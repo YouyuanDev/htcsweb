@@ -35,7 +35,7 @@ public class OdBlastProcessController {
             //添加
             resTotal=odblastprocessDao.addOdBlastProcess(odblastprocess);
         }else{
-            //修 改
+            //修改！
             resTotal=odblastprocessDao.updateOdBlastProcess(odblastprocess);
         }
         JSONObject json=new JSONObject();
