@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.htcsweb.dao.OdCoatingInspectionProcessDao">
+
+
+    <insert id="addOdCoatInProcess" parameterType="com.htcsweb.entity.OdCoatingInspectionProcess">
+     INSERT INTO od_coating_inspection_process(pipe_no,operation_time,operator_no,base_coat_thickness,top_coat_thickness,total_coating_thickness,holidays,holiday_tester_volts,repairs,cutback_length,bevel,stencil_verification,surface_condition,adhesion_test,remark) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{base_coat_thickness},#{top_coat_thickness},#{total_coating_thickness},#{holidays},#{holiday_tester_volts},#{repairs},#{cutback_length},#{bevel},#{stencil_verification},#{surface_condition},#{adhesion_test},#{remark})
+    </insert>
+
+    <select id="getOdCoatInProcess" resultType="com.htcsweb.entity.OdCoatingInspectionProcess">
+        SELECT * from od_coating_inspection_process
+    </select>
+
+    <update id="updateOdCoatInProcess" parameterType="com.htcsweb.entity.OdCoatingInspectionProcess">
+    UPDATE od_coating_inspection_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},base_coat_thickness=#{base_coat_thickness},top_coat_thickness=#{top_coat_thickness},total_coating_thickness=#{total_coating_thickness},holidays=#{holidays},holiday_tester_volts=#{holiday_tester_volts},repairs=#{repairs},cutback_length=#{cutback_length},bevel=#{bevel},stencil_verification=#{stencil_verification},surface_condition=#{surface_condition},adhesion_test=#{adhesion_test},remark=#{remark} where id=#{id}
+    </update>
+
+
+    <select id="getCount" resultType="int">
+        select count(*) from od_coating_inspection_process
+    </select>
+
+    <resultMap id="all" type="com.htcsweb.entity.OdCoatingInspectionProcess">
+        <id property="id" column="id"></id>
+        <result property="pipe_no" column="pipe_no"></result>
+        <result property="operation_time" column="operation_time"></result>
+        <result property="operator_no" column="operator_no"></result>
+        <result property="base_coat_thickness" column="base_coat_thickness"></result>
+        <result property="top_coat_thickness" column="top_coat_thickness"></result>
+        <result property="total_coating_thickness" column="total_coating_thickness"></result>
+        <result property="holidays" column="holidays"></result>
+        <result property="holiday_tester_volts" column="holiday_tester_volts"></result>
+        <result property="repairs" column="repairs"></result>
+        <result property="cutback_length" column="cutback_length"></result>
+        <result property="bevel" column="bevel"></result>
+        <result property="stencil_verification" column="stencil_verification"></result>
+        <result property="surface_condition" column="surface_condition"></result>
+        <result property="adhesion_test" column="adhesion_test"></result>
+        <result property="remark" column="remark"></result>
+    </resultMap>
+
+    <select id="feny"  resultMap="all">
+        select * from od_coating_inspection_process where id limit #{arg0},#{arg1}
+    </select>
+
+    <select id="getOdCoatInProcessById" parameterType="int" resultType="com.htcsweb.entity.OdCoatingInspectionProcess">
+        select * from od_coating_inspection_process where id=#{id}
+    </select>
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.htcsweb.dao.OdBlastInspectionProcessDao">
+
+
+    <insert id="addOdBlastInProcess" parameterType="com.htcsweb.entity.OdBlastInspectionProcess">
+    INSERT INTO od_coating_inspection_process(pipe_no,operation_time,operator_no,air_temp,relative_humidity,dew_point,blast_finish_sa25,profile,surface_dust_rating,pipe_temp,salt_concentration_after_blast,surface_condition,remark) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{air_temp},#{relative_humidity},#{dew_point},#{blast_finish_sa25},#{profile},#{surface_dust_rating},#{pipe_temp},#{salt_concentration_after_blast},#{surface_condition},#{remark})
+    </insert>
+
+    <select id="getOdBlastInProcess" resultType="com.htcsweb.entity.OdBlastInspectionProcess">
+        SELECT * from od_blast_inspection_process
+    </select>
+
+    <update id="updateOdBlastInProcess" parameterType="com.htcsweb.entity.OdBlastInspectionProcess">
+    UPDATE od_coating_inspection_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},air_temp=#{air_temp},relative_humidity=#{relative_humidity},dew_point=#{dew_point},blast_finish_sa25=#{blast_finish_sa25},profile=#{profile},surface_dust_rating=#{surface_dust_rating},pipe_temp=#{pipe_temp},salt_concentration_after_blast=#{salt_concentration_after_blast},surface_condition=#{surface_condition},remark=#{remark} where id=#{id}
+    </update>
+
+
+    <select id="getCount" resultType="int">
+        select count(*) from od_blast_inspection_process
+    </select>
+
+    <resultMap id="all" type="com.htcsweb.entity.OdBlastInspectionProcess">
+        <id property="id" column="id"></id>
+        <result property="pipe_no" column="pipe_no"></result>
+        <result property="operation_time" column="operation_time"></result>
+        <result property="operator_no" column="operator_no"></result>
+        <result property="air_temp" column="air_temp"></result>
+        <result property="relative_humidity" column="relative_humidity"></result>
+        <result property="dew_point" column="dew_point"></result>
+        <result property="blast_finish_sa25" column="blast_finish_sa25"></result>
+        <result property="profile" column="profile"></result>
+        <result property="surface_dust_rating" column="surface_dust_rating"></result>
+        <result property="pipe_temp" column="pipe_temp"></result>
+        <result property="salt_concentration_after_blast" column="salt_concentration_after_blast"></result>
+        <result property="surface_condition" column="surface_condition"></result>
+        <result property="remark" column="remark"></result>
+    </resultMap>
+
+    <select id="feny"  resultMap="all">
+        select * from od_blast_inspection_process where id limit #{arg0},#{arg1}
+    </select>
+
+    <select id="getOdBlastInProcessById" parameterType="int" resultType="com.htcsweb.entity.OdBlastInspectionProcess">
+        select * from od_blast_inspection_process where id=#{id}
+    </select>
+</mapper>

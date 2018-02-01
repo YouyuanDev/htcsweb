@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.htcsweb.dao.OdFinalInspectionProcessDao">
+
+
+    <insert id="addOdFinalInProcess" parameterType="com.htcsweb.entity.OdFinalInspectionProcess">
+   INSERT INTO od_final_inspection_process(pipe_no,operation_time,operator_no,inspection_result,remark) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{inspection_result},#{remark})
+    </insert>
+
+    <select id="getOdFinalInProcess" resultType="com.htcsweb.entity.OdFinalInspectionProcess">
+        SELECT * from od_final_inspection_process
+    </select>
+
+    <update id="updateOdFinalInProcess" parameterType="com.htcsweb.entity.OdFinalInspectionProcess">
+    UPDATE od_final_inspection_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},inspection_result=#{inspection_result},remark=#{remark} where id=#{id}
+    </update>
+
+
+    <select id="getCount" resultType="int">
+        select count(*) from od_final_inspection_process
+    </select>
+
+    <resultMap id="all" type="com.htcsweb.entity.OdFinalInspectionProcess">
+        <id property="id" column="id"></id>
+        <result property="pipe_no" column="pipe_no"></result>
+        <result property="operation_time" column="operation_time"></result>
+        <result property="operator_no" column="operator_no"></result>
+        <result property="inspection_result" column="inspection_result"></result>
+        <result property="remark" column="remark"></result>
+    </resultMap>
+
+    <select id="feny"  resultMap="all">
+        select * from od_final_inspection_process where id limit #{arg0},#{arg1}
+    </select>
+
+    <select id="getOdFinalInProcessById" parameterType="int" resultType="com.htcsweb.entity.OdFinalInspectionProcess">
+        select * from od_final_inspection_process where id=#{id}
+    </select>
+</mapper>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.htcsweb.dao.OdCoatingProcessDao">
+
+
+    <insert id="addOdCoatProcess" parameterType="com.htcsweb.entity.OdCoatingProcess">
+    INSERT INTO od_coating_process(pipe_no,operation_time,operator_no,coating_line_speed,base_coat_used,base_coat_lot_no,top_coat_used,top_coat_lot_no,base_coat_gun_count,base_coat_top_coat,application_temp,to_first_touch_duration,to_quench_duration,remark) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{coating_line_speed},#{base_coat_used},#{base_coat_lot_no},#{top_coat_used},#{top_coat_lot_no},#{base_coat_gun_count},#{base_coat_top_coat},#{application_temp},#{to_first_touch_duration},#{to_quench_duration},#{remark})
+    </insert>
+
+    <select id="getOdCoatProcess" resultType="com.htcsweb.entity.OdCoatingProcess">
+        SELECT * from od_coating_process
+    </select>
+
+    <update id="updateOdCoatProcess" parameterType="com.htcsweb.entity.OdCoatingProcess">
+    UPDATE od_coating_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},coating_line_speed=#{coating_line_speed},base_coat_used=#{base_coat_used},base_coat_lot_no=#{base_coat_lot_no},top_coat_used=#{top_coat_used},top_coat_lot_no=#{top_coat_lot_no},base_coat_gun_count=#{base_coat_gun_count},base_coat_top_coat=#{base_coat_top_coat},application_temp=#{application_temp},to_first_touch_duration=#{to_first_touch_duration},to_quench_duration=#{to_quench_duration},remark=#{remark} where id=#{id}
+    </update>
+
+
+    <select id="getCount" resultType="int">
+        select count(*) from od_coating_process
+    </select>
+
+    <resultMap id="all" type="com.htcsweb.entity.OdCoatingProcess">
+        <id property="id" column="id"></id>
+        <result property="pipe_no" column="pipe_no"></result>
+        <result property="operation_time" column="operation_time"></result>
+        <result property="operator_no" column="operator_no"></result>
+        <result property="coating_line_speed" column="coating_line_speed"></result>
+        <result property="base_coat_used" column="base_coat_used"></result>
+        <result property="base_coat_lot_no" column="base_coat_lot_no"></result>
+        <result property="top_coat_used" column="top_coat_used"></result>
+        <result property="top_coat_lot_no" column="top_coat_lot_no"></result>
+        <result property="base_coat_gun_count" column="base_coat_gun_count"></result>
+        <result property="base_coat_top_coat" column="base_coat_top_coat"></result>
+        <result property="application_temp" column="application_temp"></result>
+        <result property="to_first_touch_duration" column="to_first_touch_duration"></result>
+        <result property="to_quench_duration" column="to_quench_duration"></result>
+        <result property="remark" column="remark"></result>
+    </resultMap>
+
+    <select id="feny"  resultMap="all">
+        select * from od_coating_process where id limit #{arg0},#{arg1}
+    </select>
+
+    <select id="getOdCoatProcessById" parameterType="int" resultType="com.htcsweb.entity.OdCoatingProcess">
+        select * from od_coating_process where id=#{id}
+    </select>
+</mapper>

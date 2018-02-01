@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.htcsweb.dao.PersonDao">
+
+    <insert id="addPerson" parameterType="com.htcsweb.entity.Person">
+   INSERT INTO person(employee_no,pname,ppassword,pidcard_no,pmobile,page,psex,pstatus,pdepartment,pregister_time) VALUES (#{employee_no},#{pname},#{ppassword},#{pidcard_no},#{pmobile},#{page},#{psex},#{pstatus},#{pdepartment},#{pregister_time})
+    </insert>
+
+    <select id="getPerson" resultType="com.htcsweb.entity.Person">
+        SELECT * from person
+    </select>
+
+    <update id="updatePerson" parameterType="com.htcsweb.entity.Person">
+    UPDATE person set employee_no=#{employee_no},pname=#{pname},ppassword=#{ppassword},pidcard_no=#{pidcard_no},pmobile=#{pmobile},page=#{page},psex=#{psex},pstatus=#{pstatus},pdepartment=#{pdepartment},pregister_time=#{pregister_time} where id=#{id}
+    </update>
+
+
+    <select id="getCount" resultType="int">
+        select count(*) from person
+    </select>
+
+    <resultMap id="all" type="com.htcsweb.entity.Person">
+        <id property="id" column="id"></id>
+        <result property="employee_no" column="employee_no"></result>
+        <result property="pname" column="pname"></result>
+        <result property="ppassword" column="ppassword"></result>
+        <result property="pidcard_no" column="pidcard_no"></result>
+        <result property="pmobile" column="pmobile"></result>
+        <result property="page" column="page"></result>
+        <result property="psex" column="psex"></result>
+        <result property="pstatus" column="pstatus"></result>
+        <result property="pdepartment" column="pdepartment"></result>
+        <result property="pregister_time" column="pregister_time"></result>
+    </resultMap>
+
+    <select id="feny"  resultMap="all">
+        select * from person where id limit #{arg0},#{arg1}
+    </select>
+
+    <select id="getPersonById" parameterType="int" resultType="com.htcsweb.entity.Person">
+        select * from person where id=#{id}
+    </select>
+        </mapper>
