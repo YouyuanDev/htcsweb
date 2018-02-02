@@ -76,7 +76,7 @@ public class OdBlastProcessController {
     public  String editOdBlastProcess(OdBlastProcess odblastprocess){
         System.out.println(odblastprocess);
         odblastprocessDao.updateOdBlastProcess(odblastprocess);
-        return "odblastprocess";
+        return "od/odblastprocess";
     }
 
     @RequestMapping(value = "/getOdBlastByPage")

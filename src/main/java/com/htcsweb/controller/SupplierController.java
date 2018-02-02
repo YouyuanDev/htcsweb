@@ -7,22 +7,42 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Controller
+@RequestMapping("upload")
 public class SupplierController {
 
     @Autowired
     private SupplierDao supplierDao;
 
-    @RequestMapping("addSupplier")
-    public String addSupplier(Supplier supplier){
-        supplierDao.addSupplier(supplier);
-        return "supplier";
+    @RequestMapping("addPicture")
+    public String addPicture(HttpServletRequest request, MultipartFile file){
+
+        return "od/supplier";
+    }
+    public boolean saveFile(HttpServletRequest request,MultipartFile file){
+        //判断文件是否为空
+        if(!file.isEmpty()){
+            try{
+                String filePath=request.getSession().getServletContext().getRealPath("/")+"upload/pictures/"+file.getOriginalFilename();
+                System.out.println(filePath);
+                File saveDir=new File(filePath);
+                if(!saveDir.getParentFile().exists()){
+                    saveDir.getParentFile().mkdirs();
+                }
+
+            }catch (Exception e){
+
+            }
+        }
+        return true;
     }
     @ResponseBody
     @RequestMapping("getSupplier")
@@ -39,7 +59,7 @@ public class SupplierController {
     public  String editSupplier(Supplier supplier){
         System.out.println(supplier);
         supplierDao.updateSupplier(supplier);
-        return "supplier";
+        return "od/supplier";
     }
 
     @RequestMapping(value = "selfy")

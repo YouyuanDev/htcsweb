@@ -4,11 +4,11 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>信息</title>
-    <link rel="stylesheet" type="text/css" href="easyui/themes/metro/easyui.css" charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="easyui/themes/icon.css" charset="UTF-8">
-    <script type="text/javascript" src="easyui/jquery.min.js"charset="UTF-8"></script>
-    <script type="text/javascript" src="easyui/jquery.easyui.min.js" charset="UTF-8"></script>
-    <script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="../easyui/themes/metro/easyui.css" charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../easyui/themes/icon.css" charset="UTF-8">
+    <script type="text/javascript" src="../easyui/jquery.min.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="../easyui/jquery.easyui.min.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="../easyui/locale/easyui-lang-zh_CN.js" charset="utf-8"></script>
 
 
     <style type="text/css" >

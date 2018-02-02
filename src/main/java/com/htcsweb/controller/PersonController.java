@@ -6,7 +6,6 @@ import com.htcsweb.entity.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +22,7 @@ public class PersonController {
     @RequestMapping("addPerson")
     public String addPerson(Person person){
         personDao.addPerson(person);
-        return "person";
+        return "account/person";
     }
     @ResponseBody
     @RequestMapping("getPerson")
@@ -36,7 +35,7 @@ public class PersonController {
     @RequestMapping("editPerson")
     public  String editPerson(Person person){
         personDao.updatePerson(person);
-        return "person";
+        return "account/person";
     }
     @RequestMapping(value = "/getPersonByPage")
     @ResponseBody
