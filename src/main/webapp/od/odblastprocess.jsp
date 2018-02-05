@@ -5,28 +5,41 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>信息</title>
     <link rel="stylesheet" type="text/css" href="../easyui/themes/bootstrap/easyui.css">
-
-
     <link rel="stylesheet" type="text/css" href="../easyui/themes/icon.css">
-
+    <link href="../miniui/multiupload/multiupload.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="../css/common.css"/>
     <script type="text/javascript" src="../easyui/jquery.min.js"></script>
     <script src="../js/jquery.i18n.properties-1.0.9.js" type="text/javascript"></script>
     <script src="../js/language.js" type="text/javascript"></script>
     <script src="../js/common.js" type="text/javascript"></script>
+    <script src="../miniui/boot.js" type="text/javascript"></script>
+    <script src="../miniui/fileupload/swfupload/swfupload.js" type="text/javascript"></script>
+    <script src="../miniui/multiupload/multiupload.js" type="text/javascript"></script>
     <style type="text/css" >
         .ht-table,.ht-table td{border-collapse:collapse;border:1px solid #F0F0F0;}
         .ht-table{width:100%;margin-bottom:10px;}
-        .ht-table tr td:nth-child(1){width:180px;padding:5px;}
-        .ht-table tr td:nth-child(2){width:280px;padding:2px;}
-        .ht-table tr td:nth-child(3){width:140px;padding:5px;}
-        .ht-table tr td input{width:280px;height:35px;}
+
+        /*.ht-table tr td:nth-child(1){width:180px;padding:5px;}*/
+        /*.ht-table tr td:nth-child(2){width:280px;padding:2px;}*/
+        /*.ht-table tr td:nth-child(3){width:140px;padding:5px;}*/
+        .ht-table tr td:nth-child(1),.ht-table tr td:nth-child(4){
+            width:90px;
+            text-align:center;
+            padding:1px 2px;
+        }
+        .ht-table tr td:nth-child(3),.ht-table tr td:nth-child(6){
+            width:50px;
+            text-align:center;
+            padding:1px 2px;
+        }
+        .ht-table tr td input{width:240px;height:35px;}
         .hltr{border-bottom:2px solid #1f1f1f ;}
         .b3{border-style:inset;border-width:thin;}
     </style>
 
 
     <script type="text/javascript">
-
+        mini.parse();
         $(function () {
 
                     $('#odBlastProDatagrids').datagrid({
@@ -121,6 +134,12 @@
 
             });
         }
+        function  onUploadError() {
+            alert("上传失败!");
+        }
+        function onUploadSuccess() {
+            alert("上传成功!");
+        }
     </script>
 
 
@@ -156,15 +175,13 @@
 </div>
 
 <!--添加、修改框-->
-<div id="hlOdBlastProDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:600px;height:auto;">
+<div id="hlOdBlastProDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:800px;height:auto;">
    <form id="odBlastProForm" method="post">
        <table class="ht-table">
            <tr>
                <td>流水号</td>
                <td><label id="odbpid"></label></td>
                <td></td>
-           </tr>
-           <tr>
                <td>钢管编号</td>
                <td><input class="easyui-validatebox" type="text" name="pipe_no"/></td>
                <td></td>
@@ -173,8 +190,6 @@
                <td>操作工编号</td>
                <td><input class="easyui-validatebox" type="text" name="operator_no"/></td>
                <td></td>
-           </tr>
-           <tr>
                <td>操作时间</td>
                <td><label id="odbptime"></label></td>
                <td></td>
@@ -185,8 +200,7 @@
            <tr>
                    <td>碱浓度</td>
                    <td><input class="easyui-validatebox" type="text" name="alkaline_concentration"/></td>
-           </tr>
-           <tr>
+                   <td></td>
                    <td>碱洗时间(h)</td>
                    <td><input class="easyui-validatebox" type="text" name="alkaline_dwell_time"/></td>
                    <td>10~20</td>
@@ -195,43 +209,52 @@
            <tr>
                <td>酸洗时间</td>
                <td><input class="easyui-validatebox" type="text" name="acid_wash_time"/></td>
-           </tr>
-           <tr>
+               <td></td>
                <td>酸浓度</td>
                <td><input class="easyui-validatebox" type="text" name="acid_concentration"/></td>
+               <td></td>
            </tr>
-
        </table>
        <hr>
        <table class="ht-table">
            <tr>
                <td>外观缺陷</td>
                <td><input class="easyui-validatebox" type="text" name="surface_condition"/></td>
-           </tr>
-           <tr>
+               <td></td>
                <td>打砂前盐度</td>
                <td><input class="easyui-validatebox" type="text" name="salt_contamination_before_blasting"/></td>
                <td>80~100</td>
            </tr>
+
            <tr>
                <td>打砂传送速度(m/s)</td>
                <td><input class="easyui-validatebox" type="text" name="blast_line_speed"/></td>
-           </tr>
-           <tr>
+               <td></td>
                <td>传导性</td>
                <td><input class="easyui-validatebox" type="text" name="conductivity"/></td>
+               <td></td>
            </tr>
-
            <tr>
                <td>预热温度(℃)</td>
                <td><input class="easyui-validatebox" type="text" name="preheat_temp"/></td>
-           </tr>
-           <tr>
+               <td></td>
                <td>备注</td>
                <td><input class="easyui-textbox" type="text" name="remark" data-options="multiline:true" style="height:60px"/></td>
+               <td></td>
            </tr>
+
        </table>
+
    </form>
+    <div id="multiupload1" class="uc-multiupload" style="width:100%; max-height:200px"
+         flashurl="../miniui/fileupload/swfupload/swfupload.swf"
+         uploadurl="../UploadFile/uploadPicture.action" _autoUpload="true" _limittype="*jpg"
+         onuploaderror="onUploadError" onuploadsuccess="onUploadSuccess"
+    >
+    </div>
+    <div class="hl-gallery">
+
+    </div>
 </div>
 <div id="dlg-buttons">
     <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="odBlastProFormSubmit()">Ok</a>

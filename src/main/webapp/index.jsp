@@ -23,10 +23,10 @@
     <style type="text/css" >
         .ht-table,.ht-table td{border-collapse:collapse;border:1px solid #F0F0F0;}
         .ht-table{width:100%;margin-bottom:10px;}
-        .ht-table tr td:nth-child(1){width:180px;padding:5px;}
-        .ht-table tr td:nth-child(2){width:280px;padding:2px;}
-        .ht-table tr td:nth-child(3){width:140px;padding:5px;}
-        .ht-table tr td input{width:280px;height:35px;}
+        /*.ht-table tr td:nth-child(1){width:180px;padding:5px;}*/
+        /*.ht-table tr td:nth-child(2){width:280px;padding:2px;}*/
+        /*.ht-table tr td:nth-child(3){width:140px;padding:5px;}*/
+        /*.ht-table tr td input{width:280px;height:35px;}*/
         .hltr{border-bottom:2px solid #1f1f1f ;}
         .b3{border-style:inset;border-width:thin;}
     </style>

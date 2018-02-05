@@ -43,9 +43,9 @@ public class OdBlastProcessController {
             json.put("success",true);
         }else{
             json.put("success",false);
-        }
-        ResponseUtil.write(response,json);
+        }ResponseUtil.write(response,json);
         return null;
+
     }
     @RequestMapping("/delOdBlastProcess")
     public String delOdBlastProcess(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
