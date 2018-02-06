@@ -15,6 +15,7 @@ public class OdBlastProcess {
     private  float acid_wash_time;
     private  float acid_concentration;
     private float blast_line_speed;
+    private String upload_files;
     private float preheat_temp;
     private  String remark;
 
@@ -22,7 +23,7 @@ public class OdBlastProcess {
     }
 
 
-    public OdBlastProcess(int id, String pipe_no, Date operation_time, String operator_no, String surface_condition, float salt_contamination_before_blasting, float alkaline_dwell_time, float alkaline_concentration, float conductivity, float acid_wash_time, float acid_concentration, float blast_line_speed, float preheat_temp, String remark) {
+    public OdBlastProcess(int id, String pipe_no, Date operation_time, String operator_no, String surface_condition, float salt_contamination_before_blasting, float alkaline_dwell_time, float alkaline_concentration, float conductivity, float acid_wash_time, float acid_concentration, float blast_line_speed, String upload_files, float preheat_temp, String remark) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -35,8 +36,17 @@ public class OdBlastProcess {
         this.acid_wash_time = acid_wash_time;
         this.acid_concentration = acid_concentration;
         this.blast_line_speed = blast_line_speed;
+        this.upload_files = upload_files;
         this.preheat_temp = preheat_temp;
         this.remark = remark;
+    }
+
+    public String getUpload_files() {
+        return upload_files;
+    }
+
+    public void setUpload_files(String upload_files) {
+        this.upload_files = upload_files;
     }
 
     public int getId() {

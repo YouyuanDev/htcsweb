@@ -38,3 +38,21 @@ function getDate(str){
     second=oDate.getSeconds();
     return year+"年"+month+"月"+day+""+" "+hour+":"+minute+":"+second;
 }
+function getGalleryCon() {
+    var str='<div id="hl-gallery">'+
+        '<span class="prev"><</span>'+
+        '<div id="content">' +
+        '<div id="content_list">'+
+        '</div>'+
+    '</div>'+
+    '<span class="next">></span>'+
+    '</div>';
+    return str;
+}
+function getCalleryChildren(imgUrl) {
+    var str='<dl class="content-dl">' +
+        '<dt><img src="'+imgUrl+'"/></dt>' +
+        '<a class="content-del">X</a>' +
+        '</dl>';
+    return str;
+}

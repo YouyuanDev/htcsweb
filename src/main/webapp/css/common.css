@@ -1,4 +1,99 @@
-.hl-gallery{
-  width: 100%;
-    height: auto;
+.ht-table,.ht-table td{border-collapse:collapse;border:1px solid #F0F0F0;}
+.ht-table{width:100%;margin-bottom:10px;}
+.ht-table tr td:nth-child(1),.ht-table tr td:nth-child(4){
+  width:90px;
+  text-align:center;
+  padding:1px 2px;
+}
+.ht-table tr td:nth-child(3),.ht-table tr td:nth-child(6){
+  width:50px;
+  text-align:center;
+  padding:1px 2px;
+}
+.ht-table tr td input{width:240px;height:35px;}
+.hltr{border-bottom:2px solid #1f1f1f ;}
+.b3{border-style:inset;border-width:thin;}
+#hl-gallery-con{
+  padding:1px;
+  margin-top:10px;
+}
+#hl-gallery {
+  width: 780px;
+  height:120px;
+  border: 1px solid #ccc;
+  margin: 0 5px 5px 0;
+  float: left;
+}
+
+#hl-gallery div#content {
+  position: relative;
+  width: 690px;
+  height: 120px;
+  display: inline-block;
+  overflow: hidden;
+  float: left;
+}
+
+#hl-gallery div#content_list {
+  position: absolute;
+  width: 4000px;
+}
+
+#hl-gallery dl {
+  width: 140px;
+  height: 100px;
+  float: left;
+  margin: 10px 4px;
+  padding: 2px 2px;
+  position:relative;
+}
+#hl-gallery .content-del{
+  position:absolute;
+  display: none;
+  top:0px;
+  right:0px;
+  width:10px;
+  height:10px;
+  background:red;
+  color:white;
+  border-radius:5px;
+  padding:5px;
+  cursor: pointer;
+  line-height:10px;
+  text-align: center;
+}
+
+#hl-gallery dl:hover {
+  background: #ccc;
+}
+
+#hl-gallery dl dt {}
+
+#hl-gallery dl dt img {
+  width: 140px;
+  height: 100px;
+  border: none;
+}
+
+#hl-gallery dl dd {
+  text-align: center;
+}
+
+#hl-gallery span.prev,#hl-gallery span.next{
+  cursor: pointer;
+  display: inline-block;
+  width: 15px;
+  height: 120px;
+  line-height:120px;
+  font-size:30px;
+  font-weight:1000;
+  padding:0px 5px;
+  background-color:#EBEBEB;
+}
+#hl-gallery span.prev{
+  float: left;
+}
+#hl-gallery span.next {
+
+  float: right;
 }

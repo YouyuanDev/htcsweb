@@ -101,15 +101,19 @@ public class OdBlastProcessController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date beginTime=null;
         Date endTime=null;
+        System.out.println("begin_time="+begin_time);
+        System.out.print("end_time="+end_time);
         try{
-            if(begin_time!=null&&begin_time!=""){
+            if(begin_time!=null){
                 beginTime= sdf.parse(begin_time);
+                System.out.println("beginTime"+beginTime);
             }
-            if(end_time!=null&&end_time!=""){
+            if(end_time!=null){
                 endTime=sdf.parse(end_time);
+                System.out.println("endTime="+endTime);
             }
         }catch (ParseException e){
-
+e.printStackTrace();
         }
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
         List<OdBlastProcess> odblastprocesses= odblastprocessDao.getAllByLike(pipe_no,operator_no,beginTime,endTime,start,Integer.parseInt(rows));

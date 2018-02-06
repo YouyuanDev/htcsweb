@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+    String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+%>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,29 +18,7 @@
     <script src="../miniui/boot.js" type="text/javascript"></script>
     <script src="../miniui/fileupload/swfupload/swfupload.js" type="text/javascript"></script>
     <script src="../miniui/multiupload/multiupload.js" type="text/javascript"></script>
-    <style type="text/css" >
-        .ht-table,.ht-table td{border-collapse:collapse;border:1px solid #F0F0F0;}
-        .ht-table{width:100%;margin-bottom:10px;}
-
-        /*.ht-table tr td:nth-child(1){width:180px;padding:5px;}*/
-        /*.ht-table tr td:nth-child(2){width:280px;padding:2px;}*/
-        /*.ht-table tr td:nth-child(3){width:140px;padding:5px;}*/
-        .ht-table tr td:nth-child(1),.ht-table tr td:nth-child(4){
-            width:90px;
-            text-align:center;
-            padding:1px 2px;
-        }
-        .ht-table tr td:nth-child(3),.ht-table tr td:nth-child(6){
-            width:50px;
-            text-align:center;
-            padding:1px 2px;
-        }
-        .ht-table tr td input{width:240px;height:35px;}
-        .hltr{border-bottom:2px solid #1f1f1f ;}
-        .b3{border-style:inset;border-width:thin;}
-    </style>
-
-
+    <script type="text/javascript" src="../js/lrscroll.js"></script>
     <script type="text/javascript">
         mini.parse();
         $(function () {
@@ -74,9 +55,20 @@
                             { title: '备注',field: 'remark',width:120}
                         ]]
                     });
+                    //删除上传的图片
+            $(document).on('click','.content-del',function () {
+                var imgUrl=$(this).siblings('dt').find('img').attr('src');
+                var imgName=imgUrl.substr(imgUrl.lastIndexOf('/')+1);
+                var imgList=editFilesList(2,imgName);
+                $(this).parent('.content-dl').remove();
+            });
 
         });
         function addOdBlastPro(){
+            //var fileupload = mini.get("multiupload1");
+
+            //fileupload .clearQueue();
+            //fileupload.cancelUpload();
             $('#hlOdBlastProDialog').dialog('open').dialog('setTitle','新增');
             $('#odBlastProForm').form('clear');$('#odbpid').text('');$('#odbptime').text('');
             url="/OdOperation/saveOdBlastProcess.action";
@@ -131,15 +123,39 @@
                 error:function () {
                     hlAlertThree();
                 }
-
             });
         }
         function  onUploadError() {
             alert("上传失败!");
         }
-        function onUploadSuccess() {
-            alert("上传成功!");
+        function onUploadSuccess(e) {
+            var data=eval("("+e.serverData+")");
+            var imgListstr=editFilesList(0,data.imgUrl);
+            var imgList=imgListstr.split(';');
+            var basePath ="<%=basePath%>"+"/upload/pictures/";
+            if($('#hl-gallery').length>0){
+                $('#content_list').empty();
+                for(var i=0;i<imgList.length-1;i++){
+                    $('#content_list').append(getCalleryChildren(basePath+imgList[i]));
+                }
+            }else{
+                $('#hl-gallery-con').append(getGalleryCon());
+                for(var i=0;i<imgList.length-1;i++){
+                    $('#content_list').append(getCalleryChildren(basePath+imgList[i]));
+                }
+            }
         }
+        function editFilesList(type,imgUrl) {
+            var $obj=$('#fileslist');
+            if(type==0){
+                var filesList=$('#fileslist').val();
+                $obj.val(filesList+imgUrl+";");
+            }else{
+                $obj.val($obj.val().replace(imgUrl+";",''));
+            }
+            return $obj.val();
+        }
+
     </script>
 
 
@@ -244,7 +260,7 @@
            </tr>
 
        </table>
-
+       <input type="hidden" id="fileslist" name="upload_files" value="">
    </form>
     <div id="multiupload1" class="uc-multiupload" style="width:100%; max-height:200px"
          flashurl="../miniui/fileupload/swfupload/swfupload.swf"
@@ -252,7 +268,7 @@
          onuploaderror="onUploadError" onuploadsuccess="onUploadSuccess"
     >
     </div>
-    <div class="hl-gallery">
+    <div id="hl-gallery-con">
 
     </div>
 </div>
