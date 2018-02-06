@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
   <artifact type="war" name="htcsweb:war">
     <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="com.test.war">
+    <root id="archive" name="htcsweb.war">
       <element id="artifact" artifact-name="htcsweb:war exploded" />
     </root>
   </artifact>

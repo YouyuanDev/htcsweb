@@ -39,7 +39,7 @@
         <filtering>false</filtering>
       </resource>
     </resources>
-    <finalName>com.test</finalName>
+    <finalName>htcsweb</finalName>
     <!--<plugins>-->
       <!--<plugin>-->
         <!--<groupId>org.mortbay.jetty</groupId>-->
