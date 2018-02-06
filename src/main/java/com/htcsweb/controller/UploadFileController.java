@@ -26,10 +26,12 @@ public class UploadFileController {
     @RequestMapping(value = "/uploadPicture")
     public String uploadPicture(HttpServletRequest request,HttpServletResponse response){
         try{
-            String saveDirectory = request.getSession().getServletContext().getRealPath("/upload")+"/pictures";
-            String saveDirectory1 = request.getSession().getServletContext().getRealPath("upload/pictures");
+            String pt= this.getClass().getClassLoader().getResource("/../../").getPath();
+            System.out.println("path="+pt);
+            String saveDirectory = request.getSession().getServletContext().getRealPath("/upload/pictures");
+            //String saveDirectory1 = request.getSession().getServletContext().getRealPath("upload/pictures");
            // String saveDirectory1 = request.getSession().getServletContext().getRealPath("\\");
-            System.out.println("相对路径="+saveDirectory1);
+           // System.out.println("相对路径="+saveDirectory1);
             //String fpath=request.getp
             File f=new File(saveDirectory);
             if(f.isDirectory()){
