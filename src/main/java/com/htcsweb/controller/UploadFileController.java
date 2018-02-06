@@ -26,35 +26,22 @@ public class UploadFileController {
     @RequestMapping(value = "/uploadPicture")
     public String uploadPicture(HttpServletRequest request,HttpServletResponse response){
         try{
-            String pt= this.getClass().getClassLoader().getResource("/../../").getPath();
-            System.out.println("path="+pt);
+
             String saveDirectory = request.getSession().getServletContext().getRealPath("/upload/pictures");
-            //String saveDirectory1 = request.getSession().getServletContext().getRealPath("upload/pictures");
-           // String saveDirectory1 = request.getSession().getServletContext().getRealPath("\\");
-           // System.out.println("相对路径="+saveDirectory1);
-            //String fpath=request.getp
-            File f=new File(saveDirectory);
-            if(f.isDirectory()){
-                System.out.println("是目录");
-            }else{
-                System.out.println("不是目录");
-            }
-            System.out.println("保存路径"+saveDirectory);
-//            MultipartRequest request1=new MultipartRequest("","","","");
-            MultipartRequest multi = new MultipartRequest(request,saveDirectory,1000 * 1024 * 1024, "UTF-8");
+            MultipartRequest multi = new MultipartRequest(request,saveDirectory,5* 1024 * 1024, "UTF-8");
 
             //如果有上传文件, 则保存到数据内
+
             Enumeration files = multi.getFileNames();
-            System.out.println("执行到此处2。。。。。。。。。");
+
             while (files.hasMoreElements()) {
-                System.out.println("执行到此处3。。。。。。。。。");
                 String name = (String)files.nextElement();
-                System.out.println("文件名＝"+name);
-                File fs = multi.getFile(name);
-                if(f!=null){
-                    //读取上传后的项目文件, 导入保存到数据中
+                File file = multi.getFile(name);
+                if(file!=null){
                     String fileName = multi.getFilesystemName(name);
-                    //response.getWriter().write(fileName +"("+new Date()+")");    //可以返回一个JSON字符串, 在客户端做更多处理
+                    String extName=fileName.substring(fileName.lastIndexOf('.'));
+                    fileName=System.currentTimeMillis()+extName;
+                    
                 }
             }
         }catch (Exception e){
