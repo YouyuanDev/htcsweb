@@ -65,7 +65,7 @@ mini.extend(UserControl.MultiUpload, mini.DataGrid, {
         sb.push('<table><tr><td style="width:80px;height:25px;"><a class="mini-button" iconCls="icon-search" style="width:80px">浏览...</a><span class="mini-upload"><span id="' + me._uploadId + '" class="mini-upload-placeholder" style=""></span></span>');
         // sb.push('<table><tr><td style="width:80px"><div class="mini-upload" style=""><span id="' + me._uploadId + '" class="mini-upload-placeholder" style=""></span><span class="mini-upload-button" style="">浏览...</span></div>');
         sb.push('</td><td><a class="mini-button" iconCls="icon-upload" name="multiupload">批量上传</a>');
-        sb.push('</td><td><a class="mini-button" iconCls="icon-remove" name="removeAll">清空上传</a>');
+        // sb.push('</td><td><a class="mini-button" iconCls="icon-remove" name="removeAll">清空上传</a>');
         sb.push('</td></tr></table>');
 
 
@@ -129,15 +129,15 @@ mini.extend(UserControl.MultiUpload, mini.DataGrid, {
                     me.startUpload();
                 }
             });
-            me.removeButton.on("click", function () {
-
-                var rows = me.getData();
-                for (var i = 0, l = rows.length; i < l; i++) {
-                    me.uploader.cancelUpload(rows[i].fileId);
-                    me.customSettings.queue.remove(rows[i].fileId);
-                }
-                me.clearData();
-            });
+            // me.removeButton.on("click", function () {
+            //
+            //     var rows = me.getData();
+            //     for (var i = 0, l = rows.length; i < l; i++) {
+            //         me.uploader.cancelUpload(rows[i].fileId);
+            //         me.customSettings.queue.remove(rows[i].fileId);
+            //     }
+            //     me.clearData();
+            // });
         }
     },
     bindEvents: function () {

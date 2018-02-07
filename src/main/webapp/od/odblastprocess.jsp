@@ -16,11 +16,12 @@
     <script src="../js/language.js" type="text/javascript"></script>
     <script src="../js/common.js" type="text/javascript"></script>
     <script src="../miniui/boot.js" type="text/javascript"></script>
+    <script type="text/javascript" src="../miniui/js/miniui.js"></script>
     <script src="../miniui/fileupload/swfupload/swfupload.js" type="text/javascript"></script>
     <script src="../miniui/multiupload/multiupload.js" type="text/javascript"></script>
     <script type="text/javascript" src="../js/lrscroll.js"></script>
     <script type="text/javascript">
-        mini.parse();
+
         $(function () {
 
                     $('#odBlastProDatagrids').datagrid({
@@ -65,12 +66,9 @@
 
         });
         function addOdBlastPro(){
-            //var fileupload = mini.get("multiupload1");
-
-            //fileupload .clearQueue();
-            //fileupload.cancelUpload();
             $('#hlOdBlastProDialog').dialog('open').dialog('setTitle','新增');
             $('#odBlastProForm').form('clear');$('#odbpid').text('');$('#odbptime').text('');
+            clearMultiUpload();
             url="/OdOperation/saveOdBlastProcess.action";
         }
         function delOdBlastPro() {
@@ -88,6 +86,7 @@
             }
         }
         function editOdBlastPro() {
+            clearMultiUpload();
             var row = $('#odBlastProDatagrids').datagrid('getSelected');
             if(row){
                 $('#hlOdBlastProDialog').dialog('open').dialog('setTitle','修改');
@@ -125,9 +124,15 @@
                 }
             });
         }
-        function  onUploadError() {
+        function odBlastProCancelSubmit() {
+            $('#hlOdBlastProDialog').dialog('close');
+            clearMultiUpload();
+        }
+        //图片上传失败操作
+        function onUploadError() {
             alert("上传失败!");
         }
+        //图片上传成功操作
         function onUploadSuccess(e) {
             var data=eval("("+e.serverData+")");
             var imgListstr=editFilesList(0,data.imgUrl);
@@ -155,7 +160,19 @@
             }
             return $obj.val();
         }
-
+        //清理图片选择
+        function  clearMultiUpload() {
+            var rows = grid.getData();
+            for (var i = 0, l = rows.length; i < l; i++) {
+                grid.uploader.cancelUpload(rows[i].fileId);
+                grid.customSettings.queue.remove(rows[i].fileId);
+            }
+            grid.clearData();
+        }
+        //删除选择的图片
+        function delUploadPicture(imgName) {
+            //$.ajax();
+        }
     </script>
 
 
@@ -264,7 +281,7 @@
    </form>
     <div id="multiupload1" class="uc-multiupload" style="width:100%; max-height:200px"
          flashurl="../miniui/fileupload/swfupload/swfupload.swf"
-         uploadurl="../UploadFile/uploadPicture.action" _autoUpload="true" _limittype="*jpg"
+         uploadurl="../UploadFile/uploadPicture.action" _autoUpload="false" _limittype="*jpg"
          onuploaderror="onUploadError" onuploadsuccess="onUploadSuccess"
     >
     </div>
@@ -274,8 +291,12 @@
 </div>
 <div id="dlg-buttons">
     <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="odBlastProFormSubmit()">Ok</a>
-    <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#hlOdBlastProDialog').dialog('close')">Cancel</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="odBlastProCancelSubmit()">Cancel</a>
 </div>
 <script type="text/javascript" src="../easyui/jquery.easyui.min.js" charset="UTF-8"></script>
 </body>
 </html>
+<script type="text/javascript">
+    mini.parse();
+    var grid= mini.get("multiupload1");
+</script>

@@ -56,4 +56,9 @@ public class UploadFileController {
 
         return null;
     }
+    @RequestMapping(value = "delUploadPicture")
+    public String delUploadPicture(HttpServletRequest request){
+
+        return null;
+    }
 }

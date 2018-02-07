@@ -176,7 +176,7 @@
 <div data-options="region:'center'," style="padding:5px;">
     <div id="hlTab" class="easyui-tabs" data-options="fit:true">
         <div title="首页" class="i18n" name="home" style="padding:5px;display:none;" data-options="iconCls:'icon-lightbulb'">
-            <img src="images/44.jpg" style="width:100%;height:100%">
+            <%--<img src="images/44.jpg" style="width:100%;height:100%">--%>
         </div>
     </div>
 </div>

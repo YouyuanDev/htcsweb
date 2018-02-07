@@ -85,9 +85,11 @@
   width: 15px;
   height: 120px;
   line-height:120px;
-  font-size:30px;
+  text-align: center;
+  font-size:20px;
   font-weight:1000;
   padding:0px 5px;
+  color:white;
   background-color:#EBEBEB;
 }
 #hl-gallery span.prev{
