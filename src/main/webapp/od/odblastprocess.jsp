@@ -24,7 +24,48 @@
     <script src="../js/language.js" type="text/javascript"></script>
     <script type="text/javascript">
 
+
+
+        function formatterdate(value,row,index){
+           var date = new Date(value);
+           return date.toLocaleString();
+        }
+
+
         $(function () {
+            // $('#odBlastProDatagrids').datagrid({
+            //     striped:true,
+            //     loadMsg:'正在加载中。。。',
+            //     pagination:true,
+            //     textField:'text',
+            //     rownumbers:true,
+            //     pageList:[10,20,30,50,100],
+            //     pageSize:20,
+            //     fitColumns:true,
+            //     url:'/OdOperation/getOdBlastByLike.action',
+            //     toolbar:'#hlOdBlastProTb',
+            //     columns:[[
+            //         { field: '',checkbox:true},
+            //         { title: arg1,field: 'id',width:100},
+            //         { title: arg2,field: 'pipe_no',width:100},
+            //         { title: arg3,field : 'operation_time', formatter:function(value,row,index){
+            //                 var operation_time = new Date(value);
+            //                  return operation_time.toLocaleString();
+            //              } ,width:200},
+            //         { title: arg4,field: 'operator_no',width:100},
+            //         { title: '外观缺陷',field: 'surface_condition',width:100},
+            //         { title: '打砂前盐度',field: 'salt_contamination_before_blasting',width:100},
+            //         { title: '碱洗时间',field: 'alkaline_dwell_time',width:100},
+            //         { title: '碱浓度',field: 'alkaline_concentration',width: 100},
+            //         { title: '传导性',field: 'conductivity',width:120},
+            //         { title: '酸洗时间',field: 'acid_wash_time',width:120},
+            //         { title: '酸浓度',field: 'acid_concentration',width:120},
+            //         { title: '打砂传送速度',field: 'blast_line_speed',width:120},
+            //         { title: '预热温度',field: 'preheat_temp',width:120},
+            //         { title: '备注',field: 'remark',width:120}
+            //     ]]
+            // });
+
                     //删除上传的图片
                 $(document).on('click','.content-del',function () {
                      delUploadPicture($(this));
@@ -171,24 +212,24 @@
 <fieldset class="b3" style="padding:10px;margin:10px;">
     <legend> <h3><b style="color: orange" >|&nbsp;</b><span class="i18n1" name="datadisplay">数据展示</span></h3></legend>
     <div  style="margin-top:5px;">
-         <table class="easyui-datagrid" id="odBlastProDatagrids" url="/OdOperation/getOdBlastByLike.action" pagination="true" toolbar="#hlOdBlastProTb">
+         <table class="easyui-datagrid" id="odBlastProDatagrids" url="/OdOperation/getOdBlastByLike.action" striped="true" loadMsg="正在加载中。。。" textField="text" pageSize="20", fitColumns="true" pagination="true" toolbar="#hlOdBlastProTb">
              <thead>
                <tr>
                        <th data-options="field:'ck',checkbox:true"></th>
-                       <th field="id" width="100" class="i18n1" name="id">流水号</th>
-                       <th field="pipe_no" width="100" class="i18n1" name="pipeno">钢管编号</th>
-                       <th field="operation_time" width="100" class="i18n1" name="operationtime">操作时间</th>
-                       <th field="operator_no" width="100" class="i18n1" name="operatorno">操作工编号</th>
-                       <th field="surface_condition" width="100" class="i18n1" name="surfacecondition">外观缺陷</th>
-                       <th field="salt_contamination_before_blasting" width="100" class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</th>
-                       <th field="alkaline_dwell_time" width="100" class="i18n1" name="alkalinedwelltime">碱洗时间</th>
-                       <th field="alkaline_concentration" width="100" class="i18n1" name="alkalineconcentration">碱浓度</th>
-                       <th field="conductivity" width="100" class="i18n1" name="conductivity">传导性</th>
-                       <th field="acid_wash_time" width="100" class="i18n1" name="acidwashtime">酸洗时间</th>
-                       <th field="acid_concentration" width="100" class="i18n1" name="acidconcentration">酸浓度</th>
-                       <th field="blast_line_speed" width="100" class="i18n1" name="blastlinespeed">打砂传送速度</th>
-                       <th field="preheat_temp" width="100" class="i18n1" name="preheattemp">预热温度</th>
-                       <th field="remark" width="100" class="i18n1" name="remark">备注</th>
+                       <th field="id" align="center" width="100" class="i18n1" name="id">流水号</th>
+                       <th field="pipe_no" align="center" width="100" class="i18n1" name="pipeno">钢管编号</th>
+                       <th field="operation_time" align="center" width="200" class="i18n1" name="operationtime" data-options="formatter:formatterdate">操作时间</th>
+                       <th field="operator_no" align="center" width="100" class="i18n1" name="operatorno">操作工编号</th>
+                       <th field="surface_condition" align="center" width="100" class="i18n1" name="surfacecondition">外观缺陷</th>
+                       <th field="salt_contamination_before_blasting" align="center" width="100" class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</th>
+                       <th field="alkaline_dwell_time" align="center" width="100" class="i18n1" name="alkalinedwelltime">碱洗时间</th>
+                       <th field="alkaline_concentration" align="center" width="100" class="i18n1" name="alkalineconcentration">碱浓度</th>
+                       <th field="conductivity" width="100" align="center" class="i18n1" name="conductivity">传导性</th>
+                       <th field="acid_wash_time" width="100" align="center" class="i18n1" name="acidwashtime">酸洗时间</th>
+                       <th field="acid_concentration" width="100" align="center" class="i18n1" name="acidconcentration">酸浓度</th>
+                       <th field="blast_line_speed" align="center" width="100" class="i18n1" name="blastlinespeed">打砂传送速度</th>
+                       <th field="preheat_temp" align="center" width="100" class="i18n1" name="preheattemp">预热温度</th>
+                       <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                </tr>
              </thead>
          </table>
