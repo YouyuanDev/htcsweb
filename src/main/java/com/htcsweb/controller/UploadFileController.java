@@ -48,7 +48,6 @@ public class UploadFileController {
             }
             JSONObject json = new JSONObject();
             json.put("imgUrl", newName);
-            System.out.println(json.toString());
             ResponseUtil.write(response, json);
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,9 +55,28 @@ public class UploadFileController {
 
         return null;
     }
-    @RequestMapping(value = "delUploadPicture")
-    public String delUploadPicture(HttpServletRequest request){
-
+    @RequestMapping("/delUploadPicture")
+    public String delUploadPicture(HttpServletRequest request,HttpServletResponse response){
+        JSONObject json=new JSONObject();
+        try {
+            String imgName=request.getParameter("imgName");
+            if(imgName!=null&&imgName!=""){
+                String saveDirectory = request.getSession().getServletContext().getRealPath("/upload/pictures");
+                String imgPath=saveDirectory+"/"+imgName;
+                    File file=new File(imgPath);
+                    if(file.isFile()&&file.exists()){
+                        file.delete();
+                    }else{
+                        json.put("success",false);
+                    }
+                    json.put("success",true);
+            }else{
+                json.put("success",false);
+            }
+            ResponseUtil.write(response,json);
+        }catch (Exception e){
+            json.put("success",false);
+        }
         return null;
     }
 }

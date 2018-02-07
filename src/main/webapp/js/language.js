@@ -44,7 +44,7 @@ var getCookie = function(name, value, options) {
 };
 var i18nLanguage = "zh-CN";
 var webLanguage = ['zh-CN','en'];
-var execI18n = function(){
+var execI18n = function(languagePath){
     //获取用户浏览器之前选择的语言类型
 
     if(getCookie("userLanguage")){
@@ -64,7 +64,7 @@ var execI18n = function(){
     jQuery.i18n.properties({
         name : 'strings', //资源文件名称
         language:i18nLanguage,
-        path : 'i18n/',
+        path :languagePath,
         mode : 'map', //用Map的方式使用资源文件中的值
         callback : function() {//加载成功后设置显示内容
             var insertEle = $(".i18n");
@@ -79,17 +79,33 @@ var execI18n = function(){
     });
         
 }
-
+function getLanguage() {
+    var language;
+    if(getCookie("userLanguage")){
+        language=getCookie("userLanguage");
+    }else{
+        //获取浏览器语言
+        var navLanguage=$.i18n.browserLang();
+        //判断是否支持语言数组
+        if($.inArray(navLanguage,webLanguage)>-1){
+            language=navLanguage;
+            //缓存语言选择
+            getCookie("userLanguage",navLanguage);
+        }else{
+            language='en';
+        }
+    }
+    return language;
+}
 /*页面执行加载执行*/
-function hlLanguage() {
-    execI18n();
+function hlLanguage(languagePath) {
+    execI18n(languagePath);
     /*将语言选择默认选中缓存中的值*/
     $("#language option[value="+i18nLanguage+"]").attr("selected",true);
 
     /* 选择语言 */
     $("#language").bind('change', function() {
         var language = $(this).children('option:selected').val();
-
         getCookie("userLanguage",language,{
             expires: 30,
             path:'/'

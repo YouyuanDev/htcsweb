@@ -33,7 +33,7 @@
     <script type="text/javascript">
         var url;
         $(function(){
-            hlLanguage();
+            hlLanguage("i18n/");
             $('#tt').tree({
                 onClick:function(node){
                     var tab=$('#hlTab').tabs('getTab',node.text);
@@ -49,6 +49,7 @@
                                 content:"<iframe scrolling='auto' frameborder='0'  src='od/odblastprocess.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable:true
                             });
+                            hlLanguage();
                         }
                         else if("外喷砂检验岗位"==xy){
                             $('#hlTab').tabs('add',{
@@ -115,10 +116,6 @@
                     }
                 }
             });
-
-
-
-
         });
 
     </script>

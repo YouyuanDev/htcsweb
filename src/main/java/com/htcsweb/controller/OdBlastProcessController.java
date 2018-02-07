@@ -102,11 +102,16 @@ public class OdBlastProcessController {
         Date beginTime=null;
         Date endTime=null;
         try{
-            if(begin_time!=null){
+            if(begin_time!=null&&begin_time!=""){
                 beginTime=new Date(begin_time);
+            }else{
+                beginTime=new Date();
+                beginTime.setTime(0);//设置时间最开始(1970-01-01)
             }
-            if(end_time!=null){
+            if(end_time!=null&&end_time!=""){
                 endTime=new Date(end_time);
+            }else{
+                endTime=new Date();
             }
         }catch (Exception e){
                 e.printStackTrace();
@@ -118,9 +123,6 @@ public class OdBlastProcessController {
         maps.put("total",count);
         maps.put("rows",odblastprocesses);
         String mmp= JSONArray.toJSONString(maps);
-
-        //ceshi
-
         return mmp;
     }
     @RequestMapping("getOdBlastProcessById")
