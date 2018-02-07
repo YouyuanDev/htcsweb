@@ -25,6 +25,45 @@ function hlAlertFive(url,hlparam,total) {
         }
     });
 }
+function hlAlertSix(url,$imglist,$dialog,$obj) {
+    var hlparam=$imglist.val();
+    var imgarr=hlparam.split(';');
+    if(hlparam.split(';').length>0){
+        $.messager.confirm('系统提示',"取消上传，图片会自动删除!",function (r) {
+            if(r){
+                $.ajax({
+                    url:url,
+                    dataType:'json',
+                    data:{"imgList":hlparam},
+                    success:function (data) {
+                    },
+                    error:function () {
+                        hlAlertThree();
+                    }
+                });
+                clearMultiUpload($obj);
+                $imglist.val('');
+                $('#hl-gallery-con').empty();
+                $dialog.dialog('close');
+
+            }
+        });
+    }else{
+        clearMultiUpload($obj);
+        $imglist.val('');
+        $('#hl-gallery-con').empty();
+        $dialog.dialog('close');
+    }
+
+}
+function  clearMultiUpload($grid) {
+    var rows = $grid.getData();
+    for (var i = 0, l = rows.length; i < l; i++) {
+        $grid.uploader.cancelUpload(rows[i].fileId);
+        $grid.customSettings.queue.remove(rows[i].fileId);
+    }
+    $grid.clearData();
+}
 //时间转化函数
 function getDate(str){
     var oDate = new Date(str);

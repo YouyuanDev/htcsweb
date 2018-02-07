@@ -28,7 +28,6 @@ public class UploadFileController {
     @RequestMapping(value = "/uploadPicture")
     public String uploadPicture(HttpServletRequest request, HttpServletResponse response) {
         try {
-
             String saveDirectory = request.getSession().getServletContext().getRealPath("/upload/pictures");
             File uploadPath = new File(saveDirectory);
             if (!uploadPath.exists()) {
@@ -44,7 +43,6 @@ public class UploadFileController {
                 if (file != null) {
                     newName = file.getName();
                 }
-
             }
             JSONObject json = new JSONObject();
             json.put("imgUrl", newName);
@@ -52,24 +50,25 @@ public class UploadFileController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return null;
     }
     @RequestMapping("/delUploadPicture")
     public String delUploadPicture(HttpServletRequest request,HttpServletResponse response){
         JSONObject json=new JSONObject();
         try {
-            String imgName=request.getParameter("imgName");
-            if(imgName!=null&&imgName!=""){
+            String imgList=request.getParameter("imgList");
+            if(imgList!=null&&imgList!=""){
+                String []listArr=imgList.split(";");
                 String saveDirectory = request.getSession().getServletContext().getRealPath("/upload/pictures");
-                String imgPath=saveDirectory+"/"+imgName;
+                String imgPath="";
+                for(int i=0;i<listArr.length;i++){
+                    imgPath=saveDirectory+"/"+listArr[i];
                     File file=new File(imgPath);
                     if(file.isFile()&&file.exists()){
                         file.delete();
-                    }else{
-                        json.put("success",false);
                     }
-                    json.put("success",true);
+                }
+                json.put("success",true);
             }else{
                 json.put("success",false);
             }

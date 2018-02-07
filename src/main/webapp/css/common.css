@@ -5,12 +5,15 @@
   text-align:center;
   padding:1px 2px;
 }
+.ht-table tr td:nth-child(2),.ht-table tr td:nth-child(5){
+  padding:2px;
+}
 .ht-table tr td:nth-child(3),.ht-table tr td:nth-child(6){
-  width:50px;
+  width:100px;
   text-align:center;
   padding:1px 2px;
 }
-.ht-table tr td input{width:240px;height:35px;}
+.ht-table tr td input{width:180px;height:20px;}
 .hltr{border-bottom:2px solid #1f1f1f ;}
 .b3{border-style:inset;border-width:thin;}
 #hl-gallery-con{
@@ -96,6 +99,5 @@
   float: left;
 }
 #hl-gallery span.next {
-
   float: right;
 }

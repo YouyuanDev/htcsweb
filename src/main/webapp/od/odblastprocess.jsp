@@ -25,48 +25,15 @@
     <script type="text/javascript">
 
         $(function () {
-                    // $('#odBlastProDatagrids').datagrid({
-                    //     striped:true,
-                    //     loadMsg:'正在加载中。。。',
-                    //     pagination:true,
-                    //     textField:'text',
-                    //     rownumbers:true,
-                    //     pageList:[10,20,30,50,100],
-                    //     pageSize:20,
-                    //     fitColumns:true,
-                    //     url:'/OdOperation/getOdBlastByLike.action',
-                    //     toolbar:'#hlOdBlastProTb',
-                    //     columns:[[
-                    //         { field: '',checkbox:true},
-                    //         { title: arg1,field: 'id',width:100},
-                    //         { title: arg2,field: 'pipe_no',width:100},
-                    //         { title: arg3,field : 'operation_time', formatter:function(value,row,index){
-                    //                 var operation_time = new Date(value);
-                    //                  return operation_time.toLocaleString();
-                    //              } ,width:200},
-                    //         { title: arg4,field: 'operator_no',width:100},
-                    //         { title: '外观缺陷',field: 'surface_condition',width:100},
-                    //         { title: '打砂前盐度',field: 'salt_contamination_before_blasting',width:100},
-                    //         { title: '碱洗时间',field: 'alkaline_dwell_time',width:100},
-                    //         { title: '碱浓度',field: 'alkaline_concentration',width: 100},
-                    //         { title: '传导性',field: 'conductivity',width:120},
-                    //         { title: '酸洗时间',field: 'acid_wash_time',width:120},
-                    //         { title: '酸浓度',field: 'acid_concentration',width:120},
-                    //         { title: '打砂传送速度',field: 'blast_line_speed',width:120},
-                    //         { title: '预热温度',field: 'preheat_temp',width:120},
-                    //         { title: '备注',field: 'remark',width:120}
-                    //     ]]
-                    // });
-
                     //删除上传的图片
-                    $(document).on('click','.content-del',function () {
-                     delUploadPicture();
-
-            });
+                $(document).on('click','.content-del',function () {
+                     delUploadPicture($(this));
+                });
 
         });
         function addOdBlastPro(){
             $('#hlOdBlastProDialog').dialog('open').dialog('setTitle','新增');
+            $('#fileslist').val('');
             $('#odBlastProForm').form('clear');$('#odbpid').text('');$('#odbptime').text('');
             clearMultiUpload();
             url="/OdOperation/saveOdBlastProcess.action";
@@ -114,7 +81,8 @@
                     var result = eval('('+result+')');
                     if (result.success){
                         $('#hlOdBlastProDialog').dialog('close');
-                        $('#odBlastProDatagrids').datagrid('reload');    // reload the user data
+                        $('#odBlastProDatagrids').datagrid('reload');
+                        $('#hl-gallery-con').empty();
                     } else {
                         hlAlertFour("操作失败!");
                     }
@@ -125,8 +93,9 @@
             });
         }
         function odBlastProCancelSubmit() {
-            $('#hlOdBlastProDialog').dialog('close');
-            clearMultiUpload();
+            var $imglist=$('#fileslist');
+            var $dialog=$('#hlOdBlastProDialog');
+            hlAlertSix("../UploadFile/delUploadPicture.action",$imglist,$dialog,grid);
         }
         //图片上传失败操作
         function onUploadError() {
@@ -170,13 +139,13 @@
             grid.clearData();
         }
         //删除选择的图片
-        function delUploadPicture() {
-            var imgUrl=$(this).siblings('dt').find('img').attr('src');
+        function delUploadPicture($obj) {
+            var imgUrl=$obj.siblings('dt').find('img').attr('src');
             var imgName=imgUrl.substr(imgUrl.lastIndexOf('/')+1);
             $.ajax({
                 url:'../UploadFile/delUploadPicture.action',
                 dataType:'json',
-                data:{"imgName":imgName},
+                data:{"imgList":imgName+";"},
                 success:function (data) {
                     if(data.success){
                         var imgList=editFilesList(2,imgName);
@@ -269,12 +238,13 @@
 <hr>
        <table class="ht-table">
            <tr>
-                   <td>碱浓度</td>
-                   <td><input class="easyui-validatebox" type="text" name="alkaline_concentration"/></td>
-                   <td></td>
-                   <td>碱洗时间(h)</td>
-                   <td><input class="easyui-validatebox" type="text" name="alkaline_dwell_time"/></td>
-                   <td>10~20</td>
+               <td>碱洗时间(秒)</td>
+               <td><input class="easyui-validatebox" type="text" name="alkaline_dwell_time"/></td>
+               <td>10~20</td>
+               <td>碱浓度</td>
+               <td><input class="easyui-validatebox" type="text" name="alkaline_concentration"/></td>
+               <td></td>
+
            </tr>
 
            <tr>
@@ -294,7 +264,7 @@
                <td></td>
                <td>打砂前盐度</td>
                <td><input class="easyui-validatebox" type="text" name="salt_contamination_before_blasting"/></td>
-               <td>80~100</td>
+               <td><=25mg/㎡</td>
            </tr>
 
            <tr>
