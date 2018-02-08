@@ -37,28 +37,13 @@ public class PersonController {
         personDao.updatePerson(person);
         return "account/person";
     }
-    @RequestMapping(value = "/getPersonByLike")
+    //根据姓名模糊查询用户编号
+    @RequestMapping(value = "/getPersonNoByName")
     @ResponseBody
-    public String getPersonByPage(HttpServletRequest request){
-        String page=request.getParameter("page");
-        String rows=request.getParameter("rows");
-        System.out.println("page="+page);
-        System.out.println("rows="+rows);
-        if(page==null||page==""){
-            page="1";
-        }
-        if(rows==null||rows==""){
-            rows="10";
-        }
+    public String getPersonNoByName(HttpServletRequest request){
         String pname=request.getParameter("key");
-        System.out.println("pname="+pname);
-        int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
-        List<Person>list=personDao.getAllByLike(pname,start,Integer.parseInt(rows));
-        int count=personDao.getCount();
-        Map<String,Object>map=new HashMap<String, Object>();
-        map.put("total",count);
-        map.put("rows",list);
-        String mmp= JSONArray.toJSONString(map);
+        List<Person>list=personDao.getNoByName(pname);
+        String mmp= JSONArray.toJSONString(list);
         return mmp;
     }
     @RequestMapping("getPersonById")

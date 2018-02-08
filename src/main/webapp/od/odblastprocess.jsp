@@ -119,13 +119,26 @@
             });
         }
         function odBlastProFormSubmit() {
-            $('#odBlastProForm').form({
+            $('#odBlastProForm').form('submit',{
                 url:url,
+                onSubmit:function () {
+                    //表单验证
+                    //碱洗时间
+                    setParams($("input[name='alkaline_dwell_time']"));
+                    setParams($("input[name='alkaline_concentration']"));
+                    setParams($("input[name='acid_wash_time']"));
+                    setParams($("input[name='acid_concentration']"));
+                    setParams($("input[name='salt_contamination_before_blasting']"));
+                    setParams($("input[name='blast_line_speed']"));
+                    setParams($("input[name='conductivity']"));
+                    setParams($("input[name='preheat_temp']"));
+                },
                 success: function(result){
                     var result = eval('('+result+')');
                     if (result.success){
                         $('#hlOdBlastProDialog').dialog('close');
                         $('#odBlastProDatagrids').datagrid('reload');
+                        $('#odBlastProForm').form('clear');$('#odbpid').text('');$('#odbptime').text('');
                         $('#hl-gallery-con').empty();
                     } else {
                          hlAlertFour("操作失败!");
@@ -135,7 +148,6 @@
                     hlAlertThree();
                 }
             });
-            $('#odBlastProForm').submit();
             clearMultiUpload(grid);
         }
         function odBlastProCancelSubmit() {
@@ -219,6 +231,10 @@
                 }
             }
         }
+        function  setParams($obj) {
+            if($obj.val()==null||$obj.val()=="")
+                $obj.val(0);
+        }
     </script>
 
 
@@ -283,12 +299,18 @@
                <td><label id="odbpid"></label></td>
                <td></td>
                <td>钢管编号</td>
-               <td><input class="easyui-validatebox" type="text" name="pipe_no"/></td>
+               <td><input class="easyui-validatebox" type="text" name="pipe_no" value=""/></td>
                <td></td>
            </tr>
            <tr>
                <td>操作工编号</td>
-               <td><input class="easyui-validatebox" type="text" name="operator_no"/></td>
+               <td>
+                   <input class="easyui-validatebox" type="text" name="operator_no" value=""/>
+                   <%--<input id="lookup2" name="operator_no" class="mini-lookup" style="width:180px;"--%>
+                          <%--textField="employee_no" valueField="id" popupWidth="auto"--%>
+                          <%--popup="#gridPanel" grid="#datagrid1" multiSelect="false"--%>
+                   <%--/>--%>
+               </td>
                <td></td>
                <td>操作时间</td>
                <td><label id="odbptime"></label></td>
@@ -299,20 +321,20 @@
        <table class="ht-table">
            <tr>
                <td>碱洗时间(秒)</td>
-               <td><input class="easyui-validatebox" type="text" name="alkaline_dwell_time"/></td>
+               <td><input class="easyui-validatebox" type="text" name="alkaline_dwell_time" value=""/></td>
                <td>10~20</td>
                <td>碱浓度</td>
-               <td><input class="easyui-validatebox" type="text" name="alkaline_concentration"/></td>
+               <td><input class="easyui-validatebox" type="text" name="alkaline_concentration" value=""/></td>
                <td></td>
 
            </tr>
 
            <tr>
                <td>酸洗时间</td>
-               <td><input class="easyui-validatebox" type="text" name="acid_wash_time"/></td>
+               <td><input class="easyui-validatebox" type="text" name="acid_wash_time" value=""/></td>
                <td></td>
                <td>酸浓度</td>
-               <td><input class="easyui-validatebox" type="text" name="acid_concentration"/></td>
+               <td><input class="easyui-validatebox" type="text" name="acid_concentration" value=""/></td>
                <td></td>
            </tr>
        </table>
@@ -320,32 +342,32 @@
        <table class="ht-table">
            <tr>
                <td>外观缺陷</td>
-               <td><input class="easyui-validatebox" type="text" name="surface_condition"/></td>
+               <td><input class="easyui-validatebox" type="text" name="surface_condition" value=""/></td>
                <td></td>
                <td>打砂前盐度</td>
-               <td><input class="easyui-validatebox" type="text" name="salt_contamination_before_blasting"/></td>
+               <td><input class="easyui-validatebox" type="text" name="salt_contamination_before_blasting" value=""/></td>
                <td><=25mg/㎡</td>
            </tr>
 
            <tr>
                <td>打砂传送速度(m/s)</td>
-               <td><input class="easyui-validatebox" type="text" name="blast_line_speed"/></td>
+               <td><input class="easyui-validatebox" type="text" name="blast_line_speed" value=""/></td>
                <td></td>
                <td>传导性</td>
-               <td><input class="easyui-validatebox" type="text" name="conductivity"/></td>
+               <td><input class="easyui-validatebox" type="text" name="conductivity" value=""/></td>
                <td></td>
            </tr>
            <tr>
                <td>预热温度(℃)</td>
-               <td><input class="easyui-validatebox" type="text" name="preheat_temp"/></td>
+               <td><input class="easyui-validatebox" type="text" name="preheat_temp" value=""/></td>
                <td></td>
                <td>备注</td>
-               <td><input class="easyui-textbox" type="text" name="remark" data-options="multiline:true" style="height:60px"/></td>
+               <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
                <td></td>
            </tr>
 
        </table>
-       <input type="hidden" id="fileslist" name="upload_files" value="">
+       <input type="hidden" id="fileslist" name="upload_files" value=""/>
    </form>
     <div id="multiupload1" class="uc-multiupload" style="width:100%; max-height:200px"
          flashurl="../miniui/fileupload/swfupload/swfupload.swf"
@@ -360,11 +382,54 @@
     <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="odBlastProFormSubmit()">Ok</a>
     <a href="#" class="easyui-linkbutton" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="odBlastProCancelSubmit()">Cancel</a>
 </div>
-<script type="text/javascript" src="../easyui/jquery.easyui.min.js" charset="UTF-8"></script>
+<div id="gridPanel" class="mini-panel" title="header" iconCls="icon-add" style="width:350px;height:250px;"
+     showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0">
+    <div property="toolbar" style="padding:5px;padding-left:8px;text-align:center;">
+        <div style="float:left;padding-bottom:2px;">
+            <span>姓名：</span>
+            <input id="keyText" class="mini-textbox" style="width:140px;" onenter="onSearchClick"/>
+            <a class="mini-button" onclick="onSearchClick">查询</a>
+            <a class="mini-button" onclick="onClearClick">清除</a>
+        </div>
+        <div style="float:right;padding-bottom:2px;">
+            <a class="mini-button" onclick="onCloseClick">关闭</a>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <div id="datagrid1" class="mini-datagrid" style="width:100%;height:100%;"
+         borderStyle="border:0" showPageSize="false" showPageIndex="false"
+         url="/person/getPersonNoByName.action">
+        <div property="columns">
+            <div type="checkcolumn" ></div>
+            <div field="pname" width="60" headerAlign="center" allowSort="true">姓名</div>
+            <div field="employee_no" width="60" headerAlign="center" allowSort="true">编号</div>
+        </div>
+    </div>
+</div>
+<%--<input id="lookup2" name="operator_no" class="mini-lookup" style="width:180px;"--%>
+       <%--textField="employee_no" valueField="id" popupWidth="auto"--%>
+       <%--popup="#gridPanel" grid="#datagrid1" multiSelect="false"--%>
+<%--/>--%>
+<script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
 </body>
 </html>
 <script type="text/javascript">
     mini.parse();
     var grid= mini.get("multiupload1");
+    var keyText = mini.get("keyText");
+    var grid1=mini.get("datagrid1");
+    function onSearchClick(e) {
+        grid1.load({
+            key: keyText.value
+        });
+    }
+    function onCloseClick(e) {
+        var lookup2 = mini.get("lookup2");
+        lookup2.hidePopup();
+    }
+    function onClearClick(e) {
+        var lookup2 = mini.get("lookup2");
+        lookup2.deselectAll();
+    }
     hlLanguage("../i18n/");
 </script>

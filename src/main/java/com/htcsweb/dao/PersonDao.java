@@ -12,6 +12,7 @@ public interface PersonDao {
    public void addPerson(Person person);
    public List<Person>getPerson();
    public void  updatePerson(Person person);
+   public  List<Person>getNoByName(@Param("pname")String pname);
    public List<Person>getAllByLike(@Param("pname")String pname,@Param("skip")int skip, @Param("take")int take);
    public int getCount();
 }

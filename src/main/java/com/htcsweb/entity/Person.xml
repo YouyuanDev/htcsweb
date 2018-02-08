@@ -35,7 +35,14 @@
         <result property="pdepartment" column="pdepartment"></result>
         <result property="pregister_time" column="pregister_time"></result>
     </resultMap>
-
+    <select id="getNoByName"  resultMap="all" resultType="com.htcsweb.entity.Person">
+        select employee_no,pname from person
+        <where>
+            <if test="pname!=null and pname!=''">
+                AND pname LIKE CONCAT('%',#{pname},'%')
+            </if>
+        </where>
+    </select>
     <select id="getAllByLike"  resultMap="all" resultType="com.htcsweb.entity.Person">
         select * from person
         <where>
@@ -43,7 +50,7 @@
                 AND pname LIKE CONCAT('%',#{pname},'%')
             </if>
         </where>
-        id limit #{arg0},#{arg1}
+        id limit #{skip},#{take}
     </select>
 
     <select id="getPersonById" parameterType="int" resultType="com.htcsweb.entity.Person">

@@ -1,10 +1,13 @@
 package com.htcsweb.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class OdBlastProcess {
     private  int id;
     private  String  pipe_no;
+    @DateTimeFormat(pattern="mm:ss")
     private  Date operation_time;
     private  String operator_no;
     private  String surface_condition;
@@ -15,8 +18,8 @@ public class OdBlastProcess {
     private  float acid_wash_time;
     private  float acid_concentration;
     private float blast_line_speed;
-    private String upload_files;
     private float preheat_temp;
+    private String upload_files;
     private  String remark;
 
     public OdBlastProcess() {

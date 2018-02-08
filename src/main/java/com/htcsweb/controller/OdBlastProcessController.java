@@ -28,24 +28,29 @@ public class OdBlastProcessController {
     private OdBlastProcessDao odblastprocessDao;
 
     @RequestMapping("/saveOdBlastProcess")
-    public String saveOdBlastProcess(OdBlastProcess odblastprocess, HttpServletResponse response)throws Exception{
-        int resTotal=0;
-        odblastprocess.setOperation_time(new Date());
-        if(odblastprocess.getId()==0){
-            //添加
-            resTotal=odblastprocessDao.addOdBlastProcess(odblastprocess);
-        }else{
-            //修改！
-            resTotal=odblastprocessDao.updateOdBlastProcess(odblastprocess);
-        }
+    @ResponseBody
+    public String saveOdBlastProcess(OdBlastProcess odblastprocess, HttpServletResponse response){
         JSONObject json=new JSONObject();
-        if(resTotal>0){
-            json.put("success",true);
-        }else{
-            json.put("success",false);
-        }ResponseUtil.write(response,json);
+        try{
+            int resTotal=0;
+            odblastprocess.setOperation_time(new Date());
+            if(odblastprocess.getId()==0){
+                //添加
+                resTotal=odblastprocessDao.addOdBlastProcess(odblastprocess);
+            }else{
+                //修改！
+                resTotal=odblastprocessDao.updateOdBlastProcess(odblastprocess);
+            }
+            if(resTotal>0){
+                json.put("success",true);
+            }else{
+                json.put("success",false);
+            }
+            ResponseUtil.write(response,json);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return null;
-
     }
     @RequestMapping("/delOdBlastProcess")
     public String delOdBlastProcess(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
