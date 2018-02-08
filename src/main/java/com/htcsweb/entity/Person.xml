@@ -57,7 +57,7 @@
         select * from person where id=#{id}
     </select>
     <select id="confirmPersonByEmployeeNoPassword" resultType="int">
-        select count(*) from person where employee_no =#{employee_no} AND ppassord=#{ppassword}
+        select count(*) from person where employee_no =#{employee_no} AND ppassword=#{ppassword}
     </select>
 
         </mapper>

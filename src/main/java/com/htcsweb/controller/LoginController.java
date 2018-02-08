@@ -27,23 +27,30 @@ import java.util.Map;
 @RequestMapping("/Login")
 public class LoginController {
 
+    @Autowired
     private PersonDao personDao;
 
     @RequestMapping("/commitLogin")
     @ResponseBody
-    public String commitLogin(String employee_no,String ppassword, HttpServletResponse response){
+
+
+    //登录验证
+    public String commitLogin(HttpServletRequest request,HttpServletResponse response){
         JSONObject json=new JSONObject();
+        String employee_no= request.getParameter("employee_no");
+        String ppassword= request.getParameter("ppassword");
         try{
             int resTotal=0;
             System.out.println("employee_no="+employee_no);
-
+            //System.out.println("ppassword="+ppassword);
+            //if(personDao!=null)
             resTotal= personDao.confirmPersonByEmployeeNoPassword(employee_no,ppassword);
-
             if(resTotal>0){
                 json.put("success",true);
                 System.out.println("success");
             }else{
                 json.put("success",false);
+                json.put("msg","用户名或密码错误");
                 System.out.println("fail");
             }
             ResponseUtil.write(response,json);

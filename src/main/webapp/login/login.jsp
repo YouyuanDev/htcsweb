@@ -19,22 +19,47 @@
     <script type="text/javascript" src="../easyui/jquery.min.js"></script>
     <script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
     <script src="../js/common.js" type="text/javascript"></script>
+    <script src="../js/jquery.i18n.properties-1.0.9.js" type="text/javascript"></script>
+    <script src="../js/language.js" type="text/javascript"></script>
     <script>
+        var ckusername=getCookie("UserName");
+        var ckpass=getCookie("Password");
+
+        if(ckusername!=null&&ckpass!=null&&ckusername!=""&&ckpass!=""){
+
+            alert("存在cookie");
+           // alert("ckusername="+ckusername);
+            //alert("ckpass="+ckpass);
+            $("#employee_no").textbox('setValue',ckusername);
+            $("#ppassword").textbox('setValue',ckpass);
+            alert("读取cookie完毕");
+        }
+
+
+
         function submitForm() {
-            alert("submit")
             $("#frmLogin").form('submit',{
                 url: "/Login/commitLogin.action",
                 onSubmit:function() {
-                    alert("submit1111")
                     return $(this).form('validate');
                 },
                 success:function(result) {
-                    alert("submit2222")
                     var data = eval('(' + result + ')');
-                    if (data.success === 1) {
-                        window.location.href = "index.jsp";
+                    //alert(data.success)
+                    if (data.success == true) {
+                        //alert("记住密码111111");
+                        if ($("#logrem").attr("checked")) {//记住密码
+                            //alert("记住密码!");
+                            var u=$("#employee_no").val();
+                            var p=$("#ppassword").val();
+
+                            getCookie("UserName",u);
+                            getCookie("Password",p);
+                            alert("保存cookie完毕"+p);
+                        }
+                       // window.location.href = "../index.jsp";
                     } else {
-                        $.messager.alert("提示",data.msg);
+                        $.messager.alert("错误提示",data.msg);
                     }
                 }
             });
@@ -43,21 +68,6 @@
 </head>
 <body >
 
-
-<%--<form method="POST" id="frmLogin" >--%>
-    <%--<div class="login_title">登陆注册页面FORM</div>--%>
-    <%--<label class="login">用户名</label>--%>
-    <%--<input class="easyui-textbox" name="loginUser" id="loginUser"--%>
-           <%--data-options="iconCls:'icon-man',required:true,validType:'email'" />--%>
-
-    <%--<label class="login">密码</label>--%>
-    <%--<input class="easyui-textbox" name="loginPass" id="loginPass"--%>
-           <%--type="password" data-options="iconCls:'icon-lock',required:true" />--%>
-
-    <%--<a href="javascript:void(0);" onclick="submitForm();" style="width:80px;"--%>
-       <%--class="easyui-linkbutton" data-options="iconCls:'icon-ok'" >登陆</a>--%>
-<%--</form>--%>
-
 <%--<div style="margin:20px 0;">--%>
     <%--<a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#w').window('open')">Open</a>--%>
     <%--<a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#w').window('close')">Close</a>--%>
@@ -65,21 +75,21 @@
 <div id="w" class="easyui-window" title="请先登录" data-options="modal:true,closed:false,iconCls:'Lockgo',closable:false,minimizable:false" style="width:400px;padding:20px 70px 20px 70px;">
     <form id="frmLogin" method="post">
     <div style="margin-bottom:10px">
-        <input class="easyui-textbox" id="employee_no" style="width:100%;height:30px;padding:12px" data-options="prompt:'员工工号',iconCls:'icon-man',iconWidth:38">
+        <input class="easyui-textbox" id="employee_no" name="employee_no"  style="width:100%;height:30px;padding:12px" data-options="prompt:'员工工号',iconCls:'icon-man',iconWidth:38">
     </div>
     <div style="margin-bottom:20px">
-        <input class="easyui-textbox" id="ppassword" type="password" style="width:100%;height:30px;padding:12px" data-options="prompt:'登录密码',iconCls:'icon-lock',iconWidth:38">
+        <input class="easyui-textbox" id="ppassword" name="ppassword" type="password" style="width:100%;height:30px;padding:12px" data-options="prompt:'登录密码',iconCls:'icon-lock',iconWidth:38">
     </div>
     <%--<div style="margin-bottom:20px">--%>
         <%--<input class="easyui-textbox" type="text" id="logyzm" style="width:50%;height:30px;padding:12px" data-options="prompt:'验证码'"> <a href="javascript:;" class="showcode" onclick="changeVeryfy()"><img style=" margin:0 0 0 3px ; vertical-align:middle; height:26px;" src="/index.php?s=/Xjadmin/verifyCode"></a>--%>
     <%--</div>--%>
     <div style="margin-bottom:20px">
-        <input type="checkbox" checked="checked" id="logrem">
-        <span>Remember me</span>
+        <input type="checkbox" checked="true" id="logrem">
+        <span class="i18n1" name="rememberme">记住账号</span>
     </div>
     <div>
         <a href="javascript:;" onclick="submitForm();" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" style="padding:5px 0px;width:100%;">
-            <span style="font-size:14px;">登录</span>
+            <span class="i18n1" name="login">登录</span>
         </a>
     </div>
     </form>
@@ -87,13 +97,11 @@
 
 </div>
 
-
-
-
-
-
-
-
-
 </body>
 </html>
+<script type="text/javascript">
+
+    hlLanguage("../i18n/");
+
+
+</script>
