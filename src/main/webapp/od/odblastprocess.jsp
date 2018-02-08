@@ -305,11 +305,11 @@
            <tr>
                <td>操作工编号</td>
                <td>
-                   <input class="easyui-validatebox" type="text" name="operator_no" value=""/>
-                   <%--<input id="lookup2" name="operator_no" class="mini-lookup" style="width:180px;"--%>
-                          <%--textField="employee_no" valueField="id" popupWidth="auto"--%>
-                          <%--popup="#gridPanel" grid="#datagrid1" multiSelect="false"--%>
-                   <%--/>--%>
+                   <%--<input class="easyui-validatebox" type="text" name="operator_no" value=""/>--%>
+                   <input id="lookup2" name="operator_no" class="mini-lookup" style="width:180px;"
+                          textField="employee_no" valueField="id" popupWidth="auto"
+                          popup="#gridPanel" grid="#datagrid1" multiSelect="false"
+                   />
                </td>
                <td></td>
                <td>操作时间</td>
@@ -382,7 +382,7 @@
     <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="odBlastProFormSubmit()">Ok</a>
     <a href="#" class="easyui-linkbutton" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="odBlastProCancelSubmit()">Cancel</a>
 </div>
-<div id="gridPanel" class="mini-panel" title="header" iconCls="icon-add" style="width:350px;height:250px;"
+<div id="gridPanel" class="mini-panel" title="header" iconCls="icon-add" style="width:350px;height:250px;z-index:100000"
      showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0">
     <div property="toolbar" style="padding:5px;padding-left:8px;text-align:center;">
         <div style="float:left;padding-bottom:2px;">
