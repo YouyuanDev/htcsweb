@@ -21,15 +21,18 @@
     <script src="../js/common.js" type="text/javascript"></script>
     <script>
         function submitForm() {
+            alert("submit")
             $("#frmLogin").form('submit',{
-                url:"actionLogin.php",
+                url: "/Login/commitLogin.action",
                 onSubmit:function() {
+                    alert("submit1111")
                     return $(this).form('validate');
                 },
                 success:function(result) {
+                    alert("submit2222")
                     var data = eval('(' + result + ')');
                     if (data.success === 1) {
-                        window.location.href = "index.php";
+                        window.location.href = "index.jsp";
                     } else {
                         $.messager.alert("提示",data.msg);
                     }
@@ -55,31 +58,31 @@
        <%--class="easyui-linkbutton" data-options="iconCls:'icon-ok'" >登陆</a>--%>
 <%--</form>--%>
 
-<div style="margin:20px 0;">
-    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#w').window('open')">Open</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#w').window('close')">Close</a>
-</div>
-<div id="w" class="easyui-window" title="请先登录" data-options="modal:true,closed:true,iconCls:'Lockgo',closable:false,minimizable:false" style="width:400px;padding:20px 70px 20px 70px;">
-
+<%--<div style="margin:20px 0;">--%>
+    <%--<a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#w').window('open')">Open</a>--%>
+    <%--<a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#w').window('close')">Close</a>--%>
+<%--</div>--%>
+<div id="w" class="easyui-window" title="请先登录" data-options="modal:true,closed:false,iconCls:'Lockgo',closable:false,minimizable:false" style="width:400px;padding:20px 70px 20px 70px;">
+    <form id="frmLogin" method="post">
     <div style="margin-bottom:10px">
-        <input class="easyui-textbox" id="logname" style="width:100%;height:30px;padding:12px" data-options="prompt:'登录邮箱',iconCls:'icon-man',iconWidth:38">
+        <input class="easyui-textbox" id="employee_no" style="width:100%;height:30px;padding:12px" data-options="prompt:'员工工号',iconCls:'icon-man',iconWidth:38">
     </div>
     <div style="margin-bottom:20px">
-        <input class="easyui-textbox" id="logpass" type="password" style="width:100%;height:30px;padding:12px" data-options="prompt:'登录密码',iconCls:'icon-lock',iconWidth:38">
+        <input class="easyui-textbox" id="ppassword" type="password" style="width:100%;height:30px;padding:12px" data-options="prompt:'登录密码',iconCls:'icon-lock',iconWidth:38">
     </div>
-    <div style="margin-bottom:20px">
-        <input class="easyui-textbox" type="text" id="logyzm" style="width:50%;height:30px;padding:12px" data-options="prompt:'验证码'"> <a href="javascript:;" class="showcode" onclick="changeVeryfy()"><img style=" margin:0 0 0 3px ; vertical-align:middle; height:26px;" src="/index.php?s=/Xjadmin/verifyCode"></a>
-    </div>
+    <%--<div style="margin-bottom:20px">--%>
+        <%--<input class="easyui-textbox" type="text" id="logyzm" style="width:50%;height:30px;padding:12px" data-options="prompt:'验证码'"> <a href="javascript:;" class="showcode" onclick="changeVeryfy()"><img style=" margin:0 0 0 3px ; vertical-align:middle; height:26px;" src="/index.php?s=/Xjadmin/verifyCode"></a>--%>
+    <%--</div>--%>
     <div style="margin-bottom:20px">
         <input type="checkbox" checked="checked" id="logrem">
         <span>Remember me</span>
     </div>
     <div>
-        <a href="javascript:;" onclick="dologin()" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" style="padding:5px 0px;width:100%;">
+        <a href="javascript:;" onclick="submitForm();" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" style="padding:5px 0px;width:100%;">
             <span style="font-size:14px;">登录</span>
         </a>
     </div>
-
+    </form>
 
 
 </div>
