@@ -8,13 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fa3f659b-6ccf-4ae8-84a0-55d0a3756f6f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdBlastProcessController.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdBlastProcessController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PersonController.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PersonController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PersonDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PersonDao.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastProcess.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastProcess.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/Person.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/Person.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/od/odblastprocess.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/od/odblastprocess.jsp" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/od/supplier.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/od/supplier.jsp" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/login/login.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/login/login.jsp" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -87,11 +81,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="odblastprocess.jsp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="odblastprocess.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/od/odblastprocess.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2">
-              <caret line="400" column="48" lean-forward="true" selection-start-line="400" selection-start-column="48" selection-end-line="400" selection-end-column="48" />
+            <state relative-caret-position="287">
+              <caret line="422" column="28" lean-forward="false" selection-start-line="422" selection-start-column="28" selection-end-line="422" selection-end-column="28" />
               <folding>
                 <element signature="n#style#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -101,6 +95,16 @@
                 <element signature="n#style#0;n#div#2;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.jsp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/login/login.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="94">
+              <caret line="16" column="35" lean-forward="true" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -128,7 +132,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdblastprocessDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdCoatingInspectionProcessDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdCoatingProcessDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdFinalInspectionProcessDao.java" />
@@ -179,6 +182,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/Person.xml" />
         <option value="$PROJECT_DIR$/src/main/webapp/od/supplier.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/od/odblastprocess.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/login/login.jsp" />
       </list>
     </option>
   </component>
@@ -196,8 +200,8 @@
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="22" />
-    <option name="y" value="196" />
+    <option name="x" value="107" />
+    <option name="y" value="23" />
     <option name="width" value="1662" />
     <option name="height" value="983" />
   </component>
@@ -255,7 +259,7 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
+              <item name="account" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
@@ -263,7 +267,23 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="od" type="462c0819:PsiDirectoryNode" />
+              <item name="easyui" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="login" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="upload" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
@@ -625,7 +645,7 @@
       <workItem from="1517878670354" duration="12936000" />
       <workItem from="1517895160010" duration="16758000" />
       <workItem from="1517965170204" duration="29903000" />
-      <workItem from="1518052339130" duration="26926000" />
+      <workItem from="1518052339130" duration="27431000" />
     </task>
     <servers />
   </component>
@@ -638,10 +658,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="197430000" />
+    <option name="totallyTimeSpent" value="197935000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="22" y="196" width="1662" height="983" extended-state="0" />
+    <frame x="107" y="23" width="1662" height="983" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -690,8 +710,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/lang_zh.properties" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/zh.properties" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/en.properties" />
     <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/text-en.json" />
     <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/text-zh.json" />
@@ -1065,15 +1083,15 @@
         <state relative-caret-position="5">
           <caret line="43" column="8" lean-forward="true" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="8" />
           <folding>
-            <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#input#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1086,10 +1104,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/account/person.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1480">
+          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/od/odblastprocess.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2">
-          <caret line="400" column="48" lean-forward="true" selection-start-line="400" selection-start-column="48" selection-end-line="400" selection-end-column="48" />
+        <state relative-caret-position="287">
+          <caret line="422" column="28" lean-forward="false" selection-start-line="422" selection-start-column="28" selection-end-line="422" selection-end-column="28" />
           <folding>
             <element signature="n#style#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -1099,6 +1125,14 @@
             <element signature="n#style#0;n#div#2;n#div#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/login/login.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="94">
+          <caret line="16" column="35" lean-forward="true" selection-start-line="16" selection-start-column="35" selection-end-line="16" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>

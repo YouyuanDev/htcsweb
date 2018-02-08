@@ -11,12 +11,13 @@
 <html>
 <head>
     <title>登录</title>
+
     <link rel="stylesheet" type="text/css" href="../easyui/themes/bootstrap/easyui.css">
     <link rel="stylesheet" type="text/css" href="../easyui/themes/bootstrap/window.css">
     <link rel="stylesheet" type="text/css" href="../easyui/themes/icon.css">
     <link rel="stylesheet" href="../css/common.css"/>
-
     <script type="text/javascript" src="../easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
     <script src="../js/common.js" type="text/javascript"></script>
     <script>
         function submitForm() {
