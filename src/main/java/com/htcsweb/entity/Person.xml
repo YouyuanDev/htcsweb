@@ -36,8 +36,14 @@
         <result property="pregister_time" column="pregister_time"></result>
     </resultMap>
 
-    <select id="feny"  resultMap="all">
-        select * from person where id limit #{arg0},#{arg1}
+    <select id="getAllByLike"  resultMap="all" resultType="com.htcsweb.entity.Person">
+        select * from person
+        <where>
+            <if test="pname!=null and pname!=''">
+                AND pname LIKE CONCAT('%',#{pname},'%')
+            </if>
+        </where>
+        id limit #{arg0},#{arg1}
     </select>
 
     <select id="getPersonById" parameterType="int" resultType="com.htcsweb.entity.Person">

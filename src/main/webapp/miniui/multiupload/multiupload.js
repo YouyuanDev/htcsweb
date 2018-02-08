@@ -17,7 +17,7 @@ mini.extend(UserControl.MultiUpload, mini.DataGrid, {
     uploadUrl: '',
     uploader: undefined,
     uploadName: "Fdata",
-    limitSize: "2MB",
+    limitSize: "100MB",
     limitType: "*.jpg;*.png;*.jpeg;*.bmp",
     uploadLimit: 0,
     queueLimit: 10,

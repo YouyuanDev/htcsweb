@@ -37,24 +37,19 @@ public class PersonController {
         personDao.updatePerson(person);
         return "account/person";
     }
-    @RequestMapping(value = "/getPersonByPage")
+    @RequestMapping(value = "/getPersonByLike")
     @ResponseBody
-    public String getPersonByPage(@RequestParam(value="page",required=false) String page, @RequestParam(value="rows",required=false) String rows, HttpServletRequest request){
-//        String page=request.getParameter("page");
-//        String rows=request.getParameter("rows");
-        String mmp="";
-        if(page==null||rows==null){
-           System.out.println("page="+page+":rows="+rows);
-        }else{
-            int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
-            List<Person>list=personDao.feny(start,Integer.parseInt(rows));
-            int count=personDao.getCount();
-            Map<String,Object>map=new HashMap<String, Object>();
-            map.put("total",count);
-            map.put("rows",list);
-            mmp= JSONArray.toJSONString(map);
-        }
-
+    public String getPersonByPage(HttpServletRequest request){
+        String page=request.getParameter("page");
+        String rows=request.getParameter("rows");
+        String pname=request.getParameter("pname");
+        int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
+        List<Person>list=personDao.getAllByLike(pname,start,Integer.parseInt(rows));
+        int count=personDao.getCount();
+        Map<String,Object>map=new HashMap<String, Object>();
+        map.put("total",count);
+        map.put("rows",list);
+        String mmp= JSONArray.toJSONString(map);
         return mmp;
     }
     @RequestMapping("getPersonById")

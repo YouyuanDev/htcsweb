@@ -152,7 +152,7 @@
         }
         //文件选择时判断
         function  fileselect() {
-            
+            alert(1);
         }
         //图片上传失败操作
         function onUploadError() {
@@ -350,8 +350,8 @@
    </form>
     <div id="multiupload1" class="uc-multiupload" style="width:100%; max-height:200px"
          flashurl="../miniui/fileupload/swfupload/swfupload.swf"
-         uploadurl="../UploadFile/uploadPicture.action" _autoUpload="false" _limittype="*jpg"
-         onuploaderror="onUploadError" onuploadsuccess="onUploadSuccess"
+         uploadurl="../UploadFile/uploadPicture.action" _autoUpload="false" _limittype="*.jpg;*.png;*.jpeg;*.bmp"
+         onuploaderror="onUploadError" onuploadsuccess="onUploadSuccess" _limitSize="100M"
     >
     </div>
     <div id="hl-gallery-con">
