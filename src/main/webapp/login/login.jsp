@@ -62,7 +62,7 @@
                             getCookie("Password",p);
                             //alert("保存cookie完毕"+p);
                         }
-                       // window.location.href = "../index.jsp";
+                          window.location.href = "../index.jsp";
                     } else {
                         $.messager.alert("错误提示",data.msg);
                     }
