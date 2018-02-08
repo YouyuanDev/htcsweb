@@ -11,15 +11,15 @@
     <link rel="stylesheet" type="text/css" href="../easyui/themes/icon.css">
     <link href="../miniui/multiupload/multiupload.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="../css/common.css"/>
-    <script type="text/javascript" src="../easyui/jquery.min.js"></script>
+    <script src="../easyui/jquery.min.js" type="text/javascript"></script>
     <script src="../js/jquery.i18n.properties-1.0.9.js" type="text/javascript"></script>
     <script src="../js/language.js" type="text/javascript"></script>
     <script src="../js/common.js" type="text/javascript"></script>
     <script src="../miniui/boot.js" type="text/javascript"></script>
-    <script type="text/javascript" src="../miniui/js/miniui.js"></script>
+    <script  src="../miniui/js/miniui.js" type="text/javascript"></script>
     <script src="../miniui/fileupload/swfupload/swfupload.js" type="text/javascript"></script>
     <script src="../miniui/multiupload/multiupload.js" type="text/javascript"></script>
-    <script type="text/javascript" src="../js/lrscroll.js"></script>
+    <script  src="../js/lrscroll.js" type="text/javascript"></script>
     <script src="../js/jquery.i18n.properties-1.0.9.js" type="text/javascript"></script>
     <script src="../js/language.js" type="text/javascript"></script>
     <script type="text/javascript">
@@ -72,7 +72,8 @@
             $('#hlcancelBtn').attr('operationtype','add');
             $('#hlOdBlastProDialog').dialog('open').dialog('setTitle','新增');
             $('#fileslist').val('');
-            $('#odBlastProForm').form('clear');$('#odbpid').text('');$('#odbptime').text('');
+            $('#odBlastProForm').form('clear');
+            $('#odbpid').text('');$('#odbptime').text('');
             clearMultiUpload(grid);
             url="/OdOperation/saveOdBlastProcess.action";
         }
@@ -118,7 +119,7 @@
             });
         }
         function odBlastProFormSubmit() {
-            $('#odBlastProForm').form('submit',{
+            $('#odBlastProForm').form({
                 url:url,
                 success: function(result){
                     var result = eval('('+result+')');
@@ -127,13 +128,14 @@
                         $('#odBlastProDatagrids').datagrid('reload');
                         $('#hl-gallery-con').empty();
                     } else {
-                        hlAlertFour("操作失败!");
+                         hlAlertFour("操作失败!");
                     }
                 },
                 error:function () {
                     hlAlertThree();
                 }
             });
+            $('#odBlastProForm').submit();
             clearMultiUpload(grid);
         }
         function odBlastProCancelSubmit() {
@@ -150,10 +152,7 @@
                 $('#odBlastProForm').form('clear');$('#odbpid').text('');$('#odbptime').text('');
             }
         }
-        //文件选择时判断
-        function  fileselect() {
-            alert(1);
-        }
+
         //图片上传失败操作
         function onUploadError() {
             alert("上传失败!");
@@ -232,7 +231,7 @@
 <fieldset class="b3" style="padding:10px;margin:10px;">
     <legend> <h3><b style="color: orange" >|&nbsp;</b><span class="i18n1" name="datadisplay">数据展示</span></h3></legend>
     <div  style="margin-top:5px;">
-         <table class="easyui-datagrid" id="odBlastProDatagrids" url="/OdOperation/getOdBlastByLike.action" striped="true" loadMsg="正在加载中。。。" textField="text" pageSize="20", fitColumns="true" pagination="true" toolbar="#hlOdBlastProTb">
+         <table class="easyui-datagrid" id="odBlastProDatagrids" url="/OdOperation/getOdBlastByLike.action" striped="true" loadMsg="正在加载中。。。" textField="text" pageSize="20" fitColumns="true" pagination="true" toolbar="#hlOdBlastProTb">
              <thead>
                <tr>
                        <th data-options="field:'ck',checkbox:true"></th>
@@ -351,8 +350,7 @@
     <div id="multiupload1" class="uc-multiupload" style="width:100%; max-height:200px"
          flashurl="../miniui/fileupload/swfupload/swfupload.swf"
          uploadurl="../UploadFile/uploadPicture.action" _autoUpload="false" _limittype="*.jpg;*.png;*.jpeg;*.bmp"
-         onuploaderror="onUploadError" onuploadsuccess="onUploadSuccess" _limitSize="100M"
-    >
+         onuploaderror="onUploadError" onuploadsuccess="onUploadSuccess">
     </div>
     <div id="hl-gallery-con">
 

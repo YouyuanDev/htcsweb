@@ -51,29 +51,12 @@
                             });
                             hlLanguage();
                         }
-                        else if("外喷砂检验岗位"==xy){
+                        else if("外喷砂检验岗位"==xy||""==xy){
                             $('#hlTab').tabs('add',{
                                 title:node.text,
-                                href:'main.jsp',
-                                closable:true,
-                                onLoad:function(){
-
-                                    $('#dgg').datagrid({
-                                        url:'datagrid_data.json',
-                                        columns:[[
-                                            {field:'code',title:'代码',width:100},
-                                            {field:'name',title:'名称',width:100},
-                                            {field:'price',title:'价格',width:100,align:'right'}
-                                        ]],
-                                        striped:true,
-                                        loadMsg:'正在拼命加载中...',
-                                        pagination:true,
-                                        singleSelect:true,
-                                        rownumbers:true
-                                    });
-                                }
-
-                            })
+                                content:"<iframe scrolling='auto' frameborder='0'  src='od/supplier.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
                         }
                     }
                 }

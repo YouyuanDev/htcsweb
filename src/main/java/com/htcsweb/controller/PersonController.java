@@ -42,7 +42,16 @@ public class PersonController {
     public String getPersonByPage(HttpServletRequest request){
         String page=request.getParameter("page");
         String rows=request.getParameter("rows");
-        String pname=request.getParameter("pname");
+        System.out.println("page="+page);
+        System.out.println("rows="+rows);
+        if(page==null||page==""){
+            page="1";
+        }
+        if(rows==null||rows==""){
+            rows="10";
+        }
+        String pname=request.getParameter("key");
+        System.out.println("pname="+pname);
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
         List<Person>list=personDao.getAllByLike(pname,start,Integer.parseInt(rows));
         int count=personDao.getCount();
