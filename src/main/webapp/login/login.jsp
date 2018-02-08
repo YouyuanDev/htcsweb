@@ -22,18 +22,24 @@
     <script src="../js/jquery.i18n.properties-1.0.9.js" type="text/javascript"></script>
     <script src="../js/language.js" type="text/javascript"></script>
     <script>
-        var ckusername=getCookie("UserName");
-        var ckpass=getCookie("Password");
 
-        if(ckusername!=null&&ckpass!=null&&ckusername!=""&&ckpass!=""){
 
-            alert("存在cookie");
-           // alert("ckusername="+ckusername);
-            //alert("ckpass="+ckpass);
-            $("#employee_no").textbox('setValue',ckusername);
-            $("#ppassword").textbox('setValue',ckpass);
-            alert("读取cookie完毕");
-        }
+        $(function() {
+            var ckusername=getCookie("UserName");
+            var ckpass=getCookie("Password");
+
+            if(ckusername!=null&&ckpass!=null&&ckusername!=""&&ckpass!=""){
+                //alert("存在cookie");
+                $('#employee_no').textbox('setValue',ckusername);
+                $('#ppassword').textbox('setValue',ckpass);
+                $("#logrem").attr("checked",true);
+                //alert("读取cookie完毕");
+            }
+
+        });
+
+
+
 
 
 
@@ -52,10 +58,9 @@
                             //alert("记住密码!");
                             var u=$("#employee_no").val();
                             var p=$("#ppassword").val();
-
                             getCookie("UserName",u);
                             getCookie("Password",p);
-                            alert("保存cookie完毕"+p);
+                            //alert("保存cookie完毕"+p);
                         }
                        // window.location.href = "../index.jsp";
                     } else {
@@ -102,6 +107,5 @@
 <script type="text/javascript">
 
     hlLanguage("../i18n/");
-
 
 </script>
