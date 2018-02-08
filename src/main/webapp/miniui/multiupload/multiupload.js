@@ -12,15 +12,13 @@ UserControl.MultiUpload = function () {
 }
 
 mini.extend(UserControl.MultiUpload, mini.DataGrid, {
-
     uiCls: 'uc-multiupload',
-
     flashUrl: '',
     uploadUrl: '',
     uploader: undefined,
     uploadName: "Fdata",
-    limitSize: "10MB",
-    limitType: "*",
+    limitSize: "2MB",
+    limitType: "*.jpg;*.png;*.jpeg;*.bmp",
     uploadLimit: 0,
     queueLimit: 10,
     postParam: null,

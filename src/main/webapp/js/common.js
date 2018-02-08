@@ -26,9 +26,12 @@ function hlAlertFive(url,hlparam,total) {
     });
 }
 function hlAlertSix(url,$imglist,$dialog,$obj) {
-    var hlparam=$imglist.val();
-    var imgarr=hlparam.split(';');
-    if(hlparam.split(';').length>0){
+    var hlparam=$imglist.val().trim();
+    var imgarr=[];
+    if(hlparam!=""){
+        imgarr=hlparam.split(';');
+    }
+    if(imgarr.length>0){
         $.messager.confirm('系统提示',"取消上传，图片会自动删除!",function (r) {
             if(r){
                 $.ajax({
@@ -45,7 +48,6 @@ function hlAlertSix(url,$imglist,$dialog,$obj) {
                 $imglist.val('');
                 $('#hl-gallery-con').empty();
                 $dialog.dialog('close');
-
             }
         });
     }else{
@@ -54,7 +56,6 @@ function hlAlertSix(url,$imglist,$dialog,$obj) {
         $('#hl-gallery-con').empty();
         $dialog.dialog('close');
     }
-
 }
 function  clearMultiUpload($grid) {
     var rows = $grid.getData();

@@ -23,15 +23,11 @@
     <script src="../js/jquery.i18n.properties-1.0.9.js" type="text/javascript"></script>
     <script src="../js/language.js" type="text/javascript"></script>
     <script type="text/javascript">
-
-
-
+        var url;
         function formatterdate(value,row,index){
            var date = new Date(value);
            return date.toLocaleString();
         }
-
-
         $(function () {
             // $('#odBlastProDatagrids').datagrid({
             //     striped:true,
@@ -73,10 +69,11 @@
 
         });
         function addOdBlastPro(){
+            $('#hlcancelBtn').attr('operationtype','add');
             $('#hlOdBlastProDialog').dialog('open').dialog('setTitle','新增');
             $('#fileslist').val('');
             $('#odBlastProForm').form('clear');$('#odbpid').text('');$('#odbptime').text('');
-            clearMultiUpload();
+            clearMultiUpload(grid);
             url="/OdOperation/saveOdBlastProcess.action";
         }
         function delOdBlastPro() {
@@ -94,7 +91,7 @@
             }
         }
         function editOdBlastPro() {
-            clearMultiUpload();
+            $('#hlcancelBtn').attr('operationtype','edit');
             var row = $('#odBlastProDatagrids').datagrid('getSelected');
             if(row){
                 $('#hlOdBlastProDialog').dialog('open').dialog('setTitle','修改');
@@ -102,6 +99,11 @@
                 var odbptime=getDate(row.operation_time);
                 $('#odbpid').text(odbpid);$('#odbptime').text(odbptime);
                 $('#odBlastProForm').form('load',row);
+                var odpictures=row.upload_files;
+                if(odpictures!=null&&odpictures!=""){
+                     var imgList=odpictures.split(';');
+                    createPictureModel(imgList);
+                }
                 url="/OdOperation/saveOdBlastProcess.action?id="+row.id;
             }else{
                 hlAlertTwo();
@@ -132,11 +134,25 @@
                     hlAlertThree();
                 }
             });
+            clearMultiUpload(grid);
         }
         function odBlastProCancelSubmit() {
-            var $imglist=$('#fileslist');
-            var $dialog=$('#hlOdBlastProDialog');
-            hlAlertSix("../UploadFile/delUploadPicture.action",$imglist,$dialog,grid);
+            //取消分两种 一种是添加取消 一种是修改提交
+            var type=$('#hlcancelBtn').attr('operationtype');
+            if(type=="add"){
+                var $imglist=$('#fileslist');
+                var $dialog=$('#hlOdBlastProDialog');
+                hlAlertSix("../UploadFile/delUploadPicture.action",$imglist,$dialog,grid);
+            }else{
+                $('#hlOdBlastProDialog').dialog('close');
+                $('#hl-gallery-con').empty();
+                //$('#fileslist').val('');
+                $('#odBlastProForm').form('clear');$('#odbpid').text('');$('#odbptime').text('');
+            }
+        }
+        //文件选择时判断
+        function  fileselect() {
+            
         }
         //图片上传失败操作
         function onUploadError() {
@@ -147,18 +163,7 @@
             var data=eval("("+e.serverData+")");
             var imgListstr=editFilesList(0,data.imgUrl);
             var imgList=imgListstr.split(';');
-            var basePath ="<%=basePath%>"+"/upload/pictures/";
-            if($('#hl-gallery').length>0){
-                $('#content_list').empty();
-                for(var i=0;i<imgList.length-1;i++){
-                    $('#content_list').append(getCalleryChildren(basePath+imgList[i]));
-                }
-            }else{
-                $('#hl-gallery-con').append(getGalleryCon());
-                for(var i=0;i<imgList.length-1;i++){
-                    $('#content_list').append(getCalleryChildren(basePath+imgList[i]));
-                }
-            }
+            createPictureModel(imgList);
         }
         function editFilesList(type,imgUrl) {
             var $obj=$('#fileslist');
@@ -171,14 +176,14 @@
             return $obj.val();
         }
         //清理图片选择
-        function  clearMultiUpload() {
-            var rows = grid.getData();
-            for (var i = 0, l = rows.length; i < l; i++) {
-                grid.uploader.cancelUpload(rows[i].fileId);
-                grid.customSettings.queue.remove(rows[i].fileId);
-            }
-            grid.clearData();
-        }
+        // function  clearMultiUpload() {
+        //     var rows = grid.getData();
+        //     for (var i = 0, l = rows.length; i < l; i++) {
+        //         grid.uploader.cancelUpload(rows[i].fileId);
+        //         grid.customSettings.queue.remove(rows[i].fileId);
+        //     }
+        //     grid.clearData();
+        // }
         //删除选择的图片
         function delUploadPicture($obj) {
             var imgUrl=$obj.siblings('dt').find('img').attr('src');
@@ -199,6 +204,21 @@
                     hlAlertThree();
                 }
             });
+        }
+        //创建图片展示模型(参数是图片集合)
+        function  createPictureModel(imgList) {
+            var basePath ="<%=basePath%>"+"/upload/pictures/";
+            if($('#hl-gallery').length>0){
+                $('#content_list').empty();
+                for(var i=0;i<imgList.length-1;i++){
+                    $('#content_list').append(getCalleryChildren(basePath+imgList[i]));
+                }
+            }else{
+                $('#hl-gallery-con').append(getGalleryCon());
+                for(var i=0;i<imgList.length-1;i++){
+                    $('#content_list').append(getCalleryChildren(basePath+imgList[i]));
+                }
+            }
         }
     </script>
 
@@ -340,7 +360,7 @@
 </div>
 <div id="dlg-buttons">
     <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="odBlastProFormSubmit()">Ok</a>
-    <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="odBlastProCancelSubmit()">Cancel</a>
+    <a href="#" class="easyui-linkbutton" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="odBlastProCancelSubmit()">Cancel</a>
 </div>
 <script type="text/javascript" src="../easyui/jquery.easyui.min.js" charset="UTF-8"></script>
 </body>
