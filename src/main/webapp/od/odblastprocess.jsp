@@ -385,13 +385,15 @@
     <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="odBlastProFormSubmit()">Ok</a>
     <a href="#" class="easyui-linkbutton" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="odBlastProCancelSubmit()">Cancel</a>
 </div>
-<div id="gridPanel" class="mini-panel" title="header" iconCls="icon-add" style="width:350px;height:250px;"
+<div id="gridPanel" class="mini-panel" title="header" iconCls="icon-add" style="width:450px;height:250px;"
      showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0"
 >
     <div property="toolbar" style="padding:5px;padding-left:8px;text-align:center;">
         <div style="float:left;padding-bottom:2px;">
+            <span>工号：</span>
+            <input id="keyText1" class="mini-textbox" style="width:110px;" onenter="onSearchClick"/>
             <span>姓名：</span>
-            <input id="keyText" class="mini-textbox" style="width:140px;" onenter="onSearchClick"/>
+            <input id="keyText" class="mini-textbox" style="width:110px;" onenter="onSearchClick"/>
             <a class="mini-button" onclick="onSearchClick">查询</a>
             <a class="mini-button" onclick="onClearClick">清除</a>
         </div>
@@ -406,7 +408,7 @@
         <div property="columns">
             <div type="checkcolumn" ></div>
             <div field="pname" width="60" headerAlign="center" allowSort="true">姓名</div>
-            <div field="employee_no" width="60" headerAlign="center" allowSort="true">编号</div>
+            <div field="employee_no" width="60" headerAlign="center" allowSort="true">工号</div>
         </div>
     </div>
 </div>
@@ -417,11 +419,13 @@
     mini.parse();
     var grid= mini.get("multiupload1");
     var keyText = mini.get("keyText");
+    var keyText1=mini.get("keyText1");
     var grid1=mini.get("datagrid1");
     var look= mini.get("lookup2");
     function onSearchClick(e) {
         grid1.load({
-            key: keyText.value
+            key: keyText.value,
+            key1:keyText1.value
         });
     }
     function onCloseClick(e) {

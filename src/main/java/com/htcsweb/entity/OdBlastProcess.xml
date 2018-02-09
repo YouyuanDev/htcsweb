@@ -29,6 +29,8 @@
 
     <resultMap id="all" type="com.htcsweb.entity.OdBlastProcess">
         <id property="id" column="id"></id>
+        <result property="project_name" column="project_name"></result>
+        <result property="status_name" column="status_name"></result>
         <result property="pipe_no" column="pipe_no"></result>
         <result property="operation_time" column="operation_time"></result>
         <result property="operator_no" column="operator_no"></result>
@@ -45,6 +47,9 @@
         <result property="remark" column="remark"></result>
     </resultMap>
 
+
+
+    
     <select id="feny"  resultMap="all" resultType="com.htcsweb.entity.OdBlastProcess">
         select * from od_blast_process where id limit #{arg0},#{arg1}
     </select>
@@ -64,8 +69,24 @@
                 <![CDATA[ AND DATE_FORMAT(operation_time,'%Y-%m-%d %H:%T:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d 23:59:59')]]>
             </if>
         </where>
-
-
+        limit #{skip},#{take}
+    </select>
+    <select id="getNewAllByLike" resultType="String">
+        Select pro.project_name,s.status_name,p.contract_no,p.od,p.wt,p.length,p.weight,o.* from project_info pro  inner join  pipe_status  s  inner join pipe_basic_info p on s.status_code=p.status    inner join od_blast_process o on p.pipe_no=o.pipe_no
+        <where>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND o.pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+            <if test="operator_no!=null and operator_no!=''">
+                AND o.operator_no LIKE CONCAT('%',#{operator_no},'%')
+            </if>
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d 23:59:59')]]>
+            </if>
+        </where>
         limit #{skip},#{take}
     </select>
 

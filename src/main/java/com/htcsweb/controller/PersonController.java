@@ -42,7 +42,8 @@ public class PersonController {
     @ResponseBody
     public String getPersonNoByName(HttpServletRequest request){
         String pname=request.getParameter("key");
-        List<Person>list=personDao.getNoByName(pname);
+        String employee_no=request.getParameter("key1");
+        List<Person>list=personDao.getNoByName(pname,employee_no);
         String mmp= JSONArray.toJSONString(list);
         return mmp;
     }
