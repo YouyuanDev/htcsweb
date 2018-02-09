@@ -35,7 +35,7 @@
 <table>
     <tr>
         <td style="width:180px;height:30px;">
-            <input id="lookup2"  class="mini-lookup" style="width:200px;"
+            <input id="lookup2" name="employee_no"  class="mini-lookup" style="width:180px;"
                    textField="employee_no" valueField="id" popupWidth="auto"
                    popup="#gridPanel" grid="#datagrid1" multiSelect="false"
             />
@@ -74,22 +74,29 @@
 
     var grid = mini.get("datagrid1");
     var keyText = mini.get("keyText");
-
+    var grid1=mini.get("datagrid1");
     grid.load();
 
+    var look= mini.get("lookup2");
     function onSearchClick(e) {
-        grid.load({
+        grid1.load({
             key: keyText.value
         });
     }
     function onCloseClick(e) {
-        var lookup2 = mini.get("lookup2");
-        lookup2.hidePopup();
+        //var lookup2 = mini.get("lookup2");
+        look.hidePopup();
     }
     function onClearClick(e) {
-        var lookup2 = mini.get("lookup2");
-        lookup2.deselectAll();
+        //var lookup2 = mini.get("lookup2");
+        look.deselectAll();
     }
+
+    look.on("showpopup",function(e){
+        $('.mini-shadow').css('z-index','99999');
+        $('.mini-popup').css('z-index','100000');
+        $('.mini-panel').css('z-index','100000');
+    });
 </script>
 <script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
 </body>

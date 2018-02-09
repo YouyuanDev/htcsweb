@@ -39,6 +39,7 @@ public class OdBlastProcessController {
                 resTotal=odblastprocessDao.addOdBlastProcess(odblastprocess);
             }else{
                 //修改！
+                System.out.print("操作工编号是:"+odblastprocess.getOperator_no());
                 resTotal=odblastprocessDao.updateOdBlastProcess(odblastprocess);
             }
             if(resTotal>0){

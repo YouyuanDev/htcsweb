@@ -22,6 +22,9 @@
     <script  src="../js/lrscroll.js" type="text/javascript"></script>
     <script src="../js/jquery.i18n.properties-1.0.9.js" type="text/javascript"></script>
     <script src="../js/language.js" type="text/javascript"></script>
+
+
+
     <script type="text/javascript">
         var url;
         function formatterdate(value,row,index){
@@ -106,6 +109,7 @@
                     createPictureModel(imgList);
                 }
                 url="/OdOperation/saveOdBlastProcess.action?id="+row.id;
+                look.setText(row.operator_no);
             }else{
                 hlAlertTwo();
             }
@@ -305,11 +309,10 @@
            <tr>
                <td>操作工编号</td>
                <td>
-                   <%--<input class="easyui-validatebox" type="text" name="operator_no" value=""/>--%>
-                   <input id="lookup2" name="operator_no" class="mini-lookup" style="width:180px;"
-                          textField="employee_no" valueField="id" popupWidth="auto"
-                          popup="#gridPanel" grid="#datagrid1" multiSelect="false"
-                   />
+                       <input id="lookup2" name="operator_no" class="mini-lookup" style="text-align:center;width:180px;"
+                              textField="employee_no" valueField="id" popupWidth="auto"
+                              popup="#gridPanel" grid="#datagrid1" multiSelect="false"
+                       />
                </td>
                <td></td>
                <td>操作时间</td>
@@ -382,8 +385,9 @@
     <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="odBlastProFormSubmit()">Ok</a>
     <a href="#" class="easyui-linkbutton" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="odBlastProCancelSubmit()">Cancel</a>
 </div>
-<div id="gridPanel" class="mini-panel" title="header" iconCls="icon-add" style="width:350px;height:250px;z-index:100000"
-     showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0">
+<div id="gridPanel" class="mini-panel" title="header" iconCls="icon-add" style="width:350px;height:250px;"
+     showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0"
+>
     <div property="toolbar" style="padding:5px;padding-left:8px;text-align:center;">
         <div style="float:left;padding-bottom:2px;">
             <span>姓名：</span>
@@ -406,10 +410,6 @@
         </div>
     </div>
 </div>
-<%--<input id="lookup2" name="operator_no" class="mini-lookup" style="width:180px;"--%>
-       <%--textField="employee_no" valueField="id" popupWidth="auto"--%>
-       <%--popup="#gridPanel" grid="#datagrid1" multiSelect="false"--%>
-<%--/>--%>
 <script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
 </body>
 </html>
@@ -418,18 +418,27 @@
     var grid= mini.get("multiupload1");
     var keyText = mini.get("keyText");
     var grid1=mini.get("datagrid1");
+    var look= mini.get("lookup2");
     function onSearchClick(e) {
         grid1.load({
             key: keyText.value
         });
     }
     function onCloseClick(e) {
-        var lookup2 = mini.get("lookup2");
-        lookup2.hidePopup();
+        look.hidePopup();
     }
     function onClearClick(e) {
-        var lookup2 = mini.get("lookup2");
-        lookup2.deselectAll();
+        look.deselectAll();
     }
+    look.on('valuechanged',function (e) {
+        var rows = grid1.getSelected();
+        $("input[name='operator_no']").val(rows.employee_no);
+    });
+    look.on("showpopup",function(e){
+        $('.mini-shadow').css('z-index','99999');
+        $('.mini-popup').css('z-index','100000');
+        $('.mini-panel').css('z-index','100000');
+        $('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
+    });
     hlLanguage("../i18n/");
 </script>
