@@ -23,6 +23,10 @@ import java.util.List;
 import java.util.Map;
 
 
+//import org.apache.shiro.crypto.hash.Md5Hash;
+//import org.apache.shiro.crypto.hash.SimpleHash;
+
+
 @Controller
 @RequestMapping("/Login")
 public class LoginController {
@@ -33,6 +37,15 @@ public class LoginController {
     @RequestMapping("/commitLogin")
     @ResponseBody
 
+//    public static String md5(String pass){
+//        String saltSource = "blog";
+//        String hashAlgorithmName = "MD5";
+//        Object salt = new Md5Hash(saltSource);
+//        int hashIterations = 1024;
+//        Object result = new SimpleHash(hashAlgorithmName, pass, salt, hashIterations);
+//        String password = result.toString();
+//        return password;
+//    }
 
     //登录验证
     public String commitLogin(HttpServletRequest request,HttpServletResponse response){

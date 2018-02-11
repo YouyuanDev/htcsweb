@@ -38,11 +38,14 @@
 
         });
 
+        //重置用户名密码
+        function onResetClick(e) {
+            $('#employee_no').textbox('setValue','');
+            $('#ppassword').textbox('setValue','');
+        }
 
 
-
-
-
+        //提交登录验证
         function submitForm() {
             $("#frmLogin").form('submit',{
                 url: "/Login/commitLogin.action",
@@ -91,10 +94,16 @@
     <div style="margin-bottom:20px">
         <input type="checkbox" checked="true" id="logrem">
         <span class="i18n1" name="rememberme">记住账号</span>
+
     </div>
-    <div>
-        <a href="javascript:;" onclick="submitForm();" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" style="padding:5px 0px;width:100%;">
+    <div style="width:100%">
+        <a href="javascript:;" onclick="submitForm();" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" style="padding:5px 0px;width:48%;">
             <span class="i18n1" name="login">登录</span>
+        </a>
+        <a href="javascript:;" onclick="onResetClick();" class="easyui-linkbutton" data-options="iconCls:'icon-clear'" style="padding:5px 0px;width:48%;">
+
+            <span class="i18n1" name="reset">重置</span>
+
         </a>
     </div>
     </form>
