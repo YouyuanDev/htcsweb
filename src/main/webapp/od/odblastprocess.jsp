@@ -455,6 +455,8 @@
 >
     <div property="toolbar" style="padding:5px;padding-left:8px;text-align:center;">
         <div style="float:left;padding-bottom:2px;">
+            <span>钢管编号：</span>
+            <input id="keyText1" class="mini-textbox" style="width:110px;" onenter="onSearchClick(1)"/>
             <a class="mini-button" onclick="onSearchClick(1)">查询</a>
             <a class="mini-button" onclick="onClearClick(1)">清除</a>
         </div>
@@ -468,7 +470,12 @@
          url="/pipeinfo/getPipeNumber.action">
         <div property="columns">
             <div type="checkcolumn" ></div>
-            <div field="pipe_no" width="60" headerAlign="center" allowSort="true">钢管编号</div>
+            <div field="pipe_no" width="80" headerAlign="center" allowSort="true">钢管编号</div>
+            <div field="contract_no" width="80" headerAlign="center" allowSort="true">合同编号</div>
+            <div field="od" width="40" headerAlign="center" allowSort="true">外径</div>
+            <div field="wt" width="40" headerAlign="center" allowSort="true">壁厚</div>
+            <div field="length" width="40" headerAlign="center" allowSort="true">长度</div>
+            <div field="weight" width="40" headerAlign="center" allowSort="true">重量</div>
         </div>
     </div>
 </div>
@@ -505,6 +512,7 @@
 <script type="text/javascript">
     mini.parse();
     var grid= mini.get("multiupload1");
+    var keyText1=mini.get('keyText1');
     var keyText4 = mini.get("keyText4");
     var keyText3=mini.get("keyText3");
     var grid1=mini.get("datagrid1");
@@ -514,7 +522,9 @@
     function onSearchClick(type) {
         if(type==1)
         {
-            grid1.load();
+            grid1.load({
+                pipe_no:keyText1.value
+            });
         }else if(type==2){
             grid2.load({
                 pname: keyText4.value,

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,8 +22,9 @@ public class PipeBasicInfoController {
 
     @RequestMapping("/getPipeNumber")
     @ResponseBody
-    public String getPipeNumber(){
-        List<PipeBasicInfo>list=pipeBasicInfoDao.getPipeNumber();
+    public String getPipeNumber(HttpServletRequest request){
+        String pipe_no=request.getParameter("pipe_no");
+        List<PipeBasicInfo>list=pipeBasicInfoDao.getPipeNumber(pipe_no);
         String map= JSONObject.toJSONString(list);
         return map;
     }
