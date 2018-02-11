@@ -48,12 +48,6 @@
         <result property="remark" column="remark"></result>
     </resultMap>
 
-
-
-    
-    <select id="feny"  resultMap="all" resultType="com.htcsweb.entity.OdBlastProcess">
-        select * from od_blast_process where id limit #{arg0},#{arg1}
-    </select>
     <select id="getAllByLike" resultMap="all"  resultType="com.htcsweb.entity.OdBlastProcess">
         select * FROM od_blast_process
         <where>
@@ -73,7 +67,7 @@
         limit #{skip},#{take}
     </select>
     <select id="getNewAllByLike" resultType="map">
-        Select pro.project_name,s.status_name,p.contract_no,p.od,p.wt,p.length,p.weight,o.* from project_info pro  inner join (contract_info c inner join ((pipe_status s inner join pipe_basic_info p on s.status_code=p.status) inner join od_blast_process o on p.pipe_no=o.pipe_no)on c.contract_no=p.contract_no) on pro.project_no=c.project_no
+        Select pro.project_name,s.status_name,p.contract_no,p.grade,p.od,p.wt,p.length,p.weight,o.* from project_info pro  inner join (contract_info c inner join ((pipe_status s inner join pipe_basic_info p on s.status_code=p.status) inner join od_blast_process o on p.pipe_no=o.pipe_no)on c.contract_no=p.contract_no) on pro.project_no=c.project_no
         <where>
             <if test="pipe_no!=null and pipe_no!=''">
                 AND o.pipe_no LIKE CONCAT('%',#{pipe_no},'%')
@@ -88,6 +82,7 @@
                 <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d 23:59:59')]]>
             </if>
         </where>
+        ORDER BY o.operation_time DESC
         limit #{skip},#{take}
     </select>
 

@@ -69,7 +69,21 @@
                 $(document).on('click','.content-del',function () {
                      delUploadPicture($(this));
                 });
-
+                $('#hlOdBlastProDialog').dialog({
+                    onClose:function () {
+                        var type=$('#hlcancelBtn').attr('operationtype');
+                        if(type=="add"){
+                            var $imglist=$('#fileslist');
+                            var $dialog=$('#hlOdBlastProDialog');
+                            hlAlertSix("../UploadFile/delUploadPicture.action",$imglist,$dialog,grid);
+                        }else{
+                            //$('#hlOdBlastProDialog').dialog('close');
+                            $('#hl-gallery-con').empty();
+                            //$('#fileslist').val('');
+                            clearFormLabel();
+                        }
+                    }
+                });
         });
         function addOdBlastPro(){
             $('#hlcancelBtn').attr('operationtype','add');
@@ -104,6 +118,7 @@
                 $('#od').text(row.od);$('#wt').text(row.wt);
                 $('#length').text(row.length);$('#weight').text(row.weight);
                 $('#odbpid').text(row.id);$('#odbptime').text(getDate(row.operation_time));
+                $('#grade').text(row.grade);
                 $('#odBlastProForm').form('load',row);
                 var odpictures=row.upload_files;
                 if(odpictures!=null&&odpictures!=""){
@@ -158,18 +173,7 @@
             clearMultiUpload(grid);
         }
         function odBlastProCancelSubmit() {
-            //取消分两种 一种是添加取消 一种是修改提交
-            var type=$('#hlcancelBtn').attr('operationtype');
-            if(type=="add"){
-                var $imglist=$('#fileslist');
-                var $dialog=$('#hlOdBlastProDialog');
-                hlAlertSix("../UploadFile/delUploadPicture.action",$imglist,$dialog,grid);
-            }else{
-                $('#hlOdBlastProDialog').dialog('close');
-                $('#hl-gallery-con').empty();
-                //$('#fileslist').val('');
-                clearFormLabel();
-            }
+            $('#hlOdBlastProDialog').dialog('close');
         }
 
         //图片上传失败操作
@@ -240,6 +244,7 @@
             $('#od').text('');$('#wt').text('');
             $('#length').text('');$('#weight').text('');
             $('#odbpid').text('');$('#odbptime').text('');
+            $('#grade').text('');
         }
     </script>
 
@@ -261,6 +266,7 @@
                        <th field="project_name" align="center" width="100" class="i18n1" name="projectname">项目名称</th>
                        <th field="contract_no" align="center" width="100" class="i18n1" name="contractno">合同编号</th>
                        <th field="pipe_no" align="center" width="100" class="i18n1" name="pipeno">钢管编号</th>
+                       <th field="grade" align="center" width="100" class="i18n1" name="grade">钢种</th>
                        <th field="status_name" align="center" width="100" class="i18n1" name="statusname">状态</th>
                        <th field="od" align="center" width="50" class="i18n1" name="od">外径</th>
                        <th field="wt" align="center" width="50" class="i18n1" name="wt">壁厚</th>
@@ -269,15 +275,15 @@
                        <th field="operator_no" align="center" width="100" class="i18n1" name="operatorno">操作工编号</th>
                        <th field="surface_condition" align="center" width="100" class="i18n1" name="surfacecondition">外观缺陷</th>
                        <th field="salt_contamination_before_blasting" align="center" width="100" class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</th>
-                       <th field="alkaline_dwell_time" align="center" width="100" class="i18n1" name="alkalinedwelltime">碱洗时间</th>
-                       <th field="alkaline_concentration" align="center" width="100" class="i18n1" name="alkalineconcentration">碱浓度</th>
-                       <th field="conductivity" width="100" align="center" class="i18n1" name="conductivity">传导性</th>
-                       <th field="acid_wash_time" width="100" align="center" class="i18n1" name="acidwashtime">酸洗时间</th>
-                       <th field="acid_concentration" width="100" align="center" class="i18n1" name="acidconcentration">酸浓度</th>
+                       <th field="alkaline_dwell_time" align="center" width="100" hidden="true" class="i18n1" name="alkalinedwelltime">碱洗时间</th>
+                       <th field="alkaline_concentration" align="center" width="100" hidden="true" class="i18n1" name="alkalineconcentration">碱浓度</th>
+                       <th field="conductivity" width="100" align="center" hidden="true" class="i18n1" name="conductivity">传导性</th>
+                       <th field="acid_wash_time" width="100" align="center" hidden="true" class="i18n1" name="acidwashtime">酸洗时间</th>
+                       <th field="acid_concentration" width="100" align="center" hidden="true" class="i18n1" name="acidconcentration">酸浓度</th>
                        <th field="blast_line_speed" align="center" width="100" class="i18n1" name="blastlinespeed">打砂传送速度</th>
                        <th field="preheat_temp" align="center" width="100" class="i18n1" name="preheattemp">预热温度</th>
-                       <th field="operation_time" align="center" width="200" class="i18n1" name="operationtime" data-options="formatter:formatterdate">操作时间</th>
                        <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
+                       <th field="operation_time" align="center" width="200" class="i18n1" name="operationtime" data-options="formatter:formatterdate">操作时间</th>
                </tr>
              </thead>
          </table>
@@ -327,9 +333,10 @@
                    />
                </td>
                <td></td>
-               <td>状态</td>
-               <td><label id="status_name"></label></td>
+               <td>钢种</td>
+               <td><label id="grade"></label></td>
                <td></td>
+
            </tr>
            <tr>
                <td>外径</td>
@@ -345,6 +352,11 @@
                <td></td>
                <td>重量</td>
                <td><label id="weight"></label></td>
+               <td></td>
+           </tr>
+           <tr>
+               <td>状态</td>
+               <td><label id="status_name"></label></td>
                <td></td>
            </tr>
        </table>
@@ -478,8 +490,8 @@
          url="/person/getPersonNoByName.action">
         <div property="columns">
             <div type="checkcolumn" ></div>
-            <div field="pname" width="60" headerAlign="center" allowSort="true">姓名</div>
             <div field="employee_no" width="60" headerAlign="center" allowSort="true">工号</div>
+            <div field="pname" width="60" headerAlign="center" allowSort="true">姓名</div>
         </div>
     </div>
 </div>

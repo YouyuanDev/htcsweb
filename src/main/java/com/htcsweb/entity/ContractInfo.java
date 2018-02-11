@@ -16,16 +16,6 @@ public class ContractInfo {
     private double weight;
     private float l_length;
     private String remark;
-    //一个合同可以包含许多钢管(一对多)
-    private List<PipeBasicInfo>pipeBasicInfos;
-
-    public List<PipeBasicInfo> getPipeBasicInfos() {
-        return pipeBasicInfos;
-    }
-
-    public void setPipeBasicInfos(List<PipeBasicInfo> pipeBasicInfos) {
-        this.pipeBasicInfos = pipeBasicInfos;
-    }
 
     public ContractInfo() {
     }

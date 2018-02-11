@@ -11,17 +11,6 @@ public class ProjectInfo {
     private String mps;
     private String itp;
     private String coating_standard;
-    //一个项目可以包含多个合同(一对多)
-    private List<ContractInfo>contractInfos;
-
-    public List<ContractInfo> getContractInfos() {
-        return contractInfos;
-    }
-
-    public void setContractInfos(List<ContractInfo> contractInfos) {
-        this.contractInfos = contractInfos;
-    }
-
     public ProjectInfo() {
     }
 

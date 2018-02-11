@@ -47,14 +47,14 @@ function hlAlertSix(url,$imglist,$dialog,$obj) {
                 clearMultiUpload($obj);
                 $imglist.val('');
                 $('#hl-gallery-con').empty();
-                $dialog.dialog('close');
+                // $dialog.dialog('close');
             }
         });
     }else{
         clearMultiUpload($obj);
         $imglist.val('');
         $('#hl-gallery-con').empty();
-        $dialog.dialog('close');
+        // $dialog.dialog('close');
     }
 }
 function  clearMultiUpload($grid) {

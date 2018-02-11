@@ -77,8 +77,6 @@ public class OdBlastProcessController {
         return  map;
     }
 
-
-
     @RequestMapping("/editOdBlastProcess")
     public  String editOdBlastProcess(OdBlastProcess odblastprocess){
         System.out.println(odblastprocess);
@@ -86,20 +84,20 @@ public class OdBlastProcessController {
         return "od/odblastprocess";
     }
 
-    @RequestMapping(value = "/getOdBlastByPage")
-    @ResponseBody
-    public String getOdBlastByPage(HttpServletRequest request){
-        String page= request.getParameter("page");
-        String rows= request.getParameter("rows");
-        int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
-        List<OdBlastProcess> odblastprocesses= odblastprocessDao.feny(start,Integer.parseInt(rows));
-        int count=odblastprocessDao.getCount();
-        Map<String,Object> maps=new HashMap<String,Object>();
-        maps.put("total",count);
-        maps.put("rows",odblastprocesses);
-        String mmp= JSONArray.toJSONString(maps);
-        return mmp;
-    }
+//    @RequestMapping(value = "/getOdBlastByPage")
+//    @ResponseBody
+//    public String getOdBlastByPage(HttpServletRequest request){
+//        String page= request.getParameter("page");
+//        String rows= request.getParameter("rows");
+//        int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
+//        List<OdBlastProcess> odblastprocesses= odblastprocessDao.feny(start,Integer.parseInt(rows));
+//        int count=odblastprocessDao.getCount();
+//        Map<String,Object> maps=new HashMap<String,Object>();
+//        maps.put("total",count);
+//        maps.put("rows",odblastprocesses);
+//        String mmp= JSONArray.toJSONString(maps);
+//        return mmp;
+//    }
     @RequestMapping(value = "/getOdBlastByLike")
     @ResponseBody
     public String getOdBlastByLike(@RequestParam(value = "pipe_no",required = false)String pipe_no, @RequestParam(value = "operator_no",required = false)String operator_no, @RequestParam(value = "begin_time",required = false)String begin_time, @RequestParam(value = "end_time",required = false)String end_time, HttpServletRequest request){
