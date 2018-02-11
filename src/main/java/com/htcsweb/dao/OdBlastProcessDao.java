@@ -16,7 +16,7 @@ public interface OdBlastProcessDao {
     public int delOdBlastProcess(String[]arrId);
     public List<OdBlastProcess> getOdBlastProcess();
     public int updateOdBlastProcess(OdBlastProcess odBlastProcess);
-    public List<OdBlastProcess>getAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no")String operator_no, @Param("begin_time")Date begin_time, @Param("end_time")Date end_time, @Param("skip")int skip, @Param("take")int take);
+//    public List<OdBlastProcess>getAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no")String operator_no, @Param("begin_time")Date begin_time, @Param("end_time")Date end_time, @Param("skip")int skip, @Param("take")int take);
     public List<HashMap<String,Object>> getNewAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no")String operator_no, @Param("begin_time")Date begin_time, @Param("end_time")Date end_time, @Param("skip")int skip, @Param("take")int take);
     public int getCount();
 }

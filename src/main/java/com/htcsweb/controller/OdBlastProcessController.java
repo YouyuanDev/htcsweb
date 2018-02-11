@@ -84,13 +84,32 @@ public class OdBlastProcessController {
         return "od/odblastprocess";
     }
 
-//    @RequestMapping(value = "/getOdBlastByPage")
+
+//    @RequestMapping(value = "/getOdBlastByLike")
 //    @ResponseBody
-//    public String getOdBlastByPage(HttpServletRequest request){
+//    public String getOdBlastByLike(@RequestParam(value = "pipe_no",required = false)String pipe_no, @RequestParam(value = "operator_no",required = false)String operator_no, @RequestParam(value = "begin_time",required = false)String begin_time, @RequestParam(value = "end_time",required = false)String end_time, HttpServletRequest request){
 //        String page= request.getParameter("page");
 //        String rows= request.getParameter("rows");
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        Date beginTime=null;
+//        Date endTime=null;
+//        try{
+//            if(begin_time!=null&&begin_time!=""){
+//                beginTime=new Date(begin_time);
+//            }else{
+//                beginTime=new Date();
+//                beginTime.setTime(0);//设置时间最开始(1970-01-01)
+//            }
+//            if(end_time!=null&&end_time!=""){
+//                endTime=new Date(end_time);
+//            }else{
+//                endTime=new Date();
+//            }
+//        }catch (Exception e){
+//                e.printStackTrace();
+//        }
 //        int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
-//        List<OdBlastProcess> odblastprocesses= odblastprocessDao.feny(start,Integer.parseInt(rows));
+//        List<OdBlastProcess> odblastprocesses= odblastprocessDao.getAllByLike(pipe_no,operator_no,beginTime,endTime,start,Integer.parseInt(rows));
 //        int count=odblastprocessDao.getCount();
 //        Map<String,Object> maps=new HashMap<String,Object>();
 //        maps.put("total",count);
@@ -98,38 +117,6 @@ public class OdBlastProcessController {
 //        String mmp= JSONArray.toJSONString(maps);
 //        return mmp;
 //    }
-    @RequestMapping(value = "/getOdBlastByLike")
-    @ResponseBody
-    public String getOdBlastByLike(@RequestParam(value = "pipe_no",required = false)String pipe_no, @RequestParam(value = "operator_no",required = false)String operator_no, @RequestParam(value = "begin_time",required = false)String begin_time, @RequestParam(value = "end_time",required = false)String end_time, HttpServletRequest request){
-        String page= request.getParameter("page");
-        String rows= request.getParameter("rows");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date beginTime=null;
-        Date endTime=null;
-        try{
-            if(begin_time!=null&&begin_time!=""){
-                beginTime=new Date(begin_time);
-            }else{
-                beginTime=new Date();
-                beginTime.setTime(0);//设置时间最开始(1970-01-01)
-            }
-            if(end_time!=null&&end_time!=""){
-                endTime=new Date(end_time);
-            }else{
-                endTime=new Date();
-            }
-        }catch (Exception e){
-                e.printStackTrace();
-        }
-        int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
-        List<OdBlastProcess> odblastprocesses= odblastprocessDao.getAllByLike(pipe_no,operator_no,beginTime,endTime,start,Integer.parseInt(rows));
-        int count=odblastprocessDao.getCount();
-        Map<String,Object> maps=new HashMap<String,Object>();
-        maps.put("total",count);
-        maps.put("rows",odblastprocesses);
-        String mmp= JSONArray.toJSONString(maps);
-        return mmp;
-    }
     @RequestMapping(value = "/getNewOdBlastByLike")
     @ResponseBody
     public String getNewOdBlastByLike(@RequestParam(value = "pipe_no",required = false)String pipe_no, @RequestParam(value = "operator_no",required = false)String operator_no, @RequestParam(value = "begin_time",required = false)String begin_time, @RequestParam(value = "end_time",required = false)String end_time, HttpServletRequest request){

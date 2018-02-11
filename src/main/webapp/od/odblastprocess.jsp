@@ -375,6 +375,11 @@
                <td class="i18n1" name="id">流水号</td>
                <td><label id="odbpid"></label></td>
                <td></td>
+           </tr>
+           <tr>
+               <td class="i18n1" name="operationtime">操作时间</td>
+               <td><label id="odbptime"></label></td>
+               <td></td>
                <td class="i18n1" name="operatorno">操作工编号</td>
                <td>
                    <input id="lookup2" name="operator_no" class="mini-lookup" style="text-align:center;width:180px;"
@@ -382,11 +387,6 @@
                           popup="#gridPanel2" grid="#datagrid2" multiSelect="false"
                    />
                </td>
-               <td></td>
-           </tr>
-           <tr>
-               <td class="i18n1" name="operationtime">操作时间</td>
-               <td><label id="odbptime"></label></td>
                <td></td>
            </tr>
        </table>
@@ -419,13 +419,13 @@
                <td></td>
                <td class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</td>
                <td><input class="easyui-validatebox" type="text" name="salt_contamination_before_blasting" value=""/></td>
-               <td><=25mg/㎡</td>
+               <td><=25</td>
            </tr>
 
            <tr>
                <td class="i18n1" name="blastlinespeed">打砂传送速度</td>
                <td><input class="easyui-validatebox" type="text" name="blast_line_speed" value=""/></td>
-               <td>(m/s)</td>
+               <td></td>
                <td class="i18n1" name="conductivity">传导性</td>
                <td><input class="easyui-validatebox" type="text" name="conductivity" value=""/></td>
                <td></td>
@@ -433,7 +433,7 @@
            <tr>
                <td class="i18n1" name="preheattemp">预热温度</td>
                <td><input class="easyui-validatebox" type="text" name="preheat_temp" value=""/></td>
-               <td>(℃)</td>
+               <td></td>
                <td class="i18n1" name="remark">备注</td>
                <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
                <td></td>
