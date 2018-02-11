@@ -13,7 +13,8 @@
   text-align:center;
   padding:1px 2px;
 }
-.ht-table tr td input{width:180px;height:20px;}
+.ht-table tr td label{display: block;}
+.ht-table tr td input,.ht-table tr td label{width:180px;height:20px;}
 .hltr{border-bottom:2px solid #1f1f1f ;}
 .b3{border-style:inset;border-width:thin;}
 #hl-gallery-con{

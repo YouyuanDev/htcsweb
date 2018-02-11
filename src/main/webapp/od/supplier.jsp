@@ -35,64 +35,58 @@
 <table>
     <tr>
         <td style="width:180px;height:30px;">
-            <input id="lookup2" name="employee_no"  class="mini-lookup" style="width:180px;"
-                   textField="employee_no" valueField="id" popupWidth="auto"
-                   popup="#gridPanel" grid="#datagrid1" multiSelect="false"
+            <input id="lookup1" name="pipe_no" class="mini-lookup" style="text-align:center;width:180px;"
+                   textField="pipe_no" valueField="pipe_no" popupWidth="auto"
+                   popup="#gridPanel1" grid="#datagrid1" multiSelect="false"
             />
         </td>
     </tr>
 </table>
 
 
-<div id="gridPanel" class="mini-panel" title="header" iconCls="icon-add" style="width:350px;height:250px;"
+<div id="gridPanel1" class="mini-panel" title="header" iconCls="icon-add" style="width:450px;height:250px;"
      showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0"
 >
     <div property="toolbar" style="padding:5px;padding-left:8px;text-align:center;">
         <div style="float:left;padding-bottom:2px;">
-            <span>姓名：</span>
-            <input id="keyText" class="mini-textbox" style="width:140px;" onenter="onSearchClick"/>
-            <a class="mini-button" onclick="onSearchClick">查询</a>
-            <a class="mini-button" onclick="onClearClick">清除</a>
+            <a class="mini-button" onclick="onSearchClick(1)">查询</a>
+            <a class="mini-button" onclick="onClearClick(1)">清除</a>
         </div>
         <div style="float:right;padding-bottom:2px;">
-            <a class="mini-button" onclick="onCloseClick">关闭</a>
+            <a class="mini-button" onclick="onCloseClick(1)">关闭</a>
         </div>
         <div style="clear:both;"></div>
     </div>
     <div id="datagrid1" class="mini-datagrid" style="width:100%;height:100%;"
          borderStyle="border:0" showPageSize="false" showPageIndex="false"
-         url="/person/getPersonNoByName.action">
+         url="/pipeinfo/getPipeNumber.action">
         <div property="columns">
             <div type="checkcolumn" ></div>
-            <div field="pname" width="60" headerAlign="center" allowSort="true">姓名</div>
-            <div field="employee_no" width="60" headerAlign="center" allowSort="true">编号</div>
+            <div field="pipe_no" width="60" headerAlign="center" allowSort="true">钢管编号</div>
         </div>
     </div>
 </div>
 <script type="text/javascript">
     mini.parse();
 
-    var grid = mini.get("datagrid1");
-    var keyText = mini.get("keyText");
-    var grid1=mini.get("datagrid1");
-    grid.load();
 
-    var look= mini.get("lookup2");
-    function onSearchClick(e) {
-        grid1.load({
-            key: keyText.value
-        });
+    var grid1=mini.get("datagrid1");
+    grid1.load();
+
+    var look1= mini.get("lookup1");
+    function onSearchClick() {
+        grid1.load();
     }
     function onCloseClick(e) {
         //var lookup2 = mini.get("lookup2");
-        look.hidePopup();
+        look1.hidePopup();
     }
     function onClearClick(e) {
         //var lookup2 = mini.get("lookup2");
-        look.deselectAll();
+        look1.deselectAll();
     }
 
-    look.on("showpopup",function(e){
+    look1.on("showpopup",function(e){
         $('.mini-shadow').css('z-index','99999');
         $('.mini-popup').css('z-index','100000');
         $('.mini-panel').css('z-index','100000');

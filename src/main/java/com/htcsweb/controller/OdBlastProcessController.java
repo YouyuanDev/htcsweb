@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.OdBlastProcessDao;
 import com.htcsweb.entity.OdBlastProcess;
+import com.htcsweb.entity.ProjectInfo;
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -138,11 +139,9 @@ public class OdBlastProcessController {
         String rows= request.getParameter("rows");
         if(page==null){
             page="1";
-            System.out.println("why page is null");
         }
         if(rows==null){
             rows="20";
-            System.out.println("why rows is null");
         }
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date beginTime=null;
@@ -163,14 +162,12 @@ public class OdBlastProcessController {
             e.printStackTrace();
         }
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
-        String odblastprocesses= odblastprocessDao.getNewAllByLike(pipe_no,operator_no,beginTime,endTime,start,Integer.parseInt(rows));
-        System.out.println(odblastprocesses);
+        List<HashMap<String,Object>>list=odblastprocessDao.getNewAllByLike(pipe_no,operator_no,beginTime,endTime,start,Integer.parseInt(rows));
         int count=odblastprocessDao.getCount();
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
-        maps.put("rows",odblastprocesses);
+        maps.put("rows",list);
         String mmp= JSONArray.toJSONString(maps);
-        System.out.println(mmp);
         return mmp;
     }
     @RequestMapping("getOdBlastProcessById")

@@ -99,9 +99,11 @@
             var row = $('#odBlastProDatagrids').datagrid('getSelected');
             if(row){
                 $('#hlOdBlastProDialog').dialog('open').dialog('setTitle','修改');
-                var odbpid=row.id;
-                var odbptime=getDate(row.operation_time);
-                $('#odbpid').text(odbpid);$('#odbptime').text(odbptime);
+                $('#project_name').text(row.project_name);$('#contract_no').text(row.contract_no);
+                $('#pipe_no').text(row.pipe_no);$('#status_name').text(row.status_name);
+                $('#od').text(row.od);$('#wt').text(row.wt);
+                $('#length').text(row.length);$('#weight').text(row.weight);
+                $('#odbpid').text(row.id);$('#odbptime').text(getDate(row.operation_time));
                 $('#odBlastProForm').form('load',row);
                 var odpictures=row.upload_files;
                 if(odpictures!=null&&odpictures!=""){
@@ -109,7 +111,8 @@
                     createPictureModel(imgList);
                 }
                 url="/OdOperation/saveOdBlastProcess.action?id="+row.id;
-                look.setText(row.operator_no);
+                look1.setText(row.pipe_no);
+                look2.setText(row.operator_no);
             }else{
                 hlAlertTwo();
             }
@@ -142,7 +145,7 @@
                     if (result.success){
                         $('#hlOdBlastProDialog').dialog('close');
                         $('#odBlastProDatagrids').datagrid('reload');
-                        $('#odBlastProForm').form('clear');$('#odbpid').text('');$('#odbptime').text('');
+                        clearFormLabel();
                         $('#hl-gallery-con').empty();
                     } else {
                          hlAlertFour("操作失败!");
@@ -165,7 +168,7 @@
                 $('#hlOdBlastProDialog').dialog('close');
                 $('#hl-gallery-con').empty();
                 //$('#fileslist').val('');
-                $('#odBlastProForm').form('clear');$('#odbpid').text('');$('#odbptime').text('');
+                clearFormLabel();
             }
         }
 
@@ -190,15 +193,6 @@
             }
             return $obj.val();
         }
-        //清理图片选择
-        // function  clearMultiUpload() {
-        //     var rows = grid.getData();
-        //     for (var i = 0, l = rows.length; i < l; i++) {
-        //         grid.uploader.cancelUpload(rows[i].fileId);
-        //         grid.customSettings.queue.remove(rows[i].fileId);
-        //     }
-        //     grid.clearData();
-        // }
         //删除选择的图片
         function delUploadPicture($obj) {
             var imgUrl=$obj.siblings('dt').find('img').attr('src');
@@ -239,6 +233,14 @@
             if($obj.val()==null||$obj.val()=="")
                 $obj.val(0);
         }
+        function  clearFormLabel() {
+            $('#odBlastProForm').form('clear');$('#odbpid').text('');$('#odbptime').text('');
+            $('#project_name').text('');$('#contract_no').text('');
+            $('#pipe_no').text('');$('#status_name').text('');
+            $('#od').text('');$('#wt').text('');
+            $('#length').text('');$('#weight').text('');
+            $('#odbpid').text('');$('#odbptime').text('');
+        }
     </script>
 
 
@@ -251,13 +253,19 @@
 <fieldset class="b3" style="padding:10px;margin:10px;">
     <legend> <h3><b style="color: orange" >|&nbsp;</b><span class="i18n1" name="datadisplay">数据展示</span></h3></legend>
     <div  style="margin-top:5px;">
-         <table class="easyui-datagrid" id="odBlastProDatagrids" url="/OdOperation/getOdBlastByLike.action" striped="true" loadMsg="正在加载中。。。" textField="text" pageSize="20" fitColumns="true" pagination="true" toolbar="#hlOdBlastProTb">
+         <table class="easyui-datagrid" id="odBlastProDatagrids" url="/OdOperation/getNewOdBlastByLike.action" striped="true" loadMsg="正在加载中。。。" textField="text" pageSize="20" fitColumns="true" pagination="true" toolbar="#hlOdBlastProTb">
              <thead>
                <tr>
                        <th data-options="field:'ck',checkbox:true"></th>
                        <th field="id" align="center" width="100" class="i18n1" name="id">流水号</th>
+                       <th field="project_name" align="center" width="100" class="i18n1" name="projectname">项目名称</th>
+                       <th field="contract_no" align="center" width="100" class="i18n1" name="contractno">合同编号</th>
                        <th field="pipe_no" align="center" width="100" class="i18n1" name="pipeno">钢管编号</th>
-                       <th field="operation_time" align="center" width="200" class="i18n1" name="operationtime" data-options="formatter:formatterdate">操作时间</th>
+                       <th field="status_name" align="center" width="100" class="i18n1" name="statusname">状态</th>
+                       <th field="od" align="center" width="50" class="i18n1" name="od">外径</th>
+                       <th field="wt" align="center" width="50" class="i18n1" name="wt">壁厚</th>
+                       <th field="length" align="center" width="50" class="i18n1" name="length">长度</th>
+                       <th field="weight" align="center" width="50" class="i18n1" name="weight">重量</th>
                        <th field="operator_no" align="center" width="100" class="i18n1" name="operatorno">操作工编号</th>
                        <th field="surface_condition" align="center" width="100" class="i18n1" name="surfacecondition">外观缺陷</th>
                        <th field="salt_contamination_before_blasting" align="center" width="100" class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</th>
@@ -268,6 +276,7 @@
                        <th field="acid_concentration" width="100" align="center" class="i18n1" name="acidconcentration">酸浓度</th>
                        <th field="blast_line_speed" align="center" width="100" class="i18n1" name="blastlinespeed">打砂传送速度</th>
                        <th field="preheat_temp" align="center" width="100" class="i18n1" name="preheattemp">预热温度</th>
+                       <th field="operation_time" align="center" width="200" class="i18n1" name="operationtime" data-options="formatter:formatterdate">操作时间</th>
                        <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                </tr>
              </thead>
@@ -299,28 +308,69 @@
    <form id="odBlastProForm" method="post">
        <table class="ht-table">
            <tr>
-               <td>流水号</td>
-               <td><label id="odbpid"></label></td>
+               <td>项目名称</td>
+               <td><label id="project_name"></label></td>
                <td></td>
+               <td>合同编号</td>
+               <td><label id="contract_no"></label></td>
+               <td></td>
+           </tr>
+       </table>
+       <hr>
+       <table class="ht-table">
+           <tr>
                <td>钢管编号</td>
-               <td><input class="easyui-validatebox" type="text" name="pipe_no" value=""/></td>
+               <td>
+                   <input id="lookup1" name="pipe_no" class="mini-lookup" style="text-align:center;width:180px;"
+                          textField="pipe_no" valueField="id" popupWidth="auto"
+                          popup="#gridPanel1" grid="#datagrid1" multiSelect="false"
+                   />
+               </td>
+               <td></td>
+               <td>状态</td>
+               <td><label id="status_name"></label></td>
                <td></td>
            </tr>
            <tr>
+               <td>外径</td>
+               <td><label id="od"></label></td>
+               <td></td>
+               <td>壁厚</td>
+               <td><label id="wt"></label></td>
+               <td></td>
+           </tr>
+           <tr>
+               <td>长度</td>
+               <td><label id="length"></label></td>
+               <td></td>
+               <td>重量</td>
+               <td><label id="weight"></label></td>
+               <td></td>
+           </tr>
+       </table>
+       <hr>
+       <table class="ht-table">
+           <tr>
+               <td>流水号</td>
+               <td><label id="odbpid"></label></td>
+               <td></td>
                <td>操作工编号</td>
                <td>
-                       <input id="lookup2" name="operator_no" class="mini-lookup" style="text-align:center;width:180px;"
-                              textField="employee_no" valueField="id" popupWidth="auto"
-                              popup="#gridPanel" grid="#datagrid1" multiSelect="false"
-                       />
+                   <input id="lookup2" name="operator_no" class="mini-lookup" style="text-align:center;width:180px;"
+                          textField="employee_no" valueField="id" popupWidth="auto"
+                          popup="#gridPanel2" grid="#datagrid2" multiSelect="false"
+                   />
                </td>
                <td></td>
+           </tr>
+           <tr>
                <td>操作时间</td>
                <td><label id="odbptime"></label></td>
                <td></td>
            </tr>
        </table>
-<hr>
+       <hr>
+
        <table class="ht-table">
            <tr>
                <td>碱洗时间(秒)</td>
@@ -329,7 +379,6 @@
                <td>碱浓度</td>
                <td><input class="easyui-validatebox" type="text" name="alkaline_concentration" value=""/></td>
                <td></td>
-
            </tr>
 
            <tr>
@@ -385,24 +434,46 @@
     <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="odBlastProFormSubmit()">Ok</a>
     <a href="#" class="easyui-linkbutton" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="odBlastProCancelSubmit()">Cancel</a>
 </div>
-<div id="gridPanel" class="mini-panel" title="header" iconCls="icon-add" style="width:450px;height:250px;"
+<div id="gridPanel1" class="mini-panel" title="header" iconCls="icon-add" style="width:450px;height:250px;"
+     showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0"
+>
+    <div property="toolbar" style="padding:5px;padding-left:8px;text-align:center;">
+        <div style="float:left;padding-bottom:2px;">
+            <a class="mini-button" onclick="onSearchClick(1)">查询</a>
+            <a class="mini-button" onclick="onClearClick(1)">清除</a>
+        </div>
+        <div style="float:right;padding-bottom:2px;">
+            <a class="mini-button" onclick="onCloseClick(1)">关闭</a>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <div id="datagrid1" class="mini-datagrid" style="width:100%;height:100%;"
+         borderStyle="border:0" showPageSize="false" showPageIndex="false"
+         url="/pipeinfo/getPipeNumber.action">
+        <div property="columns">
+            <div type="checkcolumn" ></div>
+            <div field="pipe_no" width="60" headerAlign="center" allowSort="true">钢管编号</div>
+        </div>
+    </div>
+</div>
+<div id="gridPanel2" class="mini-panel" title="header" iconCls="icon-add" style="width:450px;height:250px;"
      showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0"
 >
     <div property="toolbar" style="padding:5px;padding-left:8px;text-align:center;">
         <div style="float:left;padding-bottom:2px;">
             <span>工号：</span>
-            <input id="keyText1" class="mini-textbox" style="width:110px;" onenter="onSearchClick"/>
+            <input id="keyText3" class="mini-textbox" style="width:110px;" onenter="onSearchClick(2)"/>
             <span>姓名：</span>
-            <input id="keyText" class="mini-textbox" style="width:110px;" onenter="onSearchClick"/>
-            <a class="mini-button" onclick="onSearchClick">查询</a>
-            <a class="mini-button" onclick="onClearClick">清除</a>
+            <input id="keyText4" class="mini-textbox" style="width:110px;" onenter="onSearchClick(2)"/>
+            <a class="mini-button" onclick="onSearchClick(2)">查询</a>
+            <a class="mini-button" onclick="onClearClick(2)">清除</a>
         </div>
         <div style="float:right;padding-bottom:2px;">
-            <a class="mini-button" onclick="onCloseClick">关闭</a>
+            <a class="mini-button" onclick="onCloseClick(2)">关闭</a>
         </div>
         <div style="clear:both;"></div>
     </div>
-    <div id="datagrid1" class="mini-datagrid" style="width:100%;height:100%;"
+    <div id="datagrid2" class="mini-datagrid" style="width:100%;height:100%;"
          borderStyle="border:0" showPageSize="false" showPageIndex="false"
          url="/person/getPersonNoByName.action">
         <div property="columns">
@@ -418,27 +489,51 @@
 <script type="text/javascript">
     mini.parse();
     var grid= mini.get("multiupload1");
-    var keyText = mini.get("keyText");
-    var keyText1=mini.get("keyText1");
+    var keyText4 = mini.get("keyText4");
+    var keyText3=mini.get("keyText3");
     var grid1=mini.get("datagrid1");
-    var look= mini.get("lookup2");
-    function onSearchClick(e) {
-        grid1.load({
-            key: keyText.value,
-            key1:keyText1.value
-        });
+    var grid2=mini.get("datagrid2");
+    var look1=mini.get('lookup1');
+    var look2= mini.get("lookup2");
+    function onSearchClick(type) {
+        if(type==1)
+        {
+            grid1.load();
+        }else if(type==2){
+            grid2.load({
+                pname: keyText4.value,
+                employeeno:keyText3.value
+            });
+        }
+
     }
-    function onCloseClick(e) {
-        look.hidePopup();
+    function onCloseClick(type) {
+        if(type==1)
+           look1.hidePopup();
+        else if(type==2)
+            look2.hidePopup();
     }
-    function onClearClick(e) {
-        look.deselectAll();
+    function onClearClick(type) {
+        if(type==1)
+            look1.deselectAll();
+        else if(type==2)
+            look2.deselectAll();
     }
-    look.on('valuechanged',function (e) {
+    look1.on('valuechanged',function () {
         var rows = grid1.getSelected();
+        $("input[name='pipe_no']").val(rows.pipe_no);
+    });
+    look2.on('valuechanged',function (e) {
+        var rows = grid2.getSelected();
         $("input[name='operator_no']").val(rows.employee_no);
     });
-    look.on("showpopup",function(e){
+    look1.on("showpopup",function(e){
+        $('.mini-shadow').css('z-index','99999');
+        $('.mini-popup').css('z-index','100000');
+        $('.mini-panel').css('z-index','100000');
+        $('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
+    });
+    look2.on("showpopup",function(e){
         $('.mini-shadow').css('z-index','99999');
         $('.mini-popup').css('z-index','100000');
         $('.mini-panel').css('z-index','100000');

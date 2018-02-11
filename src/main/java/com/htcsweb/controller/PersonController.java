@@ -41,8 +41,8 @@ public class PersonController {
     @RequestMapping(value = "/getPersonNoByName")
     @ResponseBody
     public String getPersonNoByName(HttpServletRequest request){
-        String pname=request.getParameter("key");
-        String employee_no=request.getParameter("key1");
+        String pname=request.getParameter("pname");
+        String employee_no=request.getParameter("employeeno");
         List<Person>list=personDao.getNoByName(pname,employee_no);
         String mmp= JSONArray.toJSONString(list);
         return mmp;

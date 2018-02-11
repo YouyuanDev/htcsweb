@@ -13,9 +13,27 @@ public class PipeBasicInfo {
     private float weight;
     private String pipe_making_lot_no;
     private String status;
+    private PipeStatus pipeStatus;
+
+    public PipeStatus getPipeStatus() {
+        return pipeStatus;
+    }
+
+    public void setPipeStatus(PipeStatus pipeStatus) {
+        this.pipeStatus = pipeStatus;
+    }
+
     //一对一和外防腐表
-    private OdBlastProcess odBlastProcess;
+    private List<OdBlastProcess> odBlastProcesses;
     public PipeBasicInfo() {
+    }
+
+    public List<OdBlastProcess> getOdBlastProcesses() {
+        return odBlastProcesses;
+    }
+
+    public void setOdBlastProcesses(List<OdBlastProcess> odBlastProcesses) {
+        this.odBlastProcesses = odBlastProcesses;
     }
 
     public PipeBasicInfo(int id, String contract_no, String pipe_no, String grade, float od, float wt, float length, float weight, String pipe_making_lot_no, String status) {
@@ -30,13 +48,7 @@ public class PipeBasicInfo {
         this.pipe_making_lot_no = pipe_making_lot_no;
         this.status = status;
     }
-    public OdBlastProcess getOdBlastProcess() {
-        return odBlastProcess;
-    }
 
-    public void setOdBlastProcess(OdBlastProcess odBlastProcess) {
-        this.odBlastProcess = odBlastProcess;
-    }
     public int getId() {
         return id;
     }
