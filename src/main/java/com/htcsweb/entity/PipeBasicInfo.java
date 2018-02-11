@@ -13,7 +13,9 @@ public class PipeBasicInfo {
     private float weight;
     private String pipe_making_lot_no;
     private String status;
-    private PipeStatus pipeStatus;
+
+    public PipeBasicInfo() {
+    }
 
     public PipeBasicInfo(int id, String contract_no, String pipe_no, String grade, float od, float wt, float length, float weight, String pipe_making_lot_no, String status) {
         this.id = id;

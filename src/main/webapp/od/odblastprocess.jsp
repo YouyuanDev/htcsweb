@@ -84,6 +84,7 @@
                         }
                     }
                 });
+               $('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
         });
         function addOdBlastPro(){
             $('#hlcancelBtn').attr('operationtype','add');
@@ -120,14 +121,17 @@
                 $('#odbpid').text(row.id);$('#odbptime').text(getDate(row.operation_time));
                 $('#grade').text(row.grade);
                 $('#odBlastProForm').form('load',row);
+                look1.setText(row.pipe_no);
+                look1.setValue(row.pipe_no);
+                look2.setText(row.operator_no);
+                look2.setValue(row.operator_no);
                 var odpictures=row.upload_files;
                 if(odpictures!=null&&odpictures!=""){
                      var imgList=odpictures.split(';');
                     createPictureModel(imgList);
                 }
                 url="/OdOperation/saveOdBlastProcess.action?id="+row.id;
-                look1.setText(row.pipe_no);
-                look2.setText(row.operator_no);
+
             }else{
                 hlAlertTwo();
             }
