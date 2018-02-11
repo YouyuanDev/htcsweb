@@ -85,6 +85,7 @@
                     }
                 });
                $('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
+               // hlLanguage("../i18n/");
         });
         function addOdBlastPro(){
             $('#hlcancelBtn').attr('operationtype','add');
@@ -119,7 +120,7 @@
                 $('#od').text(row.od);$('#wt').text(row.wt);
                 $('#length').text(row.length);$('#weight').text(row.weight);
                 $('#odbpid').text(row.id);$('#odbptime').text(getDate(row.operation_time));
-                $('#grade').text(row.grade);
+                $('#grade').text(row.grade);$('#heat_no').text(row.heat_no);
                 $('#odBlastProForm').form('load',row);
                 look1.setText(row.pipe_no);
                 look1.setValue(row.pipe_no);
@@ -248,7 +249,7 @@
             $('#od').text('');$('#wt').text('');
             $('#length').text('');$('#weight').text('');
             $('#odbpid').text('');$('#odbptime').text('');
-            $('#grade').text('');
+            $('#grade').text('');$('#heat_no').text('');
         }
     </script>
 
@@ -276,6 +277,7 @@
                        <th field="wt" align="center" width="50" class="i18n1" name="wt">壁厚</th>
                        <th field="length" align="center" width="50" class="i18n1" name="length">长度</th>
                        <th field="weight" align="center" width="50" class="i18n1" name="weight">重量</th>
+                       <th field="" align="center" hidden="true" width="50" class="i18n1" name="heat_no">炉号</th>
                        <th field="operator_no" align="center" width="100" class="i18n1" name="operatorno">操作工编号</th>
                        <th field="surface_condition" align="center" width="100" class="i18n1" name="surfacecondition">外观缺陷</th>
                        <th field="salt_contamination_before_blasting" align="center" width="100" class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</th>
@@ -318,10 +320,10 @@
    <form id="odBlastProForm" method="post">
        <table class="ht-table">
            <tr>
-               <td>项目名称</td>
+               <td class="i18n1" name="projectname">项目名称</td>
                <td><label id="project_name"></label></td>
                <td></td>
-               <td>合同编号</td>
+               <td class="i18n1" name="contractno">合同编号</td>
                <td><label id="contract_no"></label></td>
                <td></td>
            </tr>
@@ -329,7 +331,7 @@
        <hr>
        <table class="ht-table">
            <tr>
-               <td>钢管编号</td>
+               <td class="i18n1" name="pipeno">钢管编号</td>
                <td>
                    <input id="lookup1" name="pipe_no" class="mini-lookup" style="text-align:center;width:180px;"
                           textField="pipe_no" valueField="id" popupWidth="auto"
@@ -337,29 +339,32 @@
                    />
                </td>
                <td></td>
-               <td>钢种</td>
+               <td class="i18n1" name="grade">钢种</td>
                <td><label id="grade"></label></td>
                <td></td>
 
            </tr>
            <tr>
-               <td>外径</td>
+               <td class="i18n1" name="od">外径</td>
                <td><label id="od"></label></td>
                <td></td>
-               <td>壁厚</td>
+               <td class="i18n1" name="wt">壁厚</td>
                <td><label id="wt"></label></td>
                <td></td>
            </tr>
            <tr>
-               <td>长度</td>
+               <td class="i18n1" name="length">长度</td>
                <td><label id="length"></label></td>
                <td></td>
-               <td>重量</td>
+               <td class="i18n1" name="weight">重量</td>
                <td><label id="weight"></label></td>
                <td></td>
            </tr>
            <tr>
-               <td>状态</td>
+               <td class="i18n1" name="heatno">炉号</td>
+               <td><label id="heat_no"></label></td>
+               <td></td>
+               <td class="i18n1" name="statusname">状态</td>
                <td><label id="status_name"></label></td>
                <td></td>
            </tr>
@@ -367,10 +372,10 @@
        <hr>
        <table class="ht-table">
            <tr>
-               <td>流水号</td>
+               <td class="i18n1" name="id">流水号</td>
                <td><label id="odbpid"></label></td>
                <td></td>
-               <td>操作工编号</td>
+               <td class="i18n1" name="operatorno">操作工编号</td>
                <td>
                    <input id="lookup2" name="operator_no" class="mini-lookup" style="text-align:center;width:180px;"
                           textField="employee_no" valueField="id" popupWidth="auto"
@@ -380,7 +385,7 @@
                <td></td>
            </tr>
            <tr>
-               <td>操作时间</td>
+               <td class="i18n1" name="operationtime">操作时间</td>
                <td><label id="odbptime"></label></td>
                <td></td>
            </tr>
@@ -389,19 +394,19 @@
 
        <table class="ht-table">
            <tr>
-               <td>碱洗时间(秒)</td>
+               <td class="i18n1" name="alkalinedwelltime">碱洗时间</td>
                <td><input class="easyui-validatebox" type="text" name="alkaline_dwell_time" value=""/></td>
                <td>10~20</td>
-               <td>碱浓度</td>
+               <td class="i18n1" name="alkalineconcentration">碱浓度</td>
                <td><input class="easyui-validatebox" type="text" name="alkaline_concentration" value=""/></td>
                <td></td>
            </tr>
 
            <tr>
-               <td>酸洗时间</td>
+               <td class="i18n1" name="acidwashtime">酸洗时间</td>
                <td><input class="easyui-validatebox" type="text" name="acid_wash_time" value=""/></td>
                <td></td>
-               <td>酸浓度</td>
+               <td class="i18n1" name="acidconcentration">酸浓度</td>
                <td><input class="easyui-validatebox" type="text" name="acid_concentration" value=""/></td>
                <td></td>
            </tr>
@@ -409,27 +414,27 @@
        <hr>
        <table class="ht-table">
            <tr>
-               <td>外观缺陷</td>
+               <td class="i18n1" name="surfacecondition">外观缺陷</td>
                <td><input class="easyui-validatebox" type="text" name="surface_condition" value=""/></td>
                <td></td>
-               <td>打砂前盐度</td>
+               <td class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</td>
                <td><input class="easyui-validatebox" type="text" name="salt_contamination_before_blasting" value=""/></td>
                <td><=25mg/㎡</td>
            </tr>
 
            <tr>
-               <td>打砂传送速度(m/s)</td>
+               <td class="i18n1" name="blastlinespeed">打砂传送速度</td>
                <td><input class="easyui-validatebox" type="text" name="blast_line_speed" value=""/></td>
-               <td></td>
-               <td>传导性</td>
+               <td>(m/s)</td>
+               <td class="i18n1" name="conductivity">传导性</td>
                <td><input class="easyui-validatebox" type="text" name="conductivity" value=""/></td>
                <td></td>
            </tr>
            <tr>
-               <td>预热温度(℃)</td>
+               <td class="i18n1" name="preheattemp">预热温度</td>
                <td><input class="easyui-validatebox" type="text" name="preheat_temp" value=""/></td>
-               <td></td>
-               <td>备注</td>
+               <td>(℃)</td>
+               <td class="i18n1" name="remark">备注</td>
                <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
                <td></td>
            </tr>
@@ -453,15 +458,15 @@
 <div id="gridPanel1" class="mini-panel" title="header" iconCls="icon-add" style="width:450px;height:250px;"
      showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0"
 >
-    <div property="toolbar" style="padding:5px;padding-left:8px;text-align:center;">
+    <div property="toolbar" id="searchBar1" style="padding:5px;padding-left:8px;text-align:center;display: none">
         <div style="float:left;padding-bottom:2px;">
-            <span>钢管编号：</span>
+            <span class="i18n1" name="pipeno">钢管编号</span><span>:</span>
             <input id="keyText1" class="mini-textbox" style="width:110px;" onenter="onSearchClick(1)"/>
-            <a class="mini-button" onclick="onSearchClick(1)">查询</a>
-            <a class="mini-button" onclick="onClearClick(1)">清除</a>
+            <a class="mini-button" onclick="onSearchClick(1)">查找</a>
+            <a class="mini-button" onclick="onClearClick(1)" name="clear">清除</a>
         </div>
         <div style="float:right;padding-bottom:2px;">
-            <a class="mini-button" onclick="onCloseClick(1)">关闭</a>
+            <a class="mini-button" onclick="onCloseClick(1)" name="close">关闭</a>
         </div>
         <div style="clear:both;"></div>
     </div>
@@ -470,29 +475,29 @@
          url="/pipeinfo/getPipeNumber.action">
         <div property="columns">
             <div type="checkcolumn" ></div>
-            <div field="pipe_no" width="80" headerAlign="center" allowSort="true">钢管编号</div>
-            <div field="contract_no" width="80" headerAlign="center" allowSort="true">合同编号</div>
-            <div field="od" width="40" headerAlign="center" allowSort="true">外径</div>
-            <div field="wt" width="40" headerAlign="center" allowSort="true">壁厚</div>
-            <div field="length" width="40" headerAlign="center" allowSort="true">长度</div>
-            <div field="weight" width="40" headerAlign="center" allowSort="true">重量</div>
+            <div field="pipe_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="pipeno">钢管编号</div>
+            <div field="contract_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="contractno">合同编号</div>
+            <div field="od" width="40" headerAlign="center" allowSort="true" class="i18n1" name="od">外径</div>
+            <div field="wt" width="40" headerAlign="center" allowSort="true" class="i18n1" name="wt">壁厚</div>
+            <div field="length" width="40" headerAlign="center" allowSort="true" class="i18n1" name="length">长度</div>
+            <div field="weight" width="40" headerAlign="center" allowSort="true" class="i18n1" name="weight">重量</div>
         </div>
     </div>
 </div>
 <div id="gridPanel2" class="mini-panel" title="header" iconCls="icon-add" style="width:450px;height:250px;"
      showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0"
 >
-    <div property="toolbar" style="padding:5px;padding-left:8px;text-align:center;">
+    <div property="toolbar" id="searchBar2" style="padding:5px;padding-left:8px;text-align:center;display:none;">
         <div style="float:left;padding-bottom:2px;">
-            <span>工号：</span>
+            <span class="i18n1" name="operatorno">操作工编号</span><span>:</span>
             <input id="keyText3" class="mini-textbox" style="width:110px;" onenter="onSearchClick(2)"/>
-            <span>姓名：</span>
+            <span class="i18n1" name="operatorname">姓名</span><span>:</span>
             <input id="keyText4" class="mini-textbox" style="width:110px;" onenter="onSearchClick(2)"/>
-            <a class="mini-button" onclick="onSearchClick(2)">查询</a>
-            <a class="mini-button" onclick="onClearClick(2)">清除</a>
+            <a class="mini-button" onclick="onSearchClick(2)" name="search">查找</a>
+            <a class="mini-button" onclick="onClearClick(2)" name="clear">清除</a>
         </div>
         <div style="float:right;padding-bottom:2px;">
-            <a class="mini-button" onclick="onCloseClick(2)">关闭</a>
+            <a class="mini-button" onclick="onCloseClick(2)" name="close">关闭</a>
         </div>
         <div style="clear:both;"></div>
     </div>
@@ -501,8 +506,8 @@
          url="/person/getPersonNoByName.action">
         <div property="columns">
             <div type="checkcolumn" ></div>
-            <div field="employee_no" width="60" headerAlign="center" allowSort="true">工号</div>
-            <div field="pname" width="60" headerAlign="center" allowSort="true">姓名</div>
+            <div field="employee_no" width="60" headerAlign="center" allowSort="true" class="i18n1" name="operatorno">操作工编号</div>
+            <div field="pname" width="60" headerAlign="center" allowSort="true" class="i18n1" name="operatorname">姓名</div>
         </div>
     </div>
 </div>
@@ -557,13 +562,15 @@
         $('.mini-shadow').css('z-index','99999');
         $('.mini-popup').css('z-index','100000');
         $('.mini-panel').css('z-index','100000');
-        $('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
+        $('#searchBar1').css('display','block');
+        //$('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
     });
     look2.on("showpopup",function(e){
         $('.mini-shadow').css('z-index','99999');
         $('.mini-popup').css('z-index','100000');
         $('.mini-panel').css('z-index','100000');
-        $('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
+        $('#searchBar2').css('display','block');
+        //$('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
     });
     hlLanguage("../i18n/");
 </script>

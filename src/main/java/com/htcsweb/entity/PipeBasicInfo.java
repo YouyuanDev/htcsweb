@@ -13,11 +13,9 @@ public class PipeBasicInfo {
     private float weight;
     private String pipe_making_lot_no;
     private String status;
+    private String heat_no;
 
-    public PipeBasicInfo() {
-    }
-
-    public PipeBasicInfo(int id, String contract_no, String pipe_no, String grade, float od, float wt, float length, float weight, String pipe_making_lot_no, String status) {
+    public PipeBasicInfo(int id, String contract_no, String pipe_no, String grade, float od, float wt, float length, float weight, String pipe_making_lot_no, String status, String heat_no) {
         this.id = id;
         this.contract_no = contract_no;
         this.pipe_no = pipe_no;
@@ -28,6 +26,18 @@ public class PipeBasicInfo {
         this.weight = weight;
         this.pipe_making_lot_no = pipe_making_lot_no;
         this.status = status;
+        this.heat_no = heat_no;
+    }
+
+    public PipeBasicInfo() {
+    }
+
+    public String getHeat_no() {
+        return heat_no;
+    }
+
+    public void setHeat_no(String heat_no) {
+        this.heat_no = heat_no;
     }
 
     public int getId() {

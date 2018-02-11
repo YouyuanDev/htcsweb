@@ -75,6 +75,7 @@ var execI18n = function(languagePath){
             insertEle1.each(function() {
                 $(this).text($.i18n.prop($(this).attr('name')));
             });
+
         }
     });
         
