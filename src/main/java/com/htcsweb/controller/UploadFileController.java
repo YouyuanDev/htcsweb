@@ -78,4 +78,37 @@ public class UploadFileController {
         }
         return null;
     }
+
+
+
+    @RequestMapping(value = "/uploadFile")
+    public String uploadFile(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            String saveDirectory = request.getSession().getServletContext().getRealPath("/upload/files");
+            File uploadPath = new File(saveDirectory);
+            if (!uploadPath.exists()) {
+                uploadPath.mkdirs();
+            }
+            FileRenameUtil util = new FileRenameUtil();
+            MultipartRequest multi = new MultipartRequest(request, saveDirectory, 100* 1024 * 1024, "UTF-8", util);
+            Enumeration files = multi.getFileNames();
+            String newName = "";
+            while (files.hasMoreElements()) {
+                String name = (String) files.nextElement();
+                File file = multi.getFile(name);
+                if (file != null) {
+                    newName = file.getName();
+                }
+            }
+            JSONObject json = new JSONObject();
+            json.put("fileUrl", newName);
+            ResponseUtil.write(response, json);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
 }

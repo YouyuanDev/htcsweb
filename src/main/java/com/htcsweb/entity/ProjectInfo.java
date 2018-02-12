@@ -1,5 +1,6 @@
 package com.htcsweb.entity;
 
+import java.util.Date;
 import java.util.List;
 
 public class ProjectInfo {
@@ -11,10 +12,9 @@ public class ProjectInfo {
     private String mps;
     private String itp;
     private String coating_standard;
-    public ProjectInfo() {
-    }
+    private Date project_time;
 
-    public ProjectInfo(int id, String project_no, String project_name, String client_name, String client_spec, String mps, String itp, String coating_standard) {
+    public ProjectInfo(int id, String project_no, String project_name, String client_name, String client_spec, String mps, String itp, String coating_standard, Date project_time) {
         this.id = id;
         this.project_no = project_no;
         this.project_name = project_name;
@@ -23,9 +23,16 @@ public class ProjectInfo {
         this.mps = mps;
         this.itp = itp;
         this.coating_standard = coating_standard;
+        this.project_time = project_time;
     }
 
+    public Date getProject_time() {
+        return project_time;
+    }
 
+    public void setProject_time(Date project_time) {
+        this.project_time = project_time;
+    }
 
     public int getId() {
         return id;

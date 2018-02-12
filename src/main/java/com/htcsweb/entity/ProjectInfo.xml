@@ -5,4 +5,52 @@
 
 <mapper namespace="com.htcsweb.dao.ProjectInfoDao">
 
+
+    <resultMap id="all" type="com.htcsweb.entity.ProjectInfo">
+        <id property="id" column="id"></id>
+        <result property="project_no" column="project_no"></result>
+        <result property="project_name" column="project_name"></result>
+        <result property="client_spec" column="client_spec"></result>
+        <result property="coating_standard" column="coating_standard"></result>
+        <result property="mps" column="mps"></result>
+        <result property="itp" column="itp"></result>
+        <result property="project_time" column="project_time"></result>
+    </resultMap>
+
+
+    <select id="getCount" resultType="int">
+        select count(*) from project_info
+    </select>
+
+    <select id="getAllByLike" resultType="map">
+        Select id,project_no,project_name,client_name,client_spec,coating_standard,mps,itp,project_time from project_info pro
+        <where>
+            <if test="project_no!=null and project_no!=''">
+                AND project_no LIKE CONCAT('%',#{project_no},'%')
+            </if>
+            <if test="project_name!=null and project_name!=''">
+                AND project_name LIKE CONCAT('%',#{project_name},'%')
+            </if>
+            <if test="client_name!=null and client_name!=''">
+                AND client_name LIKE CONCAT('%',#{client_name},'%')
+            </if>
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(project_time,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(project_time,'%Y-%m-%d %H:%T:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d 23:59:59')]]>
+            </if>
+        </where>
+        ORDER BY project_time DESC
+        limit #{skip},#{take}
+    </select>
+
+    <update id="updateProjectInfo" parameterType="com.htcsweb.entity.ProjectInfo">
+        UPDATE project_info set project_no=#{project_no},project_name=#{project_name},client_name=#{client_name},client_spec=#{client_spec},coating_standard=#{coating_standard},mps=#{mps},itp=#{itp}  WHERE id=#{id}
+    </update>
+
+    <insert id="addProjectInfo" parameterType="com.htcsweb.entity.ProjectInfo">
+        INSERT INTO project_info(project_no,project_name,client_name,client_spec,coating_standard,mps,itp,project_time) VALUES (#{project_no},#{project_name},#{client_name},#{client_spec},#{coating_standard},#{mps},#{itp},#{project_time})
+    </insert>
+
 </mapper>
