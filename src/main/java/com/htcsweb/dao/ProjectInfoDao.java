@@ -14,6 +14,6 @@ public interface ProjectInfoDao {
     public int getCount();
     public int updateProjectInfo(ProjectInfo projectInfo);
     public int addProjectInfo(ProjectInfo projectInfo);
-
+    public int delProjectInfo(String[]arrId);
 
 }

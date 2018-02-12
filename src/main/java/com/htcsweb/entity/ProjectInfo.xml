@@ -53,4 +53,10 @@
         INSERT INTO project_info(project_no,project_name,client_name,client_spec,coating_standard,mps,itp,project_time) VALUES (#{project_no},#{project_name},#{client_name},#{client_spec},#{coating_standard},#{mps},#{itp},#{project_time})
     </insert>
 
+    <delete id="delProjectInfo">
+        delete from project_info WHERE
+        <foreach collection="array" item="item" open="id in (" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
 </mapper>

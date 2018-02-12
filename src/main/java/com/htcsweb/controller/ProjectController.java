@@ -72,11 +72,11 @@ public class ProjectController {
         return mmp;
     }
 
-    @RequestMapping("/saveProject")
+    @RequestMapping(value = "/saveProject")
     @ResponseBody
-    public String saveProject(ProjectInfo projectInfo, HttpServletResponse response){
+    public String saveProject(ProjectInfo projectInfo,HttpServletResponse response){
 
-        System.err.println("cccc:"+projectInfo.getProject_name());
+
         JSONObject json=new JSONObject();
         try{
             int resTotal=0;
@@ -104,5 +104,19 @@ public class ProjectController {
     }
 
 
-
+    @RequestMapping("/delProject")
+    @ResponseBody
+    public String delProject(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
+        String[]idArr=hlparam.split(",");
+        int resTotal=0;
+        resTotal=projectInfoDao.delProjectInfo(idArr);
+        JSONObject json=new JSONObject();
+        if(resTotal>0){
+            json.put("success",true);
+        }else{
+            json.put("success",false);
+        }
+        ResponseUtil.write(response,json);
+        return null;
+    }
 }

@@ -64,15 +64,71 @@
             // hlLanguage("../i18n/");
         });
 
+
         function addProject(){
             $('#hlcancelBtn').attr('operationtype','add');
             $('#hlProjectDialog').dialog('open').dialog('setTitle','新增项目');
             $('#fileslist').val('');
             $('#projectForm').form('clear');
-            alert("add project")
             //clearMultiUpload(grid);
             url="/ProjectOperation/saveProject.action";
         }
+        function editProject() {
+            $('#hlcancelBtn').attr('operationtype','edit');
+            var row = $('#projectDatagrids').datagrid('getSelected');
+            if(row){
+                $('#hlProjectDialog').dialog('open').dialog('setTitle','修改');
+                $('#project_no').textbox('setValue',row.project_no);
+                $('#project_name').textbox('setValue',row.project_name);
+                $('#client_name').textbox('setValue',row.client_name);
+                $('#client_spec').textbox('setValue',row.client_spec);
+                $('#coating_standard').textbox('setValue',row.coating_standard);
+                $('#mps').textbox('setValue',row.mps);
+                $('#itp').textbox('setValue',row.itp);
+                $('#project_time').textbox('setValue',row.project_time);
+
+
+                // $('#project_no').text(row.project_no);
+                // $('#project_name').text(row.project_name);
+                // $('#client_name').text(row.client_name);
+                // $('#client_spec').text(row.client_spec);
+                // $('#coating_standard').text(row.coating_standard);
+                // $('#mps').text(row.mps);
+                // $('#itp').text(row.itp);
+                // $('#project_time').text(getDate(row.project_time));
+                $('#projectForm').form('load',row);
+
+                // var odpictures=row.upload_files;
+                // if(odpictures!=null&&odpictures!=""){
+                //     var imgList=odpictures.split(';');
+                //     createPictureModel(imgList);
+                // }
+                url="/ProjectOperation/saveProject.action?id="+row.id;
+
+            }else{
+                hlAlertTwo();
+            }
+        }
+        function delProject() {
+            var row = $('#projectDatagrids').datagrid('getSelections');
+            if(row.length>0){
+                var idArr=[];
+                for (var i=0;i<row.length;i++){
+                    idArr.push(row[i].id);
+                }
+                var idArrs=idArr.join(',');
+                hlAlertFive("/ProjectOperation/delProject.action",idArrs,idArr.length);
+                // $.messager.confirm('提示','您确定要删除<font>')
+            }else{
+                hlAlertOne();
+            }
+        }
+
+
+
+
+
+
         //文件上传失败操作
         function onUploadError() {
             alert("上传失败!");
@@ -96,40 +152,36 @@
             return $obj.val();
         }
 
+        //取消保存
+        function ProjectFormCancelSubmit() {
+            $('#hlProjectDialog').dialog('close');
+        }
 
 
-
+        //增加或保存项目信息
         function ProjectFormSubmit() {
 
-            alert("submit11")
             $('#projectForm').form('submit',{
                 url:url,
                 onSubmit:function () {
                     //表单验证
 
-                    alert("1111");
                     setParams($("input[name='project_no']"));
                     setParams($("input[name='project_name']"));
                     setParams($("input[name='client_name']"));
                     setParams($("input[name='client_spec']"));
-                    alert("22222");
                     setParams($("input[name='coating_standard']"));
                     setParams($("input[name='mps']"));
                     setParams($("input[name='itp']"));
-                    setParams($("input[name='project_time']"));
-                    alert("33333");
+
                 },
                 success: function(result){
-                    alert("444444");
+
                     var result = eval('('+result+')');
-                    alert("555555");
                     if (result.success){
-                        alert("666666");
                         $('#hlProjectDialog').dialog('close');
                         $('#projectDatagrids').datagrid('reload');
-                        alert("777777");
                         clearFormLabel();
-                        alert("88888");
                         $('#hl-gallery-con').empty();
                     } else {
                         hlAlertFour("操作失败!");
@@ -211,7 +263,7 @@
 <div id="hlProjectDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;height:auto;">
     <form id="projectForm" method="post">
         <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
-            <legend>项目信息</legend>
+            <legend class="i18n1" name="projectinfo">项目信息</legend>
             <table class="ht-table" width="100%" border="0">
                 <tr>
                     <td class="i18n1" name="projectno" width="16%">项目编号</td>
@@ -234,7 +286,7 @@
                 <tr>
                     <td class="i18n1" name="coatingstandard" width="16%">涂层标准</td>
                     <td   width="33%"><input class="easyui-validatebox" type="text" name="coating_standard" value=""/></td>
-                    <td class="i18n1" name="itp" width="16%">项目时间</td>
+                    <td class="i18n1" name="projecttime" width="16%">项目时间</td>
                     <td   width="33%"><input class="easyui-datebox" type="text" name="project_time" value=""/></td>
                 </tr>
                 <tr>
@@ -273,3 +325,7 @@
 <script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
 </body>
 </html>
+<script type="text/javascript">
+    mini.parse();
+    hlLanguage("../i18n/");
+</script>
