@@ -372,8 +372,8 @@
            </tr>
            <tr>
                <td class="i18n1" name="operatorno">操作工编号</td>
-               <td colspan="2">
-                   <input id="lookup2" name="operator_no" class="mini-lookup" style="text-align:center;width:170px;"
+               <td colspan="2" >
+                   <input id="lookup2" name="operator_no" class="mini-lookup" style="text-align:center;width:180px;"
                           textField="employee_no" valueField="id" popupWidth="auto"
                           popup="#gridPanel2" grid="#datagrid2" multiSelect="false"
                    />
@@ -443,7 +443,7 @@
 
 
 </div>
-<div id="dlg-buttons">
+<div id="dlg-buttons" align="center" style="width:900px;">
     <a href="#" class="easyui-linkbutton" iconCls="icon-save" onclick="odBlastProFormSubmit()">Save</a>
     <a href="#" class="easyui-linkbutton" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="odBlastProCancelSubmit()">Cancel</a>
 </div>
