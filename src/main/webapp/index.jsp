@@ -57,6 +57,30 @@
                     }
                 }
             });
+
+            //项目管理
+            $("#hlprojectmanagement").tree({
+                onClick:function (node) {
+                    var tab=$('#hlTab').tabs('getTab',node.text);
+                    var xy=node.text;
+                    if(tab){
+                        $('hlTab').tabs('select',node.text);
+                    }else{
+                        if("项目工艺"==xy||"Project Specification"==xy){
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='project/projectManagement.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                            hlLanguage();
+                        }
+
+                    }
+                }
+            });
+
+
+
             //账户管理
             $("#hlaccount").tree({
                 onClick:function (node) {
@@ -130,8 +154,11 @@
         <div title="出入库" class="i18n" name="storage" style="padding:10px;">
             cc
         </div>
-        <div title="项目工艺" class="i18n" name="projectspecification" style="padding:10px;">
-            dd
+        <div title="项目管理" class="i18n" name="projectmanagement" style="padding:10px;">
+            <ul id="hlprojectmanagement">
+                <li class="i18n1" name="projectspecification">项目工艺</li>
+            </ul>
+
         </div>
         <div title="实验" class="i18n" name="labtesting" style="padding:10px;">
             ee

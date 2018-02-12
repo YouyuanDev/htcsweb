@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>信息</title>
+    <title>外喷砂信息</title>
     <link rel="stylesheet" type="text/css" href="../easyui/themes/bootstrap/easyui.css">
     <link rel="stylesheet" type="text/css" href="../easyui/themes/icon.css">
     <link href="../miniui/multiupload/multiupload.css" rel="stylesheet" type="text/css" />
