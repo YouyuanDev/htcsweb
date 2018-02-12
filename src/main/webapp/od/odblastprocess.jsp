@@ -430,20 +430,21 @@
 
        </table>
        <input type="hidden" id="fileslist" name="upload_files" value=""/>
+           <div id="hl-gallery-con" style="width:100%;">
 
+           </div>
+           <div id="multiupload1" class="uc-multiupload" style="width:100%; max-height:200px"
+                flashurl="../miniui/fileupload/swfupload/swfupload.swf"
+                uploadurl="../UploadFile/uploadPicture.action" _autoUpload="false" _limittype="*.jpg;*.png;*.jpeg;*.bmp"
+                onuploaderror="onUploadError" onuploadsuccess="onUploadSuccess">
+           </div>
        </fieldset>
    </form>
-    <div id="multiupload1" class="uc-multiupload" style="width:100%; max-height:200px"
-         flashurl="../miniui/fileupload/swfupload/swfupload.swf"
-         uploadurl="../UploadFile/uploadPicture.action" _autoUpload="false" _limittype="*.jpg;*.png;*.jpeg;*.bmp"
-         onuploaderror="onUploadError" onuploadsuccess="onUploadSuccess">
-    </div>
-    <div id="hl-gallery-con">
 
-    </div>
+
 </div>
 <div id="dlg-buttons">
-    <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="odBlastProFormSubmit()">Ok</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-save" onclick="odBlastProFormSubmit()">Save</a>
     <a href="#" class="easyui-linkbutton" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="odBlastProCancelSubmit()">Cancel</a>
 </div>
 <div id="gridPanel1" class="mini-panel" title="header" iconCls="icon-add" style="width:450px;height:250px;"
