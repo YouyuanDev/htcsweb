@@ -320,21 +320,19 @@
    <form id="odBlastProForm" method="post">
        <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
            <legend>钢管信息</legend>
-           <table width="100%" border="0">
+           <table class="ht-table" width="100%" border="0">
                <tr>
                    <td class="i18n1" name="projectname" width="16%">项目名称</td>
-                   <td colspan="5" width="33%"><label id="project_name"></label></td>
+                   <td colspan="2" width="33%"><label id="project_name"></label></td>
 
                    <td class="i18n1" name="contractno" width="16%">合同编号</td>
-                   <td colspan="5" width="33%"><label id="contract_no"></label></td>
+                   <td colspan="7" width="33%"><label id="contract_no"></label></td>
 
                </tr>
-           </table>
-           <hr>
-           <table width="100%" border="0">
+
                <tr>
                    <td class="i18n1" name="pipeno" width="16%">钢管编号</td>
-                   <td colspan="3" width="33%">
+                   <td colspan="2" width="33%">
                        <input id="lookup1" name="pipe_no" class="mini-lookup" style="text-align:center;width:160px;"
                               textField="pipe_no" valueField="id" popupWidth="auto"
                               popup="#gridPanel1" grid="#datagrid1" multiSelect="false"/>
@@ -344,49 +342,47 @@
                </tr>
            </table>
 
-           <table width="100%" border="0">
+           <table width="100%" border="0" align="center">
                <tr>
-                   <td class="i18n1" name="grade">钢种</td>
-                   <td><label id="grade"></label></td>
-                   <td class="i18n1" name="od">外径</td>
-                   <td><label id="od"></label></td>
-                   <td class="i18n1" name="wt">壁厚</td>
-                   <td><label id="wt"></label></td>
-                   <td class="i18n1" name="length">长度</td>
-                   <td><label id="length"></label></td>
-                   <td class="i18n1" name="weight">重量</td>
-                   <td><label id="weight"></label></td>
-                   <td class="i18n1" name="heatno">炉号</td>
-                   <td><label id="heat_no"></label></td>
+                   <td align="center" class="i18n1" name="grade">钢种</td>
+                   <td align="center"><label id="grade"></label></td>
+                   <td align="center" class="i18n1" name="od">外径</td>
+                   <td align="center"><label id="od"></label></td>
+                   <td align="center" class="i18n1" name="wt">壁厚</td>
+                   <td align="center"><label id="wt"></label></td>
+                   <td align="center" class="i18n1" name="length">长度</td>
+                   <td align="center"><label id="length"></label></td>
+                   <td align="center" class="i18n1" name="weight">重量</td>
+                   <td align="center"><label id="weight"></label></td>
+                   <td align="center" class="i18n1" name="heatno">炉号</td>
+                   <td align="center"><label id="heat_no"></label></td>
                </tr>
            </table>
        </fieldset>
 
 
-       <fieldset style="width:700px;border:solid 1px #aaa;margin-top:8px;position:relative;">
+       <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
            <legend>外喷砂生产信息</legend>
 
        <table class="ht-table">
            <tr>
                <td class="i18n1" name="id">流水号</td>
-               <td><label id="odbpid"></label></td>
-               <td></td>
+               <td colspan="5"><label id="odbpid"></label></td>
+
            </tr>
            <tr>
-               <td class="i18n1" name="operationtime">操作时间</td>
-               <td><label id="odbptime"></label></td>
-               <td></td>
                <td class="i18n1" name="operatorno">操作工编号</td>
-               <td>
-                   <input id="lookup2" name="operator_no" class="mini-lookup" style="text-align:center;width:180px;"
+               <td colspan="2">
+                   <input id="lookup2" name="operator_no" class="mini-lookup" style="text-align:center;width:170px;"
                           textField="employee_no" valueField="id" popupWidth="auto"
                           popup="#gridPanel2" grid="#datagrid2" multiSelect="false"
                    />
                </td>
-               <td></td>
+               <td class="i18n1" name="operationtime">操作时间</td>
+               <td colspan="2"><label id="odbptime"></label></td>
+
            </tr>
        </table>
-       <hr>
 
        <table class="ht-table">
            <tr>
@@ -406,31 +402,28 @@
                <td><input class="easyui-validatebox" type="text" name="acid_concentration" value=""/></td>
                <td></td>
            </tr>
-       </table>
-       <hr>
-       <table class="ht-table">
            <tr>
-               <td class="i18n1" name="surfacecondition">外观缺陷</td>
+               <td width="16%"  class="i18n1" name="surfacecondition">外观缺陷</td>
                <td><input class="easyui-validatebox" type="text" name="surface_condition" value=""/></td>
                <td></td>
-               <td class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</td>
+               <td width="16%" class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</td>
                <td><input class="easyui-validatebox" type="text" name="salt_contamination_before_blasting" value=""/></td>
                <td><=25</td>
            </tr>
 
            <tr>
-               <td class="i18n1" name="blastlinespeed">打砂传送速度</td>
+               <td width="16%" class="i18n1" name="blastlinespeed">打砂传送速度</td>
                <td><input class="easyui-validatebox" type="text" name="blast_line_speed" value=""/></td>
                <td></td>
-               <td class="i18n1" name="conductivity">传导性</td>
+               <td width="16%" class="i18n1" name="conductivity">传导性</td>
                <td><input class="easyui-validatebox" type="text" name="conductivity" value=""/></td>
                <td></td>
            </tr>
            <tr>
-               <td class="i18n1" name="preheattemp">预热温度</td>
+               <td width="16%" class="i18n1" name="preheattemp">预热温度</td>
                <td><input class="easyui-validatebox" type="text" name="preheat_temp" value=""/></td>
                <td></td>
-               <td class="i18n1" name="remark">备注</td>
+               <td width="16%" class="i18n1" name="remark">备注</td>
                <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
                <td></td>
            </tr>
