@@ -316,60 +316,56 @@
 </div>
 
 <!--添加、修改框-->
-<div id="hlOdBlastProDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:800px;height:auto;">
+<div id="hlOdBlastProDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;height:auto;">
    <form id="odBlastProForm" method="post">
-       <table class="ht-table">
-           <tr>
-               <td class="i18n1" name="projectname">项目名称</td>
-               <td><label id="project_name"></label></td>
-               <td></td>
-               <td class="i18n1" name="contractno">合同编号</td>
-               <td><label id="contract_no"></label></td>
-               <td></td>
-           </tr>
-       </table>
-       <hr>
-       <table class="ht-table">
-           <tr>
-               <td class="i18n1" name="pipeno">钢管编号</td>
-               <td>
-                   <input id="lookup1" name="pipe_no" class="mini-lookup" style="text-align:center;width:180px;"
-                          textField="pipe_no" valueField="id" popupWidth="auto"
-                          popup="#gridPanel1" grid="#datagrid1" multiSelect="false"
-                   />
-               </td>
-               <td></td>
-               <td class="i18n1" name="grade">钢种</td>
-               <td><label id="grade"></label></td>
-               <td></td>
+       <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
+           <legend>钢管信息</legend>
+           <table width="100%" border="0">
+               <tr>
+                   <td class="i18n1" name="projectname" width="16%">项目名称</td>
+                   <td colspan="5" width="33%"><label id="project_name"></label></td>
 
-           </tr>
-           <tr>
-               <td class="i18n1" name="od">外径</td>
-               <td><label id="od"></label></td>
-               <td></td>
-               <td class="i18n1" name="wt">壁厚</td>
-               <td><label id="wt"></label></td>
-               <td></td>
-           </tr>
-           <tr>
-               <td class="i18n1" name="length">长度</td>
-               <td><label id="length"></label></td>
-               <td></td>
-               <td class="i18n1" name="weight">重量</td>
-               <td><label id="weight"></label></td>
-               <td></td>
-           </tr>
-           <tr>
-               <td class="i18n1" name="heatno">炉号</td>
-               <td><label id="heat_no"></label></td>
-               <td></td>
-               <td class="i18n1" name="statusname">状态</td>
-               <td><label id="status_name"></label></td>
-               <td></td>
-           </tr>
-       </table>
-       <hr>
+                   <td class="i18n1" name="contractno" width="16%">合同编号</td>
+                   <td colspan="5" width="33%"><label id="contract_no"></label></td>
+
+               </tr>
+           </table>
+           <hr>
+           <table width="100%" border="0">
+               <tr>
+                   <td class="i18n1" name="pipeno" width="16%">钢管编号</td>
+                   <td colspan="3" width="33%">
+                       <input id="lookup1" name="pipe_no" class="mini-lookup" style="text-align:center;width:160px;"
+                              textField="pipe_no" valueField="id" popupWidth="auto"
+                              popup="#gridPanel1" grid="#datagrid1" multiSelect="false"/>
+                   </td>
+                   <td class="i18n1" name="statusname" width="16%">状态</td>
+                   <td colspan="7" width="33%"><label id="status_name"></label></td>
+               </tr>
+           </table>
+
+           <table width="100%" border="0">
+               <tr>
+                   <td class="i18n1" name="grade">钢种</td>
+                   <td><label id="grade"></label></td>
+                   <td class="i18n1" name="od">外径</td>
+                   <td><label id="od"></label></td>
+                   <td class="i18n1" name="wt">壁厚</td>
+                   <td><label id="wt"></label></td>
+                   <td class="i18n1" name="length">长度</td>
+                   <td><label id="length"></label></td>
+                   <td class="i18n1" name="weight">重量</td>
+                   <td><label id="weight"></label></td>
+                   <td class="i18n1" name="heatno">炉号</td>
+                   <td><label id="heat_no"></label></td>
+               </tr>
+           </table>
+       </fieldset>
+
+
+       <fieldset style="width:700px;border:solid 1px #aaa;margin-top:8px;position:relative;">
+           <legend>外喷砂生产信息</legend>
+
        <table class="ht-table">
            <tr>
                <td class="i18n1" name="id">流水号</td>
@@ -441,6 +437,8 @@
 
        </table>
        <input type="hidden" id="fileslist" name="upload_files" value=""/>
+
+       </fieldset>
    </form>
     <div id="multiupload1" class="uc-multiupload" style="width:100%; max-height:200px"
          flashurl="../miniui/fileupload/swfupload/swfupload.swf"
