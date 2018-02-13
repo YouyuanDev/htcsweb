@@ -94,13 +94,13 @@
                 onClose:function () {
                     var type=$('#hlcancelBtn').attr('operationtype');
                     if(type=="add"){
-                        var $imglist=$('#fileslist');
+                        var fileslist=$('#fileslist');
                         var $dialog=$('#hlProjectDialog');
-                        //hlAlertSix("../UploadFile/delUploadPicture.action",$imglist,$dialog,grid);
+                        hlAlertSix("../UploadFile/delUploadPicture.action",fileslist,$dialog,grid);
                     }else{
 
                         $('#hl-gallery-con').empty();
-                        //$('#fileslist').val('');
+                        $('#fileslist').val('');
                         clearFormLabel();
                     }
                 }
@@ -113,9 +113,9 @@
         function addProject(){
             $('#hlcancelBtn').attr('operationtype','add');
             $('#hlProjectDialog').dialog('open').dialog('setTitle','新增项目');
-            //$('#fileslist').val('');
+            $('#fileslist').val('');
             $('#projectForm').form('clear');
-            //clearMultiUpload(grid);
+            clearMultiUpload(grid);
             url="/ProjectOperation/saveProject.action";
         }
         function editProject() {
@@ -164,11 +164,11 @@
 
                 });
 
-                // var odpictures=row.upload_files;
-                // if(odpictures!=null&&odpictures!=""){
-                //     var imgList=odpictures.split(';');
-                //     createPictureModel(imgList);
-                // }
+                var files=row.upload_files;
+                if(files!=null&&files!=""){
+                    var fiList=files.split(';');
+                    createPictureModel(fiList);
+                }
                 url="/ProjectOperation/saveProject.action?id="+row.id;
 
             }else{
@@ -202,10 +202,10 @@
         //文件上传成功操作
         function onUploadSuccess(e) {
             var data=eval("("+e.serverData+")");
-            var imgListstr=editFilesList(0,data.fileUrl);
-            var imgList=imgListstr.split(';');
+            var fileListstr=editFilesList(0,data.fileUrl);
+            var fList=fileListstr.split(';');
             alert("success");
-            //createPictureModel(imgList);
+            //createPictureModel(fList);
         }
         function editFilesList(type,fileUrl) {
             var $obj=$('#fileslist');
@@ -221,6 +221,8 @@
         //取消保存
         function ProjectFormCancelSubmit() {
             $('#hlProjectDialog').dialog('close');
+
+
         }
 
 
@@ -265,7 +267,7 @@
                     hlAlertThree();
                 }
             });
-            //clearMultiUpload(grid);
+            clearMultiUpload(grid);
         }
         function  setParams($obj) {
             if($obj.val()==null||$obj.val()=="")
@@ -403,15 +405,15 @@
                 </tr>
             </table>
 
-            <%--<input type="hidden" id="fileslist" name="upload_files" value=""/>--%>
+            <input type="hidden" id="fileslist" name="upload_files" value=""/>
             <div id="hl-gallery-con" style="width:100%;">
 
             </div>
-            <%--<div id="multiupload1" class="uc-multiupload" style="width:100%; max-height:200px"--%>
-                 <%--flashurl="../miniui/fileupload/swfupload/swfupload.swf"--%>
-                 <%--uploadurl="../UploadFile/uploadFile.action" _autoUpload="false" _limittype="*.txt;*.pdf;*.doc;*.docx;*.xls;*.xlsx"--%>
-                 <%--onuploaderror="onUploadError" onuploadsuccess="onUploadSuccess">--%>
-            <%--</div>--%>
+            <div id="multiupload1" class="uc-multiupload" style="width:100%; max-height:200px"
+                 flashurl="../miniui/fileupload/swfupload/swfupload.swf"
+                 uploadurl="../UploadFile/uploadFile.action" _autoUpload="false" _limittype="*.txt;*.pdf;*.doc;*.docx;*.xls;*.xlsx"
+                 onuploaderror="onUploadError" onuploadsuccess="onUploadSuccess">
+            </div>
         </fieldset>
 
 
@@ -431,5 +433,6 @@
 </html>
 <script type="text/javascript">
     mini.parse();
+    var grid= mini.get("multiupload1");
     hlLanguage("../i18n/");
 </script>

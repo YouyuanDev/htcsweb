@@ -68,15 +68,11 @@ public class ProjectController {
         List<HashMap<String,Object>>list=projectInfoDao.getAllByLike(project_no,project_name,client_name,beginTime,endTime,start,Integer.parseInt(rows));
         int count=projectInfoDao.getCount();
 
-        System.out.println("project_no:"+project_no);
-        System.out.println("project_name:"+project_name);
-        System.out.println("client_name:"+client_name);
-
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
         maps.put("rows",list);
         String mmp= JSONArray.toJSONString(maps);
-        System.out.print("mmp:"+mmp);
+        //System.out.print("mmp:"+mmp);
         return mmp;
     }
 
@@ -84,20 +80,19 @@ public class ProjectController {
     @ResponseBody
     public String saveProject(ProjectInfo projectInfo,HttpServletResponse response){
 
-        System.out.println("saveProject"+projectInfo.getProject_time().toString());
+        //System.out.println("saveProject"+projectInfo.getProject_time().toString());
         JSONObject json=new JSONObject();
         try{
             int resTotal=0;
-            //projectInfo.setProject_time(new Date());
-            System.out.print(projectInfo.getProject_time().toString());
+            //System.out.print(projectInfo.getProject_time().toString());
 
             if(projectInfo.getId()==0){
                 //添加
                 resTotal=projectInfoDao.addProjectInfo(projectInfo);
-                System.out.print("添加:"+projectInfo.getProject_name());
+                //System.out.print("添加:"+projectInfo.getProject_name());
             }else{
                 //修改！
-                System.out.print("修改:"+projectInfo.getProject_name());
+                //System.out.print("修改:"+projectInfo.getProject_name());
                 resTotal=projectInfoDao.updateProjectInfo(projectInfo);
             }
             if(resTotal>0){
