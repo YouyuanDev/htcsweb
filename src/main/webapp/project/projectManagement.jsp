@@ -161,11 +161,11 @@
 
                 });
 
-                var files=row.upload_files;
-                if(files!=null&&files!=""){
-                    var fiList=files.split(';');
-                    createPictureModel(fiList);
-                }
+                // var files=row.upload_files;
+                // if(files!=null&&files!=""){
+                //     var fiList=files.split(';');
+                //     createPictureModel(fiList);
+                // }
                 url="/ProjectOperation/saveProject.action?id="+row.id;
 
             }else{

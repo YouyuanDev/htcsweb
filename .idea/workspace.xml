@@ -7,8 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa3f659b-6ccf-4ae8-84a0-55d0a3756f6f" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/db.properties" afterPath="$PROJECT_DIR$/src/main/resources/db.properties" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/project/projectManagement.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/project/projectManagement.jsp" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -124,14 +122,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="projectManagement.jsp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="projectManagement.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/project/projectManagement.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="24" column="69" lean-forward="false" selection-start-line="24" selection-start-column="69" selection-end-line="24" selection-end-column="69" />
+            <state relative-caret-position="210">
+              <caret line="14" column="48" lean-forward="true" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
               <folding>
                 <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="multiupload.css" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/miniui/multiupload/multiupload.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -161,9 +170,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>delOdBlastProcess</find>
-      <find>操作失败</find>
-      <find>hlparam</find>
       <find>start</find>
       <find>odblastprocessDao</find>
       <find>rows</find>
@@ -187,10 +193,13 @@
       <find>getNewOdBlastByLike</find>
       <find>getAllByLike</find>
       <find>hl-gallery-con</find>
-      <find>fileslist</find>
       <find>i18n1</find>
       <find>ht-table</find>
       <find>&lt;script src=&quot;../js/jquery.i18n.properties-1.0.9.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;</find>
+      <find>upload_files</find>
+      <find>fileslist</find>
+      <find>createPictureModel</find>
+      <find>editFilesList</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -472,7 +481,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Tomcat Server.index.jsp (1)">
+  <component name="RunManager" selected="Tomcat Server.index.jsp (2)">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -589,7 +598,7 @@
         </option>
       </method>
     </configuration>
-    <configuration name="index.jsp" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
+    <configuration name="index.jsp (2)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/index.jsp" />
       <deployment>
         <artifact name="htcsweb:war">
@@ -599,7 +608,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="index_jsp_htcsweb_51" />
+        <option name="BASE_DIRECTORY_NAME" value="index_jsp_(2)_htcsweb_65" />
       </server-settings>
       <predefined_log_file id="Tomcat" enabled="true" />
       <predefined_log_file id="Tomcat Catalina" enabled="true" />
@@ -674,19 +683,19 @@
       <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Tomcat Server.index.jsp" />
-      <item index="1" class="java.lang.String" itemvalue="Tomcat Server.projectManagement.jsp (2)" />
-      <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.odblastprocess.action" />
-      <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.projectManagement.action" />
-      <item index="4" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (1)" />
+      <item index="0" class="java.lang.String" itemvalue="Tomcat Server.projectManagement.jsp (2)" />
+      <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.odblastprocess.action" />
+      <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.projectManagement.action" />
+      <item index="3" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (1)" />
+      <item index="4" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (2)" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (1)" />
-        <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.projectManagement.action" />
-        <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.odblastprocess.action" />
-        <item index="3" class="java.lang.String" itemvalue="Tomcat Server.projectManagement.jsp (2)" />
-        <item index="4" class="java.lang.String" itemvalue="Tomcat Server.index.jsp" />
+        <item index="0" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (2)" />
+        <item index="1" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (1)" />
+        <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.projectManagement.action" />
+        <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.odblastprocess.action" />
+        <item index="4" class="java.lang.String" itemvalue="Tomcat Server.projectManagement.jsp (2)" />
       </list>
     </recent_temporary>
   </component>
@@ -723,7 +732,7 @@
       <workItem from="1518496424267" duration="11780000" />
       <workItem from="1518509977281" duration="3277000" />
       <workItem from="1518515348463" duration="12342000" />
-      <workItem from="1518532594369" duration="1329000" />
+      <workItem from="1518532594369" duration="1642000" />
     </task>
     <servers />
   </component>
@@ -736,7 +745,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="311430000" />
+    <option name="totallyTimeSpent" value="311743000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="835" extended-state="6" />
@@ -788,7 +797,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/miniui/miniui/themes/default/images/miniui.css" />
     <entry file="file://$PROJECT_DIR$/src/main/webapp/miniui/miniui/themes/default/miniui.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-870">
@@ -1200,11 +1208,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/project/projectManagement.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="24" column="69" lean-forward="false" selection-start-line="24" selection-start-column="69" selection-end-line="24" selection-end-column="69" />
+        <state relative-caret-position="210">
+          <caret line="14" column="48" lean-forward="true" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
           <folding>
             <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/miniui/multiupload/multiupload.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="1" lean-forward="true" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+          <folding />
         </state>
       </provider>
     </entry>
