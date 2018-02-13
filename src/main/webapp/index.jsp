@@ -29,7 +29,7 @@
     <script type="text/javascript">
         var url;
         $(function(){
-            hlLanguage("i18n/");
+            //hlLanguage("i18n/");
             $('#tt').tree({
                 onClick:function(node){
                     var tab=$('#hlTab').tabs('getTab',node.text);
@@ -195,3 +195,6 @@
 </body>
 
 </html>
+<script type="text/javascript">
+    hlLanguage("i18n/");
+</script>
