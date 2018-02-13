@@ -78,15 +78,14 @@
             var row = $('#projectDatagrids').datagrid('getSelected');
             if(row){
                 $('#hlProjectDialog').dialog('open').dialog('setTitle','修改');
-                $('#project_no').textbox('setValue',row.project_no);
-                $('#project_name').textbox('setValue',row.project_name);
-                $('#client_name').textbox('setValue',row.client_name);
-                $('#client_spec').textbox('setValue',row.client_spec);
-                $('#coating_standard').textbox('setValue',row.coating_standard);
-                $('#mps').textbox('setValue',row.mps);
-                $('#itp').textbox('setValue',row.itp);
-                $('#project_time').textbox('setValue',row.project_time);
-
+                // $('#project_no').textbox('setValue',row.project_no);
+                // $('#project_name').textbox('setValue',row.project_name);
+                // $('#client_name').textbox('setValue',row.client_name);
+                // $('#client_spec').textbox('setValue',row.client_spec);
+                // $('#coating_standard').textbox('setValue',row.coating_standard);
+                // $('#mps').textbox('setValue',row.mps);
+                // $('#itp').textbox('setValue',row.itp);
+                // $('#project_time').textbox('setValue',row.project_time);
 
                 // $('#project_no').text(row.project_no);
                 // $('#project_name').text(row.project_name);
@@ -96,7 +95,18 @@
                 // $('#mps').text(row.mps);
                 // $('#itp').text(row.itp);
                 // $('#project_time').text(getDate(row.project_time));
-                $('#projectForm').form('load',row);
+                //$('#projectForm').form('load',row);
+                $('#projectForm').form('load',{
+                    'project_no':row.project_no,
+                    'project_name':row.project_name,
+                    'client_name':row.client_name,
+                    'client_spec':row.client_spec,
+                    'coating_standard':row.coating_standard,
+                    'mps':row.mps,
+                    'itp':row.itp,
+                    'project_time':row.project_time
+
+                });
 
                 // var odpictures=row.upload_files;
                 // if(odpictures!=null&&odpictures!=""){
@@ -171,8 +181,8 @@
                     setParams($("input[name='client_name']"));
                     setParams($("input[name='client_spec']"));
                     setParams($("input[name='coating_standard']"));
-                    setParams($("input[name='mps']"));
-                    setParams($("input[name='itp']"));
+                    //setParams($("input[name='mps']"));
+                    //setParams($("input[name='itp']"));
 
                 },
                 success: function(result){
