@@ -191,13 +191,12 @@
                     //return $('#projectForm').form('enableValidation').form('validate');
                 },
                 success: function(result){
-                    alert(result);
                     var result = eval('('+result+')');
                     if (result.success){
-                        $('#hlProjectDialog').dialog('close');
                         $('#projectDatagrids').datagrid('reload');
+                        $('#hlProjectDialog').dialog('close');
                         clearFormLabel();
-                        $('#hl-gallery-con').empty();
+                        //$('#hl-gallery-con').empty();
                     } else {
                         //$.messager.alert('提示',data.msg,'info');
                         hlAlertFour("操作失败!");

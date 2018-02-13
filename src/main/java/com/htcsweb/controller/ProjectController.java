@@ -111,15 +111,16 @@ public class ProjectController {
 
     //删除project信息
     @RequestMapping("/delProject")
-    @ResponseBody
     public String delProject(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
         String[]idArr=hlparam.split(",");
         int resTotal=0;
         resTotal=projectInfoDao.delProjectInfo(idArr);
         JSONObject json=new JSONObject();
         if(resTotal>0){
+            System.out.print("删除成功");
             json.put("success",true);
         }else{
+            System.out.print("删除失败");
             json.put("success",false);
         }
         ResponseUtil.write(response,json);
