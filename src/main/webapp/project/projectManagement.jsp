@@ -27,11 +27,56 @@
     <script src="../js/language.js" type="text/javascript"></script>
     <script type="text/javascript">
         var url;
+
+
         function formatterdate(value,row,index){
             var date = new Date(value);
-            return date.toLocaleString();
+            //return date.toLocaleString();
+            var y = date.getFullYear();
+            var m = date.getMonth()+1;
+            var d = date.getDate();
+            return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
+
         }
 
+
+        // 日期格式为 2/20/2017 12:00:00 PM
+        function myformatter2(date){
+            return date.toLocaleString();
+        }
+        // 日期格式为 2/20/2017 12:00:00 PM
+        function myparser2(s) {
+            if (!s) return new Date();
+            return new Date(Date.parse(s));
+        }
+
+
+
+
+        function string2date(str){
+            return new Date(Date.parse(str.replace(/-/g,  "/")));
+        }
+
+        // 日期格式为 2018-2-20
+        function myformatter(date){
+            var y = date.getFullYear();
+            var m = date.getMonth()+1;
+            var d = date.getDate();
+            return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
+        }
+        // 日期格式为 2018-2-20
+        function myparser(s){
+            if (!s) return new Date();
+            var ss = (s.split('-'));
+            var y = parseInt(ss[0],10);
+            var m = parseInt(ss[1],10);
+            var d = parseInt(ss[2],10);
+            if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
+                return new Date(y,m-1,d);
+            } else {
+                return new Date();
+            }
+        }
 
 
         function searchProject() {
@@ -98,6 +143,13 @@
                 // $('#project_time').text(getDate(row.project_time));
                 // $('#projectForm').form('load',row);
 
+                var date;
+                var strdate="";
+                if(row.project_time!=null&&row.project_time!=""){
+                    date = new Date(row.project_time);
+                    strdate =myformatter(date);
+                }
+
 
                 $('#projectForm').form('load',{
                     'projectid':row.id,
@@ -108,7 +160,7 @@
                     'coating_standard':row.coating_standard,
                     'mps':row.mps,
                     'itp':row.itp,
-                    'project_time':getDate(row.project_time)
+                    'project_time':strdate
 
                 });
 
@@ -180,23 +232,30 @@
                 onSubmit:function () {
                     //表单验证
 
-
-                    // setParams($("input[name='project_name']"));
+                    setParams($("input[name='project_name']"));
                     setParams($("input[name='client_name']"));
                     setParams($("input[name='client_spec']"));
                     setParams($("input[name='coating_standard']"));
-                    //setParams($("input[name='mps']"));
-                    //setParams($("input[name='itp']"));
+                    setParams($("input[name='mps']"));
+                    setParams($("input[name='itp']"));
+
+                    if($("input[name='project_time']").val()==""){
+
+                        hlAlertFour("请输入项目开始日期");
+                        return false;
+                    }
+
 
                     //return $('#projectForm').form('enableValidation').form('validate');
                 },
                 success: function(result){
                     var result = eval('('+result+')');
                     if (result.success){
-                        $('#projectDatagrids').datagrid('reload');
                         $('#hlProjectDialog').dialog('close');
+                        $('#projectDatagrids').datagrid('reload');
                         clearFormLabel();
                         //$('#hl-gallery-con').empty();
+                       // $('#projectDatagrids').datagrid('clearSelections');
                     } else {
                         //$.messager.alert('提示',data.msg,'info');
                         hlAlertFour("操作失败!");
@@ -280,16 +339,16 @@
 <!--工具栏-->
 <div id="hlprojectTb" style="padding:10px;">
     <span class="i18n1" name="projectno">项目编号</span>:
-    <input id="projectno" name="projectno" style="line-height:26px;border:1px solid #ccc">
+    <input id="projectno" name="projectno"  style="width:100px;line-height:22px;border:1px solid #ccc">
     <span class="i18n1" name="projectname">项目名称</span>:
-    <input id="projectname" name="projectname" style="line-height:26px;border:1px solid #ccc">
+    <input id="projectname" name="projectname" style="width:100px;line-height:22px;border:1px solid #ccc">
     <span class="i18n1" name="clientname">客户名称</span>:
-    <input id="clientname" name="clientname" style="line-height:26px;border:1px solid #ccc">
+    <input id="clientname" name="clientname" style="width:100px;line-height:22px;border:1px solid #ccc">
 
     <span class="i18n1" name="begintime">开始时间</span>:
-    <input id="begintime" name="begintime" type="text" class="easyui-datebox">
+    <input id="begintime" name="begintime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
     <span class="i18n1" name="endtime">结束时间</span>:
-    <input id="endtime" name="endtime" type="text" class="easyui-datebox">
+    <input id="endtime" name="endtime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
     <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchProject()">Search</a>
     <div style="float:right">
         <a href="#" id="addProjectLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addProject()">添加</a>
@@ -332,7 +391,7 @@
                     <td class="i18n1" name="coatingstandard" width="16%">涂层标准</td>
                     <td   width="33%"><input class="easyui-validatebox" type="text" name="coating_standard" value=""/></td>
                     <td class="i18n1" name="projecttime" width="16%">项目时间</td>
-                    <td   width="33%"><input class="easyui-datebox" type="text" name="project_time" value=""/></td>
+                    <td   width="33%"><input class="easyui-datebox" type="text" name="project_time" value="" data-options="formatter:myformatter2,parser:myparser2"/></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="mps" width="16%">MPS</td>

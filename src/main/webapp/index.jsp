@@ -64,15 +64,18 @@
                     var tab=$('#hlTab').tabs('getTab',node.text);
                     var xy=node.text;
                     if(tab){
-                        $('hlTab').tabs('select',node.text);
+                        $('#hlTab').tabs('select',node.text);
                     }else{
                         if("项目工艺"==xy||"Project Specification"==xy){
+
+
                             $('#hlTab').tabs('add',{
                                 title:node.text,
                                 content:"<iframe scrolling='auto' frameborder='0'  src='project/projectManagement.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable:true
                             });
                             hlLanguage();
+
                         }
 
                     }
@@ -87,7 +90,7 @@
                     var tab=$('#hlTab').tabs('getTab',node.text);
                     var nodeTxt=node.text;
                     if(tab){
-                        $('hlTab').tabs('select',node.text);
+                        $('#hlTab').tabs('select',node.text);
                     }else{
                         if("账户管理"==nodeTxt){
                             $('#hlTab').tabs('add',{

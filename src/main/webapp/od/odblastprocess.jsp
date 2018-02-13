@@ -27,10 +27,39 @@
 
     <script type="text/javascript">
         var url;
+
+        function myformatter(date){
+            var y = date.getFullYear();
+            var m = date.getMonth()+1;
+            var d = date.getDate();
+            return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
+        }
+
+
         function formatterdate(value,row,index){
            var date = new Date(value);
-           return date.toLocaleString();
+           var y = date.getFullYear();
+           var m = date.getMonth()+1;
+           var d = date.getDate();
+
+           return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
+
+           //return date.toLocaleString();
         }
+        function myparser(s){
+            if (!s) return new Date();
+            var ss = (s.split('-'));
+            var y = parseInt(ss[0],10);
+            var m = parseInt(ss[1],10);
+            var d = parseInt(ss[2],10);
+            if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
+                return new Date(y,m-1,d);
+            } else {
+                return new Date();
+            }
+        }
+
+
         $(function () {
             // $('#odBlastProDatagrids').datagrid({
             //     striped:true,
@@ -304,9 +333,9 @@
     <span class="i18n1" name="operatorno">操作工编号</span>:
     <input id="operatorno" name="operatorno" style="line-height:26px;border:1px solid #ccc">
     <span class="i18n1" name="begintime">开始时间</span>:
-    <input id="begintime" name="begintime" type="text" class="easyui-datebox">
+    <input id="begintime" name="begintime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
     <span class="i18n1" name="endtime">结束时间</span>:
-    <input id="endtime" name="endtime" type="text" class="easyui-datebox">
+    <input id="endtime" name="endtime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
     <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchOdBlastPro()">Search</a>
     <div style="float:right">
      <a href="#" id="addObpLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addOdBlastPro()">添加</a>

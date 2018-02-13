@@ -10,6 +10,7 @@
         <id property="id" column="id"></id>
         <result property="project_no" column="project_no"></result>
         <result property="project_name" column="project_name"></result>
+        <result property="client_name" column="client_name"></result>
         <result property="client_spec" column="client_spec"></result>
         <result property="coating_standard" column="coating_standard"></result>
         <result property="mps" column="mps"></result>
@@ -28,10 +29,10 @@
 
 
     <select id="getAllByLike" resultType="map">
-        Select id,project_no,project_name,client_name,client_spec,coating_standard,mps,itp,project_time from project_info pro
+        Select * from project_info
         <where>
             <if test="project_no!=null and project_no!=''">
-                AND project_no LIKE CONCAT('%',#{project_no},'%')
+                 project_no LIKE CONCAT('%',#{project_no},'%')
             </if>
             <if test="project_name!=null and project_name!=''">
                 AND project_name LIKE CONCAT('%',#{project_name},'%')
@@ -45,13 +46,14 @@
             <if test="end_time!=null">
                 <![CDATA[ AND DATE_FORMAT(project_time,'%Y-%m-%d %H:%T:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d 23:59:59')]]>
             </if>
+
         </where>
-        ORDER BY id DESC
+        ORDER BY project_time DESC
         limit #{skip},#{take}
     </select>
 
     <update id="updateProjectInfo" parameterType="com.htcsweb.entity.ProjectInfo">
-        UPDATE project_info set project_no=#{project_no},project_name=#{project_name},client_name=#{client_name},client_spec=#{client_spec},coating_standard=#{coating_standard},mps=#{mps},itp=#{itp}  WHERE id=#{id}
+        UPDATE project_info set project_no=#{project_no},project_name=#{project_name},client_name=#{client_name},client_spec=#{client_spec},coating_standard=#{coating_standard},mps=#{mps},itp=#{itp} ,project_time=#{project_time} WHERE id=#{id}
     </update>
 
     <insert id="addProjectInfo" parameterType="com.htcsweb.entity.ProjectInfo">

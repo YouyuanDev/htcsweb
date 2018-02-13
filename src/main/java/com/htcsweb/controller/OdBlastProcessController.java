@@ -131,17 +131,27 @@ public class OdBlastProcessController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date beginTime=null;
         Date endTime=null;
+//        try{
+//            if(begin_time!=null&&begin_time!=""){
+//                beginTime=new Date(begin_time);
+//            }else{
+//                beginTime=new Date();
+//                beginTime.setTime(0);//设置时间最开始(1970-01-01)
+//            }
+//            if(end_time!=null&&end_time!=""){
+//                endTime=new Date(end_time);
+//            }else{
+//                endTime=new Date();
+//            }
+//        }
         try{
             if(begin_time!=null&&begin_time!=""){
-                beginTime=new Date(begin_time);
-            }else{
-                beginTime=new Date();
-                beginTime.setTime(0);//设置时间最开始(1970-01-01)
+                beginTime=sdf.parse(begin_time);
+                System.out.println(beginTime.toString());
             }
             if(end_time!=null&&end_time!=""){
-                endTime=new Date(end_time);
-            }else{
-                endTime=new Date();
+                endTime=sdf.parse(end_time);
+                System.out.println(endTime.toString());
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -153,6 +163,7 @@ public class OdBlastProcessController {
         maps.put("total",count);
         maps.put("rows",list);
         String mmp= JSONArray.toJSONString(maps);
+        System.out.print("mmp:"+mmp);
         return mmp;
     }
     @RequestMapping("getOdBlastProcessById")
