@@ -15,5 +15,6 @@ public interface ProjectInfoDao {
     public int updateProjectInfo(ProjectInfo projectInfo);
     public int addProjectInfo(ProjectInfo projectInfo);
     public int delProjectInfo(String[]arrId);
+    public int hasProjectNo(@Param("project_no") String project_no);
 
 }

@@ -68,7 +68,7 @@
         function addProject(){
             $('#hlcancelBtn').attr('operationtype','add');
             $('#hlProjectDialog').dialog('open').dialog('setTitle','新增项目');
-            $('#fileslist').val('');
+            //$('#fileslist').val('');
             $('#projectForm').form('clear');
             //clearMultiUpload(grid);
             url="/ProjectOperation/saveProject.action";
@@ -77,15 +77,16 @@
             $('#hlcancelBtn').attr('operationtype','edit');
             var row = $('#projectDatagrids').datagrid('getSelected');
             if(row){
-                $('#hlProjectDialog').dialog('open').dialog('setTitle','修改');
-                // $('#project_no').textbox('setValue',row.project_no);
-                // $('#project_name').textbox('setValue',row.project_name);
-                // $('#client_name').textbox('setValue',row.client_name);
-                // $('#client_spec').textbox('setValue',row.client_spec);
-                // $('#coating_standard').textbox('setValue',row.coating_standard);
-                // $('#mps').textbox('setValue',row.mps);
-                // $('#itp').textbox('setValue',row.itp);
-                // $('#project_time').textbox('setValue',row.project_time);
+                 $('#hlProjectDialog').dialog('open').dialog('setTitle','修改');
+                  // $('#project_no').textbox('setValue',row.project_no);
+                  // $('#project_name').textbox('setValue',row.project_name);
+                  // $('#client_name').textbox('setValue',row.client_name);
+                  // $('#client_spec').textbox('setValue',row.client_spec);
+                  // $('#coating_standard').textbox('setValue',row.coating_standard);
+                  // $('#mps').textbox('setValue',row.mps);
+                  // $('#itp').textbox('setValue',row.itp);
+                  // $('#project_time').datebox('setValue',row.project_time);
+                  // $('#projectid').text(row.id);
 
                 // $('#project_no').text(row.project_no);
                 // $('#project_name').text(row.project_name);
@@ -95,8 +96,11 @@
                 // $('#mps').text(row.mps);
                 // $('#itp').text(row.itp);
                 // $('#project_time').text(getDate(row.project_time));
-                //$('#projectForm').form('load',row);
+                // $('#projectForm').form('load',row);
+
+
                 $('#projectForm').form('load',{
+                    'projectid':row.id,
                     'project_no':row.project_no,
                     'project_name':row.project_name,
                     'client_name':row.client_name,
@@ -104,7 +108,7 @@
                     'coating_standard':row.coating_standard,
                     'mps':row.mps,
                     'itp':row.itp,
-                    'project_time':row.project_time
+                    'project_time':getDate(row.project_time)
 
                 });
 
@@ -176,17 +180,18 @@
                 onSubmit:function () {
                     //表单验证
 
-                    setParams($("input[name='project_no']"));
-                    setParams($("input[name='project_name']"));
+
+                    // setParams($("input[name='project_name']"));
                     setParams($("input[name='client_name']"));
                     setParams($("input[name='client_spec']"));
                     setParams($("input[name='coating_standard']"));
                     //setParams($("input[name='mps']"));
                     //setParams($("input[name='itp']"));
 
+                    //return $('#projectForm').form('enableValidation').form('validate');
                 },
                 success: function(result){
-
+                    alert(result);
                     var result = eval('('+result+')');
                     if (result.success){
                         $('#hlProjectDialog').dialog('close');
@@ -194,6 +199,7 @@
                         clearFormLabel();
                         $('#hl-gallery-con').empty();
                     } else {
+                        //$.messager.alert('提示',data.msg,'info');
                         hlAlertFour("操作失败!");
                     }
                 },
@@ -205,18 +211,43 @@
         }
         function  setParams($obj) {
             if($obj.val()==null||$obj.val()=="")
-                $obj.val(0);
+                $obj.val('');
         }
 
         function  clearFormLabel() {
             $('#projectForm').form('clear');
-            // $('#project_name').text('');$('#contract_no').text('');
-            // $('#pipe_no').text('');$('#status_name').text('');
-            // $('#od').text('');$('#wt').text('');
-            // $('#length').text('');$('#weight').text('');
-            // $('#odbpid').text('');$('#odbptime').text('');
-            // $('#grade').text('');$('#heat_no').text('');
+
         }
+
+
+        // $.extend($.fn.validatebox.defaults.rules, {
+        //     myvalidate : {
+        //         validator : function(value, param) {
+        //             var projectno = $("#project_no").val().trim();
+        //             console.log(projectno);
+        //             alert(projectno)
+        //             var haha = " ";
+        //             $.ajax({
+        //                 type : 'post',
+        //                 async : false,
+        //                 url : '/ProjectOperation/checkProjectNoAvailable.action',
+        //                 data : {
+        //                     "project_no" : projectno
+        //                 },
+        //                 success : function(data) {
+        //                     haha = data;
+        //                 }
+        //             });
+        //             console.log(haha);
+        //             return haha.indexOf("true");
+        //         },
+        //         message : '项目名已经被占用'
+        //     }
+        // });
+
+
+
+
 
     </script>
 
@@ -236,9 +267,9 @@
                 <th field="project_name" align="center" width="100" class="i18n1" name="projectname">项目名称</th>
                 <th field="client_name" align="center" width="100" class="i18n1" name="clientname">客户名称</th>
                 <th field="client_spec" align="center" width="100" class="i18n1" name="clientspec">客户技术规格书</th>
+                <th field="coating_standard" align="center" width="100" class="i18n1" name="coatingstandard">涂层标准</th>
                 <th field="mps" align="center" width="100" class="i18n1" name="mps">MPS</th>
                 <th field="itp" align="center" width="100" class="i18n1" name="itp">ITP</th>
-                <th field="coating_standard" align="center" width="100" class="i18n1" name="coatingstandard">涂层标准</th>
                 <th field="project_time" align="center" width="100" class="i18n1" name="projecttime" data-options="formatter:formatterdate">项目开始时间</th>
             </tr>
             </thead>
@@ -262,9 +293,9 @@
     <input id="endtime" name="endtime" type="text" class="easyui-datebox">
     <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchProject()">Search</a>
     <div style="float:right">
-        <a href="#" id="addObpLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addProject()">添加</a>
-        <a href="#" id="editObpLinkBtn" class="easyui-linkbutton i18n1" name="edit" data-options="iconCls:'icon-edit',plain:true" onclick="editProject()">修改</a>
-        <a href="#" id="deltObpLinkBtn" class="easyui-linkbutton i18n1" name="delete" data-options="iconCls:'icon-remove',plain:true" onclick="delProject()">删除</a>
+        <a href="#" id="addProjectLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addProject()">添加</a>
+        <a href="#" id="editProjectLinkBtn" class="easyui-linkbutton i18n1" name="edit" data-options="iconCls:'icon-edit',plain:true" onclick="editProject()">修改</a>
+        <a href="#" id="deltProjectLinkBtn" class="easyui-linkbutton i18n1" name="delete" data-options="iconCls:'icon-remove',plain:true" onclick="delProject()">删除</a>
     </div>
 </div>
 
@@ -276,11 +307,16 @@
             <legend class="i18n1" name="projectinfo">项目信息</legend>
             <table class="ht-table" width="100%" border="0">
                 <tr>
+                    <td class="i18n1" name="id">流水号</td>
+                    <td colspan="5"><input class="easyui-textbox" type="text" name="projectid" readonly="true" value="0"/></td>
+
+                </tr>
+                <tr>
                     <td class="i18n1" name="projectno" width="16%">项目编号</td>
-                    <td width="33%"><input class="easyui-validatebox" type="text" name="project_no" value=""/></td>
+                    <td width="33%"><input class="easyui-validatebox" type="text" name="project_no"  value=""/></td>
 
                     <td class="i18n1" name="projectname" width="16%">项目名称</td>
-                    <td width="33%"><input class="easyui-validatebox" type="text" name="project_name" value=""/></td>
+                    <td width="33%"><input class="easyui-validatebox" type="text" name="project_name"   value=""/></td>
 
 
                 </tr>
@@ -309,15 +345,15 @@
                 </tr>
             </table>
 
-            <input type="hidden" id="fileslist" name="upload_files" value=""/>
+            <%--<input type="hidden" id="fileslist" name="upload_files" value=""/>--%>
             <div id="hl-gallery-con" style="width:100%;">
 
             </div>
-            <div id="multiupload1" class="uc-multiupload" style="width:100%; max-height:200px"
-                 flashurl="../miniui/fileupload/swfupload/swfupload.swf"
-                 uploadurl="../UploadFile/uploadFile.action" _autoUpload="false" _limittype="*.txt;*.pdf;*.doc;*.docx;*.xls;*.xlsx"
-                 onuploaderror="onUploadError" onuploadsuccess="onUploadSuccess">
-            </div>
+            <%--<div id="multiupload1" class="uc-multiupload" style="width:100%; max-height:200px"--%>
+                 <%--flashurl="../miniui/fileupload/swfupload/swfupload.swf"--%>
+                 <%--uploadurl="../UploadFile/uploadFile.action" _autoUpload="false" _limittype="*.txt;*.pdf;*.doc;*.docx;*.xls;*.xlsx"--%>
+                 <%--onuploaderror="onUploadError" onuploadsuccess="onUploadSuccess">--%>
+            <%--</div>--%>
         </fieldset>
 
 

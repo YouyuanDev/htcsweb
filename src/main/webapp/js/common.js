@@ -76,7 +76,7 @@ function getDate(str){
     hour=oDate.getHours();
     minute=oDate.getMinutes();
     second=oDate.getSeconds();
-    return year+"年"+month+"月"+day+""+" "+hour+":"+minute+":"+second;
+    return year+"年"+month+"月"+day+"日"+" "+hour+":"+minute+":"+second;
 }
 function getGalleryCon() {
     var str='<div id="hl-gallery">'+

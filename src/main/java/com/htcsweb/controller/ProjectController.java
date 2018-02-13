@@ -33,6 +33,9 @@ public class ProjectController {
     @Autowired
     private ProjectInfoDao projectInfoDao;
 
+
+
+    //模糊查询project信息列表
     @RequestMapping(value = "/getProjectInfoByLike")
     @ResponseBody
     public String getProjectInfoByLike(@RequestParam(value = "project_no",required = false)String project_no, @RequestParam(value = "project_name",required = false)String project_name,@RequestParam(value = "client_name",required = false)String client_name, @RequestParam(value = "begin_time",required = false)String begin_time, @RequestParam(value = "end_time",required = false)String end_time, HttpServletRequest request){
@@ -65,6 +68,8 @@ public class ProjectController {
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
         List<HashMap<String,Object>>list=projectInfoDao.getAllByLike(project_no,project_name,client_name,beginTime,endTime,start,Integer.parseInt(rows));
         int count=projectInfoDao.getCount();
+
+
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
         maps.put("rows",list);
@@ -80,15 +85,16 @@ public class ProjectController {
         JSONObject json=new JSONObject();
         try{
             int resTotal=0;
-            projectInfo.setProject_time(new Date());
+            //projectInfo.setProject_time(new Date());
 
-            System.out.print("cccc:"+projectInfo.getProject_name());
+
             if(projectInfo.getId()==0){
                 //添加
                 resTotal=projectInfoDao.addProjectInfo(projectInfo);
+                System.out.print("添加:"+projectInfo.getProject_name());
             }else{
                 //修改！
-                System.out.print("ss是:"+projectInfo.getProject_name());
+                System.out.print("修改:"+projectInfo.getProject_name());
                 resTotal=projectInfoDao.updateProjectInfo(projectInfo);
             }
             if(resTotal>0){
@@ -103,7 +109,7 @@ public class ProjectController {
         return null;
     }
 
-
+    //删除project信息
     @RequestMapping("/delProject")
     @ResponseBody
     public String delProject(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
@@ -119,4 +125,25 @@ public class ProjectController {
         ResponseUtil.write(response,json);
         return null;
     }
+
+
+    //检查project_no 是否已存在
+    @RequestMapping("/checkProjectNoAvailable")
+    @ResponseBody
+    public String checkProjectNoAvailable(@RequestParam(value = "project_no",required = false)String project_no, HttpServletResponse response)throws Exception{
+
+
+        int resTotal=0;
+        resTotal=projectInfoDao.hasProjectNo(project_no);
+        JSONObject json=new JSONObject();
+
+        if(resTotal>0){
+            json.put("success",false);
+        }else{
+            json.put("success",true);
+        }
+        ResponseUtil.write(response,json);
+        return null;
+    }
+
 }

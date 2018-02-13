@@ -22,6 +22,11 @@
         select count(*) from project_info
     </select>
 
+    <select id="hasProjectNo" resultType="int">
+        select count(*) from project_info WHERE project_no=#{project_no}
+    </select>
+
+
     <select id="getAllByLike" resultType="map">
         Select id,project_no,project_name,client_name,client_spec,coating_standard,mps,itp,project_time from project_info pro
         <where>
@@ -41,7 +46,7 @@
                 <![CDATA[ AND DATE_FORMAT(project_time,'%Y-%m-%d %H:%T:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d 23:59:59')]]>
             </if>
         </where>
-        ORDER BY project_time DESC
+        ORDER BY id DESC
         limit #{skip},#{take}
     </select>
 
