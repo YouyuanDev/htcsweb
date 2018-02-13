@@ -23,7 +23,6 @@
     <script src="../miniui/fileupload/swfupload/swfupload.js" type="text/javascript"></script>
     <script src="../miniui/multiupload/multiupload.js" type="text/javascript"></script>
     <script  src="../js/lrscroll.js" type="text/javascript"></script>
-    <script src="../js/jquery.i18n.properties-1.0.9.js" type="text/javascript"></script>
     <script src="../js/language.js" type="text/javascript"></script>
     <script type="text/javascript">
         var url;
@@ -49,8 +48,6 @@
             if (!s) return new Date();
             return new Date(Date.parse(s));
         }
-
-
 
 
         function string2date(str){
