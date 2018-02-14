@@ -66,4 +66,16 @@
             #{item}
         </foreach>
     </delete>
+
+    <select id="getProjectInfo" resultType="com.htcsweb.entity.ProjectInfo">
+        SELECT * from project_info
+        <where>
+            <if test="project_no!=null and project_no!=''">
+                AND project_no LIKE CONCAT('%',#{project_no},'%')
+            </if>
+        </where>
+    </select>
+
+
+
 </mapper>

@@ -31,6 +31,17 @@
         var url;
 
 
+        // 日期格式为 2/20/2017 12:00:00 PM
+        function myformatter2(date){
+            return date.toLocaleString();
+        }
+        // 日期格式为 2/20/2017 12:00:00 PM
+        function myparser2(s) {
+            if (!s) return new Date();
+            return new Date(Date.parse(s));
+        }
+
+
         function searchContract() {
 
             $('#contractDatagrids').datagrid('load',{
@@ -69,7 +80,7 @@
             if(row){
                 $('#hlContractDialog').dialog('open').dialog('setTitle','修改');
                 $('#contractForm').form('load',row);
-
+                look1.setText(row.project_no);
                 // $('#contractForm').form('load',{
                 //     'contractid':row.id,
                 //     'project_no':row.project_no,
@@ -135,9 +146,22 @@
 
                         hlAlertFour("请输入合同编号");
                         return false;
-                    }else if($("input[name='total_order_length']").val()==""){
-
+                    }
+                    else if($("input[name='od']").val()==""){
+                        hlAlertFour("请输入外径");
+                        return false;
+                    }
+                    else if($("input[name='wt']").val()==""){
+                        hlAlertFour("请输入壁厚");
+                        return false;
+                    }
+                    else if($("input[name='total_order_length']").val()==""){
                         hlAlertFour("请输入合同总长度");
+                        return false;
+
+                    }
+                    else if($("input[name='total_order_weight']").val()==""){
+                        hlAlertFour("请输入合同总重量");
                         return false;
 
                     }
@@ -211,12 +235,13 @@
 
 <!--工具栏-->
 <div id="hlcontractTb" style="padding:10px;">
+    <span class="i18n1" name="contractno">合同编号</span>:
+    <input id="contractno" name="contractno" style="width:100px;line-height:22px;border:1px solid #ccc">
     <span class="i18n1" name="projectno">项目编号</span>:
     <input id="projectno" name="projectno"  style="width:100px;line-height:22px;border:1px solid #ccc">
     <span class="i18n1" name="projectname">项目名称</span>:
     <input id="projectname" name="projectname" style="width:100px;line-height:22px;border:1px solid #ccc">
-    <span class="i18n1" name="contractno">合同编号</span>:
-    <input id="contractno" name="contractno" style="width:100px;line-height:22px;border:1px solid #ccc">
+
 
 
     <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchContract()">Search</a>
@@ -235,12 +260,20 @@
             <table class="ht-table" width="100%" border="0">
                 <tr>
                     <td class="i18n1" name="id">流水号</td>
-                    <td colspan="5"><input class="easyui-textbox" type="text" name="contractid" readonly="true" value="0"/></td>
+                    <td colspan="5"><input class="easyui-textbox" type="text" name="id" readonly="true" value="0"/></td>
 
                 </tr>
                 <tr>
                     <td class="i18n1" name="projectno" width="16%">项目编号</td>
-                    <td width="33%"><input class="easyui-validatebox" type="text" name="project_no"   value=""/></td>
+                    <%--<td width="33%"><input class="easyui-validatebox" type="text" name="project_no"   value=""/></td>--%>
+
+                    <td colspan="1" width="33%">
+                        <input id="lookup1" name="project_no" class="mini-lookup" style="text-align:center;width:180px;"
+                               textField="project_no" valueField="id" popupWidth="auto"
+                               popup="#gridPanel1" grid="#datagrid1" multiSelect="false"/>
+                    </td>
+
+
 
                     <td class="i18n1" name="projectname" width="16%">项目名称</td>
                     <td width="33%"><input class="easyui-validatebox" type="text" name="project_name"  readonly="true" value=""/></td>
@@ -301,11 +334,91 @@
     <a href="#" class="easyui-linkbutton" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="ContractFormCancelSubmit()">Cancel</a>
 </div>
 
+
+
+<div id="gridPanel1" class="mini-panel" title="header" iconCls="icon-add" style="width:450px;height:250px;"
+     showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0"
+>
+    <div property="toolbar" id="searchBar1" style="padding:5px;padding-left:8px;text-align:center;display: none">
+        <div style="float:left;padding-bottom:2px;">
+            <span class="i18n1" name="projectno">项目编号</span><span>:</span>
+            <input id="keyText_project_no" class="mini-textbox" style="width:110px;" onenter="onSearchClick(1)"/>
+            <a class="mini-button" onclick="onSearchClick(1)">查找</a>
+            <a class="mini-button" onclick="onClearClick(1)" name="clear">清除</a>
+        </div>
+        <div style="float:right;padding-bottom:2px;">
+            <a class="mini-button" onclick="onCloseClick(1)" name="close">关闭</a>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <div id="datagrid1" class="mini-datagrid" style="width:100%;height:100%;"
+         borderStyle="border:0" showPageSize="false" showPageIndex="false"
+         url="/ProjectOperation/getProjectInfo.action">
+        <div property="columns">
+            <div type="checkcolumn" ></div>
+            <div field="project_no" width="40" headerAlign="center" allowSort="true" class="i18n1" name="projectno">项目编号</div>
+            <div field="project_name" width="80" headerAlign="center" allowSort="true" class="i18n1" name="projectname">项目名称</div>
+            <div field="client_name" width="40" headerAlign="center" allowSort="true" class="i18n1" name="clientname">客户名称</div>
+            <div field="project_time" width="40" headerAlign="center" allowSort="true" class="i18n1" name="projecttime" dateFormat="yyyy-MM-dd">项目时间</div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
 <script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
 </body>
 </html>
 <script type="text/javascript">
     mini.parse();
+    var grid1=mini.get("datagrid1");
+    var keyText1=mini.get('keyText_project_no');
+    var look1=mini.get('lookup1');
+
+    function onSearchClick(type) {
+        if(type==1)
+        {
+            grid1.load({
+                project_no:keyText1.value,
+            });
+        }
+        // else if(type==2){
+        //     grid2.load({
+        //         pname: keyText4.value,
+        //         employeeno:keyText3.value
+        //     });
+        // }
+
+    }
+    function onCloseClick(type) {
+        if(type==1)
+            look1.hidePopup();
+        // else if(type==2)
+        //     look2.hidePopup();
+    }
+    function onClearClick(type) {
+        if(type==1)
+            look1.deselectAll();
+        // else if(type==2)
+        //     look2.deselectAll();
+    }
+    look1.on('valuechanged',function () {
+        var rows = grid1.getSelected();
+        $("input[name='project_no']").val(rows.project_no);
+    });
+    // look2.on('valuechanged',function (e) {
+    //     var rows = grid2.getSelected();
+    //     $("input[name='operator_no']").val(rows.employee_no);
+    // });
+    look1.on("showpopup",function(e){
+        $('.mini-shadow').css('z-index','99999');
+        $('.mini-popup').css('z-index','100000');
+        $('.mini-panel').css('z-index','100000');
+        $('#searchBar1').css('display','block');
+        //$('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
+    });
 
     hlLanguage("../i18n/");
 </script>

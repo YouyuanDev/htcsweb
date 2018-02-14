@@ -48,7 +48,6 @@ public class ProjectController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date beginTime=null;
         Date endTime=null;
-
         try{
             if(begin_time!=null&&begin_time!=""){
                 beginTime=sdf.parse(begin_time);
@@ -143,4 +142,14 @@ public class ProjectController {
         return null;
     }
 
+
+
+    @RequestMapping("/getProjectInfo")
+    @ResponseBody
+    public String getProjectInfo(HttpServletRequest request){
+        String project_no=request.getParameter("project_no");
+        List<ProjectInfo>list=projectInfoDao.getProjectInfo(project_no);
+        String map= JSONObject.toJSONString(list);
+        return map;
+    }
 }
