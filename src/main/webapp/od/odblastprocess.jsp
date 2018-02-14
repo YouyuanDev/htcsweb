@@ -416,19 +416,19 @@
        <table class="ht-table">
            <tr>
                <td class="i18n1" name="alkalinedwelltime">碱洗时间</td>
-               <td><input class="easyui-validatebox" type="text" name="alkaline_dwell_time" value=""/></td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="alkaline_dwell_time" value=""/></td>
                <td>10~20</td>
                <td class="i18n1" name="alkalineconcentration">碱浓度</td>
-               <td><input class="easyui-validatebox" type="text" name="alkaline_concentration" value=""/></td>
+               <td><input class="easyui-numberbox"  data-options="min:0,precision:2" type="text" name="alkaline_concentration" value=""/></td>
                <td></td>
            </tr>
 
            <tr>
                <td class="i18n1" name="acidwashtime">酸洗时间</td>
-               <td><input class="easyui-validatebox" type="text" name="acid_wash_time" value=""/></td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="acid_wash_time" value=""/></td>
                <td></td>
                <td class="i18n1" name="acidconcentration">酸浓度</td>
-               <td><input class="easyui-validatebox" type="text" name="acid_concentration" value=""/></td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="acid_concentration" value=""/></td>
                <td></td>
            </tr>
            <tr>
@@ -436,21 +436,21 @@
                <td><input class="easyui-validatebox" type="text" name="surface_condition" value=""/></td>
                <td></td>
                <td width="16%" class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</td>
-               <td><input class="easyui-validatebox" type="text" name="salt_contamination_before_blasting" value=""/></td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="salt_contamination_before_blasting" value=""/></td>
                <td><=25</td>
            </tr>
 
            <tr>
                <td width="16%" class="i18n1" name="blastlinespeed">打砂传送速度</td>
-               <td><input class="easyui-validatebox" type="text" name="blast_line_speed" value=""/></td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="blast_line_speed" value=""/></td>
                <td></td>
                <td width="16%" class="i18n1" name="conductivity">传导性</td>
-               <td><input class="easyui-validatebox" type="text" name="conductivity" value=""/></td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="conductivity" value=""/></td>
                <td></td>
            </tr>
            <tr>
                <td width="16%" class="i18n1" name="preheattemp">预热温度</td>
-               <td><input class="easyui-validatebox" type="text" name="preheat_temp" value=""/></td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:1" type="text" name="preheat_temp" value=""/></td>
                <td></td>
                <td width="16%" class="i18n1" name="remark">备注</td>
                <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>

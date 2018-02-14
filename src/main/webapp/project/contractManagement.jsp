@@ -258,10 +258,10 @@
 
                 <tr>
                     <td class="i18n1" name="od" width="16%">外径</td>
-                    <td   width="33%"><input class="easyui-validatebox" type="text" name="od" value=""/></td>
+                    <td   width="33%"><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="od" value=""/></td>
 
                     <td class="i18n1" name="wt" width="16%">壁厚</td>
-                    <td  width="33%"><input class="easyui-validatebox" type="text" name="wt" value=""/></td>
+                    <td  width="33%"><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="wt" value=""/></td>
 
                 </tr>
                 <tr>
@@ -272,18 +272,18 @@
                 </tr>
                 <tr>
                     <td class="i18n1" name="weightpermeter" width="16%">米重</td>
-                    <td   width="33%"><input class="easyui-validatebox" type="text" name="weight_per_meter" value=""/></td>
+                    <td   width="33%"><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="weight_per_meter" value=""/></td>
 
                     <td class="i18n1" name="pipelength" width="16%">管长</td>
-                    <td   width="33%"><input class="easyui-validatebox" type="text" name="pipe_length" value=""/></td>
+                    <td   width="33%"><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="pipe_length" value=""/></td>
 
                 </tr>
                 <tr>
                     <td class="i18n1" name="totalorderlength" width="16%">合同总长度</td>
-                    <td   width="33%"><input class="easyui-validatebox" type="text" name="total_order_length" value=""/></td>
+                    <td   width="33%"><input class="easyui-numberbox" data-options="min:0,precision:3" type="text" name="total_order_length" value=""/></td>
 
                     <td class="i18n1" name="totalorderweight" width="16%">合同总重量</td>
-                    <td   width="33%"><input class="easyui-validatebox" type="text" name="total_order_weight" value=""/></td>
+                    <td   width="33%"><input class="easyui-numberbox" data-options="min:0,precision:3" type="text" name="total_order_weight" value=""/></td>
 
                 </tr>
             </table>
