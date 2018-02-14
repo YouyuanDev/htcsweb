@@ -336,7 +336,7 @@
 
 
 
-<div id="gridPanel1" class="mini-panel" title="header" iconCls="icon-add" style="width:450px;height:250px;"
+<div id="gridPanel1" class="mini-panel" title="header" iconCls="icon-add" style="width:500px;height:250px;"
      showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0"
 >
     <div property="toolbar" id="searchBar1" style="padding:5px;padding-left:8px;text-align:center;display: none">
