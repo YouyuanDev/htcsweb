@@ -59,19 +59,30 @@
             });
 
             //项目管理
-            $("#hlprojectmanagement").tree({
+            $("#hlprojectcontractmanagement").tree({
                 onClick:function (node) {
                     var tab=$('#hlTab').tabs('getTab',node.text);
                     var xy=node.text;
                     if(tab){
                         $('#hlTab').tabs('select',node.text);
                     }else{
-                        if("项目工艺"==xy||"Project Specification"==xy){
+                        if("项目管理"==xy||"Project Management"==xy){
 
 
                             $('#hlTab').tabs('add',{
                                 title:node.text,
                                 content:"<iframe scrolling='auto' frameborder='0'  src='project/projectManagement.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                            hlLanguage();
+
+                        }
+                        else if("合同管理"==xy||"Contract Management"==xy){
+
+
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='project/contractManagement.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable:true
                             });
                             hlLanguage();
@@ -157,9 +168,10 @@
         <div title="出入库" class="i18n" name="storage" style="padding:10px;">
             cc
         </div>
-        <div title="项目管理" class="i18n" name="projectmanagement" style="padding:10px;">
-            <ul id="hlprojectmanagement">
-                <li class="i18n1" name="projectspecification">项目工艺</li>
+        <div title="项目合同管理" class="i18n" name="projectcontractmanagement" style="padding:10px;">
+            <ul id="hlprojectcontractmanagement">
+                <li class="i18n1" name="projectmanagement">项目管理</li>
+                <li class="i18n1" name="contractmanagement">合同管理</li>
             </ul>
 
         </div>

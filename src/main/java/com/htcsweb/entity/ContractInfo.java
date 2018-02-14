@@ -3,24 +3,24 @@ package com.htcsweb.entity;
 import java.util.List;
 
 public class ContractInfo {
-    private  int id;
-    private String project_no;
-    private String contract_no;
-    private float od;
-    private float wt;
-    private String external_coating;
-    private  String internal_coating;
-    private String grade;
-    private double total_oder_length;
-    private float l_weight;
-    private double weight;
-    private float l_length;
-    private String remark;
+    private  int id; //流水号
+    private String project_no;    //项目编号
+    private String contract_no;  //合同编号
+    private float od;   //外径
+    private float wt;   //壁厚
+    private String external_coating;   //外防腐
+    private  String internal_coating;  //内防腐
+    private String grade;           //钢种
+    private double total_order_length;  //合同总长度
+    private double total_order_weight;  //合同总重量
+    private float weight_per_meter; //米重
+    private float pipe_length; //管厂
+    private String remark;  //备注
 
     public ContractInfo() {
     }
 
-    public ContractInfo(int id, String project_no, String contract_no, float od, float wt, String external_coating, String internal_coating, String grade, double total_oder_length, float l_weight, double weight, float l_length, String remark) {
+    public ContractInfo(int id, String project_no, String contract_no, float od, float wt, String external_coating, String internal_coating, String grade, double total_order_length, double total_order_weight, float weight_per_meter, float pipe_length, String remark) {
         this.id = id;
         this.project_no = project_no;
         this.contract_no = contract_no;
@@ -29,10 +29,10 @@ public class ContractInfo {
         this.external_coating = external_coating;
         this.internal_coating = internal_coating;
         this.grade = grade;
-        this.total_oder_length = total_oder_length;
-        this.l_weight = l_weight;
-        this.weight = weight;
-        this.l_length = l_length;
+        this.total_order_length = total_order_length;
+        this.total_order_weight = total_order_weight;
+        this.weight_per_meter = weight_per_meter;
+        this.pipe_length = pipe_length;
         this.remark = remark;
     }
 
@@ -100,36 +100,36 @@ public class ContractInfo {
         this.grade = grade;
     }
 
-    public double getTotal_oder_length() {
-        return total_oder_length;
+    public double getTotal_order_length() {
+        return total_order_length;
     }
 
-    public void setTotal_oder_length(double total_oder_length) {
-        this.total_oder_length = total_oder_length;
+    public void setTotal_order_length(double total_order_length) {
+        this.total_order_length = total_order_length;
     }
 
-    public float getL_weight() {
-        return l_weight;
+    public double getTotal_order_weight() {
+        return total_order_weight;
     }
 
-    public void setL_weight(float l_weight) {
-        this.l_weight = l_weight;
+    public void setTotal_order_weight(double total_order_weight) {
+        this.total_order_weight = total_order_weight;
     }
 
-    public double getWeight() {
-        return weight;
+    public float getWeight_per_meter() {
+        return weight_per_meter;
     }
 
-    public void setWeight(double weight) {
-        this.weight = weight;
+    public void setWeight_per_meter(float weight_per_meter) {
+        this.weight_per_meter = weight_per_meter;
     }
 
-    public float getL_length() {
-        return l_length;
+    public float getPipe_length() {
+        return pipe_length;
     }
 
-    public void setL_length(float l_length) {
-        this.l_length = l_length;
+    public void setPipe_length(float pipe_length) {
+        this.pipe_length = pipe_length;
     }
 
     public String getRemark() {
