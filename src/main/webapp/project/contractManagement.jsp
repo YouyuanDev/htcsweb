@@ -27,6 +27,9 @@
     <script  src="../js/lrscroll.js" type="text/javascript"></script>
     <script src="../js/jquery.i18n.properties-1.0.9.js" type="text/javascript"></script>
     <script src="../js/language.js" type="text/javascript"></script>
+    <script src="../easyui/jquery.easyui.patch.js" type="text/javascript"></script>
+
+
     <script type="text/javascript">
         var url;
 
@@ -170,7 +173,9 @@
                     //return $('#contractForm').form('enableValidation').form('validate');
                 },
                 success: function(result){
-                    var result = eval('('+result+')');
+                    alert(result)
+                    alert(url)
+                    var result = eval('('+result+')');alert(result)
                     if (result.success){
                         $('#hlContractDialog').dialog('close');
                         $('#contractDatagrids').datagrid('reload');
@@ -260,7 +265,7 @@
             <table class="ht-table" width="100%" border="0">
                 <tr>
                     <td class="i18n1" name="id">流水号</td>
-                    <td colspan="5"><input class="easyui-textbox" type="text" name="id" readonly="true" value="0"/></td>
+                    <td colspan="5"><input class="easyui-textbox" type="text" name="id" readonly="true" value=""/></td>
 
                 </tr>
                 <tr>
@@ -291,7 +296,7 @@
 
                 <tr>
                     <td class="i18n1" name="od" width="16%">外径</td>
-                    <td   width="33%"><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="od" value=""/></td>
+                    <td   width="33%"><input class="easyui-numberbox"  data-options="min:0,precision:2" type="text" name="od" value=""/></td>
 
                     <td class="i18n1" name="wt" width="16%">壁厚</td>
                     <td  width="33%"><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="wt" value=""/></td>

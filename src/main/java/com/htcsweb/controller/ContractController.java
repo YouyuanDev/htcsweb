@@ -64,7 +64,7 @@ public class ContractController {
     @RequestMapping(value = "/saveContract")
     @ResponseBody
     public String saveContract(ContractInfo contractInfo, HttpServletResponse response){
-
+        System.out.print("saveContract");
 
         JSONObject json=new JSONObject();
         try{
