@@ -492,7 +492,7 @@
         <div style="clear:both;"></div>
     </div>
     <div id="datagrid1" class="mini-datagrid" style="width:100%;height:100%;"
-         borderStyle="border:0" showPageSize="false" showPageIndex="false"
+         borderStyle="border:0" showPageSize="true" showPageIndex="true"
          url="/pipeinfo/getPipeNumber.action">
         <div property="columns">
             <div type="checkcolumn" ></div>
@@ -545,6 +545,10 @@
     var grid2=mini.get("datagrid2");
     var look1=mini.get('lookup1');
     var look2= mini.get("lookup2");
+
+    grid1.load();
+    grid2.load();
+
     function onSearchClick(type) {
         if(type==1)
         {

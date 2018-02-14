@@ -374,6 +374,8 @@
 <script type="text/javascript">
     mini.parse();
     var grid1=mini.get("datagrid1");
+    grid1.load();
+
     var keyText1=mini.get('keyText_project_no');
     var look1=mini.get('lookup1');
 
