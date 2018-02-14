@@ -27,9 +27,6 @@
     <script  src="../js/lrscroll.js" type="text/javascript"></script>
     <script src="../js/jquery.i18n.properties-1.0.9.js" type="text/javascript"></script>
     <script src="../js/language.js" type="text/javascript"></script>
-    <script src="../easyui/jquery.easyui.patch.js" type="text/javascript"></script>
-
-
     <script type="text/javascript">
         var url;
 
