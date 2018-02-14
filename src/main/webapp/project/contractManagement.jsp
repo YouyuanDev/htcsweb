@@ -336,7 +336,7 @@
 
 
 
-<div id="gridPanel1" class="mini-panel" title="header" iconCls="icon-add" style="width:500px;height:250px;"
+<div id="gridPanel1" class="mini-panel" title="header" iconCls="icon-add" style="width:500px;height:280px;"
      showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0"
 >
     <div property="toolbar" id="searchBar1" style="padding:5px;padding-left:8px;text-align:center;display: none">
@@ -355,7 +355,7 @@
          borderStyle="border:0" showPageSize="false" showPageIndex="false"
          url="/ProjectOperation/getProjectInfo.action">
         <div property="columns">
-            <div type="checkcolumn" ></div>
+            <div type="checkcolumn" width="20"></div>
             <div field="project_no" width="40" headerAlign="center" allowSort="true" class="i18n1" name="projectno">项目编号</div>
             <div field="project_name" width="80" headerAlign="center" allowSort="true" class="i18n1" name="projectname">项目名称</div>
             <div field="client_name" width="40" headerAlign="center" allowSort="true" class="i18n1" name="clientname">客户名称</div>

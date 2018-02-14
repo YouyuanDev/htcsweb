@@ -492,7 +492,7 @@
         <div style="clear:both;"></div>
     </div>
     <div id="datagrid1" class="mini-datagrid" style="width:100%;height:100%;"
-         borderStyle="border:0" showPageSize="true" showPageIndex="true"
+         borderStyle="border:0" showPageSize="false" showPageIndex="false"
          url="/pipeinfo/getPipeNumber.action">
         <div property="columns">
             <div type="checkcolumn" ></div>
