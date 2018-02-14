@@ -297,28 +297,28 @@
                <tr>
                        <th data-options="field:'ck',checkbox:true"></th>
                        <th field="id" align="center" width="100" class="i18n1" name="id">流水号</th>
-                       <th field="project_name" align="center" width="100" class="i18n1" name="projectname">项目名称</th>
-                       <th field="contract_no" align="center" width="100" class="i18n1" name="contractno">合同编号</th>
-                       <th field="pipe_no" align="center" width="100" class="i18n1" name="pipeno">钢管编号</th>
-                       <th field="grade" align="center" width="100" class="i18n1" name="grade">钢种</th>
-                       <th field="status_name" align="center" width="100" class="i18n1" name="statusname">状态</th>
+                       <th field="project_name" align="center" width="120" class="i18n1" name="projectname">项目名称</th>
+                       <th field="contract_no" align="center" width="120" class="i18n1" name="contractno">合同编号</th>
+                       <th field="pipe_no" align="center" width="120" class="i18n1" name="pipeno">钢管编号</th>
+                       <th field="grade" align="center" width="110" class="i18n1" name="grade">钢种</th>
+                       <th field="status_name" align="center" width="110" class="i18n1" name="statusname">状态</th>
                        <th field="od" align="center" width="50" class="i18n1" name="od">外径</th>
                        <th field="wt" align="center" width="50" class="i18n1" name="wt">壁厚</th>
                        <th field="length" align="center" width="50" class="i18n1" name="length">长度</th>
                        <th field="weight" align="center" width="50" class="i18n1" name="weight">重量</th>
                        <th field="" align="center" hidden="true" width="50" class="i18n1" name="heat_no">炉号</th>
                        <th field="operator_no" align="center" width="100" class="i18n1" name="operatorno">操作工编号</th>
-                       <th field="surface_condition" align="center" width="100" class="i18n1" name="surfacecondition">外观缺陷</th>
-                       <th field="salt_contamination_before_blasting" align="center" width="100" class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</th>
+                       <th field="surface_condition" align="center" width="120" class="i18n1" name="surfacecondition">外观缺陷</th>
+                       <th field="salt_contamination_before_blasting" align="center" width="120" class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</th>
                        <th field="alkaline_dwell_time" align="center" width="100" hidden="true" class="i18n1" name="alkalinedwelltime">碱洗时间</th>
                        <th field="alkaline_concentration" align="center" width="100" hidden="true" class="i18n1" name="alkalineconcentration">碱浓度</th>
                        <th field="conductivity" width="100" align="center" hidden="true" class="i18n1" name="conductivity">传导性</th>
                        <th field="acid_wash_time" width="100" align="center" hidden="true" class="i18n1" name="acidwashtime">酸洗时间</th>
                        <th field="acid_concentration" width="100" align="center" hidden="true" class="i18n1" name="acidconcentration">酸浓度</th>
-                       <th field="blast_line_speed" align="center" width="100" class="i18n1" name="blastlinespeed">打砂传送速度</th>
-                       <th field="preheat_temp" align="center" width="100" class="i18n1" name="preheattemp">预热温度</th>
+                       <th field="blast_line_speed" align="center" width="120" class="i18n1" name="blastlinespeed">打砂传送速度</th>
+                       <th field="preheat_temp" align="center" width="120" class="i18n1" name="preheattemp">预热温度</th>
                        <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
-                       <th field="operation_time" align="center" width="200" class="i18n1" name="operationtime" data-options="formatter:formatterdate">操作时间</th>
+                       <th field="operation_time" align="center" width="150" class="i18n1" name="operationtime" data-options="formatter:formatterdate">操作时间</th>
                </tr>
              </thead>
          </table>
