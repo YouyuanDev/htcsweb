@@ -170,9 +170,7 @@
                     //return $('#contractForm').form('enableValidation').form('validate');
                 },
                 success: function(result){
-                    alert(result)
-                    alert(url)
-                    var result = eval('('+result+')');alert(result)
+                    var result = eval('('+result+')');
                     if (result.success){
                         $('#hlContractDialog').dialog('close');
                         $('#contractDatagrids').datagrid('reload');
@@ -262,7 +260,7 @@
             <table class="ht-table" width="100%" border="0">
                 <tr>
                     <td class="i18n1" name="id">流水号</td>
-                    <td colspan="5"><input class="easyui-textbox" type="text" name="id" readonly="true" value=""/></td>
+                    <td colspan="5"><input class="easyui-textbox" type="text" name="contractid" readonly="true" value=""/></td>
 
                 </tr>
                 <tr>
@@ -321,6 +319,15 @@
                     <td   width="33%"><input class="easyui-numberbox" data-options="min:0,precision:3" type="text" name="total_order_weight" value=""/></td>
 
                 </tr>
+
+                <tr>
+                    <td class="i18n1" name="remark" width="16%">Remark</td>
+                    <td   width="33%"><input class="easyui-textbox" data-options="min:0,precision:3" type="text" name="remark" value=""/></td>
+
+
+                </tr>
+
+
             </table>
 
 
