@@ -137,6 +137,16 @@
       <artifactId>fastjson</artifactId>
       <version>1.2.30</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml-schemas</artifactId>
+      <version>3.14-beta1</version>
+    </dependency>
+
   </dependencies>
+
+
+
 
 </project>

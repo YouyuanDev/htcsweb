@@ -240,8 +240,6 @@
     <input id="projectno" name="projectno"  style="width:100px;line-height:22px;border:1px solid #ccc">
 
 
-
-
     <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchPipe()">Search</a>
     <div style="float:right">
         <a href="#" id="addPipeLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addPipe()">添加</a>
@@ -269,7 +267,6 @@
 
                     <td class="i18n1" name="projectname" width="16%">项目名称</td>
                     <td width="33%"><input class="easyui-validatebox" type="text" name="project_name"  readonly="true" value=""/></td>
-
 
                 </tr>
 
@@ -307,22 +304,16 @@
                     <td class="i18n1" name="weight" width="16%">重量</td>
                     <td   width="33%"><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="weight" value=""/></td>
 
-
                 </tr>
-
                 <tr>
                     <td class="i18n1" name="status" width="16%">状态</td>
-                    <td   width="33%"><input class="easyui-textbox"   type="text" name="status" value=""/></td>
-
+                    <td   width="33%"><input class="easyui-textbox" type="text" name="status" value=""/></td>
 
                 </tr>
-
 
             </table>
 
-
         </fieldset>
-
 
     </form>
 
