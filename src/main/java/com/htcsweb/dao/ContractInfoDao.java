@@ -14,5 +14,7 @@ public interface ContractInfoDao {
     public int updateContractInfo(ContractInfo contractInfo);
     public int addContractInfo(ContractInfo contractInfo);
     public int delContractInfo(String[]arrId);
+    public List<ContractInfo> getContractInfoByContractNo(@Param("contract_no")String contract_no);
+
 
 }

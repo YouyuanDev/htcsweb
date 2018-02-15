@@ -110,5 +110,14 @@ public class ContractController {
         return null;
     }
 
+    //得到Contract信息
+    @RequestMapping("/getContractInfoByContractNo")
+    @ResponseBody
+    public String getContractInfoByContractNo(HttpServletRequest request){
+        String contract_no=request.getParameter("contract_no");
+        List<ContractInfo>list=contractInfoDao.getContractInfoByContractNo(contract_no);
+        String map= JSONObject.toJSONString(list);
+        return map;
+    }
 
 }

@@ -58,8 +58,8 @@
                 }
             });
 
-            //项目管理
-            $("#hlprojectcontractmanagement").tree({
+            //基础信息管理
+            $("#hlbasicinfomanagement").tree({
                 onClick:function (node) {
                     var tab=$('#hlTab').tabs('getTab',node.text);
                     var xy=node.text;
@@ -83,6 +83,16 @@
                             $('#hlTab').tabs('add',{
                                 title:node.text,
                                 content:"<iframe scrolling='auto' frameborder='0'  src='project/contractManagement.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                            hlLanguage();
+
+                        }else if("钢管管理"==xy||"Pipe Management"==xy){
+
+
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='pipe/pipeManagement.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable:true
                             });
                             hlLanguage();
@@ -168,12 +178,12 @@
         <div title="出入库" class="i18n" name="storage" style="padding:10px;">
             cc
         </div>
-        <div title="项目合同管理" class="i18n" name="projectcontractmanagement" style="padding:10px;">
-            <ul id="hlprojectcontractmanagement">
+        <div title="基础信息管理" class="i18n" name="basicinfomanagement" style="padding:10px;">
+            <ul id="hlbasicinfomanagement">
                 <li class="i18n1" name="projectmanagement">项目管理</li>
                 <li class="i18n1" name="contractmanagement">合同管理</li>
+                <li class="i18n1" name="pipemanagement">钢管管理</li>
             </ul>
-
         </div>
         <div title="实验" class="i18n" name="labtesting" style="padding:10px;">
             ee

@@ -304,7 +304,7 @@
                        <th field="status_name" align="center" width="110" class="i18n1" name="statusname">状态</th>
                        <th field="od" align="center" width="50" class="i18n1" name="od">外径</th>
                        <th field="wt" align="center" width="50" class="i18n1" name="wt">壁厚</th>
-                       <th field="length" align="center" width="50" class="i18n1" name="length">长度</th>
+                       <th field="p_length" align="center" width="50" class="i18n1" name="p_length">长度</th>
                        <th field="weight" align="center" width="50" class="i18n1" name="weight">重量</th>
                        <th field="" align="center" hidden="true" width="50" class="i18n1" name="heat_no">炉号</th>
                        <th field="operator_no" align="center" width="100" class="i18n1" name="operatorno">操作工编号</th>
@@ -379,7 +379,7 @@
                    <td align="center"><label id="od"></label></td>
                    <td align="center" class="i18n1" name="wt">壁厚</td>
                    <td align="center"><label id="wt"></label></td>
-                   <td align="center" class="i18n1" name="length">长度</td>
+                   <td align="center" class="i18n1" name="p_length">长度</td>
                    <td align="center"><label id="length"></label></td>
                    <td align="center" class="i18n1" name="weight">重量</td>
                    <td align="center"><label id="weight"></label></td>
@@ -500,7 +500,7 @@
             <div field="contract_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="contractno">合同编号</div>
             <div field="od" width="40" headerAlign="center" allowSort="true" class="i18n1" name="od">外径</div>
             <div field="wt" width="40" headerAlign="center" allowSort="true" class="i18n1" name="wt">壁厚</div>
-            <div field="length" width="40" headerAlign="center" allowSort="true" class="i18n1" name="length">长度</div>
+            <div field="p_length" width="40" headerAlign="center" allowSort="true" class="i18n1" name="p_length">长度</div>
             <div field="weight" width="40" headerAlign="center" allowSort="true" class="i18n1" name="weight">重量</div>
         </div>
     </div>

@@ -27,7 +27,7 @@
 
 
     <select id="getAllByLike" resultType="map">
-        select co.*,project_name from contract_info co inner join project_info pr on co.project_no=pr.project_no
+        select co.*,project_name from contract_info co left join project_info pr on co.project_no=pr.project_no
         <where>
             <if test="project_no!=null and project_no!=''">
                 co.project_no LIKE CONCAT('%',#{project_no},'%')
@@ -61,6 +61,18 @@
         </foreach>
     </delete>
 
+
+
+    <select id="getContractInfoByContractNo"  resultType="com.htcsweb.entity.ContractInfo">
+        SELECT * from contract_info
+        <where>
+            <if test="contract_no!=null and contract_no!=''">
+                AND contract_no LIKE CONCAT('%',#{contract_no},'%')
+            </if>
+        </where>
+        ORDER BY id DESC
+        limit 1000
+    </select>
 
 
 </mapper>

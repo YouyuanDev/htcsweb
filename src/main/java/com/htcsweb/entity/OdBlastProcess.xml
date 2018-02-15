@@ -67,7 +67,7 @@
         limit #{skip},#{take}
     </select>
     <select id="getNewAllByLike" resultType="map">
-        Select pro.project_name,s.status_name,p.contract_no,p.grade,p.od,p.wt,p.length,p.weight,p.heat_no,o.* from project_info pro  inner join (contract_info c inner join ((pipe_status s inner join pipe_basic_info p on s.status_code=p.status) inner join od_blast_process o on p.pipe_no=o.pipe_no)on c.contract_no=p.contract_no) on pro.project_no=c.project_no
+        Select pro.project_name,s.status_name,p.contract_no,p.grade,p.od,p.wt,p.p_length,p.weight,p.heat_no,o.* from project_info pro  inner join (contract_info c inner join ((pipe_status s inner join pipe_basic_info p on s.status_code=p.status) inner join od_blast_process o on p.pipe_no=o.pipe_no)on c.contract_no=p.contract_no) on pro.project_no=c.project_no
         <where>
             <if test="pipe_no!=null and pipe_no!=''">
                 AND o.pipe_no LIKE CONCAT('%',#{pipe_no},'%')
