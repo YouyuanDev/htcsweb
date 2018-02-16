@@ -1,37 +1,27 @@
 package com.htcsweb.util;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 
-import org.apache.poi.hssf.usermodel.HSSFCell;
+
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.web.multipart.MultipartFile;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
 import java.io.InputStream;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.text.SimpleDateFormat;
 
 
 public class ExcelUtil {
@@ -41,11 +31,23 @@ public class ExcelUtil {
     /**
      * Excel导入
      */
-    public static List<List<Object>> getBankListByExcel(InputStream in, String fileName) throws Exception{
+
+    public static void test() throws Exception {
+     System.err.println("ExcelUtil:test");
+    ;
+    }
+//    public static void main(String[] args) throws Exception {
+//        ExcelUtil.test();
+//    }
+
+
+        public static List<List<Object>> getBankListByExcel(MultipartFile file) throws Exception{
+
         List<List<Object>> list = null;
         //创建Excel工作薄
         System.out.println("getBankListByExcel11111");
-        Workbook work = getWorkbook(in,fileName);
+        InputStream in=file.getInputStream();
+        Workbook work = getWorkbook(in,file.getOriginalFilename());
         if(null == work){
             System.out.println("创建Excel工作薄为空");
             throw new Exception("创建Excel工作薄为空！");
@@ -90,6 +92,7 @@ public class ExcelUtil {
         String fileType = fileName.substring(fileName.lastIndexOf("."));
         if(excel2003L.equals(fileType)){
             wb = new HSSFWorkbook(inStr);  //2003-
+
         }else if(excel2007U.equals(fileType)){
             wb = new XSSFWorkbook(inStr);  //2007+
         }else{

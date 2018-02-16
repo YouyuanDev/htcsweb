@@ -37,13 +37,14 @@
        flashUrl="../miniui/fileupload/swfupload/swfupload.swf"
        uploadUrl="/UploadFile/uploadPipeList.action"
        onuploadsuccess="onUploadSuccess"
-       onuploaderror="onUploadError" onfileselect="onFileSelect"
+       onuploaderror="onUploadError" onfileselect="onFileSelect" width="400px"
 />
-<br />
+
+<br /><br />
 <input type="button" value="上传" onclick="startUpload()"/>
 <div class="description">
     <h3>Description</h3>
-    <p>FileUpload文件上传控件，基于FLASH的swfupload实现，能实现无刷新上传文件功能。</p>
+    <p>上传钢管入库清单</p>
 </div>
 
 
