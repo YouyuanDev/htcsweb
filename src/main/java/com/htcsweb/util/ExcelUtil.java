@@ -1,139 +1,57 @@
 package com.htcsweb.util;
 
 
-
-import org.apache.poi.hssf.usermodel.HSSFDateUtil;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.web.multipart.MultipartFile;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-
-import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.text.SimpleDateFormat;
 
+import jxl.Sheet;
+import jxl.Workbook;
+import jxl.read.biff.BiffException;
+import jxl.write.Label;
+import jxl.write.WritableCellFeatures;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
+import java.util.List;
 
 public class ExcelUtil {
 
-    private final static String excel2003L =".xls";    //2003- 版本的excel
-    private final static String excel2007U =".xlsx";   //2007+ 版本的excel
-    /**
-     * Excel导入
-     */
+    //readFromFile
+    public static List<List<Object>> readFromFile(String fileFullname){
 
-    public static void test() throws Exception {
-     System.err.println("ExcelUtil:test");
-    ;
-    }
-//    public static void main(String[] args) throws Exception {
-//        ExcelUtil.test();
-//    }
+        //fileFullname="/Users/kurt/Documents/apache-tomcat-8.5.27/webapps/ROOT/upload/pipes/pipes.xls";
+        File file = new File(fileFullname);
+        StringBuffer sb = new StringBuffer();
+        try {
 
+            Workbook book = Workbook.getWorkbook(file);
+            try{
 
-        public static List<List<Object>> getBankListByExcel(MultipartFile file) throws Exception{
-
-        List<List<Object>> list = null;
-        //创建Excel工作薄
-        System.out.println("getBankListByExcel11111");
-        InputStream in=file.getInputStream();
-        Workbook work = getWorkbook(in,file.getOriginalFilename());
-        if(null == work){
-            System.out.println("创建Excel工作薄为空");
-            throw new Exception("创建Excel工作薄为空！");
-        }
-        System.out.println("getBankListByExce2222222");
-        Sheet sheet = null;
-        Row row = null;
-        Cell cell = null;
-        list = new ArrayList<List<Object>>();
-        //遍历Excel中所有的sheet
-        for (int i = 0; i < work.getNumberOfSheets(); i++) {
-            sheet = work.getSheetAt(i);
-            System.out.println("getBankListByExcel333333");
-            if(sheet==null){continue;}
-            System.out.println("getBankListByExcel4444444");
-            //遍历当前sheet中的所有行
-            //包涵头部，所以要小于等于最后一列数,这里也可以在初始值加上头部行数，以便跳过头部
-            for (int j = sheet.getFirstRowNum(); j <= sheet.getLastRowNum(); j++) {
-                //读取一行
-                System.out.println("getBankListByExcel55555");
-                row = sheet.getRow(j);
-                //去掉空行和表头
-                if(row==null||row.getFirstCellNum()==j){continue;}
-                //遍历所有的列
-                System.out.println("getBankListByExcel666666");
-                List<Object> li = new ArrayList<Object>();
-                for (int y = row.getFirstCellNum(); y < row.getLastCellNum(); y++) {
-                    cell = row.getCell(y);
-                    li.add(getCellValue(cell));
-                    System.out.println("="+getCellValue(cell));
+                Sheet sheet = book.getSheet(0);
+                for(int i = 0 ; i < 10 ; i++){
+                    for(int j = 0 ; j < 10 ; j++){
+                        //第一个参数代表列，第二个参数代表行。(默认起始值都为0)
+                        sb.append(sheet.getCell(j, i).getContents()+"\t");
+                    }
+                    sb.append("\n");
                 }
-                list.add(li);
+                System.out.println(sb);
+            }finally{
+                if(book != null){
+                    book.close();
+                    return null;
+                }
             }
+
+        } catch (BiffException e) {
+            System.err.println(e+"");
+
+        } catch (IOException e) {
+            System.err.println(e+"文件读取错误");
         }
-        return list;
-    }
-    /**
-     * 描述：根据文件后缀，自适应上传文件的版本
-     */
-    public static  Workbook getWorkbook(InputStream inStr,String fileName) throws Exception{
-        Workbook wb = null;
-        String fileType = fileName.substring(fileName.lastIndexOf("."));
-        if(excel2003L.equals(fileType)){
-            wb = new HSSFWorkbook(inStr);  //2003-
 
-        }else if(excel2007U.equals(fileType)){
-            wb = new XSSFWorkbook(inStr);  //2007+
-        }else{
-            throw new Exception("解析的文件格式有误！");
-        }
-        return wb;
-    }
-    /**
-     * 描述：对表格中数值进行格式化
-     */
-    public static  Object getCellValue(Cell cell){
-        Object value = null;
-        DecimalFormat df = new DecimalFormat("0");  //格式化字符类型的数字
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  //日期格式化
-        DecimalFormat df2 = new DecimalFormat("0.00");  //格式化数字
-        switch (cell.getCellType()) {
-            case Cell.CELL_TYPE_STRING:
-                value = cell.getRichStringCellValue().getString();
-                break;
-            case Cell.CELL_TYPE_NUMERIC:
-                if("General".equals(cell.getCellStyle().getDataFormatString())){
-                    value = df.format(cell.getNumericCellValue());
-                }else if("m/d/yy".equals(cell.getCellStyle().getDataFormatString())){
-                    value = sdf.format(cell.getDateCellValue());
-                }else{
-                    value = df2.format(cell.getNumericCellValue());
-                }
-                break;
-            case Cell.CELL_TYPE_BOOLEAN:
-                value = cell.getBooleanCellValue();
-                break;
-            case Cell.CELL_TYPE_BLANK:
-                value = "";
-                break;
-            default:
-                break;
-        }
-        return value;
-    }
-
-
-
+        return null;
+    }//end readFromFile
 
 }

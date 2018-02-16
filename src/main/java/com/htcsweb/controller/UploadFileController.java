@@ -155,15 +155,10 @@ public class UploadFileController {
             System.out.print("uploadPipeList成功");
 
 
-            InputStream in = new FileInputStream(file);
-            System.out.println("saveDirectory="+saveDirectory);
-            System.out.println("newName="+newName);
+
+            System.out.println("saveDirectory File="+saveDirectory+"/"+newName);
             System.out.println("file.length()="+file.length());
-            importExcelInfo(in,saveDirectory+"/"+newName);
-            System.out.println("end");
-            in.close();
-
-
+            importExcelInfo(saveDirectory+"/"+newName);
 
         } catch (Exception e) {
             System.err.println("Exception=" + e.getMessage().toString());
@@ -173,12 +168,12 @@ public class UploadFileController {
     }
 
 
-    public void importExcelInfo(InputStream in, String filename){
+    public void importExcelInfo( String fullfilename){
         try {
-            System.out.println("11111=" + filename);
-            com.htcsweb.util.ExcelUtil.getBankListByExcel(null);
+
+            List<List<Object>> listob =ExcelUtil.readFromFile(fullfilename);
             //List<List<Object>> listob = ExcelUtil.getBankListByExcel(in, filename);
-            System.out.println("2222222=" + filename);
+
 //            List<PipeBasicInfo> pipeList = new ArrayList<PipeBasicInfo>();
 //            //遍历listob数据，把数据放到List中
 //            for (int i = 0; i < listob.size(); i++) {
