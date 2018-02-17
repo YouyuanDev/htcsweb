@@ -44,7 +44,8 @@
        onuploaderror="onUploadError" onfileselect="onFileSelect" width="400px"
 />
 <br /><br />
-<input type="button" width="80px" value="上传" onclick="startUpload()"/>
+    <a class="mini-button mini-button-success" width="100px" value="上传" onclick="startUpload()"><span class="i18n1" name="upload">上传</span></a>
+<%--<input type="button" class="mini-button mini-button-success" width="80px" value="上传" onclick="startUpload()"/>--%>
 </div>
 <div class="description">
     <h3><span class="i18n1" name="description">描述</span></h3>
