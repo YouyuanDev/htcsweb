@@ -53,19 +53,21 @@ public class ExcelUtil {
 
             Workbook book = Workbook.getWorkbook(file);
             try{
+                //支持多sheet上传
+                for(int sh=0;sh<book.getNumberOfSheets();sh++) {
+                    Sheet sheet = book.getSheet(sh);
+                    for (int i = 0; i < sheet.getRows(); i++) {
+                        List<Object> rowitem = new ArrayList<Object>();
+                        for (int j = 0; j < sheet.getColumns(); j++) {
+                            //第一个参数代表列，第二个参数代表行。(默认起始值都为0)
+                            sb.append(sheet.getCell(j, i).getContents() + "\t");
+                            rowitem.add(sheet.getCell(j, i).getContents());
 
-                Sheet sheet = book.getSheet(0);
-                for(int i = 0 ; i < sheet.getRows() ; i++){
-                    List<Object> rowitem = new ArrayList<Object>();
-                    for(int j = 0 ; j < sheet.getColumns() ; j++){
-                        //第一个参数代表列，第二个参数代表行。(默认起始值都为0)
-                        sb.append(sheet.getCell(j, i).getContents()+"\t");
-                        rowitem.add(sheet.getCell(j, i).getContents());
+                        }
+                        sb.append("\n");
 
+                        datalist.add(rowitem);
                     }
-                    sb.append("\n");
-
-                    datalist.add(rowitem);
                 }
                 System.out.println(sb);
             }finally{
