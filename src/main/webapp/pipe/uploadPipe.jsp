@@ -63,6 +63,10 @@
     function onUploadSuccess(e) {
 
         alert("上传成功：" + e.serverData);
+        var result = eval('('+e.serverData+')');
+        if(result.success){
+            alert("成功上传钢管数量："+result.totaluploaded+" 根，"+"因不存在合同号无法上传的钢管数量："+result.totalskipped+" 根");
+        }
 
         this.setText("");
     }

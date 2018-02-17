@@ -14,13 +14,39 @@ import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 import java.util.List;
+import java.util.ArrayList;
 
 public class ExcelUtil {
 
-    //readFromFile
-    public static List<List<Object>> readFromFile(String fileFullname){
+
+    public static int PIPE_NO_INDEX=1;
+    public static int CONTRACT_NO_INDEX=2;
+    public static int OD_INDEX=4;
+    public static int WT_INDEX=5;
+    public static int HEAT_NO_INDEX=6;
+    public static int PIPE_MAKING_LOT_NO_INDEX=7;
+    public static int WEIGHT_INDEX=8;
+    public static int P_LENGTH_INDEX=10;
+
+
+    public static boolean isNumeric00(String str)
+    {
+        try{
+            Float.parseFloat(str);
+            return true;
+        }catch(NumberFormatException e)
+        {
+            System.out.println("异常：\"" + str + "\"不是数字..");
+            return false;
+        }
+    }
+
+    //readFromFiletoList
+    public static List<List<Object>> readFromFiletoList(String fileFullname){
 
         //fileFullname="/Users/kurt/Documents/apache-tomcat-8.5.27/webapps/ROOT/upload/pipes/pipes.xls";
+        List<List<Object>> datalist = new ArrayList<List<Object>>();
+
         File file = new File(fileFullname);
         StringBuffer sb = new StringBuffer();
         try {
@@ -29,18 +55,24 @@ public class ExcelUtil {
             try{
 
                 Sheet sheet = book.getSheet(0);
-                for(int i = 0 ; i < 10 ; i++){
-                    for(int j = 0 ; j < 10 ; j++){
+                for(int i = 0 ; i < sheet.getRows() ; i++){
+                    List<Object> rowitem = new ArrayList<Object>();
+                    for(int j = 0 ; j < sheet.getColumns() ; j++){
                         //第一个参数代表列，第二个参数代表行。(默认起始值都为0)
                         sb.append(sheet.getCell(j, i).getContents()+"\t");
+                        rowitem.add(sheet.getCell(j, i).getContents());
+
                     }
                     sb.append("\n");
+
+                    datalist.add(rowitem);
                 }
                 System.out.println(sb);
             }finally{
                 if(book != null){
                     book.close();
-                    return null;
+                    System.err.println("datalist size="+datalist.size());
+                    return datalist;
                 }
             }
 
