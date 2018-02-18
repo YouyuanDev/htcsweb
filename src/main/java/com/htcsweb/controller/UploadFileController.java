@@ -207,10 +207,12 @@ public class UploadFileController {
                 //通过遍历实现把每一列封装成一个model中，再把所有的model用List集合装载
                 System.out.println("row:"+String.valueOf(i));
                 System.out.println("listob.size():"+String.valueOf(listob.size()));
-                if(!ExcelUtil.isNumeric00(String.valueOf(ob.get(ExcelUtil.PIPE_NO_INDEX)))){
-                    //若管号为空或不为数字，则跳过
-                    continue;
-                }
+
+
+//                if(!ExcelUtil.isNumeric00(String.valueOf(ob.get(ExcelUtil.PIPE_NO_INDEX)))){
+//                    //若管号为空或不为数字，则跳过
+//                    continue;
+//                }
                 if(!ExcelUtil.isNumeric00(String.valueOf(ob.get(ExcelUtil.OD_INDEX)))){
                     //若od为空或不为数字，则跳过
                     continue;

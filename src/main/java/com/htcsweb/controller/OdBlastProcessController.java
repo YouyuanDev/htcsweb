@@ -30,11 +30,20 @@ public class OdBlastProcessController {
 
     @RequestMapping("/saveOdBlastProcess")
     @ResponseBody
-    public String saveOdBlastProcess(OdBlastProcess odblastprocess, HttpServletResponse response){
+    public String saveOdBlastProcess(OdBlastProcess odblastprocess, HttpServletRequest request, HttpServletResponse response){
         JSONObject json=new JSONObject();
         try{
+            String odbptime= request.getParameter("odbptime");
             int resTotal=0;
-            odblastprocess.setOperation_time(new Date());
+            //System.out.println("odbptime="+odbptime);
+
+            if(odbptime!=null&&odbptime!=""){
+                SimpleDateFormat simFormat = new SimpleDateFormat("MM/dd/yyyy,hh:mm:ss");
+                Date new_odbptime = simFormat.parse(odbptime);
+                odblastprocess.setOperation_time(new_odbptime);
+            }else{
+                odblastprocess.setOperation_time(new Date());
+            }
             if(odblastprocess.getId()==0){
                 //添加
                 resTotal=odblastprocessDao.addOdBlastProcess(odblastprocess);

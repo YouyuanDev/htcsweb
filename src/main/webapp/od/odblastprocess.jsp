@@ -38,14 +38,23 @@
 
         function formatterdate(value,row,index){
            var date = new Date(value);
-           var y = date.getFullYear();
-           var m = date.getMonth()+1;
-           var d = date.getDate();
+            //var y = date.getFullYear();
+            //var m = date.getMonth()+1;
+            //var d = date.getDate();
 
-           return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
-
-           //return date.toLocaleString();
+            //return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
+            //alert("ss"+date.toLocaleString())
+           return date.toLocaleString();
         }
+
+        function myparsedate(s){
+            if (!s) return new Date();
+            return new Date(Date.parse(s));
+        }
+
+
+
+
         function myparser(s){
             if (!s) return new Date();
             var ss = (s.split('-'));
@@ -57,6 +66,16 @@
             } else {
                 return new Date();
             }
+        }
+
+        // 日期格式为 2/20/2017 12:00:00 PM
+        function myformatter2(date){
+            return date.toLocaleString();
+        }
+        // 日期格式为 2/20/2017 12:00:00 PM
+        function myparser2(s) {
+            if (!s) return new Date();
+            return new Date(Date.parse(s));
         }
 
 
@@ -148,9 +167,22 @@
                 $('#pipe_no').text(row.pipe_no);$('#status_name').text(row.status_name);
                 $('#od').text(row.od);$('#wt').text(row.wt);
                 $('#length').text(row.length);$('#weight').text(row.weight);
-                $('#odbpid').text(row.id);$('#odbptime').text(getDate(row.operation_time));
+                $('#odbpid').text(row.id);
+
+                //$('#odbptime').datebox('setValue', date1);
+                //$('#odbptime').text(row.operation_time);
                 $('#grade').text(row.grade);$('#heat_no').text(row.heat_no);
                 $('#odBlastProForm').form('load',row);
+
+                date = new Date(row.operation_time);
+                strdate =formatterdate(date);
+                //alert(strdate);
+                $('#odBlastProForm').form('load',{
+                    'odbptime':strdate
+                });
+
+
+
                 look1.setText(row.pipe_no);
                 look1.setValue(row.pipe_no);
                 look2.setText(row.operator_no);
@@ -188,6 +220,16 @@
                     setParams($("input[name='blast_line_speed']"));
                     setParams($("input[name='conductivity']"));
                     setParams($("input[name='preheat_temp']"));
+
+
+                    if($("input[name='odbptime']").val()==""){
+
+                        hlAlertFour("请输入操作时间");
+                        return false;
+                    }
+
+
+
                 },
                 success: function(result){
                     var result = eval('('+result+')');
@@ -362,7 +404,7 @@
                <tr>
                    <td class="i18n1" name="pipeno" width="16%">钢管编号</td>
                    <td colspan="2" width="33%">
-                       <input id="lookup1" name="pipe_no" class="mini-lookup" style="text-align:center;width:160px;"
+                       <input id="lookup1" name="pipe_no" class="mini-lookup" style="text-align:center;width:180px;"
                               textField="pipe_no" valueField="id" popupWidth="auto"
                               popup="#gridPanel1" grid="#datagrid1" multiSelect="false"/>
                    </td>
@@ -408,7 +450,10 @@
                    />
                </td>
                <td class="i18n1" name="operationtime">操作时间</td>
-               <td colspan="2"><label id="odbptime"></label></td>
+               <td colspan="2">
+                   <input class="easyui-datebox" type="text" name="odbptime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+
+               </td>
 
            </tr>
        </table>

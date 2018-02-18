@@ -82,7 +82,7 @@
                 <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d 23:59:59')]]>
             </if>
         </where>
-        ORDER BY o.operation_time DESC
+        ORDER BY o.id DESC
         limit #{skip},#{take}
     </select>
 
