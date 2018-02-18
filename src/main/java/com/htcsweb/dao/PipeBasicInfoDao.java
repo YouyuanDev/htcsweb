@@ -1,6 +1,7 @@
 package com.htcsweb.dao;
 
 import com.htcsweb.entity.PipeBasicInfo;
+
 import org.apache.ibatis.annotations.Param;
 
 import java.util.HashMap;
@@ -15,5 +16,8 @@ public interface PipeBasicInfoDao {
     public int updatePipeBasicInfo(PipeBasicInfo pipeBasicInfo);
     public int addPipeBasicInfo(PipeBasicInfo pipeBasicInfo);
     public int delPipeBasicInfo(String[]arrId);
+
+
+
 
 }

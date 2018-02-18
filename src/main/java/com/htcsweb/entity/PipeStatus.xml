@@ -5,4 +5,11 @@
 
 <mapper namespace="com.htcsweb.dao.PipeStatusDao">
 
+
+
+    <select id="getAllPipeStatus" resultType="com.htcsweb.entity.PipeStatus">
+        SELECT  *  from pipe_status
+        ORDER BY id ASC
+    </select>
+
 </mapper>

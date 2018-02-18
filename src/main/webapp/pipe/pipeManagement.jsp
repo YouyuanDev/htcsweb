@@ -63,9 +63,13 @@
         function editPipe() {
             $('#hlcancelBtn').attr('operationtype','edit');
             var row = $('#pipeDatagrids').datagrid('getSelected');
-            if(row){
-                $('#hlPipeDialog').dialog('open').dialog('setTitle','修改');
-                $('#pipeForm').form('load',row);
+            if(row) {
+                $('#hlPipeDialog').dialog('open').dialog('setTitle', '修改');
+                $('#pipeForm').form('load', row);
+                //通过以上方法无法将pipeid初始化，所以再调用以下方法赋值
+                 $('#pipeForm').form('load',{
+                     'pipeid':row.id
+                 });
                 if(row.contract_no!=null)
                     look1.setText(row.contract_no);
                 // $('#contractForm').form('load',{
@@ -307,8 +311,12 @@
                 </tr>
                 <tr>
                     <td class="i18n1" name="status" width="16%">状态</td>
-                    <td   width="33%"><input class="easyui-textbox" type="text" name="status" value=""/></td>
-
+                    <td   width="33%"><input class="easyui-combobox" type="text" name="status"  data-options=
+                            "url:'/pipeinfo/getAllPipeStatus.action',
+					        method:'get',
+					        valueField:'id',
+					        textField:'text',
+					        panelHeight:'auto'"/></td>
                 </tr>
 
             </table>

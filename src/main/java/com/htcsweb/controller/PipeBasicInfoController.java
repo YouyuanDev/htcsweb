@@ -4,7 +4,9 @@ package com.htcsweb.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.PipeBasicInfoDao;
+import com.htcsweb.dao.PipeStatusDao;
 import com.htcsweb.entity.PipeBasicInfo;
+import com.htcsweb.entity.PipeStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.htcsweb.util.ResponseUtil;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import com.htcsweb.util.ComboxItem;
 
 
 @Controller
@@ -24,6 +28,10 @@ public class PipeBasicInfoController {
 
     @Autowired
     private PipeBasicInfoDao pipeBasicInfoDao;
+
+    @Autowired
+    private PipeStatusDao pipeStatusDao;
+
 
     @RequestMapping("/getPipeNumber")
     @ResponseBody
@@ -34,6 +42,24 @@ public class PipeBasicInfoController {
         return map;
     }
 
+
+    @RequestMapping("/getAllPipeStatus")
+    @ResponseBody
+    public String getAllPipeStatus(HttpServletRequest request){
+        List<PipeStatus>list=pipeStatusDao.getAllPipeStatus();
+        List<ComboxItem> colist=new ArrayList<ComboxItem>();
+        for(int i=0;i<list.size();i++){
+            ComboxItem citem= new ComboxItem();
+            PipeStatus ps=((PipeStatus)list.get(i));
+            citem.id=ps.getStatus_code();
+            citem.text= ps.getStatus_code()+"("+ps.getStatus_name()+")";
+            colist.add(citem);
+        }
+
+        String map= JSONObject.toJSONString(colist);
+        System.out.println("========="+map);
+        return map;
+    }
 
 
     //模糊查询Pipe信息列表
