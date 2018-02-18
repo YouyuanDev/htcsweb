@@ -44,6 +44,8 @@
        onuploaderror="onUploadError" onfileselect="onFileSelect" width="400px"
 />
 <br /><br />
+    <input type="checkbox" id="ck_overwrite" name="ck_overwrite"/><span class="i18n1" name="is_overwrite">是否完全覆盖数据库已有记录？(对数据库已存在的钢管,不会覆盖其状态信息)</span>
+    <br /><br />
     <a class="mini-button mini-button-success" width="100px" value="上传" onclick="startUpload()"><span class="i18n1" name="upload">上传</span></a>
 <%--<input type="button" class="mini-button mini-button-success" width="80px" value="上传" onclick="startUpload()"/>--%>
 </div>
@@ -74,7 +76,7 @@
     }
     function onUploadSuccess(e) {
 
-        alert("上传成功：" + e.serverData);
+        //alert("上传成功：" + e.serverData);
         var result = eval('('+e.serverData+')');
         if(result.success){
             alert("成功上传钢管数量："+result.totaluploaded+" 根，"+"因不存在合同号无法上传的钢管数量："+result.totalskipped+" 根");
@@ -83,11 +85,22 @@
         this.setText("");
     }
     function onUploadError(e) {
-
+        alert("上传错误：" + e.serverData);
     }
 
     function startUpload() {
         var fileupload = mini.get("fileupload1");
+        var checkbox = document.getElementById('ck_overwrite');//
+        //alert(checkbox.checked);//是否被选中
+        if(checkbox.checked){
+            //选中了
+            //alert("checked")
+            fileupload.setUploadUrl("/UploadFile/uploadPipeList.action?ck_overwrite=" + "1");
+        }else{
+            //没选中
+            //alert("Not checked")
+            fileupload.setUploadUrl("/UploadFile/uploadPipeList.action?ck_overwrite=" + "0");
+        }
 
         fileupload.startUpload();
     }

@@ -139,6 +139,15 @@ public class UploadFileController {
     @RequestMapping(value = "/uploadPipeList")
     public String uploadPipeList(HttpServletRequest request, HttpServletResponse response) throws Exception{
         try {
+            String ck_overwrite= request.getParameter("ck_overwrite");
+            System.out.println("ck_overwrite="+ck_overwrite);
+
+            boolean overwrite=false;
+
+            if(ck_overwrite!=null&&ck_overwrite.equals("1")){
+                overwrite=true;
+            }
+
             String saveDirectory = request.getSession().getServletContext().getRealPath("/upload/pipes");
             File uploadPath = new File(saveDirectory);
             if (!uploadPath.exists()) {
@@ -157,7 +166,7 @@ public class UploadFileController {
                 if (file != null) {
                     newName = file.getName();
                     //处理excel文件
-                    HashMap retMap =importExcelInfo(saveDirectory+"/"+newName);
+                    HashMap retMap =importExcelInfo(saveDirectory+"/"+newName,overwrite);
                     TotalUploadedPipes=Integer.parseInt(retMap.get("uploaded").toString());
                     TotalSkippedPipes=Integer.parseInt(retMap.get("skipped").toString());
                 }
@@ -188,7 +197,7 @@ public class UploadFileController {
 
 
 
-    public HashMap importExcelInfo( String fullfilename) throws Exception{
+    public HashMap importExcelInfo( String fullfilename,boolean overwrite) throws Exception{
 
             HashMap retMap = new HashMap();//返回值
             int TotalUploaded=0;//成功插入数据库的钢管数量
@@ -259,11 +268,15 @@ public class UploadFileController {
                     res = pipeBasicInfoDao.addPipeBasicInfo(pipe);
                     System.out.println("Insert res: " + res);
                 }else{
-                    //更新数据库旧记录
-                    PipeBasicInfo oldpipeinfo=pipelist.get(0);
-                    pipe.setId(oldpipeinfo.getId());
-                    res = pipeBasicInfoDao.updatePipeBasicInfo(pipe);
-                    System.out.println("Update res: " + res);
+
+                    if(overwrite) {
+                        //更新数据库旧记录
+                        PipeBasicInfo oldpipeinfo = pipelist.get(0);
+                        pipe.setId(oldpipeinfo.getId());
+                        pipe.setStatus(oldpipeinfo.getStatus());
+                        res = pipeBasicInfoDao.updatePipeBasicInfo(pipe);
+                        System.out.println("Update res: " + res);
+                    }
 
                 }
 
