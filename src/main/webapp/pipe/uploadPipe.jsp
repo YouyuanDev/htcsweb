@@ -37,7 +37,7 @@
 <div align="left">
 <h3><span class="i18n1" name="plsselectupladexcelfiles">请选择要上传的excel文件（.xls）</span></h3>
 <br />
-<input id="fileupload1" class="mini-fileupload" name="Fdata" limitType="*.txt;*.xls;*.xlsx"
+<input id="fileupload1" class="mini-fileupload" name="Fdata" limitType="*.xls;"
        flashUrl="../miniui/fileupload/swfupload/swfupload.swf"
        uploadUrl="/UploadFile/uploadPipeList.action"
        onuploadsuccess="onUploadSuccess"
