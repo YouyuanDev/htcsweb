@@ -162,11 +162,11 @@
 
                 });
 
-                // var files=row.upload_files;
-                // if(files!=null&&files!=""){
-                //     var fiList=files.split(';');
-                //     createPictureModel(fiList);
-                // }
+                var files=row.upload_files;
+                if(files!=null&&files!=""){
+                    var fiList=files.split(';');
+                    //createPictureModel(fiList);
+                }
                 url="/ProjectOperation/saveProject.action?id="+row.id;
 
             }else{
@@ -403,7 +403,7 @@
                 </tr>
             </table>
 
-            <input type="hidden" id="fileslist" name="upload_files" value=""/>
+            <input type="text" id="fileslist" name="upload_files" value=""/>
             <div id="hl-gallery-con" style="width:100%;">
 
             </div>

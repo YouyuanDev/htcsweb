@@ -16,6 +16,7 @@
         <result property="mps" column="mps"></result>
         <result property="itp" column="itp"></result>
         <result property="project_time" column="project_time"></result>
+        <result property="upload_files" column="upload_files"></result>
     </resultMap>
 
 
@@ -53,11 +54,11 @@
     </select>
 
     <update id="updateProjectInfo" parameterType="com.htcsweb.entity.ProjectInfo">
-        UPDATE project_info set project_no=#{project_no},project_name=#{project_name},client_name=#{client_name},client_spec=#{client_spec},coating_standard=#{coating_standard},mps=#{mps},itp=#{itp} ,project_time=#{project_time} WHERE id=#{id}
+        UPDATE project_info set project_no=#{project_no},project_name=#{project_name},client_name=#{client_name},client_spec=#{client_spec},coating_standard=#{coating_standard},mps=#{mps},itp=#{itp} ,project_time=#{project_time},upload_files=#{upload_files} WHERE id=#{id}
     </update>
 
     <insert id="addProjectInfo" parameterType="com.htcsweb.entity.ProjectInfo">
-        INSERT INTO project_info(project_no,project_name,client_name,client_spec,coating_standard,mps,itp,project_time) VALUES (#{project_no},#{project_name},#{client_name},#{client_spec},#{coating_standard},#{mps},#{itp},#{project_time})
+        INSERT INTO project_info(project_no,project_name,client_name,client_spec,coating_standard,mps,itp,project_time,upload_files) VALUES (#{project_no},#{project_name},#{client_name},#{client_spec},#{coating_standard},#{mps},#{itp},#{project_time},#{upload_files})
     </insert>
 
     <delete id="delProjectInfo">

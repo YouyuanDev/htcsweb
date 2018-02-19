@@ -116,8 +116,8 @@ public class UploadFileController {
             if (!uploadPath.exists()) {
                 uploadPath.mkdirs();
             }
-            FileRenameUtil util = new FileRenameUtil();
-            MultipartRequest multi = new MultipartRequest(request, saveDirectory, 100* 1024 * 1024, "UTF-8", util);
+            //FileRenameUtil util = new FileRenameUtil();
+            MultipartRequest multi = new MultipartRequest(request, saveDirectory, 100* 1024 * 1024, "UTF-8");
             Enumeration files = multi.getFileNames();
             String newName = "";
             while (files.hasMoreElements()) {
