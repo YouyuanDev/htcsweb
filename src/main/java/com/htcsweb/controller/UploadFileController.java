@@ -107,6 +107,33 @@ public class UploadFileController {
     }
 
 
+    @RequestMapping("/delUploadFile")
+    @ResponseBody
+    public String delUploadFile(HttpServletRequest request,HttpServletResponse response){
+        JSONObject json=new JSONObject();
+        try {
+            String fileList=request.getParameter("fileList");
+            if(fileList!=null&&fileList!=""){
+                String []listArr=fileList.split(";");
+                String saveDirectory = request.getSession().getServletContext().getRealPath("/upload/files");
+                String filePath="";
+                for(int i=0;i<listArr.length;i++){
+                    filePath=saveDirectory+"/"+listArr[i];
+                    File file=new File(filePath);
+                    if(file.isFile()&&file.exists()){
+                        file.delete();
+                    }
+                }
+                json.put("success",true);
+            }else{
+                json.put("success",false);
+            }
+            ResponseUtil.write(response,json);
+        }catch (Exception e){
+            json.put("success",false);
+        }
+        return null;
+    }
 
     @RequestMapping(value = "/uploadFile")
     public String uploadFile(HttpServletRequest request, HttpServletResponse response) {

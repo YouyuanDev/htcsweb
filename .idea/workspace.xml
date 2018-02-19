@@ -8,8 +8,9 @@
   <component name="ChangeListManager">
     <list default="true" id="fa3f659b-6ccf-4ae8-84a0-55d0a3756f6f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/ProjectController.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/ProjectController.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/UploadFileController.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/UploadFileController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ProjectInfo.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ProjectInfo.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/ProjectInfoDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/ProjectInfoDao.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ProjectInfo.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ProjectInfo.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/project/projectManagement.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/project/projectManagement.jsp" />
     </list>
@@ -36,11 +37,40 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="projectManagement.jsp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="projectManagement.jsp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/project/projectManagement.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="115" column="21" lean-forward="false" selection-start-line="115" selection-start-column="21" selection-end-line="115" selection-end-column="21" />
+            <state relative-caret-position="110">
+              <caret line="478" column="31" lean-forward="false" selection-start-line="478" selection-start-column="31" selection-end-line="478" selection-end-column="31" />
+              <folding>
+                <marker date="1519055363502" expanded="true" signature="9116:9122" ph="&amp;nbsp;" />
+                <marker date="1519055363502" expanded="true" signature="9122:9128" ph="&amp;nbsp;" />
+                <marker date="1519055363502" expanded="true" signature="9128:9134" ph="&amp;nbsp;" />
+                <marker date="1519055363502" expanded="true" signature="9134:9140" ph="&amp;nbsp;" />
+                <marker date="1519055363502" expanded="true" signature="9140:9146" ph="&amp;nbsp;" />
+                <marker date="1519055363502" expanded="true" signature="9146:9152" ph="&amp;nbsp;" />
+                <marker date="1519055363502" expanded="true" signature="9152:9158" ph="&amp;nbsp;" />
+                <marker date="1519055363502" expanded="true" signature="9158:9164" ph="&amp;nbsp;" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UploadFileController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/UploadFileController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2">
+              <caret line="111" column="31" lean-forward="false" selection-start-line="111" selection-start-column="18" selection-end-line="111" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="uploadPipe.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/pipe/uploadPipe.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="209">
+              <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -49,8 +79,28 @@
       <file leaf-file-name="common.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/js/common.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="59" column="35" lean-forward="false" selection-start-line="59" selection-start-column="35" selection-end-line="59" selection-end-column="35" />
+            <state relative-caret-position="250">
+              <caret line="92" column="27" lean-forward="false" selection-start-line="92" selection-start-column="24" selection-end-line="92" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProjectController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/ProjectController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="564">
+              <caret line="153" column="0" lean-forward="false" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ContractInfo.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ContractInfo.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="151">
+              <caret line="21" column="16" lean-forward="false" selection-start-line="7" selection-start-column="3" selection-end-line="21" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -59,49 +109,8 @@
       <file leaf-file-name="ProjectInfoDao.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/ProjectInfoDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="18" column="27" lean-forward="false" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProjectInfo.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ProjectInfo.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="53">
-              <caret line="15" column="31" lean-forward="false" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="31" />
-              <folding>
-                <element signature="e#1046#1047#0" expanded="true" />
-                <element signature="e#1081#1082#0" expanded="true" />
-                <element signature="e#1137#1138#0" expanded="true" />
-                <element signature="e#1185#1186#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProjectInfo.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ProjectInfo.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="870">
-              <caret line="58" column="0" lean-forward="true" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-              <folding>
-                <marker date="1519033020911" expanded="true" signature="1009:1042" ph="select count... project_info" />
-                <marker date="1519033020911" expanded="true" signature="1114:1178" ph="select count... project_info" />
-                <marker date="1519033020911" expanded="true" signature="1251:2175" ph="Select * fro... project_info" />
-                <marker date="1519033020911" expanded="true" signature="2282:2546" ph="UPDATE project_info... " />
-                <marker date="1519033020911" expanded="true" signature="2650:2909" ph="INSERT INTO project_info... " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OdBlastInspectionProcess.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastInspectionProcess.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+            <state relative-caret-position="210">
+              <caret line="19" column="47" lean-forward="false" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -110,8 +119,8 @@
       <file leaf-file-name="OdBlastProcess.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastProcess.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="21" column="487" lean-forward="false" selection-start-line="21" selection-start-column="458" selection-end-line="21" selection-end-column="487" />
+            <state relative-caret-position="300">
+              <caret line="20" column="36" lean-forward="false" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="36" />
               <folding>
                 <marker date="1518960181622" expanded="true" signature="319:855" ph="INSERT INTO od_blast_process... " />
                 <marker date="1518960181622" expanded="true" signature="1180:1210" ph="SELECT * fro... od_blast_process" />
@@ -125,22 +134,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OdBlastProcess.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastProcess.java">
+      <file leaf-file-name="odblastprocess.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/od/odblastprocess.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="21" column="4" lean-forward="true" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="32" />
+            <state relative-caret-position="227">
+              <caret line="307" column="57" lean-forward="false" selection-start-line="307" selection-start-column="57" selection-end-line="307" selection-end-column="57" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="odblastprocess.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/od/odblastprocess.jsp">
+      <file leaf-file-name="ProjectInfo.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ProjectInfo.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="111">
-              <caret line="140" column="36" lean-forward="false" selection-start-line="140" selection-start-column="12" selection-end-line="140" selection-end-column="36" />
-              <folding />
+            <state relative-caret-position="368">
+              <caret line="80" column="49" lean-forward="false" selection-start-line="80" selection-start-column="49" selection-end-line="80" selection-end-column="49" />
+              <folding>
+                <marker date="1519048460962" expanded="true" signature="1009:1042" ph="select count... project_info" />
+                <marker date="1519048460962" expanded="true" signature="1114:1178" ph="select count... project_info" />
+                <marker date="1519048460962" expanded="true" signature="1251:2175" ph="Select * fro... project_info" />
+                <marker date="1519048460962" expanded="true" signature="2282:2546" ph="UPDATE project_info... " />
+                <marker date="1519048460962" expanded="true" signature="2650:2909" ph="INSERT INTO project_info... " />
+                <marker date="1519048460962" expanded="true" signature="3532:3573" ph="SELECT * fro... project_info" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -160,23 +176,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>updatePipeBasicInfo</find>
-      <find>length</find>
-      <find>keyText_contract_no</find>
-      <find>getPipeInfoByLike</find>
-      <find>getAllByLike</find>
-      <find>questionTypesManage</find>
-      <find>getBankListByExcel</find>
-      <find>pipeBasicInfoDAO</find>
-      <find>getPipeNumber</find>
-      <find>pipeList</find>
-      <find>1608</find>
-      <find>1545280</find>
-      <find>pipeid</find>
-      <find>delPipe</find>
-      <find>pipeDatagrids</find>
-      <find>operationtime</find>
-      <find>updateOdBlastProcess</find>
       <find>saveOdBlastProcess</find>
       <find>project_time</find>
       <find>myformatter2</find>
@@ -190,6 +189,23 @@
       <find>operation_time</find>
       <find>uploadFile</find>
       <find>upload_files</find>
+      <find>grid</find>
+      <find>projectForm</find>
+      <find>project_id</find>
+      <find>projectDatagrids</find>
+      <find>hl-gallery</find>
+      <find>content_list</find>
+      <find>createPictureModel</find>
+      <find>createFilesModel</find>
+      <find>basePath</find>
+      <find>fileslist</find>
+      <find>hl-gallery-con</find>
+      <find>hl-file-con</find>
+      <find>delUploadPicture</find>
+      <find>file-del</find>
+      <find>delUpload</find>
+      <find>editFilesList</find>
+      <find>content-dl</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src/main/webapp/WEB-INF/lib</dir>
@@ -228,8 +244,6 @@
         <option value="$PROJECT_DIR$/src/main/resources/db.properties" />
         <option value="$PROJECT_DIR$/src/main/webapp/css/common.css" />
         <option value="$PROJECT_DIR$/src/main/webapp/js/common.js" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/ProjectInfoDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/ProjectController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ContractInfo.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/project/contractManagement.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/ContractInfoDao.java" />
@@ -253,10 +267,12 @@
         <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties" />
         <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh.properties" />
         <option value="$PROJECT_DIR$/src/main/webapp/pipe/uploadPipe.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/UploadFileController.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/project/projectManagement.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ProjectInfo.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ProjectInfo.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/ProjectInfoDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/ProjectController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/UploadFileController.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/project/projectManagement.jsp" />
       </list>
     </option>
   </component>
@@ -294,10 +310,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="AndroidView" />
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -380,22 +392,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="i18n" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
-              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="miniui" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
-              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
               <item name="od" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -434,6 +430,10 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="AndroidView" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -478,7 +478,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Tomcat Server.projectManagement.jsp (1)">
+  <component name="RunManager" selected="Tomcat Server.projectManagement.jsp (4)">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -554,8 +554,8 @@
       <properties />
       <listeners />
     </configuration>
-    <configuration name="index.jsp" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/index.jsp" />
+    <configuration name="projectManagement.jsp (1)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/project/projectManagement.jsp" />
       <deployment>
         <artifact name="htcsweb:war">
           <settings>
@@ -564,7 +564,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="index_jsp_htcsweb_62" />
+        <option name="BASE_DIRECTORY_NAME" value="projectManagement_jsp_(1)_htcsweb_14" />
       </server-settings>
       <predefined_log_file id="Tomcat" enabled="true" />
       <predefined_log_file id="Tomcat Catalina" enabled="true" />
@@ -593,7 +593,7 @@
         </option>
       </method>
     </configuration>
-    <configuration name="projectManagement.jsp (1)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
+    <configuration name="projectManagement.jsp (2)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/project/projectManagement.jsp" />
       <deployment>
         <artifact name="htcsweb:war">
@@ -603,7 +603,85 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="projectManagement_jsp_(1)_htcsweb_9" />
+        <option name="BASE_DIRECTORY_NAME" value="projectManagement_jsp_(2)_htcsweb_13" />
+      </server-settings>
+      <predefined_log_file id="Tomcat" enabled="true" />
+      <predefined_log_file id="Tomcat Catalina" enabled="true" />
+      <predefined_log_file id="Tomcat Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method>
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="htcsweb:war" />
+        </option>
+      </method>
+    </configuration>
+    <configuration name="projectManagement.jsp (3)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/project/projectManagement.jsp" />
+      <deployment>
+        <artifact name="htcsweb:war">
+          <settings>
+            <option name="CONTEXT_PATH" value="/" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="projectManagement_jsp_(3)_htcsweb_12" />
+      </server-settings>
+      <predefined_log_file id="Tomcat" enabled="true" />
+      <predefined_log_file id="Tomcat Catalina" enabled="true" />
+      <predefined_log_file id="Tomcat Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method>
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="htcsweb:war" />
+        </option>
+      </method>
+    </configuration>
+    <configuration name="projectManagement.jsp (4)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/project/projectManagement.jsp" />
+      <deployment>
+        <artifact name="htcsweb:war">
+          <settings>
+            <option name="CONTEXT_PATH" value="/" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="projectManagement_jsp_(4)_htcsweb_11" />
       </server-settings>
       <predefined_log_file id="Tomcat" enabled="true" />
       <predefined_log_file id="Tomcat Catalina" enabled="true" />
@@ -642,7 +720,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="projectManagement_jsp_htcsweb_10" />
+        <option name="BASE_DIRECTORY_NAME" value="projectManagement_jsp_htcsweb_15" />
       </server-settings>
       <predefined_log_file id="Tomcat" enabled="true" />
       <predefined_log_file id="Tomcat Catalina" enabled="true" />
@@ -671,84 +749,6 @@
         </option>
       </method>
     </configuration>
-    <configuration name="uploadPipe.jsp (3)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/pipe/uploadPipe.jsp" />
-      <deployment>
-        <artifact name="htcsweb:war exploded">
-          <settings>
-            <option name="CONTEXT_PATH" value="/" />
-          </settings>
-        </artifact>
-      </deployment>
-      <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="uploadPipe_jsp_(3)_htcsweb_16" />
-      </server-settings>
-      <predefined_log_file id="Tomcat" enabled="true" />
-      <predefined_log_file id="Tomcat Catalina" enabled="true" />
-      <predefined_log_file id="Tomcat Manager" enabled="false" />
-      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
-      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
-        <option name="USE_ENV_VARIABLES" value="true" />
-        <STARTUP>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </STARTUP>
-        <SHUTDOWN>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </SHUTDOWN>
-      </ConfigurationWrapper>
-      <method>
-        <option name="BuildArtifacts" enabled="true">
-          <artifact name="htcsweb:war exploded" />
-        </option>
-      </method>
-    </configuration>
-    <configuration name="uploadPipe.jsp (4)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/pipe/uploadPipe.jsp" />
-      <deployment>
-        <artifact name="htcsweb:war exploded">
-          <settings>
-            <option name="CONTEXT_PATH" value="/" />
-          </settings>
-        </artifact>
-      </deployment>
-      <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="uploadPipe_jsp_(4)_htcsweb_15" />
-      </server-settings>
-      <predefined_log_file id="Tomcat" enabled="true" />
-      <predefined_log_file id="Tomcat Catalina" enabled="true" />
-      <predefined_log_file id="Tomcat Manager" enabled="false" />
-      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
-      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
-        <option name="USE_ENV_VARIABLES" value="true" />
-        <STARTUP>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </STARTUP>
-        <SHUTDOWN>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </SHUTDOWN>
-      </ConfigurationWrapper>
-      <method>
-        <option name="BuildArtifacts" enabled="true">
-          <artifact name="htcsweb:war exploded" />
-        </option>
-      </method>
-    </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
@@ -756,19 +756,19 @@
       <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Tomcat Server.uploadPipe.jsp (3)" />
-      <item index="1" class="java.lang.String" itemvalue="Tomcat Server.uploadPipe.jsp (4)" />
-      <item index="2" class="java.lang.String" itemvalue="Tomcat Server.index.jsp" />
-      <item index="3" class="java.lang.String" itemvalue="Tomcat Server.projectManagement.jsp" />
-      <item index="4" class="java.lang.String" itemvalue="Tomcat Server.projectManagement.jsp (1)" />
+      <item index="0" class="java.lang.String" itemvalue="Tomcat Server.projectManagement.jsp" />
+      <item index="1" class="java.lang.String" itemvalue="Tomcat Server.projectManagement.jsp (1)" />
+      <item index="2" class="java.lang.String" itemvalue="Tomcat Server.projectManagement.jsp (2)" />
+      <item index="3" class="java.lang.String" itemvalue="Tomcat Server.projectManagement.jsp (3)" />
+      <item index="4" class="java.lang.String" itemvalue="Tomcat Server.projectManagement.jsp (4)" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Tomcat Server.projectManagement.jsp (1)" />
-        <item index="1" class="java.lang.String" itemvalue="Tomcat Server.projectManagement.jsp" />
-        <item index="2" class="java.lang.String" itemvalue="Tomcat Server.index.jsp" />
-        <item index="3" class="java.lang.String" itemvalue="Tomcat Server.uploadPipe.jsp (4)" />
-        <item index="4" class="java.lang.String" itemvalue="Tomcat Server.uploadPipe.jsp (3)" />
+        <item index="0" class="java.lang.String" itemvalue="Tomcat Server.projectManagement.jsp (4)" />
+        <item index="1" class="java.lang.String" itemvalue="Tomcat Server.projectManagement.jsp (3)" />
+        <item index="2" class="java.lang.String" itemvalue="Tomcat Server.projectManagement.jsp (2)" />
+        <item index="3" class="java.lang.String" itemvalue="Tomcat Server.projectManagement.jsp (1)" />
+        <item index="4" class="java.lang.String" itemvalue="Tomcat Server.projectManagement.jsp" />
       </list>
     </recent_temporary>
   </component>
@@ -815,7 +815,8 @@
       <workItem from="1518926849010" duration="619000" />
       <workItem from="1518942400843" duration="3331000" />
       <workItem from="1518959165771" duration="8705000" />
-      <workItem from="1519031292278" duration="1728000" />
+      <workItem from="1519031292278" duration="1840000" />
+      <workItem from="1519046000207" duration="9382000" />
     </task>
     <servers />
   </component>
@@ -828,7 +829,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="365331000" />
+    <option name="totallyTimeSpent" value="374825000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="835" extended-state="0" />
@@ -850,12 +851,12 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25688073" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39056358" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891247" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947975" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25694445" sideWeight="0.6525573" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25694445" sideWeight="0.3474427" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25694445" sideWeight="0.6408602" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25694445" sideWeight="0.35913977" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -879,27 +880,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/easyui/jquery.easyui.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/js/jquery.i18n.properties-1.0.9.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/miniui/multiupload/multiupload.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="1" lean-forward="false" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/Person.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="370">
@@ -911,13 +891,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="15" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ContractInfo.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151">
-          <caret line="21" column="16" lean-forward="false" selection-start-line="7" selection-start-column="3" selection-end-line="21" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -1111,16 +1084,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PipeBasicInfoController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="132" column="37" lean-forward="true" selection-start-line="132" selection-start-column="37" selection-end-line="132" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-239">
@@ -1169,48 +1132,29 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/strings.properties">
+      <provider editor-type-id="ResourceBundle">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1230">
           <caret line="82" column="91" lean-forward="false" selection-start-line="82" selection-start-column="91" selection-end-line="82" selection-end-column="91" />
-          <folding />
         </state>
-      </provider>
-      <provider editor-type-id="ResourceBundle">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1245">
           <caret line="83" column="49" lean-forward="false" selection-start-line="83" selection-start-column="27" selection-end-line="83" selection-end-column="49" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/strings_zh.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1260">
-          <caret line="84" column="13" lean-forward="false" selection-start-line="84" selection-start-column="13" selection-end-line="84" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
       <provider editor-type-id="ResourceBundle">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/pipe/uploadPipe.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="436">
-          <caret line="95" column="17" lean-forward="false" selection-start-line="95" selection-start-column="17" selection-end-line="95" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/ProjectController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="96" column="18" lean-forward="false" selection-start-line="96" selection-start-column="18" selection-end-line="96" selection-end-column="18" />
-          <folding />
+        <state relative-caret-position="1260">
+          <caret line="84" column="13" lean-forward="false" selection-start-line="84" selection-start-column="13" selection-end-line="84" selection-end-column="49" />
         </state>
       </provider>
     </entry>
@@ -1222,79 +1166,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/UploadFileController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="127" column="17" lean-forward="false" selection-start-line="127" selection-start-column="17" selection-end-line="127" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/od/odblastprocess.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="140" column="36" lean-forward="false" selection-start-line="140" selection-start-column="12" selection-end-line="140" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/project/projectManagement.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="115" column="21" lean-forward="false" selection-start-line="115" selection-start-column="21" selection-end-line="115" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/js/common.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="59" column="35" lean-forward="false" selection-start-line="59" selection-start-column="35" selection-end-line="59" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/ProjectInfoDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="18" column="27" lean-forward="false" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastProcess.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="21" column="4" lean-forward="true" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="32" />
+        <state relative-caret-position="285">
+          <caret line="21" column="4" lean-forward="false" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="32" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ProjectInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="53">
-          <caret line="15" column="31" lean-forward="false" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="31" />
-          <folding>
-            <element signature="e#1046#1047#0" expanded="true" />
-            <element signature="e#1081#1082#0" expanded="true" />
-            <element signature="e#1137#1138#0" expanded="true" />
-            <element signature="e#1185#1186#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastInspectionProcess.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="26" column="43" lean-forward="true" selection-start-line="26" selection-start-column="43" selection-end-line="26" selection-end-column="43" />
-          <folding>
-            <marker date="1517367136000" expanded="true" signature="334:792" ph="INSERT INTO od_coating_inspection_process... " />
-            <marker date="1517367136000" expanded="true" signature="911:952" ph="SELECT * fro... od_blast_inspection_process" />
-            <marker date="1517367136000" expanded="true" signature="1073:1535" ph="UPDATE od_coating_inspection_process... " />
-            <marker date="1517367136000" expanded="true" signature="1604:1652" ph="select count... od_blast_inspection_process" />
-            <marker date="1517367136000" expanded="true" signature="2820:2892" ph="select * fro... od_blast_inspection_process" />
-            <marker date="1517367136000" expanded="true" signature="3035:3091" ph="select * fro... od_blast_inspection_process" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1306,10 +1182,62 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/miniui/multiupload/multiupload.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="24" lean-forward="true" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
+          <folding>
+            <marker date="1518068684372" expanded="true" signature="2231:2254" ph="..." />
+            <marker date="1518068684372" expanded="true" signature="2308:2318" ph="..." />
+            <marker date="1518068684372" expanded="true" signature="6755:6776" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PipeBasicInfoController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-76">
+          <caret line="58" column="52" lean-forward="false" selection-start-line="49" selection-start-column="8" selection-end-line="58" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/src.zip!/java/lang/String.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="2408" column="20" lean-forward="false" selection-start-line="2408" selection-start-column="20" selection-end-line="2408" selection-end-column="20" />
+          <folding>
+            <element signature="e#94262#94263#0" expanded="false" />
+            <element signature="e#94300#94301#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ProjectInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="36" column="28" lean-forward="false" selection-start-line="36" selection-start-column="28" selection-end-line="36" selection-end-column="28" />
+          <folding>
+            <element signature="e#1046#1047#0" expanded="false" />
+            <element signature="e#1081#1082#0" expanded="false" />
+            <element signature="e#1137#1138#0" expanded="false" />
+            <element signature="e#1185#1186#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdCoatingProcessDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="6" column="17" lean-forward="false" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastProcess.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="21" column="487" lean-forward="false" selection-start-line="21" selection-start-column="458" selection-end-line="21" selection-end-column="487" />
+        <state relative-caret-position="300">
+          <caret line="20" column="36" lean-forward="false" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="36" />
           <folding>
             <marker date="1518960181622" expanded="true" signature="319:855" ph="INSERT INTO od_blast_process... " />
             <marker date="1518960181622" expanded="true" signature="1180:1210" ph="SELECT * fro... od_blast_process" />
@@ -1324,14 +1252,103 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ProjectInfo.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="870">
-          <caret line="58" column="0" lean-forward="true" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+        <state relative-caret-position="368">
+          <caret line="80" column="49" lean-forward="false" selection-start-line="80" selection-start-column="49" selection-end-line="80" selection-end-column="49" />
           <folding>
-            <marker date="1519033020911" expanded="true" signature="1009:1042" ph="select count... project_info" />
-            <marker date="1519033020911" expanded="true" signature="1114:1178" ph="select count... project_info" />
-            <marker date="1519033020911" expanded="true" signature="1251:2175" ph="Select * fro... project_info" />
-            <marker date="1519033020911" expanded="true" signature="2282:2546" ph="UPDATE project_info... " />
-            <marker date="1519033020911" expanded="true" signature="2650:2909" ph="INSERT INTO project_info... " />
+            <marker date="1519048460962" expanded="true" signature="1009:1042" ph="select count... project_info" />
+            <marker date="1519048460962" expanded="true" signature="1114:1178" ph="select count... project_info" />
+            <marker date="1519048460962" expanded="true" signature="1251:2175" ph="Select * fro... project_info" />
+            <marker date="1519048460962" expanded="true" signature="2282:2546" ph="UPDATE project_info... " />
+            <marker date="1519048460962" expanded="true" signature="2650:2909" ph="INSERT INTO project_info... " />
+            <marker date="1519048460962" expanded="true" signature="3532:3573" ph="SELECT * fro... project_info" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastInspectionProcess.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="26" column="43" lean-forward="false" selection-start-line="26" selection-start-column="43" selection-end-line="26" selection-end-column="43" />
+          <folding>
+            <marker date="1517367136000" expanded="true" signature="334:792" ph="INSERT INTO od_coating_inspection_process... " />
+            <marker date="1517367136000" expanded="true" signature="911:952" ph="SELECT * fro... od_blast_inspection_process" />
+            <marker date="1517367136000" expanded="true" signature="1073:1535" ph="UPDATE od_coating_inspection_process... " />
+            <marker date="1517367136000" expanded="true" signature="1604:1652" ph="select count... od_blast_inspection_process" />
+            <marker date="1517367136000" expanded="true" signature="2820:2892" ph="select * fro... od_blast_inspection_process" />
+            <marker date="1517367136000" expanded="true" signature="3035:3091" ph="select * fro... od_blast_inspection_process" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ContractInfo.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="21" column="16" lean-forward="false" selection-start-line="7" selection-start-column="3" selection-end-line="21" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/ProjectInfoDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="19" column="47" lean-forward="false" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/ProjectController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="564">
+          <caret line="153" column="0" lean-forward="false" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/pipe/uploadPipe.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/UploadFileController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2">
+          <caret line="111" column="31" lean-forward="false" selection-start-line="111" selection-start-column="18" selection-end-line="111" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/od/odblastprocess.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="307" column="57" lean-forward="false" selection-start-line="307" selection-start-column="57" selection-end-line="307" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/js/common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="92" column="27" lean-forward="false" selection-start-line="92" selection-start-column="24" selection-end-line="92" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/project/projectManagement.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="478" column="31" lean-forward="false" selection-start-line="478" selection-start-column="31" selection-end-line="478" selection-end-column="31" />
+          <folding>
+            <marker date="1519055363502" expanded="true" signature="9116:9122" ph="&amp;nbsp;" />
+            <marker date="1519055363502" expanded="true" signature="9122:9128" ph="&amp;nbsp;" />
+            <marker date="1519055363502" expanded="true" signature="9128:9134" ph="&amp;nbsp;" />
+            <marker date="1519055363502" expanded="true" signature="9134:9140" ph="&amp;nbsp;" />
+            <marker date="1519055363502" expanded="true" signature="9140:9146" ph="&amp;nbsp;" />
+            <marker date="1519055363502" expanded="true" signature="9146:9152" ph="&amp;nbsp;" />
+            <marker date="1519055363502" expanded="true" signature="9152:9158" ph="&amp;nbsp;" />
+            <marker date="1519055363502" expanded="true" signature="9158:9164" ph="&amp;nbsp;" />
           </folding>
         </state>
       </provider>

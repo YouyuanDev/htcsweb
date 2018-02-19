@@ -17,5 +17,6 @@ public interface ProjectInfoDao {
     public int delProjectInfo(String[]arrId);
     public int hasProjectNo(@Param("project_no") String project_no);
     public List<ProjectInfo> getProjectInfo(@Param("project_no")String project_no);
+    public List<ProjectInfo> getProjectInfoByID(@Param("id")String id);
 
 }

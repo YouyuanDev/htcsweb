@@ -6,6 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+%>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -87,7 +90,9 @@
             });
         }
         $(function () {
-
+            $(document).on('click','.file-del',function () {
+                delUploadFile($(this));
+            });
             $('#hlProjectDialog').dialog({
                 onClose:function () {
                     var type=$('#hlcancelBtn').attr('operationtype');
@@ -112,6 +117,9 @@
             $('#hlcancelBtn').attr('operationtype','add');
             $('#hlProjectDialog').dialog('open').dialog('setTitle','新增项目');
             $('#fileslist').val('');
+            var filesList=$('#fileslist').val();
+            var fiList=filesList.split(';');
+            createFilesModel(fiList);
             $('#projectForm').form('clear');
             clearMultiUpload(grid);
             url="/ProjectOperation/saveProject.action";
@@ -158,14 +166,15 @@
                     'coating_standard':row.coating_standard,
                     'mps':row.mps,
                     'itp':row.itp,
-                    'project_time':strdate
-
+                    'project_time':strdate,
+                    'upload_files':row.upload_files
                 });
 
                 var files=row.upload_files;
                 if(files!=null&&files!=""){
+                    alert(files);
                     var fiList=files.split(';');
-                    //createPictureModel(fiList);
+                    createFilesModel(fiList);
                 }
                 url="/ProjectOperation/saveProject.action?id="+row.id;
 
@@ -189,8 +198,72 @@
         }
 
 
+        //删除选择的文件
+        function delUploadFile($obj) {
+
+            var fileName=$obj.siblings('mt').find('a').attr('name');
+            alert("delete filename="+fileName)
+
+            $.ajax({
+                url:'../UploadFile/delUploadFile.action',
+                dataType:'json',
+                data:{"fileList":fileName+";"},
+                success:function (data) {
+                    if(data.success){
+                        var fileList=editFilesList(2,fileName);
+                        //$(this).parent('content-dd').remove();
+                        var filesList=$('#fileslist').val();
+                        var fiList=filesList.split(';');
+                        createFilesModel(fiList);
+
+                    }else{
+                        hlAlertFour("移除失败!");
+                    }
+                },
+                error:function () {
+                    hlAlertThree();
+                }
+            });
+        }
 
 
+        function getGalleyChildrenLink(fileUrl,filename) {
+            var str='<div width="400px">' +
+                '<mt><a href="'+fileUrl+'" name="'+filename+'">'+filename+'</a></mt>' +
+                '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="file-del easyui-linkbutton i18n1" name="delete" data-options="iconCls:\'icon-remove\',plain:true" >删除</a>' +
+                '</div>';
+            return str;
+        }
+
+        //创建图片展示模型(参数是图片集合)
+        function  createFilesModel(filList) {
+            var basePath ="<%=basePath%>"+"/upload/files/";
+            //alert("basePath="+basePath)
+            //var basePath ="../upload/files/";
+            if($('#hl-files').length>0){
+                $('#file_list').empty();
+                for(var i=0;i<filList.length;i++){
+                    if(filList[i]=="")continue;
+                    $('#file_list').append(getGalleyChildrenLink(basePath+filList[i],filList[i]));
+                }
+            }else{
+                $('#hl-file-con').append(getFilesCon());
+                for(var i=0;i<filList.length;i++){
+                    if(filList[i]=="")continue;
+                    $('#file_list').append(getGalleyChildrenLink(basePath+filList[i],filList[i]));
+                }
+            }
+        }
+
+        function getFilesCon() {
+            var str='<div id="hl-files">'+
+                '<div id="file">' +
+                '<div id="file_list">'+
+                '</div>'+
+                '</div>'+
+                '</div>';
+            return str;
+        }
 
 
         //文件上传失败操作
@@ -202,8 +275,8 @@
             var data=eval("("+e.serverData+")");
             var fileListstr=editFilesList(0,data.fileUrl);
             var fList=fileListstr.split(';');
-            alert("success");
-            //createPictureModel(fList);
+            //alert("success");
+            createFilesModel(fList);
         }
         function editFilesList(type,fileUrl) {
             var $obj=$('#fileslist');
@@ -403,8 +476,8 @@
                 </tr>
             </table>
 
-            <input type="text" id="fileslist" name="upload_files" value=""/>
-            <div id="hl-gallery-con" style="width:100%;">
+            <input type="hidden" id="fileslist" name="upload_files" value=""/>
+            <div id="hl-file-con" style="width:100%;">
 
             </div>
             <div id="multiupload1" class="uc-multiupload" style="width:100%; max-height:200px"
@@ -423,6 +496,9 @@
     <a href="#" class="easyui-linkbutton" iconCls="icon-save" onclick="ProjectFormSubmit()">Save</a>
     <a href="#" class="easyui-linkbutton" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="ProjectFormCancelSubmit()">Cancel</a>
 </div>
+
+
+
 
 
 

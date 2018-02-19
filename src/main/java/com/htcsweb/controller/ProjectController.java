@@ -4,7 +4,9 @@ package com.htcsweb.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.ProjectInfoDao;
+import com.htcsweb.entity.PipeStatus;
 import com.htcsweb.entity.ProjectInfo;
+import com.htcsweb.util.ComboxItem;
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,11 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import java.util.*;
 
 
 @Controller
@@ -152,4 +150,7 @@ public class ProjectController {
         String map= JSONObject.toJSONString(list);
         return map;
     }
+
+
+
 }

@@ -77,6 +77,8 @@
         </where>
     </select>
 
-
+    <select id="getProjectInfoByID" resultType="com.htcsweb.entity.ProjectInfo">
+        SELECT * from project_info WHERE id=#{id}
+    </select>
 
 </mapper>
