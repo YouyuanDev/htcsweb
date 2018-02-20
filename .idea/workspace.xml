@@ -6,18 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fa3f659b-6ccf-4ae8-84a0-55d0a3756f6f" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastInspectionProcess.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastInspectionProcess.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastInspectionProcess.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastInspectionProcess.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingInspectionProcess.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingInspectionProcess.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingInspectionProcess.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingInspectionProcess.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingProcess.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingProcess.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingProcess.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingProcess.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdFinalInspectionProcess.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdFinalInspectionProcess.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdFinalInspectionProcess.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdFinalInspectionProcess.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdStencilProcess.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdStencilProcess.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdStencilProcess.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdStencilProcess.xml" />
-    </list>
+    <list default="true" id="fa3f659b-6ccf-4ae8-84a0-55d0a3756f6f" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -859,7 +848,7 @@
       <workItem from="1518959165771" duration="8705000" />
       <workItem from="1519031292278" duration="1840000" />
       <workItem from="1519046000207" duration="9437000" />
-      <workItem from="1519132008656" duration="7004000" />
+      <workItem from="1519132008656" duration="7103000" />
     </task>
     <servers />
   </component>
@@ -872,7 +861,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="381884000" />
+    <option name="totallyTimeSpent" value="381983000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="835" extended-state="0" />
@@ -896,7 +885,7 @@
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39056358" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39056358" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891247" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947975" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25694445" sideWeight="0.6301075" order="0" side_tool="false" content_ui="combo" />
