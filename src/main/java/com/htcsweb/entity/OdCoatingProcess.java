@@ -19,11 +19,12 @@ public class OdCoatingProcess {
     private float to_quench_duration;
     private String upload_files;
     private String remark;
+    private String result;
 
     public OdCoatingProcess() {
     }
 
-    public OdCoatingProcess(int id, String pipe_no, Date operation_time, String operator_no, float coating_line_speed, String base_coat_used, String base_coat_lot_no, String top_coat_used, String top_coat_lot_no, int base_coat_gun_count, int base_coat_top_coat, float application_temp, float to_first_touch_duration, float to_quench_duration, String upload_files, String remark) {
+    public OdCoatingProcess(int id, String pipe_no, Date operation_time, String operator_no, float coating_line_speed, String base_coat_used, String base_coat_lot_no, String top_coat_used, String top_coat_lot_no, int base_coat_gun_count, int base_coat_top_coat, float application_temp, float to_first_touch_duration, float to_quench_duration, String upload_files, String remark, String result) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -40,6 +41,7 @@ public class OdCoatingProcess {
         this.to_quench_duration = to_quench_duration;
         this.upload_files = upload_files;
         this.remark = remark;
+        this.result = result;
     }
 
     public int getId() {
@@ -168,5 +170,13 @@ public class OdCoatingProcess {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
     }
 }

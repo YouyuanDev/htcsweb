@@ -10,11 +10,12 @@ public class OdFinalInspectionProcess {
     private String inspection_result;
     private String upload_files;
     private String remark;
+    private String result;
 
     public OdFinalInspectionProcess() {
     }
 
-    public OdFinalInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, String inspection_result, String upload_files, String remark) {
+    public OdFinalInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, String inspection_result, String upload_files, String remark, String result) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -22,6 +23,7 @@ public class OdFinalInspectionProcess {
         this.inspection_result = inspection_result;
         this.upload_files = upload_files;
         this.remark = remark;
+        this.result = result;
     }
 
     public int getId() {
@@ -78,5 +80,13 @@ public class OdFinalInspectionProcess {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
     }
 }

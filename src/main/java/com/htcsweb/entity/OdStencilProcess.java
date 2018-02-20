@@ -12,11 +12,13 @@ public class OdStencilProcess {
     private String pipe_end_color;
     private String upload_files;
     private String remark;
+    private String result;
+
 
     public OdStencilProcess() {
     }
 
-    public OdStencilProcess(int id, String pipe_no, Date operation_time, String operator_no, String stencil_content, String center_line_color, String pipe_end_color, String upload_files, String remark) {
+    public OdStencilProcess(int id, String pipe_no, Date operation_time, String operator_no, String stencil_content, String center_line_color, String pipe_end_color, String upload_files, String remark, String result) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -26,6 +28,7 @@ public class OdStencilProcess {
         this.pipe_end_color = pipe_end_color;
         this.upload_files = upload_files;
         this.remark = remark;
+        this.result = result;
     }
 
     public int getId() {
@@ -98,5 +101,13 @@ public class OdStencilProcess {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
     }
 }

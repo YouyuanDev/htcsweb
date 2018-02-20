@@ -18,11 +18,12 @@ public class OdBlastInspectionProcess {
    private String surface_condition;
    private String upload_files;
    private String remark;
+   private  String result;
 
     public OdBlastInspectionProcess() {
     }
 
-    public OdBlastInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, float air_temp, float relative_humidity, float dew_point, String blast_finish_sa25, float profile, int surface_dust_rating, float pipe_temp, float salt_concentration_after_blast, String surface_condition,String upload_files, String remark) {
+    public OdBlastInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, float air_temp, float relative_humidity, float dew_point, String blast_finish_sa25, float profile, int surface_dust_rating, float pipe_temp, float salt_concentration_after_blast, String surface_condition, String upload_files, String remark, String result) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -36,8 +37,9 @@ public class OdBlastInspectionProcess {
         this.pipe_temp = pipe_temp;
         this.salt_concentration_after_blast = salt_concentration_after_blast;
         this.surface_condition = surface_condition;
-        this.upload_files=upload_files;
+        this.upload_files = upload_files;
         this.remark = remark;
+        this.result = result;
     }
 
     public int getId() {
@@ -158,5 +160,13 @@ public class OdBlastInspectionProcess {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
     }
 }

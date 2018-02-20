@@ -7,14 +7,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa3f659b-6ccf-4ae8-84a0-55d0a3756f6f" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdBlastProcessController.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdBlastProcessController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastProcess.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastProcess.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastProcess.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastProcess.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/i18n/strings.properties" afterPath="$PROJECT_DIR$/src/main/webapp/i18n/strings.properties" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties" afterPath="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh.properties" afterPath="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh.properties" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/od/odblastprocess.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/od/odblastprocess.jsp" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastInspectionProcess.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastInspectionProcess.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastInspectionProcess.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastInspectionProcess.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingInspectionProcess.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingInspectionProcess.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingInspectionProcess.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingInspectionProcess.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingProcess.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingProcess.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingProcess.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingProcess.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdFinalInspectionProcess.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdFinalInspectionProcess.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdFinalInspectionProcess.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdFinalInspectionProcess.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdStencilProcess.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdStencilProcess.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdStencilProcess.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdStencilProcess.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -39,61 +41,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="odblastprocess.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/od/odblastprocess.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="185">
-              <caret line="510" column="29" lean-forward="true" selection-start-line="510" selection-start-column="29" selection-end-line="510" selection-end-column="29" />
-              <folding>
-                <element signature="n#style#0;n#select#0;n#td#1;n#tr#5;n#table#1;n#fieldset#1;n#form#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OdBlastProcess.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastProcess.java">
+      <file leaf-file-name="OdBlastInspectionProcess.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastInspectionProcess.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="326">
-              <caret line="169" column="21" lean-forward="false" selection-start-line="169" selection-start-column="15" selection-end-line="169" selection-end-column="21" />
+              <caret line="165" column="21" lean-forward="false" selection-start-line="165" selection-start-column="15" selection-end-line="165" selection-end-column="21" />
               <folding>
-                <element signature="e#4790#4791#0" expanded="true" />
-                <element signature="e#4819#4820#0" expanded="true" />
-                <element signature="e#4863#4864#0" expanded="true" />
-                <element signature="e#4899#4900#0" expanded="true" />
+                <element signature="e#4063#4064#0" expanded="true" />
+                <element signature="e#4098#4099#0" expanded="true" />
+                <element signature="e#4154#4155#0" expanded="true" />
+                <element signature="e#4202#4203#0" expanded="true" />
+                <element signature="e#4377#4378#0" expanded="true" />
+                <element signature="e#4406#4407#0" expanded="true" />
+                <element signature="e#4450#4451#0" expanded="true" />
+                <element signature="e#4486#4487#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pipeManagement.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/pipe/pipeManagement.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="332" column="49" lean-forward="false" selection-start-line="327" selection-start-column="38" selection-end-line="332" selection-end-column="49" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OdBlastProcessController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdBlastProcessController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="68" column="47" lean-forward="true" selection-start-line="68" selection-start-column="47" selection-end-line="68" selection-end-column="47" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OdBlastProcessDao.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdBlastProcessDao.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="20" column="10" lean-forward="false" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -101,70 +63,159 @@
       <file leaf-file-name="OdBlastInspectionProcess.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastInspectionProcess.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="333">
-              <caret line="50" column="9" lean-forward="true" selection-start-line="50" selection-start-column="9" selection-end-line="50" selection-end-column="9" />
+            <state relative-caret-position="135">
+              <caret line="9" column="249" lean-forward="false" selection-start-line="9" selection-start-column="249" selection-end-line="9" selection-end-column="249" />
               <folding>
-                <marker date="1519134867440" expanded="true" signature="334:821" ph="INSERT INTO od_coating_inspection_process... " />
-                <marker date="1519134867440" expanded="true" signature="940:981" ph="SELECT * fro... od_blast_inspection_process" />
-                <marker date="1519134867440" expanded="true" signature="1102:1593" ph="UPDATE od_coating_inspection_process... " />
-                <marker date="1519134867440" expanded="true" signature="1662:1710" ph="select count... od_blast_inspection_process" />
-                <marker date="1519134867440" expanded="true" signature="2950:3022" ph="select * fro... od_blast_inspection_process" />
-                <marker date="1519134867440" expanded="true" signature="3165:3221" ph="select * fro... od_blast_inspection_process" />
+                <marker date="1519139266673" expanded="true" signature="334:838" ph="INSERT INTO od_coating_inspection_process... " />
+                <marker date="1519139266673" expanded="true" signature="957:998" ph="SELECT * fro... od_blast_inspection_process" />
+                <marker date="1519139266673" expanded="true" signature="1119:1627" ph="UPDATE od_coating_inspection_process... " />
+                <marker date="1519139266673" expanded="true" signature="1696:1744" ph="select count... od_blast_inspection_process" />
+                <marker date="1519139266673" expanded="true" signature="3045:3117" ph="select * fro... od_blast_inspection_process" />
+                <marker date="1519139266673" expanded="true" signature="3260:3316" ph="select * fro... od_blast_inspection_process" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OdBlastProcess.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastProcess.xml">
+      <file leaf-file-name="OdCoatingInspectionProcess.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingInspectionProcess.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="48" column="48" lean-forward="false" selection-start-line="48" selection-start-column="42" selection-end-line="48" selection-end-column="48" />
+            <state relative-caret-position="266">
+              <caret line="189" column="28" lean-forward="false" selection-start-line="189" selection-start-column="22" selection-end-line="189" selection-end-column="28" />
               <folding>
-                <marker date="1519138507238" expanded="true" signature="319:872" ph="INSERT INTO od_blast_process... " />
-                <marker date="1519138507238" expanded="true" signature="1197:1227" ph="SELECT * fro... od_blast_process" />
-                <marker date="1519138507238" expanded="true" signature="1340:1897" ph="UPDATE od_blast_process... " />
-                <marker date="1519138507238" expanded="true" signature="1966:2003" ph="select count... od_blast_process" />
-                <marker date="1519138507238" expanded="true" signature="3553:4298" ph="select * FRO... od_blast_process" />
-                <marker date="1519138507238" expanded="true" signature="4372:5475" ph="Select pro.p... project_info" />
-                <marker date="1519138507238" expanded="true" signature="5606:5651" ph="select * fro... od_blast_process" />
+                <element signature="e#4694#4695#0" expanded="true" />
+                <element signature="e#4729#4730#0" expanded="true" />
+                <element signature="e#4785#4786#0" expanded="true" />
+                <element signature="e#4833#4834#0" expanded="true" />
+                <element signature="e#5008#5009#0" expanded="true" />
+                <element signature="e#5037#5038#0" expanded="true" />
+                <element signature="e#5081#5082#0" expanded="true" />
+                <element signature="e#5117#5118#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="strings_zh-CN.properties" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties">
+      <file leaf-file-name="OdCoatingInspectionProcess.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingInspectionProcess.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="79" column="0" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="9" />
-              <folding />
+            <state relative-caret-position="135">
+              <caret line="9" column="283" lean-forward="false" selection-start-line="9" selection-start-column="283" selection-end-line="9" selection-end-column="283" />
+              <folding>
+                <marker date="1519139351981" expanded="true" signature="338:914" ph="INSERT INTO od_coating_inspection_process... " />
+                <marker date="1519139351981" expanded="true" signature="1034:1077" ph="SELECT * fro... od_coating_inspection_process" />
+                <marker date="1519139351981" expanded="true" signature="1199:1779" ph="UPDATE od_coating_inspection_process... " />
+                <marker date="1519139351981" expanded="true" signature="1848:1898" ph="select count... od_coating_inspection_process" />
+                <marker date="1519139351981" expanded="true" signature="3358:3432" ph="select * fro... od_coating_inspection_process" />
+                <marker date="1519139351981" expanded="true" signature="3576:3634" ph="select * fro... od_coating_inspection_process" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="strings_zh.properties" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/strings_zh.properties">
-          <provider editor-type-id="ResourceBundle">
-            <state />
-          </provider>
+      <file leaf-file-name="OdCoatingProcess.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingProcess.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="318">
-              <caret line="80" column="9" lean-forward="false" selection-start-line="80" selection-start-column="9" selection-end-line="80" selection-end-column="9" />
-              <folding />
+            <state relative-caret-position="326">
+              <caret line="175" column="21" lean-forward="false" selection-start-line="175" selection-start-column="15" selection-end-line="175" selection-end-column="21" />
+              <folding>
+                <element signature="e#4574#4575#0" expanded="true" />
+                <element signature="e#4609#4610#0" expanded="true" />
+                <element signature="e#4665#4666#0" expanded="true" />
+                <element signature="e#4713#4714#0" expanded="true" />
+                <element signature="e#4888#4889#0" expanded="true" />
+                <element signature="e#4917#4918#0" expanded="true" />
+                <element signature="e#4961#4962#0" expanded="true" />
+                <element signature="e#4997#4998#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="strings.properties" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/strings.properties">
-          <provider editor-type-id="ResourceBundle">
-            <state />
-          </provider>
+      <file leaf-file-name="OdCoatingProcess.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingProcess.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="78" column="13" lean-forward="false" selection-start-line="78" selection-start-column="13" selection-end-line="78" selection-end-column="13" />
-              <folding />
+            <state relative-caret-position="135">
+              <caret line="9" column="276" lean-forward="false" selection-start-line="9" selection-start-column="276" selection-end-line="9" selection-end-column="276" />
+              <folding>
+                <marker date="1519139431196" expanded="true" signature="315:887" ph="INSERT INTO od_coating_process... " />
+                <marker date="1519139431196" expanded="true" signature="995:1027" ph="SELECT * fro... od_coating_process" />
+                <marker date="1519139431196" expanded="true" signature="1137:1713" ph="UPDATE od_coating_process... " />
+                <marker date="1519139431196" expanded="true" signature="1782:1821" ph="select count... od_coating_process" />
+                <marker date="1519139431196" expanded="true" signature="3235:3298" ph="select * fro... od_coating_process" />
+                <marker date="1519139431196" expanded="true" signature="3430:3477" ph="select * fro... od_coating_process" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OdFinalInspectionProcess.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdFinalInspectionProcess.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="326">
+              <caret line="85" column="21" lean-forward="false" selection-start-line="85" selection-start-column="15" selection-end-line="85" selection-end-column="21" />
+              <folding>
+                <element signature="e#1722#1723#0" expanded="true" />
+                <element signature="e#1757#1758#0" expanded="true" />
+                <element signature="e#1813#1814#0" expanded="true" />
+                <element signature="e#1861#1862#0" expanded="true" />
+                <element signature="e#2036#2037#0" expanded="true" />
+                <element signature="e#2065#2066#0" expanded="true" />
+                <element signature="e#2109#2110#0" expanded="true" />
+                <element signature="e#2145#2146#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OdFinalInspectionProcess.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdFinalInspectionProcess.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="122" lean-forward="false" selection-start-line="9" selection-start-column="122" selection-end-line="9" selection-end-column="122" />
+              <folding>
+                <marker date="1519139504267" expanded="true" signature="333:563" ph="INSERT INTO od_final_inspection_process... " />
+                <marker date="1519139504267" expanded="true" signature="682:723" ph="SELECT * fro... od_final_inspection_process" />
+                <marker date="1519139504267" expanded="true" signature="844:1078" ph="UPDATE od_final_inspection_process... " />
+                <marker date="1519139504267" expanded="true" signature="1147:1195" ph="select count... od_final_inspection_process" />
+                <marker date="1519139504267" expanded="true" signature="1879:1951" ph="select * fro... od_final_inspection_process" />
+                <marker date="1519139504267" expanded="true" signature="2094:2150" ph="select * fro... od_final_inspection_process" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OdStencilProcess.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdStencilProcess.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="191">
+              <caret line="105" column="31" lean-forward="false" selection-start-line="105" selection-start-column="31" selection-end-line="105" selection-end-column="31" />
+              <folding>
+                <element signature="e#2297#2298#0" expanded="true" />
+                <element signature="e#2332#2333#0" expanded="true" />
+                <element signature="e#2388#2389#0" expanded="true" />
+                <element signature="e#2436#2437#0" expanded="true" />
+                <element signature="e#2640#2641#0" expanded="true" />
+                <element signature="e#2684#2685#0" expanded="true" />
+                <element signature="e#2720#2721#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OdStencilProcess.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdStencilProcess.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+              <folding>
+                <marker date="1519139572868" expanded="true" signature="318:607" ph="INSERT INTO od_stencil_process... " />
+                <marker date="1519139572868" expanded="true" signature="718:750" ph="SELECT * fro... od_stencil_process" />
+                <marker date="1519139572868" expanded="true" signature="863:1156" ph="UPDATE od_stencil_process... " />
+                <marker date="1519139572868" expanded="true" signature="1225:1264" ph="select count... od_stencil_process" />
+                <marker date="1519139572868" expanded="true" signature="2094:2157" ph="select * fro... od_stencil_process" />
+                <marker date="1519139572868" expanded="true" signature="2292:2339" ph="select * fro... od_stencil_process" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -211,9 +262,9 @@
       <find>contractid</find>
       <find>projectid</find>
       <find>upload_files</find>
-      <find>getNewOdBlastByLike</find>
       <find>p_length</find>
       <find>length</find>
+      <find>getNewOdBlastByLike</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src/main/webapp/WEB-INF/lib</dir>
@@ -264,6 +315,13 @@
         <option value="$PROJECT_DIR$/src/main/webapp/project/contractManagement.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/pipe/pipeManagement.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/project/projectManagement.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/od/odblastprocess.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastProcess.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastProcess.xml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties" />
+        <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh.properties" />
+        <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdBlastProcessController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastInspectionProcess.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastInspectionProcess.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingInspectionProcess.java" />
@@ -274,13 +332,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdFinalInspectionProcess.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdStencilProcess.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdStencilProcess.xml" />
-        <option value="$PROJECT_DIR$/src/main/webapp/od/odblastprocess.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastProcess.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastProcess.xml" />
-        <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties" />
-        <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh.properties" />
-        <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings.properties" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdBlastProcessController.java" />
       </list>
     </option>
   </component>
@@ -808,7 +859,7 @@
       <workItem from="1518959165771" duration="8705000" />
       <workItem from="1519031292278" duration="1840000" />
       <workItem from="1519046000207" duration="9437000" />
-      <workItem from="1519132008656" duration="6560000" />
+      <workItem from="1519132008656" duration="7004000" />
     </task>
     <servers />
   </component>
@@ -821,10 +872,11 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="381440000" />
+    <option name="totallyTimeSpent" value="381884000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="835" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -847,7 +899,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39056358" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891247" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947975" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25694445" sideWeight="0.6301075" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25694445" sideWeight="0.6301075" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25694445" sideWeight="0.36989248" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1086,118 +1138,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingInspectionProcess.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="167" column="28" lean-forward="true" selection-start-line="167" selection-start-column="28" selection-end-line="167" selection-end-column="28" />
-          <folding>
-            <element signature="e#4622#4623#0" expanded="true" />
-            <element signature="e#4657#4658#0" expanded="true" />
-            <element signature="e#4713#4714#0" expanded="true" />
-            <element signature="e#4761#4762#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingInspectionProcess.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="41" column="71" lean-forward="false" selection-start-line="41" selection-start-column="71" selection-end-line="41" selection-end-column="71" />
-          <folding>
-            <marker date="1519135000454" expanded="true" signature="338:897" ph="INSERT INTO od_coating_inspection_process... " />
-            <marker date="1519135000454" expanded="true" signature="1017:1060" ph="SELECT * fro... od_coating_inspection_process" />
-            <marker date="1519135000454" expanded="true" signature="1182:1745" ph="UPDATE od_coating_inspection_process... " />
-            <marker date="1519135000454" expanded="true" signature="1814:1864" ph="select count... od_coating_inspection_process" />
-            <marker date="1519135000454" expanded="true" signature="3264:3338" ph="select * fro... od_coating_inspection_process" />
-            <marker date="1519135000454" expanded="true" signature="3482:3540" ph="select * fro... od_coating_inspection_process" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingProcess.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="161" column="40" lean-forward="false" selection-start-line="161" selection-start-column="28" selection-end-line="161" selection-end-column="40" />
-          <folding>
-            <element signature="e#4502#4503#0" expanded="true" />
-            <element signature="e#4537#4538#0" expanded="true" />
-            <element signature="e#4593#4594#0" expanded="true" />
-            <element signature="e#4641#4642#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingProcess.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="40" column="71" lean-forward="false" selection-start-line="40" selection-start-column="71" selection-end-line="40" selection-end-column="71" />
-          <folding>
-            <marker date="1519135095979" expanded="true" signature="315:870" ph="INSERT INTO od_coating_process... " />
-            <marker date="1519135095979" expanded="true" signature="978:1010" ph="SELECT * fro... od_coating_process" />
-            <marker date="1519135095979" expanded="true" signature="1120:1679" ph="UPDATE od_coating_process... " />
-            <marker date="1519135095979" expanded="true" signature="1748:1787" ph="select count... od_coating_process" />
-            <marker date="1519135095979" expanded="true" signature="3141:3204" ph="select * fro... od_coating_process" />
-            <marker date="1519135095979" expanded="true" signature="3336:3383" ph="select * fro... od_coating_process" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdFinalInspectionProcess.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="71" column="40" lean-forward="false" selection-start-line="71" selection-start-column="28" selection-end-line="71" selection-end-column="40" />
-          <folding>
-            <element signature="e#1650#1651#0" expanded="true" />
-            <element signature="e#1685#1686#0" expanded="true" />
-            <element signature="e#1741#1742#0" expanded="true" />
-            <element signature="e#1789#1790#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdFinalInspectionProcess.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="31" column="60" lean-forward="false" selection-start-line="31" selection-start-column="48" selection-end-line="31" selection-end-column="60" />
-          <folding>
-            <marker date="1519135172252" expanded="true" signature="333:546" ph="INSERT INTO od_final_inspection_process... " />
-            <marker date="1519135172252" expanded="true" signature="665:706" ph="SELECT * fro... od_final_inspection_process" />
-            <marker date="1519135172252" expanded="true" signature="827:1044" ph="UPDATE od_final_inspection_process... " />
-            <marker date="1519135172252" expanded="true" signature="1113:1161" ph="select count... od_final_inspection_process" />
-            <marker date="1519135172252" expanded="true" signature="1785:1857" ph="select * fro... od_final_inspection_process" />
-            <marker date="1519135172252" expanded="true" signature="2000:2056" ph="select * fro... od_final_inspection_process" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdStencilProcess.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="87" column="27" lean-forward="false" selection-start-line="87" selection-start-column="15" selection-end-line="87" selection-end-column="27" />
-          <folding>
-            <element signature="e#2224#2225#0" expanded="true" />
-            <element signature="e#2259#2260#0" expanded="true" />
-            <element signature="e#2315#2316#0" expanded="true" />
-            <element signature="e#2363#2364#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdStencilProcess.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="33" column="60" lean-forward="false" selection-start-line="33" selection-start-column="48" selection-end-line="33" selection-end-column="60" />
-          <folding>
-            <marker date="1519135244599" expanded="true" signature="318:590" ph="INSERT INTO od_stencil_process... " />
-            <marker date="1519135244599" expanded="true" signature="701:733" ph="SELECT * fro... od_stencil_process" />
-            <marker date="1519135244599" expanded="true" signature="846:1122" ph="UPDATE od_stencil_process... " />
-            <marker date="1519135244599" expanded="true" signature="1191:1230" ph="select count... od_stencil_process" />
-            <marker date="1519135244599" expanded="true" signature="2000:2063" ph="select * fro... od_stencil_process" />
-            <marker date="1519135244599" expanded="true" signature="2198:2245" ph="select * fro... od_stencil_process" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeStatus.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -1228,19 +1168,6 @@
         <state relative-caret-position="126">
           <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastInspectionProcess.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="136" column="5" lean-forward="true" selection-start-line="136" selection-start-column="5" selection-end-line="136" selection-end-column="5" />
-          <folding>
-            <element signature="e#3988#3989#0" expanded="true" />
-            <element signature="e#4023#4024#0" expanded="true" />
-            <element signature="e#4079#4080#0" expanded="true" />
-            <element signature="e#4127#4128#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1284,21 +1211,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastInspectionProcess.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="50" column="9" lean-forward="true" selection-start-line="50" selection-start-column="9" selection-end-line="50" selection-end-column="9" />
-          <folding>
-            <marker date="1519134867440" expanded="true" signature="334:821" ph="INSERT INTO od_coating_inspection_process... " />
-            <marker date="1519134867440" expanded="true" signature="940:981" ph="SELECT * fro... od_blast_inspection_process" />
-            <marker date="1519134867440" expanded="true" signature="1102:1593" ph="UPDATE od_coating_inspection_process... " />
-            <marker date="1519134867440" expanded="true" signature="1662:1710" ph="select count... od_blast_inspection_process" />
-            <marker date="1519134867440" expanded="true" signature="2950:3022" ph="select * fro... od_blast_inspection_process" />
-            <marker date="1519134867440" expanded="true" signature="3165:3221" ph="select * fro... od_blast_inspection_process" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeBasicInfo.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
@@ -1327,19 +1239,6 @@
           <caret line="510" column="29" lean-forward="true" selection-start-line="510" selection-start-column="29" selection-end-line="510" selection-end-column="29" />
           <folding>
             <element signature="n#style#0;n#select#0;n#td#1;n#tr#5;n#table#1;n#fieldset#1;n#form#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastProcess.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="169" column="21" lean-forward="false" selection-start-line="169" selection-start-column="15" selection-end-line="169" selection-end-column="21" />
-          <folding>
-            <element signature="e#4790#4791#0" expanded="true" />
-            <element signature="e#4819#4820#0" expanded="true" />
-            <element signature="e#4863#4864#0" expanded="true" />
-            <element signature="e#4899#4900#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1396,6 +1295,178 @@
           <caret line="68" column="47" lean-forward="true" selection-start-line="68" selection-start-column="47" selection-end-line="68" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastProcess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="23" column="4" lean-forward="false" selection-start-line="23" selection-start-column="4" selection-end-line="23" selection-end-column="27" />
+          <folding>
+            <element signature="e#4790#4791#0" expanded="true" />
+            <element signature="e#4819#4820#0" expanded="true" />
+            <element signature="e#4863#4864#0" expanded="true" />
+            <element signature="e#4899#4900#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastInspectionProcess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="326">
+          <caret line="165" column="21" lean-forward="false" selection-start-line="165" selection-start-column="15" selection-end-line="165" selection-end-column="21" />
+          <folding>
+            <element signature="e#4063#4064#0" expanded="true" />
+            <element signature="e#4098#4099#0" expanded="true" />
+            <element signature="e#4154#4155#0" expanded="true" />
+            <element signature="e#4202#4203#0" expanded="true" />
+            <element signature="e#4377#4378#0" expanded="true" />
+            <element signature="e#4406#4407#0" expanded="true" />
+            <element signature="e#4450#4451#0" expanded="true" />
+            <element signature="e#4486#4487#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastInspectionProcess.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="249" lean-forward="false" selection-start-line="9" selection-start-column="249" selection-end-line="9" selection-end-column="249" />
+          <folding>
+            <marker date="1519139266673" expanded="true" signature="334:838" ph="INSERT INTO od_coating_inspection_process... " />
+            <marker date="1519139266673" expanded="true" signature="957:998" ph="SELECT * fro... od_blast_inspection_process" />
+            <marker date="1519139266673" expanded="true" signature="1119:1627" ph="UPDATE od_coating_inspection_process... " />
+            <marker date="1519139266673" expanded="true" signature="1696:1744" ph="select count... od_blast_inspection_process" />
+            <marker date="1519139266673" expanded="true" signature="3045:3117" ph="select * fro... od_blast_inspection_process" />
+            <marker date="1519139266673" expanded="true" signature="3260:3316" ph="select * fro... od_blast_inspection_process" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingInspectionProcess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="189" column="28" lean-forward="false" selection-start-line="189" selection-start-column="22" selection-end-line="189" selection-end-column="28" />
+          <folding>
+            <element signature="e#4694#4695#0" expanded="true" />
+            <element signature="e#4729#4730#0" expanded="true" />
+            <element signature="e#4785#4786#0" expanded="true" />
+            <element signature="e#4833#4834#0" expanded="true" />
+            <element signature="e#5008#5009#0" expanded="true" />
+            <element signature="e#5037#5038#0" expanded="true" />
+            <element signature="e#5081#5082#0" expanded="true" />
+            <element signature="e#5117#5118#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingInspectionProcess.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="283" lean-forward="false" selection-start-line="9" selection-start-column="283" selection-end-line="9" selection-end-column="283" />
+          <folding>
+            <marker date="1519139351981" expanded="true" signature="338:914" ph="INSERT INTO od_coating_inspection_process... " />
+            <marker date="1519139351981" expanded="true" signature="1034:1077" ph="SELECT * fro... od_coating_inspection_process" />
+            <marker date="1519139351981" expanded="true" signature="1199:1779" ph="UPDATE od_coating_inspection_process... " />
+            <marker date="1519139351981" expanded="true" signature="1848:1898" ph="select count... od_coating_inspection_process" />
+            <marker date="1519139351981" expanded="true" signature="3358:3432" ph="select * fro... od_coating_inspection_process" />
+            <marker date="1519139351981" expanded="true" signature="3576:3634" ph="select * fro... od_coating_inspection_process" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingProcess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="326">
+          <caret line="175" column="21" lean-forward="false" selection-start-line="175" selection-start-column="15" selection-end-line="175" selection-end-column="21" />
+          <folding>
+            <element signature="e#4574#4575#0" expanded="true" />
+            <element signature="e#4609#4610#0" expanded="true" />
+            <element signature="e#4665#4666#0" expanded="true" />
+            <element signature="e#4713#4714#0" expanded="true" />
+            <element signature="e#4888#4889#0" expanded="true" />
+            <element signature="e#4917#4918#0" expanded="true" />
+            <element signature="e#4961#4962#0" expanded="true" />
+            <element signature="e#4997#4998#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingProcess.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="276" lean-forward="false" selection-start-line="9" selection-start-column="276" selection-end-line="9" selection-end-column="276" />
+          <folding>
+            <marker date="1519139431196" expanded="true" signature="315:887" ph="INSERT INTO od_coating_process... " />
+            <marker date="1519139431196" expanded="true" signature="995:1027" ph="SELECT * fro... od_coating_process" />
+            <marker date="1519139431196" expanded="true" signature="1137:1713" ph="UPDATE od_coating_process... " />
+            <marker date="1519139431196" expanded="true" signature="1782:1821" ph="select count... od_coating_process" />
+            <marker date="1519139431196" expanded="true" signature="3235:3298" ph="select * fro... od_coating_process" />
+            <marker date="1519139431196" expanded="true" signature="3430:3477" ph="select * fro... od_coating_process" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdFinalInspectionProcess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="326">
+          <caret line="85" column="21" lean-forward="false" selection-start-line="85" selection-start-column="15" selection-end-line="85" selection-end-column="21" />
+          <folding>
+            <element signature="e#1722#1723#0" expanded="true" />
+            <element signature="e#1757#1758#0" expanded="true" />
+            <element signature="e#1813#1814#0" expanded="true" />
+            <element signature="e#1861#1862#0" expanded="true" />
+            <element signature="e#2036#2037#0" expanded="true" />
+            <element signature="e#2065#2066#0" expanded="true" />
+            <element signature="e#2109#2110#0" expanded="true" />
+            <element signature="e#2145#2146#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdFinalInspectionProcess.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="122" lean-forward="false" selection-start-line="9" selection-start-column="122" selection-end-line="9" selection-end-column="122" />
+          <folding>
+            <marker date="1519139504267" expanded="true" signature="333:563" ph="INSERT INTO od_final_inspection_process... " />
+            <marker date="1519139504267" expanded="true" signature="682:723" ph="SELECT * fro... od_final_inspection_process" />
+            <marker date="1519139504267" expanded="true" signature="844:1078" ph="UPDATE od_final_inspection_process... " />
+            <marker date="1519139504267" expanded="true" signature="1147:1195" ph="select count... od_final_inspection_process" />
+            <marker date="1519139504267" expanded="true" signature="1879:1951" ph="select * fro... od_final_inspection_process" />
+            <marker date="1519139504267" expanded="true" signature="2094:2150" ph="select * fro... od_final_inspection_process" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdStencilProcess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="105" column="31" lean-forward="false" selection-start-line="105" selection-start-column="31" selection-end-line="105" selection-end-column="31" />
+          <folding>
+            <element signature="e#2297#2298#0" expanded="true" />
+            <element signature="e#2332#2333#0" expanded="true" />
+            <element signature="e#2388#2389#0" expanded="true" />
+            <element signature="e#2436#2437#0" expanded="true" />
+            <element signature="e#2640#2641#0" expanded="true" />
+            <element signature="e#2684#2685#0" expanded="true" />
+            <element signature="e#2720#2721#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdStencilProcess.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding>
+            <marker date="1519139572868" expanded="true" signature="318:607" ph="INSERT INTO od_stencil_process... " />
+            <marker date="1519139572868" expanded="true" signature="718:750" ph="SELECT * fro... od_stencil_process" />
+            <marker date="1519139572868" expanded="true" signature="863:1156" ph="UPDATE od_stencil_process... " />
+            <marker date="1519139572868" expanded="true" signature="1225:1264" ph="select count... od_stencil_process" />
+            <marker date="1519139572868" expanded="true" signature="2094:2157" ph="select * fro... od_stencil_process" />
+            <marker date="1519139572868" expanded="true" signature="2292:2339" ph="select * fro... od_stencil_process" />
           </folding>
         </state>
       </provider>

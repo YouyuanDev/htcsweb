@@ -7,7 +7,7 @@
 
 
     <insert id="addOdCoatInProcess" parameterType="com.htcsweb.entity.OdCoatingInspectionProcess">
-     INSERT INTO od_coating_inspection_process(pipe_no,operation_time,operator_no,base_coat_thickness,top_coat_thickness,total_coating_thickness,holidays,holiday_tester_volts,repairs,cutback_length,bevel,stencil_verification,surface_condition,adhesion_test,upload_files,remark) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{base_coat_thickness},#{top_coat_thickness},#{total_coating_thickness},#{holidays},#{holiday_tester_volts},#{repairs},#{cutback_length},#{bevel},#{stencil_verification},#{surface_condition},#{adhesion_test},#{upload_files},#{remark})
+     INSERT INTO od_coating_inspection_process(pipe_no,operation_time,operator_no,base_coat_thickness,top_coat_thickness,total_coating_thickness,holidays,holiday_tester_volts,repairs,cutback_length,bevel,stencil_verification,surface_condition,adhesion_test,upload_files,remark,result) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{base_coat_thickness},#{top_coat_thickness},#{total_coating_thickness},#{holidays},#{holiday_tester_volts},#{repairs},#{cutback_length},#{bevel},#{stencil_verification},#{surface_condition},#{adhesion_test},#{upload_files},#{remark},#{result})
     </insert>
 
     <select id="getOdCoatInProcess" resultType="com.htcsweb.entity.OdCoatingInspectionProcess">
@@ -15,7 +15,7 @@
     </select>
 
     <update id="updateOdCoatInProcess" parameterType="com.htcsweb.entity.OdCoatingInspectionProcess">
-    UPDATE od_coating_inspection_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},base_coat_thickness=#{base_coat_thickness},top_coat_thickness=#{top_coat_thickness},total_coating_thickness=#{total_coating_thickness},holidays=#{holidays},holiday_tester_volts=#{holiday_tester_volts},repairs=#{repairs},cutback_length=#{cutback_length},bevel=#{bevel},stencil_verification=#{stencil_verification},surface_condition=#{surface_condition},adhesion_test=#{adhesion_test},upload_files=#{upload_files},remark=#{remark} where id=#{id}
+    UPDATE od_coating_inspection_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},base_coat_thickness=#{base_coat_thickness},top_coat_thickness=#{top_coat_thickness},total_coating_thickness=#{total_coating_thickness},holidays=#{holidays},holiday_tester_volts=#{holiday_tester_volts},repairs=#{repairs},cutback_length=#{cutback_length},bevel=#{bevel},stencil_verification=#{stencil_verification},surface_condition=#{surface_condition},adhesion_test=#{adhesion_test},upload_files=#{upload_files},remark=#{remark},result=#{result} where id=#{id}
     </update>
 
 
@@ -41,6 +41,7 @@
         <result property="adhesion_test" column="adhesion_test"></result>
         <result property="upload_files" column="upload_files"></result>
         <result property="remark" column="remark"></result>
+        <result property="result" column="result"></result>
     </resultMap>
 
     <select id="feny"  resultMap="all">

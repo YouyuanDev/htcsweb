@@ -20,11 +20,12 @@ public class OdCoatingInspectionProcess {
     private String adhesion_test;
     private String upload_files;
     private String remark;
+    private String result;
 
     public OdCoatingInspectionProcess() {
     }
 
-    public OdCoatingInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, float base_coat_thickness, float top_coat_thickness, float total_coating_thickness, int holidays, float holiday_tester_volts, int repairs, float cutback_length, String bevel, String stencil_verification, String surface_condition, String adhesion_test, String upload_files, String remark) {
+    public OdCoatingInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, float base_coat_thickness, float top_coat_thickness, float total_coating_thickness, int holidays, float holiday_tester_volts, int repairs, float cutback_length, String bevel, String stencil_verification, String surface_condition, String adhesion_test, String upload_files, String remark, String result) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -42,6 +43,7 @@ public class OdCoatingInspectionProcess {
         this.adhesion_test = adhesion_test;
         this.upload_files = upload_files;
         this.remark = remark;
+        this.result = result;
     }
 
     public int getId() {
@@ -178,5 +180,13 @@ public class OdCoatingInspectionProcess {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
     }
 }
