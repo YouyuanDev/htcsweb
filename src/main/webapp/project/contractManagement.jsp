@@ -80,6 +80,10 @@
             if(row){
                 $('#hlContractDialog').dialog('open').dialog('setTitle','修改');
                 $('#contractForm').form('load',row);
+                $('#contractForm').form('load', {
+                    'contractid': row.id
+                });
+
                 look1.setText(row.project_no);
                 // $('#contractForm').form('load',{
                 //     'contractid':row.id,
@@ -114,7 +118,22 @@
                 }
                 var idArrs=idArr.join(',');
 
-                hlAlertFive("/ContractOperation/delContract.action",idArrs,idArr.length);
+                $.messager.confirm('系统提示',"您确定要删除这<font color=red>"+idArr.length+ "</font>条数据吗？",function (r) {
+                    if(r){
+                        $.post(
+                            "/ContractOperation/delContract.action",
+                            {"hlparam":idArrs},function (data) {
+                                if(data.success){
+                                    $("#contractDatagrids").datagrid("reload");
+                                }else{
+                                    hlAlertFour("操作失败!");
+                                }
+                            },"json");
+                    }
+                });
+
+
+                //hlAlertFive("/ContractOperation/delContract.action",idArrs,idArr.length);
                 // $.messager.confirm('提示','您确定要删除<font>')
             }else{
                 hlAlertOne();
@@ -260,7 +279,7 @@
             <table class="ht-table" width="100%" border="0">
                 <tr>
                     <td class="i18n1" name="id">流水号</td>
-                    <td colspan="5"><input class="easyui-textbox" type="text" name="contractid" readonly="true" value=""/></td>
+                    <td colspan="5"><input class="easyui-textbox" type="text" name="contractid" readonly="true" value="0"/></td>
 
                 </tr>
                 <tr>

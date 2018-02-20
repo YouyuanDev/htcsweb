@@ -2,16 +2,15 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="htcsweb:war" />
+      <artifact name="htcsweb:war exploded" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa3f659b-6ccf-4ae8-84a0-55d0a3756f6f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/ProjectController.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/ProjectController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/UploadFileController.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/UploadFileController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/ProjectInfoDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/ProjectInfoDao.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ProjectInfo.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ProjectInfo.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/common.js" afterPath="$PROJECT_DIR$/src/main/webapp/js/common.js" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/pipe/pipeManagement.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/pipe/pipeManagement.jsp" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/project/contractManagement.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/project/contractManagement.jsp" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/project/projectManagement.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/project/projectManagement.jsp" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -40,28 +39,52 @@
       <file leaf-file-name="projectManagement.jsp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/project/projectManagement.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="478" column="31" lean-forward="false" selection-start-line="478" selection-start-column="31" selection-end-line="478" selection-end-column="31" />
+            <state relative-caret-position="-228">
+              <caret line="175" column="22" lean-forward="false" selection-start-line="175" selection-start-column="22" selection-end-line="175" selection-end-column="22" />
               <folding>
-                <marker date="1519055363502" expanded="true" signature="9116:9122" ph="&amp;nbsp;" />
-                <marker date="1519055363502" expanded="true" signature="9122:9128" ph="&amp;nbsp;" />
-                <marker date="1519055363502" expanded="true" signature="9128:9134" ph="&amp;nbsp;" />
-                <marker date="1519055363502" expanded="true" signature="9134:9140" ph="&amp;nbsp;" />
-                <marker date="1519055363502" expanded="true" signature="9140:9146" ph="&amp;nbsp;" />
-                <marker date="1519055363502" expanded="true" signature="9146:9152" ph="&amp;nbsp;" />
-                <marker date="1519055363502" expanded="true" signature="9152:9158" ph="&amp;nbsp;" />
-                <marker date="1519055363502" expanded="true" signature="9158:9164" ph="&amp;nbsp;" />
+                <marker date="1519134482984" expanded="true" signature="9765:9771" ph="&amp;nbsp;" />
+                <marker date="1519134482984" expanded="true" signature="9771:9777" ph="&amp;nbsp;" />
+                <marker date="1519134482984" expanded="true" signature="9777:9783" ph="&amp;nbsp;" />
+                <marker date="1519134482984" expanded="true" signature="9783:9789" ph="&amp;nbsp;" />
+                <marker date="1519134482984" expanded="true" signature="9789:9795" ph="&amp;nbsp;" />
+                <marker date="1519134482984" expanded="true" signature="9795:9801" ph="&amp;nbsp;" />
+                <marker date="1519134482984" expanded="true" signature="9801:9807" ph="&amp;nbsp;" />
+                <marker date="1519134482984" expanded="true" signature="9807:9813" ph="&amp;nbsp;" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UploadFileController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/UploadFileController.java">
+      <file leaf-file-name="pipeManagement.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/pipe/pipeManagement.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2">
-              <caret line="111" column="31" lean-forward="false" selection-start-line="111" selection-start-column="18" selection-end-line="111" selection-end-column="31" />
+            <state relative-caret-position="198">
+              <caret line="112" column="49" lean-forward="true" selection-start-line="112" selection-start-column="49" selection-end-line="112" selection-end-column="49" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="contractManagement.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/project/contractManagement.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="291">
+              <caret line="132" column="19" lean-forward="true" selection-start-line="120" selection-start-column="16" selection-end-line="132" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="multiupload.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/miniui/multiupload/multiupload.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" column="42" lean-forward="true" selection-start-line="20" selection-start-column="15" selection-end-line="20" selection-end-column="42" />
+              <folding>
+                <marker date="1519132663761" expanded="true" signature="2231:2254" ph="..." />
+                <marker date="1519132663761" expanded="true" signature="2308:2318" ph="..." />
+                <marker date="1519132663761" expanded="true" signature="6755:6776" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -69,18 +92,8 @@
       <file leaf-file-name="uploadPipe.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/pipe/uploadPipe.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
+            <state relative-caret-position="15">
               <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="common.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/js/common.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="92" column="27" lean-forward="false" selection-start-line="92" selection-start-column="24" selection-end-line="92" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -89,7 +102,7 @@
       <file leaf-file-name="ProjectController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/ProjectController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="564">
+            <state relative-caret-position="266">
               <caret line="153" column="0" lean-forward="false" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
               <folding />
             </state>
@@ -134,29 +147,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="odblastprocess.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/od/odblastprocess.jsp">
+      <file leaf-file-name="common.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/js/common.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
-              <caret line="307" column="57" lean-forward="false" selection-start-line="307" selection-start-column="57" selection-end-line="307" selection-end-column="57" />
+            <state relative-caret-position="123">
+              <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProjectInfo.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ProjectInfo.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="80" column="49" lean-forward="false" selection-start-line="80" selection-start-column="49" selection-end-line="80" selection-end-column="49" />
-              <folding>
-                <marker date="1519048460962" expanded="true" signature="1009:1042" ph="select count... project_info" />
-                <marker date="1519048460962" expanded="true" signature="1114:1178" ph="select count... project_info" />
-                <marker date="1519048460962" expanded="true" signature="1251:2175" ph="Select * fro... project_info" />
-                <marker date="1519048460962" expanded="true" signature="2282:2546" ph="UPDATE project_info... " />
-                <marker date="1519048460962" expanded="true" signature="2650:2909" ph="INSERT INTO project_info... " />
-                <marker date="1519048460962" expanded="true" signature="3532:3573" ph="SELECT * fro... project_info" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -176,12 +172,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>saveOdBlastProcess</find>
-      <find>project_time</find>
-      <find>myformatter2</find>
-      <find>odbptime</find>
-      <find>formatterdate</find>
-      <find>myparsedate</find>
       <find>myformatter</find>
       <find>myparser2</find>
       <find>blast_line_speed</find>
@@ -206,6 +196,12 @@
       <find>delUpload</find>
       <find>editFilesList</find>
       <find>content-dl</find>
+      <find>limitType</find>
+      <find>delete filename</find>
+      <find>hlAlertFive</find>
+      <find>odProjectDatagrids</find>
+      <find>projectid</find>
+      <find>contractid</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src/main/webapp/WEB-INF/lib</dir>
@@ -230,7 +226,6 @@
         <option value="$PROJECT_DIR$/src/main/webapp/uploads/tt.css" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/util/FileRenameUtil.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/js/lrscroll.js" />
-        <option value="$PROJECT_DIR$/src/main/webapp/miniui/multiupload/multiupload.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastProcess.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/login/login.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PersonDao.java" />
@@ -243,9 +238,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdBlastProcessDao.java" />
         <option value="$PROJECT_DIR$/src/main/resources/db.properties" />
         <option value="$PROJECT_DIR$/src/main/webapp/css/common.css" />
-        <option value="$PROJECT_DIR$/src/main/webapp/js/common.js" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ContractInfo.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/project/contractManagement.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/ContractInfoDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/ContractController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ContractInfo.xml" />
@@ -259,7 +252,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeStatus.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/util/ComboxItem.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PipeBasicInfoController.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/pipe/pipeManagement.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastProcess.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdBlastProcessController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/od/odblastprocess.jsp" />
@@ -272,6 +264,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/ProjectInfoDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/ProjectController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/UploadFileController.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/miniui/multiupload/multiupload.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/js/common.js" />
+        <option value="$PROJECT_DIR$/src/main/webapp/project/contractManagement.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/pipe/pipeManagement.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/project/projectManagement.jsp" />
       </list>
     </option>
@@ -310,6 +306,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -430,10 +430,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
-      <pane id="AndroidView" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -478,7 +474,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Tomcat Server.projectManagement.jsp (4)">
+  <component name="RunManager" selected="Tomcat Server.projectManagement.jsp">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -554,17 +550,17 @@
       <properties />
       <listeners />
     </configuration>
-    <configuration name="projectManagement.jsp (1)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/project/projectManagement.jsp" />
+    <configuration name="contractManagement.jsp (1)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/project/contractManagement.jsp" />
       <deployment>
-        <artifact name="htcsweb:war">
+        <artifact name="htcsweb:war exploded">
           <settings>
             <option name="CONTEXT_PATH" value="/" />
           </settings>
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="projectManagement_jsp_(1)_htcsweb_14" />
+        <option name="BASE_DIRECTORY_NAME" value="contractManagement_jsp_(1)_htcsweb_15" />
       </server-settings>
       <predefined_log_file id="Tomcat" enabled="true" />
       <predefined_log_file id="Tomcat Catalina" enabled="true" />
@@ -589,21 +585,21 @@
       </ConfigurationWrapper>
       <method>
         <option name="BuildArtifacts" enabled="true">
-          <artifact name="htcsweb:war" />
+          <artifact name="htcsweb:war exploded" />
         </option>
       </method>
     </configuration>
-    <configuration name="projectManagement.jsp (2)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/project/projectManagement.jsp" />
+    <configuration name="contractManagement.jsp (2)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/project/contractManagement.jsp" />
       <deployment>
-        <artifact name="htcsweb:war">
+        <artifact name="htcsweb:war exploded">
           <settings>
             <option name="CONTEXT_PATH" value="/" />
           </settings>
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="projectManagement_jsp_(2)_htcsweb_13" />
+        <option name="BASE_DIRECTORY_NAME" value="contractManagement_jsp_(2)_htcsweb_12" />
       </server-settings>
       <predefined_log_file id="Tomcat" enabled="true" />
       <predefined_log_file id="Tomcat Catalina" enabled="true" />
@@ -628,21 +624,21 @@
       </ConfigurationWrapper>
       <method>
         <option name="BuildArtifacts" enabled="true">
-          <artifact name="htcsweb:war" />
+          <artifact name="htcsweb:war exploded" />
         </option>
       </method>
     </configuration>
-    <configuration name="projectManagement.jsp (3)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/project/projectManagement.jsp" />
+    <configuration name="contractManagement.jsp" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/project/contractManagement.jsp" />
       <deployment>
-        <artifact name="htcsweb:war">
+        <artifact name="htcsweb:war exploded">
           <settings>
             <option name="CONTEXT_PATH" value="/" />
           </settings>
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="projectManagement_jsp_(3)_htcsweb_12" />
+        <option name="BASE_DIRECTORY_NAME" value="contractManagement_jsp_htcsweb_16" />
       </server-settings>
       <predefined_log_file id="Tomcat" enabled="true" />
       <predefined_log_file id="Tomcat Catalina" enabled="true" />
@@ -667,21 +663,21 @@
       </ConfigurationWrapper>
       <method>
         <option name="BuildArtifacts" enabled="true">
-          <artifact name="htcsweb:war" />
+          <artifact name="htcsweb:war exploded" />
         </option>
       </method>
     </configuration>
-    <configuration name="projectManagement.jsp (4)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/project/projectManagement.jsp" />
+    <configuration name="pipeManagement.jsp" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/pipe/pipeManagement.jsp" />
       <deployment>
-        <artifact name="htcsweb:war">
+        <artifact name="htcsweb:war exploded">
           <settings>
             <option name="CONTEXT_PATH" value="/" />
           </settings>
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="projectManagement_jsp_(4)_htcsweb_11" />
+        <option name="BASE_DIRECTORY_NAME" value="pipeManagement_jsp_htcsweb_11" />
       </server-settings>
       <predefined_log_file id="Tomcat" enabled="true" />
       <predefined_log_file id="Tomcat Catalina" enabled="true" />
@@ -706,21 +702,21 @@
       </ConfigurationWrapper>
       <method>
         <option name="BuildArtifacts" enabled="true">
-          <artifact name="htcsweb:war" />
+          <artifact name="htcsweb:war exploded" />
         </option>
       </method>
     </configuration>
     <configuration name="projectManagement.jsp" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/project/projectManagement.jsp" />
       <deployment>
-        <artifact name="htcsweb:war">
+        <artifact name="htcsweb:war exploded">
           <settings>
             <option name="CONTEXT_PATH" value="/" />
           </settings>
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="projectManagement_jsp_htcsweb_15" />
+        <option name="BASE_DIRECTORY_NAME" value="projectManagement_jsp_htcsweb_18" />
       </server-settings>
       <predefined_log_file id="Tomcat" enabled="true" />
       <predefined_log_file id="Tomcat Catalina" enabled="true" />
@@ -745,7 +741,7 @@
       </ConfigurationWrapper>
       <method>
         <option name="BuildArtifacts" enabled="true">
-          <artifact name="htcsweb:war" />
+          <artifact name="htcsweb:war exploded" />
         </option>
       </method>
     </configuration>
@@ -756,19 +752,19 @@
       <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Tomcat Server.projectManagement.jsp" />
-      <item index="1" class="java.lang.String" itemvalue="Tomcat Server.projectManagement.jsp (1)" />
-      <item index="2" class="java.lang.String" itemvalue="Tomcat Server.projectManagement.jsp (2)" />
-      <item index="3" class="java.lang.String" itemvalue="Tomcat Server.projectManagement.jsp (3)" />
-      <item index="4" class="java.lang.String" itemvalue="Tomcat Server.projectManagement.jsp (4)" />
+      <item index="0" class="java.lang.String" itemvalue="Tomcat Server.contractManagement.jsp" />
+      <item index="1" class="java.lang.String" itemvalue="Tomcat Server.contractManagement.jsp (1)" />
+      <item index="2" class="java.lang.String" itemvalue="Tomcat Server.contractManagement.jsp (2)" />
+      <item index="3" class="java.lang.String" itemvalue="Tomcat Server.pipeManagement.jsp" />
+      <item index="4" class="java.lang.String" itemvalue="Tomcat Server.projectManagement.jsp" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Tomcat Server.projectManagement.jsp (4)" />
-        <item index="1" class="java.lang.String" itemvalue="Tomcat Server.projectManagement.jsp (3)" />
-        <item index="2" class="java.lang.String" itemvalue="Tomcat Server.projectManagement.jsp (2)" />
-        <item index="3" class="java.lang.String" itemvalue="Tomcat Server.projectManagement.jsp (1)" />
-        <item index="4" class="java.lang.String" itemvalue="Tomcat Server.projectManagement.jsp" />
+        <item index="0" class="java.lang.String" itemvalue="Tomcat Server.projectManagement.jsp" />
+        <item index="1" class="java.lang.String" itemvalue="Tomcat Server.pipeManagement.jsp" />
+        <item index="2" class="java.lang.String" itemvalue="Tomcat Server.contractManagement.jsp (2)" />
+        <item index="3" class="java.lang.String" itemvalue="Tomcat Server.contractManagement.jsp (1)" />
+        <item index="4" class="java.lang.String" itemvalue="Tomcat Server.contractManagement.jsp" />
       </list>
     </recent_temporary>
   </component>
@@ -816,7 +812,8 @@
       <workItem from="1518942400843" duration="3331000" />
       <workItem from="1518959165771" duration="8705000" />
       <workItem from="1519031292278" duration="1840000" />
-      <workItem from="1519046000207" duration="9382000" />
+      <workItem from="1519046000207" duration="9437000" />
+      <workItem from="1519132008656" duration="2484000" />
     </task>
     <servers />
   </component>
@@ -829,10 +826,11 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="374825000" />
+    <option name="totallyTimeSpent" value="377364000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="835" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -851,12 +849,12 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39056358" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39056358" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891247" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947975" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25694445" sideWeight="0.6408602" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25694445" sideWeight="0.35913977" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25694445" sideWeight="0.6301075" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25694445" sideWeight="0.36989248" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1115,22 +1113,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/project/contractManagement.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2711">
-          <caret line="207" column="104" lean-forward="false" selection-start-line="207" selection-start-column="54" selection-end-line="207" selection-end-column="104" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/pipe/pipeManagement.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1155">
-          <caret line="77" column="55" lean-forward="false" selection-start-line="77" selection-start-column="55" selection-end-line="77" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/strings.properties">
       <provider editor-type-id="ResourceBundle">
         <state />
@@ -1182,18 +1164,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/miniui/multiupload/multiupload.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="24" lean-forward="true" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
-          <folding>
-            <marker date="1518068684372" expanded="true" signature="2231:2254" ph="..." />
-            <marker date="1518068684372" expanded="true" signature="2308:2318" ph="..." />
-            <marker date="1518068684372" expanded="true" signature="6755:6776" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PipeBasicInfoController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-76">
@@ -1234,6 +1204,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastInspectionProcess.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="26" column="43" lean-forward="false" selection-start-line="26" selection-start-column="43" selection-end-line="26" selection-end-column="43" />
+          <folding>
+            <marker date="1517367136000" expanded="true" signature="334:792" ph="INSERT INTO od_coating_inspection_process... " />
+            <marker date="1517367136000" expanded="true" signature="911:952" ph="SELECT * fro... od_blast_inspection_process" />
+            <marker date="1517367136000" expanded="true" signature="1073:1535" ph="UPDATE od_coating_inspection_process... " />
+            <marker date="1517367136000" expanded="true" signature="1604:1652" ph="select count... od_blast_inspection_process" />
+            <marker date="1517367136000" expanded="true" signature="2820:2892" ph="select * fro... od_blast_inspection_process" />
+            <marker date="1517367136000" expanded="true" signature="3035:3091" ph="select * fro... od_blast_inspection_process" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/UploadFileController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1140">
+          <caret line="111" column="31" lean-forward="false" selection-start-line="111" selection-start-column="18" selection-end-line="111" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ProjectInfo.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1200">
+          <caret line="80" column="49" lean-forward="false" selection-start-line="80" selection-start-column="49" selection-end-line="80" selection-end-column="49" />
+          <folding>
+            <marker date="1519048460962" expanded="true" signature="1009:1042" ph="select count... project_info" />
+            <marker date="1519048460962" expanded="true" signature="1114:1178" ph="select count... project_info" />
+            <marker date="1519048460962" expanded="true" signature="1251:2175" ph="Select * fro... project_info" />
+            <marker date="1519048460962" expanded="true" signature="2282:2546" ph="UPDATE project_info... " />
+            <marker date="1519048460962" expanded="true" signature="2650:2909" ph="INSERT INTO project_info... " />
+            <marker date="1519048460962" expanded="true" signature="3532:3573" ph="SELECT * fro... project_info" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/od/odblastprocess.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-984">
+          <caret line="509" column="32" lean-forward="false" selection-start-line="509" selection-start-column="20" selection-end-line="509" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastProcess.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -1250,33 +1266,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ProjectInfo.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/pipe/uploadPipe.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="80" column="49" lean-forward="false" selection-start-line="80" selection-start-column="49" selection-end-line="80" selection-end-column="49" />
-          <folding>
-            <marker date="1519048460962" expanded="true" signature="1009:1042" ph="select count... project_info" />
-            <marker date="1519048460962" expanded="true" signature="1114:1178" ph="select count... project_info" />
-            <marker date="1519048460962" expanded="true" signature="1251:2175" ph="Select * fro... project_info" />
-            <marker date="1519048460962" expanded="true" signature="2282:2546" ph="UPDATE project_info... " />
-            <marker date="1519048460962" expanded="true" signature="2650:2909" ph="INSERT INTO project_info... " />
-            <marker date="1519048460962" expanded="true" signature="3532:3573" ph="SELECT * fro... project_info" />
-          </folding>
+        <state relative-caret-position="15">
+          <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastInspectionProcess.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/ProjectController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="26" column="43" lean-forward="false" selection-start-line="26" selection-start-column="43" selection-end-line="26" selection-end-column="43" />
-          <folding>
-            <marker date="1517367136000" expanded="true" signature="334:792" ph="INSERT INTO od_coating_inspection_process... " />
-            <marker date="1517367136000" expanded="true" signature="911:952" ph="SELECT * fro... od_blast_inspection_process" />
-            <marker date="1517367136000" expanded="true" signature="1073:1535" ph="UPDATE od_coating_inspection_process... " />
-            <marker date="1517367136000" expanded="true" signature="1604:1652" ph="select count... od_blast_inspection_process" />
-            <marker date="1517367136000" expanded="true" signature="2820:2892" ph="select * fro... od_blast_inspection_process" />
-            <marker date="1517367136000" expanded="true" signature="3035:3091" ph="select * fro... od_blast_inspection_process" />
-          </folding>
+        <state relative-caret-position="266">
+          <caret line="153" column="0" lean-forward="false" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1296,59 +1298,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/ProjectController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/miniui/multiupload/multiupload.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="564">
-          <caret line="153" column="0" lean-forward="false" selection-start-line="153" selection-start-column="0" selection-end-line="153" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/pipe/uploadPipe.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="55" column="0" lean-forward="false" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/UploadFileController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2">
-          <caret line="111" column="31" lean-forward="false" selection-start-line="111" selection-start-column="18" selection-end-line="111" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/od/odblastprocess.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="307" column="57" lean-forward="false" selection-start-line="307" selection-start-column="57" selection-end-line="307" selection-end-column="57" />
-          <folding />
+        <state relative-caret-position="300">
+          <caret line="20" column="42" lean-forward="true" selection-start-line="20" selection-start-column="15" selection-end-line="20" selection-end-column="42" />
+          <folding>
+            <marker date="1519132663761" expanded="true" signature="2231:2254" ph="..." />
+            <marker date="1519132663761" expanded="true" signature="2308:2318" ph="..." />
+            <marker date="1519132663761" expanded="true" signature="6755:6776" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/js/common.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="92" column="27" lean-forward="false" selection-start-line="92" selection-start-column="24" selection-end-line="92" selection-end-column="27" />
+        <state relative-caret-position="123">
+          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/project/contractManagement.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="132" column="19" lean-forward="true" selection-start-line="120" selection-start-column="16" selection-end-line="132" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/pipe/pipeManagement.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="112" column="49" lean-forward="true" selection-start-line="112" selection-start-column="49" selection-end-line="112" selection-end-column="49" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/project/projectManagement.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="478" column="31" lean-forward="false" selection-start-line="478" selection-start-column="31" selection-end-line="478" selection-end-column="31" />
+        <state relative-caret-position="-228">
+          <caret line="175" column="22" lean-forward="false" selection-start-line="175" selection-start-column="22" selection-end-line="175" selection-end-column="22" />
           <folding>
-            <marker date="1519055363502" expanded="true" signature="9116:9122" ph="&amp;nbsp;" />
-            <marker date="1519055363502" expanded="true" signature="9122:9128" ph="&amp;nbsp;" />
-            <marker date="1519055363502" expanded="true" signature="9128:9134" ph="&amp;nbsp;" />
-            <marker date="1519055363502" expanded="true" signature="9134:9140" ph="&amp;nbsp;" />
-            <marker date="1519055363502" expanded="true" signature="9140:9146" ph="&amp;nbsp;" />
-            <marker date="1519055363502" expanded="true" signature="9146:9152" ph="&amp;nbsp;" />
-            <marker date="1519055363502" expanded="true" signature="9152:9158" ph="&amp;nbsp;" />
-            <marker date="1519055363502" expanded="true" signature="9158:9164" ph="&amp;nbsp;" />
+            <marker date="1519134482984" expanded="true" signature="9765:9771" ph="&amp;nbsp;" />
+            <marker date="1519134482984" expanded="true" signature="9771:9777" ph="&amp;nbsp;" />
+            <marker date="1519134482984" expanded="true" signature="9777:9783" ph="&amp;nbsp;" />
+            <marker date="1519134482984" expanded="true" signature="9783:9789" ph="&amp;nbsp;" />
+            <marker date="1519134482984" expanded="true" signature="9789:9795" ph="&amp;nbsp;" />
+            <marker date="1519134482984" expanded="true" signature="9795:9801" ph="&amp;nbsp;" />
+            <marker date="1519134482984" expanded="true" signature="9801:9807" ph="&amp;nbsp;" />
+            <marker date="1519134482984" expanded="true" signature="9807:9813" ph="&amp;nbsp;" />
           </folding>
         </state>
       </provider>

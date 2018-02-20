@@ -90,6 +90,7 @@
             });
         }
         $(function () {
+
             $(document).on('click','.file-del',function () {
                 delUploadFile($(this));
             });
@@ -172,7 +173,7 @@
 
                 var files=row.upload_files;
                 if(files!=null&&files!=""){
-                    alert(files);
+                    //alert(files);
                     var fiList=files.split(';');
                     createFilesModel(fiList);
                 }
@@ -190,7 +191,24 @@
                     idArr.push(row[i].id);
                 }
                 var idArrs=idArr.join(',');
-                hlAlertFive("/ProjectOperation/delProject.action",idArrs,idArr.length);
+
+
+
+                $.messager.confirm('系统提示',"您确定要删除这<font color=red>"+idArr.length+ "</font>条数据吗？",function (r) {
+                    if(r){
+                        $.post(
+                            "/ProjectOperation/delProject.action",
+                            {"hlparam":idArrs},function (data) {
+                            if(data.success){
+                                $("#projectDatagrids").datagrid("reload");
+                            }else{
+                                hlAlertFour("操作失败!");
+                            }
+                        },"json");
+                    }
+                });
+
+                //hlAlertFive("/ProjectOperation/delProject.action",idArrs,idArr.length,'#projectDatagrids');
                 // $.messager.confirm('提示','您确定要删除<font>')
             }else{
                 hlAlertOne();
@@ -508,5 +526,6 @@
 <script type="text/javascript">
     mini.parse();
     var grid= mini.get("multiupload1");
+    grid.limitType="*.pdf;*.doc;*.docx;*.xls;*.xlsx;";
     hlLanguage("../i18n/");
 </script>
