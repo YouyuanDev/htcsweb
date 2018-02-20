@@ -64,8 +64,11 @@ public class OdBlastProcessController {
                 if(list.size()>0){
                     PipeBasicInfo p=list.get(0);
                     if(p.getStatus().equals("bare1")) {
-                        p.setStatus("od1");
-                        int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        //验证钢管状态为光管
+                        if(odblastprocess.getResult().equals("1")) {//当合格时才更新钢管状态
+                            p.setStatus("od1");
+                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        }
                     }
 
                 }

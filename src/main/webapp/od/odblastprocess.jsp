@@ -166,7 +166,7 @@
                 $('#project_name').text(row.project_name);$('#contract_no').text(row.contract_no);
                 $('#pipe_no').text(row.pipe_no);$('#status_name').text(row.status_name);
                 $('#od').text(row.od);$('#wt').text(row.wt);
-                $('#length').text(row.length);$('#weight').text(row.weight);
+                $('#p_length').text(row.p_length);$('#weight').text(row.weight);
                 $('#odbpid').text(row.id);
 
                 //$('#odbptime').datebox('setValue', date1);
@@ -318,7 +318,7 @@
             $('#project_name').text('');$('#contract_no').text('');
             $('#pipe_no').text('');$('#status_name').text('');
             $('#od').text('');$('#wt').text('');
-            $('#length').text('');$('#weight').text('');
+            $('#p_length').text('');$('#weight').text('');
             $('#odbpid').text('');$('#odbptime').text('');
             $('#grade').text('');$('#heat_no').text('');
         }
@@ -348,7 +348,7 @@
                        <th field="wt" align="center" width="50" class="i18n1" name="wt">壁厚</th>
                        <th field="p_length" align="center" width="50" class="i18n1" name="p_length">长度</th>
                        <th field="weight" align="center" width="50" class="i18n1" name="weight">重量</th>
-                       <th field="" align="center" hidden="true" width="50" class="i18n1" name="heat_no">炉号</th>
+                       <th field="heat_no" align="center" hidden="true" width="50" class="i18n1" name="heat_no">炉号</th>
                        <th field="operator_no" align="center" width="100" class="i18n1" name="operatorno">操作工编号</th>
                        <th field="surface_condition" align="center" width="120" class="i18n1" name="surfacecondition">外观缺陷</th>
                        <th field="salt_contamination_before_blasting" align="center" width="120" class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</th>
@@ -360,6 +360,7 @@
                        <th field="blast_line_speed" align="center" width="120" class="i18n1" name="blastlinespeed">打砂传送速度</th>
                        <th field="preheat_temp" align="center" width="120" class="i18n1" name="preheattemp">预热温度</th>
                        <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
+                       <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
                        <th field="operation_time" align="center" width="150" class="i18n1" name="operationtime" data-options="formatter:formatterdate">操作时间</th>
                </tr>
              </thead>
@@ -422,7 +423,7 @@
                    <td align="center" class="i18n1" name="wt">壁厚</td>
                    <td align="center"><label id="wt"></label></td>
                    <td align="center" class="i18n1" name="p_length">长度</td>
-                   <td align="center"><label id="length"></label></td>
+                   <td align="center"><label id="p_length"></label></td>
                    <td align="center" class="i18n1" name="weight">重量</td>
                    <td align="center"><label id="weight"></label></td>
                    <td align="center" class="i18n1" name="heatno">炉号</td>
@@ -501,6 +502,22 @@
                <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
                <td></td>
            </tr>
+           <tr>
+               <td width="16%" class="i18n1" name="result">结论</td>
+               <td><select id="cc" class="easyui-combobox" name="result" style="width:200px;">
+                   <option value="0">不合格</option>
+                   <option value="1">合格</option>
+                   <option value="2">待定</option>
+               </select></td>
+               <td></td>
+               <td ></td>
+               <td></td>
+               <td></td>
+           </tr>
+
+
+
+
 
        </table>
        <input type="hidden" id="fileslist" name="upload_files" value=""/>
