@@ -18,12 +18,13 @@ public class OdCoatingInspectionProcess {
     private String stencil_verification;
     private String surface_condition;
     private String adhesion_test;
+    private String upload_files;
     private String remark;
 
     public OdCoatingInspectionProcess() {
     }
 
-    public OdCoatingInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, float base_coat_thickness, float top_coat_thickness, float total_coating_thickness, int holidays, float holiday_tester_volts, int repairs, float cutback_length, String bevel, String stencil_verification, String surface_condition, String adhesion_test, String remark) {
+    public OdCoatingInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, float base_coat_thickness, float top_coat_thickness, float total_coating_thickness, int holidays, float holiday_tester_volts, int repairs, float cutback_length, String bevel, String stencil_verification, String surface_condition, String adhesion_test, String upload_files, String remark) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -39,6 +40,7 @@ public class OdCoatingInspectionProcess {
         this.stencil_verification = stencil_verification;
         this.surface_condition = surface_condition;
         this.adhesion_test = adhesion_test;
+        this.upload_files = upload_files;
         this.remark = remark;
     }
 
@@ -160,6 +162,14 @@ public class OdCoatingInspectionProcess {
 
     public void setAdhesion_test(String adhesion_test) {
         this.adhesion_test = adhesion_test;
+    }
+
+    public String getUpload_files() {
+        return upload_files;
+    }
+
+    public void setUpload_files(String upload_files) {
+        this.upload_files = upload_files;
     }
 
     public String getRemark() {

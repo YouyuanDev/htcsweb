@@ -7,7 +7,7 @@
 
 
     <insert id="addOdBlastInProcess" parameterType="com.htcsweb.entity.OdBlastInspectionProcess">
-    INSERT INTO od_coating_inspection_process(pipe_no,operation_time,operator_no,air_temp,relative_humidity,dew_point,blast_finish_sa25,profile,surface_dust_rating,pipe_temp,salt_concentration_after_blast,surface_condition,remark) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{air_temp},#{relative_humidity},#{dew_point},#{blast_finish_sa25},#{profile},#{surface_dust_rating},#{pipe_temp},#{salt_concentration_after_blast},#{surface_condition},#{remark})
+    INSERT INTO od_coating_inspection_process(pipe_no,operation_time,operator_no,air_temp,relative_humidity,dew_point,blast_finish_sa25,profile,surface_dust_rating,pipe_temp,salt_concentration_after_blast,surface_condition,upload_files,remark) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{air_temp},#{relative_humidity},#{dew_point},#{blast_finish_sa25},#{profile},#{surface_dust_rating},#{pipe_temp},#{salt_concentration_after_blast},#{surface_condition},#{upload_files},#{remark})
     </insert>
 
     <select id="getOdBlastInProcess" resultType="com.htcsweb.entity.OdBlastInspectionProcess">
@@ -15,7 +15,7 @@
     </select>
 
     <update id="updateOdBlastInProcess" parameterType="com.htcsweb.entity.OdBlastInspectionProcess">
-    UPDATE od_coating_inspection_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},air_temp=#{air_temp},relative_humidity=#{relative_humidity},dew_point=#{dew_point},blast_finish_sa25=#{blast_finish_sa25},profile=#{profile},surface_dust_rating=#{surface_dust_rating},pipe_temp=#{pipe_temp},salt_concentration_after_blast=#{salt_concentration_after_blast},surface_condition=#{surface_condition},remark=#{remark} where id=#{id}
+    UPDATE od_coating_inspection_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},air_temp=#{air_temp},relative_humidity=#{relative_humidity},dew_point=#{dew_point},blast_finish_sa25=#{blast_finish_sa25},profile=#{profile},surface_dust_rating=#{surface_dust_rating},pipe_temp=#{pipe_temp},salt_concentration_after_blast=#{salt_concentration_after_blast},surface_condition=#{surface_condition},upload_files=#{upload_files},remark=#{remark} where id=#{id}
     </update>
 
 
@@ -37,6 +37,7 @@
         <result property="pipe_temp" column="pipe_temp"></result>
         <result property="salt_concentration_after_blast" column="salt_concentration_after_blast"></result>
         <result property="surface_condition" column="surface_condition"></result>
+        <result property="upload_files" column="upload_files"></result>
         <result property="remark" column="remark"></result>
     </resultMap>
 

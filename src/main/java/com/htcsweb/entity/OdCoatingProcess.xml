@@ -7,7 +7,7 @@
 
 
     <insert id="addOdCoatProcess" parameterType="com.htcsweb.entity.OdCoatingProcess">
-    INSERT INTO od_coating_process(pipe_no,operation_time,operator_no,coating_line_speed,base_coat_used,base_coat_lot_no,top_coat_used,top_coat_lot_no,base_coat_gun_count,base_coat_top_coat,application_temp,to_first_touch_duration,to_quench_duration,remark) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{coating_line_speed},#{base_coat_used},#{base_coat_lot_no},#{top_coat_used},#{top_coat_lot_no},#{base_coat_gun_count},#{base_coat_top_coat},#{application_temp},#{to_first_touch_duration},#{to_quench_duration},#{remark})
+    INSERT INTO od_coating_process(pipe_no,operation_time,operator_no,coating_line_speed,base_coat_used,base_coat_lot_no,top_coat_used,top_coat_lot_no,base_coat_gun_count,base_coat_top_coat,application_temp,to_first_touch_duration,to_quench_duration,upload_files,remark) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{coating_line_speed},#{base_coat_used},#{base_coat_lot_no},#{top_coat_used},#{top_coat_lot_no},#{base_coat_gun_count},#{base_coat_top_coat},#{application_temp},#{to_first_touch_duration},#{to_quench_duration},#{upload_files},#{remark})
     </insert>
 
     <select id="getOdCoatProcess" resultType="com.htcsweb.entity.OdCoatingProcess">
@@ -15,7 +15,7 @@
     </select>
 
     <update id="updateOdCoatProcess" parameterType="com.htcsweb.entity.OdCoatingProcess">
-    UPDATE od_coating_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},coating_line_speed=#{coating_line_speed},base_coat_used=#{base_coat_used},base_coat_lot_no=#{base_coat_lot_no},top_coat_used=#{top_coat_used},top_coat_lot_no=#{top_coat_lot_no},base_coat_gun_count=#{base_coat_gun_count},base_coat_top_coat=#{base_coat_top_coat},application_temp=#{application_temp},to_first_touch_duration=#{to_first_touch_duration},to_quench_duration=#{to_quench_duration},remark=#{remark} where id=#{id}
+    UPDATE od_coating_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},coating_line_speed=#{coating_line_speed},base_coat_used=#{base_coat_used},base_coat_lot_no=#{base_coat_lot_no},top_coat_used=#{top_coat_used},top_coat_lot_no=#{top_coat_lot_no},base_coat_gun_count=#{base_coat_gun_count},base_coat_top_coat=#{base_coat_top_coat},application_temp=#{application_temp},to_first_touch_duration=#{to_first_touch_duration},to_quench_duration=#{to_quench_duration},upload_files=#{upload_files},remark=#{remark} where id=#{id}
     </update>
 
 
@@ -38,6 +38,7 @@
         <result property="application_temp" column="application_temp"></result>
         <result property="to_first_touch_duration" column="to_first_touch_duration"></result>
         <result property="to_quench_duration" column="to_quench_duration"></result>
+        <result property="upload_files" column="upload_files"></result>
         <result property="remark" column="remark"></result>
     </resultMap>
 

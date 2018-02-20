@@ -7,7 +7,7 @@
 
 
     <insert id="addOdStencilProcess" parameterType="com.htcsweb.entity.OdStencilProcess">
-    INSERT INTO od_stencil_process(pipe_no,operation_time,operator_no,stencil_content,center_line_color,pipe_end_color,remark) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{stencil_content},#{center_line_color},#{pipe_end_color},#{remark})
+    INSERT INTO od_stencil_process(pipe_no,operation_time,operator_no,stencil_content,center_line_color,pipe_end_color,upload_files,remark) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{stencil_content},#{center_line_color},#{pipe_end_color},#{upload_files},#{remark})
     </insert>
 
     <select id="getOdStencilProcess" resultType="com.htcsweb.entity.OdStencilProcess">
@@ -15,7 +15,7 @@
     </select>
 
     <update id="updateOdStencilProcess" parameterType="com.htcsweb.entity.OdStencilProcess">
-    UPDATE od_stencil_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},stencil_content=#{stencil_content},center_line_color=#{center_line_color},pipe_end_color=#{pipe_end_color},remark=#{remark} where id=#{id}
+    UPDATE od_stencil_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},stencil_content=#{stencil_content},center_line_color=#{center_line_color},pipe_end_color=#{pipe_end_color},upload_files=#{upload_files},remark=#{remark} where id=#{id}
     </update>
 
 
@@ -31,6 +31,7 @@
         <result property="stencil_content" column="stencil_content"></result>
         <result property="center_line_color" column="center_line_color"></result>
         <result property="pipe_end_color" column="pipe_end_color"></result>
+        <result property="upload_files" column="upload_files"></result>
         <result property="remark" column="remark"></result>
     </resultMap>
 

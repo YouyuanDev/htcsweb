@@ -16,12 +16,13 @@ public class OdBlastInspectionProcess {
    private float pipe_temp;
    private float salt_concentration_after_blast;
    private String surface_condition;
+   private String upload_files;
    private String remark;
 
     public OdBlastInspectionProcess() {
     }
 
-    public OdBlastInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, float air_temp, float relative_humidity, float dew_point, String blast_finish_sa25, float profile, int surface_dust_rating, float pipe_temp, float salt_concentration_after_blast, String surface_condition, String remark) {
+    public OdBlastInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, float air_temp, float relative_humidity, float dew_point, String blast_finish_sa25, float profile, int surface_dust_rating, float pipe_temp, float salt_concentration_after_blast, String surface_condition,String upload_files, String remark) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -35,6 +36,7 @@ public class OdBlastInspectionProcess {
         this.pipe_temp = pipe_temp;
         this.salt_concentration_after_blast = salt_concentration_after_blast;
         this.surface_condition = surface_condition;
+        this.upload_files=upload_files;
         this.remark = remark;
     }
 
@@ -140,6 +142,14 @@ public class OdBlastInspectionProcess {
 
     public void setSurface_condition(String surface_condition) {
         this.surface_condition = surface_condition;
+    }
+
+    public String getUpload_files() {
+        return upload_files;
+    }
+
+    public void setUpload_files(String upload_files) {
+        this.upload_files = upload_files;
     }
 
     public String getRemark() {

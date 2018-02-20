@@ -7,7 +7,7 @@
 
 
     <insert id="addOdFinalInProcess" parameterType="com.htcsweb.entity.OdFinalInspectionProcess">
-   INSERT INTO od_final_inspection_process(pipe_no,operation_time,operator_no,inspection_result,remark) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{inspection_result},#{remark})
+   INSERT INTO od_final_inspection_process(pipe_no,operation_time,operator_no,inspection_result,upload_files,remark) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{inspection_result},#{upload_files},#{remark})
     </insert>
 
     <select id="getOdFinalInProcess" resultType="com.htcsweb.entity.OdFinalInspectionProcess">
@@ -15,7 +15,7 @@
     </select>
 
     <update id="updateOdFinalInProcess" parameterType="com.htcsweb.entity.OdFinalInspectionProcess">
-    UPDATE od_final_inspection_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},inspection_result=#{inspection_result},remark=#{remark} where id=#{id}
+    UPDATE od_final_inspection_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},inspection_result=#{inspection_result},upload_files=#{upload_files},remark=#{remark} where id=#{id}
     </update>
 
 
@@ -29,6 +29,7 @@
         <result property="operation_time" column="operation_time"></result>
         <result property="operator_no" column="operator_no"></result>
         <result property="inspection_result" column="inspection_result"></result>
+        <result property="upload_files" column="upload_files"></result>
         <result property="remark" column="remark"></result>
     </resultMap>
 
