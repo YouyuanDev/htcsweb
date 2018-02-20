@@ -3,8 +3,10 @@ package com.htcsweb.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.OdBlastProcessDao;
+import com.htcsweb.dao.PipeBasicInfoDao;
 import com.htcsweb.entity.OdBlastProcess;
-import com.htcsweb.entity.ProjectInfo;
+import com.htcsweb.entity.PipeBasicInfo;
+
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +30,9 @@ public class OdBlastProcessController {
     @Autowired
     private OdBlastProcessDao odblastprocessDao;
 
+    @Autowired
+    private PipeBasicInfoDao pipeBasicInfoDao;
+
     @RequestMapping("/saveOdBlastProcess")
     @ResponseBody
     public String saveOdBlastProcess(OdBlastProcess odblastprocess, HttpServletRequest request, HttpServletResponse response){
@@ -44,6 +49,7 @@ public class OdBlastProcessController {
             }else{
                 odblastprocess.setOperation_time(new Date());
             }
+            String pipeno=odblastprocess.getPipe_no();
             if(odblastprocess.getId()==0){
                 //添加
                 resTotal=odblastprocessDao.addOdBlastProcess(odblastprocess);
@@ -53,6 +59,16 @@ public class OdBlastProcessController {
                 resTotal=odblastprocessDao.updateOdBlastProcess(odblastprocess);
             }
             if(resTotal>0){
+                //更新管子的状态
+                List<PipeBasicInfo> list=pipeBasicInfoDao.getPipeNumber(pipeno);
+                if(list.size()>0){
+                    PipeBasicInfo p=list.get(0);
+                    if(p.getStatus().equals("bare1")) {
+                        p.setStatus("od1");
+                        int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                    }
+
+                }
                 json.put("success",true);
             }else{
                 json.put("success",false);
