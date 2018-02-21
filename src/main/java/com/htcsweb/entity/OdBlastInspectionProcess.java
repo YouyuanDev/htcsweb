@@ -14,7 +14,7 @@ public class OdBlastInspectionProcess {
    private float profile;
    private int surface_dust_rating;
    private float pipe_temp;
-   private float salt_concentration_after_blast;
+   private float salt_contamination_after_blasting;
    private String surface_condition;
    private String upload_files;
    private String remark;
@@ -23,7 +23,7 @@ public class OdBlastInspectionProcess {
     public OdBlastInspectionProcess() {
     }
 
-    public OdBlastInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, float air_temp, float relative_humidity, float dew_point, String blast_finish_sa25, float profile, int surface_dust_rating, float pipe_temp, float salt_concentration_after_blast, String surface_condition, String upload_files, String remark, String result) {
+    public OdBlastInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, float air_temp, float relative_humidity, float dew_point, String blast_finish_sa25, float profile, int surface_dust_rating, float pipe_temp, float salt_contamination_after_blasting, String surface_condition, String upload_files, String remark, String result) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -35,7 +35,7 @@ public class OdBlastInspectionProcess {
         this.profile = profile;
         this.surface_dust_rating = surface_dust_rating;
         this.pipe_temp = pipe_temp;
-        this.salt_concentration_after_blast = salt_concentration_after_blast;
+        this.salt_contamination_after_blasting = salt_contamination_after_blasting;
         this.surface_condition = surface_condition;
         this.upload_files = upload_files;
         this.remark = remark;
@@ -130,12 +130,12 @@ public class OdBlastInspectionProcess {
         this.pipe_temp = pipe_temp;
     }
 
-    public float getSalt_concentration_after_blast() {
-        return salt_concentration_after_blast;
+    public float getSalt_contamination_after_blasting() {
+        return salt_contamination_after_blasting;
     }
 
-    public void setSalt_concentration_after_blast(float salt_concentration_after_blast) {
-        this.salt_concentration_after_blast = salt_concentration_after_blast;
+    public void setSalt_contamination_after_blasting(float salt_contamination_after_blasting) {
+        this.salt_contamination_after_blasting = salt_contamination_after_blasting;
     }
 
     public String getSurface_condition() {
