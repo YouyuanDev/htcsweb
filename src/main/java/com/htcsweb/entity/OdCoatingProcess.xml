@@ -6,18 +6,20 @@
 <mapper namespace="com.htcsweb.dao.OdCoatingProcessDao">
 
 
-    <insert id="addOdCoatProcess" parameterType="com.htcsweb.entity.OdCoatingProcess">
+    <insert id="addOdCoatingProcess" parameterType="com.htcsweb.entity.OdCoatingProcess">
     INSERT INTO od_coating_process(pipe_no,operation_time,operator_no,coating_line_speed,base_coat_used,base_coat_lot_no,top_coat_used,top_coat_lot_no,base_coat_gun_count,top_coat_gun_count,application_temp,to_first_touch_duration,to_quench_duration,upload_files,remark,result) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{coating_line_speed},#{base_coat_used},#{base_coat_lot_no},#{top_coat_used},#{top_coat_lot_no},#{base_coat_gun_count},#{top_coat_gun_count},#{application_temp},#{to_first_touch_duration},#{to_quench_duration},#{upload_files},#{remark},#{result})
     </insert>
 
-    <select id="getOdCoatProcess" resultType="com.htcsweb.entity.OdCoatingProcess">
-        SELECT * from od_coating_process
-    </select>
-
-    <update id="updateOdCoatProcess" parameterType="com.htcsweb.entity.OdCoatingProcess">
+    <update id="updateOdCoatingProcess" parameterType="com.htcsweb.entity.OdCoatingProcess">
     UPDATE od_coating_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},coating_line_speed=#{coating_line_speed},base_coat_used=#{base_coat_used},base_coat_lot_no=#{base_coat_lot_no},top_coat_used=#{top_coat_used},top_coat_lot_no=#{top_coat_lot_no},base_coat_gun_count=#{base_coat_gun_count},base_coat_top_coat=#{top_coat_gun_count},application_temp=#{application_temp},to_first_touch_duration=#{to_first_touch_duration},to_quench_duration=#{to_quench_duration},upload_files=#{upload_files},remark=#{remark},result=#{result} where id=#{id}
     </update>
 
+    <delete id="delOdCoatingProcess">
+        delete from od_blast_process WHERE
+        <foreach collection="array" item="item" open="id in (" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
 
     <select id="getCount" resultType="int">
         select count(*) from od_coating_process
@@ -43,11 +45,37 @@
         <result property="result" column="result"></result>
     </resultMap>
 
-    <select id="feny"  resultMap="all">
-        select * from od_coating_process where id limit #{arg0},#{arg1}
+
+    <select id="getAllByLike" resultType="map">
+        Select pro.project_name,s.status_name,p.contract_no,p.grade,p.od,p.wt,p.p_length,p.weight,p.heat_no,o.*
+        from od_coating_process o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        left join pipe_status s on s.status_code=p.status
+        <where>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND o.pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+            <if test="operator_no!=null and operator_no!=''">
+                AND o.operator_no LIKE CONCAT('%',#{operator_no},'%')
+            </if>
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d 23:59:59')]]>
+            </if>
+        </where>
+        ORDER BY o.id DESC
+        limit #{skip},#{take}
     </select>
 
-    <select id="getOdCoatProcessById" parameterType="int" resultType="com.htcsweb.entity.OdCoatingProcess">
+
+
+
+
+    <select id="getOdCoatingProcessById" parameterType="int" resultType="com.htcsweb.entity.OdCoatingProcess">
         select * from od_coating_process where id=#{id}
     </select>
 </mapper>
