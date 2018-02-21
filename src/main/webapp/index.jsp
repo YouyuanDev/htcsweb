@@ -47,10 +47,10 @@
                             });
                             hlLanguage();
                         }
-                        else if("外喷砂检验岗位"==xy||""==xy){
+                        else if("外喷砂检验岗位"==xy||"Od Blast Inspection"==xy){
                             $('#hlTab').tabs('add',{
                                 title:node.text,
-                                content:"<iframe scrolling='auto' frameborder='0'  src='od/supplier.jsp' style='width:100%;height:100%;'></iframe>",
+                                content:"<iframe scrolling='auto' frameborder='0'  src='od/odblastinspectionprocess.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable:true
                             });
                         }

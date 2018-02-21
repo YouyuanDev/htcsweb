@@ -336,8 +336,8 @@
                 <th field="status_name" align="center" width="110" class="i18n1" name="statusname">状态</th>
                 <th field="od" align="center" width="50" class="i18n1" name="od">外径</th>
                 <th field="wt" align="center" width="50" class="i18n1" name="wt">壁厚</th>
-                <th field="p_length" align="center" width="50" class="i18n1" name="p_length">长度</th>
-                <th field="weight" align="center" width="50" class="i18n1" name="weight">重量</th>
+                <th field="p_length" align="center" width="50" hidden="true" class="i18n1" name="p_length">长度</th>
+                <th field="weight" align="center" width="50" hidden="true" class="i18n1" name="weight">重量</th>
                 <th field="heat_no" align="center" hidden="true" width="50" class="i18n1" name="heat_no">炉号</th>
                 <th field="operator_no" align="center" width="100" class="i18n1" name="operatorno">操作工编号</th>
                 <th field="air_temp" align="center" width="120" class="i18n1" name="airtemp">环境温度</th>

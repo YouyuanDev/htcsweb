@@ -13,7 +13,7 @@ public class OdCoatingProcess {
     private String top_coat_used;
     private String top_coat_lot_no;
     private int base_coat_gun_count;
-    private int base_coat_top_coat;
+    private int top_coat_gun_count;
     private float application_temp;
     private float to_first_touch_duration;
     private float to_quench_duration;
@@ -24,7 +24,7 @@ public class OdCoatingProcess {
     public OdCoatingProcess() {
     }
 
-    public OdCoatingProcess(int id, String pipe_no, Date operation_time, String operator_no, float coating_line_speed, String base_coat_used, String base_coat_lot_no, String top_coat_used, String top_coat_lot_no, int base_coat_gun_count, int base_coat_top_coat, float application_temp, float to_first_touch_duration, float to_quench_duration, String upload_files, String remark, String result) {
+    public OdCoatingProcess(int id, String pipe_no, Date operation_time, String operator_no, float coating_line_speed, String base_coat_used, String base_coat_lot_no, String top_coat_used, String top_coat_lot_no, int base_coat_gun_count, int top_coat_gun_count, float application_temp, float to_first_touch_duration, float to_quench_duration, String upload_files, String remark, String result) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -35,7 +35,7 @@ public class OdCoatingProcess {
         this.top_coat_used = top_coat_used;
         this.top_coat_lot_no = top_coat_lot_no;
         this.base_coat_gun_count = base_coat_gun_count;
-        this.base_coat_top_coat = base_coat_top_coat;
+        this.top_coat_gun_count = top_coat_gun_count;
         this.application_temp = application_temp;
         this.to_first_touch_duration = to_first_touch_duration;
         this.to_quench_duration = to_quench_duration;
@@ -124,12 +124,12 @@ public class OdCoatingProcess {
         this.base_coat_gun_count = base_coat_gun_count;
     }
 
-    public int getBase_coat_top_coat() {
-        return base_coat_top_coat;
+    public int getTop_coat_gun_count() {
+        return top_coat_gun_count;
     }
 
-    public void setBase_coat_top_coat(int base_coat_top_coat) {
-        this.base_coat_top_coat = base_coat_top_coat;
+    public void setTop_coat_gun_count(int top_coat_gun_count) {
+        this.top_coat_gun_count = top_coat_gun_count;
     }
 
     public float getApplication_temp() {
