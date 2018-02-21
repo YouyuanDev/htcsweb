@@ -5,17 +5,6 @@
 
 <mapper namespace="com.htcsweb.dao.PersonDao">
 
-    <insert id="addPerson" parameterType="com.htcsweb.entity.Person">
-   INSERT INTO person(employee_no,pname,ppassword,pidcard_no,pmobile,page,psex,pstatus,pdepartment,pregister_time) VALUES (#{employee_no},#{pname},#{ppassword},#{pidcard_no},#{pmobile},#{page},#{psex},#{pstatus},#{pdepartment},#{pregister_time})
-    </insert>
-
-    <select id="getPerson" resultType="com.htcsweb.entity.Person">
-        SELECT * from person
-    </select>
-
-    <update id="updatePerson" parameterType="com.htcsweb.entity.Person">
-    UPDATE person set employee_no=#{employee_no},pname=#{pname},ppassword=#{ppassword},pidcard_no=#{pidcard_no},pmobile=#{pmobile},page=#{page},psex=#{psex},pstatus=#{pstatus},pdepartment=#{pdepartment},pregister_time=#{pregister_time} where id=#{id}
-    </update>
 
 
     <select id="getCount" resultType="int">
@@ -67,4 +56,19 @@
         select count(*) from person where employee_no =#{employee_no} AND ppassword=#{ppassword}
     </select>
 
-        </mapper>
+    <insert id="addPerson" parameterType="com.htcsweb.entity.Person">
+        INSERT INTO person(employee_no,pname,ppassword,pidcard_no,pmobile,page,psex,pstatus,pdepartment,pregister_time) VALUES (#{employee_no},#{pname},#{ppassword},#{pidcard_no},#{pmobile},#{page},#{psex},#{pstatus},#{pdepartment},#{pregister_time})
+    </insert>
+
+    <update id="updatePerson" parameterType="com.htcsweb.entity.Person">
+        UPDATE person set employee_no=#{employee_no},pname=#{pname},ppassword=#{ppassword},pidcard_no=#{pidcard_no},pmobile=#{pmobile},page=#{page},psex=#{psex},pstatus=#{pstatus},pdepartment=#{pdepartment},pregister_time=#{pregister_time} where id=#{id}
+    </update>
+
+
+    <delete id="delPerson">
+        delete from person WHERE
+        <foreach collection="array" item="item" open="id in (" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+</mapper>

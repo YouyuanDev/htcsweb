@@ -174,6 +174,7 @@
                 $('#grade').text(row.grade);$('#heat_no').text(row.heat_no);
                 $('#odBlastProForm').form('load',row);
 
+
                 date = new Date(row.operation_time);
                 strdate =formatterdate(date);
                 //alert(strdate);

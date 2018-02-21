@@ -10,9 +10,6 @@ import java.util.List;
 @Repository
 public interface PersonDao {
    public Person getPersonById(int id);
-   public void addPerson(Person person);
-   public List<Person>getPerson();
-   public void  updatePerson(Person person);
 
    //小页面显示人员名单
    public  List<Person>getNoByName(@Param("pname")String pname,@Param("employee_no")String employee_no);
@@ -23,7 +20,12 @@ public interface PersonDao {
    //验证登录密码
    public int confirmPersonByEmployeeNoPassword(@Param("employee_no")String employee_no,@Param("ppassword") String ppassword);
 
-
+   //修改person
+   public int updatePerson(Person person);
+   //增加person
+   public int addPerson(Person person);
+   //删除person
+   public int delPerson(String[]arrId);
 
 
 

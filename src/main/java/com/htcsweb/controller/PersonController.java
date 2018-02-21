@@ -1,14 +1,18 @@
 package com.htcsweb.controller;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.PersonDao;
 import com.htcsweb.entity.Person;
+import com.htcsweb.entity.PipeBasicInfo;
+import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -21,26 +25,8 @@ public class PersonController {
     @Autowired
     private PersonDao personDao;
 
-    @RequestMapping("addPerson")
-    public String addPerson(Person person){
-        personDao.addPerson(person);
-        return "account/person";
-    }
-    @ResponseBody
-    @RequestMapping("getPerson")
-    public Map<String,Object>getPerson(){
-        List<Person>personList=personDao.getPerson();
-        Map<String,Object>map=new HashMap<String, Object>();
-        map.put("rows",personList);
-        return map;
-    }
 
-    @RequestMapping("editPerson")
-    public  String editPerson(Person person){
-        personDao.updatePerson(person);
-        return "account/person";
-    }
-    //根据姓名模糊查询用户编号
+    //根据姓名模糊查询用户编号,小页面查询
     @RequestMapping(value = "/getPersonNoByName")
     @ResponseBody
     public String getPersonNoByName(HttpServletRequest request){
@@ -58,7 +44,7 @@ public class PersonController {
         return "personedit";
     }
 
-
+    //搜索
     @RequestMapping("getPersonByLike")
     @ResponseBody
     public String getPersonByLike( @RequestParam(value = "employee_no",required = false)String employee_no,@RequestParam(value = "pname",required = false)String pname,  HttpServletRequest request){
@@ -83,6 +69,56 @@ public class PersonController {
 
     }
 
+    //保存Person
+    //增加或修改Pipe信息
+    @RequestMapping(value = "/savePerson")
+    @ResponseBody
+    public String savePerson(Person person, HttpServletResponse response){
+        System.out.print("savePerson");
 
+        JSONObject json=new JSONObject();
+        try{
+            int resTotal=0;
+
+
+            if(person.getId()==0){
+                //添加
+                resTotal=personDao.addPerson(person);
+
+            }else{
+                //修改！
+
+                resTotal=personDao.updatePerson(person);
+            }
+            if(resTotal>0){
+                json.put("success",true);
+            }else{
+                json.put("success",false);
+            }
+            ResponseUtil.write(response,json);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    //删除person信息
+    @RequestMapping("/delPerson")
+    public String delPerson(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
+        String[]idArr=hlparam.split(",");
+        int resTotal=0;
+        resTotal=personDao.delPerson(idArr);
+        JSONObject json=new JSONObject();
+        if(resTotal>0){
+            System.out.print("删除成功");
+            json.put("success",true);
+        }else{
+            System.out.print("删除失败");
+            json.put("success",false);
+        }
+        ResponseUtil.write(response,json);
+        return null;
+    }
 
 }

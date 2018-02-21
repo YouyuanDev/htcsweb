@@ -155,17 +155,17 @@
                 $('#od').text(row.od);$('#wt').text(row.wt);
                 $('#p_length').text(row.p_length);$('#weight').text(row.weight);
                 $('#odbinpid').text(row.id);
-
-                //$('#odbptime').datebox('setValue', date1);
-                //$('#odbptime').text(row.operation_time);
                 $('#grade').text(row.grade);
                 $('#heat_no').text(row.heat_no);
+
                 $('#odBlastInspectionProForm').form('load',row);
 
                 date = new Date(row.operation_time);
                 strdate =formatterdate(date);
+
                 //alert(strdate);
                 $('#odBlastInspectionProForm').form('load',{
+                    'odbinpid':row.id,
                     'odbptime':strdate
                 });
 
@@ -308,7 +308,8 @@
         }
 
         function  clearFormLabel() {
-            $('#odBlastInspectionProForm').form('clear');$('#odbinpid').text('');$('#odbptime').text('');
+            $('#odBlastInspectionProForm').form('clear');
+            $('#odbinpid').text('');$('#odbptime').text('');
             $('#project_name').text('');$('#contract_no').text('');
             $('#pipe_no').text('');$('#status_name').text('');
             $('#od').text('');$('#wt').text('');
@@ -485,6 +486,12 @@
                     <td></td>
                     <td width="16%" class="i18n1" name="saltcontaminationafterblasting">打砂后盐度</td>
                     <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="salt_contamination_after_blasting" value=""/></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td width="16%" class="i18n1" name="surfacecondition">表面缺陷</td>
+                    <td><input class="easyui-textbox" type="text" value="" name="surface_condition" /></td>
+
                     <td></td>
                 </tr>
                 <tr>

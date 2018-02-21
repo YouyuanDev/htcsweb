@@ -53,25 +53,88 @@
 
         $(function () {
 
+            $('#hlPersonDialog').dialog({
+                onClose:function () {
+                    var type=$('#hlcancelBtn').attr('operationtype');
+                    if(type=="add"){
 
-            // $('#hlPersonDialog').dialog({
-            //     onClose:function () {
-            //         var type=$('#hlcancelBtn').attr('operationtype');
-            //         if(type=="add"){
-            //             var $imglist=$('#fileslist');
-            //             var $dialog=$('#hlPersonDialog');
-            //             hlAlertSix("../UploadFile/delUploadPicture.action",$imglist,$dialog,grid);
-            //         }else{
-            //             //$('#hlOdBlastProDialog').dialog('close');
-            //             $('#hl-gallery-con').empty();
-            //             //$('#fileslist').val('');
-            //             clearFormLabel();
-            //         }
-            //     }
-            // });
-            // $('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
-            // hlLanguage("../i18n/");
+                    }else{
+                        clearFormLabel();
+                    }
+                }
+            });
+            $('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
+
         });
+
+
+
+        function addPerson(){
+            $('#hlcancelBtn').attr('operationtype','add');
+            $('#hlPersonDialog').dialog('open').dialog('setTitle','新增');
+            $('#personForm').form('clear');
+            $('#pid').text('');
+            $('#pregister_time').text('');
+            url="/person/savePerson.action";
+        }
+        function delPerson() {
+            var row = $('#personDatagrids').datagrid('getSelections');
+            if(row.length>0){
+                var idArr=[];
+                for (var i=0;i<row.length;i++){
+                    idArr.push(row[i].id);
+                }
+                var idArrs=idArr.join(',');
+                $.messager.confirm('系统提示',"您确定要删除这<font color=red>"+idArr.length+ "</font>条数据吗？",function (r) {
+                    if(r){
+                        $.post(
+                            "/person/delPerson.action",
+                            {"hlparam":idArrs},function (data) {
+                                if(data.success){
+                                    $("#personDatagrids").datagrid("reload");
+                                }else{
+                                    hlAlertFour("操作失败!");
+                                }
+                            },"json");
+                    }
+                });
+                //hlAlertFive("/person/delPerson.action",idArrs,idArr.length);
+                // $.messager.confirm('提示','您确定要删除<font>')
+            }else{
+                hlAlertOne();
+            }
+        }
+        function editPerson() {
+            $('#hlcancelBtn').attr('operationtype','edit');
+
+            var row = $('#personDatagrids').datagrid('getSelected');
+            if(row){
+                $('#hlPersonDialog').dialog('open').dialog('setTitle','修改');
+                date = new Date(row.pregister_time);
+                strdate =formatterdate(date);
+
+                $('#personForm').form('load',{
+                    'employee_no':row.employee_no,
+                    'pname':row.pname,
+                    'ppassword':row.ppassword,
+                    'pidcard_no':row.pidcard_no,
+                    'pmobile':row.pmobile,
+                    'page':row.page,
+                    'psex':row.psex,
+                    'pdepartment':row.pdepartment,
+                    'pstatus':row.pstatus,
+                    'pid':row.id,
+                    'pregister_time':strdate
+
+                });
+
+
+                url="/person/savePerson.action?id="+row.id;
+
+            }else{
+                hlAlertTwo();
+            }
+        }
 
 
 
@@ -80,6 +143,49 @@
                 'employee_no': $('#employeeno').val(),
                 'pname': $('#pname').val()
             });
+        }
+
+
+
+        function personFormSubmit() {
+            $('#personForm').form('submit',{
+                url:url,
+                onSubmit:function () {
+                    //表单验证
+                    //碱洗时间
+
+                    if($("input[name='pregister_time']").val()==""){
+
+                        hlAlertFour("请输入注册时间");
+                        return false;
+                    }
+
+
+
+                },
+                success: function(result){
+                    //alert(result);
+                    var result = eval('('+result+')');
+                    if (result.success){
+                        $('#hlPersonDialog').dialog('close');
+                        $('#personDatagrids').datagrid('reload');
+                        clearFormLabel();
+                    } else {
+                        hlAlertFour("操作失败!");
+                    }
+                },
+                error:function () {
+                    hlAlertThree();
+                }
+            });
+        }
+        function personCancelSubmit() {
+            $('#hlPersonDialog').dialog('close');
+        }
+
+        function  clearFormLabel() {
+            $('#personForm').form('clear');
+
         }
 
     </script>
@@ -136,145 +242,76 @@
 <!--添加、修改框-->
 <div id="hlPersonDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;height:auto;">
     <form id="personForm" method="post">
-        <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
-            <legend>钢管信息</legend>
-            <table class="ht-table" width="100%" border="0">
-                <tr>
-                    <td class="i18n1" name="projectname" width="16%">项目名称</td>
-                    <td colspan="2" width="33%"><label id="project_name"></label></td>
-
-                    <td class="i18n1" name="contractno" width="16%">合同编号</td>
-                    <td colspan="7" width="33%"><label id="contract_no"></label></td>
-
-                </tr>
-
-                <tr>
-                    <td class="i18n1" name="pipeno" width="16%">钢管编号</td>
-                    <td colspan="2" width="33%">
-                        <input id="lookup1" name="pipe_no" class="mini-lookup" style="text-align:center;width:180px;"
-                               textField="pipe_no" valueField="id" popupWidth="auto"
-                               popup="#gridPanel1" grid="#datagrid1" multiSelect="false"/>
-                    </td>
-                    <td class="i18n1" name="statusname" width="16%">状态</td>
-                    <td colspan="7" width="33%"><label id="status_name"></label></td>
-                </tr>
-            </table>
-
-            <table width="100%" border="0" align="center">
-                <tr>
-                    <td align="center" class="i18n1" name="grade">钢种</td>
-                    <td align="center"><label id="grade"></label></td>
-                    <td align="center" class="i18n1" name="od">外径</td>
-                    <td align="center"><label id="od"></label></td>
-                    <td align="center" class="i18n1" name="wt">壁厚</td>
-                    <td align="center"><label id="wt"></label></td>
-                    <td align="center" class="i18n1" name="p_length">长度</td>
-                    <td align="center"><label id="p_length"></label></td>
-                    <td align="center" class="i18n1" name="weight">重量</td>
-                    <td align="center"><label id="weight"></label></td>
-                    <td align="center" class="i18n1" name="heatno">炉号</td>
-                    <td align="center"><label id="heat_no"></label></td>
-                </tr>
-            </table>
-        </fieldset>
 
 
         <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
-            <legend>外喷砂生产信息</legend>
+            <legend>人员信息</legend>
 
             <table class="ht-table">
                 <tr>
                     <td class="i18n1" name="id">流水号</td>
-                    <td colspan="5"><label id="odbpid"></label></td>
+                    <td colspan="5"><input class="easyui-textbox" type="text" name="pid" readonly="true" value="0"/></td>
 
                 </tr>
                 <tr>
-                    <td class="i18n1" name="operatorno">操作工编号</td>
+                    <td class="i18n1" name="employeeno">员工编号</td>
                     <td colspan="2" >
-                        <input id="lookup2" name="operator_no" class="mini-lookup" style="text-align:center;width:180px;"
-                               textField="employee_no" valueField="id" popupWidth="auto"
-                               popup="#gridPanel2" grid="#datagrid2" multiSelect="false"
-                        />
+                        <input class="easyui-textbox" type="text" value="" name="employee_no" />
                     </td>
-                    <td class="i18n1" name="operationtime">操作时间</td>
+                    <td class="i18n1" name="ppassword">密码</td>
                     <td colspan="2">
-                        <input class="easyui-datebox" type="text" name="odbptime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
-
+                        <input class="easyui-textbox" id="ppassword" name="ppassword" type="password" style="width:150px;height:22px;padding:12px" data-options="prompt:'登录密码',iconCls:'icon-lock',iconWidth:38">
                     </td>
+                    <td></td>
 
                 </tr>
             </table>
 
             <table class="ht-table">
                 <tr>
-                    <td class="i18n1" name="alkalinedwelltime">碱洗时间</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="alkaline_dwell_time" value=""/></td>
-                    <td>10~20</td>
-                    <td class="i18n1" name="alkalineconcentration">碱浓度</td>
-                    <td><input class="easyui-numberbox"  data-options="min:0,precision:2" type="text" name="alkaline_concentration" value=""/></td>
+                    <td width="16%"  class="i18n1" name="pname">姓名</td>
+                    <td><input class="easyui-textbox" type="text" name="pname" value=""/></td>
                     <td></td>
+                    <td width="16%"  class="i18n1" name="pdepartment">部门</td>
+                    <td><input class="easyui-textbox" type="text" name="pdepartment" value=""/></td>
+                    <td></td>
+
                 </tr>
 
                 <tr>
-                    <td class="i18n1" name="acidwashtime">酸洗时间</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="acid_wash_time" value=""/></td>
+                    <td class="i18n1" name="pidcardno">身份证号</td>
+                    <td><input class="easyui-textbox" type="text" name="pidcard_no" value=""/></td>
                     <td></td>
-                    <td class="i18n1" name="acidconcentration">酸浓度</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="acid_concentration" value=""/></td>
+                    <td class="i18n1" name="pmobile">手机号</td>
+                    <td><input class="easyui-textbox"  type="text" name="pmobile" value=""/></td>
                     <td></td>
-                </tr>
-                <tr>
-                    <td width="16%"  class="i18n1" name="surfacecondition">外观缺陷</td>
-                    <td><input class="easyui-validatebox" type="text" name="surface_condition" value=""/></td>
-                    <td></td>
-                    <td width="16%" class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="salt_contamination_before_blasting" value=""/></td>
-                    <td><=25</td>
-                </tr>
 
-                <tr>
-                    <td width="16%" class="i18n1" name="blastlinespeed">打砂传送速度</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="blast_line_speed" value=""/></td>
-                    <td></td>
-                    <td width="16%" class="i18n1" name="conductivity">传导性</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="conductivity" value=""/></td>
-                    <td></td>
                 </tr>
                 <tr>
-                    <td width="16%" class="i18n1" name="preheattemp">预热温度</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:1" type="text" name="preheat_temp" value=""/></td>
+                    <td class="i18n1" name="page">年龄</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="page" value=""/></td>
                     <td></td>
-                    <td width="16%" class="i18n1" name="remark">备注</td>
-                    <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
+                    <td class="i18n1" name="psex">性别</td>
+                    <td><input class="easyui-textbox" type="text" name="psex" value=""/></td>
                     <td></td>
+
                 </tr>
                 <tr>
-                    <td width="16%" class="i18n1" name="result">结论</td>
-                    <td><select id="cc" class="easyui-combobox" name="result" style="width:200px;">
-                        <option value="0">不合格</option>
-                        <option value="1">合格</option>
-                        <option value="2">待定</option>
+                    <td width="16%" class="i18n1" name="pregistertime">注册时间</td>
+                    <td><input class="easyui-datebox" type="text" name="pregister_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                    </td>
+                    <td></td>
+                    <td width="16%" class="i18n1" name="pstatus">状态</td>
+                    <td><select id="cc" class="easyui-combobox" name="pstatus" style="width:200px;">
+                        <option value="0">在用</option>
+                        <option value="1">停用</option>
                     </select></td>
-                    <td></td>
-                    <td ></td>
-                    <td></td>
-                    <td></td>
+
+
                 </tr>
-
-
-
-
 
             </table>
-            <input type="hidden" id="fileslist" name="upload_files" value=""/>
-            <div id="hl-gallery-con" style="width:100%;">
 
-            </div>
-            <div id="multiupload1" class="uc-multiupload" style="width:100%; max-height:200px"
-                 flashurl="../miniui/fileupload/swfupload/swfupload.swf"
-                 uploadurl="../UploadFile/uploadPicture.action" _autoUpload="false" _limittype="*.jpg;*.png;*.jpeg;*.bmp"
-                 onuploaderror="onUploadError" onuploadsuccess="onUploadSuccess">
-            </div>
         </fieldset>
     </form>
 
