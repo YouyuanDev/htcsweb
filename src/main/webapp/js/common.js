@@ -26,6 +26,9 @@ function hlAlertFive(url,hlparam,total) {
     });
 }
 
+
+
+
 function hlAlertSix(url,$imglist,$dialog,$obj) {
     var hlparam=$imglist.val().trim();
     var imgarr=[];

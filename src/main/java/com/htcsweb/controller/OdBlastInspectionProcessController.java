@@ -105,11 +105,11 @@ public class OdBlastInspectionProcessController {
                     PipeBasicInfo p=list.get(0);
                     if(p.getStatus().equals("od1")) {
                         //验证钢管状态为光管
-                        if(odblastinspectionprocess.getResult().equals("1")) {//当合格时才更新钢管状态
+                        if(odblastinspectionprocess.getResult().equals("1")) {//当打砂检验合格时才更新钢管状态
                             p.setStatus("od2");
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }
-                        else if(odblastinspectionprocess.getResult().equals("0")){//打砂不合格，改变状态为bare1，重新打砂处理
+                        else if(odblastinspectionprocess.getResult().equals("0")){//打砂检验不合格，改变状态为bare1，重新打砂处理
                             p.setStatus("bare1");
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
 
@@ -127,5 +127,24 @@ public class OdBlastInspectionProcessController {
         }
         return null;
     }
+
+
+    @RequestMapping("/delOdBlastInspectionProcess")
+    public String delOdBlastInspectionProcess(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
+        String[]idArr=hlparam.split(",");
+        int resTotal=0;
+        resTotal=odBlastInspectionProcessDao.delOdBlastInspectionProcess(idArr);
+        JSONObject json=new JSONObject();
+        if(resTotal>0){
+            json.put("success",true);
+        }else{
+            json.put("success",false);
+        }
+        ResponseUtil.write(response,json);
+        return null;
+    }
+
+
+
 
 }

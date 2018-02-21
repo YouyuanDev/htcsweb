@@ -137,6 +137,7 @@
                     }
                 });
 
+
                 //hlAlertFive("/OdBlastInspectionOperation/delOdBlastInspectionProcess.action",idArrs,idArr.length);
                 // $.messager.confirm('提示','您确定要删除<font>')
             }else{
@@ -149,14 +150,16 @@
             if(row){
                 $('#hlOdBlastInspectionProDialog').dialog('open').dialog('setTitle','修改');
                 $('#project_name').text(row.project_name);$('#contract_no').text(row.contract_no);
-                $('#pipe_no').text(row.pipe_no);$('#status_name').text(row.status_name);
+                $('#pipe_no').text(row.pipe_no);
+                $('#status_name').text(row.status_name);
                 $('#od').text(row.od);$('#wt').text(row.wt);
                 $('#p_length').text(row.p_length);$('#weight').text(row.weight);
                 $('#odbinpid').text(row.id);
 
                 //$('#odbptime').datebox('setValue', date1);
                 //$('#odbptime').text(row.operation_time);
-                $('#grade').text(row.grade);$('#heat_no').text(row.heat_no);
+                $('#grade').text(row.grade);
+                $('#heat_no').text(row.heat_no);
                 $('#odBlastInspectionProForm').form('load',row);
 
                 date = new Date(row.operation_time);
@@ -165,8 +168,6 @@
                 $('#odBlastInspectionProForm').form('load',{
                     'odbptime':strdate
                 });
-
-
 
                 look1.setText(row.pipe_no);
                 look1.setValue(row.pipe_no);
@@ -219,7 +220,7 @@
 
                 },
                 success: function(result){
-                    alert(result);
+                    //alert(result);
                     var result = eval('('+result+')');
                     if (result.success){
                         $('#hlOdBlastInspectionProDialog').dialog('close');
@@ -239,6 +240,67 @@
         function odBlastInspectionProCancelSubmit() {
             $('#hlOdBlastInspectionProDialog').dialog('close');
         }
+
+
+        //图片上传失败操作
+        function onUploadError() {
+            alert("上传失败!");
+        }
+        //图片上传成功操作
+        function onUploadSuccess(e) {
+            var data=eval("("+e.serverData+")");
+            var imgListstr=editFilesList(0,data.imgUrl);
+            var imgList=imgListstr.split(';');
+            createPictureModel(imgList);
+        }
+        function editFilesList(type,imgUrl) {
+            var $obj=$('#fileslist');
+            if(type==0){
+                var filesList=$('#fileslist').val();
+                $obj.val(filesList+imgUrl+";");
+            }else{
+                $obj.val($obj.val().replace(imgUrl+";",''));
+            }
+            return $obj.val();
+        }
+        //删除选择的图片
+        function delUploadPicture($obj) {
+            var imgUrl=$obj.siblings('dt').find('img').attr('src');
+            var imgName=imgUrl.substr(imgUrl.lastIndexOf('/')+1);
+            $.ajax({
+                url:'../UploadFile/delUploadPicture.action',
+                dataType:'json',
+                data:{"imgList":imgName+";"},
+                success:function (data) {
+                    if(data.success){
+                        var imgList=editFilesList(2,imgName);
+                        $(this).parent('.content-dl').remove();
+                    }else{
+                        hlAlertFour("移除失败!");
+                    }
+                },
+                error:function () {
+                    hlAlertThree();
+                }
+            });
+        }
+        //创建图片展示模型(参数是图片集合)
+        function  createPictureModel(imgList) {
+            var basePath ="<%=basePath%>"+"/upload/pictures/";
+            if($('#hl-gallery').length>0){
+                $('#content_list').empty();
+                for(var i=0;i<imgList.length-1;i++){
+                    $('#content_list').append(getCalleryChildren(basePath+imgList[i]));
+                }
+            }else{
+                $('#hl-gallery-con').append(getGalleryCon());
+                for(var i=0;i<imgList.length-1;i++){
+                    $('#content_list').append(getCalleryChildren(basePath+imgList[i]));
+                }
+            }
+        }
+
+
 
         function  setParams($obj) {
             if($obj.val()==null||$obj.val()=="")
