@@ -372,9 +372,9 @@
 <!--工具栏-->
 <div id="hlOdBlastProTb" style="padding:10px;">
     <span class="i18n1" name="pipeno">钢管编号</span>:
-    <input id="pipeno" name="pipeno" style="line-height:26px;border:1px solid #ccc">
+    <input id="pipeno" name="pipeno" style="line-height:22px;border:1px solid #ccc">
     <span class="i18n1" name="operatorno">操作工编号</span>:
-    <input id="operatorno" name="operatorno" style="line-height:26px;border:1px solid #ccc">
+    <input id="operatorno" name="operatorno" style="line-height:22px;border:1px solid #ccc">
     <span class="i18n1" name="begintime">开始时间</span>:
     <input id="begintime" name="begintime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
     <span class="i18n1" name="endtime">结束时间</span>:

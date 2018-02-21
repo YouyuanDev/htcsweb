@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +34,7 @@ public class PersonController {
         map.put("rows",personList);
         return map;
     }
+
     @RequestMapping("editPerson")
     public  String editPerson(Person person){
         personDao.updatePerson(person);
@@ -47,10 +50,39 @@ public class PersonController {
         String mmp= JSONArray.toJSONString(list);
         return mmp;
     }
+
     @RequestMapping("getPersonById")
     public String getPersonById(int id,HttpServletRequest request){
         Person person=personDao.getPersonById(id);
         request.getSession().setAttribute("sa",person);
         return "personedit";
     }
+
+
+    @RequestMapping("getPersonByLike")
+    @ResponseBody
+    public String getPersonByLike( @RequestParam(value = "employee_no",required = false)String employee_no,@RequestParam(value = "pname",required = false)String pname,  HttpServletRequest request){
+        String page= request.getParameter("page");
+        String rows= request.getParameter("rows");
+        if(page==null){
+            page="1";
+        }
+        if(rows==null){
+            rows="20";
+        }
+        System.out.print("employee_no:"+employee_no);
+        int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
+        List<HashMap<String,Object>> list=personDao.getAllByLike(employee_no,pname,start,Integer.parseInt(rows));
+        int count=personDao.getCount();
+        Map<String,Object> maps=new HashMap<String,Object>();
+        maps.put("total",count);
+        maps.put("rows",list);
+        String mmp= JSONArray.toJSONString(maps);
+        System.out.print("mmp:"+mmp);
+        return mmp;
+
+    }
+
+
+
 }

@@ -3,7 +3,7 @@ package com.htcsweb.entity;
 import java.util.Date;
 
 public class Person {
-    private int pid;
+    private int id;
     private String employee_no;
     private String pname;
     private String ppassword;
@@ -14,11 +14,12 @@ public class Person {
     private String pstatus;
     private String pdepartment;
     private Date pregister_time;
+
     public Person() {
     }
 
-    public Person(int pid, String employee_no, String pname, String ppassword, String pidcard_no, String pmobile, int page, String psex, String pstatus, String pdepartment, Date pregister_time) {
-        this.pid = pid;
+    public Person(int id, String employee_no, String pname, String ppassword, String pidcard_no, String pmobile, int page, String psex, String pstatus, String pdepartment, Date pregister_time) {
+        this.id = id;
         this.employee_no = employee_no;
         this.pname = pname;
         this.ppassword = ppassword;
@@ -31,12 +32,13 @@ public class Person {
         this.pregister_time = pregister_time;
     }
 
-    public int getPid() {
-        return pid;
+
+    public int getId() {
+        return id;
     }
 
-    public void setPid(int pid) {
-        this.pid = pid;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getEmployee_no() {

@@ -123,32 +123,14 @@
                     if(tab){
                         $('#hlTab').tabs('select',node.text);
                     }else{
-                        if("账户管理"==nodeTxt){
+                        if("人员管理"==nodeTxt||"Person Management"==nodeTxt){
+
                             $('#hlTab').tabs('add',{
-                                title:nodeTxt,
-                                href:'person.jsp',
-                                closable:true,
-                                onLoad:function () {
-                                    $('#personDatagrids').datagrid({
-                                        url:'/person/getPersonByPage.action',
-                                        striped:true,
-                                        loadMsg:'加载中...',
-                                        pagination:true,
-                                        singleSelect:true,
-                                        pageNumber:1,
-                                        rownumbers:true,
-                                        fitColumns:true,
-                                        pageList:[10,20,50,100],
-                                        pageSize:10,
-                                        toolbar:'#hlOdBlastProTb',
-                                        columns:[[
-                                            {field:'id',title:'编号',width:100},
-                                            {field:'pname',title:'姓名',width:100},
-                                            {field:'page',title:'年龄',width:100}
-                                        ]]
-                                    })
-                                }
-                            })
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='account/person.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                            hlLanguage();
                         }
                     }
                 }
@@ -204,7 +186,8 @@
         </div>
         <div title="账户管理" class="i18n" name="accountmanagement" style="padding:10px;">
             <ul id="hlaccount">
-                <li>账户管理</li>
+                <li class="i18n1" name="personmanagement">账户管理</li>
+
             </ul>
         </div>
     </div>

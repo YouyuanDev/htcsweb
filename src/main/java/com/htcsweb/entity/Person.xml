@@ -46,14 +46,18 @@
             </if>
         </where>
     </select>
-    <select id="getAllByLike"  resultMap="all" resultType="com.htcsweb.entity.Person">
+    <select id="getAllByLike"  resultMap="all" resultType="map">
         select * from person
         <where>
+            <if test="employee_no!=null and employee_no!=''">
+                AND employee_no LIKE CONCAT('%',#{employee_no},'%')
+            </if>
             <if test="pname!=null and pname!=''">
                 AND pname LIKE CONCAT('%',#{pname},'%')
             </if>
         </where>
-        id limit #{skip},#{take}
+        ORDER BY id DESC
+        limit #{skip},#{take}
     </select>
 
     <select id="getPersonById" parameterType="int" resultType="com.htcsweb.entity.Person">
