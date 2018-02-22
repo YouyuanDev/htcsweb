@@ -29,21 +29,14 @@
         var url;
 
         function formatterdate(value,row,index){
-            var date = new Date(value);
-            //var y = date.getFullYear();
-            //var m = date.getMonth()+1;
-            //var d = date.getDate();
-
-            //return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
-            //alert("ss"+date.toLocaleString())
-            return date.toLocaleString();
+            return getDate1(value);
         }
 
-        // 日期格式为 2/20/2017 12:00:00 PM
+        // 日期格式为 2017-02-20 22:00:00
         function myformatter2(date){
-            return date.toLocaleString();
+            return getDate1(date);
         }
-        // 日期格式为 2/20/2017 12:00:00 PM
+        // 日期格式为 2017-02-20 22:00:00
         function myparser2(s) {
             if (!s) return new Date();
             return new Date(Date.parse(s));
@@ -110,8 +103,6 @@
             var row = $('#personDatagrids').datagrid('getSelected');
             if(row){
                 $('#hlPersonDialog').dialog('open').dialog('setTitle','修改');
-                date = new Date(row.pregister_time);
-                strdate =formatterdate(date);
 
                 $('#personForm').form('load',{
                     'employee_no':row.employee_no,
@@ -123,11 +114,10 @@
                     'psex':row.psex,
                     'pdepartment':row.pdepartment,
                     'pstatus':row.pstatus,
-                    'pid':row.id,
-                    'pregister_time':strdate
-
+                    'pid':row.id
                 });
 
+                $("#pregister_time").datetimebox('setValue',getDate1(row.pregister_time));
 
                 url="/person/savePerson.action?id="+row.id;
 
@@ -154,7 +144,12 @@
                     //表单验证
                     //碱洗时间
 
-                    if($("input[name='pregister_time']").val()==""){
+                    if($("input[name='page']").val()==""){
+
+                        hlAlertFour("请输入年龄");
+                        return false;
+                    }
+                    else if($("input[name='pregister_time']").val()==""){
 
                         hlAlertFour("请输入注册时间");
                         return false;
@@ -301,7 +296,7 @@
                 </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="pregistertime">注册时间</td>
-                    <td><input class="easyui-datebox" type="text" name="pregister_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                    <td><input class="easyui-datetimebox" type="text" id="pregister_time" name="pregister_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
                     <td></td>
                     <td width="16%" class="i18n1" name="pstatus">状态</td>
