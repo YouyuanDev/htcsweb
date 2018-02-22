@@ -301,20 +301,19 @@
                 url:url,
                 onSubmit:function () {
                     //表单验证
-                    alert("11111")
+
                     setParams($("input[name='project_name']"));
                     setParams($("input[name='client_name']"));
                     setParams($("input[name='client_spec']"));
                     setParams($("input[name='coating_standard']"));
                     setParams($("input[name='mps']"));
-                    setParams($("input[name='itp']"));
-                    alert("2222")
+
                     if($("input[name='project_time']").val()==""){
 
                         hlAlertFour("请输入项目开始日期");
                         return false;
                     }
-                    alert("33333")
+
 
                     //return $('#projectForm').form('enableValidation').form('validate');
                 },
