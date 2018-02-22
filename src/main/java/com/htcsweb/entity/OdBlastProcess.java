@@ -7,7 +7,7 @@ import java.util.Date;
 public class OdBlastProcess {
     private  int id;
     private  String  pipe_no;
-    @DateTimeFormat(pattern="mm:ss")
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private  Date operation_time;
     private  String operator_no;
     private  String surface_condition;
