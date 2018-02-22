@@ -53,6 +53,18 @@
                                 content:"<iframe scrolling='auto' frameborder='0'  src='od/odblastinspectionprocess.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable:true
                             });
+                        }else if("外涂岗位"==xy||"Od Coating Process"==xy){
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='od/odcoatingprocess.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                        }else if("外涂检验岗位"==xy||"Od Coating Inspection"==xy){
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='od/odcoatinginspectionprocess.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
                         }
                     }
                 }

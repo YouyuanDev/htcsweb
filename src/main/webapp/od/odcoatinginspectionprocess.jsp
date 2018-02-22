@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+    String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+%>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>供应商信息</title>
+    <title>外涂检验岗位</title>
     <link rel="stylesheet" type="text/css" href="../easyui/themes/bootstrap/easyui.css">
     <link rel="stylesheet" type="text/css" href="../easyui/themes/icon.css">
     <link href="../miniui/multiupload/multiupload.css" rel="stylesheet" type="text/css" />
@@ -18,10 +21,8 @@
     <script src="../miniui/fileupload/swfupload/swfupload.js" type="text/javascript"></script>
     <script src="../miniui/multiupload/multiupload.js" type="text/javascript"></script>
     <script  src="../js/lrscroll.js" type="text/javascript"></script>
-    <style type="text/css" >
-        .b3{border-style:inset;border-width:thin;}
-    </style>
-
+    <script src="../js/jquery.i18n.properties-1.0.9.js" type="text/javascript"></script>
+    <script src="../js/language.js" type="text/javascript"></script>
 
     <script type="text/javascript">
 
