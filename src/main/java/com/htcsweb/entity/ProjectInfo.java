@@ -1,5 +1,7 @@
 package com.htcsweb.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +14,7 @@ public class ProjectInfo {
     private String coating_standard;
     private String mps;
     private String itp;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date project_time;
     private String upload_files;
 
