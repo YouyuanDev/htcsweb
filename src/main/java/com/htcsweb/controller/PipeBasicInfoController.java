@@ -89,20 +89,13 @@ public class PipeBasicInfoController {
     @RequestMapping(value ="/getPipeInfoByNo")
     public String getPipeInfoByNo(HttpServletResponse response,HttpServletRequest request){
         String pipeno=request.getParameter("pipe_no");
-        System.out.println("编号："+pipeno);
         List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoByNo(pipeno);
-        System.out.println("数据"+list.size());
-        String mmp="";
-        JSONObject object=new JSONObject();
-
-        //ResponseUtil.write(response, object);
-        if(list!=null){
-//            Map<String,Object> maps=new HashMap<String,Object>();
-//            maps.put("pipeinfo",list);
-            mmp= JSONArray.toJSONString(list);
+        String mmp= JSON.toJSONString(list);
+        try{
+            ResponseUtil.write(response, mmp);
+        }catch (Exception e){
+            e.printStackTrace();
         }
-
-        System.out.println(mmp);
         return null;
     }
 

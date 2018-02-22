@@ -74,13 +74,9 @@ public class ProjectController {
     @RequestMapping(value = "/saveProject")
     @ResponseBody
     public String saveProject(ProjectInfo projectInfo,HttpServletResponse response){
-
-        System.out.println("saveProject"+projectInfo.getProject_time().toString());
         JSONObject json=new JSONObject();
         try{
             int resTotal=0;
-            //System.out.print(projectInfo.getProject_time().toString());
-
             if(projectInfo.getId()==0){
                 //添加
                 resTotal=projectInfoDao.addProjectInfo(projectInfo);

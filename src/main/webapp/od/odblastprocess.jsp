@@ -626,23 +626,22 @@
     look1.on('valuechanged',function () {
         var rows = grid1.getSelected();
         $("input[name='pipe_no']").val(rows.pipe_no);
+        clearLabelPipeInfo();
         $.ajax({
             url:'../pipeinfo/getPipeInfoByNo.action',
             data:{'pipe_no':rows.pipe_no},
             dataType:'json',
             success:function (data) {
                 if(data!=null&&data!=""){
-
+                    addLabelPipeInfo(data);
                 }
-                alert(toString.call(data));
-                //alert( data.project_name);
             },
             error:function () {
                 hlAlertThree();
             }
         });
     });
-    look2.on('valuechanged',function (e) {
+    look2.on('valuechanged',function (e){
         var rows = grid2.getSelected();
         $("input[name='operator_no']").val(rows.employee_no);
     });

@@ -8,7 +8,7 @@
 <%
     String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
 %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -618,6 +618,20 @@
     look1.on('valuechanged',function () {
         var rows = grid1.getSelected();
         $("input[name='pipe_no']").val(rows.pipe_no);
+        clearLabelPipeInfo();
+        $.ajax({
+            url:'../pipeinfo/getPipeInfoByNo.action',
+            data:{'pipe_no':rows.pipe_no},
+            dataType:'json',
+            success:function (data) {
+                if(data!=null&&data!=""){
+                    addLabelPipeInfo(data);
+                }
+            },
+            error:function () {
+                hlAlertThree();
+            }
+        });
     });
     look2.on('valuechanged',function (e) {
         var rows = grid2.getSelected();

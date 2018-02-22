@@ -61,6 +61,7 @@ function hlAlertSix(url,$imglist,$dialog,$obj) {
         // $dialog.dialog('close');
     }
 }
+//清理选择文件框
 function  clearMultiUpload($grid) {
     var rows = $grid.getData();
     for (var i = 0, l = rows.length; i < l; i++) {
@@ -110,4 +111,30 @@ function getCalleryChildren(imgUrl) {
         '<a class="content-del">X</a>' +
         '</dl>';
     return str;
+}
+//钢管编号异步获取钢管信息清理数据
+function  clearLabelPipeInfo() {
+    $('#project_name').text('');
+    $('#contract_no').text('');
+    $('#status_name').text('');
+    $('#grade').text('');
+    $('#od').text('');
+    $('#wt').text('');
+    $('#p_length').text('');
+    $('#weight').text('');
+    $('#heat_no').text('');
+}
+//钢管编号异步获取钢管信息添加数据
+function addLabelPipeInfo(data) {
+    $.each(data,function (index,element) {
+        $('#project_name').text(element.project_name);
+        $('#contract_no').text(element.contract_no);
+        $('#status_name').text(element.status_name);
+        $('#grade').text(element.grade);
+        $('#od').text(element.od);
+        $('#wt').text(element.wt);
+        $('#p_length').text(element.p_length);
+        $('#weight').text(element.weight);
+        $('#heat_no').text(element.heat_no);
+    });
 }
