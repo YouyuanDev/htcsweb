@@ -25,7 +25,7 @@ public class SupplierController {
     @RequestMapping("addPicture")
     public String addPicture(HttpServletRequest request, MultipartFile file){
 
-        return "od/supplier";
+        return "od/odcoatingprocess";
     }
     public boolean saveFile(HttpServletRequest request,MultipartFile file){
         //判断文件是否为空
@@ -59,7 +59,7 @@ public class SupplierController {
     public  String editSupplier(Supplier supplier){
         System.out.println(supplier);
         supplierDao.updateSupplier(supplier);
-        return "od/supplier";
+        return "od/odcoatingprocess";
     }
 
     @RequestMapping(value = "selfy")
