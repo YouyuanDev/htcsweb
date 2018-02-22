@@ -33,19 +33,19 @@
 
 
         function formatterdate(value,row,index){
-            var date = new Date(value);
-            //return date.toLocaleString();
-            var y = date.getFullYear();
-            var m = date.getMonth()+1;
-            var d = date.getDate();
-            return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
-
+            // var date = new Date(value);
+            // //return date.toLocaleString();
+            // var y = date.getFullYear();
+            // var m = date.getMonth()+1;
+            // var d = date.getDate();
+            // return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
+            return getDate1(value);
         }
 
 
         // 日期格式为 2/20/2017 12:00:00 PM
         function myformatter2(date){
-            return date.toLocaleString();
+            return getDate1(date);
         }
         // 日期格式为 2/20/2017 12:00:00 PM
         function myparser2(s) {
@@ -150,13 +150,16 @@
                 // $('#project_time').text(getDate(row.project_time));
                 // $('#projectForm').form('load',row);
 
-                var date;
-                var strdate="";
-                if(row.project_time!=null&&row.project_time!=""){
-                    date = new Date(row.project_time);
-                    strdate =myformatter(date);
-                }
+                // var date;
+                // var strdate="";
+                // if(row.project_time!=null&&row.project_time!=""){
+                //     date = new Date(row.project_time);
+                //     strdate =myformatter(date);
+                // }
 
+                date = getDate1(row.project_time)
+                str=myformatter2(date)
+                alert(str)
 
                 $('#projectForm').form('load',{
                     'projectid':row.id,
@@ -167,9 +170,11 @@
                     'coating_standard':row.coating_standard,
                     'mps':row.mps,
                     'itp':row.itp,
-                    'project_time':strdate,
+                    'project_time':str,
                     'upload_files':row.upload_files
                 });
+
+                //$("#project_time").datetimebox('setValue',getDate1(row.project_time));
 
                 var files=row.upload_files;
                 if(files!=null&&files!=""){
@@ -322,20 +327,20 @@
                 url:url,
                 onSubmit:function () {
                     //表单验证
-
+                    alert("11111")
                     setParams($("input[name='project_name']"));
                     setParams($("input[name='client_name']"));
                     setParams($("input[name='client_spec']"));
                     setParams($("input[name='coating_standard']"));
                     setParams($("input[name='mps']"));
                     setParams($("input[name='itp']"));
-
+                    alert("2222")
                     if($("input[name='project_time']").val()==""){
 
                         hlAlertFour("请输入项目开始日期");
                         return false;
                     }
-
+                    alert("33333")
 
                     //return $('#projectForm').form('enableValidation').form('validate');
                 },
@@ -462,34 +467,34 @@
                 </tr>
                 <tr>
                     <td class="i18n1" name="projectno" width="16%">项目编号</td>
-                    <td width="33%"><input class="easyui-validatebox" type="text" name="project_no"  value=""/></td>
+                    <td width="33%"><input class="easyui-textbox" type="text" name="project_no"  value=""/></td>
 
                     <td class="i18n1" name="projectname" width="16%">项目名称</td>
-                    <td width="33%"><input class="easyui-validatebox" type="text" name="project_name"   value=""/></td>
+                    <td width="33%"><input class="easyui-textbox" type="text" name="project_name"   value=""/></td>
 
 
                 </tr>
 
                 <tr>
                     <td class="i18n1" name="clientname" width="16%">客户名称</td>
-                    <td   width="33%"><input class="easyui-validatebox" type="text" name="client_name" value=""/></td>
+                    <td   width="33%"><input class="easyui-textbox" type="text" name="client_name" value=""/></td>
 
                     <td class="i18n1" name="clientspec" width="16%">客户技术规格书</td>
-                    <td  width="33%"><input class="easyui-validatebox" type="text" name="client_spec" value=""/></td>
+                    <td  width="33%"><input class="easyui-textbox" type="text" name="client_spec" value=""/></td>
 
                 </tr>
                 <tr>
                     <td class="i18n1" name="coatingstandard" width="16%">涂层标准</td>
-                    <td   width="33%"><input class="easyui-validatebox" type="text" name="coating_standard" value=""/></td>
+                    <td   width="33%"><input class="easyui-textbox" type="text" name="coating_standard" value=""/></td>
                     <td class="i18n1" name="projecttime" width="16%">项目时间</td>
-                    <td   width="33%"><input class="easyui-datebox" type="text" name="project_time" value="" data-options="formatter:myformatter2,parser:myparser2"/></td>
+                    <td   width="33%"><input class="easyui-datetimebox" type="text" name="project_time" value="" data-options="formatter:myformatter2,parser:myparser2"/></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="mps" width="16%">MPS</td>
-                    <td   width="33%"><input class="easyui-validatebox" type="text" name="mps" value=""/></td>
+                    <td   width="33%"><input class="easyui-textbox" type="text" name="mps" value=""/></td>
 
                     <td class="i18n1" name="itp" width="16%">ITP</td>
-                    <td   width="33%"><input class="easyui-validatebox" type="text" name="itp" value=""/></td>
+                    <td   width="33%"><input class="easyui-textbox" type="text" name="itp" value=""/></td>
 
                 </tr>
             </table>

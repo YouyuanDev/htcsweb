@@ -83,7 +83,7 @@ public class OdBlastInspectionProcessController {
             //System.out.println("odbptime="+odbptime);
 
             if(odbptime!=null&&odbptime!=""){
-                SimpleDateFormat simFormat = new SimpleDateFormat("MM/dd/yyyy,hh:mm:ss");
+                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date new_odbptime = simFormat.parse(odbptime);
                 odblastinspectionprocess.setOperation_time(new_odbptime);
             }else{

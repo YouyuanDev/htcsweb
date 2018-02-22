@@ -75,7 +75,7 @@ public class ProjectController {
     @ResponseBody
     public String saveProject(ProjectInfo projectInfo,HttpServletResponse response){
 
-        //System.out.println("saveProject"+projectInfo.getProject_time().toString());
+        System.out.println("saveProject"+projectInfo.getProject_time().toString());
         JSONObject json=new JSONObject();
         try{
             int resTotal=0;

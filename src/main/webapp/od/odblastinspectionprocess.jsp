@@ -51,14 +51,7 @@
         }
 
         function formatterdate(value,row,index){
-            var date = new Date(value);
-            //var y = date.getFullYear();
-            //var m = date.getMonth()+1;
-            //var d = date.getDate();
-
-            //return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
-            //alert("ss"+date.toLocaleString())
-            return date.toLocaleString();
+            return getDate1(value);
         }
 
         function myparsedate(s){
@@ -70,7 +63,7 @@
 
         // 日期格式为 2/20/2017 12:00:00 PM
         function myformatter2(date){
-            return date.toLocaleString();
+            return getDate1(date);
         }
         // 日期格式为 2/20/2017 12:00:00 PM
         function myparser2(s) {
@@ -154,20 +147,16 @@
                 $('#status_name').text(row.status_name);
                 $('#od').text(row.od);$('#wt').text(row.wt);
                 $('#p_length').text(row.p_length);$('#weight').text(row.weight);
-                $('#odbinpid').text(row.id);
                 $('#grade').text(row.grade);
                 $('#heat_no').text(row.heat_no);
 
                 $('#odBlastInspectionProForm').form('load',row);
 
-                date = new Date(row.operation_time);
-                strdate =formatterdate(date);
 
-                //alert(strdate);
-                $('#odBlastInspectionProForm').form('load',{
-                    'odbinpid':row.id,
-                    'odbptime':strdate
-                });
+
+                $("#odbptime").datetimebox('setValue',getDate1(row.operation_time));
+                $("#odbinpid").textbox("setValue", row.id);
+
 
                 look1.setText(row.pipe_no);
                 look1.setValue(row.pipe_no);
@@ -433,7 +422,7 @@
             <table class="ht-table">
                 <tr>
                     <td class="i18n1" name="id">流水号</td>
-                    <td colspan="5"><input class="easyui-textbox" type="text" name="odbinpid" readonly="true" value="0"/></td>
+                    <td colspan="5"><input class="easyui-textbox" type="text" id="odbinpid" name="odbinpid" readonly="true" value="0"/></td>
 
                 </tr>
                 <tr>
@@ -446,7 +435,7 @@
                     </td>
                     <td class="i18n1" name="operationtime">操作时间</td>
                     <td colspan="2">
-                        <input class="easyui-datebox" type="text" name="odbptime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                        <input class="easyui-datetimebox" type="text" id="odbptime" name="odbptime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
 
                     </td>
 
