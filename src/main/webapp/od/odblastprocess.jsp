@@ -134,6 +134,7 @@
             $('#fileslist').val('');
             $('#odBlastProForm').form('clear');
             $('#odbpid').text('');$('#odbptime').text('');
+            combox1.setValue("");
             clearMultiUpload(grid);
             url="/OdOperation/saveOdBlastProcess.action";
         }
@@ -161,9 +162,6 @@
                 $('#od').text(row.od);$('#wt').text(row.wt);
                 $('#p_length').text(row.p_length);$('#weight').text(row.weight);
                 $('#odbpid').text(row.id);
-
-                //$('#odbptime').datebox('setValue', date1);
-                //$('#odbptime').text(row.operation_time);
                 $('#grade').text(row.grade);$('#heat_no').text(row.heat_no);
                 $('#odBlastProForm').form('load',row);
 
@@ -173,6 +171,7 @@
                 look1.setValue(row.pipe_no);
                 look2.setText(row.operator_no);
                 look2.setValue(row.operator_no);
+                combox1.setValue(row.surface_condition);
                 var odpictures=row.upload_files;
                 if(odpictures!=null&&odpictures!=""){
                      var imgList=odpictures.split(';');
@@ -306,7 +305,7 @@
             $('#od').text('');$('#wt').text('');
             $('#p_length').text('');$('#weight').text('');
             $('#odbpid').text('');$('#odbptime').text('');
-            $('#grade').text('');$('#heat_no').text('');
+            $('#grade').text('');$('#heat_no').text('');combox1.setValue("");
         }
     </script>
 
@@ -465,7 +464,17 @@
            </tr>
            <tr>
                <td width="16%"  class="i18n1" name="surfacecondition">外观缺陷</td>
-               <td><input class="easyui-validatebox" type="text" name="surface_condition" value=""/></td>
+               <td>
+
+                   <%--<input class="easyui-validatebox" type="text" name="surface_condition" value=""/>--%>
+                   <div id="combobox1" class="mini-combobox" style="width:200px;"  popupWidth="200" textField="text" valueField="text"
+                            url="../data/defect.txt" name="surface_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick" >
+                           <div property="columns">
+                               <div header="缺陷类型" field="text"></div>
+                           </div>
+                   </div>
+
+               </td>
                <td></td>
                <td width="16%" class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</td>
                <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="salt_contamination_before_blasting" value=""/></td>
@@ -593,7 +602,7 @@
     var grid2=mini.get("datagrid2");
     var look1=mini.get('lookup1');
     var look2= mini.get("lookup2");
-
+    var combox1=mini.get("combobox1");
     grid1.load();
     grid2.load();
 
@@ -659,5 +668,15 @@
         $('#searchBar2').css('display','block');
         //$('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
     });
+    combox1.on("showpopup",function () {
+        $('.mini-shadow').css('z-index','99999');
+        $('.mini-popup').css('z-index','100000');
+        $('.mini-panel').css('z-index','100000');
+    });
+    function onComboxCloseClick(e) {
+        var obj = e.sender;
+        obj.setText("");
+        obj.setValue("");
+    }
     hlLanguage("../i18n/");
 </script>
