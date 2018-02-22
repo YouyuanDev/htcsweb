@@ -1,6 +1,7 @@
 package com.htcsweb.controller;
 
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.ProjectInfoDao;
@@ -135,7 +136,19 @@ public class ProjectController {
         ResponseUtil.write(response,json);
         return null;
     }
-
+    //根据钢管编号异步查询钢管信息
+    @RequestMapping(value ="/getProjectNameByNo")
+    public String getProjectNameByNo(HttpServletResponse response,HttpServletRequest request){
+        String project_no=request.getParameter("project_no");
+        String project_name=projectInfoDao.getProjectNameByNo(project_no);
+        String mmp= JSON.toJSONString(project_name);
+        try{
+            ResponseUtil.write(response,mmp);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 
     @RequestMapping("/getProjectInfo")

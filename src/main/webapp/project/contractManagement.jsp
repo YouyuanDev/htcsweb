@@ -438,6 +438,18 @@
     look1.on('valuechanged',function () {
         var rows = grid1.getSelected();
         $("input[name='project_no']").val(rows.project_no);
+        $("input[name='project_name']").val('');
+        $.ajax({
+            url:'../ProjectOperation/getProjectNameByNo.action',
+            data:{'project_no':rows.project_no},
+            dataType:'json',
+            success:function (data) {
+                $("input[name='project_name']").val(data);
+            },
+            error:function () {
+                hlAlertThree();
+            }
+        });
     });
     // look2.on('valuechanged',function (e) {
     //     var rows = grid2.getSelected();
