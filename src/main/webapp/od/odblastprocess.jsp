@@ -467,7 +467,7 @@
                <td>
 
                    <%--<input class="easyui-validatebox" type="text" name="surface_condition" value=""/>--%>
-                   <div id="combobox1" class="mini-combobox" style="width:200px;"  popupWidth="200" textField="text" valueField="text"
+                   <div id="combobox1" class="mini-combobox" style="width:185px;"  popupWidth="185" textField="text" valueField="text"
                             url="../data/defect.txt" name="surface_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick" >
                            <div property="columns">
                                <div header="缺陷类型" field="text"></div>
