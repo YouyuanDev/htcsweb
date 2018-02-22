@@ -79,7 +79,11 @@
     <select id="getProjectNameByNo" resultType="java.lang.String">
         SELECT project_name from project_info WHERE project_no=#{project_no}
     </select>
-
+    
+    <select id="getProjectInfoByContract" resultType="com.htcsweb.entity.ProjectInfo">
+        SELECT p.* from project_info  p inner JOIN contract_info c on c.project_no=p.project_no where c.contract_no=#{contract_no}
+    </select>
+    
     <select id="getProjectInfoByID" resultType="com.htcsweb.entity.ProjectInfo">
         SELECT * from project_info WHERE id=#{id}
     </select>

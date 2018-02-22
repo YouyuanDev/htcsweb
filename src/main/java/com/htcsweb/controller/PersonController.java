@@ -27,7 +27,7 @@ public class PersonController {
 
 
     //根据姓名模糊查询用户编号,小页面查询
-    @RequestMapping(value = "/getPersonNoByName")
+    @RequestMapping(value = "/getPersonNoByName",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String getPersonNoByName(HttpServletRequest request){
         String pname=request.getParameter("pname");

@@ -111,7 +111,7 @@ public class ContractController {
     }
 
     //得到Contract信息
-    @RequestMapping("/getContractInfoByContractNo")
+    @RequestMapping(value ="/getContractInfoByContractNo",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String getContractInfoByContractNo(HttpServletRequest request){
         String contract_no=request.getParameter("contract_no");

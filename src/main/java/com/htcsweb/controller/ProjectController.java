@@ -136,7 +136,7 @@ public class ProjectController {
         ResponseUtil.write(response,json);
         return null;
     }
-    //根据钢管编号异步查询钢管信息
+    //根据钢管编号异步查询钢管信息-名字
     @RequestMapping(value ="/getProjectNameByNo")
     public String getProjectNameByNo(HttpServletResponse response,HttpServletRequest request){
         String project_no=request.getParameter("project_no");
@@ -149,9 +149,22 @@ public class ProjectController {
         }
         return null;
     }
+    //根据合同编号异步查询项目名称和编号
+    @RequestMapping(value = "/getProjectInfoByContract",produces = "text/plain;charset=utf-8")
+    @ResponseBody
+    public String getProjectInfoByContract(HttpServletResponse response,HttpServletRequest request){
+        String contract_no=request.getParameter("contract_no");
+        List<ProjectInfo>list=projectInfoDao.getProjectInfoByContract(contract_no);
+        String map= JSONObject.toJSONString(list);
+        try{
+            ResponseUtil.write(response,map);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-
-    @RequestMapping("/getProjectInfo")
+    @RequestMapping(value = "/getProjectInfo",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String getProjectInfo(HttpServletRequest request){
         String project_no=request.getParameter("project_no");

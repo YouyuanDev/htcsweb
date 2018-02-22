@@ -19,4 +19,5 @@ public interface ProjectInfoDao {
     public List<ProjectInfo> getProjectInfo(@Param("project_no")String project_no);
     public List<ProjectInfo> getProjectInfoByID(@Param("id")String id);
     public String getProjectNameByNo(@Param("project_no")String project_no);
+    public List<ProjectInfo> getProjectInfoByContract(@Param("contract_no")String contract_no);
 }

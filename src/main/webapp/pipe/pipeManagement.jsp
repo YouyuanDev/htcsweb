@@ -371,7 +371,7 @@
 
             <div field="contract_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="contractno">合同编号</div>
             <div field="project_no" width="40" headerAlign="center" allowSort="true" class="i18n1" name="projectno">项目编号</div>
-            <div field="grade" width="40" headerAlign="center" allowSort="true" class="i18n1" name="grade">钢钟</div>
+            <div field="grade" width="40" headerAlign="center" allowSort="true" class="i18n1" name="grade">钢种</div>
             <div field="od" width="40" headerAlign="center" allowSort="true" class="i18n1" name="od">外径</div>
             <div field="wt" width="40" headerAlign="center" allowSort="true" class="i18n1" name="wt">壁厚</div>
             <div field="total_order_length" width="40" headerAlign="center" allowSort="true" class="i18n1" name="total_order_length">合同总长度</div>
@@ -415,6 +415,23 @@
     look1.on('valuechanged',function () {
         var rows = grid1.getSelected();
         $("input[name='contract_no']").val(rows.contract_no);
+        $("input[name='project_no']").val('');
+        $("input[name='project_name']").val('');
+        $.ajax({
+            url:'../ProjectOperation/getProjectInfoByContract.action',
+            data:{'contract_no':rows.contract_no},
+            dataType:'json',
+            success:function (data) {
+                $.each(data,function (index,element) {
+                    $("input[name='project_no']").val(element.project_no);
+                    $("input[name='project_name']").val(element.project_name);
+                });
+
+            },
+            error:function () {
+                hlAlertThree();
+            }
+        });
     });
 
     look1.on("showpopup",function(e){
