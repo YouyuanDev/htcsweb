@@ -40,10 +40,8 @@ public class OdBlastProcessController {
         try{
             String odbptime= request.getParameter("odbptime");
             int resTotal=0;
-            //System.out.println("odbptime="+odbptime);
-
             if(odbptime!=null&&odbptime!=""){
-                SimpleDateFormat simFormat = new SimpleDateFormat("MM/dd/yyyy,hh:mm:ss");
+                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date new_odbptime = simFormat.parse(odbptime);
                 odblastprocess.setOperation_time(new_odbptime);
             }else{
@@ -55,7 +53,6 @@ public class OdBlastProcessController {
                 resTotal=odblastprocessDao.addOdBlastProcess(odblastprocess);
             }else{
                 //修改！
-                System.out.print("操作工编号是:"+odblastprocess.getOperator_no());
                 resTotal=odblastprocessDao.updateOdBlastProcess(odblastprocess);
             }
             if(resTotal>0){

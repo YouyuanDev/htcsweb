@@ -66,7 +66,7 @@ public class OdBlastInspectionProcessController {
         maps.put("total",count);
         maps.put("rows",list);
         String mmp= JSONArray.toJSONString(maps);
-        System.out.print("mmp:"+mmp);
+        //System.out.print("mmp:"+mmp);
         return mmp;
     }
 

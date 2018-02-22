@@ -82,6 +82,17 @@ function getDate(str){
     second=oDate.getSeconds();
     return year+"年"+month+"月"+day+"日"+" "+hour+":"+minute+":"+second;
 }
+//时间转化函数
+function getDate1(str){
+    var oDate = new Date(str);
+    y=oDate.getFullYear();
+    m = oDate.getMonth()+1;
+    d = oDate.getDate();
+    h=oDate.getHours();
+    mins=oDate.getMinutes();
+    s=oDate.getSeconds();
+    return  y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d)+' '+(h<10?('0'+h):h)+':'+(mins<10?('0'+mins):mins)+':'+(s<10?('0'+s):s);
+}
 function getGalleryCon() {
     var str='<div id="hl-gallery">'+
         '<span class="prev"><</span>'+

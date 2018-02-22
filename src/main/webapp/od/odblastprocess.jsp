@@ -37,14 +37,7 @@
 
 
         function formatterdate(value,row,index){
-           var date = new Date(value);
-            //var y = date.getFullYear();
-            //var m = date.getMonth()+1;
-            //var d = date.getDate();
-
-            //return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
-            //alert("ss"+date.toLocaleString())
-           return date.toLocaleString();
+           return getDate1(value);
         }
 
         function myparsedate(s){
@@ -70,7 +63,7 @@
 
         // 日期格式为 2/20/2017 12:00:00 PM
         function myformatter2(date){
-            return date.toLocaleString();
+            return getDate1(date);
         }
         // 日期格式为 2/20/2017 12:00:00 PM
         function myparser2(s) {
@@ -174,15 +167,7 @@
                 $('#grade').text(row.grade);$('#heat_no').text(row.heat_no);
                 $('#odBlastProForm').form('load',row);
 
-
-                date = new Date(row.operation_time);
-                strdate =formatterdate(date);
-                //alert(strdate);
-                $('#odBlastProForm').form('load',{
-                    'odbptime':strdate
-                });
-
-
+                $('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
 
                 look1.setText(row.pipe_no);
                 look1.setValue(row.pipe_no);
@@ -453,7 +438,7 @@
                </td>
                <td class="i18n1" name="operationtime">操作时间</td>
                <td colspan="2">
-                   <input class="easyui-datebox" type="text" name="odbptime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                   <input class="easyui-datetimebox" id="operation-time" type="text" name="odbptime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
 
                </td>
 
@@ -641,6 +626,21 @@
     look1.on('valuechanged',function () {
         var rows = grid1.getSelected();
         $("input[name='pipe_no']").val(rows.pipe_no);
+        $.ajax({
+            url:'../pipeinfo/getPipeInfoByNo.action',
+            data:{'pipe_no':rows.pipe_no},
+            dataType:'json',
+            success:function (data) {
+                if(data!=null&&data!=""){
+
+                }
+                alert(toString.call(data));
+                //alert( data.project_name);
+            },
+            error:function () {
+                hlAlertThree();
+            }
+        });
     });
     look2.on('valuechanged',function (e) {
         var rows = grid2.getSelected();

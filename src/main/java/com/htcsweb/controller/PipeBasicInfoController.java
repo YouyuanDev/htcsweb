@@ -1,6 +1,7 @@
 package com.htcsweb.controller;
 
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.PipeBasicInfoDao;
@@ -20,7 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.htcsweb.util.ComboxItem;
-
 
 @Controller
 @RequestMapping("/pipeinfo")
@@ -83,18 +83,33 @@ public class PipeBasicInfoController {
         maps.put("total",count);
         maps.put("rows",list);
         String mmp= JSONArray.toJSONString(maps);
-        System.out.print("mmp:"+mmp);
         return mmp;
     }
+    //根据钢管编号异步查询钢管信息
+    @RequestMapping(value ="/getPipeInfoByNo")
+    public String getPipeInfoByNo(HttpServletResponse response,HttpServletRequest request){
+        String pipeno=request.getParameter("pipe_no");
+        System.out.println("编号："+pipeno);
+        List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoByNo(pipeno);
+        System.out.println("数据"+list.size());
+        String mmp="";
+        JSONObject object=new JSONObject();
 
+        //ResponseUtil.write(response, object);
+        if(list!=null){
+//            Map<String,Object> maps=new HashMap<String,Object>();
+//            maps.put("pipeinfo",list);
+            mmp= JSONArray.toJSONString(list);
+        }
 
+        System.out.println(mmp);
+        return null;
+    }
 
     //增加或修改Pipe信息
     @RequestMapping(value = "/savePipe")
     @ResponseBody
     public String savePipe(PipeBasicInfo pipeBasicInfo, HttpServletResponse response){
-        System.out.print("savePipe");
-
         JSONObject json=new JSONObject();
         try{
             int resTotal=0;
@@ -103,10 +118,8 @@ public class PipeBasicInfoController {
             if(pipeBasicInfo.getId()==0){
                 //添加
                 resTotal=pipeBasicInfoDao.addPipeBasicInfo(pipeBasicInfo);
-
             }else{
                 //修改！
-
                 resTotal=pipeBasicInfoDao.updatePipeBasicInfo(pipeBasicInfo);
             }
             if(resTotal>0){
