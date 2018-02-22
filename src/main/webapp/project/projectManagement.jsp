@@ -130,36 +130,10 @@
             var row = $('#projectDatagrids').datagrid('getSelected');
             if(row){
                  $('#hlProjectDialog').dialog('open').dialog('setTitle','修改');
-                  // $('#project_no').textbox('setValue',row.project_no);
-                  // $('#project_name').textbox('setValue',row.project_name);
-                  // $('#client_name').textbox('setValue',row.client_name);
-                  // $('#client_spec').textbox('setValue',row.client_spec);
-                  // $('#coating_standard').textbox('setValue',row.coating_standard);
-                  // $('#mps').textbox('setValue',row.mps);
-                  // $('#itp').textbox('setValue',row.itp);
-                  // $('#project_time').datebox('setValue',row.project_time);
-                  // $('#projectid').text(row.id);
 
-                // $('#project_no').text(row.project_no);
-                // $('#project_name').text(row.project_name);
-                // $('#client_name').text(row.client_name);
-                // $('#client_spec').text(row.client_spec);
-                // $('#coating_standard').text(row.coating_standard);
-                // $('#mps').text(row.mps);
-                // $('#itp').text(row.itp);
-                // $('#project_time').text(getDate(row.project_time));
-                // $('#projectForm').form('load',row);
-
-                // var date;
-                // var strdate="";
-                // if(row.project_time!=null&&row.project_time!=""){
-                //     date = new Date(row.project_time);
-                //     strdate =myformatter(date);
-                // }
-
-                date = getDate1(row.project_time)
-                str=myformatter2(date)
-                alert(str)
+                //date = getDate1(row.project_time)
+                //str=myformatter2(date)
+                //alert(str)
 
                 $('#projectForm').form('load',{
                     'projectid':row.id,
@@ -170,11 +144,11 @@
                     'coating_standard':row.coating_standard,
                     'mps':row.mps,
                     'itp':row.itp,
-                    'project_time':str,
+                    //'project_time':str,
                     'upload_files':row.upload_files
                 });
 
-                //$("#project_time").datetimebox('setValue',getDate1(row.project_time));
+                $("#project_time").datetimebox('setValue',getDate1(row.project_time));
 
                 var files=row.upload_files;
                 if(files!=null&&files!=""){
@@ -327,20 +301,19 @@
                 url:url,
                 onSubmit:function () {
                     //表单验证
-                    alert("11111")
+
                     setParams($("input[name='project_name']"));
                     setParams($("input[name='client_name']"));
                     setParams($("input[name='client_spec']"));
                     setParams($("input[name='coating_standard']"));
                     setParams($("input[name='mps']"));
-                    setParams($("input[name='itp']"));
-                    alert("2222")
+
                     if($("input[name='project_time']").val()==""){
 
                         hlAlertFour("请输入项目开始日期");
                         return false;
                     }
-                    alert("33333")
+
 
                     //return $('#projectForm').form('enableValidation').form('validate');
                 },
@@ -487,7 +460,7 @@
                     <td class="i18n1" name="coatingstandard" width="16%">涂层标准</td>
                     <td   width="33%"><input class="easyui-textbox" type="text" name="coating_standard" value=""/></td>
                     <td class="i18n1" name="projecttime" width="16%">项目时间</td>
-                    <td   width="33%"><input class="easyui-datetimebox" type="text" name="project_time" value="" data-options="formatter:myformatter2,parser:myparser2"/></td>
+                    <td   width="33%"><input class="easyui-datetimebox" type="text" id="project_time" name="project_time" value="" data-options="formatter:myformatter2,parser:myparser2"/></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="mps" width="16%">MPS</td>
