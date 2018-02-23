@@ -71,6 +71,12 @@
                                 content:"<iframe scrolling='auto' frameborder='0'  src='od/odstencilprocess.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable:true
                             });
+                        }else if("外涂层终检岗位"==xy||"Od Final Inspection"==xy){
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='od/odfinalinspectionprocess.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
                         }
                     }
                 }
@@ -183,7 +189,7 @@
             </ul>
         </div>
         <div title="内防腐" class="i18n" name="intenalcoating" style="padding:10px;">
-            bb
+          bb
         </div>
         <div title="出入库" class="i18n" name="storage" style="padding:10px;">
             cc

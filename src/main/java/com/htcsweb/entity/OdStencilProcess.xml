@@ -14,7 +14,7 @@
     UPDATE od_stencil_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},stencil_content=#{stencil_content},center_line_color=#{center_line_color},pipe_end_color=#{pipe_end_color},upload_files=#{upload_files},remark=#{remark},result=#{result} where id=#{id}
     </update>
 
-    <delete id="delOdCoatingProcess">
+    <delete id="delOdStencilProcess">
         delete from od_stencil_process WHERE
         <foreach collection="array" item="item" open="id in (" separator="," close=")">
             #{item}
