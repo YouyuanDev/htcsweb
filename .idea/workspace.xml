@@ -7,26 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa3f659b-6ccf-4ae8-84a0-55d0a3756f6f" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoatingInspectionProcessController.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdStencilProcessController.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/od/odstencilprocess.jsp" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoatingProcessController.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoatingProcessController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdCoatingInspectionProcessDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdCoatingInspectionProcessDao.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdStencilProcessDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdStencilProcessDao.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingInspectionProcess.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingInspectionProcess.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingProcess.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingProcess.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingProcess.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingProcess.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdStencilProcess.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdStencilProcess.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/i18n/strings.properties" afterPath="$PROJECT_DIR$/src/main/webapp/i18n/strings.properties" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties" afterPath="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh.properties" afterPath="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh.properties" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/common.js" afterPath="$PROJECT_DIR$/src/main/webapp/js/common.js" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/od/odblastinspectionprocess.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/od/odblastinspectionprocess.jsp" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/od/odblastprocess.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/od/odblastprocess.jsp" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/od/odcoatinginspectionprocess.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/od/odcoatinginspectionprocess.jsp" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/od/odcoatingprocess.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/od/odcoatingprocess.jsp" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -50,40 +31,34 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="odstencilprocess.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/od/odstencilprocess.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="157" column="21" lean-forward="true" selection-start-line="157" selection-start-column="21" selection-end-line="157" selection-end-column="21" />
+            <state relative-caret-position="306">
+              <caret line="156" column="38" lean-forward="true" selection-start-line="156" selection-start-column="38" selection-end-line="156" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OdCoatingProcess.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingProcess.xml">
+      <file leaf-file-name="index.jsp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="8" column="19" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
+            <state relative-caret-position="348">
+              <caret line="66" column="31" lean-forward="true" selection-start-line="66" selection-start-column="31" selection-end-line="66" selection-end-column="31" />
               <folding>
-                <marker date="1519374457000" expanded="true" signature="318:895" ph="INSERT INTO od_coating_process... " />
-                <marker date="1519374457000" expanded="true" signature="1008:1589" ph="UPDATE od_coating_process... " />
-                <marker date="1519374457000" expanded="true" signature="1887:1931" ph="select count... od_coating_process" />
-                <marker date="1519374457000" expanded="true" signature="2003:3143" ph="Select pro.p... od_coating_process" />
-                <marker date="1519374457000" expanded="true" signature="3282:3334" ph="select * fro... od_coating_process" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OdStencilProcessController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdStencilProcessController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="69" column="0" lean-forward="false" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
+                <marker date="1519378821100" expanded="true" signature="1871:1894" ph="..." />
+                <marker date="1519378821100" expanded="true" signature="2359:2382" ph="..." />
+                <marker date="1519378821100" expanded="true" signature="2768:2791" ph="..." />
+                <marker date="1519378821100" expanded="true" signature="3192:3215" ph="..." />
+                <marker date="1519378821100" expanded="true" signature="3602:3625" ph="..." />
+                <marker date="1519378821100" expanded="true" signature="4023:4046" ph="..." />
+                <marker date="1519378821100" expanded="true" signature="4849:4872" ph="..." />
+                <marker date="1519378821100" expanded="true" signature="5336:5359" ph="..." />
+                <marker date="1519378821100" expanded="true" signature="5787:5810" ph="..." />
+                <marker date="1519378821100" expanded="true" signature="6230:6253" ph="..." />
+                <marker date="1519378821100" expanded="true" signature="7090:7113" ph="..." />
               </folding>
             </state>
           </provider>
@@ -229,10 +204,9 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-79" />
     <option name="y" value="23" />
-    <option name="width" value="2053" />
-    <option name="height" value="983" />
+    <option name="width" value="1440" />
+    <option name="height" value="835" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -250,9 +224,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -341,6 +314,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -385,7 +359,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Tomcat Server.index.jsp (1)">
+  <component name="RunManager" selected="Tomcat Server.index.jsp">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -500,8 +474,8 @@
         </option>
       </method>
     </configuration>
-    <configuration name="odblastprocess.jsp (1)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/od/odblastprocess.jsp" />
+    <configuration name="index.jsp" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/index.jsp" />
       <deployment>
         <artifact name="htcsweb:war">
           <settings>
@@ -510,7 +484,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="odblastprocess_jsp_(1)_htcsweb" />
+        <option name="BASE_DIRECTORY_NAME" value="index_jsp_htcsweb_66" />
       </server-settings>
       <predefined_log_file id="Tomcat" enabled="true" />
       <predefined_log_file id="Tomcat Catalina" enabled="true" />
@@ -539,7 +513,7 @@
         </option>
       </method>
     </configuration>
-    <configuration name="odblastprocess.jsp" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
+    <configuration name="odblastprocess.jsp (1)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/od/odblastprocess.jsp" />
       <deployment>
         <artifact name="htcsweb:war">
@@ -549,7 +523,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="odblastprocess_jsp_htcsweb" />
+        <option name="BASE_DIRECTORY_NAME" value="odblastprocess_jsp_(1)_htcsweb" />
       </server-settings>
       <predefined_log_file id="Tomcat" enabled="true" />
       <predefined_log_file id="Tomcat Catalina" enabled="true" />
@@ -663,19 +637,19 @@
       <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Tomcat Server.odblastprocess.jsp" />
-      <item index="1" class="java.lang.String" itemvalue="Tomcat Server.odblastprocess.jsp (1)" />
-      <item index="2" class="java.lang.String" itemvalue="Tomcat Server.odcoatingprocess.jsp" />
-      <item index="3" class="java.lang.String" itemvalue="Tomcat Server.odcoatingprocess.jsp (1)" />
-      <item index="4" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (1)" />
+      <item index="0" class="java.lang.String" itemvalue="Tomcat Server.odblastprocess.jsp (1)" />
+      <item index="1" class="java.lang.String" itemvalue="Tomcat Server.odcoatingprocess.jsp" />
+      <item index="2" class="java.lang.String" itemvalue="Tomcat Server.odcoatingprocess.jsp (1)" />
+      <item index="3" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (1)" />
+      <item index="4" class="java.lang.String" itemvalue="Tomcat Server.index.jsp" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (1)" />
-        <item index="1" class="java.lang.String" itemvalue="Tomcat Server.odcoatingprocess.jsp (1)" />
-        <item index="2" class="java.lang.String" itemvalue="Tomcat Server.odcoatingprocess.jsp" />
-        <item index="3" class="java.lang.String" itemvalue="Tomcat Server.odblastprocess.jsp (1)" />
-        <item index="4" class="java.lang.String" itemvalue="Tomcat Server.odblastprocess.jsp" />
+        <item index="0" class="java.lang.String" itemvalue="Tomcat Server.index.jsp" />
+        <item index="1" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (1)" />
+        <item index="2" class="java.lang.String" itemvalue="Tomcat Server.odcoatingprocess.jsp (1)" />
+        <item index="3" class="java.lang.String" itemvalue="Tomcat Server.odcoatingprocess.jsp" />
+        <item index="4" class="java.lang.String" itemvalue="Tomcat Server.odblastprocess.jsp (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -730,6 +704,8 @@
       <workItem from="1519261048601" duration="1172000" />
       <workItem from="1519263346886" duration="7403000" />
       <workItem from="1519348204288" duration="24628000" />
+      <workItem from="1519381871657" duration="97000" />
+      <workItem from="1519387417840" duration="99000" />
     </task>
     <servers />
   </component>
@@ -742,14 +718,14 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="463145000" />
+    <option name="totallyTimeSpent" value="463341000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-79" y="23" width="2053" height="983" extended-state="0" />
+    <frame x="0" y="23" width="1440" height="835" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3420708" sideWeight="0.50277776" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960597" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -765,12 +741,12 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34219652" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.38794234" sideWeight="0.49722221" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896462" sideWeight="0.49444443" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891247" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947975" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2446544" sideWeight="0.5817223" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2446544" sideWeight="0.41827768" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24444444" sideWeight="0.56437767" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24444444" sideWeight="0.43683085" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -783,6 +759,32 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -836,14 +838,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="151">
           <caret line="52" column="17" lean-forward="false" selection-start-line="52" selection-start-column="17" selection-end-line="52" selection-end-column="17" />
-          <folding>
-            <marker date="1519270070000" expanded="true" signature="1061:1308" ph="SELECT * fro... pipe_basic_info" />
-            <marker date="1519270070000" expanded="true" signature="1379:1415" ph="select count... pipe_basic_info" />
-            <marker date="1519270070000" expanded="true" signature="1488:2234" ph="select co.pr... pipe_basic_info" />
-            <marker date="1519270070000" expanded="true" signature="2308:2654" ph="Select pro.p... pipe_basic_info" />
-            <marker date="1519270070000" expanded="true" signature="2765:3002" ph="UPDATE pipe_basic_info... " />
-            <marker date="1519270070000" expanded="true" signature="3110:3349" ph="INSERT INTO pipe_basic_info... " />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -859,15 +854,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="137">
           <caret line="79" column="17" lean-forward="false" selection-start-line="79" selection-start-column="17" selection-end-line="79" selection-end-column="17" />
-          <folding>
-            <marker date="1519260911000" expanded="true" signature="319:872" ph="INSERT INTO od_blast_process... " />
-            <marker date="1519260911000" expanded="true" signature="1197:1227" ph="SELECT * fro... od_blast_process" />
-            <marker date="1519260911000" expanded="true" signature="1340:1897" ph="UPDATE od_blast_process... " />
-            <marker date="1519260911000" expanded="true" signature="1966:2003" ph="select count... od_blast_process" />
-            <marker date="1519260911000" expanded="true" signature="3553:4298" ph="select * FRO... od_blast_process" />
-            <marker date="1519260911000" expanded="true" signature="4372:5505" ph="Select pro.p... od_blast_process" />
-            <marker date="1519260911000" expanded="true" signature="5636:5681" ph="select * fro... od_blast_process" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -875,16 +862,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="181">
           <caret line="329" column="34" lean-forward="true" selection-start-line="329" selection-start-column="34" selection-end-line="329" selection-end-column="34" />
-          <folding>
-            <marker date="1519282030000" expanded="true" signature="10031:10037" ph="&amp;nbsp;" />
-            <marker date="1519282030000" expanded="true" signature="10037:10043" ph="&amp;nbsp;" />
-            <marker date="1519282030000" expanded="true" signature="10043:10049" ph="&amp;nbsp;" />
-            <marker date="1519282030000" expanded="true" signature="10049:10055" ph="&amp;nbsp;" />
-            <marker date="1519282030000" expanded="true" signature="10055:10061" ph="&amp;nbsp;" />
-            <marker date="1519282030000" expanded="true" signature="10061:10067" ph="&amp;nbsp;" />
-            <marker date="1519282030000" expanded="true" signature="10067:10073" ph="&amp;nbsp;" />
-            <marker date="1519282030000" expanded="true" signature="10073:10079" ph="&amp;nbsp;" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -900,7 +878,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="43">
           <caret line="19" column="32" lean-forward="true" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -908,7 +885,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -916,10 +892,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="197">
           <caret line="16" column="50" lean-forward="true" selection-start-line="16" selection-start-column="50" selection-end-line="16" selection-end-column="50" />
-          <folding>
-            <element signature="e#1326#1327#0" expanded="false" />
-            <element signature="e#1351#1352#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -927,9 +899,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="10">
           <caret line="81" column="61" lean-forward="true" selection-start-line="81" selection-start-column="61" selection-end-line="81" selection-end-column="61" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -937,7 +906,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="29" column="55" lean-forward="false" selection-start-line="29" selection-start-column="55" selection-end-line="29" selection-end-column="55" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -945,7 +913,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="181">
           <caret line="111" column="0" lean-forward="true" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -968,16 +935,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25">
           <caret line="64" column="27" lean-forward="false" selection-start-line="64" selection-start-column="27" selection-end-line="64" selection-end-column="27" />
-          <folding>
-            <marker date="1519285512000" expanded="true" signature="1009:1042" ph="select count... project_info" />
-            <marker date="1519285512000" expanded="true" signature="1114:1178" ph="select count... project_info" />
-            <marker date="1519285512000" expanded="true" signature="1251:2175" ph="Select * fro... project_info" />
-            <marker date="1519285512000" expanded="true" signature="2282:2546" ph="UPDATE project_info... " />
-            <marker date="1519285512000" expanded="true" signature="2650:2909" ph="INSERT INTO project_info... " />
-            <marker date="1519285512000" expanded="true" signature="3517:3585" ph="SELECT proje... project_info" />
-            <marker date="1519285512000" expanded="true" signature="3700:3822" ph="SELECT p.* f... project_info" />
-            <marker date="1519285512000" expanded="true" signature="3931:3972" ph="SELECT * fro... project_info" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1006,7 +964,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
           <caret line="9" column="50" lean-forward="true" selection-start-line="9" selection-start-column="50" selection-end-line="9" selection-end-column="50" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1014,14 +971,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="167" column="34" lean-forward="false" selection-start-line="167" selection-start-column="30" selection-end-line="167" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdBlastProcessController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="50" column="42" lean-forward="true" selection-start-line="50" selection-start-column="42" selection-end-line="50" selection-end-column="42" />
           <folding />
         </state>
       </provider>
@@ -1054,7 +1003,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="31">
           <caret line="7" column="19" lean-forward="true" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1062,9 +1010,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
           <caret line="523" column="19" lean-forward="false" selection-start-line="523" selection-start-column="19" selection-end-line="523" selection-end-column="19" />
-          <folding>
-            <element signature="n#style#0;n#input#0;n#td#4;n#tr#5;n#table#1;n#fieldset#1;n#form#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1072,7 +1018,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="9" column="26" lean-forward="true" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1080,15 +1025,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="158">
           <caret line="33" column="0" lean-forward="true" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding>
-            <marker date="1519260911000" expanded="true" signature="288:1432" ph="Select pro.p... od_blast_inspection_process" />
-            <marker date="1519260911000" expanded="true" signature="1551:2059" ph="INSERT INTO od_blast_inspection_process... " />
-            <marker date="1519260911000" expanded="true" signature="2178:2219" ph="SELECT * fro... od_blast_inspection_process" />
-            <marker date="1519260911000" expanded="true" signature="2340:2852" ph="UPDATE od_blast_inspection_process... " />
-            <marker date="1519260911000" expanded="true" signature="2921:2969" ph="select count... od_blast_inspection_process" />
-            <marker date="1519260911000" expanded="true" signature="4276:4348" ph="select * fro... od_blast_inspection_process" />
-            <marker date="1519260911000" expanded="true" signature="4491:4547" ph="select * fro... od_blast_inspection_process" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1096,7 +1033,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="321">
           <caret line="19" column="33" lean-forward="true" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1104,7 +1040,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
           <caret line="17" column="26" lean-forward="true" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1112,7 +1047,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-246">
           <caret line="76" column="17" lean-forward="true" selection-start-line="76" selection-start-column="17" selection-end-line="76" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1120,28 +1054,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="397" column="21" lean-forward="false" selection-start-line="397" selection-start-column="21" selection-end-line="397" selection-end-column="21" />
-          <folding>
-            <element signature="n#style#0;n#input#0;n#td#4;n#tr#6;n#table#1;n#fieldset#1;n#form#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="66" column="31" lean-forward="true" selection-start-line="66" selection-start-column="31" selection-end-line="66" selection-end-column="31" />
-          <folding>
-            <marker date="1519372841000" expanded="true" signature="1871:1894" ph="..." />
-            <marker date="1519372841000" expanded="true" signature="2359:2382" ph="..." />
-            <marker date="1519372841000" expanded="true" signature="2768:2791" ph="..." />
-            <marker date="1519372841000" expanded="true" signature="3192:3215" ph="..." />
-            <marker date="1519372841000" expanded="true" signature="3602:3625" ph="..." />
-            <marker date="1519372841000" expanded="true" signature="4428:4451" ph="..." />
-            <marker date="1519372841000" expanded="true" signature="4915:4938" ph="..." />
-            <marker date="1519372841000" expanded="true" signature="5366:5389" ph="..." />
-            <marker date="1519372841000" expanded="true" signature="5809:5832" ph="..." />
-            <marker date="1519372841000" expanded="true" signature="6669:6692" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1149,9 +1062,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
           <caret line="12" column="36" lean-forward="false" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1159,13 +1069,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="421">
           <caret line="27" column="19" lean-forward="false" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
-          <folding>
-            <marker date="1519368724000" expanded="true" signature="341:917" ph="INSERT INTO od_coating_inspection_process... " />
-            <marker date="1519368724000" expanded="true" signature="1044:1624" ph="UPDATE od_coating_inspection_process... " />
-            <marker date="1519368724000" expanded="true" signature="1933:3079" ph="Select pro.p... od_coating_inspection_process" />
-            <marker date="1519368724000" expanded="true" signature="3148:3198" ph="select count... od_coating_inspection_process" />
-            <marker date="1519368724000" expanded="true" signature="3346:3404" ph="select * fro... od_coating_inspection_process" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1173,9 +1077,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="172">
           <caret line="116" column="5" lean-forward="true" selection-start-line="116" selection-start-column="5" selection-end-line="116" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1183,9 +1084,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="233">
           <caret line="35" column="17" lean-forward="false" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1193,37 +1091,33 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="47">
           <caret line="111" column="19" lean-forward="true" selection-start-line="111" selection-start-column="19" selection-end-line="111" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/strings.properties">
-      <provider editor-type-id="ResourceBundle">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
           <caret line="19" column="35" lean-forward="false" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/strings_zh.properties">
       <provider editor-type-id="ResourceBundle">
         <state />
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/strings_zh.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
           <caret line="19" column="22" lean-forward="false" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
-          <folding />
         </state>
+      </provider>
+      <provider editor-type-id="ResourceBundle">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdBlastProcessDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
           <caret line="20" column="26" lean-forward="true" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1231,7 +1125,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
           <caret line="11" column="25" lean-forward="true" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1239,13 +1132,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="17" column="38" lean-forward="false" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
-          <folding>
-            <marker date="1519373529000" expanded="true" signature="318:607" ph="INSERT INTO od_stencil_process... " />
-            <marker date="1519373529000" expanded="true" signature="720:1013" ph="UPDATE od_stencil_process... " />
-            <marker date="1519373529000" expanded="true" signature="1305:1344" ph="select count... od_stencil_process" />
-            <marker date="1519373529000" expanded="true" signature="1415:2550" ph="Select pro.p... od_stencil_process" />
-            <marker date="1519373529000" expanded="true" signature="2686:2733" ph="select * fro... od_stencil_process" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1253,25 +1140,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
           <caret line="5" column="22" lean-forward="true" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdStencilProcessController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
+        <state relative-caret-position="1035">
           <caret line="69" column="0" lean-forward="false" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/od/odstencilprocess.jsp">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdBlastProcessController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="157" column="21" lean-forward="true" selection-start-line="157" selection-start-column="21" selection-end-line="157" selection-end-column="21" />
-          <folding />
+        <state relative-caret-position="459">
+          <caret line="68" column="21" lean-forward="true" selection-start-line="68" selection-start-column="21" selection-end-line="68" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -1280,11 +1162,39 @@
         <state relative-caret-position="51">
           <caret line="8" column="19" lean-forward="false" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
           <folding>
-            <marker date="1519374457000" expanded="true" signature="318:895" ph="INSERT INTO od_coating_process... " />
-            <marker date="1519374457000" expanded="true" signature="1008:1589" ph="UPDATE od_coating_process... " />
-            <marker date="1519374457000" expanded="true" signature="1887:1931" ph="select count... od_coating_process" />
-            <marker date="1519374457000" expanded="true" signature="2003:3143" ph="Select pro.p... od_coating_process" />
-            <marker date="1519374457000" expanded="true" signature="3282:3334" ph="select * fro... od_coating_process" />
+            <marker date="1519374871033" expanded="true" signature="318:895" ph="INSERT INTO od_coating_2fbe_process... " />
+            <marker date="1519374871033" expanded="true" signature="1008:1589" ph="UPDATE od_coating_2fbe_process... " />
+            <marker date="1519374871033" expanded="true" signature="1887:1931" ph="select count... od_coating_2fbe_process" />
+            <marker date="1519374871033" expanded="true" signature="2003:3143" ph="Select pro.p... od_coating_2fbe_process" />
+            <marker date="1519374871033" expanded="true" signature="3282:3334" ph="select * fro... od_coating_2fbe_process" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/od/odstencilprocess.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="156" column="38" lean-forward="true" selection-start-line="156" selection-start-column="38" selection-end-line="156" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="66" column="31" lean-forward="true" selection-start-line="66" selection-start-column="31" selection-end-line="66" selection-end-column="31" />
+          <folding>
+            <marker date="1519378821100" expanded="true" signature="1871:1894" ph="..." />
+            <marker date="1519378821100" expanded="true" signature="2359:2382" ph="..." />
+            <marker date="1519378821100" expanded="true" signature="2768:2791" ph="..." />
+            <marker date="1519378821100" expanded="true" signature="3192:3215" ph="..." />
+            <marker date="1519378821100" expanded="true" signature="3602:3625" ph="..." />
+            <marker date="1519378821100" expanded="true" signature="4023:4046" ph="..." />
+            <marker date="1519378821100" expanded="true" signature="4849:4872" ph="..." />
+            <marker date="1519378821100" expanded="true" signature="5336:5359" ph="..." />
+            <marker date="1519378821100" expanded="true" signature="5787:5810" ph="..." />
+            <marker date="1519378821100" expanded="true" signature="6230:6253" ph="..." />
+            <marker date="1519378821100" expanded="true" signature="7090:7113" ph="..." />
           </folding>
         </state>
       </provider>
