@@ -1,10 +1,13 @@
 package com.htcsweb.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class OdCoatingProcess {
     private int id;
     private String pipe_no;
+  @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date operation_time;
     private String operator_no;
     private float coating_line_speed;

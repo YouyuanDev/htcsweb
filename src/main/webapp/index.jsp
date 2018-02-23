@@ -65,6 +65,12 @@
                                 content:"<iframe scrolling='auto' frameborder='0'  src='od/odcoatinginspectionprocess.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable:true
                             });
+                        }else if("外喷标岗位"==xy||"Od Stencil Process"==xy){
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='od/odstencilprocess.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
                         }
                     }
                 }

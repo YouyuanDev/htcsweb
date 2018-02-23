@@ -1,14 +1,17 @@
 package com.htcsweb.dao;
 
 import com.htcsweb.entity.OdCoatingInspectionProcess;
+import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public interface OdCoatingInspectionProcessDao {
-    public OdCoatingInspectionProcess getOdCoatInProcessById(int id);
-    public void addOdCoatInProcess(OdCoatingInspectionProcess odCoatingInspectionProcess);
-    public List<OdCoatingInspectionProcess> getOdCoatInProcess();
-    public void updateOdCoatInProcess(OdCoatingInspectionProcess odCoatingInspectionProcess);
-    public List<OdCoatingInspectionProcess> feny(int pagesize, int rows);
-    public int getcount();
+    public OdCoatingInspectionProcess getOdCoatingInProcessById(int id);
+    public int addOdCoatingInProcess(OdCoatingInspectionProcess odCoatingInspectionProcess);
+    public int delOdCoatingInProcess(String[]arrId);
+    public int updateOdCoatingInProcess(OdCoatingInspectionProcess odCoatingInspectionProcess);
+    public List<HashMap<String,Object>> getAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no")String operator_no, @Param("begin_time")Date begin_time, @Param("end_time")Date end_time, @Param("skip")int skip, @Param("take")int take);
+    public int getCount();
 }

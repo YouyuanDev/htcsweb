@@ -12,7 +12,7 @@ function hlAlertThree() {
 function hlAlertFour(txt) {
     $.messager.alert('Warning',txt);
 }
-function hlAlertFive(url,hlparam,total) {
+function hlAlertFive(url,hlparam,total,$obj) {
     $.messager.confirm('系统提示',"您确定要删除这<font color=red>"+total+ "</font>条数据吗？",function (r) {
         if(r){
             $.post(url,{"hlparam":hlparam},function (data) {

@@ -7,48 +7,27 @@
 
 
     <insert id="addOdCoatingProcess" parameterType="com.htcsweb.entity.OdCoatingProcess">
-    INSERT INTO od_coating_process(pipe_no,operation_time,operator_no,coating_line_speed,base_coat_used,base_coat_lot_no,top_coat_used,top_coat_lot_no,base_coat_gun_count,top_coat_gun_count,application_temp,to_first_touch_duration,to_quench_duration,upload_files,remark,result) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{coating_line_speed},#{base_coat_used},#{base_coat_lot_no},#{top_coat_used},#{top_coat_lot_no},#{base_coat_gun_count},#{top_coat_gun_count},#{application_temp},#{to_first_touch_duration},#{to_quench_duration},#{upload_files},#{remark},#{result})
+    INSERT INTO od_coating_2fbe_process(pipe_no,operation_time,operator_no,coating_line_speed,base_coat_used,base_coat_lot_no,top_coat_used,top_coat_lot_no,base_coat_gun_count,top_coat_gun_count,application_temp,to_first_touch_duration,to_quench_duration,upload_files,remark,result) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{coating_line_speed},#{base_coat_used},#{base_coat_lot_no},#{top_coat_used},#{top_coat_lot_no},#{base_coat_gun_count},#{top_coat_gun_count},#{application_temp},#{to_first_touch_duration},#{to_quench_duration},#{upload_files},#{remark},#{result})
     </insert>
 
     <update id="updateOdCoatingProcess" parameterType="com.htcsweb.entity.OdCoatingProcess">
-    UPDATE od_coating_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},coating_line_speed=#{coating_line_speed},base_coat_used=#{base_coat_used},base_coat_lot_no=#{base_coat_lot_no},top_coat_used=#{top_coat_used},top_coat_lot_no=#{top_coat_lot_no},base_coat_gun_count=#{base_coat_gun_count},base_coat_top_coat=#{top_coat_gun_count},application_temp=#{application_temp},to_first_touch_duration=#{to_first_touch_duration},to_quench_duration=#{to_quench_duration},upload_files=#{upload_files},remark=#{remark},result=#{result} where id=#{id}
+    UPDATE od_coating_2fbe_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},coating_line_speed=#{coating_line_speed},base_coat_used=#{base_coat_used},base_coat_lot_no=#{base_coat_lot_no},top_coat_used=#{top_coat_used},top_coat_lot_no=#{top_coat_lot_no},base_coat_gun_count=#{base_coat_gun_count},top_coat_gun_count=#{top_coat_gun_count},application_temp=#{application_temp},to_first_touch_duration=#{to_first_touch_duration},to_quench_duration=#{to_quench_duration},upload_files=#{upload_files},remark=#{remark},result=#{result} where id=#{id}
     </update>
 
     <delete id="delOdCoatingProcess">
-        delete from od_blast_process WHERE
+        delete from od_coating_2fbe_process WHERE
         <foreach collection="array" item="item" open="id in (" separator="," close=")">
             #{item}
         </foreach>
     </delete>
 
     <select id="getCount" resultType="int">
-        select count(*) from od_coating_process
+        select count(*) from od_coating_2fbe_process
     </select>
-
-    <resultMap id="all" type="com.htcsweb.entity.OdCoatingProcess">
-        <id property="id" column="id"></id>
-        <result property="pipe_no" column="pipe_no"></result>
-        <result property="operation_time" column="operation_time"></result>
-        <result property="operator_no" column="operator_no"></result>
-        <result property="coating_line_speed" column="coating_line_speed"></result>
-        <result property="base_coat_used" column="base_coat_used"></result>
-        <result property="base_coat_lot_no" column="base_coat_lot_no"></result>
-        <result property="top_coat_used" column="top_coat_used"></result>
-        <result property="top_coat_lot_no" column="top_coat_lot_no"></result>
-        <result property="base_coat_gun_count" column="base_coat_gun_count"></result>
-        <result property="top_coat_gun_count" column="top_coat_gun_count"></result>
-        <result property="application_temp" column="application_temp"></result>
-        <result property="to_first_touch_duration" column="to_first_touch_duration"></result>
-        <result property="to_quench_duration" column="to_quench_duration"></result>
-        <result property="upload_files" column="upload_files"></result>
-        <result property="remark" column="remark"></result>
-        <result property="result" column="result"></result>
-    </resultMap>
-
 
     <select id="getAllByLike" resultType="map">
         Select pro.project_name,s.status_name,p.contract_no,p.grade,p.od,p.wt,p.p_length,p.weight,p.heat_no,o.*
-        from od_coating_process o
+        from od_coating_2fbe_process o
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no
         left join project_info pro on c.project_no=pro.project_no
@@ -76,6 +55,6 @@
 
 
     <select id="getOdCoatingProcessById" parameterType="int" resultType="com.htcsweb.entity.OdCoatingProcess">
-        select * from od_coating_process where id=#{id}
+        select * from od_coating_2fbe_process where id=#{id}
     </select>
 </mapper>

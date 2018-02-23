@@ -4,9 +4,9 @@ package com.htcsweb.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.htcsweb.dao.OdCoatingProcessDao;
+import com.htcsweb.dao.OdCoatingInspectionProcessDao;
 import com.htcsweb.dao.PipeBasicInfoDao;
-import com.htcsweb.entity.OdCoatingProcess;
+import com.htcsweb.entity.OdCoatingInspectionProcess;
 import com.htcsweb.entity.PipeBasicInfo;
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,17 +24,17 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/OdCoatOperation")
-public class OdCoatingProcessController {
+@RequestMapping("/OdCoatInOperation")
+public class OdCoatingInspectionProcessController {
     @Autowired
-    private OdCoatingProcessDao odCoatingProcessDao;
+    private OdCoatingInspectionProcessDao odCoatingInspectionProcessDao;
     @Autowired
     private PipeBasicInfoDao pipeBasicInfoDao;
 
     //查询
-    @RequestMapping(value = "/getOdCoatingByLike")
+    @RequestMapping(value = "/getOdCoatingInByLike")
     @ResponseBody
-    public String getOdCoatingByLike(@RequestParam(value = "pipe_no",required = false)String pipe_no, @RequestParam(value = "operator_no",required = false)String operator_no, @RequestParam(value = "begin_time",required = false)String begin_time, @RequestParam(value = "end_time",required = false)String end_time, HttpServletRequest request){
+    public String getOdCoatingInByLike(@RequestParam(value = "pipe_no",required = false)String pipe_no, @RequestParam(value = "operator_no",required = false)String operator_no, @RequestParam(value = "begin_time",required = false)String begin_time, @RequestParam(value = "end_time",required = false)String end_time, HttpServletRequest request){
         String page= request.getParameter("page");
         String rows= request.getParameter("rows");
         if(page==null){
@@ -59,8 +59,8 @@ public class OdCoatingProcessController {
             e.printStackTrace();
         }
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
-        List<HashMap<String,Object>> list=odCoatingProcessDao.getAllByLike(pipe_no,operator_no,beginTime,endTime,start,Integer.parseInt(rows));
-        int count=odCoatingProcessDao.getCount();
+        List<HashMap<String,Object>> list=odCoatingInspectionProcessDao.getAllByLike(pipe_no,operator_no,beginTime,endTime,start,Integer.parseInt(rows));
+        int count=odCoatingInspectionProcessDao.getCount();
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
         maps.put("rows",list);
@@ -69,25 +69,25 @@ public class OdCoatingProcessController {
     }
 
     //添加、修改
-    @RequestMapping("/saveOdCoatingProcess")
+    @RequestMapping("/saveOdCoatingInProcess")
     @ResponseBody
-    public String saveOdCoatingProcess(OdCoatingProcess odCoatingProcess, HttpServletRequest request, HttpServletResponse response){
+    public String saveOdCoatingInProcess(OdCoatingInspectionProcess odCoatingInspectionProcess, HttpServletRequest request, HttpServletResponse response){
         JSONObject json=new JSONObject();
         try{
             String odcoatprotime= request.getParameter("odcoatprotime");
             int resTotal=0;
-            if(odCoatingProcess.getOperation_time()==null){
+            if(odCoatingInspectionProcess.getOperation_time()==null){
                 SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date new_odbptime = simFormat.parse(odcoatprotime);
-                odCoatingProcess.setOperation_time(new_odbptime);
+                odCoatingInspectionProcess.setOperation_time(new_odbptime);
             }
-            String pipeno=odCoatingProcess.getPipe_no();
-            if(odCoatingProcess.getId()==0){
+            String pipeno=odCoatingInspectionProcess.getPipe_no();
+            if(odCoatingInspectionProcess.getId()==0){
                 //添加
-                resTotal=odCoatingProcessDao.addOdCoatingProcess(odCoatingProcess);
+                resTotal=odCoatingInspectionProcessDao.addOdCoatingInProcess(odCoatingInspectionProcess);
             }else{
                 //修改！
-                resTotal=odCoatingProcessDao.updateOdCoatingProcess(odCoatingProcess);
+                resTotal=odCoatingInspectionProcessDao.updateOdCoatingInProcess(odCoatingInspectionProcess);
             }
             if(resTotal>0){
                 //更新管子的状态
@@ -96,10 +96,10 @@ public class OdCoatingProcessController {
                     PipeBasicInfo p=list.get(0);
                     if(p.getStatus().equals("od2")) {
                         //验证钢管状态为光管
-                        if(odCoatingProcess.getResult().equals("1")) {//当合格时才更新钢管状态
+                        if(odCoatingInspectionProcess.getResult().equals("1")) {//当合格时才更新钢管状态
                             p.setStatus("od3");
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
-                        }else if(odCoatingProcess.getResult().equals("0")){
+                        }else if(odCoatingInspectionProcess.getResult().equals("0")){
                             p.setStatus("odstrip1");
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }
@@ -116,11 +116,11 @@ public class OdCoatingProcessController {
         return null;
     }
     //删除
-    @RequestMapping("/delOdCoatingProcess")
-    public String delOdCoatingProcess(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
+    @RequestMapping("/delOdCoatingInProcess")
+    public String delOdCoatingInProcess(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
         String[]idArr=hlparam.split(",");
         int resTotal=0;
-        resTotal=odCoatingProcessDao.delOdCoatingProcess(idArr);
+        resTotal=odCoatingInspectionProcessDao.delOdCoatingInProcess(idArr);
         JSONObject json=new JSONObject();
         if(resTotal>0){
             json.put("success",true);
