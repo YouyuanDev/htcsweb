@@ -4,6 +4,7 @@ public class CoatingAcceptanceCriteria {
 
     private  int id; //流水号
     private String coating_acceptance_criteria_no;    //接收标准编号
+
     private float salt_contamination_before_blast_max;  //
     private float salt_contamination_before_blast_min;   //
 
@@ -19,8 +20,8 @@ public class CoatingAcceptanceCriteria {
     private float blast_finish_sa25_max;
     private float blast_finish_sa25_min;
 
-    private float surface_dust_rating_max;
-    private float surface_dust_rating_min;
+    private int surface_dust_rating_max;
+    private int surface_dust_rating_min;
 
     private float od_profile_max;
     private float od_profile_min;
@@ -54,8 +55,11 @@ public class CoatingAcceptanceCriteria {
     private float base_3lpe_coat_thickness_max;
     private float base_3lpe_coat_thickness_min;
 
-    private float repair_max;
-    private float repair_min;
+    private float total_3lpe_coat_thickness_max;
+    private float total_3lpe_coat_thickness_min;
+
+    private int repair_max;
+    private int repair_min;
 
 
     private float holiday_tester_voltage_max;
@@ -67,7 +71,7 @@ public class CoatingAcceptanceCriteria {
     public CoatingAcceptanceCriteria() {
     }
 
-    public CoatingAcceptanceCriteria(int id, String coating_acceptance_criteria_no, float salt_contamination_before_blast_max, float salt_contamination_before_blast_min, float preheat_temp_max, float preheat_temp_min, float relative_humidity_max, float relative_humidity_min, float temp_above_dew_point_max, float temp_above_dew_point_min, float blast_finish_sa25_max, float blast_finish_sa25_min, float surface_dust_rating_max, float surface_dust_rating_min, float od_profile_max, float od_profile_min, float pipe_temp_after_blast_max, float pipe_temp_after_blast_min, float salt_contamination_after_blasting_max, float salt_contamination_after_blasting_min, float application_temp_max, float application_temp_min, float base_2fbe_coat_thickness_max, float base_2fbe_coat_thickness_min, float top_2fbe_coat_thickness_max, float top_2fbe_coat_thickness_min, float total_2fbe_coat_thickness_max, float total_2fbe_coat_thickness_min, float top_3lpe_coat_thickness_max, float top_3lpe_coat_thickness_min, float middle_3lpe_coat_thickness_max, float middle_3lpe_coat_thickness_min, float base_3lpe_coat_thickness_max, float base_3lpe_coat_thickness_min, float repair_max, float repair_min, float holiday_tester_voltage_max, float holiday_tester_voltage_min, float cutback_max, float cutback_min) {
+    public CoatingAcceptanceCriteria(int id, String coating_acceptance_criteria_no, float salt_contamination_before_blast_max, float salt_contamination_before_blast_min, float preheat_temp_max, float preheat_temp_min, float relative_humidity_max, float relative_humidity_min, float temp_above_dew_point_max, float temp_above_dew_point_min, float blast_finish_sa25_max, float blast_finish_sa25_min, int surface_dust_rating_max, int surface_dust_rating_min, float od_profile_max, float od_profile_min, float pipe_temp_after_blast_max, float pipe_temp_after_blast_min, float salt_contamination_after_blasting_max, float salt_contamination_after_blasting_min, float application_temp_max, float application_temp_min, float base_2fbe_coat_thickness_max, float base_2fbe_coat_thickness_min, float top_2fbe_coat_thickness_max, float top_2fbe_coat_thickness_min, float total_2fbe_coat_thickness_max, float total_2fbe_coat_thickness_min, float top_3lpe_coat_thickness_max, float top_3lpe_coat_thickness_min, float middle_3lpe_coat_thickness_max, float middle_3lpe_coat_thickness_min, float base_3lpe_coat_thickness_max, float base_3lpe_coat_thickness_min, float total_3lpe_coat_thickness_max, float total_3lpe_coat_thickness_min, int repair_max, int repair_min, float holiday_tester_voltage_max, float holiday_tester_voltage_min, float cutback_max, float cutback_min) {
         this.id = id;
         this.coating_acceptance_criteria_no = coating_acceptance_criteria_no;
         this.salt_contamination_before_blast_max = salt_contamination_before_blast_max;
@@ -102,6 +106,8 @@ public class CoatingAcceptanceCriteria {
         this.middle_3lpe_coat_thickness_min = middle_3lpe_coat_thickness_min;
         this.base_3lpe_coat_thickness_max = base_3lpe_coat_thickness_max;
         this.base_3lpe_coat_thickness_min = base_3lpe_coat_thickness_min;
+        this.total_3lpe_coat_thickness_max = total_3lpe_coat_thickness_max;
+        this.total_3lpe_coat_thickness_min = total_3lpe_coat_thickness_min;
         this.repair_max = repair_max;
         this.repair_min = repair_min;
         this.holiday_tester_voltage_max = holiday_tester_voltage_max;
@@ -109,7 +115,6 @@ public class CoatingAcceptanceCriteria {
         this.cutback_max = cutback_max;
         this.cutback_min = cutback_min;
     }
-
 
     public int getId() {
         return id;
@@ -207,19 +212,19 @@ public class CoatingAcceptanceCriteria {
         this.blast_finish_sa25_min = blast_finish_sa25_min;
     }
 
-    public float getSurface_dust_rating_max() {
+    public int getSurface_dust_rating_max() {
         return surface_dust_rating_max;
     }
 
-    public void setSurface_dust_rating_max(float surface_dust_rating_max) {
+    public void setSurface_dust_rating_max(int surface_dust_rating_max) {
         this.surface_dust_rating_max = surface_dust_rating_max;
     }
 
-    public float getSurface_dust_rating_min() {
+    public int getSurface_dust_rating_min() {
         return surface_dust_rating_min;
     }
 
-    public void setSurface_dust_rating_min(float surface_dust_rating_min) {
+    public void setSurface_dust_rating_min(int surface_dust_rating_min) {
         this.surface_dust_rating_min = surface_dust_rating_min;
     }
 
@@ -383,19 +388,35 @@ public class CoatingAcceptanceCriteria {
         this.base_3lpe_coat_thickness_min = base_3lpe_coat_thickness_min;
     }
 
-    public float getRepair_max() {
+    public float getTotal_3lpe_coat_thickness_max() {
+        return total_3lpe_coat_thickness_max;
+    }
+
+    public void setTotal_3lpe_coat_thickness_max(float total_3lpe_coat_thickness_max) {
+        this.total_3lpe_coat_thickness_max = total_3lpe_coat_thickness_max;
+    }
+
+    public float getTotal_3lpe_coat_thickness_min() {
+        return total_3lpe_coat_thickness_min;
+    }
+
+    public void setTotal_3lpe_coat_thickness_min(float total_3lpe_coat_thickness_min) {
+        this.total_3lpe_coat_thickness_min = total_3lpe_coat_thickness_min;
+    }
+
+    public int getRepair_max() {
         return repair_max;
     }
 
-    public void setRepair_max(float repair_max) {
+    public void setRepair_max(int repair_max) {
         this.repair_max = repair_max;
     }
 
-    public float getRepair_min() {
+    public int getRepair_min() {
         return repair_min;
     }
 
-    public void setRepair_min(float repair_min) {
+    public void setRepair_min(int repair_min) {
         this.repair_min = repair_min;
     }
 

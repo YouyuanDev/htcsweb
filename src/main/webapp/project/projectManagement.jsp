@@ -479,7 +479,7 @@
                         <%--<input class="easyui-textbox" type="text" name="coating_acceptance_criteria_no" value=""/>--%>
 
                             <input class="easyui-combobox" type="text" name="coating_acceptance_criteria_no"  data-options=
-                                    "url:'/AcceptanceCriteriaOperation/getAllAcceptanceCriteria.action',
+                             "url:'/AcceptanceCriteriaOperation/getAllAcceptanceCriteria.action',
 					        method:'get',
 					        valueField:'id',
 					        textField:'text',
