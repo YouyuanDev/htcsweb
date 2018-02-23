@@ -146,7 +146,8 @@
                     'mps':row.mps,
                     'itp':row.itp,
                     //'project_time':str,
-                    'upload_files':row.upload_files
+                    'upload_files':row.upload_files,
+                    'coating_acceptance_criteria_no':row.coating_acceptance_criteria_no
                 });
 
                 $("#project_time").datetimebox('setValue',getDate1(row.project_time));
@@ -399,6 +400,7 @@
                 <th field="mps" align="center" width="100" class="i18n1" name="mps">MPS</th>
                 <th field="itp" align="center" width="100" class="i18n1" name="itp">ITP</th>
                 <th field="project_time" align="center" width="100" class="i18n1" name="projecttime" data-options="formatter:formatterdate">项目开始时间</th>
+                <th field="coating_acceptance_criteria_no" align="center" width="100" class="i18n1" name="coatingacceptancecriteriano">acceptance_criteria</th>
             </tr>
             </thead>
         </table>
@@ -469,6 +471,24 @@
 
                     <td class="i18n1" name="itp" width="16%">ITP</td>
                     <td   width="33%"><input class="easyui-textbox" type="text" name="itp" value=""/></td>
+
+                </tr>
+                <tr>
+                    <td class="i18n1" name="coatingacceptancecriteriano" width="16%">Acceptance Criteria No.</td>
+                    <td   width="33%">
+                        <%--<input class="easyui-textbox" type="text" name="coating_acceptance_criteria_no" value=""/>--%>
+
+                            <input class="easyui-combobox" type="text" name="coating_acceptance_criteria_no"  data-options=
+                                    "url:'/AcceptanceCriteriaOperation/getAllAcceptanceCriteria.action',
+					        method:'get',
+					        valueField:'id',
+					        textField:'text',
+					        panelHeight:'auto'"/>
+
+
+                    </td>
+
+                   <td></td>
 
                 </tr>
             </table>
