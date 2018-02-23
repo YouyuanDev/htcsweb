@@ -105,6 +105,7 @@
             $('#fileslist').val('');
             $('#odBlastInspectionProForm').form('clear');
             $('#odbinpid').text('');$('#odbptime').text('');
+            combox1.setValue("");
             clearMultiUpload(grid);
             url="/OdBlastInspectionOperation/saveOdBlastInspectionProcess.action";
         }
@@ -163,6 +164,7 @@
                 look1.setValue(row.pipe_no);
                 look2.setText(row.operator_no);
                 look2.setValue(row.operator_no);
+                combox1.setValue(row.surface_condition);
                 var odpictures=row.upload_files;
                 if(odpictures!=null&&odpictures!=""){
                     var imgList=odpictures.split(';');
@@ -306,6 +308,7 @@
             $('#p_length').text('');$('#weight').text('');
             $('#odbinpid').text('');$('#odbptime').text('');
             $('#grade').text('');$('#heat_no').text('');
+            combox1.setValue("");
         }
     </script>
 
@@ -480,7 +483,15 @@
                 </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="surfacecondition">表面缺陷</td>
-                    <td><input class="easyui-textbox" type="text" value="" name="surface_condition" /></td>
+                    <td>
+                        <%--<input class="easyui-textbox" type="text" value="" name="surface_condition" />--%>
+                        <div id="combobox1" class="mini-combobox" style="width:185px;"  popupWidth="185" textField="text" valueField="text"
+                             url="../data/defect.txt" name="surface_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick" >
+                            <div property="columns">
+                                <div header="缺陷类型" field="text"></div>
+                            </div>
+                        </div>
+                    </td>
 
                     <td></td>
                 </tr>
@@ -587,7 +598,7 @@
     var grid2=mini.get("datagrid2");
     var look1=mini.get('lookup1');
     var look2= mini.get("lookup2");
-
+    var combox1=mini.get("combobox1");
     grid1.load();
     grid2.load();
     function onSearchClick(type) {
@@ -652,5 +663,17 @@
         $('#searchBar2').css('display','block');
         //$('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
     });
+
+    combox1.on("showpopup",function () {
+        $('.mini-shadow').css('z-index','99999');
+        $('.mini-popup').css('z-index','100000');
+        $('.mini-panel').css('z-index','100000');
+    });
+    function onComboxCloseClick(e) {
+        var obj = e.sender;
+        obj.setText("");
+        obj.setValue("");
+    }
+
     hlLanguage("../i18n/");
 </script>
