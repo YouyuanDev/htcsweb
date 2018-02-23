@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.htcsweb.dao.IdBlastProcessDao">
+
+    <insert id="addIdBlastProcess" parameterType="com.htcsweb.entity.IdBlastProcess">
+        INSERT INTO id_blast_process(pipe_no,operation_time,operator_no,original_pipe_no,new_pipe_no,pipe_no_update,upload_files,remark,result) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{original_pipe_no},#{new_pipe_no},#{pipe_no_update},#{upload_files},#{remark},#{result})
+    </insert>
+    <delete id="delIdBlastProcess">
+        delete from id_blast_process WHERE
+        <foreach collection="array" item="item" open="id in (" separator="," close=")">
+           #{item}
+        </foreach>
+    </delete>
+    <select id="getIdBlastProcess" resultType="com.htcsweb.entity.IdBlastProcess">
+        SELECT * from id_blast_process
+    </select>
+
+    <update id="updateIdBlastProcess" parameterType="com.htcsweb.entity.IdBlastProcess">
+        UPDATE id_blast_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no}, original_pipe_no=#{original_pipe_no},new_pipe_no =#{new_pipe_no}, pipe_no_update =#{pipe_no_update},upload_files=#{upload_files},remark=#{remark},result=#{result} WHERE id=#{id}
+     </update>
+
+    <select id="getCount" resultType="int">
+        select count(*) from id_blast_process
+    </select>
+
+
+
+
+
+    <select id="getAllByLike" resultType="map">
+        Select pro.project_name,s.status_name,p.contract_no,p.grade,p.od,p.wt,p.p_length,p.weight,p.heat_no,o.*
+        from id_blast_process o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        left join pipe_status s on s.status_code=p.status
+        <where>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND o.pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+            <if test="operator_no!=null and operator_no!=''">
+                AND o.operator_no LIKE CONCAT('%',#{operator_no},'%')
+            </if>
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d 23:59:59')]]>
+            </if>
+        </where>
+        ORDER BY o.id DESC
+        limit #{skip},#{take}
+    </select>
+
+    <select id="getIdBlastProcessById" parameterType="int" resultType="com.htcsweb.entity.IdBlastProcess">
+        select * from id_blast_process where id=#{id}
+    </select>
+
+</mapper>
