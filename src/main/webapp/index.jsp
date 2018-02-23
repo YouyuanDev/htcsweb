@@ -30,7 +30,7 @@
         var url;
         $(function(){
             //hlLanguage("i18n/");
-            $('#tt').tree({
+            $('#od').tree({
                 onClick:function(node){
                     var tab=$('#hlTab').tabs('getTab',node.text);
                     var xy=node.text;
@@ -39,7 +39,7 @@
                         $('#hlTab').tabs('select',node.text);
                     }else{
                         //添加新的选项卡
-                        if("外喷砂岗位"==xy||"Od Blast Process"==xy){
+                        if("外喷砂工序"==xy||"OD Blast Process"==xy){
                             $('#hlTab').tabs('add',{
                                 title:node.text,
                                 content:"<iframe scrolling='auto' frameborder='0'  src='od/odblastprocess.jsp' style='width:100%;height:100%;'></iframe>",
@@ -47,31 +47,31 @@
                             });
                             hlLanguage();
                         }
-                        else if("外喷砂检验岗位"==xy||"Od Blast Inspection"==xy){
+                        else if("外喷砂检验工序"==xy||"OD Blast Inspection"==xy){
                             $('#hlTab').tabs('add',{
                                 title:node.text,
                                 content:"<iframe scrolling='auto' frameborder='0'  src='od/odblastinspectionprocess.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable:true
                             });
-                        }else if("外涂岗位"==xy||"Od Coating Process"==xy){
+                        }else if("外涂工序"==xy||"OD Coating Process"==xy){
                             $('#hlTab').tabs('add',{
                                 title:node.text,
                                 content:"<iframe scrolling='auto' frameborder='0'  src='od/odcoatingprocess.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable:true
                             });
-                        }else if("外涂检验岗位"==xy||"Od Coating Inspection"==xy){
+                        }else if("外涂检验工序"==xy||"OD Coating Inspection"==xy){
                             $('#hlTab').tabs('add',{
                                 title:node.text,
                                 content:"<iframe scrolling='auto' frameborder='0'  src='od/odcoatinginspectionprocess.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable:true
                             });
-                        }else if("外喷标岗位"==xy||"Od Stencil Process"==xy){
+                        }else if("外喷标工序"==xy||"OD Stencil Process"==xy){
                             $('#hlTab').tabs('add',{
                                 title:node.text,
                                 content:"<iframe scrolling='auto' frameborder='0'  src='od/odstencilprocess.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable:true
                             });
-                        }else if("外涂层终检岗位"==xy||"Od Final Inspection"==xy){
+                        }else if("外涂层终检工序"==xy||"OD Final Inspection"==xy){
                             $('#hlTab').tabs('add',{
                                 title:node.text,
                                 content:"<iframe scrolling='auto' frameborder='0'  src='od/odfinalinspectionprocess.jsp' style='width:100%;height:100%;'></iframe>",
@@ -137,7 +137,57 @@
                 }
             });
 
-
+            $('#id').tree({
+                onClick:function(node){
+                    var tab=$('#hlTab').tabs('getTab',node.text);
+                    var xy=node.text;
+                    if(tab){
+                        //切换
+                        $('#hlTab').tabs('select',node.text);
+                    }else{
+                        //添加新的选项卡
+                        if("内喷砂工序"==xy||"ID Blast Process"==xy){
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='id/idblastprocess.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                            hlLanguage();
+                        }
+                        else if("内喷砂检验工序"==xy||"ID Blast Inspection"==xy){
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='id/idblastinspectionprocess.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                        }else if("内涂工序"==xy||"ID Coating Process"==xy){
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='id/odcoatingprocess.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                        }else if("内涂检验工序"==xy||"ID Coating Inspection"==xy){
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='id/idcoatinginspectionprocess.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                        }else if("内喷标工序"==xy||"ID Stencil Process"==xy){
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='id/idstencilprocess.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                        }else if("内涂层终检工序"==xy||"ID Final Inspection"==xy){
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='id/idfinalinspectionprocess.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                        }
+                    }
+                }
+            });
 
             //账户管理
             $("#hlaccount").tree({
@@ -179,17 +229,24 @@
 
     <div id="aa" class="easyui-accordion">
         <div title="外防腐" class="i18n" name="externalcoating"  style="padding:10px;">
-            <ul id="tt">
-                <li class="i18n1" name="odblastprocess">外喷砂岗位</li>
-                <li class="i18n1" name="odblastinspection">外喷砂检验岗位</li>
-                <li class="i18n1" name="odcoating">外涂岗位</li>
-                <li class="i18n1" name="odcoatinginspection">外涂检验岗位</li>
-                <li class="i18n1" name="odstencilprocess">外喷标岗位</li>
-                <li class="i18n1" name="odfinalinspection">外涂层终检岗位</li>
+            <ul id="od">
+                <li class="i18n1" name="odblastprocess">外喷砂工序</li>
+                <li class="i18n1" name="odblastinspection">外喷砂检验工序</li>
+                <li class="i18n1" name="odcoating">外涂工序</li>
+                <li class="i18n1" name="odcoatinginspection">外涂检验工序</li>
+                <li class="i18n1" name="odstencilprocess">外喷标工序</li>
+                <li class="i18n1" name="odfinalinspection">外涂层终检工序</li>
             </ul>
         </div>
         <div title="内防腐" class="i18n" name="intenalcoating" style="padding:10px;">
-          bb
+            <ul id="id">
+                <li class="i18n1" name="idblastprocess">内喷砂工序</li>
+                <li class="i18n1" name="idblastinspection">内喷砂检验工序</li>
+                <li class="i18n1" name="idcoating">内涂工序</li>
+                <li class="i18n1" name="idcoatinginspection">内涂检验工序</li>
+                <li class="i18n1" name="idstencilprocess">内喷标工序</li>
+                <li class="i18n1" name="idfinalinspection">内涂层终检工序</li>
+            </ul>
         </div>
         <div title="出入库" class="i18n" name="storage" style="padding:10px;">
             cc
