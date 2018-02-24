@@ -17,14 +17,13 @@ public class ProjectInfo {
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date project_time;
     private String upload_files;
-    private String coating_acceptance_criteria_no;
-
+    private String od_coating_acceptance_criteria_no;
+    private String id_coating_acceptance_criteria_no;
 
     public ProjectInfo() {
     }
 
-
-    public ProjectInfo(int id, String project_no, String project_name, String client_name, String client_spec, String coating_standard, String mps, String itp, Date project_time, String upload_files, String coating_acceptance_criteria_no) {
+    public ProjectInfo(int id, String project_no, String project_name, String client_name, String client_spec, String coating_standard, String mps, String itp, Date project_time, String upload_files, String od_coating_acceptance_criteria_no, String id_coating_acceptance_criteria_no) {
         this.id = id;
         this.project_no = project_no;
         this.project_name = project_name;
@@ -35,7 +34,8 @@ public class ProjectInfo {
         this.itp = itp;
         this.project_time = project_time;
         this.upload_files = upload_files;
-        this.coating_acceptance_criteria_no = coating_acceptance_criteria_no;
+        this.od_coating_acceptance_criteria_no = od_coating_acceptance_criteria_no;
+        this.id_coating_acceptance_criteria_no = id_coating_acceptance_criteria_no;
     }
 
     public int getId() {
@@ -118,11 +118,19 @@ public class ProjectInfo {
         this.upload_files = upload_files;
     }
 
-    public String getCoating_acceptance_criteria_no() {
-        return coating_acceptance_criteria_no;
+    public String getOd_coating_acceptance_criteria_no() {
+        return od_coating_acceptance_criteria_no;
     }
 
-    public void setCoating_acceptance_criteria_no(String coating_acceptance_criteria_no) {
-        this.coating_acceptance_criteria_no = coating_acceptance_criteria_no;
+    public void setOd_coating_acceptance_criteria_no(String od_coating_acceptance_criteria_no) {
+        this.od_coating_acceptance_criteria_no = od_coating_acceptance_criteria_no;
+    }
+
+    public String getId_coating_acceptance_criteria_no() {
+        return id_coating_acceptance_criteria_no;
+    }
+
+    public void setId_coating_acceptance_criteria_no(String id_coating_acceptance_criteria_no) {
+        this.id_coating_acceptance_criteria_no = id_coating_acceptance_criteria_no;
     }
 }

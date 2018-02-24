@@ -147,7 +147,8 @@
                     'itp':row.itp,
                     //'project_time':str,
                     'upload_files':row.upload_files,
-                    'coating_acceptance_criteria_no':row.coating_acceptance_criteria_no
+                    'od_coating_acceptance_criteria_no':row.od_coating_acceptance_criteria_no,
+                    'id_coating_acceptance_criteria_no':row.id_coating_acceptance_criteria_no
                 });
 
                 $("#project_time").datetimebox('setValue',getDate1(row.project_time));
@@ -400,7 +401,9 @@
                 <th field="mps" align="center" width="100" class="i18n1" name="mps">MPS</th>
                 <th field="itp" align="center" width="100" class="i18n1" name="itp">ITP</th>
                 <th field="project_time" align="center" width="100" class="i18n1" name="projecttime" data-options="formatter:formatterdate">项目开始时间</th>
-                <th field="coating_acceptance_criteria_no" align="center" width="100" class="i18n1" name="coatingacceptancecriteriano">acceptance_criteria</th>
+                <th field="od_coating_acceptance_criteria_no" align="center" width="100" class="i18n1" name="odcoatingacceptancecriteriano">OD acceptance_criteria</th>
+                <th field="id_coating_acceptance_criteria_no" align="center" width="100" class="i18n1" name="idcoatingacceptancecriteriano">ID acceptance_criteria</th>
+
             </tr>
             </thead>
         </table>
@@ -474,21 +477,33 @@
 
                 </tr>
                 <tr>
-                    <td class="i18n1" name="coatingacceptancecriteriano" width="16%">Acceptance Criteria No.</td>
+                    <td class="i18n1" name="odcoatingacceptancecriteriano" width="16%">OD Acceptance Criteria No.</td>
                     <td   width="33%">
                         <%--<input class="easyui-textbox" type="text" name="coating_acceptance_criteria_no" value=""/>--%>
 
-                            <input class="easyui-combobox" type="text" name="coating_acceptance_criteria_no"  data-options=
-                             "url:'/AcceptanceCriteriaOperation/getAllAcceptanceCriteria.action',
+                            <input class="easyui-combobox" type="text" name="od_coating_acceptance_criteria_no"  data-options=
+                             "url:'/AcceptanceCriteriaOperation/getAllODAcceptanceCriteria.action',
 					        method:'get',
+					        valueField:'id',
+					        editable:false,
+					        textField:'text',
+					        panelHeight:'auto'"/>
+
+
+                    </td>
+                    <td class="i18n1" name="idcoatingacceptancecriteriano" width="16%">ID Acceptance Criteria No.</td>
+                    <td   width="33%">
+
+                        <input class="easyui-combobox" type="text" name="id_coating_acceptance_criteria_no"   data-options=
+                                "url:'/AcceptanceCriteriaOperation/getAllIDAcceptanceCriteria.action',
+					        method:'get',
+					        editable:false,
 					        valueField:'id',
 					        textField:'text',
 					        panelHeight:'auto'"/>
 
 
                     </td>
-
-                   <td></td>
 
                 </tr>
             </table>

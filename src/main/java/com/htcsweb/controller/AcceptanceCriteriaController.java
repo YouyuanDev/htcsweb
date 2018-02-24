@@ -3,9 +3,11 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 
-import com.htcsweb.entity.CoatingAcceptanceCriteria;
+import com.htcsweb.entity.ODCoatingAcceptanceCriteria;
+import com.htcsweb.entity.IDCoatingAcceptanceCriteria;
 import com.htcsweb.util.ComboxItem;
-import com.htcsweb.dao.CoatingAcceptanceCriteriaDao;
+import com.htcsweb.dao.ODCoatingAcceptanceCriteriaDao;
+import com.htcsweb.dao.IDCoatingAcceptanceCriteriaDao;
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,16 +27,21 @@ public class AcceptanceCriteriaController {
 
 
     @Autowired
-    private CoatingAcceptanceCriteriaDao coatingacceptancecriteriaDao;
+    private ODCoatingAcceptanceCriteriaDao odcoatingacceptancecriteriaDao;
 
-    @RequestMapping("/getAllAcceptanceCriteria")
+    @Autowired
+    private IDCoatingAcceptanceCriteriaDao idcoatingacceptancecriteriaDao;
+
+
+
+    @RequestMapping("/getAllODAcceptanceCriteria")
     @ResponseBody
-    public String getAllAcceptanceCriteria(HttpServletRequest request){
-        List<CoatingAcceptanceCriteria>list=coatingacceptancecriteriaDao.getAllAcceptanceCriteria();
+    public String getAllODAcceptanceCriteria(HttpServletRequest request){
+        List<ODCoatingAcceptanceCriteria>list=odcoatingacceptancecriteriaDao.getAllODAcceptanceCriteria();
         List<ComboxItem> colist=new ArrayList<ComboxItem>();
         for(int i=0;i<list.size();i++){
             ComboxItem citem= new ComboxItem();
-            CoatingAcceptanceCriteria ps=((CoatingAcceptanceCriteria)list.get(i));
+            ODCoatingAcceptanceCriteria ps=((ODCoatingAcceptanceCriteria)list.get(i));
             citem.id=ps.getCoating_acceptance_criteria_no();
             citem.text=ps.getCoating_acceptance_criteria_no();
 
@@ -42,8 +49,30 @@ public class AcceptanceCriteriaController {
         }
 
         String map= JSONObject.toJSONString(colist);
-        System.out.println("========="+map);
+        //System.out.println("========="+map);
         return map;
     }
+
+    @RequestMapping("/getAllIDAcceptanceCriteria")
+    @ResponseBody
+    public String getAllIDAcceptanceCriteria(HttpServletRequest request){
+        List<IDCoatingAcceptanceCriteria>list=idcoatingacceptancecriteriaDao.getAllIDAcceptanceCriteria();
+        List<ComboxItem> colist=new ArrayList<ComboxItem>();
+        for(int i=0;i<list.size();i++){
+            ComboxItem citem= new ComboxItem();
+            IDCoatingAcceptanceCriteria ps=((IDCoatingAcceptanceCriteria)list.get(i));
+            citem.id=ps.getCoating_acceptance_criteria_no();
+            citem.text=ps.getCoating_acceptance_criteria_no();
+
+            colist.add(citem);
+        }
+
+        String map= JSONObject.toJSONString(colist);
+        //System.out.println("========="+map);
+        return map;
+    }
+
+
+
 
 }
