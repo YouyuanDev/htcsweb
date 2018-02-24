@@ -53,10 +53,16 @@
                                 content:"<iframe scrolling='auto' frameborder='0'  src='od/odblastinspectionprocess.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable:true
                             });
-                        }else if("外涂工序"==xy||"OD Coating Process"==xy){
+                        }else if("外涂工序(2FBE)"==xy||"OD Coating Process(2FBE)"==xy){
                             $('#hlTab').tabs('add',{
                                 title:node.text,
                                 content:"<iframe scrolling='auto' frameborder='0'  src='od/odcoatingprocess.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                        }else if("外涂工序(3LPE)"==xy||"OD Coating Process(3LPE)"==xy){
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='od/odcoating3lpeprocess.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable:true
                             });
                         }else if("外涂检验工序"==xy||"OD Coating Inspection"==xy){
@@ -232,7 +238,8 @@
             <ul id="od">
                 <li class="i18n1" name="odblastprocess">外喷砂工序</li>
                 <li class="i18n1" name="odblastinspection">外喷砂检验工序</li>
-                <li class="i18n1" name="odcoating">外涂工序</li>
+                <li class="i18n1" name="odcoating2fbe">外涂工序(2FBE)</li>
+                <li class="i18n1" name="odcoating3lpe">外涂工序(3LPE)</li>
                 <li class="i18n1" name="odcoatinginspection">外涂检验工序</li>
                 <li class="i18n1" name="odstencilprocess">外喷标工序</li>
                 <li class="i18n1" name="odfinalinspection">外涂层终检工序</li>
