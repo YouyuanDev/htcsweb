@@ -93,20 +93,23 @@ public class OdStencilProcessController {
             }
             if(resTotal>0){
                 //更新管子的状态
-//                List<PipeBasicInfo> list=pipeBasicInfoDao.getPipeNumber(pipeno);
-//                if(list.size()>0){
-//                    PipeBasicInfo p=list.get(0);
-//                    if(p.getStatus().equals("od2")) {
-//                        //验证钢管状态为光管
-//                        if(odStencilProcess.getResult().equals("1")) {//当合格时才更新钢管状态
-//                            p.setStatus("od3");
-//                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
-//                        }else if(odStencilProcess.getResult().equals("0")){
-//                            p.setStatus("odstrip1");
-//                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
-//                        }
-//                    }
-//                }
+                List<PipeBasicInfo> list=pipeBasicInfoDao.getPipeNumber(pipeno);
+                if(list.size()>0){
+                    PipeBasicInfo p=list.get(0);
+                    if(p.getStatus().equals("od4")) {
+                        //验证钢管状态为光管
+                        if(odStencilProcess.getResult().equals("1")) {//当合格时才更新钢管状态
+                            p.setStatus("od5");
+                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        }else if(odStencilProcess.getResult().equals("0")){
+                            p.setStatus("odrepair1");
+                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        }else if(odStencilProcess.getResult().equals("2")){
+                            p.setStatus("odstrip1");
+                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        }
+                    }
+                }
                json.put("success",true);
             }else{
                 json.put("success",false);

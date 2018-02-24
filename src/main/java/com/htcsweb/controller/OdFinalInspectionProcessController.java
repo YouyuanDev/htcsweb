@@ -7,7 +7,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.OdFinalInspectionProcessDao;
 
 import com.htcsweb.dao.PipeBasicInfoDao;
-
+import com.htcsweb.entity.PipeBasicInfo;
 import com.htcsweb.entity.OdFinalInspectionProcess;
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,20 +94,20 @@ public class OdFinalInspectionProcessController {
             }
             if(resTotal>0){
                 //更新管子的状态
-//                List<PipeBasicInfo> list=pipeBasicInfoDao.getPipeNumber(pipeno);
-//                if(list.size()>0){
-//                    PipeBasicInfo p=list.get(0);
-//                    if(p.getStatus().equals("od2")) {
-//                        //验证钢管状态为光管
-//                        if(odStencilProcess.getResult().equals("1")) {//当合格时才更新钢管状态
-//                            p.setStatus("od3");
-//                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
-//                        }else if(odStencilProcess.getResult().equals("0")){
-//                            p.setStatus("odstrip1");
-//                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
-//                        }
-//                    }
-//                }
+                List<PipeBasicInfo> list=pipeBasicInfoDao.getPipeNumber(pipeno);
+                if(list.size()>0){
+                    PipeBasicInfo p=list.get(0);
+                    if(p.getStatus().equals("od4")) {
+                        //验证钢管状态为光管
+                        if(odFinalInspectionProcess.getResult().equals("1")) {//当合格时才更新钢管状态
+                            p.setStatus("od6");
+                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        }else if(odFinalInspectionProcess.getResult().equals("0")){
+                            p.setStatus("odstrip1");
+                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        }
+                    }
+                }
                json.put("success",true);
             }else{
                 json.put("success",false);

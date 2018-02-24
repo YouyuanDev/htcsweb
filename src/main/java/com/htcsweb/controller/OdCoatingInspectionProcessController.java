@@ -94,10 +94,10 @@ public class OdCoatingInspectionProcessController {
                 List<PipeBasicInfo> list=pipeBasicInfoDao.getPipeNumber(pipeno);
                 if(list.size()>0){
                     PipeBasicInfo p=list.get(0);
-                    if(p.getStatus().equals("od2")) {
+                    if(p.getStatus().equals("od3")) {
                         //验证钢管状态为光管
                         if(odCoatingInspectionProcess.getResult().equals("1")) {//当合格时才更新钢管状态
-                            p.setStatus("od3");
+                            p.setStatus("od4");
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }else if(odCoatingInspectionProcess.getResult().equals("0")){
                             p.setStatus("odstrip1");

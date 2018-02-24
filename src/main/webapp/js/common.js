@@ -12,19 +12,19 @@ function hlAlertThree() {
 function hlAlertFour(txt) {
     $.messager.alert('Warning',txt);
 }
-function hlAlertFive(url,hlparam,total,$obj) {
-    $.messager.confirm('系统提示',"您确定要删除这<font color=red>"+total+ "</font>条数据吗？",function (r) {
-        if(r){
-            $.post(url,{"hlparam":hlparam},function (data) {
-                if(data.success){
-                    $("#odBlastProDatagrids").datagrid("reload");
-                }else{
-                    hlAlertFour("操作失败!");
-                }
-            },"json");
-        }
-    });
-}
+// function hlAlertFive(url,hlparam,total,$obj) {
+//     $.messager.confirm('系统提示',"您确定要删除这<font color=red>"+total+ "</font>条数据吗？",function (r) {
+//         if(r){
+//             $.post(url,{"hlparam":hlparam},function (data) {
+//                 if(data.success){
+//                     $("#odBlastProDatagrids").datagrid("reload");
+//                 }else{
+//                     hlAlertFour("操作失败!");
+//                 }
+//             },"json");
+//         }
+//     });
+// }
 
 
 
@@ -35,7 +35,7 @@ function hlAlertSix(url,$imglist,$dialog,$obj) {
     if(hlparam!=""){
         imgarr=hlparam.split(';');
     }
-    if(imgarr.length>0){
+    if((imgarr.length-1)>0){
         $.messager.confirm('系统提示',"取消上传，图片会自动删除!",function (r) {
             if(r){
                 $.ajax({
@@ -94,6 +94,11 @@ function getDate1(str){
     s=oDate.getSeconds();
     return  y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d)+' '+(h<10?('0'+h):h)+':'+(mins<10?('0'+mins):mins)+':'+(s<10?('0'+s):s);
 }
+//时间格式化
+function formatterdate(value,row,index){
+    return getDate1(value);
+}
+
 function getGalleryCon() {
     var str='<div id="hl-gallery">'+
         '<span class="prev"><</span>'+

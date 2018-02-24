@@ -27,27 +27,16 @@
 
     <script type="text/javascript">
         var url;
-
         function myformatter(date){
             var y = date.getFullYear();
             var m = date.getMonth()+1;
             var d = date.getDate();
             return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
         }
-
-
-        function formatterdate(value,row,index){
-           return getDate1(value);
-        }
-
         function myparsedate(s){
             if (!s) return new Date();
             return new Date(Date.parse(s));
         }
-
-
-
-
         function myparser(s){
             if (!s) return new Date();
             var ss = (s.split('-'));
@@ -66,46 +55,11 @@
             return getDate1(date);
         }
         // 日期格式为 2/20/2017 12:00:00 PM
-        function myparser2(s) {
+        function myparser2(s){
             if (!s) return new Date();
             return new Date(Date.parse(s));
         }
-
-
         $(function () {
-            // $('#odBlastProDatagrids').datagrid({
-            //     striped:true,
-            //     loadMsg:'正在加载中。。。',
-            //     pagination:true,
-            //     textField:'text',
-            //     rownumbers:true,
-            //     pageList:[10,20,30,50,100],
-            //     pageSize:20,
-            //     fitColumns:true,
-            //     url:'/OdOperation/getOdBlastByLike.action',
-            //     toolbar:'#hlOdBlastProTb',
-            //     columns:[[
-            //         { field: '',checkbox:true},
-            //         { title: arg1,field: 'id',width:100},
-            //         { title: arg2,field: 'pipe_no',width:100},
-            //         { title: arg3,field : 'operation_time', formatter:function(value,row,index){
-            //                 var operation_time = new Date(value);
-            //                  return operation_time.toLocaleString();
-            //              } ,width:200},
-            //         { title: arg4,field: 'operator_no',width:100},
-            //         { title: '外观缺陷',field: 'surface_condition',width:100},
-            //         { title: '打砂前盐度',field: 'salt_contamination_before_blasting',width:100},
-            //         { title: '碱洗时间',field: 'alkaline_dwell_time',width:100},
-            //         { title: '碱浓度',field: 'alkaline_concentration',width: 100},
-            //         { title: '传导性',field: 'conductivity',width:120},
-            //         { title: '酸洗时间',field: 'acid_wash_time',width:120},
-            //         { title: '酸浓度',field: 'acid_concentration',width:120},
-            //         { title: '打砂传送速度',field: 'blast_line_speed',width:120},
-            //         { title: '预热温度',field: 'preheat_temp',width:120},
-            //         { title: '备注',field: 'remark',width:120}
-            //     ]]
-            // });
-
                     //删除上传的图片
                 $(document).on('click','.content-del',function () {
                      delUploadPicture($(this));
@@ -117,12 +71,8 @@
                             var $imglist=$('#fileslist');
                             var $dialog=$('#hlOdBlastProDialog');
                             hlAlertSix("../UploadFile/delUploadPicture.action",$imglist,$dialog,grid);
-                        }else{
-                            //$('#hlOdBlastProDialog').dialog('close');
-                            $('#hl-gallery-con').empty();
-                            //$('#fileslist').val('');
-                            clearFormLabel();
                         }
+                        clearFormLabel();
                     }
                 });
                $('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
@@ -131,10 +81,7 @@
         function addOdBlastPro(){
             $('#hlcancelBtn').attr('operationtype','add');
             $('#hlOdBlastProDialog').dialog('open').dialog('setTitle','新增');
-            $('#fileslist').val('');
-            $('#odBlastProForm').form('clear');
-            $('#odbpid').text('');$('#odbptime').text('');
-            combox1.setValue("");
+            clearFormLabel();
             clearMultiUpload(grid);
             url="/OdOperation/saveOdBlastProcess.action";
         }
@@ -146,13 +93,22 @@
                     idArr.push(row[i].id);
                 }
                 var idArrs=idArr.join(',');
-                hlAlertFive("/OdOperation/delOdBlastProcess.action",idArrs,idArr.length);
-                // $.messager.confirm('提示','您确定要删除<font>')
+                $.messager.confirm('系统提示',"您确定要删除这<font color=red>"+idArr.length+ "</font>条数据吗？",function (r) {
+                    if(r){
+                        $.post("/OdOperation/delOdBlastProcess.action",{"hlparam":idArrs},function (data) {
+                            if(data.success){
+                                $("#odBlastProDatagrids").datagrid("reload");
+                            }else{
+                                hlAlertFour("操作失败!");
+                            }
+                        },"json");
+                    }
+                });
             }else{
                 hlAlertOne();
             }
         }
-        function editOdBlastPro() {
+        function editOdBlastPro(){
             $('#hlcancelBtn').attr('operationtype','edit');
             var row = $('#odBlastProDatagrids').datagrid('getSelected');
             if(row){
@@ -164,9 +120,7 @@
                 $('#odbpid').text(row.id);
                 $('#grade').text(row.grade);$('#heat_no').text(row.heat_no);
                 $('#odBlastProForm').form('load',row);
-
                 $('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
-
                 look1.setText(row.pipe_no);
                 look1.setValue(row.pipe_no);
                 look2.setText(row.operator_no);
@@ -175,10 +129,9 @@
                 var odpictures=row.upload_files;
                 if(odpictures!=null&&odpictures!=""){
                      var imgList=odpictures.split(';');
-                    createPictureModel(imgList);
+                     createPictureModel(imgList);
                 }
                 url="/OdOperation/saveOdBlastProcess.action?id="+row.id;
-
             }else{
                 hlAlertTwo();
             }
@@ -196,7 +149,6 @@
                 url:url,
                 onSubmit:function () {
                     //表单验证
-                    //碱洗时间
                     setParams($("input[name='alkaline_dwell_time']"));
                     setParams($("input[name='alkaline_concentration']"));
                     setParams($("input[name='acid_wash_time']"));
@@ -205,38 +157,31 @@
                     setParams($("input[name='blast_line_speed']"));
                     setParams($("input[name='conductivity']"));
                     setParams($("input[name='preheat_temp']"));
-
-
                     if($("input[name='odbptime']").val()==""){
-
                         hlAlertFour("请输入操作时间");
                         return false;
                     }
-
-
-
                 },
                 success: function(result){
                     var result = eval('('+result+')');
+                    $('#hlOdBlastProDialog').dialog('close');
                     if (result.success){
-                        $('#hlOdBlastProDialog').dialog('close');
                         $('#odBlastProDatagrids').datagrid('reload');
-                        clearFormLabel();
-                        $('#hl-gallery-con').empty();
                     } else {
                          hlAlertFour("操作失败!");
                     }
                 },
                 error:function () {
+                    //clearFormLabel();
                     hlAlertThree();
                 }
             });
             clearMultiUpload(grid);
+
         }
         function odBlastProCancelSubmit() {
             $('#hlOdBlastProDialog').dialog('close');
         }
-
         //图片上传失败操作
         function onUploadError() {
             alert("上传失败!");
@@ -298,14 +243,11 @@
             if($obj.val()==null||$obj.val()=="")
                 $obj.val(0);
         }
-        function  clearFormLabel() {
-            $('#odBlastProForm').form('clear');$('#odbpid').text('');$('#odbptime').text('');
-            $('#project_name').text('');$('#contract_no').text('');
-            $('#pipe_no').text('');$('#status_name').text('');
-            $('#od').text('');$('#wt').text('');
-            $('#p_length').text('');$('#weight').text('');
-            $('#odbpid').text('');$('#odbptime').text('');
-            $('#grade').text('');$('#heat_no').text('');combox1.setValue("");
+        function  clearFormLabel(){
+            $('#odBlastProForm').form('clear');
+            $('.hl-label').text('');
+            $('#hl-gallery-con').empty();
+            combox1.setValue("");
         }
     </script>
 
@@ -380,10 +322,10 @@
            <table class="ht-table" width="100%" border="0">
                <tr>
                    <td class="i18n1" name="projectname" width="16%">项目名称</td>
-                   <td colspan="2" width="33%"><label id="project_name"></label></td>
+                   <td colspan="2" width="33%"><label class="hl-label" id="project_name"></label></td>
 
                    <td class="i18n1" name="contractno" width="16%">合同编号</td>
-                   <td colspan="7" width="33%"><label id="contract_no"></label></td>
+                   <td colspan="7" width="33%"><label class="hl-label" id="contract_no"></label></td>
 
                </tr>
 
@@ -395,24 +337,24 @@
                               popup="#gridPanel1" grid="#datagrid1" multiSelect="false"/>
                    </td>
                    <td class="i18n1" name="statusname" width="16%">状态</td>
-                   <td colspan="7" width="33%"><label id="status_name"></label></td>
+                   <td colspan="7" width="33%"><label class="hl-label" id="status_name"></label></td>
                </tr>
            </table>
 
            <table width="100%" border="0" align="center">
                <tr>
                    <td align="center" class="i18n1" name="grade">钢种</td>
-                   <td align="center"><label id="grade"></label></td>
+                   <td align="center"><label class="hl-label" id="grade"></label></td>
                    <td align="center" class="i18n1" name="od">外径</td>
-                   <td align="center"><label id="od"></label></td>
+                   <td align="center"><label class="hl-label" id="od"></label></td>
                    <td align="center" class="i18n1" name="wt">壁厚</td>
-                   <td align="center"><label id="wt"></label></td>
+                   <td align="center"><label class="hl-label" id="wt"></label></td>
                    <td align="center" class="i18n1" name="p_length">长度</td>
-                   <td align="center"><label id="p_length"></label></td>
+                   <td align="center"><label class="hl-label" id="p_length"></label></td>
                    <td align="center" class="i18n1" name="weight">重量</td>
-                   <td align="center"><label id="weight"></label></td>
+                   <td align="center"><label class="hl-label" id="weight"></label></td>
                    <td align="center" class="i18n1" name="heatno">炉号</td>
-                   <td align="center"><label id="heat_no"></label></td>
+                   <td align="center"><label class="hl-label" id="heat_no"></label></td>
                </tr>
            </table>
        </fieldset>
@@ -424,7 +366,7 @@
        <table class="ht-table">
            <tr>
                <td class="i18n1" name="id">流水号</td>
-               <td colspan="5"><label id="odbpid"></label></td>
+               <td colspan="5"><label class="hl-label" id="odbpid"></label></td>
 
            </tr>
            <tr>
