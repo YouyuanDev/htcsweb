@@ -7,7 +7,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>外涂岗位</title>
+    <title>外涂检验岗位</title>
     <link rel="stylesheet" type="text/css" href="../easyui/themes/bootstrap/easyui.css">
     <link rel="stylesheet" type="text/css" href="../easyui/themes/icon.css">
     <link href="../miniui/multiupload/multiupload.css" rel="stylesheet" type="text/css" />
@@ -68,13 +68,13 @@
             $(document).on('click','.content-del',function () {
                 delUploadPicture($(this));
             });
-            $('#hlOdFinalInProDialog').dialog({
+            $('#hlIdCoatingInProDialog').dialog({
                 onClose:function () {
                     var type=$('#hlcancelBtn').attr('operationtype');
 
                     if(type=="add"){
                         var $imglist=$('#fileslist');
-                        var $dialog=$('#hlOdCoatingProDialog');
+                        var $dialog=$('#hlIdCoatingInProDialog');
                         hlAlertSix("../UploadFile/delUploadPicture.action",$imglist,$dialog,grid);
                     }
                     clearFormLabel();
@@ -83,17 +83,18 @@
             $('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
             // hlLanguage("../i18n/");
         });
-        function addOdFinalInPro(){
+        function addIdCoatingInPro(){
             $('#hlcancelBtn').attr('operationtype','add');
-            $('#hlOdFinalInProDialog').dialog('open').dialog('setTitle','新增');
+            $('#hlIdCoatingInProDialog').dialog('open').dialog('setTitle','新增');
             $('#fileslist').val('');
-            $('#odFinalInProForm').form('clear');
-            $('#odcoatproid').text('');
+            $('#idCoatingInProForm').form('clear');
+            $('#idcoatInproid').text('');
+            combox1.setValue("");
             clearMultiUpload(grid);
-            url="/OdFinalInOperation/saveOdFinalInProcess.action";
+            url="/IdCoatInOperation/saveIdCoatingInProcess.action";
         }
-        function delOdFinalInPro() {
-            var row = $('#odFinalInProDatagrids').datagrid('getSelections');
+        function delIdCoatingInPro() {
+            var row = $('#idCoatingInProDatagrids').datagrid('getSelections');
             if(row.length>0){
                 var idArr=[];
                 for (var i=0;i<row.length;i++){
@@ -102,9 +103,9 @@
                 var idArrs=idArr.join(',');
                 $.messager.confirm('系统提示',"您确定要删除这<font color=red>"+idArr.length+ "</font>条数据吗？",function (r) {
                     if(r){
-                        $.post("/OdFinalInOperation/delOdFinalInProcess.action",{"hlparam":idArrs},function (data) {
+                        $.post("/IdCoatInOperation/delIdCoatingInProcess.action",{"hlparam":idArrs},function (data) {
                             if(data.success){
-                                $("#odFinalInProDatagrids").datagrid("reload");
+                                $("#idCoatingInProDatagrids").datagrid("reload");
                             }else{
                                 hlAlertFour("操作失败!");
                             }
@@ -115,47 +116,56 @@
                 hlAlertOne();
             }
         }
-        function editOdFinalInPro() {
+        function editIdCoatingInPro() {
             $('#hlcancelBtn').attr('operationtype','edit');
-            var row = $('#odFinalInProDatagrids').datagrid('getSelected');
+            var row = $('#idCoatingInProDatagrids').datagrid('getSelected');
             if(row){
-                $('#hlOdFinalInProDialog').dialog('open').dialog('setTitle','修改');
+                $('#hlIdCoatingInProDialog').dialog('open').dialog('setTitle','修改');
                 $('#project_name').text(row.project_name);$('#contract_no').text(row.contract_no);
                 $('#pipe_no').text(row.pipe_no);$('#status_name').text(row.status_name);
                 $('#od').text(row.od);$('#wt').text(row.wt);
                 $('#p_length').text(row.p_length);$('#weight').text(row.weight);
                 $('#grade').text(row.grade);$('#heat_no').text(row.heat_no);
-                $('#odFinalInProForm').form('load',row);
-                $('#odFinalInprotime').datetimebox('setValue',getDate1(row.operation_time));
-                 $("#odFinalInproid").textbox("setValue", row.id);
+                $('#idCoatingInProForm').form('load',row);
+                $('#idcoatInprotime').datetimebox('setValue',getDate1(row.operation_time));
+                $("#idcoatInproid").textbox("setValue", row.id);
                 look1.setText(row.pipe_no);
                 look1.setValue(row.pipe_no);
                 look2.setText(row.operator_no);
                 look2.setValue(row.operator_no);
+                combox1.setValue(row.surface_condition);
                 var odpictures=row.upload_files;
                 if(odpictures!=null&&odpictures!=""){
                     var imgList=odpictures.split(';');
                     createPictureModel(imgList);
                 }
-                url="/OdFinalInOperation/saveOdFinalInProcess.action?id="+row.id;
+                url="/IdCoatInOperation/saveIdCoatingInProcess.action?id="+row.id;
 
             }else{
                 hlAlertTwo();
             }
         }
-        function searchOdFinalInPro() {
-            $('#odFinalInProDatagrids').datagrid('load',{
+        function searchIdCoatingInPro() {
+            $('#idCoatingInProDatagrids').datagrid('load',{
                 'pipe_no': $('#pipeno').val(),
                 'operator_no': $('#operatorno').val(),
                 'begin_time': $('#begintime').val(),
                 'end_time': $('#endtime').val()
             });
         }
-        function odFinalInProFormSubmit() {
-            $('#odFinalInProForm').form('submit',{
+        function idCoatingInProFormSubmit() {
+            $('#idCoatingInProForm').form('submit',{
                 url:url,
                 onSubmit:function () {
-                    if($("input[name='odFinalInprotime']").val()==""){
+                    //表单验证
+                    setParams($("input[name='dry_film_thickness_max']"));
+                    setParams($("input[name='dry_film_thickness_min']"));
+                    setParams($("input[name='cutback']"));
+                    setParams($("input[name='holiday_tester_volts']"));
+                    setParams($("input[name='holiday_test_results']"));
+                    setParams($("input[name='magnetism']"));
+                    setParams($("input[name='internal_repairs']"));
+                    if($("input[name='idcoatInprotime']").val()==""){
                         hlAlertFour("请输入操作时间");
                         return false;
                     }
@@ -163,8 +173,8 @@
                 success: function(result){
                     var result = eval('('+result+')');
                     if (result.success){
-                        $('#hlOdFinalInProDialog').dialog('close');
-                        $('#odFinalInProDatagrids').datagrid('reload');
+                        $('#hlIdCoatingInProDialog').dialog('close');
+                        $('#idCoatingInProDatagrids').datagrid('reload');
                         clearFormLabel();
                     } else {
                         hlAlertFour("操作失败!");
@@ -176,8 +186,8 @@
             });
             clearMultiUpload(grid);
         }
-        function odFinalInProCancelSubmit() {
-            $('#hlOdFinalInProDialog').dialog('close');
+        function idCoatingInProCancelSubmit() {
+            $('#hlIdCoatingInProDialog').dialog('close');
         }
 
         //图片上传失败操作
@@ -243,26 +253,25 @@
         }
         //清理form表单
         function  clearFormLabel() {
-            $('#odFinalInProForm').form('clear');
+            $('#idCoatingInProForm').form('clear');
             $('.hl-label').text(''); $('#hl-gallery-con').empty();
         }
     </script>
-
 </head>
 
 <body>
 <fieldset class="b3" style="padding:10px;margin:10px;">
     <legend> <h3><b style="color: orange" >|&nbsp;</b><span class="i18n1" name="datadisplay">数据展示</span></h3></legend>
     <div  style="margin-top:5px;">
-        <table class="easyui-datagrid" id="odFinalInProDatagrids" url="/OdFinalInOperation/getOdFinalInByLike.action" striped="true" loadMsg="正在加载中。。。" textField="text" pageSize="20" fitColumns="true" pagination="true" toolbar="#hlOdFinalInProTb">
+        <table class="easyui-datagrid" id="idCoatingInProDatagrids" url="/IdCoatInOperation/getIdCoatingInByLike.action" striped="true" loadMsg="正在加载中。。。" textField="text" pageSize="20" fitColumns="true" pagination="true" toolbar="#hlIdCoatingInProTb">
             <thead>
             <tr>
                 <th data-options="field:'ck',checkbox:true"></th>
                 <th field="id" align="center" width="100" class="i18n1" name="id">流水号</th>
-                <th field="project_name" align="center" width="100" class="i18n1" name="projectname">项目名称</th>
-                <th field="contract_no" align="center" width="100" class="i18n1" name="contractno">合同编号</th>
-                <th field="pipe_no" align="center" width="100" class="i18n1" name="pipeno">钢管编号</th>
-                <th field="grade" align="center" width="100" class="i18n1" name="grade">钢种</th>
+                <th field="project_name" align="center" width="120" class="i18n1" name="projectname">项目名称</th>
+                <th field="contract_no" align="center" width="120" class="i18n1" name="contractno">合同编号</th>
+                <th field="pipe_no" align="center" width="120" class="i18n1" name="pipeno">钢管编号</th>
+                <th field="grade" align="center" width="110" class="i18n1" name="grade">钢种</th>
                 <th field="status_name" align="center" width="110" class="i18n1" name="statusname">状态</th>
                 <th field="od" align="center" width="50" class="i18n1" name="od">外径</th>
                 <th field="wt" align="center" width="50" class="i18n1" name="wt">壁厚</th>
@@ -271,7 +280,15 @@
                 <th field="heat_no" align="center" hidden="true" width="50" class="i18n1" name="heat_no">炉号</th>
                 <th field="operator_no" align="center" width="100" class="i18n1" name="operatorno">操作工编号</th>
 
-                <th field="inspection_result" align="center" width="80" class="i18n1" name="inspectionresult">外涂层质检结果</th>
+                <th field="dry_film_thickness_max" align="center" width="80" class="i18n1" name="dryfilmthicknessmax">最大干膜厚度</th>
+                <th field="dry_film_thickness_min" align="center" width="100" class="i18n1" name="dryfilmthicknessmin">最小干膜厚度</th>
+                <th field="cutback" align="center" width="100" hidden="true" class="i18n1" name="cutback">预留端长度</th>
+                <th field="holiday_tester_volts" width="100" align="center" hidden="true" class="i18n1" name="holidaytestervolts">电火花检测电压</th>
+                <th field="holiday_test_results" align="center" width="100" hidden="true" class="i18n1" name="holidaytestresults">电火花检验结果</th>
+                <th field="surface_condition" align="center" width="150" class="i18n1" name="surfacecondition1">表面质量</th>
+                <th field="bevel_check" align="center" width="80" class="i18n1" name="bevelcheck">坡口质量</th>
+                <th field="magnetism" width="100" align="center"  class="i18n1" name="magnetism">剩磁</th>
+                <th field="internal_repairs" width="100" align="center"  class="i18n1" name="internalrepairs">内涂层修补数</th>
 
                 <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                 <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
@@ -284,7 +301,7 @@
 </fieldset>
 
 <!--工具栏-->
-<div id="hlOdFinalInProTb" style="padding:10px;">
+<div id="hlIdCoatingInProTb" style="padding:10px;">
     <span class="i18n1" name="pipeno">钢管编号</span>:
     <input id="pipeno" name="pipeno" style="line-height:22px;border:1px solid #ccc">
     <span class="i18n1" name="operatorno">操作工编号</span>:
@@ -293,17 +310,17 @@
     <input id="begintime" name="begintime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
     <span class="i18n1" name="endtime">结束时间</span>:
     <input id="endtime" name="endtime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
-    <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchOdFinalInPro()">Search</a>
+    <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchIdCoatingInPro()">Search</a>
     <div style="float:right">
-        <a href="#" id="addObpLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addOdFinalInPro()">添加</a>
-        <a href="#" id="editObpLinkBtn" class="easyui-linkbutton i18n1" name="edit" data-options="iconCls:'icon-edit',plain:true" onclick="editOdFinalInPro()">修改</a>
-        <a href="#" id="deltObpLinkBtn" class="easyui-linkbutton i18n1" name="delete" data-options="iconCls:'icon-remove',plain:true" onclick="delOdFinalInPro()">删除</a>
+        <a href="#" id="addObpLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addIdCoatingInPro()">添加</a>
+        <a href="#" id="editObpLinkBtn" class="easyui-linkbutton i18n1" name="edit" data-options="iconCls:'icon-edit',plain:true" onclick="editIdCoatingInPro()">修改</a>
+        <a href="#" id="deltObpLinkBtn" class="easyui-linkbutton i18n1" name="delete" data-options="iconCls:'icon-remove',plain:true" onclick="delIdCoatingInPro()">删除</a>
     </div>
 </div>
 
 <!--添加、修改框-->
-<div id="hlOdFinalInProDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;height:auto;">
-    <form id="odFinalInProForm" method="post">
+<div id="hlIdCoatingInProDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;height:auto;">
+    <form id="idCoatingInProForm" method="post">
         <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
             <legend>钢管信息</legend>
             <table class="ht-table" width="100%" border="0">
@@ -354,7 +371,7 @@
                 <tr>
                     <td class="i18n1" name="id">流水号</td>
                     <%--<td colspan="5"><label class="hl-label" id="odcoatproid"></label></td>--%>
-                    <td colspan="5"><input id="odFinalInproid" class="easyui-textbox" readonly="true" type="text" value="" name="odStencilproid"> </td>
+                    <td colspan="5"><input id="idcoatproid" class="easyui-textbox" readonly="true" type="text" value="" name="idcoatproid"> </td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="operatorno">操作工编号</td>
@@ -366,23 +383,61 @@
                     </td>
                     <td class="i18n1" name="operationtime">操作时间</td>
                     <td colspan="2">
-                        <input class="easyui-datetimebox" id="odFinalInprotime" type="text" name="odFinalInprotime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                        <input class="easyui-datetimebox" id="idcoatInprotime" type="text" name="idcoatInprotime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
 
                 </tr>
             </table>
 
             <table class="ht-table">
-
                 <tr>
-                    <td class="i18n1" name="inspectionresult">外涂层质检结果</td>
-                    <td colspan="2"><input class="easyui-textbox"  type="text" name="inspection_result" value=""/></td>
+                    <td class="i18n1" name="dryfilmthicknessmax">最大干膜厚度</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="dry_film_thickness_max" value=""/></td>
+                    <td>10~20</td>
+                    <td class="i18n1" name="dryfilmthicknessmin">最小干膜厚度</td>
+                    <td><input class="easyui-numberbox"  data-options="min:0,precision:2" type="text" name="dry_film_thickness_min" value=""/></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td width="16%" class="i18n1" name="holidaytestervolts">电火花检测电压</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="holiday_tester_volts" value=""/></td>
+                    <td></td>
+                    <td width="16%" class="i18n1" name="holidaytestresults">电火花检测结果</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:0"  type="text" name="holiday_test_results" value=""/></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td width="16%" class="i18n1" name="cutback">预留端长度</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="cutback" value=""/></td>
+                    <td></td>
+                    <td width="16%" class="i18n1" name="bevelcheck">坡口质量</td>
+                    <td><input class="easyui-textbox"  type="text" name="bevel_check" value=""/></td>
+                    <td></td>
+
                 </tr>
 
-
+                <tr>
+                    <td class="i18n1" name="magnetism">剩磁</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="magnetism" value=""/></td>
+                    <td></td>
+                    <td class="i18n1" name="internalrepairs">内涂层修补数</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="internal_repairs" value=""/></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td width="16%" class="i18n1" name="surfacecondition1">表面质量</td>
+                    <td colspan="5">
+                        <div id="combobox1" class="mini-combobox" style="width:185px;"  popupWidth="185" textField="text" valueField="text"
+                             url="../data/surfacequality.txt" name="surface_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick" >
+                            <div property="columns">
+                                <div header="缺陷类型" field="text"></div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="result">结论</td>
-                    <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
+                    <td><select id="cc" class="easyui-combobox" name="result" style="width:200px;">
                         <option value="0">不合格</option>
                         <option value="1">合格</option>
                         <option value="2">待定</option>
@@ -408,8 +463,8 @@
 
 </div>
 <div id="dlg-buttons" align="center" style="width:900px;">
-    <a href="#" class="easyui-linkbutton" iconCls="icon-save" onclick="odFinalInProFormSubmit()">Save</a>
-    <a href="#" class="easyui-linkbutton" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="odFinalInProCancelSubmit()">Cancel</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-save" onclick="idCoatingInProFormSubmit()">Save</a>
+    <a href="#" class="easyui-linkbutton" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="idCoatingInProCancelSubmit()">Cancel</a>
 </div>
 <div id="gridPanel1" class="mini-panel" title="header" iconCls="icon-add" style="width:450px;height:250px;"
      showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0"
@@ -481,6 +536,7 @@
     var grid2=mini.get("datagrid2");
     var look1=mini.get('lookup1');
     var look2= mini.get("lookup2");
+    var combox1=mini.get("combobox1");
     grid1.load();
     grid2.load();
 
@@ -546,5 +602,15 @@
         $('#searchBar2').css('display','block');
         //$('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
     });
+    combox1.on("showpopup",function () {
+        $('.mini-shadow').css('z-index','99999');
+        $('.mini-popup').css('z-index','100000');
+        $('.mini-panel').css('z-index','100000');
+    });
+    function onComboxCloseClick(e) {
+        var obj = e.sender;
+        obj.setText("");
+        obj.setValue("");
+    }
     hlLanguage("../i18n/");
 </script>

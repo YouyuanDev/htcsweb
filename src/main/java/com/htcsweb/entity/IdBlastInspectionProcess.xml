@@ -33,7 +33,7 @@
 
 
     <insert id="addIdBlastInProcess" parameterType="com.htcsweb.entity.IdBlastInspectionProcess">
-    INSERT INTO id_blast_inspection_process(pipe_no,operation_time,operator_no,relative_humidity,dew_point,pipe_temp,surface_condition,blast_time,blast_finish_sa25,profile,upload_files,remark,result) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{relative_humidity},#{dew_point},#{pipe_temp},#{surface_condition},#{blast_time},#{blast_finish_sa25},#{upload_files},#{remark},#{result})
+    INSERT INTO id_blast_inspection_process(pipe_no,operation_time,operator_no,relative_humidity,dew_point,pipe_temp,surface_condition,blast_time,blast_finish_sa25,profile,upload_files,remark,result) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{relative_humidity},#{dew_point},#{pipe_temp},#{surface_condition},#{blast_time},#{blast_finish_sa25},#{profile},#{upload_files},#{remark},#{result})
     </insert>
 
     <select id="getIdBlastInProcess" resultType="com.htcsweb.entity.IdBlastInspectionProcess">
@@ -41,7 +41,7 @@
     </select>
 
     <update id="updateIdBlastInProcess" parameterType="com.htcsweb.entity.IdBlastInspectionProcess">
-      UPDATE id_blast_inspection_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},relative_humidity=#{relative_humidity},dew_point=#{dew_point},pipe_temp=#{pipe_temp}surface_condition=#{surface_condition},blast_time=#{blast_time},blast_finish_sa25=#{blast_finish_sa25},profile=#{profile},upload_files=#{upload_files},remark=#{remark},result=#{result} where id=#{id}
+      UPDATE id_blast_inspection_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},relative_humidity=#{relative_humidity},dew_point=#{dew_point},pipe_temp=#{pipe_temp},surface_condition=#{surface_condition},blast_time=#{blast_time},blast_finish_sa25=#{blast_finish_sa25},profile=#{profile},upload_files=#{upload_files},remark=#{remark},result=#{result} where id=#{id}
     </update>
 
 

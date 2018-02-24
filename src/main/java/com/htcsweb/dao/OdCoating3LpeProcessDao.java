@@ -1,0 +1,20 @@
+package com.htcsweb.dao;
+
+
+
+import com.htcsweb.entity.OdCoating3LpeProcess;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+
+public interface OdCoating3LpeProcessDao {
+    public OdCoating3LpeProcess getOdCoating3LpeProcessById(int id);
+    public int addOdCoating3LpeProcess(OdCoating3LpeProcess odCoating3LpeProcess);
+    public int delOdCoating3LpeProcess(String[] arrId);
+    public List<OdCoating3LpeProcess> getOdCoatingProcess();
+    public int updateOdCoating3LpeProcess(OdCoating3LpeProcess odCoating3LpeProcess);
+    public List<HashMap<String,Object>> getAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no") String operator_no, @Param("begin_time") Date begin_time, @Param("end_time") Date end_time, @Param("skip") int skip, @Param("take") int take);
+    public int getCount();
+}
