@@ -40,7 +40,8 @@
             $('#hlcancelBtn').attr('operationtype','add');
             $('#hlOdAcceptanceDialog').dialog('open').dialog('setTitle','新增');
             $('#odacceptanceId').text('');
-            clearFormLabel(); $(':input').val('1');
+            clearFormLabel();
+            //$(':input').val('1');
             url="/AcceptanceCriteriaOperation/saveAllODAcceptanceCriteria.action";
         }
         function delOdAcceptance() {
@@ -69,7 +70,7 @@
         function editOdAcceptance(){
             $('#hlcancelBtn').attr('operationtype','edit');
             var row = $('#odAcceptanceDatagrids').datagrid('getSelected');
-            $(':input').val(1);
+            //$(':input').val(1);
             if(row){
                 $('#hlOdAcceptanceDialog').dialog('open').dialog('setTitle','修改');
                 $("#odacceptanceId").textbox("setValue", row.id);
@@ -100,7 +101,7 @@
                     //     hlAlertFour("请输入操作时间");
                     //     return false;
                     // }
-                    alert("neirong"+$("input[name='coating_acceptance_criteria_no']").val());
+                    //alert("neirong"+$("input[name='coating_acceptance_criteria_no']").val());
                 },
                 success: function(result){
                     var result = eval('('+result+')');
@@ -255,9 +256,9 @@
                </tr>
                <tr>
                    <td class="i18n1" name="surfacedustratingmax">灰尘度最大值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="min:0,precision:2"  type="text" name="surface_dust_rating_max" value=""/></td>
+                   <td colspan="2"><input class="easyui-numberbox" data-options="min:0,precision:0"  type="text" name="surface_dust_rating_max" value=""/></td>
                    <td class="i18n1" name="surfacedustratingmax">灰尘度最小值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="min:0,precision:2"  type="text" name="surface_dust_rating_min" value=""/></td>
+                   <td colspan="2"><input class="easyui-numberbox" data-options="min:0,precision:0"  type="text" name="surface_dust_rating_min" value=""/></td>
                </tr>
                <tr>
                    <td class="i18n1" name="odprofilemax">外锚纹深度最大值</td>
@@ -325,9 +326,9 @@
                </tr>
                <tr>
                    <td class="i18n1" name="repairmax">允许修补量最大值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="min:0,precision:2"  type="text" name="repair_max" value=""/></td>
+                   <td colspan="2"><input class="easyui-numberbox" data-options="min:0,precision:0"  type="text" name="repair_max" value=""/></td>
                    <td class="i18n1" name="repairmin">允许修补量最小值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="min:0,precision:2"  type="text" name="repair_min" value=""/></td>
+                   <td colspan="2"><input class="easyui-numberbox" data-options="min:0,precision:0"  type="text" name="repair_min" value=""/></td>
                </tr>
                <tr>
                    <td class="i18n1" name="holidaytestervoltagemax">检漏仪电压最大值</td>
