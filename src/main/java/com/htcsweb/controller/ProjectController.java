@@ -62,7 +62,7 @@ public class ProjectController {
 
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
         List<HashMap<String,Object>>list=projectInfoDao.getAllByLike(project_no,project_name,client_name,beginTime,endTime,start,Integer.parseInt(rows));
-        int count=projectInfoDao.getCount();
+        int count=projectInfoDao.getCountAllByLike(project_no,project_name,client_name,beginTime,endTime);
 
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);

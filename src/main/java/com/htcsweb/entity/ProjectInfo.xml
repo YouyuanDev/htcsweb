@@ -26,6 +26,28 @@
         select count(*) from project_info
     </select>
 
+    <select id="getCountAllByLike" resultType="int">
+        select count(*) from project_info
+        <where>
+            <if test="project_no!=null and project_no!=''">
+                project_no LIKE CONCAT('%',#{project_no},'%')
+            </if>
+            <if test="project_name!=null and project_name!=''">
+                AND project_name LIKE CONCAT('%',#{project_name},'%')
+            </if>
+            <if test="client_name!=null and client_name!=''">
+                AND client_name LIKE CONCAT('%',#{client_name},'%')
+            </if>
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(project_time,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(project_time,'%Y-%m-%d %H:%T:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d 23:59:59')]]>
+            </if>
+        </where>
+    </select>
+
+
     <select id="hasProjectNo" resultType="int">
         select count(*) from project_info WHERE project_no=#{project_no}
     </select>

@@ -38,6 +38,24 @@
         select count(*) from pipe_basic_info
     </select>
 
+    <select id="getCountAllByLike" resultType="int">
+        select count(*) from pipe_basic_info p
+        left join contract_info co on p.contract_no=co.contract_no
+        left join  project_info pr on co.project_no=pr.project_no
+        <where>
+            <if test="project_no!=null and project_no!=''">
+                AND co.project_no LIKE CONCAT('%',#{project_no},'%')
+            </if>
+
+            <if test="contract_no!=null and contract_no!=''">
+                AND p.contract_no LIKE CONCAT('%',#{contract_no},'%')
+            </if>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+
+        </where>
+    </select>
 
     <select id="getCountODInspectedPipeInfoByLike" resultType="int">
         select count(*) from pipe_basic_info p

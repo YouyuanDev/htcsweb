@@ -77,7 +77,7 @@ public class PipeBasicInfoController {
 
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
         List<HashMap<String,Object>>list=pipeBasicInfoDao.getAllByLike(project_no,contract_no,pipe_no,start,Integer.parseInt(rows));
-        int count=pipeBasicInfoDao.getCount();
+        int count=pipeBasicInfoDao.getCountAllByLike(project_no,contract_no,pipe_no);
 
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);

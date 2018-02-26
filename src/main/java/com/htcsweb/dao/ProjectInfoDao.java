@@ -11,7 +11,9 @@ public interface ProjectInfoDao {
 
 
     public List<HashMap<String,Object>> getAllByLike(@Param("project_no") String project_no, @Param("project_name")String project_name,@Param("client_name")String client_name, @Param("begin_time")Date begin_time, @Param("end_time")Date end_time, @Param("skip")int skip, @Param("take")int take);
-    public int getCount();
+    //public int getCount();
+    public int getCountAllByLike(@Param("project_no") String project_no, @Param("project_name")String project_name,@Param("client_name")String client_name, @Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
+
     public int updateProjectInfo(ProjectInfo projectInfo);
     public int addProjectInfo(ProjectInfo projectInfo);
     public int delProjectInfo(String[]arrId);
@@ -20,4 +22,6 @@ public interface ProjectInfoDao {
     public List<ProjectInfo> getProjectInfoByID(@Param("id")String id);
     public String getProjectNameByNo(@Param("project_no")String project_no);
     public List<ProjectInfo> getProjectInfoByContract(@Param("contract_no")String contract_no);
+
+
 }

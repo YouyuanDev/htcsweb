@@ -49,7 +49,7 @@ public class ContractController {
 
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
         List<HashMap<String,Object>>list=contractInfoDao.getAllByLike(project_no,project_name,contract_no,start,Integer.parseInt(rows));
-        int count=contractInfoDao.getCount();
+        int count=contractInfoDao.getCountAllByLike(project_no,project_name,contract_no);
 
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);

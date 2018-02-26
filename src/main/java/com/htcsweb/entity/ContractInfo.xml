@@ -25,6 +25,22 @@
         select count(*) from contract_info
     </select>
 
+    <select id="getCountAllByLike" resultType="int">
+        select count(*) from contract_info co
+        left join project_info pr on co.project_no=pr.project_no
+        <where>
+            <if test="project_no!=null and project_no!=''">
+                co.project_no LIKE CONCAT('%',#{project_no},'%')
+            </if>
+            <if test="project_name!=null and project_name!=''">
+                AND project_name LIKE CONCAT('%',#{project_name},'%')
+            </if>
+            <if test="contract_no!=null and contract_no!=''">
+                contract_no LIKE CONCAT('%',#{contract_no},'%')
+            </if>
+
+        </where>
+    </select>
 
     <select id="getAllByLike" resultType="map">
         select co.*,project_name from contract_info co left join project_info pr on co.project_no=pr.project_no
