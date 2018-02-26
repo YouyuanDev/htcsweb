@@ -50,6 +50,11 @@ public class AcceptanceCriteriaController {
     public String getAllODAcceptanceCriteriaByLike(@RequestParam(value = "coating_acceptance_criteria_no",required = false)String coating_acceptance_criteria_no,HttpServletRequest request){
         String page= request.getParameter("page");
         String rows= request.getParameter("rows");
+        if(page==null||page==""){
+            page="0";
+        }if(rows==null||rows==""){
+            rows="0";
+        }
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
         List<HashMap<String,Object>>list=odcoatingacceptancecriteriaDao.getAllByLike(coating_acceptance_criteria_no,start,Integer.parseInt(rows));
         int count=odcoatingacceptancecriteriaDao.getCount();
@@ -66,12 +71,15 @@ public class AcceptanceCriteriaController {
         JSONObject json=new JSONObject();
         try{
             int resTotal=0;
+            System.out.println("执行到此。。。。");
             odCoatingAcceptanceCriteria.setLast_update_time(new Date());
             if(odCoatingAcceptanceCriteria.getId()==0){
                 //添加
                 resTotal=odcoatingacceptancecriteriaDao.addOdCoatingCriterProcess(odCoatingAcceptanceCriteria);
             }else{
                 //修改！
+                System.out.println("执行修改到此。。。。");
+                System.out.println(odCoatingAcceptanceCriteria.getCoating_acceptance_criteria_no());
                 resTotal=odcoatingacceptancecriteriaDao.updateOdCoatingCriterProcess(odCoatingAcceptanceCriteria);
             }
             if(resTotal>0){
