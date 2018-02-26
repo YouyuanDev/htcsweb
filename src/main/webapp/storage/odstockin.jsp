@@ -39,17 +39,7 @@
         }
         $(function () {
 
-            $('#hlPipeDialog').dialog({
-                onClose:function () {
-                    var type=$('#hlcancelBtn').attr('operationtype');
-                    if(type=="add"){
 
-                    }else{
-
-                        clearFormLabel();
-                    }
-                }
-            });
             $('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
 
         });
@@ -83,7 +73,7 @@
                 //hlAlertFive("/pipeinfo/delPipe.action",idArrs,idArr.length);
                 // $.messager.confirm('提示','您确定要删除<font>')
             }else{
-                hlAlertOne();
+                $.messager.alert('Warning','请选择要入外防成品库的钢管!');
             }
         }
 

@@ -23,6 +23,30 @@
     <select id="getCount" resultType="int">
         select count(*) from id_stencil_process
     </select>
+
+    <select id="getCountAllByLike" resultType="int">
+        select count(*) from id_stencil_process o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        left join pipe_status s on s.status_code=p.status
+        <where>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND o.pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+            <if test="operator_no!=null and operator_no!=''">
+                AND o.operator_no LIKE CONCAT('%',#{operator_no},'%')
+            </if>
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d 23:59:59')]]>
+            </if>
+        </where>
+    </select>
+
+
     <select id="getAllByLike" resultType="map">
         Select pro.project_name,s.status_name,p.contract_no,p.grade,p.od,p.wt,p.p_length,p.weight,p.heat_no,o.*
         from id_stencil_process o

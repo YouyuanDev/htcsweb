@@ -60,7 +60,7 @@ public class OdStencilProcessController {
         }
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
         List<HashMap<String,Object>> list=odStencilProcessDao.getAllByLike(pipe_no,operator_no,beginTime,endTime,start,Integer.parseInt(rows));
-        int count=odStencilProcessDao.getCount();
+        int count=odStencilProcessDao.getCountAllByLike(pipe_no,operator_no,beginTime,endTime);
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
         maps.put("rows",list);

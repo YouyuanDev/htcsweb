@@ -120,7 +120,7 @@ public class IdBlastProcessController {
         }
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
         List<HashMap<String,Object>>list=idBlastProcessDao.getAllByLike(pipe_no,operator_no,beginTime,endTime,start,Integer.parseInt(rows));
-        int count=idBlastProcessDao.getCount();
+        int count=idBlastProcessDao.getCountAllByLike(pipe_no,operator_no,beginTime,endTime);
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
         maps.put("rows",list);

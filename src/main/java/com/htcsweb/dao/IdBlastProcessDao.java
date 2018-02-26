@@ -16,5 +16,7 @@ public interface IdBlastProcessDao {
     public List<IdBlastProcess> getIdBlastProcess();
     public int updateIdBlastProcess(IdBlastProcess idBlastProcess);
     public List<HashMap<String,Object>> getAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no") String operator_no, @Param("begin_time") Date begin_time, @Param("end_time") Date end_time, @Param("skip") int skip, @Param("take") int take);
-    public int getCount();
+    //public int getCount();
+    public int getCountAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no") String operator_no, @Param("begin_time") Date begin_time, @Param("end_time") Date end_time);
+
 }
