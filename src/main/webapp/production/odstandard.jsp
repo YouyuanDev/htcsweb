@@ -27,15 +27,11 @@
 
     <script type="text/javascript">
         var url;
-
         function myformatter(date){
             var y = date.getFullYear();
             var m = date.getMonth()+1;
             var d = date.getDate();
             return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
-        }
-        function formatterdate(value,row,index){
-           return getDate1(value);
         }
         function myparsedate(s){
             if (!s) return new Date();
@@ -53,49 +49,44 @@
                 return new Date();
             }
         }
+
         // 日期格式为 2/20/2017 12:00:00 PM
         function myformatter2(date){
             return getDate1(date);
         }
         // 日期格式为 2/20/2017 12:00:00 PM
-        function myparser2(s) {
+        function myparser2(s){
             if (!s) return new Date();
             return new Date(Date.parse(s));
         }
         $(function () {
-                //删除上传的图片
+                    //删除上传的图片
                 $(document).on('click','.content-del',function () {
                      delUploadPicture($(this));
                 });
-                $('#hlIdBlastProDialog').dialog({
+                $('#hlOdBlastProDialog').dialog({
                     onClose:function () {
                         var type=$('#hlcancelBtn').attr('operationtype');
                         if(type=="add"){
                             var $imglist=$('#fileslist');
-                            var $dialog=$('#hlIdBlastProDialog');
+                            var $dialog=$('#hlOdBlastProDialog');
                             hlAlertSix("../UploadFile/delUploadPicture.action",$imglist,$dialog,grid);
-                        }else{
-                            //$('#hlOdBlastProDialog').dialog('close');
-                            $('#hl-gallery-con').empty();
-                            //$('#fileslist').val('');
-                            clearFormLabel();
                         }
+                        clearFormLabel();
                     }
                 });
                $('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
                // hlLanguage("../i18n/");
         });
-        function addIdBlastPro(){
+        function addOdBlastPro(){
             $('#hlcancelBtn').attr('operationtype','add');
-            $('#hlIdBlastProDialog').dialog('open').dialog('setTitle','新增');
-            $('#fileslist').val('');
-            $('#idBlastProForm').form('clear');
-            $('#idbpid').text('');
+            $('#hlOdBlastProDialog').dialog('open').dialog('setTitle','新增');
+            clearFormLabel();
             clearMultiUpload(grid);
-            url="/IdOperation/saveIdBlastProcess.action";
+            url="/OdOperation/saveOdBlastProcess.action";
         }
-        function delIdBlastPro() {
-            var row = $('#idBlastProDatagrids').datagrid('getSelections');
+        function delOdBlastPro() {
+            var row = $('#odBlastProDatagrids').datagrid('getSelections');
             if(row.length>0){
                 var idArr=[];
                 for (var i=0;i<row.length;i++){
@@ -104,9 +95,9 @@
                 var idArrs=idArr.join(',');
                 $.messager.confirm('系统提示',"您确定要删除这<font color=red>"+idArr.length+ "</font>条数据吗？",function (r) {
                     if(r){
-                        $.post("/IdOperation/delIdBlastProcess.action",{"hlparam":idArrs},function (data) {
+                        $.post("/OdOperation/delOdBlastProcess.action",{"hlparam":idArrs},function (data) {
                             if(data.success){
-                                $("#idBlastProDatagrids").datagrid("reload");
+                                $("#odBlastProDatagrids").datagrid("reload");
                             }else{
                                 hlAlertFour("操作失败!");
                             }
@@ -117,83 +108,80 @@
                 hlAlertOne();
             }
         }
-        function editIdBlastPro() {
+        function editOdBlastPro(){
             $('#hlcancelBtn').attr('operationtype','edit');
-            var row = $('#idBlastProDatagrids').datagrid('getSelected');
+            var row = $('#odBlastProDatagrids').datagrid('getSelected');
             if(row){
-                $('#hlIdBlastProDialog').dialog('open').dialog('setTitle','修改');
+                $('#hlOdBlastProDialog').dialog('open').dialog('setTitle','修改');
                 $('#project_name').text(row.project_name);$('#contract_no').text(row.contract_no);
                 $('#pipe_no').text(row.pipe_no);$('#status_name').text(row.status_name);
                 $('#od').text(row.od);$('#wt').text(row.wt);
                 $('#p_length').text(row.p_length);$('#weight').text(row.weight);
-                $('#idbpid').text(row.id);
+                $('#odbpid').text(row.id);
                 $('#grade').text(row.grade);$('#heat_no').text(row.heat_no);
-                $('#idBlastProForm').form('load',row);
-
+                $('#odBlastProForm').form('load',row);
                 $('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
-
                 look1.setText(row.pipe_no);
                 look1.setValue(row.pipe_no);
                 look2.setText(row.operator_no);
                 look2.setValue(row.operator_no);
+                combox1.setValue(row.surface_condition);
                 var odpictures=row.upload_files;
                 if(odpictures!=null&&odpictures!=""){
                      var imgList=odpictures.split(';');
-                    createPictureModel(imgList);
+                     createPictureModel(imgList);
                 }
-                url="/IdOperation/saveIdBlastProcess.action?id="+row.id;
-
+                url="/OdOperation/saveOdBlastProcess.action?id="+row.id;
             }else{
                 hlAlertTwo();
             }
         }
-        function searchIdBlastPro() {
-            $('#idBlastProDatagrids').datagrid('load',{
+        function searchOdBlastPro() {
+            $('#odBlastProDatagrids').datagrid('load',{
                 'pipe_no': $('#pipeno').val(),
                 'operator_no': $('#operatorno').val(),
                 'begin_time': $('#begintime').val(),
                 'end_time': $('#endtime').val()
             });
         }
-        function idBlastProFormSubmit() {
-            $('#idBlastProForm').form('submit',{
+        function odBlastProFormSubmit() {
+            $('#odBlastProForm').form('submit',{
                 url:url,
                 onSubmit:function () {
-                    //判断钢管编号是否相同
-                    var arg1=$("input[name='pipe_no']").val();
-                    var arg2=$("input[name='original_pipe_no']").val();
-                    var arg3=$("input[name='new_pipe_no']").val();
-                     alert("arg1="+arg1+",arg2="+arg2+",arg3="+arg3);
-                     if(arg1!=arg2||arg1!=arg3||arg2!=arg3){
-                         hlAlertFour("钢管编号不同!");
-                         return false;
-                     }
-                    if($("input[name='idbptime']").val()==""){
+                    //表单验证
+                    setParams($("input[name='alkaline_dwell_time']"));
+                    setParams($("input[name='alkaline_concentration']"));
+                    setParams($("input[name='acid_wash_time']"));
+                    setParams($("input[name='acid_concentration']"));
+                    setParams($("input[name='salt_contamination_before_blasting']"));
+                    setParams($("input[name='blast_line_speed']"));
+                    setParams($("input[name='conductivity']"));
+                    setParams($("input[name='preheat_temp']"));
+                    if($("input[name='odbptime']").val()==""){
                         hlAlertFour("请输入操作时间");
                         return false;
                     }
                 },
                 success: function(result){
                     var result = eval('('+result+')');
+                    $('#hlOdBlastProDialog').dialog('close');
                     if (result.success){
-                        $('#hlIdBlastProDialog').dialog('close');
-                        $('#idBlastProDatagrids').datagrid('reload');
-                        clearFormLabel();
-                        $('#hl-gallery-con').empty();
+                        $('#odBlastProDatagrids').datagrid('reload');
                     } else {
                          hlAlertFour("操作失败!");
                     }
                 },
                 error:function () {
+                    //clearFormLabel();
                     hlAlertThree();
                 }
             });
             clearMultiUpload(grid);
-        }
-        function idBlastProCancelSubmit() {
-            $('#hlIdBlastProDialog').dialog('close');
-        }
 
+        }
+        function odBlastProCancelSubmit() {
+            $('#hlOdBlastProDialog').dialog('close');
+        }
         //图片上传失败操作
         function onUploadError() {
             alert("上传失败!");
@@ -255,9 +243,11 @@
             if($obj.val()==null||$obj.val()=="")
                 $obj.val(0);
         }
-        function  clearFormLabel() {
-            $('#idBlastProForm').form('clear');
-            $('.hl-label').text(''); $('#hl-gallery-con').empty();
+        function  clearFormLabel(){
+            $('#odBlastProForm').form('clear');
+            $('.hl-label').text('');
+            $('#hl-gallery-con').empty();
+            combox1.setValue("");
         }
     </script>
 
@@ -271,30 +261,53 @@
 <fieldset class="b3" style="padding:10px;margin:10px;">
     <legend> <h3><b style="color: orange" >|&nbsp;</b><span class="i18n1" name="datadisplay">数据展示</span></h3></legend>
     <div  style="margin-top:5px;">
-         <table class="easyui-datagrid" id="idBlastProDatagrids" url="/IdOperation/getIdBlastByLike.action" striped="true" loadMsg="正在加载中。。。" textField="text" pageSize="20" fitColumns="true" pagination="true" toolbar="#hlIdBlastProTb">
+         <table class="easyui-datagrid" id="odBlastProDatagrids" url="/OdOperation/getOdBlastByLike.action" striped="true" loadMsg="正在加载中。。。" textField="text" pageSize="20" fitColumns="true" pagination="true" toolbar="#hlOdBlastProTb">
              <thead>
                <tr>
-                       <th data-options="field:'ck',checkbox:true"></th>
-                       <th field="id" align="center" width="100" class="i18n1" name="id">流水号</th>
-                       <th field="project_name" align="center" width="120" class="i18n1" name="projectname">项目名称</th>
-                       <th field="contract_no" align="center" width="120" class="i18n1" name="contractno">合同编号</th>
-                       <th field="pipe_no" align="center" width="120" class="i18n1" name="pipeno">钢管编号</th>
-                       <th field="grade" align="center" width="110" class="i18n1" name="grade">钢种</th>
-                       <th field="status_name" align="center" width="110" class="i18n1" name="statusname">状态</th>
-                       <th field="od" align="center" width="50" class="i18n1" name="od">外径</th>
-                       <th field="wt" align="center" width="50" class="i18n1" name="wt">壁厚</th>
-                       <th field="p_length" align="center" width="50" class="i18n1" name="p_length">长度</th>
-                       <th field="weight" align="center" width="50" class="i18n1" name="weight">重量</th>
-                       <th field="heat_no" align="center" hidden="true" width="50" class="i18n1" name="heat_no">炉号</th>
-                       <th field="operator_no" align="center" width="100" class="i18n1" name="operatorno">操作工编号</th>
+                   <th data-options="field:'ck',checkbox:true"></th>
+                   <th field="id" align="center" width="100" class="i18n1" name="id">流水号</th>
+                   <th field="coating_acceptance_criteria_no" align="center" width="120" class="i18n1" name="coatingacceptancecriteriano">涂层判定标准编号</th>
+                   <th field="salt_contamination_before_blast_max" align="center" width="120" class="i18n1" name="saltcontaminationbeforeblastmax">打砂前盐度最大值</th>
+                   <th field="salt_contamination_before_blast_min" align="center" width="120" class="i18n1" name="saltcontaminationbeforeblastmin">打砂前盐度最小值</th>
+                   <th field="preheat_temp_max" align="center" width="110" class="i18n1" name="preheattempmax">预热钢管温度最大值</th>
+                   <th field="preheat_temp_min" align="center" width="110" class="i18n1" name="preheattempmin">预热钢管温度最小值</th>
+                   <th field="relative_humidity_max" align="center" width="50" class="i18n1" name="relativehumiditymax">相对湿度最大值</th>
+                   <th field="relative_humidity_min" align="center" width="50" class="i18n1" name="relativehumiditymin">相对湿度最小值</th>
+                   <th field="temp_above_dew_point_max" align="center" width="50" class="i18n1" name="tempabovedewpointmax">大于露点最大值</th>
+                   <th field="temp_above_dew_point_min" align="center" width="50" class="i18n1" name="tempabovedewpointmin">大于露点最小值</th>
+                   <th field="blast_finish_sa25_max" align="center" hidden="true" width="50" class="i18n1" name="blastfinishsa25max">打砂后清洁度Sa2.5最大值</th>
+                   <th field="blast_finish_sa25_min" align="center" width="100" class="i18n1" name="blastfinishsa25min">打砂后清洁度Sa2.5最小值</th>
+                   <th field="surface_dust_rating_max" align="center" width="100" class="i18n1" name="surfacedustratingmax">灰尘度最大值</th>
+                   <th field="surface_dust_rating_min" align="center" width="120" class="i18n1" name="surfacedustratingmin">灰尘度最小值</th>
+                   <th field="od_profile_max" align="center" width="100"  class="i18n1" name="odprofilemax">外锚纹深度最大值</th>
+                   <th field="od_profile_min" align="center" width="100"  class="i18n1" name="odprofilemin">外锚纹深度最小值</th>
+                   <th field="pipe_temp_after_blast_max" width="100" align="center"  class="i18n1" name="pipetempafterblastmax">打砂后钢管温度最大值</th>
+                   <th field="pipe_temp_after_blast_min" width="100" align="center"  class="i18n1" name="pipetempafterblastmin">打砂后钢管温度最小值</th>
+                   <th field="salt_contamination_after_blasting_max" width="100" align="center"  class="i18n1" name="saltcontaminationafterblastingmax">打砂后盐度最大值 </th>
+                   <th field="salt_contamination_after_blasting_min" align="center" width="100" class="i18n1" name="saltcontaminationafterblastingmin">打砂后盐度最小值 </th>
+                   <th field="application_temp_max" align="center" width="120" class="i18n1" name="applicationtempmax">中频温度最大值</th>
+                   <th field="application_temp_min" align="center" width="100" class="i18n1" name="applicationtempmin">中频温度最小值</th>
+                   <th field="base_2fbe_coat_thickness_max" align="center" width="100" class="i18n1" name="base2fbecoatthicknessmax">底层2fbe最大厚度</th>
+                   <th field="base_2fbe_coat_thickness_min" align="center" width="100" class="i18n1" name="base2fbecoatthicknessmin">底层2fbe最小厚度</th>
 
-                       <th field="original_pipe_no" align="center" width="120" class="i18n1" name="originalpipeno">原内壁标签管号</th>
-                       <th field="new_pipe_no" align="center" width="120" class="i18n1" name="newpipeno">新内壁标签管号</th>
-                       <th field="pipe_no_update" align="center" width="100"  class="i18n1" name="pipenoupdate">完成标签更新</th>
-
-                       <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
-                       <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
-                       <th field="operation_time" align="center" width="150" class="i18n1" name="operationtime" data-options="formatter:formatterdate">操作时间</th>
+                   <th field="top_2fbe_coat_thickness_max" align="center" width="150" hidden="true" class="i18n1" name="top2fbecoatthicknessmax">顶层2fbe最大厚度</th>
+                   <th field="top_2fbe_coat_thickness_min" align="center" width="150" hidden="true" class="i18n1" name="top2fbecoatthicknessmin">顶层2fbe最小厚度</th>
+                   <th field="total_2fbe_coat_thickness_max" align="center" width="150" hidden="true" class="i18n1" name="total2fbecoatthicknessmax">2fbe总厚度最大值</th>
+                   <th field="total_2fbe_coat_thickness_min" align="center" width="150" hidden="true" class="i18n1" name="total2fbecoatthicknessmin">2fbe总厚度最小值</th>
+                   <th field="top_3lpe_coat_thickness_max" align="center" width="150" hidden="true" class="i18n1" name="top3lpecoatthicknessmax">3lpe顶层最大值</th>
+                   <th field="top_3lpe_coat_thickness_min" align="center" width="150" hidden="true" class="i18n1" name="top3lpecoatthicknessmin">3lpe顶层最小值</th>
+                   <th field="middle_3lpe_coat_thickness_max" align="center" width="150" hidden="true" class="i18n1" name="middle3lpecoatthicknessmax">3lpe中间层最大值</th>
+                   <th field="middle_3lpe_coat_thickness_min" align="center" width="150" hidden="true" class="i18n1" name="middle3lpecoatthicknessmin">3lpe中间层最小值</th>
+                   <th field="base_3lpe_coat_thickness_max" align="center" width="150" hidden="true" class="i18n1" name="base3lpecoatthicknessmax">3lpe底层最大值</th>
+                   <th field="base_3lpe_coat_thickness_min" align="center" width="150" hidden="true" class="i18n1" name="base3lpecoatthicknessmin">3lpe底层最小值</th>
+                   <th field="total_3lpe_coat_thickness_max" align="center" width="150" hidden="true" class="i18n1" name="total3lpecoatthicknessmax">3lpe总厚度最大值</th>
+                   <th field="total_3lpe_coat_thickness_min" align="center" width="150" hidden="true" class="i18n1" name="total3lpecoatthicknessmin">3lpe总厚度最小值</th>
+                   <th field="repair_max" align="center" width="150" hidden="true" class="i18n1" name="repairmax">允许修补量最大值</th>
+                   <th field="repair_min" align="center" width="150" hidden="true" class="i18n1" name="repairmin">允许修补量最小值</th>
+                   <th field="holiday_tester_voltage_max" align="center" width="150" hidden="true" class="i18n1" name="holidaytestervoltagemax">检漏仪电压最大值</th>
+                   <th field="holiday_tester_voltage_min" align="center" width="150" hidden="true" class="i18n1" name="holidaytestervoltagemin">检漏仪电压最小值</th>
+                   <th field="cutback_max" align="center" width="150" hidden="true" class="i18n1" name="cutbackmax">预留段最大值</th>
+                   <th field="cutback_min" align="center" width="150" hidden="true" class="i18n1" name="cutbackmin">预留段最小值</th>
                </tr>
              </thead>
          </table>
@@ -303,7 +316,7 @@
 </fieldset>
 
 <!--工具栏-->
-<div id="hlIdBlastProTb" style="padding:10px;">
+<div id="hlOdBlastProTb" style="padding:10px;">
     <span class="i18n1" name="pipeno">钢管编号</span>:
     <input id="pipeno" name="pipeno" style="line-height:22px;border:1px solid #ccc">
     <span class="i18n1" name="operatorno">操作工编号</span>:
@@ -312,17 +325,17 @@
     <input id="begintime" name="begintime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
     <span class="i18n1" name="endtime">结束时间</span>:
     <input id="endtime" name="endtime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
-    <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchIdBlastPro()">Search</a>
+    <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchOdBlastPro()">Search</a>
     <div style="float:right">
-     <a href="#" id="addObpLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addIdBlastPro()">添加</a>
-     <a href="#" id="editObpLinkBtn" class="easyui-linkbutton i18n1" name="edit" data-options="iconCls:'icon-edit',plain:true" onclick="editIdBlastPro()">修改</a>
-     <a href="#" id="deltObpLinkBtn" class="easyui-linkbutton i18n1" name="delete" data-options="iconCls:'icon-remove',plain:true" onclick="delIdBlastPro()">删除</a>
+     <a href="#" id="addObpLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addOdBlastPro()">添加</a>
+     <a href="#" id="editObpLinkBtn" class="easyui-linkbutton i18n1" name="edit" data-options="iconCls:'icon-edit',plain:true" onclick="editOdBlastPro()">修改</a>
+     <a href="#" id="deltObpLinkBtn" class="easyui-linkbutton i18n1" name="delete" data-options="iconCls:'icon-remove',plain:true" onclick="delOdBlastPro()">删除</a>
     </div>
 </div>
 
 <!--添加、修改框-->
-<div id="hlIdBlastProDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;height:auto;">
-   <form id="idBlastProForm" method="post">
+<div id="hlOdBlastProDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;height:auto;">
+   <form id="odBlastProForm" method="post">
        <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
            <legend>钢管信息</legend>
            <table class="ht-table" width="100%" border="0">
@@ -372,7 +385,7 @@
        <table class="ht-table">
            <tr>
                <td class="i18n1" name="id">流水号</td>
-               <td colspan="5"><label id="idbpid"></label></td>
+               <td colspan="5"><label class="hl-label" id="odbpid"></label></td>
 
            </tr>
            <tr>
@@ -385,7 +398,7 @@
                </td>
                <td class="i18n1" name="operationtime">操作时间</td>
                <td colspan="2">
-                   <input class="easyui-datetimebox" id="operation-time" type="text" name="idbptime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                   <input class="easyui-datetimebox" id="operation-time" type="text" name="odbptime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
 
                </td>
 
@@ -394,30 +407,62 @@
 
        <table class="ht-table">
            <tr>
-               <td class="i18n1" name="originalpipeno">原内壁标签管号</td>
-               <td colspan="2"><input class="easyui-textbox"  type="text" name="original_pipe_no" value=""/></td>
-               <td class="i18n1" name="newpipeno">新内壁标签管号</td>
-               <td colspan="2"><input class="easyui-textbox"   type="text" name="new_pipe_no" value=""/></td>
+               <td class="i18n1" name="alkalinedwelltime">碱洗时间</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="alkaline_dwell_time" value=""/></td>
+               <td>10~20</td>
+               <td class="i18n1" name="alkalineconcentration">碱浓度</td>
+               <td><input class="easyui-numberbox"  data-options="min:0,precision:2" type="text" name="alkaline_concentration" value=""/></td>
+               <td></td>
+           </tr>
+
+           <tr>
+               <td class="i18n1" name="acidwashtime">酸洗时间</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="acid_wash_time" value=""/></td>
+               <td></td>
+               <td class="i18n1" name="acidconcentration">酸浓度</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="acid_concentration" value=""/></td>
+               <td></td>
            </tr>
            <tr>
-               <td class="i18n1" name="pipenoupdate">完成标签更新</td>
-               <td colspan="2">
-                   <%--<input class="easyui-textbox"  type="text" name="pipe_no_update" value=""/>--%>
-                       <select id="ee" class="easyui-combobox" data-options="editable:false" name="pipe_no_update"   style="width:200px;">
-                           <option value="0">是</option>
-                           <option value="1">否</option>
-                       </select>
+               <td width="16%"  class="i18n1" name="surfacecondition">外观缺陷</td>
+               <td>
+
+                   <%--<input class="easyui-validatebox" type="text" name="surface_condition" value=""/>--%>
+                   <div id="combobox1" class="mini-combobox" style="width:185px;"  popupWidth="185" textField="text" valueField="text"
+                            url="../data/defect.txt" name="surface_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick" >
+                           <div property="columns">
+                               <div header="缺陷类型" field="text"></div>
+                           </div>
+                   </div>
+
                </td>
-               <td class="i18n1" name="remark">备注</td>
-               <td colspan="2">
-                   <input class="easyui-textbox"  data-options="multiline:true" type="text" name="remark" value=""/>
-               </td>
+               <td></td>
+               <td width="16%" class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="salt_contamination_before_blasting" value=""/></td>
+               <td><=25</td>
+           </tr>
+
+           <tr>
+               <td width="16%" class="i18n1" name="blastlinespeed">打砂传送速度</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="blast_line_speed" value=""/></td>
+               <td></td>
+               <td width="16%" class="i18n1" name="conductivity">传导性</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="conductivity" value=""/></td>
+               <td></td>
+           </tr>
+           <tr>
+               <td width="16%" class="i18n1" name="preheattemp">预热温度</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:1" type="text" name="preheat_temp" value=""/></td>
+               <td></td>
+               <td width="16%" class="i18n1" name="remark">备注</td>
+               <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
+               <td></td>
            </tr>
            <tr>
                <td width="16%" class="i18n1" name="result">结论</td>
-               <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result"   style="width:200px;">
+               <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
                    <option value="0">不合格,重新打砂处理</option>
-                   <option value="1">合格,进入内喷砂检验工序</option>
+                   <option value="1">合格,进入外喷砂检验工序</option>
                    <option value="2">待定</option>
                </select></td>
                <td></td>
@@ -446,8 +491,8 @@
 
 </div>
 <div id="dlg-buttons" align="center" style="width:900px;">
-    <a href="#" class="easyui-linkbutton" iconCls="icon-save" onclick="idBlastProFormSubmit()">Save</a>
-    <a href="#" class="easyui-linkbutton" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="idBlastProCancelSubmit()">Cancel</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-save" onclick="odBlastProFormSubmit()">Save</a>
+    <a href="#" class="easyui-linkbutton" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="odBlastProCancelSubmit()">Cancel</a>
 </div>
 <div id="gridPanel1" class="mini-panel" title="header" iconCls="icon-add" style="width:450px;height:250px;"
      showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0"
@@ -518,6 +563,7 @@
     var grid2=mini.get("datagrid2");
     var look1=mini.get('lookup1');
     var look2= mini.get("lookup2");
+    var combox1=mini.get("combobox1");
     grid1.load();
     grid2.load();
 
@@ -574,12 +620,24 @@
         $('.mini-popup').css('z-index','100000');
         $('.mini-panel').css('z-index','100000');
         $('#searchBar1').css('display','block');
+        //$('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
     });
     look2.on("showpopup",function(e){
         $('.mini-shadow').css('z-index','99999');
         $('.mini-popup').css('z-index','100000');
         $('.mini-panel').css('z-index','100000');
         $('#searchBar2').css('display','block');
+        //$('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
     });
+    combox1.on("showpopup",function () {
+        $('.mini-shadow').css('z-index','99999');
+        $('.mini-popup').css('z-index','100000');
+        $('.mini-panel').css('z-index','100000');
+    });
+    function onComboxCloseClick(e) {
+        var obj = e.sender;
+        obj.setText("");
+        obj.setValue("");
+    }
     hlLanguage("../i18n/");
 </script>

@@ -90,7 +90,7 @@
             $('#odCoatingInProForm').form('clear');
             $('#odcoatInproid').text('');
             clearMultiUpload(grid);
-            url="/OdCoatOperation/saveOdCoatingInProcess.action";
+            url="/OdCoatInOperation/saveOdCoatingInProcess.action";
         }
         function delOdCoatingInPro() {
             var row = $('#odCoatingInProDatagrids').datagrid('getSelections');
@@ -156,12 +156,12 @@
                 url:url,
                 onSubmit:function () {
                     //表单验证
-                    setParams($("input[name='coating_line_speed']"));
-                    setParams($("input[name='application_temp']"));
-                    setParams($("input[name='base_coat_gun_count']"));
-                    setParams($("input[name='top_coat_gun_count']"));
-                    setParams($("input[name='to_first_touch_duration']"));
-                    setParams($("input[name='to_quench_duration']"));
+                    // setParams($("input[name='coating_line_speed']"));
+                    // setParams($("input[name='application_temp']"));
+                    // setParams($("input[name='base_coat_gun_count']"));
+                    // setParams($("input[name='top_coat_gun_count']"));
+                    // setParams($("input[name='to_first_touch_duration']"));
+                    // setParams($("input[name='to_quench_duration']"));
                     if($("input[name='odcoatInprotime']").val()==""){
                         hlAlertFour("请输入操作时间");
                         return false;
@@ -369,7 +369,7 @@
                 <tr>
                     <td class="i18n1" name="id">流水号</td>
                     <%--<td colspan="5"><label class="hl-label" id="odcoatproid"></label></td>--%>
-                    <td colspan="5"><input id="odcoatproid" class="easyui-textbox" readonly="true" type="text" value="" name="odcoatproid"> </td>
+                    <td colspan="5"><input id="odcoatInproid" class="easyui-textbox" readonly="true" type="text" value="" name="odcoatInproid"> </td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="operatorno">操作工编号</td>
@@ -438,8 +438,8 @@
                 <tr>
                     <td width="16%" class="i18n1" name="result">结论</td>
                     <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
-                        <option value="0">不合格,进入待修补工序</option>
                         <option value="1">合格,进入外喷标工序</option>
+                        <option value="0">不合格,进入待修补工序</option>
                         <option value="2">不合格,进入待扒皮工序</option>
                         <option value="3">待定</option>
                     </select></td>

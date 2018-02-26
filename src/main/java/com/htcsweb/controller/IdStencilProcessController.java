@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.IdStencilProcessDao;
 import com.htcsweb.dao.PipeBasicInfoDao;
 import com.htcsweb.entity.IdStencilProcess;
+import com.htcsweb.entity.PipeBasicInfo;
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -90,20 +91,17 @@ public class IdStencilProcessController {
             }
             if(resTotal>0){
                 //更新管子的状态
-//                List<PipeBasicInfo> list=pipeBasicInfoDao.getPipeNumber(pipeno);
-//                if(list.size()>0){
-//                    PipeBasicInfo p=list.get(0);
-//                    if(p.getStatus().equals("od2")) {
-//                        //验证钢管状态为光管
-//                        if(odStencilProcess.getResult().equals("1")) {//当合格时才更新钢管状态
-//                            p.setStatus("od3");
-//                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
-//                        }else if(odStencilProcess.getResult().equals("0")){
-//                            p.setStatus("odstrip1");
-//                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
-//                        }
-//                    }
-//                }
+                List<PipeBasicInfo> list=pipeBasicInfoDao.getPipeNumber(pipeno);
+                if(list.size()>0){
+                    PipeBasicInfo p=list.get(0);
+                    if(p.getStatus().equals("id4")){
+                        //验证钢管状态为光管
+                        if(idStencilProcess.getResult().equals("1")) {//当合格时才更新钢管状态
+                            p.setStatus("id5");
+                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        }
+                    }
+                }
                json.put("success",true);
             }else{
                 json.put("success",false);

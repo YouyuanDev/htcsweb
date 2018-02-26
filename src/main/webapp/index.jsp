@@ -215,6 +215,33 @@
                     }
                 }
             });
+            //生产工艺
+            //账户管理
+            $("#hlprocess").tree({
+                onClick:function (node) {
+                    var tab=$('#hlTab').tabs('getTab',node.text);
+                    var nodeTxt=node.text;
+                    if(tab){
+                        $('#hlTab').tabs('select',node.text);
+                    }else{
+                        if("外防腐标准"==nodeTxt||"Person Management"==nodeTxt){
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='production/odstandard.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                            hlLanguage();
+                        }else if("内防腐标准"==nodeTxt||"Person Management"==nodeTxt){
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='production/idstandard.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                            hlLanguage();
+                        }
+                    }
+                }
+            });
         });
 
     </script>
@@ -276,6 +303,12 @@
             <ul id="hlaccount">
                 <li class="i18n1" name="personmanagement">账户管理</li>
 
+            </ul>
+        </div>
+        <div title="生产工艺" class="i18n" name="productionprocess" style="padding:10px;">
+            <ul id="hlprocess">
+                <li class="i18n1" name="odstandard">外防腐标准</li>
+                <li class="i18n1" name="idstandard">内防腐标准</li>
             </ul>
         </div>
     </div>

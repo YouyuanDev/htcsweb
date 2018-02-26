@@ -375,7 +375,6 @@
             </table>
 
             <table class="ht-table">
-
                 <tr>
                     <td class="i18n1" name="odinspectionresult">外涂层质检结果</td>
                     <td colspan="2">
@@ -388,7 +387,6 @@
                     </td>
                     <td class="i18n1" name="idinspectionresult">内涂层质检结果</td>
                     <td colspan="2">
-                        <%--<input class="easyui-textbox"  type="text" name="id_inspection_result" value=""/>--%>
                         <select id="bb" class="easyui-combobox" data-options="editable:false" name="id_inspection_result" style="width:200px;">
                             <option value="0">不合格</option>
                             <option value="1">合格</option>
@@ -397,23 +395,16 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="i18n1" name="finalinspectionresult">终检结果</td>
-                    <td colspan="5">
-                        <%--<input class="easyui-textbox"  type="text" name="final_inspection_result" value=""/>--%>
-                            <select id="cc" class="easyui-combobox" data-options="editable:false" name="final_inspection_result" style="width:200px;">
-                                <option value="0">不合格</option>
-                                <option value="1">合格</option>
-                                <option value="2">待定</option>
-                            </select>
-                    </td>
-                </tr>
-
-                <tr>
                     <td width="16%" class="i18n1" name="result">结论</td>
                     <td><select id="dd" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
-                        <option value="0">不合格</option>
-                        <option value="1">合格</option>
-                        <option value="2">待定</option>
+                        <option value="1">合格,进入内防成品入库工序</option>
+                        <option value="0">不合格,进入外防待修补工序</option>
+                        <option value="2">不合格,进入外防待扒皮工序</option>
+                        <option value="3">不合格,进入外喷标工序</option>
+                        <option value="4">不合格,进入内防待修补工序</option>
+                        <option value="5">不合格,进入内防待扒皮工序</option>
+                        <option value="6">不合格,进入内喷标工序</option>
+                        <option value="7">待定</option>
                     </select></td>
                     <td></td>
                     <td width="16%" class="i18n1" name="remark">备注</td>

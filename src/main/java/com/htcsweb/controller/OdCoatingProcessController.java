@@ -100,7 +100,7 @@ public class OdCoatingProcessController {
                             p.setStatus("od3");
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }else if(odCoatingProcess.getResult().equals("0")){
-                            p.setStatus("odstrip1");
+                            p.setStatus("odrepair1");
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }
                     }

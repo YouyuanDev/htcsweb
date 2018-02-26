@@ -100,6 +100,9 @@ public class OdCoatingInspectionProcessController {
                             p.setStatus("od4");
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }else if(odCoatingInspectionProcess.getResult().equals("0")){
+                            p.setStatus("odrepair1");
+                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        }else if(odCoatingInspectionProcess.getResult().equals("2")){
                             p.setStatus("odstrip1");
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }

@@ -1,5 +1,7 @@
 package com.htcsweb.entity;
 
+import java.util.Date;
+
 public class ODCoatingAcceptanceCriteria {
 
     private  int id; //流水号
@@ -68,10 +70,11 @@ public class ODCoatingAcceptanceCriteria {
     private float cutback_max;
     private float cutback_min;
 
+    private Date last_update_time;
     public ODCoatingAcceptanceCriteria() {
     }
 
-    public ODCoatingAcceptanceCriteria(int id, String coating_acceptance_criteria_no, float salt_contamination_before_blast_max, float salt_contamination_before_blast_min, float preheat_temp_max, float preheat_temp_min, float relative_humidity_max, float relative_humidity_min, float temp_above_dew_point_max, float temp_above_dew_point_min, float blast_finish_sa25_max, float blast_finish_sa25_min, int surface_dust_rating_max, int surface_dust_rating_min, float od_profile_max, float od_profile_min, float pipe_temp_after_blast_max, float pipe_temp_after_blast_min, float salt_contamination_after_blasting_max, float salt_contamination_after_blasting_min, float application_temp_max, float application_temp_min, float base_2fbe_coat_thickness_max, float base_2fbe_coat_thickness_min, float top_2fbe_coat_thickness_max, float top_2fbe_coat_thickness_min, float total_2fbe_coat_thickness_max, float total_2fbe_coat_thickness_min, float top_3lpe_coat_thickness_max, float top_3lpe_coat_thickness_min, float middle_3lpe_coat_thickness_max, float middle_3lpe_coat_thickness_min, float base_3lpe_coat_thickness_max, float base_3lpe_coat_thickness_min, float total_3lpe_coat_thickness_max, float total_3lpe_coat_thickness_min, int repair_max, int repair_min, float holiday_tester_voltage_max, float holiday_tester_voltage_min, float cutback_max, float cutback_min) {
+    public ODCoatingAcceptanceCriteria(int id, String coating_acceptance_criteria_no, float salt_contamination_before_blast_max, float salt_contamination_before_blast_min, float preheat_temp_max, float preheat_temp_min, float relative_humidity_max, float relative_humidity_min, float temp_above_dew_point_max, float temp_above_dew_point_min, float blast_finish_sa25_max, float blast_finish_sa25_min, int surface_dust_rating_max, int surface_dust_rating_min, float od_profile_max, float od_profile_min, float pipe_temp_after_blast_max, float pipe_temp_after_blast_min, float salt_contamination_after_blasting_max, float salt_contamination_after_blasting_min, float application_temp_max, float application_temp_min, float base_2fbe_coat_thickness_max, float base_2fbe_coat_thickness_min, float top_2fbe_coat_thickness_max, float top_2fbe_coat_thickness_min, float total_2fbe_coat_thickness_max, float total_2fbe_coat_thickness_min, float top_3lpe_coat_thickness_max, float top_3lpe_coat_thickness_min, float middle_3lpe_coat_thickness_max, float middle_3lpe_coat_thickness_min, float base_3lpe_coat_thickness_max, float base_3lpe_coat_thickness_min, float total_3lpe_coat_thickness_max, float total_3lpe_coat_thickness_min, int repair_max, int repair_min, float holiday_tester_voltage_max, float holiday_tester_voltage_min, float cutback_max, float cutback_min, Date last_update_time) {
         this.id = id;
         this.coating_acceptance_criteria_no = coating_acceptance_criteria_no;
         this.salt_contamination_before_blast_max = salt_contamination_before_blast_max;
@@ -114,6 +117,7 @@ public class ODCoatingAcceptanceCriteria {
         this.holiday_tester_voltage_min = holiday_tester_voltage_min;
         this.cutback_max = cutback_max;
         this.cutback_min = cutback_min;
+        this.last_update_time = last_update_time;
     }
 
     public int getId() {
@@ -450,5 +454,13 @@ public class ODCoatingAcceptanceCriteria {
 
     public void setCutback_min(float cutback_min) {
         this.cutback_min = cutback_min;
+    }
+
+    public Date getLast_update_time() {
+        return last_update_time;
+    }
+
+    public void setLast_update_time(Date last_update_time) {
+        this.last_update_time = last_update_time;
     }
 }

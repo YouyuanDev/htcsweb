@@ -1,5 +1,7 @@
 package com.htcsweb.entity;
 
+import java.util.Date;
+
 public class IDCoatingAcceptanceCriteria {
 
     private  int id; //流水号
@@ -26,10 +28,11 @@ public class IDCoatingAcceptanceCriteria {
     private float residual_magnetism_max;
     private float residual_magnetism_min;
 
+    private Date last_update_time;
     public IDCoatingAcceptanceCriteria() {
     }
 
-    public IDCoatingAcceptanceCriteria(int id, String coating_acceptance_criteria_no, float temp_above_dew_point_max, float temp_above_dew_point_min, float blast_finish_sa25_max, float blast_finish_sa25_min, float relative_humidity_max, float relative_humidity_min, float id_profile_max, float id_profile_min, float dry_film_thickness_max, float dry_film_thickness_min, float cutback_max, float cutback_min, float residual_magnetism_max, float residual_magnetism_min) {
+    public IDCoatingAcceptanceCriteria(int id, String coating_acceptance_criteria_no, float temp_above_dew_point_max, float temp_above_dew_point_min, float blast_finish_sa25_max, float blast_finish_sa25_min, float relative_humidity_max, float relative_humidity_min, float id_profile_max, float id_profile_min, float dry_film_thickness_max, float dry_film_thickness_min, float cutback_max, float cutback_min, float residual_magnetism_max, float residual_magnetism_min, Date last_update_time) {
         this.id = id;
         this.coating_acceptance_criteria_no = coating_acceptance_criteria_no;
         this.temp_above_dew_point_max = temp_above_dew_point_max;
@@ -46,8 +49,8 @@ public class IDCoatingAcceptanceCriteria {
         this.cutback_min = cutback_min;
         this.residual_magnetism_max = residual_magnetism_max;
         this.residual_magnetism_min = residual_magnetism_min;
+        this.last_update_time = last_update_time;
     }
-
 
     public int getId() {
         return id;
@@ -175,5 +178,13 @@ public class IDCoatingAcceptanceCriteria {
 
     public void setResidual_magnetism_min(float residual_magnetism_min) {
         this.residual_magnetism_min = residual_magnetism_min;
+    }
+
+    public Date getLast_update_time() {
+        return last_update_time;
+    }
+
+    public void setLast_update_time(Date last_update_time) {
+        this.last_update_time = last_update_time;
     }
 }

@@ -97,23 +97,21 @@ public class IdBlastInspectionProcessController {
             }
             if(resTotal>0){
                 //更新管子的状态
-//                List<PipeBasicInfo> list=pipeBasicInfoDao.getPipeNumber(pipeno);
-//                if(list.size()>0){
-//                    PipeBasicInfo p=list.get(0);
-//                    if(p.getStatus().equals("od1")) {
-//                        //验证钢管状态为光管
-//                        if(idBlastInspectionProcess.getResult().equals("1")) {//当打砂检验合格时才更新钢管状态
-//                            p.setStatus("od2");
-//                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
-//                        }
-//                        else if(idBlastInspectionProcess.getResult().equals("0")){//打砂检验不合格，改变状态为bare1，重新打砂处理
-//                            p.setStatus("bare1");
-//                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
-//
-//                        }
-//                    }
-//
-//                }
+                List<PipeBasicInfo> list=pipeBasicInfoDao.getPipeNumber(pipeno);
+                if(list.size()>0){
+                    PipeBasicInfo p=list.get(0);
+                    if(p.getStatus().equals("id1")) {
+                        //验证钢管状态为内打砂完成
+                        if(idBlastInspectionProcess.getResult().equals("1")) {//当打砂检验合格时才更新钢管状态
+                            p.setStatus("id2");
+                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        }else if(idBlastInspectionProcess.getResult().equals("0")) {
+                            p.setStatus("bare2");
+                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        }
+                    }
+
+                }
                 json.put("success",true);
             }else{
                 json.put("success",false);

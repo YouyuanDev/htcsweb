@@ -101,12 +101,6 @@ public class OdStencilProcessController {
                         if(odStencilProcess.getResult().equals("1")) {//当合格时才更新钢管状态
                             p.setStatus("od5");
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
-                        }else if(odStencilProcess.getResult().equals("0")){
-                            p.setStatus("odrepair1");
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
-                        }else if(odStencilProcess.getResult().equals("2")){
-                            p.setStatus("odstrip1");
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }
                     }
                 }

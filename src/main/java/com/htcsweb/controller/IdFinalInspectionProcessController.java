@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.IdFinalInspectionProcessDao;
 import com.htcsweb.dao.PipeBasicInfoDao;
 import com.htcsweb.entity.IdFinalInspectionProcess;
+import com.htcsweb.entity.PipeBasicInfo;
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -91,20 +92,36 @@ public class IdFinalInspectionProcessController {
             }
             if(resTotal>0){
                 //更新管子的状态
-//                List<PipeBasicInfo> list=pipeBasicInfoDao.getPipeNumber(pipeno);
-//                if(list.size()>0){
-//                    PipeBasicInfo p=list.get(0);
-//                    if(p.getStatus().equals("od2")) {
-//                        //验证钢管状态为光管
-//                        if(odStencilProcess.getResult().equals("1")) {//当合格时才更新钢管状态
-//                            p.setStatus("od3");
-//                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
-//                        }else if(odStencilProcess.getResult().equals("0")){
-//                            p.setStatus("odstrip1");
-//                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
-//                        }
-//                    }
-//                }
+                List<PipeBasicInfo> list=pipeBasicInfoDao.getPipeNumber(pipeno);
+                if(list.size()>0){
+                    PipeBasicInfo p=list.get(0);
+                    //验证钢管状态是否为内喷标完成或者外防入库
+                    if(p.getStatus().equals("id5")||p.getStatus().equals("odstockin")){
+                        //如果为合格
+                        if(idFinalInspectionProcess.getResult().equals("1")) {
+                            p.setStatus("id6");
+                            int statusRes=pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        }else if(idFinalInspectionProcess.getResult().equals("0")){
+                            p.setStatus("odrepair1");
+                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        }else if(idFinalInspectionProcess.getResult().equals("2")){
+                            p.setStatus("odstrip1");
+                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        }else if(idFinalInspectionProcess.getResult().equals("3")){
+                            p.setStatus("od4");
+                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        }else if(idFinalInspectionProcess.getResult().equals("4")){
+                            p.setStatus("idrepair1");
+                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        }else if(idFinalInspectionProcess.getResult().equals("5")){
+                            p.setStatus("idstrip1");
+                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        }else if(idFinalInspectionProcess.getResult().equals("6")){
+                            p.setStatus("id4");
+                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        }
+                    }
+                }
                json.put("success",true);
             }else{
                 json.put("success",false);

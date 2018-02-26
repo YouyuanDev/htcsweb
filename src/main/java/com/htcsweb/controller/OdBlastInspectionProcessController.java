@@ -95,7 +95,6 @@ public class OdBlastInspectionProcessController {
                 resTotal=odBlastInspectionProcessDao.addOdBlastInProcess(odblastinspectionprocess);
             }else{
                 //修改！
-                System.out.print("操作工编号是:"+odblastinspectionprocess.getOperator_no());
                 resTotal=odBlastInspectionProcessDao.updateOdBlastInProcess(odblastinspectionprocess);
             }
             if(resTotal>0){
