@@ -65,7 +65,7 @@ public class PipeBasicInfoController {
     //模糊查询Pipe信息列表
     @RequestMapping(value = "/getPipeInfoByLike")
     @ResponseBody
-    public String getPipeInfoByLike(@RequestParam(value = "project_no",required = false)String project_no, @RequestParam(value = "contract_no",required = false)String contract_no,@RequestParam(value = "pipe_no",required = false)String pipe_no, HttpServletRequest request){
+    public String getPipeInfoByLike(@RequestParam(value = "project_no",required = false)String project_no, @RequestParam(value = "contract_no",required = false)String contract_no,@RequestParam(value = "pipe_no",required = false)String pipe_no, @RequestParam(value = "status",required = false)String status,HttpServletRequest request){
         String page= request.getParameter("page");
         String rows= request.getParameter("rows");
         if(page==null){
@@ -76,8 +76,8 @@ public class PipeBasicInfoController {
         }
 
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
-        List<HashMap<String,Object>>list=pipeBasicInfoDao.getAllByLike(project_no,contract_no,pipe_no,start,Integer.parseInt(rows));
-        int count=pipeBasicInfoDao.getCountAllByLike(project_no,contract_no,pipe_no);
+        List<HashMap<String,Object>>list=pipeBasicInfoDao.getAllByLike(project_no,contract_no,pipe_no,status,start,Integer.parseInt(rows));
+        int count=pipeBasicInfoDao.getCountAllByLike(project_no,contract_no,pipe_no,status);
 
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);

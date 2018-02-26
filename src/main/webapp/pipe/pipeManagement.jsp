@@ -34,7 +34,8 @@
             $('#pipeDatagrids').datagrid('load',{
                 'project_no': $('#projectno').val(),
                 'contract_no': $('#contractno').val(),
-                'pipe_no':$('#pipeno').val()
+                'pipe_no':$('#pipeno').val(),
+                'status':$('#status').val()
             });
         }
         $(function () {
@@ -257,7 +258,13 @@
     <input id="contractno" name="contractno" style="width:100px;line-height:22px;border:1px solid #ccc">
     <span class="i18n1" name="projectno">项目编号</span>:
     <input id="projectno" name="projectno"  style="width:100px;line-height:22px;border:1px solid #ccc">
-
+    <input id="status" class="easyui-combobox" type="text" name="status"  data-options=
+            "url:'/pipeinfo/getAllPipeStatus.action',
+					        method:'get',
+					        valueField:'id',
+					        width: 200,
+					        textField:'text',
+					        panelHeight:'auto'"/>
 
     <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchPipe()">Search</a>
     <div style="float:right">

@@ -101,7 +101,9 @@
             <if test="pipe_no!=null and pipe_no!=''">
                 AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
             </if>
-
+            <if test="status!=null and status!=''">
+                AND p.status = #{status}
+            </if>
         </where>
     </select>
 
@@ -161,7 +163,9 @@
             <if test="pipe_no!=null and pipe_no!=''">
                 AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
             </if>
-
+            <if test="status!=null and status!=''">
+                AND p.status = #{status}
+            </if>
         </where>
         ORDER BY id DESC
         limit #{skip},#{take}
