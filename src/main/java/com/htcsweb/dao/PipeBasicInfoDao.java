@@ -16,7 +16,12 @@ public interface PipeBasicInfoDao {
     public int updatePipeBasicInfo(PipeBasicInfo pipeBasicInfo);
     public int addPipeBasicInfo(PipeBasicInfo pipeBasicInfo);
     public int delPipeBasicInfo(String[]arrId);
+    public List<HashMap<String,Object>> getODInspectedPipeInfoByLike(@Param("project_no") String project_no,  @Param("contract_no")String contract_no,@Param("pipe_no")String pipe_no, @Param("skip")int skip, @Param("take")int take);
+    public List<HashMap<String,Object>> getIDInspectedPipeInfoByLike(@Param("project_no") String project_no,  @Param("contract_no")String contract_no,@Param("pipe_no")String pipe_no, @Param("skip")int skip, @Param("take")int take);
 
+
+    public int odProductStockin(String[]arrId);
+    public int idProductStockin(String[]arrId);
 
 
 

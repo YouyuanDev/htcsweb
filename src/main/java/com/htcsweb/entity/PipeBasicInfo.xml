@@ -45,11 +45,11 @@
         left join  project_info pr on co.project_no=pr.project_no
         <where>
             <if test="project_no!=null and project_no!=''">
-                co.project_no LIKE CONCAT('%',#{project_no},'%')
+                AND co.project_no LIKE CONCAT('%',#{project_no},'%')
             </if>
 
             <if test="contract_no!=null and contract_no!=''">
-                p.contract_no LIKE CONCAT('%',#{contract_no},'%')
+                AND p.contract_no LIKE CONCAT('%',#{contract_no},'%')
             </if>
             <if test="pipe_no!=null and pipe_no!=''">
                 AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
@@ -59,6 +59,52 @@
         ORDER BY id DESC
         limit #{skip},#{take}
     </select>
+
+
+
+    <select id="getODInspectedPipeInfoByLike" resultType="map">
+        select co.project_no,co.external_coating,co.internal_coating, project_name, p.* from pipe_basic_info p
+        left join contract_info co on p.contract_no=co.contract_no
+        left join  project_info pr on co.project_no=pr.project_no
+        <where>
+            <if test="project_no!=null and project_no!=''">
+                AND co.project_no LIKE CONCAT('%',#{project_no},'%')
+            </if>
+
+            <if test="contract_no!=null and contract_no!=''">
+                AND p.contract_no LIKE CONCAT('%',#{contract_no},'%')
+            </if>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+               AND p.status = 'od6'
+        </where>
+        ORDER BY id DESC
+        limit #{skip},#{take}
+    </select>
+
+
+    <select id="getIDInspectedPipeInfoByLike" resultType="map">
+        select co.project_no,co.external_coating,co.internal_coating, project_name, p.* from pipe_basic_info p
+        left join contract_info co on p.contract_no=co.contract_no
+        left join  project_info pr on co.project_no=pr.project_no
+        <where>
+            <if test="project_no!=null and project_no!=''">
+                AND co.project_no LIKE CONCAT('%',#{project_no},'%')
+            </if>
+
+            <if test="contract_no!=null and contract_no!=''">
+                AND p.contract_no LIKE CONCAT('%',#{contract_no},'%')
+            </if>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+            AND p.status = 'id7'
+        </where>
+        ORDER BY id DESC
+        limit #{skip},#{take}
+    </select>
+
     <select id="getPipeInfoByNo" resultType="map">
         Select pro.project_name,s.status_name,p.contract_no,p.grade,p.od,p.wt,p.p_length,p.weight,p.heat_no from pipe_basic_info p
         LEFT join contract_info c on p.contract_no=c.contract_no
@@ -82,5 +128,19 @@
             #{item}
         </foreach>
     </delete>
+
+    <update id="odProductStockin" parameterType="com.htcsweb.entity.PipeBasicInfo">
+        UPDATE pipe_basic_info set status='odstockin' WHERE  status='od6' AND
+        <foreach collection="array" item="item" open="id in (" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <update id="idProductStockin" parameterType="com.htcsweb.entity.PipeBasicInfo">
+        UPDATE pipe_basic_info set status='idstockin' WHERE  status='id7' AND
+        <foreach collection="array" item="item" open="id in (" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
 
 </mapper>
