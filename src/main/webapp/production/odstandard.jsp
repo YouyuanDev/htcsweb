@@ -333,14 +333,15 @@
            <legend>接收标准信息</legend>
            <table class="ht-table" width="100%" border="0">
                <tr>
-                   <td class="i18n1" name="projectname" width="16%">项目名称</td>
-                   <td colspan="2" width="33%"><label class="hl-label" id="project_name"></label></td>
-
-                   <td class="i18n1" name="contractno" width="16%">合同编号</td>
-                   <td colspan="2" width="33%"><label class="hl-label" id="contract_no"></label></td>
-
+                   <td class="i18n1" name="pipeendcolor">管端色环</td>
+                   <td colspan="5"><input class="easyui-textbox"  type="text" name="coating_acceptance_criteria_no" value=""/></td>
                </tr>
-
+               <tr>
+                   <td class="i18n1" name="pipeendcolor">管端色环</td>
+                   <td colspan="5"><input class="easyui-textbox"  type="text" name="coating_acceptance_criteria_no" value=""/></td>
+                   <td class="i18n1" name="pipeendcolor">管端色环</td>
+                   <td colspan="5"><input class="easyui-textbox"  type="text" name="coating_acceptance_criteria_no" value=""/></td>
+               </tr>
            </table>
        </fieldset>
    </form>
