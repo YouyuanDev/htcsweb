@@ -33,4 +33,9 @@
         ORDER BY id DESC
         limit #{skip},#{take}
     </select>
+
+    <select id="getAllODAcceptanceCriteria" resultType="com.htcsweb.entity.ODCoatingAcceptanceCriteria">
+        SELECT  *  from od_coating_acceptance_criteria
+        ORDER BY id DESC
+    </select>
 </mapper>

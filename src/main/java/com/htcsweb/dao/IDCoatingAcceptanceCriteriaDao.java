@@ -9,6 +9,7 @@ import java.util.List;
 
 
 public interface IDCoatingAcceptanceCriteriaDao {
+    public List<IDCoatingAcceptanceCriteria> getAllIDAcceptanceCriteria();
     public int addIdCoatingCriterProcess(IDCoatingAcceptanceCriteria idCoatingAcceptanceCriteria);
     public int delIdCoatingCriterProcess(String[] arrId);
     public int updateIdCoatingCriterProcess(IDCoatingAcceptanceCriteria idCoatingAcceptanceCriteria);

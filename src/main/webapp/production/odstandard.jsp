@@ -261,7 +261,7 @@
 <fieldset class="b3" style="padding:10px;margin:10px;">
     <legend> <h3><b style="color: orange" >|&nbsp;</b><span class="i18n1" name="datadisplay">数据展示</span></h3></legend>
     <div  style="margin-top:5px;">
-         <table class="easyui-datagrid" id="odBlastProDatagrids" url="/OdOperation/getOdBlastByLike.action" striped="true" loadMsg="正在加载中。。。" textField="text" pageSize="20" fitColumns="true" pagination="true" toolbar="#hlOdBlastProTb">
+         <table class="easyui-datagrid" id="odAcceptanceDatagrids" url="/AcceptanceCriteriaOperation/getAllODAcceptanceCriteria.action" striped="true" loadMsg="正在加载中。。。" textField="text" pageSize="20" fitColumns="true" pagination="true" toolbar="#hlOdAcceptanceTb">
              <thead>
                <tr>
                    <th data-options="field:'ck',checkbox:true"></th>
@@ -311,180 +311,37 @@
                </tr>
              </thead>
          </table>
-
     </div>
 </fieldset>
 
 <!--工具栏-->
-<div id="hlOdBlastProTb" style="padding:10px;">
-    <span class="i18n1" name="pipeno">钢管编号</span>:
+<div id="hlOdAcceptanceTb" style="padding:10px;">
+    <span class="i18n1" name="coatingacceptancecriteriano">涂层判定标准编号</span>:
     <input id="pipeno" name="pipeno" style="line-height:22px;border:1px solid #ccc">
-    <span class="i18n1" name="operatorno">操作工编号</span>:
-    <input id="operatorno" name="operatorno" style="line-height:22px;border:1px solid #ccc">
-    <span class="i18n1" name="begintime">开始时间</span>:
-    <input id="begintime" name="begintime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
-    <span class="i18n1" name="endtime">结束时间</span>:
-    <input id="endtime" name="endtime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
-    <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchOdBlastPro()">Search</a>
+    <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchOdAcceptance()">Search</a>
     <div style="float:right">
-     <a href="#" id="addObpLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addOdBlastPro()">添加</a>
-     <a href="#" id="editObpLinkBtn" class="easyui-linkbutton i18n1" name="edit" data-options="iconCls:'icon-edit',plain:true" onclick="editOdBlastPro()">修改</a>
-     <a href="#" id="deltObpLinkBtn" class="easyui-linkbutton i18n1" name="delete" data-options="iconCls:'icon-remove',plain:true" onclick="delOdBlastPro()">删除</a>
+     <a href="#" id="addObpLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addOdAcceptance()">添加</a>
+     <a href="#" id="editObpLinkBtn" class="easyui-linkbutton i18n1" name="edit" data-options="iconCls:'icon-edit',plain:true" onclick="editOdAcceptance()">修改</a>
+     <a href="#" id="deltObpLinkBtn" class="easyui-linkbutton i18n1" name="delete" data-options="iconCls:'icon-remove',plain:true" onclick="delOdAcceptance()">删除</a>
     </div>
 </div>
 
 <!--添加、修改框-->
-<div id="hlOdBlastProDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;height:auto;">
+<div id="hlOdAcceptanceDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;height:auto;">
    <form id="odBlastProForm" method="post">
        <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
-           <legend>钢管信息</legend>
+           <legend>接收标准信息</legend>
            <table class="ht-table" width="100%" border="0">
                <tr>
                    <td class="i18n1" name="projectname" width="16%">项目名称</td>
                    <td colspan="2" width="33%"><label class="hl-label" id="project_name"></label></td>
 
                    <td class="i18n1" name="contractno" width="16%">合同编号</td>
-                   <td colspan="7" width="33%"><label class="hl-label" id="contract_no"></label></td>
+                   <td colspan="2" width="33%"><label class="hl-label" id="contract_no"></label></td>
 
                </tr>
 
-               <tr>
-                   <td class="i18n1" name="pipeno" width="16%">钢管编号</td>
-                   <td colspan="2" width="33%">
-                       <input id="lookup1" name="pipe_no" class="mini-lookup" style="text-align:center;width:180px;"
-                              textField="pipe_no" valueField="id" popupWidth="auto"
-                              popup="#gridPanel1" grid="#datagrid1" multiSelect="false"/>
-                   </td>
-                   <td class="i18n1" name="statusname" width="16%">状态</td>
-                   <td colspan="7" width="33%"><label class="hl-label" id="status_name"></label></td>
-               </tr>
            </table>
-
-           <table width="100%" border="0" align="center">
-               <tr>
-                   <td align="center" class="i18n1" name="grade">钢种</td>
-                   <td align="center"><label class="hl-label" id="grade"></label></td>
-                   <td align="center" class="i18n1" name="od">外径</td>
-                   <td align="center"><label class="hl-label" id="od"></label></td>
-                   <td align="center" class="i18n1" name="wt">壁厚</td>
-                   <td align="center"><label class="hl-label" id="wt"></label></td>
-                   <td align="center" class="i18n1" name="p_length">长度</td>
-                   <td align="center"><label class="hl-label" id="p_length"></label></td>
-                   <td align="center" class="i18n1" name="weight">重量</td>
-                   <td align="center"><label class="hl-label" id="weight"></label></td>
-                   <td align="center" class="i18n1" name="heatno">炉号</td>
-                   <td align="center"><label class="hl-label" id="heat_no"></label></td>
-               </tr>
-           </table>
-       </fieldset>
-
-
-       <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
-           <legend>外喷砂生产信息</legend>
-
-       <table class="ht-table">
-           <tr>
-               <td class="i18n1" name="id">流水号</td>
-               <td colspan="5"><label class="hl-label" id="odbpid"></label></td>
-
-           </tr>
-           <tr>
-               <td class="i18n1" name="operatorno">操作工编号</td>
-               <td colspan="2" >
-                   <input id="lookup2" name="operator_no" class="mini-lookup" style="text-align:center;width:180px;"
-                          textField="employee_no" valueField="id" popupWidth="auto"
-                          popup="#gridPanel2" grid="#datagrid2" multiSelect="false"
-                   />
-               </td>
-               <td class="i18n1" name="operationtime">操作时间</td>
-               <td colspan="2">
-                   <input class="easyui-datetimebox" id="operation-time" type="text" name="odbptime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
-
-               </td>
-
-           </tr>
-       </table>
-
-       <table class="ht-table">
-           <tr>
-               <td class="i18n1" name="alkalinedwelltime">碱洗时间</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="alkaline_dwell_time" value=""/></td>
-               <td>10~20</td>
-               <td class="i18n1" name="alkalineconcentration">碱浓度</td>
-               <td><input class="easyui-numberbox"  data-options="min:0,precision:2" type="text" name="alkaline_concentration" value=""/></td>
-               <td></td>
-           </tr>
-
-           <tr>
-               <td class="i18n1" name="acidwashtime">酸洗时间</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="acid_wash_time" value=""/></td>
-               <td></td>
-               <td class="i18n1" name="acidconcentration">酸浓度</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="acid_concentration" value=""/></td>
-               <td></td>
-           </tr>
-           <tr>
-               <td width="16%"  class="i18n1" name="surfacecondition">外观缺陷</td>
-               <td>
-
-                   <%--<input class="easyui-validatebox" type="text" name="surface_condition" value=""/>--%>
-                   <div id="combobox1" class="mini-combobox" style="width:185px;"  popupWidth="185" textField="text" valueField="text"
-                            url="../data/defect.txt" name="surface_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick" >
-                           <div property="columns">
-                               <div header="缺陷类型" field="text"></div>
-                           </div>
-                   </div>
-
-               </td>
-               <td></td>
-               <td width="16%" class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="salt_contamination_before_blasting" value=""/></td>
-               <td><=25</td>
-           </tr>
-
-           <tr>
-               <td width="16%" class="i18n1" name="blastlinespeed">打砂传送速度</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="blast_line_speed" value=""/></td>
-               <td></td>
-               <td width="16%" class="i18n1" name="conductivity">传导性</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="conductivity" value=""/></td>
-               <td></td>
-           </tr>
-           <tr>
-               <td width="16%" class="i18n1" name="preheattemp">预热温度</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:1" type="text" name="preheat_temp" value=""/></td>
-               <td></td>
-               <td width="16%" class="i18n1" name="remark">备注</td>
-               <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
-               <td></td>
-           </tr>
-           <tr>
-               <td width="16%" class="i18n1" name="result">结论</td>
-               <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
-                   <option value="0">不合格,重新打砂处理</option>
-                   <option value="1">合格,进入外喷砂检验工序</option>
-                   <option value="2">待定</option>
-               </select></td>
-               <td></td>
-               <td ></td>
-               <td></td>
-               <td></td>
-           </tr>
-
-
-
-
-
-       </table>
-       <input type="hidden" id="fileslist" name="upload_files" value=""/>
-           <div id="hl-gallery-con" style="width:100%;">
-
-           </div>
-           <div id="multiupload1" class="uc-multiupload" style="width:100%; max-height:200px"
-                flashurl="../miniui/fileupload/swfupload/swfupload.swf"
-                uploadurl="../UploadFile/uploadPicture.action" _autoUpload="false" _limittype="*.jpg;*.png;*.jpeg;*.bmp"
-                onuploaderror="onUploadError" onuploadsuccess="onUploadSuccess">
-           </div>
        </fieldset>
    </form>
 

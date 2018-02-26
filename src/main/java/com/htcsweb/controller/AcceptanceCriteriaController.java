@@ -29,10 +29,25 @@ public class AcceptanceCriteriaController {
     @Autowired
     private IDCoatingAcceptanceCriteriaDao idcoatingacceptancecriteriaDao;
 
-    //查找外防腐标准
     @RequestMapping("/getAllODAcceptanceCriteria")
     @ResponseBody
     public String getAllODAcceptanceCriteria(@RequestParam(value = "coating_acceptance_criteria_no",required = false)String coating_acceptance_criteria_no,HttpServletRequest request){
+        List<ODCoatingAcceptanceCriteria>list=odcoatingacceptancecriteriaDao.getAllODAcceptanceCriteria();
+        List<ComboxItem> colist=new ArrayList<ComboxItem>();
+        for(int i=0;i<list.size();i++){
+            ComboxItem citem= new ComboxItem();
+            ODCoatingAcceptanceCriteria ps=((ODCoatingAcceptanceCriteria)list.get(i));
+            citem.id=ps.getCoating_acceptance_criteria_no();
+            citem.text=ps.getCoating_acceptance_criteria_no();
+            colist.add(citem);
+        }
+        String map= JSONObject.toJSONString(colist);
+        return map;
+    }
+    //查找外防腐标准
+    @RequestMapping("/getAllODAcceptanceCriteria")
+    @ResponseBody
+    public String getAllODAcceptanceCriteriaByLike(@RequestParam(value = "coating_acceptance_criteria_no",required = false)String coating_acceptance_criteria_no,HttpServletRequest request){
         String page= request.getParameter("page");
         String rows= request.getParameter("rows");
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
@@ -87,21 +102,25 @@ public class AcceptanceCriteriaController {
     }
 
 
-    //查找内防腐标准
     @RequestMapping("/getAllIDAcceptanceCriteria")
     @ResponseBody
     public String getAllIDAcceptanceCriteria(@RequestParam(value = "coating_acceptance_criteria_no",required = false)String coating_acceptance_criteria_no,HttpServletRequest request){
-//        List<IDCoatingAcceptanceCriteria>list=idcoatingacceptancecriteriaDao.getAllIDAcceptanceCriteria();
-//        List<ComboxItem> colist=new ArrayList<ComboxItem>();
-//        for(int i=0;i<list.size();i++){
-//              ComboxItem citem= new ComboxItem();
-//            IDCoatingAcceptanceCriteria ps=((IDCoatingAcceptanceCriteria)list.get(i));
-//            citem.id=ps.getCoating_acceptance_criteria_no();
-//            citem.text=ps.getCoating_acceptance_criteria_no();
-//            colist.add(citem);
-//        }
-//        String map= JSONObject.toJSONString(colist);
-//        return map;
+        List<IDCoatingAcceptanceCriteria>list=idcoatingacceptancecriteriaDao.getAllIDAcceptanceCriteria();
+        List<ComboxItem> colist=new ArrayList<ComboxItem>();
+        for(int i=0;i<list.size();i++){
+              ComboxItem citem= new ComboxItem();
+            IDCoatingAcceptanceCriteria ps=((IDCoatingAcceptanceCriteria)list.get(i));
+            citem.id=ps.getCoating_acceptance_criteria_no();
+            citem.text=ps.getCoating_acceptance_criteria_no();
+            colist.add(citem);
+        }
+        String map= JSONObject.toJSONString(colist);
+        return map;
+    }
+    //查找内防腐标准
+    @RequestMapping("/getAllIDAcceptanceCriteria")
+    @ResponseBody
+    public String getAllIDAcceptanceCriteriaByLike(@RequestParam(value = "coating_acceptance_criteria_no",required = false)String coating_acceptance_criteria_no,HttpServletRequest request){
         String page= request.getParameter("page");
         String rows= request.getParameter("rows");
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);

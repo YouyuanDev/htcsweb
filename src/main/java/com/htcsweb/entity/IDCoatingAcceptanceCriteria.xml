@@ -6,7 +6,7 @@
 <mapper namespace="com.htcsweb.dao.IDCoatingAcceptanceCriteriaDao">
 
     <insert id="addIdCoatingCriterProcess" parameterType="com.htcsweb.entity.IDCoatingAcceptanceCriteria">
-      INSERT INTO id_coating_acceptance_criteria(coating_acceptance_criteria_no,temp_above_dew_point_max,temp_above_dew_point_min,blast_finish_sa25_max,blast_finish_sa25_min,relative_humidity_max,relative_humidity_min,id_profile_max,id_profile_min,dry_film_thickness_max,dry_film_thickness_min,cutback_max,cutback_min,residual_magnetism_max,residual_magnetism_min,last_update_time) VALUES (#{coating_acceptance_criteria_no},#{temp_above_dew_point_max},#{temp_above_dew_point_min},#{blast_finish_sa25_max},#{blast_finish_sa25_min},#{relative_humidity_max},#{relative_humidity_min},#{id_profile_max},#{id_profile_min},#{dry_film_thickness_max},#{dry_film_thickness_min},#{cutback_max},#{cutback_min},#{residual_magnetism_max},#{residual_magnetism_min},#{last_update_time})
+        INSERT INTO id_coating_acceptance_criteria(coating_acceptance_criteria_no,temp_above_dew_point_max,temp_above_dew_point_min,blast_finish_sa25_max,blast_finish_sa25_min,relative_humidity_max,relative_humidity_min,id_profile_max,id_profile_min,dry_film_thickness_max,dry_film_thickness_min,cutback_max,cutback_min,residual_magnetism_max,residual_magnetism_min,last_update_time) VALUES (#{coating_acceptance_criteria_no},#{temp_above_dew_point_max},#{temp_above_dew_point_min},#{blast_finish_sa25_max},#{blast_finish_sa25_min},#{relative_humidity_max},#{relative_humidity_min},#{id_profile_max},#{id_profile_min},#{dry_film_thickness_max},#{dry_film_thickness_min},#{cutback_max},#{cutback_min},#{residual_magnetism_max},#{residual_magnetism_min},#{last_update_time})
     </insert>
     <delete id="delIdCoatingCriterProcess">
         delete from id_coating_acceptance_criteria WHERE
@@ -32,6 +32,11 @@
         </where>
         ORDER BY id DESC
         limit #{skip},#{take}
+    </select>
+
+    <select id="getAllIDAcceptanceCriteria" resultType="com.htcsweb.entity.IDCoatingAcceptanceCriteria">
+        SELECT  *  from id_coating_acceptance_criteria
+        ORDER BY id DESC
     </select>
 
 </mapper>
