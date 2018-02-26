@@ -2,15 +2,16 @@
   Created by IntelliJ IDEA.
   User: kurt
   Date: 2/26/18
-  Time: 9:36 PM
+  Time: 10:51 PM
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>光管调拨</title>
+    <title>涂层成品出厂</title>
     <link rel="stylesheet" type="text/css" href="../easyui/themes/bootstrap/easyui.css">
     <link rel="stylesheet" type="text/css" href="../easyui/themes/icon.css">
     <link href="../miniui/multiupload/multiupload.css" rel="stylesheet" type="text/css" />
@@ -48,7 +49,7 @@
 
 
 
-        function ODBarePipeTOIDBare() {
+        function CoatedPipeStockOut() {
             var row = $('#pipeDatagrids').datagrid('getSelections');
             if(row.length>0){
                 var idArr=[];
@@ -57,10 +58,10 @@
                 }
                 var idArrs=idArr.join(',');
 
-                $.messager.confirm('系统提示',"您确定要将这<font color=red>"+idArr.length+ "</font>根转入内防光管库吗？",function (r) {
+                $.messager.confirm('系统提示',"您确定要将这<font color=red>"+idArr.length+ "</font>根成品管出厂吗？",function (r) {
                     if(r){
                         $.post(
-                            "/pipeinfo/ODBarePipeTOIDBare.action",
+                            "/pipeinfo/coatingProductStockout.action",
                             {"hlparam":idArrs},function (data) {
                                 if(data.success){
                                     $("#pipeDatagrids").datagrid("reload");
@@ -74,39 +75,10 @@
                 //hlAlertFive("/pipeinfo/delPipe.action",idArrs,idArr.length);
                 // $.messager.confirm('提示','您确定要删除<font>')
             }else{
-                $.messager.alert('Warning','请选择要转入内防光管库的钢管!');
+                $.messager.alert('Warning','请选择要出厂的成品涂层管!');
             }
         }
 
-        function IDBarePipeTOODBare() {
-            var row = $('#pipeDatagrids').datagrid('getSelections');
-            if(row.length>0){
-                var idArr=[];
-                for (var i=0;i<row.length;i++){
-                    idArr.push(row[i].id);
-                }
-                var idArrs=idArr.join(',');
-
-                $.messager.confirm('系统提示',"您确定要将这<font color=red>"+idArr.length+ "</font>根转入外防光管库吗？",function (r) {
-                    if(r){
-                        $.post(
-                            "/pipeinfo/IDBarePipeTOODBare.action",
-                            {"hlparam":idArrs},function (data) {
-                                if(data.success){
-                                    $("#pipeDatagrids").datagrid("reload");
-                                }else{
-                                    hlAlertFour("操作失败!");
-                                }
-                            },"json");
-                    }
-                });
-
-                //hlAlertFive("/pipeinfo/delPipe.action",idArrs,idArr.length);
-                // $.messager.confirm('提示','您确定要删除<font>')
-            }else{
-                $.messager.alert('Warning','请选择要转入外防光管库的钢管!');
-            }
-        }
 
 
     </script>
@@ -116,7 +88,7 @@
 <fieldset class="b3" style="padding:10px;margin:10px;">
     <legend> <h3><b style="color: orange" >|&nbsp;</b><span class="i18n1" name="datadisplay">数据展示</span></h3></legend>
     <div  style="margin-top:5px;">
-        <table class="easyui-datagrid" id="pipeDatagrids" url="/pipeinfo/getODIDBarePipeInfoByLike.action" striped="true" loadMsg="正在加载中。。。" textField="text" pageSize="20" fitColumns="true" pagination="true" toolbar="#hlpipeTb">
+        <table class="easyui-datagrid" id="pipeDatagrids" url="/pipeinfo/getCoatedStockinPipeInfoByLike.action" striped="true" loadMsg="正在加载中。。。" textField="text" pageSize="20" fitColumns="true" pagination="true" toolbar="#hlpipeTb">
             <thead>
             <tr>
                 <th data-options="field:'ck',checkbox:true"></th>
@@ -151,14 +123,13 @@
     <input id="projectno" name="projectno"  style="width:100px;line-height:22px;border:1px solid #ccc">
     <span class="i18n1" name="status">状态</span>:
     <select id="status" class="easyui-combobox" data-options="editable:false" name="status" style="width:200px;">
-        <option value="bare1"><span class="i18n1" name="bare1">外光管</span></option>
-        <option value="bare2"><span class="i18n1" name="bare2">内光管</span></option>
+        <option value="odstockin"><span class="i18n1" name="odstockin">外涂成品</span></option>
+        <option value="idstockin"><span class="i18n1" name="idstockin">内(外)涂成品</span></option>
     </select>
 
     <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchPipe()">Search</a>
     <div style="float:right">
-        <a href="#" id="odbaretoidbareLinkBtn" class="easyui-linkbutton i18n1" name="odbaretoidbare"  onclick="ODBarePipeTOIDBare()">转入内防光管库</a>
-        <a href="#" id="idbaretoodbareLinkBtn" class="easyui-linkbutton i18n1" name="idbaretoodbare"  onclick="IDBarePipeTOODBare()">转入外防光管库</a>
+        <a href="#" id="CoatingProductStockOutLinkBtn" class="easyui-linkbutton i18n1" name="coatingproductstockout"  onclick="CoatedPipeStockOut()">成品管出厂</a>
 
     </div>
 </div>
@@ -174,3 +145,4 @@
 
     hlLanguage("../i18n/");
 </script>
+

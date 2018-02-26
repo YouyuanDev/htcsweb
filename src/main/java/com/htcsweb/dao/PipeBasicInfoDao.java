@@ -36,4 +36,11 @@ public interface PipeBasicInfoDao {
 
 
 
+    public List<HashMap<String,Object>> getCoatedStockinPipeInfoByLike(@Param("project_no") String project_no,  @Param("contract_no")String contract_no,@Param("pipe_no")String pipe_no,@Param("status")String status, @Param("skip")int skip, @Param("take")int take);
+    public int getCountCoatedStockinPipeInfoByLike(@Param("project_no") String project_no,  @Param("contract_no")String contract_no,@Param("pipe_no")String pipe_no,@Param("status")String status);
+
+    public int coatingProductStockout(String[]arrId);
+
+
+
 }

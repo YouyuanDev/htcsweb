@@ -157,7 +157,7 @@ public class PipeBasicInfoController {
     }
 
 
-    //模糊查询内防成品、可出库的Pipe信息列表
+    //模糊查询内防成品、可入成品库的Pipe信息列表
     @RequestMapping(value ="/getIDInspectedPipeInfoByLike")
     @ResponseBody
     public String getIDInspectedPipeInfoByLike(@RequestParam(value = "project_no",required = false)String project_no, @RequestParam(value = "contract_no",required = false)String contract_no,@RequestParam(value = "pipe_no",required = false)String pipe_no, HttpServletRequest request){
@@ -172,7 +172,7 @@ public class PipeBasicInfoController {
 
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
         List<HashMap<String,Object>>list=pipeBasicInfoDao.getIDInspectedPipeInfoByLike(project_no,contract_no,pipe_no,start,Integer.parseInt(rows));
-        int count=pipeBasicInfoDao.getCountODInspectedPipeInfoByLike(project_no,contract_no,pipe_no);
+        int count=pipeBasicInfoDao.getCountIDInspectedPipeInfoByLike(project_no,contract_no,pipe_no);
 
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
@@ -303,4 +303,54 @@ public class PipeBasicInfoController {
         ResponseUtil.write(response,json);
         return null;
     }
+
+
+
+    //模糊查询内防外防成品可出厂的Pipe信息列表
+    @RequestMapping(value ="/getCoatedStockinPipeInfoByLike")
+    @ResponseBody
+    public String getCoatedStockinPipeInfoByLike(@RequestParam(value = "project_no",required = false)String project_no, @RequestParam(value = "contract_no",required = false)String contract_no,@RequestParam(value = "pipe_no",required = false)String pipe_no,@RequestParam(value = "status",required = false)String status, HttpServletRequest request){
+        String page= request.getParameter("page");
+        String rows= request.getParameter("rows");
+        if(page==null){
+            page="1";
+        }
+        if(rows==null){
+            rows="20";
+        }
+        if(status==null||status.equals("")){
+            status="odstockin";
+        }
+
+        int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
+        List<HashMap<String,Object>>list=pipeBasicInfoDao.getCoatedStockinPipeInfoByLike(project_no,contract_no,pipe_no,status,start,Integer.parseInt(rows));
+        int count=pipeBasicInfoDao.getCountCoatedStockinPipeInfoByLike(project_no,contract_no,pipe_no,status);
+
+        Map<String,Object> maps=new HashMap<String,Object>();
+        maps.put("total",count);
+        maps.put("rows",list);
+        String mmp= JSONArray.toJSONString(maps);
+        return mmp;
+    }
+
+
+
+    //成品管出厂
+    @RequestMapping("/coatingProductStockout")
+    public String coatingProductStockout(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
+        String[]idArr=hlparam.split(",");
+        int resTotal=0;
+        resTotal=pipeBasicInfoDao.coatingProductStockout(idArr);
+        JSONObject json=new JSONObject();
+        if(resTotal>0){
+            System.out.print("涂层成品管出厂成功");
+            json.put("success",true);
+        }else{
+            System.out.print("涂层成品管出厂失败");
+            json.put("success",false);
+        }
+        ResponseUtil.write(response,json);
+        return null;
+    }
+
 }

@@ -7,7 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa3f659b-6ccf-4ae8-84a0-55d0a3756f6f" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/storage/barepipemovement.jsp" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/coatingrepair/idrepair.jsp" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/coatingrepair/odrepair.jsp" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/storage/productStockout.jsp" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PipeBasicInfoController.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PipeBasicInfoController.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PipeBasicInfoDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PipeBasicInfoDao.java" />
@@ -16,6 +18,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties" afterPath="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh.properties" afterPath="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh.properties" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/storage/barepipemovement.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/storage/barepipemovement.jsp" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -40,47 +43,39 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.jsp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="452">
-              <caret line="347" column="14" lean-forward="false" selection-start-line="347" selection-start-column="14" selection-end-line="347" selection-end-column="14" />
+            <state relative-caret-position="273">
+              <caret line="262" column="65" lean-forward="false" selection-start-line="262" selection-start-column="50" selection-end-line="262" selection-end-column="65" />
               <folding>
-                <element signature="e#11824#13094#0#HTML" expanded="false" />
-                <marker date="1519655403678" expanded="true" signature="1871:1894" ph="..." />
-                <marker date="1519655403678" expanded="true" signature="2359:2382" ph="..." />
-                <marker date="1519655403678" expanded="true" signature="2780:2803" ph="..." />
-                <marker date="1519655403678" expanded="true" signature="3205:3228" ph="..." />
-                <marker date="1519655403678" expanded="true" signature="3629:3652" ph="..." />
-                <marker date="1519655403678" expanded="true" signature="4039:4062" ph="..." />
-                <marker date="1519655403678" expanded="true" signature="4460:4483" ph="..." />
-                <marker date="1519655403678" expanded="true" signature="5286:5309" ph="..." />
-                <marker date="1519655403678" expanded="true" signature="5773:5796" ph="..." />
-                <marker date="1519655403678" expanded="true" signature="6224:6247" ph="..." />
-                <marker date="1519655403678" expanded="true" signature="6667:6690" ph="..." />
-                <marker date="1519655403678" expanded="true" signature="7547:7570" ph="..." />
-                <marker date="1519655403678" expanded="true" signature="8035:8058" ph="..." />
-                <marker date="1519655403678" expanded="true" signature="8444:8467" ph="..." />
-                <marker date="1519655403678" expanded="true" signature="8868:8891" ph="..." />
-                <marker date="1519655403678" expanded="true" signature="9278:9301" ph="..." />
-                <marker date="1519655403678" expanded="true" signature="9699:9722" ph="..." />
-                <marker date="1519655403678" expanded="true" signature="10532:10555" ph="..." />
-                <marker date="1519655403678" expanded="true" signature="11021:11044" ph="..." />
-                <marker date="1519655403678" expanded="true" signature="11513:11536" ph="..." />
-                <marker date="1519655403678" expanded="true" signature="12395:12418" ph="..." />
-                <marker date="1519655403678" expanded="true" signature="12858:12881" ph="..." />
-                <marker date="1519655403678" expanded="true" signature="13715:13738" ph="..." />
+                <marker date="1519656543632" expanded="true" signature="1871:1894" ph="..." />
+                <marker date="1519656543632" expanded="true" signature="2359:2382" ph="..." />
+                <marker date="1519656543632" expanded="true" signature="2780:2803" ph="..." />
+                <marker date="1519656543632" expanded="true" signature="3205:3228" ph="..." />
+                <marker date="1519656543632" expanded="true" signature="3629:3652" ph="..." />
+                <marker date="1519656543632" expanded="true" signature="4039:4062" ph="..." />
+                <marker date="1519656543632" expanded="true" signature="4460:4483" ph="..." />
+                <marker date="1519656543632" expanded="true" signature="5286:5309" ph="..." />
+                <marker date="1519656543632" expanded="true" signature="5773:5796" ph="..." />
+                <marker date="1519656543632" expanded="true" signature="6224:6247" ph="..." />
+                <marker date="1519656543632" expanded="true" signature="6667:6690" ph="..." />
+                <marker date="1519656543632" expanded="true" signature="7547:7570" ph="..." />
+                <marker date="1519656543632" expanded="true" signature="8035:8058" ph="..." />
+                <marker date="1519656543632" expanded="true" signature="8444:8467" ph="..." />
+                <marker date="1519656543632" expanded="true" signature="8868:8891" ph="..." />
+                <marker date="1519656543632" expanded="true" signature="9278:9301" ph="..." />
+                <marker date="1519656543632" expanded="true" signature="9699:9722" ph="..." />
+                <marker date="1519656543632" expanded="true" signature="10542:10565" ph="..." />
+                <marker date="1519656543632" expanded="true" signature="11036:11059" ph="..." />
+                <marker date="1519656543632" expanded="true" signature="11912:11935" ph="..." />
+                <marker date="1519656543632" expanded="true" signature="12401:12424" ph="..." />
+                <marker date="1519656543632" expanded="true" signature="12893:12916" ph="..." />
+                <marker date="1519656543632" expanded="true" signature="13391:13414" ph="..." />
+                <marker date="1519656543632" expanded="true" signature="14273:14296" ph="..." />
+                <marker date="1519656543632" expanded="true" signature="14736:14759" ph="..." />
+                <marker date="1519656543632" expanded="true" signature="15593:15616" ph="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="barepipemovement.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/storage/barepipemovement.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="118" column="98" lean-forward="false" selection-start-line="118" selection-start-column="73" selection-end-line="118" selection-end-column="98" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -88,8 +83,18 @@
       <file leaf-file-name="PipeBasicInfoController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PipeBasicInfoController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2805">
-              <caret line="206" column="46" lean-forward="false" selection-start-line="206" selection-start-column="46" selection-end-line="206" selection-end-column="46" />
+            <state relative-caret-position="126">
+              <caret line="29" column="18" lean-forward="false" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PipeBasicInfoDao.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PipeBasicInfoDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="41" column="37" lean-forward="false" selection-start-line="41" selection-start-column="15" selection-end-line="41" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -98,9 +103,31 @@
       <file leaf-file-name="strings_zh-CN.properties" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="401">
-              <caret line="231" column="21" lean-forward="false" selection-start-line="231" selection-start-column="21" selection-end-line="231" selection-end-column="21" />
+            <state relative-caret-position="327">
+              <caret line="238" column="0" lean-forward="false" selection-start-line="238" selection-start-column="0" selection-end-line="239" selection-end-column="9" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PipeBasicInfo.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeBasicInfo.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="235">
+              <caret line="299" column="17" lean-forward="true" selection-start-line="299" selection-start-column="17" selection-end-line="299" selection-end-column="17" />
+              <folding>
+                <marker date="1519657989621" expanded="true" signature="1061:1308" ph="SELECT * fro... pipe_basic_info" />
+                <marker date="1519657989621" expanded="true" signature="2284:3213" ph="select co.pr... pipe_basic_info" />
+                <marker date="1519657989621" expanded="true" signature="3281:3317" ph="select count... pipe_basic_info" />
+                <marker date="1519657989621" expanded="true" signature="3394:3430" ph="select count... pipe_basic_info" />
+                <marker date="1519657989621" expanded="true" signature="5624:6378" ph="select co.pr... pipe_basic_info" />
+                <marker date="1519657989621" expanded="true" signature="6468:7257" ph="select co.pr... pipe_basic_info" />
+                <marker date="1519657989621" expanded="true" signature="7346:8132" ph="select co.pr... pipe_basic_info" />
+                <marker date="1519657989621" expanded="true" signature="8207:8553" ph="Select pro.p... pipe_basic_info" />
+                <marker date="1519657989621" expanded="true" signature="8664:8901" ph="UPDATE pipe_basic_info... " />
+                <marker date="1519657989621" expanded="true" signature="9009:9248" ph="INSERT INTO pipe_basic_info... " />
+                <marker date="1519657989621" expanded="true" signature="10776:11707" ph="select co.pr... pipe_basic_info" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -111,21 +138,41 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="228" column="0" lean-forward="false" selection-start-line="228" selection-start-column="0" selection-end-line="229" selection-end-column="21" />
+            <state relative-caret-position="328">
+              <caret line="237" column="9" lean-forward="false" selection-start-line="237" selection-start-column="9" selection-end-line="237" selection-end-column="9" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="strings.properties" pinned="false" current-in-tab="false">
+      <file leaf-file-name="strings.properties" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/strings.properties">
           <provider editor-type-id="ResourceBundle">
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="228" column="0" lean-forward="false" selection-start-line="228" selection-start-column="0" selection-end-line="229" selection-end-column="38" />
+            <state relative-caret-position="283">
+              <caret line="236" column="7" lean-forward="false" selection-start-line="236" selection-start-column="7" selection-end-line="236" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="productStockout.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/storage/productStockout.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="162">
+              <caret line="125" column="82" lean-forward="true" selection-start-line="125" selection-start-column="34" selection-end-line="125" selection-end-column="82" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="barepipemovement.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/storage/barepipemovement.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="327">
+              <caret line="153" column="61" lean-forward="false" selection-start-line="153" selection-start-column="56" selection-end-line="153" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -134,38 +181,8 @@
       <file leaf-file-name="odstockin.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/storage/odstockin.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-456">
-              <caret line="13" column="88" lean-forward="false" selection-start-line="13" selection-start-column="88" selection-end-line="13" selection-end-column="88" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="idstockin.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/storage/idstockin.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="76" column="9" lean-forward="false" selection-start-line="48" selection-start-column="8" selection-end-line="76" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pipeManagement.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/pipe/pipeManagement.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="226" column="90" lean-forward="false" selection-start-line="226" selection-start-column="73" selection-end-line="226" selection-end-column="90" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PipeBasicInfoDao.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PipeBasicInfoDao.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="215">
-              <caret line="34" column="33" lean-forward="false" selection-start-line="34" selection-start-column="15" selection-end-line="34" selection-end-column="33" />
+            <state relative-caret-position="345">
+              <caret line="35" column="54" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -186,14 +203,8 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>searchPipe</find>
-      <find>onSearchClick</find>
-      <find>result</find>
-      <find>uploadPipeList</find>
-      <find>hlPipeDialog</find>
       <find>getODInspectedPipeInfoByLike</find>
       <find>getIDInspectedPipeInfoByLike</find>
-      <find>getCountODInspectedPipeInfoByLike</find>
       <find>mini-buttonedit</find>
       <find>getOdBlastInspectionByLike</find>
       <find>getOdCoatingByLike</find>
@@ -216,6 +227,12 @@
       <find>odbarepipetoidbare</find>
       <find>ODBarePipeTOIDBare</find>
       <find>getODIDBarePipeInfoByLike</find>
+      <find>getCountODInspectedPipeInfoByLike</find>
+      <find>getCountIDInspectedPipeInfoByLike</find>
+      <find>getCoatedStockinPipeInfoByLike</find>
+      <find>getCountCoatedStockinPipeInfoByLike</find>
+      <find>odstockin</find>
+      <find>bare1</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src/main/webapp/WEB-INF/lib</dir>
@@ -237,9 +254,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastProcess.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdBlastInspectionProcessController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdBlastInspectionProcessDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastInspectionProcess.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoatingProcessController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdCoatingProcessDao.java" />
@@ -280,14 +294,17 @@
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/ContractController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/ContractInfoDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ContractInfo.xml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/coatingrepair/odrepair.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/coatingrepair/idrepair.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/index.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PipeBasicInfoController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PipeBasicInfoDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeBasicInfo.xml" />
-        <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings.properties" />
-        <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh.properties" />
-        <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties" />
+        <option value="$PROJECT_DIR$/src/main/webapp/storage/productStockout.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/storage/barepipemovement.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PipeBasicInfoController.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/index.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties" />
+        <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh.properties" />
+        <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings.properties" />
       </list>
     </option>
   </component>
@@ -403,7 +420,24 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="coatingrepair" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
               <item name="i18n" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="i18n" type="462c0819:PsiDirectoryNode" />
+              <item name="Resource Bundle 'strings'" type="a6c14932:ResourceBundleNode" />
             </path>
             <path>
               <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
@@ -498,7 +532,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Tomcat Server.index.jsp (5)">
+  <component name="RunManager" selected="Tomcat Server.index.jsp (2)">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -584,7 +618,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="index_jsp_(1)_htcsweb_59" />
+        <option name="BASE_DIRECTORY_NAME" value="index_jsp_(1)_htcsweb_61" />
       </server-settings>
       <predefined_log_file id="Tomcat" enabled="true" />
       <predefined_log_file id="Tomcat Catalina" enabled="true" />
@@ -623,7 +657,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="index_jsp_(2)_htcsweb_74" />
+        <option name="BASE_DIRECTORY_NAME" value="index_jsp_(2)_htcsweb_76" />
       </server-settings>
       <predefined_log_file id="Tomcat" enabled="true" />
       <predefined_log_file id="Tomcat Catalina" enabled="true" />
@@ -652,7 +686,7 @@
         </option>
       </method>
     </configuration>
-    <configuration name="index.jsp (3)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
+    <configuration name="index.jsp" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/index.jsp" />
       <deployment>
         <artifact name="htcsweb:war">
@@ -662,7 +696,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="index_jsp_(3)_htcsweb_60" />
+        <option name="BASE_DIRECTORY_NAME" value="index_jsp_htcsweb_74" />
       </server-settings>
       <predefined_log_file id="Tomcat" enabled="true" />
       <predefined_log_file id="Tomcat Catalina" enabled="true" />
@@ -691,8 +725,8 @@
         </option>
       </method>
     </configuration>
-    <configuration name="index.jsp (4)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/index.jsp" />
+    <configuration name="productStockout.jsp (1)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/storage/productStockout.jsp" />
       <deployment>
         <artifact name="htcsweb:war">
           <settings>
@@ -701,7 +735,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="index_jsp_(4)_htcsweb_47" />
+        <option name="BASE_DIRECTORY_NAME" value="productStockout_jsp_(1)_htcsweb" />
       </server-settings>
       <predefined_log_file id="Tomcat" enabled="true" />
       <predefined_log_file id="Tomcat Catalina" enabled="true" />
@@ -730,8 +764,8 @@
         </option>
       </method>
     </configuration>
-    <configuration name="index.jsp (5)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/index.jsp" />
+    <configuration name="productStockout.jsp" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/storage/productStockout.jsp" />
       <deployment>
         <artifact name="htcsweb:war">
           <settings>
@@ -740,7 +774,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="index_jsp_(5)_htcsweb_43" />
+        <option name="BASE_DIRECTORY_NAME" value="productStockout_jsp_htcsweb" />
       </server-settings>
       <predefined_log_file id="Tomcat" enabled="true" />
       <predefined_log_file id="Tomcat Catalina" enabled="true" />
@@ -776,19 +810,19 @@
       <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (1)" />
-      <item index="1" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (2)" />
-      <item index="2" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (3)" />
-      <item index="3" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (4)" />
-      <item index="4" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (5)" />
+      <item index="0" class="java.lang.String" itemvalue="Tomcat Server.productStockout.jsp" />
+      <item index="1" class="java.lang.String" itemvalue="Tomcat Server.productStockout.jsp (1)" />
+      <item index="2" class="java.lang.String" itemvalue="Tomcat Server.index.jsp" />
+      <item index="3" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (1)" />
+      <item index="4" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (2)" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (5)" />
-        <item index="1" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (4)" />
-        <item index="2" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (3)" />
-        <item index="3" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (2)" />
-        <item index="4" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (1)" />
+        <item index="0" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (2)" />
+        <item index="1" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (1)" />
+        <item index="2" class="java.lang.String" itemvalue="Tomcat Server.index.jsp" />
+        <item index="3" class="java.lang.String" itemvalue="Tomcat Server.productStockout.jsp (1)" />
+        <item index="4" class="java.lang.String" itemvalue="Tomcat Server.productStockout.jsp" />
       </list>
     </recent_temporary>
   </component>
@@ -849,7 +883,7 @@
       <workItem from="1519607197397" duration="399000" />
       <workItem from="1519608578521" duration="71000" />
       <workItem from="1519608777717" duration="24667000" />
-      <workItem from="1519643981652" duration="9965000" />
+      <workItem from="1519643981652" duration="12905000" />
     </task>
     <servers />
   </component>
@@ -862,7 +896,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="533990000" />
+    <option name="totallyTimeSpent" value="536930000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="835" extended-state="6" />
@@ -934,35 +968,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="17" />
+      <option name="time" value="18" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/od/odstencilprocess.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="256" column="109" lean-forward="false" selection-start-line="256" selection-start-column="91" selection-end-line="256" selection-end-column="109" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdStencilProcessDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="16" column="32" lean-forward="false" selection-start-line="16" selection-start-column="15" selection-end-line="16" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdStencilProcessController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="29" column="22" lean-forward="false" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdStencilProcess.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
@@ -1351,41 +1361,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/storage/odstockin.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-456">
-          <caret line="13" column="88" lean-forward="false" selection-start-line="13" selection-start-column="88" selection-end-line="13" selection-end-column="88" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PipeBasicInfoDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="34" column="33" lean-forward="false" selection-start-line="34" selection-start-column="15" selection-end-line="34" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeBasicInfo.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1734">
-          <caret line="77" column="17" lean-forward="true" selection-start-line="77" selection-start-column="17" selection-end-line="77" selection-end-column="17" />
-          <folding>
-            <marker date="1519654124491" expanded="true" signature="1061:1308" ph="SELECT * fro... pipe_basic_info" />
-            <marker date="1519654124491" expanded="true" signature="2284:3213" ph="select co.pr... pipe_basic_info" />
-            <marker date="1519654124491" expanded="true" signature="3281:3317" ph="select count... pipe_basic_info" />
-            <marker date="1519654124491" expanded="true" signature="3394:3430" ph="select count... pipe_basic_info" />
-            <marker date="1519654124491" expanded="true" signature="5624:6378" ph="select co.pr... pipe_basic_info" />
-            <marker date="1519654124491" expanded="true" signature="6468:7257" ph="select co.pr... pipe_basic_info" />
-            <marker date="1519654124491" expanded="true" signature="7346:8132" ph="select co.pr... pipe_basic_info" />
-            <marker date="1519654124491" expanded="true" signature="8207:8553" ph="Select pro.p... pipe_basic_info" />
-            <marker date="1519654124491" expanded="true" signature="8664:8901" ph="UPDATE pipe_basic_info... " />
-            <marker date="1519654124491" expanded="true" signature="9009:9248" ph="INSERT INTO pipe_basic_info... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/pipe/pipeManagement.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
@@ -1394,13 +1369,121 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/strings.properties">
-      <provider editor-type-id="ResourceBundle">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/coatingrepair/odrepair.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="228" column="0" lean-forward="false" selection-start-line="228" selection-start-column="0" selection-end-line="229" selection-end-column="38" />
+        <state relative-caret-position="150">
+          <caret line="10" column="16" lean-forward="false" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/coatingrepair/idrepair.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="16" lean-forward="false" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="262" column="65" lean-forward="false" selection-start-line="262" selection-start-column="50" selection-end-line="262" selection-end-column="65" />
+          <folding>
+            <marker date="1519656543632" expanded="true" signature="1871:1894" ph="..." />
+            <marker date="1519656543632" expanded="true" signature="2359:2382" ph="..." />
+            <marker date="1519656543632" expanded="true" signature="2780:2803" ph="..." />
+            <marker date="1519656543632" expanded="true" signature="3205:3228" ph="..." />
+            <marker date="1519656543632" expanded="true" signature="3629:3652" ph="..." />
+            <marker date="1519656543632" expanded="true" signature="4039:4062" ph="..." />
+            <marker date="1519656543632" expanded="true" signature="4460:4483" ph="..." />
+            <marker date="1519656543632" expanded="true" signature="5286:5309" ph="..." />
+            <marker date="1519656543632" expanded="true" signature="5773:5796" ph="..." />
+            <marker date="1519656543632" expanded="true" signature="6224:6247" ph="..." />
+            <marker date="1519656543632" expanded="true" signature="6667:6690" ph="..." />
+            <marker date="1519656543632" expanded="true" signature="7547:7570" ph="..." />
+            <marker date="1519656543632" expanded="true" signature="8035:8058" ph="..." />
+            <marker date="1519656543632" expanded="true" signature="8444:8467" ph="..." />
+            <marker date="1519656543632" expanded="true" signature="8868:8891" ph="..." />
+            <marker date="1519656543632" expanded="true" signature="9278:9301" ph="..." />
+            <marker date="1519656543632" expanded="true" signature="9699:9722" ph="..." />
+            <marker date="1519656543632" expanded="true" signature="10542:10565" ph="..." />
+            <marker date="1519656543632" expanded="true" signature="11036:11059" ph="..." />
+            <marker date="1519656543632" expanded="true" signature="11912:11935" ph="..." />
+            <marker date="1519656543632" expanded="true" signature="12401:12424" ph="..." />
+            <marker date="1519656543632" expanded="true" signature="12893:12916" ph="..." />
+            <marker date="1519656543632" expanded="true" signature="13391:13414" ph="..." />
+            <marker date="1519656543632" expanded="true" signature="14273:14296" ph="..." />
+            <marker date="1519656543632" expanded="true" signature="14736:14759" ph="..." />
+            <marker date="1519656543632" expanded="true" signature="15593:15616" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/storage/odstockin.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="35" column="54" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PipeBasicInfoController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="29" column="18" lean-forward="false" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PipeBasicInfoDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="41" column="37" lean-forward="false" selection-start-line="41" selection-start-column="15" selection-end-line="41" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeBasicInfo.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="299" column="17" lean-forward="true" selection-start-line="299" selection-start-column="17" selection-end-line="299" selection-end-column="17" />
+          <folding>
+            <marker date="1519657989621" expanded="true" signature="1061:1308" ph="SELECT * fro... pipe_basic_info" />
+            <marker date="1519657989621" expanded="true" signature="2284:3213" ph="select co.pr... pipe_basic_info" />
+            <marker date="1519657989621" expanded="true" signature="3281:3317" ph="select count... pipe_basic_info" />
+            <marker date="1519657989621" expanded="true" signature="3394:3430" ph="select count... pipe_basic_info" />
+            <marker date="1519657989621" expanded="true" signature="5624:6378" ph="select co.pr... pipe_basic_info" />
+            <marker date="1519657989621" expanded="true" signature="6468:7257" ph="select co.pr... pipe_basic_info" />
+            <marker date="1519657989621" expanded="true" signature="7346:8132" ph="select co.pr... pipe_basic_info" />
+            <marker date="1519657989621" expanded="true" signature="8207:8553" ph="Select pro.p... pipe_basic_info" />
+            <marker date="1519657989621" expanded="true" signature="8664:8901" ph="UPDATE pipe_basic_info... " />
+            <marker date="1519657989621" expanded="true" signature="9009:9248" ph="INSERT INTO pipe_basic_info... " />
+            <marker date="1519657989621" expanded="true" signature="10776:11707" ph="select co.pr... pipe_basic_info" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/storage/productStockout.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="125" column="82" lean-forward="true" selection-start-line="125" selection-start-column="34" selection-end-line="125" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/storage/barepipemovement.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="153" column="61" lean-forward="false" selection-start-line="153" selection-start-column="56" selection-end-line="153" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="238" column="0" lean-forward="false" selection-start-line="238" selection-start-column="0" selection-end-line="239" selection-end-column="9" />
           <folding />
         </state>
       </provider>
@@ -1410,66 +1493,20 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="228" column="0" lean-forward="false" selection-start-line="228" selection-start-column="0" selection-end-line="229" selection-end-column="21" />
+        <state relative-caret-position="328">
+          <caret line="237" column="9" lean-forward="false" selection-start-line="237" selection-start-column="9" selection-end-line="237" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="401">
-          <caret line="231" column="21" lean-forward="false" selection-start-line="231" selection-start-column="21" selection-end-line="231" selection-end-column="21" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/strings.properties">
+      <provider editor-type-id="ResourceBundle">
+        <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/storage/barepipemovement.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="118" column="98" lean-forward="false" selection-start-line="118" selection-start-column="73" selection-end-line="118" selection-end-column="98" />
+        <state relative-caret-position="283">
+          <caret line="236" column="7" lean-forward="false" selection-start-line="236" selection-start-column="7" selection-end-line="236" selection-end-column="7" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PipeBasicInfoController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2805">
-          <caret line="206" column="46" lean-forward="false" selection-start-line="206" selection-start-column="46" selection-end-line="206" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="347" column="14" lean-forward="false" selection-start-line="347" selection-start-column="14" selection-end-line="347" selection-end-column="14" />
-          <folding>
-            <element signature="e#11824#13094#0#HTML" expanded="false" />
-            <marker date="1519655403678" expanded="true" signature="1871:1894" ph="..." />
-            <marker date="1519655403678" expanded="true" signature="2359:2382" ph="..." />
-            <marker date="1519655403678" expanded="true" signature="2780:2803" ph="..." />
-            <marker date="1519655403678" expanded="true" signature="3205:3228" ph="..." />
-            <marker date="1519655403678" expanded="true" signature="3629:3652" ph="..." />
-            <marker date="1519655403678" expanded="true" signature="4039:4062" ph="..." />
-            <marker date="1519655403678" expanded="true" signature="4460:4483" ph="..." />
-            <marker date="1519655403678" expanded="true" signature="5286:5309" ph="..." />
-            <marker date="1519655403678" expanded="true" signature="5773:5796" ph="..." />
-            <marker date="1519655403678" expanded="true" signature="6224:6247" ph="..." />
-            <marker date="1519655403678" expanded="true" signature="6667:6690" ph="..." />
-            <marker date="1519655403678" expanded="true" signature="7547:7570" ph="..." />
-            <marker date="1519655403678" expanded="true" signature="8035:8058" ph="..." />
-            <marker date="1519655403678" expanded="true" signature="8444:8467" ph="..." />
-            <marker date="1519655403678" expanded="true" signature="8868:8891" ph="..." />
-            <marker date="1519655403678" expanded="true" signature="9278:9301" ph="..." />
-            <marker date="1519655403678" expanded="true" signature="9699:9722" ph="..." />
-            <marker date="1519655403678" expanded="true" signature="10532:10555" ph="..." />
-            <marker date="1519655403678" expanded="true" signature="11021:11044" ph="..." />
-            <marker date="1519655403678" expanded="true" signature="11513:11536" ph="..." />
-            <marker date="1519655403678" expanded="true" signature="12395:12418" ph="..." />
-            <marker date="1519655403678" expanded="true" signature="12858:12881" ph="..." />
-            <marker date="1519655403678" expanded="true" signature="13715:13738" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>

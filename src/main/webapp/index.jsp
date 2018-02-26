@@ -195,6 +195,36 @@
                 }
             });
 
+            //涂层修补
+            $("#hlcoatingrepair").tree({
+                onClick: function (node) {
+                    var tab = $('#hlTab').tabs('getTab', node.text);
+                    var nodeTxt = node.text;
+                    if (tab) {
+                        $('#hlTab').tabs('select', node.text);
+                    } else {
+                        if ("外涂层修补" == nodeTxt || "OD Repair" == nodeTxt) {
+
+                            $('#hlTab').tabs('add', {
+                                title: node.text,
+                                content: "<iframe scrolling='auto' frameborder='0'  src='coatingrepair/odrepair.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable: true
+                            });
+                            hlLanguage();
+                        }
+                        else if ("内涂层修补" == nodeTxt || "ID Repair" == nodeTxt) {
+
+                            $('#hlTab').tabs('add', {
+                                title: node.text,
+                                content: "<iframe scrolling='auto' frameborder='0'  src='coatingrepair/idrepair.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable: true
+                            });
+                            hlLanguage();
+                        }
+                    }
+                }
+            });
+
             //出入库管理
             $("#hlstoragemanagement").tree({
                 onClick:function (node) {
@@ -226,6 +256,15 @@
                             $('#hlTab').tabs('add',{
                                 title:node.text,
                                 content:"<iframe scrolling='auto' frameborder='0'  src='storage/barepipemovement.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                            hlLanguage();
+                        }
+                        else if("成品出厂"==nodeTxt||"Coating Product Stock Out"==nodeTxt){
+
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='storage/productStockout.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable:true
                             });
                             hlLanguage();
@@ -329,8 +368,15 @@
             <li class="i18n1" name="odstockin">外涂成品入库</li>
             <li class="i18n1" name="idstockin">内涂成品入库</li>
             <li class="i18n1" name="baremovement">光管调拨</li>
+            <li class="i18n1" name="productstockout">成品出厂</li>
             </ul>
 
+        </div>
+        <div title="涂层修补" class="i18n" name="coatingrepair" style="padding:10px;">
+            <ul id="hlcoatingrepair">
+                <li class="i18n1" name="odrepair">外防修补</li>
+                <li class="i18n1" name="idrepair">内防修补</li>
+            </ul>
         </div>
         <div title="基础信息管理" class="i18n" name="basicinfomanagement" style="padding:10px;">
             <ul id="hlbasicinfomanagement">
