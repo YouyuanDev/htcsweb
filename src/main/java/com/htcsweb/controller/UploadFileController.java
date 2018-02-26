@@ -167,13 +167,20 @@ public class UploadFileController {
     public String uploadPipeList(HttpServletRequest request, HttpServletResponse response) throws Exception{
         try {
             String ck_overwrite= request.getParameter("ck_overwrite");
+            String entrance= request.getParameter("entrance");
             System.out.println("ck_overwrite="+ck_overwrite);
+            System.out.println("entrance="+entrance);
 
             boolean overwrite=false;
+            boolean inODBareStorage=true;
 
             if(ck_overwrite!=null&&ck_overwrite.equals("1")){
                 overwrite=true;
             }
+            if(entrance!=null&&entrance.equals("1")) {
+                inODBareStorage = false;
+            }
+
 
             String saveDirectory = request.getSession().getServletContext().getRealPath("/upload/pipes");
             File uploadPath = new File(saveDirectory);
@@ -193,7 +200,7 @@ public class UploadFileController {
                 if (file != null) {
                     newName = file.getName();
                     //处理excel文件
-                    HashMap retMap =importExcelInfo(saveDirectory+"/"+newName,overwrite);
+                    HashMap retMap =importExcelInfo(saveDirectory+"/"+newName,overwrite,inODBareStorage);
                     TotalUploadedPipes=Integer.parseInt(retMap.get("uploaded").toString());
                     TotalSkippedPipes=Integer.parseInt(retMap.get("skipped").toString());
                 }
@@ -224,7 +231,7 @@ public class UploadFileController {
 
 
 
-    public HashMap importExcelInfo( String fullfilename,boolean overwrite) throws Exception{
+    public HashMap importExcelInfo( String fullfilename,boolean overwrite, boolean inODBareStorage) throws Exception{
 
             HashMap retMap = new HashMap();//返回值
             int TotalUploaded=0;//成功插入数据库的钢管数量
@@ -291,7 +298,13 @@ public class UploadFileController {
                 //查找该pipebasicinfo是否存在
                 List<PipeBasicInfo>pipelist=pipeBasicInfoDao.getPipeNumber(pipe.getPipe_no());
                 if(pipelist.size()==0){
-                    //新钢管入库
+                    //新钢管入库,如od库或id库
+                    if(inODBareStorage) {
+                        pipe.setStatus("bare1");
+                    }else{
+                        pipe.setStatus("bare2");
+                    }
+
                     res = pipeBasicInfoDao.addPipeBasicInfo(pipe);
                     System.out.println("Insert res: " + res);
                 }else{

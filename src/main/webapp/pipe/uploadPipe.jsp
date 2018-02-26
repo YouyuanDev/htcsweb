@@ -45,6 +45,10 @@
        onuploaderror="onUploadError" onfileselect="onFileSelect" width="400px"
 />
 <br /><br />
+    <select id="entrance" class="easyui-combobox" data-options="editable:false" name="entrance" style="width:200px;">
+        <option value="0">录入外防光管库</option>
+        <option value="1">录入内防光管库</option>
+    </select><br><br>
     <input type="checkbox" id="ck_overwrite" name="ck_overwrite"/><span class="i18n1" name="is_overwrite">是否完全覆盖数据库已有记录？(对数据库已存在的钢管,不会覆盖其状态信息)</span>
     <br /><br />
     <a class="mini-button mini-button-success" width="100px" value="上传" onclick="startUpload()"><span class="i18n1" name="upload">上传</span></a>
@@ -92,16 +96,33 @@
     function startUpload() {
         var fileupload = mini.get("fileupload1");
         var checkbox = document.getElementById('ck_overwrite');//
+        var entrance = $('#entrance').val()
         //alert(checkbox.checked);//是否被选中
+        var overwrite="0";
+
         if(checkbox.checked){
             //选中了
             //alert("checked")
-            fileupload.setUploadUrl("/UploadFile/uploadPipeList.action?ck_overwrite=" + "1");
+            overwrite="1";
+            //fileupload.setUploadUrl("/UploadFile/uploadPipeList.action?ck_overwrite=" + "1");
         }else{
             //没选中
             //alert("Not checked")
-            fileupload.setUploadUrl("/UploadFile/uploadPipeList.action?ck_overwrite=" + "0");
+            overwrite="0";
+            //fileupload.setUploadUrl("/UploadFile/uploadPipeList.action?ck_overwrite=" + "0");
         }
+        if(entrance=='1'){
+            //录入内防光管库
+            //alert("1111")
+            fileupload.setUploadUrl("/UploadFile/uploadPipeList.action?ck_overwrite=" + overwrite+"&&entrance=1");
+        }else{
+            //录入外防光管库
+            //alert("0000");
+            fileupload.setUploadUrl("/UploadFile/uploadPipeList.action?ck_overwrite=" + overwrite+"&&entrance=0");
+        }
+
+
+
 
         fileupload.startUpload();
     }
