@@ -32,7 +32,55 @@
          limit 1000
      </select>
 
+    <select id="getCountODIDBarePipeInfoByLike" resultType="int">
+        select count(*) from pipe_basic_info p
+        left join contract_info co on p.contract_no=co.contract_no
+        left join  project_info pr on co.project_no=pr.project_no
+        <where>
+            <if test="project_no!=null and project_no!=''">
+                AND co.project_no LIKE CONCAT('%',#{project_no},'%')
+            </if>
 
+            <if test="contract_no!=null and contract_no!=''">
+                AND p.contract_no LIKE CONCAT('%',#{contract_no},'%')
+            </if>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+
+            <if test="status!=null and status!=''">
+                AND status = #{status}
+            </if>
+            AND (status = 'bare1' or status = 'bare2')
+        </where>
+    </select>
+
+
+    <select id="getODIDBarePipeInfoByLike" resultType="map">
+        select co.project_no,co.external_coating,co.internal_coating, project_name, p.*
+        from pipe_basic_info p
+        left join contract_info co on p.contract_no=co.contract_no
+        left join  project_info pr on co.project_no=pr.project_no
+        <where>
+            <if test="project_no!=null and project_no!=''">
+                AND co.project_no LIKE CONCAT('%',#{project_no},'%')
+            </if>
+
+            <if test="contract_no!=null and contract_no!=''">
+                AND p.contract_no LIKE CONCAT('%',#{contract_no},'%')
+            </if>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+
+            <if test="status!=null and status!=''">
+                AND status = #{status}
+            </if>
+               AND (status = 'bare1' or status = 'bare2')
+        </where>
+        ORDER BY id DESC
+        limit #{skip},#{take}
+    </select>
 
     <select id="getCount" resultType="int">
         select count(*) from pipe_basic_info
@@ -201,5 +249,21 @@
             #{item}
         </foreach>
     </update>
+
+
+    <update id="IDBarePipeTOODBare" parameterType="com.htcsweb.entity.PipeBasicInfo">
+        UPDATE pipe_basic_info set status='bare1' WHERE  status='bare2' AND
+        <foreach collection="array" item="item" open="id in (" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
+    <update id="ODBarePipeTOIDBare" parameterType="com.htcsweb.entity.PipeBasicInfo">
+        UPDATE pipe_basic_info set status='bare2' WHERE  status='bare1' AND
+        <foreach collection="array" item="item" open="id in (" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
+
 
 </mapper>

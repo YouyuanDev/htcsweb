@@ -14,6 +14,10 @@ public interface PipeBasicInfoDao {
     //public int getCount();
     public int getCountAllByLike(@Param("project_no") String project_no,  @Param("contract_no")String contract_no,@Param("pipe_no")String pipe_no);
 
+    public List<HashMap<String,Object>> getODIDBarePipeInfoByLike(@Param("project_no") String project_no,  @Param("contract_no")String contract_no,@Param("pipe_no")String pipe_no, @Param("status")String status,@Param("skip")int skip, @Param("take")int take);
+
+    public int getCountODIDBarePipeInfoByLike(@Param("project_no") String project_no,  @Param("contract_no")String contract_no,@Param("pipe_no")String pipe_no, @Param("status")String status);
+
     public List<HashMap<String,Object>>getPipeInfoByNo(@Param("pipe_no")String pipe_no);
     public int updatePipeBasicInfo(PipeBasicInfo pipeBasicInfo);
     public int addPipeBasicInfo(PipeBasicInfo pipeBasicInfo);
@@ -26,6 +30,9 @@ public interface PipeBasicInfoDao {
 
     public int odProductStockin(String[]arrId);
     public int idProductStockin(String[]arrId);
+
+    public int IDBarePipeTOODBare(String[]arrId);
+    public int ODBarePipeTOIDBare(String[]arrId);
 
 
 

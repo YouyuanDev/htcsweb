@@ -101,6 +101,35 @@ public class PipeBasicInfoController {
 
 //
 
+    //模糊查询OD ID 光管的Pipe信息列表
+    @RequestMapping(value ="/getODIDBarePipeInfoByLike")
+    @ResponseBody
+    public String getODIDBarePipeInfoByLike(@RequestParam(value = "project_no",required = false)String project_no, @RequestParam(value = "contract_no",required = false)String contract_no,@RequestParam(value = "pipe_no",required = false)String pipe_no, @RequestParam(value = "status",required = false)String status,HttpServletRequest request){
+        String page= request.getParameter("page");
+        String rows= request.getParameter("rows");
+        if(page==null){
+            page="1";
+        }
+        if(rows==null){
+            rows="20";
+        }
+
+        if(status==null||status.equals("")){
+            status="bare1";
+        }
+
+        int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
+        List<HashMap<String,Object>>list=pipeBasicInfoDao.getODIDBarePipeInfoByLike(project_no,contract_no,pipe_no,status,start,Integer.parseInt(rows));
+        int count=pipeBasicInfoDao.getCountODIDBarePipeInfoByLike(project_no,contract_no,pipe_no,status);
+
+        Map<String,Object> maps=new HashMap<String,Object>();
+        maps.put("total",count);
+        maps.put("rows",list);
+        String mmp= JSONArray.toJSONString(maps);
+        return mmp;
+    }
+
+
 
 
     //模糊查询外防成品、可出库的Pipe信息列表
@@ -238,4 +267,40 @@ public class PipeBasicInfoController {
         return null;
     }
 
+
+    //内防光管转外防光管库
+    @RequestMapping("/IDBarePipeTOODBare")
+    public String IDBarePipeTOODBare(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
+        String[]idArr=hlparam.split(",");
+        int resTotal=0;
+        resTotal=pipeBasicInfoDao.IDBarePipeTOODBare(idArr);
+        JSONObject json=new JSONObject();
+        if(resTotal>0){
+            System.out.print("内防光管库转外防光管库成功");
+            json.put("success",true);
+        }else{
+            System.out.print("内防光管库转外防光管库成功");
+            json.put("success",false);
+        }
+        ResponseUtil.write(response,json);
+        return null;
+    }
+
+    //外防光管转内防光管库
+    @RequestMapping("/ODBarePipeTOIDBare")
+    public String ODBarePipeTOIDBare(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
+        String[]idArr=hlparam.split(",");
+        int resTotal=0;
+        resTotal=pipeBasicInfoDao.ODBarePipeTOIDBare(idArr);
+        JSONObject json=new JSONObject();
+        if(resTotal>0){
+            System.out.print("外防光管库转内防光管库成功");
+            json.put("success",true);
+        }else{
+            System.out.print("外防光管库转内防光管库成功");
+            json.put("success",false);
+        }
+        ResponseUtil.write(response,json);
+        return null;
+    }
 }

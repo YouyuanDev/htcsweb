@@ -225,7 +225,7 @@
 
                             $('#hlTab').tabs('add',{
                                 title:node.text,
-                                content:"<iframe scrolling='auto' frameborder='0'  src='storage/baremovement.jsp' style='width:100%;height:100%;'></iframe>",
+                                content:"<iframe scrolling='auto' frameborder='0'  src='storage/barepipemovement.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable:true
                             });
                             hlLanguage();
@@ -234,29 +234,6 @@
                 }
             });
 
-
-
-
-            //账户管理
-            $("#hlaccount").tree({
-                onClick:function (node) {
-                    var tab=$('#hlTab').tabs('getTab',node.text);
-                    var nodeTxt=node.text;
-                    if(tab){
-                        $('#hlTab').tabs('select',node.text);
-                    }else{
-                        if("人员管理"==nodeTxt||"Person Management"==nodeTxt){
-
-                            $('#hlTab').tabs('add',{
-                                title:node.text,
-                                content:"<iframe scrolling='auto' frameborder='0'  src='account/person.jsp' style='width:100%;height:100%;'></iframe>",
-                                closable:true
-                            });
-                            hlLanguage();
-                        }
-                    }
-                }
-            });
             //生产工艺
             //账户管理
             $("#hlprocess").tree({
@@ -284,6 +261,29 @@
                     }
                 }
             });
+
+
+            //账户管理
+            $("#hlaccount").tree({
+                onClick:function (node) {
+                    var tab=$('#hlTab').tabs('getTab',node.text);
+                    var nodeTxt=node.text;
+                    if(tab){
+                        $('#hlTab').tabs('select',node.text);
+                    }else{
+                        if("人员管理"==nodeTxt||"Person Management"==nodeTxt){
+
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='account/person.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                            hlLanguage();
+                        }
+                    }
+                }
+            });
+
         });
 
     </script>
@@ -340,6 +340,12 @@
                 <li class="i18n1" name="uploadpipe">钢管录入</li>
             </ul>
         </div>
+        <div title="生产工艺" class="i18n" name="productionprocess" style="padding:10px;">
+            <ul id="hlprocess">
+                <li class="i18n1" name="odstandard">外防腐标准</li>
+                <li class="i18n1" name="idstandard">内防腐标准</li>
+            </ul>
+        </div>
         <div title="实验" class="i18n" name="labtesting" style="padding:10px;">
             ee
         </div>
@@ -352,12 +358,7 @@
 
             </ul>
         </div>
-        <div title="生产工艺" class="i18n" name="productionprocess" style="padding:10px;">
-            <ul id="hlprocess">
-                <li class="i18n1" name="odstandard">外防腐标准</li>
-                <li class="i18n1" name="idstandard">内防腐标准</li>
-            </ul>
-        </div>
+
     </div>
 
 </div>
