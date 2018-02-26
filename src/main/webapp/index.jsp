@@ -195,6 +195,48 @@
                 }
             });
 
+            //出入库管理
+            $("#hlstoragemanagement").tree({
+                onClick:function (node) {
+                    var tab=$('#hlTab').tabs('getTab',node.text);
+                    var nodeTxt=node.text;
+                    if(tab){
+                        $('#hlTab').tabs('select',node.text);
+                    }else{
+                        if("外涂管成品入库"==nodeTxt||"OD Product Stock In"==nodeTxt){
+
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='storage/odstockin.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                            hlLanguage();
+                        }
+                        else if("内涂管成品入库"==nodeTxt||"ID Product Stock In"==nodeTxt){
+
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='storage/idstockin.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                            hlLanguage();
+                        }
+                        else if("光管调拨"==nodeTxt||"Bare Pipe Movement"==nodeTxt){
+
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='storage/baremovement.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                            hlLanguage();
+                        }
+                    }
+                }
+            });
+
+
+
+
             //账户管理
             $("#hlaccount").tree({
                 onClick:function (node) {
@@ -283,7 +325,12 @@
             </ul>
         </div>
         <div title="出入库" class="i18n" name="storage" style="padding:10px;">
-            cc
+            <ul id="hlstoragemanagement">
+            <li class="i18n1" name="odstockin">外涂成品入库</li>
+            <li class="i18n1" name="idstockin">内涂成品入库</li>
+            <li class="i18n1" name="baremovement">光管调拨</li>
+            </ul>
+
         </div>
         <div title="基础信息管理" class="i18n" name="basicinfomanagement" style="padding:10px;">
             <ul id="hlbasicinfomanagement">

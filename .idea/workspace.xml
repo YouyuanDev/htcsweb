@@ -7,8 +7,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa3f659b-6ccf-4ae8-84a0-55d0a3756f6f" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/AcceptanceCriteriaController.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/AcceptanceCriteriaController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/production/odstandard.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/production/odstandard.jsp" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/storage/idstockin.jsp" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/webapp/storage/odstockin.jsp" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PipeBasicInfoController.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PipeBasicInfoController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PipeBasicInfoDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PipeBasicInfoDao.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeBasicInfo.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeBasicInfo.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/i18n/strings.properties" afterPath="$PROJECT_DIR$/src/main/webapp/i18n/strings.properties" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties" afterPath="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh.properties" afterPath="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh.properties" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -32,25 +40,114 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="odstandard.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/production/odstandard.jsp">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="index.jsp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="334" column="19" lean-forward="true" selection-start-line="334" selection-start-column="19" selection-end-line="334" selection-end-column="19" />
+            <state relative-caret-position="283">
+              <caret line="227" column="108" lean-forward="false" selection-start-line="227" selection-start-column="108" selection-end-line="227" selection-end-column="108" />
+              <folding>
+                <marker date="1519640372759" expanded="true" signature="1871:1894" ph="..." />
+                <marker date="1519640372759" expanded="true" signature="2359:2382" ph="..." />
+                <marker date="1519640372759" expanded="true" signature="2780:2803" ph="..." />
+                <marker date="1519640372759" expanded="true" signature="3205:3228" ph="..." />
+                <marker date="1519640372759" expanded="true" signature="3629:3652" ph="..." />
+                <marker date="1519640372759" expanded="true" signature="4039:4062" ph="..." />
+                <marker date="1519640372759" expanded="true" signature="4460:4483" ph="..." />
+                <marker date="1519640372759" expanded="true" signature="5286:5309" ph="..." />
+                <marker date="1519640372759" expanded="true" signature="5773:5796" ph="..." />
+                <marker date="1519640372759" expanded="true" signature="6224:6247" ph="..." />
+                <marker date="1519640372759" expanded="true" signature="6667:6690" ph="..." />
+                <marker date="1519640372759" expanded="true" signature="7547:7570" ph="..." />
+                <marker date="1519640372759" expanded="true" signature="8035:8058" ph="..." />
+                <marker date="1519640372759" expanded="true" signature="8444:8467" ph="..." />
+                <marker date="1519640372759" expanded="true" signature="8868:8891" ph="..." />
+                <marker date="1519640372759" expanded="true" signature="9278:9301" ph="..." />
+                <marker date="1519640372759" expanded="true" signature="9699:9722" ph="..." />
+                <marker date="1519640372759" expanded="true" signature="10532:10555" ph="..." />
+                <marker date="1519640372759" expanded="true" signature="11021:11044" ph="..." />
+                <marker date="1519640372759" expanded="true" signature="11509:11532" ph="..." />
+                <marker date="1519640372759" expanded="true" signature="12368:12391" ph="..." />
+                <marker date="1519640372759" expanded="true" signature="13249:13272" ph="..." />
+                <marker date="1519640372759" expanded="true" signature="13712:13735" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="idstockin.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/storage/idstockin.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="294">
+              <caret line="98" column="101" lean-forward="false" selection-start-line="98" selection-start-column="73" selection-end-line="98" selection-end-column="101" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AcceptanceCriteriaController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/AcceptanceCriteriaController.java">
+      <file leaf-file-name="PipeStatusTransferRules" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/PipeStatusTransferRules">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="110">
-              <caret line="83" column="8" lean-forward="false" selection-start-line="83" selection-start-column="8" selection-end-line="83" selection-end-column="8" />
+            <state relative-caret-position="395">
+              <caret line="37" column="39" lean-forward="false" selection-start-line="37" selection-start-column="39" selection-end-line="37" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pipeManagement.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/pipe/pipeManagement.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="130">
+              <caret line="403" column="0" lean-forward="false" selection-start-line="403" selection-start-column="0" selection-end-line="403" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PipeBasicInfo.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeBasicInfo.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="283">
+              <caret line="138" column="32" lean-forward="false" selection-start-line="138" selection-start-column="16" selection-end-line="138" selection-end-column="32" />
               <folding>
-                <element signature="e#1578#1590#0" expanded="true" />
-                <element signature="e#4927#4939#0" expanded="true" />
+                <marker date="1519640165790" expanded="true" signature="1061:1308" ph="SELECT * fro... pipe_basic_info" />
+                <marker date="1519640165790" expanded="true" signature="1379:1415" ph="select count... pipe_basic_info" />
+                <marker date="1519640165790" expanded="true" signature="1488:2242" ph="select co.pr... pipe_basic_info" />
+                <marker date="1519640165790" expanded="true" signature="2332:3121" ph="select co.pr... pipe_basic_info" />
+                <marker date="1519640165790" expanded="true" signature="3210:3996" ph="select co.pr... pipe_basic_info" />
+                <marker date="1519640165790" expanded="true" signature="4071:4417" ph="Select pro.p... pipe_basic_info" />
+                <marker date="1519640165790" expanded="true" signature="4528:4765" ph="UPDATE pipe_basic_info... " />
+                <marker date="1519640165790" expanded="true" signature="4873:5112" ph="INSERT INTO pipe_basic_info... " />
+                <marker date="1519640165790" expanded="true" signature="5439:5635" ph="UPDATE pipe_basic_info... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PipeStatus.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeStatus.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <marker date="1518943775198" expanded="true" signature="305:356" ph="SELECT * fro... pipe_status" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OdCoatingInspectionProcess.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingInspectionProcess.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-334">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding>
+                <marker date="1519374871032" expanded="true" signature="341:917" ph="INSERT INTO od_coating_inspection_process... " />
+                <marker date="1519374871032" expanded="true" signature="1044:1624" ph="UPDATE od_coating_inspection_process... " />
+                <marker date="1519374871032" expanded="true" signature="1933:3079" ph="Select pro.p... od_coating_inspection_process" />
+                <marker date="1519374871032" expanded="true" signature="3148:3198" ph="select count... od_coating_inspection_process" />
+                <marker date="1519374871032" expanded="true" signature="3346:3404" ph="select * fro... od_coating_inspection_process" />
               </folding>
             </state>
           </provider>
@@ -64,17 +161,13 @@
         <option value="JavaScript File" />
         <option value="CSS File" />
         <option value="Interface" />
-        <option value="Jsp File" />
         <option value="Class" />
+        <option value="Jsp File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>clearFormLabel</find>
-      <find>savePerson</find>
-      <find>getPerson</find>
-      <find>getPersonById</find>
       <find>employeeno</find>
       <find>addOD</find>
       <find>pregister_time</find>
@@ -101,6 +194,10 @@
       <find>com</find>
       <find>odbpid</find>
       <find>odcoatproid</find>
+      <find>getAllODAcceptanceCriteria</find>
+      <find>searchPipe</find>
+      <find>getIDInspectedPipeInfoByLike</find>
+      <find>onSearchClick</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src/main/webapp/WEB-INF/lib</dir>
@@ -122,11 +219,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IdCoatingProcess.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IdCoatingInspectionProcess.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IdFinalInspectionProcess.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IdCoating3LpeProcess.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoating3LpeProcess.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdCoating3LpeProcessDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoating3LpeProcess.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoating3LpeProcessController.java" />
@@ -152,7 +244,6 @@
         <option value="$PROJECT_DIR$/src/main/webapp/id/idstencilprocess.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/IdFinalInspectionProcessController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/id/idfinalinspectionprocess.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/index.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ODCoatingAcceptanceCriteria.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IDCoatingAcceptanceCriteria.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/od/odfinalinspectionprocess.jsp" />
@@ -164,15 +255,21 @@
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/PipeStatusTransferRules" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/IdBlastInspectionProcessController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/id/idblastprocess.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings.properties" />
-        <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh.properties" />
-        <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/ODCoatingAcceptanceCriteriaDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/IDCoatingAcceptanceCriteriaDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ODCoatingAcceptanceCriteria.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IDCoatingAcceptanceCriteria.xml" />
         <option value="$PROJECT_DIR$/src/main/webapp/production/odstandard.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/AcceptanceCriteriaController.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties" />
+        <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh.properties" />
+        <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PipeBasicInfoDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeBasicInfo.xml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/storage/odstockin.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/index.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/storage/idstockin.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PipeBasicInfoController.java" />
       </list>
     </option>
   </component>
@@ -217,9 +314,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -260,15 +354,6 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
-              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
               <item name="dao" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -279,6 +364,15 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
               <item name="entity" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
@@ -301,7 +395,15 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="production" type="462c0819:PsiDirectoryNode" />
+              <item name="pipe" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="storage" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
@@ -315,7 +417,10 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -361,7 +466,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Tomcat Server.index.jsp (4)">
+  <component name="RunManager" selected="Tomcat Server.idstockin.jsp">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -437,8 +542,8 @@
       <properties />
       <listeners />
     </configuration>
-    <configuration name="index.jsp (1)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/index.jsp" />
+    <configuration name="idstockin.jsp" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/storage/idstockin.jsp" />
       <deployment>
         <artifact name="htcsweb:war">
           <settings>
@@ -447,7 +552,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="index_jsp_(1)_htcsweb_4" />
+        <option name="BASE_DIRECTORY_NAME" value="idstockin_jsp_htcsweb" />
       </server-settings>
       <predefined_log_file id="Tomcat" enabled="true" />
       <predefined_log_file id="Tomcat Catalina" enabled="true" />
@@ -455,138 +560,6 @@
       <predefined_log_file id="Tomcat Host Manager" enabled="false" />
       <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
-        <option name="USE_ENV_VARIABLES" value="true" />
-        <STARTUP>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </STARTUP>
-        <SHUTDOWN>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </SHUTDOWN>
-      </ConfigurationWrapper>
-      <method>
-        <option name="BuildArtifacts" enabled="true">
-          <artifact name="htcsweb:war" />
-        </option>
-      </method>
-    </configuration>
-    <configuration name="index.jsp (2)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/index.jsp" />
-      <deployment>
-        <artifact name="htcsweb:war">
-          <settings>
-            <option name="CONTEXT_PATH" value="/" />
-          </settings>
-        </artifact>
-      </deployment>
-      <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="index_jsp_(2)_htcsweb_71" />
-      </server-settings>
-      <predefined_log_file id="Tomcat" enabled="true" />
-      <predefined_log_file id="Tomcat Catalina" enabled="true" />
-      <predefined_log_file id="Tomcat Manager" enabled="false" />
-      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
-      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
-        <option name="USE_ENV_VARIABLES" value="true" />
-        <STARTUP>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </STARTUP>
-        <SHUTDOWN>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </SHUTDOWN>
-      </ConfigurationWrapper>
-      <method>
-        <option name="BuildArtifacts" enabled="true">
-          <artifact name="htcsweb:war" />
-        </option>
-      </method>
-    </configuration>
-    <configuration name="index.jsp (3)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/index.jsp" />
-      <deployment>
-        <artifact name="htcsweb:war">
-          <settings>
-            <option name="CONTEXT_PATH" value="/" />
-          </settings>
-        </artifact>
-      </deployment>
-      <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="index_jsp_(3)_htcsweb_57" />
-      </server-settings>
-      <predefined_log_file id="Tomcat" enabled="true" />
-      <predefined_log_file id="Tomcat Catalina" enabled="true" />
-      <predefined_log_file id="Tomcat Manager" enabled="false" />
-      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
-      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
-        <option name="USE_ENV_VARIABLES" value="true" />
-        <STARTUP>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </STARTUP>
-        <SHUTDOWN>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </SHUTDOWN>
-      </ConfigurationWrapper>
-      <method>
-        <option name="BuildArtifacts" enabled="true">
-          <artifact name="htcsweb:war" />
-        </option>
-      </method>
-    </configuration>
-    <configuration name="index.jsp (4)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/index.jsp" />
-      <deployment>
-        <artifact name="htcsweb:war">
-          <settings>
-            <option name="CONTEXT_PATH" value="/" />
-          </settings>
-        </artifact>
-      </deployment>
-      <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="index_jsp_(4)_htcsweb_45" />
-      </server-settings>
-      <predefined_log_file id="Tomcat" enabled="true" />
-      <predefined_log_file id="Tomcat Catalina" enabled="true" />
-      <predefined_log_file id="Tomcat Manager" enabled="false" />
-      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
-      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
-        <option name="USE_ENV_VARIABLES" value="true" />
-        <STARTUP>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </STARTUP>
-        <SHUTDOWN>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </SHUTDOWN>
-      </ConfigurationWrapper>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
@@ -618,7 +591,124 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="index_jsp_htcsweb_66" />
+        <option name="BASE_DIRECTORY_NAME" value="index_jsp_htcsweb_68" />
+      </server-settings>
+      <predefined_log_file id="Tomcat" enabled="true" />
+      <predefined_log_file id="Tomcat Catalina" enabled="true" />
+      <predefined_log_file id="Tomcat Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method>
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="htcsweb:war" />
+        </option>
+      </method>
+    </configuration>
+    <configuration name="odstockin.jsp (2)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/storage/odstockin.jsp" />
+      <deployment>
+        <artifact name="htcsweb:war">
+          <settings>
+            <option name="CONTEXT_PATH" value="/" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="odstockin_jsp_(2)_htcsweb" />
+      </server-settings>
+      <predefined_log_file id="Tomcat" enabled="true" />
+      <predefined_log_file id="Tomcat Catalina" enabled="true" />
+      <predefined_log_file id="Tomcat Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method>
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="htcsweb:war" />
+        </option>
+      </method>
+    </configuration>
+    <configuration name="odstockin.jsp (3)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/storage/odstockin.jsp" />
+      <deployment>
+        <artifact name="htcsweb:war">
+          <settings>
+            <option name="CONTEXT_PATH" value="/" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="odstockin_jsp_(3)_htcsweb" />
+      </server-settings>
+      <predefined_log_file id="Tomcat" enabled="true" />
+      <predefined_log_file id="Tomcat Catalina" enabled="true" />
+      <predefined_log_file id="Tomcat Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method>
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="htcsweb:war" />
+        </option>
+      </method>
+    </configuration>
+    <configuration name="odstockin.jsp (4)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/storage/odstockin.jsp" />
+      <deployment>
+        <artifact name="htcsweb:war">
+          <settings>
+            <option name="CONTEXT_PATH" value="/" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="odstockin_jsp_(4)_htcsweb" />
       </server-settings>
       <predefined_log_file id="Tomcat" enabled="true" />
       <predefined_log_file id="Tomcat Catalina" enabled="true" />
@@ -654,19 +744,19 @@
       <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (1)" />
-      <item index="1" class="java.lang.String" itemvalue="Tomcat Server.index.jsp" />
-      <item index="2" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (2)" />
-      <item index="3" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (3)" />
-      <item index="4" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (4)" />
+      <item index="0" class="java.lang.String" itemvalue="Tomcat Server.odstockin.jsp (2)" />
+      <item index="1" class="java.lang.String" itemvalue="Tomcat Server.odstockin.jsp (3)" />
+      <item index="2" class="java.lang.String" itemvalue="Tomcat Server.index.jsp" />
+      <item index="3" class="java.lang.String" itemvalue="Tomcat Server.odstockin.jsp (4)" />
+      <item index="4" class="java.lang.String" itemvalue="Tomcat Server.idstockin.jsp" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (4)" />
-        <item index="1" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (3)" />
-        <item index="2" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (2)" />
-        <item index="3" class="java.lang.String" itemvalue="Tomcat Server.index.jsp" />
-        <item index="4" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (1)" />
+        <item index="0" class="java.lang.String" itemvalue="Tomcat Server.idstockin.jsp" />
+        <item index="1" class="java.lang.String" itemvalue="Tomcat Server.odstockin.jsp (4)" />
+        <item index="2" class="java.lang.String" itemvalue="Tomcat Server.index.jsp" />
+        <item index="3" class="java.lang.String" itemvalue="Tomcat Server.odstockin.jsp (3)" />
+        <item index="4" class="java.lang.String" itemvalue="Tomcat Server.odstockin.jsp (2)" />
       </list>
     </recent_temporary>
   </component>
@@ -739,11 +829,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="519882000" />
+    <option name="totallyTimeSpent" value="524020000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="123" y="135" width="1895" height="965" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1440" height="836" extended-state="0" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3420708" sideWeight="0.50277776" order="7" side_tool="true" content_ui="tabs" />
@@ -757,25 +846,50 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39842725" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.263089" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896462" sideWeight="0.49444443" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40837696" sideWeight="0.49722221" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891247" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32853404" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30972221" sideWeight="0.56437767" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24444444" sideWeight="0.43683085" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3420708" sideWeight="0.50277776" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32960597" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.019169329" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39842725" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26328218" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.40850058" sideWeight="0.49722221" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896462" sideWeight="0.49444443" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891247" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947975" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23043713" sideWeight="0.56437767" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24444444" sideWeight="0.43683085" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -817,76 +931,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoating3LpeProcess.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdCoating3LpeProcessDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="19" column="1" lean-forward="true" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/js/common.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="85" column="8" lean-forward="true" selection-start-line="85" selection-start-column="8" selection-end-line="85" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/htcsweb.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdBlastProcessController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="67" column="25" lean-forward="true" selection-start-line="67" selection-start-column="25" selection-end-line="67" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoating3LpeProcessController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="102" column="52" lean-forward="true" selection-start-line="102" selection-start-column="52" selection-end-line="102" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoatingProcessController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="102" column="53" lean-forward="true" selection-start-line="102" selection-start-column="53" selection-end-line="102" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/id/idcoatingprocess.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="433" column="20" lean-forward="true" selection-start-line="433" selection-start-column="20" selection-end-line="433" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdStencilProcessController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="206">
@@ -917,7 +961,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="282">
           <caret line="119" column="50" lean-forward="false" selection-start-line="119" selection-start-column="50" selection-end-line="119" selection-end-column="50" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -941,7 +984,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="226">
           <caret line="76" column="73" lean-forward="false" selection-start-line="76" selection-start-column="58" selection-end-line="76" selection-end-column="73" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -949,37 +991,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="335">
           <caret line="111" column="11" lean-forward="false" selection-start-line="111" selection-start-column="11" selection-end-line="111" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="220" column="41" lean-forward="true" selection-start-line="220" selection-start-column="41" selection-end-line="220" selection-end-column="41" />
-          <folding>
-            <marker date="1519623734000" expanded="true" signature="1871:1894" ph="..." />
-            <marker date="1519623734000" expanded="true" signature="2359:2382" ph="..." />
-            <marker date="1519623734000" expanded="true" signature="2780:2803" ph="..." />
-            <marker date="1519623734000" expanded="true" signature="3205:3228" ph="..." />
-            <marker date="1519623734000" expanded="true" signature="3629:3652" ph="..." />
-            <marker date="1519623734000" expanded="true" signature="4039:4062" ph="..." />
-            <marker date="1519623734000" expanded="true" signature="4460:4483" ph="..." />
-            <marker date="1519623734000" expanded="true" signature="5286:5309" ph="..." />
-            <marker date="1519623734000" expanded="true" signature="5773:5796" ph="..." />
-            <marker date="1519623734000" expanded="true" signature="6224:6247" ph="..." />
-            <marker date="1519623734000" expanded="true" signature="6667:6690" ph="..." />
-            <marker date="1519623734000" expanded="true" signature="7547:7570" ph="..." />
-            <marker date="1519623734000" expanded="true" signature="8035:8058" ph="..." />
-            <marker date="1519623734000" expanded="true" signature="8444:8467" ph="..." />
-            <marker date="1519623734000" expanded="true" signature="8868:8891" ph="..." />
-            <marker date="1519623734000" expanded="true" signature="9278:9301" ph="..." />
-            <marker date="1519623734000" expanded="true" signature="9699:9722" ph="..." />
-            <marker date="1519623734000" expanded="true" signature="10513:10536" ph="..." />
-            <marker date="1519623734000" expanded="true" signature="11394:11417" ph="..." />
-            <marker date="1519623734000" expanded="true" signature="11857:11880" ph="..." />
-            <marker date="1519623734000" expanded="false" signature="14948:14961" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1003,7 +1014,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
           <caret line="101" column="74" lean-forward="false" selection-start-line="101" selection-start-column="74" selection-end-line="101" selection-end-column="74" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1011,14 +1021,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="302">
           <caret line="43" column="408" lean-forward="true" selection-start-line="43" selection-start-column="408" selection-end-line="43" selection-end-column="408" />
-          <folding>
-            <marker date="1519452814000" expanded="true" signature="288:1432" ph="Select pro.p... id_blast_inspection_process" />
-            <marker date="1519452814000" expanded="true" signature="1551:1949" ph="INSERT INTO id_blast_inspection_process... " />
-            <marker date="1519452814000" expanded="true" signature="2068:2109" ph="SELECT * fro... id_blast_inspection_process" />
-            <marker date="1519452814000" expanded="true" signature="2232:2634" ph="UPDATE id_blast_inspection_process... " />
-            <marker date="1519452814000" expanded="true" signature="2703:2751" ph="select count... id_blast_inspection_process" />
-            <marker date="1519452814000" expanded="true" signature="2895:2951" ph="select * fro... id_blast_inspection_process" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1026,15 +1029,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="268">
           <caret line="21" column="8" lean-forward="false" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
-          <folding>
-            <marker date="1519260911000" expanded="true" signature="319:872" ph="INSERT INTO od_blast_process... " />
-            <marker date="1519260911000" expanded="true" signature="1197:1227" ph="SELECT * fro... od_blast_process" />
-            <marker date="1519260911000" expanded="true" signature="1340:1897" ph="UPDATE od_blast_process... " />
-            <marker date="1519260911000" expanded="true" signature="1966:2003" ph="select count... od_blast_process" />
-            <marker date="1519260911000" expanded="true" signature="3553:4298" ph="select * FRO... od_blast_process" />
-            <marker date="1519260911000" expanded="true" signature="4372:5505" ph="Select pro.p... od_blast_process" />
-            <marker date="1519260911000" expanded="true" signature="5636:5681" ph="select * fro... od_blast_process" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1050,22 +1045,21 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
           <caret line="10" column="17" lean-forward="false" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/util/ComboxItem.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        <state relative-caret-position="120">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/util/ExcelUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="25" column="38" lean-forward="true" selection-start-line="25" selection-start-column="38" selection-end-line="25" selection-end-column="38" />
+        <state relative-caret-position="15">
+          <caret line="25" column="38" lean-forward="false" selection-start-line="25" selection-start-column="38" selection-end-line="25" selection-end-column="38" />
           <folding />
         </state>
       </provider>
@@ -1082,12 +1076,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="394">
           <caret line="185" column="0" lean-forward="true" selection-start-line="185" selection-start-column="0" selection-end-line="185" selection-end-column="0" />
-          <folding>
-            <element signature="e#5784#5785#0" expanded="false" />
-            <element signature="e#5823#5824#0" expanded="false" />
-            <element signature="e#5885#5886#0" expanded="false" />
-            <element signature="e#5941#5942#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1095,27 +1083,21 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4039">
           <caret line="453" column="0" lean-forward="true" selection-start-line="453" selection-start-column="0" selection-end-line="453" selection-end-column="0" />
-          <folding>
-            <element signature="e#16597#16598#0" expanded="false" />
-            <element signature="e#16636#16637#0" expanded="false" />
-            <element signature="e#16698#16699#0" expanded="false" />
-            <element signature="e#16754#16755#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/od/odblastprocess.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3077">
-          <caret line="431" column="24" lean-forward="false" selection-start-line="431" selection-start-column="24" selection-end-line="431" selection-end-column="24" />
+        <state relative-caret-position="6645">
+          <caret line="443" column="88" lean-forward="false" selection-start-line="443" selection-start-column="59" selection-end-line="443" selection-end-column="88" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/od/odblastinspectionprocess.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3329">
-          <caret line="498" column="61" lean-forward="true" selection-start-line="498" selection-start-column="61" selection-end-line="498" selection-end-column="61" />
+        <state relative-caret-position="7440">
+          <caret line="496" column="67" lean-forward="false" selection-start-line="496" selection-start-column="67" selection-end-line="496" selection-end-column="67" />
           <folding />
         </state>
       </provider>
@@ -1130,8 +1112,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/od/odcoatinginspectionprocess.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="442" column="0" lean-forward="false" selection-start-line="442" selection-start-column="0" selection-end-line="442" selection-end-column="0" />
+        <state relative-caret-position="6585">
+          <caret line="439" column="93" lean-forward="false" selection-start-line="439" selection-start-column="93" selection-end-line="439" selection-end-column="93" />
           <folding />
         </state>
       </provider>
@@ -1140,14 +1122,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
           <caret line="437" column="0" lean-forward="false" selection-start-line="437" selection-start-column="0" selection-end-line="437" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/PipeStatusTransferRules">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="15" column="36" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1164,7 +1138,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="31">
           <caret line="95" column="7" lean-forward="true" selection-start-line="95" selection-start-column="7" selection-end-line="95" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1172,7 +1145,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="105" column="47" lean-forward="false" selection-start-line="105" selection-start-column="47" selection-end-line="105" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1188,7 +1160,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
           <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1196,7 +1167,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="10" column="49" lean-forward="true" selection-start-line="10" selection-start-column="49" selection-end-line="10" selection-end-column="49" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1204,13 +1174,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="37" column="32" lean-forward="false" selection-start-line="37" selection-start-column="32" selection-end-line="37" selection-end-column="32" />
-          <folding>
-            <marker date="1519635808000" expanded="true" signature="351:2627" ph="INSERT INTO od_coating_acceptance_criteria... " />
-            <marker date="1519635808000" expanded="true" signature="3004:5284" ph="UPDATE od_coating_acceptance_criteria... " />
-            <marker date="1519635808000" expanded="true" signature="5352:5403" ph="select count... od_coating_acceptance_criteria" />
-            <marker date="1519635808000" expanded="true" signature="5475:5785" ph="Select AND o... " />
-            <marker date="1519635808000" expanded="true" signature="5914:5985" ph="SELECT * fro... od_coating_acceptance_criteria" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1226,42 +1190,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
           <caret line="39" column="13" lean-forward="true" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
-          <folding>
-            <marker date="1519635830000" expanded="true" signature="349:1113" ph="INSERT INTO id_coating_acceptance_criteria... " />
-            <marker date="1519635830000" expanded="true" signature="1489:2257" ph="UPDATE id_coating_acceptance_criteria... " />
-            <marker date="1519635830000" expanded="true" signature="2325:2376" ph="select count... id_coating_acceptance_criteria" />
-            <marker date="1519635830000" expanded="true" signature="2448:2758" ph="Select ＊ fro... " />
-            <marker date="1519635830000" expanded="true" signature="2887:2958" ph="SELECT * fro... id_coating_acceptance_criteria" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/strings.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="177" column="36" lean-forward="true" selection-start-line="177" selection-start-column="36" selection-end-line="177" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="ResourceBundle">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/strings_zh.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="29">
-          <caret line="175" column="26" lean-forward="true" selection-start-line="175" selection-start-column="26" selection-end-line="175" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="ResourceBundle">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="33">
-          <caret line="166" column="26" lean-forward="true" selection-start-line="166" selection-start-column="26" selection-end-line="166" selection-end-column="26" />
           <folding />
         </state>
       </provider>
@@ -1284,11 +1212,171 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/AcceptanceCriteriaController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="83" column="8" lean-forward="false" selection-start-line="83" selection-start-column="8" selection-end-line="83" selection-end-column="8" />
+        <state relative-caret-position="-20">
+          <caret line="104" column="48" lean-forward="false" selection-start-line="104" selection-start-column="22" selection-end-line="104" selection-end-column="48" />
           <folding>
-            <element signature="e#1578#1590#0" expanded="true" />
-            <element signature="e#4927#4939#0" expanded="true" />
+            <element signature="e#2714#2729#0" expanded="false" />
+            <element signature="e#4927#4939#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/strings_zh.properties">
+      <provider editor-type-id="ResourceBundle">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="9" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="7" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/strings.properties">
+      <provider editor-type-id="ResourceBundle">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="12" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeBasicInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeStatus.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1518943775198" expanded="true" signature="305:356" ph="SELECT * fro... pipe_status" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingInspectionProcess.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-334">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1519374871032" expanded="true" signature="341:917" ph="INSERT INTO od_coating_inspection_process... " />
+            <marker date="1519374871032" expanded="true" signature="1044:1624" ph="UPDATE od_coating_inspection_process... " />
+            <marker date="1519374871032" expanded="true" signature="1933:3079" ph="Select pro.p... od_coating_inspection_process" />
+            <marker date="1519374871032" expanded="true" signature="3148:3198" ph="select count... od_coating_inspection_process" />
+            <marker date="1519374871032" expanded="true" signature="3346:3404" ph="select * fro... od_coating_inspection_process" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/PipeStatusTransferRules">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="395">
+          <caret line="37" column="39" lean-forward="false" selection-start-line="37" selection-start-column="39" selection-end-line="37" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeBasicInfo.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="138" column="32" lean-forward="false" selection-start-line="138" selection-start-column="16" selection-end-line="138" selection-end-column="32" />
+          <folding>
+            <marker date="1519640165790" expanded="true" signature="1061:1308" ph="SELECT * fro... pipe_basic_info" />
+            <marker date="1519640165790" expanded="true" signature="1379:1415" ph="select count... pipe_basic_info" />
+            <marker date="1519640165790" expanded="true" signature="1488:2242" ph="select co.pr... pipe_basic_info" />
+            <marker date="1519640165790" expanded="true" signature="2332:3121" ph="select co.pr... pipe_basic_info" />
+            <marker date="1519640165790" expanded="true" signature="3210:3996" ph="select co.pr... pipe_basic_info" />
+            <marker date="1519640165790" expanded="true" signature="4071:4417" ph="Select pro.p... pipe_basic_info" />
+            <marker date="1519640165790" expanded="true" signature="4528:4765" ph="UPDATE pipe_basic_info... " />
+            <marker date="1519640165790" expanded="true" signature="4873:5112" ph="INSERT INTO pipe_basic_info... " />
+            <marker date="1519640165790" expanded="true" signature="5439:5635" ph="UPDATE pipe_basic_info... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/storage/odstockin.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="136" column="0" lean-forward="true" selection-start-line="136" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/storage/idstockin.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="98" column="101" lean-forward="false" selection-start-line="98" selection-start-column="73" selection-end-line="98" selection-end-column="101" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PipeBasicInfoDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PipeBasicInfoController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="59">
+          <caret line="221" column="0" lean-forward="true" selection-start-line="221" selection-start-column="0" selection-end-line="221" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/pipe/pipeManagement.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="403" column="0" lean-forward="false" selection-start-line="403" selection-start-column="0" selection-end-line="403" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="227" column="108" lean-forward="false" selection-start-line="227" selection-start-column="108" selection-end-line="227" selection-end-column="108" />
+          <folding>
+            <marker date="1519640372759" expanded="true" signature="1871:1894" ph="..." />
+            <marker date="1519640372759" expanded="true" signature="2359:2382" ph="..." />
+            <marker date="1519640372759" expanded="true" signature="2780:2803" ph="..." />
+            <marker date="1519640372759" expanded="true" signature="3205:3228" ph="..." />
+            <marker date="1519640372759" expanded="true" signature="3629:3652" ph="..." />
+            <marker date="1519640372759" expanded="true" signature="4039:4062" ph="..." />
+            <marker date="1519640372759" expanded="true" signature="4460:4483" ph="..." />
+            <marker date="1519640372759" expanded="true" signature="5286:5309" ph="..." />
+            <marker date="1519640372759" expanded="true" signature="5773:5796" ph="..." />
+            <marker date="1519640372759" expanded="true" signature="6224:6247" ph="..." />
+            <marker date="1519640372759" expanded="true" signature="6667:6690" ph="..." />
+            <marker date="1519640372759" expanded="true" signature="7547:7570" ph="..." />
+            <marker date="1519640372759" expanded="true" signature="8035:8058" ph="..." />
+            <marker date="1519640372759" expanded="true" signature="8444:8467" ph="..." />
+            <marker date="1519640372759" expanded="true" signature="8868:8891" ph="..." />
+            <marker date="1519640372759" expanded="true" signature="9278:9301" ph="..." />
+            <marker date="1519640372759" expanded="true" signature="9699:9722" ph="..." />
+            <marker date="1519640372759" expanded="true" signature="10532:10555" ph="..." />
+            <marker date="1519640372759" expanded="true" signature="11021:11044" ph="..." />
+            <marker date="1519640372759" expanded="true" signature="11509:11532" ph="..." />
+            <marker date="1519640372759" expanded="true" signature="12368:12391" ph="..." />
+            <marker date="1519640372759" expanded="true" signature="13249:13272" ph="..." />
+            <marker date="1519640372759" expanded="true" signature="13712:13735" ph="..." />
           </folding>
         </state>
       </provider>
