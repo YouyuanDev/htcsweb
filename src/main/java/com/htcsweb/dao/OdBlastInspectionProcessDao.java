@@ -14,11 +14,11 @@ public interface OdBlastInspectionProcessDao {
     public int  updateOdBlastInProcess(OdBlastInspectionProcess odBlastInspectionProcess);
     public List<OdBlastInspectionProcess>feny(int pagesize, int rows);
     //public int getCount();
-    public List<HashMap<String,Object>> getAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no")String operator_no, @Param("begin_time")Date begin_time, @Param("end_time")Date end_time, @Param("skip")int skip, @Param("take")int take);
+    public List<HashMap<String,Object>> getAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no")String operator_no, @Param("begin_time")Date begin_time, @Param("end_time")Date end_time,@Param("mill_no")String mill_no, @Param("skip")int skip, @Param("take")int take);
     public int delOdBlastInspectionProcess(String[]arrId);
 
 
-    public int getCountAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no")String operator_no, @Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
+    public int getCountAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no")String operator_no, @Param("begin_time")Date begin_time, @Param("end_time")Date end_time, @Param("mill_no")String mill_no);
 
 
 }
