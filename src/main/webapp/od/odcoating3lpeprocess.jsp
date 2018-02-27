@@ -158,7 +158,7 @@
                     //表单验证
                     setParams($("input[name='coating_line_speed']"));
                     setParams($("input[name='application_temp']"));
-                    setParams($("input[name='top_coat_gun_count']"));
+                    setParams($("input[name='base_coat_gun_count']"));
                     setParams($("input[name='to_first_touch_duration']"));
                     setParams($("input[name='to_quench_duration']"));
                     if($("input[name='odcoatprotime']").val()==""){
@@ -284,7 +284,7 @@
                 <th field="middle_coat_lot_no" align="center" width="100" hidden="true" class="i18n1" name="middlecoatlotno">中间层粉末批号</th>
                 <th field="top_coat_used" align="center" width="100" hidden="true" class="i18n1" name="topcoatused">面层粉末型号</th>
                 <th field="top_coat_lot_no" width="100" align="center" hidden="true" class="i18n1" name="topcoatlotno">面层粉末批号</th>
-                <th field="top_coat_gun_count" width="100" align="center" hidden="true" class="i18n1" name="topcoatguncount">面层粉末喷枪数</th>
+                <th field="base_coat_gun_count" width="100" align="center" hidden="true" class="i18n1" name="topcoatguncount">面层粉末喷枪数</th>
                 <th field="application_temp" align="center" width="80" class="i18n1" name="applicationtemp">中频温度</th>
                 <th field="to_first_touch_duration" align="center" width="120" class="i18n1" name="tofirsttouchduration">首次到达接触点时间</th>
                 <th field="to_quench_duration" align="center" width="150" class="i18n1" name="toquenchduration">到达水淋处时间</th>
@@ -424,7 +424,7 @@
                 </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="topcoatguncount">面层粉末喷枪数</td>
-                    <td colspan="5"><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="top_coat_gun_count" value=""/></td>
+                    <td colspan="5"><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="base_coat_gun_count" value=""/></td>
                 </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="tofirsttouchduration">首次到达接触点时间</td>

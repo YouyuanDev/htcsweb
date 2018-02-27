@@ -282,14 +282,14 @@
                     if(tab){
                         $('#hlTab').tabs('select',node.text);
                     }else{
-                        if("外防腐标准"==nodeTxt||"Person Management"==nodeTxt){
+                        if("外防腐标准"==nodeTxt||"Od Standard"==nodeTxt){
                             $('#hlTab').tabs('add',{
                                 title:node.text,
                                 content:"<iframe scrolling='auto' frameborder='0'  src='production/odstandard.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable:true
                             });
                             hlLanguage();
-                        }else if("内防腐标准"==nodeTxt||"Person Management"==nodeTxt){
+                        }else if("内防腐标准"==nodeTxt||"Id Standard"==nodeTxt){
                             $('#hlTab').tabs('add',{
                                 title:node.text,
                                 content:"<iframe scrolling='auto' frameborder='0'  src='production/idstandard.jsp' style='width:100%;height:100%;'></iframe>",
@@ -389,7 +389,7 @@
         <div title="生产工艺" class="i18n" name="productionprocess" style="padding:10px;">
             <ul id="hlprocess">
                 <li class="i18n1" name="odstandard">外防腐标准</li>
-                <li class="i18n1" name="idstandard">内防腐标准</li>
+                <li class="i18n1" name="instandard">内防腐标准</li>
             </ul>
         </div>
         <div title="实验" class="i18n" name="labtesting" style="padding:10px;">

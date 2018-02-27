@@ -1,72 +1,55 @@
 package com.htcsweb.entity;
 
+import org.apache.ibatis.annotations.Param;
+import org.springframework.format.annotation.NumberFormat;
+
 import java.util.Date;
 
 public class ODCoatingAcceptanceCriteria {
 
     private  int id; //流水号
-    private String coating_acceptance_criteria_no;    //接收标准编号
-
-    private float salt_contamination_before_blast_max;  //
-    private float salt_contamination_before_blast_min;   //
-
+    private String coating_acceptance_criteria_no;
+    private float salt_contamination_before_blast_max;
+    private float salt_contamination_before_blast_min;
     private float preheat_temp_max;
     private float preheat_temp_min;
-
     private float relative_humidity_max;
     private float relative_humidity_min;
-
     private float temp_above_dew_point_max;
     private float temp_above_dew_point_min;
-
     private float blast_finish_sa25_max;
     private float blast_finish_sa25_min;
-
     private int surface_dust_rating_max;
     private int surface_dust_rating_min;
-
     private float od_profile_max;
     private float od_profile_min;
-
     private float pipe_temp_after_blast_max;
     private float pipe_temp_after_blast_min;
-
     private float salt_contamination_after_blasting_max;
     private float salt_contamination_after_blasting_min;
-
     private float application_temp_max;
     private float application_temp_min;
-
     private float base_2fbe_coat_thickness_max;
     private float base_2fbe_coat_thickness_min;
 
-
     private float top_2fbe_coat_thickness_max;
     private float top_2fbe_coat_thickness_min;
-
     private float total_2fbe_coat_thickness_max;
     private float total_2fbe_coat_thickness_min;
 
-
     private float top_3lpe_coat_thickness_max;
     private float top_3lpe_coat_thickness_min;
-
     private float middle_3lpe_coat_thickness_max;
     private float middle_3lpe_coat_thickness_min;
-
     private float base_3lpe_coat_thickness_max;
     private float base_3lpe_coat_thickness_min;
-
     private float total_3lpe_coat_thickness_max;
     private float total_3lpe_coat_thickness_min;
-
     private int repair_max;
     private int repair_min;
 
-
     private float holiday_tester_voltage_max;
     private float holiday_tester_voltage_min;
-
     private float cutback_max;
     private float cutback_min;
 

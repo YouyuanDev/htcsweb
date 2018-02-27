@@ -21,6 +21,11 @@
 
     <select id="getCount" resultType="int">
         select count(*) from od_coating_acceptance_criteria
+        <where>
+            <if test="coating_acceptance_criteria_no!=null and coating_acceptance_criteria_no!=''">
+                AND coating_acceptance_criteria_no LIKE CONCAT('%',#{coating_acceptance_criteria_no},'%')
+            </if>
+        </where>
     </select>
 
     <select id="getAllByLike" resultType="map">

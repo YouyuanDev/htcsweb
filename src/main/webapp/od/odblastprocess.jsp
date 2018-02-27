@@ -157,9 +157,8 @@
                     setParams($("input[name='blast_line_speed']"));
                     setParams($("input[name='conductivity']"));
                     setParams($("input[name='preheat_temp']"));
-                    if($("input[name='odbptime']").val()==""){
-                        hlAlertFour("请输入操作时间");
-                        return false;
+                    if(!hlValidateNull($("input[name='odbptime']"))){
+                        hlAlertFour("请输入操作时间");return false;
                     }
                 },
                 success: function(result){
@@ -332,7 +331,7 @@
                <tr>
                    <td class="i18n1" name="pipeno" width="16%">钢管编号</td>
                    <td colspan="2" width="33%">
-                       <input id="lookup1" name="pipe_no" class="mini-lookup" style="text-align:center;width:180px;"
+                       <input  id="lookup1" name="pipe_no" class="mini-lookup" style="text-align:center;width:180px;"
                               textField="pipe_no" valueField="id" popupWidth="auto"
                               popup="#gridPanel1" grid="#datagrid1" multiSelect="false"/>
                    </td>

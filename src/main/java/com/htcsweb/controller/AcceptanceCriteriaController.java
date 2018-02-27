@@ -53,11 +53,11 @@ public class AcceptanceCriteriaController {
         if(page==null||page==""){
             page="0";
         }if(rows==null||rows==""){
-            rows="0";
+            rows="20";
         }
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
         List<HashMap<String,Object>>list=odcoatingacceptancecriteriaDao.getAllByLike(coating_acceptance_criteria_no,start,Integer.parseInt(rows));
-        int count=odcoatingacceptancecriteriaDao.getCount();
+        int count=odcoatingacceptancecriteriaDao.getCount(coating_acceptance_criteria_no);
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
         maps.put("rows",list);
@@ -73,13 +73,16 @@ public class AcceptanceCriteriaController {
             int resTotal=0;
             System.out.println("执行到此。。。。");
             odCoatingAcceptanceCriteria.setLast_update_time(new Date());
+            System.out.println(odCoatingAcceptanceCriteria.getApplication_temp_min());
             if(odCoatingAcceptanceCriteria.getId()==0){
                 //添加
+                System.out.println("tinajai");
                 resTotal=odcoatingacceptancecriteriaDao.addOdCoatingCriterProcess(odCoatingAcceptanceCriteria);
             }else{
                 //修改！
                 System.out.println("执行修改到此。。。。");
                 System.out.println(odCoatingAcceptanceCriteria.getCoating_acceptance_criteria_no());
+                System.out.println(odCoatingAcceptanceCriteria.getApplication_temp_max());
                 resTotal=odcoatingacceptancecriteriaDao.updateOdCoatingCriterProcess(odCoatingAcceptanceCriteria);
             }
             if(resTotal>0){
@@ -89,10 +92,12 @@ public class AcceptanceCriteriaController {
             }
             ResponseUtil.write(response,json);
         }catch (Exception e){
+            System.out.println("baoxuo");
             e.printStackTrace();
         }
         return null;
     }
+
     //删除外防腐标准
     @RequestMapping("/delAllODAcceptanceCriteria")
     public String delAllODAcceptanceCriteria(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
@@ -131,9 +136,15 @@ public class AcceptanceCriteriaController {
     public String getAllIDAcceptanceCriteriaByLike(@RequestParam(value = "coating_acceptance_criteria_no",required = false)String coating_acceptance_criteria_no,HttpServletRequest request){
         String page= request.getParameter("page");
         String rows= request.getParameter("rows");
+        if(page==null||page==""){
+            page="0";
+        }if(rows==null||rows==""){
+            rows="20";
+        }
+        System.out.println("rows="+rows);
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
         List<HashMap<String,Object>>list=idcoatingacceptancecriteriaDao.getAllByLike(coating_acceptance_criteria_no,start,Integer.parseInt(rows));
-        int count=idcoatingacceptancecriteriaDao.getCount();
+        int count=idcoatingacceptancecriteriaDao.getCount(coating_acceptance_criteria_no);
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
         maps.put("rows",list);

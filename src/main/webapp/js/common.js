@@ -12,23 +12,6 @@ function hlAlertThree() {
 function hlAlertFour(txt) {
     $.messager.alert('Warning',txt);
 }
-// function hlAlertFive(url,hlparam,total,$obj) {
-//     $.messager.confirm('系统提示',"您确定要删除这<font color=red>"+total+ "</font>条数据吗？",function (r) {
-//         if(r){
-//             $.post(url,{"hlparam":hlparam},function (data) {
-//                 if(data.success){
-//                     $("#odBlastProDatagrids").datagrid("reload");
-//                 }else{
-//                     hlAlertFour("操作失败!");
-//                 }
-//             },"json");
-//         }
-//     });
-// }
-
-
-
-
 function hlAlertSix(url,$imglist,$dialog,$obj) {
     var hlparam=$imglist.val().trim();
     var imgarr=[];
@@ -61,6 +44,14 @@ function hlAlertSix(url,$imglist,$dialog,$obj) {
         // $dialog.dialog('close');
     }
 }
+//表单验证函数
+//---验证是否为空
+function hlValidateNull($obj) {
+  if($obj.val().trim()==""){
+     return false;
+  }
+}
+
 //清理选择文件框
 function  clearMultiUpload($grid) {
     var rows = $grid.getData();

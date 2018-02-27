@@ -7,11 +7,11 @@
 
 
     <insert id="addOdCoating3LpeProcess" parameterType="com.htcsweb.entity.OdCoating3LpeProcess">
-    INSERT INTO od_coating_3lpe_process(pipe_no,operation_time,operator_no,coating_line_speed,base_coat_used,base_coat_lot_no,middle_coat_used,middle_coat_lot_no,top_coat_used,top_coat_lot_no,top_coat_gun_count,application_temp,to_first_touch_duration,to_quench_duration,upload_files,remark,result) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{coating_line_speed},#{base_coat_used},#{base_coat_lot_no},#{middle_coat_used},#{middle_coat_lot_no},#{top_coat_used},#{top_coat_lot_no},#{top_coat_gun_count},#{application_temp},#{to_first_touch_duration},#{to_quench_duration},#{upload_files},#{remark},#{result})
+    INSERT INTO od_coating_3lpe_process(pipe_no,operation_time,operator_no,coating_line_speed,base_coat_used,base_coat_lot_no,middle_coat_used,middle_coat_lot_no,top_coat_used,top_coat_lot_no,base_coat_gun_count,application_temp,to_first_touch_duration,to_quench_duration,upload_files,remark,result) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{coating_line_speed},#{base_coat_used},#{base_coat_lot_no},#{middle_coat_used},#{middle_coat_lot_no},#{top_coat_used},#{top_coat_lot_no},#{base_coat_gun_count},#{application_temp},#{to_first_touch_duration},#{to_quench_duration},#{upload_files},#{remark},#{result})
     </insert>
 
     <update id="updateOdCoating3LpeProcess" parameterType="com.htcsweb.entity.OdCoating3LpeProcess">
-    UPDATE od_coating_3lpe_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},coating_line_speed=#{coating_line_speed},base_coat_used=#{base_coat_used},base_coat_lot_no=#{base_coat_lot_no},middle_coat_used=#{middle_coat_used},middle_coat_lot_no=#{middle_coat_lot_no},top_coat_used=#{top_coat_used},top_coat_lot_no=#{top_coat_lot_no},top_coat_gun_count=#{top_coat_gun_count},application_temp=#{application_temp},to_first_touch_duration=#{to_first_touch_duration},to_quench_duration=#{to_quench_duration},upload_files=#{upload_files},remark=#{remark},result=#{result} where id=#{id}
+    UPDATE od_coating_3lpe_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},coating_line_speed=#{coating_line_speed},base_coat_used=#{base_coat_used},base_coat_lot_no=#{base_coat_lot_no},middle_coat_used=#{middle_coat_used},middle_coat_lot_no=#{middle_coat_lot_no},top_coat_used=#{top_coat_used},top_coat_lot_no=#{top_coat_lot_no},base_coat_gun_count=#{base_coat_gun_count},application_temp=#{application_temp},to_first_touch_duration=#{to_first_touch_duration},to_quench_duration=#{to_quench_duration},upload_files=#{upload_files},remark=#{remark},result=#{result} where id=#{id}
     </update>
 
     <delete id="delOdCoating3LpeProcess">

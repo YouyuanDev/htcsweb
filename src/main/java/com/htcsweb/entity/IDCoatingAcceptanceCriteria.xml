@@ -21,12 +21,17 @@
 
     <select id="getCount" resultType="int">
         select count(*) from id_coating_acceptance_criteria
+        <where>
+            <if test="coating_acceptance_criteria_no!=null and coating_acceptance_criteria_no!=''">
+                AND coating_acceptance_criteria_no LIKE CONCAT('%',#{coating_acceptance_criteria_no},'%')
+            </if>
+        </where>
     </select>
 
     <select id="getAllByLike" resultType="map">
-        Select ＊ from id_coating_acceptance_criteria
+        Select * from id_coating_acceptance_criteria
         <where>
-            <if test="pipe_no!=null and pipe_no!=''">
+            <if test="coating_acceptance_criteria_no!=null and coating_acceptance_criteria_no!=''">
                 AND coating_acceptance_criteria_no LIKE CONCAT('%',#{coating_acceptance_criteria_no},'%')
             </if>
         </where>
@@ -35,7 +40,7 @@
     </select>
 
     <select id="getAllIDAcceptanceCriteria" resultType="com.htcsweb.entity.IDCoatingAcceptanceCriteria">
-        SELECT  *  from id_coating_acceptance_criteria
+        SELECT  * from id_coating_acceptance_criteria
         ORDER BY id DESC
     </select>
 
