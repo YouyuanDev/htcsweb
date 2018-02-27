@@ -7,11 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa3f659b-6ccf-4ae8-84a0-55d0a3756f6f" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/IdBlastInspectionProcessController.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/IdBlastInspectionProcessController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/IdBlastInspectionProcessDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/IdBlastInspectionProcessDao.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IdBlastInspectionProcess.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IdBlastInspectionProcess.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/id/idblastinspectionprocess.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/id/idblastinspectionprocess.jsp" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/id/idblastprocess.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/id/idblastprocess.jsp" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/IdCoatingProcessController.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/IdCoatingProcessController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/IdCoatingProcessDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/IdCoatingProcessDao.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IdCoatingProcess.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IdCoatingProcess.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/id/idcoatingprocess.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/id/idcoatingprocess.jsp" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -36,12 +35,58 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="idblastprocess.jsp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="idblastprocess.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/id/idblastprocess.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="166" column="23" lean-forward="false" selection-start-line="166" selection-start-column="23" selection-end-line="166" selection-end-column="23" />
+            <state relative-caret-position="265">
+              <caret line="395" column="20" lean-forward="true" selection-start-line="385" selection-start-column="15" selection-end-line="395" selection-end-column="20" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="idcoatingprocess.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/id/idcoatingprocess.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="133">
+              <caret line="270" column="106" lean-forward="false" selection-start-line="270" selection-start-column="88" selection-end-line="270" selection-end-column="106" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IdCoatingProcessController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/IdCoatingProcessController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="276">
+              <caret line="61" column="68" lean-forward="true" selection-start-line="61" selection-start-column="68" selection-end-line="61" selection-end-column="68" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IdCoatingProcessDao.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/IdCoatingProcessDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="16" column="52" lean-forward="false" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="52" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IdCoatingProcess.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IdCoatingProcess.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="380">
+              <caret line="69" column="17" lean-forward="false" selection-start-line="69" selection-start-column="17" selection-end-line="69" selection-end-column="17" />
+              <folding>
+                <marker date="1519741874874" expanded="true" signature="322:789" ph="INSERT INTO id_coating_process... " />
+                <marker date="1519741874874" expanded="true" signature="906:1377" ph="UPDATE id_coating_process... " />
+                <marker date="1519741874874" expanded="true" signature="1670:1709" ph="select count... id_coating_process" />
+                <marker date="1519741874874" expanded="true" signature="2955:4204" ph="Select pro.p... id_coating_process" />
+                <marker date="1519741874874" expanded="true" signature="4343:4390" ph="select * fro... id_coating_process" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -97,7 +142,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IdBlastProcess.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="340">
-              <caret line="71" column="17" lean-forward="false" selection-start-line="69" selection-start-column="12" selection-end-line="71" selection-end-column="17" />
+              <caret line="71" column="17" lean-forward="true" selection-start-line="69" selection-start-column="12" selection-end-line="71" selection-end-column="17" />
               <folding>
                 <marker date="1519741022077" expanded="true" signature="315:611" ph="INSERT INTO id_blast_process... " />
                 <marker date="1519741022077" expanded="true" signature="936:966" ph="SELECT * fro... id_blast_process" />
@@ -127,7 +172,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getContractInfoByLike</find>
       <find>baretype</find>
       <find>IDBarePipeTOODBare</find>
       <find>odbarepipetoidbare</find>
@@ -157,6 +201,7 @@
       <find>getIdBlastByLike</find>
       <find>getIdBlastInspectionByLike</find>
       <find>alert</find>
+      <find>getIdCoatingByLike</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src/main/webapp/WEB-INF/lib</dir>
@@ -178,10 +223,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IdFinalInspectionProcess.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IdStencilProcess.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IdStencilProcess.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastInspectionProcess.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastProcess.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoating3LpeProcess.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingInspectionProcess.java" />
@@ -229,6 +270,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/IdBlastInspectionProcessDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IdBlastInspectionProcess.xml" />
         <option value="$PROJECT_DIR$/src/main/webapp/id/idblastprocess.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/id/idcoatingprocess.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/IdCoatingProcessController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/IdCoatingProcessDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IdCoatingProcess.xml" />
       </list>
     </option>
   </component>
@@ -455,7 +500,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Tomcat Server.idblastinspectionprocess.jsp">
+  <component name="RunManager" selected="Tomcat Server.idcoatingprocess.jsp">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -609,8 +654,8 @@
         </option>
       </method>
     </configuration>
-    <configuration name="idfinalinspectionprocess.jsp" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/id/idfinalinspectionprocess.jsp" />
+    <configuration name="idcoatingprocess.jsp" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/id/idcoatingprocess.jsp" />
       <deployment>
         <artifact name="htcsweb:war">
           <settings>
@@ -619,7 +664,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="idfinalinspectionprocess_jsp_htcsweb" />
+        <option name="BASE_DIRECTORY_NAME" value="idcoatingprocess_jsp_htcsweb_2" />
       </server-settings>
       <predefined_log_file id="Tomcat" enabled="true" />
       <predefined_log_file id="Tomcat Catalina" enabled="true" />
@@ -733,19 +778,19 @@
       <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Tomcat Server.idfinalinspectionprocess.jsp" />
-      <item index="1" class="java.lang.String" itemvalue="Tomcat Server.odstencilprocess.jsp" />
-      <item index="2" class="java.lang.String" itemvalue="Tomcat Server.odstencilprocess.jsp (1)" />
-      <item index="3" class="java.lang.String" itemvalue="Tomcat Server.idblastprocess.jsp" />
-      <item index="4" class="java.lang.String" itemvalue="Tomcat Server.idblastinspectionprocess.jsp" />
+      <item index="0" class="java.lang.String" itemvalue="Tomcat Server.odstencilprocess.jsp" />
+      <item index="1" class="java.lang.String" itemvalue="Tomcat Server.odstencilprocess.jsp (1)" />
+      <item index="2" class="java.lang.String" itemvalue="Tomcat Server.idblastprocess.jsp" />
+      <item index="3" class="java.lang.String" itemvalue="Tomcat Server.idblastinspectionprocess.jsp" />
+      <item index="4" class="java.lang.String" itemvalue="Tomcat Server.idcoatingprocess.jsp" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Tomcat Server.idblastinspectionprocess.jsp" />
-        <item index="1" class="java.lang.String" itemvalue="Tomcat Server.idblastprocess.jsp" />
-        <item index="2" class="java.lang.String" itemvalue="Tomcat Server.odstencilprocess.jsp (1)" />
-        <item index="3" class="java.lang.String" itemvalue="Tomcat Server.odstencilprocess.jsp" />
-        <item index="4" class="java.lang.String" itemvalue="Tomcat Server.idfinalinspectionprocess.jsp" />
+        <item index="0" class="java.lang.String" itemvalue="Tomcat Server.idcoatingprocess.jsp" />
+        <item index="1" class="java.lang.String" itemvalue="Tomcat Server.idblastinspectionprocess.jsp" />
+        <item index="2" class="java.lang.String" itemvalue="Tomcat Server.idblastprocess.jsp" />
+        <item index="3" class="java.lang.String" itemvalue="Tomcat Server.odstencilprocess.jsp (1)" />
+        <item index="4" class="java.lang.String" itemvalue="Tomcat Server.odstencilprocess.jsp" />
       </list>
     </recent_temporary>
   </component>
@@ -809,7 +854,7 @@
       <workItem from="1519643981652" duration="13861000" />
       <workItem from="1519697672778" duration="1641000" />
       <workItem from="1519720449015" duration="2052000" />
-      <workItem from="1519734766013" duration="6510000" />
+      <workItem from="1519734766013" duration="6774000" />
     </task>
     <servers />
   </component>
@@ -822,11 +867,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="548089000" />
+    <option name="totallyTimeSpent" value="548353000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="836" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3420708" sideWeight="0.50277776" order="7" side_tool="true" content_ui="tabs" />
@@ -846,7 +890,7 @@
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896462" sideWeight="0.49444443" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37958115" sideWeight="0.49722221" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37958115" sideWeight="0.49722221" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891247" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947975" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3159722" sideWeight="0.56437767" order="0" side_tool="false" content_ui="combo" />
@@ -900,46 +944,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdFinalInspectionProcess.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="930">
-          <caret line="94" column="32" lean-forward="false" selection-start-line="94" selection-start-column="32" selection-end-line="94" selection-end-column="32" />
-          <folding>
-            <element signature="e#2285#2286#0" expanded="false" />
-            <element signature="e#2331#2332#0" expanded="false" />
-            <element signature="e#2369#2370#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdStencilProcess.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1110">
-          <caret line="114" column="32" lean-forward="false" selection-start-line="114" selection-start-column="32" selection-end-line="114" selection-end-column="32" />
-          <folding>
-            <element signature="e#2859#2860#0" expanded="false" />
-            <element signature="e#2905#2906#0" expanded="false" />
-            <element signature="e#2943#2944#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/db.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="26" lean-forward="false" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PersonController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PersonDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="163">
@@ -1340,14 +1344,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/id/idblastinspectionprocess.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="302" column="133" lean-forward="false" selection-start-line="302" selection-start-column="107" selection-end-line="302" selection-end-column="133" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/IdBlastInspectionProcessController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="268">
@@ -1361,22 +1357,6 @@
         <state relative-caret-position="225">
           <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IdBlastProcess.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="71" column="17" lean-forward="false" selection-start-line="69" selection-start-column="12" selection-end-line="71" selection-end-column="17" />
-          <folding>
-            <marker date="1519741022077" expanded="true" signature="315:611" ph="INSERT INTO id_blast_process... " />
-            <marker date="1519741022077" expanded="true" signature="936:966" ph="SELECT * fro... id_blast_process" />
-            <marker date="1519741022077" expanded="true" signature="1079:1383" ph="UPDATE id_blast_process... " />
-            <marker date="1519741022077" expanded="true" signature="1452:1489" ph="select count... id_blast_process" />
-            <marker date="1519741022077" expanded="true" signature="1566:1603" ph="select count... id_blast_process" />
-            <marker date="1519741022077" expanded="true" signature="2734:3981" ph="Select pro.p... id_blast_process" />
-            <marker date="1519741022077" expanded="true" signature="4112:4157" ph="select * fro... id_blast_process" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1395,11 +1375,73 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/id/idblastinspectionprocess.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="302" column="133" lean-forward="false" selection-start-line="302" selection-start-column="107" selection-end-line="302" selection-end-column="133" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/id/idblastprocess.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="166" column="23" lean-forward="false" selection-start-line="166" selection-start-column="23" selection-end-line="166" selection-end-column="23" />
+        <state relative-caret-position="265">
+          <caret line="395" column="20" lean-forward="true" selection-start-line="385" selection-start-column="15" selection-end-line="395" selection-end-column="20" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/id/idcoatingprocess.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="270" column="106" lean-forward="false" selection-start-line="270" selection-start-column="88" selection-end-line="270" selection-end-column="106" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/IdCoatingProcessController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="61" column="68" lean-forward="true" selection-start-line="61" selection-start-column="68" selection-end-line="61" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/IdCoatingProcessDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="16" column="52" lean-forward="false" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IdBlastProcess.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="71" column="17" lean-forward="true" selection-start-line="69" selection-start-column="12" selection-end-line="71" selection-end-column="17" />
+          <folding>
+            <marker date="1519741022077" expanded="true" signature="315:611" ph="INSERT INTO id_blast_process... " />
+            <marker date="1519741022077" expanded="true" signature="936:966" ph="SELECT * fro... id_blast_process" />
+            <marker date="1519741022077" expanded="true" signature="1079:1383" ph="UPDATE id_blast_process... " />
+            <marker date="1519741022077" expanded="true" signature="1452:1489" ph="select count... id_blast_process" />
+            <marker date="1519741022077" expanded="true" signature="1566:1603" ph="select count... id_blast_process" />
+            <marker date="1519741022077" expanded="true" signature="2734:3981" ph="Select pro.p... id_blast_process" />
+            <marker date="1519741022077" expanded="true" signature="4112:4157" ph="select * fro... id_blast_process" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IdCoatingProcess.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="69" column="17" lean-forward="false" selection-start-line="69" selection-start-column="17" selection-end-line="69" selection-end-column="17" />
+          <folding>
+            <marker date="1519741874874" expanded="true" signature="322:789" ph="INSERT INTO id_coating_process... " />
+            <marker date="1519741874874" expanded="true" signature="906:1377" ph="UPDATE id_coating_process... " />
+            <marker date="1519741874874" expanded="true" signature="1670:1709" ph="select count... id_coating_process" />
+            <marker date="1519741874874" expanded="true" signature="2955:4204" ph="Select pro.p... id_coating_process" />
+            <marker date="1519741874874" expanded="true" signature="4343:4390" ph="select * fro... id_coating_process" />
+          </folding>
         </state>
       </provider>
     </entry>
