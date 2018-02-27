@@ -15,4 +15,5 @@ public interface ODCoatingAcceptanceCriteriaDao {
     public int updateOdCoatingCriterProcess(ODCoatingAcceptanceCriteria odCoatingAcceptanceCriteria);
     public List<HashMap<String,Object>> getAllByLike(@Param("coating_acceptance_criteria_no") String coating_acceptance_criteria_no, @Param("skip") int skip, @Param("take") int take);
     public int getCount(@Param("coating_acceptance_criteria_no") String coating_acceptance_criteria_no);
+    public ODCoatingAcceptanceCriteria getODAcceptanceCriteriaByContractNo(@Param("contract_no")String contract_no);
 }

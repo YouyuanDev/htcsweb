@@ -192,6 +192,30 @@ public class AcceptanceCriteriaController {
         ResponseUtil.write(response,json);
         return null;
     }
-
-
+    //根据项目编号查找外防腐标准
+    @RequestMapping("/getODAcceptanceCriteriaByContractNo")
+    @ResponseBody
+    public String getODAcceptanceCriteriaByContractNo(HttpServletRequest request){
+        String contract_no=request.getParameter("contract_no");
+        if(contract_no!=null&&contract_no!=""){
+             ODCoatingAcceptanceCriteria criteria=odcoatingacceptancecriteriaDao.getODAcceptanceCriteriaByContractNo(contract_no);
+             String map= JSONObject.toJSONString(criteria);
+             return map;
+        }else{
+            return  null;
+        }
+    }
+    //根据项目编号查找内防腐标准
+    @RequestMapping("/getIDAcceptanceCriteriaByContractNo")
+    @ResponseBody
+    public String getIDAcceptanceCriteriaByContractNo(HttpServletRequest request){
+        String contract_no=request.getParameter("contract_no");
+        if(contract_no!=null&&contract_no!=""){
+             IDCoatingAcceptanceCriteria criteria=idcoatingacceptancecriteriaDao.getIDAcceptanceCriteriaByContractNo(contract_no);
+             String map= JSONObject.toJSONString(criteria);
+             return map;
+        }else{
+            return  null;
+        }
+    }
 }

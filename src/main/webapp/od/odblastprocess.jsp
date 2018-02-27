@@ -84,6 +84,7 @@
             clearFormLabel();
             clearMultiUpload(grid);
             url="/OdOperation/saveOdBlastProcess.action";
+            //$("input[name='alkaline_dwell_time']").siblings().css("background-color","#F9A6A6");
         }
         function delOdBlastPro() {
             var row = $('#odBlastProDatagrids').datagrid('getSelections');
@@ -131,6 +132,24 @@
                      var imgList=odpictures.split(';');
                      createPictureModel(imgList);
                 }
+                //异步获取标准并匹配
+                $.ajax({
+                    url:'/AcceptanceCriteriaOperation/getODAcceptanceCriteriaByContractNo.action',
+                    dataType:'json',
+                    data:{'contract_no':row.contract_no},
+                    success:function (data) {
+                        if(data!=null){
+                            var salt=$("input[name='salt_contamination_before_blasting']").val();
+                            if((salt>data.salt_contamination_before_blast_min)&&(salt<data.salt_contamination_before_blast_max)){
+                                $("input[name='salt_contamination_before_blasting']").siblings().css("background-color","#FFFFFF");
+                            }else{
+                                $("input[name='salt_contamination_before_blasting']").siblings().css("background-color","#F9A6A6");
+                            }
+                        }
+                    },error:function () {
+
+                    }
+                });
                 url="/OdOperation/saveOdBlastProcess.action?id="+row.id;
             }else{
                 hlAlertTwo();
@@ -157,9 +176,9 @@
                     setParams($("input[name='blast_line_speed']"));
                     setParams($("input[name='conductivity']"));
                     setParams($("input[name='preheat_temp']"));
-                    if(!hlValidateNull($("input[name='odbptime']"))){
-                        hlAlertFour("请输入操作时间");return false;
-                    }
+                    // if(!hlValidateNull($("input[name='odbptime']"))){
+                    //     hlAlertFour("请输入操作时间");return false;
+                    // }
                 },
                 success: function(result){
                     var result = eval('('+result+')');
@@ -388,7 +407,7 @@
        <table class="ht-table">
            <tr>
                <td class="i18n1" name="alkalinedwelltime">碱洗时间</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="alkaline_dwell_time" value=""/></td>
+               <td><input class="easyui-numberbox hl-errorcolor" data-options="min:0,precision:0" type="text" name="alkaline_dwell_time" value=""/></td>
                <td>10~20</td>
                <td class="i18n1" name="alkalineconcentration">碱浓度</td>
                <td><input class="easyui-numberbox"  data-options="min:0,precision:2" type="text" name="alkaline_concentration" value=""/></td>

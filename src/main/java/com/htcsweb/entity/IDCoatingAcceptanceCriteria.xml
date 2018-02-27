@@ -43,5 +43,7 @@
         SELECT  * from id_coating_acceptance_criteria
         ORDER BY id DESC
     </select>
-
+    <select id="getIDAcceptanceCriteriaByContractNo" resultType="com.htcsweb.entity.IDCoatingAcceptanceCriteria">
+        select o.* from contract_info c left JOIN project_info p on c.project_no=p.project_no left JOIN id_coating_acceptance_criteria o on p.coating_standard=o.coating_acceptance_criteria_no WHERE c.contract_no=#{contract_no}
+    </select>
 </mapper>

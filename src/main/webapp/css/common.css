@@ -102,3 +102,6 @@
 #hl-gallery span.next {
   float: right;
 }
+.hl-errorcolor{
+  background-color:#F9A6A6;
+}
