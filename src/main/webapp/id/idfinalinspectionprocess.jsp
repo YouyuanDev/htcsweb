@@ -7,7 +7,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>外涂岗位</title>
+    <title>内防终检岗位</title>
     <link rel="stylesheet" type="text/css" href="../easyui/themes/bootstrap/easyui.css">
     <link rel="stylesheet" type="text/css" href="../easyui/themes/icon.css">
     <link href="../miniui/multiupload/multiupload.css" rel="stylesheet" type="text/css" />
@@ -148,7 +148,8 @@
                 'pipe_no': $('#pipeno').val(),
                 'operator_no': $('#operatorno').val(),
                 'begin_time': $('#begintime').val(),
-                'end_time': $('#endtime').val()
+                'end_time': $('#endtime').val(),
+                'mill_no': $('#millno').val()
             });
         }
         function idFinalInProFormSubmit() {
@@ -259,6 +260,7 @@
             <tr>
                 <th data-options="field:'ck',checkbox:true"></th>
                 <th field="id" align="center" width="100" class="i18n1" name="id">流水号</th>
+                <th field="mill_no" align="center" width="150" class="i18n1" name="millno">分厂</th>
                 <th field="project_name" align="center" width="100" class="i18n1" name="projectname">项目名称</th>
                 <th field="contract_no" align="center" width="100" class="i18n1" name="contractno">合同编号</th>
                 <th field="pipe_no" align="center" width="100" class="i18n1" name="pipeno">钢管编号</th>
@@ -287,6 +289,14 @@
 
 <!--工具栏-->
 <div id="hlIdFinalInProTb" style="padding:10px;">
+    <input id="millno" class="easyui-combobox" type="text" name="millno"  data-options=
+            "url:'/millInfo/getAllMillsWithComboboxSelectAll.action',
+					        method:'get',
+					        valueField:'id',
+					        width: 150,
+					        editable:false,
+					        textField:'text',
+					        panelHeight:'auto'"/>
     <span class="i18n1" name="pipeno">钢管编号</span>:
     <input id="pipeno" name="pipeno" style="line-height:22px;border:1px solid #ccc">
     <span class="i18n1" name="operatorno">操作工编号</span>:
@@ -350,24 +360,35 @@
 
 
         <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
-            <legend>外喷砂生产信息</legend>
+            <legend>内防终检信息</legend>
 
             <table class="ht-table">
                 <tr>
-                    <td class="i18n1" name="id">流水号</td>
+                    <td class="i18n1" name="id" width="20%">流水号</td>
                     <%--<td colspan="5"><label class="hl-label" id="odcoatproid"></label></td>--%>
-                    <td colspan="5"><input id="idFinalInproid" class="easyui-textbox" readonly="true" type="text" value="" name="idStencilproid"> </td>
+                    <td colspan="1" width="30%"><input id="idFinalInproid" class="easyui-textbox" readonly="true" type="text" value="" name="idStencilproid"> </td>
+                    <td class="i18n1" name="millno" width="20%">分厂</td>
+                    <td colspan="1" width="30%">
+                        <input id="mill_no" class="easyui-combobox" type="text" name="mill_no"  data-options=
+                                "url:'/millInfo/getAllMills.action',
+					        method:'get',
+					        valueField:'id',
+					        width: 185,
+					        editable:false,
+					        textField:'text',
+					        panelHeight:'auto'"/>
+                    </td>
                 </tr>
                 <tr>
-                    <td class="i18n1" name="operatorno">操作工编号</td>
-                    <td colspan="2">
+                    <td class="i18n1" name="operatorno" width="20%">操作工编号</td>
+                    <td colspan="1" width="30%">
                         <input id="lookup2" name="operator_no" class="mini-lookup" style="text-align:center;width:180px;"
                                textField="employee_no" valueField="id" popupWidth="auto"
                                popup="#gridPanel2" grid="#datagrid2" multiSelect="false"
                         />
                     </td>
-                    <td class="i18n1" name="operationtime">操作时间</td>
-                    <td colspan="2">
+                    <td class="i18n1" name="operationtime" width="20%">操作时间</td>
+                    <td colspan="1" width="30%">
                         <input class="easyui-datetimebox" id="idFinalInprotime" type="text" name="idFinalInprotime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
 
