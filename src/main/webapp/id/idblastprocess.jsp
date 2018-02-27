@@ -164,7 +164,7 @@
                     var arg1=$("input[name='pipe_no']").val();
                     var arg2=$("input[name='original_pipe_no']").val();
                     var arg3=$("input[name='new_pipe_no']").val();
-                     alert("arg1="+arg1+",arg2="+arg2+",arg3="+arg3);
+                     //alert("arg1="+arg1+",arg2="+arg2+",arg3="+arg3);
                      if(arg1!=arg2||arg1!=arg3||arg2!=arg3){
                          hlAlertFour("钢管编号不同!");
                          return false;

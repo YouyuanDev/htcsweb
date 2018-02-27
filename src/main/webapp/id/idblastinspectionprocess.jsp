@@ -176,7 +176,8 @@
                 'pipe_no': $('#pipeno').val(),
                 'operator_no': $('#operatorno').val(),
                 'begin_time': $('#begintime').val(),
-                'end_time': $('#endtime').val()
+                'end_time': $('#endtime').val(),
+                'mill_no': $('#millno').val()
             });
         }
         function idBlastInspectionProFormSubmit() {
@@ -304,6 +305,7 @@
             <tr>
                 <th data-options="field:'ck',checkbox:true"></th>
                 <th field="id" align="center" width="100" class="i18n1" name="id">流水号</th>
+                <th field="mill_no" align="center" width="150" class="i18n1" name="millno">分厂</th>
                 <th field="project_name" align="center" width="120" class="i18n1" name="projectname">项目名称</th>
                 <th field="contract_no" align="center" width="120" class="i18n1" name="contractno">合同编号</th>
                 <th field="pipe_no" align="center" width="120" class="i18n1" name="pipeno">钢管编号</th>
@@ -337,6 +339,14 @@
 
 <!--工具栏-->
 <div id="hlIdBlastInspectionProTb" style="padding:10px;">
+    <input id="millno" class="easyui-combobox" type="text" name="millno"  data-options=
+            "url:'/millInfo/getAllMillsWithComboboxSelectAll.action',
+					        method:'get',
+					        valueField:'id',
+					        width: 150,
+					        editable:false,
+					        textField:'text',
+					        panelHeight:'auto'"/>
     <span class="i18n1" name="pipeno">钢管编号</span>:
     <input id="pipeno" name="pipeno" style="line-height:26px;border:1px solid #ccc">
     <span class="i18n1" name="operatorno">操作工编号</span>:
@@ -406,20 +416,30 @@
 
             <table class="ht-table">
                 <tr>
-                    <td class="i18n1" name="id">流水号</td>
-                    <td colspan="5"><input class="easyui-textbox" type="text" id="odbinpid" name="odbinpid" readonly="true" value="0"/></td>
-
+                    <td class="i18n1" name="id" width="20%">流水号</td>
+                    <td colspan="1" width="30%"><input class="easyui-textbox" type="text" id="odbinpid" name="odbinpid" readonly="true" value="0"/></td>
+                    <td class="i18n1" name="millno" width="20%">分厂</td>
+                    <td colspan="1" width="30%">
+                        <input id="mill_no" class="easyui-combobox" type="text" name="mill_no"  data-options=
+                                "url:'/millInfo/getAllMills.action',
+					        method:'get',
+					        valueField:'id',
+					        width: 185,
+					        editable:false,
+					        textField:'text',
+					        panelHeight:'auto'"/>
+                    </td>
                 </tr>
                 <tr>
-                    <td class="i18n1" name="operatorno">操作工编号</td>
-                    <td colspan="2" >
+                    <td class="i18n1" name="operatorno" width="20%">操作工编号</td>
+                    <td colspan="1" width="30%">
                         <input id="lookup2" name="operator_no" class="mini-lookup" style="text-align:center;width:180px;"
                                textField="employee_no" valueField="id" popupWidth="auto"
                                popup="#gridPanel2" grid="#datagrid2" multiSelect="false"
                         />
                     </td>
-                    <td class="i18n1" name="operationtime">操作时间</td>
-                    <td colspan="2">
+                    <td class="i18n1" name="operationtime" width="20%">操作时间</td>
+                    <td colspan="1" width="30%">
                         <input class="easyui-datetimebox" type="text" id="idbptime" name="idbptime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
 
