@@ -7,11 +7,11 @@
 
 
     <insert id="addIdCoatingProcess" parameterType="com.htcsweb.entity.IdCoatingProcess">
-        INSERT INTO id_coating_process(pipe_no,operation_time,operator_no,coating_speed,base_used,base_batch,curing_agent_used,curing_agent_batch,curing_start_time,curing_finish_time,curing_temp,upload_files,remark,result) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{coating_speed},#{base_used},#{base_batch},#{curing_agent_used},#{curing_agent_batch},#{curing_start_time},#{curing_finish_time},#{curing_temp},#{upload_files},#{remark},#{result})
+        INSERT INTO id_coating_process(pipe_no,operation_time,operator_no,coating_speed,base_used,base_batch,curing_agent_used,curing_agent_batch,curing_start_time,curing_finish_time,curing_temp,upload_files,remark,result,mill_no) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{coating_speed},#{base_used},#{base_batch},#{curing_agent_used},#{curing_agent_batch},#{curing_start_time},#{curing_finish_time},#{curing_temp},#{upload_files},#{remark},#{result},#{mill_no})
     </insert>
 
     <update id="updateIdCoatingProcess" parameterType="com.htcsweb.entity.IdCoatingProcess">
-        UPDATE id_coating_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},coating_speed=#{coating_speed},base_used=#{base_used},base_batch=#{base_batch},curing_agent_used=#{curing_agent_used},curing_agent_batch=#{curing_agent_batch},curing_start_time=#{curing_start_time},curing_finish_time=#{curing_finish_time},curing_temp=#{curing_temp},upload_files=#{upload_files},remark=#{remark},result=#{result} where id=#{id}
+        UPDATE id_coating_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},coating_speed=#{coating_speed},base_used=#{base_used},base_batch=#{base_batch},curing_agent_used=#{curing_agent_used},curing_agent_batch=#{curing_agent_batch},curing_start_time=#{curing_start_time},curing_finish_time=#{curing_finish_time},curing_temp=#{curing_temp},upload_files=#{upload_files},remark=#{remark},result=#{result},mill_no=#{mill_no} where id=#{id}
     </update>
 
     <delete id="delIdCoatingProcess">

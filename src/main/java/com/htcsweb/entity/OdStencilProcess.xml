@@ -7,11 +7,11 @@
 
 
     <insert id="addOdStencilProcess" parameterType="com.htcsweb.entity.OdStencilProcess">
-    INSERT INTO od_stencil_process(pipe_no,operation_time,operator_no,stencil_content,center_line_color,pipe_end_color,upload_files,remark,result) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{stencil_content},#{center_line_color},#{pipe_end_color},#{upload_files},#{remark},#{result})
+    INSERT INTO od_stencil_process(pipe_no,operation_time,operator_no,stencil_content,center_line_color,pipe_end_color,upload_files,remark,result,mill_no) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{stencil_content},#{center_line_color},#{pipe_end_color},#{upload_files},#{remark},#{result},#{mill_no})
     </insert>
 
     <update id="updateOdStencilProcess" parameterType="com.htcsweb.entity.OdStencilProcess">
-    UPDATE od_stencil_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},stencil_content=#{stencil_content},center_line_color=#{center_line_color},pipe_end_color=#{pipe_end_color},upload_files=#{upload_files},remark=#{remark},result=#{result} where id=#{id}
+    UPDATE od_stencil_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},stencil_content=#{stencil_content},center_line_color=#{center_line_color},pipe_end_color=#{pipe_end_color},upload_files=#{upload_files},remark=#{remark},result=#{result},mill_no=#{mill_no} where id=#{id}
     </update>
 
     <delete id="delOdStencilProcess">

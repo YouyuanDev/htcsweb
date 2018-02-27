@@ -7,11 +7,11 @@
 
 
     <insert id="addIdCoatingInProcess" parameterType="com.htcsweb.entity.IdCoatingInspectionProcess">
-        INSERT INTO id_coating_inspection_process(pipe_no,operation_time,operator_no,dry_film_thickness_max,dry_film_thickness_min,cutback,holiday_tester_volts,holiday_test_results,surface_condition,bevel_check,magnetism,internal_repairs,upload_files,remark,result) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{dry_film_thickness_max},#{dry_film_thickness_min},#{cutback},#{holiday_tester_volts},#{holiday_test_results},#{surface_condition},#{bevel_check},#{magnetism},#{internal_repairs},#{upload_files},#{remark},#{result})
+        INSERT INTO id_coating_inspection_process(pipe_no,operation_time,operator_no,dry_film_thickness_max,dry_film_thickness_min,cutback,holiday_tester_volts,holiday_test_results,surface_condition,bevel_check,magnetism,internal_repairs,upload_files,remark,result,mill_no) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{dry_film_thickness_max},#{dry_film_thickness_min},#{cutback},#{holiday_tester_volts},#{holiday_test_results},#{surface_condition},#{bevel_check},#{magnetism},#{internal_repairs},#{upload_files},#{remark},#{result},#{mill_no})
     </insert>
 
     <update id="updateIdCoatingInProcess" parameterType="com.htcsweb.entity.IdCoatingInspectionProcess">
-        UPDATE id_coating_inspection_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no}, dry_film_thickness_max=#{dry_film_thickness_max},dry_film_thickness_min=#{dry_film_thickness_min},cutback=#{cutback},holiday_tester_volts=#{holiday_tester_volts},holiday_test_results =#{holiday_test_results},surface_condition=#{surface_condition},bevel_check=#{bevel_check},magnetism =#{magnetism},internal_repairs=#{internal_repairs},upload_files=#{upload_files},remark=#{remark},result=#{result} where id=#{id}
+        UPDATE id_coating_inspection_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no}, dry_film_thickness_max=#{dry_film_thickness_max},dry_film_thickness_min=#{dry_film_thickness_min},cutback=#{cutback},holiday_tester_volts=#{holiday_tester_volts},holiday_test_results =#{holiday_test_results},surface_condition=#{surface_condition},bevel_check=#{bevel_check},magnetism =#{magnetism},internal_repairs=#{internal_repairs},upload_files=#{upload_files},remark=#{remark},result=#{result},mill_no=#{mill_no} where id=#{id}
     </update>
 
     <delete id="delIdCoatingInProcess">

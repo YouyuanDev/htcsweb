@@ -17,12 +17,13 @@ public class IdBlastInspectionProcess {
    private String upload_files;
    private String remark;
    private  String result;
+   private  String mill_no;
 
    public IdBlastInspectionProcess() {
 
    }
 
-    public IdBlastInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, float relative_humidity, float dew_point, float pipe_temp, String surface_condition, float blast_time, String blast_finish_sa25, float profile, String upload_files, String remark, String result) {
+    public IdBlastInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, float relative_humidity, float dew_point, float pipe_temp, String surface_condition, float blast_time, String blast_finish_sa25, float profile, String upload_files, String remark, String result, String mill_no) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -37,6 +38,7 @@ public class IdBlastInspectionProcess {
         this.upload_files = upload_files;
         this.remark = remark;
         this.result = result;
+        this.mill_no = mill_no;
     }
 
     public int getId() {
@@ -149,5 +151,13 @@ public class IdBlastInspectionProcess {
 
     public void setResult(String result) {
         this.result = result;
+    }
+
+    public String getMill_no() {
+        return mill_no;
+    }
+
+    public void setMill_no(String mill_no) {
+        this.mill_no = mill_no;
     }
 }

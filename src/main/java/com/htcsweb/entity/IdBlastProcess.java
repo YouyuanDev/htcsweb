@@ -16,11 +16,12 @@ public class IdBlastProcess {
     private String upload_files;
     private  String remark;
     private  String result;
+    private  String mill_no;
 
     public IdBlastProcess() {
     }
 
-    public IdBlastProcess(int id, String pipe_no, Date operation_time, String operator_no, String original_pipe_no, String new_pipe_no, String pipe_no_update, String upload_files, String remark, String result) {
+    public IdBlastProcess(int id, String pipe_no, Date operation_time, String operator_no, String original_pipe_no, String new_pipe_no, String pipe_no_update, String upload_files, String remark, String result, String mill_no) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -31,6 +32,7 @@ public class IdBlastProcess {
         this.upload_files = upload_files;
         this.remark = remark;
         this.result = result;
+        this.mill_no = mill_no;
     }
 
     public int getId() {
@@ -111,5 +113,13 @@ public class IdBlastProcess {
 
     public void setResult(String result) {
         this.result = result;
+    }
+
+    public String getMill_no() {
+        return mill_no;
+    }
+
+    public void setMill_no(String mill_no) {
+        this.mill_no = mill_no;
     }
 }

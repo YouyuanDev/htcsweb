@@ -57,7 +57,7 @@
 
 
     <insert id="addOdBlastInProcess" parameterType="com.htcsweb.entity.OdBlastInspectionProcess">
-    INSERT INTO od_blast_inspection_process(pipe_no,operation_time,operator_no,air_temp,relative_humidity,dew_point,blast_finish_sa25,profile,surface_dust_rating,pipe_temp,salt_contamination_after_blasting,surface_condition,upload_files,remark,result) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{air_temp},#{relative_humidity},#{dew_point},#{blast_finish_sa25},#{profile},#{surface_dust_rating},#{pipe_temp},#{salt_contamination_after_blasting},#{surface_condition},#{upload_files},#{remark},#{result})
+        INSERT INTO od_blast_inspection_process(pipe_no,operation_time,operator_no,air_temp,relative_humidity,dew_point,blast_finish_sa25,profile,surface_dust_rating,pipe_temp,salt_contamination_after_blasting,surface_condition,upload_files,remark,result,mill_no) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{air_temp},#{relative_humidity},#{dew_point},#{blast_finish_sa25},#{profile},#{surface_dust_rating},#{pipe_temp},#{salt_contamination_after_blasting},#{surface_condition},#{upload_files},#{remark},#{result},#{mill_no})
     </insert>
 
     <select id="getOdBlastInProcess" resultType="com.htcsweb.entity.OdBlastInspectionProcess">
@@ -65,7 +65,7 @@
     </select>
 
     <update id="updateOdBlastInProcess" parameterType="com.htcsweb.entity.OdBlastInspectionProcess">
-    UPDATE od_blast_inspection_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},air_temp=#{air_temp},relative_humidity=#{relative_humidity},dew_point=#{dew_point},blast_finish_sa25=#{blast_finish_sa25},profile=#{profile},surface_dust_rating=#{surface_dust_rating},pipe_temp=#{pipe_temp},salt_contamination_after_blasting=#{salt_contamination_after_blasting},surface_condition=#{surface_condition},upload_files=#{upload_files},remark=#{remark},result=#{result} where id=#{id}
+        UPDATE od_blast_inspection_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},air_temp=#{air_temp},relative_humidity=#{relative_humidity},dew_point=#{dew_point},blast_finish_sa25=#{blast_finish_sa25},profile=#{profile},surface_dust_rating=#{surface_dust_rating},pipe_temp=#{pipe_temp},salt_contamination_after_blasting=#{salt_contamination_after_blasting},surface_condition=#{surface_condition},upload_files=#{upload_files},remark=#{remark},result=#{result},mill_no=#{mill_no} where id=#{id}
     </update>
 
 
@@ -90,6 +90,7 @@
         <result property="upload_files" column="upload_files"></result>
         <result property="remark" column="remark"></result>
         <result property="result" column="result"></result>
+        <result property="mill_no" column="mill_no"></result>
 
     </resultMap>
 

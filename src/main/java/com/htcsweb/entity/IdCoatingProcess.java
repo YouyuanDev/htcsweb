@@ -21,11 +21,12 @@ public class IdCoatingProcess {
     private String upload_files;
     private String remark;
     private String result;
+    private String mill_no;
 
     public IdCoatingProcess() {
     }
 
-    public IdCoatingProcess(int id, String pipe_no, Date operation_time, String operator_no, float coating_speed, String base_used, String base_batch, String curing_agent_used, String curing_agent_batch, Date curing_start_time, Date curing_finish_time, float curing_temp, String upload_files, String remark, String result) {
+    public IdCoatingProcess(int id, String pipe_no, Date operation_time, String operator_no, float coating_speed, String base_used, String base_batch, String curing_agent_used, String curing_agent_batch, Date curing_start_time, Date curing_finish_time, float curing_temp, String upload_files, String remark, String result, String mill_no) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -41,6 +42,7 @@ public class IdCoatingProcess {
         this.upload_files = upload_files;
         this.remark = remark;
         this.result = result;
+        this.mill_no = mill_no;
     }
 
     public int getId() {
@@ -161,5 +163,13 @@ public class IdCoatingProcess {
 
     public void setResult(String result) {
         this.result = result;
+    }
+
+    public String getMill_no() {
+        return mill_no;
+    }
+
+    public void setMill_no(String mill_no) {
+        this.mill_no = mill_no;
     }
 }

@@ -7,11 +7,11 @@
 
 
     <insert id="addIdStencilProcess" parameterType="com.htcsweb.entity.IdStencilProcess">
-    INSERT INTO id_stencil_process(pipe_no,operation_time,operator_no,stencil_content,upload_files,remark,result) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{stencil_content},#{upload_files},#{remark},#{result})
+    INSERT INTO id_stencil_process(pipe_no,operation_time,operator_no,stencil_content,upload_files,remark,result,mill_no) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{stencil_content},#{upload_files},#{remark},#{result},#{mill_no})
     </insert>
 
     <update id="updateIdStencilProcess" parameterType="com.htcsweb.entity.IdStencilProcess">
-    UPDATE id_stencil_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},stencil_content=#{stencil_content},upload_files=#{upload_files},remark=#{remark},result=#{result} where id=#{id}
+    UPDATE id_stencil_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},stencil_content=#{stencil_content},upload_files=#{upload_files},remark=#{remark},result=#{result},mill_no=#{mill_no} where id=#{id}
     </update>
 
     <delete id="delIdStencilProcess">

@@ -19,11 +19,12 @@ public class OdBlastInspectionProcess {
    private String upload_files;
    private String remark;
    private  String result;
+   private  String mill_no;
 
     public OdBlastInspectionProcess() {
     }
 
-    public OdBlastInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, float air_temp, float relative_humidity, float dew_point, String blast_finish_sa25, float profile, int surface_dust_rating, float pipe_temp, float salt_contamination_after_blasting, String surface_condition, String upload_files, String remark, String result) {
+    public OdBlastInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, float air_temp, float relative_humidity, float dew_point, String blast_finish_sa25, float profile, int surface_dust_rating, float pipe_temp, float salt_contamination_after_blasting, String surface_condition, String upload_files, String remark, String result, String mill_no) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -40,6 +41,7 @@ public class OdBlastInspectionProcess {
         this.upload_files = upload_files;
         this.remark = remark;
         this.result = result;
+        this.mill_no = mill_no;
     }
 
     public int getId() {
@@ -168,5 +170,13 @@ public class OdBlastInspectionProcess {
 
     public void setResult(String result) {
         this.result = result;
+    }
+
+    public String getMill_no() {
+        return mill_no;
+    }
+
+    public void setMill_no(String mill_no) {
+        this.mill_no = mill_no;
     }
 }

@@ -24,11 +24,12 @@ public class OdCoating3LpeProcess {
     private String upload_files;
     private String remark;
     private String result;
+    private String mill_no;
 
     public OdCoating3LpeProcess() {
     }
 
-    public OdCoating3LpeProcess(int id, String pipe_no, Date operation_time, String operator_no, float coating_line_speed, String base_coat_used, String base_coat_lot_no, String middle_coat_used, String middle_coat_lot_no, String top_coat_used, String top_coat_lot_no, int base_coat_gun_count, float application_temp, float to_first_touch_duration, float to_quench_duration, String upload_files, String remark, String result) {
+    public OdCoating3LpeProcess(int id, String pipe_no, Date operation_time, String operator_no, float coating_line_speed, String base_coat_used, String base_coat_lot_no, String middle_coat_used, String middle_coat_lot_no, String top_coat_used, String top_coat_lot_no, int base_coat_gun_count, float application_temp, float to_first_touch_duration, float to_quench_duration, String upload_files, String remark, String result, String mill_no) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -47,6 +48,7 @@ public class OdCoating3LpeProcess {
         this.upload_files = upload_files;
         this.remark = remark;
         this.result = result;
+        this.mill_no = mill_no;
     }
 
     public int getId() {
@@ -137,11 +139,11 @@ public class OdCoating3LpeProcess {
         this.top_coat_lot_no = top_coat_lot_no;
     }
 
-    public int getTop_coat_gun_count() {
+    public int getBase_coat_gun_count() {
         return base_coat_gun_count;
     }
 
-    public void setTop_coat_gun_count(int base_coat_gun_count) {
+    public void setBase_coat_gun_count(int base_coat_gun_count) {
         this.base_coat_gun_count = base_coat_gun_count;
     }
 
@@ -191,5 +193,13 @@ public class OdCoating3LpeProcess {
 
     public void setResult(String result) {
         this.result = result;
+    }
+
+    public String getMill_no() {
+        return mill_no;
+    }
+
+    public void setMill_no(String mill_no) {
+        this.mill_no = mill_no;
     }
 }
