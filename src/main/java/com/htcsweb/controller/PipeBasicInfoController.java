@@ -42,6 +42,31 @@ public class PipeBasicInfoController {
         return map;
     }
 
+    //用于搜索的pipe状态下拉框，带All 选项
+    @RequestMapping("/getAllPipeStatusWithComboboxSelectAll")
+    @ResponseBody
+    public String getAllPipeStatusWithComboboxSelectAll(HttpServletRequest request){
+        List<PipeStatus>list=pipeStatusDao.getAllPipeStatus();
+        List<ComboxItem> colist=new ArrayList<ComboxItem>();
+        ComboxItem itemall= new ComboxItem();
+        itemall.id="";
+        itemall.text="All（所有状态）";
+        colist.add(itemall);
+
+        for(int i=0;i<list.size();i++){
+            ComboxItem citem= new ComboxItem();
+            PipeStatus ps=((PipeStatus)list.get(i));
+            citem.id=ps.getStatus_code();
+            citem.text= ps.getStatus_code()+"("+ps.getStatus_name()+")";
+            colist.add(citem);
+        }
+
+        String map= JSONObject.toJSONString(colist);
+        System.out.println("========="+map);
+        return map;
+    }
+
+
 
     @RequestMapping("/getAllPipeStatus")
     @ResponseBody

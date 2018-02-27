@@ -35,7 +35,7 @@
                 'project_no': $('#projectno').val(),
                 'contract_no': $('#contractno').val(),
                 'pipe_no':$('#pipeno').val(),
-                'status':$('#status').val()
+                'status':$('#pstatus').val()
             });
         }
         $(function () {
@@ -258,11 +258,12 @@
     <input id="contractno" name="contractno" style="width:100px;line-height:22px;border:1px solid #ccc">
     <span class="i18n1" name="projectno">项目编号</span>:
     <input id="projectno" name="projectno"  style="width:100px;line-height:22px;border:1px solid #ccc">
-    <input id="status" class="easyui-combobox" type="text" name="status"  data-options=
-            "url:'/pipeinfo/getAllPipeStatus.action',
+    <input id="pstatus" class="easyui-combobox" type="text" name="status"  data-options=
+            "url:'/pipeinfo/getAllPipeStatusWithComboboxSelectAll.action',
 					        method:'get',
 					        valueField:'id',
 					        width: 200,
+					        editable:false,
 					        textField:'text',
 					        panelHeight:'auto'"/>
 
@@ -333,10 +334,11 @@
                 </tr>
                 <tr>
                     <td class="i18n1" name="status" width="16%">状态</td>
-                    <td   width="33%"><input class="easyui-combobox" type="text" name="status"  data-options=
+                    <td   width="33%"><input id="status" class="easyui-combobox" type="text" name="status"  data-options=
                             "url:'/pipeinfo/getAllPipeStatus.action',
 					        method:'get',
 					        valueField:'id',
+					        editable:false,
 					        textField:'text',
 					        panelHeight:'auto'"/></td>
                 </tr>
@@ -400,6 +402,8 @@
 
     var keyText1=mini.get('keyText_contract_no');
     var look1=mini.get('lookup1');
+
+
 
     function onSearchClick(type) {
         if(type==1)
