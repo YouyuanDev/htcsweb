@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>外喷砂信息</title>
+    <title>内喷砂信息</title>
     <link rel="stylesheet" type="text/css" href="../easyui/themes/bootstrap/easyui.css">
     <link rel="stylesheet" type="text/css" href="../easyui/themes/icon.css">
     <link href="../miniui/multiupload/multiupload.css" rel="stylesheet" type="text/css" />
@@ -377,7 +377,7 @@
 
 
        <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
-           <legend>外喷砂生产信息</legend>
+           <legend>内喷砂生产信息</legend>
 
        <table class="ht-table">
            <tr>

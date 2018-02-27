@@ -35,6 +35,9 @@
             <if test="operator_no!=null and operator_no!=''">
                 AND o.operator_no LIKE CONCAT('%',#{operator_no},'%')
             </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no =#{mill_no}
+            </if>
             <if test="begin_time!=null">
                 <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
             </if>
@@ -64,6 +67,9 @@
             </if>
             <if test="operator_no!=null and operator_no!=''">
                 AND o.operator_no LIKE CONCAT('%',#{operator_no},'%')
+            </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no =#{mill_no}
             </if>
             <if test="begin_time!=null">
                 <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
