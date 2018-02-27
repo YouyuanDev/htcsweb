@@ -417,7 +417,7 @@
             <table class="ht-table">
                 <tr>
                     <td class="i18n1" name="id" width="20%">流水号</td>
-                    <td colspan="1" width="30%"><input class="easyui-textbox" type="text" id="odbinpid" name="odbinpid" readonly="true" value="0"/></td>
+                    <td colspan="1" width="30%"><input class="easyui-textbox" type="text" id="idbinpid" name="idbinpid" readonly="true" value="0"/></td>
                     <td class="i18n1" name="millno" width="20%">分厂</td>
                     <td colspan="1" width="30%">
                         <input id="mill_no" class="easyui-combobox" type="text" name="mill_no"  data-options=

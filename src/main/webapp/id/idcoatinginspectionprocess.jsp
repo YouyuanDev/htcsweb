@@ -381,7 +381,7 @@
                 <tr>
                     <td class="i18n1" name="id" width="20%">流水号</td>
                     <%--<td colspan="5"><label class="hl-label" id="odcoatproid"></label></td>--%>
-                    <td colspan="1" width="30%"><input id="idcoatproid" class="easyui-textbox" readonly="true" type="text" value="" name="idcoatproid"> </td>
+                    <td colspan="1" width="30%"><input id="idcoatInproid" class="easyui-textbox" readonly="true" type="text" value="" name="idcoatInproid"> </td>
                     <td class="i18n1" name="millno" width="20%">分厂</td>
                     <td colspan="1" width="30%">
                         <input id="mill_no" class="easyui-combobox" type="text" name="mill_no"  data-options=
