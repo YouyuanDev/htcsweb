@@ -32,17 +32,6 @@
         var url;
 
 
-        // 日期格式为 2/20/2017 12:00:00 PM
-        function myformatter2(date){
-            return date.toLocaleString();
-        }
-        // 日期格式为 2/20/2017 12:00:00 PM
-        function myparser2(s) {
-            if (!s) return new Date();
-            return new Date(Date.parse(s));
-        }
-
-
         function searchContract() {
 
             $('#contractDatagrids').datagrid('load',{
