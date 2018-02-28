@@ -434,5 +434,5 @@
 
 </html>
 <script type="text/javascript">
-    hlLanguage();
+    hlLanguage("i18n/");
 </script>
