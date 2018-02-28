@@ -13,11 +13,11 @@
     <link href="../miniui/multiupload/multiupload.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="../css/common.css"/>
     <script src="../easyui/jquery.min.js" type="text/javascript"></script>
-    <script src="../js/jquery.i18n.properties-1.0.9.js" type="text/javascript"></script>
-    <script src="../js/language.js" type="text/javascript"></script>
+    <%--<script src="../js/jquery.i18n.properties-1.0.9.js" type="text/javascript"></script>--%>
+    <%--<script src="../js/language.js" type="text/javascript"></script>--%>
     <script src="../js/common.js" type="text/javascript"></script>
     <script src="../miniui/boot.js" type="text/javascript"></script>
-    <script  src="../miniui/js/miniui.js" type="text/javascript"></script>
+    <%--<script  src="../miniui/js/miniui.js" type="text/javascript"></script>--%>
     <script src="../miniui/fileupload/swfupload/swfupload.js" type="text/javascript"></script>
     <script src="../miniui/multiupload/multiupload.js" type="text/javascript"></script>
     <script  src="../js/lrscroll.js" type="text/javascript"></script>
@@ -26,42 +26,6 @@
 
     <script type="text/javascript">
         var url;
-        function myformatter(date){
-            var y = date.getFullYear();
-            var m = date.getMonth()+1;
-            var d = date.getDate();
-            return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
-        }
-        function formatterdate(value,row,index){
-            return getDate1(value);
-        }
-        function myparsedate(s){
-            if (!s) return new Date();
-            return new Date(Date.parse(s));
-        }
-        function myparser(s){
-            if (!s) return new Date();
-            var ss = (s.split('-'));
-            var y = parseInt(ss[0],10);
-            var m = parseInt(ss[1],10);
-            var d = parseInt(ss[2],10);
-            if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
-                return new Date(y,m-1,d);
-            } else {
-                return new Date();
-            }
-        }
-
-        // 日期格式为 2/20/2017 12:00:00 PM
-        function myformatter2(date){
-            return getDate1(date);
-        }
-        // 日期格式为 2/20/2017 12:00:00 PM
-        function myparser2(s) {
-            if (!s) return new Date();
-            return new Date(Date.parse(s));
-        }
-
 
         $(function () {
             //删除上传的图片
@@ -86,9 +50,7 @@
         function addOdCoatingInPro(){
             $('#hlcancelBtn').attr('operationtype','add');
             $('#hlOdCoatingInProDialog').dialog('open').dialog('setTitle','新增');
-            $('#fileslist').val('');
-            $('#odCoatingInProForm').form('clear');
-            $('#odcoatInproid').text('');
+            clearFormLabel();
             clearMultiUpload(grid);
             url="/OdCoatInOperation/saveOdCoatingInProcess.action";
         }
@@ -120,11 +82,12 @@
             var row = $('#odCoatingInProDatagrids').datagrid('getSelected');
             if(row){
                 $('#hlOdCoatingInProDialog').dialog('open').dialog('setTitle','修改');
-                $('#project_name').text(row.project_name);$('#contract_no').text(row.contract_no);
-                $('#pipe_no').text(row.pipe_no);$('#status_name').text(row.status_name);
-                $('#od').text(row.od);$('#wt').text(row.wt);
-                $('#p_length').text(row.p_length);$('#weight').text(row.weight);
-                $('#grade').text(row.grade);$('#heat_no').text(row.heat_no);
+                // $('#project_name').text(row.project_name);$('#contract_no').text(row.contract_no);
+                // $('#pipe_no').text(row.pipe_no);$('#status_name').text(row.status_name);
+                // $('#od').text(row.od);$('#wt').text(row.wt);
+                // $('#p_length').text(row.p_length);$('#weight').text(row.weight);
+                // $('#grade').text(row.grade);$('#heat_no').text(row.heat_no);
+                loadPipeBaiscInfo(row);
                 $('#odCoatingInProForm').form('load',row);
                 $('#odcoatInprotime').datetimebox('setValue',getDate1(row.operation_time));
                 $("#odcoatInproid").textbox("setValue", row.id);
@@ -137,6 +100,60 @@
                     var imgList=odpictures.split(';');
                     createPictureModel(imgList);
                 }
+                //异步获取标准并匹配
+                $.ajax({
+                    url:'/AcceptanceCriteriaOperation/getODAcceptanceCriteriaByContractNo.action',
+                    dataType:'json',
+                    data:{'contract_no':row.contract_no},
+                    success:function (data) {
+                        if(data!=null){
+                            var $obj1=$("input[name='base_coat_thickness']");
+                            var $obj2=$("input[name='top_coat_thickness']");
+                            var $obj3=$("input[name='total_coating_thickness']");
+                            var $obj4=$("input[name='holidays']");
+                            var $obj5=$("input[name='holiday_tester_volts']");
+                            var $obj6=$("input[name='repairs']");
+                            var $obj7=$("input[name='cutback_length']");
+                            var res1=$obj1.val();
+                            var res2=$obj2.val();
+                            var res3=$obj3.val();
+                            var res4=$obj4.val();
+                            var res5=$obj5.val();
+                            var res6=$obj6.val();
+                            var res7=$obj7.val();
+                            if((res1>data.base_2fbe_coat_thickness_min)&&(res1<data.base_2fbe_coat_thickness_max))
+                                $obj1.siblings().css("background-color","#FFFFFF");
+                            else
+                                $obj1.siblings().css("background-color","#F9A6A6");
+                            if((res2>data.top_2fbe_coat_thickness_min)&&(res2<data.top_2fbe_coat_thickness_max))
+                                $obj2.siblings().css("background-color","#FFFFFF");
+                            else
+                                $obj2.siblings().css("background-color","#F9A6A6");
+                            if((res3>data.total_2fbe_coat_thickness_min)&&(res3<data.total_2fbe_coat_thickness_max))
+                                $obj3.siblings().css("background-color","#FFFFFF");
+                            else
+                                $obj3.siblings().css("background-color","#F9A6A6");
+                            if((res4>data.temp_above_dew_point_min)&&(res4<data.temp_above_dew_point_max))
+                                $obj4.siblings().css("background-color","#FFFFFF");
+                            else
+                                $obj4.siblings().css("background-color","#F9A6A6");
+                            if((res5>data.holiday_tester_voltage_min)&&(res5<data.holiday_tester_voltage_max))
+                                $obj5.siblings().css("background-color","#FFFFFF");
+                            else
+                                $obj5.siblings().css("background-color","#F9A6A6");
+                            if((res6>data.repair_min)&&(res6<data.repair_max))
+                                $obj6.siblings().css("background-color","#FFFFFF");
+                            else
+                                $obj6.siblings().css("background-color","#F9A6A6");
+                            if((res7>data.cutback_min)&&(res7<data.cutback_max))
+                                $obj7.siblings().css("background-color","#FFFFFF");
+                            else
+                                $obj7.siblings().css("background-color","#F9A6A6");
+                        }
+                    },error:function () {
+
+                    }
+                });
                 url="/OdCoatInOperation/saveOdCoatingInProcess.action?id="+row.id;
 
             }else{
@@ -250,7 +267,7 @@
         }
         //清理form表单
         function  clearFormLabel() {
-            $('#odCoatingInProForm').form('clear');
+            $('#odCoatingInProForm').form('clear');$('#fileslist').val('');
             $('.hl-label').text(''); $('#hl-gallery-con').empty();
         }
     </script>

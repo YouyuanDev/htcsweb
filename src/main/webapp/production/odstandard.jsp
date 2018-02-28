@@ -265,13 +265,13 @@
                <tr>
                    <td class="i18n1" name="preheattempmax">预热钢管温度最大值</td>
                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="preheat_temp_max" value=""/></td>
-                   <td class="i18n1" name="preheattempmax">预热钢管温度最小值</td>
+                   <td class="i18n1" name="preheattempmin">预热钢管温度最小值</td>
                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="preheat_temp_min" value=""/></td>
                </tr>
                <tr>
                    <td class="i18n1" name="relativehumiditymax">相对湿度最大值</td>
                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="relative_humidity_max" value=""/></td>
-                   <td class="i18n1" name="relativehumiditymax">相对湿度最小值</td>
+                   <td class="i18n1" name="relativehumiditymin">相对湿度最小值</td>
                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="relative_humidity_min" value=""/></td>
                </tr>
                <tr>
@@ -289,13 +289,13 @@
                <tr>
                    <td class="i18n1" name="surfacedustratingmax">灰尘度最大值</td>
                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="surface_dust_rating_max" value=""/></td>
-                   <td class="i18n1" name="surfacedustratingmax">灰尘度最小值</td>
+                   <td class="i18n1" name="surfacedustratingmin">灰尘度最小值</td>
                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="surface_dust_rating_min" value=""/></td>
                </tr>
                <tr>
                    <td class="i18n1" name="odprofilemax">外锚纹深度最大值</td>
                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="od_profile_max" value=""/></td>
-                   <td class="i18n1" name="odprofilemax">外锚纹深度最小值</td>
+                   <td class="i18n1" name="odprofilemin">外锚纹深度最小值</td>
                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="od_profile_min" value=""/></td>
                </tr>
                <tr>

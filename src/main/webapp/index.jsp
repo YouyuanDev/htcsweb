@@ -65,10 +65,16 @@
                                 content:"<iframe scrolling='auto' frameborder='0'  src='od/odcoating3lpeprocess.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable:true
                             });
-                        }else if("外涂检验工序"==xy||"OD Coating Inspection"==xy){
+                        }else if("外涂检验工序(2FBE)"==xy||"OD Coating Inspection(2FBE)"==xy){
                             $('#hlTab').tabs('add',{
                                 title:node.text,
                                 content:"<iframe scrolling='auto' frameborder='0'  src='od/odcoatinginspectionprocess.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                        }else if("外涂检验工序(3LPE)"==xy||"OD Coating Inspection(3LPE)"==xy){
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='od/odcoating3lpeinspectionprocess.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable:true
                             });
                         }else if("外喷标工序"==xy||"OD Stencil Process"==xy){
@@ -348,7 +354,8 @@
                 <li class="i18n1" name="odblastinspection">外喷砂检验工序</li>
                 <li class="i18n1" name="odcoating2fbe">外涂工序(2FBE)</li>
                 <li class="i18n1" name="odcoating3lpe">外涂工序(3LPE)</li>
-                <li class="i18n1" name="odcoatinginspection">外涂检验工序</li>
+                <li class="i18n1" name="odcoating2fbeinspection">外涂检验工序(2FBE)</li>
+                <li class="i18n1" name="odcoating3lpeinspection">外涂检验工序(3LPE)</li>
                 <li class="i18n1" name="odstencilprocess">外喷标工序</li>
                 <li class="i18n1" name="odfinalinspection">外涂层终检工序</li>
             </ul>
@@ -427,5 +434,5 @@
 
 </html>
 <script type="text/javascript">
-    hlLanguage("i18n/");
+    hlLanguage();
 </script>

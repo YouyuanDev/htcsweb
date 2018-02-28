@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.htcsweb.dao.OdCoating3LpeInspectionProcessDao">
+
+
+    <insert id="addOdCoating3LpeInProcess" parameterType="com.htcsweb.entity.OdCoating3LpeInspectionProcess">
+     INSERT INTO od_coating_3lpe_inspection_process(pipe_no,operation_time,operator_no,base_coat_thickness,middle_coat_thickness,top_coat_thickness,total_coating_thickness,holidays,holiday_tester_volts,repairs,cutback_length,bevel,stencil_verification,surface_condition,adhesion_test,upload_files,remark,result,mill_no) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{base_coat_thickness},#{middle_coat_thickness},#{top_coat_thickness},#{total_coating_thickness},#{holidays},#{holiday_tester_volts},#{repairs},#{cutback_length},#{bevel},#{stencil_verification},#{surface_condition},#{adhesion_test},#{upload_files},#{remark},#{result},#{mill_no})
+    </insert>
+
+
+
+    <update id="updateOdCoating3LpeInProcess" parameterType="com.htcsweb.entity.OdCoating3LpeInspectionProcess">
+    UPDATE od_coating_3lpe_inspection_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},base_coat_thickness=#{base_coat_thickness},middle_coat_thickness=#{middle_coat_thickness},top_coat_thickness=#{top_coat_thickness},total_coating_thickness=#{total_coating_thickness},holidays=#{holidays},holiday_tester_volts=#{holiday_tester_volts},repairs=#{repairs},cutback_length=#{cutback_length},bevel=#{bevel},stencil_verification=#{stencil_verification},surface_condition=#{surface_condition},adhesion_test=#{adhesion_test},upload_files=#{upload_files},remark=#{remark},result=#{result},mill_no=#{mill_no} where id=#{id}
+    </update>
+    <delete id="delOdCoating3LpeInProcess">
+        delete from od_coating_3lpe_inspection_process WHERE
+        <foreach collection="array" item="item" open="id in (" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <select id="getAllByLike" resultType="map">
+        Select pro.project_name,s.status_name,p.contract_no,p.grade,p.od,p.wt,p.p_length,p.weight,p.heat_no,o.*
+        from od_coating_3lpe_inspection_process o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        left join pipe_status s on s.status_code=p.status
+        <where>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND o.pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+            <if test="operator_no!=null and operator_no!=''">
+                AND o.operator_no LIKE CONCAT('%',#{operator_no},'%')
+            </if>
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d 23:59:59')]]>
+            </if>
+        </where>
+        ORDER BY o.id DESC
+        limit #{skip},#{take}
+    </select>
+
+
+
+    <select id="getCountAllByLike" resultType="int">
+        select count(*) from od_coating_3lpe_inspection_process o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        left join pipe_status s on s.status_code=p.status
+        <where>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND o.pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+            <if test="operator_no!=null and operator_no!=''">
+                AND o.operator_no LIKE CONCAT('%',#{operator_no},'%')
+            </if>
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d 23:59:59')]]>
+            </if>
+        </where>
+    </select>
+
+    <select id="getOdCoatingInProcessById" parameterType="int" resultType="com.htcsweb.entity.OdCoating3LpeInspectionProcess">
+        select * from od_coating_3lpe_inspection_process where id=#{id}
+    </select>
+</mapper>

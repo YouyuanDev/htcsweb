@@ -13,11 +13,11 @@
     <link href="../miniui/multiupload/multiupload.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="../css/common.css"/>
     <script src="../easyui/jquery.min.js" type="text/javascript"></script>
-    <script src="../js/jquery.i18n.properties-1.0.9.js" type="text/javascript"></script>
-    <script src="../js/language.js" type="text/javascript"></script>
+    <%--<script src="../js/jquery.i18n.properties-1.0.9.js" type="text/javascript"></script>--%>
+    <%--<script src="../js/language.js" type="text/javascript"></script>--%>
     <script src="../js/common.js" type="text/javascript"></script>
     <script src="../miniui/boot.js" type="text/javascript"></script>
-    <script  src="../miniui/js/miniui.js" type="text/javascript"></script>
+    <%--<script  src="../miniui/js/miniui.js" type="text/javascript"></script>--%>
     <script src="../miniui/fileupload/swfupload/swfupload.js" type="text/javascript"></script>
     <script src="../miniui/multiupload/multiupload.js" type="text/javascript"></script>
     <script  src="../js/lrscroll.js" type="text/javascript"></script>
@@ -26,42 +26,6 @@
 
     <script type="text/javascript">
         var url;
-        function myformatter(date){
-            var y = date.getFullYear();
-            var m = date.getMonth()+1;
-            var d = date.getDate();
-            return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
-        }
-        function formatterdate(value,row,index){
-            return getDate1(value);
-        }
-        function myparsedate(s){
-            if (!s) return new Date();
-            return new Date(Date.parse(s));
-        }
-        function myparser(s){
-            if (!s) return new Date();
-            var ss = (s.split('-'));
-            var y = parseInt(ss[0],10);
-            var m = parseInt(ss[1],10);
-            var d = parseInt(ss[2],10);
-            if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
-                return new Date(y,m-1,d);
-            } else {
-                return new Date();
-            }
-        }
-
-        // 日期格式为 2/20/2017 12:00:00 PM
-        function myformatter2(date){
-            return getDate1(date);
-        }
-        // 日期格式为 2/20/2017 12:00:00 PM
-        function myparser2(s) {
-            if (!s) return new Date();
-            return new Date(Date.parse(s));
-        }
-
 
         $(function () {
             //删除上传的图片
@@ -86,9 +50,10 @@
         function addIdCoatingInPro(){
             $('#hlcancelBtn').attr('operationtype','add');
             $('#hlIdCoatingInProDialog').dialog('open').dialog('setTitle','新增');
-            $('#fileslist').val('');
-            $('#idCoatingInProForm').form('clear');
-            $('#idcoatInproid').text('');
+            // $('#fileslist').val('');
+            // $('#idCoatingInProForm').form('clear');
+            // $('#idcoatInproid').text('');
+            clearFormLabel();
             combox1.setValue("");
             clearMultiUpload(grid);
             url="/IdCoatInOperation/saveIdCoatingInProcess.action";
@@ -121,11 +86,12 @@
             var row = $('#idCoatingInProDatagrids').datagrid('getSelected');
             if(row){
                 $('#hlIdCoatingInProDialog').dialog('open').dialog('setTitle','修改');
-                $('#project_name').text(row.project_name);$('#contract_no').text(row.contract_no);
-                $('#pipe_no').text(row.pipe_no);$('#status_name').text(row.status_name);
-                $('#od').text(row.od);$('#wt').text(row.wt);
-                $('#p_length').text(row.p_length);$('#weight').text(row.weight);
-                $('#grade').text(row.grade);$('#heat_no').text(row.heat_no);
+                // $('#project_name').text(row.project_name);$('#contract_no').text(row.contract_no);
+                // $('#pipe_no').text(row.pipe_no);$('#status_name').text(row.status_name);
+                // $('#od').text(row.od);$('#wt').text(row.wt);
+                // $('#p_length').text(row.p_length);$('#weight').text(row.weight);
+                // $('#grade').text(row.grade);$('#heat_no').text(row.heat_no);
+                loadPipeBaiscInfo(row);
                 $('#idCoatingInProForm').form('load',row);
                 $('#idcoatInprotime').datetimebox('setValue',getDate1(row.operation_time));
                 $("#idcoatInproid").textbox("setValue", row.id);
@@ -139,6 +105,46 @@
                     var imgList=odpictures.split(';');
                     createPictureModel(imgList);
                 }
+                //异步获取标准并匹配
+                $.ajax({
+                    url:'/AcceptanceCriteriaOperation/getIDAcceptanceCriteriaByContractNo.action',
+                    dataType:'json',
+                    data:{'contract_no':row.contract_no},
+                    success:function (data) {
+                        if(data!=null){
+                            var $obj1=$("input[name='dry_film_thickness_max']");
+                            var $obj2=$("input[name='dry_film_thickness_min']");
+                            var $obj3=$("input[name='cutback']");
+                            var $obj4=$("input[name='magnetism']");
+                            var res1=$obj1.val();
+                            var res2=$obj2.val();
+                            var res3=$obj3.val();
+                            var res4=$obj4.val();
+                            if((res1>data.dry_film_thickness_min)&&(res1<data.dry_film_thickness_max)){
+                                $obj1.siblings().css("background-color","#FFFFFF");
+                            }else{
+                                $obj1.siblings().css("background-color","#F9A6A6");
+                            }
+                            if((res2>data.dry_film_thickness_min)&&(res2<data.dry_film_thickness_max)){
+                                $obj2.siblings().css("background-color","#FFFFFF");
+                            }else{
+                                $obj2.siblings().css("background-color","#F9A6A6");
+                            }
+                            if((res3>data.cutback_min)&&(res3<data.cutback_max)){
+                                $obj3.siblings().css("background-color","#FFFFFF");
+                            }else{
+                                $obj3.siblings().css("background-color","#F9A6A6");
+                            }
+                            if((res4>data.residual_magnetism_min)&&(res4<data.residual_magnetism_max)){
+                                $obj4.siblings().css("background-color","#FFFFFF");
+                            }else{
+                                $obj4.siblings().css("background-color","#F9A6A6");
+                            }
+                        }
+                    },error:function () {
+
+                    }
+                });
                 url="/IdCoatInOperation/saveIdCoatingInProcess.action?id="+row.id;
 
             }else{

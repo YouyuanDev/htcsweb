@@ -64,7 +64,7 @@ var execI18n = function(languagePath){
     jQuery.i18n.properties({
         name : 'strings', //资源文件名称
         language:i18nLanguage,
-        path :languagePath,
+        path :"../i18n/",
         mode : 'map', //用Map的方式使用资源文件中的值
         callback : function() {//加载成功后设置显示内容
             var insertEle = $(".i18n");

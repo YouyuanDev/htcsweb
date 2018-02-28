@@ -12,11 +12,11 @@
     <link href="../miniui/multiupload/multiupload.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="../css/common.css"/>
     <script src="../easyui/jquery.min.js" type="text/javascript"></script>
-    <script src="../js/jquery.i18n.properties-1.0.9.js" type="text/javascript"></script>
-    <script src="../js/language.js" type="text/javascript"></script>
+    <%--<script src="../js/jquery.i18n.properties-1.0.9.js" type="text/javascript"></script>--%>
+    <%--<script src="../js/language.js" type="text/javascript"></script>--%>
     <script src="../js/common.js" type="text/javascript"></script>
     <script src="../miniui/boot.js" type="text/javascript"></script>
-    <script  src="../miniui/js/miniui.js" type="text/javascript"></script>
+    <%--<script  src="../miniui/js/miniui.js" type="text/javascript"></script>--%>
     <script src="../miniui/fileupload/swfupload/swfupload.js" type="text/javascript"></script>
     <script src="../miniui/multiupload/multiupload.js" type="text/javascript"></script>
     <script  src="../js/lrscroll.js" type="text/javascript"></script>
@@ -27,38 +27,6 @@
 
     <script type="text/javascript">
         var url;
-        function myformatter(date){
-            var y = date.getFullYear();
-            var m = date.getMonth()+1;
-            var d = date.getDate();
-            return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
-        }
-        function myparsedate(s){
-            if (!s) return new Date();
-            return new Date(Date.parse(s));
-        }
-        function myparser(s){
-            if (!s) return new Date();
-            var ss = (s.split('-'));
-            var y = parseInt(ss[0],10);
-            var m = parseInt(ss[1],10);
-            var d = parseInt(ss[2],10);
-            if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
-                return new Date(y,m-1,d);
-            } else {
-                return new Date();
-            }
-        }
-
-        // 日期格式为 2/20/2017 12:00:00 PM
-        function myformatter2(date){
-            return getDate1(date);
-        }
-        // 日期格式为 2/20/2017 12:00:00 PM
-        function myparser2(s){
-            if (!s) return new Date();
-            return new Date(Date.parse(s));
-        }
         $(function () {
                     //删除上传的图片
                 $(document).on('click','.content-del',function () {
@@ -114,12 +82,13 @@
             var row = $('#odBlastProDatagrids').datagrid('getSelected');
             if(row){
                 $('#hlOdBlastProDialog').dialog('open').dialog('setTitle','修改');
-                $('#project_name').text(row.project_name);$('#contract_no').text(row.contract_no);
-                $('#pipe_no').text(row.pipe_no);$('#status_name').text(row.status_name);
-                $('#od').text(row.od);$('#wt').text(row.wt);
-                $('#p_length').text(row.p_length);$('#weight').text(row.weight);
+                //$('#project_name').text(row.project_name);$('#contract_no').text(row.contract_no);
+                //$('#pipe_no').text(row.pipe_no);$('#status_name').text(row.status_name);
+                //$('#od').text(row.od);$('#wt').text(row.wt);
+                //$('#p_length').text(row.p_length);$('#weight').text(row.weight);
+                //$('#grade').text(row.grade);$('#heat_no').text(row.heat_no);
+                loadPipeBaiscInfo(row);
                 $('#odbpid').text(row.id);
-                $('#grade').text(row.grade);$('#heat_no').text(row.heat_no);
                 $('#odBlastProForm').form('load',row);
                 $('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
                 look1.setText(row.pipe_no);
@@ -139,11 +108,12 @@
                     data:{'contract_no':row.contract_no},
                     success:function (data) {
                         if(data!=null){
-                            var salt=$("input[name='salt_contamination_before_blasting']").val();
+                            var $obj=$("input[name='salt_contamination_before_blasting']");
+                            var salt=$obj.val();
                             if((salt>data.salt_contamination_before_blast_min)&&(salt<data.salt_contamination_before_blast_max)){
-                                $("input[name='salt_contamination_before_blasting']").siblings().css("background-color","#FFFFFF");
+                                $obj.siblings().css("background-color","#FFFFFF");
                             }else{
-                                $("input[name='salt_contamination_before_blasting']").siblings().css("background-color","#F9A6A6");
+                                $obj.siblings().css("background-color","#F9A6A6");
                             }
                         }
                     },error:function () {
@@ -489,11 +459,6 @@
                <td></td>
                <td></td>
            </tr>
-
-
-
-
-
        </table>
        <input type="hidden" id="fileslist" name="upload_files" value=""/>
            <div id="hl-gallery-con" style="width:100%;">

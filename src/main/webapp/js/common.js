@@ -89,7 +89,46 @@ function getDate1(str){
 function formatterdate(value,row,index){
     return getDate1(value);
 }
+function myformatter(date){
+    var y = date.getFullYear();
+    var m = date.getMonth()+1;
+    var d = date.getDate();
+    return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
+}
+function myparsedate(s){
+    if (!s) return new Date();
+    return new Date(Date.parse(s));
+}
+function myparser(s){
+    if (!s) return new Date();
+    var ss = (s.split('-'));
+    var y = parseInt(ss[0],10);
+    var m = parseInt(ss[1],10);
+    var d = parseInt(ss[2],10);
+    if (!isNaN(y) && !isNaN(m) && !isNaN(d)){
+        return new Date(y,m-1,d);
+    } else {
+        return new Date();
+    }
+}
 
+// 日期格式为 2/20/2017 12:00:00 PM
+function myformatter2(date){
+    return getDate1(date);
+}
+// 日期格式为 2/20/2017 12:00:00 PM
+function myparser2(s){
+    if (!s) return new Date();
+    return new Date(Date.parse(s));
+}
+//加载钢管信息
+function loadPipeBaiscInfo(row) {
+    $('#project_name').text(row.project_name);$('#contract_no').text(row.contract_no);
+    $('#pipe_no').text(row.pipe_no);$('#status_name').text(row.status_name);
+    $('#od').text(row.od);$('#wt').text(row.wt);
+    $('#p_length').text(row.p_length);$('#weight').text(row.weight);
+    $('#grade').text(row.grade);$('#heat_no').text(row.heat_no);
+}
 function getGalleryCon() {
     var str='<div id="hl-gallery">'+
         '<span class="prev"><</span>'+

@@ -7,7 +7,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>外涂岗位</title>
+    <title>外涂检验岗位</title>
     <link rel="stylesheet" type="text/css" href="../easyui/themes/bootstrap/easyui.css">
     <link rel="stylesheet" type="text/css" href="../easyui/themes/icon.css">
     <link href="../miniui/multiupload/multiupload.css" rel="stylesheet" type="text/css" />
@@ -32,13 +32,12 @@
             $(document).on('click','.content-del',function () {
                 delUploadPicture($(this));
             });
-            $('#hlOdCoatingProDialog').dialog({
+            $('#hlOdCoating3LpeInProDialog').dialog({
                 onClose:function () {
                     var type=$('#hlcancelBtn').attr('operationtype');
-
                     if(type=="add"){
                         var $imglist=$('#fileslist');
-                        var $dialog=$('#hlOdCoatingProDialog');
+                        var $dialog=$('#hlOdCoating3LpeInProDialog');
                         hlAlertSix("../UploadFile/delUploadPicture.action",$imglist,$dialog,grid);
                     }
                     clearFormLabel();
@@ -47,18 +46,15 @@
             $('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
             // hlLanguage("../i18n/");
         });
-        function addOdCoatingPro(){
+        function addOdCoating3LpeInPro(){
             $('#hlcancelBtn').attr('operationtype','add');
-            $('#hlOdCoatingProDialog').dialog('open').dialog('setTitle','新增');
-            //$('#fileslist').val('');
-            //$('#odCoatingProForm').form('clear');
+            $('#hlOdCoating3LpeInProDialog').dialog('open').dialog('setTitle','新增');
             clearFormLabel();
-            //$('#odcoatproid').text('');
             clearMultiUpload(grid);
-            url="/OdCoatOperation/saveOdCoatingProcess.action";
+            url="/OdCoat3LpeInOperation/saveOdCoating3LpeInProcess.action";
         }
-        function delOdCoatingPro() {
-            var row = $('#odCoatingProDatagrids').datagrid('getSelections');
+        function delOdCoating3LpeInPro() {
+            var row = $('#odCoating3LpeInProDatagrids').datagrid('getSelections');
             if(row.length>0){
                 var idArr=[];
                 for (var i=0;i<row.length;i++){
@@ -67,9 +63,9 @@
                 var idArrs=idArr.join(',');
                 $.messager.confirm('系统提示',"您确定要删除这<font color=red>"+idArr.length+ "</font>条数据吗？",function (r) {
                     if(r){
-                        $.post("/OdCoatOperation/delOdCoatingProcess.action",{"hlparam":idArrs},function (data) {
+                        $.post("/OdCoat3LpeInOperation/delOdCoating3LpeInProcess.action",{"hlparam":idArrs},function (data) {
                             if(data.success){
-                                $("#odCoatingProDatagrids").datagrid("reload");
+                                $("#odCoating3LpeInProDatagrids").datagrid("reload");
                             }else{
                                 hlAlertFour("操作失败!");
                             }
@@ -80,20 +76,20 @@
                 hlAlertOne();
             }
         }
-        function editOdCoatingPro() {
+        function editOdCoating3LpeInPro() {
             $('#hlcancelBtn').attr('operationtype','edit');
-            var row = $('#odCoatingProDatagrids').datagrid('getSelected');
+            var row = $('#odCoating3LpeInProDatagrids').datagrid('getSelected');
             if(row){
-                $('#hlOdCoatingProDialog').dialog('open').dialog('setTitle','修改');
+                $('#hlOdCoating3LpeInProDialog').dialog('open').dialog('setTitle','修改');
                 // $('#project_name').text(row.project_name);$('#contract_no').text(row.contract_no);
                 // $('#pipe_no').text(row.pipe_no);$('#status_name').text(row.status_name);
                 // $('#od').text(row.od);$('#wt').text(row.wt);
                 // $('#p_length').text(row.p_length);$('#weight').text(row.weight);
                 // $('#grade').text(row.grade);$('#heat_no').text(row.heat_no);
                 loadPipeBaiscInfo(row);
-                $('#odCoatingProForm').form('load',row);
-                $('#odcoatprotime').datetimebox('setValue',getDate1(row.operation_time));
-                 $("#odcoatproid").textbox("setValue", row.id);
+                $('#odCoating3LpeInProForm').form('load',row);
+                $('#odcoat3LpeInprotime').datetimebox('setValue',getDate1(row.operation_time));
+                $("#odcoat3LpeInproid").textbox("setValue", row.id);
                 look1.setText(row.pipe_no);
                 look1.setValue(row.pipe_no);
                 look2.setText(row.operator_no);
@@ -110,45 +106,85 @@
                     data:{'contract_no':row.contract_no},
                     success:function (data) {
                         if(data!=null){
-                            var $obj=$("input[name='application_temp']");
-                            var res1=$obj.val();
-                            if((res1>data.application_temp_min)&&(res1<data.application_temp_max)){
-                                $obj.siblings().css("background-color","#FFFFFF");
-                            }else{
-                                $obj.siblings().css("background-color","#F9A6A6");
-                            }
+                            var $obj1=$("input[name='base_coat_thickness']");
+                            var $obj2=$("input[name='top_coat_thickness']");
+                            var $obj3=$("input[name='total_coating_thickness']");
+                            var $obj4=$("input[name='holidays']");
+                            var $obj5=$("input[name='holiday_tester_volts']");
+                            var $obj6=$("input[name='repairs']");
+                            var $obj7=$("input[name='cutback_length']");
+                            var $obj8=$("input[name='middle_coat_thickness']");
+                            var res1=$obj1.val();
+                            var res2=$obj2.val();
+                            var res3=$obj3.val();
+                            var res4=$obj4.val();
+                            var res5=$obj5.val();
+                            var res6=$obj6.val();
+                            var res7=$obj7.val();
+                            var res8=$obj8.val();
+                            if((res1>data.base_3lpe_coat_thickness_min)&&(res1<data.base_3lpe_coat_thickness_max))
+                                $obj1.siblings().css("background-color","#FFFFFF");
+                            else
+                                $obj1.siblings().css("background-color","#F9A6A6");
+                            if((res2>data.top_3lpe_coat_thickness_min)&&(res2<data.top_3lpe_coat_thickness_max))
+                                $obj2.siblings().css("background-color","#FFFFFF");
+                            else
+                                $obj2.siblings().css("background-color","#F9A6A6");
+                            if((res3>data.total_3lpe_coat_thickness_min)&&(res3<data.total_3lpe_coat_thickness_max))
+                                $obj3.siblings().css("background-color","#FFFFFF");
+                            else
+                                $obj3.siblings().css("background-color","#F9A6A6");
+                            if((res4>data.temp_above_dew_point_min)&&(res4<data.temp_above_dew_point_max))
+                                $obj4.siblings().css("background-color","#FFFFFF");
+                            else
+                                $obj4.siblings().css("background-color","#F9A6A6");
+                            if((res5>data.holiday_tester_voltage_min)&&(res5<data.holiday_tester_voltage_max))
+                                $obj5.siblings().css("background-color","#FFFFFF");
+                            else
+                                $obj5.siblings().css("background-color","#F9A6A6");
+                            if((res6>data.repair_min)&&(res6<data.repair_max))
+                                $obj6.siblings().css("background-color","#FFFFFF");
+                            else
+                                $obj6.siblings().css("background-color","#F9A6A6");
+                            if((res7>data.cutback_min)&&(res7<data.cutback_max))
+                                $obj7.siblings().css("background-color","#FFFFFF");
+                            else
+                                $obj7.siblings().css("background-color","#F9A6A6");
+                            if((res8>data.middle_3lpe_coat_thickness_min)&&(res8<data.middle_3lpe_coat_thickness_max))
+                                $obj8.siblings().css("background-color","#FFFFFF");
+                            else
+                                $obj8.siblings().css("background-color","#F9A6A6");
                         }
                     },error:function () {
 
                     }
                 });
-                url="/OdCoatOperation/saveOdCoatingProcess.action?id="+row.id;
+                url="/OdCoat3LpeInOperation/saveOdCoating3LpeInProcess.action?id="+row.id;
 
             }else{
                 hlAlertTwo();
             }
         }
-        function searchOdCoatingPro() {
-            $('#odCoatingProDatagrids').datagrid('load',{
+        function searchOdCoating3LpeInPro() {
+            $('#odCoatingInProDatagrids').datagrid('load',{
                 'pipe_no': $('#pipeno').val(),
                 'operator_no': $('#operatorno').val(),
                 'begin_time': $('#begintime').val(),
-                'end_time': $('#endtime').val(),
-                'mill_no': $('#millno').val()
+                'end_time': $('#endtime').val()
             });
         }
-        function odCoatingProFormSubmit() {
-            $('#odCoatingProForm').form('submit',{
+        function odCoating3LpeInProFormSubmit() {
+            $('#odCoating3LpeInProForm').form('submit',{
                 url:url,
                 onSubmit:function () {
                     //表单验证
-                    setParams($("input[name='coating_line_speed']"));
-                    setParams($("input[name='application_temp']"));
-                    setParams($("input[name='base_coat_gun_count']"));
-                    setParams($("input[name='top_coat_gun_count']"));
-                    setParams($("input[name='to_first_touch_duration']"));
-                    setParams($("input[name='to_quench_duration']"));
-                    if($("input[name='odcoatprotime']").val()==""){
+                    // setParams($("input[name='coating_line_speed']"));
+                    // setParams($("input[name='application_temp']"));
+                    // setParams($("input[name='base_coat_gun_count']"));
+                    // setParams($("input[name='top_coat_gun_count']"));
+                    // setParams($("input[name='to_first_touch_duration']"));
+                    // setParams($("input[name='to_quench_duration']"));
+                    if($("input[name='odcoat3LpeInprotime']").val()==""){
                         hlAlertFour("请输入操作时间");
                         return false;
                     }
@@ -156,8 +192,8 @@
                 success: function(result){
                     var result = eval('('+result+')');
                     if (result.success){
-                        $('#hlOdCoatingProDialog').dialog('close');
-                        $('#odCoatingProDatagrids').datagrid('reload');
+                        $('#hlOdCoating3LpeInProDialog').dialog('close');
+                        $('#odCoating3LpeInProDatagrids').datagrid('reload');
                         clearFormLabel();
                     } else {
                         hlAlertFour("操作失败!");
@@ -169,8 +205,8 @@
             });
             clearMultiUpload(grid);
         }
-        function odCoatingProCancelSubmit() {
-            $('#hlOdCoatingProDialog').dialog('close');
+        function odCoating3LpeInProCancelSubmit() {
+            $('#hlOdCoating3LpeInProDialog').dialog('close');
         }
 
         //图片上传失败操作
@@ -236,23 +272,22 @@
         }
         //清理form表单
         function  clearFormLabel() {
-            $('#odCoatingProForm').form('clear');
-            $('.hl-label').text(''); $('#hl-gallery-con').empty();
+            $('#odCoating3LpeInProForm').form('clear');
+            $('.hl-label').text('');$('#fileslist').val('');
+            $('#hl-gallery-con').empty();
         }
     </script>
-
 </head>
 
 <body>
 <fieldset class="b3" style="padding:10px;margin:10px;">
     <legend> <h3><b style="color: orange" >|&nbsp;</b><span class="i18n1" name="datadisplay">数据展示</span></h3></legend>
     <div  style="margin-top:5px;">
-        <table class="easyui-datagrid" id="odCoatingProDatagrids" url="/OdCoatOperation/getOdCoatingByLike.action" striped="true" loadMsg="正在加载中。。。" textField="text" pageSize="20" fitColumns="true" pagination="true" toolbar="#hlOdBlastProTb">
+        <table class="easyui-datagrid" id="odCoating3LpeInProDatagrids" url="/OdCoat3LpeInOperation/getOdCoating3LpeInByLike.action" striped="true" loadMsg="正在加载中。。。" textField="text" pageSize="20" fitColumns="true" pagination="true" toolbar="#hlOdCoating3LpeInProTb">
             <thead>
             <tr>
                 <th data-options="field:'ck',checkbox:true"></th>
                 <th field="id" align="center" width="100" class="i18n1" name="id">流水号</th>
-                <th field="mill_no" align="center" width="150" class="i18n1" name="millno">分厂</th>
                 <th field="project_name" align="center" width="120" class="i18n1" name="projectname">项目名称</th>
                 <th field="contract_no" align="center" width="120" class="i18n1" name="contractno">合同编号</th>
                 <th field="pipe_no" align="center" width="120" class="i18n1" name="pipeno">钢管编号</th>
@@ -264,16 +299,19 @@
                 <th field="weight" align="center" width="50" class="i18n1" name="weight">重量</th>
                 <th field="heat_no" align="center" hidden="true" width="50" class="i18n1" name="heat_no">炉号</th>
                 <th field="operator_no" align="center" width="100" class="i18n1" name="operatorno">操作工编号</th>
-                <th field="coating_line_speed" align="center" width="80" class="i18n1" name="coatinglinespeed">涂敷线速度</th>
-                <th field="base_coat_used" align="center" width="100" class="i18n1" name="basecoatused">底层粉末型号</th>
-                <th field="base_coat_lot_no" align="center" width="100" hidden="true" class="i18n1" name="basecoatlotno">底层粉末批号</th>
-                <th field="top_coat_used" align="center" width="100" hidden="true" class="i18n1" name="topcoatused">面层粉末型号</th>
-                <th field="top_coat_lot_no" width="100" align="center" hidden="true" class="i18n1" name="topcoatlotno">面层粉末批号</th>
-                <th field="base_coat_gun_count" width="100" align="center" hidden="true" class="i18n1" name="basecoatguncount">底层粉末喷枪数</th>
-                <th field="top_coat_gun_count" width="100" align="center" hidden="true" class="i18n1" name="topcoatguncount">面层粉末喷枪数</th>
-                <th field="application_temp" align="center" width="80" class="i18n1" name="applicationtemp">中频温度</th>
-                <th field="to_first_touch_duration" align="center" width="120" class="i18n1" name="tofirsttouchduration">首次到达接触点时间</th>
-                <th field="to_quench_duration" align="center" width="150" class="i18n1" name="toquenchduration">到达水淋处时间</th>
+
+                <th field="base_coat_thickness" align="center" width="80" class="i18n1" name="basecoatthickness">底层涂层厚度</th>
+                <th field="middle_coat_thickness" align="center" width="80" class="i18n1" name="middlecoatthickness">中间层涂层厚度</th>
+                <th field="top_coat_thickness" align="center" width="100" class="i18n1" name="topcoatthickness">面层涂层厚度</th>
+                <th field="total_coating_thickness" align="center" width="100" hidden="true" class="i18n1" name="totalcoatingthickness">涂层总厚度</th>
+                <th field="holidays" align="center" width="100" hidden="true" class="i18n1" name="holidays">漏点数量</th>
+                <th field="holiday_tester_volts" width="100" align="center" hidden="true" class="i18n1" name="holidaytestervolts">电火花检测电压</th>
+                <th field="repairs" width="100" align="center" hidden="true" class="i18n1" name="repairs">修补点数</th>
+                <th field="cutback_length" width="100" align="center" hidden="true" class="i18n1" name="cutbacklength">预留端长度</th>
+                <th field="bevel" align="center" width="80" class="i18n1" name="bevel">坡口检测</th>
+                <th field="stencil_verification" align="center" width="120" class="i18n1" name="stencilverification">外喷标检验</th>
+                <th field="surface_condition" align="center" width="150" class="i18n1" name="surfacecondition1">表面质量</th>
+                <th field="adhesion_test" align="center" width="150" class="i18n1" name="adhesiontest">附着力测试</th>
                 <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                 <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
                 <th field="operation_time" align="center" width="150" class="i18n1" name="operationtime" data-options="formatter:formatterdate">操作时间</th>
@@ -285,15 +323,7 @@
 </fieldset>
 
 <!--工具栏-->
-<div id="hlOdBlastProTb" style="padding:10px;">
-    <input id="millno" class="easyui-combobox" type="text" name="millno"  data-options=
-            "url:'/millInfo/getAllMillsWithComboboxSelectAll.action',
-					        method:'get',
-					        valueField:'id',
-					        width: 150,
-					        editable:false,
-					        textField:'text',
-					        panelHeight:'auto'"/>
+<div id="hlOdCoating3LpeInProTb" style="padding:10px;">
     <span class="i18n1" name="pipeno">钢管编号</span>:
     <input id="pipeno" name="pipeno" style="line-height:22px;border:1px solid #ccc">
     <span class="i18n1" name="operatorno">操作工编号</span>:
@@ -302,17 +332,17 @@
     <input id="begintime" name="begintime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
     <span class="i18n1" name="endtime">结束时间</span>:
     <input id="endtime" name="endtime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
-    <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchOdCoatingPro()">Search</a>
+    <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchOdCoating3LpeInPro()">Search</a>
     <div style="float:right">
-        <a href="#" id="addObpLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addOdCoatingPro()">添加</a>
-        <a href="#" id="editObpLinkBtn" class="easyui-linkbutton i18n1" name="edit" data-options="iconCls:'icon-edit',plain:true" onclick="editOdCoatingPro()">修改</a>
-        <a href="#" id="deltObpLinkBtn" class="easyui-linkbutton i18n1" name="delete" data-options="iconCls:'icon-remove',plain:true" onclick="delOdCoatingPro()">删除</a>
+        <a href="#" id="addObpLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addOdCoating3LpeInPro()">添加</a>
+        <a href="#" id="editObpLinkBtn" class="easyui-linkbutton i18n1" name="edit" data-options="iconCls:'icon-edit',plain:true" onclick="editOdCoating3LpeInPro()">修改</a>
+        <a href="#" id="deltObpLinkBtn" class="easyui-linkbutton i18n1" name="delete" data-options="iconCls:'icon-remove',plain:true" onclick="delOdCoating3LpeInPro()">删除</a>
     </div>
 </div>
 
 <!--添加、修改框-->
-<div id="hlOdCoatingProDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;height:auto;">
-    <form id="odCoatingProForm" method="post">
+<div id="hlOdCoating3LpeInProDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;height:auto;">
+    <form id="odCoating3LpeInProForm" method="post">
         <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
             <legend>钢管信息</legend>
             <table class="ht-table" width="100%" border="0">
@@ -361,32 +391,21 @@
 
             <table class="ht-table">
                 <tr>
-                    <td class="i18n1" name="id" width="20%">流水号</td>
+                    <td class="i18n1" name="id">流水号</td>
                     <%--<td colspan="5"><label class="hl-label" id="odcoatproid"></label></td>--%>
-                    <td colspan="1" width="30%"><input id="odcoatproid" class="easyui-textbox" readonly="true" type="text" value="" name="odcoatproid"> </td>
-                    <td class="i18n1" name="millno" width="20%">分厂</td>
-                    <td colspan="1" width="30%">
-                        <input id="mill_no" class="easyui-combobox" type="text" name="mill_no"  data-options=
-                                "url:'/millInfo/getAllMills.action',
-					        method:'get',
-					        valueField:'id',
-					        width: 185,
-					        editable:false,
-					        textField:'text',
-					        panelHeight:'auto'"/>
-                    </td>
+                    <td colspan="5"><input id="odcoat3LpeInproid" class="easyui-textbox" readonly="true" type="text" value="" name="odcoat3LpeInproid"> </td>
                 </tr>
                 <tr>
-                    <td class="i18n1" name="operatorno" width="20%">操作工编号</td>
-                    <td colspan="1" width="30%">
+                    <td class="i18n1" name="operatorno">操作工编号</td>
+                    <td colspan="2">
                         <input id="lookup2" name="operator_no" class="mini-lookup" style="text-align:center;width:180px;"
                                textField="employee_no" valueField="id" popupWidth="auto"
                                popup="#gridPanel2" grid="#datagrid2" multiSelect="false"
                         />
                     </td>
-                    <td class="i18n1" name="operationtime" width="20%">操作时间</td>
-                    <td colspan="1" width="30%">
-                        <input class="easyui-datetimebox" id="odcoatprotime" type="text" name="odcoatprotime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                    <td class="i18n1" name="operationtime">操作时间</td>
+                    <td colspan="2">
+                        <input class="easyui-datetimebox" id="odcoat3LpeInprotime" type="text" name="odcoat3LpeInprotime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
 
                 </tr>
@@ -394,54 +413,62 @@
 
             <table class="ht-table">
                 <tr>
-                    <td class="i18n1" name="coatinglinespeed">涂敷线速度</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="coating_line_speed" value=""/></td>
-                    <td>10~20</td>
-                    <td class="i18n1" name="applicationtemp">中频温度</td>
-                    <td><input class="easyui-numberbox"  data-options="min:0,precision:2" type="text" name="application_temp" value=""/></td>
+                    <td class="i18n1" name="basecoatthickness">底层涂层厚度</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="base_coat_thickness" value=""/></td>
+                    <td></td>
+                    <td class="i18n1" name="middlecoatthickness">中间层涂层厚度</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="middle_coat_thickness" value=""/></td>
                     <td></td>
                 </tr>
 
                 <tr>
-                    <td class="i18n1" name="basecoatused">底层粉末型号</td>
-                    <td><input class="easyui-textbox"  type="text" name="base_coat_used" value=""/></td>
+                    <td class="i18n1" name="topcoatthickness">面层涂层厚度</td>
+                    <td><input class="easyui-numberbox"  data-options="min:0,precision:2" type="text" name="top_coat_thickness" value=""/></td>
                     <td></td>
-                    <td class="i18n1" name="basecoatlotno">底层粉末批号</td>
-                    <td><input class="easyui-textbox"  type="text" name="base_coat_lot_no" value=""/></td>
+                    <td class="i18n1" name="totalcoatingthickness">涂层总厚度</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="total_coating_thickness" value=""/></td>
                     <td></td>
                 </tr>
 
                 <tr>
-                    <td width="16%" class="i18n1" name="topcoatused">面层粉末型号</td>
-                    <td><input class="easyui-textbox"  type="text" name="top_coat_used" value=""/></td>
+                    <td class="i18n1" name="holidays">漏点数量</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="holidays" value=""/></td>
                     <td></td>
-                    <td width="16%" class="i18n1" name="topcoatlotno">面层粉末批号</td>
-                    <td><input class="easyui-textbox"  type="text" name="top_coat_lot_no" value=""/></td>
+                    <td width="16%" class="i18n1" name="holidaytestervolts">电火花检测电压</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="holiday_tester_volts" value=""/></td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td width="16%" class="i18n1" name="basecoatguncount">底层粉末喷枪数</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="base_coat_gun_count" value=""/></td>
+                    <td width="16%" class="i18n1" name="repairs">修补点数</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:0"  type="text" name="repairs" value=""/></td>
                     <td></td>
-                    <td width="16%" class="i18n1" name="topcoatguncount">面层粉末喷枪数</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="top_coat_gun_count" value=""/></td>
+                    <td width="16%" class="i18n1" name="cutbacklength">预留端长度</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="cutback_length" value=""/></td>
                     <td></td>
-
                 </tr>
                 <tr>
-                    <td width="16%" class="i18n1" name="tofirsttouchduration">首次到达接触点时间</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="to_first_touch_duration" value=""/></td>
+                    <td width="16%" class="i18n1" name="bevel">坡口检测</td>
+                    <td><input class="easyui-textbox"  type="text" name="bevel" value=""/></td>
                     <td></td>
-                    <td width="16%" class="i18n1" name="toquenchduration">到达水淋处所用时间</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="to_quench_duration" value=""/></td>
+                    <td width="16%" class="i18n1" name="stencilverification">外喷标检验</td>
+                    <td><input class="easyui-textbox"  type="text" name="stencil_verification" value=""/></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td width="16%" class="i18n1" name="surfacecondition1">表面质量</td>
+                    <td><input class="easyui-textbox"  type="text" name="surface_condition" value=""/></td>
+                    <td></td>
+                    <td width="16%" class="i18n1" name="adhesiontest">附着力测试</td>
+                    <td><input class="easyui-textbox"  type="text" name="adhesion_test" value=""/></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="result">结论</td>
                     <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
-                        <option value="1">合格,进入外涂敷检验工序</option>
-                        <option value="0">不合格,进入外防待修补工序</option>
-                        <option value="2">待定</option>
+                        <option value="1">合格,进入外喷标工序</option>
+                        <option value="0">不合格,进入待修补工序</option>
+                        <option value="2">不合格,进入待扒皮工序</option>
+                        <option value="3">待定</option>
                     </select></td>
                     <td></td>
                     <td width="16%" class="i18n1" name="remark">备注</td>
@@ -464,8 +491,8 @@
 
 </div>
 <div id="dlg-buttons" align="center" style="width:900px;">
-    <a href="#" class="easyui-linkbutton" iconCls="icon-save" onclick="odCoatingProFormSubmit()">Save</a>
-    <a href="#" class="easyui-linkbutton" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="odCoatingProCancelSubmit()">Cancel</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-save" onclick="odCoating3LpeInProFormSubmit()">Save</a>
+    <a href="#" class="easyui-linkbutton" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="odCoating3LpeInProCancelSubmit()">Cancel</a>
 </div>
 <div id="gridPanel1" class="mini-panel" title="header" iconCls="icon-add" style="width:450px;height:250px;"
      showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0"
