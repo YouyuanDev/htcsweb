@@ -45,6 +45,6 @@
     </select>
 
     <select id="getODAcceptanceCriteriaByContractNo" resultType="com.htcsweb.entity.ODCoatingAcceptanceCriteria">
-         select o.* from contract_info c left JOIN project_info p on c.project_no=p.project_no left JOIN od_coating_acceptance_criteria o on p.coating_standard=o.coating_acceptance_criteria_no WHERE c.contract_no=#{contract_no}
+         select o.* from contract_info c inner JOIN project_info p on c.project_no=p.project_no inner JOIN od_coating_acceptance_criteria o on p.od_coating_acceptance_criteria_no=o.coating_acceptance_criteria_no WHERE c.contract_no=#{contract_no}
     </select>
 </mapper>

@@ -124,7 +124,9 @@
                     dataType:'json',
                     data:{'contract_no':row.contract_no},
                     success:function (data) {
+                        //alert(data.relative_humidity_min);
                         if(data!=null){
+
                             var $obj1=$("input[name='relative_humidity']");
                             var $obj2=$("input[name='dew_point']");
                             var $obj3=$("input[name='blast_finish_sa25']");
