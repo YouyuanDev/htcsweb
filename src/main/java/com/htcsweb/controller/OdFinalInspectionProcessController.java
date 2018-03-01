@@ -97,22 +97,38 @@ public class OdFinalInspectionProcessController {
                 List<PipeBasicInfo> list=pipeBasicInfoDao.getPipeNumber(pipeno);
                 if(list.size()>0){
                     PipeBasicInfo p=list.get(0);
-                    if(p.getStatus().equals("od5")) {
+                    if(p.getStatus().equals("od5")||p.getStatus().equals("odrepair2")) {
                         //验证钢管状态为光管
-                        if(odFinalInspectionProcess.getResult().equals("1")) {//当合格时才更新钢管状态
+                        if (odFinalInspectionProcess.getResult().equals("1")) {//当合格时才更新钢管状态
                             p.setStatus("od6");
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
-                        }else if(odFinalInspectionProcess.getResult().equals("0")){
+                        } else if (odFinalInspectionProcess.getResult().equals("0")) {
                             p.setStatus("odrepair1");
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
-                        }else if(odFinalInspectionProcess.getResult().equals("2")){
+                        } else if (odFinalInspectionProcess.getResult().equals("2")) {
                             p.setStatus("odstrip1");
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
-                        }else if(odFinalInspectionProcess.getResult().equals("4")){
+                        } else if (odFinalInspectionProcess.getResult().equals("4")) {
                             p.setStatus("od4");
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }
                     }
+//                    }else if() {
+//                        //外防修补检验合格状态
+//                        if(odFinalInspectionProcess.getResult().equals("1")) {
+//                            p.setStatus("od6");
+//                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+//                        }else if(odFinalInspectionProcess.getResult().equals("0")){
+//                            p.setStatus("odrepair1");
+//                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+//                        }else if(odFinalInspectionProcess.getResult().equals("2")){
+//                            p.setStatus("odstrip1");
+//                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+//                        }else if(odFinalInspectionProcess.getResult().equals("4")){
+//                            p.setStatus("od4");
+//                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+//                        }
+//                    }
                 }
                json.put("success",true);
             }else{

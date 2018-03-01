@@ -26,7 +26,7 @@
 
     <script type="text/javascript">
         var url;
-
+        var basePath ="<%=basePath%>"+"/upload/pictures/";
         $(function () {
             //删除上传的图片
             $(document).on('click','.content-del',function () {
@@ -100,7 +100,7 @@
                 var odpictures=row.upload_files;
                 if(odpictures!=null&&odpictures!=""){
                     var imgList=odpictures.split(';');
-                    createPictureModel(imgList);
+                    createPictureModel(basePath,imgList);
                 }
                 url="/OdFinalInOperation/saveOdFinalInProcess.action?id="+row.id;
 
@@ -155,58 +155,58 @@
             var data=eval("("+e.serverData+")");
             var imgListstr=editFilesList(0,data.imgUrl);
             var imgList=imgListstr.split(';');
-            createPictureModel(imgList);
+            createPictureModel(basePath,imgList);
         }
-        function editFilesList(type,imgUrl) {
-            var $obj=$('#fileslist');
-            if(type==0){
-                var filesList=$('#fileslist').val();
-                $obj.val(filesList+imgUrl+";");
-            }else{
-                $obj.val($obj.val().replace(imgUrl+";",''));
-            }
-            return $obj.val();
-        }
-        //删除选择的图片
-        function delUploadPicture($obj) {
-            var imgUrl=$obj.siblings('dt').find('img').attr('src');
-            var imgName=imgUrl.substr(imgUrl.lastIndexOf('/')+1);
-            $.ajax({
-                url:'../UploadFile/delUploadPicture.action',
-                dataType:'json',
-                data:{"imgList":imgName+";"},
-                success:function (data) {
-                    if(data.success){
-                        var imgList=editFilesList(2,imgName);
-                        $(this).parent('.content-dl').remove();
-                    }else{
-                        hlAlertFour("移除失败!");
-                    }
-                },
-                error:function () {
-                    hlAlertThree();
-                }
-            });
-        }
-        //创建图片展示模型(参数是图片集合)
-        function  createPictureModel(imgList) {
-            var basePath ="<%=basePath%>"+"/upload/pictures/";
-            if($('#hl-gallery').length>0){
-                $('#content_list').empty();
-                for(var i=0;i<imgList.length-1;i++){
-                    $('#content_list').append(getCalleryChildren(basePath+imgList[i]));
-                }
-            }else{
-                $('#hl-gallery-con').append(getGalleryCon());
-                for(var i=0;i<imgList.length-1;i++){
-                    $('#content_list').append(getCalleryChildren(basePath+imgList[i]));
-                }
-            }
-        }
-        function  setParams($obj) {
-            if($obj.val()==null||$obj.val()=="")
-                $obj.val(0);
-        }
+        <%--function editFilesList(type,imgUrl) {--%>
+            <%--var $obj=$('#fileslist');--%>
+            <%--if(type==0){--%>
+                <%--var filesList=$('#fileslist').val();--%>
+                <%--$obj.val(filesList+imgUrl+";");--%>
+            <%--}else{--%>
+                <%--$obj.val($obj.val().replace(imgUrl+";",''));--%>
+            <%--}--%>
+            <%--return $obj.val();--%>
+        <%--}--%>
+        <%--//删除选择的图片--%>
+        <%--function delUploadPicture($obj) {--%>
+            <%--var imgUrl=$obj.siblings('dt').find('img').attr('src');--%>
+            <%--var imgName=imgUrl.substr(imgUrl.lastIndexOf('/')+1);--%>
+            <%--$.ajax({--%>
+                <%--url:'../UploadFile/delUploadPicture.action',--%>
+                <%--dataType:'json',--%>
+                <%--data:{"imgList":imgName+";"},--%>
+                <%--success:function (data) {--%>
+                    <%--if(data.success){--%>
+                        <%--var imgList=editFilesList(2,imgName);--%>
+                        <%--$(this).parent('.content-dl').remove();--%>
+                    <%--}else{--%>
+                        <%--hlAlertFour("移除失败!");--%>
+                    <%--}--%>
+                <%--},--%>
+                <%--error:function () {--%>
+                    <%--hlAlertThree();--%>
+                <%--}--%>
+            <%--});--%>
+        <%--}--%>
+        <%--//创建图片展示模型(参数是图片集合)--%>
+        <%--function  createPictureModel(imgList) {--%>
+            <%--var basePath ="<%=basePath%>"+"/upload/pictures/";--%>
+            <%--if($('#hl-gallery').length>0){--%>
+                <%--$('#content_list').empty();--%>
+                <%--for(var i=0;i<imgList.length-1;i++){--%>
+                    <%--$('#content_list').append(getCalleryChildren(basePath+imgList[i]));--%>
+                <%--}--%>
+            <%--}else{--%>
+                <%--$('#hl-gallery-con').append(getGalleryCon());--%>
+                <%--for(var i=0;i<imgList.length-1;i++){--%>
+                    <%--$('#content_list').append(getCalleryChildren(basePath+imgList[i]));--%>
+                <%--}--%>
+            <%--}--%>
+        <%--}--%>
+        <%--function  setParams($obj) {--%>
+            <%--if($obj.val()==null||$obj.val()=="")--%>
+                <%--$obj.val(0);--%>
+        <%--}--%>
         //清理form表单
         function  clearFormLabel() {
             $('#odFinalInProForm').form('clear');
@@ -345,7 +345,7 @@
                 <tr>
                     <td class="i18n1" name="operatorno" width="20%">操作工编号</td>
                     <td colspan="1" width="30%">
-                        <input id="lookup2" name="operator_no" class="mini-lookup" style="text-align:center;width:180px;"
+                        <input id="lookup2" name="operator_no" class="mini-lookup" style="text-align:center;width:185px;"
                                textField="employee_no" valueField="id" popupWidth="auto"
                                popup="#gridPanel2" grid="#datagrid2" multiSelect="false"
                         />
@@ -361,24 +361,22 @@
             <table class="ht-table">
 
                 <tr>
-                    <td class="i18n1" name="inspectionresult">外涂层质检结果</td>
-                    <td colspan="2"><input class="easyui-textbox"  type="text" name="inspection_result" value=""/></td>
+                    <td class="i18n1" width="20%" name="inspectionresult">外涂层质检结果</td>
+                    <td colspan="3"><input class="easyui-textbox"  type="text" name="inspection_result" value=""/></td>
                 </tr>
 
 
                 <tr>
-                    <td width="16%" class="i18n1" name="result">结论</td>
-                    <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
+                    <td width="20%" class="i18n1" name="result">结论</td>
+                    <td width="30%"><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:185px;">
                         <option value="0">不合格,进入外防待修补工序</option>
                         <option value="2">不合格,进入外防待扒皮工序</option>
                         <option value="4">不合格,进入外喷标工序</option>
                         <option value="1">合格,进入外防成品入库工序</option>
                         <option value="3">待定</option>
                     </select></td>
-                    <td></td>
-                    <td width="16%" class="i18n1" name="remark">备注</td>
-                    <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
-                    <td></td>
+                    <td width="20%" class="i18n1" name="remark">备注</td>
+                    <td width="30%"><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
                 </tr>
             </table>
             <input type="hidden" id="fileslist" name="upload_files" value=""/>

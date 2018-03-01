@@ -20,7 +20,6 @@
     </resultMap>
 
 
-
      <select id="getPipeNumber" resultType="com.htcsweb.entity.PipeBasicInfo">
          SELECT  *  from pipe_basic_info
          <where>
@@ -31,6 +30,12 @@
          ORDER BY id DESC
          limit 1000
      </select>
+    <!--<delete id="delOdCoatingProcess">-->
+        <!--delete from od_coating_2fbe_process WHERE-->
+        <!--<foreach collection="array" item="item" open="id in (" separator="," close=")">-->
+            <!--#{item}-->
+        <!--</foreach>-->
+    <!--</delete>-->
 
     <select id="getCountODIDBarePipeInfoByLike" resultType="int">
         select count(*) from pipe_basic_info p

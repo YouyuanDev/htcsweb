@@ -141,4 +141,19 @@ public class CoatingRepairController {
         }
         return null;
     }
+    //删除外防腐标准
+    @RequestMapping("/delCoatingRepair")
+    public String delCoatingRepair(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
+        String[]idArr=hlparam.split(",");
+        int resTotal=0;
+        resTotal=coatingRepairDao.delCoatingRepair(idArr);
+        JSONObject json=new JSONObject();
+        if(resTotal>0){
+            json.put("success",true);
+        }else{
+            json.put("success",false);
+        }
+        ResponseUtil.write(response,json);
+        return null;
+    }
 }

@@ -33,7 +33,7 @@
 
 
     <insert id="addCoatingRepair" parameterType="com.htcsweb.entity.CoatingRepair">
-        INSERT INTO coating_repair(pipe_no,operator_no,operation_time,coating_type,odid,repair_size,repair_number,holiday_number,repair_method,unqualified_reason,inspector_no,inspection_time,surface_condition,repair_thickness,holiday_testing,adhesion,upload_files,result,remark) VALUES (#{pipe_no},#{operator_no},#{operation_time},#{coating_type},#{odid},#{repair_size},#{repair_number},#{holiday_number},#{repair_method},#{unqualified_reason},#{inspector_no},#{inspection_time},#{surface_condition},#{repair_thickness},#{holiday_testing},#{adhesion},#{upload_files},#{result},#{remark})
+         INSERT INTO coating_repair(pipe_no,operator_no,operation_time,coating_type,odid,repair_size,repair_number,holiday_number,repair_method,unqualified_reason,inspector_no,inspection_time,surface_condition,repair_thickness,holiday_testing,adhesion,upload_files,result,remark) VALUES (#{pipe_no},#{operator_no},#{operation_time},#{coating_type},#{odid},#{repair_size},#{repair_number},#{holiday_number},#{repair_method},#{unqualified_reason},#{inspector_no},#{inspection_time},#{surface_condition},#{repair_thickness},#{holiday_testing},#{adhesion},#{upload_files},#{result},#{remark})
     </insert>
     <delete id="delCoatingRepair">
         delete from coating_repair WHERE

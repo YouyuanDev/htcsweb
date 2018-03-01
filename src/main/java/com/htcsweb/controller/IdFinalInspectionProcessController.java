@@ -96,7 +96,7 @@ public class IdFinalInspectionProcessController {
                 if(list.size()>0){
                     PipeBasicInfo p=list.get(0);
                     //验证钢管状态是否为内喷标完成或者外防入库
-                    if(p.getStatus().equals("id5")||p.getStatus().equals("odstockin")){
+                    if(p.getStatus().equals("id5")||p.getStatus().equals("odstockin")||p.getStatus().equals("idrepair2")){
                         //如果为合格
                         if(idFinalInspectionProcess.getResult().equals("1")) {
                             p.setStatus("id6");

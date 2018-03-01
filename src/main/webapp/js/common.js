@@ -130,7 +130,7 @@ function loadPipeBaiscInfo(row) {
     $('#grade').text(row.grade);$('#heat_no').text(row.heat_no);
 }
 function getGalleryCon() {
-    var str='<div id="hl-gallery">'+
+    var str='<div id="hl-gallery" class="hl-gallery">'+
         '<span class="prev"><</span>'+
         '<div id="content">' +
         '<div id="content_list">'+
@@ -146,6 +146,62 @@ function getCalleryChildren(imgUrl) {
         '<a class="content-del">X</a>' +
         '</dl>';
     return str;
+}
+function editFilesList(type,imgUrl) {
+    var $obj=$('#fileslist');
+    if(type==0){
+        var filesList=$('#fileslist').val();
+        $obj.val(filesList+imgUrl+";");
+    }else{
+        $obj.val($obj.val().replace(imgUrl+";",''));
+    }
+    return $obj.val();
+}
+//删除选择的图片
+function delUploadPicture($obj) {
+    var imgUrl=$obj.siblings('dt').find('img').attr('src');
+    var imgName=imgUrl.substr(imgUrl.lastIndexOf('/')+1);
+    var total=$('#hl-gallery-con').find('#content_list').children('.content-dl').length;
+    $.ajax({
+        url:'../UploadFile/delUploadPicture.action',
+        dataType:'json',
+        data:{"imgList":imgName+";"},
+        success:function (data) {
+            if(data.success){
+                var imgList=editFilesList(2,imgName);
+                $obj.parent('.content-dl').remove();
+                if(total<=0){
+                    $('#hl-gallery-con').empty();
+                }
+            }else{
+                hlAlertFour("移除失败!");
+            }
+        },
+        error:function () {
+            hlAlertThree();
+        }
+    });
+
+}
+//创建图片展示模型(参数是图片集合)
+function  createPictureModel(basePath,imgList) {
+    //var basePath ="<%=basePath%>"+"/upload/pictures/";
+    if($('#hl-gallery').length>0){
+        $('#content_list').empty();
+        for(var i=0;i<imgList.length-1;i++){
+            $('#content_list').append(getCalleryChildren(basePath+imgList[i]));
+        }
+    }else{
+        $('#hl-gallery-con').append(getGalleryCon());
+        for(var i=0;i<imgList.length-1;i++){
+            $('#content_list').append(getCalleryChildren(basePath+imgList[i]));
+        }
+    }
+}
+//设置空值
+function  setParams($obj) {
+    if($obj.val()==null||$obj.val()=="")
+        $obj.val(0);
 }
 //钢管编号异步获取钢管信息清理数据
 function  clearLabelPipeInfo() {
