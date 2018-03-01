@@ -442,9 +442,9 @@
                         </select>
 
                     </td>
-                    <td ></td>
+                    <td class="i18n1" name="remark">备注</td>
                     <td colspan="2">
-
+                        <input class="easyui-textbox"  data-options="multiline:true" type="text" name="remark" value=""/>
                     </td>
                 </tr>
                 <tr>

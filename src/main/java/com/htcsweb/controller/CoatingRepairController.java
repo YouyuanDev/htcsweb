@@ -113,10 +113,19 @@ public class CoatingRepairController {
                             p.setStatus("odrepair2");
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }
+                        else if(coatingRepair.getResult().equals("2")) {//当不合格需要扒皮时 更新钢管状态
+                            p.setStatus("odstrip1");
+                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        }
+
+
                     }else if(p.getStatus().equals("idrepair1")) {
                         //验证钢管状态为id 修补管
                         if(coatingRepair.getResult().equals("1")) {//当合格时才更新钢管状态
                             p.setStatus("idrepair2");
+                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        }else if(coatingRepair.getResult().equals("2")) {//当不合格需要扒皮时 更新钢管状态
+                            p.setStatus("idstrip1");
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }
                     }
