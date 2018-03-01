@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.htcsweb.dao.CoatingRepairDao">
+
+    <resultMap id="all" type="com.htcsweb.entity.CoatingRepair">
+        <id property="id" column="id"></id>
+        <result property="pipe_no" column="pipe_no"></result>
+        <result property="operator_no" column="operator_no"></result>
+        <result property="operation_time" column="operation_time"></result>
+        <result property="coating_type" column="coating_type"></result>
+        <result property="odid" column="odid"></result>
+        <result property="repair_size" column="repair_size"></result>
+        <result property="repair_number" column="repair_number"></result>
+        <result property="holiday_number" column="holiday_number"></result>
+        <result property="repair_method" column="repair_method"></result>
+        <result property="unqualified_reason" column="unqualified_reason"></result>
+        <result property="inspector_no" column="inspector_no"></result>
+        <result property="inspection_time" column="inspection_time"></result>
+        <result property="surface_condition" column="surface_condition"></result>
+        <result property="repair_thickness" column="repair_thickness"></result>
+        <result property="holiday_testing" column="holiday_testing"></result>
+        <result property="adhesion" column="adhesion"></result>
+        <result property="upload_files" column="upload_files"></result>
+        <result property="result" column="result"></result>
+        <result property="remark" column="remark"></result>
+
+    </resultMap>
+
+
+
+
+    <insert id="addCoatingRepair" parameterType="com.htcsweb.entity.CoatingRepair">
+        INSERT INTO coating_repair(pipe_no,operator_no,operation_time,coating_type,odid,repair_size,repair_number,holiday_number,repair_method,unqualified_reason,inspector_no,inspection_time,surface_condition,repair_thickness,holiday_testing,adhesion,upload_files,result,remark) VALUES (#{pipe_no},#{operator_no},#{operation_time},#{coating_type},#{odid},#{repair_size},#{repair_number},#{holiday_number},#{repair_method},#{unqualified_reason},#{inspector_no},#{inspection_time},#{surface_condition},#{repair_thickness},#{holiday_testing},#{adhesion},#{upload_files},#{result},#{remark})
+    </insert>
+    <delete id="delCoatingRepair">
+        delete from coating_repair WHERE
+        <foreach collection="array" item="item" open="id in (" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <update id="updateCoatingRepair" parameterType="com.htcsweb.entity.CoatingRepair">
+        UPDATE coating_repair set pipe_no=#{pipe_no},operator_no=#{operator_no},operation_time=#{operation_time},coating_type=#{coating_type}, odid=#{odid},repair_size=#{repair_size},repair_number=#{repair_number},holiday_number=#{holiday_number},repair_method=#{repair_method},unqualified_reason=#{unqualified_reason},inspector_no=#{inspector_no},inspection_time=#{inspection_time},surface_condition=#{surface_condition},repair_thickness=#{repair_thickness},holiday_testing=#{holiday_testing},adhesion=#{adhesion},upload_files=#{upload_files},result=#{result},remark=#{remark} WHERE id=#{id}
+    </update>
+
+
+    <select id="getCountCoatingRepairInfoByLike" resultType="int">
+        select count(*) from coating_repair o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        left join pipe_status s on s.status_code=p.status
+        <where>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND o.pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+            <if test="operator_no!=null and operator_no!=''">
+                AND o.operator_no LIKE CONCAT('%',#{operator_no},'%')
+            </if>
+            <if test="project_no!=null and project_no!=''">
+                AND c.project_no LIKE CONCAT('%',#{project_no},'%')
+            </if>
+            <if test="contract_no!=null and contract_no!=''">
+                AND p.contract_no LIKE CONCAT('%',#{contract_no},'%')
+            </if>
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d 23:59:59')]]>
+            </if>
+
+        </where>
+    </select>
+
+
+
+    <select id="getCoatingRepairInfoByLike" resultType="map">
+        Select pro.project_no,pro.project_name,s.status_name,p.contract_no,p.grade,p.od,p.wt,p.p_length,p.weight,p.heat_no,o.*
+        from coating_repair o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        left join pipe_status s on s.status_code=p.status
+        <where>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND o.pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+            <if test="operator_no!=null and operator_no!=''">
+                AND o.operator_no LIKE CONCAT('%',#{operator_no},'%')
+            </if>
+            <if test="project_no!=null and project_no!=''">
+                AND c.project_no LIKE CONCAT('%',#{project_no},'%')
+            </if>
+            <if test="contract_no!=null and contract_no!=''">
+                AND p.contract_no LIKE CONCAT('%',#{contract_no},'%')
+            </if>
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d 23:59:59')]]>
+            </if>
+
+        </where>
+        ORDER BY o.id DESC
+        limit #{skip},#{take}
+    </select>
+
+
+</mapper>
