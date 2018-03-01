@@ -20,11 +20,13 @@ public class IdCoatingInspectionProcess {
     private String remark;
     private String result;
     private String mill_no;
+    private String is_sample;
 
     public IdCoatingInspectionProcess() {
     }
 
-    public IdCoatingInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, float dry_film_thickness_max, float dry_film_thickness_min, float cutback, float holiday_tester_volts, int holiday_test_results, String surface_condition, String bevel_check, float magnetism, int internal_repairs, String upload_files, String remark, String result, String mill_no) {
+
+    public IdCoatingInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, float dry_film_thickness_max, float dry_film_thickness_min, float cutback, float holiday_tester_volts, int holiday_test_results, String surface_condition, String bevel_check, float magnetism, int internal_repairs, String upload_files, String remark, String result, String mill_no, String is_sample) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -42,6 +44,7 @@ public class IdCoatingInspectionProcess {
         this.remark = remark;
         this.result = result;
         this.mill_no = mill_no;
+        this.is_sample = is_sample;
     }
 
     public int getId() {
@@ -178,5 +181,13 @@ public class IdCoatingInspectionProcess {
 
     public void setMill_no(String mill_no) {
         this.mill_no = mill_no;
+    }
+
+    public String getIs_sample() {
+        return is_sample;
+    }
+
+    public void setIs_sample(String is_sample) {
+        this.is_sample = is_sample;
     }
 }
