@@ -229,3 +229,13 @@ function addLabelPipeInfo(data) {
         $('#heat_no').text(element.heat_no);
     });
 }
+//选样改变事件
+function selectIsSample() {
+    if($('#is-sample').is(":checked")){
+        $('#is-sample').prop('checked', true);
+        $("input[name='is_sample']").val(1);
+    }else{
+        $('#is-sample').prop('checked', false);
+        $("input[name='is_sample']").val(0);
+    }
+}

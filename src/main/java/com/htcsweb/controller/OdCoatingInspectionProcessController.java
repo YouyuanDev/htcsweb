@@ -87,6 +87,7 @@ public class OdCoatingInspectionProcessController {
                 resTotal=odCoatingInspectionProcessDao.addOdCoatingInProcess(odCoatingInspectionProcess);
             }else{
                 //修改！
+                //System.out.println("sample="+odCoatingInspectionProcess.getIs_sample());
                 resTotal=odCoatingInspectionProcessDao.updateOdCoatingInProcess(odCoatingInspectionProcess);
             }
             if(resTotal>0){

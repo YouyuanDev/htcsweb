@@ -123,8 +123,6 @@
                 hlAlertOne();
             }
         }
-
-
         //取消保存
         function CoatingRepairFormCancelSubmit() {
             $('#hlCoatingRepairDialog').dialog('close');

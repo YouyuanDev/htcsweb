@@ -90,6 +90,14 @@
                 $('#odCoating3LpeInProForm').form('load',row);
                 $('#odcoat3LpeInprotime').datetimebox('setValue',getDate1(row.operation_time));
                 $("#odcoat3LpeInproid").textbox("setValue", row.id);
+                var sample=row.is_sample;
+                if(sample=="1"){
+                    $('#is-sample').prop('checked', true);
+                    $("input[name='is_sample']").val(1);
+                }else{
+                    $('#is-sample').prop('checked', false);
+                    $("input[name='is_sample']").val(0);
+                }
                 look1.setText(row.pipe_no);
                 look1.setValue(row.pipe_no);
                 look2.setText(row.operator_no);
@@ -291,7 +299,7 @@
                 <th field="weight" align="center" width="50" class="i18n1" name="weight">重量</th>
                 <th field="heat_no" align="center" hidden="true" width="50" class="i18n1" name="heat_no">炉号</th>
                 <th field="operator_no" align="center" width="100" class="i18n1" name="operatorno">操作工编号</th>
-
+                <th field="is_sample" align="center" width="80" class="i18n1" name="issample">取样管</th>
                 <th field="base_coat_thickness" align="center" width="80" class="i18n1" name="basecoatthickness">底层涂层厚度</th>
                 <th field="middle_coat_thickness" align="center" width="80" class="i18n1" name="middlecoatthickness">中间层涂层厚度</th>
                 <th field="top_coat_thickness" align="center" width="100" class="i18n1" name="topcoatthickness">面层涂层厚度</th>
@@ -453,6 +461,13 @@
                     <td width="16%" class="i18n1" name="adhesiontest">附着力测试</td>
                     <td><input class="easyui-textbox"  type="text" name="adhesion_test" value=""/></td>
                     <td></td>
+                </tr>
+                <tr>
+                    <td width="16%" class="i18n1" name="issample">取样管</td>
+                    <td colspan="2">
+                        <input type="checkbox" id="is-sample" value="0" checked="false" onchange="selectIsSample()"/>
+                        <input type="hidden" name="is_sample" value="0">
+                    </td>
                 </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="result">结论</td>
