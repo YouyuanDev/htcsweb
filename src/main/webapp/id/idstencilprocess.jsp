@@ -251,6 +251,7 @@
 
 <!--工具栏-->
 <div id="hlIdStencilProTb" style="padding:10px;">
+    <span class="i18n1" name="millno">分厂编号</span>:
     <input id="millno" class="easyui-combobox" type="text" name="millno"  data-options=
             "url:'/millInfo/getAllMillsWithComboboxSelectAll.action',
 					        method:'get',

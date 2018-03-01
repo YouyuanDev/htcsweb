@@ -201,8 +201,8 @@
                 }
             });
 
-            //涂层修补
-            $("#hlcoatingrepair").tree({
+            //涂层修补与扒皮
+            $("#hlcoatingrepairstrip").tree({
                 onClick: function (node) {
                     var tab = $('#hlTab').tabs('getTab', node.text);
                     var nodeTxt = node.text;
@@ -217,7 +217,16 @@
                                 closable: true
                             });
                             hlLanguage();
+                        }else if ("涂层扒皮" == nodeTxt || "Coating Strip" == nodeTxt) {
+
+                            $('#hlTab').tabs('add', {
+                                title: node.text,
+                                content: "<iframe scrolling='auto' frameborder='0'  src='coatingstrip/coatingstrip.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable: true
+                            });
+                            hlLanguage();
                         }
+
 
                     }
                 }
@@ -371,9 +380,10 @@
             </ul>
 
         </div>
-        <div title="涂层修补" class="i18n" name="coatingrepair" style="padding:10px;">
-            <ul id="hlcoatingrepair">
+        <div title="涂层修补与扒皮" class="i18n" name="coatingrepairandstrip" style="padding:10px;">
+            <ul id="hlcoatingrepairstrip">
                 <li class="i18n1" name="coatingrepair">涂层修补</li>
+                <li class="i18n1" name="coatingstrip">涂层扒皮</li>
             </ul>
         </div>
         <div title="基础信息管理" class="i18n" name="basicinfomanagement" style="padding:10px;">

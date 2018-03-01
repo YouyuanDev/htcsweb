@@ -286,7 +286,7 @@
     <span class="i18n1" name="contractno">合同编号</span>:
     <input id="contractno" name="contractno" style="width:100px;line-height:22px;border:1px solid #ccc">
     <span class="i18n1" name="projectno">项目编号</span>:
-    <input id="projectno" name="projectno"  style="width:100px;line-height:22px;border:1px solid #ccc">
+    <input id="projectno" name="projectno"  style="width:100px;line-height:22px;border:1px solid #ccc"><br><br>
     <span class="i18n1" name="operatorno">操作工编号</span>:
     <input id="operatorno" name="operatorno" style="line-height:22px;border:1px solid #ccc">
     <span class="i18n1" name="begintime">开始时间</span>:
