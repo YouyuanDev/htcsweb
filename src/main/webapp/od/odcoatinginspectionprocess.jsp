@@ -106,14 +106,21 @@
                     dataType:'json',
                     data:{'contract_no':row.contract_no},
                     success:function (data) {
+                        var $obj1=$("input[name='base_coat_thickness']");
+                        var $obj2=$("input[name='top_coat_thickness']");
+                        var $obj3=$("input[name='total_coating_thickness']");
+                        var $obj4=$("input[name='holidays']");
+                        var $obj5=$("input[name='holiday_tester_volts']");
+                        var $obj6=$("input[name='repairs']");
+                        var $obj7=$("input[name='cutback_length']");
+                        $obj1.siblings().css("background-color","#FFFFFF");
+                        $obj2.siblings().css("background-color","#FFFFFF");
+                        $obj3.siblings().css("background-color","#FFFFFF");
+                        $obj4.siblings().css("background-color","#FFFFFF");
+                        $obj5.siblings().css("background-color","#FFFFFF");
+                        $obj6.siblings().css("background-color","#FFFFFF");
+                        $obj7.siblings().css("background-color","#FFFFFF");
                         if(data!=null){
-                            var $obj1=$("input[name='base_coat_thickness']");
-                            var $obj2=$("input[name='top_coat_thickness']");
-                            var $obj3=$("input[name='total_coating_thickness']");
-                            var $obj4=$("input[name='holidays']");
-                            var $obj5=$("input[name='holiday_tester_volts']");
-                            var $obj6=$("input[name='repairs']");
-                            var $obj7=$("input[name='cutback_length']");
                             var res1=$obj1.val();
                             var res2=$obj2.val();
                             var res3=$obj3.val();
@@ -121,33 +128,19 @@
                             var res5=$obj5.val();
                             var res6=$obj6.val();
                             var res7=$obj7.val();
-                            if((res1>data.base_2fbe_coat_thickness_min)&&(res1<data.base_2fbe_coat_thickness_max))
-                                $obj1.siblings().css("background-color","#FFFFFF");
-                            else
+                            if(!((res1>data.base_2fbe_coat_thickness_min)&&(res1<data.base_2fbe_coat_thickness_max)))
                                 $obj1.siblings().css("background-color","#F9A6A6");
-                            if((res2>data.top_2fbe_coat_thickness_min)&&(res2<data.top_2fbe_coat_thickness_max))
-                                $obj2.siblings().css("background-color","#FFFFFF");
-                            else
+                            if(!((res2>data.top_2fbe_coat_thickness_min)&&(res2<data.top_2fbe_coat_thickness_max)))
                                 $obj2.siblings().css("background-color","#F9A6A6");
-                            if((res3>data.total_2fbe_coat_thickness_min)&&(res3<data.total_2fbe_coat_thickness_max))
-                                $obj3.siblings().css("background-color","#FFFFFF");
-                            else
+                            if(!((res3>data.total_2fbe_coat_thickness_min)&&(res3<data.total_2fbe_coat_thickness_max)))
                                 $obj3.siblings().css("background-color","#F9A6A6");
-                            if((res4>data.temp_above_dew_point_min)&&(res4<data.temp_above_dew_point_max))
-                                $obj4.siblings().css("background-color","#FFFFFF");
-                            else
+                            if(!((res4>data.temp_above_dew_point_min)&&(res4<data.temp_above_dew_point_max)))
                                 $obj4.siblings().css("background-color","#F9A6A6");
-                            if((res5>data.holiday_tester_voltage_min)&&(res5<data.holiday_tester_voltage_max))
-                                $obj5.siblings().css("background-color","#FFFFFF");
-                            else
+                            if(!((res5>data.holiday_tester_voltage_min)&&(res5<data.holiday_tester_voltage_max)))
                                 $obj5.siblings().css("background-color","#F9A6A6");
-                            if((res6>data.repair_min)&&(res6<data.repair_max))
-                                $obj6.siblings().css("background-color","#FFFFFF");
-                            else
+                            if(!((res6>data.repair_min)&&(res6<data.repair_max)))
                                 $obj6.siblings().css("background-color","#F9A6A6");
-                            if((res7>data.cutback_min)&&(res7<data.cutback_max))
-                                $obj7.siblings().css("background-color","#FFFFFF");
-                            else
+                            if(!((res7>data.cutback_min)&&(res7<data.cutback_max)))
                                 $obj7.siblings().css("background-color","#F9A6A6");
                         }
                     },error:function () {

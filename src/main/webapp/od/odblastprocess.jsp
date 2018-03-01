@@ -107,14 +107,12 @@
                     dataType:'json',
                     data:{'contract_no':row.contract_no},
                     success:function (data) {
+                        var $obj=$("input[name='salt_contamination_before_blasting']");
+                        $obj.siblings().css("background-color","#FFFFFF");
                         if(data!=null){
-                            var $obj=$("input[name='salt_contamination_before_blasting']");
                             var salt=$obj.val();
-                            if((salt>data.salt_contamination_before_blast_min)&&(salt<data.salt_contamination_before_blast_max)){
-                                $obj.siblings().css("background-color","#FFFFFF");
-                            }else{
+                            if(!((salt>data.salt_contamination_before_blast_min)&&(salt<data.salt_contamination_before_blast_max)))
                                 $obj.siblings().css("background-color","#F9A6A6");
-                            }
                         }
                     },error:function () {
 
