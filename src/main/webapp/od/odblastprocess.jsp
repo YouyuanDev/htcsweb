@@ -461,11 +461,12 @@
     </div>
     <div id="datagrid1" class="mini-datagrid" style="width:100%;height:100%;"
          borderStyle="border:0" showPageSize="false" showPageIndex="false"
-         url="/pipeinfo/getPipeNumber.action">
+         url="/pipeinfo/getPipeNumbers.action">
         <div property="columns">
             <div type="checkcolumn" ></div>
             <div field="pipe_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="pipeno">钢管编号</div>
             <div field="contract_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="contractno">合同编号</div>
+            <div field="status" width="40" headerAlign="center" allowSort="true" class="i18n1" name="status">状态</div>
             <div field="od" width="40" headerAlign="center" allowSort="true" class="i18n1" name="od">外径</div>
             <div field="wt" width="40" headerAlign="center" allowSort="true" class="i18n1" name="wt">壁厚</div>
             <div field="p_length" width="40" headerAlign="center" allowSort="true" class="i18n1" name="p_length">长度</div>
@@ -514,14 +515,15 @@
     var look1=mini.get('lookup1');
     var look2= mini.get("lookup2");
     var combox1=mini.get("combobox1");
-    grid1.load();
-    grid2.load();
+    //grid1.load();
+    //grid2.load();
 
     function onSearchClick(type) {
         if(type==1)
         {
             grid1.load({
-                pipe_no:keyText1.value
+                pipe_no:keyText1.value,
+                pipestatus:'bare1,'
             });
         }else if(type==2){
             grid2.load({

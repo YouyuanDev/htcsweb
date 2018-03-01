@@ -41,6 +41,23 @@ public class PipeBasicInfoController {
         String map= JSONObject.toJSONString(list);
         return map;
     }
+    @RequestMapping("/getPipeNumbers")
+    @ResponseBody
+    public String getPipeNumbers(HttpServletRequest request){
+        String map="";
+        try{
+            String pipe_no=request.getParameter("pipe_no");
+            String pipestatus=request.getParameter("pipestatus");
+            String[]idArr={};
+            if(pipestatus!=null){
+                idArr=pipestatus.split(",");
+            }
+            List<PipeBasicInfo>list=pipeBasicInfoDao.getPipeNumbers(pipe_no,idArr);
+            map= JSONObject.toJSONString(list);
+        }catch (Exception e){
+        }
+        return map;
+    }
 
     //用于搜索的pipe状态下拉框，带All 选项
     @RequestMapping("/getAllPipeStatusWithComboboxSelectAll")

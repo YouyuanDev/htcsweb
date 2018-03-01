@@ -623,8 +623,8 @@
                 pname: keyText4.value,
                 employeeno:keyText3.value
             });
-        }else if(type==2){
-            grid2.load({
+        }else if(type==3){
+            grid3.load({
                 pname: keyText6.value,
                 employeeno:keyText5.value
             });
