@@ -6,7 +6,7 @@
 <mapper namespace="com.htcsweb.dao.LabTestingAcceptanceCriteria3LpeDao">
 
     <insert id="addLabTestCriteria3Lpe" parameterType="com.htcsweb.entity.LabTestingAcceptanceCriteria3Lpe">
-    INSERT INTO lab_testing_acceptance_crireria_3lpe(lab_testing_acceptance_criteria_no,resistance_to_cd_20_28d_max,resistance_to_cd_20_28d_min,resistance_to_cd_max_28d_max,resistance_to_cd_max_28d_min,resistance_to_cd_65_24h_max,resistance_to_cd_65_24h_min,impact_resistance_23_max,impact_resistance_23_min,impact_resistance_m40_max,impact_resistance_m40_min,indentation_hardness_23_max,indentation_hardness_23_min,indentation_hardness_70_max,indentation_hardness_70_min,elongation_at_break_max,elongation_at_break_min,coating_resistivity_max,coating_resistivity_min,thermal_degradation_max,thermal_degradation_min,last_update_time) VALUES (#{lab_testing_acceptance_criteria_no},#{resistance_to_cd_20_28d_max},#{resistance_to_cd_20_28d_min},#{resistance_to_cd_max_28d_max},#{resistance_to_cd_max_28d_min},#{resistance_to_cd_65_24h_max},#{resistance_to_cd_65_24h_min},#{impact_resistance_23_max},#{impact_resistance_23_min},#{impact_resistance_m40_max},#{impact_resistance_m40_min},#{indentation_hardness_23_max},#{indentation_hardness_23_min},#{indentation_hardness_70_max},#{indentation_hardness_70_min},#{elongation_at_break_max},#{elongation_at_break_min},#{coating_resistivity_max},#{coating_resistivity_min},#{thermal_degradation_max},#{thermal_degradation_min},#{last_update_time})
+    INSERT INTO lab_testing_acceptance_criteria_3lpe(lab_testing_acceptance_criteria_no,resistance_to_cd_20_28d_max,resistance_to_cd_20_28d_min,resistance_to_cd_max_28d_max,resistance_to_cd_max_28d_min,resistance_to_cd_65_24h_max,resistance_to_cd_65_24h_min,impact_resistance_23_max,impact_resistance_23_min,impact_resistance_m40_max,impact_resistance_m40_min,indentation_hardness_23_max,indentation_hardness_23_min,indentation_hardness_70_max,indentation_hardness_70_min,elongation_at_break_max,elongation_at_break_min,coating_resistivity_max,coating_resistivity_min,thermal_degradation_max,thermal_degradation_min,last_update_time) VALUES (#{lab_testing_acceptance_criteria_no},#{resistance_to_cd_20_28d_max},#{resistance_to_cd_20_28d_min},#{resistance_to_cd_max_28d_max},#{resistance_to_cd_max_28d_min},#{resistance_to_cd_65_24h_max},#{resistance_to_cd_65_24h_min},#{impact_resistance_23_max},#{impact_resistance_23_min},#{impact_resistance_m40_max},#{impact_resistance_m40_min},#{indentation_hardness_23_max},#{indentation_hardness_23_min},#{indentation_hardness_70_max},#{indentation_hardness_70_min},#{elongation_at_break_max},#{elongation_at_break_min},#{coating_resistivity_max},#{coating_resistivity_min},#{thermal_degradation_max},#{thermal_degradation_min},#{last_update_time})
     </insert>
     <delete id="delLabTestCriteria3Lpe">
         delete from id_coating_acceptance_criteria WHERE
@@ -16,11 +16,11 @@
     </delete>
 
     <update id="updateLabTestCriteria3Lpe" parameterType="com.htcsweb.entity.LabTestingAcceptanceCriteria3Lpe">
-     UPDATE lab_testing_acceptance_crireria_3lpe set lab_testing_acceptance_criteria_no=#{lab_testing_acceptance_criteria_no},resistance_to_cd_20_28d_max=#{resistance_to_cd_20_28d_max},resistance_to_cd_20_28d_min=#{resistance_to_cd_20_28d_min},resistance_to_cd_max_28d_max=#{resistance_to_cd_max_28d_max},resistance_to_cd_max_28d_min=#{resistance_to_cd_max_28d_min},resistance_to_cd_65_24h_max=#{resistance_to_cd_65_24h_max},resistance_to_cd_65_24h_min=#{resistance_to_cd_65_24h_min},impact_resistance_23_max=#{impact_resistance_23_max},impact_resistance_23_min=#{impact_resistance_23_min},impact_resistance_m40_max=#{impact_resistance_m40_max},impact_resistance_m40_min=#{impact_resistance_m40_min},indentation_hardness_23_max=#{indentation_hardness_23_max},indentation_hardness_23_min=#{indentation_hardness_23_min},indentation_hardness_70_max=#{indentation_hardness_70_max},indentation_hardness_70_min=#{indentation_hardness_70_min},elongation_at_break_max=#{elongation_at_break_max},elongation_at_break_min=#{elongation_at_break_min},coating_resistivity_max=#{coating_resistivity_max},coating_resistivity_min=#{coating_resistivity_min},thermal_degradation_max=#{thermal_degradation_max},thermal_degradation_min=#{thermal_degradation_min},last_update_time=#{last_update_time} where id=#{id}
+     UPDATE lab_testing_acceptance_criteria_3lpe set lab_testing_acceptance_criteria_no=#{lab_testing_acceptance_criteria_no},resistance_to_cd_20_28d_max=#{resistance_to_cd_20_28d_max},resistance_to_cd_20_28d_min=#{resistance_to_cd_20_28d_min},resistance_to_cd_max_28d_max=#{resistance_to_cd_max_28d_max},resistance_to_cd_max_28d_min=#{resistance_to_cd_max_28d_min},resistance_to_cd_65_24h_max=#{resistance_to_cd_65_24h_max},resistance_to_cd_65_24h_min=#{resistance_to_cd_65_24h_min},impact_resistance_23_max=#{impact_resistance_23_max},impact_resistance_23_min=#{impact_resistance_23_min},impact_resistance_m40_max=#{impact_resistance_m40_max},impact_resistance_m40_min=#{impact_resistance_m40_min},indentation_hardness_23_max=#{indentation_hardness_23_max},indentation_hardness_23_min=#{indentation_hardness_23_min},indentation_hardness_70_max=#{indentation_hardness_70_max},indentation_hardness_70_min=#{indentation_hardness_70_min},elongation_at_break_max=#{elongation_at_break_max},elongation_at_break_min=#{elongation_at_break_min},coating_resistivity_max=#{coating_resistivity_max},coating_resistivity_min=#{coating_resistivity_min},thermal_degradation_max=#{thermal_degradation_max},thermal_degradation_min=#{thermal_degradation_min},last_update_time=#{last_update_time} where id=#{id}
     </update>
 
     <select id="getCountNewAllByLike" resultType="int">
-        select count(*) from lab_testing_acceptance_crireria_3lpe
+        select count(*) from lab_testing_acceptance_criteria_3lpe
         <where>
             <if test="lab_testing_acceptance_criteria_no!=null and lab_testing_acceptance_criteria_no!=''">
                 AND lab_testing_acceptance_criteria_no LIKE CONCAT('%',#{lab_testing_acceptance_criteria_no},'%')
@@ -29,7 +29,7 @@
     </select>
 
     <select id="getNewAllByLike" resultType="map">
-        Select * from lab_testing_acceptance_crireria_3lpe
+        Select * from lab_testing_acceptance_criteria_3lpe
         <where>
             <if test="lab_testing_acceptance_criteria_no!=null and lab_testing_acceptance_criteria_no!=''">
                 AND lab_testing_acceptance_criteria_no LIKE CONCAT('%',#{lab_testing_acceptance_criteria_no},'%')
@@ -39,12 +39,12 @@
         limit #{skip},#{take}
     </select>
 
-    <!--<select id="getAllIDAcceptanceCriteria" resultType="com.htcsweb.entity.LabTestingAcceptanceCriteria3Lpe">-->
-        <!--SELECT  * from id_coating_acceptance_criteria-->
-        <!--ORDER BY id DESC-->
-    <!--</select>-->
+    <select id="getAllLabTestingAcceptanceCriteria3Lpe" resultType="com.htcsweb.entity.LabTestingAcceptanceCriteria3Lpe">
+        SELECT  * from lab_testing_acceptance_criteria_3lpe
+        ORDER BY id DESC
+    </select>
     <select id="getLabTestCriteria3LpeByContractNo" resultType="com.htcsweb.entity.LabTestingAcceptanceCriteria3Lpe">
-        select o.* from contract_info c inner JOIN project_info p on c.project_no=p.project_no inner JOIN lab_testing_acceptance_crireria_3lpe o on p.lab_testing_acceptance_criteria_3lpe_no=o.lab_testing_acceptance_criteria_no WHERE c.contract_no=#{contract_no}
+        select o.* from contract_info c inner JOIN project_info p on c.project_no=p.project_no inner JOIN lab_testing_acceptance_criteria_3lpe o on p.lab_testing_acceptance_criteria_3lpe_no=o.lab_testing_acceptance_criteria_no WHERE c.contract_no=#{contract_no}
     </select>
 
 </mapper>

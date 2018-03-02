@@ -6,21 +6,21 @@
 <mapper namespace="com.htcsweb.dao.LabTestingAcceptanceCriteria2FbeDao">
 
     <insert id="addLabTestCriteria2Fbe" parameterType="com.htcsweb.entity.LabTestingAcceptanceCriteria2Fbe">
-     INSERT INTO lab_testing_acceptance_crireria_2fbe(lab_testing_acceptance_criteria_no,interfacial_contamination_max,interfacial_contamination_min,foaming_cross_sectional_max,foaming_cross_sectional_min,foaming_interfacial_max,foaming_interfacial_min,resistance_to_hot_water_98_24h_max,resistance_to_hot_water_98_24h_min,resistance_to_hot_water_98_28d_max,resistance_to_hot_water_98_28d_min,resistance_to_cd_65_24h_max,resistance_to_cd_65_24h_min,resistance_to_cd_22_28d_max,resistance_to_cd_22_28d_min,resistance_to_cd_65_28d_max,resistance_to_cd_65_28d_min,last_update_time) VALUES (#{lab_testing_acceptance_criteria_no},#{interfacial_contamination_max},#{interfacial_contamination_min},#{foaming_cross_sectional_max},#{foaming_cross_sectional_min},#{foaming_interfacial_max},#{foaming_interfacial_min},#{resistance_to_hot_water_98_24h_max},#{resistance_to_hot_water_98_24h_min},#{resistance_to_hot_water_98_28d_max},#{resistance_to_hot_water_98_28d_min},#{resistance_to_cd_65_24h_max},#{resistance_to_cd_65_24h_min},#{resistance_to_cd_22_28d_max},#{resistance_to_cd_22_28d_min},#{resistance_to_cd_65_28d_max},#{resistance_to_cd_65_28d_min},#{last_update_time})
+     INSERT INTO lab_testing_acceptance_criteria_2fbe(lab_testing_acceptance_criteria_no,interfacial_contamination_max,interfacial_contamination_min,foaming_cross_sectional_max,foaming_cross_sectional_min,foaming_interfacial_max,foaming_interfacial_min,resistance_to_hot_water_98_24h_max,resistance_to_hot_water_98_24h_min,resistance_to_hot_water_98_28d_max,resistance_to_hot_water_98_28d_min,resistance_to_cd_65_24h_max,resistance_to_cd_65_24h_min,resistance_to_cd_22_28d_max,resistance_to_cd_22_28d_min,resistance_to_cd_65_28d_max,resistance_to_cd_65_28d_min,last_update_time) VALUES (#{lab_testing_acceptance_criteria_no},#{interfacial_contamination_max},#{interfacial_contamination_min},#{foaming_cross_sectional_max},#{foaming_cross_sectional_min},#{foaming_interfacial_max},#{foaming_interfacial_min},#{resistance_to_hot_water_98_24h_max},#{resistance_to_hot_water_98_24h_min},#{resistance_to_hot_water_98_28d_max},#{resistance_to_hot_water_98_28d_min},#{resistance_to_cd_65_24h_max},#{resistance_to_cd_65_24h_min},#{resistance_to_cd_22_28d_max},#{resistance_to_cd_22_28d_min},#{resistance_to_cd_65_28d_max},#{resistance_to_cd_65_28d_min},#{last_update_time})
     </insert>
     <delete id="delLabTestCriteria2Fbe">
-        delete from lab_testing_acceptance_crireria_2fbe WHERE
+        delete from lab_testing_acceptance_criteria_2fbe WHERE
         <foreach collection="array" item="item" open="id in (" separator="," close=")">
             #{item}
         </foreach>
     </delete>
 
     <update id="updateLabTestCriteria2Fbe" parameterType="com.htcsweb.entity.LabTestingAcceptanceCriteria2Fbe">
-      UPDATE lab_testing_acceptance_crireria_2fbe set lab_testing_acceptance_criteria_no=#{lab_testing_acceptance_criteria_no},interfacial_contamination_max=#{interfacial_contamination_max},interfacial_contamination_min=#{interfacial_contamination_min},foaming_cross_sectional_max=#{foaming_cross_sectional_max},foaming_cross_sectional_min=#{foaming_cross_sectional_min},foaming_interfacial_max=#{foaming_interfacial_max},foaming_interfacial_min=#{foaming_interfacial_min},resistance_to_hot_water_98_24h_max=#{resistance_to_hot_water_98_24h_max},resistance_to_hot_water_98_24h_min=#{resistance_to_hot_water_98_24h_min},resistance_to_hot_water_98_28d_max=#{resistance_to_hot_water_98_28d_max},resistance_to_hot_water_98_28d_min=#{resistance_to_hot_water_98_28d_min},resistance_to_cd_65_24h_max=#{resistance_to_cd_65_24h_max},resistance_to_cd_65_24h_min=#{resistance_to_cd_65_24h_min},resistance_to_cd_22_28d_max=#{resistance_to_cd_22_28d_max},resistance_to_cd_22_28d_min=#{resistance_to_cd_22_28d_min},resistance_to_cd_65_28d_max=#{resistance_to_cd_65_28d_max},resistance_to_cd_65_28d_min=#{resistance_to_cd_65_28d_min},last_update_time=#{last_update_time} where id=#{id}
+      UPDATE lab_testing_acceptance_criteria_2fbe set lab_testing_acceptance_criteria_no=#{lab_testing_acceptance_criteria_no},interfacial_contamination_max=#{interfacial_contamination_max},interfacial_contamination_min=#{interfacial_contamination_min},foaming_cross_sectional_max=#{foaming_cross_sectional_max},foaming_cross_sectional_min=#{foaming_cross_sectional_min},foaming_interfacial_max=#{foaming_interfacial_max},foaming_interfacial_min=#{foaming_interfacial_min},resistance_to_hot_water_98_24h_max=#{resistance_to_hot_water_98_24h_max},resistance_to_hot_water_98_24h_min=#{resistance_to_hot_water_98_24h_min},resistance_to_hot_water_98_28d_max=#{resistance_to_hot_water_98_28d_max},resistance_to_hot_water_98_28d_min=#{resistance_to_hot_water_98_28d_min},resistance_to_cd_65_24h_max=#{resistance_to_cd_65_24h_max},resistance_to_cd_65_24h_min=#{resistance_to_cd_65_24h_min},resistance_to_cd_22_28d_max=#{resistance_to_cd_22_28d_max},resistance_to_cd_22_28d_min=#{resistance_to_cd_22_28d_min},resistance_to_cd_65_28d_max=#{resistance_to_cd_65_28d_max},resistance_to_cd_65_28d_min=#{resistance_to_cd_65_28d_min},last_update_time=#{last_update_time} where id=#{id}
     </update>
 
     <select id="getCountNewAllByLike" resultType="int">
-        select count(*) from lab_testing_acceptance_crireria_2fbe
+        select count(*) from lab_testing_acceptance_criteria_2fbe
         <where>
             <if test="lab_testing_acceptance_criteria_no!=null and lab_testing_acceptance_criteria_no!=''">
                 AND lab_testing_acceptance_criteria_no LIKE CONCAT('%',#{lab_testing_acceptance_criteria_no},'%')
@@ -29,7 +29,7 @@
     </select>
 
     <select id="getNewAllByLike" resultType="map">
-        Select * from lab_testing_acceptance_crireria_2fbe
+        Select * from lab_testing_acceptance_criteria_2fbe
         <where>
             <if test="lab_testing_acceptance_criteria_no!=null and lab_testing_acceptance_criteria_no!=''">
                 AND lab_testing_acceptance_criteria_no LIKE CONCAT('%',#{lab_testing_acceptance_criteria_no},'%')
@@ -39,12 +39,12 @@
         limit #{skip},#{take}
     </select>
 
-    <!--<select id="getAllIDAcceptanceCriteria" resultType="com.htcsweb.entity.IDCoatingAcceptanceCriteria">-->
-        <!--SELECT  * from id_coating_acceptance_criteria-->
-        <!--ORDER BY id DESC-->
-    <!--</select>-->
+    <select id="getAllLabTestingAcceptanceCriteria2Fbe" resultType="com.htcsweb.entity.LabTestingAcceptanceCriteria2Fbe">
+        SELECT  * from lab_testing_acceptance_criteria_2fbe
+        ORDER BY id DESC
+    </select>
     <select id="getLabTestCriteria2FbeByContractNo" resultType="com.htcsweb.entity.LabTestingAcceptanceCriteria2Fbe">
-        select o.* from contract_info c inner JOIN project_info p on c.project_no=p.project_no inner JOIN lab_testing_acceptance_crireria_2fbe o on p.lab_testing_acceptance_criteria_2fbe_no=o.lab_testing_acceptance_criteria_no WHERE c.contract_no=#{contract_no}
+        select o.* from contract_info c inner JOIN project_info p on c.project_no=p.project_no inner JOIN lab_testing_acceptance_criteria_2fbe o on p.lab_testing_acceptance_criteria_2fbe_no=o.lab_testing_acceptance_criteria_no WHERE c.contract_no=#{contract_no}
     </select>
 
 </mapper>
