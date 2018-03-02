@@ -294,6 +294,10 @@ public class UploadFileController {
                     TotalSkipped=TotalSkipped+1;
                     continue;//不存在则此钢管不予以录入系统
                 }
+                //检查pipe的钢种信息是否为空,如果是从contract里得到钢种信息并赋值
+                if(pipe.getGrade()==null||pipe.getGrade().equals("")){
+                    pipe.setGrade(((ContractInfo)conlist.get(0)).getGrade());
+                }
 
                 //查找该pipebasicinfo是否存在
                 List<PipeBasicInfo>pipelist=pipeBasicInfoDao.getPipeNumber(pipe.getPipe_no());
@@ -304,7 +308,7 @@ public class UploadFileController {
                     }else{
                         pipe.setStatus("bare2");
                     }
-
+                    
                     res = pipeBasicInfoDao.addPipeBasicInfo(pipe);
                     System.out.println("Insert res: " + res);
                 }else{
