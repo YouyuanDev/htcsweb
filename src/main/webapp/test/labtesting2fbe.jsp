@@ -219,15 +219,19 @@
                        <th field="heat_no" align="center" hidden="true" width="50" class="i18n1" name="heat_no">炉号</th>
                        <th field="operator_no" align="center" width="100" class="i18n1" name="operatorno">操作工编号</th>
 
-                       <th field="surface_condition" align="center" width="120" class="i18n1" name="surfacecondition">外观缺陷</th>
-                       <th field="salt_contamination_before_blasting" align="center" width="120" class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</th>
-                       <th field="alkaline_dwell_time" align="center" width="100" hidden="true" class="i18n1" name="alkalinedwelltime">碱洗时间</th>
-                       <th field="alkaline_concentration" align="center" width="100" hidden="true" class="i18n1" name="alkalineconcentration">碱浓度</th>
-                       <th field="conductivity" width="100" align="center" hidden="true" class="i18n1" name="conductivity">传导性</th>
-                       <th field="acid_wash_time" width="100" align="center" hidden="true" class="i18n1" name="acidwashtime">酸洗时间</th>
-                       <th field="acid_concentration" width="100" align="center" hidden="true" class="i18n1" name="acidconcentration">酸浓度</th>
-                       <th field="blast_line_speed" align="center" width="120" class="i18n1" name="blastlinespeed">打砂传送速度</th>
-                       <th field="preheat_temp" align="center" width="120" class="i18n1" name="preheattemp">预热温度</th>
+                       <th field="sample_no" align="center" width="120" class="i18n1" name="sampleno">试样号</th>
+                       <th field="coating_date" align="center" width="120" class="i18n1" name="coatingdate">涂层时间</th>
+                       <th field="dsc" align="center" width="100" hidden="true" class="i18n1" name="dsc">热特性实验</th>
+                       <th field="foaming_cross_sectional" align="center" width="100" hidden="true" class="i18n1" name="foamingcrosssectional">孔隙率实验截面</th>
+                       <th field="foaming_interfacial" width="100" align="center" hidden="true" class="i18n1" name="foaminginterfacial">孔隙率实验表面</th>
+                       <th field="interfacial_contamination" width="100" align="center" hidden="true" class="i18n1" name="interfacialcontamination">表面污染率</th>
+                       <th field="flexibility" width="100" align="center" hidden="true" class="i18n1" name="flexibility">弯曲</th>
+                       <th field="impact" align="center" width="120" class="i18n1" name="impact">冲击</th>
+                       <th field="resistance_to_hot_water_98_24h" align="center" width="120" class="i18n1" name="resistancetohotwater9824h">水煮实验 98度 24小时</th>
+                       <th field="resistance_to_hot_water_98_28d" align="center" width="120" class="i18n1" name="resistancetohotwater9828d">水煮实验 98度 28天</th>
+                       <th field="resistance_to_cd_65_24h" align="center" width="120" class="i18n1" name="resistancetocd6524h">阴极剥离 65度 24小时</th>
+                       <th field="resistance_to_cd_22_28d" align="center" width="120" class="i18n1" name="resistancetocd2228d">阴极剥离 22.5度 28天</th>
+                       <th field="resistance_to_cd_65_28d" align="center" width="120" class="i18n1" name="resistancetocd6528d">阴极剥离 65度 28天</th>
 
 
                        <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
@@ -312,22 +316,15 @@
            </table>
        </fieldset>
        <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
-           <legend class="i18n1" name="odproductioninfo">外喷砂生产信息</legend>
+           <legend>外防实验(2FBE)信息</legend>
 
        <table class="ht-table">
            <tr>
                <td class="i18n1" name="id" width="20%">流水号</td>
                <td colspan="1" width="30%"><label class="hl-label" id="odbpid"></label></td>
-               <td class="i18n1" name="millno" width="20%">分厂</td>
+               <td class="i18n1" name="sampleno" width="20%">试样号</td>
                <td colspan="1" width="30%">
-               <input id="mill_no" class="easyui-combobox" type="text" name="mill_no"  data-options=
-                       "url:'/millInfo/getAllMills.action',
-					        method:'get',
-					        valueField:'id',
-					        width: 185,
-					        editable:false,
-					        textField:'text',
-					        panelHeight:'auto'"/>
+                   <input class="easyui-textbox"   type="text" name="sample_no" value=""/>
                </td>
            </tr>
            <tr>
