@@ -19,11 +19,13 @@ public class ProjectInfo {
     private String upload_files;
     private String od_coating_acceptance_criteria_no;
     private String id_coating_acceptance_criteria_no;
+    private String lab_testing_acceptance_criteria_2fbe_no;
+    private String lab_testing_acceptance_criteria_3lpe_no;
 
     public ProjectInfo() {
     }
 
-    public ProjectInfo(int id, String project_no, String project_name, String client_name, String client_spec, String coating_standard, String mps, String itp, Date project_time, String upload_files, String od_coating_acceptance_criteria_no, String id_coating_acceptance_criteria_no) {
+    public ProjectInfo(int id, String project_no, String project_name, String client_name, String client_spec, String coating_standard, String mps, String itp, Date project_time, String upload_files, String od_coating_acceptance_criteria_no, String id_coating_acceptance_criteria_no, String lab_testing_acceptance_criteria_2fbe_no, String lab_testing_acceptance_criteria_3lpe_no) {
         this.id = id;
         this.project_no = project_no;
         this.project_name = project_name;
@@ -36,6 +38,8 @@ public class ProjectInfo {
         this.upload_files = upload_files;
         this.od_coating_acceptance_criteria_no = od_coating_acceptance_criteria_no;
         this.id_coating_acceptance_criteria_no = id_coating_acceptance_criteria_no;
+        this.lab_testing_acceptance_criteria_2fbe_no = lab_testing_acceptance_criteria_2fbe_no;
+        this.lab_testing_acceptance_criteria_3lpe_no = lab_testing_acceptance_criteria_3lpe_no;
     }
 
     public int getId() {
@@ -132,5 +136,21 @@ public class ProjectInfo {
 
     public void setId_coating_acceptance_criteria_no(String id_coating_acceptance_criteria_no) {
         this.id_coating_acceptance_criteria_no = id_coating_acceptance_criteria_no;
+    }
+
+    public String getLab_testing_acceptance_criteria_2fbe_no() {
+        return lab_testing_acceptance_criteria_2fbe_no;
+    }
+
+    public void setLab_testing_acceptance_criteria_2fbe_no(String lab_testing_acceptance_criteria_2fbe_no) {
+        this.lab_testing_acceptance_criteria_2fbe_no = lab_testing_acceptance_criteria_2fbe_no;
+    }
+
+    public String getLab_testing_acceptance_criteria_3lpe_no() {
+        return lab_testing_acceptance_criteria_3lpe_no;
+    }
+
+    public void setLab_testing_acceptance_criteria_3lpe_no(String lab_testing_acceptance_criteria_3lpe_no) {
+        this.lab_testing_acceptance_criteria_3lpe_no = lab_testing_acceptance_criteria_3lpe_no;
     }
 }

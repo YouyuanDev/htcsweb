@@ -403,6 +403,8 @@
                 <th field="project_time" align="center" width="100" class="i18n1" name="projecttime" data-options="formatter:formatterdate">项目开始时间</th>
                 <th field="od_coating_acceptance_criteria_no" align="center" width="100" class="i18n1" name="odcoatingacceptancecriteriano">OD acceptance_criteria</th>
                 <th field="id_coating_acceptance_criteria_no" align="center" width="100" class="i18n1" name="idcoatingacceptancecriteriano">ID acceptance_criteria</th>
+                <th field="lab_testing_acceptance_criteria_2fbe_no" align="center" width="100" class="i18n1" name="lab_testing_acceptance_criteria_2fbe_no">Lab testing acceptance criteria 2fbe</th>
+                <th field="lab_testing_acceptance_criteria_3lpe_no" align="center" width="100" class="i18n1" name="lab_testing_acceptance_criteria_3lpe_no">Lab testing acceptance criteria 3lpe</th>
 
             </tr>
             </thead>
@@ -506,6 +508,36 @@
                     </td>
 
                 </tr>
+
+                <tr>
+                    <td class="i18n1" name="labtestingacceptancecriteria2fbeno" width="16%">Lab Testing Acceptance Criteria No.(2FBE)</td>
+                    <td   width="33%">
+
+                        <input class="easyui-combobox" type="text" name="lab_testing_acceptance_criteria_2fbe_no"  data-options=
+                                "url:'/LabTestingAcceptanceCriteriaOperation/getAllLabTestingAcceptanceCriteria2fbe.action',
+					        method:'get',
+					        valueField:'id',
+					        editable:false,
+					        textField:'text',
+					        panelHeight:'auto'"/>
+
+
+                    </td>
+                    <td class="i18n1" name="labtestingacceptancecriteria3lpeno" width="16%">Lab Testing Acceptance Criteria No.(3LPE)</td>
+                    <td   width="33%">
+
+                        <input class="easyui-combobox" type="text" name="lab_testing_acceptance_criteria_3lpe_no"   data-options=
+                                "url:'/LabTestingAcceptanceCriteriaOperation/getAllLabTestingAcceptanceCriteria3lpe.action',
+					        method:'get',
+					        editable:false,
+					        valueField:'id',
+					        textField:'text',
+					        panelHeight:'auto'"/>
+
+                    </td>
+
+                </tr>
+
             </table>
 
             <input type="hidden" id="fileslist" name="upload_files" value=""/>
