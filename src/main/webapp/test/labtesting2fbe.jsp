@@ -182,21 +182,6 @@
             var imgList=imgListstr.split(';');
             createPictureModel(basePath,imgList);
         }
-        //创建图片展示模型(参数是图片集合)
-        <%--function  createPictureModel(imgList) {--%>
-            <%--var basePath ="<%=basePath%>"+"/upload/pictures/";--%>
-            <%--if($('#hl-gallery').length>0){--%>
-                <%--$('#content_list').empty();--%>
-                <%--for(var i=0;i<imgList.length-1;i++){--%>
-                    <%--$('#content_list').append(getCalleryChildren(basePath+imgList[i]));--%>
-                <%--}--%>
-            <%--}else{--%>
-                <%--$('#hl-gallery-con').append(getGalleryCon());--%>
-                <%--for(var i=0;i<imgList.length-1;i++){--%>
-                    <%--$('#content_list').append(getCalleryChildren(basePath+imgList[i]));--%>
-                <%--}--%>
-            <%--}--%>
-        <%--}--%>
 
         function  clearFormLabel(){
             $('#odBlastProForm').form('clear');
@@ -233,6 +218,7 @@
                        <th field="weight" align="center" width="50" class="i18n1" name="weight">重量</th>
                        <th field="heat_no" align="center" hidden="true" width="50" class="i18n1" name="heat_no">炉号</th>
                        <th field="operator_no" align="center" width="100" class="i18n1" name="operatorno">操作工编号</th>
+
                        <th field="surface_condition" align="center" width="120" class="i18n1" name="surfacecondition">外观缺陷</th>
                        <th field="salt_contamination_before_blasting" align="center" width="120" class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</th>
                        <th field="alkaline_dwell_time" align="center" width="100" hidden="true" class="i18n1" name="alkalinedwelltime">碱洗时间</th>
@@ -242,6 +228,8 @@
                        <th field="acid_concentration" width="100" align="center" hidden="true" class="i18n1" name="acidconcentration">酸浓度</th>
                        <th field="blast_line_speed" align="center" width="120" class="i18n1" name="blastlinespeed">打砂传送速度</th>
                        <th field="preheat_temp" align="center" width="120" class="i18n1" name="preheattemp">预热温度</th>
+
+
                        <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                        <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
                        <th field="operation_time" align="center" width="150" class="i18n1" name="operationtime" data-options="formatter:formatterdate">操作时间</th>

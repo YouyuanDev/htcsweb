@@ -307,7 +307,39 @@
                     }
                 }
             });
-
+            //实验
+            $("#hltest").tree({
+                onClick:function (node) {
+                    var tab=$('#hlTab').tabs('getTab',node.text);
+                    var nodeTxt=node.text;
+                    if(tab){
+                        $('#hlTab').tabs('select',node.text);
+                    }else{
+                        if("外防实验(2FBE)"==nodeTxt||"Od Test(2FBE)"==nodeTxt){
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='test/labtesting2fbe.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                            hlLanguage();
+                        }else if("外防实验(3LPE)"==nodeTxt||"Od Test(3LPE)"==nodeTxt){
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='test/labtesting3lpe.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                            hlLanguage();
+                        }else if("内防实验"==nodeTxt||"Id Test Epoxy"==nodeTxt){
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='test/labtestingepoxy.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                            hlLanguage();
+                        }
+                    }
+                }
+            });
 
             //账户管理
             $("#hlaccount").tree({
@@ -401,7 +433,11 @@
             </ul>
         </div>
         <div title="实验" class="i18n" name="labtesting" style="padding:10px;">
-            ee
+            <ul id="hltest">
+                <li class="i18n1" name="odtest2fbe">外防实验(2FBE)</li>
+                <li class="i18n1" name="odtest3lpe">外防实验(3LPE)</li>
+                <li class="i18n1" name="idtestepoxy">内防实验</li>
+            </ul>
         </div>
         <div title="生产报表" class="i18n" name="productionreport" style="padding:10px;">
             ff
