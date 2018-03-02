@@ -283,7 +283,7 @@
 <div id="hlOdBlastProDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;height:auto;">
    <form id="odBlastProForm" method="post">
        <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
-           <legend>钢管信息</legend>
+           <legend class="i18n1" name="pipebasicinfo">钢管信息</legend>
            <table class="ht-table" width="100%" border="0">
                <tr>
                    <td class="i18n1" name="projectname" width="16%">项目名称</td>
@@ -326,7 +326,7 @@
 
 
        <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
-           <legend>外喷砂生产信息</legend>
+           <legend class="i18n1" name="odproductioninfo">外喷砂生产信息</legend>
 
        <table class="ht-table">
            <tr>

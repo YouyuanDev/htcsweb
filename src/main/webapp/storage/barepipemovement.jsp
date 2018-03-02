@@ -153,6 +153,8 @@
     <select id="status" class="easyui-combobox" data-options="editable:false" name="status" style="width:200px;">
         <option value="bare1"><span class="i18n1" name="bare1">外光管</span></option>
         <option value="bare2"><span class="i18n1" name="bare2">内光管</span></option>
+        <option value="odstrip2"><span class="i18n1" name="odstrip2">外扒皮管</span></option>
+        <option value="idstrip2"><span class="i18n1" name="idstrip2">内扒皮管</span></option>
     </select>
 
     <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchPipe()">Search</a>

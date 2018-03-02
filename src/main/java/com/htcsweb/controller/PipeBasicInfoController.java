@@ -79,7 +79,7 @@ public class PipeBasicInfoController {
         }
 
         String map= JSONObject.toJSONString(colist);
-        System.out.println("========="+map);
+        //System.out.println("========="+map);
         return map;
     }
 
@@ -99,7 +99,7 @@ public class PipeBasicInfoController {
         }
 
         String map= JSONObject.toJSONString(colist);
-        System.out.println("========="+map);
+        //System.out.println("========="+map);
         return map;
     }
 
@@ -155,11 +155,10 @@ public class PipeBasicInfoController {
         if(rows==null){
             rows="20";
         }
-
         if(status==null||status.equals("")){
             status="bare1";
         }
-
+        //System.out.println("钢管状态："+status);
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
         List<HashMap<String,Object>>list=pipeBasicInfoDao.getODIDBarePipeInfoByLike(project_no,contract_no,pipe_no,status,start,Integer.parseInt(rows));
         int count=pipeBasicInfoDao.getCountODIDBarePipeInfoByLike(project_no,contract_no,pipe_no,status);
@@ -167,6 +166,8 @@ public class PipeBasicInfoController {
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
         maps.put("rows",list);
+        //System.out.println("结果集："+list.toString());
+        //System.out.println("结果个数："+list.toString());
         String mmp= JSONArray.toJSONString(maps);
         return mmp;
     }
@@ -261,10 +262,10 @@ public class PipeBasicInfoController {
         resTotal=pipeBasicInfoDao.delPipeBasicInfo(idArr);
         JSONObject json=new JSONObject();
         if(resTotal>0){
-            System.out.print("删除成功");
+            //System.out.print("删除成功");
             json.put("success",true);
         }else{
-            System.out.print("删除失败");
+            //System.out.print("删除失败");
             json.put("success",false);
         }
         ResponseUtil.write(response,json);
@@ -299,10 +300,10 @@ public class PipeBasicInfoController {
         resTotal=pipeBasicInfoDao.idProductStockin(idArr);
         JSONObject json=new JSONObject();
         if(resTotal>0){
-            System.out.print("内防入库成功");
+           // System.out.print("内防入库成功");
             json.put("success",true);
         }else{
-            System.out.print("内防入库成功");
+           // System.out.print("内防入库成功");
             json.put("success",false);
         }
         ResponseUtil.write(response,json);
@@ -318,10 +319,10 @@ public class PipeBasicInfoController {
         resTotal=pipeBasicInfoDao.IDBarePipeTOODBare(idArr);
         JSONObject json=new JSONObject();
         if(resTotal>0){
-            System.out.print("内防光管库转外防光管库成功");
+            //System.out.print("内防光管库转外防光管库成功");
             json.put("success",true);
         }else{
-            System.out.print("内防光管库转外防光管库成功");
+            //System.out.print("内防光管库转外防光管库成功");
             json.put("success",false);
         }
         ResponseUtil.write(response,json);
@@ -339,7 +340,7 @@ public class PipeBasicInfoController {
             System.out.print("外防光管库转内防光管库成功");
             json.put("success",true);
         }else{
-            System.out.print("外防光管库转内防光管库成功");
+            System.out.print("外防光管库转内防光管库失败");
             json.put("success",false);
         }
         ResponseUtil.write(response,json);
@@ -374,9 +375,6 @@ public class PipeBasicInfoController {
         String mmp= JSONArray.toJSONString(maps);
         return mmp;
     }
-
-
-
     //成品管出厂
     @RequestMapping("/coatingProductStockout")
     public String coatingProductStockout(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
@@ -385,10 +383,10 @@ public class PipeBasicInfoController {
         resTotal=pipeBasicInfoDao.coatingProductStockout(idArr);
         JSONObject json=new JSONObject();
         if(resTotal>0){
-            System.out.print("涂层成品管出厂成功");
+            //System.out.print("涂层成品管出厂成功");
             json.put("success",true);
         }else{
-            System.out.print("涂层成品管出厂失败");
+            //System.out.print("涂层成品管出厂失败");
             json.put("success",false);
         }
         ResponseUtil.write(response,json);

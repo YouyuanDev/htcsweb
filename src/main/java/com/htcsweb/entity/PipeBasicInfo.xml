@@ -97,7 +97,7 @@
             <if test="status!=null and status!=''">
                 AND status = #{status}
             </if>
-               AND (status = 'bare1' or status = 'bare2')
+            AND (status = 'bare1' or status = 'bare2' or status = 'odstrip2' or status = 'idstrip2')
         </where>
         ORDER BY id DESC
         limit #{skip},#{take}
@@ -277,14 +277,14 @@
 
 
     <update id="IDBarePipeTOODBare" parameterType="com.htcsweb.entity.PipeBasicInfo">
-        UPDATE pipe_basic_info set status='bare1' WHERE  status='bare2' AND
+        UPDATE pipe_basic_info set status='bare1' WHERE  (status='bare2' or status='idstrip2') AND
         <foreach collection="array" item="item" open="id in (" separator="," close=")">
             #{item}
         </foreach>
     </update>
 
     <update id="ODBarePipeTOIDBare" parameterType="com.htcsweb.entity.PipeBasicInfo">
-        UPDATE pipe_basic_info set status='bare2' WHERE  status='bare1' AND
+        UPDATE pipe_basic_info set status='bare2' WHERE  (status='bare1' or status='odstrip2') AND
         <foreach collection="array" item="item" open="id in (" separator="," close=")">
             #{item}
         </foreach>
