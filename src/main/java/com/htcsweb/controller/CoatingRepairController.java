@@ -48,11 +48,11 @@ public class CoatingRepairController {
         try{
             if(begin_time!=null&&begin_time!=""){
                 beginTime=sdf.parse(begin_time);
-                System.out.println(beginTime.toString());
+//                System.out.println(beginTime.toString());
             }
             if(end_time!=null&&end_time!=""){
                 endTime=sdf.parse(end_time);
-                System.out.println(endTime.toString());
+//                System.out.println(endTime.toString());
             }
         }catch (Exception e){
             e.printStackTrace();

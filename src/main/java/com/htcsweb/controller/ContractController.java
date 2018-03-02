@@ -55,7 +55,7 @@ public class ContractController {
         maps.put("total",count);
         maps.put("rows",list);
         String mmp= JSONArray.toJSONString(maps);
-        System.out.print("mmp:"+mmp);
+//        System.out.print("mmp:"+mmp);
         return mmp;
     }
 
@@ -64,7 +64,7 @@ public class ContractController {
     @RequestMapping(value = "/saveContract")
     @ResponseBody
     public String saveContract(ContractInfo contractInfo, HttpServletResponse response){
-        System.out.print("saveContract");
+//        System.out.print("saveContract");
 
         JSONObject json=new JSONObject();
         try{
@@ -100,10 +100,10 @@ public class ContractController {
         resTotal=contractInfoDao.delContractInfo(idArr);
         JSONObject json=new JSONObject();
         if(resTotal>0){
-            System.out.print("删除成功");
+//            System.out.print("删除成功");
             json.put("success",true);
         }else{
-            System.out.print("删除失败");
+//            System.out.print("删除失败");
             json.put("success",false);
         }
         ResponseUtil.write(response,json);
