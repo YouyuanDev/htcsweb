@@ -35,6 +35,8 @@
         ORDER BY id DESC
         limit 1000
     </select>
+
+
      <select id="getPipeNumber" resultType="com.htcsweb.entity.PipeBasicInfo">
          SELECT  *  from pipe_basic_info
          <where>
@@ -46,6 +48,20 @@
          limit 1000
      </select>
 
+    <select id="getPipeNumberBySample" resultType="com.htcsweb.entity.PipeBasicInfo">
+        select * from pipe_basic_info where  pipe_no in(
+        select pipe_no from id_coating_inspection_process ic where is_sample='1' UNION
+        select pipe_no from od_coating_2fbe_inspection_process ic where is_sample='1' UNION
+        select pipe_no from od_coating_3lpe_inspection_process ic where is_sample='1'
+        )
+        <where>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+        </where>
+        ORDER BY id DESC
+        limit 1000
+    </select>
     <!--<delete id="delOdCoatingProcess">-->
         <!--delete from od_coating_2fbe_process WHERE-->
         <!--<foreach collection="array" item="item" open="id in (" separator="," close=")">-->

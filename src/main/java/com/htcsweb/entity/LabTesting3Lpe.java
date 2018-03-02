@@ -10,6 +10,8 @@ public class LabTesting3Lpe {
     private String pipe_no;
     private  String operator_no;
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date coating_date;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private  Date operation_time;
     private float resistance_to_cd_20_28d;
     private float resistance_to_cd_max_28d;
@@ -28,11 +30,12 @@ public class LabTesting3Lpe {
     public LabTesting3Lpe() {
     }
 
-    public LabTesting3Lpe(int id, String sample_no, String pipe_no, String operator_no, Date operation_time, float resistance_to_cd_20_28d, float resistance_to_cd_max_28d, float resistance_to_cd_65_24h, float impact_resistance_23, float impact_resistance_m40, float indentation_hardness_23, float indentation_hardness_70, float elongation_at_break, float coating_resistivity, float thermal_degradation, String upload_files, String remark, String result) {
+    public LabTesting3Lpe(int id, String sample_no, String pipe_no, String operator_no, Date coating_date, Date operation_time, float resistance_to_cd_20_28d, float resistance_to_cd_max_28d, float resistance_to_cd_65_24h, float impact_resistance_23, float impact_resistance_m40, float indentation_hardness_23, float indentation_hardness_70, float elongation_at_break, float coating_resistivity, float thermal_degradation, String upload_files, String remark, String result) {
         this.id = id;
         this.sample_no = sample_no;
         this.pipe_no = pipe_no;
         this.operator_no = operator_no;
+        this.coating_date = coating_date;
         this.operation_time = operation_time;
         this.resistance_to_cd_20_28d = resistance_to_cd_20_28d;
         this.resistance_to_cd_max_28d = resistance_to_cd_max_28d;
@@ -79,6 +82,14 @@ public class LabTesting3Lpe {
 
     public void setOperator_no(String operator_no) {
         this.operator_no = operator_no;
+    }
+
+    public Date getCoating_date() {
+        return coating_date;
+    }
+
+    public void setCoating_date(Date coating_date) {
+        this.coating_date = coating_date;
     }
 
     public Date getOperation_time() {

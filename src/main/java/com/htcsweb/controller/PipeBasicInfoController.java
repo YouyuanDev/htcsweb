@@ -58,6 +58,19 @@ public class PipeBasicInfoController {
         }
         return map;
     }
+    @RequestMapping("/getPipeNumberBySample")
+    @ResponseBody
+    public String getPipeNumberBySample(HttpServletRequest request){
+        String map="";
+        try{
+            String pipe_no=request.getParameter("pipe_no");
+            List<PipeBasicInfo>list=pipeBasicInfoDao.getPipeNumberBySample(pipe_no);
+            map= JSONObject.toJSONString(list);
+        }catch (Exception e){
+        }
+        return map;
+    }
+
 
     //用于搜索的pipe状态下拉框，带All 选项
     @RequestMapping("/getAllPipeStatusWithComboboxSelectAll")

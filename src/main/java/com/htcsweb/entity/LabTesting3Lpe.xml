@@ -9,7 +9,7 @@
       INSERT INTO lab_testing_3lpe(sample_no,pipe_no,coating_date,operator_no,operation_time,resistance_to_cd_20_28d,resistance_to_cd_max_28d,resistance_to_cd_65_24h,impact_resistance_23,impact_resistance_m40,indentation_hardness_23,indentation_hardness_70,elongation_at_break,coating_resistivity,thermal_degradation,upload_files,result,remark) VALUES (#{sample_no},#{pipe_no},#{coating_date},#{operator_no},#{operation_time},#{resistance_to_cd_20_28d},#{resistance_to_cd_max_28d},#{resistance_to_cd_65_24h},#{impact_resistance_23},#{impact_resistance_m40},#{indentation_hardness_23},#{indentation_hardness_70},#{elongation_at_break},#{coating_resistivity},#{thermal_degradation},#{upload_files},#{result},#{remark})
     </insert>
     <delete id="delLabTest3Lpe">
-        delete from od_blast_process WHERE
+        delete from lab_testing_3lpe WHERE
         <foreach collection="array" item="item" open="id in (" separator="," close=")">
            #{item}
         </foreach>
@@ -45,7 +45,7 @@
     </select>
 
     <select id="getCountNewAllByLike" resultType="int">
-        select count(*) from od_blast_process o
+        select count(*) from lab_testing_3lpe o
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no
         left join project_info pro on c.project_no=pro.project_no
