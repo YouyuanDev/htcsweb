@@ -148,7 +148,9 @@
                     //'project_time':str,
                     'upload_files':row.upload_files,
                     'od_coating_acceptance_criteria_no':row.od_coating_acceptance_criteria_no,
-                    'id_coating_acceptance_criteria_no':row.id_coating_acceptance_criteria_no
+                    'id_coating_acceptance_criteria_no':row.id_coating_acceptance_criteria_no,
+                    'lab_testing_acceptance_criteria_2fbe_no':row.lab_testing_acceptance_criteria_2fbe_no,
+                    'lab_testing_acceptance_criteria_3lpe_no':row.lab_testing_acceptance_criteria_3lpe_no
                 });
 
                 $("#project_time").datetimebox('setValue',getDate1(row.project_time));
