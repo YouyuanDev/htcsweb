@@ -308,7 +308,7 @@ public class UploadFileController {
                     }else{
                         pipe.setStatus("bare2");
                     }
-                    
+
                     res = pipeBasicInfoDao.addPipeBasicInfo(pipe);
                     System.out.println("Insert res: " + res);
                 }else{

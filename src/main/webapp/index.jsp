@@ -318,21 +318,21 @@
                         if("外防实验(2FBE)"==nodeTxt||"Od Test(2FBE)"==nodeTxt){
                             $('#hlTab').tabs('add',{
                                 title:node.text,
-                                content:"<iframe scrolling='auto' frameborder='0'  src='test/labtesting2fbe.jsp' style='width:100%;height:100%;'></iframe>",
+                                content:"<iframe scrolling='auto' frameborder='0'  src='labtesting/labtesting2fbe.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable:true
                             });
                             hlLanguage();
                         }else if("外防实验(3LPE)"==nodeTxt||"Od Test(3LPE)"==nodeTxt){
                             $('#hlTab').tabs('add',{
                                 title:node.text,
-                                content:"<iframe scrolling='auto' frameborder='0'  src='test/labtesting3lpe.jsp' style='width:100%;height:100%;'></iframe>",
+                                content:"<iframe scrolling='auto' frameborder='0'  src='labtesting/labtesting3lpe.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable:true
                             });
                             hlLanguage();
-                        }else if("内防实验"==nodeTxt||"Id Test Epoxy"==nodeTxt){
+                        }else if("内防实验(Epoxy)"==nodeTxt||"Id Test(Epoxy)"==nodeTxt){
                             $('#hlTab').tabs('add',{
                                 title:node.text,
-                                content:"<iframe scrolling='auto' frameborder='0'  src='test/labtestingepoxy.jsp' style='width:100%;height:100%;'></iframe>",
+                                content:"<iframe scrolling='auto' frameborder='0'  src='labtesting/labtestingepoxy.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable:true
                             });
                             hlLanguage();
