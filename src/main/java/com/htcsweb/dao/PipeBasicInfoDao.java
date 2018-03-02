@@ -33,9 +33,8 @@ public interface PipeBasicInfoDao {
     public int odProductStockin(String[]arrId);
     public int idProductStockin(String[]arrId);
 
-    public int IDBarePipeTOODBare(String[]arrId);
-    public int ODBarePipeTOIDBare(String[]arrId);
-
+    public int SetToODBare(String[]arrId);
+    public int SetToIDBare(String[]arrId);
 
 
     public List<HashMap<String,Object>> getCoatedStockinPipeInfoByLike(@Param("project_no") String project_no,  @Param("contract_no")String contract_no,@Param("pipe_no")String pipe_no,@Param("status")String status, @Param("skip")int skip, @Param("take")int take);
@@ -44,5 +43,8 @@ public interface PipeBasicInfoDao {
     public int coatingProductStockout(String[]arrId);
 
 
+    public int isPipeODProcessed(@Param("id")String id);
+
+    public int isPipeIDProcessed(@Param("id")String id);
 
 }

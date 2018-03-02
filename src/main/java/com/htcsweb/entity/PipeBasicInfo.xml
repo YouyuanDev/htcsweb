@@ -292,20 +292,19 @@
     </update>
 
 
-    <update id="IDBarePipeTOODBare" parameterType="com.htcsweb.entity.PipeBasicInfo">
+    <update id="SetToODBare" parameterType="com.htcsweb.entity.PipeBasicInfo">
         UPDATE pipe_basic_info set status='bare1' WHERE  (status='bare2' or status='odstrip2') AND
         <foreach collection="array" item="item" open="id in (" separator="," close=")">
             #{item}
         </foreach>
     </update>
 
-    <update id="ODBarePipeTOIDBare" parameterType="com.htcsweb.entity.PipeBasicInfo">
+    <update id="SetToIDBare" parameterType="com.htcsweb.entity.PipeBasicInfo">
         UPDATE pipe_basic_info set status='bare2' WHERE  (status='bare1' or status='idstrip2') AND
         <foreach collection="array" item="item" open="id in (" separator="," close=")">
             #{item}
         </foreach>
     </update>
-
 
 
     <select id="getCoatedStockinPipeInfoByLike" resultType="map">
@@ -360,5 +359,31 @@
             #{item}
         </foreach>
     </update>
+
+
+    <select id="isPipeODProcessed"  resultType="int">
+        select count(p.id) from od_blast_process o
+        inner join pipe_basic_info p on p.pipe_no=o.pipe_no
+        inner join pipe_status s on s.status_code=p.status
+        <where>
+            <if test="id!=null and id!=''">
+                AND p.id = #{id}
+            </if>
+                AND p.status <![CDATA[ <> ]]>  'odstrip2'
+        </where>
+    </select>
+
+    <select id="isPipeIDProcessed"  resultType="int">
+        select count(p.id) from id_blast_process o
+        inner join pipe_basic_info p on p.pipe_no=o.pipe_no
+        inner join pipe_status s on s.status_code=p.status
+        <where>
+            <if test="id!=null and id!=''">
+                AND p.id = #{id}
+            </if>
+                AND p.status <![CDATA[ <> ]]>  'idstrip2'
+        </where>
+    </select>
+
 
 </mapper>

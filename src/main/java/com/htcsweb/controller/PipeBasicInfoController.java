@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import com.htcsweb.util.ComboxItem;
 
+
 @Controller
 @RequestMapping("/pipeinfo")
 public class PipeBasicInfoController {
@@ -324,41 +325,90 @@ public class PipeBasicInfoController {
     }
 
 
-    //内防光管转外防光管库
-    @RequestMapping("/IDBarePipeTOODBare")
-    public String IDBarePipeTOODBare(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
+    //内防光管（必须无外防处理记录）、外防扒皮管转外防光管库
+    @RequestMapping("/SetPipeTOODBare")
+    public String SetPipeTOODBare(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
         String[]idArr=hlparam.split(",");
+
+        ArrayList<String> list = new ArrayList<String>();
+        StringBuilder sbmessage = new StringBuilder();
+        for(int i=0;i<idArr.length;i++){
+
+            int res=pipeBasicInfoDao.isPipeODProcessed(idArr[i]);
+            if(res==0){
+                list.add(idArr[i]);
+            }else{
+                //需要剔除的钢管id
+                sbmessage.append("钢管:");
+                sbmessage.append(idArr[i]);
+                sbmessage.append("已存在外防生产信息，无法转外防光管 ");
+            }
+        }
         int resTotal=0;
-        resTotal=pipeBasicInfoDao.IDBarePipeTOODBare(idArr);
+        if(list.size()>0) {
+            String[] array = new String[list.size()];
+            String[] newidArr = list.toArray(array);
+            //System.out.println("newidArr=" + newidArr[0]);
+
+            resTotal = pipeBasicInfoDao.SetToODBare(newidArr);
+        }
         JSONObject json=new JSONObject();
+        json.put("message",sbmessage.toString());
         if(resTotal>0){
-            //System.out.print("内防光管库转外防光管库成功");
+            //System.out.print("转外防光管库成功");
             json.put("success",true);
         }else{
-            //System.out.print("内防光管库转外防光管库成功");
+            //System.out.print("转外防光管库成功");
             json.put("success",false);
         }
         ResponseUtil.write(response,json);
         return null;
     }
 
-    //外防光管转内防光管库
-    @RequestMapping("/ODBarePipeTOIDBare")
-    public String ODBarePipeTOIDBare(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
+    //外防光管（必须无内防处理记录）、内防扒皮管转内防光管库
+    @RequestMapping("/SetPipeTOIDBare")
+    public String SetPipeTOIDBare(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
         String[]idArr=hlparam.split(",");
+        ArrayList<String> list = new ArrayList<String>();
+        StringBuilder sbmessage = new StringBuilder();
+        for(int i=0;i<idArr.length;i++){
+            //System.out.println("id="+idArr[i]);
+            int res=pipeBasicInfoDao.isPipeIDProcessed(idArr[i]);
+            if(res==0){
+                //System.out.println("res==0");
+                list.add(idArr[i]);
+            }else{
+                //需要剔除的钢管id
+                sbmessage.append("钢管:");
+                sbmessage.append(idArr[i]);
+                sbmessage.append("已存在内防生产信息，无法转内防光管 ");
+            }
+        }
         int resTotal=0;
-        resTotal=pipeBasicInfoDao.ODBarePipeTOIDBare(idArr);
+        if(list.size()>0) {
+            String[] array = new String[list.size()];
+            String[] newidArr = list.toArray(array);
+            //System.out.println("newidArr=" + newidArr[0]);
+
+            resTotal = pipeBasicInfoDao.SetToIDBare(newidArr);
+        }
         JSONObject json=new JSONObject();
+        json.put("message",sbmessage.toString());
         if(resTotal>0){
-            System.out.print("外防光管库转内防光管库成功");
+            System.out.print("转内防光管库成功");
             json.put("success",true);
         }else{
-            System.out.print("外防光管库转内防光管库失败");
+            System.out.print("转内防光管库失败");
             json.put("success",false);
+
         }
         ResponseUtil.write(response,json);
         return null;
     }
+
+
+
+
 
 
 

@@ -60,12 +60,13 @@
                 $.messager.confirm('系统提示',"您确定要将这<font color=red>"+idArr.length+ "</font>根转入内防光管库吗？",function (r) {
                     if(r){
                         $.post(
-                            "/pipeinfo/ODBarePipeTOIDBare.action",
+                            "/pipeinfo/SetPipeTOIDBare.action",
                             {"hlparam":idArrs},function (data) {
                                 if(data.success){
                                     $("#pipeDatagrids").datagrid("reload");
+                                    hlAlertFour("警告！"+data.message);
                                 }else{
-                                    hlAlertFour("操作失败!");
+                                    hlAlertFour("操作失败!"+data.message);
                                 }
                             },"json");
                     }
@@ -90,12 +91,13 @@
                 $.messager.confirm('系统提示',"您确定要将这<font color=red>"+idArr.length+ "</font>根转入外防光管库吗？",function (r) {
                     if(r){
                         $.post(
-                            "/pipeinfo/IDBarePipeTOODBare.action",
+                            "/pipeinfo/SetPipeTOODBare.action",
                             {"hlparam":idArrs},function (data) {
                                 if(data.success){
                                     $("#pipeDatagrids").datagrid("reload");
+                                    hlAlertFour("警告！"+data.message);
                                 }else{
-                                    hlAlertFour("操作失败!");
+                                    hlAlertFour("操作失败!"+data.message);
                                 }
                             },"json");
                     }
