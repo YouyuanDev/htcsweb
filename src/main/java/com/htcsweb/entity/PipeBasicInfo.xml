@@ -19,7 +19,22 @@
         <result property="heat_no" column="heat_no"></result>
     </resultMap>
 
+    <select id="getPipeNumbers" resultType="com.htcsweb.entity.PipeBasicInfo">
+        SELECT  *  from pipe_basic_info
+        <where>
+            <if test="pipestatus!=null">
+                <foreach collection="pipestatus" item="item" open="status in (" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+        </where>
 
+        ORDER BY id DESC
+        limit 1000
+    </select>
      <select id="getPipeNumber" resultType="com.htcsweb.entity.PipeBasicInfo">
          SELECT  *  from pipe_basic_info
          <where>
@@ -30,22 +45,7 @@
          ORDER BY id DESC
          limit 1000
      </select>
-     <select id="getPipeNumbers" resultType="com.htcsweb.entity.PipeBasicInfo">
-         SELECT  *  from pipe_basic_info
-         <where>
-         <if test="pipestatus!=null">
-             <foreach collection="pipestatus" item="item" open="status in (" separator="," close=")">
-                 #{item}
-             </foreach>
-         </if>
-             <if test="pipe_no!=null and pipe_no!=''">
-             AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
-             </if>
-         </where>
 
-         ORDER BY id DESC
-         limit 1000
-     </select>
     <!--<delete id="delOdCoatingProcess">-->
         <!--delete from od_coating_2fbe_process WHERE-->
         <!--<foreach collection="array" item="item" open="id in (" separator="," close=")">-->

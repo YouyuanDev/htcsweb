@@ -540,11 +540,12 @@
     </div>
     <div id="datagrid1" class="mini-datagrid" style="width:100%;height:100%;"
          borderStyle="border:0" showPageSize="false" showPageIndex="false"
-         url="/pipeinfo/getPipeNumber.action">
+         url="/pipeinfo/getPipeNumbers.action">
         <div property="columns">
             <div type="checkcolumn" ></div>
             <div field="pipe_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="pipeno">钢管编号</div>
             <div field="contract_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="contractno">合同编号</div>
+            <div field="status" width="40" headerAlign="center" allowSort="true" class="i18n1" name="status">状态</div>
             <div field="od" width="40" headerAlign="center" allowSort="true" class="i18n1" name="od">外径</div>
             <div field="wt" width="40" headerAlign="center" allowSort="true" class="i18n1" name="wt">壁厚</div>
             <div field="p_length" width="40" headerAlign="center" allowSort="true" class="i18n1" name="p_length">长度</div>
@@ -552,10 +553,10 @@
         </div>
     </div>
 </div>
-<div id="gridPanel2" class="mini-panel" title="header" iconCls="icon-add" style="width:450px;height:250px;"
+<div id="gridPanel2" class="mini-panel" title="header" iconCls="icon-add" style="width:480px;height:250px;"
      showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0"
 >
-    <div property="toolbar" id="searchBar2" style="padding:5px;padding-left:8px;text-align:center;display:none;">
+    <div property="toolbar" id="searchBar2" style="padding:5px;text-align:center;display:none;">
         <div style="float:left;padding-bottom:2px;">
             <span class="i18n1" name="operatorno">操作工编号</span><span>:</span>
             <input id="keyText3" class="mini-textbox" style="width:110px;" onenter="onSearchClick(2)"/>
@@ -563,8 +564,6 @@
             <input id="keyText4" class="mini-textbox" style="width:110px;" onenter="onSearchClick(2)"/>
             <a class="mini-button" onclick="onSearchClick(2)" name="search">查找</a>
             <a class="mini-button" onclick="onClearClick(2)" name="clear">清除</a>
-        </div>
-        <div style="float:right;padding-bottom:2px;">
             <a class="mini-button" onclick="onCloseClick(2)" name="close">关闭</a>
         </div>
         <div style="clear:both;"></div>
@@ -593,14 +592,15 @@
     var grid2=mini.get("datagrid2");
     var look1=mini.get('lookup1');
     var look2= mini.get("lookup2");
-    grid1.load();
-    grid2.load();
+    // grid1.load();
+    // grid2.load();
 
     function onSearchClick(type) {
         if(type==1)
         {
             grid1.load({
-                pipe_no:keyText1.value
+                pipe_no:keyText1.value,
+                pipestatus:'od3,'
             });
         }else if(type==2){
             grid2.load({

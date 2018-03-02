@@ -475,10 +475,10 @@
         </div>
     </div>
 </div>
-<div id="gridPanel2" class="mini-panel" title="header" iconCls="icon-add" style="width:450px;height:250px;"
+<div id="gridPanel2" class="mini-panel" title="header" iconCls="icon-add" style="width:480px;height:250px;"
      showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0"
 >
-    <div property="toolbar" id="searchBar2" style="padding:5px;padding-left:8px;text-align:center;display:none;">
+    <div property="toolbar" id="searchBar2" style="padding:5px;text-align:center;display:none;">
         <div style="float:left;padding-bottom:2px;">
             <span class="i18n1" name="operatorno">操作工编号</span><span>:</span>
             <input id="keyText3" class="mini-textbox" style="width:110px;" onenter="onSearchClick(2)"/>
@@ -486,8 +486,6 @@
             <input id="keyText4" class="mini-textbox" style="width:110px;" onenter="onSearchClick(2)"/>
             <a class="mini-button" onclick="onSearchClick(2)" name="search">查找</a>
             <a class="mini-button" onclick="onClearClick(2)" name="clear">清除</a>
-        </div>
-        <div style="float:right;padding-bottom:2px;">
             <a class="mini-button" onclick="onCloseClick(2)" name="close">关闭</a>
         </div>
         <div style="clear:both;"></div>
