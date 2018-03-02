@@ -109,7 +109,7 @@ public class CoatingStripController {
                     }else if(p.getStatus().equals("idstrip1")) {
                         //验证钢管状态为id 扒皮管
                         if(coatingStrip.getResult().equals("1")) {//当合格时才更新钢管状态
-                            p.setStatus("idstrip12");
+                            p.setStatus("idstrip2");
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }
                     }

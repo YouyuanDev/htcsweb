@@ -474,8 +474,7 @@
     var grid2=mini.get("datagrid2");
     var look1=mini.get('lookup1');
     var look2= mini.get("lookup2");
-    // grid1.load();
-    // grid2.load();
+
 
     function onSearchClick(type) {
         if(type==1)
@@ -531,14 +530,20 @@
         $('.mini-popup').css('z-index','100000');
         $('.mini-panel').css('z-index','100000');
         $('#searchBar1').css('display','block');
-        //$('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
+        grid1.load({
+            pipe_no:keyText1.value,
+            pipestatus:'od4,'
+        });
     });
     look2.on("showpopup",function(e){
         $('.mini-shadow').css('z-index','99999');
         $('.mini-popup').css('z-index','100000');
         $('.mini-panel').css('z-index','100000');
         $('#searchBar2').css('display','block');
-        //$('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
+        grid2.load({
+            pname: keyText4.value,
+            employeeno:keyText3.value
+        });
     });
     hlLanguage("../i18n/");
 </script>

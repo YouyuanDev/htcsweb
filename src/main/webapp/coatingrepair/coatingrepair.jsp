@@ -606,9 +606,7 @@
     var look1=mini.get('lookup1');
     var look2= mini.get("lookup2");
     var look3= mini.get("lookup3");
-    // grid1.load();
-    // grid2.load();
-    // grid3.load();
+
     function onSearchClick(type) {
         if(type==1)
         {
@@ -679,18 +677,30 @@
         $('.mini-popup').css('z-index','100000');
         $('.mini-panel').css('z-index','100000');
         $('#searchBar1').css('display','block');
+        grid1.load({
+            pipe_no:keyText1.value,
+            pipestatus:'odrepair1,idrepair1,odrepair2,idrepair2'
+        });
     });
     look2.on("showpopup",function(e){
         $('.mini-shadow').css('z-index','99999');
         $('.mini-popup').css('z-index','100000');
         $('.mini-panel').css('z-index','100000');
         $('#searchBar2').css('display','block');
+        grid2.load({
+            pname: keyText4.value,
+            employeeno:keyText3.value
+        });
     });
     look3.on("showpopup",function(e){
         $('.mini-shadow').css('z-index','99999');
         $('.mini-popup').css('z-index','100000');
         $('.mini-panel').css('z-index','100000');
         $('#searchBar3').css('display','block');
+        grid3.load({
+            pname: keyText6.value,
+            employeeno:keyText5.value
+        });
     });
     hlLanguage("../i18n/");
 </script>
