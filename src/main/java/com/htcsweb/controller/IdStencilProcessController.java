@@ -102,13 +102,23 @@ public class IdStencilProcessController {
                         }
                     }
                 }
-               json.put("success",true);
+                json.put("success",true);
+                json.put("message","保存成功");
             }else{
                 json.put("success",false);
+                json.put("message","保存失败");
             }
-            ResponseUtil.write(response,json);
+
         }catch (Exception e){
             e.printStackTrace();
+            json.put("success",false);
+            json.put("message",e.getMessage());
+        }finally {
+            try {
+                ResponseUtil.write(response, json);
+            }catch  (Exception e) {
+                e.printStackTrace();
+            }
         }
         return null;
     }
@@ -121,8 +131,10 @@ public class IdStencilProcessController {
         JSONObject json=new JSONObject();
         if(resTotal>0){
             json.put("success",true);
+            json.put("message","删除成功");
         }else{
             json.put("success",false);
+            json.put("message","删除失败");
         }
         ResponseUtil.write(response,json);
         return null;

@@ -96,9 +96,11 @@ public class LabTesting3LpeController {
                 resTotal=labTesting3LpeDao.updateLabTest3Lpe(labTesting3Lpe);
             }
             if(resTotal>0){
-               json.put("success",true);
+                json.put("success",true);
+                json.put("message","保存成功");
             }else{
                 json.put("success",false);
+                json.put("message","保存失败");
             }
 
         }catch (Exception e){
@@ -122,8 +124,10 @@ public class LabTesting3LpeController {
         JSONObject json=new JSONObject();
         if(resTotal>0){
             json.put("success",true);
+            json.put("message","删除成功");
         }else{
             json.put("success",false);
+            json.put("message","删除失败");
         }
         ResponseUtil.write(response,json);
         return null;

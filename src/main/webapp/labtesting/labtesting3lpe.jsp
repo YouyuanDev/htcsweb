@@ -68,9 +68,8 @@
                         $.post("/LabTest3LpeOperation/delLabTest3Lpe.action",{"hlparam":idArrs},function (data) {
                             if(data.success){
                                 $("#Labtest3LpeDatagrids").datagrid("reload");
-                            }else{
-                                hlAlertFour("操作失败!");
                             }
+                            hlAlertFour(data.message);
                         },"json");
                     }
                 });
@@ -156,9 +155,8 @@
                     $('#hlLabtest3LpeDialog').dialog('close');
                     if (result.success){
                         $('#Labtest3LpeDatagrids').datagrid('reload');
-                    } else {
-                        hlAlertFour("操作失败!");
                     }
+                    hlAlertFour(result.message);
                 },
                 error:function () {
                     //clearFormLabel();

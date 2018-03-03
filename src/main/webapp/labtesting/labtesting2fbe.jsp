@@ -68,9 +68,8 @@
                         $.post("/LabTest2FbeOperation/delLabTest2Fbe.action",{"hlparam":idArrs},function (data) {
                             if(data.success){
                                 $("#Labtest2FbeDatagrids").datagrid("reload");
-                            }else{
-                                hlAlertFour("操作失败!");
                             }
+                            hlAlertFour(data.message);
                         },"json");
                     }
                 });
@@ -154,9 +153,8 @@
                     $('#hlLabtest2FbeDialog').dialog('close');
                     if (result.success){
                         $('#Labtest2FbeDatagrids').datagrid('reload');
-                    } else {
-                         hlAlertFour("操作失败!");
                     }
+                    hlAlertFour(result.message);
                 },
                 error:function () {
                     //clearFormLabel();

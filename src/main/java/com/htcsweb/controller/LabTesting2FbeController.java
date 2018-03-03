@@ -97,9 +97,11 @@ public class LabTesting2FbeController {
                 resTotal=labTesting2FbeDao.updateLabTest2Fbe(labTesting2Fbe);
             }
             if(resTotal>0){
-               json.put("success",true);
+                json.put("success",true);
+                json.put("message","保存成功");
             }else{
                 json.put("success",false);
+                json.put("message","保存失败");
             }
 
         }catch (Exception e){
@@ -123,8 +125,10 @@ public class LabTesting2FbeController {
         JSONObject json=new JSONObject();
         if(resTotal>0){
             json.put("success",true);
+            json.put("message","删除成功");
         }else{
             json.put("success",false);
+            json.put("message","删除失败");
         }
         ResponseUtil.write(response,json);
         return null;
