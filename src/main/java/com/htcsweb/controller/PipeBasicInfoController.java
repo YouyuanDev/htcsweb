@@ -258,12 +258,23 @@ public class PipeBasicInfoController {
             }
             if(resTotal>0){
                 json.put("success",true);
+                json.put("message","保存成功");
             }else{
                 json.put("success",false);
+                json.put("message","保存失败");
             }
-            ResponseUtil.write(response,json);
+
         }catch (Exception e){
             e.printStackTrace();
+            json.put("success",false);
+            json.put("message",e.getMessage());
+
+        }finally {
+            try {
+                ResponseUtil.write(response, json);
+            }catch  (Exception e) {
+                e.printStackTrace();
+            }
         }
         return null;
     }
@@ -278,9 +289,11 @@ public class PipeBasicInfoController {
         if(resTotal>0){
             //System.out.print("删除成功");
             json.put("success",true);
+            json.put("message","删除成功");
         }else{
             //System.out.print("删除失败");
             json.put("success",false);
+            json.put("message","删除失败");
         }
         ResponseUtil.write(response,json);
         return null;
@@ -297,9 +310,11 @@ public class PipeBasicInfoController {
         if(resTotal>0){
             System.out.print("外防入库成功");
             json.put("success",true);
+            json.put("message","外防入库成功");
         }else{
             System.out.print("外防入库失败");
             json.put("success",false);
+            json.put("message","外防入库失败");
         }
         ResponseUtil.write(response,json);
         return null;
@@ -316,9 +331,11 @@ public class PipeBasicInfoController {
         if(resTotal>0){
            // System.out.print("内防入库成功");
             json.put("success",true);
+            json.put("message","内防入库成功");
         }else{
            // System.out.print("内防入库成功");
             json.put("success",false);
+            json.put("message","内防入库失败");
         }
         ResponseUtil.write(response,json);
         return null;
@@ -400,7 +417,6 @@ public class PipeBasicInfoController {
         }else{
             System.out.print("转内防光管库失败");
             json.put("success",false);
-
         }
         ResponseUtil.write(response,json);
         return null;

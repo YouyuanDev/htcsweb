@@ -115,9 +115,8 @@
                             {"hlparam":idArrs},function (data) {
                                 if(data.success){
                                     $("#contractDatagrids").datagrid("reload");
-                                }else{
-                                    hlAlertFour("操作失败!");
                                 }
+                                hlAlertFour(data.message);
                             },"json");
                     }
                 });
@@ -186,10 +185,8 @@
                         clearFormLabel();
                         //$('#hl-gallery-con').empty();
                         // $('#contractDatagrids').datagrid('clearSelections');
-                    } else {
-                        //$.messager.alert('提示',data.msg,'info');
-                        hlAlertFour("操作失败!");
                     }
+                    hlAlertFour(result.message);
                 },
                 error:function () {
                     hlAlertThree();
