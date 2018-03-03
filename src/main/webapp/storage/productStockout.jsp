@@ -65,9 +65,8 @@
                             {"hlparam":idArrs},function (data) {
                                 if(data.success){
                                     $("#pipeDatagrids").datagrid("reload");
-                                }else{
-                                    hlAlertFour("操作失败!");
                                 }
+                                hlAlertFour(data.message);
                             },"json");
                     }
                 });

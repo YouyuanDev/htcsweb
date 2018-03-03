@@ -121,13 +121,18 @@ public class PersonController {
         int resTotal=0;
         resTotal=personDao.delPerson(idArr);
         JSONObject json=new JSONObject();
+        StringBuilder sbmessage = new StringBuilder();
+        sbmessage.append("总共");
+        sbmessage.append(Integer.toString(resTotal));
+        sbmessage.append("项人员信息删除成功\n");
         if(resTotal>0){
-            System.out.print("删除成功");
+            //System.out.print("删除成功");
             json.put("success",true);
         }else{
-            System.out.print("删除失败");
+            //System.out.print("删除失败");
             json.put("success",false);
         }
+        json.put("message",sbmessage.toString());
         ResponseUtil.write(response,json);
         return null;
     }

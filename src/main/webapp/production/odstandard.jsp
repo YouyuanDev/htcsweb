@@ -56,9 +56,8 @@
                         $.post("/AcceptanceCriteriaOperation/delAllODAcceptanceCriteria.action",{"hlparam":idArrs},function (data) {
                             if(data.success){
                                 $("#odAcceptanceDatagrids").datagrid("reload");
-                            }else{
-                                hlAlertFour("操作失败!");
                             }
+                            hlAlertFour(data.message);
                         },"json");
                     }
                 });
@@ -94,9 +93,8 @@
                     $('#hlOdAcceptanceDialog').dialog('close');
                     if (result.success){
                         $('#odAcceptanceDatagrids').datagrid('reload');
-                    } else {
-                         hlAlertFour("操作失败!");
                     }
+                    hlAlertFour(result.message);
                 },
                 error:function () {
                     //clearFormLabel();

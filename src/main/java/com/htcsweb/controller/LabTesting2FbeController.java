@@ -123,13 +123,18 @@ public class LabTesting2FbeController {
         int resTotal=0;
         resTotal=labTesting2FbeDao.delLabTest2Fbe(idArr);
         JSONObject json=new JSONObject();
+        StringBuilder sbmessage = new StringBuilder();
+        sbmessage.append("总共");
+        sbmessage.append(Integer.toString(resTotal));
+        sbmessage.append("项2FBE实验信息删除成功\n");
         if(resTotal>0){
+            //System.out.print("删除成功");
             json.put("success",true);
-            json.put("message","删除成功");
         }else{
+            //System.out.print("删除失败");
             json.put("success",false);
-            json.put("message","删除失败");
         }
+        json.put("message",sbmessage.toString());
         ResponseUtil.write(response,json);
         return null;
     }

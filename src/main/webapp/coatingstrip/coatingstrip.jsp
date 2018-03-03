@@ -112,9 +112,8 @@
                             {"hlparam":idArrs},function (data) {
                                 if(data.success){
                                     $("#stripDatagrids").datagrid("reload");
-                                }else{
-                                    hlAlertFour("操作失败!");
                                 }
+                                hlAlertFour(data.message);
                             },"json");
                     }
                 });
@@ -150,9 +149,8 @@
                     $('#hlCoatingStripDialog').dialog('close');
                     if (result.success){
                         $('#stripDatagrids').datagrid('reload');
-                    } else {
-                        hlAlertFour("操作失败!");
                     }
+                    hlAlertFour(result.message);
                 },
                 error:function () {
                     hlAlertThree();

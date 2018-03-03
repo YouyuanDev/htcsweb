@@ -286,15 +286,18 @@ public class PipeBasicInfoController {
         int resTotal=0;
         resTotal=pipeBasicInfoDao.delPipeBasicInfo(idArr);
         JSONObject json=new JSONObject();
+        StringBuilder sbmessage = new StringBuilder();
+        sbmessage.append("总共");
+        sbmessage.append(Integer.toString(resTotal));
+        sbmessage.append("根钢删除成功\n");
         if(resTotal>0){
             //System.out.print("删除成功");
             json.put("success",true);
-            json.put("message","删除成功");
         }else{
             //System.out.print("删除失败");
             json.put("success",false);
-            json.put("message","删除失败");
         }
+        json.put("message",sbmessage.toString());
         ResponseUtil.write(response,json);
         return null;
     }
@@ -307,15 +310,18 @@ public class PipeBasicInfoController {
         int resTotal=0;
         resTotal=pipeBasicInfoDao.odProductStockin(idArr);
         JSONObject json=new JSONObject();
+        StringBuilder sbmessage = new StringBuilder();
+        sbmessage.append("总共");
+        sbmessage.append(Integer.toString(resTotal));
+        sbmessage.append("根钢管外防入库成功\n");
         if(resTotal>0){
             System.out.print("外防入库成功");
             json.put("success",true);
-            json.put("message","外防入库成功");
         }else{
             System.out.print("外防入库失败");
             json.put("success",false);
-            json.put("message","外防入库失败");
         }
+        json.put("message",sbmessage.toString());
         ResponseUtil.write(response,json);
         return null;
     }
@@ -328,15 +334,18 @@ public class PipeBasicInfoController {
         int resTotal=0;
         resTotal=pipeBasicInfoDao.idProductStockin(idArr);
         JSONObject json=new JSONObject();
+        StringBuilder sbmessage = new StringBuilder();
+        sbmessage.append("总共");
+        sbmessage.append(Integer.toString(resTotal));
+        sbmessage.append("根钢管内防入库成功\n");
         if(resTotal>0){
            // System.out.print("内防入库成功");
             json.put("success",true);
-            json.put("message","内防入库成功");
         }else{
            // System.out.print("内防入库成功");
             json.put("success",false);
-            json.put("message","内防入库失败");
         }
+        json.put("message",sbmessage.toString());
         ResponseUtil.write(response,json);
         return null;
     }
@@ -370,7 +379,9 @@ public class PipeBasicInfoController {
             resTotal = pipeBasicInfoDao.SetToODBare(newidArr);
         }
         JSONObject json=new JSONObject();
-        json.put("message",sbmessage.toString());
+        sbmessage.insert(0,"根钢管转入外防光管库\n");
+        sbmessage.insert(0, Integer.toString(resTotal));
+        sbmessage.insert(0,"总共");
         if(resTotal>0){
             //System.out.print("转外防光管库成功");
             json.put("success",true);
@@ -378,6 +389,7 @@ public class PipeBasicInfoController {
             //System.out.print("转外防光管库成功");
             json.put("success",false);
         }
+        json.put("message",sbmessage.toString());
         ResponseUtil.write(response,json);
         return null;
     }
@@ -398,7 +410,7 @@ public class PipeBasicInfoController {
                 //需要剔除的钢管id
                 sbmessage.append("钢管:");
                 sbmessage.append(idArr[i]);
-                sbmessage.append("已存在内防生产信息，无法转内防光管 ");
+                sbmessage.append("已存在内防生产信息，无法转内防光管\n ");
             }
         }
         int resTotal=0;
@@ -410,7 +422,9 @@ public class PipeBasicInfoController {
             resTotal = pipeBasicInfoDao.SetToIDBare(newidArr);
         }
         JSONObject json=new JSONObject();
-        json.put("message",sbmessage.toString());
+        sbmessage.insert(0,"根钢管转入内防光管库\n");
+        sbmessage.insert(0, Integer.toString(resTotal));
+        sbmessage.insert(0,"总共");
         if(resTotal>0){
             System.out.print("转内防光管库成功");
             json.put("success",true);
@@ -418,6 +432,7 @@ public class PipeBasicInfoController {
             System.out.print("转内防光管库失败");
             json.put("success",false);
         }
+        json.put("message",sbmessage.toString());
         ResponseUtil.write(response,json);
         return null;
     }
@@ -460,7 +475,11 @@ public class PipeBasicInfoController {
         String[]idArr=hlparam.split(",");
         int resTotal=0;
         resTotal=pipeBasicInfoDao.coatingProductStockout(idArr);
+        StringBuilder sbmessage = new StringBuilder();
         JSONObject json=new JSONObject();
+        sbmessage.insert(0,"根涂层成品管出厂成功\n");
+        sbmessage.insert(0, Integer.toString(resTotal));
+        sbmessage.insert(0,"总共");
         if(resTotal>0){
             //System.out.print("涂层成品管出厂成功");
             json.put("success",true);
@@ -468,6 +487,7 @@ public class PipeBasicInfoController {
             //System.out.print("涂层成品管出厂失败");
             json.put("success",false);
         }
+        json.put("message",sbmessage.toString());
         ResponseUtil.write(response,json);
         return null;
     }
