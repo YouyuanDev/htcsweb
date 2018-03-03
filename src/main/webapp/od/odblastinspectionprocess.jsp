@@ -83,9 +83,8 @@
                             {"hlparam":idArrs},function (data) {
                                 if(data.success){
                                     $("#odBlastInspectionProDatagrids").datagrid("reload");
-                                }else{
-                                    hlAlertFour("操作失败!");
                                 }
+                                hlAlertFour(data.message);
                             },"json");
                     }
                 });
@@ -215,9 +214,9 @@
                         $('#odBlastInspectionProDatagrids').datagrid('reload');
                         clearFormLabel();
                         $('#hl-gallery-con').empty();
-                    } else {
-                        hlAlertFour("操作失败!");
                     }
+
+                    hlAlertFour(result.message);
                 },
                 error:function () {
                     hlAlertThree();

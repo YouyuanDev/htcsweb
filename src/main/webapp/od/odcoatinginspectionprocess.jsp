@@ -67,9 +67,9 @@
                         $.post("/OdCoatInOperation/delOdCoatingInProcess.action",{"hlparam":idArrs},function (data) {
                             if(data.success){
                                 $("#odCoatingInProDatagrids").datagrid("reload");
-                            }else{
-                                hlAlertFour("操作失败!");
                             }
+
+                            hlAlertFour(data.message);
                         },"json");
                     }
                 });
@@ -187,9 +187,8 @@
                         $('#hlOdCoatingInProDialog').dialog('close');
                         $('#odCoatingInProDatagrids').datagrid('reload');
                         clearFormLabel();
-                    } else {
-                        hlAlertFour("操作失败!");
                     }
+                    hlAlertFour(result.message);
                 },
                 error:function () {
                     hlAlertThree();

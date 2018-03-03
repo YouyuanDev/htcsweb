@@ -405,8 +405,8 @@
                 <th field="project_time" align="center" width="100" class="i18n1" name="projecttime" data-options="formatter:formatterdate">项目开始时间</th>
                 <th field="od_coating_acceptance_criteria_no" align="center" width="100" class="i18n1" name="odcoatingacceptancecriteriano">OD acceptance_criteria</th>
                 <th field="id_coating_acceptance_criteria_no" align="center" width="100" class="i18n1" name="idcoatingacceptancecriteriano">ID acceptance_criteria</th>
-                <th field="lab_testing_acceptance_criteria_2fbe_no" align="center" width="100" class="i18n1" name="lab_testing_acceptance_criteria_2fbe_no">Lab testing acceptance criteria 2fbe</th>
-                <th field="lab_testing_acceptance_criteria_3lpe_no" align="center" width="100" class="i18n1" name="lab_testing_acceptance_criteria_3lpe_no">Lab testing acceptance criteria 3lpe</th>
+                <th field="lab_testing_acceptance_criteria_2fbe_no" align="center" width="100" class="i18n1" name="labtestingacceptancecriteria2fbeno">Lab testing acceptance criteria 2fbe</th>
+                <th field="lab_testing_acceptance_criteria_3lpe_no" align="center" width="100" class="i18n1" name="labtestingacceptancecriteria3lpeno">Lab testing acceptance criteria 3lpe</th>
 
             </tr>
             </thead>

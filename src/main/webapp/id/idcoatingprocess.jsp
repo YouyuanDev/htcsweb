@@ -69,9 +69,8 @@
                         $.post("/IdCoatOperation/delIdCoatingProcess.action",{"hlparam":idArrs},function (data) {
                             if(data.success){
                                 $("#idCoatingProDatagrids").datagrid("reload");
-                            }else{
-                                hlAlertFour("操作失败!");
                             }
+                            hlAlertFour(data.message);
                         },"json");
                     }
                 });
@@ -145,9 +144,8 @@
                         $('#hlIdCoatingProDialog').dialog('close');
                         $('#idCoatingProDatagrids').datagrid('reload');
                         clearFormLabel();
-                    } else {
-                        hlAlertFour("操作失败!");
                     }
+                    hlAlertFour(result.message);
                 },
                 error:function () {
                     hlAlertThree();

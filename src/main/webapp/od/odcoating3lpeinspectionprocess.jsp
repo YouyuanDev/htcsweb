@@ -66,9 +66,10 @@
                         $.post("/OdCoat3LpeInOperation/delOdCoating3LpeInProcess.action",{"hlparam":idArrs},function (data) {
                             if(data.success){
                                 $("#odCoating3LpeInProDatagrids").datagrid("reload");
-                            }else{
-                                hlAlertFour("操作失败!");
                             }
+
+                            hlAlertFour(data.message);
+
                         },"json");
                     }
                 });
@@ -196,9 +197,8 @@
                         $('#hlOdCoating3LpeInProDialog').dialog('close');
                         $('#odCoating3LpeInProDatagrids').datagrid('reload');
                         clearFormLabel();
-                    } else {
-                        hlAlertFour("操作失败!");
                     }
+                    hlAlertFour(result.message);
                 },
                 error:function () {
                     hlAlertThree();

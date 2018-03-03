@@ -68,9 +68,8 @@
                         $.post("/OdOperation/delOdBlastProcess.action",{"hlparam":idArrs},function (data) {
                             if(data.success){
                                 $("#odBlastProDatagrids").datagrid("reload");
-                            }else{
-                                hlAlertFour("操作失败!");
                             }
+                            hlAlertFour(data.message);
                         },"json");
                     }
                 });
@@ -156,9 +155,9 @@
                     $('#hlOdBlastProDialog').dialog('close');
                     if (result.success){
                         $('#odBlastProDatagrids').datagrid('reload');
-                    } else {
-                         hlAlertFour("操作失败!");
                     }
+                    hlAlertFour(result.message);
+
                 },
                 error:function () {
                     //clearFormLabel();
