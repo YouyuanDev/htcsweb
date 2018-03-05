@@ -33,12 +33,12 @@
             $(document).on('click','.content-del',function () {
                 delUploadPicture($(this));
             });
-            $('#hlLabtest3LpeDialog').dialog({
+            $('#hlRawMaterialtest3LpeDialog').dialog({
                 onClose:function () {
                     var type=$('#hlcancelBtn').attr('operationtype');
                     if(type=="add"){
                         var $imglist=$('#fileslist');
-                        var $dialog=$('#hlLabtest3LpeDialog');
+                        var $dialog=$('#hlRawMaterialtest3LpeDialog');
                         hlAlertSix("../UploadFile/delUploadPicture.action",$imglist,$dialog,grid);
                     }
                     clearFormLabel();
@@ -47,16 +47,16 @@
             $('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
             // hlLanguage("../i18n/");
         });
-        function addLabtest3LpePro(){
+        function addRawMaterialtest3LpePro(){
             $('#hlcancelBtn').attr('operationtype','add');
-            $('#hlLabtest3LpeDialog').dialog('open').dialog('setTitle','新增');
+            $('#hlRawMaterialtest3LpeDialog').dialog('open').dialog('setTitle','新增');
             clearFormLabel();
             clearMultiUpload(grid);
-            url="/LabTest3LpeOperation/saveLabTest3Lpe.action";
+            url="/RawMaterialTesting3LpeOperation/saveRawMaterialTest3Lpe.action";
             //$("input[name='alkaline_dwell_time']").siblings().css("background-color","#F9A6A6");
         }
-        function delLabtest3LpePro() {
-            var row = $('#Labtest3LpeDatagrids').datagrid('getSelections');
+        function delRawMaterialtest3LpePro() {
+            var row = $('#RawMaterialtest3LpeDatagrids').datagrid('getSelections');
             if(row.length>0){
                 var idArr=[];
                 for (var i=0;i<row.length;i++){
@@ -65,9 +65,9 @@
                 var idArrs=idArr.join(',');
                 $.messager.confirm('系统提示',"您确定要删除这<font color=red>"+idArr.length+ "</font>条数据吗？",function (r) {
                     if(r){
-                        $.post("/LabTest3LpeOperation/delLabTest3Lpe.action",{"hlparam":idArrs},function (data) {
+                        $.post("/RawMaterialTesting3LpeOperation/delRawMaterialTest3Lpe.action",{"hlparam":idArrs},function (data) {
                             if(data.success){
-                                $("#Labtest3LpeDatagrids").datagrid("reload");
+                                $("#RawMaterialtest3LpeDatagrids").datagrid("reload");
                             }
                             hlAlertFour(data.message);
                         },"json");
@@ -77,14 +77,14 @@
                 hlAlertOne();
             }
         }
-        function editLabtest3LpePro(){
+        function editRawMaterialtest3LpePro(){
             $('#hlcancelBtn').attr('operationtype','edit');
-            var row = $('#Labtest3LpeDatagrids').datagrid('getSelected');
+            var row = $('#RawMaterialtest3LpeDatagrids').datagrid('getSelected');
             if(row){
-                $('#hlLabtest3LpeDialog').dialog('open').dialog('setTitle','修改');
+                $('#hlRawMaterialtest3LpeDialog').dialog('open').dialog('setTitle','修改');
                 loadPipeBaiscInfo(row);
                 $('#odbpid').text(row.id);
-                $('#Labtest3LpeForm').form('load',row);
+                $('#RawMaterialtest3LpeForm').form('load',row);
                 $('#coating-date').datetimebox('setValue',getDate1(row.coating_date));
                 $('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
                 look1.setText(row.pipe_no);
@@ -158,13 +158,13 @@
 
                     }
                 });
-                url="/LabTest3LpeOperation/saveLabTest3Lpe.action?id="+row.id;
+                url="/RawMaterialTesting3LpeOperation/saveRawMaterialTest3Lpe.action?id="+row.id;
             }else{
                 hlAlertTwo();
             }
         }
-        function searchLabtest3LpePro() {
-            $('#Labtest3LpeDatagrids').datagrid('load',{
+        function searchRawMaterialtest3LpePro() {
+            $('#RawMaterialtest3LpeDatagrids').datagrid('load',{
                 'pipe_no': $('#pipeno').val(),
                 'operator_no': $('#operatorno').val(),
                 'begin_time': $('#begintime').val(),
@@ -172,8 +172,8 @@
                 'mill_no': $('#millno').val()
             });
         }
-        function Labtest3LpeFormSubmit() {
-            $('#Labtest3LpeForm').form('submit',{
+        function RawMaterialtest3LpeFormSubmit() {
+            $('#RawMaterialtest3LpeForm').form('submit',{
                 url:url,
                 onSubmit:function () {
                     //表单验证
@@ -197,9 +197,9 @@
                 success: function(result){
                     clearFormLabel();
                     var result = eval('('+result+')');
-                    $('#hlLabtest3LpeDialog').dialog('close');
+                    $('#hlRawMaterialtest3LpeDialog').dialog('close');
                     if (result.success){
-                        $('#Labtest3LpeDatagrids').datagrid('reload');
+                        $('#RawMaterialtest3LpeDatagrids').datagrid('reload');
                     }
                     hlAlertFour(result.message);
                 },
@@ -211,8 +211,8 @@
             clearMultiUpload(grid);
 
         }
-        function Labtest3LpeCancelSubmit() {
-            $('#hlLabtest3LpeDialog').dialog('close');
+        function RawMaterialtest3LpeCancelSubmit() {
+            $('#hlRawMaterialtest3LpeDialog').dialog('close');
         }
         //图片上传失败操作
         function onUploadError() {
@@ -227,7 +227,7 @@
         }
 
         function  clearFormLabel(){
-            $('#Labtest3LpeForm').form('clear');
+            $('#RawMaterialtest3LpeForm').form('clear');
             $('.hl-label').text('');
             $('#hl-gallery-con').empty();
 
@@ -244,26 +244,26 @@
 <fieldset class="b3" style="padding:10px;margin:10px;">
     <legend> <h3><b style="color: orange" >|&nbsp;</b><span class="i18n1" name="datadisplay">数据展示</span></h3></legend>
     <div  style="margin-top:5px;">
-        <table class="easyui-datagrid" id="Labtest3LpeDatagrids" url="/LabTest3LpeOperation/getLabTest3LpeByLike.action" striped="true" loadMsg="正在加载中。。。" textField="text" pageSize="20" fitColumns="true" pagination="true" toolbar="#hlLabtest3LpeProTb">
+        <table class="easyui-datagrid" id="RawMaterialtest3LpeDatagrids" url="/RawMaterialTesting3LpeOperation/getRawMaterialTest3LpeByLike.action" striped="true" loadMsg="正在加载中。。。" textField="text" pageSize="20" fitColumns="true" pagination="true" toolbar="#hlRawMaterialtest3LpeProTb">
             <thead>
             <tr>
                 <th data-options="field:'ck',checkbox:true"></th>
                 <th field="id" align="center" width="100" class="i18n1" name="id">流水号</th>
-                <th field="mill_no" align="center" width="150" class="i18n1" name="millno">分厂</th>
+                <%--<th field="mill_no" align="center" width="150" class="i18n1" name="millno">分厂</th>--%>
                 <th field="project_name" align="center" width="120" class="i18n1" name="projectname">项目名称</th>
-                <th field="contract_no" align="center" width="120" class="i18n1" name="contractno">合同编号</th>
-                <th field="pipe_no" align="center" width="120" class="i18n1" name="pipeno">钢管编号</th>
-                <th field="grade" align="center" width="110" class="i18n1" name="grade">钢种</th>
-                <th field="status_name" align="center" width="110" class="i18n1" name="statusname">状态</th>
-                <th field="od" align="center" width="50" class="i18n1" name="od">外径</th>
-                <th field="wt" align="center" width="50" class="i18n1" name="wt">壁厚</th>
-                <th field="p_length" align="center" width="50" class="i18n1" name="p_length">长度</th>
-                <th field="weight" align="center" width="50" class="i18n1" name="weight">重量</th>
-                <th field="heat_no" align="center" hidden="true" width="50" class="i18n1" name="heat_no">炉号</th>
+                <%--<th field="contract_no" align="center" width="120" class="i18n1" name="contractno">合同编号</th>--%>
+                <%--<th field="pipe_no" align="center" width="120" class="i18n1" name="pipeno">钢管编号</th>--%>
+                <%--<th field="grade" align="center" width="110" class="i18n1" name="grade">钢种</th>--%>
+                <%--<th field="status_name" align="center" width="110" class="i18n1" name="statusname">状态</th>--%>
+                <%--<th field="od" align="center" width="50" class="i18n1" name="od">外径</th>--%>
+                <%--<th field="wt" align="center" width="50" class="i18n1" name="wt">壁厚</th>--%>
+                <%--<th field="p_length" align="center" width="50" class="i18n1" name="p_length">长度</th>--%>
+                <%--<th field="weight" align="center" width="50" class="i18n1" name="weight">重量</th>--%>
+                <%--<th field="heat_no" align="center" hidden="true" width="50" class="i18n1" name="heat_no">炉号</th>--%>
                 <th field="operator_no" align="center" width="100" class="i18n1" name="operatorno">操作工编号</th>
 
                 <th field="sample_no" align="center" width="120" class="i18n1" name="sampleno">试样号</th>
-                <th field="coating_date" align="center" width="120" class="i18n1" name="coatingdate" data-options="formatter:formatterdate">涂层时间</th>
+                <%--<th field="coating_date" align="center" width="120" class="i18n1" name="coatingdate" data-options="formatter:formatterdate">涂层时间</th>--%>
 
                 <th field="resistance_to_cd_20_28d" align="center" width="100" hidden="true" class="i18n1" name="resistancetocd2028d">阴极剥离 20度 28天</th>
                 <th field="resistance_to_cd_max_28d" align="center" width="100" hidden="true" class="i18n1" name="resistancetocdmax28d">阴极剥离 最高温度 28天</th>
@@ -287,7 +287,7 @@
 </fieldset>
 
 <!--工具栏-->
-<div id="hlLabtest3LpeProTb" style="padding:10px;">
+<div id="hlRawMaterialtest3LpeProTb" style="padding:10px;">
     <span class="i18n1" name="pipeno">钢管编号</span>:
     <input id="pipeno" name="pipeno" style="line-height:22px;border:1px solid #ccc">
     <span class="i18n1" name="operatorno">操作工编号</span>:
@@ -296,17 +296,17 @@
     <input id="begintime" name="begintime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
     <span class="i18n1" name="endtime">结束时间</span>:
     <input id="endtime" name="endtime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
-    <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchLabtest3LpePro()">Search</a>
+    <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchRawMaterialtest3LpePro()">Search</a>
     <div style="float:right">
-        <a href="#" id="addObpLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addLabtest3LpePro()">添加</a>
-        <a href="#" id="editObpLinkBtn" class="easyui-linkbutton i18n1" name="edit" data-options="iconCls:'icon-edit',plain:true" onclick="editLabtest3LpePro()">修改</a>
-        <a href="#" id="deltObpLinkBtn" class="easyui-linkbutton i18n1" name="delete" data-options="iconCls:'icon-remove',plain:true" onclick="delLabtest3LpePro()">删除</a>
+        <a href="#" id="addObpLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addRawMaterialtest3LpePro()">添加</a>
+        <a href="#" id="editObpLinkBtn" class="easyui-linkbutton i18n1" name="edit" data-options="iconCls:'icon-edit',plain:true" onclick="editRawMaterialtest3LpePro()">修改</a>
+        <a href="#" id="deltObpLinkBtn" class="easyui-linkbutton i18n1" name="delete" data-options="iconCls:'icon-remove',plain:true" onclick="delRawMaterialtest3LpePro()">删除</a>
     </div>
 </div>
 
 <!--添加、修改框-->
-<div id="hlLabtest3LpeDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;height:auto;">
-    <form id="Labtest3LpeForm" method="post">
+<div id="hlRawMaterialtest3LpeDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;height:auto;">
+    <form id="RawMaterialtest3LpeForm" method="post">
         <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
             <legend class="i18n1" name="pipebasicinfo">钢管信息</legend>
             <table class="ht-table" width="100%" border="0">
@@ -461,8 +461,8 @@
 
 </div>
 <div id="dlg-buttons" align="center" style="width:900px;">
-    <a href="#" class="easyui-linkbutton" iconCls="icon-save" onclick="Labtest3LpeFormSubmit()">Save</a>
-    <a href="#" class="easyui-linkbutton" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="Labtest3LpeCancelSubmit()">Cancel</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-save" onclick="RawMaterialtest3LpeFormSubmit()">Save</a>
+    <a href="#" class="easyui-linkbutton" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="RawMaterialtest3LpeCancelSubmit()">Cancel</a>
 </div>
 <div id="gridPanel1" class="mini-panel" title="header" iconCls="icon-add" style="width:450px;height:250px;"
      showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0"

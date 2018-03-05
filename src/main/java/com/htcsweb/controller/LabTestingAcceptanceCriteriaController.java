@@ -236,6 +236,7 @@ public class LabTestingAcceptanceCriteriaController {
         if(contract_no!=null&&contract_no!=""){
             LabTestingAcceptanceCriteria3Lpe criteria=labTestingAcceptanceCriteria3LpeDao.getLabTestCriteria3LpeByContractNo(contract_no);
             String map= JSONObject.toJSONString(criteria);
+            System.out.println("查到标准＝"+map);
             return map;
         }else{
             return  null;

@@ -33,12 +33,12 @@
             $(document).on('click','.content-del',function () {
                 delUploadPicture($(this));
             });
-            $('#hlLabtest3LpeDialog').dialog({
+            $('#hlRawMaterialtestEpoxyDialog').dialog({
                 onClose:function () {
                     var type=$('#hlcancelBtn').attr('operationtype');
                     if(type=="add"){
                         var $imglist=$('#fileslist');
-                        var $dialog=$('#hlLabtest3LpeDialog');
+                        var $dialog=$('#hlRawMaterialtestEpoxyDialog');
                         hlAlertSix("../UploadFile/delUploadPicture.action",$imglist,$dialog,grid);
                     }
                     clearFormLabel();
@@ -47,16 +47,16 @@
             $('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
             // hlLanguage("../i18n/");
         });
-        function addLabtest3LpePro(){
+        function addRawMaterialtestEpoxyPro(){
             $('#hlcancelBtn').attr('operationtype','add');
-            $('#hlLabtest3LpeDialog').dialog('open').dialog('setTitle','新增');
-            clearFormLabel();
+            $('#hlRawMaterialtestEpoxyDialog').dialog('open').dialog('setTitle','新增');
+            clearFormRawMaterialel();
             clearMultiUpload(grid);
-            url="/LabTest3LpeOperation/saveLabTest3Lpe.action";
+            url="/RawMaterialTesting3LpeOperation/saveRawMaterialTestEpoxy.action";
             //$("input[name='alkaline_dwell_time']").siblings().css("background-color","#F9A6A6");
         }
-        function delLabtest3LpePro() {
-            var row = $('#Labtest3LpeDatagrids').datagrid('getSelections');
+        function delRawMaterialtestEpoxyPro() {
+            var row = $('#RawMaterialtestEpoxyDatagrids').datagrid('getSelections');
             if(row.length>0){
                 var idArr=[];
                 for (var i=0;i<row.length;i++){
@@ -65,9 +65,9 @@
                 var idArrs=idArr.join(',');
                 $.messager.confirm('系统提示',"您确定要删除这<font color=red>"+idArr.length+ "</font>条数据吗？",function (r) {
                     if(r){
-                        $.post("/LabTest3LpeOperation/delLabTest3Lpe.action",{"hlparam":idArrs},function (data) {
+                        $.post("/RawMaterialTesting3LpeOperation/delRawMaterialTestEpoxy.action",{"hlparam":idArrs},function (data) {
                             if(data.success){
-                                $("#Labtest3LpeDatagrids").datagrid("reload");
+                                $("#RawMaterialtestEpoxyDatagrids").datagrid("reload");
                             }
                             hlAlertFour(data.message);
                         },"json");
@@ -77,14 +77,14 @@
                 hlAlertOne();
             }
         }
-        function editLabtest3LpePro(){
+        function editRawMaterialtestEpoxyPro(){
             $('#hlcancelBtn').attr('operationtype','edit');
-            var row = $('#Labtest3LpeDatagrids').datagrid('getSelected');
+            var row = $('#RawMaterialtestEpoxyDatagrids').datagrid('getSelected');
             if(row){
-                $('#hlLabtest3LpeDialog').dialog('open').dialog('setTitle','修改');
+                $('#hlRawMaterialtestEpoxyDialog').dialog('open').dialog('setTitle','修改');
                 loadPipeBaiscInfo(row);
                 $('#odbpid').text(row.id);
-                $('#Labtest3LpeForm').form('load',row);
+                $('#RawMaterialtestEpoxyForm').form('load',row);
                 $('#coating-date').datetimebox('setValue',getDate1(row.coating_date));
                 $('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
                 look1.setText(row.pipe_no);
@@ -96,75 +96,13 @@
                     var imgList=odpictures.split(';');
                     createPictureModel(basePath,imgList);
                 }
-                //异步获取标准并匹配
-                $.ajax({
-                    url:'/LabTestingAcceptanceCriteriaOperation/getAcceptanceCriteria3LpeByContractNo.action',
-                    dataType:'json',
-                    data:{'contract_no':row.contract_no},
-                    success:function (data) {
-                        var $obj1=$("input[name='resistance_to_cd_20_28d']");
-                        var $obj2=$("input[name='resistance_to_cd_max_28d']");
-                        var $obj3=$("input[name='resistance_to_cd_65_24h']");
-                        var $obj4=$("input[name='impact_resistance_23']");
-                        var $obj5=$("input[name='impact_resistance_m40']");
-                        var $obj6=$("input[name='indentation_hardness_23']");
-                        var $obj7=$("input[name='indentation_hardness_70']");
-                        var $obj8=$("input[name='elongation_at_break']");
-                        var $obj9=$("input[name='coating_resistivity']");
-                        var $obj10=$("input[name='thermal_degradation']");
-                        $obj1.siblings().css("background-color","#FFFFFF");
-                        $obj2.siblings().css("background-color","#FFFFFF");
-                        $obj3.siblings().css("background-color","#FFFFFF");
-                        $obj4.siblings().css("background-color","#FFFFFF");
-                        $obj5.siblings().css("background-color","#FFFFFF");
-                        $obj6.siblings().css("background-color","#FFFFFF");
-                        $obj7.siblings().css("background-color","#FFFFFF");
-                        $obj8.siblings().css("background-color","#FFFFFF");
-                        $obj9.siblings().css("background-color","#FFFFFF");
-                        $obj10.siblings().css("background-color","#FFFFFF");
-                        if(data!=null){
-                            var res1=$obj1.val();
-                            var res2=$obj2.val();
-                            var res3=$obj3.val();
-                            var res4=$obj4.val();
-                            var res5=$obj5.val();
-                            var res6=$obj6.val();
-                            var res7=$obj7.val();
-                            var res8=$obj8.val();
-                            var res9=$obj9.val();
-                            var res10=$obj10.val();
-                            if(!((res1>data.resistance_to_cd_20_28d_min)&&(res1<data.resistance_to_cd_20_28d_max)))
-                                $obj1.siblings().css("background-color","#F9A6A6");
-                            if(!((res2>data.resistance_to_cd_max_28d_min)&&(res2<data.resistance_to_cd_max_28d_max)))
-                                $obj2.siblings().css("background-color","#F9A6A6");
-                            if(!((res3>data.resistance_to_cd_65_24h_min)&&(res3<data.resistance_to_cd_65_24h_max)))
-                                $obj3.siblings().css("background-color","#F9A6A6");
-                            if(!((res4>data.impact_resistance_23_min)&&(res4<data.impact_resistance_23_max)))
-                                $obj4.siblings().css("background-color","#F9A6A6");
-                            if(!((res5>data.impact_resistance_m40_min)&&(res5<data.impact_resistance_m40_max)))
-                                $obj5.siblings().css("background-color","#F9A6A6");
-                            if(!((res6>data.indentation_hardness_23_min)&&(res6<data.indentation_hardness_23_max)))
-                                $obj6.siblings().css("background-color","#F9A6A6");
-                            if(!((res7>data.indentation_hardness_70_min)&&(res7<data.indentation_hardness_70_max)))
-                                $obj7.siblings().css("background-color","#F9A6A6");
-                            if(!((res8>data.elongation_at_break_min)&&(res8<data.elongation_at_break_max)))
-                                $obj8.siblings().css("background-color","#F9A6A6");
-                            if(!((res9>data.coating_resistivity_min)&&(res9<data.coating_resistivity_max)))
-                                $obj9.siblings().css("background-color","#F9A6A6");
-                            if(!((res10>data.thermal_degradation_min)&&(res10<data.thermal_degradation_max)))
-                                $obj10.siblings().css("background-color","#F9A6A6");
-                        }
-                    },error:function () {
-
-                    }
-                });
-                url="/LabTest3LpeOperation/saveLabTest3Lpe.action?id="+row.id;
+                url="/RawMaterialTesting3LpeOperation/saveRawMaterialTestEpoxy.action?id="+row.id;
             }else{
                 hlAlertTwo();
             }
         }
-        function searchLabtest3LpePro() {
-            $('#Labtest3LpeDatagrids').datagrid('load',{
+        function searchRawMaterialtestEpoxyPro() {
+            $('#RawMaterialtestEpoxyDatagrids').datagrid('load',{
                 'pipe_no': $('#pipeno').val(),
                 'operator_no': $('#operatorno').val(),
                 'begin_time': $('#begintime').val(),
@@ -172,21 +110,11 @@
                 'mill_no': $('#millno').val()
             });
         }
-        function Labtest3LpeFormSubmit() {
-            $('#Labtest3LpeForm').form('submit',{
+        function RawMaterialtestEpoxyFormSubmit() {
+            $('#RawMaterialtestEpoxyForm').form('submit',{
                 url:url,
                 onSubmit:function () {
                     //表单验证
-                    setParams($("input[name='resistance_to_cd_20_28d']"));
-                    setParams($("input[name='resistance_to_cd_max_28d']"));
-                    setParams($("input[name='resistance_to_cd_65_24h']"));
-                    setParams($("input[name='impact_resistance_23']"));
-                    setParams($("input[name='impact_resistance_m40']"));
-                    setParams($("input[name='indentation_hardness_23']"));
-                    setParams($("input[name='indentation_hardness_70']"));
-                    setParams($("input[name='elongation_at_break']"));
-                    setParams($("input[name='coating_resistivity']"));
-                    setParams($("input[name='thermal_degradation']"));
                     if($("input[name='odbptime']").val()==""){
                         hlAlertFour("请输入操作时间");return false;
                     }
@@ -197,9 +125,9 @@
                 success: function(result){
                     clearFormLabel();
                     var result = eval('('+result+')');
-                    $('#hlLabtest3LpeDialog').dialog('close');
+                    $('#hlRawMaterialtestEpoxyDialog').dialog('close');
                     if (result.success){
-                        $('#Labtest3LpeDatagrids').datagrid('reload');
+                        $('#RawMaterialtestEpoxyDatagrids').datagrid('reload');
                     }
                     hlAlertFour(result.message);
                 },
@@ -211,8 +139,8 @@
             clearMultiUpload(grid);
 
         }
-        function Labtest3LpeCancelSubmit() {
-            $('#hlLabtest3LpeDialog').dialog('close');
+        function RawMaterialtestEpoxyCancelSubmit() {
+            $('#hlRawMaterialtestEpoxyDialog').dialog('close');
         }
         //图片上传失败操作
         function onUploadError() {
@@ -227,7 +155,7 @@
         }
 
         function  clearFormLabel(){
-            $('#Labtest3LpeForm').form('clear');
+            $('#RawMaterialtestEpoxyForm').form('clear');
             $('.hl-label').text('');
             $('#hl-gallery-con').empty();
 
@@ -244,37 +172,33 @@
 <fieldset class="b3" style="padding:10px;margin:10px;">
     <legend> <h3><b style="color: orange" >|&nbsp;</b><span class="i18n1" name="datadisplay">数据展示</span></h3></legend>
     <div  style="margin-top:5px;">
-        <table class="easyui-datagrid" id="Labtest3LpeDatagrids" url="/LabTest3LpeOperation/getLabTest3LpeByLike.action" striped="true" loadMsg="正在加载中。。。" textField="text" pageSize="20" fitColumns="true" pagination="true" toolbar="#hlLabtest3LpeProTb">
+        <table class="easyui-datagrid" id="RawMaterialtestEpoxyDatagrids" url="/RawMaterialTesting3LpeOperation/getRawMaterialTestEpoxyByLike.action" striped="true" loadMsg="正在加载中。。。" textField="text" pageSize="20" fitColumns="true" pagination="true" toolbar="#hlRawMaterialtestEpoxyProTb">
             <thead>
             <tr>
                 <th data-options="field:'ck',checkbox:true"></th>
                 <th field="id" align="center" width="100" class="i18n1" name="id">流水号</th>
-                <th field="mill_no" align="center" width="150" class="i18n1" name="millno">分厂</th>
+                <%--<th field="mill_no" align="center" width="150" class="i18n1" name="millno">分厂</th>--%>
                 <th field="project_name" align="center" width="120" class="i18n1" name="projectname">项目名称</th>
-                <th field="contract_no" align="center" width="120" class="i18n1" name="contractno">合同编号</th>
-                <th field="pipe_no" align="center" width="120" class="i18n1" name="pipeno">钢管编号</th>
-                <th field="grade" align="center" width="110" class="i18n1" name="grade">钢种</th>
-                <th field="status_name" align="center" width="110" class="i18n1" name="statusname">状态</th>
-                <th field="od" align="center" width="50" class="i18n1" name="od">外径</th>
-                <th field="wt" align="center" width="50" class="i18n1" name="wt">壁厚</th>
-                <th field="p_length" align="center" width="50" class="i18n1" name="p_length">长度</th>
-                <th field="weight" align="center" width="50" class="i18n1" name="weight">重量</th>
-                <th field="heat_no" align="center" hidden="true" width="50" class="i18n1" name="heat_no">炉号</th>
+                <%--<th field="contract_no" align="center" width="120" class="i18n1" name="contractno">合同编号</th>--%>
+                <%--<th field="pipe_no" align="center" width="120" class="i18n1" name="pipeno">钢管编号</th>--%>
+                <%--<th field="grade" align="center" width="110" class="i18n1" name="grade">钢种</th>--%>
+                <%--<th field="status_name" align="center" width="110" class="i18n1" name="statusname">状态</th>--%>
+                <%--<th field="od" align="center" width="50" class="i18n1" name="od">外径</th>--%>
+                <%--<th field="wt" align="center" width="50" class="i18n1" name="wt">壁厚</th>--%>
+                <%--<th field="p_length" align="center" width="50" class="i18n1" name="p_length">长度</th>--%>
+                <%--<th field="weight" align="center" width="50" class="i18n1" name="weight">重量</th>--%>
+                <%--<th field="heat_no" align="center" hidden="true" width="50" class="i18n1" name="heat_no">炉号</th>--%>
                 <th field="operator_no" align="center" width="100" class="i18n1" name="operatorno">操作工编号</th>
 
                 <th field="sample_no" align="center" width="120" class="i18n1" name="sampleno">试样号</th>
-                <th field="coating_date" align="center" width="120" class="i18n1" name="coatingdate" data-options="formatter:formatterdate">涂层时间</th>
+                <%--<th field="coating_date" align="center" width="120" class="i18n1" name="coatingdate" data-options="formatter:formatterdate">涂层时间</th>--%>
 
-                <th field="resistance_to_cd_20_28d" align="center" width="100" hidden="true" class="i18n1" name="resistancetocd2028d">阴极剥离 20度 28天</th>
-                <th field="resistance_to_cd_max_28d" align="center" width="100" hidden="true" class="i18n1" name="resistancetocdmax28d">阴极剥离 最高温度 28天</th>
-                <th field="resistance_to_cd_65_24h" width="100" align="center" hidden="true" class="i18n1" name="resistancetocd6524h">阴极剥离 65度 24小时</th>
-                <th field="impact_resistance_23" width="100" align="center" hidden="true" class="i18n1" name="impactresistance23">冲击 23度</th>
-                <th field="impact_resistance_m40" width="100" align="center" hidden="true" class="i18n1" name="impactresistancem40">冲击 -40度</th>
-                <th field="indentation_hardness_23" align="center" width="120" class="i18n1" name="indentationhardness23">压痕硬度 23度</th>
-                <th field="indentation_hardness_70" align="center" width="120" class="i18n1" name="indentationhardness70">压痕硬度 70度</th>
-                <th field="elongation_at_break" align="center" width="120" class="i18n1" name="elongationatbreak">延展率</th>
-                <th field="coating_resistivity" align="center" width="120" class="i18n1" name="coatingresistivity">涂层强度</th>
-                <th field="thermal_degradation" align="center" width="120" class="i18n1" name="thermaldegradation">热降解</th>
+                <th field="porosity" align="center" width="100"  class="i18n1" name="porosity">针孔实验</th>
+                <th field="bend" align="center" width="100"  class="i18n1" name="bend">内涂弯曲实验</th>
+                <th field="adhesion" width="100" align="center"  class="i18n1" name="adhesion">附着力实验</th>
+                <th field="curing" width="100" align="center" hidden="true" class="i18n1" name="curing">固化度实验</th>
+                <th field="water_immersion" width="100" align="center" hidden="true" class="i18n1" name="waterimmersion">水浸泡实验</th>
+
 
                 <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                 <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
@@ -287,7 +211,7 @@
 </fieldset>
 
 <!--工具栏-->
-<div id="hlLabtest3LpeProTb" style="padding:10px;">
+<div id="hlRawMaterialtestEpoxyProTb" style="padding:10px;">
     <span class="i18n1" name="pipeno">钢管编号</span>:
     <input id="pipeno" name="pipeno" style="line-height:22px;border:1px solid #ccc">
     <span class="i18n1" name="operatorno">操作工编号</span>:
@@ -296,17 +220,17 @@
     <input id="begintime" name="begintime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
     <span class="i18n1" name="endtime">结束时间</span>:
     <input id="endtime" name="endtime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
-    <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchLabtest3LpePro()">Search</a>
+    <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchRawMaterialtestEpoxyPro()">Search</a>
     <div style="float:right">
-        <a href="#" id="addObpLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addLabtest3LpePro()">添加</a>
-        <a href="#" id="editObpLinkBtn" class="easyui-linkbutton i18n1" name="edit" data-options="iconCls:'icon-edit',plain:true" onclick="editLabtest3LpePro()">修改</a>
-        <a href="#" id="deltObpLinkBtn" class="easyui-linkbutton i18n1" name="delete" data-options="iconCls:'icon-remove',plain:true" onclick="delLabtest3LpePro()">删除</a>
+        <a href="#" id="addObpLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addRawMaterialtestEpoxyPro()">添加</a>
+        <a href="#" id="editObpLinkBtn" class="easyui-linkbutton i18n1" name="edit" data-options="iconCls:'icon-edit',plain:true" onclick="editRawMaterialtestEpoxyPro()">修改</a>
+        <a href="#" id="deltObpLinkBtn" class="easyui-linkbutton i18n1" name="delete" data-options="iconCls:'icon-remove',plain:true" onclick="delRawMaterialtestEpoxyPro()">删除</a>
     </div>
 </div>
 
 <!--添加、修改框-->
-<div id="hlLabtest3LpeDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;height:auto;">
-    <form id="Labtest3LpeForm" method="post">
+<div id="hlRawMaterialtestEpoxyDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;height:auto;">
+    <form id="RawMaterialtestEpoxyForm" method="post">
         <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
             <legend class="i18n1" name="pipebasicinfo">钢管信息</legend>
             <table class="ht-table" width="100%" border="0">
@@ -388,45 +312,27 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td class="i18n1" name="resistancetocd2028d">阴极剥离 20度 28天</td>
-                    <td><input class="easyui-numberbox hl-errorcolor" data-options="min:0,precision:0" type="text" name="resistance_to_cd_20_28d" value=""/></td>
+                    <td class="i18n1" name="porosity">针孔实验</td>
+                    <td><input class="easyui-numberbox"  type="text" name="porosity" value=""/></td>
                     <td></td>
-                    <td class="i18n1" name="resistancetocdmax28d">阴极剥离 最高温度 28天</td>
-                    <td><input class="easyui-numberbox"  data-options="min:0,precision:0" type="text" name="resistance_to_cd_max_28d" value=""/></td>
+                    <td class="i18n1" name="bend">内涂弯曲实验</td>
+                    <td><input class="easyui-textbox"   type="text" name="bend" value=""/></td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td class="i18n1" name="resistancetocd6524h">阴极剥离 65度 24小时</td>
-                    <td><input class="easyui-textbox"   type="text" name="resistance_to_cd_65_24h" value=""/></td>
+                    <td class="i18n1" name="adhesion">附着力实验</td>
+                    <td><input class="easyui-textbox"   type="text" name="adhesion" value=""/></td>
                     <td></td>
-                    <td class="i18n1" name="thermaldegradation">热降解</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="thermal_degradation" value=""/></td>
+                    <td class="i18n1" name="curing">固化度实验</td>
+                    <td><input class="easyui-textbox"  type="text" name="curing" value=""/></td>
                     <td></td>
                 </tr>
 
                 <tr>
-                    <td width="16%" class="i18n1" name="impactresistance23">冲击 23度</td>
-                    <td><input class="easyui-textbox"  type="text" name="impact_resistance_23" value=""/></td>
+                    <td width="16%" class="i18n1" name="waterimmersion">水浸泡实验</td>
+                    <td><input class="easyui-textbox"  type="text" name="water_immersion" value=""/></td>
                     <td></td>
-                    <td width="16%" class="i18n1" name="impactresistancem40">冲击 -40度</td>
-                    <td><input class="easyui-textbox"  type="text" name="impact_resistance_m40" value=""/></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td class="i18n1" name="indentationhardness23">压痕硬度 23度</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="indentation_hardness_23" value=""/></td>
-                    <td></td>
-                    <td class="i18n1" name="indentationhardness70">压痕硬度 70度</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="indentation_hardness_70" value=""/></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td class="i18n1" name="elongationatbreak">延展率</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="elongation_at_break" value=""/></td>
-                    <td></td>
-                    <td class="i18n1" name="coatingresistivity">涂层强度</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="coating_resistivity" value=""/></td>
-                    <td></td>
+
                 </tr>
 
                 <tr>
@@ -461,8 +367,8 @@
 
 </div>
 <div id="dlg-buttons" align="center" style="width:900px;">
-    <a href="#" class="easyui-linkbutton" iconCls="icon-save" onclick="Labtest3LpeFormSubmit()">Save</a>
-    <a href="#" class="easyui-linkbutton" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="Labtest3LpeCancelSubmit()">Cancel</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-save" onclick="RawMaterialtestEpoxyFormSubmit()">Save</a>
+    <a href="#" class="easyui-linkbutton" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="RawMaterialtestEpoxyCancelSubmit()">Cancel</a>
 </div>
 <div id="gridPanel1" class="mini-panel" title="header" iconCls="icon-add" style="width:450px;height:250px;"
      showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0"

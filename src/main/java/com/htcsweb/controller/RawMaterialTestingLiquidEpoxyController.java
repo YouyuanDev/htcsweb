@@ -3,9 +3,8 @@ package com.htcsweb.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.PipeBasicInfoDao;
-import com.htcsweb.dao.RawMaterialTesting2FbeDao;
-import com.htcsweb.entity.PipeBasicInfo;
-import com.htcsweb.entity.RawMaterialTesting2Fbe;
+import com.htcsweb.dao.RawMaterialTestingLiquidEpoxyDao;
+import com.htcsweb.entity.RawMaterialTestingLiquidEpoxy;
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,18 +21,19 @@ import java.util.List;
 import java.util.Map;
 
 
+
 @Controller
-@RequestMapping("/RawMaterialTesting2FbeOperation")
-public class RawMaterialTesting2FbeController {
+@RequestMapping("/RawMaterialTestingLiquidEpoxyOperation")
+public class RawMaterialTestingLiquidEpoxyController {
     @Autowired
-    private RawMaterialTesting2FbeDao rawMaterialTesting2FbeDao;
+    private RawMaterialTestingLiquidEpoxyDao rawMaterialTestingLiquidEpoxyDao;
     @Autowired
     private PipeBasicInfoDao pipeBasicInfoDao;
 
     //查询
-    @RequestMapping(value = "/getRawMaterialTest2FbeByLike")
+    @RequestMapping(value = "/getRawMaterialTestEpoxyByLike")
     @ResponseBody
-    public String getRawMaterialTest2FbeByLike(@RequestParam(value = "pipe_no",required = false)String pipe_no, @RequestParam(value = "operator_no",required = false)String operator_no, @RequestParam(value = "begin_time",required = false)String begin_time, @RequestParam(value = "end_time",required = false)String end_time, HttpServletRequest request){
+    public String getRawMaterialTestEpoxyByLike(@RequestParam(value = "pipe_no",required = false)String pipe_no, @RequestParam(value = "operator_no",required = false)String operator_no, @RequestParam(value = "begin_time",required = false)String begin_time, @RequestParam(value = "end_time",required = false)String end_time, HttpServletRequest request){
         String page= request.getParameter("page");
         String rows= request.getParameter("rows");
         if(page==null){
@@ -56,8 +56,8 @@ public class RawMaterialTesting2FbeController {
             e.printStackTrace();
         }
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
-        List<HashMap<String,Object>> list=rawMaterialTesting2FbeDao.getNewAllByLike(pipe_no,operator_no,beginTime,endTime,start,Integer.parseInt(rows));
-        int count=rawMaterialTesting2FbeDao.getCountNewAllByLike(pipe_no,operator_no,beginTime,endTime);
+        List<HashMap<String,Object>> list=rawMaterialTestingLiquidEpoxyDao.getNewAllByLike(pipe_no,operator_no,beginTime,endTime,start,Integer.parseInt(rows));
+        int count=rawMaterialTestingLiquidEpoxyDao.getCountNewAllByLike(pipe_no,operator_no,beginTime,endTime);
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
         maps.put("rows",list);
@@ -66,9 +66,9 @@ public class RawMaterialTesting2FbeController {
     }
 
     //添加、修改
-    @RequestMapping("/saveRawMaterialTest2Fbe")
+    @RequestMapping("/saveRawMaterialTestEpoxy")
     @ResponseBody
-    public String saveRawMaterialTest2Fbe(RawMaterialTesting2Fbe rawMaterialTesting2Fbe, HttpServletRequest request, HttpServletResponse response){
+    public String saveRawMaterialTestEpoxy(RawMaterialTestingLiquidEpoxy rawMaterialTestingLiquidEpoxy, HttpServletRequest request, HttpServletResponse response){
         JSONObject json=new JSONObject();
         try{
             String odbptime= request.getParameter("odbptime");
@@ -76,17 +76,17 @@ public class RawMaterialTesting2FbeController {
             if(odbptime!=null&&odbptime!=""){
                 SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date new_odbptime = simFormat.parse(odbptime);
-                rawMaterialTesting2Fbe.setOperation_time(new_odbptime);
+                rawMaterialTestingLiquidEpoxy.setOperation_time(new_odbptime);
             }else{
-                rawMaterialTesting2Fbe.setOperation_time(new Date());
+                rawMaterialTestingLiquidEpoxy.setOperation_time(new Date());
             }
 
-            if(rawMaterialTesting2Fbe.getId()==0){
+            if(rawMaterialTestingLiquidEpoxy.getId()==0){
                 //添加
-                resTotal=rawMaterialTesting2FbeDao.addRawMaterialTest2Fbe(rawMaterialTesting2Fbe);
+                resTotal=rawMaterialTestingLiquidEpoxyDao.addRawMaterialTestEpoxy(rawMaterialTestingLiquidEpoxy);
             }else{
                 //修改！
-                resTotal=rawMaterialTesting2FbeDao.updateRawMaterialTest2Fbe(rawMaterialTesting2Fbe);
+                resTotal=rawMaterialTestingLiquidEpoxyDao.updateRawMaterialTestEpoxy(rawMaterialTestingLiquidEpoxy);
             }
             if(resTotal>0){
                 json.put("success",true);
@@ -109,16 +109,16 @@ public class RawMaterialTesting2FbeController {
         return null;
     }
     //删除
-    @RequestMapping("/delRawMaterialTest2Fbe")
-    public String delRawMaterialTest2Fbe(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
+    @RequestMapping("/delRawMaterialTestEpoxy")
+    public String delRawMaterialTestEpoxy(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
         String[]idArr=hlparam.split(",");
         int resTotal=0;
-        resTotal=rawMaterialTesting2FbeDao.delRawMaterialTest2Fbe(idArr);
+        resTotal=rawMaterialTestingLiquidEpoxyDao.delRawMaterialTestEpoxy(idArr);
         JSONObject json=new JSONObject();
         StringBuilder sbmessage = new StringBuilder();
         sbmessage.append("总共");
         sbmessage.append(Integer.toString(resTotal));
-        sbmessage.append("项2FBE原材料信息删除成功\n");
+        sbmessage.append("项Liquid Epoxy原材料信息删除成功\n");
         if(resTotal>0){
             //System.out.print("删除成功");
             json.put("success",true);

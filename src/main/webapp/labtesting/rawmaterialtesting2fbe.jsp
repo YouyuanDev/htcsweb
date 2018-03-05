@@ -33,12 +33,12 @@
                 $(document).on('click','.content-del',function () {
                      delUploadPicture($(this));
                 });
-                $('#hlLabtest2FbeDialog').dialog({
+                $('#hlRawMaterialtest2FbeDialog').dialog({
                     onClose:function () {
                         var type=$('#hlcancelBtn').attr('operationtype');
                         if(type=="add"){
                             var $imglist=$('#fileslist');
-                            var $dialog=$('#hlLabtest2FbeDialog');
+                            var $dialog=$('#hlRawMaterialtest2FbeDialog');
                             hlAlertSix("../UploadFile/delUploadPicture.action",$imglist,$dialog,grid);
                         }
                         clearFormLabel();
@@ -47,16 +47,16 @@
                $('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
                // hlLanguage("../i18n/");
         });
-        function addLabtest2FbePro(){
+        function addRawMaterialtest2FbePro(){
             $('#hlcancelBtn').attr('operationtype','add');
-            $('#hlLabtest2FbeDialog').dialog('open').dialog('setTitle','新增');
+            $('#hlRawMaterialtest2FbeDialog').dialog('open').dialog('setTitle','新增');
             clearFormLabel();
             clearMultiUpload(grid);
-            url="/LabTest2FbeOperation/saveLabTest2Fbe.action";
+            url="/RawMaterialTesting2FbeOperation/saveRawMaterialTest2Fbe.action";
             //$("input[name='alkaline_dwell_time']").siblings().css("background-color","#F9A6A6");
         }
-        function delLabtest2FbePro() {
-            var row = $('#Labtest2FbeDatagrids').datagrid('getSelections');
+        function delRawMaterialtest2FbePro() {
+            var row = $('#RawMaterialtest2FbeDatagrids').datagrid('getSelections');
             if(row.length>0){
                 var idArr=[];
                 for (var i=0;i<row.length;i++){
@@ -65,9 +65,9 @@
                 var idArrs=idArr.join(',');
                 $.messager.confirm('系统提示',"您确定要删除这<font color=red>"+idArr.length+ "</font>条数据吗？",function (r) {
                     if(r){
-                        $.post("/LabTest2FbeOperation/delLabTest2Fbe.action",{"hlparam":idArrs},function (data) {
+                        $.post("/RawMaterialTesting2FbeOperation/delRawMaterialTest2Fbe.action",{"hlparam":idArrs},function (data) {
                             if(data.success){
-                                $("#Labtest2FbeDatagrids").datagrid("reload");
+                                $("#RawMaterialtest2FbeDatagrids").datagrid("reload");
                             }
                             hlAlertFour(data.message);
                         },"json");
@@ -77,14 +77,14 @@
                 hlAlertOne();
             }
         }
-        function editLabtest2FbePro(){
+        function editRawMaterialtest2FbePro(){
             $('#hlcancelBtn').attr('operationtype','edit');
-            var row = $('#Labtest2FbeDatagrids').datagrid('getSelected');
+            var row = $('#RawMaterialtest2FbeDatagrids').datagrid('getSelected');
             if(row){
-                $('#hlLabtest2FbeDialog').dialog('open').dialog('setTitle','修改');
+                $('#hlRawMaterialtest2FbeDialog').dialog('open').dialog('setTitle','修改');
                 loadPipeBaiscInfo(row);
                 $('#odbpid').text(row.id);
-                $('#Labtest2FbeForm').form('load',row);
+                $('#RawMaterialtest2FbeForm').form('load',row);
                 $('#coating-date').datetimebox('setValue',getDate1(row.coating_date));
                 $('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
                 look1.setText(row.pipe_no);
@@ -97,64 +97,64 @@
                      createPictureModel(basePath,imgList);
                 }
                 //异步获取标准并匹配
-                $.ajax({
-                    url:'/LabTestingAcceptanceCriteriaOperation/getAcceptanceCriteria2FbeByContractNo.action',
-                    dataType:'json',
-                    data:{'contract_no':row.contract_no},
-                    success:function (data) {
-                        var $obj1=$("input[name='foaming_cross_sectional']");
-                        var $obj2=$("input[name='foaming_interfacial']");
-                        var $obj3=$("input[name='interfacial_contamination']");
-                        var $obj4=$("input[name='resistance_to_hot_water_98_24h']");
-                        var $obj5=$("input[name='resistance_to_hot_water_98_28d']");
-                        var $obj6=$("input[name='resistance_to_cd_65_24h']");
-                        var $obj7=$("input[name='resistance_to_cd_22_28d']");
-                        var $obj8=$("input[name='resistance_to_cd_65_28d']");
-                        $obj1.siblings().css("background-color","#FFFFFF");
-                        $obj2.siblings().css("background-color","#FFFFFF");
-                        $obj3.siblings().css("background-color","#FFFFFF");
-                        $obj4.siblings().css("background-color","#FFFFFF");
-                        $obj5.siblings().css("background-color","#FFFFFF");
-                        $obj6.siblings().css("background-color","#FFFFFF");
-                        $obj7.siblings().css("background-color","#FFFFFF");
-                        $obj8.siblings().css("background-color","#FFFFFF");
-                        if(data!=null){
-                            var res1=$obj1.val();
-                            var res2=$obj2.val();
-                            var res3=$obj3.val();
-                            var res4=$obj4.val();
-                            var res5=$obj5.val();
-                            var res6=$obj6.val();
-                            var res7=$obj7.val();
-                            var res8=$obj8.val();
-                            if(!((res1>data.foaming_cross_sectional_min)&&(res1<data.foaming_cross_sectional_max)))
-                                $obj1.siblings().css("background-color","#F9A6A6");
-                            if(!((res2>data.foaming_interfacial_min)&&(res2<data.foaming_interfacial_max)))
-                                $obj2.siblings().css("background-color","#F9A6A6");
-                            if(!((res3>data.interfacial_contamination_min)&&(res3<data.interfacial_contamination_max)))
-                                $obj3.siblings().css("background-color","#F9A6A6");
-                            if(!((res4>data.resistance_to_hot_water_98_24h_min)&&(res4<data.resistance_to_hot_water_98_24h_max)))
-                                $obj4.siblings().css("background-color","#F9A6A6");
-                            if(!((res5>data.resistance_to_hot_water_98_28d_min)&&(res5<data.resistance_to_hot_water_98_28d_max)))
-                                $obj5.siblings().css("background-color","#F9A6A6");
-                            if(!((res6>data.resistance_to_cd_65_24h_min)&&(res6<data.resistance_to_cd_65_24h_max)))
-                                $obj6.siblings().css("background-color","#F9A6A6");
-                            if(!((res7>data.resistance_to_cd_22_28d_min)&&(res7<data.resistance_to_cd_22_28d_max)))
-                                $obj7.siblings().css("background-color","#F9A6A6");
-                            if(!((res8>data.resistance_to_cd_65_28d_min)&&(res8<data.resistance_to_cd_65_28d_max)))
-                                $obj8.siblings().css("background-color","#F9A6A6");
-                        }
-                    },error:function () {
-
-                    }
-                });
-                url="/LabTest2FbeOperation/saveLabTest2Fbe.action?id="+row.id;
+                // $.ajax({
+                //     url:'/RawMaterialTestingAcceptanceCriteriaOperation/getAcceptanceCriteria2FbeByContractNo.action',
+                //     dataType:'json',
+                //     data:{'contract_no':row.contract_no},
+                //     success:function (data) {
+                //         var $obj1=$("input[name='foaming_cross_sectional']");
+                //         var $obj2=$("input[name='foaming_interfacial']");
+                //         var $obj3=$("input[name='interfacial_contamination']");
+                //         var $obj4=$("input[name='resistance_to_hot_water_98_24h']");
+                //         var $obj5=$("input[name='resistance_to_hot_water_98_28d']");
+                //         var $obj6=$("input[name='resistance_to_cd_65_24h']");
+                //         var $obj7=$("input[name='resistance_to_cd_22_28d']");
+                //         var $obj8=$("input[name='resistance_to_cd_65_28d']");
+                //         $obj1.siblings().css("background-color","#FFFFFF");
+                //         $obj2.siblings().css("background-color","#FFFFFF");
+                //         $obj3.siblings().css("background-color","#FFFFFF");
+                //         $obj4.siblings().css("background-color","#FFFFFF");
+                //         $obj5.siblings().css("background-color","#FFFFFF");
+                //         $obj6.siblings().css("background-color","#FFFFFF");
+                //         $obj7.siblings().css("background-color","#FFFFFF");
+                //         $obj8.siblings().css("background-color","#FFFFFF");
+                //         if(data!=null){
+                //             var res1=$obj1.val();
+                //             var res2=$obj2.val();
+                //             var res3=$obj3.val();
+                //             var res4=$obj4.val();
+                //             var res5=$obj5.val();
+                //             var res6=$obj6.val();
+                //             var res7=$obj7.val();
+                //             var res8=$obj8.val();
+                //             if(!((res1>data.foaming_cross_sectional_min)&&(res1<data.foaming_cross_sectional_max)))
+                //                 $obj1.siblings().css("background-color","#F9A6A6");
+                //             if(!((res2>data.foaming_interfacial_min)&&(res2<data.foaming_interfacial_max)))
+                //                 $obj2.siblings().css("background-color","#F9A6A6");
+                //             if(!((res3>data.interfacial_contamination_min)&&(res3<data.interfacial_contamination_max)))
+                //                 $obj3.siblings().css("background-color","#F9A6A6");
+                //             if(!((res4>data.resistance_to_hot_water_98_24h_min)&&(res4<data.resistance_to_hot_water_98_24h_max)))
+                //                 $obj4.siblings().css("background-color","#F9A6A6");
+                //             if(!((res5>data.resistance_to_hot_water_98_28d_min)&&(res5<data.resistance_to_hot_water_98_28d_max)))
+                //                 $obj5.siblings().css("background-color","#F9A6A6");
+                //             if(!((res6>data.resistance_to_cd_65_24h_min)&&(res6<data.resistance_to_cd_65_24h_max)))
+                //                 $obj6.siblings().css("background-color","#F9A6A6");
+                //             if(!((res7>data.resistance_to_cd_22_28d_min)&&(res7<data.resistance_to_cd_22_28d_max)))
+                //                 $obj7.siblings().css("background-color","#F9A6A6");
+                //             if(!((res8>data.resistance_to_cd_65_28d_min)&&(res8<data.resistance_to_cd_65_28d_max)))
+                //                 $obj8.siblings().css("background-color","#F9A6A6");
+                //         }
+                //     },error:function () {
+                //
+                //     }
+                // });
+                url="/RawMaterialTesting2FbeOperation/saveRawMaterialTest2Fbe.action?id="+row.id;
             }else{
                 hlAlertTwo();
             }
         }
-        function searchLabtest2FbePro() {
-            $('#Labtest2FbeDatagrids').datagrid('load',{
+        function searchRawMaterialtest2FbePro() {
+            $('#RawMaterialtest2FbeDatagrids').datagrid('load',{
                 'pipe_no': $('#pipeno').val(),
                 'operator_no': $('#operatorno').val(),
                 'begin_time': $('#begintime').val(),
@@ -162,32 +162,29 @@
                 'mill_no': $('#millno').val()
             });
         }
-        function Labtest2FbeFormSubmit() {
-            $('#Labtest2FbeForm').form('submit',{
+        function RawMaterialtest2FbeFormSubmit() {
+            $('#RawMaterialtest2FbeForm').form('submit',{
                 url:url,
                 onSubmit:function () {
                     //表单验证
-                    setParams($("input[name='foaming_cross_sectional']"));
-                    setParams($("input[name='foaming_interfacial']"));
-                    setParams($("input[name='interfacial_contamination']"));
-                    setParams($("input[name='resistance_to_hot_water_98_24h']"));
-                    setParams($("input[name='resistance_to_hot_water_98_28d']"));
-                    setParams($("input[name='resistance_to_cd_65_24h']"));
-                    setParams($("input[name='resistance_to_cd_22_28d']"));
-                    setParams($("input[name='resistance_to_cd_65_28d']"));
+                    // setParams($("input[name='foaming_cross_sectional']"));
+                    // setParams($("input[name='foaming_interfacial']"));
+                    // setParams($("input[name='interfacial_contamination']"));
+                    // setParams($("input[name='resistance_to_hot_water_98_24h']"));
+                    // setParams($("input[name='resistance_to_hot_water_98_28d']"));
+                    // setParams($("input[name='resistance_to_cd_65_24h']"));
+                    // setParams($("input[name='resistance_to_cd_22_28d']"));
+                    // setParams($("input[name='resistance_to_cd_65_28d']"));
                     if($("input[name='odbptime']").val()==""){
                         hlAlertFour("请输入操作时间");return false;
-                    }
-                    if($("input[name='coatingdate']").val()==""){
-                        hlAlertFour("请输入涂层时间");return false;
                     }
                 },
                 success: function(result){
                     clearFormLabel();
                     var result = eval('('+result+')');
-                    $('#hlLabtest2FbeDialog').dialog('close');
+                    $('#hlRawMaterialtest2FbeDialog').dialog('close');
                     if (result.success){
-                        $('#Labtest2FbeDatagrids').datagrid('reload');
+                        $('#RawMaterialtest2FbeDatagrids').datagrid('reload');
                     }
                     hlAlertFour(result.message);
                 },
@@ -199,8 +196,8 @@
             clearMultiUpload(grid);
 
         }
-        function Labtest2FbeCancelSubmit() {
-            $('#hlLabtest2FbeDialog').dialog('close');
+        function RawMaterialtest2FbeCancelSubmit() {
+            $('#hlRawMaterialtest2FbeDialog').dialog('close');
         }
         //图片上传失败操作
         function onUploadError() {
@@ -215,8 +212,8 @@
         }
 
         function  clearFormLabel(){
-            $('#Labtest2FbeForm').form('clear');
-            $('.hl-label').text('');
+            $('#RawMaterialtest2FbeForm').form('clear');
+            $('.hl-RawMaterialel').text('');
             $('#hl-gallery-con').empty();
 
         }
@@ -232,26 +229,26 @@
 <fieldset class="b3" style="padding:10px;margin:10px;">
     <legend> <h3><b style="color: orange" >|&nbsp;</b><span class="i18n1" name="datadisplay">数据展示</span></h3></legend>
     <div  style="margin-top:5px;">
-         <table class="easyui-datagrid" id="Labtest2FbeDatagrids" url="/LabTest2FbeOperation/getLabTest2FbeByLike.action" striped="true" loadMsg="正在加载中。。。" textField="text" pageSize="20" fitColumns="true" pagination="true" toolbar="#hlLabtest2FbeProTb">
+         <table class="easyui-datagrid" id="RawMaterialtest2FbeDatagrids" url="/RawMaterialTesting2FbeOperation/getRawMaterialTest2FbeByLike.action" striped="true" loadMsg="正在加载中。。。" textField="text" pageSize="20" fitColumns="true" pagination="true" toolbar="#hlRawMaterialtest2FbeProTb">
              <thead>
                <tr>
                        <th data-options="field:'ck',checkbox:true"></th>
                        <th field="id" align="center" width="100" class="i18n1" name="id">流水号</th>
-                       <th field="mill_no" align="center" width="150" class="i18n1" name="millno">分厂</th>
+                       <%--<th field="mill_no" align="center" width="150" class="i18n1" name="millno">分厂</th>--%>
                        <th field="project_name" align="center" width="120" class="i18n1" name="projectname">项目名称</th>
-                       <th field="contract_no" align="center" width="120" class="i18n1" name="contractno">合同编号</th>
-                       <th field="pipe_no" align="center" width="120" class="i18n1" name="pipeno">钢管编号</th>
-                       <th field="grade" align="center" width="110" class="i18n1" name="grade">钢种</th>
-                       <th field="status_name" align="center" width="110" class="i18n1" name="statusname">状态</th>
-                       <th field="od" align="center" width="50" class="i18n1" name="od">外径</th>
-                       <th field="wt" align="center" width="50" class="i18n1" name="wt">壁厚</th>
-                       <th field="p_length" align="center" width="50" class="i18n1" name="p_length">长度</th>
-                       <th field="weight" align="center" width="50" class="i18n1" name="weight">重量</th>
-                       <th field="heat_no" align="center" hidden="true" width="50" class="i18n1" name="heat_no">炉号</th>
+                       <%--<th field="contract_no" align="center" width="120" class="i18n1" name="contractno">合同编号</th>--%>
+                       <%--<th field="pipe_no" align="center" width="120" class="i18n1" name="pipeno">钢管编号</th>--%>
+                       <%--<th field="grade" align="center" width="110" class="i18n1" name="grade">钢种</th>--%>
+                       <%--<th field="status_name" align="center" width="110" class="i18n1" name="statusname">状态</th>--%>
+                       <%--<th field="od" align="center" width="50" class="i18n1" name="od">外径</th>--%>
+                       <%--<th field="wt" align="center" width="50" class="i18n1" name="wt">壁厚</th>--%>
+                       <%--<th field="p_length" align="center" width="50" class="i18n1" name="p_length">长度</th>--%>
+                       <%--<th field="weight" align="center" width="50" class="i18n1" name="weight">重量</th>--%>
+                       <%--<th field="heat_no" align="center" hidden="true" width="50" class="i18n1" name="heat_no">炉号</th>--%>
                        <th field="operator_no" align="center" width="100" class="i18n1" name="operatorno">操作工编号</th>
 
                        <th field="sample_no" align="center" width="120" class="i18n1" name="sampleno">试样号</th>
-                       <th field="coating_date" align="center" width="120" class="i18n1" name="coatingdate" data-options="formatter:formatterdate">涂层时间</th>
+                       <%--<th field="coating_date" align="center" width="120" class="i18n1" name="coatingdate" data-options="formatter:formatterdate">涂层时间</th>--%>
                        <th field="dsc" align="center" width="100" hidden="true" class="i18n1" name="dsc">热特性实验</th>
                        <th field="foaming_cross_sectional" align="center" width="100" hidden="true" class="i18n1" name="foamingcrosssectional">孔隙率实验截面</th>
                        <th field="foaming_interfacial" width="100" align="center" hidden="true" class="i18n1" name="foaminginterfacial">孔隙率实验表面</th>
@@ -276,7 +273,7 @@
 </fieldset>
 
 <!--工具栏-->
-<div id="hlLabtest2FbeProTb" style="padding:10px;">
+<div id="hlRawMaterialtest2FbeProTb" style="padding:10px;">
     <span class="i18n1" name="pipeno">钢管编号</span>:
     <input id="pipeno" name="pipeno" style="line-height:22px;border:1px solid #ccc">
     <span class="i18n1" name="operatorno">操作工编号</span>:
@@ -285,17 +282,17 @@
     <input id="begintime" name="begintime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
     <span class="i18n1" name="endtime">结束时间</span>:
     <input id="endtime" name="endtime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
-    <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchLabtest2FbePro()">Search</a>
+    <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchRawMaterialtest2FbePro()">Search</a>
     <div style="float:right">
-     <a href="#" id="addObpLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addLabtest2FbePro()">添加</a>
-     <a href="#" id="editObpLinkBtn" class="easyui-linkbutton i18n1" name="edit" data-options="iconCls:'icon-edit',plain:true" onclick="editLabtest2FbePro()">修改</a>
-     <a href="#" id="deltObpLinkBtn" class="easyui-linkbutton i18n1" name="delete" data-options="iconCls:'icon-remove',plain:true" onclick="delLabtest2FbePro()">删除</a>
+     <a href="#" id="addObpLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addRawMaterialtest2FbePro()">添加</a>
+     <a href="#" id="editObpLinkBtn" class="easyui-linkbutton i18n1" name="edit" data-options="iconCls:'icon-edit',plain:true" onclick="editRawMaterialtest2FbePro()">修改</a>
+     <a href="#" id="deltObpLinkBtn" class="easyui-linkbutton i18n1" name="delete" data-options="iconCls:'icon-remove',plain:true" onclick="delRawMaterialtest2FbePro()">删除</a>
     </div>
 </div>
 
 <!--添加、修改框-->
-<div id="hlLabtest2FbeDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;height:auto;">
-   <form id="Labtest2FbeForm" method="post">
+<div id="hlRawMaterialtest2FbeDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;height:auto;">
+   <form id="RawMaterialtest2FbeForm" method="post">
        <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
            <legend class="i18n1" name="pipebasicinfo">钢管信息</legend>
            <table class="ht-table" width="100%" border="0">
@@ -454,8 +451,8 @@
 
 </div>
 <div id="dlg-buttons" align="center" style="width:900px;">
-    <a href="#" class="easyui-linkbutton" iconCls="icon-save" onclick="Labtest2FbeFormSubmit()">Save</a>
-    <a href="#" class="easyui-linkbutton" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="Labtest2FbeCancelSubmit()">Cancel</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-save" onclick="RawMaterialtest2FbeFormSubmit()">Save</a>
+    <a href="#" class="easyui-linkbutton" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="RawMaterialtest2FbeCancelSubmit()">Cancel</a>
 </div>
 <div id="gridPanel1" class="mini-panel" title="header" iconCls="icon-add" style="width:450px;height:250px;"
      showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0"

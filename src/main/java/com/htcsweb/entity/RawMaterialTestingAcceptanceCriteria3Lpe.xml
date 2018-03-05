@@ -40,7 +40,7 @@
         limit #{skip},#{take}
     </select>
 
-    <select id="getAllRawMaterialTestingAcceptanceCriteria3Lpe" resultType="com.htcsweb.entity.RawMaterialTestingAcceptanceCriteria3Lpe">
+    <select id="getAllRawMaterialTestingAcceptanceCriteria3Lpe"  resultType="com.htcsweb.entity.RawMaterialTestingAcceptanceCriteria3Lpe">
         SELECT  * from raw_material_testing_acceptance_criteria_3lpe
         ORDER BY id DESC
     </select>
