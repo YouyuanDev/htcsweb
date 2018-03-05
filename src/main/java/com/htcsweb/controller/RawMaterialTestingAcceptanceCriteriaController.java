@@ -19,7 +19,7 @@ import java.util.*;
 
 
 @Controller
-@RequestMapping("/RawMaterialTestingACOperation")
+@RequestMapping("/rawMaterialACOperation")
 public class RawMaterialTestingAcceptanceCriteriaController {
 
     @Autowired
@@ -29,6 +29,7 @@ public class RawMaterialTestingAcceptanceCriteriaController {
     @RequestMapping("/getAllRawMaterialTestingAcceptanceCriteria2fbe")
     @ResponseBody
     public String getAllRawMaterialTestingAcceptanceCriteria2fbe(HttpServletRequest request){
+
         List<RawMaterialTestingAcceptanceCriteria2Fbe> list=rawMaterialTestingAcceptanceCriteria2FbeDao.getAllRawMaterialTestingAcceptanceCriteria2Fbe();
         List<ComboxItem> colist=new ArrayList<ComboxItem>();
         for(int i=0;i<list.size();i++){

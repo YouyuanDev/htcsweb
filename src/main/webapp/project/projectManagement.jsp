@@ -546,7 +546,7 @@
                     <td   width="33%">
 
                         <input class="easyui-combobox" type="text" name="raw_material_acceptance_criteria_2fbe_no"  data-options=
-                                "url:'/RawMaterialTestingACOperation/getAllRawMaterialTestingAcceptanceCriteria2fbe.action',
+                                "url:'/rawMaterialACOperation/getAllRawMaterialTestingAcceptanceCriteria2fbe.action',
 					        method:'get',
 					        valueField:'id',
 					        editable:false,

@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.htcsweb.dao.RawMaterialTestingAcceptanceCriteria2Fbe">
+<mapper namespace="com.htcsweb.dao.RawMaterialTestingAcceptanceCriteria2FbeDao">
 
     <insert id="addRawMaterialTestingAcceptanceCriteria2Fbe" parameterType="com.htcsweb.entity.RawMaterialTestingAcceptanceCriteria2Fbe">
         INSERT INTO raw_material_testing_acceptance_criteria_2fbe(raw_material_testing_acceptance_criteria_no,density_max,density_min,particle_size_32um_max,particle_size_32um_min,particle_size_150um_max,particle_size_150um_min,dsc_tgi_max,dsc_tgi_min,dsc_tgf_max,dsc_tgf_min,dsc_delta_h_max,dsc_delta_h_min,gel_time_lt_20s_max,gel_time_lt_20s_min,gel_time_gt_20s_max,gel_time_gt_20s_min,volatile_max,volatile_min,foaming_cross_sectional_max,foaming_cross_sectional_min,foaming_interfacial_max,foaming_interfacial_min,hot_water_max,hot_water_min,cd_65_24h_max,cd_65_24h_min,last_update_time)

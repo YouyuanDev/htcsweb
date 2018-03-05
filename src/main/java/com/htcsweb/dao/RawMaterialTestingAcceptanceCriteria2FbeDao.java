@@ -8,7 +8,7 @@ import com.htcsweb.entity.RawMaterialTestingAcceptanceCriteria2Fbe;
 import org.springframework.stereotype.Repository;
 
 
-@Repository
+
 public interface RawMaterialTestingAcceptanceCriteria2FbeDao {
 
     public int addRawMaterialTestingAcceptanceCriteria2Fbe(RawMaterialTestingAcceptanceCriteria2Fbe rawMaterialTestingAcceptanceCriteria2Fbe);
