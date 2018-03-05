@@ -63,6 +63,7 @@ public class RawMaterialTestingAcceptanceCriteriaController {
             colist.add(citem);
         }
         String map= JSONObject.toJSONString(colist);
+        System.out.println("3map="+map);
         return map;
     }
 
