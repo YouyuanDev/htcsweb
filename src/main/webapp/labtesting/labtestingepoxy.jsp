@@ -288,9 +288,9 @@
                                popup="#gridPanel2" grid="#datagrid2" multiSelect="false"
                         />
                     </td>
-                    <td class="i18n1" name="coatingdate" width="20%">涂层时间</td>
-                    <td colspan="1" width="30%">
-                        <input class="easyui-datetimebox" id="coating-date" type="text" name="coatingdate" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                    <td class="i18n1" name="operationtime">操作时间</td>
+                    <td>
+                        <input class="easyui-datetimebox" id="operation-time" type="text" name="odbptime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
 
                     </td>
 
@@ -304,33 +304,68 @@
                         <input class="easyui-textbox"   type="text" name="sample_no" value=""/>
                     </td>
                     <td></td>
-                    <td class="i18n1" name="operationtime">操作时间</td>
-                    <td>
-                        <input class="easyui-datetimebox" id="operation-time" type="text" name="odbptime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+
+                    <td class="i18n1" name="coatingdate" width="20%">涂层时间</td>
+                    <td colspan="1" width="30%">
+                        <input class="easyui-datetimebox" id="coating-date" type="text" name="coatingdate" value="" data-options="formatter:myformatter2,parser:myparser2"/>
 
                     </td>
                     <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="porosity">针孔实验</td>
-                    <td><input class="easyui-numberbox"  type="text" name="porosity" value=""/></td>
+                    <td>
+                        <select id="porosity" class="easyui-combobox" data-options="editable:false" name="porosity" style="width:200px;">
+                            <option value="OK">合格（无针孔）</option>
+                            <option value="Not OK">不合格（有针孔）</option>
+                            <option value="Pending">待定</option>
+                        </select>
+
+                    </td>
                     <td></td>
                     <td class="i18n1" name="bend">内涂弯曲实验</td>
-                    <td><input class="easyui-textbox"   type="text" name="bend" value=""/></td>
+                    <td>
+                        <select id="bend" class="easyui-combobox" data-options="editable:false" name="bend" style="width:200px;">
+                            <option value="OK">合格（无裂纹）</option>
+                            <option value="Not OK">不合格（有裂纹）</option>
+                            <option value="Pending">待定</option>
+                        </select>
+
+                    </td>
                     <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="adhesion">附着力实验</td>
-                    <td><input class="easyui-textbox"   type="text" name="adhesion" value=""/></td>
+                    <td>
+                        <select id="adhesion" class="easyui-combobox" data-options="editable:false" name="adhesion" style="width:200px;">
+                            <option value="OK">合格</option>
+                            <option value="Not OK">不合格</option>
+                            <option value="Pending">待定</option>
+                        </select>
+                    </td>
                     <td></td>
                     <td class="i18n1" name="curing">固化度实验</td>
-                    <td><input class="easyui-textbox"  type="text" name="curing" value=""/></td>
+                    <td>
+                        <select id="curing" class="easyui-combobox" data-options="editable:false" name="curing" style="width:200px;">
+                            <option value="OK">合格</option>
+                            <option value="Not OK">不合格</option>
+                            <option value="Pending">待定</option>
+                        </select>
+
+                    </td>
                     <td></td>
                 </tr>
 
                 <tr>
                     <td width="16%" class="i18n1" name="waterimmersion">水浸泡实验</td>
-                    <td><input class="easyui-textbox"  type="text" name="water_immersion" value=""/></td>
+                    <td>
+                        <select id="water_immersion" class="easyui-combobox" data-options="editable:false" name="water_immersion" style="width:200px;">
+                            <option value="OK">合格</option>
+                            <option value="Not OK">不合格</option>
+                            <option value="Pending">待定</option>
+                        </select>
+
+                    </td>
                     <td></td>
 
                 </tr>
