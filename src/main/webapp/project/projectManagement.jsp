@@ -150,7 +150,9 @@
                     'od_coating_acceptance_criteria_no':row.od_coating_acceptance_criteria_no,
                     'id_coating_acceptance_criteria_no':row.id_coating_acceptance_criteria_no,
                     'lab_testing_acceptance_criteria_2fbe_no':row.lab_testing_acceptance_criteria_2fbe_no,
-                    'lab_testing_acceptance_criteria_3lpe_no':row.lab_testing_acceptance_criteria_3lpe_no
+                    'lab_testing_acceptance_criteria_3lpe_no':row.lab_testing_acceptance_criteria_3lpe_no,
+                    'raw_material_acceptance_criteria_2fbe_no':row.raw_material_acceptance_criteria_2fbe_no,
+                    'raw_material_acceptance_criteria_3lpe_no':row.raw_material_acceptance_criteria_3lpe_no
                 });
 
                 $("#project_time").datetimebox('setValue',getDate1(row.project_time));
@@ -404,6 +406,8 @@
                 <th field="id_coating_acceptance_criteria_no" align="center" width="100" class="i18n1" name="idcoatingacceptancecriteriano">ID acceptance_criteria</th>
                 <th field="lab_testing_acceptance_criteria_2fbe_no" align="center" width="100" class="i18n1" name="labtestingacceptancecriteria2fbeno">Lab testing acceptance criteria 2fbe</th>
                 <th field="lab_testing_acceptance_criteria_3lpe_no" align="center" width="100" class="i18n1" name="labtestingacceptancecriteria3lpeno">Lab testing acceptance criteria 3lpe</th>
+                <th field="raw_material_acceptance_criteria_2fbe_no" align="center" width="100" class="i18n1" name="rawmaterialacceptancecriteria2fbeno">Raw Material Testing acceptance criteria 2fbe</th>
+                <th field="raw_material_acceptance_criteria_3lpe_no" align="center" width="100" class="i18n1" name="rawmaterialacceptancecriteria3lpeno">>Raw Material Testing acceptance criteria 3lpe</th>
 
             </tr>
             </thead>
@@ -526,6 +530,35 @@
                     <td   width="33%">
 
                         <input class="easyui-combobox" type="text" name="lab_testing_acceptance_criteria_3lpe_no"   data-options=
+                                "url:'/LabTestingAcceptanceCriteriaOperation/getAllLabTestingAcceptanceCriteria3lpe.action',
+					        method:'get',
+					        editable:false,
+					        valueField:'id',
+					        textField:'text',
+					        panelHeight:'auto'"/>
+
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td class="i18n1" name="rawmaterialtestingacceptancecriteria2fbeno" width="16%">Raw Material Testing Acceptance Criteria No.(2FBE)</td>
+                    <td   width="33%">
+
+                        <input class="easyui-combobox" type="text" name="raw_material_acceptance_criteria_2fbe_no"  data-options=
+                                "url:'/RawMaterialTestingACOperation/getAllRawMaterialTestingAcceptanceCriteria2fbe.action',
+					        method:'get',
+					        valueField:'id',
+					        editable:false,
+					        textField:'text',
+					        panelHeight:'auto'"/>
+
+
+                    </td>
+                    <td class="i18n1" name="rawmaterialtestingacceptancecriteria3lpeno" width="16%">Raw Material Testing Acceptance Criteria No.(3LPE)</td>
+                    <td   width="33%">
+
+                        <input class="easyui-combobox" type="text" name="raw_material_acceptance_criteria_3lpe_no"   data-options=
                                 "url:'/LabTestingAcceptanceCriteriaOperation/getAllLabTestingAcceptanceCriteria3lpe.action',
 					        method:'get',
 					        editable:false,
