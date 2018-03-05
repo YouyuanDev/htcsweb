@@ -559,7 +559,7 @@
                     <td   width="33%">
 
                         <input class="easyui-combobox" type="text" name="raw_material_acceptance_criteria_3lpe_no"   data-options=
-                                "url:'/LabTestingAcceptanceCriteriaOperation/getAllLabTestingAcceptanceCriteria3lpe.action',
+                                "url:'/rawMaterialACOperation/getAllRawMaterialTestingAcceptanceCriteria3lpe.action',
 					        method:'get',
 					        editable:false,
 					        valueField:'id',

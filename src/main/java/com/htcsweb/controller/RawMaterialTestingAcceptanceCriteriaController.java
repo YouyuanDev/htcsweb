@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.entity.RawMaterialTestingAcceptanceCriteria2Fbe;
 import com.htcsweb.dao.RawMaterialTestingAcceptanceCriteria2FbeDao;
+import com.htcsweb.entity.RawMaterialTestingAcceptanceCriteria3Lpe;
+import com.htcsweb.dao.RawMaterialTestingAcceptanceCriteria3LpeDao;
 import com.htcsweb.util.ComboxItem;
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class RawMaterialTestingAcceptanceCriteriaController {
 
     @Autowired
     RawMaterialTestingAcceptanceCriteria2FbeDao rawMaterialTestingAcceptanceCriteria2FbeDao;
+
+    @Autowired
+    RawMaterialTestingAcceptanceCriteria3LpeDao rawMaterialTestingAcceptanceCriteria3LpeDao;
 
 
     @RequestMapping("/getAllRawMaterialTestingAcceptanceCriteria2fbe")
@@ -48,18 +53,17 @@ public class RawMaterialTestingAcceptanceCriteriaController {
     @RequestMapping("/getAllRawMaterialTestingAcceptanceCriteria3lpe")
     @ResponseBody
     public String getAllRawMaterialTestingAcceptanceCriteria3lpe(HttpServletRequest request){
-//        List<RawMaterialTestingAcceptanceCriteria3lpe> list=rawMaterialTestingAcceptanceCriteria3lpeDao.getAllLabTestingAcceptanceCriteria3Lpe();
-//        List<ComboxItem> colist=new ArrayList<ComboxItem>();
-//        for(int i=0;i<list.size();i++){
-//            ComboxItem citem= new ComboxItem();
-//            RawMaterialTestingAcceptanceCriteria3lpe ps=((RawMaterialTestingAcceptanceCriteria3lpe)list.get(i));
-//            citem.id=ps.getRaw_material_testing_acceptance_criteria_no();
-//            citem.text=ps.getRaw_material_testing_acceptance_criteria_no();
-//            colist.add(citem);
-//        }
-//        String map= JSONObject.toJSONString(colist);
-//        return map;
-        return null;
+        List<RawMaterialTestingAcceptanceCriteria3Lpe> list=rawMaterialTestingAcceptanceCriteria3LpeDao.getAllRawMaterialTestingAcceptanceCriteria3Lpe();
+        List<ComboxItem> colist=new ArrayList<ComboxItem>();
+        for(int i=0;i<list.size();i++){
+            ComboxItem citem= new ComboxItem();
+            RawMaterialTestingAcceptanceCriteria3Lpe ps=((RawMaterialTestingAcceptanceCriteria3Lpe)list.get(i));
+            citem.id=ps.getRaw_material_testing_acceptance_criteria_no();
+            citem.text=ps.getRaw_material_testing_acceptance_criteria_no();
+            colist.add(citem);
+        }
+        String map= JSONObject.toJSONString(colist);
+        return map;
     }
 
 }
