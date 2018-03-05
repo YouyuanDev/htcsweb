@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>外喷砂信息</title>
+    <title>涂层（3LPE）实验信息</title>
     <link rel="stylesheet" type="text/css" href="../easyui/themes/bootstrap/easyui.css">
     <link rel="stylesheet" type="text/css" href="../easyui/themes/icon.css">
     <link href="../miniui/multiupload/multiupload.css" rel="stylesheet" type="text/css" />
@@ -389,15 +389,16 @@
                 </tr>
                 <tr>
                     <td class="i18n1" name="resistancetocd2028d">阴极剥离 20度 28天</td>
-                    <td><input class="easyui-numberbox hl-errorcolor" data-options="min:0,precision:0" type="text" name="resistance_to_cd_20_28d" value=""/></td>
+                    <td><input class="easyui-numberbox hl-errorcolor" data-options="min:0,precision:2" type="text" name="resistance_to_cd_20_28d" value=""/></td>
                     <td></td>
                     <td class="i18n1" name="resistancetocdmax28d">阴极剥离 最高温度 28天</td>
-                    <td><input class="easyui-numberbox"  data-options="min:0,precision:0" type="text" name="resistance_to_cd_max_28d" value=""/></td>
+                    <td><input class="easyui-numberbox"  data-options="min:0,precision:2" type="text" name="resistance_to_cd_max_28d" value=""/></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="resistancetocd6524h">阴极剥离 65度 24小时</td>
-                    <td><input class="easyui-textbox"   type="text" name="resistance_to_cd_65_24h" value=""/></td>
+                    <td>
+                        <input class="easyui-numberbox"  data-options="min:0,precision:2" type="text" name="resistance_to_cd_65_24h" value=""/></td>
                     <td></td>
                     <td class="i18n1" name="thermaldegradation">热降解</td>
                     <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="thermal_degradation" value=""/></td>
@@ -406,18 +407,22 @@
 
                 <tr>
                     <td width="16%" class="i18n1" name="impactresistance23">冲击 23度</td>
-                    <td><input class="easyui-textbox"  type="text" name="impact_resistance_23" value=""/></td>
+                    <td>
+                        <input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="impact_resistance_23" value=""/>
+                    </td>
                     <td></td>
                     <td width="16%" class="i18n1" name="impactresistancem40">冲击 -40度</td>
-                    <td><input class="easyui-textbox"  type="text" name="impact_resistance_m40" value=""/></td>
+                    <td>
+                        <input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="impact_resistance_m40" value=""/>
+                    </td>
                     <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="indentationhardness23">压痕硬度 23度</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="indentation_hardness_23" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="indentation_hardness_23" value=""/></td>
                     <td></td>
                     <td class="i18n1" name="indentationhardness70">压痕硬度 70度</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="indentation_hardness_70" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="indentation_hardness_70" value=""/></td>
                     <td></td>
                 </tr>
                 <tr>
