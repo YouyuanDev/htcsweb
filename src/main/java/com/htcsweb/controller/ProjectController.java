@@ -189,7 +189,20 @@ public class ProjectController {
         String map= JSONObject.toJSONString(list);
         return map;
     }
-
+    //根据项目编号和项目名字异步查询钢管信息
+    @RequestMapping(value ="/getProjectInfoByNoOrName")
+    public String getProjectInfoByNoOrName(HttpServletResponse response,HttpServletRequest request){
+        String project_no=request.getParameter("project_no");
+        String project_name=request.getParameter("project_name");
+        List<HashMap<String,Object>>list=projectInfoDao.getProjectInfoByNoOrName(project_no,project_name);
+        String mmp= JSON.toJSONString(list);
+        try{
+            ResponseUtil.write(response, mmp);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 
 }

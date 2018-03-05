@@ -71,18 +71,16 @@ public class AcceptanceCriteriaController {
         JSONObject json=new JSONObject();
         try{
             int resTotal=0;
-            System.out.println("执行到此。。。。");
             odCoatingAcceptanceCriteria.setLast_update_time(new Date());
-            System.out.println(odCoatingAcceptanceCriteria.getApplication_temp_min());
             if(odCoatingAcceptanceCriteria.getId()==0){
                 //添加
-                System.out.println("tinajai");
                 resTotal=odcoatingacceptancecriteriaDao.addOdCoatingCriterProcess(odCoatingAcceptanceCriteria);
             }else{
                 //修改！
                 System.out.println("执行修改到此。。。。");
-                System.out.println(odCoatingAcceptanceCriteria.getCoating_acceptance_criteria_no());
-                System.out.println(odCoatingAcceptanceCriteria.getApplication_temp_max());
+                System.out.println(odCoatingAcceptanceCriteria.getId());
+                System.out.println(odCoatingAcceptanceCriteria.getBlast_finish_sa25_max());
+                System.out.println(odCoatingAcceptanceCriteria.getCutback_min());
                 resTotal=odcoatingacceptancecriteriaDao.updateOdCoatingCriterProcess(odCoatingAcceptanceCriteria);
             }
             if(resTotal>0){

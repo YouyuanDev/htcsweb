@@ -22,6 +22,6 @@ public interface ProjectInfoDao {
     public List<ProjectInfo> getProjectInfoByID(@Param("id")String id);
     public String getProjectNameByNo(@Param("project_no")String project_no);
     public List<ProjectInfo> getProjectInfoByContract(@Param("contract_no")String contract_no);
-
+    public List<HashMap<String,Object>>getProjectInfoByNoOrName(@Param("project_no")String project_no,@Param("project_name")String project_name);
 
 }

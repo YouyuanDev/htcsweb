@@ -5,17 +5,17 @@
 
 <mapper namespace="com.htcsweb.dao.RawMaterialTesting3LpeDao">
 
-    <insert id="addRawMaterialTest2Fbe" parameterType="com.htcsweb.entity.RawMaterialTesting3Lpe">
+    <insert id="addRawMaterialTest3Lpe" parameterType="com.htcsweb.entity.RawMaterialTesting3Lpe">
       INSERT INTO raw_material_testing_3lpe(operator_no,project_no,operation_time,sample_no,epoxy_raw_material,epoxy_batch_no,adhesion_raw_material,adhesion_batch_no,polyethylene_raw_material,polyethylene_batch_no,epoxy_cure_time,epoxy_gel_time,epoxy_moisture_content,epoxy_particle_size,epoxy_density,epoxy_thermal_characteristics,adhesion_flow_rate,polyethylene_flow_rate,result,upload_files,remark) VALUES (#{operator_no},#{project_no},#{operation_time},#{sample_no},#{epoxy_raw_material},#{epoxy_batch_no},#{adhesion_raw_material},#{adhesion_batch_no},#{polyethylene_raw_material},#{polyethylene_batch_no},#{epoxy_cure_time},#{epoxy_gel_time},#{epoxy_moisture_content},#{epoxy_particle_size},#{epoxy_density},#{epoxy_thermal_characteristics},#{adhesion_flow_rate},#{polyethylene_flow_rate},#{result},#{upload_files},#{remark})
     </insert>
-    <delete id="delRawMaterialTest2Fbe">
+    <delete id="delRawMaterialTest3Lpe">
         delete from raw_material_testing_3lpe WHERE
         <foreach collection="array" item="item" open="id in (" separator="," close=")">
            #{item}
         </foreach>
     </delete>
 
-    <update id="updateRawMaterialTest2Fbe" parameterType="com.htcsweb.entity.RawMaterialTesting3Lpe">
+    <update id="updateRawMaterialTest3Lpe" parameterType="com.htcsweb.entity.RawMaterialTesting3Lpe">
         UPDATE raw_material_testing_3lpe set operator_no=#{operator_no},project_no=#{project_no},operation_time=#{operation_time},sample_no=#{sample_no},epoxy_raw_material=#{epoxy_raw_material},epoxy_batch_no=#{epoxy_batch_no},adhesion_raw_material=#{adhesion_raw_material},adhesion_batch_no=#{adhesion_batch_no},polyethylene_raw_material=#{polyethylene_raw_material},polyethylene_batch_no=#{polyethylene_batch_no},epoxy_cure_time=#{epoxy_cure_time},epoxy_gel_time=#{epoxy_gel_time},epoxy_moisture_content=#{epoxy_moisture_content},epoxy_particle_size=#{epoxy_particle_size},epoxy_density=#{epoxy_density},epoxy_thermal_characteristics=#{epoxy_thermal_characteristics},adhesion_flow_rate=#{adhesion_flow_rate},polyethylene_flow_rate=#{polyethylene_flow_rate},result=#{result},upload_files=#{upload_files},remark=#{remark} where id=#{id}
     </update>
 

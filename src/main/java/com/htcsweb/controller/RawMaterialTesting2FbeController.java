@@ -33,7 +33,7 @@ public class RawMaterialTesting2FbeController {
     //查询
     @RequestMapping(value = "/getRawMaterialTest2FbeByLike")
     @ResponseBody
-    public String getRawMaterialTest2FbeByLike(@RequestParam(value = "pipe_no",required = false)String pipe_no, @RequestParam(value = "operator_no",required = false)String operator_no, @RequestParam(value = "begin_time",required = false)String begin_time, @RequestParam(value = "end_time",required = false)String end_time, HttpServletRequest request){
+    public String getRawMaterialTest2FbeByLike(@RequestParam(value = "project_no",required = false)String project_no, @RequestParam(value = "operator_no",required = false)String operator_no, @RequestParam(value = "begin_time",required = false)String begin_time, @RequestParam(value = "end_time",required = false)String end_time, HttpServletRequest request){
         String page= request.getParameter("page");
         String rows= request.getParameter("rows");
         if(page==null){
@@ -56,8 +56,8 @@ public class RawMaterialTesting2FbeController {
             e.printStackTrace();
         }
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
-        List<HashMap<String,Object>> list=rawMaterialTesting2FbeDao.getNewAllByLike(pipe_no,operator_no,beginTime,endTime,start,Integer.parseInt(rows));
-        int count=rawMaterialTesting2FbeDao.getCountNewAllByLike(pipe_no,operator_no,beginTime,endTime);
+        List<HashMap<String,Object>> list=rawMaterialTesting2FbeDao.getNewAllByLike(project_no,operator_no,beginTime,endTime,start,Integer.parseInt(rows));
+        int count=rawMaterialTesting2FbeDao.getCountNewAllByLike(project_no,operator_no,beginTime,endTime);
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
         maps.put("rows",list);

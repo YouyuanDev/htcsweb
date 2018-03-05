@@ -128,4 +128,16 @@
         SELECT * from project_info WHERE id=#{id}
     </select>
 
+    <select id="getProjectInfoByNoOrName" resultType="map">
+            Select * from project_info p
+            <where>
+                <if test="project_no!=null and project_no!=''">
+                 AND project_no LIKE CONCAT('%',#{project_no},'%')
+                </if>
+                <if test="project_name!=null and project_name!=''">
+                    AND project_name LIKE CONCAT('%',#{project_name},'%')
+                </if>
+            </where>
+    </select>
+
 </mapper>

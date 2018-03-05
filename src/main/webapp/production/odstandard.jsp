@@ -66,9 +66,11 @@
             }
         }
         function editOdAcceptance(){
+
             $('#hlcancelBtn').attr('operationtype','edit');
             var row = $('#odAcceptanceDatagrids').datagrid('getSelected');
             if(row){
+                clearFormLabel();
                 $('#hlOdAcceptanceDialog').dialog('open').dialog('setTitle','修改');
                 $('#odAcceptanceForm').form('load',row);
                 $("#odacceptanceId").text(row.id);
@@ -368,7 +370,7 @@
                </tr>
                <tr>
                    <td class="i18n1" name="cutbackmax">预留段最大值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="cutback_min" value=""/></td>
+                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="cutback_max" value=""/></td>
                    <td class="i18n1" name="cutbackmin">预留段最小值</td>
                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="cutback_min" value=""/></td>
                </tr>

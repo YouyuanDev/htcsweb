@@ -85,10 +85,10 @@
                 loadPipeBaiscInfo(row);
                 $('#odbpid').text(row.id);
                 $('#RawMaterialtest2FbeForm').form('load',row);
-                $('#coating-date').datetimebox('setValue',getDate1(row.coating_date));
+                // $('#coating-date').datetimebox('setValue',getDate1(row.coating_date));
                 $('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
-                look1.setText(row.pipe_no);
-                look1.setValue(row.pipe_no);
+                look1.setText(row.project_no);
+                look1.setValue(row.project_no);
                 look2.setText(row.operator_no);
                 look2.setValue(row.operator_no);
                 var odpictures=row.upload_files;
@@ -155,11 +155,10 @@
         }
         function searchRawMaterialtest2FbePro() {
             $('#RawMaterialtest2FbeDatagrids').datagrid('load',{
-                'pipe_no': $('#pipeno').val(),
+                'project_no': $('#projectno').val(),
                 'operator_no': $('#operatorno').val(),
                 'begin_time': $('#begintime').val(),
-                'end_time': $('#endtime').val(),
-                'mill_no': $('#millno').val()
+                'end_time': $('#endtime').val()
             });
         }
         function RawMaterialtest2FbeFormSubmit() {
@@ -167,14 +166,21 @@
                 url:url,
                 onSubmit:function () {
                     //表单验证
-                    // setParams($("input[name='foaming_cross_sectional']"));
-                    // setParams($("input[name='foaming_interfacial']"));
-                    // setParams($("input[name='interfacial_contamination']"));
-                    // setParams($("input[name='resistance_to_hot_water_98_24h']"));
-                    // setParams($("input[name='resistance_to_hot_water_98_28d']"));
-                    // setParams($("input[name='resistance_to_cd_65_24h']"));
-                    // setParams($("input[name='resistance_to_cd_22_28d']"));
-                    // setParams($("input[name='resistance_to_cd_65_28d']"));
+                    setParams($("input[name='density']"));
+                    setParams($("input[name='particle_size_32um']"));
+                    setParams($("input[name='particle_size_150um']"));
+                    setParams($("input[name='dsc_tgi']"));
+                    setParams($("input[name='dsc_tgf']"));
+                    setParams($("input[name='dsc_delta_h']"));
+                    setParams($("input[name='gel_time_lt_20s']"));
+                    setParams($("input[name='gel_time_gt_20s']"));
+                    setParams($("input[name='powder_volatile']"));
+                    setParams($("input[name='foaming_cross_sectional']"));
+                    setParams($("input[name='foaming_interfacial']"));
+                    setParams($("input[name='impact']"));
+                    setParams($("input[name='flexibility']"));
+                    setParams($("input[name='hot_water']"));
+                    setParams($("input[name='cd_65_24h']"));
                     if($("input[name='odbptime']").val()==""){
                         hlAlertFour("请输入操作时间");return false;
                     }
@@ -213,9 +219,8 @@
 
         function  clearFormLabel(){
             $('#RawMaterialtest2FbeForm').form('clear');
-            $('.hl-RawMaterialel').text('');
+            $('.hl-label').text('');
             $('#hl-gallery-con').empty();
-
         }
     </script>
 
@@ -234,33 +239,27 @@
                <tr>
                        <th data-options="field:'ck',checkbox:true"></th>
                        <th field="id" align="center" width="100" class="i18n1" name="id">流水号</th>
-                       <%--<th field="mill_no" align="center" width="150" class="i18n1" name="millno">分厂</th>--%>
                        <th field="project_name" align="center" width="120" class="i18n1" name="projectname">项目名称</th>
-                       <%--<th field="contract_no" align="center" width="120" class="i18n1" name="contractno">合同编号</th>--%>
-                       <%--<th field="pipe_no" align="center" width="120" class="i18n1" name="pipeno">钢管编号</th>--%>
-                       <%--<th field="grade" align="center" width="110" class="i18n1" name="grade">钢种</th>--%>
-                       <%--<th field="status_name" align="center" width="110" class="i18n1" name="statusname">状态</th>--%>
-                       <%--<th field="od" align="center" width="50" class="i18n1" name="od">外径</th>--%>
-                       <%--<th field="wt" align="center" width="50" class="i18n1" name="wt">壁厚</th>--%>
-                       <%--<th field="p_length" align="center" width="50" class="i18n1" name="p_length">长度</th>--%>
-                       <%--<th field="weight" align="center" width="50" class="i18n1" name="weight">重量</th>--%>
-                       <%--<th field="heat_no" align="center" hidden="true" width="50" class="i18n1" name="heat_no">炉号</th>--%>
                        <th field="operator_no" align="center" width="100" class="i18n1" name="operatorno">操作工编号</th>
 
                        <th field="sample_no" align="center" width="120" class="i18n1" name="sampleno">试样号</th>
-                       <%--<th field="coating_date" align="center" width="120" class="i18n1" name="coatingdate" data-options="formatter:formatterdate">涂层时间</th>--%>
-                       <th field="dsc" align="center" width="100" hidden="true" class="i18n1" name="dsc">热特性实验</th>
-                       <th field="foaming_cross_sectional" align="center" width="100" hidden="true" class="i18n1" name="foamingcrosssectional">孔隙率实验截面</th>
-                       <th field="foaming_interfacial" width="100" align="center" hidden="true" class="i18n1" name="foaminginterfacial">孔隙率实验表面</th>
-                       <th field="interfacial_contamination" width="100" align="center" hidden="true" class="i18n1" name="interfacialcontamination">表面污染率</th>
-                       <th field="flexibility" width="100" align="center" hidden="true" class="i18n1" name="flexibility">弯曲</th>
-                       <th field="impact" align="center" width="120" class="i18n1" name="impact">冲击</th>
-                       <th field="resistance_to_hot_water_98_24h" align="center" width="120" class="i18n1" name="resistancetohotwater9824h">水煮实验 98度 24小时</th>
-                       <th field="resistance_to_hot_water_98_28d" align="center" width="120" class="i18n1" name="resistancetohotwater9828d">水煮实验 98度 28天</th>
-                       <th field="resistance_to_cd_65_24h" align="center" width="120" class="i18n1" name="resistancetocd6524h">阴极剥离 65度 24小时</th>
-                       <th field="resistance_to_cd_22_28d" align="center" width="120" class="i18n1" name="resistancetocd2228d">阴极剥离 22.5度 28天</th>
-                       <th field="resistance_to_cd_65_28d" align="center" width="120" class="i18n1" name="resistancetocd6528d">阴极剥离 65度 28天</th>
-
+                       <th field="raw_material" align="center" width="100" hidden="true" class="i18n1" name="rawmaterial">原材料</th>
+                       <th field="batch_no" align="center" width="100" hidden="true" class="i18n1" name="batchno">批号</th>
+                       <th field="density" width="100" align="center" hidden="true" class="i18n1" name="density">密度</th>
+                       <th field="particle_size_32um" width="100" align="center" hidden="true" class="i18n1" name="particlesize32um">颗粒度 32um 所占比例</th>
+                       <th field="particle_size_150um" width="100" align="center" hidden="true" class="i18n1" name="particlesize150um">颗粒度 150um 所占比例</th>
+                       <th field="dsc_tgi" align="center" width="120" class="i18n1" name="dsctgi">dsc tgi 比例</th>
+                       <th field="dsc_tgf" align="center" width="120" class="i18n1" name="dsctgf">dsc tgf 比例</th>
+                       <th field="dsc_delta_h" align="center" width="120" hidden="true" class="i18n1" name="dscdeltah">dsc delta H 比例</th>
+                       <th field="gel_time_lt_20s" align="center" width="120" hidden="true" class="i18n1" name="geltimelt20s">固化度  小于20秒</th>
+                       <th field="gel_time_gt_20s" align="center" width="120" hidden="true" class="i18n1" name="geltimegt20s">固化度  大于20秒</th>
+                       <th field="powder_volatile" align="center" width="120" hidden="true" class="i18n1" name="powdervolatile">挥发性</th>
+                       <th field="foaming_cross_sectional" align="center" hidden="true" width="120" class="i18n1" name="foamingcrosssectional">孔隙率  断面</th>
+                       <th field="foaming_interfacial" align="center" hidden="true" width="120" class="i18n1" name="foaminginterfacial">孔隙率  表面</th>
+                   <th field="impact" align="center" width="120" hidden="true" class="i18n1" name="impact">冲击</th>
+                       <th field="flexibility" align="center" hidden="true" width="120" class="i18n1" name="flexibility">弯曲</th>
+                      <th field="hot_water" align="center" hidden="true" width="120" class="i18n1" name="hotwater">水煮</th>
+                      <th field="cd_65_24h" align="center" hidden="true" width="120" class="i18n1" name="cd6524h">阴极剥离 65度 24小时</th>
 
                        <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                        <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
@@ -274,8 +273,8 @@
 
 <!--工具栏-->
 <div id="hlRawMaterialtest2FbeProTb" style="padding:10px;">
-    <span class="i18n1" name="pipeno">钢管编号</span>:
-    <input id="pipeno" name="pipeno" style="line-height:22px;border:1px solid #ccc">
+    <span class="i18n1" name="projectno">项目编号</span>:
+    <input id="projectno" name="projectno" style="line-height:22px;border:1px solid #ccc">
     <span class="i18n1" name="operatorno">操作工编号</span>:
     <input id="operatorno" name="operatorno" style="line-height:22px;border:1px solid #ccc">
     <span class="i18n1" name="begintime">开始时间</span>:
@@ -294,55 +293,29 @@
 <div id="hlRawMaterialtest2FbeDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;height:auto;">
    <form id="RawMaterialtest2FbeForm" method="post">
        <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
-           <legend class="i18n1" name="pipebasicinfo">钢管信息</legend>
+           <legend>项目信息</legend>
            <table class="ht-table" width="100%" border="0">
                <tr>
                    <td class="i18n1" name="projectname" width="16%">项目名称</td>
-                   <td colspan="2" width="33%"><label class="hl-label" id="project_name"></label></td>
-
-                   <td class="i18n1" name="contractno" width="16%">合同编号</td>
-                   <td colspan="7" width="33%"><label class="hl-label" id="contract_no"></label></td>
-
-               </tr>
-
-               <tr>
-                   <td class="i18n1" name="pipeno" width="16%">钢管编号</td>
+                   <td colspan="2"><label class="hl-label" id="project_name"></label></td>
+                   <td class="i18n1" name="projectno" width="16%">项目编号</td>
                    <td colspan="2" width="33%">
-                       <input  id="lookup1" name="pipe_no" class="mini-lookup" style="text-align:center;width:180px;"
-                              textField="pipe_no" valueField="id" popupWidth="auto"
-                              popup="#gridPanel1" grid="#datagrid1" multiSelect="false"/>
+                       <input  id="lookup1" name="project_no" class="mini-lookup" style="text-align:center;width:180px;"
+                               textField="project_no" valueField="id" popupWidth="auto"
+                               popup="#gridPanel1" grid="#datagrid1" multiSelect="false"/>
                    </td>
-                   <td class="i18n1" name="statusname" width="16%">状态</td>
-                   <td colspan="7" width="33%"><label class="hl-label" id="status_name"></label></td>
                </tr>
-           </table>
 
-           <table width="100%" border="0" align="center">
-               <tr>
-                   <td align="center" class="i18n1" name="grade">钢种</td>
-                   <td align="center"><label class="hl-label" id="grade"></label></td>
-                   <td align="center" class="i18n1" name="od">外径</td>
-                   <td align="center"><label class="hl-label" id="od"></label></td>
-                   <td align="center" class="i18n1" name="wt">壁厚</td>
-                   <td align="center"><label class="hl-label" id="wt"></label></td>
-                   <td align="center" class="i18n1" name="p_length">长度</td>
-                   <td align="center"><label class="hl-label" id="p_length"></label></td>
-                   <td align="center" class="i18n1" name="weight">重量</td>
-                   <td align="center"><label class="hl-label" id="weight"></label></td>
-                   <td align="center" class="i18n1" name="heatno">炉号</td>
-                   <td align="center"><label class="hl-label" id="heat_no"></label></td>
-               </tr>
            </table>
        </fieldset>
        <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
-           <legend>外防实验(2FBE)信息</legend>
+           <legend>原材料实验(2FBE)信息</legend>
 
        <table class="ht-table">
            <tr>
                <td class="i18n1" name="id" width="20%">流水号</td>
                <td colspan="5" width="30%"><label class="hl-label" id="odbpid"></label></td>
-           </tr>
-           <tr>
+               <td></td>
                <td class="i18n1" name="operatorno" width="20%">操作工编号</td>
                <td colspan="1" width="30%">
                    <input id="lookup2" name="operator_no" class="mini-lookup" style="text-align:center;width:180px;"
@@ -350,12 +323,7 @@
                           popup="#gridPanel2" grid="#datagrid2" multiSelect="false"
                    />
                </td>
-               <td class="i18n1" name="coatingdate" width="20%">涂层时间</td>
-               <td colspan="1" width="30%">
-                   <input class="easyui-datetimebox" id="coating-date" type="text" name="coatingdate" value="" data-options="formatter:myformatter2,parser:myparser2"/>
-
-               </td>
-
+               <td></td>
            </tr>
        </table>
 
@@ -374,50 +342,73 @@
                <td></td>
            </tr>
            <tr>
-               <td class="i18n1" name="foamingcrosssectional">孔隙率实验截面</td>
-               <td><input class="easyui-numberbox hl-errorcolor" data-options="min:0,precision:0" type="text" name="foaming_cross_sectional" value=""/></td>
+               <td class="i18n1" name="rawmaterial">原材料</td>
+               <td><input class="easyui-textbox hl-errorcolor"  type="text" name="raw_material" value=""/></td>
                <td></td>
-               <td class="i18n1" name="foaminginterfacial">孔隙率实验表面</td>
-               <td><input class="easyui-numberbox"  data-options="min:0,precision:0" type="text" name="foaming_interfacial" value=""/></td>
+               <td class="i18n1" name="batchno">批号</td>
+               <td><input class="easyui-textbox"   type="text" name="batch_no" value=""/></td>
                <td></td>
            </tr>
            <tr>
-               <td class="i18n1" name="dsc">热特性实验</td>
-               <td><input class="easyui-textbox"   type="text" name="dsc" value=""/></td>
+               <td class="i18n1" name="density">密度</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2"  type="text" name="density" value=""/></td>
                <td></td>
-               <td class="i18n1" name="interfacialcontamination">表面污染率</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="interfacial_contamination" value=""/></td>
+               <td class="i18n1" name="particlesize32um">颗粒度 32um 所占比例</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="particle_size_32um" value=""/></td>
                <td></td>
            </tr>
 
            <tr>
-               <td width="16%" class="i18n1" name="flexibility">弯曲</td>
-               <td><input class="easyui-textbox"  type="text" name="flexibility" value=""/></td>
+               <td width="16%" class="i18n1" name="particlesize150um">颗粒度 150um 所占比例</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="paricle_size_150um" value=""/></td>
                <td></td>
-               <td width="16%" class="i18n1" name="impact">冲击</td>
+               <td width="16%" class="i18n1" name="dsctgi">dsc tgi 比例</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2"  type="text" name="dsc_tgi" value=""/></td>
+               <td></td>
+           </tr>
+           <tr>
+               <td class="i18n1" name="dsctgf">dsc tgf 比例</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="dsc_tgf" value=""/></td>
+               <td></td>
+               <td class="i18n1" name="dscdeltah">dsc delta H 比例</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="dsc_delta_h" value=""/></td>
+               <td></td>
+           </tr>
+           <tr>
+               <td class="i18n1" name="geltimelt20s">固化度  小于20秒</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="gel_time_lt_20s" value=""/></td>
+               <td></td>
+               <td class="i18n1" name="geltimegt20s">固化度  大于20秒</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="gel_time_gt_20s" value=""/></td>
+               <td></td>
+           </tr>
+           <tr>
+               <td class="i18n1" name="powdervolatile">挥发性</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="powder_volatile" value=""/></td>
+               <td></td>
+               <td class="i18n1" name="foamingcrosssectional">孔隙率  断面</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="foaming_cross_sectional" value=""/></td>
+               <td></td>
+           </tr>
+           <tr>
+               <td class="i18n1" name="foaminginterfacial">孔隙率  表面</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="foaming_interfacial" value=""/></td>
+               <td></td>
+               <td class="i18n1" name="impact">冲击</td>
                <td><input class="easyui-textbox"  type="text" name="impact" value=""/></td>
                <td></td>
            </tr>
            <tr>
-               <td class="i18n1" name="resistancetohotwater9824h">水煮实验 98度 24小时</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="resistance_to_hot_water_98_24h" value=""/></td>
+               <td class="i18n1" name="flexibility">弯曲</td>
+               <td><input class="easyui-textbox"   type="text" name="flexibility" value=""/></td>
                <td></td>
-               <td class="i18n1" name="resistancetohotwater9828d">水煮实验 98度 28天</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="resistance_to_hot_water_98_28d" value=""/></td>
+               <td class="i18n1" name="hotwater">水煮</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="hot_water" value=""/></td>
                <td></td>
            </tr>
            <tr>
-               <td class="i18n1" name="resistancetocd6524h">阴极剥离 65度 24小时</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="resistance_to_cd_65_24h" value=""/></td>
-               <td></td>
-               <td class="i18n1" name="resistancetocd2228d">阴极剥离 22.5度 28天</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="resistance_to_cd_22_28d" value=""/></td>
-               <td></td>
-           </tr>
-
-           <tr>
-               <td class="i18n1" name="resistancetocd6528d">阴极剥离 65度 28天</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="resistance_to_cd_65_28d" value=""/></td>
+               <td class="i18n1" name="cd6524h">阴极剥离 65度 24小时</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="cd_65_24h" value=""/></td>
                <td></td>
                <td width="16%" class="i18n1" name="remark">备注</td>
                <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
@@ -459,8 +450,10 @@
 >
     <div property="toolbar" id="searchBar1" style="padding:5px;padding-left:8px;text-align:center;display: none">
         <div style="float:left;padding-bottom:2px;">
-            <span class="i18n1" name="pipeno">钢管编号</span><span>:</span>
+            <span class="i18n1" name="projectno">项目编号</span><span>:</span>
             <input id="keyText1" class="mini-textbox" style="width:110px;" onenter="onSearchClick(1)"/>
+            <span class="i18n1" name="projectname">项目名称</span><span>:</span>
+            <input id="keyText2" class="mini-textbox" style="width:110px;" onenter="onSearchClick(1)"/>
             <a class="mini-button" onclick="onSearchClick(1)">查找</a>
             <a class="mini-button" onclick="onClearClick(1)" name="clear">清除</a>
         </div>
@@ -471,15 +464,11 @@
     </div>
     <div id="datagrid1" class="mini-datagrid" style="width:100%;height:100%;"
          borderStyle="border:0" showPageSize="false" showPageIndex="false"
-         url="/pipeinfo/getPipeNumberBySample.action">
+         url="/ProjectOperation/getProjectInfoByNoOrName.action">
         <div property="columns">
             <div type="checkcolumn" ></div>
-            <div field="pipe_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="pipeno">钢管编号</div>
-            <div field="contract_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="contractno">合同编号</div>
-            <div field="od" width="40" headerAlign="center" allowSort="true" class="i18n1" name="od">外径</div>
-            <div field="wt" width="40" headerAlign="center" allowSort="true" class="i18n1" name="wt">壁厚</div>
-            <div field="p_length" width="40" headerAlign="center" allowSort="true" class="i18n1" name="p_length">长度</div>
-            <div field="weight" width="40" headerAlign="center" allowSort="true" class="i18n1" name="weight">重量</div>
+            <div field="project_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="pipeno">项目编号</div>
+            <div field="project_name" width="80" headerAlign="center" allowSort="true" class="i18n1" name="contractno">项目名称</div>
         </div>
     </div>
 </div>
@@ -515,6 +504,7 @@
     mini.parse();
     var grid= mini.get("multiupload1");
     var keyText1=mini.get('keyText1');
+    var keyText2=mini.get("keyText2");
     var keyText4 = mini.get("keyText4");
     var keyText3=mini.get("keyText3");
     var grid1=mini.get("datagrid1");
@@ -526,8 +516,8 @@
         if(type==1)
         {
             grid1.load({
-                pipe_no:keyText1.value,
-                pipestatus:'bare1,'
+                project_no:keyText1.value,
+                project_name:keyText2.value,
             });
         }else if(type==2){
             grid2.load({
@@ -551,21 +541,8 @@
     }
     look1.on('valuechanged',function () {
         var rows = grid1.getSelected();
-        $("input[name='pipe_no']").val(rows.pipe_no);
-        clearLabelPipeInfo();
-        $.ajax({
-            url:'../pipeinfo/getPipeInfoByNo.action',
-            data:{'pipe_no':rows.pipe_no},
-            dataType:'json',
-            success:function (data) {
-                if(data!=null&&data!=""){
-                    addLabelPipeInfo(data);
-                }
-            },
-            error:function () {
-                hlAlertThree();
-            }
-        });
+        $("input[name='project_no']").val(rows.project_no);
+        $("#project_name").text(rows.project_name);
     });
     look2.on('valuechanged',function (e){
         var rows = grid2.getSelected();
@@ -577,8 +554,8 @@
         $('.mini-panel').css('z-index','100000');
         $('#searchBar1').css('display','block');
         grid1.load({
-            pipe_no:keyText1.value,
-            pipestatus:'bare1,'
+            project_no:keyText1.value,
+            project_name:keyText2.value,
         });
         //$('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
     });

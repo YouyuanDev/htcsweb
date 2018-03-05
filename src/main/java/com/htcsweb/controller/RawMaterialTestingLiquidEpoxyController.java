@@ -33,7 +33,7 @@ public class RawMaterialTestingLiquidEpoxyController {
     //查询
     @RequestMapping(value = "/getRawMaterialTestEpoxyByLike")
     @ResponseBody
-    public String getRawMaterialTestEpoxyByLike(@RequestParam(value = "pipe_no",required = false)String pipe_no, @RequestParam(value = "operator_no",required = false)String operator_no, @RequestParam(value = "begin_time",required = false)String begin_time, @RequestParam(value = "end_time",required = false)String end_time, HttpServletRequest request){
+    public String getRawMaterialTestEpoxyByLike(@RequestParam(value = "project_no",required = false)String project_no, @RequestParam(value = "operator_no",required = false)String operator_no, @RequestParam(value = "begin_time",required = false)String begin_time, @RequestParam(value = "end_time",required = false)String end_time, HttpServletRequest request){
         String page= request.getParameter("page");
         String rows= request.getParameter("rows");
         if(page==null){
@@ -56,8 +56,8 @@ public class RawMaterialTestingLiquidEpoxyController {
             e.printStackTrace();
         }
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
-        List<HashMap<String,Object>> list=rawMaterialTestingLiquidEpoxyDao.getNewAllByLike(pipe_no,operator_no,beginTime,endTime,start,Integer.parseInt(rows));
-        int count=rawMaterialTestingLiquidEpoxyDao.getCountNewAllByLike(pipe_no,operator_no,beginTime,endTime);
+        List<HashMap<String,Object>> list=rawMaterialTestingLiquidEpoxyDao.getNewAllByLike(project_no,operator_no,beginTime,endTime,start,Integer.parseInt(rows));
+        int count=rawMaterialTestingLiquidEpoxyDao.getCountNewAllByLike(project_no,operator_no,beginTime,endTime);
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
         maps.put("rows",list);
