@@ -353,9 +353,10 @@
                           popup="#gridPanel2" grid="#datagrid2" multiSelect="false"
                    />
                </td>
-               <td class="i18n1" name="coatingdate" width="20%">涂层时间</td>
-               <td colspan="1" width="30%">
-                   <input class="easyui-datetimebox" id="coating-date" type="text" name="coatingdate" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+
+               <td class="i18n1" name="operationtime">操作时间</td>
+               <td>
+                   <input class="easyui-datetimebox" id="operation-time" type="text" name="odbptime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
 
                </td>
 
@@ -369,9 +370,9 @@
                    <input class="easyui-textbox"   type="text" name="sample_no" value=""/>
                </td>
                <td></td>
-               <td class="i18n1" name="operationtime">操作时间</td>
-               <td>
-                   <input class="easyui-datetimebox" id="operation-time" type="text" name="odbptime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+               <td class="i18n1" name="coatingdate" width="20%">涂层时间</td>
+               <td colspan="1" width="30%">
+                   <input class="easyui-datetimebox" id="coating-date" type="text" name="coatingdate" value="" data-options="formatter:myformatter2,parser:myparser2"/>
 
                </td>
                <td></td>
