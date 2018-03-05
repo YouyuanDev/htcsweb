@@ -8,6 +8,8 @@ public class LabTestingEpoxy {
     private  int id;
     private  String  sample_no;
     private  String  pipe_no;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date coating_date;
     private  String operator_no;
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private  Date operation_time;
@@ -24,10 +26,11 @@ public class LabTestingEpoxy {
 
     }
 
-    public LabTestingEpoxy(int id, String sample_no, String pipe_no, String operator_no, Date operation_time, String porosity, String bend, String adhesion, String curing, String water_immersion, String upload_files, String remark, String result) {
+    public LabTestingEpoxy(int id, String sample_no, String pipe_no, Date coating_date, String operator_no, Date operation_time, String porosity, String bend, String adhesion, String curing, String water_immersion, String upload_files, String remark, String result) {
         this.id = id;
         this.sample_no = sample_no;
         this.pipe_no = pipe_no;
+        this.coating_date = coating_date;
         this.operator_no = operator_no;
         this.operation_time = operation_time;
         this.porosity = porosity;
@@ -50,6 +53,14 @@ public class LabTestingEpoxy {
 
     public String getSample_no() {
         return sample_no;
+    }
+
+    public Date getCoating_date() {
+        return coating_date;
+    }
+
+    public void setCoating_date(Date coating_date) {
+        this.coating_date = coating_date;
     }
 
     public void setSample_no(String sample_no) {

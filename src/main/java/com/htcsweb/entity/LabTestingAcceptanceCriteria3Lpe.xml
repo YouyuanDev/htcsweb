@@ -9,7 +9,7 @@
     INSERT INTO lab_testing_acceptance_criteria_3lpe(lab_testing_acceptance_criteria_no,resistance_to_cd_20_28d_max,resistance_to_cd_20_28d_min,resistance_to_cd_max_28d_max,resistance_to_cd_max_28d_min,resistance_to_cd_65_24h_max,resistance_to_cd_65_24h_min,impact_resistance_23_max,impact_resistance_23_min,impact_resistance_m40_max,impact_resistance_m40_min,indentation_hardness_23_max,indentation_hardness_23_min,indentation_hardness_70_max,indentation_hardness_70_min,elongation_at_break_max,elongation_at_break_min,coating_resistivity_max,coating_resistivity_min,thermal_degradation_max,thermal_degradation_min,last_update_time) VALUES (#{lab_testing_acceptance_criteria_no},#{resistance_to_cd_20_28d_max},#{resistance_to_cd_20_28d_min},#{resistance_to_cd_max_28d_max},#{resistance_to_cd_max_28d_min},#{resistance_to_cd_65_24h_max},#{resistance_to_cd_65_24h_min},#{impact_resistance_23_max},#{impact_resistance_23_min},#{impact_resistance_m40_max},#{impact_resistance_m40_min},#{indentation_hardness_23_max},#{indentation_hardness_23_min},#{indentation_hardness_70_max},#{indentation_hardness_70_min},#{elongation_at_break_max},#{elongation_at_break_min},#{coating_resistivity_max},#{coating_resistivity_min},#{thermal_degradation_max},#{thermal_degradation_min},#{last_update_time})
     </insert>
     <delete id="delLabTestCriteria3Lpe">
-        delete from id_coating_acceptance_criteria WHERE
+        delete from lab_testing_acceptance_criteria_3lpe WHERE
         <foreach collection="array" item="item" open="id in (" separator="," close=")">
             #{item}
         </foreach>

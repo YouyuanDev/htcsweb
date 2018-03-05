@@ -96,23 +96,23 @@
                      var imgList=odpictures.split(';');
                      createPictureModel(basePath,imgList);
                 }
-                //异步获取标准并匹配
-                // $.ajax({
-                //     url:'/AcceptanceCriteriaOperation/getODAcceptanceCriteriaByContractNo.action',
-                //     dataType:'json',
-                //     data:{'contract_no':row.contract_no},
-                //     success:function (data) {
-                //         var $obj=$("input[name='salt_contamination_before_blasting']");
-                //         $obj.siblings().css("background-color","#FFFFFF");
-                //         if(data!=null){
-                //             var salt=$obj.val();
-                //             if(!((salt>data.salt_contamination_before_blast_min)&&(salt<data.salt_contamination_before_blast_max)))
-                //                 $obj.siblings().css("background-color","#F9A6A6");
-                //         }
-                //     },error:function () {
-                //
-                //     }
-                // });
+                异步获取标准并匹配
+                $.ajax({
+                    url:'/AcceptanceCriteriaOperation/getAcceptanceCriteria2FbeByContractNo.action',
+                    dataType:'json',
+                    data:{'contract_no':row.contract_no},
+                    success:function (data) {
+                        var $obj=$("input[name='salt_contamination_before_blasting']");
+                        $obj.siblings().css("background-color","#FFFFFF");
+                        if(data!=null){
+                            var salt=$obj.val();
+                            if(!((salt>data.salt_contamination_before_blast_min)&&(salt<data.salt_contamination_before_blast_max)))
+                                $obj.siblings().css("background-color","#F9A6A6");
+                        }
+                    },error:function () {
+
+                    }
+                });
                 url="/LabTest2FbeOperation/saveLabTest2Fbe.action?id="+row.id;
             }else{
                 hlAlertTwo();

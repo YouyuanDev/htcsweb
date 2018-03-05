@@ -6,22 +6,22 @@
 <mapper namespace="com.htcsweb.dao.LabTestingEpoxyDao">
 
     <insert id="addLabTestEpoxy" parameterType="com.htcsweb.entity.LabTestingEpoxy">
-     INSERT INTO lab_testing_epoxy(sample_no,pipe_no,coating_date,operator_no,operation_time,porosity,bend,adhesion,curing,water_immersion,upload_files,result,remark) VALUES (#{sample_no},#{pipe_no},#{coating_date},#{operator_no},#{operation_time},#{porosity},#{bend},#{adhesion},#{curing},#{water_immersion},#{upload_files},#{result},#{remark})
+     INSERT INTO lab_testing_liquid_epoxy(sample_no,pipe_no,coating_date,operator_no,operation_time,porosity,bend,adhesion,curing,water_immersion,upload_files,result,remark) VALUES (#{sample_no},#{pipe_no},#{coating_date},#{operator_no},#{operation_time},#{porosity},#{bend},#{adhesion},#{curing},#{water_immersion},#{upload_files},#{result},#{remark})
     </insert>
     <delete id="delLabTestEpoxy">
-        delete from od_blast_process WHERE
+        delete from lab_testing_liquid_epoxy WHERE
         <foreach collection="array" item="item" open="id in (" separator="," close=")">
            #{item}
         </foreach>
     </delete>
     <update id="updateLabTestEpoxy" parameterType="com.htcsweb.entity.LabTestingEpoxy">
-       UPDATE lab_testing_epoxy set sample_no=#{sample_no},pipe_no=#{pipe_no},coating_date=#{coating_date},operator_no=#{operator_no},operation_time=#{operation_time},porosity=#{porosity},bend=#{bend},adhesion=#{adhesion},curing=#{curing},water_immersion=#{water_immersion},upload_files=#{upload_files},result=#{result},remark=#{remark} where id=#{id}
+       UPDATE lab_testing_liquid_epoxy set sample_no=#{sample_no},pipe_no=#{pipe_no},coating_date=#{coating_date},operator_no=#{operator_no},operation_time=#{operation_time},porosity=#{porosity},bend=#{bend},adhesion=#{adhesion},curing=#{curing},water_immersion=#{water_immersion},upload_files=#{upload_files},result=#{result},remark=#{remark} where id=#{id}
     </update>
 
 
     <select id="getNewAllByLike" resultType="map">
         Select pro.project_name,s.status_name,p.contract_no,p.grade,p.od,p.wt,p.p_length,p.weight,p.heat_no,o.*
-        from od_blast_process o
+        from lab_testing_liquid_epoxy o
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no
         left join project_info pro on c.project_no=pro.project_no
@@ -47,7 +47,7 @@
 
 
     <select id="getCountNewAllByLike" resultType="int">
-        select count(*) from od_blast_process o
+        select count(*) from lab_testing_liquid_epoxy o
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no
         left join project_info pro on c.project_no=pro.project_no

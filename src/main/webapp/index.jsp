@@ -329,10 +329,24 @@
                                 closable:true
                             });
                             hlLanguage();
-                        }else if("内防实验(Epoxy)"==nodeTxt||"Id Test(Epoxy)"==nodeTxt){
+                        }else if("内防实验(Liquid Epoxy)"==nodeTxt||"Id Test(Liquid Epoxy)"==nodeTxt){
                             $('#hlTab').tabs('add',{
                                 title:node.text,
                                 content:"<iframe scrolling='auto' frameborder='0'  src='labtesting/labtestingepoxy.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                            hlLanguage();
+                        }else if("实验标准(2FBE)"==nodeTxt||"Testing Standard(2FBE)"==nodeTxt){
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='labtesting/labtestingstandard2fbe.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                            hlLanguage();
+                        }else if("实验标准(3LPE)"==nodeTxt||"Testing Standard(3LPE)"==nodeTxt){
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='labtesting/labtestingstandard3lpe.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable:true
                             });
                             hlLanguage();
@@ -436,7 +450,9 @@
             <ul id="hltest">
                 <li class="i18n1" name="odtest2fbe">外防实验(2FBE)</li>
                 <li class="i18n1" name="odtest3lpe">外防实验(3LPE)</li>
-                <li class="i18n1" name="idtestepoxy">内防实验</li>
+                <li class="i18n1" name="idtestepoxy">内防实验(Liquid Epoxy)</li>
+                <li class="i18n1" name="teststandard2fbe">实验标准(2FBE)</li>
+                <li class="i18n1" name="teststandard3lpe">实验标准(3LPE)</li>
             </ul>
         </div>
         <div title="生产报表" class="i18n" name="productionreport" style="padding:10px;">
