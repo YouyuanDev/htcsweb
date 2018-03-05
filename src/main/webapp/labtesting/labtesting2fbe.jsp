@@ -378,40 +378,82 @@
            </tr>
            <tr>
                <td class="i18n1" name="foamingcrosssectional">孔隙率实验截面</td>
-               <td><input class="easyui-numberbox hl-errorcolor" data-options="min:0,precision:0" type="text" name="foaming_cross_sectional" value=""/></td>
+               <td>
+                   <select id="foaming_cross_sectional" class="easyui-combobox" data-options="editable:false" name="foaming_cross_sectional" style="width:200px;">
+                       <option value="1">1级</option>
+                       <option value="2">2级</option>
+                       <option value="3">3级</option>
+                       <option value="4">4级</option>
+                   </select>
+               </td>
                <td></td>
                <td class="i18n1" name="foaminginterfacial">孔隙率实验表面</td>
-               <td><input class="easyui-numberbox"  data-options="min:0,precision:0" type="text" name="foaming_interfacial" value=""/></td>
+               <td>
+                   <select id="foaming_interfacial" class="easyui-combobox" data-options="editable:false" name="foaming_interfacial" style="width:200px;">
+                       <option value="1">1级</option>
+                       <option value="2">2级</option>
+                       <option value="3">3级</option>
+                       <option value="4">4级</option>
+                   </select></td>
                <td></td>
            </tr>
            <tr>
+               <td class="i18n1" name="interfacialcontamination">表面污染率%</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="interfacial_contamination" value=""/></td>
+               <td></td>
                <td class="i18n1" name="dsc">热特性实验</td>
                <td><input class="easyui-textbox"   type="text" name="dsc" value=""/></td>
-               <td></td>
-               <td class="i18n1" name="interfacialcontamination">表面污染率</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="interfacial_contamination" value=""/></td>
                <td></td>
            </tr>
 
            <tr>
                <td width="16%" class="i18n1" name="flexibility">弯曲</td>
-               <td><input class="easyui-textbox"  type="text" name="flexibility" value=""/></td>
+               <td>
+                   <select id="flexibility" class="easyui-combobox" data-options="editable:false" name="flexibility" style="width:200px;">
+                       <option value="OK">合格（无裂纹）</option>
+                       <option value="Not OK">不合格（有裂纹）</option>
+                       <option value="Pending">待定</option>
+                   </select>
+
+               </td>
                <td></td>
                <td width="16%" class="i18n1" name="impact">冲击</td>
-               <td><input class="easyui-textbox"  type="text" name="impact" value=""/></td>
+               <td>
+                   <select id="impact" class="easyui-combobox" data-options="editable:false" name="impact" style="width:200px;">
+                       <option value="OK">合格（无漏点）</option>
+                       <option value="Not OK">不合格（有漏点）</option>
+                       <option value="Pending">待定</option>
+                   </select>
+               </td>
                <td></td>
            </tr>
            <tr>
                <td class="i18n1" name="resistancetohotwater9824h">水煮实验 98度 24小时</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="resistance_to_hot_water_98_24h" value=""/></td>
+               <td>
+                   <select id="resistance_to_hot_water_98_24h" class="easyui-combobox" data-options="editable:false" name="resistance_to_hot_water_98_24h" style="width:200px;">
+                       <option value="1">1级</option>
+                       <option value="2">2级</option>
+                       <option value="3">3级</option>
+                       <option value="4">4级</option>
+                   </select>
+               </td>
                <td></td>
                <td class="i18n1" name="resistancetohotwater9828d">水煮实验 98度 28天</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="resistance_to_hot_water_98_28d" value=""/></td>
+               <td>
+                   <select id="resistance_to_hot_water_98_28d" class="easyui-combobox" data-options="editable:false" name="resistance_to_hot_water_98_28d" style="width:200px;">
+                       <option value="1">1级</option>
+                       <option value="2">2级</option>
+                       <option value="3">3级</option>
+                       <option value="4">4级</option>
+                   </select>
+               </td>
                <td></td>
            </tr>
            <tr>
                <td class="i18n1" name="resistancetocd6524h">阴极剥离 65度 24小时</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="resistance_to_cd_65_24h" value=""/></td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="resistance_to_cd_65_24h" value=""/>
+
+               </td>
                <td></td>
                <td class="i18n1" name="resistancetocd2228d">阴极剥离 22.5度 28天</td>
                <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="resistance_to_cd_22_28d" value=""/></td>
