@@ -158,7 +158,6 @@
             $('#LabtestEpoxyForm').form('clear');
             $('.hl-label').text('');
             $('#hl-gallery-con').empty();
-
         }
     </script>
 

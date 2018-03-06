@@ -302,6 +302,9 @@
             $('.hl-label').text('');
             $('#hl-gallery-con').empty();
             combox1.setValue("");
+            $(":input").each(function () {
+                $(this).siblings().css("background-color","#FFFFFF");
+            });
         }
     </script>
 

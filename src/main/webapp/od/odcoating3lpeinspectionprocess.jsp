@@ -276,6 +276,9 @@
             $('#odCoating3LpeInProForm').form('clear');
             $('.hl-label').text('');$('#fileslist').val('');
             $('#hl-gallery-con').empty();
+            $(":input").each(function () {
+                $(this).siblings().css("background-color","#FFFFFF");
+            });
         }
     </script>
 </head>

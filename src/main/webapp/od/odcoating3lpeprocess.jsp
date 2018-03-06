@@ -233,6 +233,9 @@
         function  clearFormLabel() {
             $('#odCoating3LpeProForm').form('clear');
             $('.hl-label').text(''); $('#hl-gallery-con').empty();
+            $(":input").each(function () {
+                $(this).siblings().css("background-color","#FFFFFF");
+            });
         }
     </script>
 
