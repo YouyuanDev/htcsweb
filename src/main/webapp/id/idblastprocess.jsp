@@ -381,35 +381,35 @@
        <table class="ht-table">
            <tr>
                <td class="i18n1" name="originalpipeno">原内壁标签管号</td>
-               <td colspan="2"><input class="easyui-textbox"  type="text" name="original_pipe_no" value=""/></td>
+               <td><input class="easyui-textbox"  type="text" name="original_pipe_no" value=""/></td>
+               <td></td>
                <td class="i18n1" name="newpipeno">新内壁标签管号</td>
-               <td colspan="2"><input class="easyui-textbox"   type="text" name="new_pipe_no" value=""/></td>
+               <td><input class="easyui-textbox"   type="text" name="new_pipe_no" value=""/></td>
+               <td></td>
            </tr>
            <tr>
                <td class="i18n1" name="pipenoupdate">完成标签更新</td>
-               <td colspan="2">
+               <td>
                    <%--<input class="easyui-textbox"  type="text" name="pipe_no_update" value=""/>--%>
                        <select id="ee" class="easyui-combobox" data-options="editable:false" name="pipe_no_update"   style="width:200px;">
                            <option value="0">是</option>
                            <option value="1">否</option>
                        </select>
                </td>
+               <td></td>
                <td class="i18n1" name="remark">备注</td>
-               <td colspan="2">
+               <td>
                    <input class="easyui-textbox"  data-options="multiline:true" type="text" name="remark" value=""/>
                </td>
+               <td></td>
            </tr>
            <tr>
                <td width="16%" class="i18n1" name="result">结论</td>
-               <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result"   style="width:200px;">
+               <td colspan="5"><select id="cc" class="easyui-combobox" data-options="editable:false" name="result"   style="width:200px;">
                    <option value="0">不合格,重新打砂处理</option>
                    <option value="1">合格,进入内喷砂检验工序</option>
                    <option value="2">待定</option>
                </select></td>
-               <td></td>
-               <td ></td>
-               <td></td>
-               <td></td>
            </tr>
 
 

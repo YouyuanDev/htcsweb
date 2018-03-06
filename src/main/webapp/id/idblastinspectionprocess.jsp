@@ -125,15 +125,18 @@
                         var $obj2=$("input[name='dew_point']");
                         var $obj3=$("input[name='blast_finish_sa25']");
                         var $obj4=$("input[name='profile']");
+                        var $obj5=$("input[name='pipe_temp']");
                         $obj1.siblings().css("background-color","#FFFFFF");
                         $obj2.siblings().css("background-color","#FFFFFF");
                         $obj3.siblings().css("background-color","#FFFFFF");
                         $obj4.siblings().css("background-color","#FFFFFF");
+                        $obj5.siblings().css("background-color","#FFFFFF");
                         if(data!=null){
                             var res1=$obj1.val();
                             var res2=$obj2.val();
                             var res3=$obj3.val();
                             var res4=$obj4.val();
+                            var res5=$obj5.val();
                             if(!((res1>=data.relative_humidity_min)&&(res1<=data.relative_humidity_max)))
                                 $obj1.siblings().css("background-color","#F9A6A6");
                             if(!((res2>=data.temp_above_dew_point_min)&&(res2<=data.temp_above_dew_point_max)))
@@ -142,7 +145,8 @@
                                 $obj3.siblings().css("background-color","#F9A6A6");
                             if(!((res4>=data.id_profile_min)&&(res4<=data.id_profile_max)))
                                 $obj4.siblings().css("background-color","#F9A6A6");
-
+                            if(!((res5-$obj2)>=data.temp_above_dew_point_min))
+                                $obj5.siblings().css("background-color","#F9A6A6");
                         }
                     },error:function () {
 
@@ -448,7 +452,7 @@
                     <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="pipe_temp" value=""/></td>
                     <td></td>
                     <td class="i18n1" name="blastfinishsa25">清洁度Sa2.5</td>
-                    <td><input class="easyui-validatebox" type="text" name="blast_finish_sa25" value=""/></td>
+                    <td><input class="easyui-textbox" type="text" name="blast_finish_sa25" value=""/></td>
                     <td></td>
                 </tr>
                 <tr>
@@ -479,6 +483,7 @@
                         <option value="1">合格,进入外涂敷工序</option>
                         <option value="2">待定</option>
                     </select></td>
+                    <td></td>
                     <td width="16%" class="i18n1" name="remark">备注</td>
                     <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
                     <td></td>
