@@ -181,21 +181,6 @@
             var imgList=imgListstr.split(';');
             createPictureModel(basePath,imgList);
         }
-        //创建图片展示模型(参数是图片集合)
-        <%--function  createPictureModel(imgList) {--%>
-            <%--var basePath ="<%=basePath%>"+"/upload/pictures/";--%>
-            <%--if($('#hl-gallery').length>0){--%>
-                <%--$('#content_list').empty();--%>
-                <%--for(var i=0;i<imgList.length-1;i++){--%>
-                    <%--$('#content_list').append(getCalleryChildren(basePath+imgList[i]));--%>
-                <%--}--%>
-            <%--}else{--%>
-                <%--$('#hl-gallery-con').append(getGalleryCon());--%>
-                <%--for(var i=0;i<imgList.length-1;i++){--%>
-                    <%--$('#content_list').append(getCalleryChildren(basePath+imgList[i]));--%>
-                <%--}--%>
-            <%--}--%>
-        <%--}--%>
 
         function  clearFormLabel(){
             $('#odBlastProForm').form('clear');

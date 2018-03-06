@@ -83,11 +83,7 @@
             var row = $('#odFinalInProDatagrids').datagrid('getSelected');
             if(row){
                 $('#hlOdFinalInProDialog').dialog('open').dialog('setTitle','修改');
-                // $('#project_name').text(row.project_name);$('#contract_no').text(row.contract_no);
-                // $('#pipe_no').text(row.pipe_no);$('#status_name').text(row.status_name);
-                // $('#od').text(row.od);$('#wt').text(row.wt);
-                // $('#p_length').text(row.p_length);$('#weight').text(row.weight);
-                // $('#grade').text(row.grade);$('#heat_no').text(row.heat_no);
+
                 loadPipeBaiscInfo(row);
                 $('#odFinalInProForm').form('load',row);
                 $('#odFinalInprotime').datetimebox('setValue',getDate1(row.operation_time));

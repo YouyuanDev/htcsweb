@@ -181,56 +181,7 @@
             var imgList=imgListstr.split(';');
             createPictureModel(basePath,imgList);
         }
-        <%--function editFilesList(type,imgUrl) {--%>
-            <%--var $obj=$('#fileslist');--%>
-            <%--if(type==0){--%>
-                <%--var filesList=$('#fileslist').val();--%>
-                <%--$obj.val(filesList+imgUrl+";");--%>
-            <%--}else{--%>
-                <%--$obj.val($obj.val().replace(imgUrl+";",''));--%>
-            <%--}--%>
-            <%--return $obj.val();--%>
-        <%--}--%>
-        <%--//删除选择的图片--%>
-        <%--function delUploadPicture($obj) {--%>
-            <%--var imgUrl=$obj.siblings('dt').find('img').attr('src');--%>
-            <%--var imgName=imgUrl.substr(imgUrl.lastIndexOf('/')+1);--%>
-            <%--$.ajax({--%>
-                <%--url:'../UploadFile/delUploadPicture.action',--%>
-                <%--dataType:'json',--%>
-                <%--data:{"imgList":imgName+";"},--%>
-                <%--success:function (data) {--%>
-                    <%--if(data.success){--%>
-                        <%--var imgList=editFilesList(2,imgName);--%>
-                        <%--$(this).parent('.content-dl').remove();--%>
-                    <%--}else{--%>
-                        <%--hlAlertFour("移除失败!");--%>
-                    <%--}--%>
-                <%--},--%>
-                <%--error:function () {--%>
-                    <%--hlAlertThree();--%>
-                <%--}--%>
-            <%--});--%>
-        <%--}--%>
-        <%--//创建图片展示模型(参数是图片集合)--%>
-        <%--function  createPictureModel(imgList) {--%>
-            <%--var basePath ="<%=basePath%>"+"/upload/pictures/";--%>
-            <%--if($('#hl-gallery').length>0){--%>
-                <%--$('#content_list').empty();--%>
-                <%--for(var i=0;i<imgList.length-1;i++){--%>
-                    <%--$('#content_list').append(getCalleryChildren(basePath+imgList[i]));--%>
-                <%--}--%>
-            <%--}else{--%>
-                <%--$('#hl-gallery-con').append(getGalleryCon());--%>
-                <%--for(var i=0;i<imgList.length-1;i++){--%>
-                    <%--$('#content_list').append(getCalleryChildren(basePath+imgList[i]));--%>
-                <%--}--%>
-            <%--}--%>
-        <%--}--%>
-        <%--function  setParams($obj) {--%>
-            <%--if($obj.val()==null||$obj.val()=="")--%>
-                <%--$obj.val(0);--%>
-        <%--}--%>
+
         //清理form表单
         function  clearFormLabel() {
             $('#odCoatingProForm').form('clear');
