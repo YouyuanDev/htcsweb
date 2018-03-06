@@ -159,7 +159,7 @@
 
                             if(!((res6>=data.pipe_temp_after_blast_min)&&(res6<=data.pipe_temp_after_blast_max)))
                                 $obj6.siblings().css("background-color","#F9A6A6");
-                            if(!((res6-$obj2)>=data.temp_above_dew_point_min))
+                            if(!((res6-res2)>=data.temp_above_dew_point_min))
                                 $obj6.siblings().css("background-color","#F9A6A6");
                             if(!((res7>=data.salt_contamination_after_blasting_min)&&(res7<=data.salt_contamination_after_blasting_max)))
                                 $obj7.siblings().css("background-color","#F9A6A6");

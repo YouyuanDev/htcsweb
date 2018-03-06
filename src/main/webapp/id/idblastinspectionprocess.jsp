@@ -145,7 +145,7 @@
                                 $obj3.siblings().css("background-color","#F9A6A6");
                             if(!((res4>=data.id_profile_min)&&(res4<=data.id_profile_max)))
                                 $obj4.siblings().css("background-color","#F9A6A6");
-                            if(!((res5-$obj2)>=data.temp_above_dew_point_min))
+                            if(!((res5-res2)>=data.temp_above_dew_point_min))
                                 $obj5.siblings().css("background-color","#F9A6A6");
                         }
                     },error:function () {
