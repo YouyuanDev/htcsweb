@@ -113,15 +113,17 @@ public class QRCodeUtil {
         //BufferedImage textImage = new BufferedImage(source.getWidth(), source.getHeight(), BufferedImage.TYPE_INT_RGB);
 
         Graphics g = source.createGraphics();
-        g.drawImage(source, 0, QRCODE_SIZE - 10, source.getWidth(), source.getHeight(), null);
+        //g.drawImage(source, 0, QRCODE_SIZE - 10, source.getWidth(), source.getHeight(), null);
         //设置画笔的颜色
         g.setColor(Color.BLACK);
         //设置字体
         Font font = new Font("TimesRoman", Font.BOLD, 32);
         //FontMetrics metrics = g.getFontMetrics(font);
+
+        int startX=(int)(QRCODE_SIZE/2-g.getFontMetrics().stringWidth(declareText));
         //文字在图片中的坐标 这里设置在中间
-        int startX = QRCODE_SIZE  / 2-80;
-        int startY = QRCODE_SIZE-2;
+        //int startX = QRCODE_SIZE  / 2-80;
+        int startY = QRCODE_SIZE-1;
         g.setFont(font);
 
 
@@ -129,6 +131,9 @@ public class QRCodeUtil {
         g.dispose();
 
     }
+
+
+
 
     /**
      *  插入Logo图片
@@ -335,9 +340,18 @@ public class QRCodeUtil {
 //            QRCodeUtil.encode(text,"d:/test"); // 不带logo
 
 
-        //BufferedImage bi = ImageIO.read(new File("a1.jpg"));
-        BufferedImage bi=null;
-        QRCodeUtil.encode(text,bi,"P/N:3232323","testqrcode","qrcode_tmp", true);
+        BufferedImage bi = ImageIO.read(new File("/Users/kurt/Desktop/logo1.jpg"));
+        //BufferedImage bi=null;
+        QRCodeUtil.encode(text,bi,"P/N:3232323","testqrcode","tmp", true);
+    }
+
+
+    public static void GenerateQRCode(String QRContent,String logoFullPathFileName,String pictureName, String bottemDes,String path)throws Exception{
+
+        BufferedImage bi = ImageIO.read(new File(logoFullPathFileName));
+
+        QRCodeUtil.encode(QRContent,bi,bottemDes,pictureName,path, true);
+
     }
 
 

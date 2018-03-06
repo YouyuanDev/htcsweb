@@ -126,6 +126,33 @@
                 hlAlertOne();
             }
         }
+        function GenQRCode(){
+            var row = $('#pipeDatagrids').datagrid('getSelections');
+            if(row.length>0){
+                var idArr=[];
+                for (var i=0;i<row.length;i++){
+                    idArr.push(row[i].pipe_no);
+                }
+                var idArrs=idArr.join(',');
+
+                $.messager.confirm('系统提示',"您确定要生成这<font color=red>"+idArr.length+ "</font>条QR码吗？",function (r) {
+                    if(r){
+                        $.post(
+                            "/QrCodeOperation/genQRCode.action",
+                            {"hlparam":idArrs},function (data) {
+                                if(data.success){
+                                    $("#pipeDatagrids").datagrid("reload");
+                                }
+                                hlAlertFour(data.message);
+                            },"json");
+                    }
+                });
+
+            }else{
+                $.messager.alert('Warning','请选择要生成QR码的钢管!');
+            }
+
+        }
 
 
         //取消保存
@@ -266,6 +293,8 @@
 
     <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchPipe()">Search</a>
     <div style="float:right">
+        <a href="#" id="genQRLinkBtn" class="easyui-linkbutton i18n1" name="genQR"  onclick="GenQRCode()">生成QRCode</a>
+
         <a href="#" id="addPipeLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addPipe()">添加</a>
         <a href="#" id="editPipeLinkBtn" class="easyui-linkbutton i18n1" name="edit" data-options="iconCls:'icon-edit',plain:true" onclick="editPipe()">修改</a>
         <a href="#" id="deltPipeLinkBtn" class="easyui-linkbutton i18n1" name="delete" data-options="iconCls:'icon-remove',plain:true" onclick="delPipe()">删除</a>

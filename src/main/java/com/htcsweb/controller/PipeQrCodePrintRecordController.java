@@ -5,6 +5,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.PipeQrCodePrintRecordDao;
 import com.htcsweb.entity.PipeQrCodePrintRecord;
 import com.htcsweb.util.ResponseUtil;
+import com.htcsweb.entity.PipeQrCodePrintRecord;
+import com.htcsweb.util.QRCodeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -83,5 +85,49 @@ public class PipeQrCodePrintRecordController {
         String mmp= JSONArray.toJSONString(maps);
         return mmp;
     }
+
+
+    @RequestMapping("/genQRCode")
+    public String genQRCode(@RequestParam(value = "hlparam")String hlparam,HttpServletRequest request,HttpServletResponse response)throws Exception{
+        String[]pipeNoArr=hlparam.split(",");
+        int resTotal=0;
+
+
+        String logoDirectory = request.getSession().getServletContext().getRealPath("/images");
+        StringBuilder sb = new StringBuilder();
+        sb.append(logoDirectory);
+        sb.append("/");
+        sb.append("logo1.jpg");
+        System.out.println("logoDirectory="+sb.toString());
+        String logofullname=sb.toString();
+
+
+        for(int i=0;i<pipeNoArr.length;i++){
+            StringBuilder sb2 = new StringBuilder();
+            sb2.append("qrcode_");
+            sb2.append(pipeNoArr[i]);
+            StringBuilder sbbot = new StringBuilder();
+            sbbot.append("P/N:");
+            sbbot.append(pipeNoArr[i]);
+            QRCodeUtil.GenerateQRCode(pipeNoArr[i],logofullname,sb2.toString(),sbbot.toString(),"QRtmp");
+        }
+
+
+
+        JSONObject json=new JSONObject();
+        StringBuilder sbmessage = new StringBuilder();
+        sbmessage.append("总共");
+        sbmessage.append(Integer.toString(pipeNoArr.length));
+        sbmessage.append("项二维码生成成功\n");
+        if(resTotal>0){
+            json.put("success",true);
+        }else{
+            json.put("success",false);
+        }
+        json.put("message",sbmessage.toString());
+        ResponseUtil.write(response,json);
+        return null;
+    }
+
 
 }
