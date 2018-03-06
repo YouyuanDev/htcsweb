@@ -7,19 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa3f659b-6ccf-4ae8-84a0-55d0a3756f6f" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/util/FileBean.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/util/ZipUtils.java" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/htcsweb.iml" afterPath="$PROJECT_DIR$/htcsweb.iml" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PipeQrCodePrintRecordController.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PipeQrCodePrintRecordController.java" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/db.properties" afterPath="$PROJECT_DIR$/src/main/resources/db.properties" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/i18n/strings.properties" afterPath="$PROJECT_DIR$/src/main/webapp/i18n/strings.properties" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/i18n/strings_en.properties" afterPath="$PROJECT_DIR$/src/main/webapp/i18n/strings_en.properties" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties" afterPath="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh.properties" afterPath="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh.properties" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/pipe/pipeManagement.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/pipe/pipeManagement.jsp" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -846,7 +834,7 @@
       <workItem from="1520069482679" duration="7739000" />
       <workItem from="1520217265465" duration="21155000" />
       <workItem from="1520302738513" duration="16144000" />
-      <workItem from="1520338840351" duration="10476000" />
+      <workItem from="1520338840351" duration="10585000" />
     </task>
     <servers />
   </component>
@@ -859,7 +847,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="659403000" />
+    <option name="totallyTimeSpent" value="659512000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="23" width="1440" height="835" extended-state="0" />
@@ -882,7 +870,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42726082" sideWeight="0.49722221" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42726082" sideWeight="0.49722221" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896462" sideWeight="0.49444443" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891247" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947975" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
