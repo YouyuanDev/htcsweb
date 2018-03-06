@@ -239,3 +239,4 @@ function selectIsSample() {
         $("input[name='is_sample']").val(0);
     }
 }
+//
