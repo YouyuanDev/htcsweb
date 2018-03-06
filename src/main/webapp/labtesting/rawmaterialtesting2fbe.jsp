@@ -82,13 +82,10 @@
             var row = $('#RawMaterialtest2FbeDatagrids').datagrid('getSelected');
             if(row){
                 $('#hlRawMaterialtest2FbeDialog').dialog('open').dialog('setTitle','修改');
-                alert(row.project_no+":"+row.project_name);
+                $('#project_name').text(row.project_name);
                 $('#odbpid').text(row.id);
-                alert(row.project_no+":"+row.project_name);
                 $('#RawMaterialtest2FbeForm').form('load',row);
-                alert(row.project_no+":"+row.project_name);
                 $('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
-                alert(row.project_no+":"+row.project_name);
                 look1.setText(row.project_no);
                 look1.setValue(row.project_no);
                 look2.setText(row.operator_no);

@@ -83,6 +83,7 @@
             if(row){
                 $('#hlRawMaterialtestEpoxyDialog').dialog('open').dialog('setTitle','修改');
                 $('#odbpid').text(row.id);
+                $('#project_name').text(row.project_name);
                 $('#RawMaterialtestEpoxyForm').form('load',row);
                 //$('#coating-date').datetimebox('setValue',getDate1(row.coating_date));
                 $('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
