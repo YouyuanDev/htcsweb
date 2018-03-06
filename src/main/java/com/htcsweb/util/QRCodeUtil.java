@@ -1,9 +1,5 @@
 package com.htcsweb.util;
-import java.awt.BasicStroke;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Shape;
+import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -35,7 +31,7 @@ public class QRCodeUtil {
     private static final String CHARSET = "utf-8";
     private static final String FORMAT_NAME = "JPG";
     // 二维码尺寸
-    private static final int QRCODE_SIZE = 300;
+    private static final int QRCODE_SIZE = 400;
     // LOGO宽度
     private static final int WIDTH = 60;
     // LOGO高度
@@ -81,7 +77,7 @@ public class QRCodeUtil {
         int tempHeight = height;
         boolean needDescription=(null==bottomDes&&"".equals(bottomDes));
         if (needDescription) {
-            tempHeight += 30;
+            tempHeight += 50;
         }
         BufferedImage image = new BufferedImage(width, tempHeight,
                 BufferedImage.TYPE_INT_RGB);
@@ -92,16 +88,17 @@ public class QRCodeUtil {
             }
         }
 
-        if(null==logoImage)
-            return image;
 
-        // 插入图片
+        // 插入图片LOGO
+        if(logoImage!=null)
         QRCodeUtil.insertImage(image, logoImage, needCompress);
 
         if(needDescription)
             return image;
 
+        //插入底部文字
         QRCodeUtil.addFontImage(image, bottomDes);
+
 
         return image;
     }
@@ -112,15 +109,25 @@ public class QRCodeUtil {
      * @param declareText 文字本文
      */
     private static void addFontImage(BufferedImage source, String declareText) {
-        BufferedImage textImage = FontImage.getImage(declareText, QRCODE_SIZE, 50);
-        Graphics2D graph = source.createGraphics();
 
-        int width = textImage.getWidth(null);
-        int height = textImage.getHeight(null);
+        BufferedImage textImage = new BufferedImage(source.getWidth(), source.getHeight(), BufferedImage.TYPE_INT_RGB);
 
-        Image src =textImage;
-        graph.drawImage(src, 0, QRCODE_SIZE - 20, width, height, null);
-        graph.dispose();
+        Graphics g = source.createGraphics();
+        g.drawImage(source, 0, QRCODE_SIZE - 10, source.getWidth(), source.getHeight(), null);
+        //设置画笔的颜色
+        g.setColor(Color.BLACK);
+        //设置字体
+        Font font = new Font("TimesRoman", Font.BOLD, 32);
+        //FontMetrics metrics = g.getFontMetrics(font);
+        //文字在图片中的坐标 这里设置在中间
+        int startX = QRCODE_SIZE  / 2-80;
+        int startY = QRCODE_SIZE-2;
+        g.setFont(font);
+
+
+        g.drawString(declareText, startX, startY);
+        g.dispose();
+
     }
 
     /**
@@ -330,7 +337,7 @@ public class QRCodeUtil {
 
         //BufferedImage bi = ImageIO.read(new File("a1.jpg"));
         BufferedImage bi=null;
-        QRCodeUtil.encode(text,bi,"ok","testqrcode","test", true);
+        QRCodeUtil.encode(text,bi,"P/N:3232323","testqrcode","qrcode_tmp", true);
     }
 
 
