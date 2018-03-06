@@ -266,6 +266,16 @@
                     <td></td>
                 </tr>
                 <tr>
+                    <td class="i18n1" name="batchno">批号</td>
+                    <td>
+                        <input class="easyui-textbox"   type="text" name="batch_no" value=""/>
+                    </td>
+                    <td></td>
+                    <td class="i18n1" name="rawmaterial">原材料名称</td>
+                    <td><input class="easyui-textbox"  type="text" name="raw_material" value=""/></td>
+                    <td></td>
+                </tr>
+                <tr>
                     <td class="i18n1" name="viscosity">粘度</td>
                     <td><input class="easyui-textbox"   type="text" name="viscosity" value=""/></td>
                     <td></td>
