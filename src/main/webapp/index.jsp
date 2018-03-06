@@ -317,6 +317,20 @@
                                 closable:true
                             });
                             hlLanguage();
+                        }else if("原材料标准(2FBE)"==nodeTxt||"Raw Material Standard(2FBE)"==nodeTxt){
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='production/rawmaterialtestingstandard2fbe.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                            hlLanguage();
+                        }else if("原材料标准(3LPE)"==nodeTxt||"Raw Material Standard(3LPE)"==nodeTxt){
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='production/rawmaterialtestingstandard3lpe.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                            hlLanguage();
                         }
                     }
                 }
@@ -467,6 +481,8 @@
                 <li class="i18n1" name="instandard">内防腐生产标准</li>
                 <li class="i18n1" name="teststandard2fbe">实验标准(2FBE)</li>
                 <li class="i18n1" name="teststandard3lpe">实验标准(3LPE)</li>
+                <li class="i18n1" name="rawmaterialstandard2fbe">原材料标准(2FBE)</li>
+                <li class="i18n1" name="rawmaterialstandard3lpe">原材料标准(3LPE)</li>
             </ul>
         </div>
         <div title="实验" class="i18n" name="labtesting" style="padding:10px;">

@@ -6,8 +6,8 @@
 <mapper namespace="com.htcsweb.dao.RawMaterialTestingAcceptanceCriteria3LpeDao">
 
     <insert id="addRawMaterialTestingAcceptanceCriteria3Lpe" parameterType="com.htcsweb.entity.RawMaterialTestingAcceptanceCriteria3Lpe">
-        INSERT INTO raw_material_testing_acceptance_criteria_3lpe (raw_material_testing_acceptance_criteria_no,epoxy_cure_time_max,epoxy_cure_time_min,epoxy_gel_time_max,epoxy_gel_time_min,epoxy_moisture_content_max,epoxy_moisture_content_min,epoxy_particle_size_max,epoxy_particle_size_min,adhesion_flow_rate_max,adhesion_flow_rate_min,polyethylene_flow_rate_max,polyethylene_flow_rate_min,last_update_time)
-        VALUES (#{raw_material_testing_acceptance_criteria_no},#{epoxy_cure_time_max},#{epoxy_cure_time_min},#{epoxy_gel_time_max},#{epoxy_gel_time_min},#{epoxy_moisture_content_max},#{epoxy_moisture_content_min},#{epoxy_particle_size_max},#{epoxy_particle_size_min},#{adhesion_flow_rate_max},#{adhesion_flow_rate_min},#{polyethylene_flow_rate_max},#{polyethylene_flow_rate_min},#{last_update_time})
+        INSERT INTO raw_material_testing_acceptance_criteria_3lpe (raw_material_testing_acceptance_criteria_no,epoxy_cure_time_max,epoxy_cure_time_min,epoxy_gel_time_max,epoxy_gel_time_min,epoxy_moisture_content_max,epoxy_moisture_content_min,epoxy_particle_size_150um_max,epoxy_particle_size_150um_min,epoxy_particle_size_250um_max,epoxy_particle_size_250um_min,adhesion_flow_rate_max,adhesion_flow_rate_min,polyethylene_flow_rate_max,polyethylene_flow_rate_min,last_update_time)
+        VALUES (#{raw_material_testing_acceptance_criteria_no},#{epoxy_cure_time_max},#{epoxy_cure_time_min},#{epoxy_gel_time_max},#{epoxy_gel_time_min},#{epoxy_moisture_content_max},#{epoxy_moisture_content_min},#{epoxy_particle_size_150um_max},#{epoxy_particle_size_150um_min},#{epoxy_particle_size_250um_max},#{epoxy_particle_size_250um_min},#{adhesion_flow_rate_max},#{adhesion_flow_rate_min},#{polyethylene_flow_rate_max},#{polyethylene_flow_rate_min},#{last_update_time})
     </insert>
     <delete id="delRawMaterialTestingAcceptanceCriteria3Lpe">
         delete from raw_material_testing_acceptance_criteria_3lpe WHERE
@@ -16,8 +16,8 @@
         </foreach>
     </delete>
 
-    <update id="updateRawMaterialTestingAcceptanceCriteriaLpe" parameterType="com.htcsweb.entity.RawMaterialTestingAcceptanceCriteria3Lpe">
-        UPDATE raw_material_testing_acceptance_criteria_3lpe set raw_material_testing_acceptance_criteria_no=#{raw_material_testing_acceptance_criteria_no},epoxy_cure_time_max=#{epoxy_cure_time_max},epoxy_cure_time_min=#{epoxy_cure_time_min},epoxy_gel_time_max=#{epoxy_gel_time_max},epoxy_gel_time_min=#{epoxy_gel_time_min},epoxy_moisture_content_max=#{epoxy_moisture_content_max},epoxy_moisture_content_min=#{epoxy_moisture_content_min},epoxy_particle_size_max=#{epoxy_particle_size_max},epoxy_particle_size_min=#{epoxy_particle_size_min},adhesion_flow_rate_max=#{adhesion_flow_rate_max},adhesion_flow_rate_min=#{adhesion_flow_rate_min},polyethylene_flow_rate_max=#{polyethylene_flow_rate_max},polyethylene_flow_rate_min=#{polyethylene_flow_rate_min},last_update_time=#{last_update_time} where id=#{id}
+    <update id="updateRawMaterialTestingAcceptanceCriteria3Lpe" parameterType="com.htcsweb.entity.RawMaterialTestingAcceptanceCriteria3Lpe">
+        UPDATE raw_material_testing_acceptance_criteria_3lpe set raw_material_testing_acceptance_criteria_no=#{raw_material_testing_acceptance_criteria_no},epoxy_cure_time_max=#{epoxy_cure_time_max},epoxy_cure_time_min=#{epoxy_cure_time_min},epoxy_gel_time_max=#{epoxy_gel_time_max},epoxy_gel_time_min=#{epoxy_gel_time_min},epoxy_moisture_content_max=#{epoxy_moisture_content_max},epoxy_moisture_content_min=#{epoxy_moisture_content_min},epoxy_particle_size_150um_max=#{epoxy_particle_size_150um_max},epoxy_particle_size_150um_min=#{epoxy_particle_size_150um_min},epoxy_particle_size_250um_max=#{epoxy_particle_size_250um_max},epoxy_particle_size_250um_min=#{epoxy_particle_size_250um_min},adhesion_flow_rate_max=#{adhesion_flow_rate_max},adhesion_flow_rate_min=#{adhesion_flow_rate_min},polyethylene_flow_rate_max=#{polyethylene_flow_rate_max},polyethylene_flow_rate_min=#{polyethylene_flow_rate_min},last_update_time=#{last_update_time} where id=#{id}
     </update>
 
     <select id="getCountAllByLike" resultType="int">
@@ -44,8 +44,8 @@
         SELECT  * from raw_material_testing_acceptance_criteria_3lpe
         ORDER BY id DESC
     </select>
-    <select id="getRawMaterialTestingAcceptanceCriteria3LpeByContractNo" resultType="com.htcsweb.entity.RawMaterialTestingAcceptanceCriteria3Lpe">
-        select o.* from contract_info c inner JOIN project_info p on c.project_no=p.project_no inner JOIN raw_material_testing_acceptance_criteria_3lpe o on p.raw_material_acceptance_criteria_3lpe_no=o.raw_material_testing_acceptance_criteria_no WHERE c.contract_no=#{contract_no}
+    <select id="getRawMaterialTestingAcceptanceCriteria3LpeByProjectNo" resultType="com.htcsweb.entity.RawMaterialTestingAcceptanceCriteria3Lpe">
+       select o.* from project_info p  inner JOIN raw_material_testing_acceptance_criteria_3lpe o on p.raw_material_acceptance_criteria_3lpe_no=o.raw_material_testing_acceptance_criteria_no  where p.project_no='20180208'
     </select>
 
 </mapper>

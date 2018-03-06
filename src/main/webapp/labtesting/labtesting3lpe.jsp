@@ -133,25 +133,25 @@
                             var res8=$obj8.val();
                             var res9=$obj9.val();
                             var res10=$obj10.val();
-                            if(!((res1>data.resistance_to_cd_20_28d_min)&&(res1<data.resistance_to_cd_20_28d_max)))
+                            if(!((res1>=data.resistance_to_cd_20_28d_min)&&(res1<=data.resistance_to_cd_20_28d_max)))
                                 $obj1.siblings().css("background-color","#F9A6A6");
-                            if(!((res2>data.resistance_to_cd_max_28d_min)&&(res2<data.resistance_to_cd_max_28d_max)))
+                            if(!((res2>=data.resistance_to_cd_max_28d_min)&&(res2<=data.resistance_to_cd_max_28d_max)))
                                 $obj2.siblings().css("background-color","#F9A6A6");
-                            if(!((res3>data.resistance_to_cd_65_24h_min)&&(res3<data.resistance_to_cd_65_24h_max)))
+                            if(!((res3>=data.resistance_to_cd_65_24h_min)&&(res3<=data.resistance_to_cd_65_24h_max)))
                                 $obj3.siblings().css("background-color","#F9A6A6");
-                            if(!((res4>data.impact_resistance_23_min)&&(res4<data.impact_resistance_23_max)))
+                            if(!((res4>=data.impact_resistance_23_min)&&(res4<=data.impact_resistance_23_max)))
                                 $obj4.siblings().css("background-color","#F9A6A6");
-                            if(!((res5>data.impact_resistance_m40_min)&&(res5<data.impact_resistance_m40_max)))
+                            if(!((res5>=data.impact_resistance_m40_min)&&(res5<=data.impact_resistance_m40_max)))
                                 $obj5.siblings().css("background-color","#F9A6A6");
-                            if(!((res6>data.indentation_hardness_23_min)&&(res6<data.indentation_hardness_23_max)))
+                            if(!((res6>=data.indentation_hardness_23_min)&&(res6<=data.indentation_hardness_23_max)))
                                 $obj6.siblings().css("background-color","#F9A6A6");
-                            if(!((res7>data.indentation_hardness_70_min)&&(res7<data.indentation_hardness_70_max)))
+                            if(!((res7>=data.indentation_hardness_70_min)&&(res7<=data.indentation_hardness_70_max)))
                                 $obj7.siblings().css("background-color","#F9A6A6");
-                            if(!((res8>data.elongation_at_break_min)&&(res8<data.elongation_at_break_max)))
+                            if(!((res8>=data.elongation_at_break_min)&&(res8<=data.elongation_at_break_max)))
                                 $obj8.siblings().css("background-color","#F9A6A6");
-                            if(!((res9>data.coating_resistivity_min)&&(res9<data.coating_resistivity_max)))
+                            if(!((res9>=data.coating_resistivity_min)&&(res9<=data.coating_resistivity_max)))
                                 $obj9.siblings().css("background-color","#F9A6A6");
-                            if(!((res10>data.thermal_degradation_min)&&(res10<data.thermal_degradation_max)))
+                            if(!((res10>=data.thermal_degradation_min)&&(res10<=data.thermal_degradation_max)))
                                 $obj10.siblings().css("background-color","#F9A6A6");
                         }
                     },error:function () {
@@ -209,7 +209,6 @@
                 }
             });
             clearMultiUpload(grid);
-
         }
         function Labtest3LpeCancelSubmit() {
             $('#hlLabtest3LpeDialog').dialog('close');

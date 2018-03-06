@@ -17,7 +17,7 @@
     </delete>
 
     <update id="updateRawMaterialTestingAcceptanceCriteria2Fbe" parameterType="com.htcsweb.entity.RawMaterialTestingAcceptanceCriteria2Fbe">
-        UPDATE raw_material_testing_acceptance_criteria_2fbe set raw_material_testing_acceptance_criteria_no=#{raw_material_testing_acceptance_criteria_no},density_max=#{density_max},density_min=#{density_min},particle_size_32um_max=#{particle_size_32um_max},particle_size_32um_min=#{particle_size_32um_min},particle_size_150um_max=#{particle_size_150um_max},particle_size_150um_min=#{particle_size_150um_min},dsc_tgi_max=#{dsc_tgi_max},dsc_tgi_min=#{dsc_tgi_min},dsc_tgf_max=#{dsc_tgf_max},dsc_tgf_min=#{dsc_tgf_min},dsc_delta_h_max=#{dsc_delta_h_max},dsc_delta_h_min=#{dsc_delta_h_min},gel_time_lt_20s_max=#{gel_time_lt_20s_max},gel_time_lt_20s_min=#{gel_time_lt_20s_min},gel_time_gt_20s_max=#{gel_time_gt_20s_max},gel_time_gt_20s_min=#{gel_time_gt_20s_min},volatile_max=#{volatile_max},volatile_min=#{volatile_min},foaming_cross_sectional_max=#{foaming_cross_sectional_max},foaming_cross_sectional_min=#{foaming_cross_sectional_min},foaming_interfacial_max=#{foaming_interfacial_max},foaming_interfacial_min=#{foaming_interfacial_min},hot_water_max=#{hot_water_max},hot_water_min=#{hot_water_min},cd_65_24h_max=#{cd_65_24h_max},#{cd_65_24h_min},last_update_time=#{last_update_time} where id=#{id}
+        UPDATE raw_material_testing_acceptance_criteria_2fbe set raw_material_testing_acceptance_criteria_no=#{raw_material_testing_acceptance_criteria_no},density_max=#{density_max},density_min=#{density_min},particle_size_32um_max=#{particle_size_32um_max},particle_size_32um_min=#{particle_size_32um_min},particle_size_150um_max=#{particle_size_150um_max},particle_size_150um_min=#{particle_size_150um_min},dsc_tgi_max=#{dsc_tgi_max},dsc_tgi_min=#{dsc_tgi_min},dsc_tgf_max=#{dsc_tgf_max},dsc_tgf_min=#{dsc_tgf_min},dsc_delta_h_max=#{dsc_delta_h_max},dsc_delta_h_min=#{dsc_delta_h_min},gel_time_lt_20s_max=#{gel_time_lt_20s_max},gel_time_lt_20s_min=#{gel_time_lt_20s_min},gel_time_gt_20s_max=#{gel_time_gt_20s_max},gel_time_gt_20s_min=#{gel_time_gt_20s_min},volatile_max=#{volatile_max},volatile_min=#{volatile_min},foaming_cross_sectional_max=#{foaming_cross_sectional_max},foaming_cross_sectional_min=#{foaming_cross_sectional_min},foaming_interfacial_max=#{foaming_interfacial_max},foaming_interfacial_min=#{foaming_interfacial_min},hot_water_max=#{hot_water_max},hot_water_min=#{hot_water_min},cd_65_24h_max=#{cd_65_24h_max},cd_65_24h_min=#{cd_65_24h_min},last_update_time=#{last_update_time} where id=#{id}
     </update>
 
     <select id="getCountAllByLike" resultType="int">
@@ -44,8 +44,8 @@
         SELECT  * from raw_material_testing_acceptance_criteria_2fbe
         ORDER BY id DESC
     </select>
-    <select id="getRawMaterialTestingAcceptanceCriteria2FbeByContractNo" resultType="com.htcsweb.entity.RawMaterialTestingAcceptanceCriteria2Fbe">
-        select o.* from contract_info c inner JOIN project_info p on c.project_no=p.project_no inner JOIN raw_material_testing_acceptance_criteria_2fbe o on p.raw_material_acceptance_criteria_2fbe_no=o.raw_material_testing_acceptance_criteria_no WHERE c.contract_no=#{contract_no}
+    <select id="getRawMaterialTestingAcceptanceCriteria2FbeByProjectNo" resultType="com.htcsweb.entity.RawMaterialTestingAcceptanceCriteria2Fbe">
+        select o.* from project_info p  inner JOIN raw_material_testing_acceptance_criteria_3lpe o on p.raw_material_acceptance_criteria_3lpe_no=o.raw_material_testing_acceptance_criteria_no  where p.project_no='20180208'
     </select>
 
 </mapper>

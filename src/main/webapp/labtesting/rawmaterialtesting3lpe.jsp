@@ -82,7 +82,6 @@
             var row = $('#RawMaterialtest3LpeDatagrids').datagrid('getSelected');
             if(row){
                 $('#hlRawMaterialtest3LpeDialog').dialog('open').dialog('setTitle','修改');
-                loadPipeBaiscInfo(row);
                 $('#odbpid').text(row.id);
                 $('#RawMaterialtest3LpeForm').form('load',row);
                 // $('#coating-date').datetimebox('setValue',getDate1(row.coating_date));
@@ -98,30 +97,22 @@
                 }
                 //异步获取标准并匹配
                 $.ajax({
-                    url:'/LabTestingAcceptanceCriteriaOperation/getAcceptanceCriteria3LpeByContractNo.action',
+                    url:'/rawMaterialACOperation/getRawMaterialStandard3LpeByProjectNo.action',
                     dataType:'json',
-                    data:{'contract_no':row.contract_no},
-                    success:function (data) {
-                        var $obj1=$("input[name='resistance_to_cd_20_28d']");
-                        var $obj2=$("input[name='resistance_to_cd_max_28d']");
-                        var $obj3=$("input[name='resistance_to_cd_65_24h']");
-                        var $obj4=$("input[name='impact_resistance_23']");
-                        var $obj5=$("input[name='impact_resistance_m40']");
-                        var $obj6=$("input[name='indentation_hardness_23']");
-                        var $obj7=$("input[name='indentation_hardness_70']");
-                        var $obj8=$("input[name='elongation_at_break']");
-                        var $obj9=$("input[name='coating_resistivity']");
-                        var $obj10=$("input[name='thermal_degradation']");
+                    data:{'project_no':row.project_no},
+                    success:function (data){
+                        var $obj1=$("input[name='epoxy_cure_time']");
+                        var $obj2=$("input[name='epoxy_gel_time']");
+                        var $obj3=$("input[name='epoxy_moisture_content']");
+                        var $obj4=$("input[name='epoxy_particle_size']");
+                        var $obj5=$("input[name='adhesion_flow_rate']");
+                        var $obj6=$("input[name='polyethylene_flow_rate']");
                         $obj1.siblings().css("background-color","#FFFFFF");
                         $obj2.siblings().css("background-color","#FFFFFF");
                         $obj3.siblings().css("background-color","#FFFFFF");
                         $obj4.siblings().css("background-color","#FFFFFF");
                         $obj5.siblings().css("background-color","#FFFFFF");
                         $obj6.siblings().css("background-color","#FFFFFF");
-                        $obj7.siblings().css("background-color","#FFFFFF");
-                        $obj8.siblings().css("background-color","#FFFFFF");
-                        $obj9.siblings().css("background-color","#FFFFFF");
-                        $obj10.siblings().css("background-color","#FFFFFF");
                         if(data!=null){
                             var res1=$obj1.val();
                             var res2=$obj2.val();
@@ -129,30 +120,18 @@
                             var res4=$obj4.val();
                             var res5=$obj5.val();
                             var res6=$obj6.val();
-                            var res7=$obj7.val();
-                            var res8=$obj8.val();
-                            var res9=$obj9.val();
-                            var res10=$obj10.val();
-                            if(!((res1>data.resistance_to_cd_20_28d_min)&&(res1<data.resistance_to_cd_20_28d_max)))
+                            if(!((res1>=data.epoxy_cure_time_min)&&(res1<=data.epoxy_cure_time_max)))
                                 $obj1.siblings().css("background-color","#F9A6A6");
-                            if(!((res2>data.resistance_to_cd_max_28d_min)&&(res2<data.resistance_to_cd_max_28d_max)))
+                            if(!((res2>=data.epoxy_gel_time_min)&&(res2<=data.epoxy_gel_time_max)))
                                 $obj2.siblings().css("background-color","#F9A6A6");
-                            if(!((res3>data.resistance_to_cd_65_24h_min)&&(res3<data.resistance_to_cd_65_24h_max)))
+                            if(!((res3>=data.epoxy_moisture_content_min)&&(res3<=data.epoxy_moisture_content_max)))
                                 $obj3.siblings().css("background-color","#F9A6A6");
-                            if(!((res4>data.impact_resistance_23_min)&&(res4<data.impact_resistance_23_max)))
+                            if(!((res4>=data.epoxy_particle_size_min)&&(res4<=data.epoxy_particle_size_max)))
                                 $obj4.siblings().css("background-color","#F9A6A6");
-                            if(!((res5>data.impact_resistance_m40_min)&&(res5<data.impact_resistance_m40_max)))
+                            if(!((res5>=data.adhesion_flow_rate_min)&&(res5<=data.adhesion_flow_rate_max)))
                                 $obj5.siblings().css("background-color","#F9A6A6");
-                            if(!((res6>data.indentation_hardness_23_min)&&(res6<data.indentation_hardness_23_max)))
+                            if(!((res6>=data.polyethylene_flow_rate_min)&&(res6<=data.polyethylene_flow_rate_max)))
                                 $obj6.siblings().css("background-color","#F9A6A6");
-                            if(!((res7>data.indentation_hardness_70_min)&&(res7<data.indentation_hardness_70_max)))
-                                $obj7.siblings().css("background-color","#F9A6A6");
-                            if(!((res8>data.elongation_at_break_min)&&(res8<data.elongation_at_break_max)))
-                                $obj8.siblings().css("background-color","#F9A6A6");
-                            if(!((res9>data.coating_resistivity_min)&&(res9<data.coating_resistivity_max)))
-                                $obj9.siblings().css("background-color","#F9A6A6");
-                            if(!((res10>data.thermal_degradation_min)&&(res10<data.thermal_degradation_max)))
-                                $obj10.siblings().css("background-color","#F9A6A6");
                         }
                     },error:function () {
 
@@ -176,16 +155,14 @@
                 url:url,
                 onSubmit:function () {
                     //表单验证
-                    setParams($("input[name='resistance_to_cd_20_28d']"));
-                    setParams($("input[name='resistance_to_cd_max_28d']"));
-                    setParams($("input[name='resistance_to_cd_65_24h']"));
-                    setParams($("input[name='impact_resistance_23']"));
-                    setParams($("input[name='impact_resistance_m40']"));
-                    setParams($("input[name='indentation_hardness_23']"));
+                    setParams($("input[name='epoxy_cure_time']"));
+                    setParams($("input[name='epoxy_gel_time']"));
+                    setParams($("input[name='epoxy_moisture_content']"));
+                    setParams($("input[name='epoxy_particle_size_150um']"));
+                    setParams($("input[name='epoxy_particle_size_250um']"));
+                    setParams($("input[name='adhesion_flow_rate']"));
                     setParams($("input[name='indentation_hardness_70']"));
-                    setParams($("input[name='elongation_at_break']"));
-                    setParams($("input[name='coating_resistivity']"));
-                    setParams($("input[name='thermal_degradation']"));
+                    setParams($("input[name='polyethylene_flow_rate']"));
                     if($("input[name='odbptime']").val()==""){
                         hlAlertFour("请输入操作时间");return false;
                     }
@@ -261,7 +238,10 @@
                 <th field="epoxy_cure_time" align="center" width="120" class="i18n1" name="epoxycuretime">环氧树脂固化时间</th>
                 <th field="epoxy_gel_time" align="center" width="120" class="i18n1" name="epoxygeltime">环氧树脂胶化时间</th>
                 <th field="epoxy_moisture_content" align="center" width="120" class="i18n1" name="epoxymoisturecontent">环氧树脂水分含量</th>
-                <th field="epoxy_particle_size" align="center" width="120" class="i18n1" name="epoxyparticlesize">环氧树脂颗粒度大小</th>
+
+                <th field="epoxy_particle_size_150um" align="center" width="120" class="i18n1" name="epoxyparticlesize150um">环氧树脂颗粒度大小150um</th>
+                <th field="epoxy_particle_size_250um" align="center" width="120" class="i18n1" name="epoxyparticlesize250um">环氧树脂颗粒度大小250um</th>
+
                 <th field="epoxy_density" align="center" width="120" class="i18n1" name="epoxydensity">环氧树脂密度</th>
                 <th field="epoxy_thermal_characteristics" align="center" width="120" class="i18n1" name="epoxythermalcharacteristics">环氧树脂热特性</th>
                 <th field="adhesion_flow_rate" align="center" width="120" class="i18n1" name="adhesionflowrate">附着层流速</th>
@@ -320,8 +300,9 @@
             <table class="ht-table">
                 <tr>
                     <td class="i18n1" name="id" width="20%">流水号</td>
-                    <td colspan="5" width="30%"><label class="hl-label" id="odbpid"></label></td>
-                    <td></td>
+                    <td colspan="5"><label class="hl-label" id="odbpid"></label></td>
+                </tr>
+                <tr>
                     <td class="i18n1" name="operatorno" width="20%">操作工编号</td>
                     <td colspan="1" width="30%">
                         <input id="lookup2" name="operator_no" class="mini-lookup" style="text-align:center;width:180px;"
@@ -330,21 +311,20 @@
                         />
                     </td>
                     <td></td>
+                    <td class="i18n1" name="operationtime">操作时间</td>
+                    <td>
+                        <input class="easyui-datetimebox" id="operation-time" type="text" name="odbptime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                    </td>
+                    <td></td>
                 </tr>
             </table>
 
             <table class="ht-table">
                 <tr>
                     <td class="i18n1" name="sampleno">试样号</td>
-                    <td>
+                    <td colspan="5">
                         <input class="easyui-textbox"   type="text" name="sample_no" value=""/>
                     </td>
-                    <td></td>
-                    <td class="i18n1" name="operationtime">操作时间</td>
-                    <td>
-                        <input class="easyui-datetimebox" id="operation-time" type="text" name="odbptime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
-                    </td>
-                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="epoxyrawmaterial">环氧树脂Epoxy_原材料</td>
@@ -383,29 +363,36 @@
                     <td class="i18n1" name="epoxymoisturecontent">环氧树脂水分含量</td>
                     <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="epoxy_moisture_content" value=""/></td>
                     <td></td>
-                    <td class="i18n1" name="epoxyparticlesize">环氧树脂颗粒度大小</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="epoxy_particle_size" value=""/></td>
+                    <td class="i18n1" name="epoxyparticlesize150um">环氧树脂颗粒度大小150um</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="epoxy_particle_size_150um" value=""/></td>
                     <td></td>
                 </tr>
+
                 <tr>
+                    <td class="i18n1" name="epoxyparticlesize250um">环氧树脂颗粒度大小250um</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="epoxy_particle_size_250um" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="epoxydensity">环氧树脂密度</td>
                     <td><input class="easyui-textbox"  type="text" name="epoxy_density" value=""/></td>
                     <td></td>
+
+                </tr>
+                <tr>
                     <td class="i18n1" name="epoxythermalcharacteristics">环氧树脂热特性</td>
                     <td><input class="easyui-textbox"  type="text" name="epoxy_thermal_characteristics" value=""/></td>
                     <td></td>
-                </tr>
-                <tr>
                     <td class="i18n1" name="adhesionflowrate">附着层流速</td>
                     <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="adhesion_flow_rate" value=""/></td>
                     <td></td>
+
+                </tr>
+                <tr>
                     <td class="i18n1" name="polyethyleneflowrate">聚乙烯流速</td>
                     <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="polyethylene_flow_rate" value=""/></td>
                     <td></td>
-                </tr>
-                <tr>
                     <td width="16%" class="i18n1" name="remark">备注</td>
-                    <td colspan="5"><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
+                    <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="result">结论</td>

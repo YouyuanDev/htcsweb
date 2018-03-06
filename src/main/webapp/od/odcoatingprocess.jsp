@@ -113,7 +113,7 @@
                         $obj.siblings().css("background-color","#FFFFFF");
                         if(data!=null) {
                             var res1 = $obj.val();
-                            if (!((res1 > data.application_temp_min) && (res1 < data.application_temp_max)))
+                            if (!((res1>=data.application_temp_min)&&(res1<=data.application_temp_max)))
                                 $obj.siblings().css("background-color", "#F9A6A6");
                         }
                     },error:function () {

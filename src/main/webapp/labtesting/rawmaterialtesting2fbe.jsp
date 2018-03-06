@@ -82,11 +82,13 @@
             var row = $('#RawMaterialtest2FbeDatagrids').datagrid('getSelected');
             if(row){
                 $('#hlRawMaterialtest2FbeDialog').dialog('open').dialog('setTitle','修改');
-                loadPipeBaiscInfo(row);
+                alert(row.project_no+":"+row.project_name);
                 $('#odbpid').text(row.id);
+                alert(row.project_no+":"+row.project_name);
                 $('#RawMaterialtest2FbeForm').form('load',row);
-                // $('#coating-date').datetimebox('setValue',getDate1(row.coating_date));
+                alert(row.project_no+":"+row.project_name);
                 $('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
+                alert(row.project_no+":"+row.project_name);
                 look1.setText(row.project_no);
                 look1.setValue(row.project_no);
                 look2.setText(row.operator_no);
@@ -97,57 +99,82 @@
                      createPictureModel(basePath,imgList);
                 }
                 //异步获取标准并匹配
-                // $.ajax({
-                //     url:'/RawMaterialTestingAcceptanceCriteriaOperation/getAcceptanceCriteria2FbeByContractNo.action',
-                //     dataType:'json',
-                //     data:{'contract_no':row.contract_no},
-                //     success:function (data) {
-                //         var $obj1=$("input[name='foaming_cross_sectional']");
-                //         var $obj2=$("input[name='foaming_interfacial']");
-                //         var $obj3=$("input[name='interfacial_contamination']");
-                //         var $obj4=$("input[name='resistance_to_hot_water_98_24h']");
-                //         var $obj5=$("input[name='resistance_to_hot_water_98_28d']");
-                //         var $obj6=$("input[name='resistance_to_cd_65_24h']");
-                //         var $obj7=$("input[name='resistance_to_cd_22_28d']");
-                //         var $obj8=$("input[name='resistance_to_cd_65_28d']");
-                //         $obj1.siblings().css("background-color","#FFFFFF");
-                //         $obj2.siblings().css("background-color","#FFFFFF");
-                //         $obj3.siblings().css("background-color","#FFFFFF");
-                //         $obj4.siblings().css("background-color","#FFFFFF");
-                //         $obj5.siblings().css("background-color","#FFFFFF");
-                //         $obj6.siblings().css("background-color","#FFFFFF");
-                //         $obj7.siblings().css("background-color","#FFFFFF");
-                //         $obj8.siblings().css("background-color","#FFFFFF");
-                //         if(data!=null){
-                //             var res1=$obj1.val();
-                //             var res2=$obj2.val();
-                //             var res3=$obj3.val();
-                //             var res4=$obj4.val();
-                //             var res5=$obj5.val();
-                //             var res6=$obj6.val();
-                //             var res7=$obj7.val();
-                //             var res8=$obj8.val();
-                //             if(!((res1>data.foaming_cross_sectional_min)&&(res1<data.foaming_cross_sectional_max)))
-                //                 $obj1.siblings().css("background-color","#F9A6A6");
-                //             if(!((res2>data.foaming_interfacial_min)&&(res2<data.foaming_interfacial_max)))
-                //                 $obj2.siblings().css("background-color","#F9A6A6");
-                //             if(!((res3>data.interfacial_contamination_min)&&(res3<data.interfacial_contamination_max)))
-                //                 $obj3.siblings().css("background-color","#F9A6A6");
-                //             if(!((res4>data.resistance_to_hot_water_98_24h_min)&&(res4<data.resistance_to_hot_water_98_24h_max)))
-                //                 $obj4.siblings().css("background-color","#F9A6A6");
-                //             if(!((res5>data.resistance_to_hot_water_98_28d_min)&&(res5<data.resistance_to_hot_water_98_28d_max)))
-                //                 $obj5.siblings().css("background-color","#F9A6A6");
-                //             if(!((res6>data.resistance_to_cd_65_24h_min)&&(res6<data.resistance_to_cd_65_24h_max)))
-                //                 $obj6.siblings().css("background-color","#F9A6A6");
-                //             if(!((res7>data.resistance_to_cd_22_28d_min)&&(res7<data.resistance_to_cd_22_28d_max)))
-                //                 $obj7.siblings().css("background-color","#F9A6A6");
-                //             if(!((res8>data.resistance_to_cd_65_28d_min)&&(res8<data.resistance_to_cd_65_28d_max)))
-                //                 $obj8.siblings().css("background-color","#F9A6A6");
-                //         }
-                //     },error:function () {
-                //
-                //     }
-                // });
+                $.ajax({
+                    url:'/rawMaterialACOperation/getRawMaterialStandard2FbeByProjectNo.action',
+                    dataType:'json',
+                    data:{'project_no':row.project_no},
+                    success:function (data) {
+                        var $obj1=$("input[name='density']");
+                        var $obj2=$("input[name='particle_size_32um']");
+                        var $obj3=$("input[name='particle_size_150um']");
+                        var $obj4=$("input[name='dsc_tgi']");
+                        var $obj5=$("input[name='dsc_tgf']");
+                        var $obj6=$("input[name='dsc_delta_h']");
+                        var $obj7=$("input[name='gel_time_lt_20s']");
+                        var $obj8=$("input[name='gel_time_gt_20s']");
+                        var $obj9=$("input[name='powder_volatile']");
+                        var $obj10=$("input[name='foaming_cross_sectional']");
+                        var $obj11=$("input[name='foaming_interfacial']");
+                        // var $obj12=$("input[name='hot_water']");
+                        var $obj13=$("input[name='cd_65_24h']");
+                        $obj1.siblings().css("background-color","#FFFFFF");
+                        $obj2.siblings().css("background-color","#FFFFFF");
+                        $obj3.siblings().css("background-color","#FFFFFF");
+                        $obj4.siblings().css("background-color","#FFFFFF");
+                        $obj5.siblings().css("background-color","#FFFFFF");
+                        $obj6.siblings().css("background-color","#FFFFFF");
+                        $obj7.siblings().css("background-color","#FFFFFF");
+                        $obj8.siblings().css("background-color","#FFFFFF");
+                        $obj9.siblings().css("background-color","#FFFFFF");
+                        $obj10.siblings().css("background-color","#FFFFFF");
+                        $obj11.siblings().css("background-color","#FFFFFF");
+                        // $obj12.siblings().css("background-color","#FFFFFF");
+                        $obj13.siblings().css("background-color","#FFFFFF");
+                        if(data!=null){
+                            var res1=$obj1.val();
+                            var res2=$obj2.val();
+                            var res3=$obj3.val();
+                            var res4=$obj4.val();
+                            var res5=$obj5.val();
+                            var res6=$obj6.val();
+                            var res7=$obj7.val();
+                            var res8=$obj8.val();
+                            var res9=$obj9.val();
+                            var res10=$obj10.val();
+                            var res11=$obj11.val();
+                            // var res12=$obj12.val();
+                            var res13=$obj13.val();
+                            if(!((res1>=data.density_min)&&(res1<=data.density_max)))
+                                $obj1.siblings().css("background-color","#F9A6A6");
+                            if(!((res2>=data.particle_size_32um_min)&&(res2<=data.particle_size_32um_max)))
+                                $obj2.siblings().css("background-color","#F9A6A6");
+                            if(!((res3>=data.particle_size_150um_min)&&(res3<=data.particle_size_150um_max)))
+                                $obj3.siblings().css("background-color","#F9A6A6");
+                            if(!((res4>=data.dsc_tgi_min)&&(res4<=data.dsc_tgi_max)))
+                                $obj4.siblings().css("background-color","#F9A6A6");
+                            if(!((res5>=data.dsc_tgf_min)&&(res5<=data.dsc_tgf_max)))
+                                $obj5.siblings().css("background-color","#F9A6A6");
+                            if(!((res6>=data.dsc_delta_h_min)&&(res6<=data.dsc_delta_h_max)))
+                                $obj6.siblings().css("background-color","#F9A6A6");
+                            if(!((res7>=data.gel_time_lt_20s_min)&&(res7<=data.gel_time_lt_20s_max)))
+                                $obj7.siblings().css("background-color","#F9A6A6");
+                            if(!((res8>=data.gel_time_gt_20s_min)&&(res8<=data.gel_time_gt_20s_max)))
+                                $obj8.siblings().css("background-color","#F9A6A6");
+                            if(!((res9>=data.volatile_min)&&(res9<=data.volatile_max)))
+                                $obj9.siblings().css("background-color","#F9A6A6");
+                            if(!((res10>=data.foaming_cross_sectional_min)&&(res10<=data.foaming_cross_sectional_max)))
+                                $obj10.siblings().css("background-color","#F9A6A6");
+                            if(!((res11>=data.foaming_interfacial_min)&&(res11<=data.foaming_interfacial_max)))
+                                $obj11.siblings().css("background-color","#F9A6A6");
+                            // if(!((res12>=data.hot_water_min)&&(res12<=data.hot_water_max)))
+                            //     $obj12.siblings().css("background-color","#F9A6A6");
+                            if(!((res13>=data.cd_65_24h_min)&&(res13<=data.cd_65_24h_max)))
+                                $obj13.siblings().css("background-color","#F9A6A6");
+                        }
+                    },error:function () {
+
+                    }
+                });
                 url="/RawMaterialTesting2FbeOperation/saveRawMaterialTest2Fbe.action?id="+row.id;
             }else{
                 hlAlertTwo();
@@ -179,7 +206,7 @@
                     setParams($("input[name='foaming_interfacial']"));
                     setParams($("input[name='impact']"));
                     setParams($("input[name='flexibility']"));
-                    setParams($("input[name='hot_water']"));
+                    // setParams($("input[name='hot_water']"));
                     setParams($("input[name='cd_65_24h']"));
                     if($("input[name='odbptime']").val()==""){
                         hlAlertFour("请输入操作时间");return false;
@@ -240,7 +267,8 @@
                        <th data-options="field:'ck',checkbox:true"></th>
                        <th field="id" align="center" width="100" class="i18n1" name="id">流水号</th>
                        <th field="project_name" align="center" width="120" class="i18n1" name="projectname">项目名称</th>
-                       <th field="operator_no" align="center" width="100" class="i18n1" name="operatorno">操作工编号</th>
+                      <th field="project_no" align="center" width="120" hidden="true" class="i18n1" name="projectno">项目编号</th>
+                       <th field="operator_no" align="center" width="100"  class="i18n1" name="operatorno">操作工编号</th>
 
                        <th field="sample_no" align="center" width="120" class="i18n1" name="sampleno">试样号</th>
                        <th field="raw_material" align="center" width="100" hidden="true" class="i18n1" name="rawmaterial">原材料</th>
@@ -314,14 +342,21 @@
        <table class="ht-table">
            <tr>
                <td class="i18n1" name="id" width="20%">流水号</td>
-               <td colspan="5" width="30%"><label class="hl-label" id="odbpid"></label></td>
-               <td></td>
+               <td colspan="5"><label class="hl-label" id="odbpid"></label></td>
+           </tr>
+           <tr>
                <td class="i18n1" name="operatorno" width="20%">操作工编号</td>
                <td colspan="1" width="30%">
                    <input id="lookup2" name="operator_no" class="mini-lookup" style="text-align:center;width:180px;"
                           textField="employee_no" valueField="id" popupWidth="auto"
                           popup="#gridPanel2" grid="#datagrid2" multiSelect="false"
                    />
+               </td>
+               <td></td>
+               <td class="i18n1" name="operationtime">操作时间</td>
+               <td>
+                   <input class="easyui-datetimebox" id="operation-time" type="text" name="odbptime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+
                </td>
                <td></td>
            </tr>
@@ -334,96 +369,109 @@
                    <input class="easyui-textbox"   type="text" name="sample_no" value=""/>
                </td>
                <td></td>
-               <td class="i18n1" name="operationtime">操作时间</td>
-               <td>
-                   <input class="easyui-datetimebox" id="operation-time" type="text" name="odbptime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+               <td class="i18n1" name="rawmaterial">原材料</td>
+               <td><input class="easyui-textbox hl-errorcolor"  type="text" name="raw_material" value=""/></td>
+               <td></td>
+           </tr>
+           <tr>
+               <td class="i18n1" name="batchno">批号</td>
+               <td><input class="easyui-textbox"   type="text" name="batch_no" value=""/></td>
+               <td></td>
+               <td class="i18n1" name="density">密度</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2"  type="text" name="density" value=""/></td>
+               <td></td>
+           </tr>
+           <tr>
+               <td class="i18n1" name="particlesize32um">颗粒度 32um 所占比例</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="particle_size_32um" value=""/></td>
+               <td></td>
+               <td width="16%" class="i18n1" name="particlesize150um">颗粒度 150um 所占比例</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="paricle_size_150um" value=""/></td>
+               <td></td>
+           </tr>
 
+           <tr>
+               <td width="16%" class="i18n1" name="dsctgi">dsc tgi 比例</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2"  type="text" name="dsc_tgi" value=""/></td>
+               <td></td>
+               <td class="i18n1" name="dsctgf">dsc tgf 比例</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="dsc_tgf" value=""/></td>
+               <td></td>
+           </tr>
+           <tr>
+               <td class="i18n1" name="dscdeltah">dsc delta H 比例</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="dsc_delta_h" value=""/></td>
+               <td></td>
+               <td class="i18n1" name="geltimelt20s">固化度  小于20秒</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="gel_time_lt_20s" value=""/></td>
+               <td></td>
+           </tr>
+           <tr>
+               <td class="i18n1" name="geltimegt20s">固化度  大于20秒</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="gel_time_gt_20s" value=""/></td>
+               <td></td>
+               <td class="i18n1" name="powdervolatile">挥发性</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="powder_volatile" value=""/></td>
+               <td></td>
+           </tr>
+           <tr>
+               <td class="i18n1" name="foamingcrosssectional">孔隙率  断面</td>
+               <td>
+                   <%--<input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="foaming_cross_sectional" value=""/>--%>
+                       <select id="foaming_cross_sectional" class="easyui-combobox" data-options="editable:false" name="foaming_cross_sectional" style="width:200px;">
+                           <option value="1">1级</option>
+                           <option value="2">2级</option>
+                           <option value="3">3级</option>
+                           <option value="4">4级</option>
+                       </select>
+               </td>
+               <td></td>
+               <td class="i18n1" name="foaminginterfacial">孔隙率  表面</td>
+               <td>
+                   <%--<input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="foaming_interfacial" value=""/>--%>
+                       <select id="foaming_interfacial" class="easyui-combobox" data-options="editable:false" name="foaming_interfacial" style="width:200px;">
+                           <option value="1">1级</option>
+                           <option value="2">2级</option>
+                           <option value="3">3级</option>
+                           <option value="4">4级</option>
+                       </select>
                </td>
                <td></td>
            </tr>
            <tr>
-               <td class="i18n1" name="rawmaterial">原材料</td>
-               <td><input class="easyui-textbox hl-errorcolor"  type="text" name="raw_material" value=""/></td>
-               <td></td>
-               <td class="i18n1" name="batchno">批号</td>
-               <td><input class="easyui-textbox"   type="text" name="batch_no" value=""/></td>
-               <td></td>
-           </tr>
-           <tr>
-               <td class="i18n1" name="density">密度</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:2"  type="text" name="density" value=""/></td>
-               <td></td>
-               <td class="i18n1" name="particlesize32um">颗粒度 32um 所占比例</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="particle_size_32um" value=""/></td>
-               <td></td>
-           </tr>
-
-           <tr>
-               <td width="16%" class="i18n1" name="particlesize150um">颗粒度 150um 所占比例</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="paricle_size_150um" value=""/></td>
-               <td></td>
-               <td width="16%" class="i18n1" name="dsctgi">dsc tgi 比例</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:2"  type="text" name="dsc_tgi" value=""/></td>
-               <td></td>
-           </tr>
-           <tr>
-               <td class="i18n1" name="dsctgf">dsc tgf 比例</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="dsc_tgf" value=""/></td>
-               <td></td>
-               <td class="i18n1" name="dscdeltah">dsc delta H 比例</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="dsc_delta_h" value=""/></td>
-               <td></td>
-           </tr>
-           <tr>
-               <td class="i18n1" name="geltimelt20s">固化度  小于20秒</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="gel_time_lt_20s" value=""/></td>
-               <td></td>
-               <td class="i18n1" name="geltimegt20s">固化度  大于20秒</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="gel_time_gt_20s" value=""/></td>
-               <td></td>
-           </tr>
-           <tr>
-               <td class="i18n1" name="powdervolatile">挥发性</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="powder_volatile" value=""/></td>
-               <td></td>
-               <td class="i18n1" name="foamingcrosssectional">孔隙率  断面</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="foaming_cross_sectional" value=""/></td>
-               <td></td>
-           </tr>
-           <tr>
-               <td class="i18n1" name="foaminginterfacial">孔隙率  表面</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="foaming_interfacial" value=""/></td>
-               <td></td>
                <td class="i18n1" name="impact">冲击</td>
                <td><input class="easyui-textbox"  type="text" name="impact" value=""/></td>
                <td></td>
-           </tr>
-           <tr>
                <td class="i18n1" name="flexibility">弯曲</td>
                <td><input class="easyui-textbox"   type="text" name="flexibility" value=""/></td>
                <td></td>
-               <td class="i18n1" name="hotwater">水煮</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="hot_water" value=""/></td>
-               <td></td>
            </tr>
            <tr>
+               <td class="i18n1" name="hotwater">水煮</td>
+               <td>
+                   <%--<input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="hot_water" value=""/>--%>
+                   <select id="hot_water" class="easyui-combobox" data-options="editable:false" name="hot_water" style="width:200px;">
+                       <option value="1">1级</option>
+                       <option value="2">2级</option>
+                       <option value="3">3级</option>
+                       <option value="4">4级</option>
+                   </select>
+               </td>
+               <td></td>
                <td class="i18n1" name="cd6524h">阴极剥离 65度 24小时</td>
                <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="cd_65_24h" value=""/></td>
                <td></td>
-               <td width="16%" class="i18n1" name="remark">备注</td>
-               <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
-               <td></td>
            </tr>
            <tr>
-               <td width="16%" class="i18n1" name="result">结论</td>
+               <td class="i18n1" name="remark">备注</td>
+               <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
+               <td></td>
+               <td  class="i18n1" name="result">结论</td>
                <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
                    <option value="0">不合格,复验</option>
                    <option value="1">合格</option>
                    <option value="2">待定</option>
                </select></td>
-               <td></td>
-               <td ></td>
-               <td></td>
                <td></td>
            </tr>
        </table>

@@ -23,7 +23,8 @@ public class RawMaterialTesting3Lpe {
     private float epoxy_cure_time;
     private float epoxy_gel_time;
     private float epoxy_moisture_content;
-    private float epoxy_particle_size;
+    private float epoxy_particle_size_150um;
+    private float epoxy_particle_size_250um;
     private String epoxy_density;
     private String epoxy_thermal_characteristics;
     private float adhesion_flow_rate;
@@ -34,7 +35,7 @@ public class RawMaterialTesting3Lpe {
     public RawMaterialTesting3Lpe() {
     }
 
-    public RawMaterialTesting3Lpe(int id, String project_no, String sample_no, String operator_no, Date operation_time, String epoxy_raw_material, String epoxy_batch_no, String adhesion_raw_material, String adhesion_batch_no, String polyethylene_raw_material, String polyethylene_batch_no, float epoxy_cure_time, float epoxy_gel_time, float epoxy_moisture_content, float epoxy_particle_size, String epoxy_density, String epoxy_thermal_characteristics, float adhesion_flow_rate, float polyethylene_flow_rate, String upload_files, String remark, String result) {
+    public RawMaterialTesting3Lpe(int id, String project_no, String sample_no, String operator_no, Date operation_time, String epoxy_raw_material, String epoxy_batch_no, String adhesion_raw_material, String adhesion_batch_no, String polyethylene_raw_material, String polyethylene_batch_no, float epoxy_cure_time, float epoxy_gel_time, float epoxy_moisture_content, float epoxy_particle_size_150um, float epoxy_particle_size_250um, String epoxy_density, String epoxy_thermal_characteristics, float adhesion_flow_rate, float polyethylene_flow_rate, String upload_files, String remark, String result) {
         this.id = id;
         this.project_no = project_no;
         this.sample_no = sample_no;
@@ -49,7 +50,8 @@ public class RawMaterialTesting3Lpe {
         this.epoxy_cure_time = epoxy_cure_time;
         this.epoxy_gel_time = epoxy_gel_time;
         this.epoxy_moisture_content = epoxy_moisture_content;
-        this.epoxy_particle_size = epoxy_particle_size;
+        this.epoxy_particle_size_150um = epoxy_particle_size_150um;
+        this.epoxy_particle_size_250um = epoxy_particle_size_250um;
         this.epoxy_density = epoxy_density;
         this.epoxy_thermal_characteristics = epoxy_thermal_characteristics;
         this.adhesion_flow_rate = adhesion_flow_rate;
@@ -171,12 +173,20 @@ public class RawMaterialTesting3Lpe {
         this.epoxy_moisture_content = epoxy_moisture_content;
     }
 
-    public float getEpoxy_particle_size() {
-        return epoxy_particle_size;
+    public float getEpoxy_particle_size_150um() {
+        return epoxy_particle_size_150um;
     }
 
-    public void setEpoxy_particle_size(float epoxy_particle_size) {
-        this.epoxy_particle_size = epoxy_particle_size;
+    public void setEpoxy_particle_size_150um(float epoxy_particle_size_150um) {
+        this.epoxy_particle_size_150um = epoxy_particle_size_150um;
+    }
+
+    public float getEpoxy_particle_size_250um() {
+        return epoxy_particle_size_250um;
+    }
+
+    public void setEpoxy_particle_size_250um(float epoxy_particle_size_250um) {
+        this.epoxy_particle_size_250um = epoxy_particle_size_250um;
     }
 
     public String getEpoxy_density() {

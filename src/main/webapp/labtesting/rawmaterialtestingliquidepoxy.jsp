@@ -82,7 +82,6 @@
             var row = $('#RawMaterialtestEpoxyDatagrids').datagrid('getSelected');
             if(row){
                 $('#hlRawMaterialtestEpoxyDialog').dialog('open').dialog('setTitle','修改');
-                loadPipeBaiscInfo(row);
                 $('#odbpid').text(row.id);
                 $('#RawMaterialtestEpoxyForm').form('load',row);
                 //$('#coating-date').datetimebox('setValue',getDate1(row.coating_date));
@@ -234,14 +233,21 @@
             <table class="ht-table">
                 <tr>
                     <td class="i18n1" name="id" width="20%">流水号</td>
-                    <td><label class="hl-label" id="odbpid"></label></td>
-                    <td></td>
+                    <td colspan="5"><label class="hl-label" id="odbpid"></label></td>
+                </tr>
+                <tr>
                     <td class="i18n1" name="operatorno" width="20%">操作工编号</td>
                     <td>
                         <input id="lookup2" name="operator_no" class="mini-lookup" style="text-align:center;width:180px;"
                                textField="employee_no" valueField="id" popupWidth="auto"
                                popup="#gridPanel2" grid="#datagrid2" multiSelect="false"
                         />
+                    </td>
+                    <td></td>
+                    <td class="i18n1" name="operationtime">操作时间</td>
+                    <td>
+                        <input class="easyui-datetimebox" id="operation-time" type="text" name="odbptime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+
                     </td>
                     <td></td>
                 </tr>
@@ -254,26 +260,17 @@
                         <input class="easyui-textbox"   type="text" name="sample_no" value=""/>
                     </td>
                     <td></td>
-                    <td class="i18n1" name="operationtime">操作时间</td>
-                    <td>
-                        <input class="easyui-datetimebox" id="operation-time" type="text" name="odbptime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
-
-                    </td>
-                    <td></td>
-                </tr>
-                <tr>
                     <td class="i18n1" name="potlife">适用期</td>
                     <td><input class="easyui-textbox"  type="text" name="pot_life" value=""/></td>
                     <td></td>
+                </tr>
+                <tr>
                     <td class="i18n1" name="viscosity">粘度</td>
                     <td><input class="easyui-textbox"   type="text" name="viscosity" value=""/></td>
                     <td></td>
-                </tr>
-
-
-                <tr>
-                    <td width="16%" class="i18n1" name="remark">备注</td>
-                    <td colspan="5"><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
+                    <td class="i18n1" name="remark">备注</td>
+                    <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="result">结论</td>

@@ -131,13 +131,13 @@
                             var res2=$obj2.val();
                             var res3=$obj3.val();
                             var res4=$obj4.val();
-                            if(!((res1>data.dry_film_thickness_min)&&(res1<data.dry_film_thickness_max)))
+                            if(!((res1>=data.dry_film_thickness_min)&&(res1<=data.dry_film_thickness_max)))
                                 $obj1.siblings().css("background-color","#F9A6A6");
-                            if(!((res2>data.dry_film_thickness_min)&&(res2<data.dry_film_thickness_max)))
+                            if(!((res2>=data.dry_film_thickness_min)&&(res2<=data.dry_film_thickness_max)))
                                 $obj2.siblings().css("background-color","#F9A6A6");
-                            if(!((res3>data.cutback_min)&&(res3<data.cutback_max)))
+                            if(!((res3>=data.cutback_min)&&(res3<=data.cutback_max)))
                                 $obj3.siblings().css("background-color","#F9A6A6");
-                            if(!((res4>data.residual_magnetism_min)&&(res4<data.residual_magnetism_max)))
+                            if(!((res4>=data.residual_magnetism_min)&&(res4<=data.residual_magnetism_max)))
                                 $obj4.siblings().css("background-color","#F9A6A6");
                         }
                     },error:function () {

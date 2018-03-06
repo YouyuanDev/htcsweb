@@ -105,7 +105,7 @@
                         var $obj1=$("input[name='foaming_cross_sectional']");
                         var $obj2=$("input[name='foaming_interfacial']");
                         var $obj3=$("input[name='interfacial_contamination']");
-                        var $obj4=$("input[name='resistance_to_hot_water_98_24h']");
+                        // var $obj4=$("input[name='resistance_to_hot_water_98_24h']");
                         var $obj5=$("input[name='resistance_to_hot_water_98_28d']");
                         var $obj6=$("input[name='resistance_to_cd_65_24h']");
                         var $obj7=$("input[name='resistance_to_cd_22_28d']");
@@ -113,7 +113,7 @@
                         $obj1.siblings().css("background-color","#FFFFFF");
                         $obj2.siblings().css("background-color","#FFFFFF");
                         $obj3.siblings().css("background-color","#FFFFFF");
-                        $obj4.siblings().css("background-color","#FFFFFF");
+                        //$obj4.siblings().css("background-color","#FFFFFF");
                         $obj5.siblings().css("background-color","#FFFFFF");
                         $obj6.siblings().css("background-color","#FFFFFF");
                         $obj7.siblings().css("background-color","#FFFFFF");
@@ -122,26 +122,26 @@
                             var res1=$obj1.val();
                             var res2=$obj2.val();
                             var res3=$obj3.val();
-                            var res4=$obj4.val();
+                            // var res4=$obj4.val();
                             var res5=$obj5.val();
                             var res6=$obj6.val();
                             var res7=$obj7.val();
                             var res8=$obj8.val();
-                            if(!((res1>data.foaming_cross_sectional_min)&&(res1<data.foaming_cross_sectional_max)))
+                            if(!((res1>=data.foaming_cross_sectional_min)&&(res1<=data.foaming_cross_sectional_max)))
                                 $obj1.siblings().css("background-color","#F9A6A6");
-                            if(!((res2>data.foaming_interfacial_min)&&(res2<data.foaming_interfacial_max)))
+                            if(!((res2>=data.foaming_interfacial_min)&&(res2<=data.foaming_interfacial_max)))
                                 $obj2.siblings().css("background-color","#F9A6A6");
-                            if(!((res3>data.interfacial_contamination_min)&&(res3<data.interfacial_contamination_max)))
+                            if(!((res3>=data.interfacial_contamination_min)&&(res3<=data.interfacial_contamination_max)))
                                 $obj3.siblings().css("background-color","#F9A6A6");
-                            if(!((res4>data.resistance_to_hot_water_98_24h_min)&&(res4<data.resistance_to_hot_water_98_24h_max)))
-                                $obj4.siblings().css("background-color","#F9A6A6");
-                            if(!((res5>data.resistance_to_hot_water_98_28d_min)&&(res5<data.resistance_to_hot_water_98_28d_max)))
+                            // if(!((res4>=data.resistance_to_hot_water_98_24h_min)&&(res4<=data.resistance_to_hot_water_98_24h_max)))
+                            //     $obj4.siblings().css("background-color","#F9A6A6");
+                            if(!((res5>=data.resistance_to_hot_water_98_28d_min)&&(res5<=data.resistance_to_hot_water_98_28d_max)))
                                 $obj5.siblings().css("background-color","#F9A6A6");
-                            if(!((res6>data.resistance_to_cd_65_24h_min)&&(res6<data.resistance_to_cd_65_24h_max)))
+                            if(!((res6>=data.resistance_to_cd_65_24h_min)&&(res6<=data.resistance_to_cd_65_24h_max)))
                                 $obj6.siblings().css("background-color","#F9A6A6");
-                            if(!((res7>data.resistance_to_cd_22_28d_min)&&(res7<data.resistance_to_cd_22_28d_max)))
+                            if(!((res7>=data.resistance_to_cd_22_28d_min)&&(res7<=data.resistance_to_cd_22_28d_max)))
                                 $obj7.siblings().css("background-color","#F9A6A6");
-                            if(!((res8>data.resistance_to_cd_65_28d_min)&&(res8<data.resistance_to_cd_65_28d_max)))
+                            if(!((res8>=data.resistance_to_cd_65_28d_min)&&(res8<=data.resistance_to_cd_65_28d_max)))
                                 $obj8.siblings().css("background-color","#F9A6A6");
                         }
                     },error:function () {
