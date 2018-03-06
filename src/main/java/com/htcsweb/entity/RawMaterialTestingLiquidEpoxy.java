@@ -10,10 +10,11 @@ public class RawMaterialTestingLiquidEpoxy {
     private int id; //流水号
     private String project_no;
     private String sample_no;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private String operator_no;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date operation_time;
+    private String raw_material;
+    private String batch_no;
     private String pot_life;
     private String viscosity;
     private String upload_files;
@@ -23,18 +24,22 @@ public class RawMaterialTestingLiquidEpoxy {
     public RawMaterialTestingLiquidEpoxy() {
     }
 
-    public RawMaterialTestingLiquidEpoxy(int id, String project_no, String sample_no, String operator_no, Date operation_time, String pot_life, String viscosity, String upload_files, String remark, String result) {
+    public RawMaterialTestingLiquidEpoxy(int id, String project_no, String sample_no, String operator_no, Date operation_time, String raw_material, String batch_no, String pot_life, String viscosity, String upload_files, String remark, String result) {
         this.id = id;
         this.project_no = project_no;
         this.sample_no = sample_no;
         this.operator_no = operator_no;
         this.operation_time = operation_time;
+        this.raw_material = raw_material;
+        this.batch_no = batch_no;
         this.pot_life = pot_life;
         this.viscosity = viscosity;
         this.upload_files = upload_files;
         this.remark = remark;
         this.result = result;
     }
+
+
     public int getId() {
         return id;
     }
@@ -73,6 +78,22 @@ public class RawMaterialTestingLiquidEpoxy {
 
     public void setOperation_time(Date operation_time) {
         this.operation_time = operation_time;
+    }
+
+    public String getRaw_material() {
+        return raw_material;
+    }
+
+    public void setRaw_material(String raw_material) {
+        this.raw_material = raw_material;
+    }
+
+    public String getBatch_no() {
+        return batch_no;
+    }
+
+    public void setBatch_no(String batch_no) {
+        this.batch_no = batch_no;
     }
 
     public String getPot_life() {

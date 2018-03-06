@@ -6,7 +6,7 @@
 <mapper namespace="com.htcsweb.dao.RawMaterialTestingLiquidEpoxyDao">
 
     <insert id="addRawMaterialTestEpoxy" parameterType="com.htcsweb.entity.RawMaterialTestingLiquidEpoxy">
-       INSERT INTO raw_material_testing_liquid_epoxy(operator_no,project_no,operation_time,sample_no,pot_life,viscosity,result,upload_files,remark) VALUES (#{operator_no},#{project_no},#{operation_time},#{sample_no},#{pot_life},#{viscosity},#{result},#{upload_files},#{remark})
+       INSERT INTO raw_material_testing_liquid_epoxy(operator_no,project_no,operation_time,sample_no,pot_life,viscosity,result,upload_files,remark,raw_material,batch_no) VALUES (#{operator_no},#{project_no},#{operation_time},#{sample_no},#{pot_life},#{viscosity},#{result},#{upload_files},#{remark},#{raw_material},#{batch_no})
     </insert>
     <delete id="delRawMaterialTestEpoxy">
         delete from raw_material_testing_liquid_epoxy WHERE
@@ -16,7 +16,7 @@
     </delete>
 
     <update id="updateRawMaterialTestEpoxy" parameterType="com.htcsweb.entity.RawMaterialTestingLiquidEpoxy">
-       UPDATE raw_material_testing_liquid_epoxy set operator_no=#{operator_no},project_no=#{project_no},operation_time=#{operation_time},sample_no=#{sample_no},pot_life=#{pot_life},viscosity=#{viscosity},result=#{result},upload_files=#{upload_files},remark=#{remark} where id=#{id}
+       UPDATE raw_material_testing_liquid_epoxy set operator_no=#{operator_no},project_no=#{project_no},operation_time=#{operation_time},sample_no=#{sample_no},pot_life=#{pot_life},viscosity=#{viscosity},result=#{result},upload_files=#{upload_files},remark=#{remark}, raw_material=#{raw_material}, batch_no=#{batch_no} where id=#{id}
     </update>
 
 
