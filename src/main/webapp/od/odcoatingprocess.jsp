@@ -394,7 +394,7 @@
                 <tr>
                     <td class="i18n1" name="coatinglinespeed">涂敷线速度</td>
                     <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="coating_line_speed" value=""/></td>
-                    <td>10~20</td>
+                    <td></td>
                     <td class="i18n1" name="applicationtemp">中频温度</td>
                     <td><input class="easyui-numberbox"  data-options="min:0,precision:2" type="text" name="application_temp" value=""/></td>
                     <td></td>

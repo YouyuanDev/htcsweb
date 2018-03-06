@@ -463,7 +463,7 @@
                 <tr>
                     <td class="i18n1" name="airtemp">环境温度</td>
                     <td><input class="easyui-numberbox" data-options="min:0,precision:1" type="text" name="air_temp" value=""/></td>
-                    <td>10~20</td>
+                    <td></td>
                     <td class="i18n1" name="relativehumidity">相对湿度</td>
                     <td><input class="easyui-numberbox"  data-options="min:0,precision:1" type="text" name="relative_humidity" value=""/></td>
                     <td></td>
@@ -483,7 +483,7 @@
                     <td></td>
                     <td width="16%" class="i18n1" name="surfacedustrating">灰尘度</td>
                     <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="surface_dust_rating" value=""/></td>
-                    <td><=25</td>
+                    <td></td>
                 </tr>
 
                 <tr>
@@ -515,6 +515,7 @@
                         <option value="1">合格,进入外涂敷工序</option>
                         <option value="2">待定</option>
                     </select></td>
+                    <td></td>
                     <td width="16%" class="i18n1" name="remark">备注</td>
                     <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
                     <td></td>

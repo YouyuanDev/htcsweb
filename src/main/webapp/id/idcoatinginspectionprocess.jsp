@@ -419,7 +419,7 @@
                 <tr>
                     <td class="i18n1" name="dryfilmthicknessmax">最大干膜厚度</td>
                     <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="dry_film_thickness_max" value=""/></td>
-                    <td>10~20</td>
+                    <td></td>
                     <td class="i18n1" name="dryfilmthicknessmin">最小干膜厚度</td>
                     <td><input class="easyui-numberbox"  data-options="min:0,precision:2" type="text" name="dry_film_thickness_min" value=""/></td>
                     <td></td>

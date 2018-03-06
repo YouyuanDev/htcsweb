@@ -428,7 +428,7 @@
                 <tr>
                     <td class="i18n1" name="basecoatthickness">底层涂层厚度</td>
                     <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="base_coat_thickness" value=""/></td>
-                    <td>10~20</td>
+                    <td></td>
                     <td class="i18n1" name="topcoatthickness">面层涂层厚度</td>
                     <td><input class="easyui-numberbox"  data-options="min:0,precision:2" type="text" name="top_coat_thickness" value=""/></td>
                     <td></td>

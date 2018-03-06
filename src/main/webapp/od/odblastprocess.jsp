@@ -362,7 +362,7 @@
            <tr>
                <td class="i18n1" name="alkalinedwelltime">碱洗时间</td>
                <td><input class="easyui-numberbox hl-errorcolor" data-options="min:0,precision:0" type="text" name="alkaline_dwell_time" value=""/></td>
-               <td>10~20</td>
+               <td></td>
                <td class="i18n1" name="alkalineconcentration">碱浓度</td>
                <td><input class="easyui-numberbox"  data-options="min:0,precision:2" type="text" name="alkaline_concentration" value=""/></td>
                <td></td>
@@ -392,7 +392,7 @@
                <td></td>
                <td width="16%" class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</td>
                <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="salt_contamination_before_blasting" value=""/></td>
-               <td><=25</td>
+               <td></td>
            </tr>
 
            <tr>
@@ -413,15 +413,12 @@
            </tr>
            <tr>
                <td width="16%" class="i18n1" name="result">结论</td>
-               <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
+               <td colspan="5"><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
                    <option value="0">不合格,重新打砂处理</option>
                    <option value="1">合格,进入外喷砂检验工序</option>
                    <option value="2">待定</option>
                </select></td>
-               <td></td>
-               <td ></td>
-               <td></td>
-               <td></td>
+
            </tr>
        </table>
            <input type="hidden" id="fileslist" name="upload_files" value=""/>
