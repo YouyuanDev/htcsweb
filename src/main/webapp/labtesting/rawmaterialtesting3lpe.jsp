@@ -105,15 +105,17 @@
                         var $obj1=$("input[name='epoxy_cure_time']");
                         var $obj2=$("input[name='epoxy_gel_time']");
                         var $obj3=$("input[name='epoxy_moisture_content']");
-                        var $obj4=$("input[name='epoxy_particle_size']");
+                        var $obj4=$("input[name='epoxy_particle_size_150um']");
                         var $obj5=$("input[name='adhesion_flow_rate']");
                         var $obj6=$("input[name='polyethylene_flow_rate']");
+                        var $obj7=$("input[name='epoxy_particle_size_250um']");
                         $obj1.siblings().css("background-color","#FFFFFF");
                         $obj2.siblings().css("background-color","#FFFFFF");
                         $obj3.siblings().css("background-color","#FFFFFF");
                         $obj4.siblings().css("background-color","#FFFFFF");
                         $obj5.siblings().css("background-color","#FFFFFF");
                         $obj6.siblings().css("background-color","#FFFFFF");
+                        $obj7.siblings().css("background-color","#FFFFFF");
                         if(data!=null){
                             var res1=$obj1.val();
                             var res2=$obj2.val();
@@ -121,18 +123,21 @@
                             var res4=$obj4.val();
                             var res5=$obj5.val();
                             var res6=$obj6.val();
+                            var res7=$obj7.val();
                             if(!((res1>=data.epoxy_cure_time_min)&&(res1<=data.epoxy_cure_time_max)))
                                 $obj1.siblings().css("background-color","#F9A6A6");
                             if(!((res2>=data.epoxy_gel_time_min)&&(res2<=data.epoxy_gel_time_max)))
                                 $obj2.siblings().css("background-color","#F9A6A6");
                             if(!((res3>=data.epoxy_moisture_content_min)&&(res3<=data.epoxy_moisture_content_max)))
                                 $obj3.siblings().css("background-color","#F9A6A6");
-                            if(!((res4>=data.epoxy_particle_size_min)&&(res4<=data.epoxy_particle_size_max)))
+                            if(!((res4>=data.epoxy_particle_size_150um_min)&&(res4<=data.epoxy_particle_size_150um_max)))
                                 $obj4.siblings().css("background-color","#F9A6A6");
                             if(!((res5>=data.adhesion_flow_rate_min)&&(res5<=data.adhesion_flow_rate_max)))
                                 $obj5.siblings().css("background-color","#F9A6A6");
                             if(!((res6>=data.polyethylene_flow_rate_min)&&(res6<=data.polyethylene_flow_rate_max)))
                                 $obj6.siblings().css("background-color","#F9A6A6");
+                            if(!((res7>=data.epoxy_particle_size_250um_min)&&(res7<=data.epoxy_particle_size_250um_max)))
+                                $obj7.siblings().css("background-color","#F9A6A6");
                         }
                     },error:function () {
 
