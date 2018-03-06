@@ -406,8 +406,8 @@
                 <th field="id_coating_acceptance_criteria_no" align="center" width="100" class="i18n1" name="idcoatingacceptancecriteriano">ID acceptance_criteria</th>
                 <th field="lab_testing_acceptance_criteria_2fbe_no" align="center" width="100" class="i18n1" name="labtestingacceptancecriteria2fbeno">Lab testing acceptance criteria 2fbe</th>
                 <th field="lab_testing_acceptance_criteria_3lpe_no" align="center" width="100" class="i18n1" name="labtestingacceptancecriteria3lpeno">Lab testing acceptance criteria 3lpe</th>
-                <th field="raw_material_acceptance_criteria_2fbe_no" align="center" width="100" class="i18n1" name="rawmaterialacceptancecriteria2fbeno">Raw Material Testing acceptance criteria 2fbe</th>
-                <th field="raw_material_acceptance_criteria_3lpe_no" align="center" width="100" class="i18n1" name="rawmaterialacceptancecriteria3lpeno">>Raw Material Testing acceptance criteria 3lpe</th>
+                <th field="raw_material_acceptance_criteria_2fbe_no" align="center" width="100" class="i18n1" name="rawmaterialtestingacceptancecriteria2fbeno">Raw Material Testing acceptance criteria 2fbe</th>
+                <th field="raw_material_acceptance_criteria_3lpe_no" align="center" width="100" class="i18n1" name="rawmaterialtestingacceptancecriteria3lpeno">>Raw Material Testing acceptance criteria 3lpe</th>
 
             </tr>
             </thead>
