@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.htcsweb.dao.PipeQrCodePrintRecordDao">
+
+
+
+    <delete id="delQrCode">
+        delete from pipe_qr_code_print_record WHERE
+        <foreach collection="array" item="item" open="id in (" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <select id="getCountQrCodeInfoByLike" resultType="int">
+        select count(*) from pipe_qr_code_print_record p
+        <where>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND p.pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+            <if test="operator_no!=null and operator_no!=''">
+                AND p.operator_no LIKE CONCAT('%',#{operator_no},'%')
+            </if>
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(p.operation_time,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(p.operation_time,'%Y-%m-%d %H:%T:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d 23:59:59')]]>
+            </if>
+        </where>
+    </select>
+
+
+    <select id="getQrCodeInfoByLike" resultType="com.htcsweb.entity.PipeQrCodePrintRecord">
+        select * from pipe_qr_code_print_record p
+        <where>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND p.pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+            <if test="operator_no!=null and operator_no!=''">
+                AND p.operator_no LIKE CONCAT('%',#{operator_no},'%')
+            </if>
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(p.operation_time,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(p.operation_time,'%Y-%m-%d %H:%T:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d 23:59:59')]]>
+            </if>
+        </where>
+        limit #{skip},#{take}
+    </select>
+</mapper>

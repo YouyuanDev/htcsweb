@@ -134,11 +134,17 @@
                             hlLanguage();
 
                         }else if("钢管录入"==xy||"Upload Pipe"==xy){
-
-
                             $('#hlTab').tabs('add',{
                                 title:node.text,
                                 content:"<iframe scrolling='auto' frameborder='0'  src='pipe/uploadPipe.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                            hlLanguage();
+
+                        }else if("二维码打印记录"==xy||"Two-dimensional Code Print Record"==xy){
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='pipe/twodimensionalcode.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable:true
                             });
                             hlLanguage();
@@ -473,6 +479,7 @@
                 <li class="i18n1" name="contractmanagement">合同管理</li>
                 <li class="i18n1" name="pipemanagement">钢管管理</li>
                 <li class="i18n1" name="uploadpipe">钢管录入</li>
+                <li class="i18n1" name="twodimensionalcodeprintrecord">二维码打印记录</li>
             </ul>
         </div>
         <div title="生产工艺" class="i18n" name="productionprocess" style="padding:10px;">
