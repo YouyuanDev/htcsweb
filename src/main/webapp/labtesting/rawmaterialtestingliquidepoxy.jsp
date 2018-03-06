@@ -261,8 +261,8 @@
                         <input class="easyui-textbox"   type="text" name="sample_no" value=""/>
                     </td>
                     <td></td>
-                    <td class="i18n1" name="potlife">适用期</td>
-                    <td><input class="easyui-textbox"  type="text" name="pot_life" value=""/></td>
+                    <td class="i18n1" name="rawmaterial">原材料名称</td>
+                    <td><input class="easyui-textbox"  type="text" name="raw_material" value=""/></td>
                     <td></td>
                 </tr>
                 <tr>
@@ -271,8 +271,8 @@
                         <input class="easyui-textbox"   type="text" name="batch_no" value=""/>
                     </td>
                     <td></td>
-                    <td class="i18n1" name="rawmaterial">原材料名称</td>
-                    <td><input class="easyui-textbox"  type="text" name="raw_material" value=""/></td>
+                    <td class="i18n1" name="potlife">适用期</td>
+                    <td><input class="easyui-textbox"  type="text" name="pot_life" value=""/></td>
                     <td></td>
                 </tr>
                 <tr>
