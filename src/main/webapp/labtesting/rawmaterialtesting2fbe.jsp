@@ -437,10 +437,22 @@
            </tr>
            <tr>
                <td class="i18n1" name="impact">冲击</td>
-               <td><input class="easyui-textbox"  type="text" name="impact" value=""/></td>
+               <td>
+                   <select id="impact" class="easyui-combobox" data-options="editable:false" name="impact" style="width:200px;">
+                       <option value="OK">合格（无漏点）</option>
+                       <option value="Not OK">不合格（有漏点）</option>
+                       <option value="Pending">待定</option>
+                   </select>
+               </td>
                <td></td>
                <td class="i18n1" name="flexibility">弯曲</td>
-               <td><input class="easyui-textbox"   type="text" name="flexibility" value=""/></td>
+               <td>
+                   <select  class="easyui-combobox" data-options="editable:false" name="flexibility" style="width:200px;">
+                       <option value="OK">合格（无裂纹）</option>
+                       <option value="Not OK">不合格（有裂纹）</option>
+                       <option value="Pending">待定</option>
+                   </select>
+               </td>
                <td></td>
            </tr>
            <tr>
