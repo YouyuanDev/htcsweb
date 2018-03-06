@@ -110,7 +110,7 @@ public class QRCodeUtil {
      */
     private static void addFontImage(BufferedImage source, String declareText) {
 
-        BufferedImage textImage = new BufferedImage(source.getWidth(), source.getHeight(), BufferedImage.TYPE_INT_RGB);
+        //BufferedImage textImage = new BufferedImage(source.getWidth(), source.getHeight(), BufferedImage.TYPE_INT_RGB);
 
         Graphics g = source.createGraphics();
         g.drawImage(source, 0, QRCODE_SIZE - 10, source.getWidth(), source.getHeight(), null);
