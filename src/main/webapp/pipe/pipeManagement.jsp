@@ -137,14 +137,22 @@
 
                 $.messager.confirm('系统提示',"您确定要生成这<font color=red>"+idArr.length+ "</font>条QR码吗？",function (r) {
                     if(r){
-                        $.post(
-                            "/QrCodeOperation/genQRCode.action",
-                            {"hlparam":idArrs},function (data) {
-                                if(data.success){
-                                    $("#pipeDatagrids").datagrid("reload");
-                                }
-                                hlAlertFour(data.message);
-                            },"json");
+                        // $.get(
+                        //     "/QrCodeOperation/genQRCode.action",
+                        //     {"hlparam":idArrs});
+                        var form=$("<form>");//定义一个form表单
+                        form.attr("style","display:none");
+                        form.attr("target","");
+                        form.attr("method","post");//请求类型
+                        form.attr("action","/QrCodeOperation/genQRCode.action");//请求地址
+                        $("body").append(form);//将表单放置在web中
+                        var input1=$("<input>");
+                        input1.attr("type","hidden");
+                        input1.attr("name","hlparam");
+                        input1.attr("value",idArrs);
+                        form.append(input1);
+                        form.submit();//表单提交
+
                     }
                 });
 
