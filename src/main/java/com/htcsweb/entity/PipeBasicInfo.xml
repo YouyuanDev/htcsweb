@@ -384,7 +384,7 @@
                 AND p.status <![CDATA[ <> ]]>  'idstrip2'
         </where>
     </select>
-    <select id="getPipeNoByContractNos" resultType="java.lang.String">
+    <select id="getPipeNoByContractNo" resultType="java.lang.String">
           SELECT pipe_no from pipe_basic_info WHERE
           <foreach collection="array" item="item" open="contract_no in (" separator="," close=")">
            #{item}
