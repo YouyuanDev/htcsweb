@@ -19,19 +19,19 @@ public class ResponseUtil {
         out.close();
     }
 
-    public static void writeQRCodeZipFile(String hlparam,String zipFileName,HttpServletRequest request, HttpServletResponse response)throws Exception{
+    public static void writeQRCodeZipFile(String hlparam,HttpServletRequest request, HttpServletResponse response)throws Exception{
 
         if(hlparam==null||hlparam.equals(""))
             return;
 
         String[]pipeNoArr=hlparam.split(",");
 
-        ResponseUtil.writeQRCodeZipFile(pipeNoArr,zipFileName,request,response);
+        ResponseUtil.writeQRCodeZipFile(pipeNoArr,request,response);
 
     }
 
 
-    public static void writeQRCodeZipFile(String[] pipeNoArr,String zipFileName, HttpServletRequest request, HttpServletResponse response)throws Exception{
+    public static void writeQRCodeZipFile(String[] pipeNoArr, HttpServletRequest request, HttpServletResponse response)throws Exception{
 
         String tmpfolderPath=request.getSession().getServletContext().getRealPath("/tmp");
         String logoDirectory = request.getSession().getServletContext().getRealPath("/images");
@@ -71,8 +71,9 @@ public class ResponseUtil {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");//可以方便地修改日期格式
         String timenow = dateFormat.format( now );
         StringBuilder sbzip = new StringBuilder();
-        sbzip.append("downloadQR");
-        sbzip.append(zipFileName);
+        sbzip.append("downloadQR_");
+        sbzip.append(String.valueOf(fileList.size()));
+        sbzip.append("items_");
         sbzip.append(timenow);
         sbzip.append(".zip");
         String zipName = sbzip.toString();
