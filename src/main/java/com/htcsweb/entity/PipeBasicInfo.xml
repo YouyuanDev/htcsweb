@@ -385,10 +385,10 @@
         </where>
     </select>
     <select id="getPipeNoByContractNo" resultType="java.lang.String">
-          SELECT pipe_no from pipe_basic_info WHERE
-          <foreach collection="array" item="item" open="contract_no in (" separator="," close=")">
-           #{item}
-         </foreach>
+        SELECT pipe_no from pipe_basic_info WHERE
+        <foreach collection="array" item="item" open="contract_no in (" separator="," close=")">
+            #{item}
+        </foreach>
     </select>
 
 </mapper>

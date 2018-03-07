@@ -99,6 +99,15 @@ public class PipeQrCodePrintRecordController {
         list=getPipenoByContractNo(contractNoArr);
         String[]pipeNoArr=new String[list.size()];
         String[] s=list.toArray(pipeNoArr);
+        List<PipeQrCodePrintRecord>list1=new ArrayList<PipeQrCodePrintRecord>();
+        for (int i=0;i<s.length;i++){
+            PipeQrCodePrintRecord record=new PipeQrCodePrintRecord();
+            record.setPipe_no(s[i]);
+            record.setOperator_no("0000000");
+            record.setOperation_time(new Date());
+            list1.add(record);
+        }
+        pipeQrCodePrintRecordDao.addQrCode(list1);
         ResponseUtil.writeQRCodeZipFile(s,request,response);
         return "";
     }
@@ -106,6 +115,16 @@ public class PipeQrCodePrintRecordController {
     @RequestMapping("/genQRCode")
     public String genQRCode(@RequestParam(value = "hlparam")String hlparam,HttpServletRequest request,HttpServletResponse response)throws Exception{
         ResponseUtil.writeQRCodeZipFile(hlparam,request,response);
+        List<PipeQrCodePrintRecord>list1=new ArrayList<PipeQrCodePrintRecord>();
+        String[]arr=hlparam.split(",");
+        for (int i=0;i<arr.length;i++){
+            PipeQrCodePrintRecord record=new PipeQrCodePrintRecord();
+            record.setPipe_no(arr[i]);
+            record.setOperator_no("0000000");
+            record.setOperation_time(new Date());
+            list1.add(record);
+        }
+        pipeQrCodePrintRecordDao.addQrCode(list1);
         return  null;
     }
     //根据合同编号查询所有的钢管编号
