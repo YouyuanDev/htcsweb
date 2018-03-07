@@ -205,6 +205,41 @@
             $('#contractForm').form('clear');
 
         }
+        function GenQRCode(){
+            var row = $('#contractDatagrids').datagrid('getSelections');
+            if(row.length>0){
+                var idArr=[];
+                for (var i=0;i<row.length;i++){
+                    idArr.push(row[i].contract_no);
+                }
+                var idArrs=idArr.join(',');
+
+                $.messager.confirm('系统提示',"您确定要生成这<font color=red>"+idArr.length+ "</font>条QR码吗？",function (r) {
+                    if(r){
+                        // $.get(
+                        //     "/QrCodeOperation/genQRCode.action",
+                        //     {"hlparam":idArrs});
+                        var form=$("<form>");//定义一个form表单
+                        form.attr("style","display:none");
+                        form.attr("target","");
+                        form.attr("method","post");//请求类型
+                        form.attr("action","/QrCodeOperation/genQRCodeByContractNo.action");//请求地址
+                        $("body").append(form);//将表单放置在web中
+                        var input1=$("<input>");
+                        input1.attr("type","hidden");
+                        input1.attr("name","hlparam");
+                        input1.attr("value",idArrs);
+                        form.append(input1);
+                        form.submit();//表单提交
+
+                    }
+                });
+
+            }else{
+                $.messager.alert('Warning','请选择要生成QR码的钢管!');
+            }
+
+        }
 
 
     </script>
@@ -252,6 +287,7 @@
 
     <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchContract()">Search</a>
     <div style="float:right">
+        <a href="#" id="genQRLinkBtn" class="easyui-linkbutton i18n1" name="genQR"  onclick="GenQRCode()">生成QRCode</a>
         <a href="#" id="addContractLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addContract()">添加</a>
         <a href="#" id="editContractLinkBtn" class="easyui-linkbutton i18n1" name="edit" data-options="iconCls:'icon-edit',plain:true" onclick="editContract()">修改</a>
         <a href="#" id="deltContractLinkBtn" class="easyui-linkbutton i18n1" name="delete" data-options="iconCls:'icon-remove',plain:true" onclick="delContract()">删除</a>

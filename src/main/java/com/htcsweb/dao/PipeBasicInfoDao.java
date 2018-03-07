@@ -47,4 +47,6 @@ public interface PipeBasicInfoDao {
 
     public int isPipeIDProcessed(@Param("id")String id);
 
+    public List<String>getPipeNoByContractNo(@Param("array")String[] array);
+
 }

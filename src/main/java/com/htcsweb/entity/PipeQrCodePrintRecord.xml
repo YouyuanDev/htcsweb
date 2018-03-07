@@ -51,4 +51,11 @@
         </where>
         limit #{skip},#{take}
     </select>
+
+    <insert id="addQrCode" parameterType="java.util.List">
+        INSERT INTO pipe_qr_code_print_record(pipe_no,operator_no,operation_time,remark)VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.pipe_no}, #{item.operator_no}, #{item.operation_time}, #{item.remark})
+        </foreach>
+    </insert>
 </mapper>
