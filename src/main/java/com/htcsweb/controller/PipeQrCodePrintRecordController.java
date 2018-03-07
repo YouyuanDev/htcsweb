@@ -97,15 +97,6 @@ public class PipeQrCodePrintRecordController {
         String[]contractNoArr=hlparam.split(",");
         List<String>list=new ArrayList<String>();
         list=getPipenoByContractNo(contractNoArr);
-        if(list.size()==0) {
-            JSONObject json=new JSONObject();
-            StringBuilder sbmessage = new StringBuilder();
-            sbmessage.append("合同下无钢管信息\n");
-            json.put("success",false);
-            json.put("message",sbmessage.toString());
-            ResponseUtil.write(response,json);
-            return null;
-        }
         String[]pipeNoArr=new String[list.size()];
         String[] pipeNos=list.toArray(pipeNoArr);
         List<PipeQrCodePrintRecord>list1=new ArrayList<PipeQrCodePrintRecord>();
