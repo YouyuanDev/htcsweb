@@ -97,18 +97,29 @@ public class PipeQrCodePrintRecordController {
         String[]contractNoArr=hlparam.split(",");
         List<String>list=new ArrayList<String>();
         list=getPipenoByContractNo(contractNoArr);
+        if(list.size()==0) {
+            JSONObject json=new JSONObject();
+            StringBuilder sbmessage = new StringBuilder();
+            sbmessage.append("合同下无钢管信息\n");
+            json.put("success",false);
+            json.put("message",sbmessage.toString());
+            ResponseUtil.write(response,json);
+            return null;
+        }
         String[]pipeNoArr=new String[list.size()];
-        String[] s=list.toArray(pipeNoArr);
+        String[] pipeNos=list.toArray(pipeNoArr);
         List<PipeQrCodePrintRecord>list1=new ArrayList<PipeQrCodePrintRecord>();
-        for (int i=0;i<s.length;i++){
+        for (int i=0;i<pipeNos.length;i++){
             PipeQrCodePrintRecord record=new PipeQrCodePrintRecord();
-            record.setPipe_no(s[i]);
+            record.setPipe_no(pipeNos[i]);
             record.setOperator_no("0000000");
             record.setOperation_time(new Date());
+            record.setRemark("合同信息管理页面下载");
             list1.add(record);
         }
-        pipeQrCodePrintRecordDao.addQrCode(list1);
-        ResponseUtil.writeQRCodeZipFile(s,request,response);
+        if(list1.size()>0)
+            pipeQrCodePrintRecordDao.addQrCode(list1);
+        ResponseUtil.writeQRCodeZipFile(pipeNos,request,response);
         return "";
     }
 
@@ -122,9 +133,11 @@ public class PipeQrCodePrintRecordController {
             record.setPipe_no(arr[i]);
             record.setOperator_no("0000000");
             record.setOperation_time(new Date());
+            record.setRemark("钢管信息管理页面下载");
             list1.add(record);
         }
-        pipeQrCodePrintRecordDao.addQrCode(list1);
+        if(list1.size()>0)
+            pipeQrCodePrintRecordDao.addQrCode(list1);
         return  null;
     }
     //根据合同编号查询所有的钢管编号
