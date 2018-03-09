@@ -360,6 +360,7 @@
                    <option value="0">不合格,重新打砂处理</option>
                    <option value="1">合格,进入内喷砂检验工序</option>
                    <option value="2">待定</option>
+                   <option value="3">内表面缺陷，进入修磨或切割处理</option>
                </select></td>
            </tr>
 

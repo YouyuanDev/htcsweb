@@ -113,6 +113,10 @@ public class OdBlastInspectionProcessController {
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
 
                         }
+                        else if(odblastinspectionprocess.getResult().equals("3")) {//当需要修磨或切除时，设置为onhold状态
+                            p.setStatus("onhold");
+                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        }
                     }
 
                 }

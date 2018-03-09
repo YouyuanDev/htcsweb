@@ -109,6 +109,10 @@ public class IdBlastInspectionProcessController {
                             p.setStatus("bare2");
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }
+                        else if(idBlastInspectionProcess.getResult().equals("3")) {//当需要修磨或切除时，设置为onhold状态
+                            p.setStatus("onhold");
+                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        }
                     }
 
                 }
