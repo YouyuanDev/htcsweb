@@ -62,9 +62,9 @@
             // $('#barePipeGrindingProForm').form('clear');
             // $('#idbinpid').text('');
             clearFormLabel();
-            combox1.setValue("");
+            //combox1.setValue("");
             clearMultiUpload(grid);
-            url="/IdBlastInspectionOperation/saveIdBlastInspectionProcess.action";
+            url="/BarePipeGrindingOperation/saveBarePipeGrindingProcess.action";
         }
         function delBarePipeGrindingPro() {
             var row = $('#barePipeGrindingProDatagrids').datagrid('getSelections');
@@ -77,7 +77,7 @@
                 $.messager.confirm('系统提示',"您确定要删除这<font color=red>"+idArr.length+ "</font>条数据吗？",function (r) {
                     if(r){
                         $.post(
-                            "/IdBlastInspectionOperation/delIdBlastInspectionProcess.action",
+                            "/BarePipeGrindingOperation/delBarePipeGrindingProcess.action",
                             {"hlparam":idArrs},function (data) {
                                 if(data.success){
                                     $("#barePipeGrindingProDatagrids").datagrid("reload");
@@ -104,55 +104,58 @@
                 // $('#heat_no').text(row.heat_no);
                 loadPipeBaiscInfo(row);
                 $('#barePipeGrindingProForm').form('load',row);
-                $("#idbptime").datetimebox('setValue',getDate1(row.operation_time));
+                $("#operation-time").datetimebox('setValue',getDate1(row.operation_time));
                 $("#idbinpid").textbox("setValue", row.id);
+
+
                 look1.setText(row.pipe_no);
                 look1.setValue(row.pipe_no);
                 look2.setText(row.operator_no);
                 look2.setValue(row.operator_no);
-                combox1.setValue(row.surface_condition);
+                //combox1.setValue(row.surface_condition);
                 var odpictures=row.upload_files;
                 if(odpictures!=null&&odpictures!=""){
                     var imgList=odpictures.split(';');
                     createPictureModel(basePath,imgList);
                 }
                 //异步获取标准并匹配
-                $.ajax({
-                    url:'/AcceptanceCriteriaOperation/getIDAcceptanceCriteriaByContractNo.action',
-                    dataType:'json',
-                    data:{'contract_no':row.contract_no},
-                    success:function (data) {
-                        var $obj1=$("input[name='relative_humidity']");
-                        var $obj2=$("input[name='dew_point']");
-                        var $obj3=$("input[name='blast_finish_sa25']");
-                        var $obj4=$("input[name='profile']");
-                        var $obj5=$("input[name='pipe_temp']");
-                        $obj1.siblings().css("background-color","#FFFFFF");
-                        $obj2.siblings().css("background-color","#FFFFFF");
-                        $obj3.siblings().css("background-color","#FFFFFF");
-                        $obj4.siblings().css("background-color","#FFFFFF");
-                        $obj5.siblings().css("background-color","#FFFFFF");
-                        if(data!=null){
-                            var res1=$obj1.val();
-                            var res2=$obj2.val();
-                            var res3=$obj3.val();
-                            var res4=$obj4.val();
-                            var res5=$obj5.val();
-                            if(!((res1>=data.relative_humidity_min)&&(res1<=data.relative_humidity_max)))
-                                $obj1.siblings().css("background-color","#F9A6A6");
-                            if(!((res3>=data.blast_finish_sa25_min)&&(res3<=data.blast_finish_sa25_max)))
-                                $obj3.siblings().css("background-color","#F9A6A6");
-                            if(!((res4>=data.id_profile_min)&&(res4<=data.id_profile_max)))
-                                $obj4.siblings().css("background-color","#F9A6A6");
-                            if(!((res5-res2)>=data.temp_above_dew_point_min))
-                                $obj5.siblings().css("background-color","#F9A6A6");
+                // $.ajax({
+                //     url:'/AcceptanceCriteriaOperation/getIDAcceptanceCriteriaByContractNo.action',
+                //     dataType:'json',
+                //     //data:{'contract_no':row.contract_no},
+                //     success:function (data) {
+                //         // var $obj1=$("input[name='relative_humidity']");
+                //         // var $obj2=$("input[name='dew_point']");
+                //         // var $obj3=$("input[name='blast_finish_sa25']");
+                //         // var $obj4=$("input[name='profile']");
+                //         // var $obj5=$("input[name='pipe_temp']");
+                //         // $obj1.siblings().css("background-color","#FFFFFF");
+                //         // $obj2.siblings().css("background-color","#FFFFFF");
+                //         // $obj3.siblings().css("background-color","#FFFFFF");
+                //         // $obj4.siblings().css("background-color","#FFFFFF");
+                //         // $obj5.siblings().css("background-color","#FFFFFF");
+                //         // if(data!=null){
+                //         //     var res1=$obj1.val();
+                //         //     var res2=$obj2.val();
+                //         //     var res3=$obj3.val();
+                //         //     var res4=$obj4.val();
+                //         //     var res5=$obj5.val();
+                //         //     if(!((res1>=data.relative_humidity_min)&&(res1<=data.relative_humidity_max)))
+                //         //         $obj1.siblings().css("background-color","#F9A6A6");
+                //         //     if(!((res3>=data.blast_finish_sa25_min)&&(res3<=data.blast_finish_sa25_max)))
+                //         //         $obj3.siblings().css("background-color","#F9A6A6");
+                //         //     if(!((res4>=data.id_profile_min)&&(res4<=data.id_profile_max)))
+                //         //         $obj4.siblings().css("background-color","#F9A6A6");
+                //         //     if(!((res5-res2)>=data.temp_above_dew_point_min))
+                //         //         $obj5.siblings().css("background-color","#F9A6A6");
+                //         //
+                //         // }
+                //     },error:function () {
+                //
+                //     }
+                // });
+                url="/BarePipeGrindingOperation/editBarePipeGrindingProcess.action?id="+row.id;
 
-                        }
-                    },error:function () {
-
-                    }
-                });
-                url="/IdBlastInspectionOperation/saveIdBlastInspectionProcess.action?id="+row.id;
 
             }else{
                 hlAlertTwo();
@@ -175,24 +178,21 @@
                 url:url,
                 onSubmit:function () {
                     //表单验证
-                    setParams($("input[name='relative_humidity']"));
-                    setParams($("input[name='dew_point']"));
-                    setParams($("input[name='profile']"));
-                    setParams($("input[name='pipe_temp']"));
-                    setParams($("input[name='blast_time']"));
 
+                    setParams($("input[name='cut_off_length']"));
+                    setParams($("input[name='original_pipe_length']"));
+                    setParams($("input[name='pipe_length_after_cut']"));
 
-                    if($("input[name='idbptime']").val()==""){
+                    if($("input[name='operation-time']").val()==""){
 
                         hlAlertFour("请输入操作时间");
                         return false;
                     }
 
 
-
                 },
                 success: function(result){
-                    //alert(result);
+                    alert(result);
                     var result = eval('('+result+')');
                     if (result.success){
                         $('#hlbarePipeGrindingProDialog').dialog('close');
@@ -208,7 +208,7 @@
             });
             clearMultiUpload(grid);
         }
-        function idBlastInspectionProCancelSubmit() {
+        function barePipeGrindingProCancelSubmit() {
             $('#hlbarePipeGrindingProDialog').dialog('close');
         }
 
@@ -228,7 +228,7 @@
         function  clearFormLabel() {
             $('#barePipeGrindingProForm').form('clear');
             $('.hl-label').text(''); $('#hl-gallery-con').empty();
-            combox1.setValue("");
+            //combox1.setValue("");
             $(":input").each(function () {
                 $(this).siblings().css("background-color","#FFFFFF");
             });
@@ -241,7 +241,7 @@
 <fieldset class="b3" style="padding:10px;margin:10px;">
     <legend> <h3><b style="color: orange" >|&nbsp;</b><span class="i18n1" name="datadisplay">数据展示</span></h3></legend>
     <div  style="margin-top:5px;">
-        <table class="easyui-datagrid" id="barePipeGrindingProDatagrids" url="/barePipeGrindingOperation/getBarePipeGrindingByLike.action" striped="true" loadMsg="正在加载中。。。" textField="text" pageSize="20" fitColumns="true" pagination="true" toolbar="#hlBarePipeGrindingProTb">
+        <table class="easyui-datagrid" id="barePipeGrindingProDatagrids" url="/BarePipeGrindingOperation/getAllByLike.action" striped="true" loadMsg="正在加载中。。。" textField="text" pageSize="20" fitColumns="true" pagination="true" toolbar="#hlBarePipeGrindingProTb">
             <thead>
             <tr>
                 <th data-options="field:'ck',checkbox:true"></th>
@@ -259,14 +259,12 @@
                 <th field="heat_no" align="center" hidden="true" width="50" class="i18n1" name="heat_no">炉号</th>
                 <th field="operator_no" align="center" width="100" class="i18n1" name="operatorno">操作工编号</th>
 
-                <th field="relative_humidity" align="center" width="120" class="i18n1" name="relativehumidity">相对湿度</th>
-                <th field="dew_point" align="center" width="100"  class="i18n1" name="dewpoint">露点</th>
-                <th field="pipe_temp" width="100" align="center"  class="i18n1" name="pipetemp">钢管温度</th>
-                <th field="surface_condition" align="center" width="120" class="i18n1" name="surfacecondition1">表面质量</th>
-                <th field="blast_time" align="center" width="120" class="i18n1" name="blasttime">内打砂时间</th>
-                <th field="blast_finish_sa25" align="center" width="100"  class="i18n1" name="blastfinishsa25">清洁度Sa2.5</th>
-                <th field="profile" width="100" align="center" class="i18n1" name="profile">锚纹深度</th>
-
+                <th field="odid" align="center" width="120" class="i18n1" name="odid">内外表</th>
+                <th field="grinding" align="center" width="100"  class="i18n1" name="grinding">修磨</th>
+                <th field="remaining_wall_thickness_list" width="100" align="center"  class="i18n1" name="remainingwallthicknesslist">剩余壁厚测量</th>
+                <th field="cut_off_length" align="center" width="120" class="i18n1" name="cutofflength">切除长度</th>
+                <th field="original_pipe_length" align="center" width="120" class="i18n1" name="originalpipelength">钢管原始长度</th>
+                <th field="pipe_length_after_cut" align="center" width="100"  class="i18n1" name="pipelengthaftercut">钢管切除后长度</th>
                 <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                 <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
                 <th field="operation_time" align="center" width="150" class="i18n1" name="operationtime" data-options="formatter:formatterdate">操作时间</th>
@@ -354,7 +352,7 @@
 
 
         <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
-            <legend>内喷砂检验信息</legend>
+            <legend>光管修磨信息</legend>
 
             <table class="ht-table">
                 <tr>
@@ -382,7 +380,7 @@
                     </td>
                     <td class="i18n1" name="operationtime" width="20%">操作时间</td>
                     <td colspan="1" width="30%">
-                        <input class="easyui-datetimebox" type="text" id="idbptime" name="idbptime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                        <input class="easyui-datetimebox" type="text" id="operation-time" name="operation-time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
 
                 </tr>
@@ -392,50 +390,47 @@
                 <tr>
                     <td class="i18n1" name="odid">外（内）</td>
                     <td>
-                        <input class="easyui-numberbox"  data-options="min:0,precision:1" type="text" name="odid" value=""/>
+                        <select  class="easyui-combobox" data-options="editable:false"  name="odid" style="width:200px;">
+                            <option value="OD">外表面</option>
+                            <option value="ID">内表面</option>
+                        </select>
                     </td>
                     <td></td>
-                    <td class="i18n1" name="defectlocation">露点</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:1" type="text" name="defect_location" value=""/></td>
-                    <td></td>
-                </tr>
-
-                <tr>
-                    <td width="16%" class="i18n1" name="pipetemp">钢管温度</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="pipe_temp" value=""/></td>
-                    <td></td>
-                    <td class="i18n1" name="blastfinishsa25">清洁度Sa2.5</td>
-                    <td><input class="easyui-textbox" type="text" name="blast_finish_sa25" value=""/></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td width="16%"  class="i18n1" name="profile">锚纹深度</td>
-                    <td><input class="easyui-numberbox" type="text" data-options="min:0,precision:1" name="profile" value=""/></td>
-                    <td></td>
-                    <td width="16%"  class="i18n1" name="blasttime">打砂时间</td>
-                    <td><input class="easyui-numberbox" type="text" data-options="min:0,precision:2" name="blast_time" value=""/></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td width="16%" class="i18n1" name="surfacecondition">表面缺陷</td>
+                    <td class="i18n1" name="grinding">修磨</td>
                     <td>
-                        <div id="combobox1" class="mini-combobox" style="width:185px;"  popupWidth="185" textField="text" valueField="text"
-                             url="../data/defect.txt" name="surface_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick" >
-                            <div property="columns">
-                                <div header="缺陷类型" field="text"></div>
-                            </div>
-                        </div>
-                    </td>
+                        <select  class="easyui-combobox" data-options="editable:false"  name="grinding" style="width:200px;">
+                            <option value="0">否</option>
+                            <option value="1">是</option>
+                        </select>
 
+                    </td>
                     <td></td>
                 </tr>
+
+                <tr>
+                    <td width="16%" class="i18n1" name="remainingwallthicknesslist">修磨剩余壁厚记录</td>
+                    <td><input class="easyui-textbox"   type="text" name="remaining_wall_thickness_list" value=""/></td>
+                    <td></td>
+                    <td width="16%"  class="i18n1" name="originalpipelength">钢管原始长度</td>
+                    <td><input class="easyui-numberbox" type="text" data-options="min:0,precision:2" name="original_pipe_length" value=""/></td>
+                    <td></td>
+
+                </tr>
+                <tr>
+                    <td class="i18n1" name="cutofflength">切除长度</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="cut_off_length" value=""/></td>
+                    <td></td>
+                    <td width="16%"  class="i18n1" name="pipelengthaftercut">钢管切后长度</td>
+                    <td><input class="easyui-numberbox" type="text" data-options="min:0,precision:2" name="pipe_length_after_cut" value=""/></td>
+                    <td></td>
+                </tr>
+
                 <tr>
                     <td width="16%" class="i18n1" name="result">结论</td>
                     <td><select id="cc" class="easyui-combobox" data-options="editable:false"  name="result" style="width:200px;">
-                        <option value="0">不合格,重新打砂处理</option>
-                        <option value="1">合格,进入外涂敷工序</option>
+                        <option value="0">不合格,重新修磨或切长处理</option>
+                        <option value="1">合格,转为光管</option>
                         <option value="2">待定</option>
-                        <option value="3">内表面缺陷，进入修磨或切割处理</option>
                     </select></td>
                     <td></td>
                     <td width="16%" class="i18n1" name="remark">备注</td>
@@ -462,7 +457,7 @@
 </div>
 <div id="dlg-buttons" align="center" style="width:900px;">
     <a href="#" class="easyui-linkbutton" iconCls="icon-save" onclick="barePipeGrindingProFormSubmit()">Save</a>
-    <a href="#" class="easyui-linkbutton" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="idBlastInspectionProCancelSubmit()">Cancel</a>
+    <a href="#" class="easyui-linkbutton" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="barePipeGrindingProCancelSubmit()">Cancel</a>
 </div>
 <div id="gridPanel1" class="mini-panel" title="header" iconCls="icon-add" style="width:450px;height:250px;"
      showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0"
@@ -533,14 +528,14 @@
     var grid2=mini.get("datagrid2");
     var look1=mini.get('lookup1');
     var look2= mini.get("lookup2");
-    var combox1=mini.get("combobox1");
+    //var combox1=mini.get("combobox1");
 
     function onSearchClick(type) {
         if(type==1)
         {
             grid1.load({
                 pipe_no:keyText1.value,
-                pipestatus:'id1,'
+                pipestatus:'onhold,'
             });
         }else if(type==2){
             grid2.load({
@@ -591,7 +586,7 @@
         $('#searchBar1').css('display','block');
         grid1.load({
             pipe_no:keyText1.value,
-            pipestatus:'id1,'
+            pipestatus:'onhold,'
         });
     });
     look2.on("showpopup",function(e){
@@ -605,16 +600,16 @@
         });
     });
 
-    combox1.on("showpopup",function () {
-        $('.mini-shadow').css('z-index','99999');
-        $('.mini-popup').css('z-index','100000');
-        $('.mini-panel').css('z-index','100000');
-    });
-    function onComboxCloseClick(e) {
-        var obj = e.sender;
-        obj.setText("");
-        obj.setValue("");
-    }
+    // combox1.on("showpopup",function () {
+    //     $('.mini-shadow').css('z-index','99999');
+    //     $('.mini-popup').css('z-index','100000');
+    //     $('.mini-panel').css('z-index','100000');
+    // });
+    // function onComboxCloseClick(e) {
+    //     var obj = e.sender;
+    //     obj.setText("");
+    //     obj.setValue("");
+    // }
 
     hlLanguage("../i18n/");
 </script>

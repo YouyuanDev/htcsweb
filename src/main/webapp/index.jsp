@@ -232,6 +232,15 @@
                             });
                             hlLanguage();
                         }
+                        else if ("光管修磨切长" == nodeTxt || "Bare Pipe Grinding Cut-off" == nodeTxt) {
+
+                            $('#hlTab').tabs('add', {
+                                title: node.text,
+                                content: "<iframe scrolling='auto' frameborder='0'  src='grinding/barepipegridingProcess.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable: true
+                            });
+                            hlLanguage();
+                        }
 
 
                     }
@@ -471,6 +480,7 @@
             <ul id="hlcoatingrepairstrip">
                 <li class="i18n1" name="coatingrepair">涂层修补</li>
                 <li class="i18n1" name="coatingstrip">涂层扒皮</li>
+                <li class="i18n1" name="barepipegrindingcutoff">光管修磨切长</li>
             </ul>
         </div>
         <div title="基础信息管理" class="i18n" name="basicinfomanagement" style="padding:10px;">
