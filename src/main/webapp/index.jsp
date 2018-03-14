@@ -232,7 +232,23 @@
                             });
                             hlLanguage();
                         }
-                        else if ("光管修磨切长" == nodeTxt || "Bare Pipe Grinding Cut-off" == nodeTxt) {
+
+
+                    }
+                }
+            });
+
+
+            //钢管修磨、切割与倒棱
+            $("#hlgrindingcutoffrebevel").tree({
+                onClick: function (node) {
+                    var tab = $('#hlTab').tabs('getTab', node.text);
+                    var nodeTxt = node.text;
+                    if (tab) {
+                        $('#hlTab').tabs('select', node.text);
+                    } else {
+
+                        if ("光管修磨切割" == nodeTxt || "Bare Pipe Grinding Cut-off" == nodeTxt) {
 
                             $('#hlTab').tabs('add', {
                                 title: node.text,
@@ -241,6 +257,17 @@
                             });
                             hlLanguage();
                         }
+
+                        else if ("钢管倒棱" == nodeTxt || "Pipe Rebevel" == nodeTxt) {
+
+                            $('#hlTab').tabs('add', {
+                                title: node.text,
+                                content: "<iframe scrolling='auto' frameborder='0'  src='grinding/pipeRebevelProcess.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable: true
+                            });
+                            hlLanguage();
+                        }
+
 
 
                     }
@@ -480,9 +507,16 @@
             <ul id="hlcoatingrepairstrip">
                 <li class="i18n1" name="coatingrepair">涂层修补</li>
                 <li class="i18n1" name="coatingstrip">涂层扒皮</li>
-                <li class="i18n1" name="barepipegrindingcutoff">光管修磨切长</li>
             </ul>
         </div>
+        <div title="钢管修磨切割与倒棱" class="i18n" name="grindingcutoffrebevel" style="padding:10px;">
+            <ul id="hlgrindingcutoffrebevel">
+                <li class="i18n1" name="barepipegrindingcutoff">光管修磨切割</li>
+                <li class="i18n1" name="piperebevel">钢管倒棱</li>
+            </ul>
+        </div>
+
+
         <div title="基础信息管理" class="i18n" name="basicinfomanagement" style="padding:10px;">
             <ul id="hlbasicinfomanagement">
                 <li class="i18n1" name="projectmanagement">项目管理</li>

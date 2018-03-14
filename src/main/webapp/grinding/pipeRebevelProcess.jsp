@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: kurt
-  Date: 3/9/18
-  Time: 4:29 PM
+  Date: 3/14/18
+  Time: 1:54 PM
   To change this template use File | Settings | File Templates.
 --%>
 
@@ -14,7 +14,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>光管修磨处理</title>
+    <title>钢管倒棱处理</title>
     <link rel="stylesheet" type="text/css" href="../easyui/themes/bootstrap/easyui.css">
     <link rel="stylesheet" type="text/css" href="../easyui/themes/icon.css">
     <link href="../miniui/multiupload/multiupload.css" rel="stylesheet" type="text/css" />
@@ -39,12 +39,12 @@
             $(document).on('click','.content-del',function () {
                 delUploadPicture($(this));
             });
-            $('#hlbarePipeGrindingProDialog').dialog({
+            $('#hlPipeRebevelProDialog').dialog({
                 onClose:function () {
                     var type=$('#hlcancelBtn').attr('operationtype');
                     if(type=="add"){
                         var $imglist=$('#fileslist');
-                        var $dialog=$('#hlbarePipeGrindingProDialog');
+                        var $dialog=$('#hlPipeRebevelProDialog');
                         hlAlertSix("../UploadFile/delUploadPicture.action",$imglist,$dialog,grid);
                     }
                     clearFormLabel();
@@ -55,19 +55,19 @@
         });
 
 
-        function addBarePipeGrindingPro(){
+        function addPipeRebevelPro(){
             $('#hlcancelBtn').attr('operationtype','add');
-            $('#hlbarePipeGrindingProDialog').dialog('open').dialog('setTitle','新增');
+            $('#hlPipeRebevelProDialog').dialog('open').dialog('setTitle','新增');
             // $('#fileslist').val('');
-            // $('#barePipeGrindingProForm').form('clear');
+            // $('#PipeRebevelProForm').form('clear');
             // $('#idbinpid').text('');
             clearFormLabel();
             //combox1.setValue("");
             clearMultiUpload(grid);
-            url="/BarePipeGrindingOperation/saveBarePipeGrindingProcess.action";
+            url="/PipeRebevelOperation/savePipeRebevelProcess.action";
         }
-        function delBarePipeGrindingPro() {
-            var row = $('#barePipeGrindingProDatagrids').datagrid('getSelections');
+        function delPipeRebevelPro() {
+            var row = $('#PipeRebevelProDatagrids').datagrid('getSelections');
             if(row.length>0){
                 var idArr=[];
                 for (var i=0;i<row.length;i++){
@@ -77,10 +77,10 @@
                 $.messager.confirm('系统提示',"您确定要删除这<font color=red>"+idArr.length+ "</font>条数据吗？",function (r) {
                     if(r){
                         $.post(
-                            "/BarePipeGrindingOperation/delBarePipeGrindingProcess.action",
+                            "/PipeRebevelOperation/delPipeRebevelProcess.action",
                             {"hlparam":idArrs},function (data) {
                                 if(data.success){
-                                    $("#barePipeGrindingProDatagrids").datagrid("reload");
+                                    $("#PipeRebevelProDatagrids").datagrid("reload");
                                 }
                                 hlAlertFour(data.message);
                             },"json");
@@ -90,11 +90,11 @@
                 hlAlertOne();
             }
         }
-        function editBarePipeGrindingPro() {
+        function editPipeRebevelPro() {
             $('#hlcancelBtn').attr('operationtype','edit');
-            var row = $('#barePipeGrindingProDatagrids').datagrid('getSelected');
+            var row = $('#PipeRebevelProDatagrids').datagrid('getSelected');
             if(row){
-                $('#hlbarePipeGrindingProDialog').dialog('open').dialog('setTitle','修改');
+                $('#hlPipeRebevelProDialog').dialog('open').dialog('setTitle','修改');
                 // $('#project_name').text(row.project_name);$('#contract_no').text(row.contract_no);
                 // $('#pipe_no').text(row.pipe_no);
                 // $('#status_name').text(row.status_name);
@@ -103,9 +103,9 @@
                 // $('#grade').text(row.grade);
                 // $('#heat_no').text(row.heat_no);
                 loadPipeBaiscInfo(row);
-                $('#barePipeGrindingProForm').form('load',row);
+                $('#PipeRebevelProForm').form('load',row);
                 $("#operation-time").datetimebox('setValue',getDate1(row.operation_time));
-                $("#idbinpid").textbox("setValue", row.id);
+                $("#idpid").textbox("setValue", row.id);
 
 
                 look1.setText(row.pipe_no);
@@ -154,7 +154,7 @@
                 //
                 //     }
                 // });
-                url="/BarePipeGrindingOperation/saveBarePipeGrindingProcess.action?id="+row.id;
+                url="/PipeRebevelOperation/savePipeRebevelProcess.action?id="+row.id;
 
 
             }else{
@@ -164,24 +164,20 @@
 
 
 
-        function searchBarePipeGrindingPro() {
-            $('#barePipeGrindingProDatagrids').datagrid('load',{
+        function searchPipeRebevelPro() {
+            $('#PipeRebevelProDatagrids').datagrid('load',{
                 'pipe_no': $('#pipeno').val(),
                 'operator_no': $('#operatorno').val(),
                 'begin_time': $('#begintime').val(),
-                'end_time': $('#endtime').val(),
-                'mill_no': $('#millno').val()
+                'end_time': $('#endtime').val()
             });
         }
-        function barePipeGrindingProFormSubmit() {
-            $('#barePipeGrindingProForm').form('submit',{
+        function PipeRebevelProFormSubmit() {
+            $('#PipeRebevelProForm').form('submit',{
                 url:url,
                 onSubmit:function () {
                     //表单验证
 
-                    setParams($("input[name='cut_off_length']"));
-                    setParams($("input[name='original_pipe_length']"));
-                    setParams($("input[name='pipe_length_after_cut']"));
 
                     if($("input[name='operation-time']").val()==""){
 
@@ -195,8 +191,8 @@
                     //alert(result);
                     var result = eval('('+result+')');
                     if (result.success){
-                        $('#hlbarePipeGrindingProDialog').dialog('close');
-                        $('#barePipeGrindingProDatagrids').datagrid('reload');
+                        $('#hlPipeRebevelProDialog').dialog('close');
+                        $('#PipeRebevelProDatagrids').datagrid('reload');
                         clearFormLabel();
                     }
                     hlAlertFour(result.message);
@@ -208,8 +204,8 @@
             });
             clearMultiUpload(grid);
         }
-        function barePipeGrindingProCancelSubmit() {
-            $('#hlbarePipeGrindingProDialog').dialog('close');
+        function PipeRebevelProFormCancelSubmit() {
+            $('#hlPipeRebevelProDialog').dialog('close');
         }
 
 
@@ -226,7 +222,7 @@
         }
 
         function  clearFormLabel() {
-            $('#barePipeGrindingProForm').form('clear');
+            $('#PipeRebevelProForm').form('clear');
             $('.hl-label').text(''); $('#hl-gallery-con').empty();
             //combox1.setValue("");
             $(":input").each(function () {
@@ -241,12 +237,11 @@
 <fieldset class="b3" style="padding:10px;margin:10px;">
     <legend> <h3><b style="color: orange" >|&nbsp;</b><span class="i18n1" name="datadisplay">数据展示</span></h3></legend>
     <div  style="margin-top:5px;">
-        <table class="easyui-datagrid" id="barePipeGrindingProDatagrids" url="/BarePipeGrindingOperation/getAllByLike.action" striped="true" loadMsg="正在加载中。。。" textField="text" pageSize="20" fitColumns="true" pagination="true" toolbar="#hlBarePipeGrindingProTb">
+        <table class="easyui-datagrid" id="PipeRebevelProDatagrids" url="/PipeRebevelOperation/getAllByLike.action" striped="true" loadMsg="正在加载中。。。" textField="text" pageSize="20" fitColumns="true" pagination="true" toolbar="#hlPipeRebevelProTb">
             <thead>
             <tr>
                 <th data-options="field:'ck',checkbox:true"></th>
                 <th field="id" align="center" width="100" class="i18n1" name="id">流水号</th>
-                <th field="mill_no" align="center" width="150" class="i18n1" name="millno">分厂</th>
                 <th field="project_name" align="center" width="120" class="i18n1" name="projectname">项目名称</th>
                 <th field="contract_no" align="center" width="120" class="i18n1" name="contractno">合同编号</th>
                 <th field="pipe_no" align="center" width="120" class="i18n1" name="pipeno">钢管编号</th>
@@ -259,12 +254,11 @@
                 <th field="heat_no" align="center" hidden="true" width="50" class="i18n1" name="heat_no">炉号</th>
                 <th field="operator_no" align="center" width="100" class="i18n1" name="operatorno">操作工编号</th>
 
-                <th field="odid" align="center" width="120" class="i18n1" name="odid">内外表</th>
-                <th field="grinding_cutoff" align="center" width="100"  class="i18n1" name="grinding_cutoff">修磨或切割</th>
-                <th field="remaining_wall_thickness_list" width="100" align="center"  class="i18n1" name="remainingwallthicknesslist">剩余壁厚测量</th>
-                <th field="cut_off_length" align="center" width="120" class="i18n1" name="cutofflength">切除长度</th>
-                <th field="original_pipe_length" align="center" width="120" class="i18n1" name="originalpipelength">钢管原始长度</th>
-                <th field="pipe_length_after_cut" align="center" width="100"  class="i18n1" name="pipelengthaftercut">钢管切除后长度</th>
+                <th field="squareness" align="center" width="120" class="i18n1" name="squareness">切斜</th>
+                <th field="ovality" align="center" width="100"  class="i18n1" name="ovality">椭圆度</th>
+                <th field="bevel" width="100" align="center"  class="i18n1" name="bevel">坡口</th>
+                <th field="rootface" align="center" width="120" class="i18n1" name="rootface">钝边</th>
+
                 <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                 <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
                 <th field="operation_time" align="center" width="150" class="i18n1" name="operationtime" data-options="formatter:formatterdate">操作时间</th>
@@ -277,16 +271,7 @@
 
 
 <!--工具栏-->
-<div id="hlBarePipeGrindingProTb" style="padding:10px;">
-    <span class="i18n1" name="millno">分厂编号</span>:
-    <input id="millno" class="easyui-combobox" type="text" name="millno"  data-options=
-            "url:'/millInfo/getAllMillsWithComboboxSelectAll.action',
-					        method:'get',
-					        valueField:'id',
-					        width: 150,
-					        editable:false,
-					        textField:'text',
-					        panelHeight:'auto'"/>
+<div id="hlPipeRebevelProTb" style="padding:10px;">
     <span class="i18n1" name="pipeno">钢管编号</span>:
     <input id="pipeno" name="pipeno" style="line-height:26px;border:1px solid #ccc">
     <span class="i18n1" name="operatorno">操作工编号</span>:
@@ -295,19 +280,19 @@
     <input id="begintime" name="begintime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
     <span class="i18n1" name="endtime">结束时间</span>:
     <input id="endtime" name="endtime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
-    <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchBarePipeGrindingPro()">Search</a>
+    <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchPipeRebevelPro()">Search</a>
     <div style="float:right">
-        <a href="#" id="addLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addBarePipeGrindingPro()">添加</a>
-        <a href="#" id="editLinkBtn" class="easyui-linkbutton i18n1" name="edit" data-options="iconCls:'icon-edit',plain:true" onclick="editBarePipeGrindingPro()">修改</a>
-        <a href="#" id="deltLinkBtn" class="easyui-linkbutton i18n1" name="delete" data-options="iconCls:'icon-remove',plain:true" onclick="delBarePipeGrindingPro()">删除</a>
+        <a href="#" id="addLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addPipeRebevelPro()">添加</a>
+        <a href="#" id="editLinkBtn" class="easyui-linkbutton i18n1" name="edit" data-options="iconCls:'icon-edit',plain:true" onclick="editPipeRebevelPro()">修改</a>
+        <a href="#" id="deltLinkBtn" class="easyui-linkbutton i18n1" name="delete" data-options="iconCls:'icon-remove',plain:true" onclick="delPipeRebevelPro()">删除</a>
     </div>
 </div>
 
 
 
 <!--添加、修改框-->
-<div id="hlbarePipeGrindingProDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;height:auto;">
-    <form id="barePipeGrindingProForm" method="post">
+<div id="hlPipeRebevelProDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;height:auto;">
+    <form id="PipeRebevelProForm" method="post">
         <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
             <legend>钢管信息</legend>
             <table class="ht-table" width="100%" border="0">
@@ -352,22 +337,15 @@
 
 
         <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
-            <legend>光管修磨信息</legend>
+            <legend>光管倒棱信息</legend>
 
             <table class="ht-table">
                 <tr>
                     <td class="i18n1" name="id" width="20%">流水号</td>
-                    <td colspan="1" width="30%"><input class="easyui-textbox" type="text" id="idbinpid" name="idbinpid" readonly="true" value="0"/></td>
-                    <td class="i18n1" name="millno" width="20%">分厂</td>
+                    <td colspan="1" width="30%"><input class="easyui-textbox" type="text" id="idpid" name="idpid" readonly="true" value="0"/></td>
+                    <td></td>
                     <td colspan="1" width="30%">
-                        <input id="mill_no" class="easyui-combobox" type="text" name="mill_no"  data-options=
-                                "url:'/millInfo/getAllMills.action',
-					        method:'get',
-					        valueField:'id',
-					        width: 185,
-					        editable:false,
-					        textField:'text',
-					        panelHeight:'auto'"/>
+
                     </td>
                 </tr>
                 <tr>
@@ -388,20 +366,19 @@
 
             <table class="ht-table">
                 <tr>
-                    <td class="i18n1" name="odid">外（内）</td>
+                    <td class="i18n1" name="squareness">切斜</td>
                     <td>
-                        <select  class="easyui-combobox" data-options="editable:false"  name="odid" style="width:200px;">
-                            <option value="OD">外表面</option>
-                            <option value="ID">内表面</option>
+                        <select  class="easyui-combobox" data-options="editable:false"  name="squareness" style="width:200px;">
+                            <option value="0">Not OK</option>
+                            <option value="1">OK</option>
                         </select>
                     </td>
                     <td></td>
-                    <td class="i18n1" name="grinding_cutoff">修磨或切割</td>
+                    <td class="i18n1" name="ovality">修磨或切割</td>
                     <td>
-                        <select  class="easyui-combobox" data-options="editable:false"  name="grinding_cutoff" style="width:200px;">
-                            <option value="G">修磨</option>
-                            <option value="C">切割</option>
-                            <option value="GC">修磨并切割</option>
+                        <select  class="easyui-combobox" data-options="editable:false"  name="ovality" style="width:200px;">
+                            <option value="0">Not OK</option>
+                            <option value="1">OK</option>
                         </select>
 
                     </td>
@@ -409,28 +386,31 @@
                 </tr>
 
                 <tr>
-                    <td width="16%" class="i18n1" name="remainingwallthicknesslist">修磨剩余壁厚记录</td>
-                    <td><input class="easyui-textbox"   type="text" name="remaining_wall_thickness_list" value=""/></td>
+                    <td class="i18n1" name="bevel">坡口</td>
+                    <td>
+                        <select  class="easyui-combobox" data-options="editable:false"  name="bevel" style="width:200px;">
+                            <option value="0">Not OK</option>
+                            <option value="1">OK</option>
+                        </select>
+                    </td>
                     <td></td>
-                    <td width="16%"  class="i18n1" name="originalpipelength">钢管原始长度</td>
-                    <td><input class="easyui-numberbox" type="text" data-options="min:0,precision:2" name="original_pipe_length" value=""/></td>
-                    <td></td>
+                    <td class="i18n1" name="rootface">钝边</td>
+                    <td>
+                        <select  class="easyui-combobox" data-options="editable:false"  name="rootface" style="width:200px;">
+                            <option value="0">Not OK</option>
+                            <option value="1">OK</option>
+                        </select>
 
-                </tr>
-                <tr>
-                    <td class="i18n1" name="cutofflength">切除长度</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="cut_off_length" value=""/></td>
-                    <td></td>
-                    <td width="16%"  class="i18n1" name="pipelengthaftercut">钢管切后长度</td>
-                    <td><input class="easyui-numberbox" type="text" data-options="min:0,precision:2" name="pipe_length_after_cut" value=""/></td>
+                    </td>
                     <td></td>
                 </tr>
+
 
                 <tr>
                     <td width="16%" class="i18n1" name="result">结论</td>
                     <td><select id="cc" class="easyui-combobox" data-options="editable:false"  name="result" style="width:200px;">
-                        <option value="0">不合格,重新修磨或切长处理</option>
-                        <option value="1">合格,转为光管</option>
+                        <option value="0">不合格,重新倒棱处理</option>
+                        <option value="1">合格</option>
                         <option value="2">待定</option>
                     </select></td>
                     <td></td>
@@ -457,8 +437,8 @@
 
 </div>
 <div id="dlg-buttons" align="center" style="width:900px;">
-    <a href="#" class="easyui-linkbutton" iconCls="icon-save" onclick="barePipeGrindingProFormSubmit()">Save</a>
-    <a href="#" class="easyui-linkbutton" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="barePipeGrindingProCancelSubmit()">Cancel</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-save" onclick="PipeRebevelProFormSubmit()">Save</a>
+    <a href="#" class="easyui-linkbutton" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="PipeRebevelProFormCancelSubmit()">Cancel</a>
 </div>
 <div id="gridPanel1" class="mini-panel" title="header" iconCls="icon-add" style="width:450px;height:250px;"
      showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0"

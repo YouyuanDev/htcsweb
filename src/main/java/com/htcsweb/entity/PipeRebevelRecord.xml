@@ -3,12 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.htcsweb.dao.BarePipeGrindingCutoffRecordDao">
-
-
+<mapper namespace="com.htcsweb.dao.PipeRebevelRecordDao">
 
     <select id="getCountAllByLike" resultType="int">
-        select count(*) from bare_pipe_grinding_cutoff_record o
+        select count(*) from pipe_rebevel_record o
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no
         left join project_info pro on c.project_no=pro.project_no
@@ -19,9 +17,6 @@
             </if>
             <if test="operator_no!=null and operator_no!=''">
                 AND o.operator_no LIKE CONCAT('%',#{operator_no},'%')
-            </if>
-            <if test="mill_no!=null and mill_no!=''">
-                AND o.mill_no =#{mill_no}
             </if>
             <if test="begin_time!=null">
                 <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
@@ -36,7 +31,7 @@
 
     <select id="getAllByLike" resultType="map">
         Select pro.project_name,s.status_name,p.contract_no,p.grade,p.od,p.wt,p.p_length,p.weight,p.heat_no,o.*
-        from bare_pipe_grinding_cutoff_record o
+        from pipe_rebevel_record o
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no
         left join project_info pro on c.project_no=pro.project_no
@@ -47,9 +42,6 @@
             </if>
             <if test="operator_no!=null and operator_no!=''">
                 AND o.operator_no LIKE CONCAT('%',#{operator_no},'%')
-            </if>
-            <if test="mill_no!=null and mill_no!=''">
-                AND o.mill_no =#{mill_no}
             </if>
             <if test="begin_time!=null">
                 <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
@@ -63,37 +55,33 @@
     </select>
 
 
-    <insert id="addBarePipeGrindingCutoffRecord" parameterType="com.htcsweb.entity.BarePipeGrindingCutoffRecord">
-        INSERT INTO bare_pipe_grinding_cutoff_record(pipe_no,operation_time,operator_no,odid,grinding_cutoff,remaining_wall_thickness_list,cut_off_length,original_pipe_length,pipe_length_after_cut,upload_files,remark,result,mill_no) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{odid},#{grinding_cutoff},#{remaining_wall_thickness_list},#{cut_off_length},#{original_pipe_length},#{pipe_length_after_cut},#{upload_files},#{remark},#{result},#{mill_no})
+    <insert id="addPipeRebevelRecord" parameterType="com.htcsweb.entity.PipeRebevelRecord">
+        INSERT INTO pipe_rebevel_record(pipe_no,operation_time,operator_no, squareness,ovality,bevel,rootface,upload_files,remark,result) VALUES (#{pipe_no},#{operation_time},#{operator_no}, #{squareness},#{ovality},#{bevel},#{rootface} ,#{upload_files},#{remark},#{result})
     </insert>
 
-    <select id="getBarePipeGrindingCutoffRecord" resultType="com.htcsweb.entity.BarePipeGrindingCutoffRecord">
-        SELECT * from bare_pipe_grinding_cutoff_record
+    <select id="getPipeRebevelRecord" resultType="com.htcsweb.entity.PipeRebevelRecord">
+        SELECT * from pipe_rebevel_record
     </select>
 
-    <update id="updateBarePipeGrindingCutoffRecord" parameterType="com.htcsweb.entity.BarePipeGrindingCutoffRecord">
-        UPDATE bare_pipe_grinding_cutoff_record set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},
-        odid=#{odid},grinding_cutoff=#{grinding_cutoff},remaining_wall_thickness_list=#{remaining_wall_thickness_list},
-        cut_off_length=#{cut_off_length},original_pipe_length=#{original_pipe_length},
-        pipe_length_after_cut=#{pipe_length_after_cut},
-        upload_files=#{upload_files},remark=#{remark},result=#{result} ,
-        mill_no=#{mill_no}
+    <update id="updatePipeRebevelRecord" parameterType="com.htcsweb.entity.PipeRebevelRecord">
+        UPDATE pipe_rebevel_record set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},
+        squareness=#{squareness},ovality=#{ovality},bevel=#{bevel},rootface=#{rootface} ,
+        upload_files=#{upload_files},remark=#{remark},result=#{result}
         where id=#{id}
     </update>
 
 
     <select id="getCount" resultType="int">
-        select count(*) from bare_pipe_grinding_cutoff_record
+        select count(*) from pipe_rebevel_record
     </select>
 
 
-    <delete id="delBarePipeGrindingCutoffRecord">
-        delete from bare_pipe_grinding_cutoff_record WHERE
+    <delete id="delPipeRebevelRecord">
+        delete from pipe_rebevel_record WHERE
         <foreach collection="array" item="item" open="id in (" separator="," close=")">
             #{item}
         </foreach>
     </delete>
-
 
 
 </mapper>

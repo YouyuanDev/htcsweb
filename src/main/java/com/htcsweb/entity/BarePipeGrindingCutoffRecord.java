@@ -11,7 +11,7 @@ public class BarePipeGrindingCutoffRecord {
     private Date operation_time;
     private String operator_no;
     private String odid;
-    private String grinding;
+    private String grinding_cutoff;
     private String remaining_wall_thickness_list;
     private float cut_off_length;
     private float original_pipe_length;
@@ -24,13 +24,13 @@ public class BarePipeGrindingCutoffRecord {
     public BarePipeGrindingCutoffRecord() {
     }
 
-    public BarePipeGrindingCutoffRecord(int id, String pipe_no, Date operation_time, String operator_no, String odid, String grinding, String remaining_wall_thickness_list, float cut_off_length, float original_pipe_length, float pipe_length_after_cut, String upload_files, String remark, String result, String mill_no) {
+    public BarePipeGrindingCutoffRecord(int id, String pipe_no, Date operation_time, String operator_no, String odid, String grinding_cutoff, String remaining_wall_thickness_list, float cut_off_length, float original_pipe_length, float pipe_length_after_cut, String upload_files, String remark, String result, String mill_no) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
         this.operator_no = operator_no;
         this.odid = odid;
-        this.grinding = grinding;
+        this.grinding_cutoff = grinding_cutoff;
         this.remaining_wall_thickness_list = remaining_wall_thickness_list;
         this.cut_off_length = cut_off_length;
         this.original_pipe_length = original_pipe_length;
@@ -81,12 +81,12 @@ public class BarePipeGrindingCutoffRecord {
         this.odid = odid;
     }
 
-    public String getGrinding() {
-        return grinding;
+    public String getGrinding_cutoff() {
+        return grinding_cutoff;
     }
 
-    public void setGrinding(String grinding) {
-        this.grinding = grinding;
+    public void setGrinding_cutoff(String grinding_cutoff) {
+        this.grinding_cutoff = grinding_cutoff;
     }
 
     public String getRemaining_wall_thickness_list() {
