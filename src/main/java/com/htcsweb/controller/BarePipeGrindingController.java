@@ -49,6 +49,14 @@ public class BarePipeGrindingController {
                 barePipeGrindingCutoffRecord.setOperation_time(new Date());
             }
             String pipeno=barePipeGrindingCutoffRecord.getPipe_no();
+            //判断切割长度是否大于原始长度
+            if(barePipeGrindingCutoffRecord.getOriginal_pipe_length()<barePipeGrindingCutoffRecord.getCut_off_length())
+                barePipeGrindingCutoffRecord.setCut_off_length(barePipeGrindingCutoffRecord.getOriginal_pipe_length());
+            //自动计算切割后剩余长度
+            barePipeGrindingCutoffRecord.setPipe_length_after_cut(barePipeGrindingCutoffRecord.getOriginal_pipe_length()-barePipeGrindingCutoffRecord.getCut_off_length());
+
+
+
             if(barePipeGrindingCutoffRecord.getId()==0){
                 //添加
                 resTotal=barePipeGrindingCutoffRecordDao.addBarePipeGrindingCutoffRecord(barePipeGrindingCutoffRecord);
@@ -70,15 +78,15 @@ public class BarePipeGrindingController {
                             else {
                                 p.setStatus("bare2");
                             }
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
 
                             //若切割，判断是否需要重新倒坡口
                             if(barePipeGrindingCutoffRecord.getGrinding_cutoff()!=null&&(barePipeGrindingCutoffRecord.getGrinding_cutoff().equals("C")||barePipeGrindingCutoffRecord.getGrinding_cutoff().equals("GC"))) {
-                                //
-
-
+                                //判断管子是否计算过新长度
+                                if(p.getP_length()>barePipeGrindingCutoffRecord.getPipe_length_after_cut()){
+                                    p.setP_length(barePipeGrindingCutoffRecord.getPipe_length_after_cut());
+                                }
                             }
-
+                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }
                     }
 

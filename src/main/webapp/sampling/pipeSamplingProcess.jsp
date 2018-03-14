@@ -337,7 +337,7 @@
 
 
         <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
-            <legend>光管修磨切割信息</legend>
+            <legend>取样信息</legend>
 
             <table class="ht-table">
                 <tr>
