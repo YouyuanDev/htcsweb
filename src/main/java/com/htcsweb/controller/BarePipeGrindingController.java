@@ -7,6 +7,7 @@ import com.htcsweb.dao.PipeBasicInfoDao;
 import com.htcsweb.entity.BarePipeGrindingCutoffRecord;
 import com.htcsweb.entity.OdBlastProcess;
 import com.htcsweb.entity.PipeBasicInfo;
+import com.htcsweb.util.PipeActWeightUtil;
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -82,9 +83,10 @@ public class BarePipeGrindingController {
                             //若切割，判断是否需要重新倒坡口
                             if(barePipeGrindingCutoffRecord.getGrinding_cutoff()!=null&&(barePipeGrindingCutoffRecord.getGrinding_cutoff().equals("C")||barePipeGrindingCutoffRecord.getGrinding_cutoff().equals("GC"))) {
                                 //判断管子是否计算过新长度
-                                if(p.getP_length()>barePipeGrindingCutoffRecord.getPipe_length_after_cut()){
+                                //if(p.getP_length()>barePipeGrindingCutoffRecord.getPipe_length_after_cut()){
                                     p.setP_length(barePipeGrindingCutoffRecord.getPipe_length_after_cut());
-                                }
+                                    p.setWeight(PipeActWeightUtil.getActWeight(p.getP_length(),p.getOd(),p.getWt()));
+                                //}
                             }
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }

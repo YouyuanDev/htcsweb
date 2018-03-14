@@ -382,7 +382,7 @@
                     <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="cut_off_length" value=""/></td>
                     <td></td>
                     <td width="16%"  class="i18n1" name="pipelengthaftercut">钢管切后长度</td>
-                    <td><input class="easyui-numberbox" type="text" data-options="min:0,precision:2" name="pipe_length_after_cut" value=""/></td>
+                    <td><input class="easyui-numberbox" type="text" data-options="min:0,precision:2" readonly="true" name="pipe_length_after_cut" value=""/></td>
                     <td></td>
                 </tr>
 

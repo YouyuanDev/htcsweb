@@ -5,9 +5,9 @@ import com.alibaba.fastjson.JSONObject;
 
 import com.htcsweb.dao.PipeBasicInfoDao;
 import com.htcsweb.dao.PipeSamplingRecordDao;
-import com.htcsweb.entity.BarePipeGrindingCutoffRecord;
 import com.htcsweb.entity.PipeBasicInfo;
 import com.htcsweb.entity.PipeSamplingRecord;
+import com.htcsweb.util.PipeActWeightUtil;
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,6 +50,13 @@ public class PipeSamplingProcessController {
                 pipeSamplingRecord.setOperation_time(new Date());
             }
             String pipeno=pipeSamplingRecord.getPipe_no();
+            //判断切割长度是否大于原始长度
+            if(pipeSamplingRecord.getOriginal_pipe_length()<pipeSamplingRecord.getCut_off_length())
+                pipeSamplingRecord.setCut_off_length(pipeSamplingRecord.getOriginal_pipe_length());
+            //自动计算切割后剩余长度
+            pipeSamplingRecord.setPipe_length_after_cut(pipeSamplingRecord.getOriginal_pipe_length()-pipeSamplingRecord.getCut_off_length());
+
+
             if(pipeSamplingRecord.getId()==0){
                 //添加
                 resTotal=pipeSamplingRecordDao.addPipeSamplingRecord(pipeSamplingRecord);
@@ -58,7 +65,26 @@ public class PipeSamplingProcessController {
                 resTotal=pipeSamplingRecordDao.updatePipeSamplingRecord(pipeSamplingRecord);
             }
             if(resTotal>0){
+                //更新管子的状态
+                List<PipeBasicInfo> list=pipeBasicInfoDao.getPipeNumber(pipeno);
+                if(list.size()>0){
+                    PipeBasicInfo p=list.get(0);
 
+                    if(pipeSamplingRecord.getResult()!=null&&pipeSamplingRecord.getResult().equals("1")) {//当合格时才更新钢管状态
+
+
+                        //判断管子是否计算过新长度
+                        //if(p.getP_length()>pipeSamplingRecord.getPipe_length_after_cut()){
+                            p.setP_length(pipeSamplingRecord.getPipe_length_after_cut());
+                            p.setWeight(PipeActWeightUtil.getActWeight(p.getP_length(),p.getOd(),p.getWt()));
+                        //}
+
+
+                        int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                    }
+
+
+                }
                 json.put("success",true);
                 json.put("message","保存成功");
             }else{

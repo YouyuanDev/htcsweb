@@ -268,6 +268,16 @@
                             hlLanguage();
                         }
 
+                        else if ("钢管外防取样" == nodeTxt || "Pipe Coating Sampling" == nodeTxt) {
+
+                            $('#hlTab').tabs('add', {
+                                title: node.text,
+                                content: "<iframe scrolling='auto' frameborder='0'  src='sampling/pipeSamplingProcess.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable: true
+                            });
+                            hlLanguage();
+                        }
+
 
 
                     }
@@ -513,6 +523,7 @@
             <ul id="hlgrindingcutoffrebevel">
                 <li class="i18n1" name="barepipegrindingcutoff">光管修磨切割</li>
                 <li class="i18n1" name="piperebevel">钢管倒棱</li>
+                <li class="i18n1" name="pipesampling">钢管外防取样</li>
             </ul>
         </div>
 
