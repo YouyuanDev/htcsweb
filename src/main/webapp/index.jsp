@@ -522,8 +522,8 @@
         <div title="钢管修磨切割与倒棱" class="i18n" name="grindingcutoffrebevel" style="padding:10px;">
             <ul id="hlgrindingcutoffrebevel">
                 <li class="i18n1" name="barepipegrindingcutoff">光管修磨切割</li>
-                <li class="i18n1" name="piperebevel">钢管倒棱</li>
                 <li class="i18n1" name="pipesampling">钢管外防取样</li>
+                <li class="i18n1" name="piperebevel">钢管倒棱</li>
             </ul>
         </div>
 
