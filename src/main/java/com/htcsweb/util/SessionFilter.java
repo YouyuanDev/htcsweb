@@ -17,31 +17,58 @@ import org.springframework.web.filter.OncePerRequestFilter;
  */
 public class SessionFilter extends OncePerRequestFilter{
 
+
     @Override
     protected void doFilterInternal(HttpServletRequest request,HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
         System.out.println("====测试Filter功能====拦截用户登陆====");
-
-        String[] notFilter = new String[] { "login.jsp"}; // 不过滤的uri
         String strUri = request.getRequestURI() ;
-        System.out.println("strUri="+strUri);
-        System.out.println("request.getSession()="+request.getSession().getAttribute("userSession"));
+
+
+        //System.out.println("strUri="+strUri);
+        //System.out.println("request.getSession()="+request.getSession().getAttribute("userSession"));
         if(request.getSession().getAttribute("userSession")==null ){
             //进入后台,必须先登陆
-            if( strUri.indexOf("login.jsp")==-1&&strUri.indexOf("commitLogin.action")==-1){//点击的不是登陆页面
-                response.sendRedirect("/login/login.jsp") ;
-            }else{
-                System.out.println("可以进入 strUri="+strUri);
+            if(isURIinNotFilterList(strUri)){//请求的URI允许不过滤,包括login等
+                //System.out.println("====login 不需要验证====");
+                System.out.println("请求登录="+strUri);
                 filterChain.doFilter(request, response);//不执行过滤,继续执行操作
-                return ;
+                return;
+            }else{//uri需要被过滤
+                System.out.println("目标URI禁止访问，请先登录"+strUri);
+                response.sendRedirect("/login/login.jsp") ;
+
             }
-        }else{
+        }else{//存在登录信息session
             System.out.println("存在用户session 可以进入 session="+request.getSession().getAttribute("userSession"));
+            //下面开始验证访问权限
+
+
+
+
             filterChain.doFilter(request, response);//不执行过滤,继续执行操作
             //filterChain.doFilter(new MyFilter((HttpServletRequest)request), response);//调用下一个filter
             return ;
         }
     }
+
+    //检查URI是否在免过滤列表中
+    private boolean isURIinNotFilterList(String URI){
+        if(URI==null)
+            return false;
+
+        String[] notFilterList = new String[] { "login.jsp","commitLogin.action"}; // 不过滤的uri
+        for(int i=0;i<notFilterList.length;i++){
+            if( URI.indexOf(notFilterList[i])!=-1)
+                return true;
+        }
+
+
+        return false;
+    }
+
+
+
 
 }

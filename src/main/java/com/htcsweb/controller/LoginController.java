@@ -65,10 +65,11 @@ public class LoginController {
                 //把用户数据保存在session域对象中
                 session.setAttribute("userSession", employee_no);
                 //跳转到用户主页
-                //response.sendRedirect(request.getContextPath()+"/IndexServlet");
-                response.sendRedirect(request.getContextPath()+"/index.jsp") ;
+
+                //System.out.println("跳转到index.jsp");
+
                 json.put("success",true);
-                System.out.println("success");
+                System.out.println("登录验证 success");
             }else{
                 json.put("success",false);
                 json.put("msg","用户名或密码错误");
