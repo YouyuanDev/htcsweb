@@ -42,6 +42,12 @@ public class SessionFilter extends OncePerRequestFilter{
 
             }
         }else{//存在登录信息session
+            if(isURIinNotFilterList(strUri)){//请求的URI允许不过滤,包括login等
+                filterChain.doFilter(request, response);//不执行过滤,继续执行操作
+                return;
+            }
+
+
             System.out.println("存在用户session 可以进入 session="+request.getSession().getAttribute("userSession"));
             System.out.println("检测用户是否存在页面"+reqfunctionCode+"的权限");
             boolean authrized=false;
@@ -52,7 +58,7 @@ public class SessionFilter extends OncePerRequestFilter{
             }
             System.out.println("authrized===="+authrized);
             if(!authrized)
-                response.sendRedirect("/login/login.jsp") ;
+                response.sendRedirect("/login/error.jsp") ;
             else
                 filterChain.doFilter(request, response);//不执行过滤,继续执行操作
             //filterChain.doFilter(new MyFilter((HttpServletRequest)request), response);//调用下一个filter
