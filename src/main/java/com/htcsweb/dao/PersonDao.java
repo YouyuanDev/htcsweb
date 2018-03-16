@@ -16,7 +16,10 @@ public interface PersonDao {
 
    //模糊搜索带分页
    public List<HashMap<String,Object>> getAllByLike(@Param("employee_no")String employee_no, @Param("pname")String pname, @Param("skip")int skip, @Param("take")int take);
-   public int getCount();
+   //public int getCount();
+   //模糊搜索总数
+   public int getCountAllByLike(@Param("employee_no")String employee_no, @Param("pname")String pname);
+
    //验证登录密码
    public int confirmPersonByEmployeeNoPassword(@Param("employee_no")String employee_no,@Param("ppassword") String ppassword);
 

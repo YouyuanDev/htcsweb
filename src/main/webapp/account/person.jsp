@@ -209,6 +209,7 @@
                 <th field="pdepartment" align="center" width="100" class="i18n1" name="pdepartment">部门</th>
                 <th field="pregister_time" align="center" width="100" class="i18n1" name="pregistertime" data-options="formatter:formatterdate">注册时间</th>
                 <th field="pstatus" align="center" width="100" class="i18n1" name="pstatus">状态</th>
+                <th field="role_no_list" align="center" width="100" class="i18n1" name="rolenolist">角色列表</th>
             </tr>
             </thead>
         </table>

@@ -17,11 +17,12 @@ public class Person {
     private String pdepartment;
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date pregister_time;
+    private String role_no_list;
 
     public Person() {
     }
 
-    public Person(int id, String employee_no, String pname, String ppassword, String pidcard_no, String pmobile, int page, String psex, String pstatus, String pdepartment, Date pregister_time) {
+    public Person(int id, String employee_no, String pname, String ppassword, String pidcard_no, String pmobile, int page, String psex, String pstatus, String pdepartment, Date pregister_time, String role_no_list) {
         this.id = id;
         this.employee_no = employee_no;
         this.pname = pname;
@@ -33,8 +34,8 @@ public class Person {
         this.pstatus = pstatus;
         this.pdepartment = pdepartment;
         this.pregister_time = pregister_time;
+        this.role_no_list = role_no_list;
     }
-
 
     public int getId() {
         return id;
@@ -122,5 +123,13 @@ public class Person {
 
     public void setPregister_time(Date pregister_time) {
         this.pregister_time = pregister_time;
+    }
+
+    public String getRole_no_list() {
+        return role_no_list;
+    }
+
+    public void setRole_no_list(String role_no_list) {
+        this.role_no_list = role_no_list;
     }
 }
