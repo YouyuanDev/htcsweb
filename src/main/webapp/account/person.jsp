@@ -286,7 +286,7 @@
                     <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="page" value=""/></td>
                     <td></td>
                     <td class="i18n1" name="psex">性别</td>
-                    <td><select class="easyui-combobox" name="psex" style="width:200px;">
+                    <td><select class="easyui-combobox" name="psex" data-options="editable:false" style="width:200px;">
                         <option value="M">男</option>
                         <option value="F">女</option>
                     </select></td>
@@ -299,7 +299,7 @@
                     </td>
                     <td></td>
                     <td width="16%" class="i18n1" name="pstatus">状态</td>
-                    <td><select id="cc" class="easyui-combobox" name="pstatus" style="width:200px;">
+                    <td><select id="cc" class="easyui-combobox" name="pstatus" data-options="editable:false" style="width:200px;">
                         <option value="0">在用</option>
                         <option value="1">停用</option>
                     </select></td>

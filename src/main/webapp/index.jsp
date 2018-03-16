@@ -468,6 +468,15 @@
                             });
                             hlLanguage();
                         }
+                        else if("权限管理"==nodeTxt||"Function Management"==nodeTxt){
+
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='account/function.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                            hlLanguage();
+                        }
 
 
                     }
@@ -575,6 +584,7 @@
             <ul id="hlaccount">
                 <li class="i18n1" name="personmanagement">账户管理</li>
                 <li class="i18n1" name="rolemanagement">角色管理</li>
+                <li class="i18n1" name="functionmanagement">权限管理</li>
 
             </ul>
         </div>
