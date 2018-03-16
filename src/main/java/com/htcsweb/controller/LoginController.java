@@ -64,10 +64,15 @@ public class LoginController {
                 HttpSession session = request.getSession();
                 //把用户数据保存在session域对象中
                 session.setAttribute("userSession", employee_no);
+
+                //设置权限
+                HashMap<String,Object> functionMap=new HashMap<String,Object>();
+                //这里读取数据库设置所有权限
+                functionMap.put("index","WRD");
+
+                session.setAttribute("userfunctionMap", functionMap);
+
                 //跳转到用户主页
-
-                //System.out.println("跳转到index.jsp");
-
                 json.put("success",true);
                 System.out.println("登录验证 success");
             }else{

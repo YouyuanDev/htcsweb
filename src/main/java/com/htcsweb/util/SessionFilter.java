@@ -1,6 +1,7 @@
 package com.htcsweb.util;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -23,11 +24,11 @@ public class SessionFilter extends OncePerRequestFilter{
             throws ServletException, IOException {
 
         System.out.println("====测试Filter功能====拦截用户登陆====");
-        String strUri = request.getRequestURI() ;
-
-
+        String strUri = request.getRequestURI();
+        //从uri中取出functioncode 如/index.jsp 为 index
+        String reqfunctionCode=strUri.substring(strUri.lastIndexOf('/')+1,strUri.lastIndexOf('.'));
+        System.out.println("reqfunctionCode===="+reqfunctionCode);
         //System.out.println("strUri="+strUri);
-        //System.out.println("request.getSession()="+request.getSession().getAttribute("userSession"));
         if(request.getSession().getAttribute("userSession")==null ){
             //进入后台,必须先登陆
             if(isURIinNotFilterList(strUri)){//请求的URI允许不过滤,包括login等
@@ -42,12 +43,18 @@ public class SessionFilter extends OncePerRequestFilter{
             }
         }else{//存在登录信息session
             System.out.println("存在用户session 可以进入 session="+request.getSession().getAttribute("userSession"));
+            System.out.println("检测用户是否存在页面"+reqfunctionCode+"的权限");
+            boolean authrized=false;
             //下面开始验证访问权限
-
-
-
-
-            filterChain.doFilter(request, response);//不执行过滤,继续执行操作
+            HashMap<String,Object> functionMap=(HashMap<String,Object>)request.getSession().getAttribute("userfunctionMap");
+            if(functionMap!=null&&functionMap.containsKey(reqfunctionCode)){
+                authrized=true;
+            }
+            System.out.println("authrized===="+authrized);
+            if(!authrized)
+                response.sendRedirect("/login/login.jsp") ;
+            else
+                filterChain.doFilter(request, response);//不执行过滤,继续执行操作
             //filterChain.doFilter(new MyFilter((HttpServletRequest)request), response);//调用下一个filter
             return ;
         }
