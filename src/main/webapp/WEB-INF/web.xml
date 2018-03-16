@@ -26,6 +26,22 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 
+  <!--加载 sessionFilter-->
+  <!-- 过滤所有对action的请求-->
+  <filter>
+    <filter-name>sessionFilter</filter-name>
+    <filter-class>com.htcsweb.util.SessionFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>sessionFilter</filter-name>
+    <url-pattern>*.action</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>sessionFilter</filter-name>
+    <url-pattern>*.jsp</url-pattern>
+  </filter-mapping>
+
+
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Date;
@@ -34,8 +35,7 @@ public class LoginController {
     @Autowired
     private PersonDao personDao;
 
-    @RequestMapping("/commitLogin")
-    @ResponseBody
+
 
 //    public static String md5(String pass){
 //        String saltSource = "blog";
@@ -48,6 +48,8 @@ public class LoginController {
 //    }
 
     //登录验证
+    @RequestMapping("/commitLogin")
+    @ResponseBody
     public String commitLogin(HttpServletRequest request,HttpServletResponse response){
         JSONObject json=new JSONObject();
         String employee_no= request.getParameter("employee_no");
@@ -59,6 +61,12 @@ public class LoginController {
             //if(personDao!=null)
             resTotal= personDao.confirmPersonByEmployeeNoPassword(employee_no,ppassword);
             if(resTotal>0){
+                HttpSession session = request.getSession();
+                //把用户数据保存在session域对象中
+                session.setAttribute("userSession", employee_no);
+                //跳转到用户主页
+                //response.sendRedirect(request.getContextPath()+"/IndexServlet");
+                response.sendRedirect(request.getContextPath()+"/index.jsp") ;
                 json.put("success",true);
                 System.out.println("success");
             }else{
