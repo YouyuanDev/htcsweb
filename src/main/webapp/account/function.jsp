@@ -194,9 +194,12 @@
             <tr>
                 <th data-options="field:'ck',checkbox:true"></th>
                 <th field="id" align="center" width="100" class="i18n1" name="id">流水号</th>
+                <th field="module_name" align="center" width="100" class="i18n1" name="modulename">模块名称</th>
                 <th field="function_no" align="center" width="100" class="i18n1" name="functionno">权限编号</th>
                 <th field="function_name" align="center" width="100" class="i18n1" name="functionname">权限名称</th>
                 <th field="operation_type" align="center" width="100" class="i18n1" name="operationtype">操作类型</th>
+                <th field="uri" align="center" width="100" class="i18n1" name="uri">URI</th>
+
             </tr>
             </thead>
         </table>
@@ -231,16 +234,22 @@
             <table class="ht-table">
                 <tr>
                     <td class="i18n1" name="id">流水号</td>
-                    <td colspan="5"><input class="easyui-textbox" type="text" name="id" readonly="true" value="0"/></td>
-
+                    <td colspan="1"><input class="easyui-textbox" type="text" name="id" readonly="true" value="0"/></td>
+                    <td></td>
+                    <td class="i18n1" name="modulename">模块名称</td>
+                    <td colspan="1">
+                        <input class="easyui-textbox" name="module_name" type="text" style="width:150px;height:22px;padding:12px" >
+                    </td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="functionno">权限编号</td>
-                    <td colspan="2" >
+                    <td colspan="1" >
                         <input class="easyui-textbox" type="text" value="" name="function_no" />
                     </td>
+                    <td></td>
                     <td class="i18n1" name="functionname">权限名称</td>
-                    <td colspan="2">
+                    <td colspan="1">
                         <input class="easyui-textbox" name="function_name" type="text" style="width:150px;height:22px;padding:12px" >
                     </td>
                     <td></td>
@@ -248,19 +257,19 @@
                 </tr>
                 <tr>
                     <td class="i18n1" name="operationtype">操作类型</td>
-                    <td colspan="2" >
+                    <td colspan="1" >
                         <select class="easyui-combobox" name="operation_type"  data-options="editable:false" style="width:200px;">
-                            <option value="R">查看</option>
-                            <option value="W">编辑</option>
-                            <option value="D">删除</option>
+                            <option value="r">查看</option>
+                            <option value="w">编辑</option>
+                            <option value="d">删除</option>
                         </select>
                     </td>
                     <td></td>
-                    <td colspan="2">
-
+                    <td class="i18n1" name="uri">URI名称</td>
+                    <td colspan="1">
+                        <input class="easyui-textbox" name="uri" type="text" style="width:150px;height:22px;padding:12px" >
                     </td>
                     <td></td>
-
                 </tr>
             </table>
 

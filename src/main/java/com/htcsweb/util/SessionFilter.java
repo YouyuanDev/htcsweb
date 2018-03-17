@@ -18,10 +18,24 @@ import org.springframework.web.filter.OncePerRequestFilter;
  */
 public class SessionFilter extends OncePerRequestFilter{
 
+    boolean adminMode=false; //测试时暂时关闭
+    String[] notFilterList = new String[] {
+            "login.jsp",
+            "commitLogin.action",
+            "error.jsp",
+            "getAllMillsWithComboboxSelectAll",
+            "getAllMills"
+    }; // 不过滤的uri
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+        if(adminMode){//adminMode
+            filterChain.doFilter(request, response);//不执行过滤,继续执行操作
+            return;
+        }
+
+
 
         System.out.println("====测试Filter功能====拦截用户登陆====");
         String strUri = request.getRequestURI();
@@ -58,7 +72,7 @@ public class SessionFilter extends OncePerRequestFilter{
             }
             System.out.println("authrized===="+authrized);
             if(!authrized)
-                response.sendRedirect("/login/error.jsp") ;
+                response.sendRedirect("/error.jsp") ;
             else
                 filterChain.doFilter(request, response);//不执行过滤,继续执行操作
             //filterChain.doFilter(new MyFilter((HttpServletRequest)request), response);//调用下一个filter
@@ -71,7 +85,7 @@ public class SessionFilter extends OncePerRequestFilter{
         if(URI==null)
             return false;
 
-        String[] notFilterList = new String[] { "login.jsp","commitLogin.action"}; // 不过滤的uri
+
         for(int i=0;i<notFilterList.length;i++){
             if( URI.indexOf(notFilterList[i])!=-1)
                 return true;

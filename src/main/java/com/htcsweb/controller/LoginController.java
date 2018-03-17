@@ -2,10 +2,14 @@ package com.htcsweb.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.htcsweb.dao.FunctionDao;
 import com.htcsweb.dao.OdBlastProcessDao;
 import com.htcsweb.dao.PersonDao;
+import com.htcsweb.dao.RoleDao;
+import com.htcsweb.entity.Function;
 import com.htcsweb.entity.OdBlastProcess;
 import com.htcsweb.entity.Person;
+import com.htcsweb.entity.Role;
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,6 +39,11 @@ public class LoginController {
     @Autowired
     private PersonDao personDao;
 
+    @Autowired
+    private RoleDao roleDao;
+
+    @Autowired
+    private FunctionDao functionDao;
 
 
 //    public static String md5(String pass){
@@ -68,8 +77,47 @@ public class LoginController {
                 //设置权限
                 HashMap<String,Object> functionMap=new HashMap<String,Object>();
                 //这里读取数据库设置所有权限
-                functionMap.put("index","WRD");
+                if(employee_no!=null) {
+                    List<Person> lt=personDao.getPersonByEmployeeNo(employee_no);
+                    if(lt.size()>0) {
+                        Person person=lt.get(0);
+                        String role_no_list=person.getRole_no_list();
+                        if(role_no_list!=null&&!role_no_list.equals("")){
+                            String[] roles= role_no_list.split(";");
+                            for(int i=0;i<roles.length;i++){
+                                List<Role> rolelt=roleDao.getRoleByRoleNo(roles[i]);
+                                System.out.println("role ="+roles[i]);
+                                if(rolelt.size()>0) {
+                                    Role role=rolelt.get(0);
+                                    String functionlist = role.getFunction_no_list();
+                                    if(functionlist!=null&&!functionlist.equals("")){
+                                        String[] func_no_s=functionlist.split(";");
+                                        for(int j=0;j<func_no_s.length;j++) {
+                                            List<Function> funlst=functionDao.getFunctionByFunctionNo(func_no_s[j]);
+                                            if(funlst.size()>0){
+                                                //得到function
+                                                Function f=funlst.get(0);
+                                                String function_no=f.getFunction_no();
+                                                String uri=f.getUri();
+                                                functionMap.put(function_no,"1");
+                                                functionMap.put(uri,"1");
+                                                System.out.println("functionMap put="+function_no);
+                                                System.out.println("uri put="+uri);
+                                            }
 
+
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+
+
+                    }
+                }
+
+                //functionMap.put("index","1");
                 session.setAttribute("userfunctionMap", functionMap);
 
                 //跳转到用户主页

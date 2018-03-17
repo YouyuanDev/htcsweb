@@ -37,6 +37,16 @@
     </select>
 
 
+    <select id="getRoleByRoleNo" resultType="com.htcsweb.entity.Role">
+        select * from  role r
+        <where>
+            <if test="role_no!=null and role_no!=''">
+                AND r.role_no =#{role_no}
+            </if>
+
+        </where>
+    </select>
+
 
     <insert id="addRole" parameterType="com.htcsweb.entity.Role">
         INSERT INTO role(role_no,role_name,function_no_list) VALUES (#{role_no},#{role_name},#{function_no_list})

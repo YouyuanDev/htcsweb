@@ -37,6 +37,18 @@
             </if>
         </where>
     </select>
+
+    <select id="getPersonByEmployeeNo"  resultMap="all" resultType="com.htcsweb.entity.Person">
+        select * from person
+        <where>
+            <if test="employee_no!=null and employee_no!=''">
+                AND employee_no =#{employee_no}
+            </if>
+        </where>
+    </select>
+
+
+
     <select id="getAllByLike"  resultMap="all" resultType="map">
         select * from person
         <where>

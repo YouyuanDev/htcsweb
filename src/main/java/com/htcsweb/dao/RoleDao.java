@@ -1,5 +1,6 @@
 package com.htcsweb.dao;
 
+import com.htcsweb.entity.Function;
 import com.htcsweb.entity.Role;
 import org.apache.ibatis.annotations.Param;
 
@@ -21,4 +22,10 @@ public interface RoleDao {
     public int addRole(Role role);
     //删除role
     public int delRole(String[]arrId);
+
+    //根据Role No 得到Role
+    public List<Role> getRoleByRoleNo(@Param("role_no")String role_no);
+
+
+
 }

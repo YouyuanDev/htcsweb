@@ -21,4 +21,7 @@ public interface FunctionDao {
     public int addFunction(Function function);
     //删除function
     public int delFunction(String[]arrId);
+
+    //根据function_no得到Function
+    public List<Function> getFunctionByFunctionNo(@Param("function_no")String function_no);
 }

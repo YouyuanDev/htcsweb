@@ -14,6 +14,10 @@ public interface PersonDao {
    //小页面显示人员名单
    public  List<Person>getNoByName(@Param("pname")String pname,@Param("employee_no")String employee_no);
 
+   //根据编号查找person
+   public  List<Person>getPersonByEmployeeNo(@Param("employee_no")String employee_no);
+
+
    //模糊搜索带分页
    public List<HashMap<String,Object>> getAllByLike(@Param("employee_no")String employee_no, @Param("pname")String pname, @Param("skip")int skip, @Param("take")int take);
    //public int getCount();

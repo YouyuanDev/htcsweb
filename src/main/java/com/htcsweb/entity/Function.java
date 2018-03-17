@@ -5,15 +5,19 @@ public class Function {
     private String function_no;     //权限编号
     private String function_name;   //权限名称
     private String operation_type;  //操作类型
+    private String uri;             //访问uri名称
+    private String module_name;     //模块名称
 
     public Function() {
     }
 
-    public Function(int id, String function_no, String function_name, String operation_type) {
+    public Function(int id, String function_no, String function_name, String operation_type, String uri, String module_name) {
         this.id = id;
         this.function_no = function_no;
         this.function_name = function_name;
         this.operation_type = operation_type;
+        this.uri = uri;
+        this.module_name = module_name;
     }
 
     public int getId() {
@@ -46,5 +50,21 @@ public class Function {
 
     public void setOperation_type(String operation_type) {
         this.operation_type = operation_type;
+    }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
+
+    public String getModule_name() {
+        return module_name;
+    }
+
+    public void setModule_name(String module_name) {
+        this.module_name = module_name;
     }
 }

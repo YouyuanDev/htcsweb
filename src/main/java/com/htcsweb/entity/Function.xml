@@ -37,13 +37,25 @@
     </select>
 
 
+    <select id="getFunctionByFunctionNo" resultType="com.htcsweb.entity.Function">
+        select * from  function f
+
+        <where>
+            <if test="function_no!=null and function_no!=''">
+                AND f.function_no =#{function_no}
+            </if>
+
+        </where>
+
+    </select>
+
 
     <insert id="addFunction" parameterType="com.htcsweb.entity.Function">
-        INSERT INTO function(function_no,function_name,operation_type) VALUES (#{function_no},#{function_name},#{operation_type})
+        INSERT INTO function(function_no,function_name,operation_type,uri,module_name) VALUES (#{function_no},#{function_name},#{operation_type},#{uri},#{module_name})
     </insert>
 
     <update id="updateFunction" parameterType="com.htcsweb.entity.Function">
-        UPDATE function set function_no=#{function_no},function_name=#{function_name},operation_type=#{operation_type} where id=#{id}
+        UPDATE function set function_no=#{function_no},function_name=#{function_name},operation_type=#{operation_type}, uri=#{uri}, module_name=#{module_name} where id=#{id}
     </update>
 
 
