@@ -112,12 +112,12 @@ public class PipeRebevelProcessController {
 
 
 
-    @RequestMapping(value = "/getAllByLike")
+    @RequestMapping(value = "/getAllPipeRebevelByLike")
     @ResponseBody
-    public String getAllByLike(@RequestParam(value = "pipe_no",required = false)String pipe_no, @RequestParam(value = "operator_no",required = false)String operator_no, @RequestParam(value = "begin_time",required = false)String begin_time, @RequestParam(value = "end_time",required = false)String end_time, HttpServletRequest request){
+    public String getAllPipeRebevelByLike(@RequestParam(value = "pipe_no",required = false)String pipe_no, @RequestParam(value = "operator_no",required = false)String operator_no, @RequestParam(value = "begin_time",required = false)String begin_time, @RequestParam(value = "end_time",required = false)String end_time, HttpServletRequest request){
         String page= request.getParameter("page");
         String rows= request.getParameter("rows");
-        System.out.print("getAllByLike:");
+        System.out.print("getAllPipeRebevelByLike:");
         if(page==null){
             page="1";
         }

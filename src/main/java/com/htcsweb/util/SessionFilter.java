@@ -31,7 +31,19 @@ public class SessionFilter extends OncePerRequestFilter{
             "getPipeInfoByNo",
             "delUploadPicture",
             "uploadPicture",
-            "getIDAcceptanceCriteriaByContractNo"
+            "getIDAcceptanceCriteriaByContractNo",
+            "getAllODAcceptanceCriteria",
+            "getAllIDAcceptanceCriteria",
+            "getAllLabTestingAcceptanceCriteria2fbe",
+            "getAllLabTestingAcceptanceCriteria3lpe",
+            "getAllRawMaterialTestingAcceptanceCriteria2fbe",
+            "getAllRawMaterialTestingAcceptanceCriteria3lpe",
+            "getProjectInfo",
+            "getProjectNameByNo",
+            "getContractInfoByContractNo",
+            "getAllPipeStatus",
+            "getAllPipeStatusWithComboboxSelectAll"
+
     }; // 不过滤的uri
 
     @Override
