@@ -42,7 +42,11 @@ public class SessionFilter extends OncePerRequestFilter{
             "getProjectNameByNo",
             "getContractInfoByContractNo",
             "getAllPipeStatus",
-            "getAllPipeStatusWithComboboxSelectAll"
+            "getAllPipeStatusWithComboboxSelectAll",
+            "getAcceptanceCriteria2FbeByContractNo",
+            "getAcceptanceCriteria3LpeByContractNo",
+            "getRawMaterialStandard2FbeByProjectNo",
+            "getRawMaterialStandard3LpeByProjectNo"
 
     }; // 不过滤的uri
 
