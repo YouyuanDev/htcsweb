@@ -309,7 +309,7 @@
 
 
         <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
-            <legend>外喷砂生产信息</legend>
+            <legend>外涂生产信息（3LPE）</legend>
 
             <table class="ht-table">
                 <tr>

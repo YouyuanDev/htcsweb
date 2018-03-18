@@ -24,7 +24,13 @@ public class SessionFilter extends OncePerRequestFilter{
             "commitLogin.action",
             "error.jsp",
             "getAllMillsWithComboboxSelectAll",
-            "getAllMills"
+            "getAllMills",
+            "getODAcceptanceCriteriaByContractNo",
+            "getPipeNumbers",
+            "getPersonNoByName",
+            "getPipeInfoByNo",
+            "delUploadPicture",
+            "uploadPicture"
     }; // 不过滤的uri
 
     @Override

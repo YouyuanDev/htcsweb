@@ -342,7 +342,7 @@
 
 
         <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
-            <legend>外喷砂生产信息</legend>
+            <legend>外涂检验信息（2FBE）</legend>
 
             <table class="ht-table">
                 <tr>
@@ -364,14 +364,14 @@
                 </tr>
                 <tr>
                     <td class="i18n1" name="operatorno">操作工编号</td>
-                    <td colspan="2">
+                    <td colspan="1" width="30%">
                         <input id="lookup2" name="operator_no" class="mini-lookup" style="text-align:center;width:180px;"
                                textField="employee_no" valueField="id" popupWidth="auto"
                                popup="#gridPanel2" grid="#datagrid2" multiSelect="false"
                         />
                     </td>
                     <td class="i18n1" name="operationtime">操作时间</td>
-                    <td colspan="2">
+                    <td colspan="1">
                         <input class="easyui-datetimebox" id="odcoatInprotime" type="text" name="odcoatInprotime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
 
