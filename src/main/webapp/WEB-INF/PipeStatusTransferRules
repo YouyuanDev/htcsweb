@@ -21,19 +21,15 @@ Current_Status                     Result:NextStatus
 
 外防修补完成待检验    odrepair2   0:odrepair1   1:od4   2:odrepair2
 
-
 光管入库             bare2        0:bare1     1:id1   2:bare1
-
-
-
 
 内喷砂完成           id1       0:id1     1:id2   2:id1
 内喷砂检验完成        id2       0:odstockin     1:id3   2:id1
 内涂完成             id3        0:idstrip1     1:id4   2:idrepair1
 内涂检验完成          id4         0:idstrip1     1:id5  2:idrepair1
 内喷标完成           id5         0:id5       1:id6     2:id5
-内防终检完成         id6          0:id6   1:id7     2:id6
-内外防终检完成       id7           1:idstockin
+内防终检完成         id6          0:id6   1:idstockin    2:id6
+
 内防成品入库       idstockin       1:out
 外防待扒皮        odstrip1       0:odstrip1  1:odstrip2
 外防扒皮完成      odstrip2        1:bare1

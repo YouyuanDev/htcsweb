@@ -30,7 +30,8 @@ public class SessionFilter extends OncePerRequestFilter{
             "getPersonNoByName",
             "getPipeInfoByNo",
             "delUploadPicture",
-            "uploadPicture"
+            "uploadPicture",
+            "getIDAcceptanceCriteriaByContractNo"
     }; // 不过滤的uri
 
     @Override

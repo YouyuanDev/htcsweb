@@ -1,5 +1,11 @@
 [
-    { "id": "aa", "text": "aa"},
-    { "id": "bb", "text": "bb" },
-    { "id": "cc", "text": "cc" }
+    { "id": "pit", "text": "麻坑"},
+    { "id": "crater", "text": "凹坑" },
+    { "id": "inclusion", "text": "杂质" },
+    { "id": "thicknesslow", "text": "厚度低" },
+    { "id": "thicknesshigh", "text": "厚度高" },
+    { "id": "scratch", "text": "划伤" },
+    { "id": "notsmooth", "text": "不平整" },
+    { "id": "other", "text": "其他缺陷" }
+
 ]

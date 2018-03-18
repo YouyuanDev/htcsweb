@@ -178,7 +178,7 @@
             <if test="pipe_no!=null and pipe_no!=''">
                 AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
             </if>
-            AND p.status = 'id7'
+            AND p.status = 'id6'
         </where>
     </select>
 
@@ -247,7 +247,7 @@
             <if test="pipe_no!=null and pipe_no!=''">
                 AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
             </if>
-            AND p.status = 'id7'
+            AND p.status = 'id6'
         </where>
         ORDER BY id DESC
         limit #{skip},#{take}
@@ -285,7 +285,7 @@
     </update>
 
     <update id="idProductStockin" parameterType="com.htcsweb.entity.PipeBasicInfo">
-        UPDATE pipe_basic_info set status='idstockin' WHERE  status='id7' AND
+        UPDATE pipe_basic_info set status='idstockin' WHERE  status='id6' AND
         <foreach collection="array" item="item" open="id in (" separator="," close=")">
             #{item}
         </foreach>
