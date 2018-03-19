@@ -30,7 +30,19 @@
     <script type="text/javascript">
         var url;
         $(function(){
-            //hlLanguage("i18n/");
+            var odDiv='<div title=\"外防腐\" class=\"i18n\" name=\"externalcoating\"  style=\"padding:10px;\"><ul id=\"od\">';
+            var odDivSon="";
+            odDivSon+=MakeMenus("odblastprocess");
+            alert(odDivSon);
+            if(odDivSon.length>0){
+                odDiv+=odDivSon;
+                odDiv+='</ul></div>';
+                alert(odDiv);
+                $('#aa').append(odDiv);
+            }else{
+                odDiv="";
+            }
+            hlLanguage("i18n/");
             $('#od').tree({
                 onClick:function(node){
                     var tab=$('#hlTab').tabs('getTab',node.text);
@@ -484,11 +496,15 @@
                 }
             });
 
+
+            //makeMenu("外喷砂工序",odParams,"odblastprocess");
         });
-        $('#aa').accordion('add',{
-            title:'Title',
-            content:'<div style="padding:10px">Content</div>'
-        });
+
+        function  MakeMenus(name) {
+            var res='<li class=\"i18n1\" name=\"'+name+'\" ></li>';
+            return res;
+        }
+
     </script>
 </head>
 <body class="easyui-layout">
@@ -525,18 +541,18 @@
 <div data-options="region:'west'" title="导航菜单" class="i18n" name="navigation" style="width:200px;">
 
     <div id="aa" class="easyui-accordion">
-        <div title="外防腐" class="i18n" name="externalcoating"  style="padding:10px;">
-            <ul id="od">
-                <li class="i18n1" name="odblastprocess" >外喷砂工序</li>
-                <li class="i18n1" name="odblastinspection" >外喷砂检验工序</li>
-                <li class="i18n1" name="odcoating2fbe" >外涂工序(2FBE)</li>
-                <li class="i18n1" name="odcoating3lpe" >外涂工序(3LPE)</li>
-                <li class="i18n1" name="odcoating2fbeinspection" >外涂检验工序(2FBE)</li>
-                <li class="i18n1" name="odcoating3lpeinspection" >外涂检验工序(3LPE)</li>
-                <li class="i18n1" name="odstencilprocess" >外喷标工序</li>
-                <li class="i18n1" name="odfinalinspection">外涂层终检工序</li>
-            </ul>
-        </div>
+        <%--<div title="外防腐" class="i18n" name="externalcoating"  style="padding:10px;">--%>
+            <%--<ul id="od">--%>
+                <%--<li class="i18n1" name="odblastprocess" >外喷砂工序</li>--%>
+                <%--<li class="i18n1" name="odblastinspection" >外喷砂检验工序</li>--%>
+                <%--<li class="i18n1" name="odcoating2fbe" >外涂工序(2FBE)</li>--%>
+                <%--<li class="i18n1" name="odcoating3lpe" >外涂工序(3LPE)</li>--%>
+                <%--<li class="i18n1" name="odcoating2fbeinspection" >外涂检验工序(2FBE)</li>--%>
+                <%--<li class="i18n1" name="odcoating3lpeinspection" >外涂检验工序(3LPE)</li>--%>
+                <%--<li class="i18n1" name="odstencilprocess" >外喷标工序</li>--%>
+                <%--<li class="i18n1" name="odfinalinspection">外涂层终检工序</li>--%>
+            <%--</ul>--%>
+        <%--</div>--%>
         <div title="内防腐" class="i18n" name="intenalcoating" style="padding:10px;">
             <ul id="id">
                 <li class="i18n1" name="idblastprocess">内喷砂工序</li>
