@@ -1,4 +1,5 @@
-<%@ page import="java.util.ResourceBundle" %><%--
+<%@ page import="java.util.ResourceBundle" %>
+<%@ page import="java.util.HashMap" %><%--
   Created by IntelliJ IDEA.
   User: Administrator
   Date: 2017/11/13 0013
@@ -484,7 +485,10 @@
             });
 
         });
-
+        $('#aa').accordion('add',{
+            title:'Title',
+            content:'<div style="padding:10px">Content</div>'
+        });
     </script>
 </head>
 <body class="easyui-layout">
@@ -499,18 +503,37 @@
         </select>
     </div>
 </div>
+
+
+<%
+
+    //把用户数据保存在session域对象中
+    HashMap<String,Object> functionMap=(HashMap<String,Object>)request.getSession().getAttribute("userfunctionMap");
+    String odblastprocessDisplay="display:none;";
+    String odblastinspectionDisplay="display:none;";
+    if(functionMap!=null&&functionMap.containsKey("odblastprocess")){
+        odblastprocessDisplay="";
+    }
+    else if(functionMap!=null&&functionMap.containsKey("odblastinspectionprocess")){
+        odblastinspectionDisplay="";
+    }
+
+
+%>
+
+
 <div data-options="region:'west'" title="导航菜单" class="i18n" name="navigation" style="width:200px;">
 
     <div id="aa" class="easyui-accordion">
         <div title="外防腐" class="i18n" name="externalcoating"  style="padding:10px;">
             <ul id="od">
-                <li class="i18n1" name="odblastprocess">外喷砂工序</li>
-                <li class="i18n1" name="odblastinspection">外喷砂检验工序</li>
-                <li class="i18n1" name="odcoating2fbe">外涂工序(2FBE)</li>
-                <li class="i18n1" name="odcoating3lpe">外涂工序(3LPE)</li>
-                <li class="i18n1" name="odcoating2fbeinspection">外涂检验工序(2FBE)</li>
-                <li class="i18n1" name="odcoating3lpeinspection">外涂检验工序(3LPE)</li>
-                <li class="i18n1" name="odstencilprocess">外喷标工序</li>
+                <li class="i18n1" name="odblastprocess" >外喷砂工序</li>
+                <li class="i18n1" name="odblastinspection" >外喷砂检验工序</li>
+                <li class="i18n1" name="odcoating2fbe" >外涂工序(2FBE)</li>
+                <li class="i18n1" name="odcoating3lpe" >外涂工序(3LPE)</li>
+                <li class="i18n1" name="odcoating2fbeinspection" >外涂检验工序(2FBE)</li>
+                <li class="i18n1" name="odcoating3lpeinspection" >外涂检验工序(3LPE)</li>
+                <li class="i18n1" name="odstencilprocess" >外喷标工序</li>
                 <li class="i18n1" name="odfinalinspection">外涂层终检工序</li>
             </ul>
         </div>
@@ -611,5 +634,6 @@
 
 </html>
 <script type="text/javascript">
+
     hlLanguage("i18n/");
 </script>
