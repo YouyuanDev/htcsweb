@@ -40,19 +40,16 @@
                 "odstandard","idstandard","labtestingstandard2fbe","labtestingstandard3lpe","rawmaterialtestingstandard2fbe","rawmaterialtestingstandard3lpe",
                 "labtesting2fbe","labtesting3lpe","labtestingepoxy","rawmaterialtesting2fbe","rawmaterialtesting3lpe","rawmaterialtestingliquidepoxy",
                 "person","role","function"];
-            var nameUriMap={odblastprocess:"odblastprocess",odblastinspectionprocess:"odblastinspection",odcoatingprocess:"odcoating2fbe",odcoatinginspectionprocess:"odcoating3lpe",odcoating3lpeprocess:"odcoating2fbeinspection",odcoating3lpeinspectionprocess:"odcoating3lpeinspection",odstencilprocess:"odstencilprocess",odfinalinspectionprocess:"odfinalinspection",idblastprocess:"idblastprocess",idblastinspectionprocess:"idblastinspection",idcoatingprocess:"idcoating",idcoatinginspectionprocess:"idcoatinginspection",idstencilprocess:"idstencilprocess",idfinalinspectionprocess:"idfinalinspection",odstockin:"odstockin",idstockin:"idstockin",barepipemovement:"baremovement",productStockout:"productstockout",coatingrepair:"coatingrepair",coatingstrip:"coatingstrip",barepipegridingProcess:"barepipegrindingcutoff",pipeSamplingProcess:"pipesampling",pipeRebevelProcess:"piperebevel",projectManagement:"projectmanagement",contractManagement:"contractmanagement",pipeManagement:"pipemanagement",uploadPipe:"uploadpipe",twodimensionalcode:"twodimensionalcodeprintrecord",odstandard:"odstandard",idstandard:"instandard",labtestingstandard2fbe:"teststandard2fbe",labtestingstandard3lpe:"teststandard3lpe",rawmaterialtestingstandard2fbe:"rawmaterialstandard2fbe",rawmaterialtestingstandard3lpe:"rawmaterialstandard3lpe",labtesting2fbe:"odtest2fbe",labtesting3lpe:"odtest3lpe",labtestingepoxy:"idtestepoxy",rawmaterialtesting2fbe:"rawmaterialtest2fbe",rawmaterialtesting3lpe:"rawmaterialtest3lpe",rawmaterialtestingliquidepoxy:"rawmaterialtestepoxy",person:"personmanagement",role:"rolemanagement",function:"functionmanagement"};
-            var jsonArr=[]
-            var odArr=["odblastprocess","odblastinspection","odcoating2fbe","odcoating3lpe","odcoating2fbeinspection",
-                "odcoating3lpeinspection","odstencilprocess","odfinalinspection"];
-            var idArr=["idblastprocess","idblastinspection","idcoating","idcoatinginspection","idstencilprocess","idfinalinspection"];
-            var outinArr=["odstockin","idstockin","baremovement","productstockout"];
-            var repairArr=["coatingrepair","coatingstrip"];
-            var pipeArr=["barepipegrindingcutoff","pipesampling","piperebevel"];
-            var basicArr=["projectmanagement","contractmanagement","pipemanagement","uploadpipe","twodimensionalcodeprintrecord"];
-            var standArr=["odstandard","instandard","teststandard2fbe","teststandard3lpe","rawmaterialstandard2fbe","rawmaterialstandard3lpe"];
-            var labArr=["odtest2fbe","odtest3lpe","idtestepoxy","rawmaterialtest2fbe","rawmaterialtest3lpe","rawmaterialtestepoxy"];
+            var odArr=uriArr.slice(0,8);
+            var idArr=uriArr.slice(8,14);
+            var outinArr=uriArr.slice(14,18);
+            var repairArr=uriArr.slice(18,20);
+            var pipeArr=uriArr.slice(20,23);
+            var basicArr=uriArr.slice(23,28);
+            var standArr=uriArr.slice(28,34);
+            var labArr=uriArr.slice(34,40);
             var reportArr=[];
-            var accountArr=["personmanagement","rolemanagement","functionmanagement"];
+            var accountArr=uriArr.slice(40,43);
             var hsMapList="<%=session.getAttribute("userfunctionMap")%>";
             var funArr;
             if(hsMapList!=null&&hsMapList!=""&&hsMapList.length>0){
@@ -60,20 +57,12 @@
                  hsMapList=hsMapList.replace(reg,"");
                  funArr=hsMapList.substring(1,hsMapList.length-1).split(',');
             }
-            var newUriArr=new Array();//得到的是比对uri中新的权限数组
+            var finalNameArr=new Array();//得到的是比对uri中新的权限数组
             for(var i=0;i<funArr.length;i++){
                 if($.inArray(funArr[i].trim(),uriArr)!=-1){
-                    newUriArr.push(funArr[i].trim());
+                    finalNameArr.push(funArr[i].trim());
                 }
             }
-            var finalNameArr=[];
-            $.each(newUriArr,function(index,element){
-                $.each(nameUriMap,function(name,value){
-                    if(element==name){
-                        finalNameArr.push(value);
-                    }
-                })
-            });
             if(finalNameArr.length>0){
                 var odDiv='<div title=\"外防腐\" class=\"i18n\" name=\"externalcoating\"  style=\"padding:10px;\"><ul id=\"od\">';
                 var odDivSon="";
