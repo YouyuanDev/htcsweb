@@ -246,6 +246,54 @@
                     <td></td>
 
                 </tr>
+
+                <tr>
+
+                    <td >权限列表</td>
+                    <td>
+                        <input id="lookup2" name="look" class="mini-lookup" style="width:200px;"
+                               textField="function_no_list" valueField="id" popupWidth="auto"
+                               popup="#gridPanel" grid="#datagrid1" multiSelect="true"
+                        />
+
+                        <div id="gridPanel" class="mini-panel" title="header" iconCls="icon-add" style="width:450px;height:250px;"
+                             showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0"
+                        >
+                            <div property="toolbar" style="padding:5px;padding-left:8px;text-align:center;">
+                                <div style="float:left;padding-bottom:2px;">
+                                    <span>功能编号或名称：</span>
+                                    <input id="keyText" class="mini-textbox" style="width:160px;" onenter="onSearchClick"/>
+                                    <a class="mini-button" onclick="onSearchClick">查询</a>
+                                    <a class="mini-button" onclick="onClearClick">清除</a>
+                                </div>
+                                <div style="float:right;padding-bottom:2px;">
+                                    <a class="mini-button" onclick="onCloseClick">关闭</a>
+                                </div>
+                                <div style="clear:both;"></div>
+                            </div>
+                            <div id="datagrid1" class="mini-datagrid" style="width:100%;height:100%;"
+                                 borderStyle="border:0" showPageSize="false" showPageIndex="false"
+                                 url="/Function/getFunctionByLike.action"
+                            >
+                                <div property="columns">
+                                    <div type="checkcolumn" ></div>
+                                    <div field="module_name" width="120" headerAlign="center" allowSort="true" class="i18n1" name="modulename">功能模块</div>
+                                    <div field="function_no" width="120" headerAlign="center" allowSort="true" class="i18n1" name="functionno">功能编号</div>
+                                    <div field="function_name" width="120" headerAlign="center" allowSort="true" class="i18n1" name="functionname">功能名称</div>
+                                    <div field="uri" width="120" headerAlign="center" allowSort="true" class="i18n1" name="uri">uri</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </td>
+                    <td ></td>
+                    <td >
+
+                    </td>
+                    <td></td>
+
+                </tr>
+
             </table>
 
 
@@ -266,6 +314,41 @@
 </html>
 <script type="text/javascript">
     mini.parse();
+
+
+    var grid = mini.get("datagrid1");
+    var keyText = mini.get("keyText");
+    var look2= mini.get("lookup2");
+    grid.load();
+
+    function onSearchClick(e) {
+        grid.load({
+            function_no: keyText.value,
+            function_name:keyText.value
+        });
+    }
+    function onCloseClick(e) {
+        var lookup2 = mini.get("lookup2");
+        lookup2.hidePopup();
+    }
+    function onClearClick(e) {
+        var lookup2 = mini.get("lookup2");
+        lookup2.deselectAll();
+    }
+    look2.on("showpopup",function(e){
+        $('.mini-shadow').css('z-index','99999');
+        $('.mini-popup').css('z-index','100000');
+        $('.mini-panel').css('z-index','100000');
+        $('#searchBar2').css('display','block');
+        grid2.load({
+            function_no: keyText.value,
+            function_name:keyText.value
+        });
+        //$('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
+    });
+
+
+
 
     hlLanguage("../i18n/");
 </script>
