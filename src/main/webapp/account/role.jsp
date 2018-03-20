@@ -257,7 +257,7 @@
                     <td >权限列表</td>
                     <td>
                         <input id="lookup2" name="function_no_list" class="mini-lookup" style="width:200px;"
-                               textField="function_no" valueField="id" popupWidth="auto"
+                               textField="function_no" valueField="function_no" popupWidth="auto"
                                popup="#gridPanel" grid="#datagrid1" multiSelect="true"
                         />
 

@@ -16,8 +16,6 @@
                 AND f.function_name LIKE CONCAT('%',#{function_name},'%')
             </if>
         </where>
-        ORDER BY id DESC
-        limit #{skip},#{take}
     </select>
 
     <select id="getAllByNoName" resultType="map">

@@ -83,6 +83,7 @@ public class LoginController {
                         Person person=lt.get(0);
                         String role_no_list=person.getRole_no_list();
                         if(role_no_list!=null&&!role_no_list.equals("")){
+                            role_no_list=role_no_list.replace(',',';');
                             String[] roles= role_no_list.split(";");
                             for(int i=0;i<roles.length;i++){
                                 List<Role> rolelt=roleDao.getRoleByRoleNo(roles[i]);
@@ -91,6 +92,7 @@ public class LoginController {
                                     Role role=rolelt.get(0);
                                     String functionlist = role.getFunction_no_list();
                                     if(functionlist!=null&&!functionlist.equals("")){
+                                        functionlist=functionlist.replace(',',';');
                                         String[] func_no_s=functionlist.split(";");
                                         for(int j=0;j<func_no_s.length;j++) {
                                             List<Function> funlst=functionDao.getFunctionByFunctionNo(func_no_s[j]);
