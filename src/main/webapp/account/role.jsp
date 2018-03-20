@@ -109,11 +109,10 @@
             if(row){
                 $('#hlRoleDialog').dialog('open').dialog('setTitle','修改');
                 $('#RoleForm').form('load',row);
-                var funList=myformatter(row.function_no_list);
-                var fun_no_list=funList.substring(0,funList.length-1);
-                alert(fun_no_list);
-                look2.setText(fun_no_list);
-                look2.setValue(fun_no_list);
+
+                alert(row.function_no_list);
+                look2.setText(row.function_no_list);
+                look2.setValue(row.function_no_list);
                 url="/Role/saveRole.action?id="+row.id;
 
             }else{
@@ -174,12 +173,10 @@
 
         function  clearFormLabel() {
             $('#RoleForm').form('clear');
+            look2.setText('');
+            look2.setValue('');
+        }
 
-        }
-        function  myformatter(data) {
-            re = new RegExp(";","g");
-            return data.replace(re,",");
-        }
     </script>
 
 
