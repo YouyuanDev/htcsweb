@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public interface FunctionDao {
-
+    public List<HashMap<String,Object>>getAllByNoName(@Param("function_no")String function_no, @Param("function_name")String function_name);
 
     //模糊搜索带分页
     public List<HashMap<String,Object>> getAllByLike(@Param("function_no")String function_no, @Param("function_name")String function_name, @Param("skip")int skip, @Param("take")int take);

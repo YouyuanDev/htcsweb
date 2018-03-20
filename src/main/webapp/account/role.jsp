@@ -108,10 +108,12 @@
             var row = $('#RoleDatagrids').datagrid('getSelected');
             if(row){
                 $('#hlRoleDialog').dialog('open').dialog('setTitle','修改');
-
-
                 $('#RoleForm').form('load',row);
-
+                var funList=myformatter(row.function_no_list);
+                var fun_no_list=funList.substring(0,funList.length-1);
+                alert(fun_no_list);
+                look2.setText(fun_no_list);
+                look2.setValue(fun_no_list);
                 url="/Role/saveRole.action?id="+row.id;
 
             }else{
@@ -174,7 +176,10 @@
             $('#RoleForm').form('clear');
 
         }
-
+        function  myformatter(data) {
+            re = new RegExp(";","g");
+            return data.replace(re,",");
+        }
     </script>
 
 
@@ -195,7 +200,7 @@
                 <th field="id" align="center" width="100" class="i18n1" name="id">流水号</th>
                 <th field="role_no" align="center" width="100" class="i18n1" name="roleno">角色编号</th>
                 <th field="role_name" align="center" width="100" class="i18n1" name="rolename">角色名称</th>
-                <th field="function_no_list" align="center" width="100" class="i18n1" name="functionnolist">权限列表</th>
+                <th field="function_no_list" align="center" width="100" class="i18n1" name="functionnolist" >权限列表</th>
 
             </tr>
             </thead>
@@ -251,8 +256,8 @@
 
                     <td >权限列表</td>
                     <td>
-                        <input id="lookup2" name="look" class="mini-lookup" style="width:200px;"
-                               textField="function_no_list" valueField="id" popupWidth="auto"
+                        <input id="lookup2" name="function_no_list" class="mini-lookup" style="width:200px;"
+                               textField="function_no" valueField="id" popupWidth="auto"
                                popup="#gridPanel" grid="#datagrid1" multiSelect="true"
                         />
 
@@ -273,7 +278,7 @@
                             </div>
                             <div id="datagrid1" class="mini-datagrid" style="width:100%;height:100%;"
                                  borderStyle="border:0" showPageSize="false" showPageIndex="false"
-                                 url="/Function/getFunctionByLike.action"
+                                 url="/Function/getFunctionByNoName.action"
                             >
                                 <div property="columns">
                                     <div type="checkcolumn" ></div>
@@ -314,13 +319,22 @@
 </html>
 <script type="text/javascript">
     mini.parse();
-
-
     var grid = mini.get("datagrid1");
     var keyText = mini.get("keyText");
     var look2= mini.get("lookup2");
-    grid.load();
-
+    //grid.load();
+    //look2.on('valuechanged',function () {
+     //   var rows = grid.getSelected();
+        //alert(rows.function_no);
+        //$("input[name='function_no_list']").val(rows.function_no);
+    //});
+    look2.on('itemclick',function () {
+        alert(1);
+        //var rows = grid.getSelected();
+        //var $obj=rows.checked;
+       // alert("xuanzhong:"+$obj)
+        //$("input[name='function_no_list']").val(rows.function_no);
+    });
     function onSearchClick(e) {
         grid.load({
             function_no: keyText.value,
@@ -340,7 +354,7 @@
         $('.mini-popup').css('z-index','100000');
         $('.mini-panel').css('z-index','100000');
         $('#searchBar2').css('display','block');
-        grid2.load({
+        grid.load({
             function_no: keyText.value,
             function_name:keyText.value
         });

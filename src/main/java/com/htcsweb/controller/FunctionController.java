@@ -27,7 +27,7 @@ public class FunctionController {
 
 
     //搜索
-    @RequestMapping("getFunctionByLike")
+    @RequestMapping(value = "getFunctionByLike",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String getFunctionByLike(@RequestParam(value = "function_no",required = false)String function_no, @RequestParam(value = "function_name",required = false)String function_name, HttpServletRequest request){
         String page= request.getParameter("page");
@@ -44,10 +44,18 @@ public class FunctionController {
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
         maps.put("rows",list);
-        String mmp= JSONArray.toJSONString(maps);
-        System.out.print("mmp:"+mmp);
+        String mmp= JSONArray.toJSONString(list);
+        //System.out.print("mmp:"+mmp);
         return mmp;
 
+    }
+    @RequestMapping(value = "getFunctionByNoName",produces = "text/plain;charset=utf-8")
+    @ResponseBody
+    public String getFunctionByNoName(@RequestParam(value = "function_no",required = false)String function_no, @RequestParam(value = "function_name",required = false)String function_name, HttpServletRequest request){
+        List<HashMap<String,Object>> list=functionDao.getAllByNoName(function_no,function_name);
+        String mmp= JSONArray.toJSONString(list);
+        System.out.println(mmp);
+        return mmp;
     }
 
     //保存function

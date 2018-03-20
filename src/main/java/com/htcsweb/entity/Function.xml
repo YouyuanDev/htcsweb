@@ -8,7 +8,20 @@
 
     <select id="getCountAllByLike" resultType="int">
         select count(*) from function f
+        <where>
+            <if test="function_no!=null and function_no!=''">
+                AND f.function_no LIKE CONCAT('%',#{function_no},'%')
+            </if>
+            <if test="function_name!=null and function_name!=''">
+                AND f.function_name LIKE CONCAT('%',#{function_name},'%')
+            </if>
+        </where>
+        ORDER BY id DESC
+        limit #{skip},#{take}
+    </select>
 
+    <select id="getAllByNoName" resultType="map">
+        select * from  function f
         <where>
             <if test="function_no!=null and function_no!=''">
                 AND f.function_no LIKE CONCAT('%',#{function_no},'%')
@@ -18,7 +31,6 @@
             </if>
         </where>
     </select>
-
 
 
     <select id="getAllByLike" resultType="map">

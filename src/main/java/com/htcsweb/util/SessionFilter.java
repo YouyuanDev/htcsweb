@@ -47,8 +47,8 @@ public class SessionFilter extends OncePerRequestFilter{
             "getAcceptanceCriteria3LpeByContractNo",
             "getRawMaterialStandard2FbeByProjectNo",
             "getRawMaterialStandard3LpeByProjectNo",
-            "getFunctionByLike"
-
+            "getFunctionByLike",
+            "getFunctionByNoName"
 
     }; // 不过滤的uri
 
