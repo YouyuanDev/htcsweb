@@ -30,18 +30,179 @@
     <script type="text/javascript">
         var url;
         $(function(){
-            var odDiv='<div title=\"外防腐\" class=\"i18n\" name=\"externalcoating\"  style=\"padding:10px;\"><ul id=\"od\">';
-            var odDivSon="";
-            odDivSon+=MakeMenus("odblastprocess");
-            alert(odDivSon);
-            if(odDivSon.length>0){
-                odDiv+=odDivSon;
-                odDiv+='</ul></div>';
-                alert(odDiv);
-                $('#aa').append(odDiv);
-            }else{
-                odDiv="";
+            var uriArr=["odblastprocess","odblastinspectionprocess","odcoatingprocess","odcoatinginspectionprocess",
+                "odcoating3lpeprocess","odcoating3lpeinspectionprocess","odstencilprocess","odfinalinspectionprocess",
+                "idblastprocess","idblastinspectionprocess","idcoatingprocess","idcoatinginspectionprocess","idstencilprocess","idfinalinspectionprocess",
+                "odstockin","idstockin","barepipemovement","productStockout",
+                "coatingrepair","coatingstrip",
+                "barepipegridingProcess","pipeSamplingProcess","pipeRebevelProcess",
+                "projectManagement","contractManagement","pipeManagement","uploadPipe","twodimensionalcode",
+                "odstandard","idstandard","labtestingstandard2fbe","labtestingstandard3lpe","rawmaterialtestingstandard2fbe","rawmaterialtestingstandard3lpe",
+                "labtesting2fbe","labtesting3lpe","labtestingepoxy","rawmaterialtesting2fbe","rawmaterialtesting3lpe","rawmaterialtestingliquidepoxy",
+                "person","role","function"];
+            var nameUriMap={odblastprocess:"odblastprocess",odblastinspectionprocess:"odblastinspection",odcoatingprocess:"odcoating2fbe",odcoatinginspectionprocess:"odcoating3lpe",odcoating3lpeprocess:"odcoating2fbeinspection",odcoating3lpeinspectionprocess:"odcoating3lpeinspection",odstencilprocess:"odstencilprocess",odfinalinspectionprocess:"odfinalinspection",idblastprocess:"idblastprocess",idblastinspectionprocess:"idblastinspection",idcoatingprocess:"idcoating",idcoatinginspectionprocess:"idcoatinginspection",idstencilprocess:"idstencilprocess",idfinalinspectionprocess:"idfinalinspection",odstockin:"odstockin",idstockin:"idstockin",barepipemovement:"baremovement",productStockout:"productstockout",coatingrepair:"coatingrepair",coatingstrip:"coatingstrip",barepipegridingProcess:"barepipegrindingcutoff",pipeSamplingProcess:"pipesampling",pipeRebevelProcess:"piperebevel",projectManagement:"projectmanagement",contractManagement:"contractmanagement",pipeManagement:"pipemanagement",uploadPipe:"uploadpipe",twodimensionalcode:"twodimensionalcodeprintrecord",odstandard:"odstandard",idstandard:"instandard",labtestingstandard2fbe:"teststandard2fbe",labtestingstandard3lpe:"teststandard3lpe",rawmaterialtestingstandard2fbe:"rawmaterialstandard2fbe",rawmaterialtestingstandard3lpe:"rawmaterialstandard3lpe",labtesting2fbe:"odtest2fbe",labtesting3lpe:"odtest3lpe",labtestingepoxy:"idtestepoxy",rawmaterialtesting2fbe:"rawmaterialtest2fbe",rawmaterialtesting3lpe:"rawmaterialtest3lpe",rawmaterialtestingliquidepoxy:"rawmaterialtestepoxy",person:"personmanagement",role:"rolemanagement",function:"functionmanagement"};
+            var jsonArr=[]
+            var odArr=["odblastprocess","odblastinspection","odcoating2fbe","odcoating3lpe","odcoating2fbeinspection",
+                "odcoating3lpeinspection","odstencilprocess","odfinalinspection"];
+            var idArr=["idblastprocess","idblastinspection","idcoating","idcoatinginspection","idstencilprocess","idfinalinspection"];
+            var outinArr=["odstockin","idstockin","baremovement","productstockout"];
+            var repairArr=["coatingrepair","coatingstrip"];
+            var pipeArr=["barepipegrindingcutoff","pipesampling","piperebevel"];
+            var basicArr=["projectmanagement","contractmanagement","pipemanagement","uploadpipe","twodimensionalcodeprintrecord"];
+            var standArr=["odstandard","instandard","teststandard2fbe","teststandard3lpe","rawmaterialstandard2fbe","rawmaterialstandard3lpe"];
+            var labArr=["odtest2fbe","odtest3lpe","idtestepoxy","rawmaterialtest2fbe","rawmaterialtest3lpe","rawmaterialtestepoxy"];
+            var reportArr=[];
+            var accountArr=["personmanagement","rolemanagement","functionmanagement"];
+            var hsMapList="<%=session.getAttribute("userfunctionMap")%>";
+            var funArr;
+            if(hsMapList!=null&&hsMapList!=""&&hsMapList.length>0){
+                 var reg=new RegExp('=1',"g")
+                 hsMapList=hsMapList.replace(reg,"");
+                 funArr=hsMapList.substring(1,hsMapList.length-1).split(',');
             }
+            var newUriArr=new Array();//得到的是比对uri中新的权限数组
+            for(var i=0;i<funArr.length;i++){
+                if($.inArray(funArr[i].trim(),uriArr)!=-1){
+                    newUriArr.push(funArr[i].trim());
+                }
+            }
+            var finalNameArr=[];
+            $.each(newUriArr,function(index,element){
+                $.each(nameUriMap,function(name,value){
+                    if(element==name){
+                        finalNameArr.push(value);
+                    }
+                })
+            });
+            if(finalNameArr.length>0){
+                var odDiv='<div title=\"外防腐\" class=\"i18n\" name=\"externalcoating\"  style=\"padding:10px;\"><ul id=\"od\">';
+                var odDivSon="";
+                var idDiv='<div title=\"内防腐\" class=\"i18n\" name=\"intenalcoating\"  style=\"padding:10px;\"><ul id=\"id\">';
+                var idDivSon="";
+                var outinDiv='<div title=\"出入库\" class=\"i18n\" name=\"storage\"  style=\"padding:10px;\"><ul id=\"hlstoragemanagement\">';
+                var outinDivSon="";
+                var repairDiv='<div title=\"涂层修补与扒皮\" class=\"i18n\" name=\"coatingrepairandstrip\"  style=\"padding:10px;\"><ul id=\"hlcoatingrepairstrip\">';
+                var repairDivSon="";
+                var pipeDiv='<div title=\"钢管修磨切割与倒棱\" class=\"i18n\" name=\"grindingcutoffrebevel\"  style=\"padding:10px;\"><ul id=\"hlgrindingcutoffrebevel\">';
+                var pipeDivSon="";
+                var basicDiv='<div title=\"基础信息管理\" class=\"i18n\" name=\"basicinfomanagement\"  style=\"padding:10px;\"><ul id=\"hlbasicinfomanagement\">';
+                var basicDivSon="";
+                var standDiv='<div title=\"生产工艺\" class=\"i18n\" name=\"productionprocess\"  style=\"padding:10px;\"><ul id=\"hlprocess\">';
+                var standDivSon="";
+                var labDiv='<div title=\"实验\" class=\"i18n\" name=\"labtesting\"  style=\"padding:10px;\"><ul id=\"hltest\">';
+                var labDivSon="";
+                var reportDiv='<div title=\"生产报表\" class=\"i18n\" name=\"productionreport\"  style=\"padding:10px;\"><ul id=\"od\">';
+                var reportDivSon="";
+                var accountDiv='<div title=\"账户管理\" class=\"i18n\" name=\"accountmanagement\"  style=\"padding:10px;\"><ul id=\"hlaccount\">';
+                var accountDivSon="";
+
+                var endDiv="</ul></div>";
+                //外喷砂
+
+                $.each(finalNameArr,function (index,element) {
+                    if($.inArray(element,odArr)!=-1){
+                        odDivSon+=MakeMenus(element);
+                        return true;
+                    }
+                    if($.inArray(element,idArr)!=-1){
+                        idDivSon+=MakeMenus(element);
+                        return true;
+                    }
+                    if($.inArray(element,outinArr)!=-1){
+                        outinDivSon+=MakeMenus(element);
+                        return true;
+                    }
+                    if($.inArray(element,repairArr)!=-1){
+                        repairDivSon+=MakeMenus(element);
+                        return true;
+                    }
+                    if($.inArray(element,pipeArr)!=-1){
+                        pipeDivSon+=MakeMenus(element);
+                        return true;
+                    }
+                    if($.inArray(element,basicArr)!=-1){
+                        basicDivSon+=MakeMenus(element);
+                        return true;
+                    }
+                    if($.inArray(element,standArr)!=-1){
+                        standDivSon+=MakeMenus(element);
+                        return true;
+                    }
+                    if($.inArray(element,labArr)!=-1){
+                        labDivSon+=MakeMenus(element);
+                        return true;
+                    }
+                    if($.inArray(element,reportArr)!=-1){
+                        reportDivSon+=MakeMenus(element);
+                        return true;
+                    }
+                    if($.inArray(element,accountArr)!=-1){
+                        accountDivSon+=MakeMenus(element);
+                        return true;
+                    }
+                });
+                if(odDivSon!=""&&odDivSon.length>0){
+                    odDiv+=odDivSon;
+                    odDiv+=endDiv;
+                    $('#aa').append(odDiv);
+                }
+                if(idDivSon!=""&&idDivSon.length>0){
+                    idDiv+=idDivSon;
+                    idDiv+=endDiv;
+                    $('#aa').append(idDiv);
+                }
+                if(outinDivSon!=""&&outinDivSon.length>0){
+                    outinDiv+=outinDivSon;
+                    outinDiv+=endDiv;
+                    $('#aa').append(outinDiv);
+                }
+                if(repairDivSon!=""&&repairDivSon.length>0){
+                    repairDiv+=repairDivSon;
+                    repairDiv+=endDiv;
+                    $('#aa').append(repairDiv);
+                }
+                if(pipeDivSon!=""&&pipeDivSon.length>0){
+                    pipeDiv+=pipeDivSon;
+                    pipeDiv+=endDiv;
+                    $('#aa').append(pipeDiv);
+                }
+                if(basicDivSon!=""&&basicDivSon.length>0){
+                    basicDiv+=basicDivSon;
+                    basicDiv+=endDiv;
+                    $('#aa').append(basicDiv);
+                }
+                if(standDivSon!=""&&standDivSon.length>0){
+                    standDiv+=standDivSon;
+                    standDiv+=endDiv;
+                    $('#aa').append(standDiv);
+                }
+                if(labDivSon!=""&&labDivSon.length>0){
+                    labDiv+=labDivSon;
+                    labDiv+=endDiv;
+                    $('#aa').append(labDiv);
+                }
+                if(reportDivSon!=""&&reportDivSon.length>0){
+                    reportDiv+=reportDivSon;
+                    reportDiv+=endDiv;
+                    $('#aa').append(reportDiv);
+                }
+                if(accountDivSon!=""&&accountDivSon.length>0){
+                    accountDiv+=accountDivSon;
+                    accountDiv+=endDiv;
+                    $('#aa').append(accountDiv);
+                }
+                //内喷砂
+            }
+            // var odDiv='<div title=\"外防腐\" class=\"i18n\" name=\"externalcoating\"  style=\"padding:10px;\"><ul id=\"od\">';
+            // var odDivSon="";
+            // odDivSon+=MakeMenus("odblastprocess");
+            // if(odDivSon.length>0){
+            //     odDiv+=odDivSon;
+            //     odDiv+='</ul></div>';
+            //     $('#aa').append(odDiv);
+            // }else{
+            //     odDiv="";
+            //}
             hlLanguage("i18n/");
             $('#od').tree({
                 onClick:function(node){
@@ -553,80 +714,80 @@
                 <%--<li class="i18n1" name="odfinalinspection">外涂层终检工序</li>--%>
             <%--</ul>--%>
         <%--</div>--%>
-        <div title="内防腐" class="i18n" name="intenalcoating" style="padding:10px;">
-            <ul id="id">
-                <li class="i18n1" name="idblastprocess">内喷砂工序</li>
-                <li class="i18n1" name="idblastinspection">内喷砂检验工序</li>
-                <li class="i18n1" name="idcoating">内涂工序</li>
-                <li class="i18n1" name="idcoatinginspection">内涂检验工序</li>
-                <li class="i18n1" name="idstencilprocess">内喷标工序</li>
-                <li class="i18n1" name="idfinalinspection">内涂层终检工序</li>
-            </ul>
-        </div>
-        <div title="出入库" class="i18n" name="storage" style="padding:10px;">
-            <ul id="hlstoragemanagement">
-            <li class="i18n1" name="odstockin">外涂成品入库</li>
-            <li class="i18n1" name="idstockin">内涂成品入库</li>
-            <li class="i18n1" name="baremovement">光管调拨</li>
-            <li class="i18n1" name="productstockout">成品出厂</li>
-            </ul>
+        <%--<div title="内防腐" class="i18n" name="intenalcoating" style="padding:10px;">--%>
+            <%--<ul id="id">--%>
+                <%--<li class="i18n1" name="idblastprocess">内喷砂工序</li>--%>
+                <%--<li class="i18n1" name="idblastinspection">内喷砂检验工序</li>--%>
+                <%--<li class="i18n1" name="idcoating">内涂工序</li>--%>
+                <%--<li class="i18n1" name="idcoatinginspection">内涂检验工序</li>--%>
+                <%--<li class="i18n1" name="idstencilprocess">内喷标工序</li>--%>
+                <%--<li class="i18n1" name="idfinalinspection">内涂层终检工序</li>--%>
+            <%--</ul>--%>
+        <%--</div>--%>
+        <%--<div title="出入库" class="i18n" name="storage" style="padding:10px;">--%>
+            <%--<ul id="hlstoragemanagement">--%>
+            <%--<li class="i18n1" name="odstockin">外涂成品入库</li>--%>
+            <%--<li class="i18n1" name="idstockin">内涂成品入库</li>--%>
+            <%--<li class="i18n1" name="baremovement">光管调拨</li>--%>
+            <%--<li class="i18n1" name="productstockout">成品出厂</li>--%>
+            <%--</ul>--%>
 
-        </div>
-        <div title="涂层修补与扒皮" class="i18n" name="coatingrepairandstrip" style="padding:10px;">
-            <ul id="hlcoatingrepairstrip">
-                <li class="i18n1" name="coatingrepair">涂层修补</li>
-                <li class="i18n1" name="coatingstrip">涂层扒皮</li>
-            </ul>
-        </div>
-        <div title="钢管修磨切割与倒棱" class="i18n" name="grindingcutoffrebevel" style="padding:10px;">
-            <ul id="hlgrindingcutoffrebevel">
-                <li class="i18n1" name="barepipegrindingcutoff">光管修磨切割</li>
-                <li class="i18n1" name="pipesampling">钢管外防取样</li>
-                <li class="i18n1" name="piperebevel">钢管倒棱</li>
-            </ul>
-        </div>
+        <%--</div>--%>
+        <%--<div title="涂层修补与扒皮" class="i18n" name="coatingrepairandstrip" style="padding:10px;">--%>
+            <%--<ul id="hlcoatingrepairstrip">--%>
+                <%--<li class="i18n1" name="coatingrepair">涂层修补</li>--%>
+                <%--<li class="i18n1" name="coatingstrip">涂层扒皮</li>--%>
+            <%--</ul>--%>
+        <%--</div>--%>
+        <%--<div title="钢管修磨切割与倒棱" class="i18n" name="grindingcutoffrebevel" style="padding:10px;">--%>
+            <%--<ul id="hlgrindingcutoffrebevel">--%>
+                <%--<li class="i18n1" name="barepipegrindingcutoff">光管修磨切割</li>--%>
+                <%--<li class="i18n1" name="pipesampling">钢管外防取样</li>--%>
+                <%--<li class="i18n1" name="piperebevel">钢管倒棱</li>--%>
+            <%--</ul>--%>
+        <%--</div>--%>
 
 
-        <div title="基础信息管理" class="i18n" name="basicinfomanagement" style="padding:10px;">
-            <ul id="hlbasicinfomanagement">
-                <li class="i18n1" name="projectmanagement">项目管理</li>
-                <li class="i18n1" name="contractmanagement">合同管理</li>
-                <li class="i18n1" name="pipemanagement">钢管管理</li>
-                <li class="i18n1" name="uploadpipe">钢管录入</li>
-                <li class="i18n1" name="twodimensionalcodeprintrecord">二维码打印记录</li>
-            </ul>
-        </div>
-        <div title="生产工艺" class="i18n" name="productionprocess" style="padding:10px;">
-            <ul id="hlprocess">
-                <li class="i18n1" name="odstandard">外防腐生产标准</li>
-                <li class="i18n1" name="instandard">内防腐生产标准</li>
-                <li class="i18n1" name="teststandard2fbe">实验标准(2FBE)</li>
-                <li class="i18n1" name="teststandard3lpe">实验标准(3LPE)</li>
-                <li class="i18n1" name="rawmaterialstandard2fbe">原材料标准(2FBE)</li>
-                <li class="i18n1" name="rawmaterialstandard3lpe">原材料标准(3LPE)</li>
-            </ul>
-        </div>
-        <div title="实验" class="i18n" name="labtesting" style="padding:10px;">
-            <ul id="hltest">
-                <li class="i18n1" name="odtest2fbe">外防实验(2FBE)</li>
-                <li class="i18n1" name="odtest3lpe">外防实验(3LPE)</li>
-                <li class="i18n1" name="idtestepoxy">内防实验(Liquid Epoxy)</li>
-                <li class="i18n1" name="rawmaterialtest2fbe">原材料实验(2FBE)</li>
-                <li class="i18n1" name="rawmaterialtest3lpe">原材料实验(3LPE)</li>
-                <li class="i18n1" name="rawmaterialtestepoxy">原材料实验(Liquid Epoxy)</li>
-            </ul>
-        </div>
-        <div title="生产报表" class="i18n" name="productionreport" style="padding:10px;">
-            ff
-        </div>
-        <div title="账户管理" class="i18n" name="accountmanagement" style="padding:10px;">
-            <ul id="hlaccount">
-                <li class="i18n1" name="personmanagement">账户管理</li>
-                <li class="i18n1" name="rolemanagement">角色管理</li>
-                <li class="i18n1" name="functionmanagement">权限管理</li>
+        <%--<div title="基础信息管理" class="i18n" name="basicinfomanagement" style="padding:10px;">--%>
+            <%--<ul id="hlbasicinfomanagement">--%>
+                <%--<li class="i18n1" name="projectmanagement">项目管理</li>--%>
+                <%--<li class="i18n1" name="contractmanagement">合同管理</li>--%>
+                <%--<li class="i18n1" name="pipemanagement">钢管管理</li>--%>
+                <%--<li class="i18n1" name="uploadpipe">钢管录入</li>--%>
+                <%--<li class="i18n1" name="twodimensionalcodeprintrecord">二维码打印记录</li>--%>
+            <%--</ul>--%>
+        <%--</div>--%>
+        <%--<div title="生产工艺" class="i18n" name="productionprocess" style="padding:10px;">--%>
+            <%--<ul id="hlprocess">--%>
+                <%--<li class="i18n1" name="odstandard">外防腐生产标准</li>--%>
+                <%--<li class="i18n1" name="instandard">内防腐生产标准</li>--%>
+                <%--<li class="i18n1" name="teststandard2fbe">实验标准(2FBE)</li>--%>
+                <%--<li class="i18n1" name="teststandard3lpe">实验标准(3LPE)</li>--%>
+                <%--<li class="i18n1" name="rawmaterialstandard2fbe">原材料标准(2FBE)</li>--%>
+                <%--<li class="i18n1" name="rawmaterialstandard3lpe">原材料标准(3LPE)</li>--%>
+            <%--</ul>--%>
+        <%--</div>--%>
+        <%--<div title="实验" class="i18n" name="labtesting" style="padding:10px;">--%>
+            <%--<ul id="hltest">--%>
+                <%--<li class="i18n1" name="odtest2fbe">外防实验(2FBE)</li>--%>
+                <%--<li class="i18n1" name="odtest3lpe">外防实验(3LPE)</li>--%>
+                <%--<li class="i18n1" name="idtestepoxy">内防实验(Liquid Epoxy)</li>--%>
+                <%--<li class="i18n1" name="rawmaterialtest2fbe">原材料实验(2FBE)</li>--%>
+                <%--<li class="i18n1" name="rawmaterialtest3lpe">原材料实验(3LPE)</li>--%>
+                <%--<li class="i18n1" name="rawmaterialtestepoxy">原材料实验(Liquid Epoxy)</li>--%>
+            <%--</ul>--%>
+        <%--</div>--%>
+        <%--<div title="生产报表" class="i18n" name="productionreport" style="padding:10px;">--%>
+            <%--ff--%>
+        <%--</div>--%>
+        <%--<div title="账户管理" class="i18n" name="accountmanagement" style="padding:10px;">--%>
+            <%--<ul id="hlaccount">--%>
+                <%--<li class="i18n1" name="personmanagement">账户管理</li>--%>
+                <%--<li class="i18n1" name="rolemanagement">角色管理</li>--%>
+                <%--<li class="i18n1" name="functionmanagement">权限管理</li>--%>
 
-            </ul>
-        </div>
+            <%--</ul>--%>
+        <%--</div>--%>
 
     </div>
 

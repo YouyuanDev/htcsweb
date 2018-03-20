@@ -86,7 +86,7 @@ public class LoginController {
                             String[] roles= role_no_list.split(";");
                             for(int i=0;i<roles.length;i++){
                                 List<Role> rolelt=roleDao.getRoleByRoleNo(roles[i]);
-                                System.out.println("role ="+roles[i]);
+                                //System.out.println("role ="+roles[i]);
                                 if(rolelt.size()>0) {
                                     Role role=rolelt.get(0);
                                     String functionlist = role.getFunction_no_list();
@@ -101,8 +101,8 @@ public class LoginController {
                                                 String uri=f.getUri();
                                                 functionMap.put(function_no,"1");
                                                 functionMap.put(uri,"1");
-                                                System.out.println("functionMap put="+function_no);
-                                                System.out.println("uri put="+uri);
+//                                                System.out.println("functionMap put="+function_no);
+//                                                System.out.println("uri put="+uri);
                                             }
 
 
@@ -122,11 +122,11 @@ public class LoginController {
 
                 //跳转到用户主页
                 json.put("success",true);
-                System.out.println("登录验证 success");
+                //System.out.println("登录验证 success");
             }else{
                 json.put("success",false);
                 json.put("msg","用户名或密码错误");
-                System.out.println("fail");
+                //System.out.println("fail");
             }
             ResponseUtil.write(response,json);
         }catch (Exception e){
