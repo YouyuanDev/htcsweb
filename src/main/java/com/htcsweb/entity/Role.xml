@@ -19,7 +19,17 @@
         </where>
     </select>
 
-
+    <select id="getAllRoleByLike" resultType="map">
+        select * from  role r
+        <where>
+            <if test="role_no!=null and role_no!=''">
+                AND r.role_no LIKE CONCAT('%',#{role_no},'%')
+            </if>
+            <if test="role_name!=null and role_name!=''">
+                OR r.role_name LIKE CONCAT('%',#{role_name},'%')
+            </if>
+        </where>
+    </select>
 
     <select id="getAllByLike" resultType="map">
         select * from  role r

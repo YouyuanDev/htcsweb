@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface RoleDao {
 
-
+    public List<HashMap<String,Object>>getAllRoleByLike(@Param("role_no")String role_no, @Param("role_name")String role_name);
     //模糊搜索带分页
     public List<HashMap<String,Object>> getAllByLike(@Param("role_no")String role_no, @Param("role_name")String role_name, @Param("skip")int skip, @Param("take")int take);
 

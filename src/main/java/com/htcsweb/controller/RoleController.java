@@ -23,9 +23,7 @@ import java.util.Map;
 public class RoleController {
     @Autowired
     private RoleDao roleDao;
-
-
-    //搜索
+    //获取所有role列表
     @RequestMapping("getRoleByLike")
     @ResponseBody
     public String getRoleByLike(@RequestParam(value = "role_no",required = false)String role_no, @RequestParam(value = "role_name",required = false)String role_name, HttpServletRequest request){
@@ -47,6 +45,15 @@ public class RoleController {
         System.out.print("mmp:"+mmp);
         return mmp;
 
+    }
+
+    //搜索
+    @RequestMapping(value ="/getAllRoleByLike",produces = "text/plain;charset=utf-8")
+    @ResponseBody
+    public String getAllRoleByLike(@RequestParam(value = "role_no",required = false)String role_no, @RequestParam(value = "role_name",required = false)String role_name, HttpServletRequest request){
+        List<HashMap<String,Object>> list=roleDao.getAllRoleByLike(role_no,role_name);
+        String mmp= JSONArray.toJSONString(list);
+        return mmp;
     }
 
     //保存Role

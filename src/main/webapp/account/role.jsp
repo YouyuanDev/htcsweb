@@ -75,6 +75,7 @@
             $('#RoleForm').form('clear');
             $("input[name='id']").val('0');
             url="/Role/saveRole.action";
+            look2.deselectAll();
         }
         function delRole() {
             var row = $('#RoleDatagrids').datagrid('getSelections');
@@ -109,8 +110,6 @@
             if(row){
                 $('#hlRoleDialog').dialog('open').dialog('setTitle','修改');
                 $('#RoleForm').form('load',row);
-
-                alert(row.function_no_list);
                 look2.setText(row.function_no_list);
                 look2.setValue(row.function_no_list);
                 url="/Role/saveRole.action?id="+row.id;

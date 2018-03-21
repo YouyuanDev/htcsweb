@@ -59,9 +59,6 @@
             $('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
 
         });
-
-
-
         function addPerson(){
             $('#hlcancelBtn').attr('operationtype','add');
             $('#hlPersonDialog').dialog('open').dialog('setTitle','新增');
@@ -69,6 +66,7 @@
             $('#pid').text('');
             $('#pregister_time').text('');
             url="/person/savePerson.action";
+            look2.deselectAll();
         }
         function delPerson() {
             var row = $('#personDatagrids').datagrid('getSelections');
@@ -115,7 +113,8 @@
                     'pstatus':row.pstatus,
                     'pid':row.id
                 });
-
+                look2.setText(row.role_no_list);
+                look2.setValue(row.role_no_list);
                 $("#pregister_time").datetimebox('setValue',getDate1(row.pregister_time));
 
                 url="/person/savePerson.action?id="+row.id;
@@ -306,7 +305,45 @@
 
 
                 </tr>
+                <tr>
+                    <td>角色列表</td>
+                    <td colspan="5">
+                        <input id="lookup2" name="role_no_list" class="mini-lookup" style="width:200px;"
+                               textField="role_no" valueField="role_no" popupWidth="auto"
+                               popup="#gridPanel" grid="#datagrid1" multiSelect="true"
+                        />
 
+                        <div id="gridPanel" class="mini-panel" title="header" iconCls="icon-add" style="width:450px;height:250px;"
+                             showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0"
+                        >
+                            <div property="toolbar" style="padding:5px;padding-left:8px;text-align:center;">
+                                <div style="float:left;padding-bottom:2px;">
+                                    <span>功能编号或名称：</span>
+                                    <input id="keyText" class="mini-textbox" style="width:160px;" onenter="onSearchClick"/>
+                                    <a class="mini-button" onclick="onSearchClick">查询</a>
+                                    <a class="mini-button" onclick="onClearClick">清除</a>
+                                </div>
+                                <div style="float:right;padding-bottom:2px;">
+                                    <a class="mini-button" onclick="onCloseClick">关闭</a>
+                                </div>
+                                <div style="clear:both;"></div>
+                            </div>
+                            <div id="datagrid1" class="mini-datagrid" style="width:100%;height:100%;"
+                                 borderStyle="border:0" showPageSize="false" showPageIndex="false"
+                                 url="/Role/getAllRoleByLike.action"
+                            >
+                                <div property="columns">
+                                    <div type="checkcolumn" ></div>
+                                    <div field="id" width="120" headerAlign="center" allowSort="true" class="i18n1" name="id">流水号</div>
+                                    <div field="role_no" width="120" headerAlign="center" allowSort="true" class="i18n1" name="roleno">角色编号</div>
+                                    <div field="role_name" width="120" headerAlign="center" allowSort="true" class="i18n1" name="rolename">角色名称</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </td>
+
+                </tr>
             </table>
 
         </fieldset>
@@ -325,6 +362,38 @@
 </html>
 <script type="text/javascript">
     mini.parse();
+    var grid = mini.get("datagrid1");
+    var keyText = mini.get("keyText");
+    var look2= mini.get("lookup2");
+    //grid.load();
+    // look2.on('valuechanged',function () {
+    //    var rows = grid.getSelected();
+    //    $("input[name='function_no_list']").val(rows.function_no);
+    // });
 
+    function onSearchClick(e) {
+        grid.load({
+            role_no: keyText.value,
+            role_name:keyText.value
+        });
+    }
+    function onCloseClick(e) {
+        look2.hidePopup();
+    }
+    function onClearClick(e) {
+        look2.deselectAll();
+    }
+    look2.on("showpopup",function(e){
+        $('.mini-shadow').css('z-index','99999');
+        $('.mini-popup').css('z-index','100000');
+        $('.mini-panel').css('z-index','100000');
+        $('#searchBar2').css('display','block');
+
+
+        grid.load({
+            function_no: keyText.value,
+            function_name:keyText.value
+        });
+    });
     hlLanguage("../i18n/");
 </script>

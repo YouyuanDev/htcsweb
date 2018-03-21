@@ -25,7 +25,7 @@
                 AND f.function_no LIKE CONCAT('%',#{function_no},'%')
             </if>
             <if test="function_name!=null and function_name!=''">
-                AND f.function_name LIKE CONCAT('%',#{function_name},'%')
+                OR f.function_name LIKE CONCAT('%',#{function_name},'%')
             </if>
         </where>
     </select>
