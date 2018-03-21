@@ -318,7 +318,7 @@
                         >
                             <div property="toolbar" style="padding:5px;padding-left:8px;text-align:center;">
                                 <div style="float:left;padding-bottom:2px;">
-                                    <span>功能编号或名称：</span>
+                                    <span>角色编号或名称：</span>
                                     <input id="keyText" class="mini-textbox" style="width:160px;" onenter="onSearchClick"/>
                                     <a class="mini-button" onclick="onSearchClick">查询</a>
                                     <a class="mini-button" onclick="onClearClick">清除</a>
