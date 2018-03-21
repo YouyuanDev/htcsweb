@@ -26,6 +26,7 @@
         .ht-table{width:100%;margin-bottom:10px;}
         .hltr{border-bottom:2px solid #1f1f1f ;}
         .b3{border-style:inset;border-width:thin;}
+
     </style>
     <script type="text/javascript">
         var url;
@@ -57,12 +58,20 @@
                  hsMapList=hsMapList.replace(reg,"");
                  funArr=hsMapList.substring(1,hsMapList.length-1).split(',');
             }
-            var finalNameArr=new Array();//得到的是比对uri中新的权限数组
+
+            var tempNameArr=new Array();//得到的是比对uri中新的权限数组
             for(var i=0;i<funArr.length;i++){
                 if($.inArray(funArr[i].trim(),uriArr)!=-1){
-                    finalNameArr.push(funArr[i].trim());
+                    tempNameArr.push(funArr[i].trim());
                 }
             }
+            var finalNameArr=new Array();
+            $.each(uriArr,function (index,element) {
+                if($.inArray(element,tempNameArr)!=-1){
+                    finalNameArr.push(element);
+                }
+            });
+
             if(finalNameArr.length>0){
                 var odDiv='<div title=\"外防腐\" class=\"i18n\" name=\"externalcoating\"  style=\"padding:10px;\"><ul id=\"od\">';
                 var odDivSon="";

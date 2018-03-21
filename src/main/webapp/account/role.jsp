@@ -29,6 +29,7 @@
 
     <style type="text/css" >
         .b3{border-style:inset;border-width:thin;}
+
     </style>
 
 
@@ -251,7 +252,7 @@
 
                     <td >权限列表</td>
                     <td colspan="5">
-                        <input id="lookup2" name="function_no_list" class="mini-lookup" style="width:400px;"
+                        <input id="lookup2" name="function_no_list" class="mini-lookup hl-mini-input" style="width:400px;"
                                textField="function_no" valueField="function_no" popupWidth="auto"
                                popup="#gridPanel" grid="#datagrid1" multiSelect="true"
                         />
@@ -315,19 +316,8 @@
     var grid = mini.get("datagrid1");
     var keyText = mini.get("keyText");
     var look2= mini.get("lookup2");
-    //grid.load();
-    //look2.on('valuechanged',function () {
-     //   var rows = grid.getSelected();
-        //alert(rows.function_no);
-        //$("input[name='function_no_list']").val(rows.function_no);
-    //});
-    look2.on('itemclick',function () {
-        alert(1);
-        //var rows = grid.getSelected();
-        //var $obj=rows.checked;
-       // alert("xuanzhong:"+$obj)
-        //$("input[name='function_no_list']").val(rows.function_no);
-    });
+
+
     function onSearchClick(e) {
         grid.load({
             function_no: keyText.value,
@@ -354,7 +344,9 @@
         //$('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
     });
 
-
+    $(function () {
+        $('.hl-mini-input .mini-buttonedit-border .mini-buttonedit-input').css("width","360px");
+    });
 
 
     hlLanguage("../i18n/");
