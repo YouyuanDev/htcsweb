@@ -255,8 +255,6 @@
                     <td colspan="2">
                         <input class="easyui-textbox" id="ppassword" name="ppassword" type="password" style="width:150px;height:22px;padding:12px" data-options="prompt:'登录密码',iconCls:'icon-lock',iconWidth:38">
                     </td>
-                    <td></td>
-
                 </tr>
             </table>
 
@@ -302,13 +300,13 @@
                         <option value="0">在用</option>
                         <option value="1">停用</option>
                     </select></td>
-
+                    <td></td>
 
                 </tr>
                 <tr>
                     <td>角色列表</td>
                     <td colspan="5">
-                        <input id="lookup2" name="role_no_list" class="mini-lookup" style="width:200px;"
+                        <input id="lookup2" name="role_no_list" class="mini-lookup hl-mini-input" style="width:400px;"
                                textField="role_no" valueField="role_no" popupWidth="auto"
                                popup="#gridPanel" grid="#datagrid1" multiSelect="true"
                         />
@@ -394,6 +392,9 @@
             function_no: keyText.value,
             function_name:keyText.value
         });
+    });
+    $(function () {
+        $('.hl-mini-input .mini-buttonedit-border .mini-buttonedit-input').css("width","360px");
     });
     hlLanguage("../i18n/");
 </script>
