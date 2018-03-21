@@ -244,15 +244,14 @@
                     <td colspan="2">
                         <input class="easyui-textbox" name="role_name" type="text" style="width:150px;height:22px;padding:12px" >
                     </td>
-                    <td></td>
 
                 </tr>
 
                 <tr>
 
                     <td >权限列表</td>
-                    <td>
-                        <input id="lookup2" name="function_no_list" class="mini-lookup" style="width:200px;"
+                    <td colspan="5">
+                        <input id="lookup2" name="function_no_list" class="mini-lookup" style="width:400px;"
                                textField="function_no" valueField="function_no" popupWidth="auto"
                                popup="#gridPanel" grid="#datagrid1" multiSelect="true"
                         />
@@ -287,11 +286,9 @@
                         </div>
 
                     </td>
-                    <td ></td>
-                    <td >
 
-                    </td>
-                    <td></td>
+
+
 
                 </tr>
 
