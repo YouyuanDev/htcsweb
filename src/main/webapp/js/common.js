@@ -239,4 +239,25 @@ function selectIsSample() {
         $("input[name='is_sample']").val(0);
     }
 }
-//
+//字符串转换，全角转,半角
+function  changeComma(str) {
+    var reg=new RegExp("，","g");
+    var newstr=str.replace(reg,",");
+    return newstr;
+}
+
+//判断字符串厚度列表是否合法
+function thicknessIsAllow(str){
+    var flag=true;
+    var reg=new RegExp("，","g");
+    var newstr=str.replace(reg,",");
+    var numList=newstr.split(',');
+    for (var i=0;i<numList.length;i++) {
+        if(numList[i]!=""){
+            if(isNaN(numList[i])){
+                flag=false;
+            }
+        }
+    }
+    return flag;
+}

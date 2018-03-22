@@ -7,11 +7,11 @@
 
 
     <insert id="addIdFinalInProcess" parameterType="com.htcsweb.entity.IdFinalInspectionProcess">
-        INSERT INTO id_final_inspection_process(pipe_no,operation_time,operator_no,od_inspection_result,id_inspection_result,final_inspection_result,upload_files,remark,result,mill_no) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{od_inspection_result},#{id_inspection_result},#{final_inspection_result},#{upload_files},#{remark},#{result},#{mill_no})
+        INSERT INTO id_final_inspection_process(pipe_no,operation_time,operator_no,od_inspection_result,id_inspection_result,final_inspection_result,upload_files,remark,result,mill_no,dry_film_thickness_list) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{od_inspection_result},#{id_inspection_result},#{final_inspection_result},#{upload_files},#{remark},#{result},#{mill_no},#{dry_film_thickness_list})
     </insert>
 
     <update id="updateIdFinalInProcess" parameterType="com.htcsweb.entity.IdFinalInspectionProcess">
-        UPDATE id_final_inspection_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},od_inspection_result=#{od_inspection_result},id_inspection_result=#{id_inspection_result},final_inspection_result=#{final_inspection_result},upload_files=#{upload_files},remark=#{remark},result=#{result},mill_no=#{mill_no} where id=#{id}
+        UPDATE id_final_inspection_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},od_inspection_result=#{od_inspection_result},id_inspection_result=#{id_inspection_result},final_inspection_result=#{final_inspection_result},upload_files=#{upload_files},remark=#{remark},result=#{result},mill_no=#{mill_no},dry_film_thickness_list=#{dry_film_thickness_list} where id=#{id}
     </update>
 
     <delete id="delIdFinalInProcess">

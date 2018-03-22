@@ -14,11 +14,11 @@ public class IdFinalInspectionProcess {
     private String remark;
     private String result;
     private String mill_no;
-
+    private String dry_film_thickness_list;
     public IdFinalInspectionProcess() {
     }
 
-    public IdFinalInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, String od_inspection_result, String id_inspection_result, String final_inspection_result, String upload_files, String remark, String result, String mill_no) {
+    public IdFinalInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, String od_inspection_result, String id_inspection_result, String final_inspection_result, String upload_files, String remark, String result, String mill_no, String dry_film_thickness_list) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -30,6 +30,7 @@ public class IdFinalInspectionProcess {
         this.remark = remark;
         this.result = result;
         this.mill_no = mill_no;
+        this.dry_film_thickness_list = dry_film_thickness_list;
     }
 
     public int getId() {
@@ -118,5 +119,13 @@ public class IdFinalInspectionProcess {
 
     public void setMill_no(String mill_no) {
         this.mill_no = mill_no;
+    }
+
+    public String getDry_film_thickness_list() {
+        return dry_film_thickness_list;
+    }
+
+    public void setDry_film_thickness_list(String dry_film_thickness_list) {
+        this.dry_film_thickness_list = dry_film_thickness_list;
     }
 }

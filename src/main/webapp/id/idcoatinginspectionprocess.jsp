@@ -133,9 +133,8 @@
                             // var res2=$obj2.val();
                             var res3=$obj3.val();
                             var res4=$obj4.val();
-                            var res5=$obj5.val();
+                            var res5=changeComma($obj5.val());
                             var res5_1=res5.split(',');
-
                             // if(!((res1>=data.dry_film_thickness_min)&&(res1<=data.dry_film_thickness_max)))
                             //     $obj1.siblings().css("background-color","#F9A6A6");
                             // if(!((res2>=data.dry_film_thickness_min)&&(res2<=data.dry_film_thickness_max)))
@@ -177,11 +176,19 @@
                     //表单验证
                     // setParams($("input[name='dry_film_thickness_max']"));
                     // setParams($("input[name='dry_film_thickness_min']"));
+                    var arg1=$("input[name='wet_film_thickness_list']").val().trim();
+                    if(arg1!=""){
+                        if(!thicknessIsAllow(arg1)){
+                            hlAlertFour("湿膜厚度测量列表不合法!");
+                            return false;
+                        }
+                    }
                     setParams($("input[name='cutback']"));
                     setParams($("input[name='holiday_tester_volts']"));
                     setParams($("input[name='holiday_test_results']"));
                     setParams($("input[name='magnetism']"));
                     setParams($("input[name='internal_repairs']"));
+
                     if($("input[name='idcoatInprotime']").val()==""){
                         hlAlertFour("请输入操作时间");
                         return false;
@@ -402,7 +409,14 @@
                     <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="cutback" value=""/></td>
                     <td></td>
                     <td width="16%" class="i18n1" name="bevelcheck">坡口质量</td>
-                    <td><input class="easyui-textbox"  type="text" name="bevel_check" value=""/></td>
+                    <td>
+                        <select id="bev" class="easyui-combobox" data-options="editable:false" name="bevel_check" style="width:200px;">
+                            <option value="0" selected="selected">未检测</option>
+                            <option value="1">合格</option>
+                            <option value="2">不合格</option>
+                        </select>
+                        <%--<input class="easyui-textbox"  type="text" name="bevel_check" value=""/>--%>
+                    </td>
                     <td></td>
 
                 </tr>
@@ -433,7 +447,7 @@
                     </td>
                 </tr>
                     <tr>
-                        <td width="16%" class="i18n1" name="wefilmthicknesslist">湿膜厚度μm测量列表</td>
+                        <td width="16%" class="i18n1" name="wetfilmthicknesslist">湿膜厚度μm测量列表</td>
                         <td colspan="5">
                             <input class="easyui-textbox"  type="text" name="wet_film_thickness_list" value=""/>
                         </td>

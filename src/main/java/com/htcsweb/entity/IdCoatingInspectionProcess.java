@@ -21,12 +21,11 @@ public class IdCoatingInspectionProcess {
     private String result;
     private String mill_no;
     private String is_sample;
-
+    private String wet_film_thickness_list;
     public IdCoatingInspectionProcess() {
     }
 
-
-    public IdCoatingInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, float dry_film_thickness_max, float dry_film_thickness_min, float cutback, float holiday_tester_volts, int holiday_test_results, String surface_condition, String bevel_check, float magnetism, int internal_repairs, String upload_files, String remark, String result, String mill_no, String is_sample) {
+    public IdCoatingInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, float dry_film_thickness_max, float dry_film_thickness_min, float cutback, float holiday_tester_volts, int holiday_test_results, String surface_condition, String bevel_check, float magnetism, int internal_repairs, String upload_files, String remark, String result, String mill_no, String is_sample, String wet_film_thickness_list) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -45,6 +44,7 @@ public class IdCoatingInspectionProcess {
         this.result = result;
         this.mill_no = mill_no;
         this.is_sample = is_sample;
+        this.wet_film_thickness_list = wet_film_thickness_list;
     }
 
     public int getId() {
@@ -189,5 +189,13 @@ public class IdCoatingInspectionProcess {
 
     public void setIs_sample(String is_sample) {
         this.is_sample = is_sample;
+    }
+
+    public String getWet_film_thickness_list() {
+        return wet_film_thickness_list;
+    }
+
+    public void setWet_film_thickness_list(String wet_film_thickness_list) {
+        this.wet_film_thickness_list = wet_film_thickness_list;
     }
 }

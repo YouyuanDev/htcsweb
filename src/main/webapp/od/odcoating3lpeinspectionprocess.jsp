@@ -50,6 +50,7 @@
             $('#hlcancelBtn').attr('operationtype','add');
             $('#hlOdCoating3LpeInProDialog').dialog('open').dialog('setTitle','新增');
             clearFormLabel();
+            combox1.setValue("");
             clearMultiUpload(grid);
             url="/OdCoat3LpeInOperation/saveOdCoating3LpeInProcess.action";
         }
@@ -103,6 +104,7 @@
                 look1.setValue(row.pipe_no);
                 look2.setText(row.operator_no);
                 look2.setValue(row.operator_no);
+                combox1.setValue(row.surface_condition);
                 var odpictures=row.upload_files;
                 if(odpictures!=null&&odpictures!=""){
                     var imgList=odpictures.split(';');
@@ -131,14 +133,14 @@
                         $obj7.siblings().css("background-color","#FFFFFF");
                         $obj8.siblings().css("background-color","#FFFFFF");
                         if(data!=null){
-                            var res1=$obj1.val();
-                            var res2=$obj2.val();
-                            var res3=$obj3.val();
+                            var res1=changeComma($obj1.val());
+                            var res2=changeComma($obj2.val());
+                            var res3=changeComma($obj3.val());
                             var res4=$obj4.val();
                             var res5=$obj5.val();
                             var res6=$obj6.val();
                             var res7=$obj7.val();
-                            var res8=$obj8.val();
+                            var res8=changeComma($obj8.val());
                             var res1_1=res1.split(',');
                             var res2_1=res2.split(',');
                             var res3_1=res3.split(',');
@@ -206,6 +208,34 @@
                     // setParams($("input[name='top_coat_gun_count']"));
                     // setParams($("input[name='to_first_touch_duration']"));
                     // setParams($("input[name='to_quench_duration']"));
+                    var arg1=$("input[name='base_coat_thickness_list']").val().trim();
+                    var arg2=$("input[name='top_coat_thickness_list']").val().trim();
+                    var arg3=$("input[name='total_coating_thickness_list']").val().trim();
+                    var arg4=$("input[name='middle_coat_thickness_list']").val().trim();
+                    if(arg1!=""){
+                        if(!thicknessIsAllow(arg1)){
+                            hlAlertFour("底层涂层厚度列表不合法!");
+                            return false;
+                        }
+                    }
+                    if(arg2!=""){
+                        if(!thicknessIsAllow(arg2)){
+                            hlAlertFour("表层涂层厚度列表不合法!");
+                            return false;
+                        }
+                    }
+                    if(arg3!=""){
+                        if(!thicknessIsAllow(arg3)){
+                            hlAlertFour("涂层总厚度列表不合法!");
+                            return false;
+                        }
+                    }
+                    if(arg4!=""){
+                        if(!thicknessIsAllow(arg4)){
+                            hlAlertFour("中间层涂层厚度列表不合法!");
+                            return false;
+                        }
+                    }
                     if($("input[name='odcoat3LpeInprotime']").val()==""){
                         hlAlertFour("请输入操作时间");
                         return false;
@@ -444,18 +474,47 @@
                 </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="bevel">坡口检测</td>
-                    <td><input class="easyui-textbox"  type="text" name="bevel" value=""/></td>
+                    <td>
+                        <select id="bev" class="easyui-combobox" data-options="editable:false" name="bevel" style="width:200px;">
+                            <option value="0" selected="selected">未检测</option>
+                            <option value="1">合格</option>
+                            <option value="2">不合格</option>
+                        </select>
+                        <%--<input class="easyui-textbox"  type="text" name="bevel" value=""/>--%>
+                    </td>
                     <td></td>
                     <td width="16%" class="i18n1" name="stencilverification">外喷标检验</td>
-                    <td><input class="easyui-textbox"  type="text" name="stencil_verification" value=""/></td>
+                    <td>
+                        <select id="sv" class="easyui-combobox" data-options="editable:false" name="stencil_verification" style="width:200px;">
+                            <option value="0" selected="selected">未检测</option>
+                            <option value="1">合格</option>
+                            <option value="2">不合格</option>
+                        </select>
+                        <%--<input class="easyui-textbox"  type="text" name="stencil_verification" value=""/>--%>
+                    </td>
                     <td></td>
                 </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="surfacecondition1">表面质量</td>
-                    <td><input class="easyui-textbox"  type="text" name="surface_condition" value=""/></td>
+                    <td>
+                        <div id="combobox1" class="mini-combobox" style="width:185px;"  popupWidth="185" textField="text" valueField="text"
+                             url="../data/surfacequality.txt" name="surface_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick" >
+                            <div property="columns">
+                                <div header="缺陷类型" field="text"></div>
+                            </div>
+                        </div>
+                        <%--<input class="easyui-textbox"  type="text" name="surface_condition" value=""/>--%>
+                    </td>
                     <td></td>
                     <td width="16%" class="i18n1" name="adhesiontest">附着力测试</td>
-                    <td><input class="easyui-textbox"  type="text" name="adhesion_test" value=""/></td>
+                    <td>
+                        <select id="at" class="easyui-combobox" data-options="editable:false" name="adhesion_test" style="width:200px;">
+                            <option value="0" selected="selected">未检测</option>
+                            <option value="1">合格</option>
+                            <option value="2">不合格</option>
+                        </select>
+                        <%--<input class="easyui-textbox"  type="text" name="adhesion_test" value=""/>--%>
+                    </td>
                     <td></td>
                 </tr>
                 <tr>
@@ -566,7 +625,7 @@
     var grid2=mini.get("datagrid2");
     var look1=mini.get('lookup1');
     var look2= mini.get("lookup2");
-
+    var combox1=mini.get("combobox1");
     function onSearchClick(type) {
         if(type==1)
         {
@@ -636,5 +695,15 @@
             employeeno:keyText3.value
         });
     });
+    combox1.on("showpopup",function () {
+        $('.mini-shadow').css('z-index','99999');
+        $('.mini-popup').css('z-index','100000');
+        $('.mini-panel').css('z-index','100000');
+    });
+    function onComboxCloseClick(e) {
+        var obj = e.sender;
+        obj.setText("");
+        obj.setValue("");
+    }
     hlLanguage("../i18n/");
 </script>

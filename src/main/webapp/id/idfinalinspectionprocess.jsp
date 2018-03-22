@@ -120,6 +120,13 @@
             $('#idFinalInProForm').form('submit',{
                 url:url,
                 onSubmit:function () {
+                    var arg1=$("input[name='dry_film_thickness_list']").val().trim();
+                    if(arg1!=""){
+                        if(!thicknessIsAllow(arg1)){
+                            hlAlertFour("干膜厚度测量列表不合法!");
+                            return false;
+                        }
+                    }
                     if($("input[name='idFinalInprotime']").val()==""){
                         hlAlertFour("请输入操作时间");
                         return false;
