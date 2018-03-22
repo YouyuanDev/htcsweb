@@ -29,10 +29,17 @@ public class IDCoatingAcceptanceCriteria {
     private float residual_magnetism_min;
 
     private Date last_update_time;
+
+    private float wet_film_thickness_max;
+    private float wet_film_thickness_min;
+
+
+
+
     public IDCoatingAcceptanceCriteria() {
     }
 
-    public IDCoatingAcceptanceCriteria(int id, String coating_acceptance_criteria_no, float temp_above_dew_point_max, float temp_above_dew_point_min, float blast_finish_sa25_max, float blast_finish_sa25_min, float relative_humidity_max, float relative_humidity_min, float id_profile_max, float id_profile_min, float dry_film_thickness_max, float dry_film_thickness_min, float cutback_max, float cutback_min, float residual_magnetism_max, float residual_magnetism_min, Date last_update_time) {
+    public IDCoatingAcceptanceCriteria(int id, String coating_acceptance_criteria_no, float temp_above_dew_point_max, float temp_above_dew_point_min, float blast_finish_sa25_max, float blast_finish_sa25_min, float relative_humidity_max, float relative_humidity_min, float id_profile_max, float id_profile_min, float dry_film_thickness_max, float dry_film_thickness_min, float cutback_max, float cutback_min, float residual_magnetism_max, float residual_magnetism_min, Date last_update_time, float wet_film_thickness_max, float wet_film_thickness_min) {
         this.id = id;
         this.coating_acceptance_criteria_no = coating_acceptance_criteria_no;
         this.temp_above_dew_point_max = temp_above_dew_point_max;
@@ -50,7 +57,10 @@ public class IDCoatingAcceptanceCriteria {
         this.residual_magnetism_max = residual_magnetism_max;
         this.residual_magnetism_min = residual_magnetism_min;
         this.last_update_time = last_update_time;
+        this.wet_film_thickness_max = wet_film_thickness_max;
+        this.wet_film_thickness_min = wet_film_thickness_min;
     }
+
 
     public int getId() {
         return id;
@@ -186,5 +196,21 @@ public class IDCoatingAcceptanceCriteria {
 
     public void setLast_update_time(Date last_update_time) {
         this.last_update_time = last_update_time;
+    }
+
+    public float getWet_film_thickness_max() {
+        return wet_film_thickness_max;
+    }
+
+    public void setWet_film_thickness_max(float wet_film_thickness_max) {
+        this.wet_film_thickness_max = wet_film_thickness_max;
+    }
+
+    public float getWet_film_thickness_min() {
+        return wet_film_thickness_min;
+    }
+
+    public void setWet_film_thickness_min(float wet_film_thickness_min) {
+        this.wet_film_thickness_min = wet_film_thickness_min;
     }
 }

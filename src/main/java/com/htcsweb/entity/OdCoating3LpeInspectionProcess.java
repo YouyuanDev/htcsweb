@@ -7,10 +7,10 @@ public class OdCoating3LpeInspectionProcess {
     private String pipe_no;
     private Date operation_time;
     private String operator_no;
-    private float base_coat_thickness;
-    private float middle_coat_thickness;
-    private float top_coat_thickness;
-    private float total_coating_thickness;
+    private String base_coat_thickness_list;
+    private String middle_coat_thickness_list;
+    private String top_coat_thickness_list;
+    private String total_coating_thickness_list;
     private int holidays;
     private float holiday_tester_volts;
     private int repairs;
@@ -28,15 +28,15 @@ public class OdCoating3LpeInspectionProcess {
     public OdCoating3LpeInspectionProcess() {
     }
 
-    public OdCoating3LpeInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, float base_coat_thickness, float middle_coat_thickness, float top_coat_thickness, float total_coating_thickness, int holidays, float holiday_tester_volts, int repairs, float cutback_length, String bevel, String stencil_verification, String surface_condition, String adhesion_test, String upload_files, String remark, String result, String mill_no, String is_sample) {
+    public OdCoating3LpeInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, String base_coat_thickness_list, String middle_coat_thickness_list, String top_coat_thickness_list, String total_coating_thickness_list, int holidays, float holiday_tester_volts, int repairs, float cutback_length, String bevel, String stencil_verification, String surface_condition, String adhesion_test, String upload_files, String remark, String result, String mill_no, String is_sample) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
         this.operator_no = operator_no;
-        this.base_coat_thickness = base_coat_thickness;
-        this.middle_coat_thickness = middle_coat_thickness;
-        this.top_coat_thickness = top_coat_thickness;
-        this.total_coating_thickness = total_coating_thickness;
+        this.base_coat_thickness_list = base_coat_thickness_list;
+        this.middle_coat_thickness_list = middle_coat_thickness_list;
+        this.top_coat_thickness_list = top_coat_thickness_list;
+        this.total_coating_thickness_list = total_coating_thickness_list;
         this.holidays = holidays;
         this.holiday_tester_volts = holiday_tester_volts;
         this.repairs = repairs;
@@ -84,36 +84,36 @@ public class OdCoating3LpeInspectionProcess {
         this.operator_no = operator_no;
     }
 
-    public float getBase_coat_thickness() {
-        return base_coat_thickness;
+    public String getBase_coat_thickness_list() {
+        return base_coat_thickness_list;
     }
 
-    public void setBase_coat_thickness(float base_coat_thickness) {
-        this.base_coat_thickness = base_coat_thickness;
+    public void setBase_coat_thickness_list(String base_coat_thickness_list) {
+        this.base_coat_thickness_list = base_coat_thickness_list;
     }
 
-    public float getMiddle_coat_thickness() {
-        return middle_coat_thickness;
+    public String getMiddle_coat_thickness_list() {
+        return middle_coat_thickness_list;
     }
 
-    public void setMiddle_coat_thickness(float middle_coat_thickness) {
-        this.middle_coat_thickness = middle_coat_thickness;
+    public void setMiddle_coat_thickness_list(String middle_coat_thickness_list) {
+        this.middle_coat_thickness_list = middle_coat_thickness_list;
     }
 
-    public float getTop_coat_thickness() {
-        return top_coat_thickness;
+    public String getTop_coat_thickness_list() {
+        return top_coat_thickness_list;
     }
 
-    public void setTop_coat_thickness(float top_coat_thickness) {
-        this.top_coat_thickness = top_coat_thickness;
+    public void setTop_coat_thickness_list(String top_coat_thickness_list) {
+        this.top_coat_thickness_list = top_coat_thickness_list;
     }
 
-    public float getTotal_coating_thickness() {
-        return total_coating_thickness;
+    public String getTotal_coating_thickness_list() {
+        return total_coating_thickness_list;
     }
 
-    public void setTotal_coating_thickness(float total_coating_thickness) {
-        this.total_coating_thickness = total_coating_thickness;
+    public void setTotal_coating_thickness_list(String total_coating_thickness_list) {
+        this.total_coating_thickness_list = total_coating_thickness_list;
     }
 
     public int getHolidays() {
