@@ -286,6 +286,7 @@
                 <th field="pipe_temp" width="100" align="center"  class="i18n1" name="pipetemp">钢管温度</th>
                 <th field="salt_contamination_after_blasting" align="center" width="120" class="i18n1" name="saltcontaminationafterblasting">打砂后盐度</th>
                 <th field="surface_condition" align="center" width="120" class="i18n1" name="surfacecondition">表面质量</th>
+                <th field="oil_water_in_air_compressor" align="center" width="120" class="i18n1" name="oilwaterinaircompressor">压缩空气是否存在油水</th>
                 <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                 <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
                 <th field="operation_time" align="center" width="150" class="i18n1" name="operationtime" data-options="formatter:formatterdate">操作时间</th>
@@ -454,7 +455,14 @@
                             </div>
                         </div>
                     </td>
-
+                    <td> </td>
+                    <td width="16%" class="i18n1" name="oilwaterinaircompressor">压缩空气是否存在油水</td>
+                    <td>
+                        <select id="dd" class="easyui-combobox" data-options="editable:false" name="oil_water_in_air_compressor" style="width:200px;">
+                            <option value="0">否</option>
+                            <option value="1">是</option>
+                        </select>
+                    </td>
                     <td></td>
                 </tr>
                 <tr>

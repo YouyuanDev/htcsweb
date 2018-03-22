@@ -191,7 +191,7 @@
                 <th field="od_inspection_result" align="center" width="80" class="i18n1" name="odinspectionresult">外涂层质检结果</th>
                 <th field="id_inspection_result" align="center" width="80" class="i18n1" name="idinspectionresult">内涂层质检结果</th>
                 <th field="final_inspection_result" align="center" width="80" class="i18n1" name="finalinspectionresult">终检结果</th>
-
+                <th field="dry_film_thickness_list" align="center" width="80" class="i18n1" name="dryfilmthicknesslist">干膜厚度μm测量列表</th>
                 <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                 <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
                 <th field="operation_time" align="center" width="150" class="i18n1" name="operationtime" data-options="formatter:formatterdate">操作时间</th>
@@ -329,6 +329,12 @@
                             <option value="1">合格</option>
                             <option value="2">待定</option>
                         </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="i18n1" name="dryfilmthicknesslist">干膜厚度μm测量列表</td>
+                    <td colspan="5">
+                        <input class="easyui-textbox"  type="text" name="dry_film_thickness_list" value=""/>
                     </td>
                 </tr>
                 <tr>

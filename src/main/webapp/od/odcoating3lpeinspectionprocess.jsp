@@ -114,14 +114,14 @@
                     dataType:'json',
                     data:{'contract_no':row.contract_no},
                     success:function (data) {
-                        var $obj1=$("input[name='base_coat_thickness']");
-                        var $obj2=$("input[name='top_coat_thickness']");
-                        var $obj3=$("input[name='total_coating_thickness']");
+                        var $obj1=$("input[name='base_coat_thickness_list']");
+                        var $obj2=$("input[name='top_coat_thickness_list']");
+                        var $obj3=$("input[name='total_coating_thickness_list']");
                         var $obj4=$("input[name='holidays']");
                         var $obj5=$("input[name='holiday_tester_volts']");
                         var $obj6=$("input[name='repairs']");
                         var $obj7=$("input[name='cutback_length']");
-                        var $obj8=$("input[name='middle_coat_thickness']");
+                        var $obj8=$("input[name='middle_coat_thickness_list']");
                         $obj1.siblings().css("background-color","#FFFFFF");
                         $obj2.siblings().css("background-color","#FFFFFF");
                         $obj3.siblings().css("background-color","#FFFFFF");
@@ -139,12 +139,34 @@
                             var res6=$obj6.val();
                             var res7=$obj7.val();
                             var res8=$obj8.val();
-                            if(!((res1>=data.base_3lpe_coat_thickness_min)&&(res1<=data.base_3lpe_coat_thickness_max)))
-                                $obj1.siblings().css("background-color","#F9A6A6");
-                            if(!((res2>=data.top_3lpe_coat_thickness_min)&&(res2<=data.top_3lpe_coat_thickness_max)))
-                                $obj2.siblings().css("background-color","#F9A6A6");
-                            if(!((res3>=data.total_3lpe_coat_thickness_min)&&(res3<=data.total_3lpe_coat_thickness_max)))
-                                $obj3.siblings().css("background-color","#F9A6A6");
+                            var res1_1=res1.split(',');
+                            var res2_1=res2.split(',');
+                            var res3_1=res3.split(',');
+                            var res8_1=res8.split(',');
+                            for(var i=0;i<res1_1.length;i++){
+                                if(res1_1[i]!=""&&res1_1.length>0){
+                                    if(!((res1_1[i]>=data.base_3lpe_coat_thickness_min)&&(res1_1[i]<=data.base_3lpe_coat_thickness_max)))
+                                        $obj1.siblings().css("background-color","#F9A6A6");
+                                }
+                            }
+                            for(var i=0;i<res2_1.length;i++){
+                                if(res2_1[i]!=""&&res2_1[i].length>0){
+                                    if(!((res2_1[i]>=data.top_3lpe_coat_thickness_min)&&(res2_1[i]<=data.top_3lpe_coat_thickness_max)))
+                                        $obj2.siblings().css("background-color","#F9A6A6");
+                                }
+                            }
+                            for(var i=0;i<res3_1.length;i++){
+                                if(res3_1[i]!=""&&res3_1[i].length>0){
+                                    if(!((res3_1[i]>=data.total_3lpe_coat_thickness_min)&&(res3_1[i]<=data.total_3lpe_coat_thickness_max)))
+                                        $obj3.siblings().css("background-color","#F9A6A6");
+                                }
+                            }
+                            for(var i=0;i<res8_1.length;i++){
+                                if(res8_1[i]!=""&&res8_1[i].length>0){
+                                    if(!((res8_1[i]>=data.middle_3lpe_coat_thickness_min)&&(res8_1[i]<=data.middle_3lpe_coat_thickness_max)))
+                                        $obj8.siblings().css("background-color","#F9A6A6");
+                                }
+                            }
                             if(!((res4>=data.temp_above_dew_point_min)&&(res4<=data.temp_above_dew_point_max)))
                                 $obj4.siblings().css("background-color","#F9A6A6");
                             if(!((res5>=data.holiday_tester_voltage_min)&&(res5<=data.holiday_tester_voltage_max)))
@@ -153,8 +175,6 @@
                                 $obj6.siblings().css("background-color","#F9A6A6");
                             if(!((res7>=data.cutback_min)&&(res7<=data.cutback_max)))
                                 $obj7.siblings().css("background-color","#F9A6A6");
-                            if(!((res8>=data.middle_3lpe_coat_thickness_min)&&(res8<=data.middle_3lpe_coat_thickness_max)))
-                                $obj8.siblings().css("background-color","#F9A6A6");
                         }
                     },error:function () {
 
@@ -256,10 +276,10 @@
                 <th field="heat_no" align="center" hidden="true" width="50" class="i18n1" name="heat_no">炉号</th>
                 <th field="operator_no" align="center" width="100" class="i18n1" name="operatorno">操作工编号</th>
                 <th field="is_sample" align="center" width="80" class="i18n1" name="issample">取样管</th>
-                <th field="base_coat_thickness" align="center" width="80" class="i18n1" name="basecoatthickness">底层涂层厚度</th>
-                <th field="middle_coat_thickness" align="center" width="80" class="i18n1" name="middlecoatthickness">中间层涂层厚度</th>
-                <th field="top_coat_thickness" align="center" width="100" class="i18n1" name="topcoatthickness">面层涂层厚度</th>
-                <th field="total_coating_thickness" align="center" width="100" hidden="true" class="i18n1" name="totalcoatingthickness">涂层总厚度</th>
+                <th field="base_coat_thickness_list" align="center" width="80" class="i18n1" name="basecoatthicknesslist">底层涂层厚度列表</th>
+                <th field="middle_coat_thickness_list" align="center" width="80" class="i18n1" name="middlecoatthicknesslist">中间层涂层厚度列表</th>
+                <th field="top_coat_thickness_list" align="center" width="100" class="i18n1" name="topcoatthicknesslist">面层涂层厚度列表</th>
+                <th field="total_coating_thickness_list" align="center" width="100" hidden="true" class="i18n1" name="totalcoatingthicknesslist">涂层总厚度列表</th>
                 <th field="holidays" align="center" width="100" hidden="true" class="i18n1" name="holidays">漏点数量</th>
                 <th field="holiday_tester_volts" width="100" align="center" hidden="true" class="i18n1" name="holidaytestervolts">电火花检测电压</th>
                 <th field="repairs" width="100" align="center" hidden="true" class="i18n1" name="repairs">修补点数</th>
@@ -389,20 +409,20 @@
 
             <table class="ht-table">
                 <tr>
-                    <td class="i18n1" name="basecoatthickness">底层涂层厚度</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="base_coat_thickness" value=""/></td>
+                    <td class="i18n1" name="basecoatthicknesslist">底层涂层厚度列表</td>
+                    <td><input class="easyui-textbox"  type="text" name="base_coat_thickness_list" value=""/></td>
                     <td></td>
-                    <td class="i18n1" name="middlecoatthickness">中间层涂层厚度</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="middle_coat_thickness" value=""/></td>
+                    <td class="i18n1" name="middlecoatthicknesslist">中间层涂层厚度列表</td>
+                    <td><input class="easyui-textbox"  type="text" name="middle_coat_thickness_list" value=""/></td>
                     <td></td>
                 </tr>
 
                 <tr>
-                    <td class="i18n1" name="topcoatthickness">面层涂层厚度</td>
-                    <td><input class="easyui-numberbox"  data-options="min:0,precision:2" type="text" name="top_coat_thickness" value=""/></td>
+                    <td class="i18n1" name="topcoatthicknesslist">面层涂层厚度列表</td>
+                    <td><input class="easyui-textbox"  type="text" name="top_coat_thickness_list" value=""/></td>
                     <td></td>
-                    <td class="i18n1" name="totalcoatingthickness">涂层总厚度</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="total_coating_thickness" value=""/></td>
+                    <td class="i18n1" name="totalcoatingthicknesslist">涂层总厚度列表</td>
+                    <td><input class="easyui-textbox"  type="text" name="total_coating_thickness_list" value=""/></td>
                     <td></td>
                 </tr>
 

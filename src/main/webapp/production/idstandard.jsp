@@ -121,6 +121,8 @@
             setParamsMin($("input[name='cutback_min']"));
             setParamsMax($("input[name='residual_magnetism_max']"));
             setParamsMin($("input[name='residual_magnetism_min']"));
+            setParamsMax($("input[name='wet_film_thickness_max']"));
+            setParamsMin($("input[name='wet_film_thickness_min']"));
         }
         function  setParamsMax($obj) {
             if($obj.val()==null||$obj.val()=="")
@@ -166,6 +168,8 @@
                 <th field="cutback_min" align="center" hidden="true" width="120" class="i18n1" name="cutbackmin">预留段最小值</th>
                 <th field="residual_magnetism_max" align="center" width="100" hidden="true" class="i18n1" name="residualmagnetismmax">剩磁最大值</th>
                 <th field="residual_magnetism_min" align="center" width="100" hidden="true" class="i18n1" name="residualmagnetismmin">剩磁最小值</th>
+                <th field="wet_film_thickness_max" align="center" width="100" hidden="true" class="i18n1" name="wetfilmthicknessmax">湿膜厚度最大值μm</th>
+                <th field="wet_film_thickness_min" align="center" width="100" hidden="true" class="i18n1" name="wetfilmthicknessmin">湿膜厚度最小值μm</th>
             </tr>
             </thead>
         </table>
@@ -240,6 +244,12 @@
                     <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="residual_magnetism_max" value=""/></td>
                     <td class="i18n1" name="residualmagnetismmin">剩磁最小值</td>
                     <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="residual_magnetism_min" value=""/></td>
+                </tr>
+                <tr>
+                    <td class="i18n1" name="wetfilmthicknessmax">剩磁最大值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="wet_film_thickness_max" value=""/></td>
+                    <td class="i18n1" name="wetfilmthicknessmin">剩磁最小值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="wet_film_thickness_min" value=""/></td>
                 </tr>
             </table>
         </fieldset>

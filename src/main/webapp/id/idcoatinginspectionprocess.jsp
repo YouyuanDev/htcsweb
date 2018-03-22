@@ -118,27 +118,38 @@
                     dataType:'json',
                     data:{'contract_no':row.contract_no},
                     success:function (data) {
-                        var $obj1=$("input[name='dry_film_thickness_max']");
-                        var $obj2=$("input[name='dry_film_thickness_min']");
+                        // var $obj1=$("input[name='dry_film_thickness_max']");
+                        // var $obj2=$("input[name='dry_film_thickness_min']");
                         var $obj3=$("input[name='cutback']");
                         var $obj4=$("input[name='magnetism']");
-                        $obj1.siblings().css("background-color","#FFFFFF");
-                        $obj2.siblings().css("background-color","#FFFFFF");
+                        var $obj5=$("input[name='wet_film_thickness_list']");
+                        // $obj1.siblings().css("background-color","#FFFFFF");
+                        // $obj2.siblings().css("background-color","#FFFFFF");
                         $obj3.siblings().css("background-color","#FFFFFF");
                         $obj4.siblings().css("background-color","#FFFFFF");
+                        $obj5.siblings().css("background-color","#FFFFFF");
                         if(data!=null){
-                            var res1=$obj1.val();
-                            var res2=$obj2.val();
+                            // var res1=$obj1.val();
+                            // var res2=$obj2.val();
                             var res3=$obj3.val();
                             var res4=$obj4.val();
-                            if(!((res1>=data.dry_film_thickness_min)&&(res1<=data.dry_film_thickness_max)))
-                                $obj1.siblings().css("background-color","#F9A6A6");
-                            if(!((res2>=data.dry_film_thickness_min)&&(res2<=data.dry_film_thickness_max)))
-                                $obj2.siblings().css("background-color","#F9A6A6");
+                            var res5=$obj5.val();
+                            var res5_1=res5.split(',');
+
+                            // if(!((res1>=data.dry_film_thickness_min)&&(res1<=data.dry_film_thickness_max)))
+                            //     $obj1.siblings().css("background-color","#F9A6A6");
+                            // if(!((res2>=data.dry_film_thickness_min)&&(res2<=data.dry_film_thickness_max)))
+                            //     $obj2.siblings().css("background-color","#F9A6A6");
                             if(!((res3>=data.cutback_min)&&(res3<=data.cutback_max)))
                                 $obj3.siblings().css("background-color","#F9A6A6");
                             if(!((res4>=data.residual_magnetism_min)&&(res4<=data.residual_magnetism_max)))
                                 $obj4.siblings().css("background-color","#F9A6A6");
+                            for(var i=0;i<res5_1.length;i++){
+                                if(res5_1[i]!=""&&res5_1[i].length>0){
+                                    if(!((res5_1[i]>=data.wet_film_thickness_min)&&(res5_1[i]<=data.wet_film_thickness_max)))
+                                        $obj5.siblings().css("background-color","#F9A6A6");
+                                }
+                            }
                         }
                     },error:function () {
 
@@ -164,8 +175,8 @@
                 url:url,
                 onSubmit:function () {
                     //表单验证
-                    setParams($("input[name='dry_film_thickness_max']"));
-                    setParams($("input[name='dry_film_thickness_min']"));
+                    // setParams($("input[name='dry_film_thickness_max']"));
+                    // setParams($("input[name='dry_film_thickness_min']"));
                     setParams($("input[name='cutback']"));
                     setParams($("input[name='holiday_tester_volts']"));
                     setParams($("input[name='holiday_test_results']"));
@@ -240,8 +251,8 @@
                 <th field="heat_no" align="center" hidden="true" width="50" class="i18n1" name="heat_no">炉号</th>
                 <th field="operator_no" align="center" width="100" class="i18n1" name="operatorno">操作工编号</th>
                 <th field="is_sample" align="center" width="80" class="i18n1" name="issample">取样管</th>
-                <th field="dry_film_thickness_max" align="center" width="80" class="i18n1" name="dryfilmthicknessmax">最大干膜厚度</th>
-                <th field="dry_film_thickness_min" align="center" width="100" class="i18n1" name="dryfilmthicknessmin">最小干膜厚度</th>
+                <%--<th field="dry_film_thickness_max" align="center" width="80" class="i18n1" name="dryfilmthicknessmax">最大干膜厚度</th>--%>
+                <%--<th field="dry_film_thickness_min" align="center" width="100" class="i18n1" name="dryfilmthicknessmin">最小干膜厚度</th>--%>
                 <th field="cutback" align="center" width="100" hidden="true" class="i18n1" name="cutback">预留端长度</th>
                 <th field="holiday_tester_volts" width="100" align="center" hidden="true" class="i18n1" name="holidaytestervolts">电火花检测电压</th>
                 <th field="holiday_test_results" align="center" width="100" hidden="true" class="i18n1" name="holidaytestresults">电火花检验结果</th>
@@ -249,7 +260,7 @@
                 <th field="bevel_check" align="center" width="80" class="i18n1" name="bevelcheck">坡口质量</th>
                 <th field="magnetism" width="100" align="center"  class="i18n1" name="magnetism">剩磁</th>
                 <th field="internal_repairs" width="100" align="center"  class="i18n1" name="internalrepairs">内涂层修补数</th>
-
+                <th field="wet_film_thickness_list" width="100" align="center"  class="i18n1" name="wetfilmthicknesslist">湿膜厚度μm测量列表</th>
                 <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                 <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
                 <th field="operation_time" align="center" width="150" class="i18n1" name="operationtime" data-options="formatter:formatterdate">操作时间</th>
@@ -370,14 +381,14 @@
             </table>
 
             <table class="ht-table">
-                <tr>
-                    <td class="i18n1" name="dryfilmthicknessmax">最大干膜厚度</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="dry_film_thickness_max" value=""/></td>
-                    <td></td>
-                    <td class="i18n1" name="dryfilmthicknessmin">最小干膜厚度</td>
-                    <td><input class="easyui-numberbox"  data-options="min:0,precision:2" type="text" name="dry_film_thickness_min" value=""/></td>
-                    <td></td>
-                </tr>
+                <%--<tr>--%>
+                    <%--<td class="i18n1" name="dryfilmthicknessmax">最大干膜厚度</td>--%>
+                    <%--<td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="dry_film_thickness_max" value=""/></td>--%>
+                    <%--<td></td>--%>
+                    <%--<td class="i18n1" name="dryfilmthicknessmin">最小干膜厚度</td>--%>
+                    <%--<td><input class="easyui-numberbox"  data-options="min:0,precision:2" type="text" name="dry_film_thickness_min" value=""/></td>--%>
+                    <%--<td></td>--%>
+                <%--</tr>--%>
                 <tr>
                     <td width="16%" class="i18n1" name="holidaytestervolts">电火花检测电压</td>
                     <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="holiday_tester_volts" value=""/></td>
@@ -421,6 +432,12 @@
                         <input type="hidden" name="is_sample" value="0">
                     </td>
                 </tr>
+                    <tr>
+                        <td width="16%" class="i18n1" name="wefilmthicknesslist">湿膜厚度μm测量列表</td>
+                        <td colspan="5">
+                            <input class="easyui-textbox"  type="text" name="wet_film_thickness_list" value=""/>
+                        </td>
+                    </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="result">结论</td>
                     <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
