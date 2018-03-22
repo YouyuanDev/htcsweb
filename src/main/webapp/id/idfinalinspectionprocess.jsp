@@ -101,6 +101,28 @@
                     var imgList=odpictures.split(';');
                     createPictureModel(basePath,imgList);
                 }
+                //异步获取标准并匹配
+                $.ajax({
+                    url:'/AcceptanceCriteriaOperation/getIDAcceptanceCriteriaByContractNo.action',
+                    dataType:'json',
+                    data:{'contract_no':row.contract_no},
+                    success:function (data) {
+                        var $obj1=$("input[name='dry_film_thickness_list']");
+                        $obj1.siblings().css("background-color","#FFFFFF");
+                        if(data!=null){
+                            var res1=changeComma($obj1.val());
+                            var res1_1=res1.split(',');
+                            for(var i=0;i<res1_1.length;i++){
+                                if(res1_1[i]!=""&&res1_1[i].length>0){
+                                    if(!((res1_1[i]>=data.dry_film_thickness_min)&&(res1_1[i]<=data.dry_film_thickness_max)))
+                                        $obj1.siblings().css("background-color","#F9A6A6");
+                                }
+                            }
+                        }
+                    },error:function () {
+
+                    }
+                });
                 url="/IdFinalInOperation/saveIdFinalInProcess.action?id="+row.id;
 
             }else{
@@ -131,6 +153,7 @@
                         hlAlertFour("请输入操作时间");
                         return false;
                     }
+                    $("input[name='dry_film_thickness_list']").val(changeComma(arg1));
                 },
                 success: function(result){
                     var result = eval('('+result+')');

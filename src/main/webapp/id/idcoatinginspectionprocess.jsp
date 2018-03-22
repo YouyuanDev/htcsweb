@@ -183,6 +183,7 @@
                             return false;
                         }
                     }
+                    $("input[name='wet_film_thickness_list']").val(changeComma(arg1));
                     setParams($("input[name='cutback']"));
                     setParams($("input[name='holiday_tester_volts']"));
                     setParams($("input[name='holiday_test_results']"));
@@ -432,7 +433,7 @@
                 <tr>
                     <td width="16%" class="i18n1" name="surfacecondition1">表面质量</td>
                     <td colspan="2">
-                        <div id="combobox1" class="mini-combobox" style="width:185px;"  popupWidth="185" textField="text" valueField="text"
+                        <div id="combobox1" class="mini-combobox hl-combox-miniui" style="width:185px;"  popupWidth="185" textField="text" valueField="text"
                              url="../data/surfacequality.txt" name="surface_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick" >
                             <div property="columns">
                                 <div header="缺陷类型" field="text"></div>
@@ -637,4 +638,7 @@
         obj.setValue("");
     }
     hlLanguage("../i18n/");
+    $(function () {
+        $(".hl-combox-miniui .mini-buttonedit-input").css("width","170px");
+    });
 </script>
