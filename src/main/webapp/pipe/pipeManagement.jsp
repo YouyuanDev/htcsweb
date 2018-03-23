@@ -274,7 +274,8 @@
                 <th field="p_length" align="center" width="100" class="i18n1" name="p_length">钢管长度</th>
                 <th field="weight" align="center" width="100" class="i18n1" name="weight">钢管米重</th>
                 <th field="status" align="center" width="100" class="i18n1" name="status">状态</th>
-
+                <th field="storage_stack" align="center" width="100" class="i18n1" name="storagestack">垛位号</th>
+                <th field="stack_level" align="center" width="100" class="i18n1" name="stacklevel">层数</th>
             </tr>
             </thead>
         </table>
@@ -367,6 +368,50 @@
 
                 </tr>
                 <tr>
+                    <td class="i18n1" name="storagestack" width="16%">垛位号</td>
+                    <td   width="33%">
+                        <select class="easyui-combobox" data-options="editable:false" name="storage_stack" style="width:200px;">
+                            <option value="stack0">光管垛</option>
+                            <option value="stack1">1号垛</option>
+                            <option value="stack2">2号垛</option>
+                            <option value="stack3">3号垛</option>
+                            <option value="stack4">4号垛</option>
+                            <option value="stack5">5号垛</option>
+                            <option value="stack6">6号垛</option>
+                            <option value="stack7">7号垛</option>
+                            <option value="stack8">8号垛</option>
+                            <option value="stack9">9号垛</option>
+                            <option value="stack10">10号垛</option>
+                            <option value="stack11">11号垛</option>
+                            <option value="stack12">12号垛</option>
+                            <option value="stack13">13号垛</option>
+                            <option value="stack14">14号垛</option>
+                            <option value="stack15">15号垛</option>
+                            <option value="stack16">16号垛</option>
+                            <option value="stack17">17号垛</option>
+                            <option value="stack18">18号垛</option>
+                            <option value="stack19">19号垛</option>
+                            <option value="stack20">20号垛</option>
+                        </select>
+                    </td>
+                    <td class="i18n1" name="stacklevel" width="16%">层号</td>
+                    <td   width="33%">
+                        <select class="easyui-combobox" data-options="editable:false" name="stack_level" style="width:200px;">
+                            <option value="l1">1层</option>
+                            <option value="l2">2层</option>
+                            <option value="l3">3层</option>
+                            <option value="l4">4层</option>
+                            <option value="l5">5层</option>
+                            <option value="l6">6层</option>
+                            <option value="l7">7层</option>
+                            <option value="l8">8层</option>
+                            <option value="l9">9层</option>
+                            <option value="l10">10层</option>
+                        </select>
+                    </td>
+
+                </tr>
+                <tr>
                     <td class="i18n1" name="status" width="16%">状态</td>
                     <td   width="33%"><input id="status" class="easyui-combobox" type="text" name="status"  data-options=
                             "url:'/pipeinfo/getAllPipeStatus.action',
@@ -375,6 +420,11 @@
 					        editable:false,
 					        textField:'text',
 					        panelHeight:'auto'"/></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
                 </tr>
 
             </table>

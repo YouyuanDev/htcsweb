@@ -17,6 +17,9 @@
         <result property="pipe_making_lot_no" column="pipe_making_lot_no"></result>
         <result property="status" column="status"></result>
         <result property="heat_no" column="heat_no"></result>
+        <result property="storage_stack" column="storage_stack"></result>
+        <result property="stack_level" column="stack_level"></result>
+
     </resultMap>
 
     <select id="getPipeNumbers" resultType="com.htcsweb.entity.PipeBasicInfo">
@@ -262,12 +265,12 @@
     </select>
 
     <update id="updatePipeBasicInfo" parameterType="com.htcsweb.entity.PipeBasicInfo">
-        UPDATE pipe_basic_info set contract_no=#{contract_no},pipe_no=#{pipe_no},grade=#{grade},od=#{od},wt=#{wt},p_length=#{p_length}, weight=#{weight},pipe_making_lot_no=#{pipe_making_lot_no},status=#{status}, heat_no=#{heat_no} WHERE id=#{id}
+        UPDATE pipe_basic_info set contract_no=#{contract_no},pipe_no=#{pipe_no},grade=#{grade},od=#{od},wt=#{wt},p_length=#{p_length}, weight=#{weight},pipe_making_lot_no=#{pipe_making_lot_no},status=#{status}, heat_no=#{heat_no},storage_stack=#{storage_stack},stack_level=#{stack_level} WHERE id=#{id}
     </update>
 
     <insert id="addPipeBasicInfo" parameterType="com.htcsweb.entity.PipeBasicInfo">
-        INSERT INTO pipe_basic_info(contract_no,pipe_no,grade,od,wt,p_length,weight,pipe_making_lot_no,status,heat_no)
-        VALUES (#{contract_no},#{pipe_no},#{grade},#{od},#{wt},#{p_length},#{weight},#{pipe_making_lot_no},#{status},#{heat_no})
+        INSERT INTO pipe_basic_info(contract_no,pipe_no,grade,od,wt,p_length,weight,pipe_making_lot_no,status,heat_no,storage_stack,stack_level)
+        VALUES (#{contract_no},#{pipe_no},#{grade},#{od},#{wt},#{p_length},#{weight},#{pipe_making_lot_no},#{status},#{heat_no},#{storage_stack},#{stack_level})
     </insert>
 
     <delete id="delPipeBasicInfo">
