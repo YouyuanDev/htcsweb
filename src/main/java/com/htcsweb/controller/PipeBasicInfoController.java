@@ -330,10 +330,10 @@ public class PipeBasicInfoController {
 
     //内访成品管入库
     @RequestMapping("/idproductstockin")
-    public String idproductstockin(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
+    public String idproductstockin(@RequestParam(value = "hlparam")String hlparam,@RequestParam(value = "storage_stack")String storage_stack,@RequestParam(value = "stack_level")String stack_level,HttpServletResponse response)throws Exception{
         String[]idArr=hlparam.split(",");
         int resTotal=0;
-        resTotal=pipeBasicInfoDao.idProductStockin(idArr);
+        resTotal=pipeBasicInfoDao.idProductStockin(idArr,storage_stack,stack_level);
         JSONObject json=new JSONObject();
         StringBuilder sbmessage = new StringBuilder();
         sbmessage.append("总共");
