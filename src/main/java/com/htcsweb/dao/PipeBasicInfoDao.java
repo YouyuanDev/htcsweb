@@ -30,7 +30,7 @@ public interface PipeBasicInfoDao {
     public int getCountODInspectedPipeInfoByLike(@Param("project_no") String project_no,  @Param("contract_no")String contract_no,@Param("pipe_no")String pipe_no);
     public int getCountIDInspectedPipeInfoByLike(@Param("project_no") String project_no,  @Param("contract_no")String contract_no,@Param("pipe_no")String pipe_no);
 
-    public int odProductStockin(String[]arrId);
+    public int odProductStockin(String[]arrId,@Param("storage_stack") String storage_stack,@Param("stack_level")String stack_level);
     public int idProductStockin(String[]arrId);
 
     public int SetToODBare(String[]arrId);

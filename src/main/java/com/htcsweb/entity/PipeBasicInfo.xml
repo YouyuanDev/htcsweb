@@ -281,7 +281,7 @@
     </delete>
 
     <update id="odProductStockin" parameterType="com.htcsweb.entity.PipeBasicInfo">
-        UPDATE pipe_basic_info set status='odstockin' WHERE  status='od6' AND
+        UPDATE pipe_basic_info set status='odstockin',storage_stack=#{storage_stack}, stack_level=#{stack_level} WHERE  status='od6' AND
         <foreach collection="array" item="item" open="id in (" separator="," close=")">
             #{item}
         </foreach>
