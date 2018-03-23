@@ -45,6 +45,11 @@
         });
 
         function openPipeStockInPage(){
+            var row = $('#pipeDatagrids').datagrid('getSelections');
+            if(row.length==0){
+                $.messager.alert('Warning','请选择要入外防成品库的钢管!');
+                return;
+            }
             $('#hlOdStockinDialog').dialog('open').dialog('setTitle','修改');
         }
 
@@ -62,9 +67,7 @@
                 var idArrs=idArr.join(',');
                 var storage_stack=$('#storage_stack').val();
                 var stack_level=$('#stack_level').val();
-                alert(idArrs)
-                alert(storage_stack);
-                alert(stack_level);
+
                 $.messager.confirm('系统提示',"您确定要将这<font color=red>"+idArr.length+ "</font>根外防成品管入库吗？",function (r) {
                     if(r){
                         $.post(
@@ -139,7 +142,7 @@
 </div>
 
 <div id="hlOdStockinDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;height:auto;">
-    <form id="odStencilProForm" method="post">
+    <form id="odStockinForm" method="post">
 
         <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
             <legend>入库信息</legend>
