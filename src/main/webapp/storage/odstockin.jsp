@@ -69,7 +69,7 @@
                     if(r){
                         $.post(
                             "/pipeinfo/odproductstockin.action",
-                            {'hlparam':idArrs,'storage_stack':storage_stack,'stack_level':stack_level},function (data) {
+                            {hlparam:idArrs,storage_stack:storage_stack,stack_level:stack_level},function (data) {
                                 if(data.success){
                                     $("#pipeDatagrids").datagrid("reload");
                                     $('#hlOdStockinDialog').dialog('close');
