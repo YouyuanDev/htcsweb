@@ -45,6 +45,11 @@
         });
 
         function openPipeStockInPage(){
+            var row = $('#pipeDatagrids').datagrid('getSelections');
+            if(row.length==0){
+                $.messager.alert('Warning','请选择要入外防成品库的钢管!');
+                return;
+            }
             $('#hlOdStockinDialog').dialog('open').dialog('setTitle','修改');
         }
 

@@ -39,12 +39,17 @@
         }
         $(function () {
 
-            //$('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
+            $('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
 
         });
 
 
-        function openPipeStockInPage(){
+        function openPipeIDStockInPage(){
+            var row = $('#pipeDatagrids').datagrid('getSelections');
+            if(row.length==0){
+                $.messager.alert('Warning','请选择要入内防成品库的钢管!');
+                return;
+            }
             $('#hlIdStockinDialog').dialog('open').dialog('setTitle','修改');
         }
 
@@ -130,7 +135,7 @@
 
     <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchPipe()">Search</a>
     <div style="float:right">
-        <a href="#" id="IDPipeStockInLinkBtn" class="easyui-linkbutton i18n1" name="idstockin"  onclick="openPipeStockInPage()">内防成品管入库</a>
+        <a href="#" id="IDPipeStockInLinkBtn" class="easyui-linkbutton i18n1" name="idstockin" data-options="iconCls:'icon-edit',plain:true" onclick="openPipeIDStockInPage()">内防成品管入库</a>
 
     </div>
 </div>
