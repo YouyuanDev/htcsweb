@@ -70,12 +70,13 @@ public class GenerateExcelToPDFUtil {
     }
 
     //获取指定内容与字体的单元格
-    private static PdfPCell getPDFCell(String string, Font font)
+    private static PdfPCell getPDFCell(String string, Font font,int textHorizontalAlign)
     {
         //创建单元格对象，将内容与字体放入段落中作为单元格内容
         PdfPCell cell=new PdfPCell(new Paragraph(string,font));
 
-        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        cell.setHorizontalAlignment(textHorizontalAlign);
+        //cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
         //设置最小单元格高度
@@ -173,9 +174,19 @@ public class GenerateExcelToPDFUtil {
     }
 
 
+    private static void setNoBorder(PdfPCell cell){
+        cell.disableBorderSide(1); // 隐藏单元格周边的上边框
+        cell.disableBorderSide(2);// 隐藏单元格周边的下边框
+        cell.disableBorderSide(4); // 隐藏单元格周边的左边框
+        cell.disableBorderSide(8);// 隐藏单元格周边的右框
+    }
+
+
     //根据excel名称，转成PDF
     private static boolean ExcelToPDFRecord(String excelFullName,String pdfFullName,String imagePath){
 
+
+        float excelTableTotalWidth=800;
         //excelFullName="/Users/kurt/Documents/pipe_coating_surface_inspection_record_template.xls";
         File excelfile = new File(excelFullName);
         StringBuffer sb = new StringBuffer();
@@ -191,7 +202,7 @@ public class GenerateExcelToPDFUtil {
             //BufferedImage logoimg = ImageIO.read(new File(imagePath));
             Image image = Image.getInstance(imagePath);
             //image.setWidthPercentage(0.6f);
-            Document document = new Document(new RectangleReadOnly(PageSize.A4.getHeight(),PageSize.A4.getWidth()),0,0,50,0);
+            Document document = new Document(new RectangleReadOnly(PageSize.A4.getHeight(),PageSize.A4.getWidth()),0,0,0,0);
            // System.out.println("PageSize.A4.getWidth()="+PageSize.A4.getWidth());//595
             //System.out.println("PageSize.A4.getHeight()="+PageSize.A4.getHeight());//842
 
@@ -206,6 +217,8 @@ public class GenerateExcelToPDFUtil {
         BaseFont bf=BaseFont.createFont("/Users/kurt/Documents/simhei.ttf", BaseFont.IDENTITY_H, false);
         //创建Font对象，将基础字体对象，字体大小，字体风格
         Font font=new Font(bf,10,Font.NORMAL);
+        Font headfont1=new Font(bf,14,Font.BOLD);
+        Font headfont2=new Font(bf,10,Font.BOLD);
         int rowNum = 0;
         int colNum = 0;
 
@@ -264,6 +277,13 @@ public class GenerateExcelToPDFUtil {
                         if(i==0&&j==0){
                             table.addCell(image);
                         }
+                        if(i==3&&j==1){//image设置span
+                            table.getRow(0).getCells()[0].setRowspan(3);
+                            table.getRow(0).getCells()[0].setColspan(3);
+                            setNoBorder(table.getRow(0).getCells()[0]);
+                        }
+
+
 
                         boolean flag = true;
                         Cell cell=sheet.getCell(j, i);
@@ -278,25 +298,55 @@ public class GenerateExcelToPDFUtil {
                                 rowNum = range.getBottomRight().getRow() - range.getTopLeft().getRow()+1;
                                 colNum = range.getBottomRight().getColumn() - range.getTopLeft().getColumn()+1;
                                 if(rowNum > colNum){
-                                    cell1 = mergeRow(str, font, rowNum);
+                                    if(i==1||i==3&&j!=10)//头部公司中文名称字体及报告名称
+                                        cell1 = mergeRow(str, headfont1, rowNum);
+                                    else if(i==2)//设置公司英文名称
+                                        cell1 = mergeRow(str, headfont2, rowNum);
+                                    else//设置表格其他单元
+                                        cell1 = mergeRow(str, font, rowNum);
                                     cell1.setColspan(colNum);
-                                    table.addCell(cell1);
                                 }else {
-                                    cell1 = mergeCol(str, font, colNum);
+                                    if(i==1||i==3&&j!=10)//设置公司中文名称字体及报告名称
+                                        cell1 = mergeCol(str, headfont1, colNum);
+                                    else if(i==2)//设置公司英文名称
+                                        cell1 = mergeCol(str, headfont2, colNum);
+                                    else//设置表格其他单元
+                                        cell1 = mergeCol(str, font, colNum);
                                     cell1.setRowspan(rowNum);
-                                    table.addCell(cell1);
                                 }
+
+                                if(i<=3) {//头部文字排版
+                                    cell1.setHorizontalAlignment(Element.ALIGN_RIGHT);
+                                }
+                                if(i<=3||i>=21){//头部及尾部 取消边框
+                                    setNoBorder(cell1);
+                                }
+                                table.addCell(cell1);
+
                                 //System.out.println(num1 + "  " + num2);
                                 flag = false;
                                 break;
                             }
                         }
                         if(flag){
-                            table.addCell(getPDFCell(str,font));
+                            int horizontalAlign=Element.ALIGN_CENTER;
+                            if(i<=3) {//头部两行文字
+                                horizontalAlign=Element.ALIGN_RIGHT;
+                                cell1 = getPDFCell(str, headfont1, horizontalAlign);
+                            }else {
+                                cell1 = getPDFCell(str, font, horizontalAlign);
+                            }
+                            if(i<=3||i>=21){//头部及尾部 取消边框
+                                setNoBorder(cell1);
+                            }
+
+                            table.addCell(cell1);
                         }
                     }
                 }
-
+                //设置表格总宽度
+                table.setTotalWidth(excelTableTotalWidth);
+                table.setLockedWidth(true);
 
                 //System.out.println(sb);
             }finally{
