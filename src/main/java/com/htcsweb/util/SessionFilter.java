@@ -50,6 +50,8 @@ public class SessionFilter extends OncePerRequestFilter{
             "getFunctionByLike",
             "getFunctionByNoName",
             "getAllRoleByLike",
+            "htmlToPDF",
+            "ceshi.jsp",
             "pipe_coating_surface_inspection_record_template"
 
     }; // 不过滤的uri
