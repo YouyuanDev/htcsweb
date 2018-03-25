@@ -52,7 +52,8 @@ public class SessionFilter extends OncePerRequestFilter{
             "getAllRoleByLike",
             "htmlToPDF",
             "ceshi.jsp",
-            "pipe_coating_surface_inspection_record_template"
+            "pipe_coating_surface_inspection_record_template",
+            "exportBlastRecordToPDF"
 
     }; // 不过滤的uri
 

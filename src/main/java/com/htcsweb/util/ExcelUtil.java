@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class ExcelUtil {
-
+    //钢管数据导入专用
 
     public static int PIPE_NO_INDEX=1;
     public static int CONTRACT_NO_INDEX=2;

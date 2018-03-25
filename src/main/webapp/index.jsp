@@ -35,7 +35,8 @@
                 var htmlStr=$("iframe").attr("src");
                 $.ajax({
                     type:'post',
-                    url:'/CommonOperation/htmlToPDF.action',
+                    //url:'/CommonOperation/htmlToPDF.action',
+                    url:'/InspectionRecordPDFOperation/exportBlastRecordToPDF.action',
                     dataType:'json',
                     data:{"htmlStr":htmlStr},
                     success:function (data) {
@@ -697,22 +698,6 @@
     </div>
 </div>
 
-
-<%
-
-    //把用户数据保存在session域对象中
-    HashMap<String,Object> functionMap=(HashMap<String,Object>)request.getSession().getAttribute("userfunctionMap");
-    String odblastprocessDisplay="display:none;";
-    String odblastinspectionDisplay="display:none;";
-    if(functionMap!=null&&functionMap.containsKey("odblastprocess")){
-        odblastprocessDisplay="";
-    }
-    else if(functionMap!=null&&functionMap.containsKey("odblastinspectionprocess")){
-        odblastinspectionDisplay="";
-    }
-
-
-%>
 
 
 <div data-options="region:'west'" title="导航菜单" class="i18n" name="navigation" style="width:200px;">
