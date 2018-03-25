@@ -28,10 +28,19 @@ public class GenerateExcelToPDFUtil {
 
     public static void main(String[] args) {
             String excelTemplateFullName = "/Users/kurt/Documents/pipe_coating_surface_inspection_record_template.xls";
-            String newexcelfile=GenerateExcelToPDFUtil.FillExcelTemplate(excelTemplateFullName,null);
-            GenerateExcelToPDFUtil.ExcelToPDFRecord(newexcelfile,"/Users/kurt/Documents/testPDF.pdf");
+            //String newexcelfile=GenerateExcelToPDFUtil.FillExcelTemplate(excelTemplateFullName,null);
+            //GenerateExcelToPDFUtil.ExcelToPDFRecord(newexcelfile,"/Users/kurt/Documents/testPDF.pdf","/Users/kurt/Documents/image002.jpg");
+        GenerateExcelToPDFUtil.PDFAutoMation(excelTemplateFullName,null,"/Users/kurt/Documents/testPDF.pdf","/Users/kurt/Documents/image002.jpg");
+    }
+
+    //PDF生成方法入口
+    public static void PDFAutoMation(String excelTemplateFullName,ArrayList<Label> dataList,String pdfFullName,String imagePath) {
+
+        String newexcelfile=GenerateExcelToPDFUtil.FillExcelTemplate(excelTemplateFullName,dataList);
+        GenerateExcelToPDFUtil.ExcelToPDFRecord(newexcelfile,pdfFullName,imagePath);
 
     }
+
 
     //合并行的静态函数
     private static PdfPCell mergeRow(String str,Font font,int i) {
@@ -124,7 +133,7 @@ public class GenerateExcelToPDFUtil {
 
 
     //根据模版名字，将数据填入相应excel模版中
-    public static String FillExcelTemplate(String excelTemplateFullName,ArrayList<Label> dataList) {
+    private static String FillExcelTemplate(String excelTemplateFullName,ArrayList<Label> dataList) {
 
         //excelTemplateFullName = "/Users/kurt/Documents/pipe_coating_surface_inspection_record_template.xls";
         //复制模版
@@ -165,13 +174,13 @@ public class GenerateExcelToPDFUtil {
 
 
     //根据excel名称，转成PDF
-    public static boolean ExcelToPDFRecord(String excelFullName,String pdfFullName){
+    private static boolean ExcelToPDFRecord(String excelFullName,String pdfFullName,String imagePath){
 
         //excelFullName="/Users/kurt/Documents/pipe_coating_surface_inspection_record_template.xls";
         File excelfile = new File(excelFullName);
         StringBuffer sb = new StringBuffer();
 
-        String imagePath = "/Users/kurt/Documents/image002.jpg";
+        //imagePath = "/Users/kurt/Documents/image002.jpg";
 
         pdfFullName=pdfFullName.substring(0,pdfFullName.lastIndexOf('.'))+ String.valueOf(System.currentTimeMillis()+".pdf");
 
@@ -181,7 +190,7 @@ public class GenerateExcelToPDFUtil {
         try {
             //BufferedImage logoimg = ImageIO.read(new File(imagePath));
             Image image = Image.getInstance(imagePath);
-            image.setWidthPercentage(0.2f);
+            //image.setWidthPercentage(0.6f);
             Document document = new Document(new RectangleReadOnly(PageSize.A4.getHeight(),PageSize.A4.getWidth()),0,0,50,0);
            // System.out.println("PageSize.A4.getWidth()="+PageSize.A4.getWidth());//595
             //System.out.println("PageSize.A4.getHeight()="+PageSize.A4.getHeight());//842
@@ -202,13 +211,11 @@ public class GenerateExcelToPDFUtil {
 
             Workbook book = Workbook.getWorkbook(excelfile);
 
-
             try{
-                //支持多sheet上传
-                    Sheet sheet = book.getSheet(0);
-
-                    int columnCount=sheet.getColumns();
+                Sheet sheet = book.getSheet(0);
+                int columnCount=sheet.getColumns();
                 table=new PdfPTable(columnCount);
+
                 //下面是找出表格中的空行和空列
                 List<Integer> nullCol = new ArrayList<>();
                 List<Integer> nullRow = new ArrayList<>();
@@ -246,12 +253,18 @@ public class GenerateExcelToPDFUtil {
                 PdfPCell cell1=new PdfPCell();
                 for(int i=0;i<sheet.getRows();i++){
                     if(nullRow.contains(i)){    //如果这一行是空行，这跳过这一行
-                        continue;
+                        //continue;
                     }
                     for(int j=0;j<sheet.getColumns();j++){
                         if(nullCol.contains(j)){    //如果这一列是空列，则跳过这一列
-                            continue;
+                           // continue;
                         }
+
+                        //设置logo
+                        if(i==0&&j==0){
+                            table.addCell(image);
+                        }
+
                         boolean flag = true;
                         Cell cell=sheet.getCell(j, i);
                         String str = cell.getContents();
@@ -290,10 +303,10 @@ public class GenerateExcelToPDFUtil {
                 if(book != null){
                     book.close();
                     document.open();
-                    document.add(image);
                     document.add(table);
                     document.close();
                     writer.close();
+                    System.out.println("PDF生成！");
                     return true;
                 }
             }
