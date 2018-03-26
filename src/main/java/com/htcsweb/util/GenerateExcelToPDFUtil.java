@@ -1,32 +1,33 @@
 package com.htcsweb.util;
+
 import com.itextpdf.text.*;
-import com.itextpdf.text.Font;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import javafx.application.Application;
 import jxl.Cell;
 import jxl.Range;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
-import jxl.write.*;
-import jxl.write.biff.RowsExceededException;
+import jxl.write.Label;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
 
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.channels.FileChannel;
-import java.util.Date;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class GenerateExcelToPDFUtil {
 
     private static String  newExcelFileName=null;
+
+    private static int tableTopIndex=4;
+    private static int tableBottomIndex=20;
+    private static int tableLeftIndex=0;
+    private static int tableRightIndex=12;
 
     public static void main(String[] args) {
             String excelTemplateFullName = "/Users/kurt/Documents/od_blast_record_template.xls";
@@ -184,17 +185,17 @@ public class GenerateExcelToPDFUtil {
 
 
     private static void setOutsideBorderWidth(PdfPCell cell,int i,int j){
-        if(i==3){//设置head bottom的边框宽度
+        if(i==tableTopIndex){//设置Table Top的边框宽度
+            cell.setBorderWidthTop(2);
+        }
+        if(i==tableBottomIndex){//设置foot Bottom的边框宽度
             cell.setBorderWidthBottom(2);
         }
-        if(i==20){//设置foot Bottom的边框宽度
-            cell.setBorderWidthBottom(2);
-        }
-        if(j==0&&(i>3&&i<=20)){//设置左侧外边框
+        if(j==tableLeftIndex&&(i>=tableTopIndex&&i<=tableBottomIndex)){//设置左侧外边框
             cell.setBorderWidthLeft(2);
         }
-        if(i>3&&i<=20){//设置右侧外边框
-            if(j==12||(cell.getColspan()+j-1)==12)
+        if(i>=tableTopIndex&&i<=tableBottomIndex){//设置右侧外边框
+            if(j==tableRightIndex||(cell.getColspan()+j-1)==tableRightIndex)
                 cell.setBorderWidthRight(2);
         }
     }
@@ -322,7 +323,7 @@ public class GenerateExcelToPDFUtil {
                                 rowNum = range.getBottomRight().getRow() - range.getTopLeft().getRow()+1;
                                 colNum = range.getBottomRight().getColumn() - range.getTopLeft().getColumn()+1;
                                 if(rowNum > colNum){
-                                    if(i==1||i==3&&j!=10)//头部公司中文名称字体及报告名称
+                                    if(i==1||i==tableTopIndex-1&&j!=10)//头部公司中文名称字体及报告名称
                                         cell1 = mergeRow(str, headfont1, rowNum);
                                     else if(i==2)//设置公司英文名称
                                         cell1 = mergeRow(str, headfont2, rowNum);
@@ -330,7 +331,7 @@ public class GenerateExcelToPDFUtil {
                                         cell1 = mergeRow(str, font, rowNum);
                                     cell1.setColspan(colNum);
                                 }else {
-                                    if(i==1||i==3&&j!=10)//设置公司中文名称字体及报告名称
+                                    if(i==1||i==tableTopIndex-1&&j!=10)//设置公司中文名称字体及报告名称
                                         cell1 = mergeCol(str, headfont1, colNum);
                                     else if(i==2)//设置公司英文名称
                                         cell1 = mergeCol(str, headfont2, colNum);
@@ -339,10 +340,10 @@ public class GenerateExcelToPDFUtil {
                                     cell1.setRowspan(rowNum);
                                 }
 
-                                if(i<=3) {//头部文字排版
+                                if(i<tableTopIndex) {//头部文字排版
                                     cell1.setHorizontalAlignment(Element.ALIGN_RIGHT);
                                 }
-                                if(i<=3||i>=21){//头部及尾部 取消边框
+                                if(i<tableTopIndex||i>tableBottomIndex){//头部及尾部 取消边框
                                     setNoBorder(cell1);
                                 }
 
@@ -359,13 +360,13 @@ public class GenerateExcelToPDFUtil {
                         }
                         if(flag){
                             int horizontalAlign=Element.ALIGN_CENTER;
-                            if(i<=3) {//头部两行文字
+                            if(i<tableTopIndex) {//头部两行文字
                                 horizontalAlign=Element.ALIGN_RIGHT;
                                 cell1 = getPDFCell(str, headfont1, horizontalAlign);
                             }else {
                                 cell1 = getPDFCell(str, font, horizontalAlign);
                             }
-                            if(i<=3||i>=21){//头部及尾部 取消边框
+                            if(i<tableTopIndex||i>tableBottomIndex){//头部及尾部 取消边框
                                 setNoBorder(cell1);
                             }
                             setOutsideBorderWidth(cell1,i,j);
