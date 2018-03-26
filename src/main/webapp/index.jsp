@@ -36,7 +36,7 @@
                 $.ajax({
                     type:'post',
                     //url:'/CommonOperation/htmlToPDF.action',
-                    url:'/InspectionRecordPDFOperation/exportBlastRecordToPDF.action',
+                    url:'/InspectionRecordPDFOperation/getOdBlastRecord.action',
                     dataType:'json',
                     data:{"htmlStr":htmlStr},
                     success:function (data) {

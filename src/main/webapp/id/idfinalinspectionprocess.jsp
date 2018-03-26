@@ -109,13 +109,23 @@
                     success:function (data) {
                         var $obj1=$("input[name='dry_film_thickness_list']");
                         $obj1.siblings().css("background-color","#FFFFFF");
+                        var $obj7=$("input[name='cutback_length']");
+                        $obj7.siblings().css("background-color","#FFFFFF");
                         if(data!=null){
                             var res1=changeComma($obj1.val());
                             var res1_1=res1.split(',');
+                            var res7=changeComma($obj7.val());
+                            var res7_1=res7.split(',');
                             for(var i=0;i<res1_1.length;i++){
                                 if(res1_1[i]!=""&&res1_1[i].length>0){
                                     if(!((res1_1[i]>=data.dry_film_thickness_min)&&(res1_1[i]<=data.dry_film_thickness_max)))
                                         $obj1.siblings().css("background-color","#F9A6A6");
+                                }
+                            }
+                            for(var i=0;i<res7_1.length;i++){
+                                if(res7_1[i]!=""&&res7_1[i].length>0){
+                                    if(!((res7_1[i]>=data.cutback_min)&&(res7_1[i]<=data.cutback_max)))
+                                        $obj7.siblings().css("background-color","#F9A6A6");
                                 }
                             }
                         }
@@ -149,11 +159,19 @@
                             return false;
                         }
                     }
+                    var arg2=$("input[name='cutback_length']").val().trim();
+                    if(arg2!=""){
+                        if(!thicknessIsAllow(arg2)){
+                            hlAlertFour("预留端列表不合法!");
+                            return false;
+                        }
+                    }
                     if($("input[name='idFinalInprotime']").val()==""){
                         hlAlertFour("请输入操作时间");
                         return false;
                     }
                     $("input[name='dry_film_thickness_list']").val(changeComma(arg1));
+                    $("input[name='cutback_length']").val(changeComma(arg2));
                 },
                 success: function(result){
                     var result = eval('('+result+')');
@@ -217,6 +235,8 @@
                 <th field="weight" align="center" width="50" class="i18n1" name="weight">重量</th>
                 <th field="heat_no" align="center" hidden="true" width="50" class="i18n1" name="heat_no">炉号</th>
                 <th field="operator_no" align="center" width="100" class="i18n1" name="operatorno">操作工编号</th>
+                <th field="stencil_verification" align="center" width="100" class="i18n1" name="stencilverification">预留端长度 2个值(,分隔)</th>
+                <th field="inspection_result" align="center" width="80" class="i18n1" name="inspectionresult">外涂层质检结果</th>
 
                 <th field="od_inspection_result" align="center" width="80" class="i18n1" name="odinspectionresult">外涂层质检结果</th>
                 <th field="id_inspection_result" align="center" width="80" class="i18n1" name="idinspectionresult">内涂层质检结果</th>
@@ -342,6 +362,18 @@
             </table>
 
             <table class="ht-table">
+                <tr>
+                    <td class="i18n1" width="20%" name="cutbacklength">预留端长度2个值(,分隔)</td>
+                    <td colspan="2"><input class="easyui-textbox"  type="text" name="cutback_length" value=""/></td>
+                    <td class="i18n1" width="20%" name="stencilverification">外喷标检验</td>
+                    <td colspan="2">
+                        <select id="sv" class="easyui-combobox" data-options="editable:false" name="stencil_verification" style="width:200px;">
+                            <option value="0" selected="selected">未检测</option>
+                            <option value="1">合格</option>
+                            <option value="2">不合格</option>
+                        </select>
+                    </td>
+                </tr>
                 <tr>
                     <td class="i18n1" name="odinspectionresult">外涂层质检结果</td>
                     <td colspan="2">

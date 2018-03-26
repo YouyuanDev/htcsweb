@@ -26,6 +26,7 @@ import java.util.ArrayList;
 
 public class GenerateExcelToPDFUtil {
 
+    private static String  newExcelFileName=null;
 
     public static void main(String[] args) {
             String excelTemplateFullName = "/Users/kurt/Documents/pipe_coating_surface_inspection_record_template.xls";
@@ -35,10 +36,10 @@ public class GenerateExcelToPDFUtil {
     }
 
     //PDF生成方法入口
-    public static void PDFAutoMation(String excelTemplateFullName,ArrayList<Label> dataList,String pdfFullName,String imagePath,String fontPath) {
+    public static void PDFAutoMation(String excelTemplateFullName,ArrayList<Label> dataList,String pdfFullName,String imagePath,String fontPath,String basePath) {
 
         String newexcelfile=GenerateExcelToPDFUtil.FillExcelTemplate(excelTemplateFullName,dataList);
-        GenerateExcelToPDFUtil.ExcelToPDFRecord(newexcelfile,pdfFullName,imagePath,fontPath);
+        GenerateExcelToPDFUtil.ExcelToPDFRecord(newexcelfile,pdfFullName,imagePath,fontPath,basePath);
 
     }
 
@@ -136,13 +137,12 @@ public class GenerateExcelToPDFUtil {
 
     //根据模版名字，将数据填入相应excel模版中
     private static String FillExcelTemplate(String excelTemplateFullName,ArrayList<Label> dataList) {
-
+        //tempXlsFileName=String.valueOf(System.currentTimeMillis());
         //excelTemplateFullName = "/Users/kurt/Documents/pipe_coating_surface_inspection_record_template.xls";
         //复制模版
-        String newExcelFileName=excelTemplateFullName.substring(0,excelTemplateFullName.lastIndexOf('.'))+ String.valueOf(System.currentTimeMillis()+".xls");
+        //String newExcelFileName=excelTemplateFullName.substring(0,excelTemplateFullName.lastIndexOf('.'))+ String.valueOf(System.currentTimeMillis()+".xls");
+        newExcelFileName=excelTemplateFullName.substring(0,excelTemplateFullName.lastIndexOf('.'))+ String.valueOf(System.currentTimeMillis())+".xls";
         fileChannelCopy(excelTemplateFullName,newExcelFileName);
-
-
         try {
             Workbook wb = Workbook.getWorkbook(new File(newExcelFileName));
             WritableWorkbook wwb = Workbook.createWorkbook(new File(newExcelFileName), wb);
@@ -184,7 +184,7 @@ public class GenerateExcelToPDFUtil {
 
 
     //根据excel名称，转成PDF
-    private static boolean ExcelToPDFRecord(String excelFullName,String pdfFullName,String imagePath,String fontPath){
+    private static boolean ExcelToPDFRecord(String excelFullName,String pdfFullName,String imagePath,String fontPath,String basePath){
         File pdf=new File(pdfFullName);
         try{
             if(!pdf.exists()){
@@ -365,6 +365,14 @@ public class GenerateExcelToPDFUtil {
                     document.close();
                     writer.close();
                     System.out.println("PDF生成！");
+                    //删除临时生成的.xls文件
+                    if(newExcelFileName!=null){
+                        File file=new File(newExcelFileName);
+                        if(file.exists()){
+                            file.delete();
+                        }
+                    }
+
                     return true;
                 }
             }
