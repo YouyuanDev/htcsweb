@@ -23,13 +23,12 @@ public class OdBlastProcess {
     private  String remark;
     private  String result;
     private  String mill_no;
-
+    private  String marking;
 
     public OdBlastProcess() {
     }
 
-
-    public OdBlastProcess(int id, String pipe_no, Date operation_time, String operator_no, String surface_condition, float salt_contamination_before_blasting, float alkaline_dwell_time, float alkaline_concentration, float conductivity, float acid_wash_time, float acid_concentration, float blast_line_speed, float preheat_temp, String upload_files, String remark, String result, String mill_no) {
+    public OdBlastProcess(int id, String pipe_no, Date operation_time, String operator_no, String surface_condition, float salt_contamination_before_blasting, float alkaline_dwell_time, float alkaline_concentration, float conductivity, float acid_wash_time, float acid_concentration, float blast_line_speed, float preheat_temp, String upload_files, String remark, String result, String mill_no, String marking) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -47,14 +46,7 @@ public class OdBlastProcess {
         this.remark = remark;
         this.result = result;
         this.mill_no = mill_no;
-    }
-
-    public String getUpload_files() {
-        return upload_files;
-    }
-
-    public void setUpload_files(String upload_files) {
-        this.upload_files = upload_files;
+        this.marking = marking;
     }
 
     public int getId() {
@@ -161,6 +153,14 @@ public class OdBlastProcess {
         this.preheat_temp = preheat_temp;
     }
 
+    public String getUpload_files() {
+        return upload_files;
+    }
+
+    public void setUpload_files(String upload_files) {
+        this.upload_files = upload_files;
+    }
+
     public String getRemark() {
         return remark;
     }
@@ -183,5 +183,13 @@ public class OdBlastProcess {
 
     public void setMill_no(String mill_no) {
         this.mill_no = mill_no;
+    }
+
+    public String getMarking() {
+        return marking;
+    }
+
+    public void setMarking(String marking) {
+        this.marking = marking;
     }
 }
