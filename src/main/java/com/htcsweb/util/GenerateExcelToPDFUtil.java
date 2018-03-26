@@ -216,7 +216,7 @@ public class GenerateExcelToPDFUtil {
         StringBuffer sb = new StringBuffer();
 
         //imagePath = "/Users/kurt/Documents/image002.jpg";
-
+        //输出pdf文件名增加时间戳
         pdfFullName=pdfFullName.substring(0,pdfFullName.lastIndexOf('.'))+ String.valueOf(System.currentTimeMillis()+".pdf");
 
         //写入pdf
@@ -226,6 +226,7 @@ public class GenerateExcelToPDFUtil {
             //BufferedImage logoimg = ImageIO.read(new File(imagePath));
             Image image = Image.getInstance(imagePath);
             //image.setWidthPercentage(0.6f);
+            //设置PDf是landscape输出
             Document document = new Document(new RectangleReadOnly(PageSize.A4.getHeight(),PageSize.A4.getWidth()),0,0,0,0);
            // System.out.println("PageSize.A4.getWidth()="+PageSize.A4.getWidth());//595
             //System.out.println("PageSize.A4.getHeight()="+PageSize.A4.getHeight());//842
