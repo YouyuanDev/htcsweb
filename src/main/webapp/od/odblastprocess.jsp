@@ -227,8 +227,9 @@
                        <th field="conductivity" width="100" align="center" hidden="true" class="i18n1" name="conductivity">传导性</th>
                        <th field="acid_wash_time" width="100" align="center" hidden="true" class="i18n1" name="acidwashtime">酸洗时间</th>
                        <th field="acid_concentration" width="100" align="center" hidden="true" class="i18n1" name="acidconcentration">酸浓度</th>
-                       <th field="blast_line_speed" align="center" width="120" class="i18n1" name="blastlinespeed">打砂传送速度</th>
-                       <th field="preheat_temp" align="center" width="120" class="i18n1" name="preheattemp">预热温度</th>
+                       <th field="blast_line_speed" align="center" width="120" hidden="true" class="i18n1" name="blastlinespeed">打砂传送速度</th>
+                       <th field="preheat_temp" align="center" width="120" hidden="true" class="i18n1" name="preheattemp">预热温度</th>
+                       <th field="marking" align="center" width="120" hidden="true" class="i18n1" name="marking">管体标识是否清晰</th>
                        <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                        <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
                        <th field="operation_time" align="center" width="150" class="i18n1" name="operationtime" data-options="formatter:formatterdate">操作时间</th>
@@ -395,19 +396,28 @@
                <td width="16%" class="i18n1" name="preheattemp">预热温度</td>
                <td><input class="easyui-numberbox" data-options="min:0,precision:1" type="text" name="preheat_temp" value=""/></td>
                <td></td>
-               <td width="16%" class="i18n1" name="remark">备注</td>
-               <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
+               <td width="16%" class="i18n1" name="marking">管体标识是否清晰</td>
+               <td>
+                   <select id="mk" class="easyui-combobox" data-options="editable:false" name="marking" style="width:200px;">
+                       <option value="0" selected="selected">清晰</option>
+                       <option value="1">不清晰</option>
+                   </select>
+                   <%--<input class="easyui-numberbox" data-options="min:0,precision:1" type="text" name="preheat_temp" value=""/>--%>
+               </td>
                <td></td>
            </tr>
            <tr>
                <td width="16%" class="i18n1" name="result">结论</td>
-               <td colspan="5"><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
+               <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
                    <option value="0">不合格,重新打砂处理</option>
                    <option value="1">合格,进入外喷砂检验工序</option>
                    <option value="2">待定</option>
                    <option value="3">表面缺陷，进入修磨或切割处理</option>
                </select></td>
-
+               <td></td>
+               <td width="16%" class="i18n1" name="remark">备注</td>
+               <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
+               <td></td>
            </tr>
        </table>
            <input type="hidden" id="fileslist" name="upload_files" value=""/>

@@ -14,7 +14,7 @@ public class OdCoating3LpeInspectionProcess {
     private int holidays;
     private float holiday_tester_volts;
     private int repairs;
-    private float cutback_length;
+    private String cutback_length;
     private String bevel;
     private String stencil_verification;
     private String surface_condition;
@@ -28,7 +28,7 @@ public class OdCoating3LpeInspectionProcess {
     public OdCoating3LpeInspectionProcess() {
     }
 
-    public OdCoating3LpeInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, String base_coat_thickness_list, String middle_coat_thickness_list, String top_coat_thickness_list, String total_coating_thickness_list, int holidays, float holiday_tester_volts, int repairs, float cutback_length, String bevel, String stencil_verification, String surface_condition, String adhesion_test, String upload_files, String remark, String result, String mill_no, String is_sample) {
+    public OdCoating3LpeInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, String base_coat_thickness_list, String middle_coat_thickness_list, String top_coat_thickness_list, String total_coating_thickness_list, int holidays, float holiday_tester_volts, int repairs, String cutback_length, String bevel, String stencil_verification, String surface_condition, String adhesion_test, String upload_files, String remark, String result, String mill_no, String is_sample) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -140,11 +140,11 @@ public class OdCoating3LpeInspectionProcess {
         this.repairs = repairs;
     }
 
-    public float getCutback_length() {
+    public String getCutback_length() {
         return cutback_length;
     }
 
-    public void setCutback_length(float cutback_length) {
+    public void setCutback_length(String cutback_length) {
         this.cutback_length = cutback_length;
     }
 

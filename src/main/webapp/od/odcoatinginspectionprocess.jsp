@@ -129,14 +129,15 @@
                             var res1=changeComma($obj1.val());
                             var res2=changeComma($obj2.val());
                             var res3=changeComma($obj3.val());
-
                             var res1_1=res1.split(',');
                             var res2_1=res2.split(',');
                             var res3_1=res3.split(',');
                             var res4=$obj4.val();
                             var res5=$obj5.val();
                             var res6=$obj6.val();
-                            var res7=$obj7.val();
+                            //var res7=$obj7.val();
+                            var res7=changeComma($obj7.val());
+                            var res7_1=res7.split(',');
                             for(var i=0;i<res1_1.length;i++){
                                 if(res1_1[i]!=""&&res1_1.length>0){
                                     if(!((res1_1[i]>=data.base_2fbe_coat_thickness_min)&&(res1_1[i]<=data.base_2fbe_coat_thickness_max)))
@@ -161,8 +162,14 @@
                                 $obj5.siblings().css("background-color","#F9A6A6");
                             if(!((res6>=data.repair_min)&&(res6<=data.repair_max)))
                                 $obj6.siblings().css("background-color","#F9A6A6");
-                            if(!((res7>=data.cutback_min)&&(res7<=data.cutback_max)))
-                                $obj7.siblings().css("background-color","#F9A6A6");
+                            for(var i=0;i<res7_1.length;i++){
+                                if(res7_1[i]!=""&&res7_1.length>0){
+                                    if(!((res7_1[i]>=data.cutback_min)&&(res7_1[i]<=data.cutback_max)))
+                                        $obj7.siblings().css("background-color","#F9A6A6");
+                                }
+                            }
+                            // if(!((res7>=data.cutback_min)&&(res7<=data.cutback_max)))
+                            //     $obj7.siblings().css("background-color","#F9A6A6");
                         }
                     },error:function () {
 
@@ -197,6 +204,7 @@
                     var arg1=$("input[name='base_coat_thickness_list']").val().trim();
                     var arg2=$("input[name='top_coat_thickness_list']").val().trim();
                     var arg3=$("input[name='total_coating_thickness_list']").val().trim();
+                    var arg4=$("input[name='cutback_length']").val().trim();
                     if(arg1!=""){
                         if(!thicknessIsAllow(arg1)){
                             hlAlertFour("底层涂层厚度列表不合法!");
@@ -215,9 +223,16 @@
                             return false;
                         }
                     }
+                    if(arg4!=""){
+                        if(!thicknessIsAllow(arg4)){
+                            hlAlertFour("预留端列表不合法!");
+                            return false;
+                        }
+                    }
                     $("input[name='base_coat_thickness_list']").val(changeComma(arg1));
                     $("input[name='top_coat_thickness_list']").val(changeComma(arg2));
                     $("input[name='total_coating_thickness_list']").val(changeComma(arg3));
+                    $("input[name='cutback_length']").val(changeComma(arg4));
                     //判断输入的厚度列表是否合法
                     if($("input[name='odcoatInprotime']").val()==""){
                         hlAlertFour("请输入操作时间");
@@ -450,7 +465,7 @@
                 </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="cutbacklength">预留端长度</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="cutback_length" value=""/></td>
+                    <td><input class="easyui-textbox" type="text" name="cutback_length" value=""/></td>
                     <td></td>
                     <td width="16%" class="i18n1" name="bevel">坡口检测</td>
                     <td>
