@@ -190,10 +190,10 @@ public class GenerateExcelToPDFUtil {
         if(i==20){//设置foot Bottom的边框宽度
             cell.setBorderWidthBottom(2);
         }
-        if(j==0&&(i>=4&&i<=20)){//设置左侧外边框
+        if(j==0&&(i>3&&i<=20)){//设置左侧外边框
             cell.setBorderWidthLeft(2);
         }
-        if(i>=4&&i<=20){//设置右侧外边框
+        if(i>3&&i<=20){//设置右侧外边框
             if(j==12||(cell.getColspan()+j-1)==12)
                 cell.setBorderWidthRight(2);
         }
