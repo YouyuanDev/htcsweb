@@ -14,9 +14,7 @@ public class OdCoating3LpeInspectionProcess {
     private int holidays;
     private float holiday_tester_volts;
     private int repairs;
-    private String cutback_length;
     private String bevel;
-    private String stencil_verification;
     private String surface_condition;
     private String adhesion_test;
     private String upload_files;
@@ -28,7 +26,7 @@ public class OdCoating3LpeInspectionProcess {
     public OdCoating3LpeInspectionProcess() {
     }
 
-    public OdCoating3LpeInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, String base_coat_thickness_list, String middle_coat_thickness_list, String top_coat_thickness_list, String total_coating_thickness_list, int holidays, float holiday_tester_volts, int repairs, String cutback_length, String bevel, String stencil_verification, String surface_condition, String adhesion_test, String upload_files, String remark, String result, String mill_no, String is_sample) {
+    public OdCoating3LpeInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, String base_coat_thickness_list, String middle_coat_thickness_list, String top_coat_thickness_list, String total_coating_thickness_list, int holidays, float holiday_tester_volts, int repairs, String bevel, String surface_condition, String adhesion_test, String upload_files, String remark, String result, String mill_no, String is_sample) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -40,9 +38,7 @@ public class OdCoating3LpeInspectionProcess {
         this.holidays = holidays;
         this.holiday_tester_volts = holiday_tester_volts;
         this.repairs = repairs;
-        this.cutback_length = cutback_length;
         this.bevel = bevel;
-        this.stencil_verification = stencil_verification;
         this.surface_condition = surface_condition;
         this.adhesion_test = adhesion_test;
         this.upload_files = upload_files;
@@ -140,28 +136,12 @@ public class OdCoating3LpeInspectionProcess {
         this.repairs = repairs;
     }
 
-    public String getCutback_length() {
-        return cutback_length;
-    }
-
-    public void setCutback_length(String cutback_length) {
-        this.cutback_length = cutback_length;
-    }
-
     public String getBevel() {
         return bevel;
     }
 
     public void setBevel(String bevel) {
         this.bevel = bevel;
-    }
-
-    public String getStencil_verification() {
-        return stencil_verification;
-    }
-
-    public void setStencil_verification(String stencil_verification) {
-        this.stencil_verification = stencil_verification;
     }
 
     public String getSurface_condition() {

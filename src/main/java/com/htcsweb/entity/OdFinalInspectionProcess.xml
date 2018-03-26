@@ -7,11 +7,11 @@
 
 
     <insert id="addOdFinalInProcess" parameterType="com.htcsweb.entity.OdFinalInspectionProcess">
-      INSERT INTO od_final_inspection_process(pipe_no,operation_time,operator_no,inspection_result,upload_files,remark,result,mill_no) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{inspection_result},#{upload_files},#{remark},#{result},#{mill_no})
+      INSERT INTO od_final_inspection_process(pipe_no,operation_time,operator_no,inspection_result,upload_files,remark,result,mill_no,cutback_length,stencil_verification) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{inspection_result},#{upload_files},#{remark},#{result},#{mill_no},#{cutback_length},#{stencil_verification})
     </insert>
 
     <update id="updateOdFinalInProcess" parameterType="com.htcsweb.entity.OdFinalInspectionProcess">
-    UPDATE od_final_inspection_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},inspection_result=#{inspection_result},upload_files=#{upload_files},remark=#{remark},result=#{result},mill_no=#{mill_no} where id=#{id}
+    UPDATE od_final_inspection_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},inspection_result=#{inspection_result},upload_files=#{upload_files},remark=#{remark},result=#{result},mill_no=#{mill_no},cutback_length=#{cutback_length},stencil_verification=#{stencil_verification} where id=#{id}
     </update>
 
     <delete id="delOdFinalInProcess">

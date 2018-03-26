@@ -9,7 +9,6 @@ public class IdCoatingInspectionProcess {
     private String operator_no;
     private float dry_film_thickness_max;
     private float dry_film_thickness_min;
-    private String cutback;
     private float holiday_tester_volts;
     private int holiday_test_results;
     private String surface_condition;
@@ -25,14 +24,13 @@ public class IdCoatingInspectionProcess {
     public IdCoatingInspectionProcess() {
     }
 
-    public IdCoatingInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, float dry_film_thickness_max, float dry_film_thickness_min, String cutback, float holiday_tester_volts, int holiday_test_results, String surface_condition, String bevel_check, float magnetism, int internal_repairs, String upload_files, String remark, String result, String mill_no, String is_sample, String wet_film_thickness_list) {
+    public IdCoatingInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, float dry_film_thickness_max, float dry_film_thickness_min, float holiday_tester_volts, int holiday_test_results, String surface_condition, String bevel_check, float magnetism, int internal_repairs, String upload_files, String remark, String result, String mill_no, String is_sample, String wet_film_thickness_list) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
         this.operator_no = operator_no;
         this.dry_film_thickness_max = dry_film_thickness_max;
         this.dry_film_thickness_min = dry_film_thickness_min;
-        this.cutback = cutback;
         this.holiday_tester_volts = holiday_tester_volts;
         this.holiday_test_results = holiday_test_results;
         this.surface_condition = surface_condition;
@@ -93,14 +91,6 @@ public class IdCoatingInspectionProcess {
 
     public void setDry_film_thickness_min(float dry_film_thickness_min) {
         this.dry_film_thickness_min = dry_film_thickness_min;
-    }
-
-    public String getCutback() {
-        return cutback;
-    }
-
-    public void setCutback(String cutback) {
-        this.cutback = cutback;
     }
 
     public float getHoliday_tester_volts() {

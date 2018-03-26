@@ -15,10 +15,14 @@ public class IdFinalInspectionProcess {
     private String result;
     private String mill_no;
     private String dry_film_thickness_list;
+    private String cutback_length;
+    private String stencil_verification;
+
+
     public IdFinalInspectionProcess() {
     }
 
-    public IdFinalInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, String od_inspection_result, String id_inspection_result, String final_inspection_result, String upload_files, String remark, String result, String mill_no, String dry_film_thickness_list) {
+    public IdFinalInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, String od_inspection_result, String id_inspection_result, String final_inspection_result, String upload_files, String remark, String result, String mill_no, String dry_film_thickness_list, String cutback_length, String stencil_verification) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -31,6 +35,8 @@ public class IdFinalInspectionProcess {
         this.result = result;
         this.mill_no = mill_no;
         this.dry_film_thickness_list = dry_film_thickness_list;
+        this.cutback_length = cutback_length;
+        this.stencil_verification = stencil_verification;
     }
 
     public int getId() {
@@ -127,5 +133,21 @@ public class IdFinalInspectionProcess {
 
     public void setDry_film_thickness_list(String dry_film_thickness_list) {
         this.dry_film_thickness_list = dry_film_thickness_list;
+    }
+
+    public String getCutback_length() {
+        return cutback_length;
+    }
+
+    public void setCutback_length(String cutback_length) {
+        this.cutback_length = cutback_length;
+    }
+
+    public String getStencil_verification() {
+        return stencil_verification;
+    }
+
+    public void setStencil_verification(String stencil_verification) {
+        this.stencil_verification = stencil_verification;
     }
 }
