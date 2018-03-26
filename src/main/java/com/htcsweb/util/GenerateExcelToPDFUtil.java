@@ -29,10 +29,10 @@ public class GenerateExcelToPDFUtil {
     private static String  newExcelFileName=null;
 
     public static void main(String[] args) {
-            String excelTemplateFullName = "/Users/kurt/Documents/pipe_coating_surface_inspection_record_template.xls";
+            String excelTemplateFullName = "/Users/kurt/Documents/od_blast_record_template.xls";
             //String newexcelfile=GenerateExcelToPDFUtil.FillExcelTemplate(excelTemplateFullName,null);
             //GenerateExcelToPDFUtil.ExcelToPDFRecord(newexcelfile,"/Users/kurt/Documents/testPDF.pdf","/Users/kurt/Documents/image002.jpg");
-        //GenerateExcelToPDFUtil.PDFAutoMation(excelTemplateFullName,null,"/Users/kurt/Documents/testPDF.pdf","/Users/kurt/Documents/image002.jpg");
+        GenerateExcelToPDFUtil.PDFAutoMation(excelTemplateFullName,null,"/Users/kurt/Documents/testPDF.pdf","/Users/kurt/Documents/image002.jpg","/Users/kurt/Documents/simhei.ttf","");
     }
 
     //PDF生成方法入口
@@ -183,6 +183,22 @@ public class GenerateExcelToPDFUtil {
     }
 
 
+    private static void setOutsideBorderWidth(PdfPCell cell,int i,int j){
+        if(i==3){//设置head bottom的边框宽度
+            cell.setBorderWidthBottom(2);
+        }
+        if(i==20){//设置foot Bottom的边框宽度
+            cell.setBorderWidthBottom(2);
+        }
+        if(j==0&&(i>=4&&i<=20)){//设置左侧外边框
+            cell.setBorderWidthLeft(2);
+        }
+        if(i>=4&&i<=20){//设置右侧外边框
+            if(j==12||(cell.getColspan()+j-1)==12)
+                cell.setBorderWidthRight(2);
+        }
+    }
+
     //根据excel名称，转成PDF
     private static boolean ExcelToPDFRecord(String excelFullName,String pdfFullName,String imagePath,String fontPath,String basePath){
         File pdf=new File(pdfFullName);
@@ -329,6 +345,11 @@ public class GenerateExcelToPDFUtil {
                                 if(i<=3||i>=21){//头部及尾部 取消边框
                                     setNoBorder(cell1);
                                 }
+
+
+                                setOutsideBorderWidth(cell1,i,j);
+
+
                                 table.addCell(cell1);
 
                                 //System.out.println(num1 + "  " + num2);
@@ -347,7 +368,7 @@ public class GenerateExcelToPDFUtil {
                             if(i<=3||i>=21){//头部及尾部 取消边框
                                 setNoBorder(cell1);
                             }
-
+                            setOutsideBorderWidth(cell1,i,j);
                             table.addCell(cell1);
                         }
                     }
