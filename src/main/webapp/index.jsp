@@ -56,7 +56,8 @@
                 "projectManagement","contractManagement","pipeManagement","uploadPipe","twodimensionalcode",
                 "odstandard","idstandard","labtestingstandard2fbe","labtestingstandard3lpe","rawmaterialtestingstandard2fbe","rawmaterialtestingstandard3lpe",
                 "labtesting2fbe","labtesting3lpe","labtestingepoxy","rawmaterialtesting2fbe","rawmaterialtesting3lpe","rawmaterialtestingliquidepoxy",
-                "person","role","function"];
+                "person","role","function",
+                "productionProcessRecord"];
             var odArr=uriArr.slice(0,8);
             var idArr=uriArr.slice(8,14);
             var outinArr=uriArr.slice(14,18);
@@ -65,8 +66,11 @@
             var basicArr=uriArr.slice(23,28);
             var standArr=uriArr.slice(28,34);
             var labArr=uriArr.slice(34,40);
-            var reportArr=[];
+            var reportArr=uriArr.slice(43,44);
             var accountArr=uriArr.slice(40,43);
+
+
+
             var hsMapList="<%=session.getAttribute("userfunctionMap")%>";
             var funArr;
             if(hsMapList!=null&&hsMapList!=""&&hsMapList.length>0){
@@ -105,7 +109,7 @@
                 var standDivSon="";
                 var labDiv='<div title=\"实验\" class=\"i18n\" name=\"labtesting\"  style=\"padding:10px;\"><ul id=\"hltest\">';
                 var labDivSon="";
-                var reportDiv='<div title=\"生产报表\" class=\"i18n\" name=\"productionreport\"  style=\"padding:10px;\"><ul id=\"od\">';
+                var reportDiv='<div title=\"生产报表\" class=\"i18n\" name=\"productionreport\"  style=\"padding:10px;\"><ul id=\"hlprodcutionreport\">';
                 var reportDivSon="";
                 var accountDiv='<div title=\"账户管理\" class=\"i18n\" name=\"accountmanagement\"  style=\"padding:10px;\"><ul id=\"hlaccount\">';
                 var accountDivSon="";
@@ -629,6 +633,30 @@
                     }
                 }
             });
+
+
+            //生产报表管理
+            $("#hlprodcutionreport").tree({
+                onClick: function (node) {
+                    var tab = $('#hlTab').tabs('getTab', node.text);
+                    var nodeTxt = node.text;
+                    if (tab) {
+                        $('#hlTab').tabs('select', node.text);
+                    } else {
+                        if ("生产岗位记录管理" == nodeTxt || "Production Process Record Management" == nodeTxt) {
+
+                            $('#hlTab').tabs('add', {
+                                title: node.text,
+                                content: "<iframe scrolling='auto' frameborder='0'  src='productionRecordAndReport/productionProcessRecord.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable: true
+                            });
+                            hlLanguage();
+                        }
+                    }
+                }
+            });
+
+
 
             //账户管理
             $("#hlaccount").tree({
