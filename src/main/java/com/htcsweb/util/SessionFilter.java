@@ -53,7 +53,10 @@ public class SessionFilter extends OncePerRequestFilter{
             "htmlToPDF",
             "pipe_coating_surface_inspection_record_template",
             "exportBlastRecordToPDF",
-            "getOdBlastRecord"
+            "getOdBlastRecord",
+            "getOdBlastInspectionRecord",
+            "getOdCoat2FBERecord",
+            "getOdCoat2FBEInspectionRecord"
 
     }; // 不过滤的uri
 

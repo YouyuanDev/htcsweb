@@ -114,7 +114,7 @@
             #{item}
         </foreach>
     </delete>
-    <!--获取当天外打砂记录-->
+    <!--获取当天外打砂检验记录-->
     <select id="getOdBlastInspectionRecord" resultType="com.htcsweb.entity.OdBlastInspectionProcess">
         select * from od_blast_inspection_process o
         <where>

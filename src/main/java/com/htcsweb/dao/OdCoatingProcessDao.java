@@ -18,5 +18,6 @@ public interface OdCoatingProcessDao {
     //public int getCount();
 
     public int getCountAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no")String operator_no, @Param("begin_time")Date begin_time, @Param("end_time")Date end_time,@Param("mill_no")String mill_no);
-
+    //获取2fbe外涂记录
+    public List<OdCoatingProcess>getOd2FBECoatRecord(@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
 }
