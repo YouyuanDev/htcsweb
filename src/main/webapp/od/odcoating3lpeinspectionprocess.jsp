@@ -122,7 +122,7 @@
                         var $obj4=$("input[name='holidays']");
                         var $obj5=$("input[name='holiday_tester_volts']");
                         var $obj6=$("input[name='repairs']");
-                        var $obj7=$("input[name='cutback_length']");
+                        //var $obj7=$("input[name='cutback_length']");
                         var $obj8=$("input[name='middle_coat_thickness_list']");
                         $obj1.siblings().css("background-color","#FFFFFF");
                         $obj2.siblings().css("background-color","#FFFFFF");
@@ -130,7 +130,7 @@
                         $obj4.siblings().css("background-color","#FFFFFF");
                         $obj5.siblings().css("background-color","#FFFFFF");
                         $obj6.siblings().css("background-color","#FFFFFF");
-                        $obj7.siblings().css("background-color","#FFFFFF");
+                        //$obj7.siblings().css("background-color","#FFFFFF");
                         $obj8.siblings().css("background-color","#FFFFFF");
                         if(data!=null){
                             var res1=changeComma($obj1.val());
@@ -139,12 +139,12 @@
                             var res4=$obj4.val();
                             var res5=$obj5.val();
                             var res6=$obj6.val();
-                            var res7=changeComma($obj7.val());
+                            //var res7=changeComma($obj7.val());
                             var res8=changeComma($obj8.val());
                             var res1_1=res1.split(',');
                             var res2_1=res2.split(',');
                             var res3_1=res3.split(',');
-                            var res7_1=res7.split(',');
+                            //var res7_1=res7.split(',');
                             var res8_1=res8.split(',');
                             for(var i=0;i<res1_1.length;i++){
                                 if(res1_1[i]!=""&&res1_1.length>0){
@@ -176,12 +176,12 @@
                                 $obj5.siblings().css("background-color","#F9A6A6");
                             if(!((res6>=data.repair_min)&&(res6<=data.repair_max)))
                                 $obj6.siblings().css("background-color","#F9A6A6");
-                            for(var i=0;i<res7_1.length;i++){
-                                if(res7_1[i]!=""&&res7_1[i].length>0){
-                                    if(!((res7_1[i]>=data.cutback_min)&&(res7_1[i]<=data.cutback_max)))
-                                        $obj7.siblings().css("background-color","#F9A6A6");
-                                }
-                            }
+                            // for(var i=0;i<res7_1.length;i++){
+                            //     if(res7_1[i]!=""&&res7_1[i].length>0){
+                            //         if(!((res7_1[i]>=data.cutback_min)&&(res7_1[i]<=data.cutback_max)))
+                            //             $obj7.siblings().css("background-color","#F9A6A6");
+                            //     }
+                            // }
                             // if(!((res7>=data.cutback_min)&&(res7<=data.cutback_max)))
                             //     $obj7.siblings().css("background-color","#F9A6A6");
                         }
@@ -219,7 +219,7 @@
                     var arg2=$("input[name='top_coat_thickness_list']").val().trim();
                     var arg3=$("input[name='total_coating_thickness_list']").val().trim();
                     var arg4=$("input[name='middle_coat_thickness_list']").val().trim();
-                    var arg5=$("input[name='cutback_length']").val().trim();
+                    //var arg5=$("input[name='cutback_length']").val().trim();
                     if(arg1!=""){
                         if(!thicknessIsAllow(arg1)){
                             hlAlertFour("底层涂层厚度列表不合法!");
@@ -244,12 +244,12 @@
                             return false;
                         }
                     }
-                    if(arg5!=""){
-                        if(!thicknessIsAllow(arg5)){
-                            hlAlertFour("预留端列表不合法!");
-                            return false;
-                        }
-                    }
+                    // if(arg5!=""){
+                    //     if(!thicknessIsAllow(arg5)){
+                    //         hlAlertFour("预留端列表不合法!");
+                    //         return false;
+                    //     }
+                    // }
                     if($("input[name='odcoat3LpeInprotime']").val()==""){
                         hlAlertFour("请输入操作时间");
                         return false;
@@ -258,7 +258,7 @@
                     $("input[name='top_coat_thickness_list']").val(changeComma(arg2));
                     $("input[name='total_coating_thickness_list']").val(changeComma(arg3));
                     $("input[name='middle_coat_thickness_list']").val(changeComma(arg4));
-                    $("input[name='cutback_length']").val(changeComma(arg5));
+                    //$("input[name='cutback_length']").val(changeComma(arg5));
                 },
                 success: function(result){
                     var result = eval('('+result+')');
@@ -332,9 +332,9 @@
                 <th field="holidays" align="center" width="100" hidden="true" class="i18n1" name="holidays">漏点数量</th>
                 <th field="holiday_tester_volts" width="100" align="center" hidden="true" class="i18n1" name="holidaytestervolts">电火花检测电压</th>
                 <th field="repairs" width="100" align="center" hidden="true" class="i18n1" name="repairs">修补点数</th>
-                <th field="cutback_length" width="100" align="center" hidden="true" class="i18n1" name="cutbacklength">预留端长度</th>
+                <%--<th field="cutback_length" width="100" align="center" hidden="true" class="i18n1" name="cutbacklength">预留端长度</th>--%>
                 <th field="bevel" align="center" width="80" class="i18n1" name="bevel">坡口检测</th>
-                <th field="stencil_verification" align="center" width="120" class="i18n1" name="stencilverification">外喷标检验</th>
+                <%--<th field="stencil_verification" align="center" width="120" class="i18n1" name="stencilverification">外喷标检验</th>--%>
                 <th field="surface_condition" align="center" width="150" class="i18n1" name="surfacecondition1">表面质量</th>
                 <th field="adhesion_test" align="center" width="150" class="i18n1" name="adhesiontest">附着力测试</th>
                 <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
@@ -487,9 +487,15 @@
                     <td width="16%" class="i18n1" name="repairs">修补点数</td>
                     <td><input class="easyui-numberbox" data-options="min:0,precision:0"  type="text" name="repairs" value=""/></td>
                     <td></td>
-                    <td width="16%" class="i18n1" name="cutbacklength">预留端长度</td>
-                    <td><input class="easyui-textbox"  type="text" name="cutback_length" value=""/></td>
-                    <td></td>
+                    <%--<td width="16%" class="i18n1" name="cutbacklength">预留端长度</td>--%>
+                    <%--<td><input class="easyui-textbox"  type="text" name="cutback_length" value=""/></td>--%>
+                    <%--<td></td>--%>
+                    <td width="16%" class="i18n1" name="issample">取样管</td>
+                    <td colspan="2">
+                        <input type="checkbox" id="is-sample" value="0" checked="false" onchange="selectIsSample()"/>
+                        <input type="hidden" name="is_sample" value="0">
+                    </td>
+
                 </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="bevel">坡口检测</td>
@@ -502,16 +508,25 @@
                         <%--<input class="easyui-textbox"  type="text" name="bevel" value=""/>--%>
                     </td>
                     <td></td>
-                    <td width="16%" class="i18n1" name="stencilverification">外喷标检验</td>
+                    <td width="16%" class="i18n1" name="adhesiontest">附着力测试</td>
                     <td>
-                        <select id="sv" class="easyui-combobox" data-options="editable:false" name="stencil_verification" style="width:200px;">
+                        <select id="at" class="easyui-combobox" data-options="editable:false" name="adhesion_test" style="width:200px;">
                             <option value="0" selected="selected">未检测</option>
                             <option value="1">合格</option>
                             <option value="2">不合格</option>
                         </select>
-                        <%--<input class="easyui-textbox"  type="text" name="stencil_verification" value=""/>--%>
+                        <%--<input class="easyui-textbox"  type="text" name="adhesion_test" value=""/>--%>
                     </td>
                     <td></td>
+                    <%--<td width="16%" class="i18n1" name="stencilverification">外喷标检验</td>--%>
+                    <%--<td>--%>
+                        <%--<select id="sv" class="easyui-combobox" data-options="editable:false" name="stencil_verification" style="width:200px;">--%>
+                            <%--<option value="0" selected="selected">未检测</option>--%>
+                            <%--<option value="1">合格</option>--%>
+                            <%--<option value="2">不合格</option>--%>
+                        <%--</select>--%>
+                    <%--</td>--%>
+                    <%--<td></td>--%>
                 </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="surfacecondition1">表面质量</td>
@@ -525,23 +540,9 @@
                         <%--<input class="easyui-textbox"  type="text" name="surface_condition" value=""/>--%>
                     </td>
                     <td></td>
-                    <td width="16%" class="i18n1" name="adhesiontest">附着力测试</td>
-                    <td>
-                        <select id="at" class="easyui-combobox" data-options="editable:false" name="adhesion_test" style="width:200px;">
-                            <option value="0" selected="selected">未检测</option>
-                            <option value="1">合格</option>
-                            <option value="2">不合格</option>
-                        </select>
-                        <%--<input class="easyui-textbox"  type="text" name="adhesion_test" value=""/>--%>
-                    </td>
                     <td></td>
-                </tr>
-                <tr>
-                    <td width="16%" class="i18n1" name="issample">取样管</td>
-                    <td colspan="2">
-                        <input type="checkbox" id="is-sample" value="0" checked="false" onchange="selectIsSample()"/>
-                        <input type="hidden" name="is_sample" value="0">
-                    </td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="result">结论</td>

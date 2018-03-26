@@ -120,7 +120,7 @@
                     success:function (data) {
                         // var $obj1=$("input[name='dry_film_thickness_max']");
                         // var $obj2=$("input[name='dry_film_thickness_min']");
-                        var $obj3=$("input[name='cutback']");
+                        //var $obj3=$("input[name='cutback']");
                         var $obj4=$("input[name='magnetism']");
                         var $obj5=$("input[name='wet_film_thickness_list']");
                         // $obj1.siblings().css("background-color","#FFFFFF");
@@ -142,12 +142,12 @@
                             //     $obj2.siblings().css("background-color","#F9A6A6");
                             // if(!((res3>=data.cutback_min)&&(res3<=data.cutback_max)))
                             //     $obj3.siblings().css("background-color","#F9A6A6");
-                            for(var i=0;i<res3_1.length;i++){
-                                if(res3_1[i]!=""&&res3_1[i].length>0){
-                                    if(!((res3_1[i]>=data.cutback_min)&&(res3_1[i]<=data.cutback_max)))
-                                        $obj3.siblings().css("background-color","#F9A6A6");
-                                }
-                            }
+                            // for(var i=0;i<res3_1.length;i++){
+                            //     if(res3_1[i]!=""&&res3_1[i].length>0){
+                            //         if(!((res3_1[i]>=data.cutback_min)&&(res3_1[i]<=data.cutback_max)))
+                            //             $obj3.siblings().css("background-color","#F9A6A6");
+                            //     }
+                            // }
                             if(!((res4>=data.residual_magnetism_min)&&(res4<=data.residual_magnetism_max)))
                                 $obj4.siblings().css("background-color","#F9A6A6");
                             for(var i=0;i<res5_1.length;i++){
@@ -185,21 +185,21 @@
                     // setParams($("input[name='dry_film_thickness_max']"));
                     // setParams($("input[name='dry_film_thickness_min']"));
                     var arg1=$("input[name='wet_film_thickness_list']").val().trim();
-                    var arg2=$("input[name='cutback']").val().trim();
+                    //var arg2=$("input[name='cutback']").val().trim();
                     if(arg1!=""){
                         if(!thicknessIsAllow(arg1)){
                             hlAlertFour("湿膜厚度测量列表不合法!");
                             return false;
                         }
                     }
-                    if(arg2!=""){
-                        if(!thicknessIsAllow(arg2)){
-                            hlAlertFour("预留端列表不合法!");
-                            return false;
-                        }
-                    }
+                    // if(arg2!=""){
+                    //     if(!thicknessIsAllow(arg2)){
+                    //         hlAlertFour("预留端列表不合法!");
+                    //         return false;
+                    //     }
+                    // }
                     $("input[name='wet_film_thickness_list']").val(changeComma(arg1));
-                    $("input[name='cutback']").val(changeComma(arg2));
+                    //$("input[name='cutback']").val(changeComma(arg2));
                     //setParams($("input[name='cutback']"));
                     setParams($("input[name='holiday_tester_volts']"));
                     setParams($("input[name='holiday_test_results']"));
@@ -277,7 +277,7 @@
                 <th field="is_sample" align="center" width="80" class="i18n1" name="issample">取样管</th>
                 <%--<th field="dry_film_thickness_max" align="center" width="80" class="i18n1" name="dryfilmthicknessmax">最大干膜厚度</th>--%>
                 <%--<th field="dry_film_thickness_min" align="center" width="100" class="i18n1" name="dryfilmthicknessmin">最小干膜厚度</th>--%>
-                <th field="cutback" align="center" width="100" hidden="true" class="i18n1" name="cutback">预留端长度</th>
+                <%--<th field="cutback" align="center" width="100" hidden="true" class="i18n1" name="cutback">预留端长度</th>--%>
                 <th field="holiday_tester_volts" width="100" align="center" hidden="true" class="i18n1" name="holidaytestervolts">电火花检测电压</th>
                 <th field="holiday_test_results" align="center" width="100" hidden="true" class="i18n1" name="holidaytestresults">电火花检验结果</th>
                 <th field="surface_condition" align="center" width="150" class="i18n1" name="surfacecondition1">表面质量</th>
@@ -422,9 +422,14 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td width="16%" class="i18n1" name="cutback">预留端长度</td>
-                    <td><input class="easyui-textbox"  type="text" name="cutback" value=""/></td>
-                    <td></td>
+                    <%--<td width="16%" class="i18n1" name="cutback">预留端长度</td>--%>
+                    <%--<td><input class="easyui-textbox"  type="text" name="cutback" value=""/></td>--%>
+                    <%--<td></td>--%>
+                        <td width="16%" class="i18n1" name="wetfilmthicknesslist">湿膜厚度μm测量列表</td>
+                        <td>
+                            <input class="easyui-textbox"  type="text" name="wet_film_thickness_list" value=""/>
+                        </td>
+                        <td></td>
                     <td width="16%" class="i18n1" name="bevelcheck">坡口质量</td>
                     <td>
                         <select id="bev" class="easyui-combobox" data-options="editable:false" name="bevel_check" style="width:200px;">
@@ -463,12 +468,7 @@
                         <input type="hidden" name="is_sample" value="0">
                     </td>
                 </tr>
-                    <tr>
-                        <td width="16%" class="i18n1" name="wetfilmthicknesslist">湿膜厚度μm测量列表</td>
-                        <td colspan="5">
-                            <input class="easyui-textbox"  type="text" name="wet_film_thickness_list" value=""/>
-                        </td>
-                    </tr>
+
                 <tr>
                     <td width="16%" class="i18n1" name="result">结论</td>
                     <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
