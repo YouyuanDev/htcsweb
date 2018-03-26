@@ -11,6 +11,7 @@ import jxl.format.Alignment;
 import jxl.write.Label;
 import jxl.write.WritableCellFormat;
 import jxl.write.WritableFont;
+import org.apache.ibatis.jdbc.Null;
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -100,7 +101,16 @@ public class InspectionRecordPDFController {
             for (int i=0;i<list.size();i++){
                 Label label1 = new Label(1, row+8, list.get(i).getPipe_no(), wcf);
                 datalist.add(label1);
-                Label label2 = new Label(2, row+8, list.get(i).getMarking(), wcf);
+                String isClear="是";
+                String marking=list.get(i).getMarking();
+                if(marking!=null){
+                    if(!marking.equals("0")){
+                        isClear="否";
+                    }
+                }else {
+                    isClear=" ";
+                }
+                Label label2 = new Label(2, row+8, isClear, wcf);
                 datalist.add(label2);
                 Label label3 = new Label(3, row+8, list.get(i).getSurface_condition(), wcf);
                 datalist.add(label3);
