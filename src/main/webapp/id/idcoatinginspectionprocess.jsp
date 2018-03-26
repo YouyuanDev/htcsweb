@@ -131,7 +131,8 @@
                         if(data!=null){
                             // var res1=$obj1.val();
                             // var res2=$obj2.val();
-                            var res3=$obj3.val();
+                            var res3=changeComma($obj3.val());
+                            var res3_1=res3.split(',');
                             var res4=$obj4.val();
                             var res5=changeComma($obj5.val());
                             var res5_1=res5.split(',');
@@ -139,8 +140,14 @@
                             //     $obj1.siblings().css("background-color","#F9A6A6");
                             // if(!((res2>=data.dry_film_thickness_min)&&(res2<=data.dry_film_thickness_max)))
                             //     $obj2.siblings().css("background-color","#F9A6A6");
-                            if(!((res3>=data.cutback_min)&&(res3<=data.cutback_max)))
-                                $obj3.siblings().css("background-color","#F9A6A6");
+                            // if(!((res3>=data.cutback_min)&&(res3<=data.cutback_max)))
+                            //     $obj3.siblings().css("background-color","#F9A6A6");
+                            for(var i=0;i<res3_1.length;i++){
+                                if(res3_1[i]!=""&&res3_1[i].length>0){
+                                    if(!((res3_1[i]>=data.cutback_min)&&(res3_1[i]<=data.cutback_max)))
+                                        $obj3.siblings().css("background-color","#F9A6A6");
+                                }
+                            }
                             if(!((res4>=data.residual_magnetism_min)&&(res4<=data.residual_magnetism_max)))
                                 $obj4.siblings().css("background-color","#F9A6A6");
                             for(var i=0;i<res5_1.length;i++){
@@ -149,6 +156,7 @@
                                         $obj5.siblings().css("background-color","#F9A6A6");
                                 }
                             }
+
                         }
                     },error:function () {
 
@@ -177,14 +185,22 @@
                     // setParams($("input[name='dry_film_thickness_max']"));
                     // setParams($("input[name='dry_film_thickness_min']"));
                     var arg1=$("input[name='wet_film_thickness_list']").val().trim();
+                    var arg2=$("input[name='cutback']").val().trim();
                     if(arg1!=""){
                         if(!thicknessIsAllow(arg1)){
                             hlAlertFour("湿膜厚度测量列表不合法!");
                             return false;
                         }
                     }
+                    if(arg2!=""){
+                        if(!thicknessIsAllow(arg2)){
+                            hlAlertFour("预留端列表不合法!");
+                            return false;
+                        }
+                    }
                     $("input[name='wet_film_thickness_list']").val(changeComma(arg1));
-                    setParams($("input[name='cutback']"));
+                    $("input[name='cutback']").val(changeComma(arg2));
+                    //setParams($("input[name='cutback']"));
                     setParams($("input[name='holiday_tester_volts']"));
                     setParams($("input[name='holiday_test_results']"));
                     setParams($("input[name='magnetism']"));
@@ -407,7 +423,7 @@
                 </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="cutback">预留端长度</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="cutback" value=""/></td>
+                    <td><input class="easyui-textbox"  type="text" name="cutback" value=""/></td>
                     <td></td>
                     <td width="16%" class="i18n1" name="bevelcheck">坡口质量</td>
                     <td>

@@ -5,6 +5,7 @@ import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import javafx.application.Application;
 import jxl.Cell;
 import jxl.Range;
 import jxl.Sheet;
@@ -30,14 +31,14 @@ public class GenerateExcelToPDFUtil {
             String excelTemplateFullName = "/Users/kurt/Documents/pipe_coating_surface_inspection_record_template.xls";
             //String newexcelfile=GenerateExcelToPDFUtil.FillExcelTemplate(excelTemplateFullName,null);
             //GenerateExcelToPDFUtil.ExcelToPDFRecord(newexcelfile,"/Users/kurt/Documents/testPDF.pdf","/Users/kurt/Documents/image002.jpg");
-        GenerateExcelToPDFUtil.PDFAutoMation(excelTemplateFullName,null,"/Users/kurt/Documents/testPDF.pdf","/Users/kurt/Documents/image002.jpg");
+        //GenerateExcelToPDFUtil.PDFAutoMation(excelTemplateFullName,null,"/Users/kurt/Documents/testPDF.pdf","/Users/kurt/Documents/image002.jpg");
     }
 
     //PDF生成方法入口
-    public static void PDFAutoMation(String excelTemplateFullName,ArrayList<Label> dataList,String pdfFullName,String imagePath) {
+    public static void PDFAutoMation(String excelTemplateFullName,ArrayList<Label> dataList,String pdfFullName,String imagePath,String fontPath) {
 
         String newexcelfile=GenerateExcelToPDFUtil.FillExcelTemplate(excelTemplateFullName,dataList);
-        GenerateExcelToPDFUtil.ExcelToPDFRecord(newexcelfile,pdfFullName,imagePath);
+        GenerateExcelToPDFUtil.ExcelToPDFRecord(newexcelfile,pdfFullName,imagePath,fontPath);
 
     }
 
@@ -183,9 +184,15 @@ public class GenerateExcelToPDFUtil {
 
 
     //根据excel名称，转成PDF
-    private static boolean ExcelToPDFRecord(String excelFullName,String pdfFullName,String imagePath){
+    private static boolean ExcelToPDFRecord(String excelFullName,String pdfFullName,String imagePath,String fontPath){
+        File pdf=new File(pdfFullName);
+        try{
+            if(!pdf.exists()){
+                pdf.createNewFile();
+            }
+        }catch (Exception e){
 
-
+        }
         float excelTableTotalWidth=800;
         //excelFullName="/Users/kurt/Documents/pipe_coating_surface_inspection_record_template.xls";
         File excelfile = new File(excelFullName);
@@ -214,7 +221,8 @@ public class GenerateExcelToPDFUtil {
          * 找到文件后，打开属性，将文件名及所在路径作为字体名即可。
          */
         //创建BaseFont对象，指明字体，编码方式,是否嵌入
-        BaseFont bf=BaseFont.createFont("/Users/kurt/Documents/simhei.ttf", BaseFont.IDENTITY_H, false);
+            BaseFont bf=BaseFont.createFont(fontPath, BaseFont.IDENTITY_H, false);
+        //BaseFont bf=BaseFont.createFont("/Users/kurt/Documents/simhei.ttf", BaseFont.IDENTITY_H, false);
         //创建Font对象，将基础字体对象，字体大小，字体风格
         Font font=new Font(bf,10,Font.NORMAL);
         Font headfont1=new Font(bf,14,Font.BOLD);

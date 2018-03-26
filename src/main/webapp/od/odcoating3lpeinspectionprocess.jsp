@@ -139,11 +139,12 @@
                             var res4=$obj4.val();
                             var res5=$obj5.val();
                             var res6=$obj6.val();
-                            var res7=$obj7.val();
+                            var res7=changeComma($obj7.val());
                             var res8=changeComma($obj8.val());
                             var res1_1=res1.split(',');
                             var res2_1=res2.split(',');
                             var res3_1=res3.split(',');
+                            var res7_1=res7.split(',');
                             var res8_1=res8.split(',');
                             for(var i=0;i<res1_1.length;i++){
                                 if(res1_1[i]!=""&&res1_1.length>0){
@@ -175,8 +176,14 @@
                                 $obj5.siblings().css("background-color","#F9A6A6");
                             if(!((res6>=data.repair_min)&&(res6<=data.repair_max)))
                                 $obj6.siblings().css("background-color","#F9A6A6");
-                            if(!((res7>=data.cutback_min)&&(res7<=data.cutback_max)))
-                                $obj7.siblings().css("background-color","#F9A6A6");
+                            for(var i=0;i<res7_1.length;i++){
+                                if(res7_1[i]!=""&&res7_1[i].length>0){
+                                    if(!((res7_1[i]>=data.cutback_min)&&(res7_1[i]<=data.cutback_max)))
+                                        $obj7.siblings().css("background-color","#F9A6A6");
+                                }
+                            }
+                            // if(!((res7>=data.cutback_min)&&(res7<=data.cutback_max)))
+                            //     $obj7.siblings().css("background-color","#F9A6A6");
                         }
                     },error:function () {
 
@@ -212,6 +219,7 @@
                     var arg2=$("input[name='top_coat_thickness_list']").val().trim();
                     var arg3=$("input[name='total_coating_thickness_list']").val().trim();
                     var arg4=$("input[name='middle_coat_thickness_list']").val().trim();
+                    var arg5=$("input[name='cutback_length']").val().trim();
                     if(arg1!=""){
                         if(!thicknessIsAllow(arg1)){
                             hlAlertFour("底层涂层厚度列表不合法!");
@@ -236,6 +244,12 @@
                             return false;
                         }
                     }
+                    if(arg5!=""){
+                        if(!thicknessIsAllow(arg5)){
+                            hlAlertFour("预留端列表不合法!");
+                            return false;
+                        }
+                    }
                     if($("input[name='odcoat3LpeInprotime']").val()==""){
                         hlAlertFour("请输入操作时间");
                         return false;
@@ -244,6 +258,7 @@
                     $("input[name='top_coat_thickness_list']").val(changeComma(arg2));
                     $("input[name='total_coating_thickness_list']").val(changeComma(arg3));
                     $("input[name='middle_coat_thickness_list']").val(changeComma(arg4));
+                    $("input[name='cutback_length']").val(changeComma(arg5));
                 },
                 success: function(result){
                     var result = eval('('+result+')');
@@ -473,7 +488,7 @@
                     <td><input class="easyui-numberbox" data-options="min:0,precision:0"  type="text" name="repairs" value=""/></td>
                     <td></td>
                     <td width="16%" class="i18n1" name="cutbacklength">预留端长度</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="cutback_length" value=""/></td>
+                    <td><input class="easyui-textbox"  type="text" name="cutback_length" value=""/></td>
                     <td></td>
                 </tr>
                 <tr>
