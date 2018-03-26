@@ -1,7 +1,9 @@
 package com.htcsweb.controller;
 
 
+import com.htcsweb.dao.OdBlastInspectionProcessDao;
 import com.htcsweb.dao.OdBlastProcessDao;
+import com.htcsweb.entity.OdBlastInspectionProcess;
 import com.htcsweb.entity.OdBlastProcess;
 import com.htcsweb.util.GenerateExcelToPDFUtil;
 import jxl.format.Alignment;
@@ -62,10 +64,11 @@ public class InspectionRecordPDFController {
     }
     @Autowired
     private OdBlastProcessDao odblastprocessDao;
+    @Autowired
+    private OdBlastInspectionProcessDao odBlastInspectionProcessDao;
     //1.---------------获取外打砂记录PDF
     @RequestMapping("getOdBlastRecord")
     public  String getOdBlastRecord(HttpServletRequest request){
-        System.out.println(basePath);
        // String begin_time=request.getParameter("begin_time");
         //String end_time=request.getParameter("end_time");
         String begin_time="2018-01-03";
@@ -148,9 +151,91 @@ public class InspectionRecordPDFController {
         }
         return  null;
     }
+    //1.---------------获取外打砂检验记录PDF
+    @RequestMapping("getOdBlastInspectionRecord")
+    public  String getOdBlastInspectionRecord(HttpServletRequest request){
+        String begin_time="2018-01-03";
+        String end_time="2018-03-30";
+        String templateFullName=request.getSession().getServletContext().getRealPath("/")
+                +"template/od_blast_inspection_record_template.xls";
+        try{
+            if(begin_time!=null&&begin_time!=""){
+                beginTime=sdf.parse(begin_time);
+            }
+            if(end_time!=null&&end_time!=""){
+                endTime=sdf.parse(end_time);
+            }
+            List<OdBlastInspectionProcess>list=odBlastInspectionProcessDao.getOdBlastInspectionRecord(beginTime,endTime);
+            ArrayList<Label> datalist=new ArrayList<Label>();
+            int index=1,row=0;
+            StringBuilder sb=new StringBuilder();
+            String result="";
+            for (int i=0;i<list.size();i++){
+                Label label1 = new Label(1, row+8, list.get(i).getPipe_no(), wcf);
+                datalist.add(label1);
+                Label label2 = new Label(2, row+8, String.valueOf(list.get(i).getAir_temp()), wcf);
+                datalist.add(label2);
+                Label label3 = new Label(3, row+8, String.valueOf(list.get(i).getRelative_humidity()), wcf);
+                datalist.add(label3);
+                Label label4 = new Label(4, row+8, String.valueOf(list.get(i).getDew_point()), wcf);
+                datalist.add(label4);
+                Label label5 = new Label(5, row+8, String.valueOf(list.get(i).getPipe_temp()), wcf);
+                datalist.add(label5);
+                Label label6 = new Label(6, row+8, String.valueOf(list.get(i).getSurface_condition()), wcf);
+                datalist.add(label6);
+                Label label7 = new Label(7, row+8, String.valueOf(list.get(i).getBlast_finish_sa25()), wcf);
+                datalist.add(label7);
+                Label label8 = new Label(8, row+8, String.valueOf(list.get(i).getSurface_dust_rating()), wcf);
+                datalist.add(label8);
+                Label label9 = new Label(9, row+8, String.valueOf(list.get(i).getProfile()), wcf);
+                datalist.add(label9);
+                Label label10 = new Label(10, row+8, String.valueOf(list.get(i).getSalt_contamination_after_blasting()), wcf);
+                datalist.add(label10);
+                Label label11 = new Label(11, row+8, String.valueOf(list.get(i).getOil_water_in_air_compressor()), wcf);
+                datalist.add(label11);
+                result=list.get(i).getResult();
+                if(result!=null){
+                    if(result.equals("0")){
+                        result="不合格";
+                    }else if(result.equals("1")){
+                        result="合格";
+                    }else if(result.equals("3")){
+                        result="表面缺陷";
+                    }else{
+                        result="待定";
+                    }
+                }else{
+                    result="待定";
+                }
+                Label label12 = new Label(12, row+8, result, wcf);
+                datalist.add(label12);
+                sb.append("#"+list.get(i).getPipe_no()+":"+list.get(i).getRemark()+" ");
+                //最后一行数据为空问题
+                index++;
+                row++;
+                if(index%13==0){
+                    AddLastWhiteSpace(datalist,sb.toString(),wcf);
+                    //到结束
+                    GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
+                    datalist.clear();
+                    index=1;
+                    row=0;
+                }
+            }
+            if(datalist.size()>0){
+                AddLastWhiteSpace(datalist,sb.toString(),wcf);
+                GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
+                datalist.clear();
+                index=1;
+                row=0;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  null;
+    }
     private void AddLastWhiteSpace(ArrayList<Label> datalist,String remark,WritableCellFormat wcf){
         datalist.add(new Label(2,20,remark,wcf));
-        //datalist.add(new Label(3,20," ",wcf));
     }
 
     //导出外观检验记录PDF

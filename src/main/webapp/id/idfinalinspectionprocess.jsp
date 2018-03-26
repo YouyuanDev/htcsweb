@@ -235,8 +235,8 @@
                 <th field="weight" align="center" width="50" class="i18n1" name="weight">重量</th>
                 <th field="heat_no" align="center" hidden="true" width="50" class="i18n1" name="heat_no">炉号</th>
                 <th field="operator_no" align="center" width="100" class="i18n1" name="operatorno">操作工编号</th>
-                <th field="stencil_verification" align="center" width="100" class="i18n1" name="stencilverification">预留端长度 2个值(,分隔)</th>
-                <th field="inspection_result" align="center" width="80" class="i18n1" name="inspectionresult">外涂层质检结果</th>
+                <th field="cutback_length" align="center" width="100" class="i18n1" name="cutbacklength">预留端长度 2个值(,分隔)</th>
+                <th field="stencil_verification" align="center" width="80" class="i18n1" name="idstencilverification">内喷表检验</th>
 
                 <th field="od_inspection_result" align="center" width="80" class="i18n1" name="odinspectionresult">外涂层质检结果</th>
                 <th field="id_inspection_result" align="center" width="80" class="i18n1" name="idinspectionresult">内涂层质检结果</th>
@@ -365,7 +365,7 @@
                 <tr>
                     <td class="i18n1" width="20%" name="cutbacklength">预留端长度2个值(,分隔)</td>
                     <td colspan="2"><input class="easyui-textbox"  type="text" name="cutback_length" value=""/></td>
-                    <td class="i18n1" width="20%" name="stencilverification">外喷标检验</td>
+                    <td class="i18n1" width="20%" name="idstencilverification">内喷标检验</td>
                     <td colspan="2">
                         <select id="sv" class="easyui-combobox" data-options="editable:false" name="stencil_verification" style="width:200px;">
                             <option value="0" selected="selected">未检测</option>

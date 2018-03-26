@@ -114,6 +114,17 @@
             #{item}
         </foreach>
     </delete>
-
+    <!--获取当天外打砂记录-->
+    <select id="getOdBlastInspectionRecord" resultType="com.htcsweb.entity.OdBlastInspectionProcess">
+        select * from od_blast_inspection_process o
+        <where>
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d 23:59:59')]]>
+            </if>
+        </where>
+    </select>
 
 </mapper>

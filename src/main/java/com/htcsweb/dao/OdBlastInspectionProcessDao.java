@@ -16,9 +16,8 @@ public interface OdBlastInspectionProcessDao {
     //public int getCount();
     public List<HashMap<String,Object>> getAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no")String operator_no, @Param("begin_time")Date begin_time, @Param("end_time")Date end_time,@Param("mill_no")String mill_no, @Param("skip")int skip, @Param("take")int take);
     public int delOdBlastInspectionProcess(String[]arrId);
-
-
     public int getCountAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no")String operator_no, @Param("begin_time")Date begin_time, @Param("end_time")Date end_time, @Param("mill_no")String mill_no);
-
+    //获取当天外打砂记录
+    public List<OdBlastInspectionProcess> getOdBlastInspectionRecord(@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
 
 }
