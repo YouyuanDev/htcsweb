@@ -357,6 +357,7 @@
                     <td class="i18n1" name="id" width="20%">流水号</td>
                     <%--<td colspan="5"><label class="hl-label" id="odcoatproid"></label></td>--%>
                     <td colspan="1" width="30%"><input id="odFinalInproid" class="easyui-textbox" readonly="true" type="text" value="" name="odStencilproid"> </td>
+                    <td></td>
                     <td class="i18n1" name="millno" width="20%">分厂</td>
                     <td colspan="1" width="30%">
                         <input id="mill_no" class="easyui-combobox" type="text" name="mill_no"  data-options=
@@ -368,6 +369,7 @@
 					        textField:'text',
 					        panelHeight:'auto'"/>
                     </td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="operatorno" width="20%">操作工编号</td>
@@ -377,11 +379,12 @@
                                popup="#gridPanel2" grid="#datagrid2" multiSelect="false"
                         />
                     </td>
+                    <td></td>
                     <td class="i18n1" name="operationtime" width="20%">操作时间</td>
                     <td colspan="1" width="30%">
                         <input class="easyui-datetimebox" id="odFinalInprotime" type="text" name="odFinalInprotime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
-
+                    <td></td>
                 </tr>
             </table>
 
@@ -389,27 +392,31 @@
 
                 <tr>
                     <td class="i18n1" width="16%" name="cutbacklength">预留端长度2个值(,分隔)</td>
-                    <td colspan="2"><input class="easyui-textbox"  type="text" name="cutback_length" value=""/></td>
+                    <td colspan="1"><input class="easyui-textbox"  type="text" name="cutback_length" value=""/></td>
+                    <td></td>
                     <td class="i18n1" width="16%" name="stencilverification">外喷标检验</td>
-                    <td colspan="2">
+                    <td colspan="1">
                         <select id="sv" class="easyui-combobox" data-options="editable:false" name="stencil_verification" style="width:200px;">
                             <option value="0" selected="selected">未检测</option>
                             <option value="1">合格</option>
                             <option value="2">不合格</option>
                         </select>
                     </td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" width="16%" name="inspectionresult">外涂层质检结果</td>
-                    <td colspan="2"><input class="easyui-textbox"  type="text" name="inspection_result" value=""/></td>
+                    <td colspan="1"><input class="easyui-textbox"  type="text" name="inspection_result" value=""/></td>
+                    <td></td>
                     <td width="16%" class="i18n1" name="result">结论</td>
-                    <td colspan="2"><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:185px;">
+                    <td colspan="1"><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:185px;">
                         <option value="0">不合格,进入外防待修补工序</option>
                         <option value="2">不合格,进入外防待扒皮工序</option>
                         <option value="4">不合格,进入外喷标工序</option>
                         <option value="1">合格,进入外防成品入库工序</option>
                         <option value="3">待定</option>
                     </select></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="remark">备注</td>

@@ -333,6 +333,7 @@
                     <td class="i18n1" name="id" width="20%">流水号</td>
                     <%--<td colspan="5"><label class="hl-label" id="odcoatproid"></label></td>--%>
                     <td colspan="1" width="30%"><input id="idFinalInproid" class="easyui-textbox" readonly="true" type="text" value="" name="idStencilproid"> </td>
+                    <td></td>
                     <td class="i18n1" name="millno" width="20%">分厂</td>
                     <td colspan="1" width="30%">
                         <input id="mill_no" class="easyui-combobox" type="text" name="mill_no"  data-options=
@@ -344,6 +345,7 @@
 					        textField:'text',
 					        panelHeight:'auto'"/>
                     </td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="operatorno" width="20%">操作工编号</td>
@@ -353,45 +355,29 @@
                                popup="#gridPanel2" grid="#datagrid2" multiSelect="false"
                         />
                     </td>
+                    <td></td>
                     <td class="i18n1" name="operationtime" width="20%">操作时间</td>
                     <td colspan="1" width="30%">
                         <input class="easyui-datetimebox" id="idFinalInprotime" type="text" name="idFinalInprotime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
-
+                    <td></td>
                 </tr>
             </table>
 
             <table class="ht-table">
                 <tr>
                     <td class="i18n1" width="20%" name="cutbacklength">预留端长度2个值(,分隔)</td>
-                    <td colspan="2"><input class="easyui-textbox"  type="text" name="cutback_length" value=""/></td>
+                    <td colspan="1"><input class="easyui-textbox"  type="text" name="cutback_length" value=""/></td>
+                    <td></td>
                     <td class="i18n1" width="20%" name="idstencilverification">内喷标检验</td>
-                    <td colspan="2">
+                    <td colspan="1">
                         <select id="sv" class="easyui-combobox" data-options="editable:false" name="stencil_verification" style="width:200px;">
                             <option value="0" selected="selected">未检测</option>
                             <option value="1">合格</option>
                             <option value="2">不合格</option>
                         </select>
                     </td>
-                </tr>
-                <tr>
-                    <td class="i18n1" name="odinspectionresult">外涂层质检结果</td>
-                    <td colspan="2">
-                        <%--<input class="easyui-textbox"  type="text" name="od_inspection_result" value=""/>--%>
-                        <select id="aa" class="easyui-combobox" data-options="editable:false" name="od_inspection_result" style="width:200px;">
-                            <option value="0">不合格</option>
-                            <option value="1">合格</option>
-                            <option value="2">待定</option>
-                        </select>
-                    </td>
-                    <td class="i18n1" name="idinspectionresult">内涂层质检结果</td>
-                    <td colspan="2">
-                        <select id="bb" class="easyui-combobox" data-options="editable:false" name="id_inspection_result" style="width:200px;">
-                            <option value="0">不合格</option>
-                            <option value="1">合格</option>
-                            <option value="2">待定</option>
-                        </select>
-                    </td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="dryfilmthicknesslist">干膜厚度μm测量列表</td>
@@ -399,6 +385,29 @@
                         <input class="easyui-textbox"  type="text" name="dry_film_thickness_list" value=""/>
                     </td>
                 </tr>
+
+                <tr>
+                    <td class="i18n1" name="odinspectionresult">外涂层质检结果</td>
+                    <td colspan="1">
+                        <%--<input class="easyui-textbox"  type="text" name="od_inspection_result" value=""/>--%>
+                        <select id="aa" class="easyui-combobox" data-options="editable:false" name="od_inspection_result" style="width:200px;">
+                            <option value="0">不合格</option>
+                            <option value="1">合格</option>
+                            <option value="2">待定</option>
+                        </select>
+                    </td>
+                    <td></td>
+                    <td class="i18n1" name="idinspectionresult">内涂层质检结果</td>
+                    <td colspan="1">
+                        <select id="bb" class="easyui-combobox" data-options="editable:false" name="id_inspection_result" style="width:200px;">
+                            <option value="0">不合格</option>
+                            <option value="1">合格</option>
+                            <option value="2">待定</option>
+                        </select>
+                    </td>
+                    <td></td>
+                </tr>
+
                 <tr>
                     <td width="16%" class="i18n1" name="result">结论</td>
                     <td><select id="dd" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
