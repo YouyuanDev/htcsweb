@@ -38,11 +38,24 @@ public class GenerateExcelToPDFUtil {
 
     //PDF生成方法入口
     public static void PDFAutoMation(String excelTemplateFullName,ArrayList<Label> dataList,String pdfFullName,String imagePath,String fontPath,String basePath) {
-
+        tableTopIndex=4;
+        tableBottomIndex=20;
+        tableLeftIndex=0;
+        tableRightIndex=12;
         String newexcelfile=GenerateExcelToPDFUtil.FillExcelTemplate(excelTemplateFullName,dataList);
         GenerateExcelToPDFUtil.ExcelToPDFRecord(newexcelfile,pdfFullName,imagePath,fontPath,basePath);
 
     }
+    //PDF生成方法入口
+    public static void PDFAutoMation(String excelTemplateFullName,ArrayList<Label> dataList,String pdfFullName,String imagePath,String fontPath,String basePath,int p_tableLeftIndex,int p_tableRightIndex,int p_tableTopIndex,int p_tableBottomIndex) {
+        GenerateExcelToPDFUtil.tableTopIndex=p_tableTopIndex;
+        GenerateExcelToPDFUtil.tableBottomIndex=p_tableBottomIndex;
+        GenerateExcelToPDFUtil.tableLeftIndex=p_tableLeftIndex;
+        GenerateExcelToPDFUtil.tableRightIndex=p_tableRightIndex;
+        String newexcelfile=GenerateExcelToPDFUtil.FillExcelTemplate(excelTemplateFullName,dataList);
+        GenerateExcelToPDFUtil.ExcelToPDFRecord(newexcelfile,pdfFullName,imagePath,fontPath,basePath);
+    }
+
 
 
     //合并行的静态函数
