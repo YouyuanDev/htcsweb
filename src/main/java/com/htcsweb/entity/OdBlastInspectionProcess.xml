@@ -126,5 +126,19 @@
             </if>
         </where>
     </select>
-
+    <!--更新等待时间-->
+    <!--<update id="updateElapsedTime">-->
+        <!--update od_blast_inspection_process set elapsed_time=(TIMESTAMPDIFF(MINUTE ,#{begin_time},#{end_time})) where id=#{id}-->
+    <!--</update>-->
+    <update id="updateElapsedTime">
+      update od_blast_inspection_process set elapsed_time=#{elapsed_time} where id=#{id}
+    </update>
+    <!--获取id-->
+    <select id="getOdBlastInfoByCoatingInfo" resultType="map">
+         select ob.id,oc.operation_time as odcoatingtime,ob.operation_time as odblasttime  from od_blast_inspection_process ob inner join od_coating_2fbe_process oc on ob.pipe_no=oc.pipe_no
+         where   oc.operation_time >=ob.operation_time
+         AND ob.pipe_no=#{pipe_no} and oc.id=#{id}
+         order by ob.operation_time desc
+         limit 1
+    </select>
 </mapper>

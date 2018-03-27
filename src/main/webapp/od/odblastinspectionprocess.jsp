@@ -198,8 +198,7 @@
                     setParams($("input[name='surface_dust_rating']"));
                     setParams($("input[name='pipe_temp']"));
                     setParams($("input[name='salt_contamination_after_blasting']"));
-
-
+                    setParams($("input[name='elapsed_time']"));
                     if($("input[name='odbptime']").val()==""){
 
                         hlAlertFour("请输入操作时间");
@@ -286,6 +285,7 @@
                 <th field="pipe_temp" width="100" align="center"  class="i18n1" name="pipetemp">钢管温度</th>
                 <th field="salt_contamination_after_blasting" align="center" width="120" class="i18n1" name="saltcontaminationafterblasting">打砂后盐度</th>
                 <th field="surface_condition" align="center" width="120" class="i18n1" name="surfacecondition">表面质量</th>
+                <th field="elapsed_time" align="center" width="120" class="i18n1" name="elapsedtime">涂敷前等待时间(分钟)</th>
                 <th field="oil_water_in_air_compressor" align="center" width="120" class="i18n1" name="oilwaterinaircompressor">压缩空气是否存在油水</th>
                 <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                 <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
@@ -466,6 +466,9 @@
                     <td></td>
                 </tr>
                 <tr>
+                    <td width="16%" class="i18n1" name="elapsedtime">涂敷前等待时间(分钟)</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="elapsed_time" value=""/></td>
+                    <td></td>
                     <td width="16%" class="i18n1" name="result">结论</td>
                     <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
                         <option value="0">不合格,重新打砂处理</option>
@@ -474,9 +477,10 @@
                         <option value="3">表面缺陷，进入修磨或切割处理</option>
                     </select></td>
                     <td></td>
+                </tr>
+                <tr>
                     <td width="16%" class="i18n1" name="remark">备注</td>
-                    <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
-                    <td></td>
+                    <td colspan="5"><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
                 </tr>
 
 

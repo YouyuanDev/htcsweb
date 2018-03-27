@@ -4,6 +4,7 @@ package com.htcsweb.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.htcsweb.dao.OdBlastInspectionProcessDao;
 import com.htcsweb.dao.OdCoating3LpeProcessDao;
 import com.htcsweb.dao.PipeBasicInfoDao;
 import com.htcsweb.entity.OdCoating3LpeProcess;
@@ -30,7 +31,8 @@ public class OdCoating3LpeProcessController {
     private OdCoating3LpeProcessDao odCoating3LpeProcessDao;
     @Autowired
     private PipeBasicInfoDao pipeBasicInfoDao;
-
+    @Autowired
+    private OdBlastInspectionProcessDao odBlastInspectionProcessDao;
     //查询
     @RequestMapping(value = "/getOdCoating3LpeByLike")
     @ResponseBody
@@ -85,9 +87,36 @@ public class OdCoating3LpeProcessController {
             if(odCoating3LpeProcess.getId()==0){
                 //添加
                 resTotal=odCoating3LpeProcessDao.addOdCoating3LpeProcess(odCoating3LpeProcess);
+                //－先根据新增id查询外打砂检验的id,然后更新
+                int id=odCoating3LpeProcess.getId();
+                List<HashMap<String,Object>>list=odBlastInspectionProcessDao.getOdBlastInfoByCoatingInfo(pipeno,id);
+                if(list!=null&&list.size()>0){
+                    HashMap<String,Object>hs=list.get(0);
+                    int odBlastId=Integer.parseInt(String.valueOf(hs.get("id")));
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    long begin_time=format.parse(String.valueOf(hs.get("odcoatingtime"))).getTime();
+                    long end_time=format.parse(String.valueOf(hs.get("odblasttime"))).getTime();
+                    float minute=((begin_time-end_time)/(1000));
+                    minute=minute/60;minute=minute/60;
+                    minute=(float)(Math.round(minute*100))/100;
+                    odBlastInspectionProcessDao.updateElapsedTime(minute,odBlastId);
+                }
             }else{
                 //修改！
                 resTotal=odCoating3LpeProcessDao.updateOdCoating3LpeProcess(odCoating3LpeProcess);
+                int id=odCoating3LpeProcess.getId();
+                List<HashMap<String,Object>>list=odBlastInspectionProcessDao.getOdBlastInfoByCoatingInfo(pipeno,id);
+                if(list!=null&&list.size()>0){
+                    HashMap<String,Object>hs=list.get(0);
+                    int odBlastId=Integer.parseInt(String.valueOf(hs.get("id")));
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    long begin_time=format.parse(String.valueOf(hs.get("odcoatingtime"))).getTime();
+                    long end_time=format.parse(String.valueOf(hs.get("odblasttime"))).getTime();
+                    float minute=((begin_time-end_time)/(1000));
+                    minute=minute/60;
+                    minute=(float)(Math.round(minute*100))/100;
+                    odBlastInspectionProcessDao.updateElapsedTime(minute,odBlastId);
+                }
             }
             if(resTotal>0){
                 //更新管子的状态

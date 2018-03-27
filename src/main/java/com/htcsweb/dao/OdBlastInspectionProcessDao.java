@@ -19,5 +19,9 @@ public interface OdBlastInspectionProcessDao {
     public int getCountAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no")String operator_no, @Param("begin_time")Date begin_time, @Param("end_time")Date end_time, @Param("mill_no")String mill_no);
     //获取当天外打砂记录
     public List<OdBlastInspectionProcess> getOdBlastInspectionRecord(@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
-
+    //更新等待时间
+//    public int updateElapsedTime(@Param("begin_time")Date begin_time,@Param("end_time")Date end_time,@Param("id")int id);
+    public int updateElapsedTime(@Param("elapsed_time")float elapsed_time,@Param("id")int id);
+    //根据外涂的信息查询对应的外打砂信息
+    public List<HashMap<String,Object>>getOdBlastInfoByCoatingInfo(@Param("pipe_no")String pipe_no,@Param("id")int id);
 }

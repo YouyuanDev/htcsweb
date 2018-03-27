@@ -4,6 +4,7 @@ package com.htcsweb.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.htcsweb.dao.OdBlastInspectionProcessDao;
 import com.htcsweb.dao.OdCoatingProcessDao;
 import com.htcsweb.dao.PipeBasicInfoDao;
 import com.htcsweb.entity.OdCoatingProcess;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.text.html.MinimalHTMLWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -30,7 +32,8 @@ public class OdCoatingProcessController {
     private OdCoatingProcessDao odCoatingProcessDao;
     @Autowired
     private PipeBasicInfoDao pipeBasicInfoDao;
-
+    @Autowired
+    private OdBlastInspectionProcessDao odBlastInspectionProcessDao;
     //查询
     @RequestMapping(value = "/getOdCoatingByLike")
     @ResponseBody
@@ -82,12 +85,39 @@ public class OdCoatingProcessController {
                 odCoatingProcess.setOperation_time(new_odbptime);
             }
             String pipeno=odCoatingProcess.getPipe_no();
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             if(odCoatingProcess.getId()==0){
                 //添加
-                resTotal=odCoatingProcessDao.addOdCoatingProcess(odCoatingProcess);
+                 resTotal=odCoatingProcessDao.addOdCoatingProcess(odCoatingProcess);
+                 //此时的resTotal为新增厚的记录的id，更新odBlastInsepction的等待时间
+                 //－先根据新增id查询外打砂检验的id,然后更新
+                 int id=odCoatingProcess.getId();
+                 List<HashMap<String,Object>>list=odBlastInspectionProcessDao.getOdBlastInfoByCoatingInfo(pipeno,id);
+                 if(list!=null&&list.size()>0){
+                     HashMap<String,Object>hs=list.get(0);
+                     int odBlastId=Integer.parseInt(String.valueOf(hs.get("id")));
+                     long begin_time=format.parse(String.valueOf(hs.get("odcoatingtime"))).getTime();
+                     long end_time=format.parse(String.valueOf(hs.get("odblasttime"))).getTime();
+                     float minute=((begin_time-end_time)/(1000));
+                     minute=minute/60;
+                     minute=(float)(Math.round(minute*100))/100;
+                     odBlastInspectionProcessDao.updateElapsedTime(minute,odBlastId);
+                 }
             }else{
                 //修改！
                 resTotal=odCoatingProcessDao.updateOdCoatingProcess(odCoatingProcess);
+                int id=odCoatingProcess.getId();
+                List<HashMap<String,Object>>list=odBlastInspectionProcessDao.getOdBlastInfoByCoatingInfo(pipeno,id);
+                if(list!=null&&list.size()>0){
+                    HashMap<String,Object>hs=list.get(0);
+                    int odBlastId=Integer.parseInt(String.valueOf(hs.get("id")));
+                    long begin_time=format.parse(String.valueOf(hs.get("odcoatingtime"))).getTime();
+                    long end_time=format.parse(String.valueOf(hs.get("odblasttime"))).getTime();
+                    float minute=((begin_time-end_time)/(1000));
+                    minute=minute/60;
+                    minute=(float)(Math.round(minute*100))/100;
+                    odBlastInspectionProcessDao.updateElapsedTime(minute,odBlastId);
+                }
             }
             if(resTotal>0){
                 //更新管子的状态
