@@ -14,6 +14,7 @@ import jxl.write.Label;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.io.*;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
@@ -33,27 +34,16 @@ public class GenerateExcelToPDFUtil {
             String excelTemplateFullName = "/Users/kurt/Documents/od_blast_record_template.xls";
             //String newexcelfile=GenerateExcelToPDFUtil.FillExcelTemplate(excelTemplateFullName,null);
             //GenerateExcelToPDFUtil.ExcelToPDFRecord(newexcelfile,"/Users/kurt/Documents/testPDF.pdf","/Users/kurt/Documents/image002.jpg");
+        //GenerateExcelToPDFUtil.PDFAutoMation(excelTemplateFullName,null,"/Users/kurt/Documents/testPDF.pdf","/Users/kurt/Documents/image002.jpg","/Users/kurt/Documents/simhei.ttf","");
         GenerateExcelToPDFUtil.PDFAutoMation(excelTemplateFullName,null,"/Users/kurt/Documents/testPDF.pdf","/Users/kurt/Documents/image002.jpg","/Users/kurt/Documents/simhei.ttf","");
+
     }
 
     //PDF生成方法入口
     public static void PDFAutoMation(String excelTemplateFullName,ArrayList<Label> dataList,String pdfFullName,String imagePath,String fontPath,String basePath) {
-        tableTopIndex=4;
-        tableBottomIndex=20;
-        tableLeftIndex=0;
-        tableRightIndex=12;
         String newexcelfile=GenerateExcelToPDFUtil.FillExcelTemplate(excelTemplateFullName,dataList);
         GenerateExcelToPDFUtil.ExcelToPDFRecord(newexcelfile,pdfFullName,imagePath,fontPath,basePath);
 
-    }
-    //PDF生成方法入口
-    public static void PDFAutoMation(String excelTemplateFullName,ArrayList<Label> dataList,String pdfFullName,String imagePath,String fontPath,String basePath,int p_tableLeftIndex,int p_tableRightIndex,int p_tableTopIndex,int p_tableBottomIndex) {
-        GenerateExcelToPDFUtil.tableTopIndex=p_tableTopIndex;
-        GenerateExcelToPDFUtil.tableBottomIndex=p_tableBottomIndex;
-        GenerateExcelToPDFUtil.tableLeftIndex=p_tableLeftIndex;
-        GenerateExcelToPDFUtil.tableRightIndex=p_tableRightIndex;
-        String newexcelfile=GenerateExcelToPDFUtil.FillExcelTemplate(excelTemplateFullName,dataList);
-        GenerateExcelToPDFUtil.ExcelToPDFRecord(newexcelfile,pdfFullName,imagePath,fontPath,basePath);
     }
 
 
@@ -199,17 +189,22 @@ public class GenerateExcelToPDFUtil {
 
     private static void setOutsideBorderWidth(PdfPCell cell,int i,int j){
         if(i==tableTopIndex){//设置Table Top的边框宽度
+            //System.out.println("set TOP border i="+i+"  j="+j);
             cell.setBorderWidthTop(2);
         }
         if(i==tableBottomIndex){//设置foot Bottom的边框宽度
+            //System.out.println("set Bottom border i="+i+"  j="+j);
             cell.setBorderWidthBottom(2);
         }
         if(j==tableLeftIndex&&(i>=tableTopIndex&&i<=tableBottomIndex)){//设置左侧外边框
+            //System.out.println("set Left border i="+i+"  j="+j);
             cell.setBorderWidthLeft(2);
         }
         if(i>=tableTopIndex&&i<=tableBottomIndex){//设置右侧外边框
-            if(j==tableRightIndex||(cell.getColspan()+j-1)==tableRightIndex)
+            if(j==tableRightIndex||(cell.getColspan()+j-1)==tableRightIndex) {
+                //System.out.println("set Right border i="+i+"  j="+j);
                 cell.setBorderWidthRight(2);
+            }
         }
     }
 
@@ -266,6 +261,10 @@ public class GenerateExcelToPDFUtil {
             try{
                 Sheet sheet = book.getSheet(0);
                 int columnCount=sheet.getColumns();
+                //table的rightIndex修正
+                if(tableRightIndex!=columnCount-1)
+                    tableRightIndex=columnCount-1;
+                System.out.println("table column count:"+columnCount);
                 table=new PdfPTable(columnCount);
 
                 //下面是找出表格中的空行和空列
@@ -383,6 +382,7 @@ public class GenerateExcelToPDFUtil {
                             if(i<tableTopIndex||i>tableBottomIndex){//头部及尾部 取消边框
                                 setNoBorder(cell1);
                             }
+
                             setOutsideBorderWidth(cell1,i,j);
                             table.addCell(cell1);
                         }
