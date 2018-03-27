@@ -21,11 +21,12 @@ public class OdBlastInspectionProcess {
    private  String result;
    private  String mill_no;
    private  String oil_water_in_air_compressor;
+   private float elapsed_time;
 
     public OdBlastInspectionProcess() {
     }
 
-    public OdBlastInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, float air_temp, float relative_humidity, float dew_point, String blast_finish_sa25, float profile, int surface_dust_rating, float pipe_temp, float salt_contamination_after_blasting, String surface_condition, String upload_files, String remark, String result, String mill_no, String oil_water_in_air_compressor) {
+    public OdBlastInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, float air_temp, float relative_humidity, float dew_point, String blast_finish_sa25, float profile, int surface_dust_rating, float pipe_temp, float salt_contamination_after_blasting, String surface_condition, String upload_files, String remark, String result, String mill_no, String oil_water_in_air_compressor, float elapsed_time) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -44,6 +45,7 @@ public class OdBlastInspectionProcess {
         this.result = result;
         this.mill_no = mill_no;
         this.oil_water_in_air_compressor = oil_water_in_air_compressor;
+        this.elapsed_time = elapsed_time;
     }
 
     public int getId() {
@@ -188,5 +190,13 @@ public class OdBlastInspectionProcess {
 
     public void setOil_water_in_air_compressor(String oil_water_in_air_compressor) {
         this.oil_water_in_air_compressor = oil_water_in_air_compressor;
+    }
+
+    public float getElapsed_time() {
+        return elapsed_time;
+    }
+
+    public void setElapsed_time(float elapsed_time) {
+        this.elapsed_time = elapsed_time;
     }
 }
