@@ -31,7 +31,7 @@ public class GenerateExcelToPDFUtil {
     private static int tableRightIndex=12;
 
     public static void main(String[] args) {
-            String excelTemplateFullName = "/Users/kurt/Documents/od_blast_record_template.xls";
+            String excelTemplateFullName = "/Users/kurt/Documents/od_coating_3lpe_record_template.xls";
             //String newexcelfile=GenerateExcelToPDFUtil.FillExcelTemplate(excelTemplateFullName,null);
             //GenerateExcelToPDFUtil.ExcelToPDFRecord(newexcelfile,"/Users/kurt/Documents/testPDF.pdf","/Users/kurt/Documents/image002.jpg");
         //GenerateExcelToPDFUtil.PDFAutoMation(excelTemplateFullName,null,"/Users/kurt/Documents/testPDF.pdf","/Users/kurt/Documents/image002.jpg","/Users/kurt/Documents/simhei.ttf","");
