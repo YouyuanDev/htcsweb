@@ -28,11 +28,12 @@ public class OdCoatingProcess {
     private float coating_voltage;
     private float gun_distance;
     private float spray_speed;
+    private float application_voltage;
 
     public OdCoatingProcess() {
     }
 
-    public OdCoatingProcess(int id, String pipe_no, Date operation_time, String operator_no, float coating_line_speed, String base_coat_used, String base_coat_lot_no, String top_coat_used, String top_coat_lot_no, int base_coat_gun_count, int top_coat_gun_count, float application_temp, float to_first_touch_duration, float to_quench_duration, String upload_files, String remark, String result, String mill_no, float air_pressure, float coating_voltage, float gun_distance, float spray_speed) {
+    public OdCoatingProcess(int id, String pipe_no, Date operation_time, String operator_no, float coating_line_speed, String base_coat_used, String base_coat_lot_no, String top_coat_used, String top_coat_lot_no, int base_coat_gun_count, int top_coat_gun_count, float application_temp, float to_first_touch_duration, float to_quench_duration, String upload_files, String remark, String result, String mill_no, float air_pressure, float coating_voltage, float gun_distance, float spray_speed, float application_voltage) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -55,6 +56,7 @@ public class OdCoatingProcess {
         this.coating_voltage = coating_voltage;
         this.gun_distance = gun_distance;
         this.spray_speed = spray_speed;
+        this.application_voltage = application_voltage;
     }
 
     public int getId() {
@@ -231,5 +233,13 @@ public class OdCoatingProcess {
 
     public void setSpray_speed(float spray_speed) {
         this.spray_speed = spray_speed;
+    }
+
+    public float getApplication_voltage() {
+        return application_voltage;
+    }
+
+    public void setApplication_voltage(float application_voltage) {
+        this.application_voltage = application_voltage;
     }
 }
