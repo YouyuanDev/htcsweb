@@ -26,7 +26,6 @@
         .ht-table{width:100%;margin-bottom:10px;}
         .hltr{border-bottom:2px solid #1f1f1f ;}
         .b3{border-style:inset;border-width:thin;}
-
     </style>
     <script type="text/javascript">
         var url;
@@ -36,7 +35,7 @@
                 $.ajax({
                     type:'post',
                     //url:'/CommonOperation/htmlToPDF.action',
-                    url:'/InspectionRecordPDFOperation/getOdBlastRecord.action',
+                    url:'/InspectionRecordPDFOperation/getOdCoat3LPEInspectionRecord.action',
                     dataType:'json',
                     data:{"htmlStr":htmlStr},
                     success:function (data) {

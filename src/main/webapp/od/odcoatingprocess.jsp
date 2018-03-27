@@ -146,6 +146,12 @@
                     setParams($("input[name='top_coat_gun_count']"));
                     setParams($("input[name='to_first_touch_duration']"));
                     setParams($("input[name='to_quench_duration']"));
+
+                    setParams($("input[name='air_pressure']"));
+                    setParams($("input[name='coating_voltage']"));
+                    setParams($("input[name='gun_distance']"));
+                    setParams($("input[name='spray_speed']"));
+                    setParams($("input[name='application_voltage']"));
                     if($("input[name='odcoatprotime']").val()==""){
                         hlAlertFour("请输入操作时间");
                         return false;
@@ -225,6 +231,13 @@
                 <th field="application_temp" align="center" width="80" class="i18n1" name="applicationtemp">中频温度</th>
                 <th field="to_first_touch_duration" align="center" width="120" class="i18n1" name="tofirsttouchduration">首次到达接触点时间</th>
                 <th field="to_quench_duration" align="center" width="150" class="i18n1" name="toquenchduration">到达水淋处时间</th>
+
+                <th field="air_pressure" width="100" align="center" hidden="true" class="i18n1" name="airpressure">供气压力(psi)</th>
+                <th field="coating_voltage" align="center" hidden="true" width="80" class="i18n1" name="coatingvoltage">喷涂电压(V)</th>
+                <th field="gun_distance" align="center" hidden="true" width="120" class="i18n1" name="gundistance">喷枪距离(cm)</th>
+                <th field="spray_speed" align="center" hidden="true" width="150" class="i18n1" name="sprayspeed">粉量(m/s)</th>
+                <th field="application_voltage" align="center" hidden="true" width="150" class="i18n1" name="applicationvoltage">中频电压(V)</th>
+
                 <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                 <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
                 <th field="operation_time" align="center" width="150" class="i18n1" name="operationtime" data-options="formatter:formatterdate">操作时间</th>
@@ -388,7 +401,29 @@
                     <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="to_quench_duration" value=""/></td>
                     <td></td>
                 </tr>
+
                 <tr>
+                    <td width="16%" class="i18n1" name="airpressure">供气压力(psi)</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="air_pressure" value=""/></td>
+                    <td></td>
+                    <td width="16%" class="i18n1" name="coatingvoltage">喷涂电压(V)</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="coating_voltage" value=""/></td>
+                    <td></td>
+
+                </tr>
+                <tr>
+                    <td width="16%" class="i18n1" name="gundistance">喷枪距离(cm)</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="gun_distance" value=""/></td>
+                    <td></td>
+                    <td width="16%" class="i18n1" name="sprayspeed">粉量(m/s)</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="spray_speed" value=""/></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td width="16%" class="i18n1" name="applicationvoltage">中频电压(V)</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="application_voltage" value=""/></td>
+                    <td></td>
                     <td width="16%" class="i18n1" name="result">结论</td>
                     <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
                         <option value="1">合格,进入外涂敷检验工序</option>
@@ -396,9 +431,11 @@
                         <option value="2">待定</option>
                     </select></td>
                     <td></td>
+                </tr>
+
+                <tr>
                     <td width="16%" class="i18n1" name="remark">备注</td>
-                    <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
-                    <td></td>
+                    <td colspan="5"><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
                 </tr>
             </table>
             <input type="hidden" id="fileslist" name="upload_files" value=""/>
