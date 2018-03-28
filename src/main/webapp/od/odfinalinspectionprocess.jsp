@@ -103,11 +103,44 @@
                     dataType:'json',
                     data:{'contract_no':row.contract_no},
                     success:function (data) {
+                        var $obj1=$("input[name='magnetism_list']");
+                        var $obj2=$("input[name='coating_bevel_angle_list']");
+                        var $obj3=$("input[name='epoxy_cutback_list']");
                         var $obj7=$("input[name='cutback_length']");
+
+                        $obj1.siblings().css("background-color","#FFFFFF");
+                        $obj2.siblings().css("background-color","#FFFFFF");
+                        $obj3.siblings().css("background-color","#FFFFFF");
                         $obj7.siblings().css("background-color","#FFFFFF");
                         if(data!=null){
+                            var res1=changeComma($obj1.val());
+                            var res2=changeComma($obj2.val());
+                            var res3=changeComma($obj3.val());
                             var res7=changeComma($obj7.val());
                             var res7_1=res7.split(',');
+                            var res1_1=res1.split(',');
+                            var res2_1=res2.split(',');
+                            var res3_1=res3.split(',');
+
+                            for(var i=0;i<res1_1.length;i++){
+                                if(res1_1[i]!=""&&res1_1[i].length>0){
+                                    if(!((res1_1[i]>=data.magnetism_min)&&(res1_1[i]<=data.magnetism_max)))
+                                        $obj1.siblings().css("background-color","#F9A6A6");
+                                }
+                            }
+                            for(var i=0;i<res2_1.length;i++){
+                                if(res2_1[i]!=""&&res2_1[i].length>0){
+                                    if(!((res2_1[i]>=data.coating_bevel_angle_min)&&(res2_1[i]<=data.coating_bevel_angle_max)))
+                                        $obj2.siblings().css("background-color","#F9A6A6");
+                                }
+                            }
+                            for(var i=0;i<res3_1.length;i++){
+                                if(res3_1[i]!=""&&res3_1[i].length>0){
+                                    if(!((res3_1[i]>=data.epoxy_cutback_min)&&(res3_1[i]<=data.epoxy_cutback_max)))
+                                        $obj3.siblings().css("background-color","#F9A6A6");
+                                }
+                            }
+
                             for(var i=0;i<res7_1.length;i++){
                                 if(res7_1[i]!=""&&res7_1[i].length>0){
                                     if(!((res7_1[i]>=data.cutback_min)&&(res7_1[i]<=data.cutback_max)))
@@ -139,9 +172,30 @@
                 url:url,
                 onSubmit:function () {
                     var arg1=$("input[name='cutback_length']").val().trim();
+                    var arg2=$("input[name='magnetism_list']").val().trim();
+                    var arg3=$("input[name='coating_bevel_angle_list']").val().trim();
+                    var arg4=$("input[name='epoxy_cutback_list']").val().trim();
                     if(arg1!=""){
                         if(!thicknessIsAllow(arg1)){
                             hlAlertFour("预留端列表不合法!");
+                            return false;
+                        }
+                    }
+                    if(arg2!=""){
+                        if(!thicknessIsAllow(arg2)){
+                            hlAlertFour("剩磁测量值列表不合法!");
+                            return false;
+                        }
+                    }
+                    if(arg3!=""){
+                        if(!thicknessIsAllow(arg3)){
+                            hlAlertFour("涂层倒角列表不合法!");
+                            return false;
+                        }
+                    }
+                    if(arg4!=""){
+                        if(!thicknessIsAllow(arg4)){
+                            hlAlertFour("粉末长度 列表不合法!");
                             return false;
                         }
                     }
@@ -265,6 +319,11 @@
                 <th field="cutback_length" align="center" width="100" class="i18n1" name="cutbacklength">操作工编号</th>
                 <th field="stencil_verification" align="center" width="100" class="i18n1" name="stencilverification">预留端长度 2个值(,分隔)</th>
                 <th field="inspection_result" align="center" width="80" class="i18n1" name="inspectionresult">外涂层质检结果</th>
+
+                <th field="cutback_surface" align="center" width="80" hidden="true" class="i18n1" name="cutbacksurface">预留端表面</th>
+                <th field="magnetism_list" align="center" width="80" hidden="true" class="i18n1" name="magnetismlist">剩磁测量值</th>
+                <th field="coating_bevel_angle_list" align="center" width="80" hidden="true" class="i18n1" name="coatingbevelanglelist">涂层倒角</th>
+                <th field="epoxy_cutback_list" align="center" width="80" hidden="true" class="i18n1" name="epoxycutbacklist">粉末长度</th>
 
                 <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                 <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
@@ -404,6 +463,34 @@
                     </td>
                     <td></td>
                 </tr>
+
+                <tr>
+                    <td class="i18n1" width="16%" name="cutbacksurface">预留端表面</td>
+                    <td colspan="1">
+                        <select id="cs" class="easyui-combobox" data-options="editable:false" name="cutback_surface" style="width:200px;">
+                            <option value="0" selected="selected">合格</option>
+                            <option value="1">不合格</option>
+                        </select>
+                    </td>
+                    <td></td>
+                    <td class="i18n1" width="16%" name="magnetismlist">剩磁测量值(Gause ,分隔)</td>
+                    <td colspan="1">
+                        <input class="easyui-textbox"  type="text" name="magnetism_list" value=""/>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="i18n1" width="16%" name="coatingbevelanglelist">涂层倒角(度 ,分隔)</td>
+                    <td colspan="1"><input class="easyui-textbox"  type="text" name="coating_bevel_angle_list" value=""/></td>
+                    <td></td>
+                    <td class="i18n1" width="16%" name="epoxycutbacklist">粉末长度(mm ,分隔)</td>
+                    <td colspan="1">
+                        <input class="easyui-textbox"  type="text" name="epoxy_cutback_list" value=""/>
+                    </td>
+                    <td></td>
+                </tr>
+
+
                 <tr>
                     <td class="i18n1" width="16%" name="inspectionresult">外涂层质检结果</td>
                     <td colspan="1"><input class="easyui-textbox"  type="text" name="inspection_result" value=""/></td>

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.sql.DataSource;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -161,6 +162,7 @@ public class InspectionRecordPDFController {
                     //到结束
                     GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
                     datalist.clear();
+                    qualifiedTotal=0;
                     index=1;
                     row=0;
                 }
@@ -171,6 +173,7 @@ public class InspectionRecordPDFController {
                 datalist.add(new Label(12,20,String.valueOf(qualifiedTotal),wcf));
                 GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
                 datalist.clear();
+                qualifiedTotal=0;
                 index=1;
                 row=0;
             }
@@ -232,6 +235,8 @@ public class InspectionRecordPDFController {
                 }
                 Label label11 = new Label(11, row+8,oil, wcf);
                 datalist.add(label11);
+                Label label12=new Label(12,row+8,String.valueOf(list.get(i).getElapsed_time()),wcf);
+                datalist.add(label12);
                 result=list.get(i).getResult();
                 if(result!=null){
                     if(result.equals("0")){
@@ -250,8 +255,8 @@ public class InspectionRecordPDFController {
                 }else{
                     result=" ";
                 }
-                Label label12 = new Label(12, row+8, result, wcf);
-                datalist.add(label12);
+                Label label13 = new Label(13, row+8, result, wcf);
+                datalist.add(label13);
                 if(list.get(i).getRemark()!=null&&!list.get(i).getRemark().equals("")){
                     sb.append("#"+list.get(i).getPipe_no()+":"+list.get(i).getRemark()+" ");
                 }
@@ -261,10 +266,11 @@ public class InspectionRecordPDFController {
                 if(index%13==0){
                     AddLastWhiteSpace(datalist,sb.toString(),wcf);
                     //添加合格数
-                    datalist.add(new Label(12,20,String.valueOf(qualifiedTotal),wcf));
+                    datalist.add(new Label(13,20,String.valueOf(qualifiedTotal),wcf));
                     //到结束
                     GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
                     datalist.clear();
+                    qualifiedTotal=0;
                     index=1;
                     row=0;
                 }
@@ -272,9 +278,10 @@ public class InspectionRecordPDFController {
             if(datalist.size()>0){
                 AddLastWhiteSpace(datalist,sb.toString(),wcf);
                 //添加合格数
-                datalist.add(new Label(12,20,String.valueOf(qualifiedTotal),wcf));
+                datalist.add(new Label(13,20,String.valueOf(qualifiedTotal),wcf));
                 GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
                 datalist.clear();
+                qualifiedTotal=0;
                 index=1;
                 row=0;
             }
@@ -291,6 +298,7 @@ public class InspectionRecordPDFController {
         String end_time="2018-03-30";
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/od_coating_2fbe_record_template.xls";
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try{
             if(begin_time!=null&&begin_time!=""){
                 beginTime=sdf.parse(begin_time);
@@ -305,28 +313,46 @@ public class InspectionRecordPDFController {
             String result="";
             int qualifiedTotal=0;
             for (int i=0;i<list.size();i++){
-                Label label1 = new Label(1, row+8, getFormatString(list.get(i).getPipe_no()), wcf);
+                Label label1 = new Label(1, row+9, getFormatString(list.get(i).getPipe_no()), wcf);
                 datalist.add(label1);
-                Label label2 = new Label(2, row+8, String.valueOf(list.get(i).getCoating_line_speed()), wcf);
+                Label label2 = new Label(2, row+9, String.valueOf(list.get(i).getCoating_line_speed()), wcf);
                 datalist.add(label2);
-                Label label3 = new Label(3, row+8, getFormatString(list.get(i).getBase_coat_used()), wcf);
+                Label label3 = new Label(3, row+9, getFormatString(list.get(i).getBase_coat_used()), wcf);
                 datalist.add(label3);
-                Label label4 = new Label(4, row+8, getFormatString(list.get(i).getBase_coat_lot_no()), wcf);
+                Label label4 = new Label(4, row+9, getFormatString(list.get(i).getBase_coat_lot_no()), wcf);
                 datalist.add(label4);
-                Label label5 = new Label(5, row+8, getFormatString(list.get(i).getTop_coat_used()), wcf);
+                Label label5 = new Label(5, row+9, getFormatString(list.get(i).getTop_coat_used()), wcf);
                 datalist.add(label5);
-                Label label6 = new Label(6, row+8,getFormatString(list.get(i).getTop_coat_lot_no()), wcf);
+                Label label6 = new Label(6, row+9,getFormatString(list.get(i).getTop_coat_lot_no()), wcf);
                 datalist.add(label6);
-                Label label7 = new Label(7, row+8,list.get(i).getBase_coat_gun_count()+"", wcf);
+                Label label7 = new Label(7, row+9,String.valueOf(list.get(i).getBase_coat_gun_count()), wcf);
                 datalist.add(label7);
-                Label label8 = new Label(8, row+8, list.get(i).getTop_coat_gun_count()+"", wcf);
+                Label label8 = new Label(8, row+9, String.valueOf(list.get(i).getTop_coat_gun_count()), wcf);
                 datalist.add(label8);
-                Label label9 = new Label(9, row+8, list.get(i).getApplication_temp()+"", wcf);
+                Label label9 = new Label(9, row+9, String.valueOf(list.get(i).getAir_pressure()), wcf);
                 datalist.add(label9);
-                Label label10 = new Label(10, row+8, list.get(i).getTo_first_touch_duration()+"", wcf);
+                Label label10 = new Label(10, row+9, String.valueOf(list.get(i).getCoating_voltage()), wcf);
                 datalist.add(label10);
-                Label label11= new Label(11, row+8,list.get(i).getTo_quench_duration()+"", wcf);
+                Label label11= new Label(11, row+9,String.valueOf(list.get(i).getGun_distance()), wcf);
                 datalist.add(label11);
+
+                Label label12= new Label(2, row+10,String.valueOf(list.get(i).getSpray_speed()), wcf);
+                datalist.add(label12);
+                Label label13= new Label(3, row+10,String.valueOf(list.get(i).getApplication_temp()), wcf);
+                datalist.add(label13);
+                Label label14= new Label(4, row+10,String.valueOf(list.get(i).getApplication_voltage()), wcf);
+                datalist.add(label14);
+
+                String dateStr=format.format(list.get(i).getOperation_time());
+                Label label15= new Label(5, row+10,dateStr, wcf);
+                datalist.add(label15);
+
+                Label label16= new Label(6, row+10,String.valueOf(list.get(i).getTo_first_touch_duration()), wcf);
+                datalist.add(label16);
+                Label label17= new Label(7, row+10,String.valueOf(list.get(i).getTo_quench_duration()), wcf);
+                datalist.add(label17);
+
+
                 result=list.get(i).getResult();
                 if(result!=null){
                     if(result.equals("0")){
@@ -342,29 +368,30 @@ public class InspectionRecordPDFController {
                 }else{
                     result=" ";
                 }
-                Label label12 = new Label(12, row+8, result, wcf);
-                datalist.add(label12);
+                Label label18 = new Label(12, row+9, result, wcf);
+                datalist.add(label18);
                 if(list.get(i).getRemark()!=null&&!list.get(i).getRemark().equals("")){
                     sb.append("#"+list.get(i).getPipe_no()+":"+list.get(i).getRemark()+" ");
                 }
                 //最后一行数据为空问题
-                index++;
-                row++;
-                if(index%13==0){
-                    AddLastWhiteSpace(datalist,sb.toString(),wcf);
+                index+=2;
+                row+=2;
+                if(index%11==0){
+                    datalist.add(new Label(2,19,getFormatString(sb.toString()),wcf));
                     //添加合格数
-                    datalist.add(new Label(12,20,String.valueOf(qualifiedTotal),wcf));
+                    datalist.add(new Label(12,19,String.valueOf(qualifiedTotal),wcf));
                     //到结束
                     GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
                     datalist.clear();
+                    qualifiedTotal=0;
                     index=1;
                     row=0;
                 }
             }
             if(datalist.size()>0){
-                AddLastWhiteSpace(datalist,sb.toString(),wcf);
+                datalist.add(new Label(2,19,getFormatString(sb.toString()),wcf));
                 //添加合格数
-                datalist.add(new Label(12,20,String.valueOf(qualifiedTotal),wcf));
+                datalist.add(new Label(12,19,String.valueOf(qualifiedTotal),wcf));
                 GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
                 datalist.clear();
                 index=1;
@@ -432,7 +459,7 @@ public class InspectionRecordPDFController {
                 if(isSample!=null){
                     if(isSample.equals("0")){
                         label7Txt="否";
-                    }else{
+                    }else if(isSample.equals("1")){
                         label7Txt="是";
                     }
                 }
@@ -472,27 +499,26 @@ public class InspectionRecordPDFController {
                     sb.append("#"+list.get(i).getPipe_no()+":"+list.get(i).getRemark()+" ");
                 }
                 //最后一行数据为空问题
-                index++;
+                index+=2;
                 row+=2;
-                if(index%5==0){
-                    datalist.add(new Label(2,19,sb.toString(),wcf));
+                if(index%11==0){
+                    datalist.add(new Label(2,19,getFormatString(sb.toString()),wcf));
                     //添加合格数
-                    datalist.add(new Label(12,19,String.valueOf(qualifiedTotal),wcf));
+                    datalist.add(new Label(13,19,String.valueOf(qualifiedTotal),wcf));
                     //到结束
                     GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
                     datalist.clear();
+                    qualifiedTotal=0;
                     index=1;
                     row=0;
                 }
             }
             if(datalist.size()>0){
-                if(sb.toString().equals(""))
-                   datalist.add(new Label(2,19," ",wcf));
-                else
-                    datalist.add(new Label(2,19,sb.toString(),wcf));
-                datalist.add(new Label(12,19,String.valueOf(qualifiedTotal),wcf));
+                datalist.add(new Label(2,19,getFormatString(sb.toString()),wcf));
+                datalist.add(new Label(13,19,String.valueOf(qualifiedTotal),wcf));
                 GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
                 datalist.clear();
+                qualifiedTotal=0;
                 index=1;
                 row=0;
             }
@@ -523,30 +549,44 @@ public class InspectionRecordPDFController {
             String result="";
             int qualifiedTotal=0;
             for (int i=0;i<list.size();i++){
-                Label label1 = new Label(1, row+8, getFormatString(list.get(i).getPipe_no()), wcf);
+                Label label1 = new Label(1, row+9, getFormatString(list.get(i).getPipe_no()), wcf);
                 datalist.add(label1);
-                Label label2 = new Label(2, row+8, String.valueOf(list.get(i).getCoating_line_speed()), wcf);
+                Label label2 = new Label(2, row+9, String.valueOf(list.get(i).getCoating_line_speed()), wcf);
                 datalist.add(label2);
-                Label label3 = new Label(3, row+8, getFormatString(list.get(i).getBase_coat_used()), wcf);
+                Label label3 = new Label(3, row+9, getFormatString(list.get(i).getBase_coat_used()), wcf);
                 datalist.add(label3);
-                Label label4 = new Label(4, row+8, getFormatString(list.get(i).getBase_coat_lot_no()), wcf);
+                Label label4 = new Label(4, row+9, getFormatString(list.get(i).getBase_coat_lot_no()), wcf);
                 datalist.add(label4);
-                Label label5 = new Label(5, row+8, getFormatString(list.get(i).getMiddle_coat_used()), wcf);
+                Label label5 = new Label(5, row+9, getFormatString(list.get(i).getMiddle_coat_used()), wcf);
                 datalist.add(label5);
-                Label label6 = new Label(6, row+8,getFormatString(list.get(i).getMiddle_coat_lot_no()), wcf);
+                Label label6 = new Label(6, row+9,getFormatString(list.get(i).getMiddle_coat_lot_no()), wcf);
                 datalist.add(label6);
-                Label label7 = new Label(7, row+8, getFormatString(list.get(i).getTop_coat_used()), wcf);
+                Label label7 = new Label(7, row+9, getFormatString(list.get(i).getTop_coat_used()), wcf);
                 datalist.add(label7);
-                Label label8 = new Label(8, row+8, getFormatString(list.get(i).getTop_coat_lot_no()), wcf);
+                Label label8 = new Label(8, row+9, getFormatString(list.get(i).getTop_coat_lot_no()), wcf);
                 datalist.add(label8);
-                Label label9 = new Label(9, row+8, String.valueOf(list.get(i).getBase_coat_gun_count()), wcf);
+                Label label9 = new Label(9, row+9, String.valueOf(list.get(i).getAir_pressure()), wcf);
                 datalist.add(label9);
-                Label label10 = new Label(10, row+8, String.valueOf(list.get(i).getApplication_temp()), wcf);
+                Label label10 = new Label(10, row+9, String.valueOf(list.get(i).getCoating_voltage()), wcf);
                 datalist.add(label10);
-                Label label11 = new Label(11, row+8,String.valueOf(list.get(i).getTo_first_touch_duration()), wcf);
+                Label label11 = new Label(11, row+9,String.valueOf(list.get(i).getGun_distance()), wcf);
                 datalist.add(label11);
-                Label label12 = new Label(12, row+8, String.valueOf(list.get(i).getTo_quench_duration()), wcf);
+
+                Label label12 = new Label(2, row+10, String.valueOf(list.get(i).getSpray_speed()), wcf);
                 datalist.add(label12);
+                Label label13 = new Label(3, row+10, String.valueOf(list.get(i).getBase_coat_gun_count()), wcf);
+                datalist.add(label13);
+                Label label14= new Label(4, row+10,String.valueOf(list.get(i).getApplication_temp()), wcf);
+                datalist.add(label14);
+                Label label15 = new Label(5, row+10, String.valueOf(list.get(i).getApplication_voltage()), wcf);
+                datalist.add(label15);
+                Label label16 = new Label(6, row+10, String.valueOf(list.get(i).getOperation_time()), wcf);
+                datalist.add(label16);
+                Label label17 = new Label(7, row+10, String.valueOf(list.get(i).getTo_first_touch_duration()), wcf);
+                datalist.add(label17);
+                Label label18 = new Label(8, row+10, String.valueOf(list.get(i).getTo_quench_duration()), wcf);
+                datalist.add(label18);
+
                 result=list.get(i).getResult();
                 if(result!=null){
                     if(result.equals("0")){
@@ -563,14 +603,14 @@ public class InspectionRecordPDFController {
                 }else{
                     result=" ";
                 }
-                Label label13 = new Label(13, row+8, result, wcf);
-                datalist.add(label13);
+                Label label19 = new Label(13, row+10, result, wcf);
+                datalist.add(label19);
                 if(list.get(i).getRemark()!=null&&!list.get(i).getRemark().equals("")){
                     sb.append("#"+list.get(i).getPipe_no()+":"+list.get(i).getRemark()+" ");
                 }
                 //最后一行数据为空问题
-                index++;
-                row++;
+                index+=2;
+                row+=2;
                 if(index%13==0){
                     AddLastWhiteSpace(datalist,sb.toString(),wcf);
                     //添加合格数
@@ -578,6 +618,7 @@ public class InspectionRecordPDFController {
                     //到结束
                     GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
                     datalist.clear();
+                    qualifiedTotal=0;
                     index=1;
                     row=0;
                 }
@@ -588,6 +629,7 @@ public class InspectionRecordPDFController {
                 datalist.add(new Label(13,20,String.valueOf(qualifiedTotal),wcf));
                 GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
                 datalist.clear();
+                qualifiedTotal=0;
                 index=1;
                 row=0;
             }

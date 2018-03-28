@@ -149,6 +149,13 @@
             setParamsMin($("input[name='holiday_tester_voltage_min']"));
             setParamsMax($("input[name='cutback_max']"));
             setParamsMin($("input[name='cutback_min']"));
+
+            setParamsMax($("input[name='epoxy_cutback_max']"));
+            setParamsMin($("input[name='epoxy_cutback_min']"));
+            setParamsMax($("input[name='magnetism_max']"));
+            setParamsMin($("input[name='magnetism_min']"));
+            setParamsMax($("input[name='coating_bevel_angle_max']"));
+            setParamsMin($("input[name='coating_bevel_angle_min']"));
         }
         function  setParamsMax($obj) {
             if($obj.val()==null||$obj.val()=="")
@@ -221,6 +228,13 @@
                    <th field="holiday_tester_voltage_min" align="center" width="150" hidden="true" class="i18n1" name="holidaytestervoltagemin">检漏仪电压最小值</th>
                    <th field="cutback_max" align="center" width="150" hidden="true" class="i18n1" name="cutbackmax">预留段最大值</th>
                    <th field="cutback_min" align="center" width="150" hidden="true" class="i18n1" name="cutbackmin">预留段最小值</th>
+
+                   <th field="epoxy_cutback_max" align="center" width="150" hidden="true" class="i18n1" name="epoxycutbackmax">粉末长度最大值</th>
+                   <th field="epoxy_cutback_min" align="center" width="150" hidden="true" class="i18n1" name="epoxycutbackmin">粉末长度最小值</th>
+                   <th field="magnetism_max" align="center" width="150" hidden="true" class="i18n1" name="magnetismmax">剩磁最大值</th>
+                   <th field="magnetism_min" align="center" width="150" hidden="true" class="i18n1" name="magnetismin">剩磁最小值</th>
+                   <th field="coating_bevel_angle_max" align="center" width="150" hidden="true" class="i18n1" name="coatingbevelanglemax">涂层倒角最大值 </th>
+                   <th field="coating_bevel_angle_min" align="center" width="150" hidden="true" class="i18n1" name="coatingbevelanglemin">涂层倒角最小值 </th>
                </tr>
              </thead>
          </table>
@@ -373,6 +387,24 @@
                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="cutback_max" value=""/></td>
                    <td class="i18n1" name="cutbackmin">预留段最小值</td>
                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="cutback_min" value=""/></td>
+               </tr>
+               <tr>
+                   <td class="i18n1" name="epoxycutbackmax">粉末长度最大值</td>
+                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="epoxy_cutback_max" value=""/></td>
+                   <td class="i18n1" name="epoxycutbackmin">粉末长度最小值</td>
+                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="epoxy_cutback_min" value=""/></td>
+               </tr>
+               <tr>
+                   <td class="i18n1" name="magnetismmax">剩磁最大值</td>
+                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="magnetism_max" value=""/></td>
+                   <td class="i18n1" name="magnetismmin">剩磁最小值</td>
+                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="magnetism_min" value=""/></td>
+               </tr>
+               <tr>
+                   <td class="i18n1" name="coatingbevelanglemax">涂层倒角最大值</td>
+                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="coating_bevel_angle_max" value=""/></td>
+                   <td class="i18n1" name="coatingbevelanglemin">涂层倒角最小值</td>
+                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="coating_bevel_angle_min" value=""/></td>
                </tr>
 
            </table>
