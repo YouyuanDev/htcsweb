@@ -18,11 +18,14 @@ public class IdBlastProcess {
     private  String result;
     private  String mill_no;
     private  float salt_contamination_before_blasting;
+    private  String surface_condition;
+    private  String external_coating_condition;
+    private  String marking;
 
     public IdBlastProcess() {
     }
 
-    public IdBlastProcess(int id, String pipe_no, Date operation_time, String operator_no, String original_pipe_no, String new_pipe_no, String pipe_no_update, String upload_files, String remark, String result, String mill_no, float salt_contamination_before_blasting) {
+    public IdBlastProcess(int id, String pipe_no, Date operation_time, String operator_no, String original_pipe_no, String new_pipe_no, String pipe_no_update, String upload_files, String remark, String result, String mill_no, float salt_contamination_before_blasting, String surface_condition, String external_coating_condition, String marking) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -35,6 +38,9 @@ public class IdBlastProcess {
         this.result = result;
         this.mill_no = mill_no;
         this.salt_contamination_before_blasting = salt_contamination_before_blasting;
+        this.surface_condition = surface_condition;
+        this.external_coating_condition = external_coating_condition;
+        this.marking = marking;
     }
 
     public int getId() {
@@ -131,5 +137,29 @@ public class IdBlastProcess {
 
     public void setSalt_contamination_before_blasting(float salt_contamination_before_blasting) {
         this.salt_contamination_before_blasting = salt_contamination_before_blasting;
+    }
+
+    public String getSurface_condition() {
+        return surface_condition;
+    }
+
+    public void setSurface_condition(String surface_condition) {
+        this.surface_condition = surface_condition;
+    }
+
+    public String getExternal_coating_condition() {
+        return external_coating_condition;
+    }
+
+    public void setExternal_coating_condition(String external_coating_condition) {
+        this.external_coating_condition = external_coating_condition;
+    }
+
+    public String getMarking() {
+        return marking;
+    }
+
+    public void setMarking(String marking) {
+        this.marking = marking;
     }
 }
