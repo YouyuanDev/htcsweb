@@ -364,18 +364,20 @@
                <td></td>
            </tr>
            <tr>
+               <td class="i18n1" name="marking"></td>
+               <td>
+                   <select id="mk" class="easyui-combobox" data-options="editable:false" name="marking"   style="width:200px;">
+                       <option value="0" selected="selected">清晰</option>
+                       <option value="1">不清晰</option>
+                       <%--<option value="2">待定</option>--%>
+                   </select>
+                   <%--<input class="easyui-textbox"  type="text" name="marking" value=""/>--%>
+               </td>
+               <td></td>
                <td class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</td>
                <td><input class="easyui-numberbox"  data-options="precision:2"  type="text" name="salt_contamination_before_blasting" value=""/></td>
                <td></td>
-               <td class="i18n1" name="pipenoupdate">完成标签更新</td>
-               <td>
-                   <%--<input class="easyui-textbox"  type="text" name="pipe_no_update" value=""/>--%>
-                       <select id="ee" class="easyui-combobox" data-options="editable:false" name="pipe_no_update"   style="width:200px;">
-                           <option value="0">是</option>
-                           <option value="1">否</option>
-                       </select>
-               </td>
-               <td></td>
+
 
            </tr>
 
@@ -422,14 +424,13 @@
                <td></td>
            </tr>
            <tr>
-               <td class="i18n1" name="marking"></td>
+               <td class="i18n1" name="pipenoupdate">完成标签更新</td>
                <td>
-                   <select id="mk" class="easyui-combobox" data-options="editable:false" name="marking"   style="width:200px;">
-                       <option value="0" selected="selected">清晰</option>
-                       <option value="1">不清晰</option>
-                       <%--<option value="2">待定</option>--%>
+                   <%--<input class="easyui-textbox"  type="text" name="pipe_no_update" value=""/>--%>
+                   <select id="ee" class="easyui-combobox" data-options="editable:false" name="pipe_no_update"   style="width:200px;">
+                       <option value="0">是</option>
+                       <option value="1">否</option>
                    </select>
-                   <%--<input class="easyui-textbox"  type="text" name="marking" value=""/>--%>
                </td>
                <td></td>
                <td width="16%" class="i18n1" name="result">结论</td>
