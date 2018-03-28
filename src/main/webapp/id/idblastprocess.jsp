@@ -102,7 +102,7 @@
                 look1.setValue(row.pipe_no);
                 look2.setText(row.operator_no);
                 look2.setValue(row.operator_no);
-                combox1.setValue(row.surface_condition);
+                combox1.setValue(row.internal_surface_condition);
                 combox2.setValue(row.external_coating_condition);
                 var odpictures=row.upload_files;
                 if(odpictures!=null&&odpictures!=""){
@@ -230,8 +230,8 @@
                        <th field="new_pipe_no" align="center" width="120" class="i18n1" name="newpipeno">新内壁标签管号</th>
                        <th field="salt_contamination_before_blasting" align="center" width="100"  class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</th>
 
-                       <th field="surface_condition" align="center" hidden="true" width="150" class="i18n1" name="surfacecondition">内表面外观</th>
-                       <th field="external_coating_condition" align="center" hidden="true" width="150" class="i18n1" name="externalcoatingcondition">外涂层表面</th>
+                       <th field="internal_surface_condition" align="center"  width="150" class="i18n1" name="internalsurfacecondition">内表面外观</th>
+                       <th field="external_coating_condition" align="center"  width="150" class="i18n1" name="externalcoatingcondition">外涂层表面</th>
                        <th field="marking" align="center" width="150" hidden="true" class="i18n1" name="marking">管体标识是否清晰</th>
 
 
@@ -380,20 +380,20 @@
            </tr>
 
            <tr>
-               <td class="i18n1" name="surfacecondition">内表面外观</td>
+               <td class="i18n1" name="internalsurfacecondition">内表面外观</td>
                <td>
-                   <div id="combobox1" class="mini-combobox hl-combox-miniui" style="width:185px;"  popupWidth="185" textField="text" valueField="text"
-                        url="../data/surfacequality.txt" name="surface_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick0" >
-                       <div property="columns">
-                           <div header="缺陷类型" field="text"></div>
-                       </div>
-                   </div>
-                   <%--<div id="combobox1" class="mini-combobox" style="width:185px;"  popupWidth="185" textField="text" valueField="text"--%>
-                        <%--url="../data/defect.txt" name="surface_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick0" >--%>
+                   <%--<div id="combobox1" class="mini-combobox hl-combox-miniui" style="width:185px;"  popupWidth="185" textField="text" valueField="text"--%>
+                        <%--url="../data/surfacequality.txt" name="surface_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick0" >--%>
                        <%--<div property="columns">--%>
                            <%--<div header="缺陷类型" field="text"></div>--%>
                        <%--</div>--%>
                    <%--</div>--%>
+                   <div id="combobox1" class="mini-combobox" style="width:185px;"  popupWidth="185" textField="text" valueField="text"
+                        url="../data/defect.txt" name="internal_surface_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick0" >
+                       <div property="columns">
+                           <div header="缺陷类型" field="text"></div>
+                       </div>
+                   </div>
                    <%--<select id="sc" class="easyui-combobox" data-options="editable:false" name="surface_condition"   style="width:200px;">--%>
                        <%--<option value="0" selected="selected">合格</option>--%>
                        <%--<option value="1">不合格</option>--%>

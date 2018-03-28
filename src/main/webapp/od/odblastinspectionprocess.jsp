@@ -159,7 +159,7 @@
 
                             if(!((res6>=data.pipe_temp_after_blast_min)&&(res6<=data.pipe_temp_after_blast_max)))
                                 $obj6.siblings().css("background-color","#F9A6A6");
-                            if(!((res6-res2)>=data.temp_above_dew_point_min))
+                            if(!(((res6-res2)>=data.temp_above_dew_point_min)&&((res6-res2)<=data.temp_above_dew_point_max)))
                                 $obj6.siblings().css("background-color","#F9A6A6");
                             if(!((res7>=data.salt_contamination_after_blasting_min)&&(res7<=data.salt_contamination_after_blasting_max)))
                                 $obj7.siblings().css("background-color","#F9A6A6");
@@ -287,6 +287,7 @@
                 <th field="surface_condition" align="center" width="120" class="i18n1" name="surfacecondition">表面质量</th>
                 <th field="elapsed_time" align="center" width="120" class="i18n1" name="elapsedtime">涂敷前等待时间(分钟)</th>
                 <th field="oil_water_in_air_compressor" align="center" width="120" class="i18n1" name="oilwaterinaircompressor">压缩空气是否存在油水</th>
+
                 <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                 <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
                 <th field="operation_time" align="center" width="150" class="i18n1" name="operationtime" data-options="formatter:formatterdate">操作时间</th>
@@ -439,10 +440,26 @@
 
                 <tr>
                     <td class="i18n1" name="blastfinishsa25">清洁度Sa2.5</td>
-                    <td><input class="easyui-validatebox" type="text" name="blast_finish_sa25" value=""/></td>
+                    <td>
+                        <select id="bfs" class="easyui-combobox" data-options="editable:false" name="blast_finish_sa25"   style="width:200px;">
+                            <option value="2.0" selected="selected">Sa2.0</option>
+                            <option value="2.5">Sa2.5</option>
+                            <option value="3.0">Sa3.0</option>
+                        </select>
+                        <%--<input class="easyui-validatebox" type="text" name="blast_finish_sa25" value=""/>--%>
+                    </td>
                     <td></td>
                     <td width="16%" class="i18n1" name="surfacedustrating">灰尘度</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="surface_dust_rating" value=""/></td>
+                    <td>
+                        <select id="sdr" class="easyui-combobox" data-options="editable:false" name="surface_dust_rating"   style="width:200px;">
+                            <option value="1" selected="selected">1级</option>
+                            <option value="2">2级</option>
+                            <option value="3">3级</option>
+                            <option value="4">4级</option>
+                            <option value="5">5级</option>
+                        </select>
+                        <%--<input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="surface_dust_rating" value=""/>--%>
+                    </td>
                     <td></td>
 
                 </tr>
