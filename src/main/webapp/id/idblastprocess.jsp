@@ -102,6 +102,8 @@
                 look1.setValue(row.pipe_no);
                 look2.setText(row.operator_no);
                 look2.setValue(row.operator_no);
+                combox1.setValue(row.surface_condition);
+                combox2.setValue(row.external_coating_condition);
                 var odpictures=row.upload_files;
                 if(odpictures!=null&&odpictures!=""){
                      var imgList=odpictures.split(';');
@@ -380,18 +382,30 @@
            <tr>
                <td class="i18n1" name="surfacecondition">内表面外观</td>
                <td>
-                   <select id="sc" class="easyui-combobox" data-options="editable:false" name="surface_condition"   style="width:200px;">
-                       <option value="0" selected="selected">合格</option>
-                       <option value="1">不合格</option>
-                   </select>
+                   <div id="combobox1" class="mini-combobox" style="width:185px;"  popupWidth="185" textField="text" valueField="text"
+                        url="../data/defect.txt" name="surface_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick0" >
+                       <div property="columns">
+                           <div header="缺陷类型" field="text"></div>
+                       </div>
+                   </div>
+                   <%--<select id="sc" class="easyui-combobox" data-options="editable:false" name="surface_condition"   style="width:200px;">--%>
+                       <%--<option value="0" selected="selected">合格</option>--%>
+                       <%--<option value="1">不合格</option>--%>
+                   <%--</select>--%>
                </td>
                <td></td>
                <td class="i18n1" name="externalcoatingcondition">外涂层表面</td>
                <td>
-                   <select id="ecc" class="easyui-combobox" data-options="editable:false" name="external_coating_condition"   style="width:200px;">
-                       <option value="0" selected="selected">合格</option>
-                       <option value="1">不合格</option>
-                   </select>
+                   <div id="combobox2" class="mini-combobox" style="width:185px;"  popupWidth="185" textField="text" valueField="text"
+                        url="../data/defect.txt" name="external_coating_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick1" >
+                       <div property="columns">
+                           <div header="缺陷类型" field="text"></div>
+                       </div>
+                   </div>
+                   <%--<select id="ecc" class="easyui-combobox" data-options="editable:false" name="external_coating_condition"   style="width:200px;">--%>
+                       <%--<option value="0" selected="selected">合格</option>--%>
+                       <%--<option value="1">不合格</option>--%>
+                   <%--</select>--%>
                </td>
                <td></td>
            </tr>
@@ -401,7 +415,7 @@
                    <select id="mk" class="easyui-combobox" data-options="editable:false" name="marking"   style="width:200px;">
                        <option value="0" selected="selected">清晰</option>
                        <option value="1">不清晰</option>
-                       <option value="2">待定</option>
+                       <%--<option value="2">待定</option>--%>
                    </select>
                    <%--<input class="easyui-textbox"  type="text" name="marking" value=""/>--%>
                </td>
@@ -514,8 +528,18 @@
     var grid2=mini.get("datagrid2");
     var look1=mini.get('lookup1');
     var look2= mini.get("lookup2");
-
-
+    var combox1=mini.get("combobox1");
+    var combox2=mini.get("combobox2");
+    combox1.on("showpopup",function () {
+        $('.mini-shadow').css('z-index','99999');
+        $('.mini-popup').css('z-index','100000');
+        $('.mini-panel').css('z-index','100000');
+    });
+    combox2.on("showpopup",function () {
+        $('.mini-shadow').css('z-index','99999');
+        $('.mini-popup').css('z-index','100000');
+        $('.mini-panel').css('z-index','100000');
+    });
     function onSearchClick(type) {
         if(type==1)
         {
@@ -585,5 +609,15 @@
             employeeno:keyText3.value
         });
     });
+    function onComboxCloseClick0(e) {
+        var obj = e.sender;
+        obj.setText("");
+        obj.setValue("");
+    }
+    function onComboxCloseClick1(e) {
+        var obj = e.sender;
+        obj.setText("");
+        obj.setValue("");
+    }
     hlLanguage("../i18n/");
 </script>
