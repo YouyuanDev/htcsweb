@@ -89,23 +89,15 @@ public class OdCoatingProcessController {
             if(odCoatingProcess.getId()==0){
                 //添加
                  resTotal=odCoatingProcessDao.addOdCoatingProcess(odCoatingProcess);
-                 //此时的resTotal为新增厚的记录的id，更新odBlastInsepction的等待时间
-                 //－先根据新增id查询外打砂检验的id,然后更新
-                 int id=odCoatingProcess.getId();
-                 List<HashMap<String,Object>>list=odBlastInspectionProcessDao.getOdBlastInfoByCoatingInfo(pipeno,id);
-                 if(list!=null&&list.size()>0){
-                     HashMap<String,Object>hs=list.get(0);
-                     int odBlastId=Integer.parseInt(String.valueOf(hs.get("id")));
-                     long begin_time=format.parse(String.valueOf(hs.get("odcoatingtime"))).getTime();
-                     long end_time=format.parse(String.valueOf(hs.get("odblasttime"))).getTime();
-                     float minute=((begin_time-end_time)/(1000));
-                     minute=minute/60;
-                     minute=(float)(Math.round(minute*100))/100;
-                     odBlastInspectionProcessDao.updateElapsedTime(minute,odBlastId);
-                 }
             }else{
                 //修改！
                 resTotal=odCoatingProcessDao.updateOdCoatingProcess(odCoatingProcess);
+
+            }
+
+            if(resTotal>0){
+                //此时的resTotal为新增厚的记录的id，更新odBlastInsepction的等待时间
+                //－先根据新增id查询外打砂检验的id,然后更新
                 int id=odCoatingProcess.getId();
                 List<HashMap<String,Object>>list=odBlastInspectionProcessDao.getOdBlastInfoByCoatingInfo(pipeno,id);
                 if(list!=null&&list.size()>0){
@@ -118,12 +110,10 @@ public class OdCoatingProcessController {
                     minute=(float)(Math.round(minute*100))/100;
                     odBlastInspectionProcessDao.updateElapsedTime(minute,odBlastId);
                 }
-            }
-            if(resTotal>0){
                 //更新管子的状态
-                List<PipeBasicInfo> list=pipeBasicInfoDao.getPipeNumber(pipeno);
-                if(list.size()>0){
-                    PipeBasicInfo p=list.get(0);
+                List<PipeBasicInfo> pipelist=pipeBasicInfoDao.getPipeNumber(pipeno);
+                if(pipelist.size()>0){
+                    PipeBasicInfo p=pipelist.get(0);
                     if(p.getStatus().equals("od2")) {
                         //验证钢管状态为光管
                         if(odCoatingProcess.getResult().equals("1")) {//当合格时才更新钢管状态
