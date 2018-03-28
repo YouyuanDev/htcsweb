@@ -109,17 +109,28 @@
                     success:function (data) {
                         var $obj1=$("input[name='dry_film_thickness_list']");
                         $obj1.siblings().css("background-color","#FFFFFF");
+                        var $obj2=$("input[name='roughness_list']");
+                        $obj2.siblings().css("background-color","#FFFFFF");
                         var $obj7=$("input[name='cutback_length']");
                         $obj7.siblings().css("background-color","#FFFFFF");
                         if(data!=null){
                             var res1=changeComma($obj1.val());
                             var res1_1=res1.split(',');
+                            var res2=changeComma($obj2.val());
+                            var res2_1=res2.split(',');
+
                             var res7=changeComma($obj7.val());
                             var res7_1=res7.split(',');
                             for(var i=0;i<res1_1.length;i++){
                                 if(res1_1[i]!=""&&res1_1[i].length>0){
                                     if(!((res1_1[i]>=data.dry_film_thickness_min)&&(res1_1[i]<=data.dry_film_thickness_max)))
                                         $obj1.siblings().css("background-color","#F9A6A6");
+                                }
+                            }
+                            for(var i=0;i<res2_1.length;i++){
+                                if(res2_1[i]!=""&&res2_1[i].length>0){
+                                    if(!((res2_1[i]>=data.roughness_min)&&(res2_1[i]<=data.roughness_max)))
+                                        $obj2.siblings().css("background-color","#F9A6A6");
                                 }
                             }
                             for(var i=0;i<res7_1.length;i++){
