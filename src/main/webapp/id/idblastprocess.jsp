@@ -382,12 +382,18 @@
            <tr>
                <td class="i18n1" name="surfacecondition">内表面外观</td>
                <td>
-                   <div id="combobox1" class="mini-combobox" style="width:185px;"  popupWidth="185" textField="text" valueField="text"
-                        url="../data/defect.txt" name="surface_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick0" >
+                   <div id="combobox1" class="mini-combobox hl-combox-miniui" style="width:185px;"  popupWidth="185" textField="text" valueField="text"
+                        url="../data/surfacequality.txt" name="surface_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick0" >
                        <div property="columns">
                            <div header="缺陷类型" field="text"></div>
                        </div>
                    </div>
+                   <%--<div id="combobox1" class="mini-combobox" style="width:185px;"  popupWidth="185" textField="text" valueField="text"--%>
+                        <%--url="../data/defect.txt" name="surface_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick0" >--%>
+                       <%--<div property="columns">--%>
+                           <%--<div header="缺陷类型" field="text"></div>--%>
+                       <%--</div>--%>
+                   <%--</div>--%>
                    <%--<select id="sc" class="easyui-combobox" data-options="editable:false" name="surface_condition"   style="width:200px;">--%>
                        <%--<option value="0" selected="selected">合格</option>--%>
                        <%--<option value="1">不合格</option>--%>
@@ -396,12 +402,18 @@
                <td></td>
                <td class="i18n1" name="externalcoatingcondition">外涂层表面</td>
                <td>
-                   <div id="combobox2" class="mini-combobox" style="width:185px;"  popupWidth="185" textField="text" valueField="text"
-                        url="../data/defect.txt" name="external_coating_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick1" >
+                   <div id="combobox2" class="mini-combobox hl-combox-miniui" style="width:185px;"  popupWidth="185" textField="text" valueField="text"
+                        url="../data/surfacequality.txt" name="external_coating_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick1" >
                        <div property="columns">
                            <div header="缺陷类型" field="text"></div>
                        </div>
                    </div>
+                   <%--<div id="combobox2" class="mini-combobox" style="width:185px;"  popupWidth="185" textField="text" valueField="text"--%>
+                        <%--url="../data/defect.txt" name="external_coating_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick1" >--%>
+                       <%--<div property="columns">--%>
+                           <%--<div header="缺陷类型" field="text"></div>--%>
+                       <%--</div>--%>
+                   <%--</div>--%>
                    <%--<select id="ecc" class="easyui-combobox" data-options="editable:false" name="external_coating_condition"   style="width:200px;">--%>
                        <%--<option value="0" selected="selected">合格</option>--%>
                        <%--<option value="1">不合格</option>--%>
