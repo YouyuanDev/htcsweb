@@ -164,7 +164,7 @@ public class InspectionRecordPDFController {
                     datalist.clear();
                     qualifiedTotal=0;
                     index=1;
-                    row=0;
+                    row=0;sb.setLength(0);
                 }
             }
             if(datalist.size()>0){
@@ -175,7 +175,7 @@ public class InspectionRecordPDFController {
                 datalist.clear();
                 qualifiedTotal=0;
                 index=1;
-                row=0;
+                row=0;sb.setLength(0);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -272,7 +272,7 @@ public class InspectionRecordPDFController {
                     datalist.clear();
                     qualifiedTotal=0;
                     index=1;
-                    row=0;
+                    row=0;sb.setLength(0);
                 }
             }
             if(datalist.size()>0){
@@ -283,7 +283,7 @@ public class InspectionRecordPDFController {
                 datalist.clear();
                 qualifiedTotal=0;
                 index=1;
-                row=0;
+                row=0;sb.setLength(0);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -385,7 +385,7 @@ public class InspectionRecordPDFController {
                     datalist.clear();
                     qualifiedTotal=0;
                     index=1;
-                    row=0;
+                    row=0;sb.setLength(0);
                 }
             }
             if(datalist.size()>0){
@@ -394,7 +394,7 @@ public class InspectionRecordPDFController {
                 datalist.add(new Label(12,19,String.valueOf(qualifiedTotal),wcf));
                 GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
                 datalist.clear();
-                index=1;
+                index=1;sb.setLength(0);
                 row=0;
             }
         }catch (Exception e){
@@ -504,23 +504,23 @@ public class InspectionRecordPDFController {
                 if(index%11==0){
                     datalist.add(new Label(2,19,getFormatString(sb.toString()),wcf));
                     //添加合格数
-                    datalist.add(new Label(13,19,String.valueOf(qualifiedTotal),wcf));
+                    datalist.add(new Label(12,19,String.valueOf(qualifiedTotal),wcf));
                     //到结束
                     GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
                     datalist.clear();
                     qualifiedTotal=0;
                     index=1;
-                    row=0;
+                    row=0;sb.setLength(0);
                 }
             }
             if(datalist.size()>0){
                 datalist.add(new Label(2,19,getFormatString(sb.toString()),wcf));
-                datalist.add(new Label(13,19,String.valueOf(qualifiedTotal),wcf));
+                datalist.add(new Label(12,19,String.valueOf(qualifiedTotal),wcf));
                 GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
                 datalist.clear();
                 qualifiedTotal=0;
                 index=1;
-                row=0;
+                row=0;sb.setLength(0);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -535,6 +535,7 @@ public class InspectionRecordPDFController {
         String end_time="2018-03-30";
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/od_coating_3lpe_record_template.xls";
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try{
             if(begin_time!=null&&begin_time!=""){
                 beginTime=sdf.parse(begin_time);
@@ -580,7 +581,8 @@ public class InspectionRecordPDFController {
                 datalist.add(label14);
                 Label label15 = new Label(5, row+10, String.valueOf(list.get(i).getApplication_voltage()), wcf);
                 datalist.add(label15);
-                Label label16 = new Label(6, row+10, String.valueOf(list.get(i).getOperation_time()), wcf);
+                String dateSter=format.format(list.get(i).getOperation_time());
+                Label label16 = new Label(6, row+10, dateSter, wcf);
                 datalist.add(label16);
                 Label label17 = new Label(7, row+10, String.valueOf(list.get(i).getTo_first_touch_duration()), wcf);
                 datalist.add(label17);
@@ -603,7 +605,7 @@ public class InspectionRecordPDFController {
                 }else{
                     result=" ";
                 }
-                Label label19 = new Label(13, row+10, result, wcf);
+                Label label19 = new Label(12, row+10, result, wcf);
                 datalist.add(label19);
                 if(list.get(i).getRemark()!=null&&!list.get(i).getRemark().equals("")){
                     sb.append("#"+list.get(i).getPipe_no()+":"+list.get(i).getRemark()+" ");
@@ -611,27 +613,29 @@ public class InspectionRecordPDFController {
                 //最后一行数据为空问题
                 index+=2;
                 row+=2;
-                if(index%13==0){
-                    AddLastWhiteSpace(datalist,sb.toString(),wcf);
+                if(index%11==0){
+                    datalist.add(new Label(2,19,getFormatString(sb.toString()),wcf));
                     //添加合格数
-                    datalist.add(new Label(13,20,String.valueOf(qualifiedTotal),wcf));
+                    datalist.add(new Label(11,19,String.valueOf(qualifiedTotal),wcf));
                     //到结束
                     GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
                     datalist.clear();
                     qualifiedTotal=0;
                     index=1;
                     row=0;
+                    sb.setLength(0);
                 }
             }
             if(datalist.size()>0){
-                AddLastWhiteSpace(datalist,sb.toString(),wcf);
+                datalist.add(new Label(2,19,String.valueOf(sb.toString()),wcf));
                 //添加合格数
-                datalist.add(new Label(13,20,String.valueOf(qualifiedTotal),wcf));
+                datalist.add(new Label(11,19,String.valueOf(qualifiedTotal),wcf));
                 GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
                 datalist.clear();
                 qualifiedTotal=0;
                 index=1;
                 row=0;
+                sb.setLength(0);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -646,6 +650,7 @@ public class InspectionRecordPDFController {
         String end_time="2018-03-30";
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/od_coating_3lpe_inspection_record_template.xls";
+
         try{
             if(begin_time!=null&&begin_time!=""){
                 beginTime=sdf.parse(begin_time);

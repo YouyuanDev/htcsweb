@@ -123,6 +123,12 @@
             setParamsMin($("input[name='residual_magnetism_min']"));
             setParamsMax($("input[name='wet_film_thickness_max']"));
             setParamsMin($("input[name='wet_film_thickness_min']"));
+            setParamsMax($("input[name='salt_contamination_before_blast_max']"));
+            setParamsMin($("input[name='salt_contamination_before_blast_min']"));
+            setParamsMax($("input[name='salt_contamination_after_blasting_max']"));
+            setParamsMin($("input[name='salt_contamination_after_blasting_min']"));
+            setParamsMax($("input[name='surface_dust_rating_max']"));
+            setParamsMin($("input[name='surface_dust_rating_min']"));
         }
         function  setParamsMax($obj) {
             if($obj.val()==null||$obj.val()=="")
@@ -170,6 +176,13 @@
                 <th field="residual_magnetism_min" align="center" width="100" hidden="true" class="i18n1" name="residualmagnetismmin">剩磁最小值</th>
                 <th field="wet_film_thickness_max" align="center" width="100" hidden="true" class="i18n1" name="wetfilmthicknessmax">湿膜厚度最大值μm</th>
                 <th field="wet_film_thickness_min" align="center" width="100" hidden="true" class="i18n1" name="wetfilmthicknessmin">湿膜厚度最小值μm</th>
+
+                <th field="salt_contamination_before_blast_max" align="center" hidden="true" width="100" class="i18n1" name="saltcontaminationbeforeblastmax">打砂前盐度最大值</th>
+                <th field="salt_contamination_before_blast_min" align="center" hidden="true" width="120" class="i18n1" name="saltcontaminationbeforeblastmin">打砂前盐度最大值</th>
+                <th field="salt_contamination_after_blasting_max" align="center" width="100" hidden="true" class="i18n1" name="saltcontaminationafterblastingmax">打砂后盐度最大值</th>
+                <th field="salt_contamination_after_blasting_min" align="center" width="100" hidden="true" class="i18n1" name="saltcontaminationafterblastingmin">打砂后盐度最小值</th>
+                <th field="surface_dust_rating_max" align="center" width="100" hidden="true" class="i18n1" name="surfacedustratingmax">灰尘度最大值</th>
+                <th field="surface_dust_rating_min" align="center" width="100" hidden="true" class="i18n1" name="surfacedustratingmin">灰尘度最小值</th>
             </tr>
             </thead>
         </table>
@@ -251,6 +264,27 @@
                     <td class="i18n1" name="wetfilmthicknessmin">剩磁最小值</td>
                     <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="wet_film_thickness_min" value=""/></td>
                 </tr>
+
+
+                <tr>
+                    <td class="i18n1" name="saltcontaminationbeforeblastmax">打砂前盐度最大值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="salt_contamination_before_blast_max" value=""/></td>
+                    <td class="i18n1" name="saltcontaminationbeforeblastmin">打砂前盐度最小值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="salt_contamination_before_blast_min" value=""/></td>
+                </tr>
+                <tr>
+                    <td class="i18n1" name="saltcontaminationafterblastingmax">打砂后盐度最大值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="salt_contamination_after_blasting_max" value=""/></td>
+                    <td class="i18n1" name="saltcontaminationafterblastingmin">打砂后盐度最小值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="salt_contamination_after_blasting_min" value=""/></td>
+                </tr>
+                <tr>
+                    <td class="i18n1" name="surfacedustratingmax">灰尘度最大值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="surface_dust_rating_max" value=""/></td>
+                    <td class="i18n1" name="surfacedustratingmin">灰尘度最小值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="surface_dust_rating_min" value=""/></td>
+                </tr>
+
             </table>
         </fieldset>
     </form>

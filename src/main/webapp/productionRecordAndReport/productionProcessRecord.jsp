@@ -9,6 +9,19 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../easyui/themes/bootstrap/easyui.css">
+    <link rel="stylesheet" type="text/css" href="../easyui/themes/icon.css">
+    <link href="../miniui/multiupload/multiupload.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="../css/common.css"/>
+    <script src="../easyui/jquery.min.js" type="text/javascript"></script>
+    <script src="../js/common.js" type="text/javascript"></script>
+    <script src="../miniui/boot.js" type="text/javascript"></script>
+    <script src="../miniui/fileupload/swfupload/swfupload.js" type="text/javascript"></script>
+    <script src="../miniui/multiupload/multiupload.js" type="text/javascript"></script>
+    <script  src="../js/lrscroll.js" type="text/javascript"></script>
+    <script src="../js/jquery.i18n.properties-1.0.9.js" type="text/javascript"></script>
+    <script src="../js/language.js" type="text/javascript"></script>
+
     <style type="text/css">
         .datagrid-mask {
             position: absolute;
@@ -80,7 +93,7 @@
     </script>
 </head>
 <body>
-<div>
+<div style="padding:10px">
     <select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
         <option value="0">外喷砂工序</option>
         <option value="1">外喷砂检验工序</option>
@@ -104,5 +117,6 @@
     <button class="btnReport">开始生成</button>
 
 </div>
+<script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
 </body>
 </html>
