@@ -199,11 +199,15 @@
                             return false;
                         }
                     }
+
                     if($("input[name='odFinalInprotime']").val()==""){
                         hlAlertFour("请输入操作时间");
                         return false;
                     }
                     $("input[name='cutback_length']").val(changeComma(arg1));
+                    $("input[name='magnetism_list']").val(changeComma(arg2));
+                    $("input[name='coating_bevel_angle_list']").val(changeComma(arg3));
+                    $("input[name='epoxy_cutback_list']").val(changeComma(arg4));
                 },
                 success: function(result){
                     var result = eval('('+result+')');
