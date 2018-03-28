@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 /**
@@ -73,8 +74,9 @@ public class SessionFilter extends OncePerRequestFilter{
 
 
 
-        System.out.println("====测试Filter功能====拦截用户登陆====");
+        //System.out.println("====测试Filter功能====拦截用户登陆====");
         String strUri = request.getRequestURI();
+        String suffix=strUri.substring(strUri.lastIndexOf('.')+1);
         //从uri中取出functioncode 如/index.jsp 为 index
         String reqfunctionCode=strUri.substring(strUri.lastIndexOf('/')+1,strUri.lastIndexOf('.'));
         System.out.println("reqfunctionCode===="+reqfunctionCode);
@@ -98,17 +100,37 @@ public class SessionFilter extends OncePerRequestFilter{
             }
 
 
-            System.out.println("存在用户session 可以进入 session="+request.getSession().getAttribute("userSession"));
-            System.out.println("检测用户是否存在页面"+reqfunctionCode+"的权限");
+            //System.out.println("存在用户session 可以进入 session="+request.getSession().getAttribute("userSession"));
+            //System.out.println("检测用户是否存在页面"+reqfunctionCode+"的权限");
             boolean authrized=false;
             //下面开始验证访问权限
             HashMap<String,Object> functionMap=(HashMap<String,Object>)request.getSession().getAttribute("userfunctionMap");
             if(functionMap!=null&&functionMap.containsKey(reqfunctionCode)){
+                System.out.println("存在存在页面"+reqfunctionCode+"的权限");
                 authrized=true;
             }
-            System.out.println("authrized===="+authrized);
-            if(!authrized)
-                response.sendRedirect("/error.jsp") ;
+            //System.out.println("authrized===="+authrized);
+            if(!authrized) {
+                System.out.println("Error：不存在存在页面"+reqfunctionCode+"的权限");
+                if(suffix.equals("jsp")) {
+                    response.sendRedirect("/error.jsp");
+
+                }else{
+                    JSONObject json = new JSONObject();
+                    StringBuilder sbmessage = new StringBuilder();
+                    sbmessage.append("没有权限\n");
+
+                    json.put("success", false);
+                    json.put("message", sbmessage.toString());
+                    try {
+                        ResponseUtil.write(response, json);
+                    } catch (Exception e) {
+
+                    }
+                }
+
+
+            }
             else
                 filterChain.doFilter(request, response);//不执行过滤,继续执行操作
             //filterChain.doFilter(new MyFilter((HttpServletRequest)request), response);//调用下一个filter
