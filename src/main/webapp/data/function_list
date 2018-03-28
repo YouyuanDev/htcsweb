@@ -167,3 +167,6 @@
 170	权限信息管理	funs	搜索	r	getFunctionByLike
 171	权限信息管理	fune	编辑	w	saveFunction
 172	权限信息管理	fund	删除	d	delFunction
+173	生产岗位记录管理	pprmr	查看	r	productionProcessRecord
+174	生产岗位记录管理	pprme	编辑	w	genProductionProcessRecord
+
