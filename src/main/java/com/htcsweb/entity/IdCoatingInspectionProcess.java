@@ -10,7 +10,7 @@ public class IdCoatingInspectionProcess {
     private float dry_film_thickness_max;
     private float dry_film_thickness_min;
     private float holiday_tester_volts;
-    private int holiday_test_results;
+    private int holidays;
     private String surface_condition;
     private String bevel_check;
     private float magnetism;
@@ -24,7 +24,7 @@ public class IdCoatingInspectionProcess {
     public IdCoatingInspectionProcess() {
     }
 
-    public IdCoatingInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, float dry_film_thickness_max, float dry_film_thickness_min, float holiday_tester_volts, int holiday_test_results, String surface_condition, String bevel_check, float magnetism, int internal_repairs, String upload_files, String remark, String result, String mill_no, String is_sample, String wet_film_thickness_list) {
+    public IdCoatingInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, float dry_film_thickness_max, float dry_film_thickness_min, float holiday_tester_volts, int holidays, String surface_condition, String bevel_check, float magnetism, int internal_repairs, String upload_files, String remark, String result, String mill_no, String is_sample, String wet_film_thickness_list) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -32,7 +32,7 @@ public class IdCoatingInspectionProcess {
         this.dry_film_thickness_max = dry_film_thickness_max;
         this.dry_film_thickness_min = dry_film_thickness_min;
         this.holiday_tester_volts = holiday_tester_volts;
-        this.holiday_test_results = holiday_test_results;
+        this.holidays = holidays;
         this.surface_condition = surface_condition;
         this.bevel_check = bevel_check;
         this.magnetism = magnetism;
@@ -101,12 +101,12 @@ public class IdCoatingInspectionProcess {
         this.holiday_tester_volts = holiday_tester_volts;
     }
 
-    public int getHoliday_test_results() {
-        return holiday_test_results;
+    public int getHolidays() {
+        return holidays;
     }
 
-    public void setHoliday_test_results(int holiday_test_results) {
-        this.holiday_test_results = holiday_test_results;
+    public void setHolidays(int holidays) {
+        this.holidays = holidays;
     }
 
     public String getSurface_condition() {
