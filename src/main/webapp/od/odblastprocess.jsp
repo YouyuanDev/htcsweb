@@ -349,6 +349,38 @@
 
        <table class="ht-table">
            <tr>
+               <td width="16%" class="i18n1" name="marking">管体标识是否清晰</td>
+               <td>
+                   <select id="mk" class="easyui-combobox" data-options="editable:false" name="marking" style="width:200px;">
+                       <option value="0" selected="selected">清晰</option>
+                       <option value="1">不清晰</option>
+                   </select>
+                   <%--<input class="easyui-numberbox" data-options="min:0,precision:1" type="text" name="preheat_temp" value=""/>--%>
+               </td>
+               <td></td>
+               <td width="16%"  class="i18n1" name="surfacecondition">外观缺陷</td>
+               <td>
+
+                   <%--<input class="easyui-validatebox" type="text" name="surface_condition" value=""/>--%>
+                   <div id="combobox1" class="mini-combobox" style="width:185px;"  popupWidth="185" textField="text" valueField="text"
+                        url="../data/defect.txt" name="surface_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick" >
+                       <div property="columns">
+                           <div header="缺陷类型" field="text"></div>
+                       </div>
+                   </div>
+
+               </td>
+               <td></td>
+           </tr>
+           <tr>
+               <td width="16%" class="i18n1" name="preheattemp">预热温度</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:1" type="text" name="preheat_temp" value=""/></td>
+               <td></td>
+               <td width="16%" class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="salt_contamination_before_blasting" value=""/></td>
+               <td></td>
+           </tr>
+           <tr>
                <td class="i18n1" name="alkalinedwelltime">碱洗时间</td>
                <td><input class="easyui-numberbox hl-errorcolor" data-options="min:0,precision:0" type="text" name="alkaline_dwell_time" value=""/></td>
                <td></td>
@@ -365,24 +397,7 @@
                <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="acid_concentration" value=""/></td>
                <td></td>
            </tr>
-           <tr>
-               <td width="16%"  class="i18n1" name="surfacecondition">外观缺陷</td>
-               <td>
 
-                   <%--<input class="easyui-validatebox" type="text" name="surface_condition" value=""/>--%>
-                   <div id="combobox1" class="mini-combobox" style="width:185px;"  popupWidth="185" textField="text" valueField="text"
-                            url="../data/defect.txt" name="surface_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick" >
-                           <div property="columns">
-                               <div header="缺陷类型" field="text"></div>
-                           </div>
-                   </div>
-
-               </td>
-               <td></td>
-               <td width="16%" class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="salt_contamination_before_blasting" value=""/></td>
-               <td></td>
-           </tr>
 
            <tr>
                <td width="16%" class="i18n1" name="blastlinespeed">打砂传送速度</td>
@@ -392,20 +407,7 @@
                <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="conductivity" value=""/></td>
                <td></td>
            </tr>
-           <tr>
-               <td width="16%" class="i18n1" name="preheattemp">预热温度</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:1" type="text" name="preheat_temp" value=""/></td>
-               <td></td>
-               <td width="16%" class="i18n1" name="marking">管体标识是否清晰</td>
-               <td>
-                   <select id="mk" class="easyui-combobox" data-options="editable:false" name="marking" style="width:200px;">
-                       <option value="0" selected="selected">清晰</option>
-                       <option value="1">不清晰</option>
-                   </select>
-                   <%--<input class="easyui-numberbox" data-options="min:0,precision:1" type="text" name="preheat_temp" value=""/>--%>
-               </td>
-               <td></td>
-           </tr>
+
            <tr>
                <td width="16%" class="i18n1" name="result">结论</td>
                <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
