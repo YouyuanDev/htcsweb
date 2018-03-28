@@ -272,7 +272,7 @@
                 <th field="weight" align="center" width="50" hidden="true" class="i18n1" name="weight">重量</th>
                 <th field="heat_no" align="center" hidden="true" width="50" class="i18n1" name="heat_no">炉号</th>
                 <th field="operator_no" align="center" width="100" class="i18n1" name="operatorno">操作工编号</th>
-
+                <th field="air_temp" align="center" hidden="false" width="120" class="i18n1" name="airtemp">环境温度</th>
                 <th field="relative_humidity" align="center" width="120" class="i18n1" name="relativehumidity">相对湿度</th>
                 <th field="dew_point" align="center" width="100"  class="i18n1" name="dewpoint">露点</th>
                 <th field="pipe_temp" width="100" align="center"  class="i18n1" name="pipetemp">钢管温度</th>
@@ -281,10 +281,10 @@
                 <th field="blast_finish_sa25" align="center" width="100"  class="i18n1" name="blastfinishsa25">清洁度Sa2.5</th>
                 <th field="profile" width="100" align="center" class="i18n1" name="profile">锚纹深度</th>
 
-                <th field="air_temp" align="center" hidden="true" width="120" class="i18n1" name="airtemp">环境温度</th>
-                <th field="surface_dust_rating" align="center" hidden="true" width="120" class="i18n1" name="surfacedustrating">灰尘度</th>
+
+                <th field="surface_dust_rating" align="center" hidden="false" width="120" class="i18n1" name="surfacedustrating">灰尘度</th>
                 <th field="salt_contamination_after_blasting" align="center" hidden="true" width="100"  class="i18n1" name="saltcontaminationafterblasting">打砂后盐度.5</th>
-                <th field="elapsed_time" width="100" align="center" hidden="true" class="i18n1" name="elapsedtime">涂敷前等待时间</th>
+                <th field="elapsed_time" width="100" align="center" hidden="false" class="i18n1" name="elapsedtime">涂敷前等待时间</th>
 
                 <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                 <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
