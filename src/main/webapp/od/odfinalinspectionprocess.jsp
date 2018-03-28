@@ -460,8 +460,8 @@
                     <td class="i18n1" width="16%" name="stencilverification">外喷标检验</td>
                     <td colspan="1">
                         <select id="sv" class="easyui-combobox" data-options="editable:false" name="stencil_verification" style="width:200px;">
-                            <option value="0" selected="selected">未检测</option>
-                            <option value="1">合格</option>
+                            <option value="0">未检测</option>
+                            <option value="1" selected="selected">合格</option>
                             <option value="2">不合格</option>
                         </select>
                     </td>

@@ -30,22 +30,7 @@
     <script type="text/javascript">
         var url;
         $(function(){
-            $('.pdfbtn').click(function () {
-                var htmlStr=$("iframe").attr("src");
-                $.ajax({
-                    type:'post',
-                    //url:'/CommonOperation/htmlToPDF.action',
-                    url:'/InspectionRecordPDFOperation/getOdCoat3LPEInspectionRecord.action',
-                    dataType:'json',
-                    data:{"htmlStr":htmlStr},
-                    success:function (data) {
 
-                    },
-                    error:function () {
-                        
-                    }
-                });
-            });
             var uriArr=["odblastprocess","odblastinspectionprocess","odcoatingprocess","odcoatinginspectionprocess",
                 "odcoating3lpeprocess","odcoating3lpeinspectionprocess","odstencilprocess","odfinalinspectionprocess",
                 "idblastprocess","idblastinspectionprocess","idcoatingprocess","idcoatinginspectionprocess","idstencilprocess","idfinalinspectionprocess",
@@ -714,9 +699,9 @@
     <div style="text-align: center"><h3>@2018 友元科技 版权所有</h3></div>
 </div>
 <div data-options="region:'north',split:true">
-    <div>
-        <button class="pdfbtn">转PDF</button>
-    </div>
+    <%--<div>--%>
+        <%--<button class="pdfbtn">转PDF</button>--%>
+    <%--</div>--%>
     <div style="float: right;padding:10px">
         <select id="language">
             <option value="zh-CN">中文</option>

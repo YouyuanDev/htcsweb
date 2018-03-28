@@ -49,10 +49,12 @@
     </style>
     <script type="text/javascript">
         $(function() {
-            $('.btnReport').click(function() {
+            $('.btnReport').click(function () {
+                var selectValue=$('#cc').select();
                 $.ajax({
                     type:"post",
                     url:"",
+                    data:{},
                     async:false,
                     beforeSend:function(){
                         ajaxLoading();
@@ -67,9 +69,6 @@
                         ajaxLoadEnd();
                     }
                 });
-
-                alert(1);
-                ajaxLoading();
             });
         });
 

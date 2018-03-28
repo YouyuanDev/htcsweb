@@ -166,12 +166,21 @@
                             return false;
                         }
                     }
+                    var arg3=$("input[name='roughness_list']").val().trim();
+                    if(arg3!=""){
+                        if(!thicknessIsAllow(arg3)){
+                            hlAlertFour("粗糙度列表不合法!");
+                            return false;
+                        }
+                    }
+
                     if($("input[name='idFinalInprotime']").val()==""){
                         hlAlertFour("请输入操作时间");
                         return false;
                     }
                     $("input[name='dry_film_thickness_list']").val(changeComma(arg1));
                     $("input[name='cutback_length']").val(changeComma(arg2));
+                    $("input[name='roughness_list']").val(changeComma(arg3));
                 },
                 success: function(result){
                     var result = eval('('+result+')');
@@ -242,6 +251,8 @@
                 <th field="id_inspection_result" align="center" width="80" class="i18n1" name="idinspectionresult">内涂层质检结果</th>
                 <th field="final_inspection_result" align="center" width="80" class="i18n1" name="finalinspectionresult">终检结果</th>
                 <th field="dry_film_thickness_list" align="center" width="80" class="i18n1" name="dryfilmthicknesslist">干膜厚度μm测量列表</th>
+                <th field="roughness_list" align="center" width="80" class="i18n1" name="roughnesslist">粗糙度(μm ,分隔)</th>
+
                 <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                 <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
                 <th field="operation_time" align="center" width="150" class="i18n1" name="operationtime" data-options="formatter:formatterdate">操作时间</th>
@@ -381,9 +392,15 @@
                 </tr>
                 <tr>
                     <td class="i18n1" name="dryfilmthicknesslist">干膜厚度μm测量列表</td>
-                    <td colspan="5">
+                    <td colspan="1">
                         <input class="easyui-textbox"  type="text" name="dry_film_thickness_list" value=""/>
                     </td>
+                    <td></td>
+                    <td class="i18n1" name="roughnesslist">粗糙度(μm ,分隔)</td>
+                    <td colspan="1">
+                        <input class="easyui-textbox"  type="text" name="roughness_list" value=""/>
+                    </td>
+                    <td></td>
                 </tr>
 
                 <tr>
