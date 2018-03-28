@@ -17,12 +17,13 @@ public class IdFinalInspectionProcess {
     private String dry_film_thickness_list;
     private String cutback_length;
     private String stencil_verification;
-
+    private String roughness_list;
 
     public IdFinalInspectionProcess() {
     }
 
-    public IdFinalInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, String od_inspection_result, String id_inspection_result, String final_inspection_result, String upload_files, String remark, String result, String mill_no, String dry_film_thickness_list, String cutback_length, String stencil_verification) {
+
+    public IdFinalInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, String od_inspection_result, String id_inspection_result, String final_inspection_result, String upload_files, String remark, String result, String mill_no, String dry_film_thickness_list, String cutback_length, String stencil_verification, String roughness_list) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -37,6 +38,7 @@ public class IdFinalInspectionProcess {
         this.dry_film_thickness_list = dry_film_thickness_list;
         this.cutback_length = cutback_length;
         this.stencil_verification = stencil_verification;
+        this.roughness_list = roughness_list;
     }
 
     public int getId() {
@@ -149,5 +151,13 @@ public class IdFinalInspectionProcess {
 
     public void setStencil_verification(String stencil_verification) {
         this.stencil_verification = stencil_verification;
+    }
+
+    public String getRoughness_list() {
+        return roughness_list;
+    }
+
+    public void setRoughness_list(String roughness_list) {
+        this.roughness_list = roughness_list;
     }
 }
