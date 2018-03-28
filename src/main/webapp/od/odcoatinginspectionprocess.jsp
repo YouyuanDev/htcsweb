@@ -124,7 +124,7 @@
                         $obj4.siblings().css("background-color","#FFFFFF");
                         $obj5.siblings().css("background-color","#FFFFFF");
                         $obj6.siblings().css("background-color","#FFFFFF");
-                        $obj7.siblings().css("background-color","#FFFFFF");
+                        //$obj7.siblings().css("background-color","#FFFFFF");
                         if(data!=null){
                             var res1=changeComma($obj1.val());
                             var res2=changeComma($obj2.val());
@@ -136,8 +136,8 @@
                             var res5=$obj5.val();
                             var res6=$obj6.val();
                             //var res7=$obj7.val();
-                            var res7=changeComma($obj7.val());
-                            var res7_1=res7.split(',');
+                            //var res7=changeComma($obj7.val());
+                            //var res7_1=res7.split(',');
                             for(var i=0;i<res1_1.length;i++){
                                 if(res1_1[i]!=""&&res1_1.length>0){
                                     if(!((res1_1[i]>=data.base_2fbe_coat_thickness_min)&&(res1_1[i]<=data.base_2fbe_coat_thickness_max)))
@@ -156,7 +156,7 @@
                                         $obj3.siblings().css("background-color","#F9A6A6");
                                 }
                             }
-                            if(!((res4>=data.temp_above_dew_point_min)&&(res4<=data.temp_above_dew_point_max)))
+                            if(!((res4>=data.holiday_min)&&(res4<=data.holiday_max)))
                                 $obj4.siblings().css("background-color","#F9A6A6");
                             if(!((res5>=data.holiday_tester_voltage_min)&&(res5<=data.holiday_tester_voltage_max)))
                                 $obj5.siblings().css("background-color","#F9A6A6");

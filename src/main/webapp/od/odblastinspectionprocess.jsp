@@ -148,8 +148,8 @@
                             var res7=$obj7.val();
                             if(!((res1>=data.relative_humidity_min)&&(res1<=data.relative_humidity_max)))
                                 $obj1.siblings().css("background-color","#F9A6A6");
-                            // if(!((res2>=data.temp_above_dew_point_min)&&(res2<=data.temp_above_dew_point_max)))
-                            //     $obj2.siblings().css("background-color","#F9A6A6");
+                            if(!((res2>=data.temp_above_dew_point_min)&&(res2<=data.temp_above_dew_point_max)))
+                                $obj2.siblings().css("background-color","#F9A6A6");
                             if(!((res3>=data.blast_finish_sa25_min)&&(res3<=data.blast_finish_sa25_max)))
                                 $obj3.siblings().css("background-color","#F9A6A6");
                             if(!((res4>=data.od_profile_min)&&(res4<=data.od_profile_max)))

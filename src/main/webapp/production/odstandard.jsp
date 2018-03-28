@@ -156,6 +156,8 @@
             setParamsMin($("input[name='magnetism_min']"));
             setParamsMax($("input[name='coating_bevel_angle_max']"));
             setParamsMin($("input[name='coating_bevel_angle_min']"));
+            setParamsMax($("input[name='holiday_max']"));
+            setParamsMin($("input[name='holiday_min']"));
         }
         function  setParamsMax($obj) {
             if($obj.val()==null||$obj.val()=="")
@@ -235,6 +237,9 @@
                    <th field="magnetism_min" align="center" width="150" hidden="true" class="i18n1" name="magnetismin">剩磁最小值</th>
                    <th field="coating_bevel_angle_max" align="center" width="150" hidden="true" class="i18n1" name="coatingbevelanglemax">涂层倒角最大值 </th>
                    <th field="coating_bevel_angle_min" align="center" width="150" hidden="true" class="i18n1" name="coatingbevelanglemin">涂层倒角最小值 </th>
+                   <th field="holiday_max" align="center" width="150" hidden="true" class="i18n1" name="holidaymax">漏点最大值 </th>
+                   <th field="holiday_min" align="center" width="150" hidden="true" class="i18n1" name="holidaymin">漏点最小值 </th>
+
                </tr>
              </thead>
          </table>
@@ -254,7 +259,7 @@
 </div>
 
 <!--添加、修改框-->
-<div id="hlOdAcceptanceDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;height:auto;">
+<div id="hlOdAcceptanceDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;max-height:500px;overflow-y: auto;">
    <form id="odAcceptanceForm" method="post">
        <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
            <legend>接收标准信息</legend>
@@ -406,6 +411,13 @@
                    <td class="i18n1" name="coatingbevelanglemin">涂层倒角最小值</td>
                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="coating_bevel_angle_min" value=""/></td>
                </tr>
+               <tr>
+                   <td class="i18n1" name="holidaymax">漏点最大值</td>
+                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="holiday_max" value=""/></td>
+                   <td class="i18n1" name="holidaymin">漏点最小值</td>
+                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="holiday_min" value=""/></td>
+               </tr>
+
 
            </table>
        </fieldset>

@@ -170,7 +170,7 @@
                                         $obj8.siblings().css("background-color","#F9A6A6");
                                 }
                             }
-                            if(!((res4>=data.temp_above_dew_point_min)&&(res4<=data.temp_above_dew_point_max)))
+                            if(!((res4>=data.holiday_min)&&(res4<=data.holiday_max)))
                                 $obj4.siblings().css("background-color","#F9A6A6");
                             if(!((res5>=data.holiday_tester_voltage_min)&&(res5<=data.holiday_tester_voltage_max)))
                                 $obj5.siblings().css("background-color","#F9A6A6");
