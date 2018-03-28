@@ -99,7 +99,7 @@ public class OdCoatingProcessController {
                 //此时的resTotal为新增厚的记录的id，更新odBlastInsepction的等待时间
                 //－先根据新增id查询外打砂检验的id,然后更新
                 int id=odCoatingProcess.getId();
-                List<HashMap<String,Object>>list=odBlastInspectionProcessDao.getOdBlastInfoByCoatingInfo(pipeno,id);
+                List<HashMap<String,Object>>list=odBlastInspectionProcessDao.getOdBlastInfoBy2fbeCoatingInfo(pipeno,id);
                 if(list!=null&&list.size()>0){
                     HashMap<String,Object>hs=list.get(0);
                     int odBlastId=Integer.parseInt(String.valueOf(hs.get("id")));

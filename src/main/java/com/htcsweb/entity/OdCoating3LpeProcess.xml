@@ -6,10 +6,7 @@
 <mapper namespace="com.htcsweb.dao.OdCoating3LpeProcessDao">
 
 
-    <insert id="addOdCoating3LpeProcess" parameterType="com.htcsweb.entity.OdCoating3LpeProcess">
-        <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
+    <insert id="addOdCoating3LpeProcess" useGeneratedKeys="true" keyProperty="id" parameterType="com.htcsweb.entity.OdCoating3LpeProcess">
     INSERT INTO od_coating_3lpe_process(pipe_no,operation_time,operator_no,coating_line_speed,base_coat_used,base_coat_lot_no,middle_coat_used,middle_coat_lot_no,top_coat_used,top_coat_lot_no,base_coat_gun_count,application_temp,to_first_touch_duration,to_quench_duration,upload_files,remark,result,mill_no,air_pressure,coating_voltage,gun_distance,spray_speed,application_voltage) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{coating_line_speed},#{base_coat_used},#{base_coat_lot_no},#{middle_coat_used},#{middle_coat_lot_no},#{top_coat_used},#{top_coat_lot_no},#{base_coat_gun_count},#{application_temp},#{to_first_touch_duration},#{to_quench_duration},#{upload_files},#{remark},#{result},#{mill_no},#{air_pressure},#{coating_voltage},#{gun_distance},#{spray_speed},#{application_voltage})
     </insert>
 

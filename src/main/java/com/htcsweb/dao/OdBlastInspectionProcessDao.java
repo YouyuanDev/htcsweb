@@ -22,6 +22,9 @@ public interface OdBlastInspectionProcessDao {
     //更新等待时间
 //    public int updateElapsedTime(@Param("begin_time")Date begin_time,@Param("end_time")Date end_time,@Param("id")int id);
     public int updateElapsedTime(@Param("elapsed_time")float elapsed_time,@Param("id")int id);
-    //根据外涂的信息查询对应的外打砂信息
-    public List<HashMap<String,Object>>getOdBlastInfoByCoatingInfo(@Param("pipe_no")String pipe_no,@Param("id")int id);
+    //根据3lpe外涂的信息查询对应的外打砂信息
+    public List<HashMap<String,Object>>getOdBlastInfoBy3lpeCoatingInfo(@Param("pipe_no")String pipe_no,@Param("id")int id);
+    //根据2fbe外涂的信息查询对应的外打砂信息
+    public List<HashMap<String,Object>>getOdBlastInfoBy2fbeCoatingInfo(@Param("pipe_no")String pipe_no,@Param("id")int id);
+
 }
