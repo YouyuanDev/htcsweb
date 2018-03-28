@@ -126,17 +126,23 @@
                         var $obj3=$("input[name='blast_finish_sa25']");
                         var $obj4=$("input[name='profile']");
                         var $obj5=$("input[name='pipe_temp']");
+                        var $obj6=$("input[name='surface_dust_rating']");
+                        var $obj7=$("input[name='salt_contamination_after_blasting']");
                         $obj1.siblings().css("background-color","#FFFFFF");
                         $obj2.siblings().css("background-color","#FFFFFF");
                         $obj3.siblings().css("background-color","#FFFFFF");
                         $obj4.siblings().css("background-color","#FFFFFF");
                         $obj5.siblings().css("background-color","#FFFFFF");
+                        $obj6.siblings().css("background-color","#FFFFFF");
+                        $obj7.siblings().css("background-color","#FFFFFF");
                         if(data!=null){
                             var res1=$obj1.val();
                             var res2=$obj2.val();
                             var res3=$obj3.val();
                             var res4=$obj4.val();
                             var res5=$obj5.val();
+                            var res6=$obj6.val();
+                            var res7=$obj7.val();
                             if(!((res1>=data.relative_humidity_min)&&(res1<=data.relative_humidity_max)))
                                 $obj1.siblings().css("background-color","#F9A6A6");
                             if(!((res3>=data.blast_finish_sa25_min)&&(res3<=data.blast_finish_sa25_max)))
@@ -145,7 +151,10 @@
                                 $obj4.siblings().css("background-color","#F9A6A6");
                             if(!((res5-res2)>=data.temp_above_dew_point_min))
                                 $obj5.siblings().css("background-color","#F9A6A6");
-
+                            if(!((res6>=data.surface_dust_rating_min)&&(res6<=data.surface_dust_rating_max)))
+                                $obj6.siblings().css("background-color","#F9A6A6");
+                            if(!((res7>=data.salt_contamination_after_blasting_min)&&(res7<=data.salt_contamination_after_blasting_max)))
+                                $obj7.siblings().css("background-color","#F9A6A6");
                         }
                     },error:function () {
 
@@ -180,6 +189,10 @@
                     setParams($("input[name='pipe_temp']"));
                     setParams($("input[name='blast_time']"));
 
+                    setParams($("input[name='air_temp']"));
+                    setParams($("input[name='surface_dust_rating']"));
+                    setParams($("input[name='salt_contamination_after_blasting']"));
+                    setParams($("input[name='elapsed_time']"));
 
                     if($("input[name='idbptime']").val()==""){
 
@@ -265,6 +278,11 @@
                 <th field="blast_time" align="center" width="120" class="i18n1" name="blasttime">内打砂时间</th>
                 <th field="blast_finish_sa25" align="center" width="100"  class="i18n1" name="blastfinishsa25">清洁度Sa2.5</th>
                 <th field="profile" width="100" align="center" class="i18n1" name="profile">锚纹深度</th>
+
+                <th field="air_temp" align="center" hidden="true" width="120" class="i18n1" name="airtemp">环境温度</th>
+                <th field="surface_dust_rating" align="center" hidden="true" width="120" class="i18n1" name="surfacedustrating">灰尘度</th>
+                <th field="salt_contamination_after_blasting" align="center" hidden="true" width="100"  class="i18n1" name="saltcontaminationafterblasting">打砂后盐度.5</th>
+                <th field="elapsed_time" width="100" align="center" hidden="true" class="i18n1" name="elapsedtime">涂敷前等待时间</th>
 
                 <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                 <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
@@ -413,6 +431,24 @@
                     <td><input class="easyui-numberbox" type="text" data-options="min:0,precision:2" name="blast_time" value=""/></td>
                     <td></td>
                 </tr>
+
+                <tr>
+                    <td width="16%"  class="i18n1" name="airtemp">环境温度</td>
+                    <td><input class="easyui-numberbox" type="text" data-options="min:0,precision:2" name="air_temp" value=""/></td>
+                    <td></td>
+                    <td width="16%"  class="i18n1" name="surfacedustrating">灰尘度</td>
+                    <td><input class="easyui-numberbox" type="text" data-options="min:0,precision:0" name="surface_dust_rating" value=""/></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td width="16%"  class="i18n1" name="saltcontaminationafterblasting">打砂后盐度</td>
+                    <td><input class="easyui-numberbox" type="text" data-options="min:0,precision:2" name="salt_contamination_after_blasting" value=""/></td>
+                    <td></td>
+                    <td width="16%"  class="i18n1" name="elapsedtime">涂敷前等待时间</td>
+                    <td><input class="easyui-numberbox" type="text" data-options="min:0,precision:2" name="elapsed_time" value=""/></td>
+                    <td></td>
+                </tr>
+
                 <tr>
                     <td width="16%" class="i18n1" name="surfacecondition">表面缺陷</td>
                     <td>
@@ -423,8 +459,8 @@
                             </div>
                         </div>
                     </td>
-
                     <td></td>
+
                 </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="result">结论</td>

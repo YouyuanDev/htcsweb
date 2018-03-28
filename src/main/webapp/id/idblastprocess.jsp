@@ -107,6 +107,22 @@
                      var imgList=odpictures.split(';');
                     createPictureModel(basePath,imgList);
                 }
+                $.ajax({
+                    url:'/AcceptanceCriteriaOperation/getIDAcceptanceCriteriaByContractNo.action',
+                    dataType:'json',
+                    data:{'contract_no':row.contract_no},
+                    success:function (data) {
+                        var $obj1=$("input[name='salt_contamination_before_blasting']");
+                        $obj1.siblings().css("background-color","#FFFFFF");
+                        if(data!=null){
+                            var res1=$obj1.val();
+                            if(!((res1>=data.salt_contamination_before_blast_min)&&(res1<=data.salt_contamination_before_blast_max)))
+                                $obj1.siblings().css("background-color","#F9A6A6");
+                        }
+                    },error:function () {
+
+                    }
+                });
                 url="/IdOperation/saveIdBlastProcess.action?id="+row.id;
 
             }else{
@@ -130,7 +146,7 @@
                     var arg1=$("input[name='pipe_no']").val();
                     var arg2=$("input[name='original_pipe_no']").val();
                     var arg3=$("input[name='new_pipe_no']").val();
-                     //alert("arg1="+arg1+",arg2="+arg2+",arg3="+arg3);
+                    setParams($("input[name='salt_contamination_before_blasting']"));
                      if(arg1!=arg2||arg1!=arg3||arg2!=arg3){
                          hlAlertFour("钢管编号不同!");
                          return false;
@@ -176,6 +192,7 @@
             $('#idBlastProForm').form('clear');
             $('.hl-label').text(''); $('#hl-gallery-con').empty();
         }
+
     </script>
 
 
@@ -208,7 +225,8 @@
 
                        <th field="original_pipe_no" align="center" width="120" class="i18n1" name="originalpipeno">原内壁标签管号</th>
                        <th field="new_pipe_no" align="center" width="120" class="i18n1" name="newpipeno">新内壁标签管号</th>
-                       <th field="pipe_no_update" align="center" width="100"  class="i18n1" name="pipenoupdate">完成标签更新</th>
+                       <th field="new_pipe_no" align="center" width="120" class="i18n1" name="newpipeno">新内壁标签管号</th>
+                       <th field="salt_contamination_before_blasting" align="center" width="100"  class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</th>
 
                        <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                        <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
@@ -339,6 +357,9 @@
                <td></td>
            </tr>
            <tr>
+               <td class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</td>
+               <td><input class="easyui-numberbox"  data-options="precision:2"  type="text" name="salt_contamination_before_blasting" value=""/></td>
+               <td></td>
                <td class="i18n1" name="pipenoupdate">完成标签更新</td>
                <td>
                    <%--<input class="easyui-textbox"  type="text" name="pipe_no_update" value=""/>--%>
@@ -348,20 +369,22 @@
                        </select>
                </td>
                <td></td>
-               <td class="i18n1" name="remark">备注</td>
-               <td>
-                   <input class="easyui-textbox"  data-options="multiline:true" type="text" name="remark" value=""/>
-               </td>
-               <td></td>
+
            </tr>
            <tr>
                <td width="16%" class="i18n1" name="result">结论</td>
-               <td colspan="5"><select id="cc" class="easyui-combobox" data-options="editable:false" name="result"   style="width:200px;">
+               <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result"   style="width:200px;">
                    <option value="0">不合格,重新打砂处理</option>
                    <option value="1">合格,进入内喷砂检验工序</option>
                    <option value="2">待定</option>
                    <option value="3">内表面缺陷，进入修磨或切割处理</option>
                </select></td>
+               <td></td>
+               <td class="i18n1" name="remark">备注</td>
+               <td>
+                   <input class="easyui-textbox"  data-options="multiline:true" type="text" name="remark" value=""/>
+               </td>
+               <td></td>
            </tr>
 
 

@@ -616,7 +616,7 @@ public class InspectionRecordPDFController {
                 if(index%11==0){
                     datalist.add(new Label(2,19,getFormatString(sb.toString()),wcf));
                     //添加合格数
-                    datalist.add(new Label(11,19,String.valueOf(qualifiedTotal),wcf));
+                    datalist.add(new Label(12,19,String.valueOf(qualifiedTotal),wcf));
                     //到结束
                     GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
                     datalist.clear();
@@ -629,7 +629,7 @@ public class InspectionRecordPDFController {
             if(datalist.size()>0){
                 datalist.add(new Label(2,19,String.valueOf(sb.toString()),wcf));
                 //添加合格数
-                datalist.add(new Label(11,19,String.valueOf(qualifiedTotal),wcf));
+                datalist.add(new Label(12,19,String.valueOf(qualifiedTotal),wcf));
                 GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
                 datalist.clear();
                 qualifiedTotal=0;
