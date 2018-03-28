@@ -228,6 +228,11 @@
                        <th field="new_pipe_no" align="center" width="120" class="i18n1" name="newpipeno">新内壁标签管号</th>
                        <th field="salt_contamination_before_blasting" align="center" width="100"  class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</th>
 
+                       <th field="surface_condition" align="center" hidden="true" width="150" class="i18n1" name="surfacecondition">内表面外观</th>
+                       <th field="external_coating_condition" align="center" hidden="true" width="150" class="i18n1" name="externalcoatingcondition">外涂层表面</th>
+                       <th field="marking" align="center" width="150" hidden="true" class="i18n1" name="marking">管体标识是否清晰</th>
+
+
                        <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                        <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
                        <th field="operation_time" align="center" width="150" class="i18n1" name="operationtime" data-options="formatter:formatterdate">操作时间</th>
@@ -371,7 +376,36 @@
                <td></td>
 
            </tr>
+
            <tr>
+               <td class="i18n1" name="surfacecondition">内表面外观</td>
+               <td>
+                   <select id="sc" class="easyui-combobox" data-options="editable:false" name="surface_condition"   style="width:200px;">
+                       <option value="0" selected="selected">合格</option>
+                       <option value="1">不合格</option>
+                   </select>
+               </td>
+               <td></td>
+               <td class="i18n1" name="externalcoatingcondition">外涂层表面</td>
+               <td>
+                   <select id="ecc" class="easyui-combobox" data-options="editable:false" name="external_coating_condition"   style="width:200px;">
+                       <option value="0" selected="selected">合格</option>
+                       <option value="1">不合格</option>
+                   </select>
+               </td>
+               <td></td>
+           </tr>
+           <tr>
+               <td class="i18n1" name="marking"></td>
+               <td>
+                   <select id="mk" class="easyui-combobox" data-options="editable:false" name="marking"   style="width:200px;">
+                       <option value="0" selected="selected">清晰</option>
+                       <option value="1">不清晰</option>
+                       <option value="2">待定</option>
+                   </select>
+                   <%--<input class="easyui-textbox"  type="text" name="marking" value=""/>--%>
+               </td>
+               <td></td>
                <td width="16%" class="i18n1" name="result">结论</td>
                <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result"   style="width:200px;">
                    <option value="0">不合格,重新打砂处理</option>
@@ -380,11 +414,13 @@
                    <option value="3">内表面缺陷，进入修磨或切割处理</option>
                </select></td>
                <td></td>
+           </tr>
+
+           <tr>
                <td class="i18n1" name="remark">备注</td>
-               <td>
+               <td colspan="5">
                    <input class="easyui-textbox"  data-options="multiline:true" type="text" name="remark" value=""/>
                </td>
-               <td></td>
            </tr>
 
 

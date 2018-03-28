@@ -738,9 +738,134 @@ public class InspectionRecordPDFController {
                 }
                 Label label13= new Label(12, row+10, result, wcf);
                 datalist.add(label13);
-//                if(list.get(i).getRemark()!=null&&!list.get(i).getRemark().equals("")){
-//                    sb.append("#"+list.get(i).getPipe_no()+":"+list.get(i).getRemark()+" ");
-//                }
+                if(list.get(i).getRemark()!=null&&!list.get(i).getRemark().equals("")){
+                    sb.append("#"+list.get(i).getPipe_no()+":"+list.get(i).getRemark()+" ");
+                }
+                //最后一行数据为空问题
+                index++;
+                row+=2;
+                if(index%5==0){
+                    datalist.add(new Label(2,19,getFormatString(sb.toString()),wcf));
+                    //到结束
+                    datalist.add(new Label(12,19,String.valueOf(qualifiedTotal),wcf));
+                    GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
+                    datalist.clear();
+                    sb.setLength(0);
+                    index=1;
+                    row=0;
+                }
+            }
+            if(datalist.size()>0){
+                datalist.add(new Label(2,19,getFormatString(sb.toString()),wcf));
+                datalist.add(new Label(12,19,String.valueOf(qualifiedTotal),wcf));
+                GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
+                datalist.clear();
+                index=1;
+                row=0;sb.setLength(0);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  null;
+    }
+
+    //7.---------------获取外涂终检记录PDF
+    @RequestMapping("getOdCoatFinalInspectionRecord")
+    public  String getOdCoatFinalInspectionRecord(HttpServletRequest request){
+        String begin_time="2018-01-03";
+        String end_time="2018-03-30";
+        String templateFullName=request.getSession().getServletContext().getRealPath("/")
+                +"template/od_final_inspection_record_template.xls";
+        try{
+            if(begin_time!=null&&begin_time!=""){
+                beginTime=sdf.parse(begin_time);
+            }
+            if(end_time!=null&&end_time!=""){
+                endTime=sdf.parse(end_time);
+            }
+            List<OdCoating3LpeInspectionProcess>list=odCoating3LpeInspectionProcessDao.getOd3LPECoatInspectionRecord(beginTime,endTime);
+            ArrayList<Label> datalist=new ArrayList<Label>();
+            int index=1,row=0;
+            StringBuilder sb=new StringBuilder();
+            String result="";
+            int qualifiedTotal=0;
+            for (int i=0;i<list.size();i++){
+                Label label1 = new Label(1, row+9, getFormatString(list.get(i).getPipe_no()), wcf);
+                datalist.add(label1);
+                Label label2 = new Label(2, row+9, String.valueOf(list.get(i).getHolidays()), wcf);
+                datalist.add(label2);
+                Label label3 = new Label(3, row+9, String.valueOf(list.get(i).getHoliday_tester_volts()), wcf);
+                datalist.add(label3);
+                Label label4 = new Label(4, row+9, String.valueOf(list.get(i).getRepairs()), wcf);
+                datalist.add(label4);
+                String bevel=list.get(i).getBevel();
+                String label5txt="未检测";
+                if(bevel!=null){
+                    if(bevel.equals("1")){
+                        label5txt="合格";
+                    }else if(bevel.equals("2")){
+                        label5txt="不合格";
+                    }
+                }
+                Label label5 = new Label(5, row+9, label5txt, wcf);
+                datalist.add(label5);
+                String Adhesion=list.get(i).getAdhesion_test();
+                String label6txt="未检测";
+                if(Adhesion!=null){
+                    if(Adhesion.equals("1")){
+                        label6txt="合格";
+                    }else if(Adhesion.equals("2")){
+                        label6txt="不合格";
+                    }
+                }
+                Label label6 = new Label(6, row+9, label6txt, wcf);
+                datalist.add(label6);
+                String isSample=list.get(i).getIs_sample();
+                String label7Txt=" ";
+                if(isSample!=null){
+                    if(isSample.equals("0")){
+                        label7Txt="否";
+                    }else{
+                        label7Txt="是";
+                    }
+
+                }
+                Label label7 = new Label(7, row+9,label7Txt, wcf);
+                datalist.add(label7);
+                Label label8 = new Label(8, row+9, getFormatString(list.get(i).getSurface_condition()), wcf);
+                datalist.add(label8);
+
+                Label label9 = new Label(2, row+10, String.valueOf(list.get(i).getBase_coat_thickness_list()), wcf);
+                datalist.add(label9);
+                Label label10 = new Label(4, row+10, String.valueOf(list.get(i).getMiddle_coat_thickness_list()), wcf);
+                datalist.add(label10);
+                Label label11 = new Label(6, row+10, String.valueOf(list.get(i).getTop_coat_thickness_list()), wcf);
+                datalist.add(label11);
+                Label label12 = new Label(8, row+10,String.valueOf(list.get(i).getTotal_coating_thickness_list()), wcf);
+                datalist.add(label12);
+                result=list.get(i).getResult();
+                if(result!=null){
+                    if(result.equals("0")){
+                        result="不合格";
+                    }else if(result.equals("1")){
+                        result="合格";
+                        qualifiedTotal++;
+                    }else if(result.equals("2")){
+                        result="不合格";
+                    }
+                    else if(result.equals("3")){
+                        result="待定";
+                    }else{
+                        result=" ";
+                    }
+                }else{
+                    result=" ";
+                }
+                Label label13= new Label(12, row+10, result, wcf);
+                datalist.add(label13);
+                if(list.get(i).getRemark()!=null&&!list.get(i).getRemark().equals("")){
+                    sb.append("#"+list.get(i).getPipe_no()+":"+list.get(i).getRemark()+" ");
+                }
                 //最后一行数据为空问题
                 index++;
                 row+=2;
@@ -752,6 +877,7 @@ public class InspectionRecordPDFController {
                     datalist.clear();
                     index=1;
                     row=0;
+                    sb.setLength(0);
                 }
             }
             if(datalist.size()>0){
@@ -760,13 +886,14 @@ public class InspectionRecordPDFController {
                 GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
                 datalist.clear();
                 index=1;
-                row=0;
+                row=0; sb.setLength(0);
             }
         }catch (Exception e){
             e.printStackTrace();
         }
         return  null;
     }
+
     //填补空白Bug
     private void AddLastWhiteSpace(ArrayList<Label> datalist,String remark,WritableCellFormat wcf){
         datalist.add(new Label(2,20,remark,wcf));

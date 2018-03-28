@@ -407,20 +407,36 @@
 
             <table class="ht-table">
                 <tr>
+                    <td width="16%"  class="i18n1" name="airtemp">环境温度</td>
+                    <td><input class="easyui-numberbox" type="text" data-options="min:0,precision:2" name="air_temp" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="relativehumidity">相对湿度</td>
                     <td><input class="easyui-numberbox"  data-options="min:0,precision:1" type="text" name="relative_humidity" value=""/></td>
                     <td></td>
-                    <td class="i18n1" name="dewpoint">露点</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:1" type="text" name="dew_point" value=""/></td>
-                    <td></td>
-                </tr>
 
+                </tr>
                 <tr>
-                    <td width="16%" class="i18n1" name="pipetemp">钢管温度</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="pipe_temp" value=""/></td>
-                    <td></td>
                     <td class="i18n1" name="blastfinishsa25">清洁度Sa2.5</td>
-                    <td><input class="easyui-textbox" type="text" name="blast_finish_sa25" value=""/></td>
+                    <td>
+                        <select id="bfs" class="easyui-combobox" data-options="editable:false" name="blast_finish_sa25"   style="width:200px;">
+                            <option value="2.0" selected="selected">Sa2.0</option>
+                            <option value="2.5">Sa2.5</option>
+                            <option value="3.0">Sa3.0</option>
+                        </select>
+                        <%--<input class="easyui-textbox" type="text" name="blast_finish_sa25" value=""/>--%>
+                    </td>
+                    <td></td>
+                    <td width="16%"  class="i18n1" name="surfacedustrating">灰尘度</td>
+                    <td>
+                        <select id="sdr" class="easyui-combobox" data-options="editable:false" name="surface_dust_rating"   style="width:200px;">
+                            <option value="1" selected="selected">1级</option>
+                            <option value="2">2级</option>
+                            <option value="3">3级</option>
+                            <option value="4">4级</option>
+                            <option value="5">5级</option>
+                        </select>
+                        <%--<input class="easyui-numberbox" type="text" data-options="min:0,precision:0" name="surface_dust_rating" value=""/>--%>
+                    </td>
                     <td></td>
                 </tr>
                 <tr>
@@ -433,11 +449,11 @@
                 </tr>
 
                 <tr>
-                    <td width="16%"  class="i18n1" name="airtemp">环境温度</td>
-                    <td><input class="easyui-numberbox" type="text" data-options="min:0,precision:2" name="air_temp" value=""/></td>
+                    <td class="i18n1" name="dewpoint">露点</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:1" type="text" name="dew_point" value=""/></td>
                     <td></td>
-                    <td width="16%"  class="i18n1" name="surfacedustrating">灰尘度</td>
-                    <td><input class="easyui-numberbox" type="text" data-options="min:0,precision:0" name="surface_dust_rating" value=""/></td>
+                    <td width="16%" class="i18n1" name="pipetemp">钢管温度</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="pipe_temp" value=""/></td>
                     <td></td>
                 </tr>
                 <tr>

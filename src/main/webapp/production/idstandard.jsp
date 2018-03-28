@@ -129,6 +129,8 @@
             setParamsMin($("input[name='salt_contamination_after_blasting_min']"));
             setParamsMax($("input[name='surface_dust_rating_max']"));
             setParamsMin($("input[name='surface_dust_rating_min']"));
+            setParamsMax($("input[name='holiday_max']"));
+            setParamsMin($("input[name='holiday_min']"));
         }
         function  setParamsMax($obj) {
             if($obj.val()==null||$obj.val()=="")
@@ -183,6 +185,8 @@
                 <th field="salt_contamination_after_blasting_min" align="center" width="100" hidden="true" class="i18n1" name="saltcontaminationafterblastingmin">打砂后盐度最小值</th>
                 <th field="surface_dust_rating_max" align="center" width="100" hidden="true" class="i18n1" name="surfacedustratingmax">灰尘度最大值</th>
                 <th field="surface_dust_rating_min" align="center" width="100" hidden="true" class="i18n1" name="surfacedustratingmin">灰尘度最小值</th>
+                <th field="holiday_max" align="center" width="100" hidden="true" class="i18n1" name="holidaymax">漏点最大值</th>
+                <th field="holiday_min" align="center" width="100" hidden="true" class="i18n1" name="holidaymin">漏点最小值</th>
             </tr>
             </thead>
         </table>
@@ -283,6 +287,12 @@
                     <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="surface_dust_rating_max" value=""/></td>
                     <td class="i18n1" name="surfacedustratingmin">灰尘度最小值</td>
                     <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="surface_dust_rating_min" value=""/></td>
+                </tr>
+                <tr>
+                    <td class="i18n1" name="holidaymax">漏点最大值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="holiday_max" value=""/></td>
+                    <td class="i18n1" name="holidaymin">漏点最小值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="holiday_min" value=""/></td>
                 </tr>
 
             </table>
