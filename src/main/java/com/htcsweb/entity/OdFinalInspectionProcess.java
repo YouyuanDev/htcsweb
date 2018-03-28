@@ -14,11 +14,15 @@ public class OdFinalInspectionProcess {
     private String mill_no;
     private String cutback_length;
     private String stencil_verification;
+    private String cutback_surface;
+    private String magnetism_list;
+    private String coating_bevel_angle_list;
+    private String epoxy_cutback_list;
 
     public OdFinalInspectionProcess() {
     }
 
-    public OdFinalInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, String inspection_result, String upload_files, String remark, String result, String mill_no, String cutback_length, String stencil_verification) {
+    public OdFinalInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, String inspection_result, String upload_files, String remark, String result, String mill_no, String cutback_length, String stencil_verification, String cutback_surface, String magnetism_list, String coating_bevel_angle_list, String epoxy_cutback_list) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -30,7 +34,12 @@ public class OdFinalInspectionProcess {
         this.mill_no = mill_no;
         this.cutback_length = cutback_length;
         this.stencil_verification = stencil_verification;
+        this.cutback_surface = cutback_surface;
+        this.magnetism_list = magnetism_list;
+        this.coating_bevel_angle_list = coating_bevel_angle_list;
+        this.epoxy_cutback_list = epoxy_cutback_list;
     }
+
 
     public int getId() {
         return id;
@@ -118,5 +127,37 @@ public class OdFinalInspectionProcess {
 
     public void setStencil_verification(String stencil_verification) {
         this.stencil_verification = stencil_verification;
+    }
+
+    public String getCutback_surface() {
+        return cutback_surface;
+    }
+
+    public void setCutback_surface(String cutback_surface) {
+        this.cutback_surface = cutback_surface;
+    }
+
+    public String getMagnetism_list() {
+        return magnetism_list;
+    }
+
+    public void setMagnetism_list(String magnetism_list) {
+        this.magnetism_list = magnetism_list;
+    }
+
+    public String getCoating_bevel_angle_list() {
+        return coating_bevel_angle_list;
+    }
+
+    public void setCoating_bevel_angle_list(String coating_bevel_angle_list) {
+        this.coating_bevel_angle_list = coating_bevel_angle_list;
+    }
+
+    public String getEpoxy_cutback_list() {
+        return epoxy_cutback_list;
+    }
+
+    public void setEpoxy_cutback_list(String epoxy_cutback_list) {
+        this.epoxy_cutback_list = epoxy_cutback_list;
     }
 }
