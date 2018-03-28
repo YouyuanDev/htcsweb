@@ -415,6 +415,16 @@
                     <td></td>
 
                 </tr>
+
+                <tr>
+                    <td class="i18n1" name="dewpoint">露点</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:1" type="text" name="dew_point" value=""/></td>
+                    <td></td>
+                    <td width="16%" class="i18n1" name="pipetemp">钢管温度</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="pipe_temp" value=""/></td>
+                    <td></td>
+                </tr>
+
                 <tr>
                     <td class="i18n1" name="blastfinishsa25">清洁度Sa2.5</td>
                     <td>
@@ -443,29 +453,14 @@
                     <td width="16%"  class="i18n1" name="profile">锚纹深度</td>
                     <td><input class="easyui-numberbox" type="text" data-options="min:0,precision:1" name="profile" value=""/></td>
                     <td></td>
-                    <td width="16%"  class="i18n1" name="blasttime">打砂时间</td>
-                    <td><input class="easyui-numberbox" type="text" data-options="min:0,precision:2" name="blast_time" value=""/></td>
-                    <td></td>
-                </tr>
-
-                <tr>
-                    <td class="i18n1" name="dewpoint">露点</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:1" type="text" name="dew_point" value=""/></td>
-                    <td></td>
-                    <td width="16%" class="i18n1" name="pipetemp">钢管温度</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="pipe_temp" value=""/></td>
-                    <td></td>
-                </tr>
-                <tr>
                     <td width="16%"  class="i18n1" name="saltcontaminationafterblasting">打砂后盐度</td>
                     <td><input class="easyui-numberbox" type="text" data-options="min:0,precision:2" name="salt_contamination_after_blasting" value=""/></td>
                     <td></td>
-                    <td width="16%"  class="i18n1" name="elapsedtime">涂敷前等待时间</td>
-                    <td><input class="easyui-numberbox" type="text" data-options="min:0,precision:2" name="elapsed_time" value=""/></td>
-                    <td></td>
+
                 </tr>
 
                 <tr>
+
                     <td width="16%" class="i18n1" name="surfacecondition">表面缺陷</td>
                     <td>
                         <div id="combobox1" class="mini-combobox" style="width:185px;"  popupWidth="185" textField="text" valueField="text"
@@ -475,6 +470,15 @@
                             </div>
                         </div>
                     </td>
+                    <td></td>
+                    <td width="16%"  class="i18n1" name="elapsedtime">涂敷前等待时间</td>
+                    <td><input class="easyui-numberbox" type="text" data-options="min:0,precision:2" name="elapsed_time" value=""/></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td width="16%"  class="i18n1" name="blasttime">打砂时间</td>
+                    <td><input class="easyui-numberbox" type="text" data-options="min:0,precision:2" name="blast_time" value=""/></td>
                     <td></td>
 
                 </tr>
