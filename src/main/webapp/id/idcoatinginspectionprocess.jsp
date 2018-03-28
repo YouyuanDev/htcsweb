@@ -125,14 +125,14 @@
                         var $obj5=$("input[name='wet_film_thickness_list']");
                         // $obj1.siblings().css("background-color","#FFFFFF");
                         // $obj2.siblings().css("background-color","#FFFFFF");
-                        $obj3.siblings().css("background-color","#FFFFFF");
+                        //$obj3.siblings().css("background-color","#FFFFFF");
                         $obj4.siblings().css("background-color","#FFFFFF");
                         $obj5.siblings().css("background-color","#FFFFFF");
                         if(data!=null){
                             // var res1=$obj1.val();
                             // var res2=$obj2.val();
-                            var res3=changeComma($obj3.val());
-                            var res3_1=res3.split(',');
+                            //var res3=changeComma($obj3.val());
+                            //var res3_1=res3.split(',');
                             var res4=$obj4.val();
                             var res5=changeComma($obj5.val());
                             var res5_1=res5.split(',');

@@ -17,11 +17,12 @@ public class IdBlastProcess {
     private  String remark;
     private  String result;
     private  String mill_no;
+    private  float salt_contamination_before_blasting;
 
     public IdBlastProcess() {
     }
 
-    public IdBlastProcess(int id, String pipe_no, Date operation_time, String operator_no, String original_pipe_no, String new_pipe_no, String pipe_no_update, String upload_files, String remark, String result, String mill_no) {
+    public IdBlastProcess(int id, String pipe_no, Date operation_time, String operator_no, String original_pipe_no, String new_pipe_no, String pipe_no_update, String upload_files, String remark, String result, String mill_no, float salt_contamination_before_blasting) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -33,6 +34,7 @@ public class IdBlastProcess {
         this.remark = remark;
         this.result = result;
         this.mill_no = mill_no;
+        this.salt_contamination_before_blasting = salt_contamination_before_blasting;
     }
 
     public int getId() {
@@ -121,5 +123,13 @@ public class IdBlastProcess {
 
     public void setMill_no(String mill_no) {
         this.mill_no = mill_no;
+    }
+
+    public float getSalt_contamination_before_blasting() {
+        return salt_contamination_before_blasting;
+    }
+
+    public void setSalt_contamination_before_blasting(float salt_contamination_before_blasting) {
+        this.salt_contamination_before_blasting = salt_contamination_before_blasting;
     }
 }

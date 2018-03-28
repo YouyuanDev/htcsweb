@@ -19,11 +19,17 @@ public class IdBlastInspectionProcess {
    private  String result;
    private  String mill_no;
 
+   private float air_temp;
+   private int surface_dust_rating;
+   private float salt_contamination_after_blasting;
+   private float elapsed_time;
+
+
    public IdBlastInspectionProcess() {
 
    }
 
-    public IdBlastInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, float relative_humidity, float dew_point, float pipe_temp, String surface_condition, float blast_time, String blast_finish_sa25, float profile, String upload_files, String remark, String result, String mill_no) {
+    public IdBlastInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, float relative_humidity, float dew_point, float pipe_temp, String surface_condition, float blast_time, String blast_finish_sa25, float profile, String upload_files, String remark, String result, String mill_no, float air_temp, int surface_dust_rating, float salt_contamination_after_blasting, float elapsed_time) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -39,6 +45,10 @@ public class IdBlastInspectionProcess {
         this.remark = remark;
         this.result = result;
         this.mill_no = mill_no;
+        this.air_temp = air_temp;
+        this.surface_dust_rating = surface_dust_rating;
+        this.salt_contamination_after_blasting = salt_contamination_after_blasting;
+        this.elapsed_time = elapsed_time;
     }
 
     public int getId() {
@@ -159,5 +169,37 @@ public class IdBlastInspectionProcess {
 
     public void setMill_no(String mill_no) {
         this.mill_no = mill_no;
+    }
+
+    public float getAir_temp() {
+        return air_temp;
+    }
+
+    public void setAir_temp(float air_temp) {
+        this.air_temp = air_temp;
+    }
+
+    public int getSurface_dust_rating() {
+        return surface_dust_rating;
+    }
+
+    public void setSurface_dust_rating(int surface_dust_rating) {
+        this.surface_dust_rating = surface_dust_rating;
+    }
+
+    public float getSalt_contamination_after_blasting() {
+        return salt_contamination_after_blasting;
+    }
+
+    public void setSalt_contamination_after_blasting(float salt_contamination_after_blasting) {
+        this.salt_contamination_after_blasting = salt_contamination_after_blasting;
+    }
+
+    public float getElapsed_time() {
+        return elapsed_time;
+    }
+
+    public void setElapsed_time(float elapsed_time) {
+        this.elapsed_time = elapsed_time;
     }
 }

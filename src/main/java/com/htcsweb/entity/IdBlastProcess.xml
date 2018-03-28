@@ -6,7 +6,7 @@
 <mapper namespace="com.htcsweb.dao.IdBlastProcessDao">
 
     <insert id="addIdBlastProcess" parameterType="com.htcsweb.entity.IdBlastProcess">
-        INSERT INTO id_blast_process(pipe_no,operation_time,operator_no,original_pipe_no,new_pipe_no,pipe_no_update,upload_files,remark,result,mill_no) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{original_pipe_no},#{new_pipe_no},#{pipe_no_update},#{upload_files},#{remark},#{result},#{mill_no})
+        INSERT INTO id_blast_process(pipe_no,operation_time,operator_no,original_pipe_no,new_pipe_no,pipe_no_update,upload_files,remark,result,mill_no,salt_contamination_before_blasting) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{original_pipe_no},#{new_pipe_no},#{pipe_no_update},#{upload_files},#{remark},#{result},#{mill_no},#{salt_contamination_before_blasting})
     </insert>
     <delete id="delIdBlastProcess">
         delete from id_blast_process WHERE
@@ -19,7 +19,7 @@
     </select>
 
     <update id="updateIdBlastProcess" parameterType="com.htcsweb.entity.IdBlastProcess">
-        UPDATE id_blast_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no}, original_pipe_no=#{original_pipe_no},new_pipe_no =#{new_pipe_no}, pipe_no_update =#{pipe_no_update},upload_files=#{upload_files},remark=#{remark},result=#{result},mill_no=#{mill_no} WHERE id=#{id}
+        UPDATE id_blast_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no}, original_pipe_no=#{original_pipe_no},new_pipe_no =#{new_pipe_no}, pipe_no_update =#{pipe_no_update},upload_files=#{upload_files},remark=#{remark},result=#{result},mill_no=#{mill_no},salt_contamination_before_blasting=#{salt_contamination_before_blasting} WHERE id=#{id}
      </update>
 
     <select id="getCount" resultType="int">
