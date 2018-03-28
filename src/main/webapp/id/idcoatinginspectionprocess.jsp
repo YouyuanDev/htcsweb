@@ -120,7 +120,7 @@
                     success:function (data) {
                         // var $obj1=$("input[name='dry_film_thickness_max']");
                         // var $obj2=$("input[name='dry_film_thickness_min']");
-                        var $obj3=$("input[name='holiday_test_results']");
+                        var $obj3=$("input[name='holidays']");
                         var $obj4=$("input[name='magnetism']");
                         var $obj5=$("input[name='wet_film_thickness_list']");
                         // $obj1.siblings().css("background-color","#FFFFFF");
@@ -202,7 +202,7 @@
                     //$("input[name='cutback']").val(changeComma(arg2));
                     //setParams($("input[name='cutback']"));
                     setParams($("input[name='holiday_tester_volts']"));
-                    setParams($("input[name='holiday_test_results']"));
+                    setParams($("input[name='holidays']"));
                     setParams($("input[name='magnetism']"));
                     setParams($("input[name='internal_repairs']"));
 
@@ -279,7 +279,7 @@
                 <%--<th field="dry_film_thickness_min" align="center" width="100" class="i18n1" name="dryfilmthicknessmin">最小干膜厚度</th>--%>
                 <%--<th field="cutback" align="center" width="100" hidden="true" class="i18n1" name="cutback">预留端长度</th>--%>
                 <th field="holiday_tester_volts" width="100" align="center" hidden="true" class="i18n1" name="holidaytestervolts">电火花检测电压</th>
-                <th field="holiday_test_results" align="center" width="100" hidden="true" class="i18n1" name="holidaytestresults">漏点</th>
+                <th field="holidays" align="center" width="100" hidden="true" class="i18n1" name="holidaytestresults">漏点</th>
                 <th field="surface_condition" align="center" width="150" class="i18n1" name="surfacecondition1">表面质量</th>
                 <th field="bevel_check" align="center" width="80" class="i18n1" name="bevelcheck">坡口质量</th>
                 <th field="magnetism" width="100" align="center"  class="i18n1" name="magnetism">剩磁</th>
@@ -418,7 +418,7 @@
                     <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="holiday_tester_volts" value=""/></td>
                     <td></td>
                     <td width="16%" class="i18n1" name="holidaytestresults">漏点</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:0"  type="text" name="holiday_test_results" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:0"  type="text" name="holidays" value=""/></td>
                     <td></td>
                 </tr>
                 <tr>
