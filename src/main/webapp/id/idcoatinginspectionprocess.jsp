@@ -120,18 +120,18 @@
                     success:function (data) {
                         // var $obj1=$("input[name='dry_film_thickness_max']");
                         // var $obj2=$("input[name='dry_film_thickness_min']");
-                        //var $obj3=$("input[name='cutback']");
+                        var $obj3=$("input[name='holiday_test_results']");
                         var $obj4=$("input[name='magnetism']");
                         var $obj5=$("input[name='wet_film_thickness_list']");
                         // $obj1.siblings().css("background-color","#FFFFFF");
                         // $obj2.siblings().css("background-color","#FFFFFF");
-                        //$obj3.siblings().css("background-color","#FFFFFF");
+                        $obj3.siblings().css("background-color","#FFFFFF");
                         $obj4.siblings().css("background-color","#FFFFFF");
                         $obj5.siblings().css("background-color","#FFFFFF");
                         if(data!=null){
                             // var res1=$obj1.val();
                             // var res2=$obj2.val();
-                            //var res3=changeComma($obj3.val());
+                            var res3=$obj3.val();
                             //var res3_1=res3.split(',');
                             var res4=$obj4.val();
                             var res5=changeComma($obj5.val());
@@ -140,8 +140,8 @@
                             //     $obj1.siblings().css("background-color","#F9A6A6");
                             // if(!((res2>=data.dry_film_thickness_min)&&(res2<=data.dry_film_thickness_max)))
                             //     $obj2.siblings().css("background-color","#F9A6A6");
-                            // if(!((res3>=data.cutback_min)&&(res3<=data.cutback_max)))
-                            //     $obj3.siblings().css("background-color","#F9A6A6");
+                            if(!((res3>=data.holiday_min)&&(res3<=data.holiday_max)))
+                                $obj3.siblings().css("background-color","#F9A6A6");
                             // for(var i=0;i<res3_1.length;i++){
                             //     if(res3_1[i]!=""&&res3_1[i].length>0){
                             //         if(!((res3_1[i]>=data.cutback_min)&&(res3_1[i]<=data.cutback_max)))
@@ -279,7 +279,7 @@
                 <%--<th field="dry_film_thickness_min" align="center" width="100" class="i18n1" name="dryfilmthicknessmin">最小干膜厚度</th>--%>
                 <%--<th field="cutback" align="center" width="100" hidden="true" class="i18n1" name="cutback">预留端长度</th>--%>
                 <th field="holiday_tester_volts" width="100" align="center" hidden="true" class="i18n1" name="holidaytestervolts">电火花检测电压</th>
-                <th field="holiday_test_results" align="center" width="100" hidden="true" class="i18n1" name="holidaytestresults">电火花检验结果</th>
+                <th field="holiday_test_results" align="center" width="100" hidden="true" class="i18n1" name="holidaytestresults">漏点</th>
                 <th field="surface_condition" align="center" width="150" class="i18n1" name="surfacecondition1">表面质量</th>
                 <th field="bevel_check" align="center" width="80" class="i18n1" name="bevelcheck">坡口质量</th>
                 <th field="magnetism" width="100" align="center"  class="i18n1" name="magnetism">剩磁</th>
@@ -417,7 +417,7 @@
                     <td width="16%" class="i18n1" name="holidaytestervolts">电火花检测电压</td>
                     <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="holiday_tester_volts" value=""/></td>
                     <td></td>
-                    <td width="16%" class="i18n1" name="holidaytestresults">电火花检测结果</td>
+                    <td width="16%" class="i18n1" name="holidaytestresults">漏点</td>
                     <td><input class="easyui-numberbox" data-options="min:0,precision:0"  type="text" name="holiday_test_results" value=""/></td>
                     <td></td>
                 </tr>
