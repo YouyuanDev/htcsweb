@@ -42,12 +42,14 @@ public class IDCoatingAcceptanceCriteria {
     private int surface_dust_rating_max;
     private int surface_dust_rating_min;
 
+    private int holiday_max;
+    private int holiday_min;
 
 
     public IDCoatingAcceptanceCriteria() {
     }
 
-    public IDCoatingAcceptanceCriteria(int id, String coating_acceptance_criteria_no, float temp_above_dew_point_max, float temp_above_dew_point_min, float blast_finish_sa25_max, float blast_finish_sa25_min, float relative_humidity_max, float relative_humidity_min, float id_profile_max, float id_profile_min, float dry_film_thickness_max, float dry_film_thickness_min, float cutback_max, float cutback_min, float residual_magnetism_max, float residual_magnetism_min, Date last_update_time, float wet_film_thickness_max, float wet_film_thickness_min, float salt_contamination_before_blast_max, float salt_contamination_before_blast_min, float salt_contamination_after_blasting_max, float salt_contamination_after_blasting_min, int surface_dust_rating_max, int surface_dust_rating_min) {
+    public IDCoatingAcceptanceCriteria(int id, String coating_acceptance_criteria_no, float temp_above_dew_point_max, float temp_above_dew_point_min, float blast_finish_sa25_max, float blast_finish_sa25_min, float relative_humidity_max, float relative_humidity_min, float id_profile_max, float id_profile_min, float dry_film_thickness_max, float dry_film_thickness_min, float cutback_max, float cutback_min, float residual_magnetism_max, float residual_magnetism_min, Date last_update_time, float wet_film_thickness_max, float wet_film_thickness_min, float salt_contamination_before_blast_max, float salt_contamination_before_blast_min, float salt_contamination_after_blasting_max, float salt_contamination_after_blasting_min, int surface_dust_rating_max, int surface_dust_rating_min, int holiday_max, int holiday_min) {
         this.id = id;
         this.coating_acceptance_criteria_no = coating_acceptance_criteria_no;
         this.temp_above_dew_point_max = temp_above_dew_point_max;
@@ -73,6 +75,8 @@ public class IDCoatingAcceptanceCriteria {
         this.salt_contamination_after_blasting_min = salt_contamination_after_blasting_min;
         this.surface_dust_rating_max = surface_dust_rating_max;
         this.surface_dust_rating_min = surface_dust_rating_min;
+        this.holiday_max = holiday_max;
+        this.holiday_min = holiday_min;
     }
 
     public int getId() {
@@ -273,5 +277,21 @@ public class IDCoatingAcceptanceCriteria {
 
     public void setSurface_dust_rating_min(int surface_dust_rating_min) {
         this.surface_dust_rating_min = surface_dust_rating_min;
+    }
+
+    public int getHoliday_max() {
+        return holiday_max;
+    }
+
+    public void setHoliday_max(int holiday_max) {
+        this.holiday_max = holiday_max;
+    }
+
+    public int getHoliday_min() {
+        return holiday_min;
+    }
+
+    public void setHoliday_min(int holiday_min) {
+        this.holiday_min = holiday_min;
     }
 }

@@ -62,10 +62,14 @@ public class ODCoatingAcceptanceCriteria {
     private float coating_bevel_angle_max;
     private float coating_bevel_angle_min;
 
+    private int holiday_max;
+    private int holiday_min;
+
+
     public ODCoatingAcceptanceCriteria() {
     }
 
-    public ODCoatingAcceptanceCriteria(int id, String coating_acceptance_criteria_no, float salt_contamination_before_blast_max, float salt_contamination_before_blast_min, float preheat_temp_max, float preheat_temp_min, float relative_humidity_max, float relative_humidity_min, float temp_above_dew_point_max, float temp_above_dew_point_min, float blast_finish_sa25_max, float blast_finish_sa25_min, int surface_dust_rating_max, int surface_dust_rating_min, float od_profile_max, float od_profile_min, float pipe_temp_after_blast_max, float pipe_temp_after_blast_min, float salt_contamination_after_blasting_max, float salt_contamination_after_blasting_min, float application_temp_max, float application_temp_min, float base_2fbe_coat_thickness_max, float base_2fbe_coat_thickness_min, float top_2fbe_coat_thickness_max, float top_2fbe_coat_thickness_min, float total_2fbe_coat_thickness_max, float total_2fbe_coat_thickness_min, float top_3lpe_coat_thickness_max, float top_3lpe_coat_thickness_min, float middle_3lpe_coat_thickness_max, float middle_3lpe_coat_thickness_min, float base_3lpe_coat_thickness_max, float base_3lpe_coat_thickness_min, float total_3lpe_coat_thickness_max, float total_3lpe_coat_thickness_min, int repair_max, int repair_min, float holiday_tester_voltage_max, float holiday_tester_voltage_min, float cutback_max, float cutback_min, Date last_update_time, float epoxy_cutback_max, float epoxy_cutback_min, float magnetism_max, float magnetism_min, float coating_bevel_angle_max, float coating_bevel_angle_min) {
+    public ODCoatingAcceptanceCriteria(int id, String coating_acceptance_criteria_no, float salt_contamination_before_blast_max, float salt_contamination_before_blast_min, float preheat_temp_max, float preheat_temp_min, float relative_humidity_max, float relative_humidity_min, float temp_above_dew_point_max, float temp_above_dew_point_min, float blast_finish_sa25_max, float blast_finish_sa25_min, int surface_dust_rating_max, int surface_dust_rating_min, float od_profile_max, float od_profile_min, float pipe_temp_after_blast_max, float pipe_temp_after_blast_min, float salt_contamination_after_blasting_max, float salt_contamination_after_blasting_min, float application_temp_max, float application_temp_min, float base_2fbe_coat_thickness_max, float base_2fbe_coat_thickness_min, float top_2fbe_coat_thickness_max, float top_2fbe_coat_thickness_min, float total_2fbe_coat_thickness_max, float total_2fbe_coat_thickness_min, float top_3lpe_coat_thickness_max, float top_3lpe_coat_thickness_min, float middle_3lpe_coat_thickness_max, float middle_3lpe_coat_thickness_min, float base_3lpe_coat_thickness_max, float base_3lpe_coat_thickness_min, float total_3lpe_coat_thickness_max, float total_3lpe_coat_thickness_min, int repair_max, int repair_min, float holiday_tester_voltage_max, float holiday_tester_voltage_min, float cutback_max, float cutback_min, Date last_update_time, float epoxy_cutback_max, float epoxy_cutback_min, float magnetism_max, float magnetism_min, float coating_bevel_angle_max, float coating_bevel_angle_min, int holiday_max, int holiday_min) {
         this.id = id;
         this.coating_acceptance_criteria_no = coating_acceptance_criteria_no;
         this.salt_contamination_before_blast_max = salt_contamination_before_blast_max;
@@ -115,6 +119,8 @@ public class ODCoatingAcceptanceCriteria {
         this.magnetism_min = magnetism_min;
         this.coating_bevel_angle_max = coating_bevel_angle_max;
         this.coating_bevel_angle_min = coating_bevel_angle_min;
+        this.holiday_max = holiday_max;
+        this.holiday_min = holiday_min;
     }
 
     public int getId() {
@@ -507,5 +513,21 @@ public class ODCoatingAcceptanceCriteria {
 
     public void setCoating_bevel_angle_min(float coating_bevel_angle_min) {
         this.coating_bevel_angle_min = coating_bevel_angle_min;
+    }
+
+    public int getHoliday_max() {
+        return holiday_max;
+    }
+
+    public void setHoliday_max(int holiday_max) {
+        this.holiday_max = holiday_max;
+    }
+
+    public int getHoliday_min() {
+        return holiday_min;
+    }
+
+    public void setHoliday_min(int holiday_min) {
+        this.holiday_min = holiday_min;
     }
 }
