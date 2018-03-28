@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.PipeBasicInfoDao;
 import com.htcsweb.entity.ContractInfo;
 import com.htcsweb.util.FileRenameUtil;
+import com.htcsweb.util.PictureCompressorUtil;
 import com.htcsweb.util.ResponseUtil;
 import com.htcsweb.util.ExcelUtil;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -68,6 +69,12 @@ public class UploadFileController {
                 File file = multi.getFile(name);
                 if (file != null) {
                     newName = file.getName();
+                    //压缩文件 0.5 rate
+                    String srcimgfilename=saveDirectory+"/"+newName;
+                    System.out.println("srcimgfilename="+srcimgfilename);
+                    String distimgFilename=saveDirectory+"/"+newName;
+                    System.out.println("distimgFilename="+distimgFilename);
+                    PictureCompressorUtil.reduceImg(srcimgfilename, distimgFilename, 1000, 1000,0.5f);
                 }
             }
             JSONObject json = new JSONObject();
