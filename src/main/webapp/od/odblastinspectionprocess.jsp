@@ -156,7 +156,7 @@
                                 $obj4.siblings().css("background-color","#F9A6A6");
                             if(!((res5>=data.surface_dust_rating_min)&&(res5<=data.surface_dust_rating_max)))
                                 $obj5.siblings().css("background-color","#F9A6A6");
-                            alert(data.pipe_temp_after_blast_min+":"+data.pipe_temp_after_blast_max+"result="+res6);
+                            //alert(data.pipe_temp_after_blast_min+":"+data.pipe_temp_after_blast_max+"result="+res6);
                             // if(!((res6>=data.preheat_temp_min)&&(res6<=data.preheat_temp_max)))
                             //     $obj6.siblings().css("background-color","#F9A6A6");
                             if(!((res6>=data.pipe_temp_after_blast_min)&&(res6<=data.pipe_temp_after_blast_max)))

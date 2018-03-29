@@ -113,9 +113,11 @@
                         var $obj2=$("input[name='roughness_list']");
                         var $obj3=$("input[name='holidays']");
                         var $obj4=$("input[name='magnetism_list']");
-                        var $obj5=$("input[name='holiday_tester_volts']");//不存在acc
-                        var $obj6=$("input[name='repairs']");//不存在acc
+                        var $obj5=$("input[name='holiday_tester_volts']");
+                        var $obj6=$("input[name='internal_repairs']");
                         var $obj7=$("input[name='cutback_length']");
+
+
 
                         $obj1.siblings().css("background-color","#FFFFFF");
                         $obj2.siblings().css("background-color","#FFFFFF");
@@ -134,7 +136,8 @@
                             var res3=$obj3.val();
                             var res4=changeComma($obj4.val());
                             var res4_1=res4.split(',');
-
+                            var res5=$obj5.val();
+                            var res6=$obj6.val();
                             var res7=changeComma($obj7.val());
                             var res7_1=res7.split(',');
                             for(var i=0;i<res1_1.length;i++){
@@ -158,6 +161,11 @@
                                         $obj4.siblings().css("background-color","#F9A6A6");
                                 }
                             }
+                            if(!((res5>=data.holiday_tester_voltage_min)&&(res5<=data.holiday_tester_voltage_max)))
+                                $obj5.siblings().css("background-color","#F9A6A6");
+
+                            if(!((res6>=data.repair_min)&&(res6<=data.repair_max)))
+                                $obj6.siblings().css("background-color","#F9A6A6");
 
                             for(var i=0;i<res7_1.length;i++){
                                 if(res7_1[i]!=""&&res7_1[i].length>0){
