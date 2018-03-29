@@ -53,6 +53,7 @@
             $('#fileslist').val('');
             $('#idFinalInProForm').form('clear');
             $('#idcoatproid').text('');
+            combox1.setValue("");
             clearMultiUpload(grid);
             url="/IdFinalInOperation/saveIdFinalInProcess.action";
         }
@@ -96,6 +97,7 @@
                 look1.setValue(row.pipe_no);
                 look2.setText(row.operator_no);
                 look2.setValue(row.operator_no);
+                combox1.setValue(row.surface_condition);
                 var odpictures=row.upload_files;
                 if(odpictures!=null&&odpictures!=""){
                     var imgList=odpictures.split(';');
@@ -108,16 +110,30 @@
                     data:{'contract_no':row.contract_no},
                     success:function (data) {
                         var $obj1=$("input[name='dry_film_thickness_list']");
-                        $obj1.siblings().css("background-color","#FFFFFF");
                         var $obj2=$("input[name='roughness_list']");
-                        $obj2.siblings().css("background-color","#FFFFFF");
+                        var $obj3=$("input[name='holidays']");
+                        var $obj4=$("input[name='magnetism_list']");
+                        var $obj5=$("input[name='holiday_tester_volts']");//不存在acc
+                        var $obj6=$("input[name='repairs']");//不存在acc
                         var $obj7=$("input[name='cutback_length']");
+
+                        $obj1.siblings().css("background-color","#FFFFFF");
+                        $obj2.siblings().css("background-color","#FFFFFF");
+                        $obj3.siblings().css("background-color","#FFFFFF");
+                        $obj4.siblings().css("background-color","#FFFFFF");
+                        $obj5.siblings().css("background-color","#FFFFFF");
+                        $obj6.siblings().css("background-color","#FFFFFF");
                         $obj7.siblings().css("background-color","#FFFFFF");
+
+
                         if(data!=null){
                             var res1=changeComma($obj1.val());
                             var res1_1=res1.split(',');
                             var res2=changeComma($obj2.val());
                             var res2_1=res2.split(',');
+                            var res3=$obj3.val();
+                            var res4=changeComma($obj4.val());
+                            var res4_1=res4.split(',');
 
                             var res7=changeComma($obj7.val());
                             var res7_1=res7.split(',');
@@ -133,6 +149,16 @@
                                         $obj2.siblings().css("background-color","#F9A6A6");
                                 }
                             }
+                            if(!((res3>=data.holiday_min)&&(res3<=data.holiday_max)))
+                                $obj3.siblings().css("background-color","#F9A6A6");
+
+                            for(var i=0;i<res4_1.length;i++){
+                                if(res4_1[i]!=""&&res4_1[i].length>0){
+                                    if(!((res4_1[i]>=data.residual_magnetism_min)&&(res4_1[i]<=data.residual_magnetism_max)))
+                                        $obj4.siblings().css("background-color","#F9A6A6");
+                                }
+                            }
+
                             for(var i=0;i<res7_1.length;i++){
                                 if(res7_1[i]!=""&&res7_1[i].length>0){
                                     if(!((res7_1[i]>=data.cutback_min)&&(res7_1[i]<=data.cutback_max)))
@@ -189,9 +215,13 @@
                         hlAlertFour("请输入操作时间");
                         return false;
                     }
+
+                    var arg4=$("input[name='magnetism_list']").val().trim();
+
                     $("input[name='dry_film_thickness_list']").val(changeComma(arg1));
                     $("input[name='cutback_length']").val(changeComma(arg2));
                     $("input[name='roughness_list']").val(changeComma(arg3));
+                    $("input[name='magnetism_list']").val(changeComma(arg4));
                 },
                 success: function(result){
                     var result = eval('('+result+')');
@@ -259,10 +289,16 @@
                 <th field="stencil_verification" align="center" width="80" class="i18n1" name="idstencilverification">内喷表检验</th>
 
                 <th field="od_inspection_result" align="center" width="80" class="i18n1" name="odinspectionresult">外涂层质检结果</th>
-                <th field="id_inspection_result" align="center" width="80" class="i18n1" name="idinspectionresult">内涂层质检结果</th>
+                <%--<th field="id_inspection_result" align="center" width="80" class="i18n1" name="idinspectionresult">内涂层质检结果</th>--%>
                 <th field="final_inspection_result" align="center" width="80" class="i18n1" name="finalinspectionresult">终检结果</th>
                 <th field="dry_film_thickness_list" align="center" width="80" class="i18n1" name="dryfilmthicknesslist">干膜厚度μm测量列表</th>
                 <th field="roughness_list" align="center" width="80" class="i18n1" name="roughnesslist">粗糙度(μm ,分隔)</th>
+                <th field="holiday_tester_volts" width="100" align="center" hidden="true" class="i18n1" name="holidaytestervolts">电火花检测电压</th>
+                <th field="holidays" align="center" width="100" hidden="true" class="i18n1" name="holidaytestresults">漏点</th>
+                <th field="surface_condition" align="center" width="150" class="i18n1" name="surfacecondition1">表面质量</th>
+                <th field="bevel_check" align="center" width="80" class="i18n1" name="bevelcheck">坡口质量</th>
+                <th field="magnetism_list" width="100" align="center"  class="i18n1" name="magnetism">剩磁</th>
+                <th field="internal_repairs" width="100" align="center"  class="i18n1" name="internalrepairs">内涂层修补数</th>
 
                 <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                 <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
@@ -388,6 +424,49 @@
 
             <table class="ht-table">
                 <tr>
+                    <td width="16%" class="i18n1" name="holidaytestervolts">电火花检测电压</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="holiday_tester_volts" value=""/></td>
+                    <td></td>
+                    <td width="16%" class="i18n1" name="holidaytestresults">漏点</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:0"  type="text" name="holidays" value=""/></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="i18n1" width="16%" name="magnetismlist">剩磁测量值(Gause ,分隔)</td>
+                    <td colspan="1">
+                        <input class="easyui-textbox"  type="text" name="magnetism_list" value=""/>
+                    </td>
+                    <td></td>
+                    <td class="i18n1" name="internalrepairs">内涂层修补数</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="internal_repairs" value=""/></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td width="16%" class="i18n1" name="surfacecondition1">表面质量</td>
+                    <td colspan="1">
+                        <div id="combobox1" class="mini-combobox hl-combox-miniui" style="width:185px;"  popupWidth="185" textField="text" valueField="text"
+                             url="../data/surfacequality.txt" name="surface_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick" >
+                            <div property="columns">
+                                <div header="缺陷类型" field="text"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td></td>
+                    <td width="16%" class="i18n1" name="bevelcheck">坡口质量</td>
+                    <td>
+                        <select id="bev" class="easyui-combobox" data-options="editable:false" name="bevel_check" style="width:200px;">
+                            <option value="0" selected="selected">未检测</option>
+                            <option value="1">合格</option>
+                            <option value="2">不合格</option>
+                        </select>
+                        <%--<input class="easyui-textbox"  type="text" name="bevel_check" value=""/>--%>
+                    </td>
+                    <td></td>
+
+                </tr>
+
+
+                <tr>
                     <td class="i18n1" width="20%" name="cutbacklength">预留端长度2个值(,分隔)</td>
                     <td colspan="1"><input class="easyui-textbox"  type="text" name="cutback_length" value=""/></td>
                     <td></td>
@@ -425,18 +504,6 @@
                         </select>
                     </td>
                     <td></td>
-                    <td class="i18n1" name="idinspectionresult">内涂层质检结果</td>
-                    <td colspan="1">
-                        <select id="bb" class="easyui-combobox" data-options="editable:false" name="id_inspection_result" style="width:200px;">
-                            <option value="0">不合格</option>
-                            <option value="1">合格</option>
-                            <option value="2">待定</option>
-                        </select>
-                    </td>
-                    <td></td>
-                </tr>
-
-                <tr>
                     <td width="16%" class="i18n1" name="result">结论</td>
                     <td><select id="dd" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
                         <option value="1">合格,进入内防成品入库工序</option>
@@ -449,6 +516,19 @@
                         <option value="7">待定</option>
                     </select></td>
                     <td></td>
+                    <%--<td class="i18n1" name="idinspectionresult">内涂层质检结果</td>--%>
+                    <%--<td colspan="1">--%>
+                        <%--<select id="bb" class="easyui-combobox" data-options="editable:false" name="id_inspection_result" style="width:200px;">--%>
+                            <%--<option value="0">不合格</option>--%>
+                            <%--<option value="1">合格</option>--%>
+                            <%--<option value="2">待定</option>--%>
+                        <%--</select>--%>
+                    <%--</td>--%>
+                    <%--<td></td>--%>
+                </tr>
+
+                <tr>
+
                     <td width="16%" class="i18n1" name="remark">备注</td>
                     <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
                     <td></td>
@@ -541,6 +621,7 @@
     var grid2=mini.get("datagrid2");
     var look1=mini.get('lookup1');
     var look2= mini.get("lookup2");
+    var combox1=mini.get("combobox1");
 
     function onSearchClick(type) {
         if(type==1)
@@ -611,5 +692,12 @@
             employeeno:keyText3.value
         });
     });
+    combox1.on("showpopup",function () {
+        $('.mini-shadow').css('z-index','99999');
+        $('.mini-popup').css('z-index','100000');
+        $('.mini-panel').css('z-index','100000');
+    });
+
+
     hlLanguage("../i18n/");
 </script>

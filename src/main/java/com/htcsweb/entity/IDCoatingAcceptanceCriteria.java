@@ -49,6 +49,8 @@ public class IDCoatingAcceptanceCriteria {
     private float roughness_min;
 
 
+
+
     public IDCoatingAcceptanceCriteria() {
     }
 

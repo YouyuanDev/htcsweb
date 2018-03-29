@@ -8,7 +8,6 @@ public class IdFinalInspectionProcess {
     private Date operation_time;
     private String operator_no;
     private String od_inspection_result;
-    private String id_inspection_result;
     private String final_inspection_result;
     private String upload_files;
     private String remark;
@@ -19,17 +18,22 @@ public class IdFinalInspectionProcess {
     private String stencil_verification;
     private String roughness_list;
 
+    private float holiday_tester_volts;
+    private int holidays;
+    private String surface_condition;
+    private String bevel_check;
+    private String magnetism_list;
+    private int internal_repairs;
+
     public IdFinalInspectionProcess() {
     }
 
-
-    public IdFinalInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, String od_inspection_result, String id_inspection_result, String final_inspection_result, String upload_files, String remark, String result, String mill_no, String dry_film_thickness_list, String cutback_length, String stencil_verification, String roughness_list) {
+    public IdFinalInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, String od_inspection_result, String final_inspection_result, String upload_files, String remark, String result, String mill_no, String dry_film_thickness_list, String cutback_length, String stencil_verification, String roughness_list, float holiday_tester_volts, int holidays, String surface_condition, String bevel_check, String magnetism_list, int internal_repairs) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
         this.operator_no = operator_no;
         this.od_inspection_result = od_inspection_result;
-        this.id_inspection_result = id_inspection_result;
         this.final_inspection_result = final_inspection_result;
         this.upload_files = upload_files;
         this.remark = remark;
@@ -39,7 +43,14 @@ public class IdFinalInspectionProcess {
         this.cutback_length = cutback_length;
         this.stencil_verification = stencil_verification;
         this.roughness_list = roughness_list;
+        this.holiday_tester_volts = holiday_tester_volts;
+        this.holidays = holidays;
+        this.surface_condition = surface_condition;
+        this.bevel_check = bevel_check;
+        this.magnetism_list = magnetism_list;
+        this.internal_repairs = internal_repairs;
     }
+
 
     public int getId() {
         return id;
@@ -79,14 +90,6 @@ public class IdFinalInspectionProcess {
 
     public void setOd_inspection_result(String od_inspection_result) {
         this.od_inspection_result = od_inspection_result;
-    }
-
-    public String getId_inspection_result() {
-        return id_inspection_result;
-    }
-
-    public void setId_inspection_result(String id_inspection_result) {
-        this.id_inspection_result = id_inspection_result;
     }
 
     public String getFinal_inspection_result() {
@@ -159,5 +162,53 @@ public class IdFinalInspectionProcess {
 
     public void setRoughness_list(String roughness_list) {
         this.roughness_list = roughness_list;
+    }
+
+    public float getHoliday_tester_volts() {
+        return holiday_tester_volts;
+    }
+
+    public void setHoliday_tester_volts(float holiday_tester_volts) {
+        this.holiday_tester_volts = holiday_tester_volts;
+    }
+
+    public int getHolidays() {
+        return holidays;
+    }
+
+    public void setHolidays(int holidays) {
+        this.holidays = holidays;
+    }
+
+    public String getSurface_condition() {
+        return surface_condition;
+    }
+
+    public void setSurface_condition(String surface_condition) {
+        this.surface_condition = surface_condition;
+    }
+
+    public String getBevel_check() {
+        return bevel_check;
+    }
+
+    public void setBevel_check(String bevel_check) {
+        this.bevel_check = bevel_check;
+    }
+
+    public String getMagnetism_list() {
+        return magnetism_list;
+    }
+
+    public void setMagnetism_list(String magnetism_list) {
+        this.magnetism_list = magnetism_list;
+    }
+
+    public int getInternal_repairs() {
+        return internal_repairs;
+    }
+
+    public void setInternal_repairs(int internal_repairs) {
+        this.internal_repairs = internal_repairs;
     }
 }

@@ -7,11 +7,29 @@
 
 
     <insert id="addIdFinalInProcess" parameterType="com.htcsweb.entity.IdFinalInspectionProcess">
-        INSERT INTO id_final_inspection_process(pipe_no,operation_time,operator_no,od_inspection_result,id_inspection_result,final_inspection_result,upload_files,remark,result,mill_no,dry_film_thickness_list,cutback_length,stencil_verification,roughness_list) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{od_inspection_result},#{id_inspection_result},#{final_inspection_result},#{upload_files},#{remark},#{result},#{mill_no},#{dry_film_thickness_list},#{cutback_length},#{stencil_verification},#{roughness_list})
+        INSERT INTO id_final_inspection_process(pipe_no,operation_time,
+        operator_no,od_inspection_result,final_inspection_result,
+        upload_files,remark,result,mill_no,dry_film_thickness_list,cutback_length,
+        stencil_verification,roughness_list,holiday_tester_volts,holidays,surface_condition,
+        bevel_check,magnetism_list,internal_repairs) VALUES
+        (#{pipe_no},#{operation_time},#{operator_no},#{od_inspection_result},
+        #{final_inspection_result},#{upload_files},#{remark},
+        #{result},#{mill_no},#{dry_film_thickness_list},#{cutback_length},#{stencil_verification},#{roughness_list},
+        #{holiday_tester_volts},#{holidays},#{surface_condition},#{bevel_check},
+        #{magnetism_list},#{internal_repairs})
     </insert>
 
     <update id="updateIdFinalInProcess" parameterType="com.htcsweb.entity.IdFinalInspectionProcess">
-        UPDATE id_final_inspection_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},od_inspection_result=#{od_inspection_result},id_inspection_result=#{id_inspection_result},final_inspection_result=#{final_inspection_result},upload_files=#{upload_files},remark=#{remark},result=#{result},mill_no=#{mill_no},dry_film_thickness_list=#{dry_film_thickness_list}, cutback_length=#{cutback_length},stencil_verification=#{stencil_verification},roughness_list=#{roughness_list} where id=#{id}
+        UPDATE id_final_inspection_process set pipe_no=#{pipe_no},operation_time=#{operation_time},
+        operator_no=#{operator_no},od_inspection_result=#{od_inspection_result},
+        final_inspection_result=#{final_inspection_result},
+        upload_files=#{upload_files},remark=#{remark},result=#{result},
+        mill_no=#{mill_no},dry_film_thickness_list=#{dry_film_thickness_list},
+        cutback_length=#{cutback_length},stencil_verification=#{stencil_verification},
+        roughness_list=#{roughness_list},holiday_tester_volts=#{holiday_tester_volts},
+        holidays=#{holidays},surface_condition=#{surface_condition},bevel_check=#{bevel_check},
+        magnetism_list=#{magnetism_list},internal_repairs=#{internal_repairs}
+        where id=#{id}
     </update>
 
     <delete id="delIdFinalInProcess">
