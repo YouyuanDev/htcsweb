@@ -5,6 +5,7 @@ package com.htcsweb.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.IdCoatingProcessDao;
+import com.htcsweb.dao.IdBlastInspectionProcessDao;
 import com.htcsweb.dao.PipeBasicInfoDao;
 import com.htcsweb.entity.IdCoatingProcess;
 import com.htcsweb.entity.PipeBasicInfo;
@@ -30,6 +31,8 @@ public class IdCoatingProcessController {
     private IdCoatingProcessDao idCoatingProcessDao;
     @Autowired
     private PipeBasicInfoDao pipeBasicInfoDao;
+    @Autowired
+    private IdBlastInspectionProcessDao idBlastInspectionProcessDao;
 
     //查询
     @RequestMapping(value = "/getIdCoatingByLike")
@@ -107,6 +110,24 @@ public class IdCoatingProcessController {
                 resTotal=idCoatingProcessDao.updateIdCoatingProcess(idCoatingProcess);
             }
             if(resTotal>0){
+
+
+                //此时的resTotal为新增厚的记录的id，更新idBlastInsepction的等待时间elapse time
+                //－先根据新增id查询内打砂检验的id,然后更新
+                int id=idCoatingProcess.getId();
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                List<HashMap<String,Object>>blastlist=idBlastInspectionProcessDao.getIdBlastInfoByCoatingInfo(pipeno,id);
+                if(blastlist!=null&&blastlist.size()>0){
+                    HashMap<String,Object>hs=blastlist.get(0);
+                    int odBlastId=Integer.parseInt(String.valueOf(hs.get("id")));
+                    long begin_time=format.parse(String.valueOf(hs.get("idcoatingtime"))).getTime();
+                    long end_time=format.parse(String.valueOf(hs.get("idblasttime"))).getTime();
+                    float minute=((begin_time-end_time)/(1000));
+                    minute=minute/60;
+                    minute=(float)(Math.round(minute*100))/100;
+                    idBlastInspectionProcessDao.updateElapsedTime(minute,odBlastId);
+                }
+
                 //更新管子的状态
                 List<PipeBasicInfo> list=pipeBasicInfoDao.getPipeNumber(pipeno);
                 if(list.size()>0){

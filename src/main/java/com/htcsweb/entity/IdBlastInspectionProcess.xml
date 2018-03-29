@@ -91,6 +91,18 @@
         </foreach>
     </delete>
 
+    <!--根据内涂时间得到对应的内打砂检验时间，获取id-->
+    <select id="getIdBlastInfoByCoatingInfo" resultType="map">
+        select ib.id, ic.operation_time as idcoatingtime, ib.operation_time as idblasttime from id_blast_inspection_process ib inner join id_coating_process ic on ib.pipe_no=ic.pipe_no
+        where   ic.operation_time >=ib.operation_time
+        AND ib.pipe_no=#{pipe_no} and ic.id=#{id}
+        order by ib.operation_time desc
+        limit 1
+    </select>
 
+    <!--更新内打砂检验的等待时间-->
+    <update id="updateElapsedTime">
+        update id_blast_inspection_process set elapsed_time=#{elapsed_time} where id=#{id}
+    </update>
 
 </mapper>

@@ -17,4 +17,10 @@ public interface IdBlastInspectionProcessDao {
     public int getCountAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no") String operator_no, @Param("begin_time") Date begin_time, @Param("end_time") Date end_time, @Param("mill_no") String mill_no);
     public List<HashMap<String,Object>> getAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no") String operator_no, @Param("begin_time") Date begin_time, @Param("end_time") Date end_time, @Param("mill_no") String mill_no, @Param("skip") int skip, @Param("take") int take);
     public int delIdBlastInspectionProcess(String[] arrId);
+
+
+    //根据内涂的信息查询对应的内打砂检验信息
+    public List<HashMap<String,Object>>getIdBlastInfoByCoatingInfo(@Param("pipe_no")String pipe_no,@Param("id")int id);
+    //更新内打砂检验等待时间
+    public int updateElapsedTime(@Param("elapsed_time")float elapsed_time,@Param("id")int id);
 }
