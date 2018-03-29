@@ -120,6 +120,21 @@
             $('#idStencilProForm').form('submit',{
                 url:url,
                 onSubmit:function () {
+                    if($("input[name='pipe_no']").val()==""){
+
+                        hlAlertFour("请选择钢管管号");
+                        return false;
+                    }
+                    if($("input[name='operator_no']").val()==""){
+
+                        hlAlertFour("请选择操作工工号");
+                        return false;
+                    }
+                    if($("input[name='mill_no']").val()==""){
+
+                        hlAlertFour("请输入分厂信息");
+                        return false;
+                    }
                     if($("input[name='idStencilprotime']").val()==""){
                         hlAlertFour("请输入操作时间");
                         return false;

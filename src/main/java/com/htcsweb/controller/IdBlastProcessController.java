@@ -58,7 +58,7 @@ public class IdBlastProcessController {
                 List<PipeBasicInfo> list=pipeBasicInfoDao.getPipeNumber(pipeno);
                 if(list.size()>0){
                     PipeBasicInfo p=list.get(0);
-                    if(p.getStatus().equals("odstockin")||p.getStatus().equals("bare1")) {
+                    if(p.getStatus().equals("odstockin")||p.getStatus().equals("bare2")) {
                         //验证钢管状态是否是成品入库或者外防腐终检完成
                         if(idBlastProcess.getResult().equals("1")) {//当合格时才更新钢管状态
                             p.setStatus("id1");

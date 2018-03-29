@@ -76,7 +76,7 @@
 78	涂层扒皮模块	css	搜索	r	getCoatingStripInfoByLike
 79	涂层扒皮模块	cse	编辑	w	saveCoatingStrip
 80	涂层扒皮模块	csd	删除	d	delCoatingStrip
-81	光管修磨切割模块	bpgr	查看	r	barepipegridingProcess
+81	光管修磨切割模块	bpgr	查看	r	barepipegrindingProcess
 82	光管修磨切割模块	bpgs	搜索	r	getAllBarePipeGrindingByLike
 83	光管修磨切割模块	bpge	编辑	w	saveBarePipeGrindingProcess
 84	光管修磨切割模块	bpgd	删除	d	delBarePipeGrindingProcess

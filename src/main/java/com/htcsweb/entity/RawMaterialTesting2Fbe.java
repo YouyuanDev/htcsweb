@@ -18,7 +18,7 @@ public class RawMaterialTesting2Fbe {
     private String batch_no;
     private float density;
     private float particle_size_32um;
-    private float paricle_size_150um;
+    private float particle_size_150um;
     private float dsc_tgi;
     private float dsc_tgf;
     private float dsc_delta_h;
@@ -37,7 +37,7 @@ public class RawMaterialTesting2Fbe {
     public RawMaterialTesting2Fbe() {
     }
 
-    public RawMaterialTesting2Fbe(int id, String project_no, String sample_no, String operator_no, Date operation_time, String raw_material, String batch_no, float density, float particle_size_32um, float paricle_size_150um, float dsc_tgi, float dsc_tgf, float dsc_delta_h, float gel_time_lt_20s, float gel_time_gt_20s, float powder_volatile, int foaming_cross_sectional, int foaming_interfacial, String impact, String flexibility, int hot_water, float cd_65_24h, String upload_files, String remark, String result) {
+    public RawMaterialTesting2Fbe(int id, String project_no, String sample_no, String operator_no, Date operation_time, String raw_material, String batch_no, float density, float particle_size_32um, float particle_size_150um, float dsc_tgi, float dsc_tgf, float dsc_delta_h, float gel_time_lt_20s, float gel_time_gt_20s, float powder_volatile, int foaming_cross_sectional, int foaming_interfacial, String impact, String flexibility, int hot_water, float cd_65_24h, String upload_files, String remark, String result) {
         this.id = id;
         this.project_no = project_no;
         this.sample_no = sample_no;
@@ -47,7 +47,7 @@ public class RawMaterialTesting2Fbe {
         this.batch_no = batch_no;
         this.density = density;
         this.particle_size_32um = particle_size_32um;
-        this.paricle_size_150um = paricle_size_150um;
+        this.particle_size_150um = particle_size_150um;
         this.dsc_tgi = dsc_tgi;
         this.dsc_tgf = dsc_tgf;
         this.dsc_delta_h = dsc_delta_h;
@@ -137,12 +137,12 @@ public class RawMaterialTesting2Fbe {
         this.particle_size_32um = particle_size_32um;
     }
 
-    public float getParicle_size_150um() {
-        return paricle_size_150um;
+    public float getParticle_size_150um() {
+        return particle_size_150um;
     }
 
-    public void setParicle_size_150um(float paricle_size_150um) {
-        this.paricle_size_150um = paricle_size_150um;
+    public void setParticle_size_150um(float particle_size_150um) {
+        this.particle_size_150um = particle_size_150um;
     }
 
     public float getDsc_tgi() {

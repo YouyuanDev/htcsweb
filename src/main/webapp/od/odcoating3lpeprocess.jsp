@@ -139,6 +139,25 @@
                 url:url,
                 onSubmit:function () {
                     //表单验证
+                    if($("input[name='pipe_no']").val()==""){
+
+                        hlAlertFour("请选择钢管管号");
+                        return false;
+                    }
+                    if($("input[name='operator_no']").val()==""){
+
+                        hlAlertFour("请选择操作工工号");
+                        return false;
+                    }
+                    if($("input[name='mill_no']").val()==""){
+
+                        hlAlertFour("请输入分厂信息");
+                        return false;
+                    }
+                    if($("input[name='odcoatprotime']").val()==""){
+                        hlAlertFour("请输入操作时间");
+                        return false;
+                    }
                     setParams($("input[name='coating_line_speed']"));
                     setParams($("input[name='application_temp']"));
                     setParams($("input[name='base_coat_gun_count']"));
@@ -149,10 +168,7 @@
                     setParams($("input[name='gun_distance']"));
                     setParams($("input[name='spray_speed']"));
                     setParams($("input[name='application_voltage']"));
-                    if($("input[name='odcoatprotime']").val()==""){
-                        hlAlertFour("请输入操作时间");
-                        return false;
-                    }
+
                 },
                 success: function(result){
                     var result = eval('('+result+')');

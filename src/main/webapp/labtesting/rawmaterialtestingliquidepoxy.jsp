@@ -115,6 +115,18 @@
                 url:url,
                 onSubmit:function () {
                     //表单验证
+
+
+                    if($("input[name='project_no']").val()==""){
+
+                        hlAlertFour("请选择项目信息");
+                        return false;
+                    }
+                    if($("input[name='operator_no']").val()==""){
+
+                        hlAlertFour("请选择操作工工号");
+                        return false;
+                    }
                     if($("input[name='odbptime']").val()==""){
                         hlAlertFour("请输入操作时间");return false;
                     }
@@ -336,8 +348,8 @@
          url="/ProjectOperation/getProjectInfoByNoOrName.action">
         <div property="columns">
             <div type="checkcolumn" ></div>
-            <div field="project_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="pipeno">项目编号</div>
-            <div field="project_name" width="80" headerAlign="center" allowSort="true" class="i18n1" name="contractno">项目名称</div>
+            <div field="project_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="projectno">项目编号</div>
+            <div field="project_name" width="80" headerAlign="center" allowSort="true" class="i18n1" name="projectname">项目名称</div>
         </div>
     </div>
 </div>

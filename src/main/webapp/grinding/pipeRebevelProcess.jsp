@@ -178,7 +178,21 @@
                 onSubmit:function () {
                     //表单验证
 
+                    if($("input[name='pipe_no']").val()==""){
 
+                        hlAlertFour("请选择钢管管号");
+                        return false;
+                    }
+                    if($("input[name='operator_no']").val()==""){
+
+                        hlAlertFour("请选择操作工工号");
+                        return false;
+                    }
+                    // if($("input[name='mill_no']").val()==""){
+                    //
+                    //     hlAlertFour("请输入分厂信息");
+                    //     return false;
+                    // }
                     if($("input[name='operation-time']").val()==""){
 
                         hlAlertFour("请输入操作时间");

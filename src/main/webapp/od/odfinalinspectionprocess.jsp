@@ -171,6 +171,26 @@
             $('#odFinalInProForm').form('submit',{
                 url:url,
                 onSubmit:function () {
+                    if($("input[name='pipe_no']").val()==""){
+
+                        hlAlertFour("请选择钢管管号");
+                        return false;
+                    }
+                    if($("input[name='operator_no']").val()==""){
+
+                        hlAlertFour("请选择操作工工号");
+                        return false;
+                    }
+                    if($("input[name='mill_no']").val()==""){
+
+                        hlAlertFour("请输入分厂信息");
+                        return false;
+                    }
+                    if($("input[name='odFinalInprotime']").val()==""){
+                        hlAlertFour("请输入操作时间");
+                        return false;
+                    }
+
                     var arg1=$("input[name='cutback_length']").val().trim();
                     var arg2=$("input[name='magnetism_list']").val().trim();
                     var arg3=$("input[name='coating_bevel_angle_list']").val().trim();
@@ -200,10 +220,7 @@
                         }
                     }
 
-                    if($("input[name='odFinalInprotime']").val()==""){
-                        hlAlertFour("请输入操作时间");
-                        return false;
-                    }
+
                     $("input[name='cutback_length']").val(changeComma(arg1));
                     $("input[name='magnetism_list']").val(changeComma(arg2));
                     $("input[name='coating_bevel_angle_list']").val(changeComma(arg3));

@@ -198,12 +198,26 @@
                     setParams($("input[name='salt_contamination_after_blasting']"));
                     setParams($("input[name='elapsed_time']"));
 
+                    if($("input[name='pipe_no']").val()==""){
+
+                        hlAlertFour("请选择钢管管号");
+                        return false;
+                    }
+                    if($("input[name='operator_no']").val()==""){
+
+                        hlAlertFour("请选择操作工工号");
+                        return false;
+                    }
+                    if($("input[name='mill_no']").val()==""){
+
+                        hlAlertFour("请输入分厂信息");
+                        return false;
+                    }
                     if($("input[name='idbptime']").val()==""){
 
                         hlAlertFour("请输入操作时间");
                         return false;
                     }
-
 
 
                 },

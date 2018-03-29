@@ -149,14 +149,30 @@
                     var arg2=$("input[name='original_pipe_no']").val();
                     var arg3=$("input[name='new_pipe_no']").val();
                     setParams($("input[name='salt_contamination_before_blasting']"));
+                    if($("input[name='pipe_no']").val()==""){
+
+                        hlAlertFour("请选择钢管管号");
+                        return false;
+                    }
+                    if($("input[name='operator_no']").val()==""){
+
+                        hlAlertFour("请选择操作工工号");
+                        return false;
+                    }
                      if(arg1!=arg2||arg1!=arg3||arg2!=arg3){
                          hlAlertFour("钢管编号不同!");
                          return false;
                      }
+                    if($("input[name='mill_no']").val()==""){
+
+                        hlAlertFour("请输入分厂信息");
+                        return false;
+                    }
                     if($("input[name='idbptime']").val()==""){
                         hlAlertFour("请输入操作时间");
                         return false;
                     }
+
                 },
                 success: function(result){
                     var result = eval('('+result+')');

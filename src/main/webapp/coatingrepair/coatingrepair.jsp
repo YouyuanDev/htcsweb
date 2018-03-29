@@ -133,6 +133,33 @@
                 url:url,
                 onSubmit:function () {
                     //表单验证
+                    if($("input[name='pipe_no']").val()==""){
+
+                        hlAlertFour("请选择钢管管号");
+                        return false;
+                    }
+                    if($("input[name='operator_no']").val()==""){
+
+                        hlAlertFour("请选择操作工工号");
+                        return false;
+                    }
+
+                    if($("input[name='operation-time']").val()==""){
+
+                        hlAlertFour("请输入操作时间");
+                        return false;
+                    }
+                    if($("input[name='inspector_no']").val()==""){
+
+                        hlAlertFour("请输入检验员工号");
+                        return false;
+                    }
+                    if($("input[name='instime']").val()==""){
+
+                        hlAlertFour("请输入检验时间");
+                        return false;
+                    }
+
                     setParams($("input[name='repair_number']"));
                     setParams($("input[name='holiday_number']"));
                     // if($("input[name='operator_no']").val()==""){

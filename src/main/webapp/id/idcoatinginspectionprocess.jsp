@@ -54,7 +54,7 @@
             // $('#idCoatingInProForm').form('clear');
             // $('#idcoatInproid').text('');
             clearFormLabel();
-            combox1.setValue("");
+            //combox1.setValue("");
             clearMultiUpload(grid);
             url="/IdCoatInOperation/saveIdCoatingInProcess.action";
         }
@@ -106,7 +106,7 @@
                 look1.setValue(row.pipe_no);
                 look2.setText(row.operator_no);
                 look2.setValue(row.operator_no);
-                combox1.setValue(row.surface_condition);
+                //combox1.setValue(row.surface_condition);
                 var odpictures=row.upload_files;
                 if(odpictures!=null&&odpictures!=""){
                     var imgList=odpictures.split(';');
@@ -120,36 +120,36 @@
                     success:function (data) {
                         // var $obj1=$("input[name='dry_film_thickness_max']");
                         // var $obj2=$("input[name='dry_film_thickness_min']");
-                        var $obj3=$("input[name='holidays']");
-                        var $obj4=$("input[name='magnetism']");
+                        //var $obj3=$("input[name='holidays']");
+                        //var $obj4=$("input[name='magnetism']");
                         var $obj5=$("input[name='wet_film_thickness_list']");
                         // $obj1.siblings().css("background-color","#FFFFFF");
                         // $obj2.siblings().css("background-color","#FFFFFF");
-                        $obj3.siblings().css("background-color","#FFFFFF");
-                        $obj4.siblings().css("background-color","#FFFFFF");
+                        //$obj3.siblings().css("background-color","#FFFFFF");
+                        //$obj4.siblings().css("background-color","#FFFFFF");
                         $obj5.siblings().css("background-color","#FFFFFF");
                         if(data!=null){
                             // var res1=$obj1.val();
                             // var res2=$obj2.val();
-                            var res3=$obj3.val();
+                            //var res3=$obj3.val();
                             //var res3_1=res3.split(',');
-                            var res4=$obj4.val();
+                            //var res4=$obj4.val();
                             var res5=changeComma($obj5.val());
                             var res5_1=res5.split(',');
                             // if(!((res1>=data.dry_film_thickness_min)&&(res1<=data.dry_film_thickness_max)))
                             //     $obj1.siblings().css("background-color","#F9A6A6");
                             // if(!((res2>=data.dry_film_thickness_min)&&(res2<=data.dry_film_thickness_max)))
                             //     $obj2.siblings().css("background-color","#F9A6A6");
-                            if(!((res3>=data.holiday_min)&&(res3<=data.holiday_max)))
-                                $obj3.siblings().css("background-color","#F9A6A6");
+                            // if(!((res3>=data.holiday_min)&&(res3<=data.holiday_max)))
+                            //     $obj3.siblings().css("background-color","#F9A6A6");
                             // for(var i=0;i<res3_1.length;i++){
                             //     if(res3_1[i]!=""&&res3_1[i].length>0){
                             //         if(!((res3_1[i]>=data.cutback_min)&&(res3_1[i]<=data.cutback_max)))
                             //             $obj3.siblings().css("background-color","#F9A6A6");
                             //     }
                             // }
-                            if(!((res4>=data.residual_magnetism_min)&&(res4<=data.residual_magnetism_max)))
-                                $obj4.siblings().css("background-color","#F9A6A6");
+                            // if(!((res4>=data.residual_magnetism_min)&&(res4<=data.residual_magnetism_max)))
+                            //     $obj4.siblings().css("background-color","#F9A6A6");
                             for(var i=0;i<res5_1.length;i++){
                                 if(res5_1[i]!=""&&res5_1[i].length>0){
                                     if(!((res5_1[i]>=data.wet_film_thickness_min)&&(res5_1[i]<=data.wet_film_thickness_max)))
@@ -182,6 +182,22 @@
                 url:url,
                 onSubmit:function () {
                     //表单验证
+                    if($("input[name='pipe_no']").val()==""){
+
+                        hlAlertFour("请选择钢管管号");
+                        return false;
+                    }
+                    if($("input[name='operator_no']").val()==""){
+
+                        hlAlertFour("请选择操作工工号");
+                        return false;
+                    }
+                    if($("input[name='mill_no']").val()==""){
+
+                        hlAlertFour("请输入分厂信息");
+                        return false;
+                    }
+
                     // setParams($("input[name='dry_film_thickness_max']"));
                     // setParams($("input[name='dry_film_thickness_min']"));
                     var arg1=$("input[name='wet_film_thickness_list']").val().trim();
@@ -201,10 +217,10 @@
                     $("input[name='wet_film_thickness_list']").val(changeComma(arg1));
                     //$("input[name='cutback']").val(changeComma(arg2));
                     //setParams($("input[name='cutback']"));
-                    setParams($("input[name='holiday_tester_volts']"));
-                    setParams($("input[name='holidays']"));
-                    setParams($("input[name='magnetism']"));
-                    setParams($("input[name='internal_repairs']"));
+                    // setParams($("input[name='holiday_tester_volts']"));
+                    // setParams($("input[name='holidays']"));
+                    // setParams($("input[name='magnetism']"));
+                    // setParams($("input[name='internal_repairs']"));
 
                     if($("input[name='idcoatInprotime']").val()==""){
                         hlAlertFour("请输入操作时间");
@@ -278,12 +294,12 @@
                 <%--<th field="dry_film_thickness_max" align="center" width="80" class="i18n1" name="dryfilmthicknessmax">最大干膜厚度</th>--%>
                 <%--<th field="dry_film_thickness_min" align="center" width="100" class="i18n1" name="dryfilmthicknessmin">最小干膜厚度</th>--%>
                 <%--<th field="cutback" align="center" width="100" hidden="true" class="i18n1" name="cutback">预留端长度</th>--%>
-                <th field="holiday_tester_volts" width="100" align="center" hidden="true" class="i18n1" name="holidaytestervolts">电火花检测电压</th>
-                <th field="holidays" align="center" width="100" hidden="true" class="i18n1" name="holidaytestresults">漏点</th>
-                <th field="surface_condition" align="center" width="150" class="i18n1" name="surfacecondition1">表面质量</th>
-                <th field="bevel_check" align="center" width="80" class="i18n1" name="bevelcheck">坡口质量</th>
-                <th field="magnetism" width="100" align="center"  class="i18n1" name="magnetism">剩磁</th>
-                <th field="internal_repairs" width="100" align="center"  class="i18n1" name="internalrepairs">内涂层修补数</th>
+                <%--<th field="holiday_tester_volts" width="100" align="center" hidden="true" class="i18n1" name="holidaytestervolts">电火花检测电压</th>--%>
+                <%--<th field="holidays" align="center" width="100" hidden="true" class="i18n1" name="holidaytestresults">漏点</th>--%>
+                <%--<th field="surface_condition" align="center" width="150" class="i18n1" name="surfacecondition1">表面质量</th>--%>
+                <%--<th field="bevel_check" align="center" width="80" class="i18n1" name="bevelcheck">坡口质量</th>--%>
+                <%--<th field="magnetism" width="100" align="center"  class="i18n1" name="magnetism">剩磁</th>--%>
+                <%--<th field="internal_repairs" width="100" align="center"  class="i18n1" name="internalrepairs">内涂层修补数</th>--%>
                 <th field="wet_film_thickness_list" width="100" align="center"  class="i18n1" name="wetfilmthicknesslist">湿膜厚度μm测量列表</th>
                 <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                 <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
@@ -413,61 +429,64 @@
                     <%--<td><input class="easyui-numberbox"  data-options="min:0,precision:2" type="text" name="dry_film_thickness_min" value=""/></td>--%>
                     <%--<td></td>--%>
                 <%--</tr>--%>
-                <tr>
-                    <td width="16%" class="i18n1" name="holidaytestervolts">电火花检测电压</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="holiday_tester_volts" value=""/></td>
-                    <td></td>
-                    <td width="16%" class="i18n1" name="holidaytestresults">漏点</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:0"  type="text" name="holidays" value=""/></td>
-                    <td></td>
-                </tr>
+                <%--<tr>--%>
+                    <%--<td width="16%" class="i18n1" name="holidaytestervolts">电火花检测电压</td>--%>
+                    <%--<td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="holiday_tester_volts" value=""/></td>--%>
+                    <%--<td></td>--%>
+                    <%--<td width="16%" class="i18n1" name="holidaytestresults">漏点</td>--%>
+                    <%--<td><input class="easyui-numberbox" data-options="min:0,precision:0"  type="text" name="holidays" value=""/></td>--%>
+                    <%--<td></td>--%>
+                <%--</tr>--%>
                 <tr>
                     <%--<td width="16%" class="i18n1" name="cutback">预留端长度</td>--%>
                     <%--<td><input class="easyui-textbox"  type="text" name="cutback" value=""/></td>--%>
                     <%--<td></td>--%>
+
                         <td width="16%" class="i18n1" name="wetfilmthicknesslist">湿膜厚度μm测量列表</td>
                         <td>
                             <input class="easyui-textbox"  type="text" name="wet_film_thickness_list" value=""/>
                         </td>
                         <td></td>
-                    <td width="16%" class="i18n1" name="bevelcheck">坡口质量</td>
-                    <td>
-                        <select id="bev" class="easyui-combobox" data-options="editable:false" name="bevel_check" style="width:200px;">
-                            <option value="0" selected="selected">未检测</option>
-                            <option value="1">合格</option>
-                            <option value="2">不合格</option>
-                        </select>
-                        <%--<input class="easyui-textbox"  type="text" name="bevel_check" value=""/>--%>
-                    </td>
-                    <td></td>
+                        <td width="16%" class="i18n1" name="issample">取样管</td>
+                        <td colspan="1">
+                            <input type="checkbox" id="is-sample" value="0" checked="false" onchange="selectIsSample()"/>
+                            <input type="hidden" name="is_sample" value="0">
+                        </td>
+                        <td></td>
+                    <%--<td width="16%" class="i18n1" name="bevelcheck">坡口质量</td>--%>
+                    <%--<td>--%>
+                        <%--<select id="bev" class="easyui-combobox" data-options="editable:false" name="bevel_check" style="width:200px;">--%>
+                            <%--<option value="0" selected="selected">未检测</option>--%>
+                            <%--<option value="1">合格</option>--%>
+                            <%--<option value="2">不合格</option>--%>
+                        <%--</select>--%>
+                        <%--&lt;%&ndash;<input class="easyui-textbox"  type="text" name="bevel_check" value=""/>&ndash;%&gt;--%>
+                    <%--</td>--%>
+                    <%--<td></td>--%>
 
                 </tr>
 
-                <tr>
-                    <td class="i18n1" name="magnetism">剩磁</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="magnetism" value=""/></td>
-                    <td></td>
-                    <td class="i18n1" name="internalrepairs">内涂层修补数</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="internal_repairs" value=""/></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td width="16%" class="i18n1" name="surfacecondition1">表面质量</td>
-                    <td colspan="2">
-                        <div id="combobox1" class="mini-combobox hl-combox-miniui" style="width:185px;"  popupWidth="185" textField="text" valueField="text"
-                             url="../data/surfacequality.txt" name="surface_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick" >
-                            <div property="columns">
-                                <div header="缺陷类型" field="text"></div>
-                            </div>
-                        </div>
-                    </td>
+                <%--<tr>--%>
+                    <%--<td class="i18n1" name="magnetism">剩磁</td>--%>
+                    <%--<td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="magnetism" value=""/></td>--%>
+                    <%--<td></td>--%>
+                    <%--<td class="i18n1" name="internalrepairs">内涂层修补数</td>--%>
+                    <%--<td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="internal_repairs" value=""/></td>--%>
+                    <%--<td></td>--%>
+                <%--</tr>--%>
+                <%--<tr>--%>
+                    <%--<td width="16%" class="i18n1" name="surfacecondition1">表面质量</td>--%>
+                    <%--<td colspan="2">--%>
+                        <%--<div id="combobox1" class="mini-combobox hl-combox-miniui" style="width:185px;"  popupWidth="185" textField="text" valueField="text"--%>
+                             <%--url="../data/surfacequality.txt" name="surface_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick" >--%>
+                            <%--<div property="columns">--%>
+                                <%--<div header="缺陷类型" field="text"></div>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
+                    <%--</td>--%>
 
-                    <td width="16%" class="i18n1" name="issample">取样管</td>
-                    <td colspan="2">
-                        <input type="checkbox" id="is-sample" value="0" checked="false" onchange="selectIsSample()"/>
-                        <input type="hidden" name="is_sample" value="0">
-                    </td>
-                </tr>
+                    <%----%>
+                <%--</tr>--%>
 
                 <tr>
                     <td width="16%" class="i18n1" name="result">结论</td>
@@ -570,7 +589,7 @@
     var grid2=mini.get("datagrid2");
     var look1=mini.get('lookup1');
     var look2= mini.get("lookup2");
-    var combox1=mini.get("combobox1");
+    //var combox1=mini.get("combobox1");
 
 
     function onSearchClick(type) {
@@ -643,16 +662,16 @@
             employeeno:keyText3.value
         });
     });
-    combox1.on("showpopup",function () {
-        $('.mini-shadow').css('z-index','99999');
-        $('.mini-popup').css('z-index','100000');
-        $('.mini-panel').css('z-index','100000');
-    });
-    function onComboxCloseClick(e) {
-        var obj = e.sender;
-        obj.setText("");
-        obj.setValue("");
-    }
+    // combox1.on("showpopup",function () {
+    //     $('.mini-shadow').css('z-index','99999');
+    //     $('.mini-popup').css('z-index','100000');
+    //     $('.mini-panel').css('z-index','100000');
+    // });
+    // function onComboxCloseClick(e) {
+    //     var obj = e.sender;
+    //     obj.setText("");
+    //     obj.setValue("");
+    // }
     hlLanguage("../i18n/");
     $(function () {
         $(".hl-combox-miniui .mini-buttonedit-input").css("width","170px");

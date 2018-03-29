@@ -6,7 +6,7 @@
 <mapper namespace="com.htcsweb.dao.RawMaterialTesting2FbeDao">
 
     <insert id="addRawMaterialTest2Fbe" parameterType="com.htcsweb.entity.RawMaterialTesting2Fbe">
-      INSERT INTO raw_material_testing_2fbe(operator_no,project_no,operation_time,sample_no,raw_material,batch_no,density,particle_size_32um,paricle_size_150um,dsc_tgi,dsc_tgf,dsc_delta_h,gel_time_lt_20s,gel_time_gt_20s,powder_volatile,foaming_cross_sectional,foaming_interfacial,impact,flexibility,hot_water,cd_65_24h,result,upload_files,remark) VALUES (#{operator_no},#{project_no},#{operation_time},#{sample_no},#{raw_material},#{batch_no},#{density},#{particle_size_32um},#{paricle_size_150um},#{dsc_tgi},#{dsc_tgf},#{dsc_delta_h},#{gel_time_lt_20s},#{gel_time_gt_20s},#{powder_volatile},#{foaming_cross_sectional},#{foaming_interfacial},#{impact},#{flexibility},#{hot_water},#{cd_65_24h},#{result},#{upload_files},#{remark})
+      INSERT INTO raw_material_testing_2fbe(operator_no,project_no,operation_time,sample_no,raw_material,batch_no,density,particle_size_32um,particle_size_150um,dsc_tgi,dsc_tgf,dsc_delta_h,gel_time_lt_20s,gel_time_gt_20s,powder_volatile,foaming_cross_sectional,foaming_interfacial,impact,flexibility,hot_water,cd_65_24h,result,upload_files,remark) VALUES (#{operator_no},#{project_no},#{operation_time},#{sample_no},#{raw_material},#{batch_no},#{density},#{particle_size_32um},#{particle_size_150um},#{dsc_tgi},#{dsc_tgf},#{dsc_delta_h},#{gel_time_lt_20s},#{gel_time_gt_20s},#{powder_volatile},#{foaming_cross_sectional},#{foaming_interfacial},#{impact},#{flexibility},#{hot_water},#{cd_65_24h},#{result},#{upload_files},#{remark})
     </insert>
     <delete id="delRawMaterialTest2Fbe">
         delete from raw_material_testing_2fbe WHERE
@@ -16,7 +16,7 @@
     </delete>
 
     <update id="updateRawMaterialTest2Fbe" parameterType="com.htcsweb.entity.RawMaterialTesting2Fbe">
-       UPDATE raw_material_testing_2fbe set operator_no=#{operator_no},project_no=#{project_no},operation_time=#{operation_time},sample_no=#{sample_no},raw_material=#{raw_material},batch_no=#{batch_no},density=#{density},particle_size_32um=#{particle_size_32um},paricle_size_150um=#{paricle_size_150um},dsc_tgi=#{dsc_tgi},dsc_tgf=#{dsc_tgf},dsc_delta_h=#{dsc_delta_h},gel_time_lt_20s=#{gel_time_lt_20s},gel_time_gt_20s=#{gel_time_gt_20s},powder_volatile=#{powder_volatile},foaming_cross_sectional=#{foaming_cross_sectional},foaming_interfacial=#{foaming_interfacial},impact=#{impact},flexibility=#{flexibility},hot_water=#{hot_water},cd_65_24h=#{cd_65_24h},result=#{result},upload_files=#{upload_files},remark=#{remark} where id=#{id}
+       UPDATE raw_material_testing_2fbe set operator_no=#{operator_no},project_no=#{project_no},operation_time=#{operation_time},sample_no=#{sample_no},raw_material=#{raw_material},batch_no=#{batch_no},density=#{density},particle_size_32um=#{particle_size_32um},particle_size_150um=#{particle_size_150um},dsc_tgi=#{dsc_tgi},dsc_tgf=#{dsc_tgf},dsc_delta_h=#{dsc_delta_h},gel_time_lt_20s=#{gel_time_lt_20s},gel_time_gt_20s=#{gel_time_gt_20s},powder_volatile=#{powder_volatile},foaming_cross_sectional=#{foaming_cross_sectional},foaming_interfacial=#{foaming_interfacial},impact=#{impact},flexibility=#{flexibility},hot_water=#{hot_water},cd_65_24h=#{cd_65_24h},result=#{result},upload_files=#{upload_files},remark=#{remark} where id=#{id}
     </update>
 
 

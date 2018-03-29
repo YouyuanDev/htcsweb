@@ -36,7 +36,7 @@
                 "idblastprocess","idblastinspectionprocess","idcoatingprocess","idcoatinginspectionprocess","idstencilprocess","idfinalinspectionprocess",
                 "odstockin","idstockin","barepipemovement","productStockout",
                 "coatingrepair","coatingstrip",
-                "barepipegridingProcess","pipeSamplingProcess","pipeRebevelProcess",
+                "barepipegrindingProcess","pipeSamplingProcess","pipeRebevelProcess",
                 "projectManagement","contractManagement","pipeManagement","uploadPipe","twodimensionalcode",
                 "odstandard","idstandard","labtestingstandard2fbe","labtestingstandard3lpe","rawmaterialtestingstandard2fbe","rawmaterialtestingstandard3lpe",
                 "labtesting2fbe","labtesting3lpe","labtestingepoxy","rawmaterialtesting2fbe","rawmaterialtesting3lpe","rawmaterialtestingliquidepoxy",
@@ -428,7 +428,7 @@
 
                             $('#hlTab').tabs('add', {
                                 title: node.text,
-                                content: "<iframe scrolling='auto' frameborder='0'  src='grinding/barepipegridingProcess.jsp' style='width:100%;height:100%;'></iframe>",
+                                content: "<iframe scrolling='auto' frameborder='0'  src='grinding/barepipegrindingProcess.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable: true
                             });
                             hlLanguage();

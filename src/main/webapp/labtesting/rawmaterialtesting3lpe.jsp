@@ -161,6 +161,21 @@
                 url:url,
                 onSubmit:function () {
                     //表单验证
+                    if($("input[name='project_no']").val()==""){
+
+                        hlAlertFour("请选择项目信息");
+                        return false;
+                    }
+                    if($("input[name='operator_no']").val()==""){
+
+                        hlAlertFour("请选择操作工工号");
+                        return false;
+                    }
+                    if($("input[name='odbptime']").val()==""){
+                        hlAlertFour("请输入操作时间");
+                        return false;
+                    }
+
                     setParams($("input[name='epoxy_cure_time']"));
                     setParams($("input[name='epoxy_gel_time']"));
                     setParams($("input[name='epoxy_moisture_content']"));
@@ -169,12 +184,7 @@
                     setParams($("input[name='adhesion_flow_rate']"));
                     setParams($("input[name='indentation_hardness_70']"));
                     setParams($("input[name='polyethylene_flow_rate']"));
-                    if($("input[name='odbptime']").val()==""){
-                        hlAlertFour("请输入操作时间");return false;
-                    }
-                    if($("input[name='coatingdate']").val()==""){
-                        hlAlertFour("请输入涂层时间");return false;
-                    }
+
                 },
                 success: function(result){
                     clearFormLabel();

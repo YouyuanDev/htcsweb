@@ -190,6 +190,20 @@
                 url:url,
                 onSubmit:function () {
                     //表单验证
+                    if($("input[name='project_no']").val()==""){
+
+                        hlAlertFour("请选择项目信息");
+                        return false;
+                    }
+                    if($("input[name='operator_no']").val()==""){
+
+                        hlAlertFour("请选择操作工工号");
+                        return false;
+                    }
+                    if($("input[name='odbptime']").val()==""){
+                        hlAlertFour("请输入操作时间");
+                        return false;
+                    }
                     setParams($("input[name='density']"));
                     setParams($("input[name='particle_size_32um']"));
                     setParams($("input[name='particle_size_150um']"));
@@ -205,9 +219,7 @@
                     setParams($("input[name='flexibility']"));
                     // setParams($("input[name='hot_water']"));
                     setParams($("input[name='cd_65_24h']"));
-                    if($("input[name='odbptime']").val()==""){
-                        hlAlertFour("请输入操作时间");return false;
-                    }
+
                 },
                 success: function(result){
                     clearFormLabel();
@@ -386,7 +398,7 @@
                <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="particle_size_32um" value=""/></td>
                <td></td>
                <td width="16%" class="i18n1" name="particlesize150um">颗粒度 150um 所占比例</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="paricle_size_150um" value=""/></td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="particle_size_150um" value=""/></td>
                <td></td>
            </tr>
 

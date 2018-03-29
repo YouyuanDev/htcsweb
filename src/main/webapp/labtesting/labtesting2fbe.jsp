@@ -167,6 +167,22 @@
                 url:url,
                 onSubmit:function () {
                     //表单验证
+                    if($("input[name='pipe_no']").val()==""){
+
+                        hlAlertFour("请选择钢管管号");
+                        return false;
+                    }
+                    if($("input[name='operator_no']").val()==""){
+
+                        hlAlertFour("请选择操作工工号");
+                        return false;
+                    }
+                    if($("input[name='odbptime']").val()==""){
+                        hlAlertFour("请输入操作时间");return false;
+                    }
+                    if($("input[name='coatingdate']").val()==""){
+                        hlAlertFour("请输入涂层时间");return false;
+                    }
                     setParams($("input[name='foaming_cross_sectional']"));
                     setParams($("input[name='foaming_interfacial']"));
                     setParams($("input[name='interfacial_contamination']"));
@@ -175,12 +191,7 @@
                     setParams($("input[name='resistance_to_cd_65_24h']"));
                     setParams($("input[name='resistance_to_cd_22_28d']"));
                     setParams($("input[name='resistance_to_cd_65_28d']"));
-                    if($("input[name='odbptime']").val()==""){
-                        hlAlertFour("请输入操作时间");return false;
-                    }
-                    if($("input[name='coatingdate']").val()==""){
-                        hlAlertFour("请输入涂层时间");return false;
-                    }
+
                 },
                 success: function(result){
                     clearFormLabel();

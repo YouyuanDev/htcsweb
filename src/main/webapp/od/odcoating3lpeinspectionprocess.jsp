@@ -209,6 +209,25 @@
                 url:url,
                 onSubmit:function () {
                     //表单验证
+                    if($("input[name='pipe_no']").val()==""){
+
+                        hlAlertFour("请选择钢管管号");
+                        return false;
+                    }
+                    if($("input[name='operator_no']").val()==""){
+
+                        hlAlertFour("请选择操作工工号");
+                        return false;
+                    }
+                    if($("input[name='mill_no']").val()==""){
+
+                        hlAlertFour("请输入分厂信息");
+                        return false;
+                    }
+                    if($("input[name='odcoat3LpeInprotime']").val()==""){
+                        hlAlertFour("请输入操作时间");
+                        return false;
+                    }
                     // setParams($("input[name='coating_line_speed']"));
                     // setParams($("input[name='application_temp']"));
                     // setParams($("input[name='base_coat_gun_count']"));
@@ -250,15 +269,15 @@
                     //         return false;
                     //     }
                     // }
-                    if($("input[name='odcoat3LpeInprotime']").val()==""){
-                        hlAlertFour("请输入操作时间");
-                        return false;
-                    }
+
                     $("input[name='base_coat_thickness_list']").val(changeComma(arg1));
                     $("input[name='top_coat_thickness_list']").val(changeComma(arg2));
                     $("input[name='total_coating_thickness_list']").val(changeComma(arg3));
                     $("input[name='middle_coat_thickness_list']").val(changeComma(arg4));
                     //$("input[name='cutback_length']").val(changeComma(arg5));
+                    setParams($("input[name='holidays']"));
+                    setParams($("input[name='holiday_tester_volts']"));
+                    setParams($("input[name='repairs']"));
                 },
                 success: function(result){
                     var result = eval('('+result+')');
