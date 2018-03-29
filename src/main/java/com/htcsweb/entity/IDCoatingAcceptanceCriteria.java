@@ -48,13 +48,20 @@ public class IDCoatingAcceptanceCriteria {
     private float roughness_max;
     private float roughness_min;
 
+    private float pipe_temp_max;
+    private float pipe_temp_min;
 
+    private int repair_max;
+    private int repair_min;
+
+    private float holiday_tester_voltage_max;
+    private float holiday_tester_voltage_min;
 
 
     public IDCoatingAcceptanceCriteria() {
     }
 
-    public IDCoatingAcceptanceCriteria(int id, String coating_acceptance_criteria_no, float temp_above_dew_point_max, float temp_above_dew_point_min, float blast_finish_sa25_max, float blast_finish_sa25_min, float relative_humidity_max, float relative_humidity_min, float id_profile_max, float id_profile_min, float dry_film_thickness_max, float dry_film_thickness_min, float cutback_max, float cutback_min, float residual_magnetism_max, float residual_magnetism_min, Date last_update_time, float wet_film_thickness_max, float wet_film_thickness_min, float salt_contamination_before_blast_max, float salt_contamination_before_blast_min, float salt_contamination_after_blasting_max, float salt_contamination_after_blasting_min, int surface_dust_rating_max, int surface_dust_rating_min, int holiday_max, int holiday_min, float roughness_max, float roughness_min) {
+    public IDCoatingAcceptanceCriteria(int id, String coating_acceptance_criteria_no, float temp_above_dew_point_max, float temp_above_dew_point_min, float blast_finish_sa25_max, float blast_finish_sa25_min, float relative_humidity_max, float relative_humidity_min, float id_profile_max, float id_profile_min, float dry_film_thickness_max, float dry_film_thickness_min, float cutback_max, float cutback_min, float residual_magnetism_max, float residual_magnetism_min, Date last_update_time, float wet_film_thickness_max, float wet_film_thickness_min, float salt_contamination_before_blast_max, float salt_contamination_before_blast_min, float salt_contamination_after_blasting_max, float salt_contamination_after_blasting_min, int surface_dust_rating_max, int surface_dust_rating_min, int holiday_max, int holiday_min, float roughness_max, float roughness_min, float pipe_temp_max, float pipe_temp_min, int repair_max, int repair_min, float holiday_tester_voltage_max, float holiday_tester_voltage_min) {
         this.id = id;
         this.coating_acceptance_criteria_no = coating_acceptance_criteria_no;
         this.temp_above_dew_point_max = temp_above_dew_point_max;
@@ -84,6 +91,12 @@ public class IDCoatingAcceptanceCriteria {
         this.holiday_min = holiday_min;
         this.roughness_max = roughness_max;
         this.roughness_min = roughness_min;
+        this.pipe_temp_max = pipe_temp_max;
+        this.pipe_temp_min = pipe_temp_min;
+        this.repair_max = repair_max;
+        this.repair_min = repair_min;
+        this.holiday_tester_voltage_max = holiday_tester_voltage_max;
+        this.holiday_tester_voltage_min = holiday_tester_voltage_min;
     }
 
     public int getId() {
@@ -316,5 +329,53 @@ public class IDCoatingAcceptanceCriteria {
 
     public void setRoughness_min(float roughness_min) {
         this.roughness_min = roughness_min;
+    }
+
+    public float getPipe_temp_max() {
+        return pipe_temp_max;
+    }
+
+    public void setPipe_temp_max(float pipe_temp_max) {
+        this.pipe_temp_max = pipe_temp_max;
+    }
+
+    public float getPipe_temp_min() {
+        return pipe_temp_min;
+    }
+
+    public void setPipe_temp_min(float pipe_temp_min) {
+        this.pipe_temp_min = pipe_temp_min;
+    }
+
+    public int getRepair_max() {
+        return repair_max;
+    }
+
+    public void setRepair_max(int repair_max) {
+        this.repair_max = repair_max;
+    }
+
+    public int getRepair_min() {
+        return repair_min;
+    }
+
+    public void setRepair_min(int repair_min) {
+        this.repair_min = repair_min;
+    }
+
+    public float getHoliday_tester_voltage_max() {
+        return holiday_tester_voltage_max;
+    }
+
+    public void setHoliday_tester_voltage_max(float holiday_tester_voltage_max) {
+        this.holiday_tester_voltage_max = holiday_tester_voltage_max;
+    }
+
+    public float getHoliday_tester_voltage_min() {
+        return holiday_tester_voltage_min;
+    }
+
+    public void setHoliday_tester_voltage_min(float holiday_tester_voltage_min) {
+        this.holiday_tester_voltage_min = holiday_tester_voltage_min;
     }
 }

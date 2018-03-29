@@ -133,6 +133,12 @@
             setParamsMin($("input[name='holiday_min']"));
             setParamsMax($("input[name='roughness_max']"));
             setParamsMin($("input[name='roughness_min']"));
+            setParamsMax($("input[name='pipe_temp_max']"));
+            setParamsMin($("input[name='pipe_temp_min']"));
+            setParamsMax($("input[name='repair_max']"));
+            setParamsMin($("input[name='repair_min']"));
+            setParamsMax($("input[name='holiday_tester_voltage_max']"));
+            setParamsMin($("input[name='holiday_tester_voltage_min']"));
         }
         function  setParamsMax($obj) {
             if($obj.val()==null||$obj.val()=="")
@@ -191,6 +197,15 @@
                 <th field="holiday_min" align="center" width="100" hidden="true" class="i18n1" name="holidaymin">漏点最小值</th>
                 <th field="roughness_max" align="center" width="100" hidden="true" class="i18n1" name="roughnessmax">粗糙度最大值</th>
                 <th field="roughness_min" align="center" width="100" hidden="true" class="i18n1" name="roughnessmin">粗糙度最小值</th>
+
+                <th field="pipe_temp_max" align="center" width="100" hidden="true" class="i18n1" name="pipetempmax">钢管温度最大值</th>
+                <th field="pipe_temp_min" align="center" width="100" hidden="true" class="i18n1" name="pipetempmin">钢管温度最小值</th>
+                <th field="repair_max" align="center" width="100" hidden="true" class="i18n1" name="idcoatingrepairmax">内涂修补最大值</th>
+                <th field="repair_min" align="center" width="100" hidden="true" class="i18n1" name="idcoatingrepairmin">内涂修补最小值</th>
+                <th field="holiday_tester_voltage_max" align="center" width="100" hidden="true" class="i18n1" name="holidaytestervoltagemax">检漏仪电压最大值</th>
+                <th field="holiday_tester_voltage_min" align="center" width="100" hidden="true" class="i18n1" name="holidaytestervoltagemin">检漏仪电压最小值</th>
+                
+
             </tr>
             </thead>
         </table>
@@ -304,6 +319,28 @@
                     <td class="i18n1" name="roughnessmin">粗糙度最小值</td>
                     <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="roughness_min" value=""/></td>
                 </tr>
+                <tr>
+                    <td class="i18n1" name="pipetempmax">钢管温度最大值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_temp_max" value=""/></td>
+                    <td class="i18n1" name="pipetempmin">钢管最小值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_temp_min" value=""/></td>
+                </tr>
+                <tr>
+                    <td class="i18n1" name="idcoatingrepairmax">内涂修补最大值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="repair_max" value=""/></td>
+                    <td class="i18n1" name="idcoatingrepairmin">内涂修补最小值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="repair_min" value=""/></td>
+                </tr>
+                <tr>
+                    <td class="i18n1" name="holidaytestervoltagemax">检漏仪电压最大值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="holiday_tester_voltage_max" value=""/></td>
+                    <td class="i18n1" name="holidaytestervoltagemin">检漏仪电压最小值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="holiday_tester_voltage_min" value=""/></td>
+                </tr>
+
+
+
+
 
             </table>
         </fieldset>
