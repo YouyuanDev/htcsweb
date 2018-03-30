@@ -166,6 +166,9 @@
             setParamsMin($("input[name='coating_bevel_angle_min']"));
             setParamsMax($("input[name='holiday_max']"));
             setParamsMin($("input[name='holiday_min']"));
+            setParamsMax($("input[name='strip_temp_max']"));
+            setParamsMin($("input[name='strip_temp_min']"));
+
         }
         function  setParamsMax($obj) {
             if($obj.val()==null||$obj.val()=="")
@@ -247,6 +250,10 @@
                    <th field="coating_bevel_angle_min" align="center" width="150" hidden="true" class="i18n1" name="coatingbevelanglemin">涂层倒角最小值 </th>
                    <th field="holiday_max" align="center" width="150" hidden="true" class="i18n1" name="holidaymax">漏点最大值 </th>
                    <th field="holiday_min" align="center" width="150" hidden="true" class="i18n1" name="holidaymin">漏点最小值 </th>
+
+                   <th field="strip_temp_max" align="center" width="150" hidden="true" class="i18n1" name="striptempmax">扒皮温度最大值 </th>
+                   <th field="strip_temp_min" align="center" width="150" hidden="true" class="i18n1" name="striptempmin">扒皮温度最小值 </th>
+
                    <th field="last_update_time" align="center" width="150" class="i18n1" name="lastupdatetime" data-options="formatter:formatterdate">最后更新时间</th>
 
                </tr>
@@ -426,6 +433,13 @@
                    <td class="i18n1" name="holidaymin">漏点最小值</td>
                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="holiday_min" value=""/></td>
                </tr>
+               <tr>
+                   <td class="i18n1" name="striptempmax">扒皮温度最大值(℃)</td>
+                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="strip_temp_max" value=""/></td>
+                   <td class="i18n1" name="striptempmin">扒皮温度最小值(℃)</td>
+                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="strip_temp_min" value=""/></td>
+               </tr>
+
 
                <tr>
                    <td class="i18n1" name="lastupdatetime">最后更新时间</td>

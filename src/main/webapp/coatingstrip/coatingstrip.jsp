@@ -90,6 +90,36 @@
                     var imgList=odpictures.split(';');
                     createPictureModel(basePath,imgList);
                 }
+
+                var accurl;
+                if(row.odid=="od")
+                    accurl='/AcceptanceCriteriaOperation/getODAcceptanceCriteriaByContractNo.action';
+                else
+                    accurl='/AcceptanceCriteriaOperation/getIDAcceptanceCriteriaByContractNo.action';
+
+                //异步获取标准并匹配
+                $.ajax({
+                    url:accurl,
+                    dataType:'json',
+                    data:{'contract_no':row.contract_no},
+                    success:function (data) {
+                        var $obj1=$("input[name='strip_temperature']");
+                        $obj1.siblings().css("background-color","#FFFFFF");
+                        if(data!=null){
+
+                            var res1=$obj1.val();
+
+                            if(!((res1>=data.strip_temp_min)&&(res1<=data.strip_temp_max)))
+                                $obj1.siblings().css("background-color","#F9A6A6");
+
+                        }
+                    },error:function () {
+
+                    }
+                });
+
+
+
                 url="/coatingStripOperation/saveCoatingStrip.action?id="+row.id;
 
             }else{
@@ -159,16 +189,8 @@
                         return false;
                     }
 
-
                     setParams($("input[name='strip_temperature']"));
-                    // if($("input[name='operator_no']").val()==""){
-                    //     hlAlertFour("请输入操作员编号");
-                    //     return false;
-                    // }
-                    // if($("input[name='inspector_no']").val()==""){
-                    //     hlAlertFour("请输入检验员编号");
-                    //     return false;
-                    // }
+
                     //return $('#coatingStripForm').form('enableValidation').form('validate');
                 },
                 success: function(result){

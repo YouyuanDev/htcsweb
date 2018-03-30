@@ -13,7 +13,7 @@
         salt_contamination_before_blast_max,salt_contamination_before_blast_min,salt_contamination_after_blasting_max,
         salt_contamination_after_blasting_min,surface_dust_rating_max,surface_dust_rating_min,holiday_max,holiday_min,
         roughness_max,roughness_min,pipe_temp_max,pipe_temp_min,repair_max,repair_min,holiday_tester_voltage_max,
-        holiday_tester_voltage_min)
+        holiday_tester_voltage_min,strip_temp_max,strip_temp_min)
         VALUES (#{coating_acceptance_criteria_no},#{temp_above_dew_point_max},#{temp_above_dew_point_min},
         #{blast_finish_sa25_max},#{blast_finish_sa25_min},#{relative_humidity_max},#{relative_humidity_min},
         #{id_profile_max},#{id_profile_min},#{dry_film_thickness_max},#{dry_film_thickness_min},#{cutback_max},
@@ -22,7 +22,7 @@
         #{salt_contamination_after_blasting_max},#{salt_contamination_after_blasting_min},#{surface_dust_rating_max},
         #{surface_dust_rating_min},#{holiday_max},#{holiday_min},#{roughness_max},#{roughness_min},
         #{pipe_temp_max},#{pipe_temp_min},#{repair_max},#{repair_min},#{holiday_tester_voltage_max},
-        #{holiday_tester_voltage_min}
+        #{holiday_tester_voltage_min},#{strip_temp_max},#{strip_temp_min}
         )
     </insert>
     <delete id="delIdCoatingCriterProcess">
@@ -49,7 +49,8 @@
         holiday_max=#{holiday_max},holiday_min=#{holiday_min},roughness_max=#{roughness_max},roughness_min=#{roughness_min},
         pipe_temp_max=#{pipe_temp_max},pipe_temp_min=#{pipe_temp_min},repair_max=#{repair_max},
         repair_min=#{repair_min},holiday_tester_voltage_max=#{holiday_tester_voltage_max},
-        holiday_tester_voltage_min=#{holiday_tester_voltage_min}
+        holiday_tester_voltage_min=#{holiday_tester_voltage_min},
+        strip_temp_max=#{strip_temp_max},strip_temp_min=#{strip_temp_min}
          where id=#{id}
     </update>
 
