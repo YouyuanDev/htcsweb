@@ -74,6 +74,8 @@
                 $('#hlOdAcceptanceDialog').dialog('open').dialog('setTitle','修改');
                 $('#odAcceptanceForm').form('load',row);
                 $("#odacceptanceId").text(row.id);
+                var lasttime=formatterdate(row.last_update_time);
+                $("#lastupdatetime").text(lasttime);
                 url="/AcceptanceCriteriaOperation/saveAllODAcceptanceCriteria.action?id="+row.id;
             }else{
                 hlAlertTwo();
@@ -245,6 +247,7 @@
                    <th field="coating_bevel_angle_min" align="center" width="150" hidden="true" class="i18n1" name="coatingbevelanglemin">涂层倒角最小值 </th>
                    <th field="holiday_max" align="center" width="150" hidden="true" class="i18n1" name="holidaymax">漏点最大值 </th>
                    <th field="holiday_min" align="center" width="150" hidden="true" class="i18n1" name="holidaymin">漏点最小值 </th>
+                   <th field="last_update_time" align="center" width="150" class="i18n1" name="lastupdatetime" data-options="formatter:formatterdate">最后更新时间</th>
 
                </tr>
              </thead>
@@ -424,7 +427,14 @@
                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="holiday_min" value=""/></td>
                </tr>
 
+               <tr>
+                   <td class="i18n1" name="lastupdatetime">最后更新时间</td>
+                   <td colspan="2">
+                       <label class="hl-label" id="lastupdatetime" type="text" name="last_update_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                   </td>
 
+
+               </tr>
            </table>
        </fieldset>
    </form>

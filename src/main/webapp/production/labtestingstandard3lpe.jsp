@@ -70,6 +70,8 @@
                 $('#hlLabStandard3LpeDialog').dialog('open').dialog('setTitle','修改');
                 $('#LabStandard3LpeForm').form('load',row);
                 $("#LabStandard3LpeId").text(row.id);
+                var lasttime=formatterdate(row.last_update_time);
+                $("#lastupdatetime").text(lasttime);
                 url="/LabTestingAcceptanceCriteriaOperation/saveLabTestingAcceptanceCriteria3lpe.action?id="+row.id;
             }else{
                 hlAlertTwo();
@@ -180,6 +182,8 @@
                 <th field="coating_resistivity_min" align="center" width="100" hidden="true" class="i18n1" name="coatingresistivitymin">涂层强度 最大值</th>
                 <th field="thermal_degradation_max" align="center" width="100" hidden="true" class="i18n1" name="thermaldegradationmax">热特性最大值</th>
                 <th field="thermal_degradation_min" align="center" width="100" hidden="true" class="i18n1" name="thermaldegradationmin">热特性最小值</th>
+                <th field="last_update_time" align="center" width="150" class="i18n1" name="lastupdatetime" data-options="formatter:formatterdate">最后更新时间</th>
+
             </tr>
             </thead>
         </table>
@@ -271,6 +275,15 @@
                     <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="thermal_degradation_max" value=""/></td>
                     <td class="i18n1" name="thermaldegradationmin">热特性最小值</td>
                     <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="thermal_degradation_min" value=""/></td>
+                </tr>
+
+                <tr>
+                    <td class="i18n1" name="lastupdatetime">最后更新时间</td>
+                    <td colspan="2">
+                        <label class="hl-label" id="lastupdatetime" type="text" name="last_update_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                    </td>
+
+
                 </tr>
             </table>
         </fieldset>

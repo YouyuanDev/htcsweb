@@ -72,6 +72,8 @@
                 $('#hlLabStandard2FbeDialog').dialog('open').dialog('setTitle','修改');
                 $('#LabStandard2FbeForm').form('load',row);
                 $("#LabStandard2FbeId").text(row.id);
+                var lasttime=formatterdate(row.last_update_time);
+                $("#lastupdatetime").text(lasttime);
                 url="/LabTestingAcceptanceCriteriaOperation/saveLabTestingAcceptanceCriteria2Fbe.action?id="+row.id;
             }else{
                 hlAlertTwo();
@@ -176,6 +178,8 @@
                 <th field="resistance_to_cd_22_28d_min" align="center" width="100" hidden="true" class="i18n1" name="resistancetocd2228dmin">水煮实验 22.5度 28天 最小值</th>
                 <th field="resistance_to_cd_65_28d_max" align="center" width="100" hidden="true" class="i18n1" name="resistancetocd6528dmax">水煮实验 65度 28天 最大值</th>
                 <th field="resistance_to_cd_65_28d_min" align="center" width="100" hidden="true" class="i18n1" name="resistancetocd6528dmin">水煮实验 65度 28天 最小值</th>
+                <th field="last_update_time" align="center" width="150" class="i18n1" name="lastupdatetime" data-options="formatter:formatterdate">最后更新时间</th>
+
             </tr>
             </thead>
         </table>
@@ -256,6 +260,16 @@
                     <td class="i18n1" name="resistancetocd6528dmin">水煮实验 65度 28天 最小值</td>
                     <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="resistance_to_cd_65_28d_min" value=""/></td>
                 </tr>
+
+                <tr>
+                    <td class="i18n1" name="lastupdatetime">最后更新时间</td>
+                    <td colspan="2">
+                        <label class="hl-label" id="lastupdatetime" type="text" name="last_update_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                    </td>
+
+
+                </tr>
+
             </table>
         </fieldset>
     </form>

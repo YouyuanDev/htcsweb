@@ -140,7 +140,7 @@
             setParamsMin($("input[name='pipe_end_ovality_factor_min']"));
             setParamsMax($("input[name='pipe_straightness_tolerance_max']"));
             setParamsMin($("input[name='pipe_straightness_tolerance_min']"));
-            
+
         }
         function  setParamsMax($obj) {
             if($obj.val()==null||$obj.val()=="")

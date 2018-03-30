@@ -72,6 +72,8 @@
                 $('#hlRawMaterialStandard2FbeDialog').dialog('open').dialog('setTitle','修改');
                 $('#RawMaterialStandard2FbeForm').form('load',row);
                 $("#RawMaterialStandard2FbeId").text(row.id);
+                var lasttime=formatterdate(row.last_update_time);
+                $("#lastupdatetime").text(lasttime);
                 url="/rawMaterialACOperation/saveRawMaterialStandard2Fbe.action?id="+row.id;
             }else{
                 hlAlertTwo();
@@ -195,6 +197,8 @@
                 <th field="hot_water_min" align="center" width="100" hidden="true" class="i18n1" name="hotwatermin">水煮 98度 24小时最小值</th>
                 <th field="cd_65_24h_max" align="center" width="100" hidden="true" class="i18n1" name="cd6524hmax">阴极剥离 65度 24小时 最大值</th>
                 <th field="cd_65_24h_min" align="center" width="100" hidden="true" class="i18n1" name="cd6524hmin">阴极剥离 65度 24小时 最小值</th>
+                <th field="last_update_time" align="center" width="150" class="i18n1" name="lastupdatetime" data-options="formatter:formatterdate">最后更新时间</th>
+
             </tr>
             </thead>
         </table>
@@ -304,6 +308,15 @@
                     <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="cd_65_24h_max" value=""/></td>
                     <td class="i18n1" name="cd6524hmin">阴极剥离65度24小时最小值</td>
                     <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="cd_65_24h_min" value=""/></td>
+                </tr>
+
+                <tr>
+                    <td class="i18n1" name="lastupdatetime">最后更新时间</td>
+                    <td colspan="2">
+                        <label class="hl-label" id="lastupdatetime" type="text" name="last_update_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                    </td>
+
+
                 </tr>
             </table>
         </fieldset>

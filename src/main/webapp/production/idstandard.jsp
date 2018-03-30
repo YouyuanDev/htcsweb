@@ -72,6 +72,8 @@
                 $('#hlIdAcceptanceDialog').dialog('open').dialog('setTitle','修改');
                 $('#idAcceptanceForm').form('load',row);
                 $("#idacceptanceId").text(row.id);
+                var lasttime=formatterdate(row.last_update_time);
+                $("#lastupdatetime").text(lasttime);
                 url="/AcceptanceCriteriaOperation/saveAllIDAcceptanceCriteria.action?id="+row.id;
             }else{
                 hlAlertTwo();
@@ -211,7 +213,8 @@
                 <th field="repair_min" align="center" width="100" hidden="true" class="i18n1" name="idcoatingrepairmin">内涂修补最小值</th>
                 <th field="holiday_tester_voltage_max" align="center" width="100" hidden="true" class="i18n1" name="holidaytestervoltagemax">检漏仪电压最大值</th>
                 <th field="holiday_tester_voltage_min" align="center" width="100" hidden="true" class="i18n1" name="holidaytestervoltagemin">检漏仪电压最小值</th>
-                
+                <th field="last_update_time" align="center" width="150" class="i18n1" name="lastupdatetime" data-options="formatter:formatterdate">最后更新时间</th>
+
 
             </tr>
             </thead>
@@ -345,7 +348,14 @@
                     <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="holiday_tester_voltage_min" value=""/></td>
                 </tr>
 
+                <tr>
+                    <td class="i18n1" name="lastupdatetime">最后更新时间</td>
+                    <td colspan="2">
+                        <label class="hl-label" id="lastupdatetime" type="text" name="last_update_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                    </td>
 
+
+                </tr>
 
 
 

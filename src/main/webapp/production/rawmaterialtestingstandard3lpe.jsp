@@ -72,6 +72,8 @@
                 $('#hlRawMaterialStandard3LpeDialog').dialog('open').dialog('setTitle','修改');
                 $('#RawMaterialStandard3LpeForm').form('load',row);
                 $("#RawMaterialStandard3LpeId").text(row.id);
+                var lasttime=formatterdate(row.last_update_time);
+                $("#lastupdatetime").text(lasttime);
                 url="/rawMaterialACOperation/saveRawMaterialStandard3Lpe.action?id="+row.id;
             }else{
                 hlAlertTwo();
@@ -171,6 +173,8 @@
                 <th field="adhesion_flow_rate_min" align="center" hidden="true" width="100" class="i18n1" name="adhesionflowratemin">附着层流速最小值</th>
                 <th field="polyethylene_flow_rate_max" align="center" hidden="true" width="100" class="i18n1" name="polyethyleneflowratemax">聚乙烯流速最大值</th>
                 <th field="polyethylene_flow_rate_min" align="center" hidden="true" width="120" class="i18n1" name="polyethyleneflowratemin">聚乙烯流速最小值</th>
+                <th field="last_update_time" align="center" width="150" class="i18n1" name="lastupdatetime" data-options="formatter:formatterdate">最后更新时间</th>
+
             </tr>
             </thead>
         </table>
@@ -243,6 +247,14 @@
                     <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="polyethylene_flow_rate_max" value=""/></td>
                     <td class="i18n1" name="polyethyleneflowratemin">聚乙烯流速最大值</td>
                     <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="polyethylene_flow_rate_min" value=""/></td>
+                </tr>
+                <tr>
+                    <td class="i18n1" name="lastupdatetime">最后更新时间</td>
+                    <td colspan="2">
+                        <label class="hl-label" id="lastupdatetime" type="text" name="last_update_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                    </td>
+
+
                 </tr>
             </table>
         </fieldset>
