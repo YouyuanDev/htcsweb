@@ -325,18 +325,20 @@
             <table class="ht-table">
                 <tr>
                     <td class="i18n1" name="stencilcontent">喷标内容</td>
-                    <td colspan="5"><input class="easyui-textbox"  type="text" name="stencil_content" value=""/></td>
+                    <td colspan="2"><input class="easyui-textbox" type="text" data-options="multiline:true" name="stencil_content" value="" style="width:300px;height:80px"/></td>
+                    <td></td>
+                    <td width="16%" class="i18n1" name="remark">备注</td>
+                    <td ><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:80px"/></td>
 
                 </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="result">结论</td>
-                    <td colspan="2"><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
+                    <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
                         <option value="0">不合格,重喷</option>
                         <option value="1">合格,进入内防终检工序</option>
                         <option value="2">待定</option>
                     </select></td>
-                    <td width="16%" class="i18n1" name="remark">备注</td>
-                    <td colspan="2"><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
+                    <td></td>
 
                 </tr>
             </table>

@@ -371,15 +371,42 @@
 
             <table class="ht-table">
                 <tr>
-                    <td class="i18n1" name="stencilcontent">喷标内容</td>
-                    <td colspan="2"><input class="easyui-textbox"  type="text" name="stencil_content" value=""/></td>
+
                     <td class="i18n1" name="centerlinecolor">中心色环</td>
-                    <td colspan="2"><input class="easyui-textbox"   type="text" name="center_line_color" value=""/></td>
+                    <td>
+                        <select id="center_line_color" class="easyui-combobox" data-options="editable:false" name="center_line_color"   style="width:185px;">
+                            <option value="NONE">无</option>
+                            <option value="RED">红色</option>
+                            <option value="YELLOW">黄色</option>
+                            <option value="WHITE">白色</option>
+                            <option value="GREEN">绿色</option>
+                            <option value="BLUE">蓝色</option>
+                            <option value="BLACK">黑色</option>
+                        </select>
+                    </td>
+                    <td></td>
+                    <td class="i18n1" name="pipeendcolor">管端色环</td>
+                    <td>
+                        <select id="pipe_end_color" class="easyui-combobox" data-options="editable:false" name="pipe_end_color"   style="width:185px;">
+                            <option value="NONE">无</option>
+                            <option value="RED">红色</option>
+                            <option value="YELLOW">黄色</option>
+                            <option value="WHITE">白色</option>
+                            <option value="GREEN">绿色</option>
+                            <option value="BLUE">蓝色</option>
+                            <option value="BLACK">黑色</option>
+                        </select>
+                    </td>
+                    <td></td>
                 </tr>
 
                 <tr>
-                    <td class="i18n1" name="pipeendcolor">管端色环</td>
-                    <td colspan="5"><input class="easyui-textbox"  type="text" name="pipe_end_color" value=""/></td>
+
+                    <td class="i18n1" name="stencilcontent">喷标内容</td>
+                    <td colspan="2"><input class="easyui-textbox" type="text" data-options="multiline:true" name="stencil_content" value="" style="width:300px;height:80px"/></td>
+                    <td  width="16%" class="i18n1" name="remark" align="left" >备注</td>
+                    <td colspan="2"><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="width:300px;height:80px"/></td>
+
                 </tr>
 
 
@@ -390,9 +417,6 @@
                         <option value="1">合格,进入外防终检工序</option>
                         <option value="2">待定</option>
                     </select></td>
-                    <td width="16%" class="i18n1" name="remark">备注</td>
-                    <td colspan="2"><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
-
                 </tr>
             </table>
             <input type="hidden" id="fileslist" name="upload_files" value=""/>

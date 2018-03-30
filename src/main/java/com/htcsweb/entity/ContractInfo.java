@@ -17,10 +17,14 @@ public class ContractInfo {
     private float pipe_length; //管厂
     private String remark;  //备注
 
+    private String center_line_color;//中心色环
+    private String pipe_end_color;//管端色环
+
+
     public ContractInfo() {
     }
 
-    public ContractInfo(int id, String project_no, String contract_no, float od, float wt, String external_coating, String internal_coating, String grade, double total_order_length, double total_order_weight, float weight_per_meter, float pipe_length, String remark) {
+    public ContractInfo(int id, String project_no, String contract_no, float od, float wt, String external_coating, String internal_coating, String grade, double total_order_length, double total_order_weight, float weight_per_meter, float pipe_length, String remark, String center_line_color, String pipe_end_color) {
         this.id = id;
         this.project_no = project_no;
         this.contract_no = contract_no;
@@ -34,6 +38,8 @@ public class ContractInfo {
         this.weight_per_meter = weight_per_meter;
         this.pipe_length = pipe_length;
         this.remark = remark;
+        this.center_line_color = center_line_color;
+        this.pipe_end_color = pipe_end_color;
     }
 
     public int getId() {
@@ -138,5 +144,21 @@ public class ContractInfo {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getCenter_line_color() {
+        return center_line_color;
+    }
+
+    public void setCenter_line_color(String center_line_color) {
+        this.center_line_color = center_line_color;
+    }
+
+    public String getPipe_end_color() {
+        return pipe_end_color;
+    }
+
+    public void setPipe_end_color(String pipe_end_color) {
+        this.pipe_end_color = pipe_end_color;
     }
 }

@@ -148,7 +148,11 @@
                     setParams($("input[name='external_coating']"));
                     setParams($("input[name='internal_coating']"));
                     setParams($("input[name='grade']"));
+                    if($("input[name='project_no']").val()==""){
 
+                        hlAlertFour("请输入项目编号");
+                        return false;
+                    }
 
                     if($("input[name='contract_no']").val()==""){
 
@@ -161,6 +165,14 @@
                     }
                     else if($("input[name='wt']").val()==""){
                         hlAlertFour("请输入壁厚");
+                        return false;
+                    }
+                    else if($("input[name='weight_per_meter']").val()==""){
+                        hlAlertFour("请输入米重");
+                        return false;
+                    }
+                    else if($("input[name='pipe_length']").val()==""){
+                        hlAlertFour("请输入钢管长度");
                         return false;
                     }
                     else if($("input[name='total_order_length']").val()==""){
@@ -353,6 +365,33 @@
                     <td   width="33%"><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="pipe_length" value=""/></td>
 
                 </tr>
+                <tr>
+                    <td class="i18n1" name="centerlinecolor" width="16%">中心色环</td>
+                    <td   width="33%">
+                        <select id="center_line_color" class="easyui-combobox" data-options="editable:false" name="center_line_color"   style="width:185px;">
+                            <option value="NONE">无</option>
+                            <option value="RED">红色</option>
+                            <option value="YELLOW">黄色</option>
+                            <option value="WHITE">白色</option>
+                            <option value="GREEN">绿色</option>
+                            <option value="BLUE">蓝色</option>
+                            <option value="BLACK">黑色</option>
+                        </select>
+
+                    </td>
+                    <td class="i18n1" name="pipeendcolor" width="16%">管端色环</td>
+                    <td width="33%"><select id="pipe_end_color" class="easyui-combobox" data-options="editable:false" name="pipe_end_color"   style="width:185px;">
+                        <option value="NONE">无</option>
+                        <option value="RED">红色</option>
+                        <option value="YELLOW">黄色</option>
+                        <option value="WHITE">白色</option>
+                        <option value="GREEN">绿色</option>
+                        <option value="BLUE">蓝色</option>
+                        <option value="BLACK">黑色</option>
+                    </select>
+                    </td>
+                </tr>
+
                 <tr>
                     <td class="i18n1" name="totalorderlength" width="16%">合同总长度</td>
                     <td   width="33%"><input class="easyui-numberbox" data-options="min:0,precision:3" type="text" name="total_order_length" value=""/></td>

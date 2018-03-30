@@ -19,6 +19,9 @@
         <result property="weight_per_meter" column="weight_per_meter"></result>
         <result property="pipe_length" column="pipe_length"></result>
         <result property="remark" column="remark"></result>
+        <result property="center_line_color" column="center_line_color"></result>
+        <result property="pipe_end_color" column="pipe_end_color"></result>
+
     </resultMap>
 
     <select id="getCount" resultType="int">
@@ -62,12 +65,12 @@
 
 
     <update id="updateContractInfo" parameterType="com.htcsweb.entity.ContractInfo">
-        UPDATE contract_info set project_no=#{project_no},contract_no=#{contract_no},od=#{od},wt=#{wt},external_coating=#{external_coating},internal_coating=#{internal_coating},grade=#{grade} ,total_order_length=#{total_order_length},total_order_weight=#{total_order_weight},weight_per_meter=#{weight_per_meter},pipe_length=#{pipe_length},remark=#{remark} WHERE id=#{id}
+        UPDATE contract_info set project_no=#{project_no},contract_no=#{contract_no},od=#{od},wt=#{wt},external_coating=#{external_coating},internal_coating=#{internal_coating},grade=#{grade} ,total_order_length=#{total_order_length},total_order_weight=#{total_order_weight},weight_per_meter=#{weight_per_meter},pipe_length=#{pipe_length},remark=#{remark},center_line_color=#{center_line_color},pipe_end_color=#{pipe_end_color} WHERE id=#{id}
     </update>
 
     <insert id="addContractInfo" parameterType="com.htcsweb.entity.ContractInfo">
-        INSERT INTO contract_info(project_no,contract_no,od,wt,external_coating,internal_coating,grade,total_order_length,total_order_weight,weight_per_meter,pipe_length,remark)
-         VALUES (#{project_no},#{contract_no},#{od},#{wt},#{external_coating},#{internal_coating},#{grade},#{total_order_length},#{total_order_weight},#{weight_per_meter},#{pipe_length},#{remark})
+        INSERT INTO contract_info(project_no,contract_no,od,wt,external_coating,internal_coating,grade,total_order_length,total_order_weight,weight_per_meter,pipe_length,remark,center_line_color,pipe_end_color)
+         VALUES (#{project_no},#{contract_no},#{od},#{wt},#{external_coating},#{internal_coating},#{grade},#{total_order_length},#{total_order_weight},#{weight_per_meter},#{pipe_length},#{remark},#{center_line_color},#{pipe_end_color})
     </insert>
 
     <delete id="delContractInfo">
