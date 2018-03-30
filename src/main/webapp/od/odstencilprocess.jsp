@@ -82,14 +82,37 @@
         }
 
         function replaceStencilcontent(row){
-            var str=stencilcontent;
-            str=str.replace(/\[OD\]/, row.od);
-            str=str.replace(/\[WT\]/, row.wt);
-            str=str.replace(/\[PIPENO\]/, row.pipe_no);
-            str=str.replace(/\[PIPELENGTH\]/, row.p_length);
-            str=str.replace(/\[WEIGHT\]/, row.weight);
-            str=str.replace(/\[COATINGDATE\]/, '2018-01-01');
-            $("#stencil_content").textbox("setValue", str);
+            if(row==null)
+                return;
+            //异步获取标准并匹配
+            $.ajax({
+                url:'/AcceptanceCriteriaOperation/getODAcceptanceCriteriaByContractNo.action',
+                dataType:'json',
+                data:{'contract_no':row.contract_no},
+                success:function (data) {
+
+                    var $obj1=$("input[name='stencil_content']");
+                    var res1=$obj1.val();
+                    //alert("pipe_no="+row.pipe_no);
+                    if(data!=null) {
+                        var str=data.stencil_content;
+                        str=str.replace(/\[OD\]/, row.od);
+                        str=str.replace(/\[WT\]/, row.wt);
+                        str=str.replace(/\[PIPENO\]/, row.pipe_no);
+                        str=str.replace(/\[PIPELENGTH\]/, row.p_length);
+                        str=str.replace(/\[WEIGHT\]/, row.weight);
+                        str=str.replace(/\[COATINGDATE\]/, '2018-01-01');
+                        $("#stencil_content").textbox("setValue", str);
+                        //alert(str);
+                    }
+
+
+                },error:function () {
+
+                }
+            });
+
+
 
         }
 
@@ -111,29 +134,7 @@
                     var imgList=odpictures.split(';');
                     createPictureModel(basePath,imgList);
                 }
-                //异步获取标准并匹配
-                $.ajax({
-                    url:'/AcceptanceCriteriaOperation/getODAcceptanceCriteriaByContractNo.action',
-                    dataType:'json',
-                    data:{'contract_no':row.contract_no},
-                    success:function (data) {
-
-                        var $obj1=$("input[name='stencil_content']");
-                        var res1=$obj1.val();
-
-                        if(data!=null&&row.stencil_content=="") {
-                            var str=data.stencil_content;
-                            stencilcontent=str;
-                            replaceStencilcontent(row);
-                            //alert(str);
-                        }
-
-
-
-                    },error:function () {
-
-                    }
-                });
+                replaceStencilcontent(row);
                 url="/OdStencilOperation/saveOdStencilProcess.action?id="+row.id;
 
             }else{
@@ -583,7 +584,8 @@
             success:function (data) {
                 if(data!=null&&data!=""){
                     addLabelPipeInfo(data);
-                    replaceStencilcontent(row);
+                    replaceStencilcontent(data[0]);
+
                 }
             },
             error:function () {

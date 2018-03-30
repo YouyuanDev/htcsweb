@@ -257,7 +257,7 @@
     </select>
 
     <select id="getPipeInfoByNo" resultType="map">
-        Select pro.project_name,s.status_name,p.contract_no,p.grade,p.od,p.wt,p.p_length,p.weight,p.heat_no from pipe_basic_info p
+        Select p.pipe_no,pro.project_name,s.status_name,p.contract_no,p.grade,p.od,p.wt,p.p_length,p.weight,p.heat_no from pipe_basic_info p
         LEFT join contract_info c on p.contract_no=c.contract_no
         LEFT join project_info pro on c.project_no=pro.project_no
         LEFT join pipe_status s on s.status_code=p.status

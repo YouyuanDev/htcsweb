@@ -99,7 +99,6 @@
                                 +"Length: [PIPELENGTH] m Weight: [WEIGHT]Kg\n"
                                 +"Coating Date: [COATINGDATE]";
                         $("input[name='stencil_content']").val(str);
-                        alert(str);
                     }
 
 
