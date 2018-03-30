@@ -101,6 +101,36 @@
                     var imgList=odpictures.split(';');
                     createPictureModel(basePath,imgList);
                 }
+                //异步获取标准并匹配
+                $.ajax({
+                    url:'/AcceptanceCriteriaOperation/getIDAcceptanceCriteriaByContractNo.action',
+                    dataType:'json',
+                    data:{'contract_no':row.contract_no},
+                    success:function (data) {
+
+                        var $obj1=$("input[name='stencil_content']");
+                        var res1=$obj1.val();
+
+                        if(data!=null&&row.stencil_content=="") {
+                            var str=data.stencil_content;
+                            str=str.replace(/\[OD\]/, row.od);
+                            str=str.replace(/\[WT\]/, row.wt);
+                            str=str.replace(/\[PIPENO\]/, row.pipe_no);
+                            str=str.replace(/\[PIPELENGTH\]/, row.p_length);
+                            str=str.replace(/\[WEIGHT\]/, row.weight);
+                            str=str.replace(/\[COATINGDATE\]/, '2018-01-01');
+                            $("#stencil_content").textbox("setValue", str);
+                            //alert(str);
+                        }
+
+
+
+                    },error:function () {
+
+                    }
+                });
+
+
                 url="/IdStencilOperation/saveIdStencilProcess.action?id="+row.id;
 
             }else{
@@ -325,7 +355,7 @@
             <table class="ht-table">
                 <tr>
                     <td class="i18n1" name="stencilcontent">喷标内容</td>
-                    <td colspan="2"><input class="easyui-textbox" type="text" data-options="multiline:true" name="stencil_content" value="" style="width:300px;height:80px"/></td>
+                    <td colspan="2"><input id="stencil_content" class="easyui-textbox" type="text" data-options="multiline:true" name="stencil_content" value="" style="width:300px;height:80px"/></td>
                     <td></td>
                     <td width="16%" class="i18n1" name="remark">备注</td>
                     <td ><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:80px"/></td>

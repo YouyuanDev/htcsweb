@@ -60,11 +60,14 @@ public class IDCoatingAcceptanceCriteria {
     private float strip_temp_max;
     private float strip_temp_min;
 
+    private String stencil_content;
+
+
 
     public IDCoatingAcceptanceCriteria() {
     }
 
-    public IDCoatingAcceptanceCriteria(int id, String coating_acceptance_criteria_no, float temp_above_dew_point_max, float temp_above_dew_point_min, float blast_finish_sa25_max, float blast_finish_sa25_min, float relative_humidity_max, float relative_humidity_min, float id_profile_max, float id_profile_min, float dry_film_thickness_max, float dry_film_thickness_min, float cutback_max, float cutback_min, float residual_magnetism_max, float residual_magnetism_min, Date last_update_time, float wet_film_thickness_max, float wet_film_thickness_min, float salt_contamination_before_blast_max, float salt_contamination_before_blast_min, float salt_contamination_after_blasting_max, float salt_contamination_after_blasting_min, int surface_dust_rating_max, int surface_dust_rating_min, int holiday_max, int holiday_min, float roughness_max, float roughness_min, float pipe_temp_max, float pipe_temp_min, int repair_max, int repair_min, float holiday_tester_voltage_max, float holiday_tester_voltage_min, float strip_temp_max, float strip_temp_min) {
+    public IDCoatingAcceptanceCriteria(int id, String coating_acceptance_criteria_no, float temp_above_dew_point_max, float temp_above_dew_point_min, float blast_finish_sa25_max, float blast_finish_sa25_min, float relative_humidity_max, float relative_humidity_min, float id_profile_max, float id_profile_min, float dry_film_thickness_max, float dry_film_thickness_min, float cutback_max, float cutback_min, float residual_magnetism_max, float residual_magnetism_min, Date last_update_time, float wet_film_thickness_max, float wet_film_thickness_min, float salt_contamination_before_blast_max, float salt_contamination_before_blast_min, float salt_contamination_after_blasting_max, float salt_contamination_after_blasting_min, int surface_dust_rating_max, int surface_dust_rating_min, int holiday_max, int holiday_min, float roughness_max, float roughness_min, float pipe_temp_max, float pipe_temp_min, int repair_max, int repair_min, float holiday_tester_voltage_max, float holiday_tester_voltage_min, float strip_temp_max, float strip_temp_min, String stencil_content) {
         this.id = id;
         this.coating_acceptance_criteria_no = coating_acceptance_criteria_no;
         this.temp_above_dew_point_max = temp_above_dew_point_max;
@@ -102,6 +105,7 @@ public class IDCoatingAcceptanceCriteria {
         this.holiday_tester_voltage_min = holiday_tester_voltage_min;
         this.strip_temp_max = strip_temp_max;
         this.strip_temp_min = strip_temp_min;
+        this.stencil_content = stencil_content;
     }
 
     public int getId() {
@@ -398,5 +402,13 @@ public class IDCoatingAcceptanceCriteria {
 
     public void setStrip_temp_min(float strip_temp_min) {
         this.strip_temp_min = strip_temp_min;
+    }
+
+    public String getStencil_content() {
+        return stencil_content;
+    }
+
+    public void setStencil_content(String stencil_content) {
+        this.stencil_content = stencil_content;
     }
 }

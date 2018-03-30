@@ -95,6 +95,15 @@
                         hlAlertFour("请输入外防接收标准编号");
                         return false;
                     }
+
+                    if($("input[name='stencil_content']").val()==""){
+                        var str="O.D.*W.T.: [OD]mm*[WT]mm Pipe No.: [PIPENO]\n"
+                            +"Length: [PIPELENGTH] m Weight: [WEIGHT]Kg\n"
+                            +"Coating Date: [COATINGDATE]";
+                        $("input[name='stencil_content']").val(str);
+                        //alert(str);
+                    }
+
                     setParams();
                 },
                 success: function(result){
@@ -253,6 +262,8 @@
 
                    <th field="strip_temp_max" align="center" width="150" hidden="true" class="i18n1" name="striptempmax">扒皮温度最大值 </th>
                    <th field="strip_temp_min" align="center" width="150" hidden="true" class="i18n1" name="striptempmin">扒皮温度最小值 </th>
+
+                   <th field="stencil_content" align="center" width="150" hidden="true" class="i18n1" name="stencilcontent">喷标内容 </th>
 
                    <th field="last_update_time" align="center" width="150" class="i18n1" name="lastupdatetime" data-options="formatter:formatterdate">最后更新时间</th>
 
@@ -521,15 +532,18 @@
                    <td></td>
                </tr>
 
-
                <tr>
+                   <td class="i18n1" name="stencilcontent">喷标内容</td>
+                   <td ><input class="easyui-textbox" type="text" data-options="multiline:true" name="stencil_content" value="" style="width:300px;height:80px"/>
+                   </td>
+                   <td></td>
                    <td class="i18n1" name="lastupdatetime">最后更新时间</td>
-                   <td >
+                   <td  >
                        <label class="hl-label" id="lastupdatetime" type="text" name="last_update_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                    </td>
                    <td></td>
-
                </tr>
+
            </table>
        </fieldset>
    </form>
