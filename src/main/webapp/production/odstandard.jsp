@@ -282,13 +282,15 @@
            <table class="ht-table" width="100%" border="0">
                <tr>
                    <td class="i18n1" name="id">流水号</td>
-                   <td colspan="2">
+                   <td  >
                        <label id="odacceptanceId" class="hl-label"></label>
                        <%--<input id="odacceptanceId" class="easyui-textbox" readonly="true" type="text" value="" name="odacceptanceId">--%>
                        <%--<input id="odacceptanceId" class="easyui-textbox" readonly="true" type="text" value="" name="odacceptanceId"> --%>
                    </td>
+                   <td></td>
                    <td class="i18n1" name="coatingacceptancecriteriano">涂层判定标准编号</td>
-                   <td colspan="2"><input class="easyui-textbox"  type="text" name="coating_acceptance_criteria_no" value=""/></td>
+                   <td ><input class="easyui-textbox"  type="text" name="coating_acceptance_criteria_no" value=""/></td>
+                   <td></td>
 
                </tr>
                <tr>
@@ -297,58 +299,76 @@
                </tr>
                <tr>
                    <td class="i18n1" name="saltcontaminationbeforeblastmax">打砂前盐度最大值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="salt_contamination_before_blast_max" value=""/></td>
+                   <td  ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="salt_contamination_before_blast_max" value=""/></td>
+                   <td></td>
                    <td class="i18n1" name="saltcontaminationbeforeblastmin">打砂前盐度最小值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="salt_contamination_before_blast_min" value=""/></td>
+                   <td  ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="salt_contamination_before_blast_min" value=""/></td>
+                   <td></td>
                </tr>
                <tr>
                    <td class="i18n1" name="preheattempmax">预热钢管温度最大值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="preheat_temp_max" value=""/></td>
+                   <td  ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="preheat_temp_max" value=""/></td>
+                   <td></td>
                    <td class="i18n1" name="preheattempmin">预热钢管温度最小值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="preheat_temp_min" value=""/></td>
+                   <td  ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="preheat_temp_min" value=""/></td>
+                   <td></td>
                </tr>
                <tr>
                    <td class="i18n1" name="relativehumiditymax">相对湿度最大值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="relative_humidity_max" value=""/></td>
+                   <td  ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="relative_humidity_max" value=""/></td>
+                   <td></td>
                    <td class="i18n1" name="relativehumiditymin">相对湿度最小值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="relative_humidity_min" value=""/></td>
+                   <td  ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="relative_humidity_min" value=""/></td>
+                   <td></td>
                </tr>
                <tr>
                    <td class="i18n1" name="tempabovedewpointmax">大于露点最大值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="temp_above_dew_point_max" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="temp_above_dew_point_max" value=""/></td>
+                   <td></td>
                    <td class="i18n1" name="tempabovedewpointmin">大于露点最小值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="temp_above_dew_point_min" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="temp_above_dew_point_min" value=""/></td>
+                   <td></td>
                </tr>
                <tr>
                    <td class="i18n1" name="pipetempafterblastmax">打砂后钢管温度最大值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_temp_after_blast_max" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_temp_after_blast_max" value=""/></td>
+                   <td></td>
                    <td class="i18n1" name="pipetempafterblastmin">打砂后钢管温度最小值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_temp_after_blast_min" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_temp_after_blast_min" value=""/></td>
+                   <td></td>
                </tr>
                <tr>
                    <td class="i18n1" name="blastfinishsa25max">打砂后清洁度Sa2.5最大值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="blast_finish_sa25_max" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="blast_finish_sa25_max" value=""/></td>
+                   <td></td>
                    <td class="i18n1" name="blastfinishsa25min">打砂后清洁度Sa2.5最小值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="blast_finish_sa25_min" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="blast_finish_sa25_min" value=""/></td>
+                   <td></td>
                </tr>
                <tr>
                    <td class="i18n1" name="surfacedustratingmax">灰尘度最大值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="surface_dust_rating_max" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="surface_dust_rating_max" value=""/></td>
+                   <td></td>
                    <td class="i18n1" name="surfacedustratingmin">灰尘度最小值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="surface_dust_rating_min" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="surface_dust_rating_min" value=""/></td>
+                   <td></td>
                </tr>
                <tr>
                    <td class="i18n1" name="odprofilemax">外锚纹深度最大值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="od_profile_max" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="od_profile_max" value=""/></td>
+                   <td></td>
                    <td class="i18n1" name="odprofilemin">外锚纹深度最小值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="od_profile_min" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="od_profile_min" value=""/></td>
+                   <td></td>
                </tr>
 
                <tr>
                    <td class="i18n1" name="saltcontaminationafterblastingmax">打砂后盐度最大值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="salt_contamination_after_blasting_max" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="salt_contamination_after_blasting_max" value=""/></td>
+                   <td></td>
                    <td class="i18n1" name="saltcontaminationafterblastingmin">打砂后盐度最小值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="salt_contamination_after_blasting_min" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="salt_contamination_after_blasting_min" value=""/></td>
+                   <td></td>
                </tr>
                <tr>
                    <td class="i18n1" colspan="6" name="odcoatingcontrolparameter">外喷涂控制参数</td>
@@ -356,9 +376,11 @@
                </tr>
                <tr>
                    <td class="i18n1" name="applicationtempmax">中频温度最大值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="application_temp_max" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="application_temp_max" value=""/></td>
+                   <td></td>
                    <td class="i18n1" name="applicationtempmin">中频温度最小值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="application_temp_min" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="application_temp_min" value=""/></td>
+                   <td></td>
                </tr>
                <tr>
                    <td class="i18n1" colspan="6" name="2fbeodcoatingcontrolparameter">2FBE外涂检验控制参数</td>
@@ -366,21 +388,27 @@
 
                <tr>
                    <td class="i18n1" name="base2fbecoatthicknessmax">底层2fbe最大厚度</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="base_2fbe_coat_thickness_max" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="base_2fbe_coat_thickness_max" value=""/></td>
+                   <td></td>
                    <td class="i18n1" name="base2fbecoatthicknessmin">底层2fbe最小厚度</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="base_2fbe_coat_thickness_min" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="base_2fbe_coat_thickness_min" value=""/></td>
+                   <td></td>
                </tr>
                <tr>
                    <td class="i18n1" name="top2fbecoatthicknessmax">顶层2fbe最大厚度</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="top_2fbe_coat_thickness_max" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="top_2fbe_coat_thickness_max" value=""/></td>
+                   <td></td>
                    <td class="i18n1" name="top2fbecoatthicknessmin">顶层2fbe最小厚度</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="top_2fbe_coat_thickness_min" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="top_2fbe_coat_thickness_min" value=""/></td>
+                   <td></td>
                </tr>
                <tr>
                    <td class="i18n1" name="total2fbecoatthicknessmax">2fbe总厚度最大值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="total_2fbe_coat_thickness_max" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="total_2fbe_coat_thickness_max" value=""/></td>
+                   <td></td>
                    <td class="i18n1" name="total2fbecoatthicknessmin">2fbe总厚度最小值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="total_2fbe_coat_thickness_min" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="total_2fbe_coat_thickness_min" value=""/></td>
+                   <td></td>
                </tr>
 
                <tr>
@@ -389,40 +417,54 @@
 
                <tr>
                    <td class="i18n1" name="top3lpecoatthicknessmax">3lpe顶层最大值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="top_3lpe_coat_thickness_max" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="top_3lpe_coat_thickness_max" value=""/></td><td>
+
+               </td>
                    <td class="i18n1" name="top3lpecoatthicknessmin">3lpe顶层最小值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="top_3lpe_coat_thickness_min" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="top_3lpe_coat_thickness_min" value=""/></td><td>
+
+               </td>
                </tr>
                <tr>
                    <td class="i18n1" name="middle3lpecoatthicknessmax">3lpe中间层最大值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="middle_3lpe_coat_thickness_max" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="middle_3lpe_coat_thickness_max" value=""/></td>
+                   <td></td>
                    <td class="i18n1" name="middle3lpecoatthicknessmin">3lpe中间层最小值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="middle_3lpe_coat_thickness_min" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="middle_3lpe_coat_thickness_min" value=""/></td>
+                   <td></td>
                </tr>
                <tr>
                    <td class="i18n1" name="base3lpecoatthicknessmax">3lpe底层最大值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="base_3lpe_coat_thickness_max" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="base_3lpe_coat_thickness_max" value=""/></td>
+                   <td></td>
                    <td class="i18n1" name="base3lpecoatthicknessmin">3lpe底层最小值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="base_3lpe_coat_thickness_min" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="base_3lpe_coat_thickness_min" value=""/></td>
+                   <td></td>
                </tr>
                <tr>
                    <td class="i18n1" name="total3lpecoatthicknessmax">3lpe总厚度最大值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="total_3lpe_coat_thickness_max" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="total_3lpe_coat_thickness_max" value=""/></td>
+                   <td></td>
                    <td class="i18n1" name="total3lpecoatthicknessmin">3lpe总厚度最小值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="total_3lpe_coat_thickness_min" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="total_3lpe_coat_thickness_min" value=""/></td>
+                   <td></td>
                </tr>
 
                <tr>
                    <td class="i18n1" name="repairmax">允许修补量最大值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="repair_max" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="repair_max" value=""/></td>
+                   <td></td>
                    <td class="i18n1" name="repairmin">允许修补量最小值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="repair_min" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="repair_min" value=""/></td>
+                   <td></td>
                </tr>
                <tr>
                    <td class="i18n1" name="holidaytestervoltagemax">检漏仪电压最大值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="holiday_tester_voltage_max" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="holiday_tester_voltage_max" value=""/></td>
+                   <td></td>
                    <td class="i18n1" name="holidaytestervoltagemin">检漏仪电压最小值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="holiday_tester_voltage_min" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="holiday_tester_voltage_min" value=""/></td>
+                   <td></td>
                </tr>
 
 
@@ -432,48 +474,60 @@
 
                <tr>
                    <td class="i18n1" name="cutbackmax">预留段最大值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="cutback_max" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="cutback_max" value=""/></td>
+                   <td></td>
                    <td class="i18n1" name="cutbackmin">预留段最小值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="cutback_min" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="cutback_min" value=""/></td>
+                   <td></td>
                </tr>
                <tr>
                    <td class="i18n1" name="epoxycutbackmax">粉末长度最大值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="epoxy_cutback_max" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="epoxy_cutback_max" value=""/></td>
+                   <td></td>
                    <td class="i18n1" name="epoxycutbackmin">粉末长度最小值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="epoxy_cutback_min" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="epoxy_cutback_min" value=""/></td>
+                   <td></td>
                </tr>
                <tr>
                    <td class="i18n1" name="magnetismmax">剩磁最大值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="magnetism_max" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="magnetism_max" value=""/></td>
+                   <td></td>
                    <td class="i18n1" name="magnetismmin">剩磁最小值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="magnetism_min" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="magnetism_min" value=""/></td>
+                   <td></td>
                </tr>
                <tr>
                    <td class="i18n1" name="coatingbevelanglemax">涂层倒角最大值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="coating_bevel_angle_max" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="coating_bevel_angle_max" value=""/></td>
+                   <td></td>
                    <td class="i18n1" name="coatingbevelanglemin">涂层倒角最小值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="coating_bevel_angle_min" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="coating_bevel_angle_min" value=""/></td>
+                   <td></td>
                </tr>
                <tr>
                    <td class="i18n1" name="holidaymax">漏点最大值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="holiday_max" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="holiday_max" value=""/></td>
+                   <td></td>
                    <td class="i18n1" name="holidaymin">漏点最小值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="holiday_min" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="holiday_min" value=""/></td>
+                   <td></td>
                </tr>
                <tr>
                    <td class="i18n1" name="striptempmax">扒皮温度最大值(℃)</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="strip_temp_max" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="strip_temp_max" value=""/></td>
+                   <td></td>
                    <td class="i18n1" name="striptempmin">扒皮温度最小值(℃)</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="strip_temp_min" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="strip_temp_min" value=""/></td>
+                   <td></td>
                </tr>
 
 
                <tr>
                    <td class="i18n1" name="lastupdatetime">最后更新时间</td>
-                   <td colspan="2">
+                   <td >
                        <label class="hl-label" id="lastupdatetime" type="text" name="last_update_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                    </td>
-
+                   <td></td>
 
                </tr>
            </table>

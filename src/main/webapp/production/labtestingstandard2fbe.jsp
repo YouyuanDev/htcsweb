@@ -206,64 +206,82 @@
             <table class="ht-table" width="100%" border="0">
                 <tr>
                     <td class="i18n1" name="id">流水号</td>
-                    <td colspan="2">
+                    <td >
                         <label id="LabStandard2FbeId" class="hl-label"></label>
                     </td>
+                    <td></td>
                     <td class="i18n1" name="coatingacceptancecriteriano">涂层判定标准编号</td>
-                    <td colspan="2"><input class="easyui-textbox"  type="text" name="lab_testing_acceptance_criteria_no" value=""/></td>
+                    <td ><input class="easyui-textbox"  type="text" name="lab_testing_acceptance_criteria_no" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="interfacialcontaminationmax">表面污染率最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="interfacial_contamination_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="interfacial_contamination_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="interfacialcontaminationmin">表面污染率最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="interfacial_contamination_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="interfacial_contamination_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="foamingcrosssectionalmax">孔隙率实验 截面 最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="foaming_cross_sectional_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="foaming_cross_sectional_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="foamingcrosssectionalmin">孔隙率实验 截面 最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="foaming_cross_sectional_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="foaming_cross_sectional_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="foaminginterfacialmax">孔隙率实验 表面 最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="foaming_interfacial_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="foaming_interfacial_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="foaminginterfacialmin">孔隙率实验 表面 最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="foaming_interfacial_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="foaming_interfacial_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="resistancetohotwater9824hmax">水煮实验 98度 24小时 最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="resistance_to_hot_water_98_24h_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="resistance_to_hot_water_98_24h_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="resistancetohotwater9824hmin">水煮实验 98度 24小时 最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="resistance_to_hot_water_98_24h_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="resistance_to_hot_water_98_24h_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="resistancetohotwater9828dmax">水煮实验 98度 28天 最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="resistance_to_hot_water_98_28d_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="resistance_to_hot_water_98_28d_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="resistancetohotwater9828dmin">水煮实验 98度 28天 最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="resistance_to_hot_water_98_28d_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="resistance_to_hot_water_98_28d_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="resistancetocd6524hmax">水煮实验 65度 24小时 最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="resistance_to_cd_65_24h_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="resistance_to_cd_65_24h_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="resistancetocd6524hmin">水煮实验 65度 24小时 最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="resistance_to_cd_65_24h_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="resistance_to_cd_65_24h_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="resistancetocd2228dmax">水煮实验 22.5度 28天 最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="resistance_to_cd_22_28d_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="resistance_to_cd_22_28d_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="resistancetocd2228dmin">水煮实验 22.5度 28天 最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="resistance_to_cd_22_28d_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="resistance_to_cd_22_28d_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="resistancetocd6528dmax">水煮实验 65度 28天 最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="resistance_to_cd_65_28d_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="resistance_to_cd_65_28d_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="resistancetocd6528dmin">水煮实验 65度 28天 最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="resistance_to_cd_65_28d_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="resistance_to_cd_65_28d_min" value=""/></td>
+                    <td></td>
                 </tr>
 
                 <tr>
                     <td class="i18n1" name="lastupdatetime">最后更新时间</td>
-                    <td colspan="2">
+                    <td >
                         <label class="hl-label" id="lastupdatetime" type="text" name="last_update_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
 

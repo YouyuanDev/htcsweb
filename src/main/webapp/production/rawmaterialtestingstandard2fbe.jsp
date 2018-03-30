@@ -225,97 +225,125 @@
             <table class="ht-table" width="100%" border="0">
                 <tr>
                     <td class="i18n1" name="id">流水号</td>
-                    <td colspan="2">
+                    <td>
                         <label id="RawMaterialStandard2FbeId" class="hl-label"></label>
                     </td>
+                    <td></td>
                     <td class="i18n1" name="rawmaterialtestingacceptancecriteriano">原材料接收标准编号</td>
-                    <td colspan="2"><input class="easyui-textbox"  type="text" name="raw_material_testing_acceptance_criteria_no" value=""/></td>
+                    <td><input class="easyui-textbox"  type="text" name="raw_material_testing_acceptance_criteria_no" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="densitymax">密度最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="density_max" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="precision:2"  type="text" name="density_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="densitymin">密度最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="density_min" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="precision:2"  type="text" name="density_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="particlesize32ummax">颗粒度32um最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="particle_size_32um_max" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="precision:2"  type="text" name="particle_size_32um_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="particlesize32ummin">颗粒度32um最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="particle_size_32um_min" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="precision:2"  type="text" name="particle_size_32um_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="particlesize150ummax">颗粒度150um最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="particle_size_150um_max" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="precision:2"  type="text" name="particle_size_150um_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="particlesize150ummin">颗粒度150um最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="particle_size_150um_min" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="precision:2"  type="text" name="particle_size_150um_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="dsctgimax">dsc tgi最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="dsc_tgi_max" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="precision:2"  type="text" name="dsc_tgi_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="dsctgimin">dsc tgi最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="dsc_tgi_min" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="precision:2"  type="text" name="dsc_tgi_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="dsctgfmax">dsc tgf最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="dsc_tgf_max" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="precision:2"  type="text" name="dsc_tgf_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="dsctgfmin">dsc tgf最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="dsc_tgf_min" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="precision:2"  type="text" name="dsc_tgf_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="dscdeltahmax">dsc delta h最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="dsc_delta_h_max" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="precision:2"  type="text" name="dsc_delta_h_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="dscdeltahmin">dsc delta h最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="dsc_delta_h_min" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="precision:2"  type="text" name="dsc_delta_h_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="geltimelt20smax">胶化时间小于20秒最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="gel_time_lt_20s_max" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="precision:2"  type="text" name="gel_time_lt_20s_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="geltimelt20smin">胶化时间小于20秒最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="gel_time_lt_20s_min" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="precision:2"  type="text" name="gel_time_lt_20s_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="geltimegt20smax">胶化时间大于20秒最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="gel_time_gt_20s_max" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="precision:2"  type="text" name="gel_time_gt_20s_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="geltimegt20smin">胶化时间大于20秒最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="gel_time_gt_20s_min" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="precision:2"  type="text" name="gel_time_gt_20s_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="volatilemax">挥发度最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="volatile_max" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="precision:2"  type="text" name="volatile_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="volatilemin">挥发度最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="volatile_min" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="precision:2"  type="text" name="volatile_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="foamingcrosssectionalmax">孔隙率 断面最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="foaming_cross_sectional_max" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="precision:2"  type="text" name="foaming_cross_sectional_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="foamingcrosssectionalmin">孔隙率 断面最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="foaming_cross_sectional_min" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="precision:2"  type="text" name="foaming_cross_sectional_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="foaminginterfacialmax">孔隙率 表面最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="foaming_interfacial_max" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="precision:2"  type="text" name="foaming_interfacial_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="foaminginterfacialmin">孔隙率 表面最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="foaming_interfacial_min" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="precision:2"  type="text" name="foaming_interfacial_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="hotwatermax">水煮98度24小时最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="hot_water_max" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="precision:0"  type="text" name="hot_water_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="hotwatermin">水煮98度24小时最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="hot_water_min" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="precision:0"  type="text" name="hot_water_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="cd6524hmax">阴极剥离65度24小时最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="cd_65_24h_max" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="precision:2"  type="text" name="cd_65_24h_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="cd6524hmin">阴极剥离65度24小时最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="cd_65_24h_min" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="precision:2"  type="text" name="cd_65_24h_min" value=""/></td>
+                    <td></td>
                 </tr>
 
                 <tr>
                     <td class="i18n1" name="lastupdatetime">最后更新时间</td>
-                    <td colspan="2">
+                    <td>
                         <label class="hl-label" id="lastupdatetime" type="text" name="last_update_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
-
+                    <td></td>
 
                 </tr>
             </table>

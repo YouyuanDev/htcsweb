@@ -173,7 +173,6 @@
                 <th field="adhesion_flow_rate_min" align="center" hidden="true" width="100" class="i18n1" name="adhesionflowratemin">附着层流速最小值</th>
                 <th field="polyethylene_flow_rate_max" align="center" hidden="true" width="100" class="i18n1" name="polyethyleneflowratemax">聚乙烯流速最大值</th>
                 <th field="polyethylene_flow_rate_min" align="center" hidden="true" width="120" class="i18n1" name="polyethyleneflowratemin">聚乙烯流速最小值</th>
-                <th field="last_update_time" align="center" width="150" class="i18n1" name="lastupdatetime" data-options="formatter:formatterdate">最后更新时间</th>
 
             </tr>
             </thead>
@@ -201,59 +200,75 @@
             <table class="ht-table" width="100%" border="0">
                 <tr>
                     <td class="i18n1" name="id">流水号</td>
-                    <td colspan="2">
+                    <td >
                         <label id="RawMaterialStandard3LpeId" class="hl-label"></label>
                     </td>
+                    <td></td>
                     <td class="i18n1" name="rawmaterialtestingacceptancecriteriano">原材料接收标准编号</td>
-                    <td colspan="2"><input class="easyui-textbox"  type="text" name="raw_material_testing_acceptance_criteria_no" value=""/></td>
+                    <td ><input class="easyui-textbox"  type="text" name="raw_material_testing_acceptance_criteria_no" value=""/></td>
+                    <td></td>
                 <tr>
                     <td class="i18n1" name="epoxycuretimemax">环氧树脂固化时间最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="epoxy_cure_time_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="epoxy_cure_time_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="epoxycuretimemin">环氧树脂固化时间最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="epoxy_cure_time_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="epoxy_cure_time_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="epoxygeltimemax">环氧树脂胶化时间最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="epoxy_gel_time_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="epoxy_gel_time_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="epoxygeltimemin">环氧树脂胶化时间最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="epoxy_gel_time_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="epoxy_gel_time_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="epoxymoisturecontentmax">环氧树脂水分含量最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="epoxy_moisture_content_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="epoxy_moisture_content_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="epoxymoisturecontentmin">环氧树脂水分含量最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="epoxy_moisture_content_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="epoxy_moisture_content_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="epoxyparticlesize150ummax">环氧树脂颗粒度大小150um最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="epoxy_particle_size_150um_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="epoxy_particle_size_150um_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="epoxyparticlesize150ummin">环氧树脂颗粒度大小150um最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="epoxy_particle_size_150um_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="epoxy_particle_size_150um_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="epoxyparticlesize250ummax">环氧树脂颗粒度大小250um最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="epoxy_particle_size_250um_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="epoxy_particle_size_250um_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="epoxyparticlesize250ummin">环氧树脂颗粒度大小250um最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="epoxy_particle_size_250um_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="epoxy_particle_size_250um_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="adhesionflowratemax">附着层流速最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="adhesion_flow_rate_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="adhesion_flow_rate_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="adhesionflowratemin">附着层流速最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="adhesion_flow_rate_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="adhesion_flow_rate_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="polyethyleneflowratemax">聚乙烯流速最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="polyethylene_flow_rate_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="polyethylene_flow_rate_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="polyethyleneflowratemin">聚乙烯流速最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="polyethylene_flow_rate_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="polyethylene_flow_rate_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="lastupdatetime">最后更新时间</td>
-                    <td colspan="2">
+                    <td >
                         <label class="hl-label" id="lastupdatetime" type="text" name="last_update_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
-
+                    <td></td>
 
                 </tr>
             </table>

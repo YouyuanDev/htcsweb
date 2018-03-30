@@ -217,62 +217,78 @@
             <table class="ht-table" width="100%" border="0">
                 <tr>
                     <td class="i18n1" name="id">流水号</td>
-                    <td colspan="2">
+                    <td >
                         <label id="pipeacceptanceId" class="hl-label"></label>
                     </td>
+                    <td></td>
                     <td class="i18n1" name="pipebodyacceptancecriteriano">钢管管体标准编号</td>
-                    <td colspan="2"><input class="easyui-textbox"  type="text" name="pipe_body_acceptance_criteria_no" value=""/></td>
+                    <td ><input class="easyui-textbox"  type="text" name="pipe_body_acceptance_criteria_no" value=""/></td>
+                    <td></td>
 
                 </tr>
                 <tr>
                     <td class="i18n1" name="pipelengthmax">钢管长度最大值 m</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_length_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_length_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="pipelengthmin">钢管长度最小值 m</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_length_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_length_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="pipethicknesstolerancemax">钢管壁厚公差最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_thickness_tolerance_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_thickness_tolerance_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="pipethicknesstolerancemin">钢管壁厚公差最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_thickness_tolerance_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_thickness_tolerance_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="pipebevelanglemax">钢管坡口角度最大值 度</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_bevel_angle_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_bevel_angle_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="pipebevelanglemin">钢管坡口角度最小值 度</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_bevel_angle_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_bevel_angle_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="piperootfacemax">钝边最大值 mm</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_rootface_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_rootface_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="piperootfacemin">钝边最小值 mm</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_rootface_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_rootface_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="pipesquarenessmax">切斜最大值 mm</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_squareness_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_squareness_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="pipesquarenessmin">切斜最小值 mm</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_squareness_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_squareness_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="pipeendovalityfactormax">管端椭圆度公差系数最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:3"  type="text" name="pipe_end_ovality_factor_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:3"  type="text" name="pipe_end_ovality_factor_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="pipeendovalityfactormin">管端椭圆度公差系数最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:3"  type="text" name="pipe_end_ovality_factor_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:3"  type="text" name="pipe_end_ovality_factor_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="pipestraightnesstolerancemax">直度公差最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_straightness_tolerance_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_straightness_tolerance_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="pipestraightnesstolerancemin">直度公差最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_straightness_tolerance_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_straightness_tolerance_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="lastupdatetime">最后更新时间</td>
-                    <td colspan="2">
+                    <td >
                         <label class="hl-label" id="lastupdatetime" type="text" name="last_update_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
 
-
+                    <td></td>
                 </tr>
 
             </table>

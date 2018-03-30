@@ -210,76 +210,98 @@
             <table class="ht-table" width="100%" border="0">
                 <tr>
                     <td class="i18n1" name="id">流水号</td>
-                    <td colspan="2">
+                    <td >
                         <label id="LabStandard3LpeId" class="hl-label"></label>
                     </td>
+                    <td></td>
                     <td class="i18n1" name="coatingacceptancecriteriano">涂层判定标准编号</td>
-                    <td colspan="2"><input class="easyui-textbox"  type="text" name="lab_testing_acceptance_criteria_no" value=""/></td>
+                    <td ><input class="easyui-textbox"  type="text" name="lab_testing_acceptance_criteria_no" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="resistancetocd2028dmax">阴极剥离 20度 28d 最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="resistance_to_cd_20_28d_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="resistance_to_cd_20_28d_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="resistancetocd2028dmin">阴极剥离 20度 28d 最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="resistance_to_cd_20_28d_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="resistance_to_cd_20_28d_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="resistancetocdmax28dmax">阴极剥离 最高温度 28d 最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="resistance_to_cd_max_28d_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="resistance_to_cd_max_28d_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="resistancetocdmax28dmin">阴极剥离 最高温度 28d 最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="resistance_to_cd_max_28d_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="resistance_to_cd_max_28d_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="resistancetocd6524hmax">阴极剥离 65度 24小时 最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="resistance_to_cd_65_24h_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="resistance_to_cd_65_24h_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="resistancetocd6524hmin">阴极剥离 65度 24小时 最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="resistance_to_cd_65_24h_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="resistance_to_cd_65_24h_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="impactresistance23max">冲击 23度 最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="impact_resistance_23_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="impact_resistance_23_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="impactresistance23min">冲击 23度 最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="impact_resistance_23_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="impact_resistance_23_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="impactresistancem40max">冲击 -40度 最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="impact_resistance_m40_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="impact_resistance_m40_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="impactresistancem40min">冲击 -40度 最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="impact_resistance_m40_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="impact_resistance_m40_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="indentationhardness23max">压痕硬度 23度  最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="indentation_hardness_23_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="indentation_hardness_23_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="indentationhardness23min">压痕硬度 23度  最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="indentation_hardness_23_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="indentation_hardness_23_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="indentationhardness70max">压痕硬度 70度  最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="indentation_hardness_70_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="indentation_hardness_70_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="indentationhardness70min">压痕硬度 70度  最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="indentation_hardness_70_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="indentation_hardness_70_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="elongationatbreakmax">延展率 最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="elongation_at_break_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="elongation_at_break_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="elongationatbreakmin">延展率 最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="elongation_at_break_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="elongation_at_break_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="coatingresistivitymax">涂层强度 最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="coating_resistivity_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="coating_resistivity_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="coatingresistivitymin">涂层强度 最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="coating_resistivity_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="coating_resistivity_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="thermaldegradationmax">热特性最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="thermal_degradation_max" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="thermal_degradation_max" value=""/></td>
+                    <td></td>
                     <td class="i18n1" name="thermaldegradationmin">热特性最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="thermal_degradation_min" value=""/></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="thermal_degradation_min" value=""/></td>
+                    <td></td>
                 </tr>
 
                 <tr>
                     <td class="i18n1" name="lastupdatetime">最后更新时间</td>
-                    <td colspan="2">
+                    <td>
                         <label class="hl-label" id="lastupdatetime" type="text" name="last_update_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
 
