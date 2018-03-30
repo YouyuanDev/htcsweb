@@ -169,4 +169,7 @@
 172	权限信息管理	fund	删除	d	delFunction
 173	生产岗位记录管理	pprmr	查看	r	productionProcessRecord
 174	生产岗位记录管理	pprme	编辑	w	genProductionProcessRecord
-
+176	钢管管体标准管理	pbstdr	查看	r	pipebodystandard
+177	钢管管体标准管理	pbstds	搜索	r	getAllPipeBodyAcceptanceCriteriaByLike
+178	钢管管体标准管理	pbstde	编辑	w	saveAllPipeBodyAcceptanceCriteria
+179	钢管管体标准管理	pbstdd	删除	d	delAllPipeBodyAcceptanceCriteria
