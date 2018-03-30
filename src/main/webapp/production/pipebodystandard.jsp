@@ -256,9 +256,9 @@
                 </tr>
                 <tr>
                     <td class="i18n1" name="pipeendovalityfactormax">管端椭圆度公差系数最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_end_ovality_factor_max" value=""/></td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:3"  type="text" name="pipe_end_ovality_factor_max" value=""/></td>
                     <td class="i18n1" name="pipeendovalityfactormin">管端椭圆度公差系数最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_end_ovality_factor_min" value=""/></td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:3"  type="text" name="pipe_end_ovality_factor_min" value=""/></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="pipestraightnesstolerancemax">直度公差最大值</td>

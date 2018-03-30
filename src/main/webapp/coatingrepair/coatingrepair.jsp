@@ -91,6 +91,77 @@
                     var imgList=odpictures.split(';');
                     createPictureModel(basePath,imgList);
                 }
+
+
+
+                var accurl;
+                if(row.odid=="od")
+                    accurl='/AcceptanceCriteriaOperation/getODAcceptanceCriteriaByContractNo.action';
+                else
+                    accurl='/AcceptanceCriteriaOperation/getIDAcceptanceCriteriaByContractNo.action';
+
+                //异步获取标准并匹配
+                $.ajax({
+                    url:accurl,
+                    dataType:'json',
+                    data:{'contract_no':row.contract_no},
+                    success:function (data) {
+                        var $obj1=$("input[name='repair_thickness']");
+                        var $obj2=$("input[name='holiday_number']");
+                        var $obj3=$("input[name='repair_number']");
+
+
+                        $obj1.siblings().css("background-color","#FFFFFF");
+                        $obj2.siblings().css("background-color","#FFFFFF");
+                        $obj3.siblings().css("background-color","#FFFFFF");
+
+
+                        if(data!=null){
+                            var res1=changeComma($obj1.val());
+                            var res1_1=res1.split(',');
+                            var res2=$obj2.val();
+                            var res3=$obj3.val();
+
+                            if(row.odid=="id") {
+
+                                for (var i = 0; i < res1_1.length; i++) {
+                                    if (res1_1[i] != "" && res1_1.length > 0) {
+                                        if (!((res1_1[i] >= data.dry_film_thickness_min) && (res1_1[i] <= data.dry_film_thickness_max)))
+                                            $obj1.siblings().css("background-color", "#F9A6A6");
+                                    }
+                                }
+                            }
+                            else if(row.odid=="od"){
+                                if(row.coating_type=="2FBE"){
+
+                                    for (var i = 0; i < res1_1.length; i++) {
+                                        if (res1_1[i] != "" && res1_1.length > 0) {
+                                            if (!((res1_1[i] >= data.total_2fbe_coat_thickness_min) && (res1_1[i] <= data.total_2fbe_coat_thickness_max)))
+                                                $obj1.siblings().css("background-color", "#F9A6A6");
+                                        }
+                                    }
+                                }
+                                else if(row.coating_type=="3LPE"){
+
+                                    for (var i = 0; i < res1_1.length; i++) {
+                                        if (res1_1[i] != "" && res1_1.length > 0) {
+                                            if (!((res1_1[i] >= data.total_3lpe_coat_thickness_min) && (res1_1[i] <= data.total_3lpe_coat_thickness_max)))
+                                                $obj1.siblings().css("background-color", "#F9A6A6");
+                                        }
+                                    }
+                                }
+                            }
+
+                            if(!((res2>=data.holiday_min)&&(res2<=data.holiday_max)))
+                                $obj2.siblings().css("background-color","#F9A6A6");
+                            if(!((res3>=data.repair_min)&&(res3<=data.repair_max)))
+                                $obj3.siblings().css("background-color","#F9A6A6");
+
+                        }
+                    },error:function () {
+
+                    }
+                });
                 url="/coatingRepairOperation/saveCoatingRepair.action?id="+row.id;
 
             }else{
@@ -159,17 +230,12 @@
                         hlAlertFour("请输入检验时间");
                         return false;
                     }
+                    var arg1=$("input[name='repair_thickness']").val().trim();
+                    $("input[name='repair_thickness']").val(changeComma(arg1));
 
                     setParams($("input[name='repair_number']"));
                     setParams($("input[name='holiday_number']"));
-                    // if($("input[name='operator_no']").val()==""){
-                    //     hlAlertFour("请输入操作员编号");
-                    //     return false;
-                    // }
-                    // if($("input[name='inspector_no']").val()==""){
-                    //     hlAlertFour("请输入检验员编号");
-                    //     return false;
-                    // }
+
                     //return $('#coatingRepairForm').form('enableValidation').form('validate');
                 },
                 success: function(result){
@@ -404,6 +470,7 @@
                         <select id="coating_type" class="easyui-combobox" data-options="editable:false" name="coating_type"   style="width:185px;">
                             <option value="2FBE">2FBE</option>
                             <option value="3LPE">3LPE</option>
+                            <option value="Liquid Epoxy">Liquid Epoxy</option>
                             <option value="Other">Other</option>
                         </select>
                     </td>
@@ -476,9 +543,9 @@
                     </td>
                 </tr>
                 <tr>
-                    <td width="20%" class="i18n1" name="repairthickness">修补厚度</td>
+                    <td width="20%" class="i18n1" name="repairthickness">修补厚度（,分隔）</td>
                     <td width="30%" >
-                        <input class="easyui-textbox"  type="text" data-options="multiline:true" name="repair_thickness" value=""/>
+                        <input class="easyui-textbox"  type="text" name="repair_thickness" value=""/>
 
                     </td>
                     <td width="20%" class="i18n1" name="holidaytesting">漏点检测</td>

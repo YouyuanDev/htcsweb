@@ -56,7 +56,7 @@
 
 
     <insert id="addPipeRebevelRecord" parameterType="com.htcsweb.entity.PipeRebevelRecord">
-        INSERT INTO pipe_rebevel_record(pipe_no,operation_time,operator_no, squareness,ovality,bevel,rootface,upload_files,remark,result) VALUES (#{pipe_no},#{operation_time},#{operator_no}, #{squareness},#{ovality},#{bevel},#{rootface} ,#{upload_files},#{remark},#{result})
+        INSERT INTO pipe_rebevel_record(pipe_no,operation_time,operator_no, squareness,ovality,bevel_angle,rootface,upload_files,remark,result) VALUES (#{pipe_no},#{operation_time},#{operator_no}, #{squareness},#{ovality},#{bevel_angle},#{rootface} ,#{upload_files},#{remark},#{result})
     </insert>
 
     <select id="getPipeRebevelRecord" resultType="com.htcsweb.entity.PipeRebevelRecord">
@@ -65,7 +65,7 @@
 
     <update id="updatePipeRebevelRecord" parameterType="com.htcsweb.entity.PipeRebevelRecord">
         UPDATE pipe_rebevel_record set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},
-        squareness=#{squareness},ovality=#{ovality},bevel=#{bevel},rootface=#{rootface} ,
+        squareness=#{squareness},ovality=#{ovality},bevel_angle=#{bevel_angle},rootface=#{rootface} ,
         upload_files=#{upload_files},remark=#{remark},result=#{result}
         where id=#{id}
     </update>

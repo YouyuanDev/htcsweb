@@ -12,10 +12,10 @@ public class PipeRebevelRecord {
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date operation_time;
 
-    private String squareness;
-    private String ovality;
-    private String bevel;
-    private String rootface;
+    private float squareness;
+    private float ovality;
+    private float bevel_angle;
+    private float rootface;
 
     private String upload_files;
     private String result;
@@ -24,14 +24,14 @@ public class PipeRebevelRecord {
     public PipeRebevelRecord() {
     }
 
-    public PipeRebevelRecord(int id, String pipe_no, String operator_no, Date operation_time, String squareness, String ovality, String bevel, String rootface, String upload_files, String result, String remark) {
+    public PipeRebevelRecord(int id, String pipe_no, String operator_no, Date operation_time, float squareness, float ovality, float bevel_angle, float rootface, String upload_files, String result, String remark) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operator_no = operator_no;
         this.operation_time = operation_time;
         this.squareness = squareness;
         this.ovality = ovality;
-        this.bevel = bevel;
+        this.bevel_angle = bevel_angle;
         this.rootface = rootface;
         this.upload_files = upload_files;
         this.result = result;
@@ -70,35 +70,35 @@ public class PipeRebevelRecord {
         this.operation_time = operation_time;
     }
 
-    public String getSquareness() {
+    public float getSquareness() {
         return squareness;
     }
 
-    public void setSquareness(String squareness) {
+    public void setSquareness(float squareness) {
         this.squareness = squareness;
     }
 
-    public String getOvality() {
+    public float getOvality() {
         return ovality;
     }
 
-    public void setOvality(String ovality) {
+    public void setOvality(float ovality) {
         this.ovality = ovality;
     }
 
-    public String getBevel() {
-        return bevel;
+    public float getBevel_angle() {
+        return bevel_angle;
     }
 
-    public void setBevel(String bevel) {
-        this.bevel = bevel;
+    public void setBevel_angle(float bevel_angle) {
+        this.bevel_angle = bevel_angle;
     }
 
-    public String getRootface() {
+    public float getRootface() {
         return rootface;
     }
 
-    public void setRootface(String rootface) {
+    public void setRootface(float rootface) {
         this.rootface = rootface;
     }
 

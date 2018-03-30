@@ -119,41 +119,48 @@
                     createPictureModel(basePath,imgList);
                 }
                 //异步获取标准并匹配
-                // $.ajax({
-                //     url:'/AcceptanceCriteriaOperation/getIDAcceptanceCriteriaByContractNo.action',
-                //     dataType:'json',
-                //     //data:{'contract_no':row.contract_no},
-                //     success:function (data) {
-                //         // var $obj1=$("input[name='relative_humidity']");
-                //         // var $obj2=$("input[name='dew_point']");
-                //         // var $obj3=$("input[name='blast_finish_sa25']");
-                //         // var $obj4=$("input[name='profile']");
-                //         // var $obj5=$("input[name='pipe_temp']");
-                //         // $obj1.siblings().css("background-color","#FFFFFF");
-                //         // $obj2.siblings().css("background-color","#FFFFFF");
-                //         // $obj3.siblings().css("background-color","#FFFFFF");
-                //         // $obj4.siblings().css("background-color","#FFFFFF");
-                //         // $obj5.siblings().css("background-color","#FFFFFF");
-                //         // if(data!=null){
-                //         //     var res1=$obj1.val();
-                //         //     var res2=$obj2.val();
-                //         //     var res3=$obj3.val();
-                //         //     var res4=$obj4.val();
-                //         //     var res5=$obj5.val();
-                //         //     if(!((res1>=data.relative_humidity_min)&&(res1<=data.relative_humidity_max)))
-                //         //         $obj1.siblings().css("background-color","#F9A6A6");
-                //         //     if(!((res3>=data.blast_finish_sa25_min)&&(res3<=data.blast_finish_sa25_max)))
-                //         //         $obj3.siblings().css("background-color","#F9A6A6");
-                //         //     if(!((res4>=data.id_profile_min)&&(res4<=data.id_profile_max)))
-                //         //         $obj4.siblings().css("background-color","#F9A6A6");
-                //         //     if(!((res5-res2)>=data.temp_above_dew_point_min))
-                //         //         $obj5.siblings().css("background-color","#F9A6A6");
-                //         //
-                //         // }
-                //     },error:function () {
-                //
-                //     }
-                // });
+                $.ajax({
+                    url:'/AcceptanceCriteriaOperation/getPipeBodyAcceptanceCriteriaByContractNo.action',
+                    dataType:'json',
+                    data:{'contract_no':row.contract_no},
+                    success:function (data) {
+                        var $obj1=$("input[name='squareness']");
+                        var $obj2=$("input[name='ovality']");
+                        var $obj3=$("input[name='bevel_angle']");
+                        var $obj4=$("input[name='rootface']");
+
+                        $obj1.siblings().css("background-color","#FFFFFF");
+                        $obj2.siblings().css("background-color","#FFFFFF");
+                        $obj3.siblings().css("background-color","#FFFFFF");
+                        $obj4.siblings().css("background-color","#FFFFFF");
+
+
+                        if(data!=null){
+                            var res1=$obj1.val();
+                            var res2=$obj2.val();
+                            var res3=$obj3.val();
+                            var res4=$obj4.val();
+                            var OD=row.od;
+
+                            //Ovality = Max-Min ,  Ovality<= factor* D
+                            var maximumOvality=data.pipe_end_ovality_factor_max*OD;
+                            var minimumOvality=data.pipe_end_ovality_factor_min*OD;
+
+
+                            if(!((res1>=data.pipe_squareness_min)&&(res1<=data.pipe_squareness_max)))
+                                $obj1.siblings().css("background-color","#F9A6A6");
+                            if(!((res2>=minimumOvality)&&(res2<=maximumOvality)))
+                                $obj2.siblings().css("background-color","#F9A6A6");
+                            if(!((res3>=data.pipe_bevel_angle_min)&&(res3<=data.pipe_bevel_angle_max)))
+                                $obj3.siblings().css("background-color","#F9A6A6");
+                            if(!((res4>=data.pipe_rootface_min)&&(res4<=data.pipe_rootface_max)))
+                                $obj4.siblings().css("background-color","#F9A6A6");
+
+
+                        }
+                    },error:function () {
+                    }
+                });
                 url="/PipeRebevelOperation/savePipeRebevelProcess.action?id="+row.id;
 
 
@@ -270,7 +277,7 @@
 
                 <th field="squareness" align="center" width="120" class="i18n1" name="squareness">切斜</th>
                 <th field="ovality" align="center" width="100"  class="i18n1" name="ovality">椭圆度</th>
-                <th field="bevel" width="100" align="center"  class="i18n1" name="bevel">坡口</th>
+                <th field="bevel_angle" width="100" align="center"  class="i18n1" name="bevelangle">坡口角度</th>
                 <th field="rootface" align="center" width="120" class="i18n1" name="rootface">钝边</th>
 
                 <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
@@ -382,39 +389,26 @@
                 <tr>
                     <td class="i18n1" name="squareness">切斜</td>
                     <td>
-                        <select  class="easyui-combobox" data-options="editable:false"  name="squareness" style="width:200px;">
-                            <option value="0">Not OK</option>
-                            <option value="1">OK</option>
-                        </select>
+                        <input class="easyui-numberbox" data-options="precision:2"  type="text" name="squareness" value=""/>
                     </td>
                     <td></td>
-                    <td class="i18n1" name="ovality">修磨或切割</td>
+                    <td class="i18n1" name="ovality">椭圆度</td>
                     <td>
-                        <select  class="easyui-combobox" data-options="editable:false"  name="ovality" style="width:200px;">
-                            <option value="0">Not OK</option>
-                            <option value="1">OK</option>
-                        </select>
+                        <input class="easyui-numberbox" data-options="precision:2"  type="text" name="ovality" value=""/>
 
                     </td>
                     <td></td>
                 </tr>
 
                 <tr>
-                    <td class="i18n1" name="bevel">坡口</td>
+                    <td class="i18n1" name="bevelangle">坡口角度</td>
                     <td>
-                        <select  class="easyui-combobox" data-options="editable:false"  name="bevel" style="width:200px;">
-                            <option value="0">Not OK</option>
-                            <option value="1">OK</option>
-                        </select>
+                        <input class="easyui-numberbox" data-options="precision:2"  type="text" name="bevel_angle" value=""/>
                     </td>
                     <td></td>
                     <td class="i18n1" name="rootface">钝边</td>
                     <td>
-                        <select  class="easyui-combobox" data-options="editable:false"  name="rootface" style="width:200px;">
-                            <option value="0">Not OK</option>
-                            <option value="1">OK</option>
-                        </select>
-
+                        <input class="easyui-numberbox" data-options="precision:2"  type="text" name="rootface" value=""/>
                     </td>
                     <td></td>
                 </tr>
