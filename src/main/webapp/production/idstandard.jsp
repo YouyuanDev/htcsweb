@@ -239,7 +239,7 @@
 </div>
 
 <!--添加、修改框-->
-<div id="hlIdAcceptanceDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;max-height:500px;overflow-y:auto;">
+<div id="hlIdAcceptanceDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:1000px;max-height:500px;overflow-y:auto;">
     <form id="idAcceptanceForm" method="post">
         <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
             <legend>内防接收标准信息</legend>
@@ -254,6 +254,28 @@
 
                 </tr>
                 <tr>
+                    <td class="i18n1" colspan="6" name="idblastcontrolparameter">内打砂控制参数</td>
+
+                </tr>
+                <tr>
+                    <td class="i18n1" name="saltcontaminationbeforeblastmax">打砂前盐度最大值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="salt_contamination_before_blast_max" value=""/></td>
+                    <td class="i18n1" name="saltcontaminationbeforeblastmin">打砂前盐度最小值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="salt_contamination_before_blast_min" value=""/></td>
+                </tr>
+                <tr>
+                    <td class="i18n1" name="relativehumiditymax">相对湿度最大值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="relative_humidity_max" value=""/></td>
+                    <td class="i18n1" name="relativehumiditymin">相对湿度最小值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="relative_humidity_min" value=""/></td>
+                </tr>
+                <tr>
+                    <td class="i18n1" name="pipetempmax">钢管温度最大值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_temp_max" value=""/></td>
+                    <td class="i18n1" name="pipetempmin">钢管最小值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_temp_min" value=""/></td>
+                </tr>
+                <tr>
                     <td class="i18n1" name="tempabovedewpointmax">高于露点最大值</td>
                     <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="temp_above_dew_point_max" value=""/></td>
                     <td class="i18n1" name="tempabovedewpointmin">高于露点最小值</td>
@@ -266,10 +288,16 @@
                     <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="blast_finish_sa25_min" value=""/></td>
                 </tr>
                 <tr>
-                    <td class="i18n1" name="relativehumiditymax">相对湿度最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="relative_humidity_max" value=""/></td>
-                    <td class="i18n1" name="relativehumiditymin">相对湿度最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="relative_humidity_min" value=""/></td>
+                    <td class="i18n1" name="surfacedustratingmax">灰尘度最大值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="surface_dust_rating_max" value=""/></td>
+                    <td class="i18n1" name="surfacedustratingmin">灰尘度最小值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="surface_dust_rating_min" value=""/></td>
+                </tr>
+                <tr>
+                    <td class="i18n1" name="saltcontaminationafterblastingmax">打砂后盐度最大值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="salt_contamination_after_blasting_max" value=""/></td>
+                    <td class="i18n1" name="saltcontaminationafterblastingmin">打砂后盐度最小值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="salt_contamination_after_blasting_min" value=""/></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="idprofilemax">内锚纹深度最大值</td>
@@ -278,10 +306,30 @@
                     <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="id_profile_min" value=""/></td>
                 </tr>
                 <tr>
+                    <td class="i18n1" colspan="6" name="idcoatingcontrolparameter">内喷涂控制参数</td>
+
+                </tr>
+                <tr>
+                    <td class="i18n1" name="wetfilmthicknessmax">湿膜厚度最大值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="wet_film_thickness_max" value=""/></td>
+                    <td class="i18n1" name="wetfilmthicknessmin">湿膜厚度最小值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="wet_film_thickness_min" value=""/></td>
+                </tr>
+
+                <tr>
+                    <td class="i18n1" colspan="6" name="idfinalcontrolparameter">内防终检控制参数</td>
+                </tr>
+                <tr>
                     <td class="i18n1" name="dryfilmthicknessmax">干膜厚度最大值</td>
                     <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="dry_film_thickness_max" value=""/></td>
                     <td class="i18n1" name="dryfilmthicknessmin">干膜厚度最小值</td>
                     <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="dry_film_thickness_min" value=""/></td>
+                </tr>
+                <tr>
+                    <td class="i18n1" name="roughnessmax">粗糙度最大值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="roughness_max" value=""/></td>
+                    <td class="i18n1" name="roughnessmin">粗糙度最小值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="roughness_min" value=""/></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="cutbackmax">预留段最大值</td>
@@ -295,31 +343,12 @@
                     <td class="i18n1" name="residualmagnetismmin">剩磁最小值</td>
                     <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="residual_magnetism_min" value=""/></td>
                 </tr>
-                <tr>
-                    <td class="i18n1" name="wetfilmthicknessmax">湿膜厚度最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="wet_film_thickness_max" value=""/></td>
-                    <td class="i18n1" name="wetfilmthicknessmin">湿膜厚度最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="wet_film_thickness_min" value=""/></td>
-                </tr>
-
 
                 <tr>
-                    <td class="i18n1" name="saltcontaminationbeforeblastmax">打砂前盐度最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="salt_contamination_before_blast_max" value=""/></td>
-                    <td class="i18n1" name="saltcontaminationbeforeblastmin">打砂前盐度最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="salt_contamination_before_blast_min" value=""/></td>
-                </tr>
-                <tr>
-                    <td class="i18n1" name="saltcontaminationafterblastingmax">打砂后盐度最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="salt_contamination_after_blasting_max" value=""/></td>
-                    <td class="i18n1" name="saltcontaminationafterblastingmin">打砂后盐度最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="salt_contamination_after_blasting_min" value=""/></td>
-                </tr>
-                <tr>
-                    <td class="i18n1" name="surfacedustratingmax">灰尘度最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="surface_dust_rating_max" value=""/></td>
-                    <td class="i18n1" name="surfacedustratingmin">灰尘度最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="surface_dust_rating_min" value=""/></td>
+                    <td class="i18n1" name="holidaytestervoltagemax">检漏仪电压最大值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="holiday_tester_voltage_max" value=""/></td>
+                    <td class="i18n1" name="holidaytestervoltagemin">检漏仪电压最小值</td>
+                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="holiday_tester_voltage_min" value=""/></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="holidaymax">漏点最大值</td>
@@ -327,18 +356,8 @@
                     <td class="i18n1" name="holidaymin">漏点最小值</td>
                     <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="holiday_min" value=""/></td>
                 </tr>
-                <tr>
-                    <td class="i18n1" name="roughnessmax">粗糙度最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="roughness_max" value=""/></td>
-                    <td class="i18n1" name="roughnessmin">粗糙度最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="roughness_min" value=""/></td>
-                </tr>
-                <tr>
-                    <td class="i18n1" name="pipetempmax">钢管温度最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_temp_max" value=""/></td>
-                    <td class="i18n1" name="pipetempmin">钢管最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_temp_min" value=""/></td>
-                </tr>
+
+
                 <tr>
                     <td class="i18n1" name="idcoatingrepairmax">内涂修补最大值</td>
                     <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="repair_max" value=""/></td>
@@ -346,10 +365,7 @@
                     <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="repair_min" value=""/></td>
                 </tr>
                 <tr>
-                    <td class="i18n1" name="holidaytestervoltagemax">检漏仪电压最大值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="holiday_tester_voltage_max" value=""/></td>
-                    <td class="i18n1" name="holidaytestervoltagemin">检漏仪电压最小值</td>
-                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="holiday_tester_voltage_min" value=""/></td>
+                    <td class="i18n1" colspan="6" name="idstripcontrolparameter">内防扒皮控制参数</td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="striptempmax">扒皮温度最大值(℃)</td>

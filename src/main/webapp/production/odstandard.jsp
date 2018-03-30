@@ -292,6 +292,10 @@
 
                </tr>
                <tr>
+                   <td class="i18n1" colspan="6" name="odblastcontrolparameter">外打砂控制参数</td>
+
+               </tr>
+               <tr>
                    <td class="i18n1" name="saltcontaminationbeforeblastmax">打砂前盐度最大值</td>
                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="salt_contamination_before_blast_max" value=""/></td>
                    <td class="i18n1" name="saltcontaminationbeforeblastmin">打砂前盐度最小值</td>
@@ -316,6 +320,12 @@
                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="temp_above_dew_point_min" value=""/></td>
                </tr>
                <tr>
+                   <td class="i18n1" name="pipetempafterblastmax">打砂后钢管温度最大值</td>
+                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_temp_after_blast_max" value=""/></td>
+                   <td class="i18n1" name="pipetempafterblastmin">打砂后钢管温度最小值</td>
+                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_temp_after_blast_min" value=""/></td>
+               </tr>
+               <tr>
                    <td class="i18n1" name="blastfinishsa25max">打砂后清洁度Sa2.5最大值</td>
                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="blast_finish_sa25_max" value=""/></td>
                    <td class="i18n1" name="blastfinishsa25min">打砂后清洁度Sa2.5最小值</td>
@@ -333,40 +343,50 @@
                    <td class="i18n1" name="odprofilemin">外锚纹深度最小值</td>
                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="od_profile_min" value=""/></td>
                </tr>
-               <tr>
-                   <td class="i18n1" name="pipetempafterblastmax">打砂后钢管温度最大值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_temp_after_blast_max" value=""/></td>
-                   <td class="i18n1" name="pipetempafterblastmin">打砂后钢管温度最小值</td>
-                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="pipe_temp_after_blast_min" value=""/></td>
-               </tr>
+
                <tr>
                    <td class="i18n1" name="saltcontaminationafterblastingmax">打砂后盐度最大值</td>
                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="salt_contamination_after_blasting_max" value=""/></td>
                    <td class="i18n1" name="saltcontaminationafterblastingmin">打砂后盐度最小值</td>
                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="salt_contamination_after_blasting_min" value=""/></td>
-               </tr><tr>
-               <td class="i18n1" name="applicationtempmax">中频温度最大值</td>
-               <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="application_temp_max" value=""/></td>
-               <td class="i18n1" name="applicationtempmin">中频温度最小值</td>
-               <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="application_temp_min" value=""/></td>
-           </tr>
+               </tr>
+               <tr>
+                   <td class="i18n1" colspan="6" name="odcoatingcontrolparameter">外喷涂控制参数</td>
+
+               </tr>
+               <tr>
+                   <td class="i18n1" name="applicationtempmax">中频温度最大值</td>
+                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="application_temp_max" value=""/></td>
+                   <td class="i18n1" name="applicationtempmin">中频温度最小值</td>
+                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="application_temp_min" value=""/></td>
+               </tr>
+               <tr>
+                   <td class="i18n1" colspan="6" name="2fbeodcoatingcontrolparameter">2FBE外涂检验控制参数</td>
+               </tr>
+
                <tr>
                    <td class="i18n1" name="base2fbecoatthicknessmax">底层2fbe最大厚度</td>
                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="base_2fbe_coat_thickness_max" value=""/></td>
                    <td class="i18n1" name="base2fbecoatthicknessmin">底层2fbe最小厚度</td>
                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="base_2fbe_coat_thickness_min" value=""/></td>
-               </tr><tr>
-               <td class="i18n1" name="top2fbecoatthicknessmax">顶层2fbe最大厚度</td>
-               <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="top_2fbe_coat_thickness_max" value=""/></td>
-               <td class="i18n1" name="top2fbecoatthicknessmin">顶层2fbe最小厚度</td>
-               <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="top_2fbe_coat_thickness_min" value=""/></td>
-           </tr>
+               </tr>
+               <tr>
+                   <td class="i18n1" name="top2fbecoatthicknessmax">顶层2fbe最大厚度</td>
+                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="top_2fbe_coat_thickness_max" value=""/></td>
+                   <td class="i18n1" name="top2fbecoatthicknessmin">顶层2fbe最小厚度</td>
+                   <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="top_2fbe_coat_thickness_min" value=""/></td>
+               </tr>
                <tr>
                    <td class="i18n1" name="total2fbecoatthicknessmax">2fbe总厚度最大值</td>
                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="total_2fbe_coat_thickness_max" value=""/></td>
                    <td class="i18n1" name="total2fbecoatthicknessmin">2fbe总厚度最小值</td>
                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="total_2fbe_coat_thickness_min" value=""/></td>
                </tr>
+
+               <tr>
+                   <td class="i18n1" colspan="6" name="3lpeodcoatingcontrolparameter">3LPE外涂检验控制参数</td>
+               </tr>
+
                <tr>
                    <td class="i18n1" name="top3lpecoatthicknessmax">3lpe顶层最大值</td>
                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="top_3lpe_coat_thickness_max" value=""/></td>
@@ -391,6 +411,7 @@
                    <td class="i18n1" name="total3lpecoatthicknessmin">3lpe总厚度最小值</td>
                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="total_3lpe_coat_thickness_min" value=""/></td>
                </tr>
+
                <tr>
                    <td class="i18n1" name="repairmax">允许修补量最大值</td>
                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:0"  type="text" name="repair_max" value=""/></td>
@@ -403,6 +424,12 @@
                    <td class="i18n1" name="holidaytestervoltagemin">检漏仪电压最小值</td>
                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="holiday_tester_voltage_min" value=""/></td>
                </tr>
+
+
+               <tr>
+                   <td class="i18n1" colspan="6" name="odfinalcontrolparameter">外防终检控制参数</td>
+               </tr>
+
                <tr>
                    <td class="i18n1" name="cutbackmax">预留段最大值</td>
                    <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="cutback_max" value=""/></td>
