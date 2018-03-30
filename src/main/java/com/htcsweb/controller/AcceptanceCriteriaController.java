@@ -3,8 +3,10 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 
+import com.htcsweb.dao.PipeBodyAcceptanceCriteriaDao;
 import com.htcsweb.entity.ODCoatingAcceptanceCriteria;
 import com.htcsweb.entity.IDCoatingAcceptanceCriteria;
+import com.htcsweb.entity.PipeBodyAcceptanceCriteria;
 import com.htcsweb.util.ComboxItem;
 import com.htcsweb.dao.ODCoatingAcceptanceCriteriaDao;
 import com.htcsweb.dao.IDCoatingAcceptanceCriteriaDao;
@@ -28,6 +30,9 @@ public class AcceptanceCriteriaController {
     private ODCoatingAcceptanceCriteriaDao odcoatingacceptancecriteriaDao;
     @Autowired
     private IDCoatingAcceptanceCriteriaDao idcoatingacceptancecriteriaDao;
+
+    @Autowired
+    private PipeBodyAcceptanceCriteriaDao pipeBodyAcceptanceCriteriaDao;
 
     @RequestMapping("/getAllODAcceptanceCriteria")
     @ResponseBody
@@ -127,7 +132,7 @@ public class AcceptanceCriteriaController {
         return null;
     }
 
-
+    //获取所有内防接收标准下拉
     @RequestMapping("/getAllIDAcceptanceCriteria")
     @ResponseBody
     public String getAllIDAcceptanceCriteria(@RequestParam(value = "coating_acceptance_criteria_no",required = false)String coating_acceptance_criteria_no,HttpServletRequest request){
@@ -249,4 +254,108 @@ public class AcceptanceCriteriaController {
             return  null;
         }
     }
+
+
+
+    //查找钢管管体标准
+    @RequestMapping("/getAllPipeBodyAcceptanceCriteriaByLike")
+    @ResponseBody
+    public String getAllPipeBodyAcceptanceCriteriaByLike(@RequestParam(value = "pipe_body_acceptance_criteria_no",required = false)String pipe_body_acceptance_criteria_no,HttpServletRequest request){
+        String page= request.getParameter("page");
+        String rows= request.getParameter("rows");
+        if(page==null||page==""){
+            page="0";
+        }if(rows==null||rows==""){
+            rows="20";
+        }
+        System.out.println("rows="+rows);
+        int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
+        List<HashMap<String,Object>>list=pipeBodyAcceptanceCriteriaDao.getAllByLike(pipe_body_acceptance_criteria_no,start,Integer.parseInt(rows));
+        int count=pipeBodyAcceptanceCriteriaDao.getCount(pipe_body_acceptance_criteria_no);
+        Map<String,Object> maps=new HashMap<String,Object>();
+        maps.put("total",count);
+        maps.put("rows",list);
+        String mmp= JSONArray.toJSONString(maps);
+        return mmp;
+    }
+
+    //获取所有钢管管体接收标准下拉
+    @RequestMapping("/getAllPipeBodyAcceptanceCriteria")
+    @ResponseBody
+    public String getAllPipeBodyAcceptanceCriteria(@RequestParam(value = "pipe_body_acceptance_criteria_no",required = false)String pipe_body_acceptance_criteria_no,HttpServletRequest request){
+        List<PipeBodyAcceptanceCriteria>list=pipeBodyAcceptanceCriteriaDao.getAllPipeBodyAcceptanceCriteria();
+        List<ComboxItem> colist=new ArrayList<ComboxItem>();
+        for(int i=0;i<list.size();i++){
+            ComboxItem citem= new ComboxItem();
+            PipeBodyAcceptanceCriteria ps=((PipeBodyAcceptanceCriteria)list.get(i));
+            citem.id=ps.getPipe_body_acceptance_criteria_no();
+            citem.text=ps.getPipe_body_acceptance_criteria_no();
+            colist.add(citem);
+        }
+        String map= JSONObject.toJSONString(colist);
+        return map;
+    }
+
+    //添加、修改钢管管体腐标准
+    @RequestMapping("/saveAllPipeBodyAcceptanceCriteria")
+    @ResponseBody
+    public String saveAllPipeBodyAcceptanceCriteria(PipeBodyAcceptanceCriteria pipeBodyAcceptanceCriteria, HttpServletRequest request, HttpServletResponse response){
+        JSONObject json=new JSONObject();
+        try{
+            int resTotal=0;
+            pipeBodyAcceptanceCriteria.setLast_update_time(new Date());
+            if(pipeBodyAcceptanceCriteria.getId()==0){
+                //添加
+                resTotal=pipeBodyAcceptanceCriteriaDao.addPipeBodyAcceptanceCriteria(pipeBodyAcceptanceCriteria);
+            }else{
+                //修改！
+                resTotal=pipeBodyAcceptanceCriteriaDao.updatePipeBodyAcceptanceCriteria(pipeBodyAcceptanceCriteria);
+            }
+            if(resTotal>0){
+                json.put("success",true);
+                json.put("message","保存成功");
+            }else{
+                json.put("success",false);
+                json.put("message","保存失败");
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            json.put("success",false);
+            json.put("message",e.getMessage());
+
+        }finally {
+            try {
+                ResponseUtil.write(response, json);
+            }catch  (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+
+    //删除钢管管体腐标准
+    @RequestMapping("/delAllPipeBodyAcceptanceCriteria")
+    public String delAllPipeBodyAcceptanceCriteria(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
+        String[]idArr=hlparam.split(",");
+        int resTotal=0;
+        resTotal=pipeBodyAcceptanceCriteriaDao.delPipeBodyAcceptanceCriteria(idArr);
+        JSONObject json=new JSONObject();
+        StringBuilder sbmessage = new StringBuilder();
+        sbmessage.append("总共");
+        sbmessage.append(Integer.toString(resTotal));
+        sbmessage.append("项钢管管体接收标准删除成功\n");
+        if(resTotal>0){
+            //System.out.print("删除成功");
+            json.put("success",true);
+        }else{
+            //System.out.print("删除失败");
+            json.put("success",false);
+        }
+        json.put("message",sbmessage.toString());
+        ResponseUtil.write(response,json);
+        return null;
+    }
+
 }

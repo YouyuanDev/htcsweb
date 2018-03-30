@@ -23,11 +23,13 @@ public class ProjectInfo {
     private String lab_testing_acceptance_criteria_3lpe_no;
     private String raw_material_acceptance_criteria_2fbe_no;
     private String raw_material_acceptance_criteria_3lpe_no;
+    private String pipe_body_acceptance_criteria_no;
 
     public ProjectInfo() {
     }
 
-    public ProjectInfo(int id, String project_no, String project_name, String client_name, String client_spec, String coating_standard, String mps, String itp, Date project_time, String upload_files, String od_coating_acceptance_criteria_no, String id_coating_acceptance_criteria_no, String lab_testing_acceptance_criteria_2fbe_no, String lab_testing_acceptance_criteria_3lpe_no, String raw_material_acceptance_criteria_2fbe_no, String raw_material_acceptance_criteria_3lpe_no) {
+
+    public ProjectInfo(int id, String project_no, String project_name, String client_name, String client_spec, String coating_standard, String mps, String itp, Date project_time, String upload_files, String od_coating_acceptance_criteria_no, String id_coating_acceptance_criteria_no, String lab_testing_acceptance_criteria_2fbe_no, String lab_testing_acceptance_criteria_3lpe_no, String raw_material_acceptance_criteria_2fbe_no, String raw_material_acceptance_criteria_3lpe_no, String pipe_body_acceptance_criteria_no) {
         this.id = id;
         this.project_no = project_no;
         this.project_name = project_name;
@@ -44,6 +46,7 @@ public class ProjectInfo {
         this.lab_testing_acceptance_criteria_3lpe_no = lab_testing_acceptance_criteria_3lpe_no;
         this.raw_material_acceptance_criteria_2fbe_no = raw_material_acceptance_criteria_2fbe_no;
         this.raw_material_acceptance_criteria_3lpe_no = raw_material_acceptance_criteria_3lpe_no;
+        this.pipe_body_acceptance_criteria_no = pipe_body_acceptance_criteria_no;
     }
 
     public int getId() {
@@ -172,5 +175,13 @@ public class ProjectInfo {
 
     public void setRaw_material_acceptance_criteria_3lpe_no(String raw_material_acceptance_criteria_3lpe_no) {
         this.raw_material_acceptance_criteria_3lpe_no = raw_material_acceptance_criteria_3lpe_no;
+    }
+
+    public String getPipe_body_acceptance_criteria_no() {
+        return pipe_body_acceptance_criteria_no;
+    }
+
+    public void setPipe_body_acceptance_criteria_no(String pipe_body_acceptance_criteria_no) {
+        this.pipe_body_acceptance_criteria_no = pipe_body_acceptance_criteria_no;
     }
 }

@@ -86,6 +86,11 @@
             $('#RawMaterialStandard3LpeForm').form('submit',{
                 url:url,
                 onSubmit:function () {
+                    if($("input[name='raw_material_testing_acceptance_criteria_no']").val()==""){
+
+                        hlAlertFour("请输入3LPE原材料接收标准编号");
+                        return false;
+                    }
                     setParams();
                 },
                 success: function(result){
@@ -175,7 +180,7 @@
 <!--工具栏-->
 <div id="hlRawMaterialStandard3LpeTb" style="padding:10px;">
     <span class="i18n1" name="coatingacceptancecriteriano">涂层判定标准编号</span>:
-    <input id="raw_material_testing_acceptance_criteria_no" name="raw_material_testing_acceptance_criteria_no" style="line-height:22px;border:1px solid #ccc">
+    <input id="raw_material_testing_acceptance_criteria_no" name="rawmaterialtestingacceptancecriteriano" style="line-height:22px;border:1px solid #ccc">
     <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchRawMaterialStandard3Lpe()">Search</a>
     <div style="float:right">
         <a href="#" id="addObpLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addRawMaterialStandard3Lpe()">添加</a>
@@ -185,10 +190,10 @@
 </div>
 
 <!--添加、修改框-->
-<div id="hlRawMaterialStandard3LpeDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;height:auto;">
+<div id="hlRawMaterialStandard3LpeDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;max-height:500px;overflow-y: auto;">
     <form id="RawMaterialStandard3LpeForm" method="post">
         <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
-            <legend>接收标准信息</legend>
+            <legend>3LPE原材料接收标准信息</legend>
             <table class="ht-table" width="100%" border="0">
                 <tr>
                     <td class="i18n1" name="id">流水号</td>

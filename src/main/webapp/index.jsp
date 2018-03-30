@@ -38,7 +38,7 @@
                 "coatingrepair","coatingstrip",
                 "barepipegrindingProcess","pipeSamplingProcess","pipeRebevelProcess",
                 "projectManagement","contractManagement","pipeManagement","uploadPipe","twodimensionalcode",
-                "odstandard","idstandard","labtestingstandard2fbe","labtestingstandard3lpe","rawmaterialtestingstandard2fbe","rawmaterialtestingstandard3lpe",
+                "odstandard","idstandard","labtestingstandard2fbe","labtestingstandard3lpe","rawmaterialtestingstandard2fbe","rawmaterialtestingstandard3lpe","pipebodystandard",
                 "labtesting2fbe","labtesting3lpe","labtestingepoxy","rawmaterialtesting2fbe","rawmaterialtesting3lpe","rawmaterialtestingliquidepoxy",
                 "person","role","function",
                 "productionProcessRecord"];
@@ -48,10 +48,10 @@
             var repairArr=uriArr.slice(18,20);
             var pipeArr=uriArr.slice(20,23);
             var basicArr=uriArr.slice(23,28);
-            var standArr=uriArr.slice(28,34);
-            var labArr=uriArr.slice(34,40);
-            var reportArr=uriArr.slice(43,44);
-            var accountArr=uriArr.slice(40,43);
+            var standArr=uriArr.slice(28,35);
+            var labArr=uriArr.slice(35,41);
+            var accountArr=uriArr.slice(41,44);
+            var reportArr=uriArr.slice(44,45);
 
 
 
@@ -509,7 +509,6 @@
             });
 
             //生产工艺
-            //账户管理
             $("#hlprocess").tree({
                 onClick:function (node) {
                     var tab=$('#hlTab').tabs('getTab',node.text);
@@ -556,6 +555,13 @@
                             $('#hlTab').tabs('add',{
                                 title:node.text,
                                 content:"<iframe scrolling='auto' frameborder='0'  src='production/rawmaterialtestingstandard3lpe.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                            hlLanguage();
+                        }else if("钢管管体标准"==nodeTxt||"Pipe Body Standard"==nodeTxt){
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='production/pipebodystandard.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable:true
                             });
                             hlLanguage();

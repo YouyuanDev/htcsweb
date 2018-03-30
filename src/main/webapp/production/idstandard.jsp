@@ -28,7 +28,7 @@
     <script type="text/javascript">
         var url;
         $(function () {
-            $('#hlIdBlastProDialog').dialog({
+            $('#hlIdAcceptanceDialog').dialog({
                 onClose:function () {
                     clearFormLabel();
                 }
@@ -86,6 +86,13 @@
             $('#idAcceptanceForm').form('submit',{
                 url:url,
                 onSubmit:function () {
+
+                    if($("input[name='coating_acceptance_criteria_no']").val()==""){
+
+                        hlAlertFour("请输入内防接收标准编号");
+                        return false;
+                    }
+
                     setParams();
                 },
                 success: function(result){
@@ -215,7 +222,7 @@
 <!--工具栏-->
 <div id="hlIdAcceptanceTb" style="padding:10px;">
     <span class="i18n1" name="coatingacceptancecriteriano">涂层判定标准编号</span>:
-    <input id="coating_acceptance_criteria_no" name="coating_acceptance_criteria_no" style="line-height:22px;border:1px solid #ccc">
+    <input id="coating_acceptance_criteria_no" name="coatingacceptancecriteriano" style="line-height:22px;border:1px solid #ccc">
     <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchIdAcceptance()">Search</a>
     <div style="float:right">
         <a href="#" id="addObpLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addIdAcceptance()">添加</a>
@@ -228,7 +235,7 @@
 <div id="hlIdAcceptanceDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;max-height:500px;overflow-y:auto;">
     <form id="idAcceptanceForm" method="post">
         <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
-            <legend>接收标准信息</legend>
+            <legend>内防接收标准信息</legend>
             <table class="ht-table" width="100%" border="0">
                 <tr>
                     <td class="i18n1" name="id">流水号</td>
@@ -282,9 +289,9 @@
                     <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="residual_magnetism_min" value=""/></td>
                 </tr>
                 <tr>
-                    <td class="i18n1" name="wetfilmthicknessmax">剩磁最大值</td>
+                    <td class="i18n1" name="wetfilmthicknessmax">湿膜厚度最大值</td>
                     <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="wet_film_thickness_max" value=""/></td>
-                    <td class="i18n1" name="wetfilmthicknessmin">剩磁最小值</td>
+                    <td class="i18n1" name="wetfilmthicknessmin">湿膜厚度最小值</td>
                     <td colspan="2"><input class="easyui-numberbox" data-options="precision:2"  type="text" name="wet_film_thickness_min" value=""/></td>
                 </tr>
 

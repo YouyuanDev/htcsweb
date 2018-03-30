@@ -307,6 +307,33 @@
                 url:url,
                 onSubmit:function () {
                     //表单验证
+                    if($("input[name='project_no']").val()==""){
+
+                        hlAlertFour("请输入项目编号");
+                        return false;
+                    }
+                    if($("input[name='project_name']").val()==""){
+
+                        hlAlertFour("请输入项目名称");
+                        return false;
+                    }
+                    if($("input[name='client_name']").val()==""){
+
+                        hlAlertFour("请输入客户名称");
+                        return false;
+                    }
+                    // if($("input[name='pipe_body_acceptance_criteria_no']").val()==""){
+                    //
+                    //     hlAlertFour("请输入钢管管体标准名称");
+                    //     return false;
+                    // }
+
+
+                    if($("input[name='project_time']").val()==""){
+
+                        hlAlertFour("请输入项目开始日期");
+                        return false;
+                    }
 
                     setParams($("input[name='project_name']"));
                     setParams($("input[name='client_name']"));
@@ -314,11 +341,7 @@
                     setParams($("input[name='coating_standard']"));
                     setParams($("input[name='mps']"));
 
-                    if($("input[name='project_time']").val()==""){
 
-                        hlAlertFour("请输入项目开始日期");
-                        return false;
-                    }
 
 
                     //return $('#projectForm').form('enableValidation').form('validate');
@@ -481,6 +504,30 @@
                     <td   width="33%"><input class="easyui-textbox" type="text" name="itp" value=""/></td>
 
                 </tr>
+                <tr>
+                    <td class="i18n1" name="pipebodyacceptancecriteriano" width="16%">钢管管体接收标准</td>
+                    <td   width="33%">
+
+                        <input class="easyui-combobox" type="text" name="pipe_body_acceptance_criteria_no"  data-options=
+                                "url:'/AcceptanceCriteriaOperation/getAllPipeBodyAcceptanceCriteria.action',
+					        method:'get',
+					        valueField:'id',
+					        editable:false,
+					        textField:'text',
+					        panelHeight:'auto'"/>
+
+                    </td>
+                    <td class="i18n1" width="16%"></td>
+                    <td   width="33%">
+
+
+
+
+                    </td>
+
+                </tr>
+
+
                 <tr>
                     <td class="i18n1" name="odcoatingacceptancecriteriano" width="16%">OD Acceptance Criteria No.</td>
                     <td   width="33%">

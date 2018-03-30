@@ -28,7 +28,7 @@
     <script type="text/javascript">
         var url;
         $(function () {
-                $('#hlOdBlastProDialog').dialog({
+                $('#hlOdAcceptanceDialog').dialog({
                     onClose:function () {
                         clearFormLabel();
                     }
@@ -88,6 +88,11 @@
             $('#odAcceptanceForm').form('submit',{
                 url:url,
                 onSubmit:function () {
+                    if($("input[name='coating_acceptance_criteria_no']").val()==""){
+
+                        hlAlertFour("请输入外防接收标准编号");
+                        return false;
+                    }
                     setParams();
                 },
                 success: function(result){
@@ -109,6 +114,7 @@
             $('#hlOdAcceptanceDialog').dialog('close');
         }
         function setParams() {
+
             setParamsMax($("input[name='salt_contamination_before_blast_max']"));
             setParamsMin($("input[name='salt_contamination_before_blast_min']"));
             setParamsMax($("input[name='preheat_temp_max']"));
@@ -249,7 +255,7 @@
 <!--工具栏-->
 <div id="hlOdAcceptanceTb" style="padding:10px;">
     <span class="i18n1" name="coatingacceptancecriteriano">涂层判定标准编号</span>:
-    <input id="coating_acceptance_criteria_no" name="coating_acceptance_criteria_no" style="line-height:22px;border:1px solid #ccc">
+    <input id="coating_acceptance_criteria_no" name="coatingacceptancecriteriano" style="line-height:22px;border:1px solid #ccc">
     <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchOdAcceptance()">Search</a>
     <div style="float:right">
      <a href="#" id="addObpLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addOdAcceptance()">添加</a>
@@ -262,7 +268,7 @@
 <div id="hlOdAcceptanceDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;max-height:500px;overflow-y: auto;">
    <form id="odAcceptanceForm" method="post">
        <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
-           <legend>接收标准信息</legend>
+           <legend>外防接收标准信息</legend>
            <table class="ht-table" width="100%" border="0">
                <tr>
                    <td class="i18n1" name="id">流水号</td>

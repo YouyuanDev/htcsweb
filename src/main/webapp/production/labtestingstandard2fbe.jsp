@@ -86,6 +86,12 @@
             $('#LabStandard2FbeForm').form('submit',{
                 url:url,
                 onSubmit:function () {
+
+                    if($("input[name='lab_testing_acceptance_criteria_no']").val()==""){
+
+                        hlAlertFour("请输入2FBE实验标准编号");
+                        return false;
+                    }
                     setParams();
                 },
                 success: function(result){
@@ -179,7 +185,7 @@
 <!--工具栏-->
 <div id="hlLabStandard2FbeTb" style="padding:10px;">
     <span class="i18n1" name="coatingacceptancecriteriano">涂层判定标准编号</span>:
-    <input id="lab_testing_acceptance_criteria_no" name="lab_testing_acceptance_criteria_no" style="line-height:22px;border:1px solid #ccc">
+    <input id="lab_testing_acceptance_criteria_no" name="labtestingacceptancecriteriano" style="line-height:22px;border:1px solid #ccc">
     <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchLabStandard2Fbe()">Search</a>
     <div style="float:right">
         <a href="#" id="addObpLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addLabStandard2Fbe()">添加</a>
@@ -192,7 +198,7 @@
 <div id="hlLabStandard2FbeDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;height:auto;">
     <form id="LabStandard2FbeForm" method="post">
         <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
-            <legend>接收标准信息</legend>
+            <legend>2FBE实验接收标准信息</legend>
             <table class="ht-table" width="100%" border="0">
                 <tr>
                     <td class="i18n1" name="id">流水号</td>

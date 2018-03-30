@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.htcsweb.dao.PipeBodyAcceptanceCriteriaDao">
+
+    <insert id="addPipeBodyAcceptanceCriteria" parameterType="com.htcsweb.entity.PipeBodyAcceptanceCriteria">
+        INSERT INTO pipe_body_acceptance_criteria(pipe_body_acceptance_criteria_no,pipe_length_max,pipe_length_min,
+        pipe_thickness_tolerance_max,pipe_thickness_tolerance_min,pipe_bevel_angle_max,pipe_bevel_angle_min,
+        pipe_rootface_max,pipe_rootface_min,pipe_squareness_max,pipe_squareness_min,pipe_end_ovality_factor_max,
+        pipe_end_ovality_factor_min,pipe_straightness_tolerance_max,pipe_straightness_tolerance_min,last_update_time
+
+        ) VALUES (
+        #{pipe_body_acceptance_criteria_no},#{pipe_length_max},#{pipe_length_min},
+        #{pipe_thickness_tolerance_max},#{pipe_thickness_tolerance_min},#{pipe_bevel_angle_max},#{pipe_bevel_angle_min},
+        #{pipe_rootface_max},#{pipe_rootface_min},#{pipe_squareness_max},#{pipe_squareness_min},#{pipe_end_ovality_factor_max},
+        #{pipe_end_ovality_factor_min},#{pipe_straightness_tolerance_max},#{pipe_straightness_tolerance_min},#{last_update_time}
+        )
+    </insert>
+    <delete id="delPipeBodyAcceptanceCriteria">
+        delete from pipe_body_acceptance_criteria WHERE
+        <foreach collection="array" item="item" open="id in (" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <update id="updatePipeBodyAcceptanceCriteria" parameterType="com.htcsweb.entity.PipeBodyAcceptanceCriteria">
+        UPDATE pipe_body_acceptance_criteria set
+         pipe_body_acceptance_criteria_no=#{pipe_body_acceptance_criteria_no},pipe_length_max=#{pipe_length_max},pipe_length_min=#{pipe_length_min},
+        pipe_thickness_tolerance_max=#{pipe_thickness_tolerance_max},pipe_thickness_tolerance_min=#{pipe_thickness_tolerance_min},
+        pipe_bevel_angle_max=#{pipe_bevel_angle_max},pipe_bevel_angle_min=#{pipe_bevel_angle_min},
+        pipe_rootface_max=#{pipe_rootface_max},pipe_rootface_min=#{pipe_rootface_min},pipe_squareness_max=#{pipe_squareness_max},
+        pipe_squareness_min=#{pipe_squareness_min},pipe_end_ovality_factor_max=#{pipe_end_ovality_factor_max},
+        pipe_end_ovality_factor_min=#{pipe_end_ovality_factor_min},pipe_straightness_tolerance_max=#{pipe_straightness_tolerance_max},
+        pipe_straightness_tolerance_min=#{pipe_straightness_tolerance_min},last_update_time=#{last_update_time}
+         where id=#{id}
+    </update>
+
+    <select id="getCount" resultType="int">
+        select count(*) from pipe_body_acceptance_criteria
+        <where>
+            <if test="pipe_body_acceptance_criteria_no!=null and pipe_body_acceptance_criteria_no!=''">
+                AND pipe_body_acceptance_criteria_no LIKE CONCAT('%',#{pipe_body_acceptance_criteria_no},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="getAllByLike" resultType="map">
+        Select o.* from pipe_body_acceptance_criteria o
+        <where>
+            <if test="pipe_body_acceptance_criteria_no!=null and pipe_body_acceptance_criteria_no!=''">
+                AND pipe_body_acceptance_criteria_no LIKE CONCAT('%',#{pipe_body_acceptance_criteria_no},'%')
+            </if>
+        </where>
+        ORDER BY o.id DESC
+        limit #{skip},#{take}
+    </select>
+
+    <select id="getAllPipeBodyAcceptanceCriteria" resultType="com.htcsweb.entity.PipeBodyAcceptanceCriteria">
+        SELECT  * from pipe_body_acceptance_criteria
+        ORDER BY id DESC
+    </select>
+
+    <select id="getPipeBodyAcceptanceCriteriaByContractNo" resultType="com.htcsweb.entity.PipeBodyAcceptanceCriteria">
+        select o.* from contract_info c inner JOIN project_info p on c.project_no=p.project_no inner JOIN pipe_body_acceptance_criteria o on p.pipe_body_acceptance_criteria_no=o.pipe_body_acceptance_criteria_no WHERE c.contract_no=#{contract_no}
+    </select>
+</mapper>

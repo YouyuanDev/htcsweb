@@ -48,6 +48,8 @@ public class SessionFilter extends OncePerRequestFilter{
             "getAcceptanceCriteria3LpeByContractNo",
             "getRawMaterialStandard2FbeByProjectNo",
             "getRawMaterialStandard3LpeByProjectNo",
+            "getAllPipeBodyAcceptanceCriteria",
+            "getPipeBodyAcceptanceCriteriaByContractNo",
             "getFunctionByLike",
             "getFunctionByNoName",
             "getAllRoleByLike",
