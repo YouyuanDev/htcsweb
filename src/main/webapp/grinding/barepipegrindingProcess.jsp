@@ -119,41 +119,47 @@
                     createPictureModel(basePath,imgList);
                 }
                 //异步获取标准并匹配
-                // $.ajax({
-                //     url:'/AcceptanceCriteriaOperation/getIDAcceptanceCriteriaByContractNo.action',
-                //     dataType:'json',
-                //     //data:{'contract_no':row.contract_no},
-                //     success:function (data) {
-                //         // var $obj1=$("input[name='relative_humidity']");
-                //         // var $obj2=$("input[name='dew_point']");
-                //         // var $obj3=$("input[name='blast_finish_sa25']");
-                //         // var $obj4=$("input[name='profile']");
-                //         // var $obj5=$("input[name='pipe_temp']");
-                //         // $obj1.siblings().css("background-color","#FFFFFF");
-                //         // $obj2.siblings().css("background-color","#FFFFFF");
-                //         // $obj3.siblings().css("background-color","#FFFFFF");
-                //         // $obj4.siblings().css("background-color","#FFFFFF");
-                //         // $obj5.siblings().css("background-color","#FFFFFF");
-                //         // if(data!=null){
-                //         //     var res1=$obj1.val();
-                //         //     var res2=$obj2.val();
-                //         //     var res3=$obj3.val();
-                //         //     var res4=$obj4.val();
-                //         //     var res5=$obj5.val();
-                //         //     if(!((res1>=data.relative_humidity_min)&&(res1<=data.relative_humidity_max)))
-                //         //         $obj1.siblings().css("background-color","#F9A6A6");
-                //         //     if(!((res3>=data.blast_finish_sa25_min)&&(res3<=data.blast_finish_sa25_max)))
-                //         //         $obj3.siblings().css("background-color","#F9A6A6");
-                //         //     if(!((res4>=data.id_profile_min)&&(res4<=data.id_profile_max)))
-                //         //         $obj4.siblings().css("background-color","#F9A6A6");
-                //         //     if(!((res5-res2)>=data.temp_above_dew_point_min))
-                //         //         $obj5.siblings().css("background-color","#F9A6A6");
-                //         //
-                //         // }
-                //     },error:function () {
-                //
-                //     }
-                // });
+                $.ajax({
+                    url:'/AcceptanceCriteriaOperation/getPipeBodyAcceptanceCriteriaByContractNo.action',
+                    dataType:'json',
+                    data:{'contract_no':row.contract_no},
+                    success:function (data) {
+                        var $obj1=$("input[name='original_pipe_length']");
+                        var $obj2=$("input[name='pipe_length_after_cut']");
+                        var $obj3=$("input[name='remaining_wall_thickness_list']");
+
+                        $obj1.siblings().css("background-color","#FFFFFF");
+                        $obj2.siblings().css("background-color","#FFFFFF");
+                        $obj3.siblings().css("background-color","#FFFFFF");
+
+
+                        if(data!=null){
+                            var res1=$obj1.val();
+                            var res2=$obj2.val();
+                            var res3=changeComma($obj3.val());
+                            var res3_1=res3.split(',');
+                            var wt=row.wt;
+
+                            var maximumwt=(data.pipe_thickness_tolerance_max+1)*wt;
+                            var minimumwt=(data.pipe_thickness_tolerance_min+1)*wt;
+
+
+                            if(!((res1>=data.pipe_length_min)&&(res1<=data.pipe_length_max)))
+                                $obj1.siblings().css("background-color","#F9A6A6");
+                            if(!((res2>=data.pipe_length_min)&&(res2<=data.pipe_length_max)))
+                                $obj2.siblings().css("background-color","#F9A6A6");
+                            for(var i=0;i<res3_1.length;i++){
+                                if(res3_1[i]!=""&&res3_1[i].length>0){
+                                    if(!((res3_1[i]>=minimumwt)&&(res3_1[i]<=maximumwt)))
+                                        $obj3.siblings().css("background-color","#F9A6A6");
+                                }
+                            }
+
+
+                        }
+                    },error:function () {
+                    }
+                });
                 url="/BarePipeGrindingOperation/saveBarePipeGrindingProcess.action?id="+row.id;
 
 
@@ -201,8 +207,8 @@
                     setParams($("input[name='cut_off_length']"));
                     setParams($("input[name='original_pipe_length']"));
                     setParams($("input[name='pipe_length_after_cut']"));
-
-
+                    var arg1=$("input[name='remaining_wall_thickness_list']").val().trim();
+                    $("input[name='remaining_wall_thickness_list']").val(changeComma(arg1));
 
 
                 },

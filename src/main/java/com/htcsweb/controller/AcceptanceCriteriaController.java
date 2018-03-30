@@ -296,7 +296,7 @@ public class AcceptanceCriteriaController {
         return map;
     }
 
-    //添加、修改钢管管体腐标准
+    //添加、修改钢管管体标准
     @RequestMapping("/saveAllPipeBodyAcceptanceCriteria")
     @ResponseBody
     public String saveAllPipeBodyAcceptanceCriteria(PipeBodyAcceptanceCriteria pipeBodyAcceptanceCriteria, HttpServletRequest request, HttpServletResponse response){
@@ -335,7 +335,7 @@ public class AcceptanceCriteriaController {
     }
 
 
-    //删除钢管管体腐标准
+    //删除钢管管体标准
     @RequestMapping("/delAllPipeBodyAcceptanceCriteria")
     public String delAllPipeBodyAcceptanceCriteria(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
         String[]idArr=hlparam.split(",");
@@ -356,6 +356,20 @@ public class AcceptanceCriteriaController {
         json.put("message",sbmessage.toString());
         ResponseUtil.write(response,json);
         return null;
+    }
+
+    //根据项目编号查找钢管管体标准
+    @RequestMapping("/getPipeBodyAcceptanceCriteriaByContractNo")
+    @ResponseBody
+    public String getPipeBodyAcceptanceCriteriaByContractNo(HttpServletRequest request){
+        String contract_no=request.getParameter("contract_no");
+        if(contract_no!=null&&contract_no!=""){
+            PipeBodyAcceptanceCriteria criteria=pipeBodyAcceptanceCriteriaDao.getPipeBodyAcceptanceCriteriaByContractNo(contract_no);
+            String map= JSONObject.toJSONString(criteria);
+            return map;
+        }else{
+            return  null;
+        }
     }
 
 }

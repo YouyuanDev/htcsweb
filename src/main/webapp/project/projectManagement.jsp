@@ -147,6 +147,7 @@
                     'itp':row.itp,
                     //'project_time':str,
                     'upload_files':row.upload_files,
+                    'pipe_body_acceptance_criteria_no':row.pipe_body_acceptance_criteria_no,
                     'od_coating_acceptance_criteria_no':row.od_coating_acceptance_criteria_no,
                     'id_coating_acceptance_criteria_no':row.id_coating_acceptance_criteria_no,
                     'lab_testing_acceptance_criteria_2fbe_no':row.lab_testing_acceptance_criteria_2fbe_no,
@@ -425,6 +426,9 @@
                 <th field="mps" align="center" width="100" class="i18n1" name="mps">MPS</th>
                 <th field="itp" align="center" width="100" class="i18n1" name="itp">ITP</th>
                 <th field="project_time" align="center" width="100" class="i18n1" name="projecttime" data-options="formatter:formatterdate">项目开始时间</th>
+
+                <th field="pipe_body_acceptance_criteria_no" align="center" width="100" class="i18n1" name="pipebodyacceptancecriteriano">Pipe Body acceptance_criteria</th>
+
                 <th field="od_coating_acceptance_criteria_no" align="center" width="100" class="i18n1" name="odcoatingacceptancecriteriano">OD acceptance_criteria</th>
                 <th field="id_coating_acceptance_criteria_no" align="center" width="100" class="i18n1" name="idcoatingacceptancecriteriano">ID acceptance_criteria</th>
                 <th field="lab_testing_acceptance_criteria_2fbe_no" align="center" width="100" class="i18n1" name="labtestingacceptancecriteria2fbeno">Lab testing acceptance criteria 2fbe</th>
@@ -517,7 +521,7 @@
 					        panelHeight:'auto'"/>
 
                     </td>
-                    <td class="i18n1" width="16%"></td>
+                    <td  width="16%"></td>
                     <td   width="33%">
 
 
