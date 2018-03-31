@@ -100,7 +100,7 @@
                         str=str.replace(/\[PIPENO\]/, row.pipe_no);
                         str=str.replace(/\[PIPELENGTH\]/, row.p_length);
                         str=str.replace(/\[WEIGHT\]/, row.weight);
-                        var coatingdate=formatterdate(row.id_coating_date)
+                        var coatingdate=getDateWithoutTime(row.id_coating_date)
                         str=str.replace(/\[COATINGDATE\]/, coatingdate);
                         $("#stencil_content").textbox("setValue", str);
                         //alert(str);

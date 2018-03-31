@@ -85,6 +85,14 @@ function getDate1(str){
     s=oDate.getSeconds();
     return  y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d)+' '+(h<10?('0'+h):h)+':'+(mins<10?('0'+mins):mins)+':'+(s<10?('0'+s):s);
 }
+//时间转化函数
+function getDateWithoutTime(str){
+    var oDate = new Date(str);
+    y=oDate.getFullYear();
+    m = oDate.getMonth()+1;
+    d = oDate.getDate();
+    return  y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
+}
 //时间格式化
 function formatterdate(value,row,index){
     return getDate1(value);
