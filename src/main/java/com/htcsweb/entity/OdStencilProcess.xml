@@ -52,7 +52,7 @@
 
 
     <select id="getAllByLike" resultType="map">
-        Select pro.project_name,s.status_name,p.contract_no,p.grade,p.od,p.wt,p.p_length,p.weight,p.heat_no,o.*
+        Select pro.project_name,s.status_name,p.contract_no,p.grade,p.od,p.wt,p.p_length,p.weight,p.heat_no,p.pipe_making_lot_no,pro.client_spec,pro.coating_standard,o.*
         from od_stencil_process o
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no

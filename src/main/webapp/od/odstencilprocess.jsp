@@ -96,11 +96,21 @@
                     //alert("pipe_no="+row.pipe_no);
                     if(data!=null) {
                         var str=data.stencil_content;
-                        str=str.replace(/\[OD\]/, row.od);
-                        str=str.replace(/\[WT\]/, row.wt);
-                        str=str.replace(/\[PIPENO\]/, row.pipe_no);
+                        str=str.replace(/\[OD\]/g, row.od);
+                        str=str.replace(/\[WT\]/g, row.wt);
+                        str=str.replace(/\[GRADE\]/g, row.grade);
+                        str=str.replace(/\[CONTRACTNO\]/g, row.contract_no);
+                        str=str.replace(/\[COATINGSPEC\]/, row.coating_standard);
+                        str=str.replace(/\[CLIENTSPEC\]/, row.client_spec);
+                        str=str.replace(/\[PROJECTNAME\]/g, row.project_name);
+                        str=str.replace(/\[PIPENO\]/g, row.pipe_no);
                         str=str.replace(/\[PIPELENGTH\]/, row.p_length);
-                        str=str.replace(/\[WEIGHT\]/, row.weight);
+                        var halflength=row.p_length*0.5;
+                        str=str.replace(/\[HALFLENGTH\]/, halflength);
+                        str=str.replace(/\[HEATNO\]/, row.heat_no);
+                        str=str.replace(/\[BATCHNO\]/, row.pipe_making_lot_no);
+                        var kg=row.weight*1000;
+                        str=str.replace(/\[WEIGHT\]/, kg);
                         str=str.replace(/\[COATINGDATE\]/, '2018-01-01');
                         $("#stencil_content").textbox("setValue", str);
                         //alert(str);

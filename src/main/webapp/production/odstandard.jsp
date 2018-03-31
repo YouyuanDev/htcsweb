@@ -97,9 +97,11 @@
                     }
 
                     if($("input[name='stencil_content']").val()==""){
-                        var str="O.D.*W.T.: [OD]mm*[WT]mm Pipe No.: [PIPENO]\n"
-                            +"Length: [PIPELENGTH] m Weight: [WEIGHT]Kg\n"
-                            +"Coating Date: [COATINGDATE]";
+                        var str="[PIPENO] [HALFLENGTH]\n"
+                                +"BAOSTEEL API SPEC 5L 05 17 [OD]mm*[WT]mm [GRADE] PSL2 HFW TESTED 18.3 APA GROUP\n"
+                                +"Order No.: [CONTRACTNO] Pipe No.: [PIPENO] Length: [PIPELENGTH]m Weight: [WEIGHT]Kg Heat No.:[HEATNO] Batch No.:[BATCHNO]\n"
+                                +"Linepipe Spec: [CLIENTSPEC] Coating Spec: [COATINGSPEC]\n"
+                                +"Coating Date: [COATINGDATE] Nominal Coating Thickness: 600 um [PROJECTNAME] Hilong";
                         $("input[name='stencil_content']").val(str);
                         //alert(str);
                     }
