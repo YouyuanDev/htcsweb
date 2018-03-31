@@ -136,6 +136,8 @@ public class IdCoatingProcessController {
                         //验证钢管状态为光管
                         if(idCoatingProcess.getResult().equals("1")) {//当合格时才更新钢管状态
                             p.setStatus("id3");
+                            //同时更新钢管基础信息的id_coating_date信息，内涂日期
+                            p.setId_coating_date(idCoatingProcess.getOperation_time());
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }else if(idCoatingProcess.getResult().equals("0")){
                             p.setStatus("idrepair1");

@@ -111,14 +111,15 @@
                         str=str.replace(/\[BATCHNO\]/, row.pipe_making_lot_no);
                         var kg=row.weight*1000;
                         str=str.replace(/\[WEIGHT\]/, kg);
-                        str=str.replace(/\[COATINGDATE\]/, '2018-01-01');
+                        var coatingdate=formatterdate(row.od_coating_date)
+                        str=str.replace(/\[COATINGDATE\]/, coatingdate);
                         $("#stencil_content").textbox("setValue", str);
                         //alert(str);
                     }
 
 
                 },error:function () {
-
+                    alert("Could not getODAcceptanceCriteriaByContractNo");
                 }
             });
 

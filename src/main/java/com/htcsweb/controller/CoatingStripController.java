@@ -101,6 +101,8 @@ public class CoatingStripController {
                         //验证钢管状态为od 扒皮管
                         if(coatingStrip.getResult().equals("1")) {//当合格时才更新钢管状态
                             p.setStatus("odstrip2");
+                            //删除钢管外涂时间
+                            p.setOd_coating_date(null);
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }
 
@@ -110,6 +112,8 @@ public class CoatingStripController {
                         //验证钢管状态为id 扒皮管
                         if(coatingStrip.getResult().equals("1")) {//当合格时才更新钢管状态
                             p.setStatus("idstrip2");
+                            //删除钢管内涂时间
+                            p.setId_coating_date(null);
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }
                     }

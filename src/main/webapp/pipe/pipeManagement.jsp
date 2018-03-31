@@ -276,6 +276,8 @@
                 <th field="status" align="center" width="100" class="i18n1" name="status">状态</th>
                 <th field="storage_stack" align="center" width="100" class="i18n1" name="storagestack">垛位号</th>
                 <th field="stack_level" align="center" width="100" class="i18n1" name="stacklevel">层数</th>
+                <th field="od_coating_date" align="center" width="100" class="i18n1" name="odcoatingdate" data-options="formatter:formatterdate">外涂日期</th>
+                <th field="id_coating_date" align="center" width="100" class="i18n1" name="idcoatingdate" data-options="formatter:formatterdate">内涂日期</th>
             </tr>
             </thead>
         </table>
@@ -409,7 +411,16 @@
                             <option value="l10">10层</option>
                         </select>
                     </td>
+                <tr>
+                    <td class="i18n1" name="odcoatingdate" width="16%">外涂日期</td>
+                    <td   width="33%"><label class="hl-label" id="od_coating_date"></label>
+                    </td>
 
+                    <td class="i18n1" name="idcoatingdate" width="16%">内涂日期</td>
+                    <td   width="33%"><label class="hl-label" id="id_coating_date"></label>
+                    </td>
+
+                </tr>
                 </tr>
                 <tr>
                     <td class="i18n1" name="status" width="16%">状态</td>

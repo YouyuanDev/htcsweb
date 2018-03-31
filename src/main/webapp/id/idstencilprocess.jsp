@@ -100,14 +100,15 @@
                         str=str.replace(/\[PIPENO\]/, row.pipe_no);
                         str=str.replace(/\[PIPELENGTH\]/, row.p_length);
                         str=str.replace(/\[WEIGHT\]/, row.weight);
-                        str=str.replace(/\[COATINGDATE\]/, '2018-01-01');
+                        var coatingdate=formatterdate(row.id_coating_date)
+                        str=str.replace(/\[COATINGDATE\]/, coatingdate);
                         $("#stencil_content").textbox("setValue", str);
                         //alert(str);
                     }
 
 
                 },error:function () {
-
+                    alert("Could not getIDAcceptanceCriteriaByContractNo");
                 }
             });
 
@@ -245,6 +246,8 @@
                 <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                 <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
                 <th field="operation_time" align="center" width="150" class="i18n1" name="operationtime" data-options="formatter:formatterdate">操作时间</th>
+                <th field="od_coating_date" align="center" width="150" class="i18n1" name="odcoatingdate" data-options="formatter:formatterdate">外涂日期</th>
+                <th field="id_coating_date" align="center" width="150" class="i18n1" name="idcoatingdate" data-options="formatter:formatterdate">内涂日期</th>
             </tr>
             </thead>
         </table>

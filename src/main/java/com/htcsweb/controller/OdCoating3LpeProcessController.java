@@ -117,6 +117,8 @@ public class OdCoating3LpeProcessController {
                         //验证钢管状态为光管
                         if(odCoating3LpeProcess.getResult().equals("1")) {//当合格时才更新钢管状态
                             p.setStatus("od3");
+                            //同时更新钢管基础信息的od_coating_date信息，外涂日期
+                            p.setOd_coating_date(odCoating3LpeProcess.getOperation_time());
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }else if(odCoating3LpeProcess.getResult().equals("0")){
                             p.setStatus("odstrip1");
