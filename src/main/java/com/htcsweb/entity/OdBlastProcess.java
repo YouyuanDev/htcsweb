@@ -14,7 +14,7 @@ public class OdBlastProcess {
     private  float salt_contamination_before_blasting;
     private  float alkaline_dwell_time;
     private  float alkaline_concentration;
-    private  float conductivity;
+    private  float abrasive_conductivity;
     private  float acid_wash_time;
     private  float acid_concentration;
     private float blast_line_speed;
@@ -28,7 +28,7 @@ public class OdBlastProcess {
     public OdBlastProcess() {
     }
 
-    public OdBlastProcess(int id, String pipe_no, Date operation_time, String operator_no, String surface_condition, float salt_contamination_before_blasting, float alkaline_dwell_time, float alkaline_concentration, float conductivity, float acid_wash_time, float acid_concentration, float blast_line_speed, float preheat_temp, String upload_files, String remark, String result, String mill_no, String marking) {
+    public OdBlastProcess(int id, String pipe_no, Date operation_time, String operator_no, String surface_condition, float salt_contamination_before_blasting, float alkaline_dwell_time, float alkaline_concentration, float abrasive_conductivity, float acid_wash_time, float acid_concentration, float blast_line_speed, float preheat_temp, String upload_files, String remark, String result, String mill_no, String marking) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -37,7 +37,7 @@ public class OdBlastProcess {
         this.salt_contamination_before_blasting = salt_contamination_before_blasting;
         this.alkaline_dwell_time = alkaline_dwell_time;
         this.alkaline_concentration = alkaline_concentration;
-        this.conductivity = conductivity;
+        this.abrasive_conductivity = abrasive_conductivity;
         this.acid_wash_time = acid_wash_time;
         this.acid_concentration = acid_concentration;
         this.blast_line_speed = blast_line_speed;
@@ -48,6 +48,7 @@ public class OdBlastProcess {
         this.mill_no = mill_no;
         this.marking = marking;
     }
+
 
     public int getId() {
         return id;
@@ -113,12 +114,12 @@ public class OdBlastProcess {
         this.alkaline_concentration = alkaline_concentration;
     }
 
-    public float getConductivity() {
-        return conductivity;
+    public float getAbrasive_conductivity() {
+        return abrasive_conductivity;
     }
 
-    public void setConductivity(float conductivity) {
-        this.conductivity = conductivity;
+    public void setAbrasive_conductivity(float abrasive_conductivity) {
+        this.abrasive_conductivity = abrasive_conductivity;
     }
 
     public float getAcid_wash_time() {
