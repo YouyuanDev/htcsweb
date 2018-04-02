@@ -184,6 +184,10 @@
             setParamsMax($("input[name='rinse_water_conductivity_max']"));
             setParamsMin($("input[name='rinse_water_conductivity_min']"));
 
+            setParamsMax($("input[name='adhesion_rating_max']"));
+            setParamsMin($("input[name='adhesion_rating_min']"));
+
+
         }
         function  setParamsMax($obj) {
             if($obj.val()==null||$obj.val()=="")
@@ -274,6 +278,8 @@
                    <th field="abrasive_conductivity_min" align="center" width="150" hidden="true" class="i18n1" name="abrasiveconductivitymin">磨料电导率最小值 </th>
                    <th field="rinse_water_conductivity_max" align="center" width="150" hidden="true" class="i18n1" name="rinsewaterconductivitymax">冲洗水电导率最大值 </th>
                    <th field="rinse_water_conductivity_min" align="center" width="150" hidden="true" class="i18n1" name="rinsewaterconductivitymin">冲洗水电导率最小值 </th>
+                   <th field="adhesion_rating_max" align="center" width="150" hidden="true" class="i18n1" name="adhesionratingmax">附着力等级最大值 </th>
+                   <th field="adhesion_rating_min" align="center" width="150" hidden="true" class="i18n1" name="adhesionratingmin">附着力等级最小值 </th>
 
 
                    <th field="last_update_time" align="center" width="150" class="i18n1" name="lastupdatetime" data-options="formatter:formatterdate">最后更新时间</th>
@@ -506,7 +512,14 @@
                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="holiday_tester_voltage_min" value=""/></td>
                    <td></td>
                </tr>
-
+               <tr>
+                   <td class="i18n1" name="adhesionratingmax">附着力等级最大值</td>
+                   <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="adhesion_rating_max" value=""/></td>
+                   <td></td>
+                   <td class="i18n1" name="adhesionratingmin">附着力等级最小值</td>
+                   <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="adhesion_rating_min" value=""/></td>
+                   <td></td>
+               </tr>
 
                <tr>
                    <td class="i18n1" colspan="6" name="odfinalcontrolparameter">外防终检控制参数</td>

@@ -445,7 +445,7 @@ public class InspectionRecordPDFController {
                 }
                 Label label5 = new Label(5, row+9,label5txt, wcf);
                 datalist.add(label5);
-                String Adhesion=list.get(i).getAdhesion_test();
+                String Adhesion=String.valueOf(list.get(i).getAdhesion_rating());
                 String label6txt="未检测";
                 if(Adhesion!=null){
                     if(Adhesion.equals("1")){
@@ -686,7 +686,7 @@ public class InspectionRecordPDFController {
                 }
                 Label label5 = new Label(5, row+9, label5txt, wcf);
                 datalist.add(label5);
-                String Adhesion=list.get(i).getAdhesion_test();
+                String Adhesion=String.valueOf(list.get(i).getAdhesion_rating());
                 String label6txt="未检测";
                 if(Adhesion!=null){
                     if(Adhesion.equals("1")){

@@ -16,7 +16,7 @@ public class OdCoating3LpeInspectionProcess {
     private int repairs;
     private String bevel;
     private String surface_condition;
-    private String adhesion_test;
+    private int adhesion_rating;
     private String upload_files;
     private String remark;
     private String result;
@@ -26,7 +26,7 @@ public class OdCoating3LpeInspectionProcess {
     public OdCoating3LpeInspectionProcess() {
     }
 
-    public OdCoating3LpeInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, String base_coat_thickness_list, String middle_coat_thickness_list, String top_coat_thickness_list, String total_coating_thickness_list, int holidays, float holiday_tester_volts, int repairs, String bevel, String surface_condition, String adhesion_test, String upload_files, String remark, String result, String mill_no, String is_sample) {
+    public OdCoating3LpeInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, String base_coat_thickness_list, String middle_coat_thickness_list, String top_coat_thickness_list, String total_coating_thickness_list, int holidays, float holiday_tester_volts, int repairs, String bevel, String surface_condition, int adhesion_rating, String upload_files, String remark, String result, String mill_no, String is_sample) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -40,7 +40,7 @@ public class OdCoating3LpeInspectionProcess {
         this.repairs = repairs;
         this.bevel = bevel;
         this.surface_condition = surface_condition;
-        this.adhesion_test = adhesion_test;
+        this.adhesion_rating = adhesion_rating;
         this.upload_files = upload_files;
         this.remark = remark;
         this.result = result;
@@ -152,12 +152,12 @@ public class OdCoating3LpeInspectionProcess {
         this.surface_condition = surface_condition;
     }
 
-    public String getAdhesion_test() {
-        return adhesion_test;
+    public int getAdhesion_rating() {
+        return adhesion_rating;
     }
 
-    public void setAdhesion_test(String adhesion_test) {
-        this.adhesion_test = adhesion_test;
+    public void setAdhesion_rating(int adhesion_rating) {
+        this.adhesion_rating = adhesion_rating;
     }
 
     public String getUpload_files() {

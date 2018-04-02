@@ -75,11 +75,15 @@ public class ODCoatingAcceptanceCriteria {
     private float rinse_water_conductivity_max;
     private float rinse_water_conductivity_min;
 
+    private int adhesion_rating_max;
+    private int adhesion_rating_min;
+
+
 
     public ODCoatingAcceptanceCriteria() {
     }
 
-    public ODCoatingAcceptanceCriteria(int id, String coating_acceptance_criteria_no, float salt_contamination_before_blast_max, float salt_contamination_before_blast_min, float preheat_temp_max, float preheat_temp_min, float relative_humidity_max, float relative_humidity_min, float temp_above_dew_point_max, float temp_above_dew_point_min, float blast_finish_sa25_max, float blast_finish_sa25_min, int surface_dust_rating_max, int surface_dust_rating_min, float od_profile_max, float od_profile_min, float pipe_temp_after_blast_max, float pipe_temp_after_blast_min, float salt_contamination_after_blasting_max, float salt_contamination_after_blasting_min, float application_temp_max, float application_temp_min, float base_2fbe_coat_thickness_max, float base_2fbe_coat_thickness_min, float top_2fbe_coat_thickness_max, float top_2fbe_coat_thickness_min, float total_2fbe_coat_thickness_max, float total_2fbe_coat_thickness_min, float top_3lpe_coat_thickness_max, float top_3lpe_coat_thickness_min, float middle_3lpe_coat_thickness_max, float middle_3lpe_coat_thickness_min, float base_3lpe_coat_thickness_max, float base_3lpe_coat_thickness_min, float total_3lpe_coat_thickness_max, float total_3lpe_coat_thickness_min, int repair_max, int repair_min, float holiday_tester_voltage_max, float holiday_tester_voltage_min, float cutback_max, float cutback_min, Date last_update_time, float epoxy_cutback_max, float epoxy_cutback_min, float magnetism_max, float magnetism_min, float coating_bevel_angle_max, float coating_bevel_angle_min, int holiday_max, int holiday_min, float strip_temp_max, float strip_temp_min, String stencil_content, float abrasive_conductivity_max, float abrasive_conductivity_min, float rinse_water_conductivity_max, float rinse_water_conductivity_min) {
+    public ODCoatingAcceptanceCriteria(int id, String coating_acceptance_criteria_no, float salt_contamination_before_blast_max, float salt_contamination_before_blast_min, float preheat_temp_max, float preheat_temp_min, float relative_humidity_max, float relative_humidity_min, float temp_above_dew_point_max, float temp_above_dew_point_min, float blast_finish_sa25_max, float blast_finish_sa25_min, int surface_dust_rating_max, int surface_dust_rating_min, float od_profile_max, float od_profile_min, float pipe_temp_after_blast_max, float pipe_temp_after_blast_min, float salt_contamination_after_blasting_max, float salt_contamination_after_blasting_min, float application_temp_max, float application_temp_min, float base_2fbe_coat_thickness_max, float base_2fbe_coat_thickness_min, float top_2fbe_coat_thickness_max, float top_2fbe_coat_thickness_min, float total_2fbe_coat_thickness_max, float total_2fbe_coat_thickness_min, float top_3lpe_coat_thickness_max, float top_3lpe_coat_thickness_min, float middle_3lpe_coat_thickness_max, float middle_3lpe_coat_thickness_min, float base_3lpe_coat_thickness_max, float base_3lpe_coat_thickness_min, float total_3lpe_coat_thickness_max, float total_3lpe_coat_thickness_min, int repair_max, int repair_min, float holiday_tester_voltage_max, float holiday_tester_voltage_min, float cutback_max, float cutback_min, Date last_update_time, float epoxy_cutback_max, float epoxy_cutback_min, float magnetism_max, float magnetism_min, float coating_bevel_angle_max, float coating_bevel_angle_min, int holiday_max, int holiday_min, float strip_temp_max, float strip_temp_min, String stencil_content, float abrasive_conductivity_max, float abrasive_conductivity_min, float rinse_water_conductivity_max, float rinse_water_conductivity_min, int adhesion_rating_max, int adhesion_rating_min) {
         this.id = id;
         this.coating_acceptance_criteria_no = coating_acceptance_criteria_no;
         this.salt_contamination_before_blast_max = salt_contamination_before_blast_max;
@@ -138,6 +142,8 @@ public class ODCoatingAcceptanceCriteria {
         this.abrasive_conductivity_min = abrasive_conductivity_min;
         this.rinse_water_conductivity_max = rinse_water_conductivity_max;
         this.rinse_water_conductivity_min = rinse_water_conductivity_min;
+        this.adhesion_rating_max = adhesion_rating_max;
+        this.adhesion_rating_min = adhesion_rating_min;
     }
 
     public int getId() {
@@ -602,5 +608,21 @@ public class ODCoatingAcceptanceCriteria {
 
     public void setRinse_water_conductivity_min(float rinse_water_conductivity_min) {
         this.rinse_water_conductivity_min = rinse_water_conductivity_min;
+    }
+
+    public int getAdhesion_rating_max() {
+        return adhesion_rating_max;
+    }
+
+    public void setAdhesion_rating_max(int adhesion_rating_max) {
+        this.adhesion_rating_max = adhesion_rating_max;
+    }
+
+    public int getAdhesion_rating_min() {
+        return adhesion_rating_min;
+    }
+
+    public void setAdhesion_rating_min(int adhesion_rating_min) {
+        this.adhesion_rating_min = adhesion_rating_min;
     }
 }

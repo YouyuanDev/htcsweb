@@ -118,6 +118,8 @@
                         var $obj5=$("input[name='holiday_tester_volts']");
                         var $obj6=$("input[name='repairs']");
                         //var $obj7=$("input[name='cutback_length']");
+                        var $obj8=$("input[name='adhesion_rating']");
+
                         $obj1.siblings().css("background-color","#FFFFFF");
                         $obj2.siblings().css("background-color","#FFFFFF");
                         $obj3.siblings().css("background-color","#FFFFFF");
@@ -125,6 +127,7 @@
                         $obj5.siblings().css("background-color","#FFFFFF");
                         $obj6.siblings().css("background-color","#FFFFFF");
                         //$obj7.siblings().css("background-color","#FFFFFF");
+                        $obj8.siblings().css("background-color","#FFFFFF");
                         if(data!=null){
                             var res1=changeComma($obj1.val());
                             var res2=changeComma($obj2.val());
@@ -135,6 +138,7 @@
                             var res4=$obj4.val();
                             var res5=$obj5.val();
                             var res6=$obj6.val();
+                            var res8=$obj8.val();
                             //var res7=$obj7.val();
                             //var res7=changeComma($obj7.val());
                             //var res7_1=res7.split(',');
@@ -170,6 +174,8 @@
                             // }
                             // if(!((res7>=data.cutback_min)&&(res7<=data.cutback_max)))
                             //     $obj7.siblings().css("background-color","#F9A6A6");
+                            if(!((res8>=data.adhesion_rating_min)&&(res8<=data.adhesion_rating_max)))
+                                $obj8.siblings().css("background-color","#F9A6A6");
                         }
                     },error:function () {
 
@@ -257,7 +263,7 @@
                     setParams($("input[name='holidays']"));
                     setParams($("input[name='holiday_tester_volts']"));
                     setParams($("input[name='repairs']"));
-
+                    setParams($("input[name='adhesion_rating']"));
 
                     //判断输入的厚度列表是否合法
 
@@ -337,7 +343,7 @@
                 <th field="bevel" align="center" width="80" class="i18n1" name="bevel">坡口检测</th>
                 <%--<th field="stencil_verification" align="center" width="120" class="i18n1" name="stencilverification">外喷标检验</th>--%>
                 <th field="surface_condition" align="center" width="150" class="i18n1" name="surfacecondition1">表面质量</th>
-                <th field="adhesion_test" align="center" width="150" class="i18n1" name="adhesiontest">附着力测试</th>
+                <th field="adhesion_rating" align="center" width="150" class="i18n1" name="adhesionrating">附着力等级</th>
                 <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                 <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
                 <th field="operation_time" align="center" width="150" class="i18n1" name="operationtime" data-options="formatter:formatterdate">操作时间</th>
@@ -526,14 +532,17 @@
 
                 <%--</tr>--%>
                 <tr>
-                    <td width="16%" class="i18n1" name="adhesiontest">附着力测试</td>
+                    <td width="16%" class="i18n1" name="adhesionrating">附着力测试</td>
                     <td colspan="2">
-                        <select id="at" class="easyui-combobox" data-options="editable:false" name="adhesion_test" style="width:200px;">
+                        <select id="at" class="easyui-combobox" data-options="editable:false" name="adhesion_rating" style="width:200px;">
                             <option value="0" selected="selected">未检测</option>
-                            <option value="1">合格</option>
-                            <option value="2">不合格</option>
+                            <option value="1">等级1</option>
+                            <option value="2">等级2</option>
+                            <option value="3">等级3</option>
+                            <option value="4">等级4</option>
+                            <option value="5">等级5</option>
                         </select>
-                        <%--<input class="easyui-textbox"  type="text" name="adhesion_test" value=""/>--%>
+                        <%--<input class="easyui-textbox"  type="text" name="adhesion_rating" value=""/>--%>
                     </td>
 
                     <td width="16%" class="i18n1" name="issample">取样管</td>
