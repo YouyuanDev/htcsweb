@@ -157,6 +157,10 @@
             setParamsMin($("input[name='holiday_tester_voltage_min']"));
             setParamsMax($("input[name='strip_temp_max']"));
             setParamsMin($("input[name='strip_temp_min']"));
+            setParamsMax($("input[name='abrasive_conductivity_max']"));
+            setParamsMin($("input[name='abrasive_conductivity_min']"));
+
+
         }
         function  setParamsMax($obj) {
             if($obj.val()==null||$obj.val()=="")
@@ -226,6 +230,8 @@
                 <th field="strip_temp_max" align="center" width="150" hidden="true" class="i18n1" name="striptempmax">扒皮温度最大值 </th>
                 <th field="strip_temp_min" align="center" width="150" hidden="true" class="i18n1" name="striptempmin">扒皮温度最小值 </th>
                 <th field="stencil_content" align="center" width="150" hidden="true" class="i18n1" name="stencilcontent">喷标内容 </th>
+                <th field="abrasive_conductivity_max" align="center" width="150" hidden="true" class="i18n1" name="abrasiveconductivitymax">磨料电导率最大值 </th>
+                <th field="abrasive_conductivity_min" align="center" width="150" hidden="true" class="i18n1" name="abrasiveconductivitymin">磨料电导率最小值 </th>
 
             </tr>
             </thead>
@@ -264,6 +270,14 @@
                 <tr>
                     <td class="i18n1" colspan="6" name="idblastcontrolparameter">内打砂控制参数</td>
 
+                </tr>
+                <tr>
+                    <td class="i18n1" name="abrasiveconductivitymax">磨料电导率最大值</td>
+                    <td  ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="abrasive_conductivity_max" value=""/></td>
+                    <td></td>
+                    <td class="i18n1" name="abrasiveconductivitymin">磨料电导率最小值</td>
+                    <td  ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="abrasive_conductivity_min" value=""/></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="saltcontaminationbeforeblastmax">打砂前盐度最大值</td>

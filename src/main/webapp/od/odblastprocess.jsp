@@ -111,13 +111,26 @@
                         $obj.siblings().css("background-color","#FFFFFF");
                         var $obj1=$("input[name='preheat_temp']");
                         $obj1.siblings().css("background-color","#FFFFFF");
+                        var $obj2=$("input[name='abrasive_conductivity']");
+                        $obj2.siblings().css("background-color","#FFFFFF");
+                        var $obj3=$("input[name='rinse_water_conductivity']");
+                        $obj3.siblings().css("background-color","#FFFFFF");
+
+
                         if(data!=null){
                             var salt=$obj.val();
                             var res1=$obj1.val();
+                            var res2=$obj2.val();
+                            var res3=$obj3.val();
                             if(!((salt>=data.salt_contamination_before_blast_min)&&(salt<=data.salt_contamination_before_blast_max)))
                                 $obj.siblings().css("background-color","#F9A6A6");
                             if(!((res1>=data.preheat_temp_min)&&(res1<=data.preheat_temp_max)))
                                 $obj1.siblings().css("background-color","#F9A6A6");
+                            if(!((res2>=data.abrasive_conductivity_min)&&(res2<=data.abrasive_conductivity_max)))
+                                $obj2.siblings().css("background-color","#F9A6A6");
+                            if(!((res3>=data.rinse_water_conductivity_min)&&(res3<=data.rinse_water_conductivity_max)))
+                                $obj3.siblings().css("background-color","#F9A6A6");
+
                         }
                     },error:function () {
 
@@ -148,7 +161,8 @@
                     setParams($("input[name='acid_concentration']"));
                     setParams($("input[name='salt_contamination_before_blasting']"));
                     setParams($("input[name='blast_line_speed']"));
-                    setParams($("input[name='conductivity']"));
+                    setParams($("input[name='rinse_water_conductivity']"));
+                    setParams($("input[name='abrasive_conductivity']"));
                     setParams($("input[name='preheat_temp']"));
                     if($("input[name='pipe_no']").val()==""){
 
@@ -250,7 +264,9 @@
                        <th field="salt_contamination_before_blasting" align="center" width="120" class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</th>
                        <th field="alkaline_dwell_time" align="center" width="100" hidden="true" class="i18n1" name="alkalinedwelltime">碱洗时间</th>
                        <th field="alkaline_concentration" align="center" width="100" hidden="true" class="i18n1" name="alkalineconcentration">碱浓度</th>
-                       <th field="conductivity" width="100" align="center" hidden="true" class="i18n1" name="conductivity">传导性</th>
+                       <th field="rinse_water_conductivity" width="100" align="center" hidden="true" class="i18n1" name="rinsewaterconductivity">冲洗水传导性</th>
+
+                       <th field="abrasive_conductivity" width="100" align="center" hidden="true" class="i18n1" name="abrasiveconductivity">磨料电导率</th>
                        <th field="acid_wash_time" width="100" align="center" hidden="true" class="i18n1" name="acidwashtime">酸洗时间</th>
                        <th field="acid_concentration" width="100" align="center" hidden="true" class="i18n1" name="acidconcentration">酸浓度</th>
                        <th field="blast_line_speed" align="center" width="120" hidden="true" class="i18n1" name="blastlinespeed">打砂传送速度</th>
@@ -426,11 +442,19 @@
 
 
            <tr>
+               <td width="16%" class="i18n1" name="rinsewaterconductivity">冲洗水电导率</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="rinse_water_conductivity" value=""/></td>
+               <td></td>
+               <td width="16%" class="i18n1" name="abrasiveconductivity">磨料电导率</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="abrasive_conductivity" value=""/></td>
+               <td></td>
+           </tr>
+           <tr>
                <td width="16%" class="i18n1" name="blastlinespeed">打砂传送速度</td>
                <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="blast_line_speed" value=""/></td>
                <td></td>
-               <td width="16%" class="i18n1" name="conductivity">传导性</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="conductivity" value=""/></td>
+               <td></td>
+               <td></td>
                <td></td>
            </tr>
 

@@ -116,10 +116,16 @@
                     success:function (data) {
                         var $obj1=$("input[name='salt_contamination_before_blasting']");
                         $obj1.siblings().css("background-color","#FFFFFF");
+                        var $obj2=$("input[name='abrasive_conductivity']");
+                        $obj2.siblings().css("background-color","#FFFFFF");
                         if(data!=null){
                             var res1=$obj1.val();
+                            var res2=$obj2.val();
                             if(!((res1>=data.salt_contamination_before_blast_min)&&(res1<=data.salt_contamination_before_blast_max)))
                                 $obj1.siblings().css("background-color","#F9A6A6");
+                            if(!((res2>=data.abrasive_conductivity_min)&&(res2<=data.abrasive_conductivity_max)))
+                                $obj2.siblings().css("background-color","#F9A6A6");
+
                         }
                     },error:function () {
 
@@ -149,6 +155,7 @@
                     var arg2=$("input[name='original_pipe_no']").val();
                     var arg3=$("input[name='new_pipe_no']").val();
                     setParams($("input[name='salt_contamination_before_blasting']"));
+                    setParams($("input[name='abrasive_conductivity']"));
                     if($("input[name='pipe_no']").val()==""){
 
                         hlAlertFour("请选择钢管管号");
@@ -245,7 +252,7 @@
                        <th field="new_pipe_no" align="center" width="120" class="i18n1" name="newpipeno">新内壁标签管号</th>
                        <th field="new_pipe_no" align="center" width="120" class="i18n1" name="newpipeno">新内壁标签管号</th>
                        <th field="salt_contamination_before_blasting" align="center" width="100"  class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</th>
-
+                       <th field="abrasive_conductivity" width="100" align="center" hidden="true" class="i18n1" name="abrasiveconductivity">磨料电导率</th>
                        <th field="internal_surface_condition" align="center"  width="150" class="i18n1" name="internalsurfacecondition">内表面外观</th>
                        <th field="external_coating_condition" align="center"  width="150" class="i18n1" name="externalcoatingcondition">外涂层表面</th>
                        <th field="marking" align="center" width="150" hidden="true" class="i18n1" name="marking">管体标识是否清晰</th>
@@ -449,6 +456,12 @@
                    </select>
                </td>
                <td></td>
+               <td width="16%" class="i18n1" name="abrasiveconductivity">磨料电导率</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="abrasive_conductivity" value=""/></td>
+               <td></td>
+           </tr>
+
+           <tr>
                <td width="16%" class="i18n1" name="result">结论</td>
                <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result"   style="width:200px;">
                    <option value="0">不合格,重新打砂处理</option>
@@ -457,9 +470,6 @@
                    <option value="3">内表面缺陷，进入修磨或切割处理</option>
                </select></td>
                <td></td>
-           </tr>
-
-           <tr>
                <td class="i18n1" name="remark">备注</td>
                <td colspan="5">
                    <input class="easyui-textbox"  data-options="multiline:true" type="text" name="remark" value=""/>

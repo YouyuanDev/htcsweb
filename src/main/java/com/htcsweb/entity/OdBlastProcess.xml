@@ -6,7 +6,7 @@
 <mapper namespace="com.htcsweb.dao.OdBlastProcessDao">
 
     <insert id="addOdBlastProcess" parameterType="com.htcsweb.entity.OdBlastProcess">
-            INSERT INTO od_blast_process(pipe_no,operation_time,operator_no,surface_condition,salt_contamination_before_blasting,alkaline_dwell_time,alkaline_concentration,abrasive_conductivity,acid_wash_time,acid_concentration,blast_line_speed,upload_files,preheat_temp,remark,result,mill_no,marking) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{surface_condition},#{salt_contamination_before_blasting},#{alkaline_dwell_time},#{alkaline_concentration},#{abrasive_conductivity},#{acid_wash_time},#{acid_concentration},#{blast_line_speed},#{upload_files},#{preheat_temp},#{remark},#{result},#{mill_no},#{marking})
+            INSERT INTO od_blast_process(pipe_no,operation_time,operator_no,surface_condition,salt_contamination_before_blasting,alkaline_dwell_time,alkaline_concentration,abrasive_conductivity,acid_wash_time,acid_concentration,blast_line_speed,upload_files,preheat_temp,remark,result,mill_no,marking,rinse_water_conductivity) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{surface_condition},#{salt_contamination_before_blasting},#{alkaline_dwell_time},#{alkaline_concentration},#{abrasive_conductivity},#{acid_wash_time},#{acid_concentration},#{blast_line_speed},#{upload_files},#{preheat_temp},#{remark},#{result},#{mill_no},#{marking},#{rinse_water_conductivity})
     </insert>
     <delete id="delOdBlastProcess">
         delete from od_blast_process WHERE
@@ -19,7 +19,7 @@
     </select>
 
     <update id="updateOdBlastProcess" parameterType="com.htcsweb.entity.OdBlastProcess">
-        UPDATE od_blast_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},surface_condition=#{surface_condition},salt_contamination_before_blasting=#{salt_contamination_before_blasting},alkaline_dwell_time=#{alkaline_dwell_time},alkaline_concentration=#{alkaline_concentration},abrasive_conductivity=#{abrasive_conductivity},acid_wash_time=#{acid_wash_time},acid_concentration=#{acid_concentration},blast_line_speed=#{blast_line_speed},upload_files=#{upload_files},preheat_temp=#{preheat_temp},remark=#{remark},result=#{result},mill_no=#{mill_no},marking=#{marking} WHERE id=#{id}
+        UPDATE od_blast_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},surface_condition=#{surface_condition},salt_contamination_before_blasting=#{salt_contamination_before_blasting},alkaline_dwell_time=#{alkaline_dwell_time},alkaline_concentration=#{alkaline_concentration},abrasive_conductivity=#{abrasive_conductivity},acid_wash_time=#{acid_wash_time},acid_concentration=#{acid_concentration},blast_line_speed=#{blast_line_speed},upload_files=#{upload_files},preheat_temp=#{preheat_temp},remark=#{remark},result=#{result},mill_no=#{mill_no},marking=#{marking},rinse_water_conductivity=#{rinse_water_conductivity} WHERE id=#{id}
     </update>
 
 
@@ -48,6 +48,8 @@
         <result property="result" column="result"></result>
         <result property="mill_no" column="mill_no"></result>
         <result property="marking" column="marking"></result>
+        <result property="rinse_water_conductivity" column="rinse_water_conductivity"></result>
+
     </resultMap>
 
     <select id="getAllByLike" resultMap="all"  resultType="com.htcsweb.entity.OdBlastProcess">

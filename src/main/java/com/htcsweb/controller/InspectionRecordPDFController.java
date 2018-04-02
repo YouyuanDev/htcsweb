@@ -121,7 +121,7 @@ public class InspectionRecordPDFController {
                 datalist.add(label5);
                 Label label6 = new Label(6, row+8, String.valueOf(list.get(i).getBlast_line_speed()), wcf);
                 datalist.add(label6);
-                Label label7 = new Label(7, row+8, String.valueOf(list.get(i).getConductivity()), wcf);
+                Label label7 = new Label(7, row+8, String.valueOf(list.get(i).getAbrasive_conductivity()), wcf);
                 datalist.add(label7);
                 Label label8 = new Label(8, row+8, String.valueOf(list.get(i).getAlkaline_dwell_time()), wcf);
                 datalist.add(label8);

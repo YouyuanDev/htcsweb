@@ -25,10 +25,13 @@ public class OdBlastProcess {
     private  String mill_no;
     private  String marking;
 
+    private float rinse_water_conductivity;
+
+
     public OdBlastProcess() {
     }
 
-    public OdBlastProcess(int id, String pipe_no, Date operation_time, String operator_no, String surface_condition, float salt_contamination_before_blasting, float alkaline_dwell_time, float alkaline_concentration, float abrasive_conductivity, float acid_wash_time, float acid_concentration, float blast_line_speed, float preheat_temp, String upload_files, String remark, String result, String mill_no, String marking) {
+    public OdBlastProcess(int id, String pipe_no, Date operation_time, String operator_no, String surface_condition, float salt_contamination_before_blasting, float alkaline_dwell_time, float alkaline_concentration, float abrasive_conductivity, float acid_wash_time, float acid_concentration, float blast_line_speed, float preheat_temp, String upload_files, String remark, String result, String mill_no, String marking, float rinse_water_conductivity) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -47,8 +50,8 @@ public class OdBlastProcess {
         this.result = result;
         this.mill_no = mill_no;
         this.marking = marking;
+        this.rinse_water_conductivity = rinse_water_conductivity;
     }
-
 
     public int getId() {
         return id;
@@ -192,5 +195,13 @@ public class OdBlastProcess {
 
     public void setMarking(String marking) {
         this.marking = marking;
+    }
+
+    public float getRinse_water_conductivity() {
+        return rinse_water_conductivity;
+    }
+
+    public void setRinse_water_conductivity(float rinse_water_conductivity) {
+        this.rinse_water_conductivity = rinse_water_conductivity;
     }
 }

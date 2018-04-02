@@ -21,11 +21,12 @@ public class IdBlastProcess {
     private  String internal_surface_condition;
     private  String external_coating_condition;
     private  String marking;
+    private float abrasive_conductivity;
 
     public IdBlastProcess() {
     }
 
-    public IdBlastProcess(int id, String pipe_no, Date operation_time, String operator_no, String original_pipe_no, String new_pipe_no, String pipe_no_update, String upload_files, String remark, String result, String mill_no, float salt_contamination_before_blasting, String internal_surface_condition, String external_coating_condition, String marking) {
+    public IdBlastProcess(int id, String pipe_no, Date operation_time, String operator_no, String original_pipe_no, String new_pipe_no, String pipe_no_update, String upload_files, String remark, String result, String mill_no, float salt_contamination_before_blasting, String internal_surface_condition, String external_coating_condition, String marking, float abrasive_conductivity) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -41,6 +42,7 @@ public class IdBlastProcess {
         this.internal_surface_condition = internal_surface_condition;
         this.external_coating_condition = external_coating_condition;
         this.marking = marking;
+        this.abrasive_conductivity = abrasive_conductivity;
     }
 
     public int getId() {
@@ -161,5 +163,13 @@ public class IdBlastProcess {
 
     public void setMarking(String marking) {
         this.marking = marking;
+    }
+
+    public float getAbrasive_conductivity() {
+        return abrasive_conductivity;
+    }
+
+    public void setAbrasive_conductivity(float abrasive_conductivity) {
+        this.abrasive_conductivity = abrasive_conductivity;
     }
 }
