@@ -4,6 +4,8 @@ package com.htcsweb.controller;
 import com.htcsweb.dao.*;
 import com.htcsweb.entity.*;
 import com.htcsweb.util.GenerateExcelToPDFUtil;
+import com.htcsweb.util.MergePDF;
+import com.htcsweb.util.ResponseUtil;
 import jxl.format.Alignment;
 import jxl.write.Label;
 import jxl.write.WritableCellFormat;
@@ -18,11 +20,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -30,6 +34,7 @@ import java.util.List;
 @RequestMapping("/InspectionRecordPDFOperation")
 public class InspectionRecordPDFController {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat timeformat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     Date beginTime=new Date();
     Date endTime=new Date();
     String basePath="";
@@ -77,112 +82,220 @@ public class InspectionRecordPDFController {
     @Autowired
     private OdFinalInspectionProcessDao odFinalInspectionProcessDao;
 
+    @RequestMapping(value="getRecordReportPDF",produces="application/json;charset=UTF-8")
+    @ResponseBody
+    public  String getRecordReportPDF(HttpServletRequest request, HttpServletResponse response){
+        String flag="fail";
+        String pdfPath=request.getSession().getServletContext().getRealPath("/")+"upload/pdf/";
+        String dayOutputPDFFullName=pdfPath+"daymerge.pdf";
+        String nightOutputPDFFullName=pdfPath+"nightmerge.pdf";
+        try{
+            //判断合成文件是否存在
+            File fileDay=new File(dayOutputPDFFullName);
+            File fileNight=new File(nightOutputPDFFullName);
+            if(!fileDay.exists()){
+                fileDay.createNewFile();
+            }
+            if(!fileNight.exists()){
+                fileNight.createNewFile();
+            }
+            SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+            //SimpleDateFormat timeformat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String selectValStr=request.getParameter("selectValue");
+            String beginTimeStr=request.getParameter("beginTime");
+            String endTimeStr=request.getParameter("endTime");
+            Date start_time=null;
+            Date finish_time=null;
+            if(selectValStr!=null&&!selectValStr.equals("")){
+                int selectVal=Integer.parseInt(selectValStr);
+                if(beginTimeStr==null||beginTimeStr.equals("")||endTimeStr==null||endTimeStr.equals("")){
+                    beginTimeStr=format.format(new Date());
+                    endTimeStr=format.format(new Date());
+                }
+                start_time=format.parse(beginTimeStr);
+                finish_time=format.parse(endTimeStr);
+                //时间集合为包含前面不包含后面
+                List<String>listDate=getBetweenDates(start_time,finish_time);
+                Date day_begin_time=null,day_end_time=null,night_begin_time=null,night_end_time=null;
+                List<String> dayPdfNamePathList=new ArrayList<>();
+                List<String> nightPdfNamePathList=new ArrayList<>();
+                List<String>dayAndNightList=new ArrayList<>();
+                String dayTempName=null,nightTempName=null;
+                for (int i=0;i<listDate.size();i++){
+                    day_begin_time=timeformat.parse(listDate.get(i)+" 08:00:00");
+                    day_end_time=timeformat.parse(listDate.get(i)+" 20:00:00");
+                    night_begin_time=timeformat.parse(listDate.get(i)+" 20:00:00");
+                    night_end_time=timeformat.parse(getNextDay(listDate.get(i))+" 08:00:00");
+                    switch (selectVal) {
+                        case 0://外喷砂工序
+                            dayTempName=getOdBlastRecord(request,0,day_begin_time,day_end_time);//生成白班报表PDF
+                            if(dayTempName!=null){
+                                dayPdfNamePathList.add(dayTempName);
+                                dayAndNightList.add(dayTempName);
+                            }
+                            nightTempName=getOdBlastRecord(request,1,night_begin_time,night_end_time);//生成夜班报表PDF
+                            if(nightTempName!=null){
+                                nightPdfNamePathList.add(nightTempName);
+                                dayAndNightList.add(nightTempName);
+                            }
+                            flag="success";
+                            break;
+                        case 1://外喷砂检验工序
+
+                            break;
+                        case 2://外涂工序(2FBE)
+
+                            break;
+                        case 3://外涂检验工序(2FBE)
+
+                            break;
+                        case 4://外涂工序(3LPE)
+
+                            break;
+                        case 5://外涂检验工序(3LPE)
+
+                            break;
+                        case 6://外涂层终检工序
+
+                            break;
+                        case 7://内喷砂工序
+
+                            break;
+                        case 8://内喷砂检验工序
+
+                            break;
+                        case 9://内涂工序
+
+                            break;
+                    }
+                }
+                //然后根据白班 夜班的集合，Merge Pdf,最后打包下载
+                MergePDF.MergePDFs(dayPdfNamePathList,dayOutputPDFFullName);
+                MergePDF.MergePDFs(nightPdfNamePathList,nightOutputPDFFullName);
+                List<String>dayNightPdf=new ArrayList<>();
+                dayNightPdf.add(dayOutputPDFFullName);
+                dayNightPdf.add(nightOutputPDFFullName);
+                ResponseUtil.downLoadPdf(dayNightPdf,request,response);
+            }else{
+                //没有获取到数据，生成失败
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  flag;
+    }
+
     //1.---------------获取外打砂记录PDF
-    @RequestMapping("getOdBlastRecord")
-    public  String getOdBlastRecord(HttpServletRequest request){
-       // String begin_time=request.getParameter("begin_time");
-        //String end_time=request.getParameter("end_time");
-        String begin_time="2018-01-03";
-        String end_time="2018-03-30";
+    // 返回生成的pdf名称
+    public  String getOdBlastRecord(HttpServletRequest request,int dayOrNight,Date begin_time,Date end_time){
+
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/od_blast_record_template.xls";
+        String newPdfName=null;
         try{
-            if(begin_time!=null&&begin_time!=""){
-                beginTime=sdf.parse(begin_time);
-            }
-            if(end_time!=null&&end_time!=""){
-                endTime=sdf.parse(end_time);
-            }
-            List<OdBlastProcess>list=odblastprocessDao.getOdBlastRecord(beginTime,endTime);
-            ArrayList<Label> datalist=new ArrayList<Label>();
-            int index=1,row=0;
-            StringBuilder sb=new StringBuilder();
-            String result="";
-            int qualifiedTotal=0;
-            for (int i=0;i<list.size();i++){
-                Label label1 = new Label(1, row+8, list.get(i).getPipe_no(), wcf);
-                datalist.add(label1);
-                String isClear="是";
-                String marking=list.get(i).getMarking();
-                if(marking!=null){
-                    if(!marking.equals("0")){
-                        isClear="否";
-                    }
-                }else {
-                    isClear=" ";
+            System.out.println(String.valueOf(begin_time==null)+":"+String.valueOf(end_time==null));
+            System.out.println(timeformat.format(begin_time)+":"+timeformat.format(end_time));
+            List<OdBlastProcess>list=odblastprocessDao.getOdBlastRecord(begin_time,end_time);
+            System.out.println(list.size()+"------------");
+            if(list.size()>0){
+                ArrayList<Label> datalist=new ArrayList<Label>();
+                //添加模板头部信息
+                if(dayOrNight==0){
+                    datalist.add(new Label(13, 5,"白班(Day)", wcf));
+                }else{
+                    datalist.add(new Label(13, 5, "夜班(Night)", wcf));
                 }
-                Label label2 = new Label(2, row+8, isClear, wcf);
-                datalist.add(label2);
-                Label label3 = new Label(3, row+8, getFormatString(list.get(i).getSurface_condition()), wcf);
-                datalist.add(label3);
-                Label label4 = new Label(4, row+8, String.valueOf(list.get(i).getSalt_contamination_before_blasting()), wcf);
-                datalist.add(label4);
-                Label label5 = new Label(5, row+8, String.valueOf(list.get(i).getPreheat_temp()), wcf);
-                datalist.add(label5);
-                Label label6 = new Label(6, row+8, String.valueOf(list.get(i).getBlast_line_speed()), wcf);
-                datalist.add(label6);
-                Label label7 = new Label(7, row+8, String.valueOf(list.get(i).getAbrasive_conductivity()), wcf);
-                datalist.add(label7);
-                Label label8 = new Label(8, row+8, String.valueOf(list.get(i).getAlkaline_dwell_time()), wcf);
-                datalist.add(label8);
-                Label label9 = new Label(9, row+8, String.valueOf(list.get(i).getAcid_concentration()), wcf);
-                datalist.add(label9);
-                Label label10 = new Label(10, row+8, String.valueOf(list.get(i).getAcid_wash_time()), wcf);
-                datalist.add(label10);
-                Label label11 = new Label(11, row+8, String.valueOf(list.get(i).getAcid_concentration()), wcf);
-                datalist.add(label11);
-                result=list.get(i).getResult();
-                if(result!=null){
-                    if(result.equals("0")){
-                        result="不合格";
-                    }else if(result.equals("1")){
-                        result="合格";
-                        qualifiedTotal++;
-                    }else if(result.equals("2")){
-                        result="待定";
+                int index=1,row=0;
+                StringBuilder sb=new StringBuilder();
+                String result="";
+                int qualifiedTotal=0;
+                for (int i=0;i<list.size();i++){
+                    Label label1 = new Label(1, row+8, list.get(i).getPipe_no(), wcf);
+                    datalist.add(label1);
+                    String isClear="是";
+                    String marking=list.get(i).getMarking();
+                    if(marking!=null){
+                        if(!marking.equals("0")){
+                            isClear="否";
+                        }
+                    }else {
+                        isClear=" ";
                     }
-                    else if(result.equals("3")){
-                        result="表面缺陷";
+                    Label label2 = new Label(2, row+8, isClear, wcf);
+                    datalist.add(label2);
+                    Label label3 = new Label(3, row+8, getFormatString(list.get(i).getSurface_condition()), wcf);
+                    datalist.add(label3);
+                    Label label4 = new Label(4, row+8, String.valueOf(list.get(i).getSalt_contamination_before_blasting()), wcf);
+                    datalist.add(label4);
+                    Label label5 = new Label(5, row+8, String.valueOf(list.get(i).getPreheat_temp()), wcf);
+                    datalist.add(label5);
+                    Label label6 = new Label(6, row+8, String.valueOf(list.get(i).getBlast_line_speed()), wcf);
+                    datalist.add(label6);
+                    Label label7 = new Label(7, row+8, String.valueOf(list.get(i).getRinse_water_conductivity()), wcf);
+                    datalist.add(label7);
+                    Label label8 = new Label(8, row+8, String.valueOf(list.get(i).getAbrasive_conductivity()), wcf);
+                    datalist.add(label8);
+                    Label label9 = new Label(9, row+8, String.valueOf(list.get(i).getAlkaline_dwell_time()), wcf);
+                    datalist.add(label9);
+                    Label label10 = new Label(10, row+8, String.valueOf(list.get(i).getAcid_concentration()), wcf);
+                    datalist.add(label10);
+                    Label label11 = new Label(11, row+8, String.valueOf(list.get(i).getAcid_wash_time()), wcf);
+                    datalist.add(label11);
+                    Label label12= new Label(12, row+8, String.valueOf(list.get(i).getAcid_concentration()), wcf);
+                    datalist.add(label12);
+                    result=list.get(i).getResult();
+                    if(result!=null){
+                        if(result.equals("0")){
+                            result="不合格";
+                        }else if(result.equals("1")){
+                            result="合格";
+                            qualifiedTotal++;
+                        }else if(result.equals("2")){
+                            result="待定";
+                        }
+                        else if(result.equals("3")){
+                            result="表面缺陷";
+                        }else{
+                            result=" ";
+                        }
                     }else{
                         result=" ";
                     }
-                }else{
-                    result=" ";
+                    Label label13 = new Label(13, row+8, result, wcf);
+                    datalist.add(label13);
+                    if(list.get(i).getRemark()!=null&&!list.get(i).getRemark().equals("")) {
+                        sb.append("#" + list.get(i).getPipe_no() + ":" + list.get(i).getRemark() + " ");
+                    }
+                    //最后一行数据为空问题
+                    index++;
+                    row++;
+                    if(index%13==0){
+                        AddLastWhiteSpace(datalist,getFormatString(sb.toString()),wcf);
+                        //添加合格数
+                        datalist.add(new Label(13,20,String.valueOf(qualifiedTotal),wcf));
+                        //到结束
+                         newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
+                        datalist.clear();
+                        qualifiedTotal=0;
+                        index=1;
+                        row=0;sb.setLength(0);
+                    }
                 }
-                Label label12 = new Label(12, row+8, result, wcf);
-                datalist.add(label12);
-                if(list.get(i).getRemark()!=null&&!list.get(i).getRemark().equals("")) {
-                    sb.append("#" + list.get(i).getPipe_no() + ":" + list.get(i).getRemark() + " ");
-                }
-                //最后一行数据为空问题
-                index++;
-                row++;
-                if(index%13==0){
-                    AddLastWhiteSpace(datalist,sb.toString(),wcf);
+                if(datalist.size()>0){
+                    AddLastWhiteSpace(datalist,getFormatString(sb.toString()),wcf);
                     //添加合格数
-                    datalist.add(new Label(12,20,String.valueOf(qualifiedTotal),wcf));
-                    //到结束
-                    GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
+                    datalist.add(new Label(13,20,String.valueOf(qualifiedTotal),wcf));
+                    newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
                     datalist.clear();
                     qualifiedTotal=0;
                     index=1;
                     row=0;sb.setLength(0);
                 }
             }
-            if(datalist.size()>0){
-                AddLastWhiteSpace(datalist,sb.toString(),wcf);
-                //添加合格数
-                datalist.add(new Label(12,20,String.valueOf(qualifiedTotal),wcf));
-                GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
-                datalist.clear();
-                qualifiedTotal=0;
-                index=1;
-                row=0;sb.setLength(0);
-            }
         }catch (Exception e){
             e.printStackTrace();
         }
-        return  null;
+         return newPdfName;
     }
 
     //2.---------------获取外打砂检验记录PDF
@@ -266,7 +379,7 @@ public class InspectionRecordPDFController {
                 index++;
                 row++;
                 if(index%13==0){
-                    AddLastWhiteSpace(datalist,sb.toString(),wcf);
+                    datalist.add(new Label(2,20,getFormatString(sb.toString()),wcf));
                     //添加合格数
                     datalist.add(new Label(13,20,String.valueOf(qualifiedTotal),wcf));
                     //到结束
@@ -278,7 +391,7 @@ public class InspectionRecordPDFController {
                 }
             }
             if(datalist.size()>0){
-                AddLastWhiteSpace(datalist,sb.toString(),wcf);
+                datalist.add(new Label(2,20,getFormatString(sb.toString()),wcf));
                 //添加合格数
                 datalist.add(new Label(13,20,String.valueOf(qualifiedTotal),wcf));
                 GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
@@ -969,5 +1082,36 @@ public class InspectionRecordPDFController {
         }else{
             return  " ";
         }
+    }
+
+    //获取两个日期之间的所有字符串日期
+    private  List<String> getBetweenDates(Date start, Date end) {
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+        List<String> result = new ArrayList<String>();
+        result.add(format.format(start));
+        Calendar tempStart = Calendar.getInstance();
+        tempStart.setTime(start);
+        tempStart.add(Calendar.DAY_OF_YEAR, 1);
+        Calendar tempEnd = Calendar.getInstance();
+        tempEnd.setTime(end);
+        while (tempStart.before(tempEnd)) {
+            result.add(format.format(tempStart.getTime()));
+            tempStart.add(Calendar.DAY_OF_YEAR, 1);
+        }
+        return result;
+    }
+    //获取传过来日期的下一天的日期字符串
+    private  String getNextDay(String day){
+        String returnday=null;
+        try{
+            Date dayTime=sdf.parse(day);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(dayTime);
+            calendar.add(Calendar.DAY_OF_MONTH,1);
+            returnday=sdf.format(calendar.getTime());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return returnday;
     }
 }

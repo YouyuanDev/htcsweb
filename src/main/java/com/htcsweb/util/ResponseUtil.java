@@ -2,12 +2,14 @@ package com.htcsweb.util;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 import java.util.zip.ZipOutputStream;
 
 public class ResponseUtil {
@@ -99,6 +101,53 @@ public class ResponseUtil {
             out.close();
         }
 
+    }
+    //新增将pdf打包下载
+    public  static  void downLoadPdf(List<String>pdfListPath,HttpServletRequest request, HttpServletResponse response){
+        List<FileBean> fileList=new ArrayList<>();
+
+        for (int i=0;i<pdfListPath.size();i++){
+            FileBean bean=new FileBean();
+            bean.setFileId(i);
+            //.setFileName(pdfListPath.get(i).substring(pdfListPath.get(i).lastIndexOf("/")+1));
+            bean.setFilePath(pdfListPath.get(i));
+            fileList.add(bean);
+        }
+        try{
+            Date now = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");//可以方便地修改日期格式
+            String timenow = dateFormat.format( now );
+            StringBuilder sbzip = new StringBuilder();
+            sbzip.append("downloadPDF_");
+            sbzip.append(String.valueOf(pdfListPath.size()));
+            sbzip.append("items_");
+            sbzip.append(timenow);
+            sbzip.append(".zip");
+            String zipName = sbzip.toString();
+            response.setContentType("APPLICATION/OCTET-STREAM");
+            response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(zipName, "UTF-8"));
+            //设置压缩流：直接写入response，实现边压缩边下载
+
+            //循环将文件写入压缩流
+            ZipOutputStream out = new ZipOutputStream(response.getOutputStream());
+            try {
+                for(Iterator<FileBean> it = fileList.iterator(); it.hasNext();){
+                    FileBean file = it.next();
+                    //System.out.println("zip="+file.getFilePath()+"/"+file.getFileName());
+                    ZipUtils.doCompress(file.getFilePath(), out);
+                    response.flushBuffer();
+                }
+            } catch (Exception e) {
+                  e.printStackTrace();
+                  System.out.println(e.getMessage());
+
+            }finally{
+                out.close();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
     }
 
 }

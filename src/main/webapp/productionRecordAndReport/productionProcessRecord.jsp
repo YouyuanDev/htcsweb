@@ -50,25 +50,75 @@
     <script type="text/javascript">
         $(function() {
             $('.btnReport').click(function () {
-                var selectValue=$('#cc').select();
-                $.ajax({
-                    type:"post",
-                    url:"",
-                    data:{},
-                    async:false,
-                    beforeSend:function(){
-                        ajaxLoading();
-                    },
-                    success:function(){
-                        ajaxLoadEnd();
-                    },
-                    error:function(){
-                        ajaxLoadEnd();
-                    },
-                    complete:function(){
-                        ajaxLoadEnd();
-                    }
-                });
+                var selectValue=$('#cc').val();
+                var begin_time=$('#begintime').val();
+                var end_time=$('#endtime').val();
+                if(begin_time==null||begin_time.length==""){
+                    $.messager.alert('Warning','请输入开始时间!');
+                    return false;
+                }
+                if(end_time==null||end_time.length==""){
+                    $.messager.alert('Warning','请输入结束时间!');
+                    return false;
+                }
+                var begin_date=new Date(begin_time);
+                var end_date=new Date(end_time);
+                if(!(end_date-begin_date>=0)){
+                    $.messager.alert('Warning','开始时间必须小于结束时间!');
+                    return false;
+                }
+                var form=$("<form>");//定义一个form表单
+                form.attr("style","display:none");
+                form.attr("target","");
+                form.attr("method","post");//请求类型
+                form.attr("action","/InspectionRecordPDFOperation/getRecordReportPDF.action");//请求地址
+                $("body").append(form);//将表单放置在web中
+                var input1=$("<input type='hidden' name='selectValue' value='"+selectValue+"'/>");
+                // input1.attr("type","hidden");
+                // input1.attr("name","selectValue");
+                // input1.attr("value",selectValue);
+                form.append(input1);
+                var input2=$("<input type='hidden' name='beginTime' value='"+begin_time+"'/>");
+                // input2.attr("type","hidden");
+                // input2.attr("name","beginTime");
+                // input2.attr("value",begin_time);
+                form.append(input2);
+                var input3=$("<input type='hidden' name='endTime' value='"+end_time+"'/>");
+                // input3.attr("type","hidden");
+                // input3.attr("name","endTime");
+                // input3.attr("value",end_time);
+                form.append(input3);
+                form.submit();//表单提交
+
+
+                // $.ajax({
+                //     url:"/InspectionRecordPDFOperation/getRecordReportPDF.action",
+                //     data:{selectValue:selectValue,beginTime:begin_time,endTime:end_time},
+                //     dataType:'json',
+                //     async:false,
+                //     beforeSend:function(){
+                //         ajaxLoading();
+                //     },
+                //     success:function(data){
+                //         if(data!=null){
+                //              if(data=="success"){
+                //                  $.messager.alert('Warning','生成成功!');
+                //              }else{
+                //                  $.messager.alert('Warning','生成失败!');
+                //              }
+                //         }else{
+                //             $.messager.alert('Warning','生成失败!');
+                //         }
+                //         ajaxLoadEnd();
+                //     },
+                //     error:function(){
+                //         ajaxLoadEnd();
+                //         $.messager.alert('Warning','生成失败!');
+                //     },
+                //     complete:function(){
+                //         ajaxLoadEnd();
+                //     }
+                // });
             });
         });
 
@@ -94,7 +144,7 @@
 <body>
 <div style="padding:10px">
     <select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
-        <option value="0">外喷砂工序</option>
+        <option value="0" selected="selected">外喷砂工序</option>
         <option value="1">外喷砂检验工序</option>
         <option value="2">外涂工序(2FBE)</option>
         <option value="3">外涂检验工序(2FBE)</option>

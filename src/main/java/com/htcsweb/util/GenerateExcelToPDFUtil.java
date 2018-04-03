@@ -40,10 +40,10 @@ public class GenerateExcelToPDFUtil {
     }
 
     //PDF生成方法入口
-    public static void PDFAutoMation(String excelTemplateFullName,ArrayList<Label> dataList,String pdfFullName,String imagePath,String fontPath,String basePath) {
+    public static String PDFAutoMation(String excelTemplateFullName,ArrayList<Label> dataList,String pdfFullName,String imagePath,String fontPath,String basePath) {
         String newexcelfile=GenerateExcelToPDFUtil.FillExcelTemplate(excelTemplateFullName,dataList);
-        GenerateExcelToPDFUtil.ExcelToPDFRecord(newexcelfile,pdfFullName,imagePath,fontPath,basePath);
-
+        String newpdfName=GenerateExcelToPDFUtil.ExcelToPDFRecord(newexcelfile,pdfFullName,imagePath,fontPath,basePath);
+        return  newpdfName;
     }
 
 
@@ -173,7 +173,7 @@ public class GenerateExcelToPDFUtil {
             System.out.println("Exception:"+e.getMessage());
         } finally {
             System.out.println("表格生成！");
-            return newExcelFileName;
+            return  newExcelFileName;
         }
 
     }
@@ -209,7 +209,7 @@ public class GenerateExcelToPDFUtil {
     }
 
     //根据excel名称，转成PDF
-    private static boolean ExcelToPDFRecord(String excelFullName,String pdfFullName,String imagePath,String fontPath,String basePath){
+    private static String ExcelToPDFRecord(String excelFullName,String pdfFullName,String imagePath,String fontPath,String basePath){
         File pdf=new File(pdfFullName);
         try{
             if(!pdf.exists()){
@@ -409,7 +409,7 @@ public class GenerateExcelToPDFUtil {
                         }
                     }
 
-                    return true;
+                    return pdfFullName;
                 }
             }
 
@@ -422,6 +422,6 @@ public class GenerateExcelToPDFUtil {
             System.err.println(e+"错误");
         }
 
-        return true;
+        return pdfFullName;
     }
 }

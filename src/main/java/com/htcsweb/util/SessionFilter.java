@@ -62,7 +62,9 @@ public class SessionFilter extends OncePerRequestFilter{
             "getOdCoat2FBEInspectionRecord",
             "getOdCoat3LPERecord",
             "getOdCoat3LPEInspectionRecord",
-            "getOdCoatFinalInspectionRecord"
+            "getOdCoatFinalInspectionRecord",
+            "getProductionRecord",
+             "getRecordReportPDF"
 
     }; // 不过滤的uri
 

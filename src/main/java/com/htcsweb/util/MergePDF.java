@@ -62,7 +62,20 @@ public class MergePDF {
         }
 
     }
+    public static void MergePDFs(List<String> pdfFullNames,String outputPDFFullName){
+        try {
+            List<InputStream> pdfs = new ArrayList<InputStream>();
+            for(int i = 0; i < pdfFullNames.size(); i++){
+                System.out.println(pdfFullNames.get(i));
+                pdfs.add(new FileInputStream(pdfFullNames.get(i)));
+            }
+            OutputStream output = new FileOutputStream(outputPDFFullName);
+            MergePDF.concatPDFs(pdfs, output, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+    }
 
 
     private static void concatPDFs(List<InputStream> streamOfPDFFiles,
