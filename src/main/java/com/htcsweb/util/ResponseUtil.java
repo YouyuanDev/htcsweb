@@ -91,7 +91,6 @@ public class ResponseUtil {
                 //System.out.println("zip="+file.getFilePath()+"/"+file.getFileName());
                 ZipUtils.doCompress(file.getFilePath()+"/"+file.getFileName(), out);
                 response.flushBuffer();
-
             }
         } catch (Exception e) {
             e.printStackTrace();

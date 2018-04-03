@@ -74,19 +74,10 @@
                 form.attr("action","/InspectionRecordPDFOperation/getRecordReportPDF.action");//请求地址
                 $("body").append(form);//将表单放置在web中
                 var input1=$("<input type='hidden' name='selectValue' value='"+selectValue+"'/>");
-                // input1.attr("type","hidden");
-                // input1.attr("name","selectValue");
-                // input1.attr("value",selectValue);
                 form.append(input1);
                 var input2=$("<input type='hidden' name='beginTime' value='"+begin_time+"'/>");
-                // input2.attr("type","hidden");
-                // input2.attr("name","beginTime");
-                // input2.attr("value",begin_time);
                 form.append(input2);
                 var input3=$("<input type='hidden' name='endTime' value='"+end_time+"'/>");
-                // input3.attr("type","hidden");
-                // input3.attr("name","endTime");
-                // input3.attr("value",end_time);
                 form.append(input3);
                 form.submit();//表单提交
 
@@ -144,7 +135,8 @@
 <body>
 <div style="padding:10px">
     <select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
-        <option value="0" selected="selected">外喷砂工序</option>
+        <option value="-1" selected="selected">所有工序</option>
+        <option value="0">外喷砂工序</option>
         <option value="1">外喷砂检验工序</option>
         <option value="2">外涂工序(2FBE)</option>
         <option value="3">外涂检验工序(2FBE)</option>
