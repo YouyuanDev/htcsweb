@@ -86,7 +86,7 @@ public class GenerateExcelToPDFUtil {
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
 
         //设置最小单元格高度
-        cell.setMinimumHeight(25);
+        cell.setMinimumHeight(22);
         return cell;
     }
 
