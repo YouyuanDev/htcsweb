@@ -41,7 +41,7 @@
                 "odstandard","idstandard","labtestingstandard2fbe","labtestingstandard3lpe","rawmaterialtestingstandard2fbe","rawmaterialtestingstandard3lpe","pipebodystandard",
                 "labtesting2fbe","labtesting3lpe","labtestingepoxy","rawmaterialtesting2fbe","rawmaterialtesting3lpe","rawmaterialtestingliquidepoxy",
                 "person","role","function",
-                "productionProcessRecord"];
+                "productionProcessRecord","dailyProductionReport"];
             var odArr=uriArr.slice(0,8);
             var idArr=uriArr.slice(8,14);
             var outinArr=uriArr.slice(14,18);
@@ -51,7 +51,7 @@
             var standArr=uriArr.slice(28,35);
             var labArr=uriArr.slice(35,41);
             var accountArr=uriArr.slice(41,44);
-            var reportArr=uriArr.slice(44,45);
+            var reportArr=uriArr.slice(44,46);
 
 
 
@@ -638,6 +638,15 @@
                             $('#hlTab').tabs('add', {
                                 title: node.text,
                                 content: "<iframe scrolling='auto' frameborder='0'  src='productionRecordAndReport/productionProcessRecord.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable: true
+                            });
+                            hlLanguage();
+                        }
+                        else if ("生产日报管理" == nodeTxt || "Daily Production Report Management" == nodeTxt) {
+
+                            $('#hlTab').tabs('add', {
+                                title: node.text,
+                                content: "<iframe scrolling='auto' frameborder='0'  src='productionRecordAndReport/dailyProductionReport.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable: true
                             });
                             hlLanguage();

@@ -165,7 +165,7 @@
 <fieldset class="b3" style="padding:10px;margin:10px;">
     <legend> <h3><b style="color: orange" >|&nbsp;</b><span class="i18n1" name="datadisplay">数据展示</span></h3></legend>
     <div  style="margin-top:5px;">
-        <table class="easyui-datagrid" id="dailyProRptDatagrids" url="/OdOperation/getNewOdBlastByLike.action" striped="true" loadMsg="正在加载中。。。" textField="text" pageSize="20" fitColumns="true" pagination="true" toolbar="#hlOdBlastProTb">
+        <table class="easyui-datagrid" id="dailyProRptDatagrids" url="/DailyProductionReportOperation/getDailProductionReportByLike.action" striped="true" loadMsg="正在加载中。。。" textField="text" pageSize="20" fitColumns="true" pagination="true" toolbar="#hldailyRptTb">
             <thead>
             <tr>
                 <th data-options="field:'ck',checkbox:true"></th>
@@ -230,20 +230,10 @@
 </fieldset>
 
 <!--工具栏-->
-<div id="hlOdBlastProTb" style="padding:10px;">
-    <span class="i18n1" name="millno">分厂编号</span>:
-    <input id="millno" class="easyui-combobox" type="text" name="millno"  data-options=
-            "url:'/millInfo/getAllMillsWithComboboxSelectAll.action',
-					        method:'get',
-					        valueField:'id',
-					        width: 150,
-					        editable:false,
-					        textField:'text',
-					        panelHeight:'auto'"/>
-    <span class="i18n1" name="pipeno">钢管编号</span>:
-    <input id="pipeno" name="pipeno" style="line-height:22px;border:1px solid #ccc">
-    <span class="i18n1" name="operatorno">操作工编号</span>:
-    <input id="operatorno" name="operatorno" style="line-height:22px;border:1px solid #ccc">
+<div id="hldailyRptTb" style="padding:10px;">
+
+    <span class="i18n1" name="projectno">项目编号</span>:
+    <input id="pipeno" name="projectno" style="line-height:22px;border:1px solid #ccc">
     <span class="i18n1" name="begintime">开始时间</span>:
     <input id="begintime" name="begintime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
     <span class="i18n1" name="endtime">结束时间</span>:
@@ -339,7 +329,7 @@
                 </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="odbarepipecutcount">外光管切长数量</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="od_bare_pipe_cut_count" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="od_bare_pipe_cut_count" value=""/></td>
                     <td></td>
                     <td width="16%" class="i18n1" name="odcoatedpiperejectedcount">外涂层管废管数量</td>
                     <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="od_coated_pipe_rejected_count" value=""/></td>
@@ -355,6 +345,103 @@
                     <td></td>
                 </tr>
 
+                <tr>
+                    <td width="16%" class="i18n1" name="idtotalacceptedcount">内防涂敷合格数量</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="id_total_accepted_count" value=""/></td>
+                    <td></td>
+                    <td width="16%" class="i18n1" name="idaimingacceptedcount">内防目标涂敷数量</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="id_aiming_accepted_count" value=""/></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td width="16%" class="i18n1" name="idtotalacceptedlength">内防合格涂敷米数</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="id_total_accepted_length" value=""/></td>
+                    <td></td>
+                    <td width="16%" class="i18n1" name="idaimingtotalacceptedlength">内防目标合格涂敷米数</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="id_aiming_total_accepted_length" value=""/></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td width="16%" class="i18n1" name="idrepairpipecount">内防修补管数</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="id_repair_pipe_count" value=""/></td>
+                    <td></td>
+                    <td width="16%" class="i18n1" name="idbarepipeonholdcount">内光管待处理数量</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="id_bare_pipe_onhold_count" value=""/></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td width="16%" class="i18n1" name="idbarepipegrindedcount">内光管修磨数量</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="id_bare_pipe_grinded_count" value=""/></td>
+                    <td></td>
+                    <td width="16%" class="i18n1" name="idbarepipecutcount">内光管切长数量</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="id_bare_pipe_cut_count" value=""/></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td width="16%" class="i18n1" name="idcoatedpiperejectedcount">内涂层管废管数量</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="id_coated_pipe_rejected_count" value=""/></td>
+                    <td></td>
+                    <td width="16%" class="i18n1" name="idcoatedpipestripcount">内涂层管扒皮数量</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="id_coated_pipe_strip_count" value=""/></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td width="16%" class="i18n1" name="odtestpipenodayshift">实验管管号白班</td>
+                    <td><input class="easyui-textbox" type="text" name="od_test_pipe_no_dayshift" value=""/></td>
+                    <td></td>
+                    <td width="16%" class="i18n1" name="odtestpipelengthbeforecutdayshift">实验管原始长度白班</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="od_test_pipe_length_before_cut_dayshift" value=""/></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td width="16%" class="i18n1" name="odtestpipecuttinglengthdayshift">实验管切除长度白班</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="od_test_pipe_cutting_length_dayshift" value=""/></td>
+                    <td></td>
+                    <td width="16%" class="i18n1" name="odtestpipenonightshift">实验管管号夜班</td>
+                    <td><input class="easyui-textbox" type="text" name="od_test_pipe_no_nightshift" value=""/></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td width="16%" class="i18n1" name="odtestpipelengthbeforecutnightshift">实验管原始长度夜班</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="od_test_pipe_length_before_cut_nightshift" value=""/></td>
+                    <td></td>
+                    <td width="16%" class="i18n1" name="odtestpipecuttinglengthnightshift">实验管切除长度夜班</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="od_test_pipe_cutting_length_nightshift" value=""/></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <td width="16%" class="i18n1" name="odtestpipecount">实验管数量</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="od_test_pipe_count" value=""/></td>
+                    <td></td>
+                    <td width="16%" class="i18n1" name="rebevelpipecount">需倒棱管数量</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="rebevel_pipe_count" value=""/></td>
+                    <td></td>
+                </tr>
+
+                <tr>
+
+                    <td width="16%" class="i18n1" name="pipeacceptedcountafterrebevel">倒棱合格管数量</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="pipe_accepted_count_after_rebevel" value=""/></td>
+                    <td></td>
+                    <td width="16%" class="i18n1" name="pipedeliveredcount">成品发运数量</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="pipe_delivered_count" value=""/></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td width="16%" class="i18n1" name="pipedeliveredlength">成品发运长度</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="pipe_delivered_length" value=""/></td>
+                    <td></td>
+
+                </tr>
+
             </table>
             <input type="hidden" id="fileslist" name="upload_files" value=""/>
 
@@ -368,76 +455,13 @@
     <a href="#" class="easyui-linkbutton" iconCls="icon-save" onclick="dailyProductionReportFormSubmit()">Save</a>
     <a href="#" class="easyui-linkbutton" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="dailyProductionReportCancelSubmit()">Cancel</a>
 </div>
-<div id="gridPanel1" class="mini-panel" title="header" iconCls="icon-add" style="width:450px;height:250px;"
-     showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0"
->
-    <div property="toolbar" id="searchBar1" style="padding:5px;padding-left:8px;text-align:center;display: none">
-        <div style="float:left;padding-bottom:2px;">
-            <span class="i18n1" name="pipeno">钢管编号</span><span>:</span>
-            <input id="keyText1" class="mini-textbox" style="width:110px;" onenter="onSearchClick(1)"/>
-            <a class="mini-button" onclick="onSearchClick(1)">查找</a>
-            <a class="mini-button" onclick="onClearClick(1)" name="clear">清除</a>
-        </div>
-        <div style="float:right;padding-bottom:2px;">
-            <a class="mini-button" onclick="onCloseClick(1)" name="close">关闭</a>
-        </div>
-        <div style="clear:both;"></div>
-    </div>
-    <div id="datagrid1" class="mini-datagrid" style="width:100%;height:100%;"
-         borderStyle="border:0" showPageSize="false" showPageIndex="false"
-         url="/pipeinfo/getPipeNumbers.action">
-        <div property="columns">
-            <div type="checkcolumn" ></div>
-            <div field="pipe_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="pipeno">钢管编号</div>
-            <div field="contract_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="contractno">合同编号</div>
-            <div field="status" width="40" headerAlign="center" allowSort="true" class="i18n1" name="status">状态</div>
-            <div field="od" width="40" headerAlign="center" allowSort="true" class="i18n1" name="od">外径</div>
-            <div field="wt" width="40" headerAlign="center" allowSort="true" class="i18n1" name="wt">壁厚</div>
-            <div field="p_length" width="40" headerAlign="center" allowSort="true" class="i18n1" name="p_length">长度</div>
-            <div field="weight" width="40" headerAlign="center" allowSort="true" class="i18n1" name="weight">重量</div>
-        </div>
-    </div>
-</div>
-<div id="gridPanel2" class="mini-panel" title="header" iconCls="icon-add" style="width:480px;height:250px;"
-     showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0"
->
-    <div property="toolbar" id="searchBar2" style="padding:5px;text-align:center;display:none;">
-        <div style="float:left;padding-bottom:2px;">
-            <span class="i18n1" name="operatorno">操作工编号</span><span>:</span>
-            <input id="keyText3" class="mini-textbox" style="width:110px;" onenter="onSearchClick(2)"/>
-            <span class="i18n1" name="operatorname">姓名</span><span>:</span>
-            <input id="keyText4" class="mini-textbox" style="width:110px;" onenter="onSearchClick(2)"/>
-            <a class="mini-button" onclick="onSearchClick(2)" name="search">查找</a>
-            <a class="mini-button" onclick="onClearClick(2)" name="clear">清除</a>
-            <a class="mini-button" onclick="onCloseClick(2)" name="close">关闭</a>
-        </div>
-        <div style="clear:both;"></div>
-    </div>
-    <div id="datagrid2" class="mini-datagrid" style="width:100%;height:100%;"
-         borderStyle="border:0" showPageSize="false" showPageIndex="false"
-         url="/person/getPersonNoByName.action">
-        <div property="columns">
-            <div type="checkcolumn" ></div>
-            <div field="employee_no" width="60" headerAlign="center" allowSort="true" class="i18n1" name="operatorno">操作工编号</div>
-            <div field="pname" width="60" headerAlign="center" allowSort="true" class="i18n1" name="operatorname">姓名</div>
-        </div>
-    </div>
-</div>
+
+
 <script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
 </body>
 </html>
 <script type="text/javascript">
     mini.parse();
-    var keyText1=mini.get('keyText1');
-    var keyText4 = mini.get("keyText4");
-    var keyText3=mini.get("keyText3");
-    var grid1=mini.get("datagrid1");
-    var grid2=mini.get("datagrid2");
-
-
-
-
-
 
     hlLanguage("../i18n/");
 </script>
