@@ -58,7 +58,7 @@
             url="/DailyProductionReportOperation/saveDailyProductionReport.action";
             //$("input[name='alkaline_dwell_time']").siblings().css("background-color","#F9A6A6");
         }
-        function delOdBlastPro() {
+        function delDailyProRpt() {
             var row = $('#dailyProRptDatagrids').datagrid('getSelections');
             if(row.length>0){
                 var idArr=[];
