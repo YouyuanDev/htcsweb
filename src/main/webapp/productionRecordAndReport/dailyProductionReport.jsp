@@ -266,7 +266,7 @@
 <div id="hldailyRptTb" style="padding:10px;">
 
     <span class="i18n1" name="projectno">项目编号</span>:
-    <input id="pipeno" name="projectno" style="line-height:22px;border:1px solid #ccc">
+    <input id="projectno" name="projectno" style="line-height:22px;border:1px solid #ccc">
     <span class="i18n1" name="begintime">开始时间</span>:
     <input id="begintime" name="begintime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
     <span class="i18n1" name="endtime">结束时间</span>:
