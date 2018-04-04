@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.htcsweb.dao.DailyProductionReportDao">
+
+
+    <select id="getCountAllByLike" resultType="int">
+        select count(*) from daily_production_report dr
+        <where>
+
+            <if test="project_no!=null and project_no!=''">
+                AND dr.project_no LIKE CONCAT('%',#{project_no},'%')
+            </if>
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(dr.production_date,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 08:00:00')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(dr.production_date,'%Y-%m-%d %H:%T:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d 08:00:00')]]>
+            </if>
+        </where>
+    </select>
+
+
+
+    <select id="getAllByLike" resultType="map">
+        select * from  daily_production_report dr
+        <where>
+            <if test="project_no!=null and project_no!=''">
+                AND dr.project_no LIKE CONCAT('%',#{project_no},'%')
+            </if>
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(dr.production_date,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 08:00:00')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(dr.production_date,'%Y-%m-%d %H:%T:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d 08:00:00')]]>
+            </if>
+        </where>
+        ORDER BY id DESC
+        limit #{skip},#{take}
+    </select>
+
+
+
+
+    <insert id="addDailyProductionReport" parameterType="com.htcsweb.entity.DailyProductionReport">
+        INSERT INTO daily_production_report(
+              production_date,project_no,od_coating_type,od_wt,bare_pipe_count,bare_pipe_length,
+              od_total_coated_count,od_total_accepted_count,od_aiming_accepted_count,od_total_accepted_length,
+              od_aiming_total_accepted_length,od_repair_pipe_count,od_bare_pipe_onhold_count,od_bare_pipe_grinded_count,
+              od_bare_pipe_cut_count,od_coated_pipe_rejected_count,od_coated_pipe_strip_count,id_total_coated_count,
+              id_total_accepted_count,id_aiming_accepted_count,id_total_accepted_length,id_aiming_total_accepted_length,
+              id_repair_pipe_count,id_bare_pipe_onhold_count,id_bare_pipe_grinded_count,id_bare_pipe_cut_count,
+              id_coated_pipe_rejected_count,id_coated_pipe_strip_count,od_test_pipe_no_dayshift,od_test_pipe_length_before_cut_dayshift,
+              od_test_pipe_cutting_length_dayshift,od_test_pipe_no_nightshift,od_test_pipe_length_before_cut_nightshift,
+              od_test_pipe_cutting_length_nightshift,od_test_pipe_count,rebevel_pipe_count,
+              pipe_accepted_count_after_rebevel,pipe_delivered_count,pipe_delivered_length
+
+        ) VALUES (
+              #{production_date},#{project_no},#{od_coating_type},#{od_wt},#{bare_pipe_count},#{bare_pipe_length},
+              #{od_total_coated_count},#{od_total_accepted_count},#{od_aiming_accepted_count},#{od_total_accepted_length},
+              #{od_aiming_total_accepted_length},#{od_repair_pipe_count},#{od_bare_pipe_onhold_count},#{od_bare_pipe_grinded_count},
+              #{od_bare_pipe_cut_count},#{od_coated_pipe_rejected_count},#{od_coated_pipe_strip_count},#{id_total_coated_count},
+              #{id_total_accepted_count},#{id_aiming_accepted_count},#{id_total_accepted_length},#{id_aiming_total_accepted_length},
+              #{id_repair_pipe_count},#{id_bare_pipe_onhold_count},#{id_bare_pipe_grinded_count},#{id_bare_pipe_cut_count},
+              #{id_coated_pipe_rejected_count},#{id_coated_pipe_strip_count},#{od_test_pipe_no_dayshift},#{od_test_pipe_length_before_cut_dayshift},
+              #{od_test_pipe_cutting_length_dayshift},#{od_test_pipe_no_nightshift},#{od_test_pipe_length_before_cut_nightshift},
+              #{od_test_pipe_cutting_length_nightshift},#{od_test_pipe_count},#{rebevel_pipe_count},
+              #{pipe_accepted_count_after_rebevel},#{pipe_delivered_count},#{pipe_delivered_length}
+        )
+    </insert>
+
+    <update id="updateDailyProductionReport" parameterType="com.htcsweb.entity.DailyProductionReport">
+        UPDATE daily_production_report set
+              production_date=#{production_date},project_no=#{project_no},od_coating_type=#{od_coating_type},od_wt=#{od_wt},bare_pipe_count=#{bare_pipe_count},bare_pipe_length=#{bare_pipe_length},
+              od_total_coated_count=#{od_total_coated_count},od_total_accepted_count=#{od_total_accepted_count},od_aiming_accepted_count=#{od_aiming_accepted_count},od_total_accepted_length=#{od_total_accepted_length},
+              od_aiming_total_accepted_length=#{od_aiming_total_accepted_length},od_repair_pipe_count=#{od_repair_pipe_count},od_bare_pipe_onhold_count=#{od_bare_pipe_onhold_count},od_bare_pipe_grinded_count=#{od_bare_pipe_grinded_count},
+              od_bare_pipe_cut_count=#{od_bare_pipe_cut_count},od_coated_pipe_rejected_count=#{od_coated_pipe_rejected_count},od_coated_pipe_strip_count=#{od_coated_pipe_strip_count},id_total_coated_count=#{id_total_coated_count},
+              id_total_accepted_count=#{id_total_accepted_count},id_aiming_accepted_count=#{id_aiming_accepted_count},id_total_accepted_length=#{id_total_accepted_length},id_aiming_total_accepted_length=#{id_aiming_total_accepted_length},
+              id_repair_pipe_count=#{id_repair_pipe_count},id_bare_pipe_onhold_count=#{id_bare_pipe_onhold_count},id_bare_pipe_grinded_count=#{id_bare_pipe_grinded_count},id_bare_pipe_cut_count=#{id_bare_pipe_cut_count},
+              id_coated_pipe_rejected_count=#{id_coated_pipe_rejected_count},id_coated_pipe_strip_count=#{id_coated_pipe_strip_count},od_test_pipe_no_dayshift=#{od_test_pipe_no_dayshift},od_test_pipe_length_before_cut_dayshift=#{od_test_pipe_length_before_cut_dayshift},
+              od_test_pipe_cutting_length_dayshift=#{od_test_pipe_cutting_length_dayshift},od_test_pipe_no_nightshift=#{od_test_pipe_no_nightshift},od_test_pipe_length_before_cut_nightshift=#{od_test_pipe_length_before_cut_nightshift},
+              od_test_pipe_cutting_length_nightshift=#{od_test_pipe_cutting_length_nightshift},od_test_pipe_count=#{od_test_pipe_count},rebevel_pipe_count=#{rebevel_pipe_count},
+              pipe_accepted_count_after_rebevel=#{pipe_accepted_count_after_rebevel},pipe_delivered_count=#{pipe_delivered_count},pipe_delivered_length=#{pipe_delivered_length}
+
+        where id=#{id}
+    </update>
+
+
+    <delete id="delDailyProductionReport">
+        delete from function WHERE
+        <foreach collection="array" item="item" open="id in (" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+</mapper>
