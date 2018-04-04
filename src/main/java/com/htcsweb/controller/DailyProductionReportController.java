@@ -73,7 +73,7 @@ public class DailyProductionReportController {
     public String saveDailyProductionReport(DailyProductionReport dailyProductionReport, HttpServletRequest request, HttpServletResponse response){
         JSONObject json=new JSONObject();
         try{
-            String productiondate= request.getParameter("production_date");
+            String productiondate= request.getParameter("production-date");
             int resTotal=0;
             if(productiondate!=null&&productiondate!=""){
                 SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

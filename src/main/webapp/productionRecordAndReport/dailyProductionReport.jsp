@@ -88,8 +88,8 @@
 
                 $('#dprid').text(row.id);
                 $('#dailyProRptForm').form('load',row);
-                $('#production_date').datetimebox('setValue',getDate1(row.production_date));
 
+                $('#production-date').datetimebox('setValue',getDate1(row.production_date));
 
                 url="/DailyProductionReportOperation/saveDailyProductionReport.action?id="+row.id;
             }else{
@@ -153,7 +153,7 @@
 
 
 
-                    if($("input[name='production_date']").val()==""){
+                    if($("input[name='production-date']").val()==""){
 
                         hlAlertFour("请选择生产日期");
                         return false;
@@ -293,7 +293,7 @@
                     <td></td>
                     <td class="i18n1" name="productiondate" width="20%">生产日期</td>
                     <td colspan="1" width="30%">
-                        <input class="easyui-datetimebox" id="production_date" type="text" name="production_date" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                        <input class="easyui-datetimebox" id="production-date" type="text" name="production-date" value="" data-options="formatter:myformatter2,parser:myparser2"/>
 
                     </td>
                     <td></td>
