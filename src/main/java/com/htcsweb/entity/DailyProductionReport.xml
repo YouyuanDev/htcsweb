@@ -7,7 +7,7 @@
 
 
     <select id="getCountAllByLike" resultType="int">
-        select count(*) from daily_production_report dr
+        select count(*) from daily_production_report dr inner join project_info pro on dr.project_no=pro.project_no
         <where>
 
             <if test="project_no!=null and project_no!=''">
@@ -25,7 +25,7 @@
 
 
     <select id="getAllByLike" resultType="map">
-        select * from  daily_production_report dr
+        select dr.*, pro.project_name from  daily_production_report dr inner join project_info pro on dr.project_no=pro.project_no
         <where>
             <if test="project_no!=null and project_no!=''">
                 AND dr.project_no LIKE CONCAT('%',#{project_no},'%')
