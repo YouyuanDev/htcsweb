@@ -69,7 +69,6 @@ public class DailyProductionReportController {
     @ResponseBody
     public String saveDailyProductionReport(DailyProductionReport dailyProductionReport, HttpServletRequest request, HttpServletResponse response){
         JSONObject json=new JSONObject();
-        System.out.println("进入---"+dailyProductionReport.getId());
         try{
             String productiondate= request.getParameter("production-date");
             int resTotal=0;
