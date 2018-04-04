@@ -5,9 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.ContractInfoDao;
 import com.htcsweb.dao.DailyProductionReportDao;
 import com.htcsweb.dao.ProjectInfoDao;
-import com.htcsweb.entity.ContractInfo;
-import com.htcsweb.entity.OdBlastProcess;
-import com.htcsweb.entity.ProjectInfo;
+import com.htcsweb.entity.*;
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -68,4 +66,73 @@ public class DailyProductionReportController {
         return mmp;
     }
 
+
+
+    @RequestMapping("/saveDailyProductionReport")
+    @ResponseBody
+    public String saveDailyProductionReport(DailyProductionReport dailyProductionReport, HttpServletRequest request, HttpServletResponse response){
+        JSONObject json=new JSONObject();
+        try{
+            String productiondate= request.getParameter("production_date");
+            int resTotal=0;
+            if(productiondate!=null&&productiondate!=""){
+                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date new_productiondate = simFormat.parse(productiondate);
+                dailyProductionReport.setProduction_date(new_productiondate);
+            }else{
+                dailyProductionReport.setProduction_date(new Date());
+            }
+
+            if(dailyProductionReport.getId()==0){
+                //添加
+                resTotal=dailyProductionReportDao.addDailyProductionReport(dailyProductionReport);
+            }else{
+                //修改！
+                resTotal=dailyProductionReportDao.updateDailyProductionReport(dailyProductionReport);
+            }
+            if(resTotal>0){
+
+                json.put("success",true);
+                json.put("message","保存成功");
+            }else{
+                json.put("success",false);
+                json.put("message","保存失败");
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            json.put("success",false);
+            json.put("message",e.getMessage());
+
+        }finally {
+            try {
+                ResponseUtil.write(response, json);
+            }catch  (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+    @RequestMapping("/delDailyProductionReport")
+    public String delDailyProductionReport(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
+        String[]idArr=hlparam.split(",");
+        int resTotal=0;
+        resTotal=dailyProductionReportDao.delDailyProductionReport(idArr);
+        JSONObject json=new JSONObject();
+        StringBuilder sbmessage = new StringBuilder();
+        sbmessage.append("总共");
+        sbmessage.append(Integer.toString(resTotal));
+        sbmessage.append("项日报删除成功\n");
+        if(resTotal>0){
+            //System.out.print("删除成功");
+            json.put("success",true);
+        }else{
+            //System.out.print("删除失败");
+            json.put("success",false);
+        }
+        json.put("message",sbmessage.toString());
+        ResponseUtil.write(response,json);
+        return null;
+    }
 }

@@ -42,9 +42,7 @@
                 onClose:function () {
                     var type=$('#hlcancelBtn').attr('operationtype');
                     if(type=="add"){
-                        var $imglist=$('#fileslist');
                         var $dialog=$('#hldailyProRptDialog');
-                        hlAlertSix("../UploadFile/delUploadPicture.action",$imglist,$dialog,grid);
                     }
                     clearFormLabel();
                 }
@@ -57,7 +55,7 @@
             $('#hldailyProRptDialog').dialog('open').dialog('setTitle','新增');
             clearFormLabel();
 
-            url="/OdOperation/saveOdBlastProcess.action";
+            url="/DailyProductionReportOperation/saveDailyProductionReport.action";
             //$("input[name='alkaline_dwell_time']").siblings().css("background-color","#F9A6A6");
         }
         function delOdBlastPro() {
@@ -70,7 +68,7 @@
                 var idArrs=idArr.join(',');
                 $.messager.confirm('系统提示',"您确定要删除这<font color=red>"+idArr.length+ "</font>条数据吗？",function (r) {
                     if(r){
-                        $.post("/OdOperation/delOdBlastProcess.action",{hlparam:idArrs},function (data) {
+                        $.post("/DailyProductionReportOperation/delDailyProductionReport.action",{hlparam:idArrs},function (data) {
                             if(data.success){
                                 $("#dailyProRptDatagrids").datagrid("reload");
                             }
@@ -90,10 +88,10 @@
 
                 $('#dprid').text(row.id);
                 $('#dailyProRptForm').form('load',row);
-                $('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
+                $('#production_date').datetimebox('setValue',getDate1(row.production_date));
 
 
-                url="/OdOperation/saveOdBlastProcess.action?id="+row.id;
+                url="/DailyProductionReportOperation/saveDailyProductionReport.action?id="+row.id;
             }else{
                 hlAlertTwo();
             }
@@ -110,19 +108,59 @@
                 url:url,
                 onSubmit:function () {
                     //表单验证
-                    setParams($("input[name='alkaline_dwell_time']"));
-                    setParams($("input[name='alkaline_concentration']"));
+                    setParams($("input[name='bare_pipe_count']"));
+                    setParams($("input[name='bare_pipe_length']"));
+                    setParams($("input[name='od_total_coated_count']"));
+                    setParams($("input[name='od_total_accepted_count']"));
+                    setParams($("input[name='od_aiming_accepted_count']"));
+                    setParams($("input[name='od_total_accepted_length']"));
+                    setParams($("input[name='od_aiming_total_accepted_length']"));
+                    setParams($("input[name='od_repair_pipe_count']"));
+                    setParams($("input[name='od_bare_pipe_onhold_count']"));
+                    setParams($("input[name='od_bare_pipe_grinded_count']"));
+                    setParams($("input[name='od_bare_pipe_cut_count']"));
 
-                    if($("input[name='pipe_no']").val()==""){
+                    setParams($("input[name='od_coated_pipe_rejected_count']"));
+                    setParams($("input[name='od_coated_pipe_strip_count']"));
+                    setParams($("input[name='id_total_coated_count']"));
+                    setParams($("input[name='id_total_accepted_count']"));
+                    setParams($("input[name='id_aiming_accepted_count']"));
 
-                        hlAlertFour("请选择钢管管号");
+
+                    setParams($("input[name='id_total_accepted_length']"));
+                    setParams($("input[name='id_aiming_total_accepted_length']"));
+                    setParams($("input[name='id_repair_pipe_count']"));
+                    setParams($("input[name='id_bare_pipe_onhold_count']"));
+                    setParams($("input[name='id_bare_pipe_grinded_count']"));
+                    setParams($("input[name='id_bare_pipe_cut_count']"));
+
+
+                    setParams($("input[name='id_coated_pipe_rejected_count']"));
+                    setParams($("input[name='id_coated_pipe_strip_count']"));
+                    setParams($("input[name='od_test_pipe_no_dayshift']"));
+                    setParams($("input[name='od_test_pipe_length_before_cut_dayshift']"));
+                    setParams($("input[name='od_test_pipe_cutting_length_dayshift']"));
+                    setParams($("input[name='od_test_pipe_no_nightshift']"));
+                    setParams($("input[name='od_test_pipe_length_before_cut_nightshift']"));
+                    setParams($("input[name='od_test_pipe_cutting_length_nightshift']"));
+
+
+                    setParams($("input[name='od_test_pipe_count']"));
+                    setParams($("input[name='rebevel_pipe_count']"));
+                    setParams($("input[name='pipe_accepted_count_after_rebevel']"));
+                    setParams($("input[name='pipe_delivered_count']"));
+                    setParams($("input[name='pipe_delivered_length']"));
+
+
+
+                    if($("input[name='production_date']").val()==""){
+
+                        hlAlertFour("请选择生产日期");
                         return false;
                     }
 
-
                 },
                 success: function(result){
-                    clearFormLabel();
                     var result = eval('('+result+')');
                     $('#hldailyProRptDialog').dialog('close');
                     if (result.success){
@@ -136,7 +174,7 @@
                     hlAlertThree();
                 }
             });
-            clearMultiUpload(grid);
+
 
         }
         function dailyProductionReportCancelSubmit() {
@@ -147,11 +185,6 @@
         function  clearFormLabel(){
             $('#dailyProRptForm').form('clear');
             $('.hl-label').text('');
-            $('#hl-gallery-con').empty();
-            combox1.setValue("");
-            $(":input").each(function () {
-                $(this).siblings().css("background-color","#FFFFFF");
-            });
         }
     </script>
 
@@ -258,7 +291,7 @@
                     <td class="i18n1" name="id" width="20%">流水号</td>
                     <td colspan="1" width="30%"><label class="hl-label" id="dprid"></label></td>
                     <td></td>
-                    <td class="i18n1" name="operationtime" width="20%">生产日期</td>
+                    <td class="i18n1" name="productiondate" width="20%">生产日期</td>
                     <td colspan="1" width="30%">
                         <input class="easyui-datetimebox" id="production_date" type="text" name="production_date" value="" data-options="formatter:myformatter2,parser:myparser2"/>
 
@@ -270,7 +303,7 @@
             <table class="ht-table">
                 <tr>
                     <td width="16%" class="i18n1" name="projectno">项目编号</td>
-                    <td><label class="hl-label" name="project_no"></label></td>
+                    <td><input class="easyui-textbox" type="text" name="project_no" value=""/></td>
                     <td></td>
                     <td width="16%" class="i18n1" name="projectname">项目名称</td>
                     <td><label class="hl-label" name="project_name"></label></td>

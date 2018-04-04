@@ -33,10 +33,10 @@ public class DailyProductionReport {
     private  int id_bare_pipe_cut_count;
     private  int id_coated_pipe_rejected_count;
     private  int id_coated_pipe_strip_count;
-    private  int od_test_pipe_no_dayshift;
+    private  String od_test_pipe_no_dayshift;
     private  float od_test_pipe_length_before_cut_dayshift;
     private  float od_test_pipe_cutting_length_dayshift;
-    private  int od_test_pipe_no_nightshift;
+    private  String od_test_pipe_no_nightshift;
     private  float od_test_pipe_length_before_cut_nightshift;
     private  float od_test_pipe_cutting_length_nightshift;
     private  int od_test_pipe_count;
@@ -48,7 +48,7 @@ public class DailyProductionReport {
     public DailyProductionReport() {
     }
 
-    public DailyProductionReport(int id, Date production_date, String project_no, String od_coating_type, String od_wt, int bare_pipe_count, float bare_pipe_length, int od_total_coated_count, int od_total_accepted_count, int od_aiming_accepted_count, float od_total_accepted_length, float od_aiming_total_accepted_length, int od_repair_pipe_count, int od_bare_pipe_onhold_count, int od_bare_pipe_grinded_count, int od_bare_pipe_cut_count, int od_coated_pipe_rejected_count, int od_coated_pipe_strip_count, int id_total_coated_count, int id_total_accepted_count, int id_aiming_accepted_count, float id_total_accepted_length, float id_aiming_total_accepted_length, int id_repair_pipe_count, int id_bare_pipe_onhold_count, int id_bare_pipe_grinded_count, int id_bare_pipe_cut_count, int id_coated_pipe_rejected_count, int id_coated_pipe_strip_count, int od_test_pipe_no_dayshift, float od_test_pipe_length_before_cut_dayshift, float od_test_pipe_cutting_length_dayshift, int od_test_pipe_no_nightshift, float od_test_pipe_length_before_cut_nightshift, float od_test_pipe_cutting_length_nightshift, int od_test_pipe_count, int rebevel_pipe_count, int pipe_accepted_count_after_rebevel, int pipe_delivered_count, float pipe_delivered_length) {
+    public DailyProductionReport(int id, Date production_date, String project_no, String od_coating_type, String od_wt, int bare_pipe_count, float bare_pipe_length, int od_total_coated_count, int od_total_accepted_count, int od_aiming_accepted_count, float od_total_accepted_length, float od_aiming_total_accepted_length, int od_repair_pipe_count, int od_bare_pipe_onhold_count, int od_bare_pipe_grinded_count, int od_bare_pipe_cut_count, int od_coated_pipe_rejected_count, int od_coated_pipe_strip_count, int id_total_coated_count, int id_total_accepted_count, int id_aiming_accepted_count, float id_total_accepted_length, float id_aiming_total_accepted_length, int id_repair_pipe_count, int id_bare_pipe_onhold_count, int id_bare_pipe_grinded_count, int id_bare_pipe_cut_count, int id_coated_pipe_rejected_count, int id_coated_pipe_strip_count, String od_test_pipe_no_dayshift, float od_test_pipe_length_before_cut_dayshift, float od_test_pipe_cutting_length_dayshift, String od_test_pipe_no_nightshift, float od_test_pipe_length_before_cut_nightshift, float od_test_pipe_cutting_length_nightshift, int od_test_pipe_count, int rebevel_pipe_count, int pipe_accepted_count_after_rebevel, int pipe_delivered_count, float pipe_delivered_length) {
         this.id = id;
         this.production_date = production_date;
         this.project_no = project_no;
@@ -323,11 +323,11 @@ public class DailyProductionReport {
         this.id_coated_pipe_strip_count = id_coated_pipe_strip_count;
     }
 
-    public int getOd_test_pipe_no_dayshift() {
+    public String getOd_test_pipe_no_dayshift() {
         return od_test_pipe_no_dayshift;
     }
 
-    public void setOd_test_pipe_no_dayshift(int od_test_pipe_no_dayshift) {
+    public void setOd_test_pipe_no_dayshift(String od_test_pipe_no_dayshift) {
         this.od_test_pipe_no_dayshift = od_test_pipe_no_dayshift;
     }
 
@@ -347,11 +347,11 @@ public class DailyProductionReport {
         this.od_test_pipe_cutting_length_dayshift = od_test_pipe_cutting_length_dayshift;
     }
 
-    public int getOd_test_pipe_no_nightshift() {
+    public String getOd_test_pipe_no_nightshift() {
         return od_test_pipe_no_nightshift;
     }
 
-    public void setOd_test_pipe_no_nightshift(int od_test_pipe_no_nightshift) {
+    public void setOd_test_pipe_no_nightshift(String od_test_pipe_no_nightshift) {
         this.od_test_pipe_no_nightshift = od_test_pipe_no_nightshift;
     }
 
