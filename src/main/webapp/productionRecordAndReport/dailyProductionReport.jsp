@@ -86,7 +86,7 @@
             if(row){
                 $('#hldailyProRptDialog').dialog('open').dialog('setTitle','修改');
 
-                $('#dprid').text(row.id);
+                $('#dprid').textbox("setValue",row.id);
                 $('#dailyProRptForm').form('load',row);
 
                 $('#production-date').datetimebox('setValue',getDate1(row.production_date));
@@ -137,10 +137,10 @@
 
                     setParams($("input[name='id_coated_pipe_rejected_count']"));
                     setParams($("input[name='id_coated_pipe_strip_count']"));
-                    setParams($("input[name='od_test_pipe_no_dayshift']"));
+                    //setParams($("input[name='od_test_pipe_no_dayshift']"));
                     setParams($("input[name='od_test_pipe_length_before_cut_dayshift']"));
                     setParams($("input[name='od_test_pipe_cutting_length_dayshift']"));
-                    setParams($("input[name='od_test_pipe_no_nightshift']"));
+                    //setParams($("input[name='od_test_pipe_no_nightshift']"));
                     setParams($("input[name='od_test_pipe_length_before_cut_nightshift']"));
                     setParams($("input[name='od_test_pipe_cutting_length_nightshift']"));
 
@@ -289,7 +289,10 @@
             <table class="ht-table">
                 <tr>
                     <td class="i18n1" name="id" width="20%">流水号</td>
-                    <td colspan="1" width="30%"><label class="hl-label" id="dprid"></label></td>
+                    <td colspan="1" width="30%">
+                        <%--<label class="hl-label" id="dprid"></label>--%>
+                        <input class="easyui-textbox" type="text" id="dprid" name="dprid" readonly="true" value="0"/>
+                    </td>
                     <td></td>
                     <td class="i18n1" name="productiondate" width="20%">生产日期</td>
                     <td colspan="1" width="30%">

@@ -21,7 +21,7 @@
     <script  src="../js/lrscroll.js" type="text/javascript"></script>
     <script src="../js/jquery.i18n.properties-1.0.9.js" type="text/javascript"></script>
     <script src="../js/language.js" type="text/javascript"></script>
-
+    <script src="../js/jquery.form.js" type="text/javascript"></script>
     <style type="text/css">
         .datagrid-mask {
             position: absolute;
@@ -49,8 +49,29 @@
     </style>
     <script type="text/javascript">
         $(function() {
+            //先获取所有的项目的编号和名称
+            $.ajax({
+                url:"/ProjectOperation/getProjectNoAndName.action",
+                dataType:'json',
+                async:false,
+                success:function(data) {
+                    var dataJson=data[0];
+                    if (dataJson != null && dataJson.length>0) {
+                        $.each(dataJson,function (index,element) {
+                             var template='<option value="'+element.project_no+'">'+element.project_name+'</option>';
+                             $('#cc').append(template);
+                        });
+                    }
+                },
+                error:function(){
+                    alert("获取项目信息时出错!");
+                }
+            });
+
+
             $('.btnReport').click(function () {
                 var selectValue=$('#cc').val();
+                var selectText=$('#cc').find('option:selected').text();
                 var begin_time=$('#begintime').val();
                 var end_time=$('#endtime').val();
                 if(begin_time==null||begin_time.length==""){
@@ -73,14 +94,36 @@
                 form.attr("method","post");//请求类型
                 form.attr("action","/InspectionRecordPDFOperation/getRecordReportPDF.action");//请求地址
                 $("body").append(form);//将表单放置在web中
-                var input1=$("<input type='hidden' name='selectValue' value='"+selectValue+"'/>");
+                var input1=$("<input type='hidden' name='project_no' value='"+selectValue+"'/>");
                 form.append(input1);
                 var input2=$("<input type='hidden' name='beginTime' value='"+begin_time+"'/>");
                 form.append(input2);
                 var input3=$("<input type='hidden' name='endTime' value='"+end_time+"'/>");
                 form.append(input3);
-                form.submit();//表单提交
-
+                var input4=$("<input type='hidden' name='project_name' value='"+selectText+"'/>");
+                form.append(input4);
+                var options={
+                    type:'POST',
+                    url:'/InspectionRecordPDFOperation/getRecordReportPDF.action',
+                    dataType:'json',
+                    beforeSubmit:function () {
+                        ajaxLoading();
+                    },
+                    success:function (data) {
+                        if(data=="success"){
+                            alert("生成成功!");
+                        }else{
+                            alert("生成失败!");
+                        }
+                        ajaxLoadEnd();
+                    },error:function () {
+                        ajaxLoadEnd();
+                    }
+                };
+                //form.submit(function (e) {
+                form.ajaxSubmit(options);
+                   // return false;
+                //});//表单提交
 
                 // $.ajax({
                 //     url:"/InspectionRecordPDFOperation/getRecordReportPDF.action",
@@ -135,21 +178,21 @@
 <body>
 <div style="padding:10px">
     <select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
-        <option value="-1" selected="selected">所有工序</option>
-        <option value="0">外喷砂工序</option>
-        <option value="1">外喷砂检验工序</option>
-        <option value="2">外涂工序(2FBE)</option>
-        <option value="3">外涂检验工序(2FBE)</option>
-        <option value="4">外涂工序(3LPE)</option>
-        <option value="5">外涂检验工序(3LPE)</option>
-        <option value="6">外喷标工序</option>
-        <option value="7">外涂层终检工序</option>
-        <option value="8">内喷砂工序</option>
-        <option value="9">内喷砂检验工序</option>
-        <option value="10">内涂工序</option>
-        <option value="11">内涂检验工序</option>
-        <option value="12">内喷标工序</option>
-        <option value="13">内涂层终检工序</option>
+        <%--<option value="-1" selected="selected">所有工序</option>--%>
+        <%--<option value="0">外喷砂工序</option>--%>
+        <%--<option value="1">外喷砂检验工序</option>--%>
+        <%--<option value="2">外涂工序(2FBE)</option>--%>
+        <%--<option value="3">外涂检验工序(2FBE)</option>--%>
+        <%--<option value="4">外涂工序(3LPE)</option>--%>
+        <%--<option value="5">外涂检验工序(3LPE)</option>--%>
+        <%--<option value="6">外喷标工序</option>--%>
+        <%--<option value="7">外涂层终检工序</option>--%>
+        <%--<option value="8">内喷砂工序</option>--%>
+        <%--<option value="9">内喷砂检验工序</option>--%>
+        <%--<option value="10">内涂工序</option>--%>
+        <%--<option value="11">内涂检验工序</option>--%>
+        <%--<option value="12">内喷标工序</option>--%>
+        <%--<option value="13">内涂层终检工序</option>--%>
     </select>
     <span class="i18n1" name="begintime">开始时间</span>:
     <input id="begintime" name="begintime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">

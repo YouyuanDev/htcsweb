@@ -19,5 +19,5 @@ public interface OdCoating3LpeProcessDao {
     //public int getCount();
     public int getCountAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no") String operator_no, @Param("begin_time") Date begin_time, @Param("end_time") Date end_time,@Param("mill_no") String mill_no);
     //获取3lpe外涂记录pdf
-    public List<OdCoating3LpeProcess>getOd3LPECoatRecord(@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
+    public List<HashMap<String,Object>>getOd3LPECoatRecord(@Param("project_no")String project_no,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
 }
