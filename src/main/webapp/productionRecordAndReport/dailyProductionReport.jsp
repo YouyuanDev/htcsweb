@@ -158,14 +158,21 @@
                         hlAlertFour("请选择生产日期");
                         return false;
                     }
+                    if($("input[name='project_no']").val()==""){
+
+                        hlAlertFour("请输入项目编号");
+                        return false;
+                    }
 
                 },
                 success: function(result){
+
                     var result = eval('('+result+')');
                     $('#hldailyProRptDialog').dialog('close');
                     if (result.success){
                         $('#dailyProRptDatagrids').datagrid('reload');
                     }
+                    clearFormLabel();
                     hlAlertFour(result.message);
 
                 },
@@ -362,7 +369,7 @@
                 </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="odbarepipecutcount">外光管切长数量</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="od_bare_pipe_cut_count" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="od_bare_pipe_cut_count" value=""/></td>
                     <td></td>
                     <td width="16%" class="i18n1" name="odcoatedpiperejectedcount">外涂层管废管数量</td>
                     <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="od_coated_pipe_rejected_count" value=""/></td>
