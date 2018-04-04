@@ -16,5 +16,5 @@ public interface OdFinalInspectionProcessDao {
     //public int getCount();
     public int getCountAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no")String operator_no, @Param("begin_time")Date begin_time, @Param("end_time")Date end_time,@Param("mill_no")String mill_no);
     //获取外涂终检记录
-    public List<OdFinalInspectionProcess>getOdFianlInspectionRecord(@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
+    public List<HashMap<String,Object>>getOdFianlInspectionRecord(@Param("project_no")String project_no,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
 }

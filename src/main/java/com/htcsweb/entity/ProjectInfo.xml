@@ -144,4 +144,7 @@
             </where>
     </select>
 
+    <select id="getProjectNoAndName" resultType="map">
+        SELECT p.project_no,p.project_name FROM  project_info p
+    </select>
 </mapper>

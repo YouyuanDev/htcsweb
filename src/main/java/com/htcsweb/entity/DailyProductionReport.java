@@ -1,10 +1,13 @@
 package com.htcsweb.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class DailyProductionReport {
 
     private  int id; //流水号
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date production_date;
     private String project_no;    //项目编号
     private String od_coating_type;  //

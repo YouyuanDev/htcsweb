@@ -23,5 +23,6 @@ public interface ProjectInfoDao {
     public String getProjectNameByNo(@Param("project_no")String project_no);
     public List<ProjectInfo> getProjectInfoByContract(@Param("contract_no")String contract_no);
     public List<HashMap<String,Object>>getProjectInfoByNoOrName(@Param("project_no")String project_no,@Param("project_name")String project_name);
-
+    //获取项目编号和名字
+    public  List<HashMap<String,Object>>getProjectNoAndName();
 }

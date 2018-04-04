@@ -30,7 +30,16 @@ public class ProjectController {
     @Autowired
     private ProjectInfoDao projectInfoDao;
 
-
+    //获取项目编号和名称
+    @RequestMapping(value = "/getProjectNoAndName",produces="text/plain;charset=UTF-8")
+    @ResponseBody
+    public String getProjectNoAndName(HttpServletRequest request,HttpServletResponse response)
+    {
+        List<HashMap<String,Object>>list=projectInfoDao.getProjectNoAndName();
+        JSONArray jsonArray=new JSONArray();
+        jsonArray.add(list);
+        return jsonArray.toString();
+    }
 
     //模糊查询project信息列表
     @RequestMapping(value = "/getProjectInfoByLike")

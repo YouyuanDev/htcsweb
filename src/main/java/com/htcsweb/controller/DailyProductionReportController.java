@@ -65,13 +65,11 @@ public class DailyProductionReportController {
         String mmp= JSONArray.toJSONString(maps);
         return mmp;
     }
-
-
-
-    @RequestMapping("/saveDailyProductionReport")
+    @RequestMapping(value = "/saveDailyProductionReport")
     @ResponseBody
     public String saveDailyProductionReport(DailyProductionReport dailyProductionReport, HttpServletRequest request, HttpServletResponse response){
         JSONObject json=new JSONObject();
+        System.out.println("进入---"+dailyProductionReport.getId());
         try{
             String productiondate= request.getParameter("production-date");
             int resTotal=0;
