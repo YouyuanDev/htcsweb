@@ -2,6 +2,7 @@ package com.htcsweb.controller;
 
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.*;
 import com.htcsweb.entity.*;
 import com.htcsweb.util.FileBean;
@@ -47,8 +48,10 @@ public class InspectionRecordPDFController {
     //定义临时文件名
     String tempDayName=null,tempNightName=null;
     //定义工位的生成pdf的集合
-    List<String>stationDayList=new ArrayList<String>();
-    List<String>stationNightList=new ArrayList<String>();
+    List<String>stationOdDayList=new ArrayList<String>();
+    List<String>stationOdNightList=new ArrayList<String>();
+    List<String>stationIdDayList=new ArrayList<String>();
+    List<String>stationIdNightList=new ArrayList<String>();
     List<String>delSetPath=new ArrayList<String>();//定义删除pdf集合，用于生成zip后删除所有的临时文件
     //String logoImageFullName=this.getClass().getClassLoader().getResource("").getPath() + "template/img/image002.jpg";
     //String pdfDirPath=this.getClass().getClassLoader().getResource("").getPath()+"upload/pdf/";
@@ -87,110 +90,14 @@ public class InspectionRecordPDFController {
     private OdCoating3LpeInspectionProcessDao odCoating3LpeInspectionProcessDao;
     @Autowired
     private OdFinalInspectionProcessDao odFinalInspectionProcessDao;
-
-//    @RequestMapping(value="getRecordReportPDF",produces="application/json;charset=UTF-8")
-//    @ResponseBody
-//    public  String getRecordReportPDF(HttpServletRequest request, HttpServletResponse response){
-//        String flag="fail";
-//        String pdfPath=request.getSession().getServletContext().getRealPath("/")+"upload/pdf/";
-//        String dayOutputPDFFullName=pdfPath+"daymerge.pdf";
-//        String nightOutputPDFFullName=pdfPath+"nightmerge.pdf";
-//        try{
-//            //判断合成文件是否存在
-//            File fileDay=new File(dayOutputPDFFullName);
-//            File fileNight=new File(nightOutputPDFFullName);
-//            if(!fileDay.exists()){
-//                fileDay.createNewFile();
-//            }
-//            if(!fileNight.exists()){
-//                fileNight.createNewFile();
-//            }
-//            SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
-//            //SimpleDateFormat timeformat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//            String selectValStr=request.getParameter("selectValue");
-//            String beginTimeStr=request.getParameter("beginTime");
-//            String endTimeStr=request.getParameter("endTime");
-//            Date start_time=null;
-//            Date finish_time=null;
-//            if(selectValStr!=null&&!selectValStr.equals("")){
-//                int selectVal=Integer.parseInt(selectValStr);
-//                if(beginTimeStr==null||beginTimeStr.equals("")||endTimeStr==null||endTimeStr.equals("")){
-//                    beginTimeStr=format.format(new Date());
-//                    endTimeStr=format.format(new Date());
-//                }
-//                start_time=format.parse(beginTimeStr);
-//                finish_time=format.parse(endTimeStr);
-//                //时间集合为包含前面不包含后面
-//                List<String>listDate=getBetweenDates(start_time,finish_time);
-//                Date day_begin_time=null,day_end_time=null,night_begin_time=null,night_end_time=null;
-//                List<String> dayPdfNamePathList=new ArrayList<>();
-//                List<String> nightPdfNamePathList=new ArrayList<>();
-//                List<String>dayAndNightList=new ArrayList<>();
-//                String dayTempName=null,nightTempName=null;
-//                for (int i=0;i<listDate.size();i++){
-//                    day_begin_time=timeformat.parse(listDate.get(i)+" 08:00:00");
-//                    day_end_time=timeformat.parse(listDate.get(i)+" 20:00:00");
-//                    night_begin_time=timeformat.parse(listDate.get(i)+" 20:00:00");
-//                    night_end_time=timeformat.parse(getNextDay(listDate.get(i))+" 08:00:00");
-//                    switch (selectVal) {
-//                        case 0://外喷砂工序
-//                            dayTempName=getOdBlastRecord(request,0,day_begin_time,day_end_time);//生成白班报表PDF
-//                            if(dayTempName!=null){
-//                                dayPdfNamePathList.add(dayTempName);
-//                                dayAndNightList.add(dayTempName);
-//                            }
-//                            nightTempName=getOdBlastRecord(request,1,night_begin_time,night_end_time);//生成夜班报表PDF
-//                            if(nightTempName!=null){
-//                                nightPdfNamePathList.add(nightTempName);
-//                                dayAndNightList.add(nightTempName);
-//                            }
-//                            flag="success";
-//                            break;
-//                        case 1://外喷砂检验工序
-//
-//                            break;
-//                        case 2://外涂工序(2FBE)
-//
-//                            break;
-//                        case 3://外涂检验工序(2FBE)
-//
-//                            break;
-//                        case 4://外涂工序(3LPE)
-//
-//                            break;
-//                        case 5://外涂检验工序(3LPE)
-//
-//                            break;
-//                        case 6://外涂层终检工序
-//
-//                            break;
-//                        case 7://内喷砂工序
-//
-//                            break;
-//                        case 8://内喷砂检验工序
-//
-//                            break;
-//                        case 9://内涂工序
-//
-//                            break;
-//                    }
-//                }
-//                //然后根据白班 夜班的集合，Merge Pdf,最后打包下载
-//                MergePDF.MergePDFs(dayPdfNamePathList,dayOutputPDFFullName);
-//                MergePDF.MergePDFs(nightPdfNamePathList,nightOutputPDFFullName);
-//                List<String>dayNightPdf=new ArrayList<>();
-//                dayNightPdf.add(dayOutputPDFFullName);
-//                dayNightPdf.add(nightOutputPDFFullName);
-//                ResponseUtil.downLoadPdf(dayNightPdf,request,response);
-//            }else{
-//                //没有获取到数据，生成失败
-//            }
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//        return  flag;
-//    }
-
+    @Autowired
+    private IdBlastInspectionProcessDao idBlastInspectionProcessDao;
+    @Autowired
+    private IdCoatingProcessDao idCoatingProcessDao;
+    @Autowired
+    private  IdCoatingInspectionProcessDao idCoatingInspectionProcessDao;
+    @Autowired
+    private  IdFinalInspectionProcessDao idFinalInspectionProcessDao;
     @RequestMapping(value="getRecordReportPDF",produces="application/json;charset=UTF-8")
     @ResponseBody
     public  String getRecordReportPDF(HttpServletRequest request, HttpServletResponse response){
@@ -198,11 +105,12 @@ public class InspectionRecordPDFController {
         Date start_time=null;
         Date finish_time=null;
         List<String>listDate=new ArrayList<>();//时间区间集合
-        List<String>listPdfSetPath=new ArrayList<>();//pdf白班夜班集合
-        String pdfSetDayPath="",pdfSetNightPath="";
+        //List<String>listPdfSetPath=new ArrayList<>();//pdf白班夜班集合
+        String pdfSetOdDayPath="",pdfSetOdNightPath="",pdfSetIdDayPath="",pdfSetIdNightPath="";
         Date day_begin_time=null,day_end_time=null,night_begin_time=null,night_end_time=null;//定义每天班次的开始结束时间
         //是否成功标识
-        String flag="fail";
+        String flag="success",zipName="";
+        //HashMap<String,Object>map=new HashMap<>();
         //先获取选择的日期区间之间的所有日期
         String project_no=request.getParameter("project_no");
         String project_name=request.getParameter("project_name");
@@ -211,6 +119,7 @@ public class InspectionRecordPDFController {
         }
         String beginTimeStr=request.getParameter("beginTime");
         String endTimeStr=request.getParameter("endTime");
+        List<String>dayNightPdf=new ArrayList<>();
         if(project_no!=null&&!project_no.equals("")){
             try{
                 if(beginTimeStr==null||beginTimeStr.equals("")||endTimeStr==null||endTimeStr.equals("")){
@@ -222,43 +131,98 @@ public class InspectionRecordPDFController {
                 listDate=getBetweenDates(start_time,finish_time);
                 //遍历时间区间，生成白班、夜班集合PDF文件
                 for (int i=0;i<listDate.size();i++){
-                    pdfSetDayPath=basePath+"upload/pdf/"+(project_name+"_"+listDate.get(i)+"_白班(Day).pdf");
-                    pdfSetNightPath=basePath+"upload/pdf/"+(project_name+"_"+listDate.get(i)+"_夜班(Night).pdf");
-                    File fileday=new File(pdfSetDayPath);
-                    File filenight=new File(pdfSetNightPath);
-                    if(!fileday.exists()){
-                        fileday.createNewFile();
+                    pdfSetOdDayPath=basePath+"upload/pdf/"+(project_name+"_"+listDate.get(i)+"_外防白班(Day).pdf");
+                    pdfSetOdNightPath=basePath+"upload/pdf/"+(project_name+"_"+listDate.get(i)+"_外防夜班(Night).pdf");
+                    pdfSetIdDayPath=basePath+"upload/pdf/"+(project_name+"_"+listDate.get(i)+"_内防白班(Day).pdf");
+                    pdfSetIdNightPath=basePath+"upload/pdf/"+(project_name+"_"+listDate.get(i)+"_内防夜班(Night).pdf");
+                    File fileodday=new File(pdfSetOdDayPath);
+                    File fileodnight=new File(pdfSetOdNightPath);
+                    File fileidday=new File(pdfSetIdDayPath);
+                    File fileidnight=new File(pdfSetIdNightPath);
+                    if(!fileodday.exists()){
+                        fileodday.createNewFile();
                     }
-                    if(!filenight.exists()){
-                        filenight.createNewFile();
+                    if(!fileodnight.exists()){
+                        fileodnight.createNewFile();
                     }
-                    listPdfSetPath.add(pdfSetDayPath);
-                    listPdfSetPath.add(pdfSetNightPath);
+                    if(!fileidday.exists()){
+                        fileidday.createNewFile();
+                    }
+                    if(!fileidnight.exists()){
+                        fileidnight.createNewFile();
+                    }
                 }
                 //按天生成白班和夜班的pdf,然后融合到白班的pdf和夜班的pdf中
                 for (int i=0;i<listDate.size();i++){
-                    pdfSetDayPath=basePath+"upload/pdf/"+(project_name+"_"+listDate.get(i)+"_白班(Day).pdf");
-                    pdfSetNightPath=basePath+"upload/pdf/"+(project_name+"_"+listDate.get(i)+"_夜班(Night).pdf");
+                    pdfSetOdDayPath=basePath+"upload/pdf/"+(project_name+"_"+listDate.get(i)+"_外防白班(Day).pdf");
+                    pdfSetOdNightPath=basePath+"upload/pdf/"+(project_name+"_"+listDate.get(i)+"_外防夜班(Night).pdf");
+                    pdfSetIdDayPath=basePath+"upload/pdf/"+(project_name+"_"+listDate.get(i)+"_内防白班(Day).pdf");
+                    pdfSetIdNightPath=basePath+"upload/pdf/"+(project_name+"_"+listDate.get(i)+"_内防夜班(Night).pdf");
                     day_begin_time=timeformat.parse(listDate.get(i)+" 08:00:00");
                     day_end_time=timeformat.parse(listDate.get(i)+" 20:00:00");
                     night_begin_time=timeformat.parse(listDate.get(i)+" 20:00:00");
                     night_end_time=timeformat.parse(getNextDay(listDate.get(i))+" 08:00:00");
+
+                    //-------------------外防腐---------------------
+
                     //1.生成当天的外打砂工位的模板
                     OdBlastRecord(request,project_no,0,day_begin_time,day_end_time);//生成白班报表PDF
                     OdBlastRecord(request,project_no,1,night_begin_time,night_end_time);//生成夜班报表PDF
                     //2.生成当天的外打砂检验工位的模板
                     OdBlastInspectionRecord(request,project_no,0,day_begin_time,day_end_time);
                     OdBlastInspectionRecord(request,project_no,1,night_begin_time,night_end_time);
-                    //最后分别融合白班集合和夜班集合
-                    if(stationDayList.size()>0){
-                        MergePDF.MergePDFs(stationDayList,pdfSetDayPath);
+                    //3.生成当天的外涂(2FBE)工位的模板
+                    OdCoat2FBERecord(request,project_no,0,day_begin_time,day_end_time);
+                    OdCoat2FBERecord(request,project_no,1,night_begin_time,night_end_time);
+                    //4.生成当天的外涂检验(2FBE)工位的模板
+                     OdCoat2FBEInspectionRecord(request,project_no,0,day_begin_time,day_end_time);
+                    OdCoat2FBEInspectionRecord(request,project_no,1,night_begin_time,night_end_time);
+                    //5.生成当天的外涂(3LPE)工位的模板
+                    OdCoat3LPERecord(request,project_no,0,day_begin_time,day_end_time);
+                    OdCoat3LPERecord(request,project_no,1,night_begin_time,night_end_time);
+                    //6.生成当天的外涂检验(3LPE)工位的模板
+                    OdCoat3LPEInspectionRecord(request,project_no,0,day_begin_time,day_end_time);
+                    OdCoat3LPEInspectionRecord(request,project_no,1,night_begin_time,night_end_time);
+                    //7.生成当天的外防终检工位的模板
+                    OdCoatFinalInspectionRecord(request,project_no,0,day_begin_time,day_end_time);
+                    OdCoatFinalInspectionRecord(request,project_no,1,night_begin_time,night_end_time);
+
+                    //-------------------内防腐---------------------
+
+                    //8.内打砂检验记录PDF
+                    IdBlastInspectionRecord(request,project_no,0,day_begin_time,day_end_time);
+                    IdBlastInspectionRecord(request,project_no,1,night_begin_time,night_end_time);
+                    //9.内涂记录PDF
+                    IdCoatRecord(request,project_no,0,day_begin_time,day_end_time);
+                    IdCoatRecord(request,project_no,1,night_begin_time,night_end_time);
+                    //10.内涂检验记录PDF
+                    IdCoatInspectionRecord(request,project_no,0,day_begin_time,day_end_time);
+                    IdCoatInspectionRecord(request,project_no,1,night_begin_time,night_end_time);
+                    //11.内涂终验记录PDF
+                    IdFinalInspectionRecord(request,project_no,0,day_begin_time,day_end_time);
+                    IdFinalInspectionRecord(request,project_no,1,night_begin_time,night_end_time);
+                    //最后分别融合外访和内防的白班集合和夜班集合
+                    if(stationOdDayList.size()>0){
+                        MergePDF.MergePDFs(stationOdDayList,pdfSetOdDayPath);
                     }
-                    if(stationNightList.size()>0){
-                        MergePDF.MergePDFs(stationNightList,pdfSetNightPath);
+                    if(stationOdNightList.size()>0){
+                        MergePDF.MergePDFs(stationOdNightList,pdfSetOdNightPath);
                     }
+                    if(stationIdDayList.size()>0){
+                        MergePDF.MergePDFs(stationIdDayList,pdfSetIdDayPath);
+                    }
+                    if(stationIdNightList.size()>0){
+                        MergePDF.MergePDFs(stationIdNightList,pdfSetIdNightPath);
+                    }
+                    dayNightPdf.add(pdfSetOdDayPath);
+                    dayNightPdf.add(pdfSetOdNightPath);
+                    dayNightPdf.add(pdfSetIdDayPath);
+                    dayNightPdf.add(pdfSetIdNightPath);
                     //清空stationDayList和stationNightList
-                    stationDayList.clear();
-                    stationNightList.clear();
+                    stationOdDayList.clear();
+                    stationOdNightList.clear();
+                    stationIdDayList.clear();
+                    stationIdNightList.clear();
                 }
                 //定时删除临时文件
                 for (int j=0;j<delSetPath.size();j++){
@@ -269,16 +233,25 @@ public class InspectionRecordPDFController {
                         }
                     }
                 }
-                flag="success";
+                zipName="upload/pdf/"+ResponseUtil.downLoadPdf(dayNightPdf,request,response);
             }catch (Exception e){
                 e.printStackTrace();
             }
         }
-        JSONArray jsonArray=new JSONArray();
-        jsonArray.add(flag);
-        return jsonArray.toString();
+        return JSONObject.toJSONString(zipName);
     }
 
+    @RequestMapping(value="downloadPDF",produces="application/json;charset=UTF-8")
+    @ResponseBody
+    public String downloadPDF(HttpServletRequest request, HttpServletResponse response){
+        String pathArr=request.getParameter("pathList");
+        System.out.println(pathArr+"0-------------");
+        String []pathList=pathArr.split(";");
+        List<String>dayNightPdf=new ArrayList<>();
+        dayNightPdf=Arrays.asList(pathList);
+        ResponseUtil.downLoadPdf(dayNightPdf,request,response);
+        return null;
+    }
     //1.---------------获取外打砂记录PDF
     public  void OdBlastRecord(HttpServletRequest request,String project_no,int dayOrNight,Date begin_time,Date end_time){
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
@@ -301,7 +274,7 @@ public class InspectionRecordPDFController {
                         title_project_name=String.valueOf(list.get(i).get("project_name"));
                         title_pipe_size=("Φ"+String.valueOf(list.get(i).get("od"))+"*"+String.valueOf(list.get(i).get("wt"))+"mm");
                         title_standard=(String.valueOf(list.get(i).get("client_spec"))+" "+String.valueOf(list.get(i).get("coating_standard")));
-                        title_coating_type=String.valueOf(list.get(i).get("external_coating").toString());
+                        title_coating_type=getFormatString(String.valueOf(list.get(i).get("external_coating")));
                         datalist.add(new Label(3, 4,title_project_name, wcf));
                         datalist.add(new Label(9, 4,title_pipe_size, wcf));
                         datalist.add(new Label(3, 5,title_standard, wcf));
@@ -373,9 +346,9 @@ public class InspectionRecordPDFController {
                         row=0;sb.setLength(0);
                         if(newPdfName!=null){
                             if(dayOrNight==0){
-                                stationDayList.add(newPdfName);
+                                stationOdDayList.add(newPdfName);
                             }else{
-                                stationNightList.add(newPdfName);
+                                stationOdNightList.add(newPdfName);
                             }
                             delSetPath.add(newPdfName);
                         }
@@ -392,9 +365,9 @@ public class InspectionRecordPDFController {
                     row=0;sb.setLength(0);
                     if(newPdfName!=null){
                         if(dayOrNight==0){
-                            stationDayList.add(newPdfName);
+                            stationOdDayList.add(newPdfName);
                         }else{
-                            stationNightList.add(newPdfName);
+                            stationOdNightList.add(newPdfName);
                         }
                         delSetPath.add(newPdfName);
                     }
@@ -425,7 +398,7 @@ public class InspectionRecordPDFController {
                     title_project_name=String.valueOf(list.get(i).get("project_name"));
                     title_pipe_size=("Φ"+String.valueOf(list.get(i).get("od"))+"*"+String.valueOf(list.get(i).get("wt"))+"mm");
                     title_standard=(String.valueOf(list.get(i).get("client_spec"))+" "+String.valueOf(list.get(i).get("coating_standard")));
-                    title_coating_type=String.valueOf(list.get(i).get("external_coating").toString());
+                    title_coating_type=getFormatString(String.valueOf(list.get(i).get("external_coating")));
                     datalist.add(new Label(3, 4,title_project_name, wcf));
                     datalist.add(new Label(8, 4,title_pipe_size, wcf));
                     datalist.add(new Label(3, 5,title_standard, wcf));
@@ -497,9 +470,9 @@ public class InspectionRecordPDFController {
                     row=0;sb.setLength(0);
                     if(newPdfName!=null){
                         if(dayOrNight==0){
-                            stationDayList.add(newPdfName);
+                            stationOdDayList.add(newPdfName);
                         }else{
-                            stationNightList.add(newPdfName);
+                            stationOdNightList.add(newPdfName);
                         }
                         delSetPath.add(newPdfName);
                     }
@@ -516,9 +489,9 @@ public class InspectionRecordPDFController {
                 row=0;sb.setLength(0);
                 if(newPdfName!=null){
                     if(dayOrNight==0){
-                        stationDayList.add(newPdfName);
+                        stationOdDayList.add(newPdfName);
                     }else{
-                        stationNightList.add(newPdfName);
+                        stationOdNightList.add(newPdfName);
                     }
                     delSetPath.add(newPdfName);
                 }
@@ -547,7 +520,7 @@ public class InspectionRecordPDFController {
                     title_project_name=String.valueOf(list.get(i).get("project_name"));
                     title_pipe_size=("Φ"+String.valueOf(list.get(i).get("od"))+"*"+String.valueOf(list.get(i).get("wt"))+"mm");
                     title_standard=(String.valueOf(list.get(i).get("client_spec"))+" "+String.valueOf(list.get(i).get("coating_standard")));
-                    title_coating_type=String.valueOf(list.get(i).get("external_coating").toString());
+                    title_coating_type=getFormatString(String.valueOf(list.get(i).get("external_coating")));
                     datalist.add(new Label(3, 4,title_project_name, wcf));
                     datalist.add(new Label(8, 4,title_pipe_size, wcf));
                     datalist.add(new Label(3, 5,title_standard, wcf));
@@ -575,7 +548,7 @@ public class InspectionRecordPDFController {
                 datalist.add(new Label(2, row+10,String.valueOf(list.get(i).get("spray_speed")), wcf));
                 datalist.add(new Label(3, row+10,String.valueOf(list.get(i).get("application_temp")), wcf));
                 datalist.add(new Label(4, row+10,String.valueOf(list.get(i).get("application_voltage")), wcf));
-                String dateStr=sdf.format(list.get(i).get("operation_time"));
+                String dateStr=timeformat.format(list.get(i).get("operation_time"));
                 Label label15= new Label(5, row+10,dateStr, wcf);
                 datalist.add(label15);
                 datalist.add(new Label(6, row+10,String.valueOf(list.get(i).get("to_first_touch_duration")), wcf));
@@ -616,9 +589,9 @@ public class InspectionRecordPDFController {
                     row=0;sb.setLength(0);
                     if(newPdfName!=null){
                         if(dayOrNight==0){
-                            stationDayList.add(newPdfName);
+                            stationOdDayList.add(newPdfName);
                         }else{
-                            stationNightList.add(newPdfName);
+                            stationOdNightList.add(newPdfName);
                         }
                         delSetPath.add(newPdfName);
                     }
@@ -634,9 +607,9 @@ public class InspectionRecordPDFController {
                 row=0;
                 if(newPdfName!=null){
                     if(dayOrNight==0){
-                        stationDayList.add(newPdfName);
+                        stationOdDayList.add(newPdfName);
                     }else{
-                        stationNightList.add(newPdfName);
+                        stationOdNightList.add(newPdfName);
                     }
                     delSetPath.add(newPdfName);
                 }
@@ -665,7 +638,7 @@ public class InspectionRecordPDFController {
                     title_project_name=String.valueOf(list.get(i).get("project_name"));
                     title_pipe_size=("Φ"+String.valueOf(list.get(i).get("od"))+"*"+String.valueOf(list.get(i).get("wt"))+"mm");
                     title_standard=(String.valueOf(list.get(i).get("client_spec"))+" "+String.valueOf(list.get(i).get("coating_standard")));
-                    title_coating_type=String.valueOf(list.get(i).get("external_coating").toString());
+                    title_coating_type=getFormatString(String.valueOf(list.get(i).get("external_coating")));
                     datalist.add(new Label(3, 4,title_project_name, wcf));
                     datalist.add(new Label(8, 4,title_pipe_size, wcf));
                     datalist.add(new Label(3, 5,title_standard, wcf));
@@ -713,7 +686,7 @@ public class InspectionRecordPDFController {
                     }
                 }
                 datalist.add(new Label(7, row+9,label7Txt, wcf));
-                datalist.add(new Label(8, row+9, String.valueOf(list.get(i).get("surface_condition")), wcf));
+                datalist.add(new Label(8, row+9, getFormatString(list.get(i).get("surface_condition").toString()), wcf));
                 datalist.add(new Label(2, row+10,String.valueOf(list.get(i).get("base_coat_thickness_list")), wcf));
                 datalist.add(new Label(5, row+10, String.valueOf(list.get(i).get("top_coat_thickness_list")), wcf));
                 datalist.add(new Label(8, row+10,String.valueOf(list.get(i).get("total_coating_thickness_list")), wcf));
@@ -754,9 +727,9 @@ public class InspectionRecordPDFController {
                     row=0;sb.setLength(0);
                     if(newPdfName!=null){
                         if(dayOrNight==0){
-                            stationDayList.add(newPdfName);
+                            stationOdDayList.add(newPdfName);
                         }else{
-                            stationNightList.add(newPdfName);
+                            stationOdNightList.add(newPdfName);
                         }
                         delSetPath.add(newPdfName);
                     }
@@ -772,9 +745,9 @@ public class InspectionRecordPDFController {
                 row=0;sb.setLength(0);
                 if(newPdfName!=null){
                     if(dayOrNight==0){
-                        stationDayList.add(newPdfName);
+                        stationOdDayList.add(newPdfName);
                     }else{
-                        stationNightList.add(newPdfName);
+                        stationOdNightList.add(newPdfName);
                     }
                     delSetPath.add(newPdfName);
                 }
@@ -787,7 +760,7 @@ public class InspectionRecordPDFController {
     public  void OdCoat3LPERecord(HttpServletRequest request,String project_no,int dayOrNight,Date begin_time,Date end_time){
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/od_coating_3lpe_record_template.xls";
-        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String newPdfName=null;
         try{
             List<HashMap<String,Object>>list=odCoating3LpeProcessDao.getOd3LPECoatRecord(project_no,begin_time,end_time);
@@ -804,7 +777,7 @@ public class InspectionRecordPDFController {
                     title_project_name=String.valueOf(list.get(i).get("project_name"));
                     title_pipe_size=("Φ"+String.valueOf(list.get(i).get("od"))+"*"+String.valueOf(list.get(i).get("wt"))+"mm");
                     title_standard=(String.valueOf(list.get(i).get("client_spec"))+" "+String.valueOf(list.get(i).get("coating_standard")));
-                    title_coating_type=String.valueOf(list.get(i).get("external_coating").toString());
+                    title_coating_type=getFormatString(String.valueOf(list.get(i).get("external_coating").toString()));
                     datalist.add(new Label(3, 4,title_project_name, wcf));
                     datalist.add(new Label(8, 4,title_pipe_size, wcf));
                     datalist.add(new Label(3, 5,title_standard, wcf));
@@ -833,7 +806,7 @@ public class InspectionRecordPDFController {
                 datalist.add(new Label(3, row+10, String.valueOf(list.get(i).get("base_coat_gun_count")), wcf));
                 datalist.add(new Label(4, row+10,String.valueOf(list.get(i).get("application_temp")), wcf));
                 datalist.add(new Label(5, row+10, String.valueOf(list.get(i).get("application_voltage")), wcf));
-                String dateSter=format.format(list.get(i).get("operation_time"));
+                String dateSter=timeformat.format(list.get(i).get("operation_time"));
                 datalist.add(new Label(6, row+10, dateSter, wcf));
                 datalist.add(new Label(7, row+10, String.valueOf(list.get(i).get("to_first_touch_duration")), wcf));
                 datalist.add(new Label(8, row+10, String.valueOf(list.get(i).get("to_quench_duration")), wcf));
@@ -875,9 +848,9 @@ public class InspectionRecordPDFController {
                     sb.setLength(0);
                     if(newPdfName!=null){
                         if(dayOrNight==0){
-                            stationDayList.add(newPdfName);
+                            stationOdDayList.add(newPdfName);
                         }else{
-                            stationNightList.add(newPdfName);
+                            stationOdNightList.add(newPdfName);
                         }
                         delSetPath.add(newPdfName);
                     }
@@ -895,9 +868,9 @@ public class InspectionRecordPDFController {
                 sb.setLength(0);
                 if(newPdfName!=null){
                     if(dayOrNight==0){
-                        stationDayList.add(newPdfName);
+                        stationOdDayList.add(newPdfName);
                     }else{
-                        stationNightList.add(newPdfName);
+                        stationOdNightList.add(newPdfName);
                     }
                     delSetPath.add(newPdfName);
                 }
@@ -926,7 +899,7 @@ public class InspectionRecordPDFController {
                     title_project_name=String.valueOf(list.get(i).get("project_name"));
                     title_pipe_size=("Φ"+String.valueOf(list.get(i).get("od"))+"*"+String.valueOf(list.get(i).get("wt"))+"mm");
                     title_standard=(String.valueOf(list.get(i).get("client_spec"))+" "+String.valueOf(list.get(i).get("coating_standard")));
-                    title_coating_type=String.valueOf(list.get(i).get("external_coating").toString());
+                    title_coating_type=getFormatString(String.valueOf(list.get(i).get("external_coating")));
                     datalist.add(new Label(3, 4,title_project_name, wcf));
                     datalist.add(new Label(8, 4,title_pipe_size, wcf));
                     datalist.add(new Label(3, 5,title_standard, wcf));
@@ -982,9 +955,8 @@ public class InspectionRecordPDFController {
                 }
                 Label label7 = new Label(7, row+9,label7Txt, wcf);
                 datalist.add(label7);
-                Label label8 = new Label(8, row+9, String.valueOf(list.get(i).get("surface_condition")), wcf);
+                Label label8 = new Label(8, row+9,getFormatString(String.valueOf(list.get(i).get("surface_condition"))), wcf);
                 datalist.add(label8);
-
                 Label label9 = new Label(2, row+10, String.valueOf(list.get(i).get("base_coat_thickness_list")), wcf);
                 datalist.add(label9);
                 Label label10 = new Label(4, row+10, String.valueOf(list.get(i).get("middle_coat_thickness_list")), wcf);
@@ -1030,9 +1002,9 @@ public class InspectionRecordPDFController {
                     row=0;
                     if(newPdfName!=null){
                         if(dayOrNight==0){
-                            stationDayList.add(newPdfName);
+                            stationOdDayList.add(newPdfName);
                         }else{
-                            stationNightList.add(newPdfName);
+                            stationOdNightList.add(newPdfName);
                         }
                         delSetPath.add(newPdfName);
                     }
@@ -1047,9 +1019,9 @@ public class InspectionRecordPDFController {
                 row=0;sb.setLength(0);
                 if(newPdfName!=null){
                     if(dayOrNight==0){
-                        stationDayList.add(newPdfName);
+                        stationOdDayList.add(newPdfName);
                     }else{
-                        stationNightList.add(newPdfName);
+                        stationOdNightList.add(newPdfName);
                     }
                     delSetPath.add(newPdfName);
                 }
@@ -1059,194 +1031,641 @@ public class InspectionRecordPDFController {
         }
     }
     //7.---------------获取外涂终检记录PDF
-    @RequestMapping("getOdCoatFinalInspectionRecord")
-    public  void getOdCoatFinalInspectionRecord(HttpServletRequest request,String project_no,int dayOrNight,Date begin_time,Date end_time){
-//        String templateFullName=request.getSession().getServletContext().getRealPath("/")
-//                +"template/od_final_inspection_record_template.xls";
-//        String newPdfName=null;
-//        try{
-//            List<HashMap<String,Object>>list=odFinalInspectionProcessDao.getOdFianlInspectionRecord(project_no,begin_time,end_time);
-//            ArrayList<Label> datalist=new ArrayList<Label>();
-//            int index=1,row=0;
-//            StringBuilder sb=new StringBuilder();
-//            String result="",cutbackStr=null,cutback1=" ",cutback2=" ",stencilStr=" ";;
-//            int qualifiedTotal=0;
-//            boolean isHaveTitle=true;
-//            String title_project_name=" ",title_pipe_size=" ",title_standard=" ",title_coating_type;
-//            for (int i=0;i<list.size();i++){
-//                if(isHaveTitle){
-//                    //添加模板头部信息
-//                    title_project_name=String.valueOf(list.get(i).get("project_name"));
-//                    title_pipe_size=("Φ"+String.valueOf(list.get(i).get("od"))+"*"+String.valueOf(list.get(i).get("wt"))+"mm");
-//                    title_standard=(String.valueOf(list.get(i).get("client_spec"))+" "+String.valueOf(list.get(i).get("coating_standard")));
-//                    title_coating_type=String.valueOf(list.get(i).get("external_coating").toString());
-//                    datalist.add(new Label(3, 4,title_project_name, wcf));
-//                    datalist.add(new Label(8, 4,title_pipe_size, wcf));
-//                    datalist.add(new Label(3, 5,title_standard, wcf));
-//                    datalist.add(new Label(8, 5,title_coating_type, wcf));
-//                    if(dayOrNight==0){
-//                        datalist.add(new Label(12, 5,"白班(Day)", wcf));
-//                        datalist.add(new Label(12, 4,sdf.format(begin_time), wcf));
-//                    }else{
-//                        datalist.add(new Label(12, 5, "夜班(Night)", wcf));
-//                        datalist.add(new Label(12, 4,sdf.format(begin_time), wcf));
-//                    }
-//                    isHaveTitle=false;
-//                }
-//                datalist.add(new Label(1, row+9, String.valueOf(list.get(i).get("pipe_no")), wcf));
-//                String stencilRes=String.valueOf(list.get(i).get("stencil_verification"));
-//                if(stencilRes!=null&&!stencilStr.equals("")){
-//                    if(stencilRes.equals("0")){
-//                        stencilStr="未检测";
-//                    }else if(stencilRes.equals("1")){
-//                        stencilStr="合格";
-//                    }else if(stencilRes.equals("2")){
-//                        stencilStr="不合格";
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//                    }
-//                }
-//                datalist.add(new Label(2, row+9, stencilStr, wcf));
-//                cutbackStr=String.valueOf(list.get(i).get("cutback_length"));
-//                if(cutbackStr!=null&&!cutbackStr.equals("")){
-//                    String[]arr=cutbackStr.split(",");
-//                    if(arr.length>0){
-//                        cutback1=arr[0];
-//                        if(arr.length>1)
-//                           cutback2=arr[1];
-//                    }
-//                }
-//                //预留端 两个值
-//                datalist.add(new Label(3, row+9, stencilStr, wcf));
-//                datalist.add(new Label(3, row+10, stencilStr, wcf));
-//                //预留端 外观两个值
-//                datalist.add(new Label(4, row+9, String.valueOf(list.get(i).get("cutback_surface")), wcf));
-//                datalist.add(new Label(4, row+10, String.valueOf(list.get(i).get("cutback_surface")), wcf));
-//                //剩磁 四个值 一端两个
-//                String magnetismList[]=String.valueOf(list.get(i).get("magnetism_list")).split(",");
-//                Label label3 = new Label(3, row+9, String.valueOf(list.get(i).get("magnetism_list")), wcf);
-//                datalist.add(label3);
-//                Label label4 = new Label(4, row+9, String.valueOf(list.get(i).getRepairs()), wcf);
-//                datalist.add(label4);
-//                String bevel=String.valueOf(list.get(i).get(""));
-//                String label5txt="未检测";
-//                if(bevel!=null){
-//                    if(bevel.equals("1")){
-//                        label5txt="合格";
-//                    }else if(bevel.equals("2")){
-//                        label5txt="不合格";
-//                    }
-//                }
-//                Label label5 = new Label(5, row+9, label5txt, wcf);
-//                datalist.add(label5);
-//                String Adhesion=list.get(i).getAdhesion_test();
-//                String label6txt="未检测";
-//                if(Adhesion!=null){
-//                    if(Adhesion.equals("1")){
-//                        label6txt="合格";
-//                    }else if(Adhesion.equals("2")){
-//                        label6txt="不合格";
-//                    }
-//                }
-//                Label label6 = new Label(6, row+9, label6txt, wcf);
-//                datalist.add(label6);
-//                String isSample=list.get(i).getIs_sample();
-//                String label7Txt=" ";
-//                if(isSample!=null){
-//                    if(isSample.equals("0")){
-//                        label7Txt="否";
-//                    }else{
-//                        label7Txt="是";
-//                    }
-//
-//                }
-//                Label label7 = new Label(7, row+9,label7Txt, wcf);
-//                datalist.add(label7);
-//                Label label8 = new Label(8, row+9, getFormatString(list.get(i).getSurface_condition()), wcf);
-//                datalist.add(label8);
-//
-//                Label label9 = new Label(2, row+10, String.valueOf(list.get(i).getBase_coat_thickness_list()), wcf);
-//                datalist.add(label9);
-//                Label label10 = new Label(4, row+10, String.valueOf(list.get(i).getMiddle_coat_thickness_list()), wcf);
-//                datalist.add(label10);
-//                Label label11 = new Label(6, row+10, String.valueOf(list.get(i).getTop_coat_thickness_list()), wcf);
-//                datalist.add(label11);
-//                Label label12 = new Label(8, row+10,String.valueOf(list.get(i).getTotal_coating_thickness_list()), wcf);
-//                datalist.add(label12);
-//                result=list.get(i).getResult();
-//                if(result!=null){
-//                    if(result.equals("0")){
-//                        result="不合格";
-//                    }else if(result.equals("1")){
-//                        result="合格";
-//                        qualifiedTotal++;
-//                    }else if(result.equals("2")){
-//                        result="不合格";
-//                    }
-//                    else if(result.equals("3")){
-//                        result="待定";
-//                    }else{
-//                        result=" ";
-//                    }
-//                }else{
-//                    result=" ";
-//                }
-//                Label label13= new Label(12, row+10, result, wcf);
-//                datalist.add(label13);
-//                if(String.valueOf(list.get(i).get("remark"))!=null&&!String.valueOf(list.get(i).get("remark")).equals("")){
-//                    sb.append("#"+list.get(i).get("pipe_no")+":"+list.get(i).get("remark")+" ");
-//                }
-//                //最后一行数据为空问题
-//                index++;
-//                row+=2;
-//                if(index%5==0){
-//                    datalist.add(new Label(2,19,getFormatString(sb.toString()),wcf));
-//                    //到结束
-//                    datalist.add(new Label(12,19,String.valueOf(qualifiedTotal),wcf));
-//                    newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
-//                    datalist.clear();
-//                    index=1;
-//                    row=0;
-//                    sb.setLength(0);
-//                    if(newPdfName!=null){
-//                        if(dayOrNight==0){
-//                            stationDayList.add(newPdfName);
-//                        }else{
-//                            stationNightList.add(newPdfName);
-//                        }
-//                        delSetPath.add(newPdfName);
-//                    }
-//                }
-//            }
-//            if(datalist.size()>0){
-//                datalist.add(new Label(2,19,getFormatString(sb.toString()),wcf));
-//                datalist.add(new Label(12,19,String.valueOf(qualifiedTotal),wcf));
-//                newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
-//                datalist.clear();
-//                index=1;
-//                row=0; sb.setLength(0);
-//                if(newPdfName!=null){
-//                    if(dayOrNight==0){
-//                        stationDayList.add(newPdfName);
-//                    }else{
-//                        stationNightList.add(newPdfName);
-//                    }
-//                    delSetPath.add(newPdfName);
-//                }
-//            }
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
+    public  void OdCoatFinalInspectionRecord(HttpServletRequest request,String project_no,int dayOrNight,Date begin_time,Date end_time){
+        String templateFullName=request.getSession().getServletContext().getRealPath("/")
+                +"template/od_final_inspection_record_template.xls";
+        String newPdfName=null;
+        List<String>splitList=new ArrayList<>();
+        try{
+            List<HashMap<String,Object>>list=odFinalInspectionProcessDao.getOdFianlInspectionRecord(project_no,begin_time,end_time);
+            ArrayList<Label> datalist=new ArrayList<Label>();
+            int index=1,row=0;
+            StringBuilder sb=new StringBuilder();
+            String result="",cutbackStr=null,cutback1=" ",cutback2=" ",stencilStr=" ";;
+            int qualifiedTotal=0;
+            boolean isHaveTitle=true;
+            String title_project_name=" ",title_pipe_size=" ",title_standard=" ",title_coating_type;
+            for (int i=0;i<list.size();i++){
+                if(isHaveTitle){
+                    //添加模板头部信息
+                    title_project_name=String.valueOf(list.get(i).get("project_name"));
+                    title_pipe_size=("Φ"+String.valueOf(list.get(i).get("od"))+"*"+String.valueOf(list.get(i).get("wt"))+"mm");
+                    title_standard=(String.valueOf(list.get(i).get("client_spec"))+" "+String.valueOf(list.get(i).get("coating_standard")));
+                    title_coating_type=getFormatString(String.valueOf(list.get(i).get("external_coating")));
+                    datalist.add(new Label(3, 4,title_project_name, wcf));
+                    datalist.add(new Label(8, 4,title_pipe_size, wcf));
+                    datalist.add(new Label(3, 5,title_standard, wcf));
+                    datalist.add(new Label(8, 5,title_coating_type, wcf));
+                    if(dayOrNight==0){
+                        datalist.add(new Label(12, 5,"白班(Day)", wcf));
+                        datalist.add(new Label(12, 4,sdf.format(begin_time), wcf));
+                    }else{
+                        datalist.add(new Label(12, 5, "夜班(Night)", wcf));
+                        datalist.add(new Label(12, 4,sdf.format(begin_time), wcf));
+                    }
+                    isHaveTitle=false;
+                }
+                datalist.add(new Label(1, row+9, String.valueOf(list.get(i).get("pipe_no")), wcf));
+                String stencilRes=String.valueOf(list.get(i).get("stencil_verification"));
+                if(stencilRes!=null&&!stencilRes.equals("")){
+                    if(stencilRes.equals("0")){
+                        stencilStr="未检测";
+                    }else if(stencilRes.equals("1")){
+                        stencilStr="合格";
+                    }else if(stencilRes.equals("2")){
+                        stencilStr="不合格";
+                    }
+                }
+                datalist.add(new Label(2, row+9, stencilStr, wcf));
+                cutbackStr=String.valueOf(list.get(i).get("cutback_length"));
+                if(cutbackStr!=null&&!cutbackStr.equals("")){
+                    String[]arr=cutbackStr.split(",");
+                    if(arr.length>0){
+                        cutback1=arr[0];
+                        if(arr.length>1)
+                           cutback2=arr[1];
+                    }
+                }
+                //预留端 两个值
+                datalist.add(new Label(3, row+9, cutback1, wcf));
+                datalist.add(new Label(3, row+10, cutback2, wcf));
+                //预留端 外观两个值
+                String cutback= String.valueOf(list.get(i).get("cutback_surface"));
+                if(cutback!=null&&!cutback.equals("")){
+                    if(cutback.equals("0")){
+                        cutback="合格";
+                    }else if(cutback.equals("1")){
+                        cutback="不合格";
+                    }else{
+                        cutback=" ";
+                    }
+                }else{
+                    cutback=" ";
+                }
+                datalist.add(new Label(4, row+9,cutback, wcf));
+                datalist.add(new Label(4, row+10, cutback, wcf));
+                //剩磁 四个值 一端两个
+                splitList=getSplitList(String.valueOf(list.get(i).get("magnetism_list")));
+                datalist.add(new Label(5, row+9, splitList.get(0), wcf));
+                datalist.add(new Label(5, row+10,splitList.get(1), wcf));
+                //平均剩磁
+                datalist.add(new Label(6, row+9, getAvgOfMagnetism(splitList.get(0)), wcf));
+                datalist.add(new Label(6, row+10,getAvgOfMagnetism(splitList.get(1)), wcf));
+                //涂层倒角
+                splitList=getSplitList(String.valueOf(list.get(i).get("coating_bevel_angle_list")));
+                datalist.add(new Label(7, row+9, splitList.get(0), wcf));
+                datalist.add(new Label(7, row+10,splitList.get(1), wcf));
+                //粉末长度
+                splitList=getSplitList(String.valueOf(list.get(i).get("epoxy_cutback_list")));
+                datalist.add(new Label(8, row+9, splitList.get(0), wcf));
+                datalist.add(new Label(8, row+10,splitList.get(1), wcf));
+
+                datalist.add(new Label(11, row+9,sdf.format(sdf.parse(String.valueOf(list.get(i).get("operation_time")))), wcf));
+
+                String result1=String.valueOf(list.get(i).get("result"));
+                String labeltxt=" ";
+                if(result1!=null&&!result1.equals("")){
+                    if(result1.equals("1")){
+                        qualifiedTotal++;
+                        labeltxt="合格";
+                    }else if(result1.equals("2")){
+                        labeltxt="待定";
+                    }else if(result1.equals("0")){
+                        labeltxt="不合格";
+                    }
+                }
+                datalist.add(new Label(12, row+9, labeltxt, wcf));
+                if(String.valueOf(list.get(i).get("remark"))!=null&&!String.valueOf(list.get(i).get("remark")).equals("")){
+                    sb.append("#"+list.get(i).get("pipe_no")+":"+list.get(i).get("remark")+" ");
+                }
+                //最后一行数据为空问题
+                index++;
+                row+=2;
+                if(index%5==0){
+                    datalist.add(new Label(2,19,getFormatString(sb.toString()),wcf));
+                    //到结束
+                    datalist.add(new Label(12,19,String.valueOf(qualifiedTotal),wcf));
+                    newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
+                    datalist.clear();
+                    index=1;
+                    row=0;
+                    sb.setLength(0);
+                    if(newPdfName!=null){
+                        if(dayOrNight==0){
+                            stationOdDayList.add(newPdfName);
+                        }else{
+                            stationOdNightList.add(newPdfName);
+                        }
+                        delSetPath.add(newPdfName);
+                    }
+                }
+            }
+            if(datalist.size()>0){
+                datalist.add(new Label(2,19,getFormatString(sb.toString()),wcf));
+                datalist.add(new Label(12,19,String.valueOf(qualifiedTotal),wcf));
+                newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
+                datalist.clear();
+                index=1;
+                row=0; sb.setLength(0);
+                if(newPdfName!=null){
+                    if(dayOrNight==0){
+                        stationOdDayList.add(newPdfName);
+                    }else{
+                        stationOdNightList.add(newPdfName);
+                    }
+                    delSetPath.add(newPdfName);
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
+
+
+    //8.---------------内打砂检验记录PDF
+    public void  IdBlastInspectionRecord(HttpServletRequest request,String project_no,int dayOrNight,Date begin_time,Date end_time){
+        String templateFullName=request.getSession().getServletContext().getRealPath("/")
+                +"template/id_blast_inspection_record_template.xls";
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String newPdfName=null;
+        try{
+            List<HashMap<String,Object>>list=idBlastInspectionProcessDao.getIdBlastInspectionRecord(project_no,begin_time,end_time);
+            ArrayList<Label> datalist=new ArrayList<Label>();
+            int index=1,row=0;
+            StringBuilder sb=new StringBuilder();
+            String result="";
+            int qualifiedTotal=0;
+            boolean isHaveTitle=true;
+            String title_project_name=" ",title_pipe_size=" ",title_standard=" ",title_coating_type;
+            for (int i=0;i<list.size();i++){
+                if(isHaveTitle){
+                    //添加模板头部信息
+                    title_project_name=String.valueOf(list.get(i).get("project_name"));
+                    title_pipe_size=("Φ"+String.valueOf(list.get(i).get("od"))+"*"+String.valueOf(list.get(i).get("wt"))+"mm");
+                    title_standard=(String.valueOf(list.get(i).get("client_spec"))+" "+String.valueOf(list.get(i).get("coating_standard")));
+                    title_coating_type=getFormatString(String.valueOf(list.get(i).get("internal_coating")));
+                    datalist.add(new Label(3, 4,title_project_name, wcf));
+                    datalist.add(new Label(8, 4,title_pipe_size, wcf));
+                    datalist.add(new Label(3, 5,title_standard, wcf));
+                    datalist.add(new Label(8, 5,title_coating_type, wcf));
+                    if(dayOrNight==0){
+                        datalist.add(new Label(12, 5,"白班(Day)", wcf));
+                        datalist.add(new Label(12, 4,sdf.format(begin_time), wcf));
+                    }else{
+                        datalist.add(new Label(12, 5, "夜班(Night)", wcf));
+                        datalist.add(new Label(12, 4,sdf.format(begin_time), wcf));
+                    }
+                    isHaveTitle=false;
+                }
+                datalist.add(new Label(1, row+8, String.valueOf(list.get(i).get("pipe_no")), wcf));
+                datalist.add(new Label(2, row+8, String.valueOf(list.get(i).get("air_temp")), wcf));
+                datalist.add(new Label(3, row+8, String.valueOf(list.get(i).get("relative_humidity")), wcf));
+                datalist.add(new Label(4, row+8, String.valueOf(list.get(i).get("dew_point")), wcf));
+                datalist.add(new Label(5, row+8, String.valueOf(list.get(i).get("pipe_temp")), wcf));
+                datalist.add(new Label(6, row+8, getFormatString(String.valueOf(list.get(i).get("surface_condition"))) , wcf));
+                datalist.add(new Label(7, row+8, getFormatString(String.valueOf(list.get(i).get("blast_finish_sa25"))), wcf));
+                datalist.add(new Label(8, row+8, String.valueOf(list.get(i).get("surface_dust_rating"))+"级", wcf));
+                datalist.add(new Label(9, row+8, String.valueOf(list.get(i).get("profile")), wcf));
+                datalist.add(new Label(10, row+8, String.valueOf(list.get(i).get("salt_contamination_after_blasting")), wcf));
+                datalist.add(new Label(11, row+8,String.valueOf(list.get(i).get("elapsed_time")), wcf));
+
+                result=String.valueOf(list.get(i).get("result"));
+                if(result!=null){
+                    if(result.equals("0")){
+                        result="不合格";
+                    }else if(result.equals("1")){
+                        result="合格";
+                        qualifiedTotal++;
+                    }else if(result.equals("2")){
+                        result="待定";
+                    }
+                    else{
+                        result="其他";
+                    }
+                }else{
+                    result=" ";
+                }
+                Label label19 = new Label(12, row+8, result, wcf);
+                datalist.add(label19);
+                if(String.valueOf(list.get(i).get("remark"))!=null&&!String.valueOf(list.get(i).get("remark")).equals("")){
+                    sb.append("#"+list.get(i).get("pipe_no")+":"+list.get(i).get("remark")+" ");
+                }
+                //最后一行数据为空问题
+                index++;
+                row++;
+                if(index%13==0){
+                    datalist.add(new Label(2,20,getFormatString(sb.toString()),wcf));
+                    //添加合格数
+                    datalist.add(new Label(12,20,String.valueOf(qualifiedTotal),wcf));
+                    //到结束
+                    newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
+                    datalist.clear();
+                    qualifiedTotal=0;
+                    index=1;
+                    row=0;
+                    sb.setLength(0);
+                    if(newPdfName!=null){
+                        if(dayOrNight==0){
+                            stationIdDayList.add(newPdfName);
+                        }else{
+                            stationIdNightList.add(newPdfName);
+                        }
+                        delSetPath.add(newPdfName);
+                    }
+                }
+            }
+            if(datalist.size()>0){
+                datalist.add(new Label(2,20,String.valueOf(sb.toString()),wcf));
+                //添加合格数
+                datalist.add(new Label(12,20,String.valueOf(qualifiedTotal),wcf));
+                newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
+                datalist.clear();
+                qualifiedTotal=0;
+                index=1;
+                row=0;
+                sb.setLength(0);
+                if(newPdfName!=null){
+                    if(dayOrNight==0){
+                        stationIdDayList.add(newPdfName);
+                    }else{
+                        stationIdNightList.add(newPdfName);
+                    }
+                    delSetPath.add(newPdfName);
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    //9.---------------内涂记录PDF
+    public void  IdCoatRecord(HttpServletRequest request,String project_no,int dayOrNight,Date begin_time,Date end_time){
+        String templateFullName=request.getSession().getServletContext().getRealPath("/")
+                +"template/id_coating_epoxy_record_template.xls";
+        //SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String newPdfName=null;
+        try{
+            List<HashMap<String,Object>>list=idCoatingProcessDao.getIdCoatRecord(project_no,begin_time,end_time);
+            ArrayList<Label> datalist=new ArrayList<Label>();
+            int index=1,row=0;
+            StringBuilder sb=new StringBuilder();
+            String result="";
+            int qualifiedTotal=0;
+            boolean isHaveTitle=true;
+            String title_project_name=" ",title_pipe_size=" ",title_standard=" ",title_coating_type;
+            for (int i=0;i<list.size();i++){
+                if(isHaveTitle){
+                    //添加模板头部信息
+                    title_project_name=String.valueOf(list.get(i).get("project_name"));
+                    title_pipe_size=("Φ"+String.valueOf(list.get(i).get("od"))+"*"+String.valueOf(list.get(i).get("wt"))+"mm");
+                    title_standard=(String.valueOf(list.get(i).get("client_spec"))+" "+String.valueOf(list.get(i).get("coating_standard")));
+                    title_coating_type=getFormatString(String.valueOf(list.get(i).get("internal_coating")));
+                    datalist.add(new Label(3, 4,title_project_name, wcf));
+                    datalist.add(new Label(8, 4,title_pipe_size, wcf));
+                    datalist.add(new Label(3, 5,title_standard, wcf));
+                    datalist.add(new Label(8, 5,title_coating_type, wcf));
+                    if(dayOrNight==0){
+                        datalist.add(new Label(12, 5,"白班(Day)", wcf));
+                        datalist.add(new Label(12, 4,sdf.format(begin_time), wcf));
+                    }else{
+                        datalist.add(new Label(12, 5, "夜班(Night)", wcf));
+                        datalist.add(new Label(12, 4,sdf.format(begin_time), wcf));
+                    }
+                    isHaveTitle=false;
+                }
+                datalist.add(new Label(1, row+8, String.valueOf(list.get(i).get("pipe_no")), wcf));
+                datalist.add(new Label(2, row+8, String.valueOf(list.get(i).get("coating_speed")), wcf));
+                datalist.add(new Label(3, row+8, String.valueOf(list.get(i).get("base_used")), wcf));
+                datalist.add(new Label(4, row+8, String.valueOf(list.get(i).get("base_batch")), wcf));
+                datalist.add(new Label(5, row+8, String.valueOf(list.get(i).get("curing_agent_used")), wcf));
+                datalist.add(new Label(6, row+8,String.valueOf(list.get(i).get("curing_agent_batch")), wcf));
+                datalist.add(new Label(7, row+8, String.valueOf(list.get(i).get("curing_temp")), wcf));
+                datalist.add(new Label(8, row+8, String.valueOf(list.get(i).get("curing_start_time")), wcf));
+                datalist.add(new Label(9, row+8, String.valueOf(list.get(i).get("curing_finish_time")), wcf));
+                datalist.add(new Label(10, row+8,timeformat.format(timeformat.parse(String.valueOf(list.get(i).get("operation_time")))), wcf));
+
+                result=String.valueOf(list.get(i).get("result"));
+                if(result!=null){
+                    if(result.equals("0")){
+                        result="不合格";
+                    }else if(result.equals("1")){
+                        result="合格";
+                        qualifiedTotal++;
+                    }else if(result.equals("2")){
+                        result="待定";
+                    }
+                    else{
+                        result=" ";
+                    }
+                }else{
+                    result=" ";
+                }
+                Label label19 = new Label(12, row+8, result, wcf);
+                datalist.add(label19);
+                if(String.valueOf(list.get(i).get("remark"))!=null&&!String.valueOf(list.get(i).get("remark")).equals("")){
+                    sb.append("#"+list.get(i).get("pipe_no")+":"+list.get(i).get("remark")+" ");
+                }
+                //最后一行数据为空问题
+                index++;
+                row++;
+                if(index%13==0){
+                    datalist.add(new Label(2,20,getFormatString(sb.toString()),wcf));
+                    //添加合格数
+                    datalist.add(new Label(12,20,String.valueOf(qualifiedTotal),wcf));
+                    //到结束
+                    newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
+                    datalist.clear();
+                    qualifiedTotal=0;
+                    index=1;
+                    row=0;
+                    sb.setLength(0);
+                    if(newPdfName!=null){
+                        if(dayOrNight==0){
+                            stationIdDayList.add(newPdfName);
+                        }else{
+                            stationIdNightList.add(newPdfName);
+                        }
+                        delSetPath.add(newPdfName);
+                    }
+                }
+            }
+            if(datalist.size()>0){
+                datalist.add(new Label(2,20,String.valueOf(sb.toString()),wcf));
+                //添加合格数
+                datalist.add(new Label(12,20,String.valueOf(qualifiedTotal),wcf));
+                newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
+                datalist.clear();
+                qualifiedTotal=0;
+                index=1;
+                row=0;
+                sb.setLength(0);
+                if(newPdfName!=null){
+                    if(dayOrNight==0){
+                        stationIdDayList.add(newPdfName);
+                    }else{
+                        stationIdNightList.add(newPdfName);
+                    }
+                    delSetPath.add(newPdfName);
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    //10.---------------内涂检验记录PDF
+    public void  IdCoatInspectionRecord(HttpServletRequest request,String project_no,int dayOrNight,Date begin_time,Date end_time){
+        String templateFullName=request.getSession().getServletContext().getRealPath("/")
+                +"template/id_coating_epoxy_inspection_record_template.xls";
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String newPdfName=null;
+        try{
+            List<HashMap<String,Object>>list=idCoatingInspectionProcessDao.getIdCoatInspectionRecord(project_no,begin_time,end_time);
+            ArrayList<Label> datalist=new ArrayList<Label>();
+            int index=1,row=0;
+            StringBuilder sb=new StringBuilder();
+            String result="";
+            int qualifiedTotal=0;
+            boolean isHaveTitle=true;
+            String title_project_name=" ",title_pipe_size=" ",title_standard=" ",title_coating_type;
+            for (int i=0;i<list.size();i++){
+                if(isHaveTitle){
+                    //添加模板头部信息
+                    title_project_name=String.valueOf(list.get(i).get("project_name"));
+                    title_pipe_size=("Φ"+String.valueOf(list.get(i).get("od"))+"*"+String.valueOf(list.get(i).get("wt"))+"mm");
+                    title_standard=(String.valueOf(list.get(i).get("client_spec"))+" "+String.valueOf(list.get(i).get("coating_standard")));
+                    title_coating_type=getFormatString(String.valueOf(list.get(i).get("internal_coating")));
+                    datalist.add(new Label(3, 4,title_project_name, wcf));
+                    datalist.add(new Label(8, 4,title_pipe_size, wcf));
+                    datalist.add(new Label(3, 5,title_standard, wcf));
+                    datalist.add(new Label(8, 5,title_coating_type, wcf));
+                    if(dayOrNight==0){
+                        datalist.add(new Label(12, 5,"白班(Day)", wcf));
+                        datalist.add(new Label(12, 4,sdf.format(begin_time), wcf));
+                    }else{
+                        datalist.add(new Label(12, 5, "夜班(Night)", wcf));
+                        datalist.add(new Label(12, 4,sdf.format(begin_time), wcf));
+                    }
+                    isHaveTitle=false;
+                }
+                datalist.add(new Label(1, row+8, String.valueOf(list.get(i).get("pipe_no")), wcf));
+                String isSample=String.valueOf(list.get(i).get("is_sample"));
+                if(isSample!=null&&!isSample.equals("")){
+                    if(isSample.equals("0")){
+                        isSample="否";
+                    }else if(isSample.equals("1")){
+                        isSample="是";
+                    }else{
+                        isSample=" ";
+                    }
+                }else{
+                    isSample=" ";
+                }
+                datalist.add(new Label(2, row+8,isSample, wcf));
+                datalist.add(new Label(3, row+8, String.valueOf(list.get(i).get("wet_film_thickness_list")), wcf));
+                result=String.valueOf(list.get(i).get("result"));
+                if(result!=null){
+                    if(result.equals("0")){
+                        result="不合格";
+                    }else if(result.equals("1")){
+                        result="合格";
+                        qualifiedTotal++;
+                    }else if(result.equals("2")){
+                        result="待定";
+                    }
+                    else{
+                        result=" ";
+                    }
+                }else{
+                    result=" ";
+                }
+                Label label19 = new Label(12, row+8, result, wcf);
+                datalist.add(label19);
+                if(String.valueOf(list.get(i).get("remark"))!=null&&!String.valueOf(list.get(i).get("remark")).equals("")){
+                    sb.append("#"+list.get(i).get("pipe_no")+":"+list.get(i).get("remark")+" ");
+                }
+                //最后一行数据为空问题
+                index++;
+                row++;
+                if(index%13==0){
+                    datalist.add(new Label(2,20,getFormatString(sb.toString()),wcf));
+                    //添加合格数
+                    datalist.add(new Label(12,20,String.valueOf(qualifiedTotal),wcf));
+                    //到结束
+                    newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
+                    datalist.clear();
+                    qualifiedTotal=0;
+                    index=1;
+                    row=0;
+                    sb.setLength(0);
+                    if(newPdfName!=null){
+                        if(dayOrNight==0){
+                            stationIdDayList.add(newPdfName);
+                        }else{
+                            stationIdNightList.add(newPdfName);
+                        }
+                        delSetPath.add(newPdfName);
+                    }
+                }
+            }
+            if(datalist.size()>0){
+                datalist.add(new Label(2,20,String.valueOf(sb.toString()),wcf));
+                //添加合格数
+                datalist.add(new Label(12,20,String.valueOf(qualifiedTotal),wcf));
+                newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
+                datalist.clear();
+                qualifiedTotal=0;
+                index=1;
+                row=0;
+                sb.setLength(0);
+                if(newPdfName!=null){
+                    if(dayOrNight==0){
+                        stationIdDayList.add(newPdfName);
+                    }else{
+                        stationIdNightList.add(newPdfName);
+                    }
+                    delSetPath.add(newPdfName);
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    //11.---------------内涂终验记录PDF
+    public void  IdFinalInspectionRecord(HttpServletRequest request,String project_no,int dayOrNight,Date begin_time,Date end_time){
+        String templateFullName=request.getSession().getServletContext().getRealPath("/")
+                +"template/id_coating_final_inspection_record_template.xls";
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String newPdfName=null;
+        try{
+            List<HashMap<String,Object>>list=idFinalInspectionProcessDao.getIdCoatFinalInspectionRecord(project_no,begin_time,end_time);
+            ArrayList<Label> datalist=new ArrayList<Label>();
+            int index=1,row=0;
+            StringBuilder sb=new StringBuilder();
+            String result="",stencilRes="",stencilStr="",bevelRes="",bevelStr="";
+            int qualifiedTotal=0;
+            boolean isHaveTitle=true;
+            String title_project_name=" ",title_pipe_size=" ",title_standard=" ",title_coating_type;
+            for (int i=0;i<list.size();i++){
+                if(isHaveTitle){
+                    //添加模板头部信息
+                    title_project_name=String.valueOf(list.get(i).get("project_name"));
+                    title_pipe_size=("Φ"+String.valueOf(list.get(i).get("od"))+"*"+String.valueOf(list.get(i).get("wt"))+"mm");
+                    title_standard=(String.valueOf(list.get(i).get("client_spec"))+" "+String.valueOf(list.get(i).get("coating_standard")));
+                    title_coating_type=getFormatString(String.valueOf(list.get(i).get("internal_coating")));
+                    datalist.add(new Label(3, 4,title_project_name, wcf));
+                    datalist.add(new Label(8, 4,title_pipe_size, wcf));
+                    datalist.add(new Label(3, 5,title_standard, wcf));
+                    datalist.add(new Label(8, 5,title_coating_type, wcf));
+                    if(dayOrNight==0){
+                        datalist.add(new Label(12, 5,"白班(Day)", wcf));
+                        datalist.add(new Label(12, 4,sdf.format(begin_time), wcf));
+                    }else{
+                        datalist.add(new Label(12, 5, "夜班(Night)", wcf));
+                        datalist.add(new Label(12, 4,sdf.format(begin_time), wcf));
+                    }
+                    isHaveTitle=false;
+                }
+                datalist.add(new Label(1, row+9, String.valueOf(list.get(i).get("pipe_no")), wcf));
+                datalist.add(new Label(2, row+9, String.valueOf(list.get(i).get("holidays")), wcf));
+                datalist.add(new Label(3, row+9, String.valueOf(list.get(i).get("holiday_tester_volts")), wcf));
+                datalist.add(new Label(4, row+9, String.valueOf(list.get(i).get("internal_repairs")), wcf));
+                bevelRes=String.valueOf(list.get(i).get("bevel_check"));
+                if(bevelRes!=null&&!bevelRes.equals("")){
+                    if(bevelRes.equals("0")){
+                        bevelStr="未检测";
+                    }else if(bevelRes.equals("1")){
+                        bevelStr="合格";
+                    }else if(bevelRes.equals("2")){
+                        bevelStr="不合格";
+                    }
+                }
+                datalist.add(new Label(5, row+9, bevelStr, wcf));
+                datalist.add(new Label(6, row+9,String.valueOf(list.get(i).get("magnetism_list")), wcf));
+                stencilRes=String.valueOf(list.get(i).get("stencil_verification"));
+                if(stencilRes!=null&&!stencilRes.equals("")){
+                    if(stencilRes.equals("0")){
+                        stencilStr="未检测";
+                    }else if(stencilRes.equals("1")){
+                        stencilStr="合格";
+                    }else if(stencilRes.equals("2")){
+                        stencilStr="不合格";
+                    }
+                }
+                datalist.add(new Label(7, row+9, stencilStr, wcf));
+                datalist.add(new Label(8, row+9,getFormatString(String.valueOf(list.get(i).get("surface_condition"))), wcf));
+
+                datalist.add(new Label(2, row+10, String.valueOf(list.get(i).get("dry_film_thickness_list")), wcf));
+                datalist.add(new Label(5, row+10, String.valueOf(list.get(i).get("cutback_length")), wcf));
+                datalist.add(new Label(8, row+10, String.valueOf(list.get(i).get("roughness_list")), wcf));
+
+                result=String.valueOf(list.get(i).get("result"));
+                if(result!=null){
+                    if(result.equals("0")){
+                        result="不合格";
+                    }else if(result.equals("1")){
+                        result="合格";
+                        qualifiedTotal++;
+                    }else if(result.equals("7")){
+                        result="待定";
+                    }
+                    else{
+                        result="其他";
+                    }
+                }else{
+                    result=" ";
+                }
+                Label label19 = new Label(12, row+10, result, wcf);
+                datalist.add(label19);
+                if(String.valueOf(list.get(i).get("remark"))!=null&&!String.valueOf(list.get(i).get("remark")).equals("")){
+                    sb.append("#"+list.get(i).get("pipe_no")+":"+list.get(i).get("remark")+" ");
+                }
+                //最后一行数据为空问题
+                index+=2;
+                row+=2;
+                if(index%11==0){
+                    datalist.add(new Label(2,19,getFormatString(sb.toString()),wcf));
+                    //添加合格数
+                    datalist.add(new Label(12,19,String.valueOf(qualifiedTotal),wcf));
+                    //到结束
+                    newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
+                    datalist.clear();
+                    qualifiedTotal=0;
+                    index=1;
+                    row=0;
+                    sb.setLength(0);
+                    if(newPdfName!=null){
+                        if(dayOrNight==0){
+                            stationIdDayList.add(newPdfName);
+                        }else{
+                            stationIdNightList.add(newPdfName);
+                        }
+                        delSetPath.add(newPdfName);
+                    }
+                }
+            }
+            if(datalist.size()>0){
+                datalist.add(new Label(2,19,String.valueOf(sb.toString()),wcf));
+                //添加合格数
+                datalist.add(new Label(12,19,String.valueOf(qualifiedTotal),wcf));
+                newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
+                datalist.clear();
+                qualifiedTotal=0;
+                index=1;
+                row=0;
+                sb.setLength(0);
+                if(newPdfName!=null){
+                    if(dayOrNight==0){
+                        stationIdDayList.add(newPdfName);
+                    }else{
+                        stationIdNightList.add(newPdfName);
+                    }
+                    delSetPath.add(newPdfName);
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
 
     //填补空白Bug
     private void AddLastWhiteSpace(ArrayList<Label> datalist,String remark,WritableCellFormat wcf){
@@ -1345,5 +1764,67 @@ public class InspectionRecordPDFController {
             e.printStackTrace();
         }
         return returnday;
+    }
+    //数组拆分两部分
+    private List<String>getSplitList(String strVal){
+        String leftArr=" ",rightArr=" ";
+        List<String>listStr=new ArrayList<>();
+        if(strVal!=null){
+            String []list=strVal.split(",");
+            int listLen=list.length;
+            int leftLen=1,rightLen=1;
+            if(listLen%2!=0){
+                leftLen=(listLen+1)/2;
+                rightLen=leftLen-1;
+            }else{
+                leftLen=listLen/2;
+                rightLen=leftLen;
+            }
+
+            if(leftLen%2!=0){
+                for (int i=0;i<leftLen;i++){
+                    if(i!=leftLen-1)
+                        leftArr+=list[i]+",";
+                    else
+                        leftArr+=list[i];
+                }
+                for (int i=leftLen,j=0;i<listLen;i++,j++){
+                    if(i!=leftLen-1)
+                        rightArr+=list[i]+",";
+                    else
+                        rightArr+=list[i];
+
+                }
+            }else{
+                for (int i=0;i<leftLen;i++){
+                        leftArr+=list[i]+",";
+                }
+                for (int i=leftLen,j=0;i<listLen;i++,j++){
+                        rightArr+=list[i]+",";
+                }
+            }
+        }
+        if(leftArr.endsWith(",")){
+            leftArr=leftArr.substring(0,leftArr.length()-1);
+        }
+        if(rightArr.endsWith(",")){
+            rightArr=rightArr.substring(0,rightArr.length()-1);
+        }
+        listStr.add(leftArr);
+        listStr.add(rightArr);
+        return  listStr;
+    }
+    //获取剩磁平均值
+    public String getAvgOfMagnetism(String strVal){
+        String returnVal=" ";
+        if(strVal.trim().length()>0){
+            String valArr[]=strVal.split(",");
+            Float totalNumber=0f;
+            for (int i=0;i<valArr.length;i++){
+                 totalNumber+=Float.parseFloat(valArr[i]);
+            }
+             returnVal=String.valueOf(totalNumber/valArr.length);
+        }
+        return  returnVal;
     }
 }

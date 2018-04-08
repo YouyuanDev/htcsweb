@@ -514,7 +514,14 @@
 
                 <tr>
                     <td class="i18n1" width="16%" name="inspectionresult">外涂层质检结果</td>
-                    <td colspan="1"><input class="easyui-textbox"  type="text" name="inspection_result" value=""/></td>
+                    <td colspan="1">
+                        <select id="ir" class="easyui-combobox" data-options="editable:false" name="inspection_result" style="width:185px;">
+                            <option value="0">不合格</option>
+                            <option value="1">合格</option>
+                            <option value="2">待定</option>
+                        </select>
+                        <%--<input class="easyui-textbox"  type="text" name="inspection_result" value=""/>--%>
+                    </td>
                     <td></td>
                     <td width="16%" class="i18n1" name="result">结论</td>
                     <td colspan="1"><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:185px;">

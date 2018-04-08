@@ -65,7 +65,8 @@ public class SessionFilter extends OncePerRequestFilter{
             "getOdCoatFinalInspectionRecord",
             "getProductionRecord",
              "getRecordReportPDF",
-            "getProjectNoAndName"
+            "getProjectNoAndName",
+            "downloadPDF"
 
     }; // 不过滤的uri
 

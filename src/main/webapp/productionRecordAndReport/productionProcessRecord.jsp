@@ -51,57 +51,59 @@
         $(function() {
             //先获取所有的项目的编号和名称
             $.ajax({
-                url:"/ProjectOperation/getProjectNoAndName.action",
-                dataType:'json',
-                async:false,
-                success:function(data) {
-                    var dataJson=data[0];
-                    if (dataJson != null && dataJson.length>0) {
-                        $.each(dataJson,function (index,element) {
-                             var template='<option value="'+element.project_no+'">'+element.project_name+'</option>';
-                             $('#cc').append(template);
+                url: "/ProjectOperation/getProjectNoAndName.action",
+                dataType: 'json',
+                async: false,
+                success: function (data) {
+                    var dataJson = data[0];
+                    if (dataJson != null && dataJson.length > 0) {
+                        $.each(dataJson, function (index, element) {
+                            var template = '<option value="' + element.project_no + '">' + element.project_name + '</option>';
+                            $('#cc').append(template);
                         });
                     }
                 },
-                error:function(){
+                error: function () {
                     alert("获取项目信息时出错!");
                 }
             });
 
 
             $('.btnReport').click(function () {
-                var selectValue=$('#cc').val();
-                var selectText=$('#cc').find('option:selected').text();
-                var begin_time=$('#begintime').val();
-                var end_time=$('#endtime').val();
-                if(begin_time==null||begin_time.length==""){
-                    $.messager.alert('Warning','请输入开始时间!');
+                var selectValue = $('#cc').val();
+                var selectText = $('#cc').find('option:selected').text();
+                var begin_time = $('#begintime').val();
+                var end_time = $('#endtime').val();
+                if (begin_time == null || begin_time.length == "") {
+                    $.messager.alert('Warning', '请输入开始时间!');
                     return false;
                 }
-                if(end_time==null||end_time.length==""){
-                    $.messager.alert('Warning','请输入结束时间!');
+                if (end_time == null || end_time.length == "") {
+                    $.messager.alert('Warning', '请输入结束时间!');
                     return false;
                 }
-                var begin_date=new Date(begin_time);
-                var end_date=new Date(end_time);
-                if(!(end_date-begin_date>=0)){
-                    $.messager.alert('Warning','开始时间必须小于结束时间!');
+                var begin_date = new Date(begin_time);
+                var end_date = new Date(end_time);
+                if (!(end_date - begin_date >= 0)) {
+                    $.messager.alert('Warning', '开始时间必须小于结束时间!');
                     return false;
                 }
-                var form=$("<form>");//定义一个form表单
-                form.attr("style","display:none");
-                form.attr("target","");
-                form.attr("method","post");//请求类型
+                //ajaxLoading();
+                var form = $("<form>");//定义一个form表单
+                form.attr("style", "display:none");
+                form.attr("target", "");
+                form.attr("method", "post");//请求类型
                 form.attr("action","/InspectionRecordPDFOperation/getRecordReportPDF.action");//请求地址
                 $("body").append(form);//将表单放置在web中
-                var input1=$("<input type='hidden' name='project_no' value='"+selectValue+"'/>");
+                var input1 = $("<input type='hidden' name='project_no' value='" + selectValue + "'/>");
                 form.append(input1);
-                var input2=$("<input type='hidden' name='beginTime' value='"+begin_time+"'/>");
+                var input2 = $("<input type='hidden' name='beginTime' value='" + begin_time + "'/>");
                 form.append(input2);
-                var input3=$("<input type='hidden' name='endTime' value='"+end_time+"'/>");
+                var input3 = $("<input type='hidden' name='endTime' value='" + end_time + "'/>");
                 form.append(input3);
-                var input4=$("<input type='hidden' name='project_name' value='"+selectText+"'/>");
+                var input4 = $("<input type='hidden' name='project_name' value='" + selectText + "'/>");
                 form.append(input4);
+                // form.submit();
                 var options={
                     type:'POST',
                     url:'/InspectionRecordPDFOperation/getRecordReportPDF.action',
@@ -110,11 +112,7 @@
                         ajaxLoading();
                     },
                     success:function (data) {
-                        if(data=="success"){
-                            alert("生成成功!");
-                        }else{
-                            alert("生成失败!");
-                        }
+                        window.location.href="http://localhost:8080/"+data;
                         ajaxLoadEnd();
                     },error:function () {
                         ajaxLoadEnd();
@@ -122,9 +120,10 @@
                 };
                 //form.submit(function (e) {
                 form.ajaxSubmit(options);
-                   // return false;
-                //});//表单提交
+                   return false;
+                });
 
+                //表单提交
                 // $.ajax({
                 //     url:"/InspectionRecordPDFOperation/getRecordReportPDF.action",
                 //     data:{selectValue:selectValue,beginTime:begin_time,endTime:end_time},
@@ -152,10 +151,8 @@
                 //     complete:function(){
                 //         ajaxLoadEnd();
                 //     }
-                // });
-            });
+            //});
         });
-
         function ajaxLoading() {
             $("<div class=\"datagrid-mask\"></div>").css({
                 display: "block",
@@ -168,11 +165,24 @@
                 top: ($(window).height() - 45) / 2
             });
         }
-
         function ajaxLoadEnd() {
             $(".datagrid-mask").remove();
             $(".datagrid-mask-msg").remove();
         }
+        // function downloadPdf(pathList) {
+        //     var form=$("<form>");//定义一个form表单
+        //     form.attr("style","display:none");
+        //     form.attr("target","");
+        //     form.attr("method","post");//请求类型
+        //     form.attr("action","/InspectionRecordPDFOperation/downloadPDF.action");//请求地址
+        //     $("body").append(form);//将表单放置在web中
+        //     var input1=$("<input>");
+        //     input1.attr("type","hidden");
+        //     input1.attr("name","pathList");
+        //     input1.attr("value",pathList);
+        //     form.append(input1);
+        //     form.submit();//表单提交
+        // }
     </script>
 </head>
 <body>

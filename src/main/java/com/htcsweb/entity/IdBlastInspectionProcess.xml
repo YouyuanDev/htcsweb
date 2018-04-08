@@ -105,4 +105,20 @@
         update id_blast_inspection_process set elapsed_time=#{elapsed_time} where id=#{id}
     </update>
 
+    <!--获取当天内打砂检验记录-->
+    <select id="getIdBlastInspectionRecord" resultType="map">
+        Select pro.project_name,pro.client_spec,pro.coating_standard,c.od,c.wt,c.external_coating,c.internal_coating,o.*
+        from id_blast_inspection_process o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        WHERE pro.project_no=#{project_no}
+        <if test="begin_time!=null">
+            <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+        </if>
+        <if test="end_time!=null">
+            <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+        </if>
+        ORDER BY o.id DESC
+    </select>
 </mapper>

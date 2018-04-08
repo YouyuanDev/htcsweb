@@ -17,5 +17,6 @@ public interface IdCoatingInspectionProcessDao {
     //public int getCount();
 
     public int getCountAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no") String operator_no, @Param("begin_time") Date begin_time, @Param("end_time") Date end_time, @Param("mill_no") String mill_no);
-
+    //获取内涂检验记录PDF
+    public List<HashMap<String,Object>>getIdCoatInspectionRecord(@Param("project_no")String project_no,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
 }
