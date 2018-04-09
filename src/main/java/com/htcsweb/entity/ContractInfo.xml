@@ -92,6 +92,8 @@
         ORDER BY id DESC
         limit 1000
     </select>
-
-
+   <!--根据项目编号获取所属的所有合同信息-->
+   <select id="getAllContractInfoByProjectNo" resultType="map">
+       SELECT * from contract_info WHERE project_no=#{project_no}
+   </select>
 </mapper>

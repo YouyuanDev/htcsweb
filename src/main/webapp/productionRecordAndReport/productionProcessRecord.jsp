@@ -6,6 +6,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getContextPath();
+    String bPath =request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+            + path + "/";
+%>
 <html>
 <head>
     <title>Title</title>
@@ -112,7 +117,7 @@
                         ajaxLoading();
                     },
                     success:function (data) {
-                        window.location.href="http://localhost:8080/"+data;
+                        window.location.href="<%=bPath%>"+data;
                         ajaxLoadEnd();
                     },error:function () {
                         ajaxLoadEnd();

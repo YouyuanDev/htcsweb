@@ -187,7 +187,35 @@
         function dailyProductionReportCancelSubmit() {
             $('#hldailyProRptDialog').dialog('close');
         }
+        
+        function  addDialyReportLinkBtn() {
+            var project_no=$("input[name='projectno']").val();
+            var begin_time=$("input[name='begintime']").val();
+            var end_time=$("input[name='endtime']").val();
+            if(project_no==null||project_no==""){
+                alert("请输入项目编号");
+                return false;
+            }
+            if(begin_time==null||begin_time==""){
+                alert("请输入项目编号");
+                return false;
+            }
+            if(end_time==null||end_time==""){
+                alert("请输入项目编号");
+                return false;
+            }
+            $.ajax({
+               url:'/DailyProductionReportOperation/addDialyReportAndCreateExcel.action',
+               dataType:'json',
+               data:{project_no:project_no,begin_time:begin_time,end_time:end_time},
+               success:function (data) {
 
+               },
+                error:function () {
+                    
+                }
+            });
+        }
 
         function  clearFormLabel(){
             $('#dailyProRptForm').form('clear');
@@ -280,6 +308,7 @@
     <input id="endtime" name="endtime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
     <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchDailyProRpt()">Search</a>
     <div style="float:right">
+        <a href="#" id="addDialyReportLinkBtn" class="easyui-linkbutton i18n1" name="addDialyReport" onclick="addDialyReportLinkBtn()">生成报表</a>
         <a href="#" id="addObpLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addDailyProRpt()">添加</a>
         <a href="#" id="editObpLinkBtn" class="easyui-linkbutton i18n1" name="edit" data-options="iconCls:'icon-edit',plain:true" onclick="editDailyProRpt()">修改</a>
         <a href="#" id="deltObpLinkBtn" class="easyui-linkbutton i18n1" name="delete" data-options="iconCls:'icon-remove',plain:true" onclick="delDailyProRpt()">删除</a>

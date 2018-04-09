@@ -353,9 +353,21 @@
                 </tr>
                 <tr>
                     <td class="i18n1" name="externalcoating" width="16%">外涂层</td>
-                    <td   width="33%"><input class="easyui-validatebox" type="text" name="external_coating" value=""/></td>
+                    <td   width="33%">
+                        <select id="ec" class="easyui-combobox" data-options="editable:false" name="external_coating"   style="width:185px;">
+                            <option value="2FBE">2FBE</option>
+                            <option value="3LPE">3LPE</option>
+                        </select>
+                        <%--<input class="easyui-validatebox" type="text" name="external_coating" value=""/>--%>
+                    </td>
                     <td class="i18n1" name="internalcoating" width="16%">内涂层</td>
-                    <td   width="33%"><input class="easyui-validatebox" type="text" name="internal_coating" value="" /></td>
+                    <td   width="33%">
+                        <select id="ic" class="easyui-combobox" data-options="editable:false" name="internal_coating"   style="width:185px;">
+                            <option value="Epoxy">Epoxy</option>
+                            <option value="">无</option>
+                        </select>
+                        <%--<input class="easyui-validatebox" type="text" name="internal_coating" value="" />--%>
+                    </td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="weightpermeter" width="16%">米重</td>
