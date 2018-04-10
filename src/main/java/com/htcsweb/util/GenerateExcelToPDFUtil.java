@@ -140,7 +140,7 @@ public class GenerateExcelToPDFUtil {
 
 
     //根据模版名字，将数据填入相应excel模版中
-    private static String FillExcelTemplate(String excelTemplateFullName,ArrayList<Label> dataList) {
+    public static String FillExcelTemplate(String excelTemplateFullName,ArrayList<Label> dataList) {
         //tempXlsFileName=String.valueOf(System.currentTimeMillis());
         //excelTemplateFullName = "/Users/kurt/Documents/pipe_coating_surface_inspection_record_template.xls";
         //复制模版
