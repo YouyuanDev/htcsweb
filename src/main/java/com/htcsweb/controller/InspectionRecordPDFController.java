@@ -97,6 +97,8 @@ public class InspectionRecordPDFController {
     @Autowired
     private  IdFinalInspectionProcessDao idFinalInspectionProcessDao;
     @Autowired
+    private PipeSamplingRecordDao pipeSamplingRecordDao;
+    @Autowired
     private MillInfoDao millInfoDao;
     @RequestMapping(value="getRecordReportPDF",produces="application/json;charset=UTF-8")
     @ResponseBody
@@ -1300,8 +1302,66 @@ public class InspectionRecordPDFController {
     }
 
     //12.---------------生成封面1
-    public void  createCoverOne(String project_name,String mill_name,String pipe_size,String date,String standard,String coating_type,String dayNight){
+    public void  createCoverOne( HttpServletRequest request,String project_no,String mill_no,int dayOrNight,Date begin_time,Date end_time){
+        //获取试验管
+        String templateFullName=request.getSession().getServletContext().getRealPath("/")
+                +"template/online_production_inspection_record_list_cover_1.xls";
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String newPdfName=null;
+        try{
+            List<HashMap<String,Object>>list=pipeSamplingRecordDao.getCoverPipeSamplingInfo(project_no,mill_no,begin_time,end_time);
+            ArrayList<Label> datalist=new ArrayList<Label>();
+            if(list.size()>0){
+                int index=1,row=0;
+                boolean isHaveTitle=true;
+                String title_project_name=" ",title_pipe_size=" ",title_standard=" ",title_coating_type=" ";
+                for (int i=0;i<list.size();i++){
+                    if(isHaveTitle){
+                        //添加模板头部信息
+                        title_project_name=String.valueOf(list.get(i).get("project_name"));
+                        title_pipe_size=("Φ"+String.valueOf(list.get(i).get("od"))+"*"+String.valueOf(list.get(i).get("wt"))+"mm");
+                        title_standard=(String.valueOf(list.get(i).get("client_spec"))+" "+String.valueOf(list.get(i).get("coating_standard")));
+                        title_coating_type=getFormatString(String.valueOf(list.get(i).get("internal_coating")));
+                        isHaveTitle=false;
+                    }
+                    datalist.add(new Label(1, row+10, String.valueOf(list.get(i).get("pipe_no")), wcf));
+                    datalist.add(new Label(2, row+10, String.valueOf(list.get(i).get("cut_off_length")), wcf));
+                    datalist.add(new Label(3, row+10, String.valueOf(list.get(i).get("holiday_tester_volts")), wcf));
+                    datalist.add(new Label(4, row+10, String.valueOf(list.get(i).get("internal_repairs")), wcf));
+                    bevelRes=String.valueOf(list.get(i).get("bevel_check"));
 
+                    datalist.add(new Label(5, row+9, bevelStr, wcf));
+                    datalist.add(new Label(6, row+9,String.valueOf(list.get(i).get("magnetism_list")), wcf));
+                    stencilRes=String.valueOf(list.get(i).get("stencil_verification"));
+
+                    datalist.add(new Label(7, row+9, stencilStr, wcf));
+                    datalist.add(new Label(8, row+9,getFormatString(String.valueOf(list.get(i).get("surface_condition"))), wcf));
+
+                    datalist.add(new Label(2, row+10, String.valueOf(list.get(i).get("dry_film_thickness_list")), wcf));
+                    datalist.add(new Label(5, row+10, String.valueOf(list.get(i).get("cutback_length")), wcf));
+                    datalist.add(new Label(8, row+10, String.valueOf(list.get(i).get("roughness_list")), wcf));
+
+                    result=String.valueOf(list.get(i).get("result"));
+
+
+                    //最后一行数据为空问题
+                    index+=2;
+                    row+=2;
+                    if(index%11==0){
+                        createRecordPdfTitle(datalist,3,8,12,4,5,title_project_name,title_pipe_size,title_standard,title_coating_type,dayOrNight,begin_time);
+                        createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,dayOrNight,stationIdDayList,stationIdNightList);
+                    }
+                }
+                if(datalist.size()>0){
+                    createRecordPdfTitle(datalist,3,8,12,4,5,title_project_name,title_pipe_size,title_standard,title_coating_type,dayOrNight,begin_time);
+                    createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,dayOrNight,stationIdDayList,stationIdNightList);
+                }
+            }else {
+                createRecordNullPdf(datalist,3,8,12,1,4,5,9,newPdfName,templateFullName,dayOrNight,stationIdDayList,stationIdNightList);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
     //13.---------------生成封面2
     public void  createCoverTwo(){
