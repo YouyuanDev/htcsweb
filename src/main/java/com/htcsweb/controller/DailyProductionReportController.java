@@ -274,6 +274,8 @@ public class DailyProductionReportController {
                             //发运成品管
                             int res32=0;
                             float res33=0f;
+                            //向日报中填充数据
+
                         }
                     }
                 }

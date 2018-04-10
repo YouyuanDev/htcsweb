@@ -10,41 +10,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/DailyProductionReportController.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/DailyProductionReportController.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/InspectionRecordPDFController.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/InspectionRecordPDFController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/BarePipeGrindingCutoffRecordDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/BarePipeGrindingCutoffRecordDao.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/CoatingRepairDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/CoatingRepairDao.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/CoatingStripDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/CoatingStripDao.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/IdBlastInspectionProcessDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/IdBlastInspectionProcessDao.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/IdCoatingInspectionProcessDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/IdCoatingInspectionProcessDao.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/IdCoatingProcessDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/IdCoatingProcessDao.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/IdFinalInspectionProcessDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/IdFinalInspectionProcessDao.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdBlastInspectionProcessDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdBlastInspectionProcessDao.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdBlastProcessDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdBlastProcessDao.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdCoating3LpeInspectionProcessDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdCoating3LpeInspectionProcessDao.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdCoating3LpeProcessDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdCoating3LpeProcessDao.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdCoatingInspectionProcessDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdCoatingInspectionProcessDao.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdCoatingProcessDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdCoatingProcessDao.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdFinalInspectionProcessDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdFinalInspectionProcessDao.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PipeRebevelRecordDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PipeRebevelRecordDao.java" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PipeSamplingRecordDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PipeSamplingRecordDao.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/BarePipeGrindingCutoffRecord.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/BarePipeGrindingCutoffRecord.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/CoatingRepair.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/CoatingRepair.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/CoatingStrip.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/CoatingStrip.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ContractInfo.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ContractInfo.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IdBlastInspectionProcess.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IdBlastInspectionProcess.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IdCoatingInspectionProcess.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IdCoatingInspectionProcess.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IdCoatingProcess.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IdCoatingProcess.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IdFinalInspectionProcess.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IdFinalInspectionProcess.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastInspectionProcess.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastInspectionProcess.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastProcess.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastProcess.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoating3LpeInspectionProcess.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoating3LpeInspectionProcess.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoating3LpeProcess.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoating3LpeProcess.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingInspectionProcess.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingInspectionProcess.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingProcess.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingProcess.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdFinalInspectionProcess.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdFinalInspectionProcess.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeRebevelRecord.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeRebevelRecord.xml" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeSamplingRecord.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeSamplingRecord.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/template/online_production_inspection_record_list_cover_1.xls" afterPath="$PROJECT_DIR$/src/main/webapp/template/online_production_inspection_record_list_cover_1.xls" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/template/online_production_inspection_record_list_cover_2.xls" afterPath="$PROJECT_DIR$/src/main/webapp/template/online_production_inspection_record_list_cover_2.xls" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -72,8 +39,8 @@
       <file leaf-file-name="DailyProductionReportController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/DailyProductionReportController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1410">
-              <caret line="279" column="13" lean-forward="true" selection-start-line="279" selection-start-column="13" selection-end-line="279" selection-end-column="13" />
+            <state relative-caret-position="120">
+              <caret line="266" column="26" lean-forward="false" selection-start-line="266" selection-start-column="26" selection-end-line="266" selection-end-column="26" />
               <folding>
                 <element signature="method#getTabGroup#0;class#DailyProductionReportController#0" expanded="false" />
                 <element signature="method#getTotalOdCoating#0;class#DailyProductionReportController#0" expanded="false" />
@@ -91,11 +58,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="InspectionRecordPDFController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="InspectionRecordPDFController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/InspectionRecordPDFController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
-              <caret line="1304" column="5" lean-forward="true" selection-start-line="1304" selection-start-column="5" selection-end-line="1304" selection-end-column="5" />
+            <state relative-caret-position="264">
+              <caret line="1325" column="21" lean-forward="true" selection-start-line="1325" selection-start-column="21" selection-end-line="1325" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#InspectionRecordPDFController#0;class#InspectionRecordPDFController#0" expanded="false" />
@@ -106,11 +73,11 @@
                 <element signature="method#OdCoat3LPERecord#0;class#InspectionRecordPDFController#0" expanded="false" />
                 <element signature="method#OdCoat3LPEInspectionRecord#0;class#InspectionRecordPDFController#0" expanded="false" />
                 <element signature="method#OdCoatFinalInspectionRecord#0;class#InspectionRecordPDFController#0" expanded="false" />
-                <element signature="e#50799#50806#0" expanded="true" />
+                <element signature="e#50871#50878#0" expanded="true" />
                 <element signature="method#IdBlastInspectionRecord#0;class#InspectionRecordPDFController#0" expanded="false" />
-                <element signature="e#57731#57738#0" expanded="true" />
+                <element signature="e#57803#57810#0" expanded="true" />
                 <element signature="method#IdCoatRecord#0;class#InspectionRecordPDFController#0" expanded="false" />
-                <element signature="e#62755#62762#0" expanded="true" />
+                <element signature="e#62827#62834#0" expanded="true" />
                 <element signature="method#IdCoatInspectionRecord#0;class#InspectionRecordPDFController#0" expanded="false" />
                 <element signature="method#IdFinalInspectionRecord#0;class#InspectionRecordPDFController#0" expanded="false" />
                 <element signature="method#exportBlastRecordToPDF#0;class#InspectionRecordPDFController#0" expanded="false" />
@@ -126,25 +93,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OdBlastProcess.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastProcess.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="142" column="17" lean-forward="true" selection-start-line="142" selection-start-column="17" selection-end-line="142" selection-end-column="17" />
-              <folding>
-                <marker date="1523326406000" expanded="true" signature="319:981" ph="INSERT INTO od_blast_process... " />
-                <marker date="1523326406000" expanded="true" signature="1306:1336" ph="SELECT * fro... od_blast_process" />
-                <marker date="1523326406000" expanded="true" signature="1449:2115" ph="UPDATE od_blast_process... " />
-                <marker date="1523326406000" expanded="true" signature="2184:2221" ph="select count... od_blast_process" />
-                <marker date="1523326406000" expanded="true" signature="4009:4754" ph="select * FRO... od_blast_process" />
-                <marker date="1523326406000" expanded="true" signature="4828:6075" ph="Select pro.p... od_blast_process" />
-                <marker date="1523326406000" expanded="true" signature="7383:7428" ph="select * fro... od_blast_process" />
-                <marker date="1523326406000" expanded="true" signature="7525:8535" ph="Select pro.p... od_blast_process" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="LabTesting2Fbe.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTesting2Fbe.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -155,76 +103,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LabTesting3Lpe.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTesting3Lpe.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <marker date="1519985846000" expanded="true" signature="310:1020" ph="INSERT INTO lab_testing_3lpe... " />
-                <marker date="1519985846000" expanded="true" signature="1345:2059" ph="UPDATE lab_testing_3lpe... " />
-                <marker date="1519985846000" expanded="true" signature="2134:3267" ph="Select pro.p... lab_testing_3lpe" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LabTesting3Lpe.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTesting3Lpe.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ContractInfo.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ContractInfo.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
-              <folding>
-                <marker date="1523347223000" expanded="true" signature="1394:1428" ph="select count... contract_info" />
-                <marker date="1523347223000" expanded="true" signature="2152:2783" ph="select co.*,... contract_info" />
-                <marker date="1523347223000" expanded="true" signature="2893:3327" ph="UPDATE contract_info... " />
-                <marker date="1523347223000" expanded="true" signature="3433:3871" ph="INSERT INTO contract_info... " />
-                <marker date="1523347223000" expanded="true" signature="4205:4457" ph="SELECT * fro... contract_info" />
-                <marker date="1523347223000" expanded="true" signature="4571:4629" ph="SELECT * fro... contract_info" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PipeRebevelRecord.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeRebevelRecord.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="87" column="33" lean-forward="false" selection-start-line="87" selection-start-column="27" selection-end-line="87" selection-end-column="33" />
-              <folding>
-                <marker date="1523345964000" expanded="true" signature="1342:2478" ph="Select pro.p... pipe_rebevel_record" />
-                <marker date="1523345964000" expanded="true" signature="2595:2873" ph="INSERT INTO pipe_rebevel_record... " />
-                <marker date="1523345964000" expanded="true" signature="2986:3019" ph="SELECT * fro... pipe_rebevel_record" />
-                <marker date="1523345964000" expanded="true" signature="3138:3444" ph="UPDATE pipe_rebevel_record... " />
-                <marker date="1523345964000" expanded="true" signature="3513:3553" ph="select count... pipe_rebevel_record" />
-                <marker date="1523345964000" expanded="true" signature="3876:4746" ph="SELECT count... pipe_rebevel_record" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PipeSamplingRecord.xml" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PipeSamplingRecord.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeSamplingRecord.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="163">
-              <caret line="83" column="13" lean-forward="true" selection-start-line="83" selection-start-column="13" selection-end-line="83" selection-end-column="13" />
+            <state relative-caret-position="240">
+              <caret line="110" column="13" lean-forward="true" selection-start-line="110" selection-start-column="13" selection-end-line="110" selection-end-column="13" />
               <folding>
-                <marker date="1523345280000" expanded="true" signature="1344:2481" ph="Select pro.p... pipe_sampling_record" />
-                <marker date="1523345280000" expanded="true" signature="2600:2936" ph="INSERT INTO pipe_sampling_record... " />
-                <marker date="1523345280000" expanded="true" signature="3051:3085" ph="SELECT * fro... pipe_sampling_record" />
-                <marker date="1523345280000" expanded="true" signature="3206:3569" ph="UPDATE pipe_sampling_record... " />
-                <marker date="1523345280000" expanded="true" signature="3638:3679" ph="select count... pipe_sampling_record" />
+                <marker date="1523354165000" expanded="true" signature="1459:2710" ph="Select pro.p... pipe_sampling_record" />
+                <marker date="1523354165000" expanded="true" signature="2829:3184" ph="INSERT INTO pipe_sampling_record... " />
+                <marker date="1523354165000" expanded="true" signature="3299:3333" ph="SELECT * fro... pipe_sampling_record" />
+                <marker date="1523354165000" expanded="true" signature="3454:3836" ph="UPDATE pipe_sampling_record... " />
+                <marker date="1523354165000" expanded="true" signature="3905:3946" ph="select count... pipe_sampling_record" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PipeSamplingRecordDao.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PipeSamplingRecordDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="304">
+              <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -349,8 +249,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IdCoatingProcess.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/IdCoatingInspectionProcessDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IdCoatingInspectionProcess.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PipeSamplingRecordDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeSamplingRecord.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeRebevelRecord.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PipeRebevelRecordDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ContractInfo.xml" />
@@ -360,6 +258,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdFinalInspectionProcessDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/DailyProductionReportController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/InspectionRecordPDFController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PipeSamplingRecordDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeSamplingRecord.xml" />
       </list>
     </option>
   </component>
@@ -383,8 +283,8 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-117" />
-    <option name="y" value="31" />
+    <option name="x" value="-352" />
+    <option name="y" value="151" />
     <option name="width" value="2402" />
     <option name="height" value="983" />
   </component>
@@ -439,6 +339,15 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
@@ -934,7 +843,7 @@
       <workItem from="1522805905869" duration="28167000" />
       <workItem from="1523149309931" duration="29867000" />
       <workItem from="1523236661896" duration="27857000" />
-      <workItem from="1523324488384" duration="23861000" />
+      <workItem from="1523324488384" duration="25449000" />
     </task>
     <servers />
   </component>
@@ -947,10 +856,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="940229000" />
+    <option name="totallyTimeSpent" value="941817000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-117" y="31" width="2402" height="983" extended-state="0" />
+    <frame x="-352" y="151" width="2402" height="983" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1225,21 +1134,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingProcess.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="115" column="54" lean-forward="true" selection-start-line="115" selection-start-column="54" selection-end-line="115" selection-end-column="54" />
-          <folding>
-            <marker date="1523342411000" expanded="true" signature="359:1118" ph="INSERT INTO od_coating_2fbe_process... " />
-            <marker date="1523342411000" expanded="true" signature="1231:1994" ph="UPDATE od_coating_2fbe_process... " />
-            <marker date="1523342411000" expanded="true" signature="2292:2336" ph="select count... od_coating_2fbe_process" />
-            <marker date="1523342411000" expanded="true" signature="3589:4843" ph="Select pro.p... od_coating_2fbe_process" />
-            <marker date="1523342411000" expanded="true" signature="4982:5034" ph="select * fro... od_coating_2fbe_process" />
-            <marker date="1523342411000" expanded="true" signature="5137:5925" ph="Select pro.p... od_coating_2fbe_process" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdCoatingProcessDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
@@ -1388,14 +1282,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PipeSamplingRecordDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="17" column="303" lean-forward="false" selection-start-line="17" selection-start-column="55" selection-end-line="17" selection-end-column="303" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/grinding/pipeRebevelProcess.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-7817">
@@ -1432,21 +1318,6 @@
         <state relative-caret-position="152">
           <caret line="14" column="37" lean-forward="true" selection-start-line="14" selection-start-column="37" selection-end-line="14" selection-end-column="37" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ContractInfo.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
-          <folding>
-            <marker date="1523347223000" expanded="true" signature="1394:1428" ph="select count... contract_info" />
-            <marker date="1523347223000" expanded="true" signature="2152:2783" ph="select co.*,... contract_info" />
-            <marker date="1523347223000" expanded="true" signature="2893:3327" ph="UPDATE contract_info... " />
-            <marker date="1523347223000" expanded="true" signature="3433:3871" ph="INSERT INTO contract_info... " />
-            <marker date="1523347223000" expanded="true" signature="4205:4457" ph="SELECT * fro... contract_info" />
-            <marker date="1523347223000" expanded="true" signature="4571:4629" ph="SELECT * fro... contract_info" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1523,11 +1394,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTesting2Fbe.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/DailyProductionReportController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="28" column="27" lean-forward="true" selection-start-line="28" selection-start-column="27" selection-end-line="28" selection-end-column="27" />
-          <folding />
+        <state relative-caret-position="120">
+          <caret line="266" column="26" lean-forward="false" selection-start-line="266" selection-start-column="26" selection-end-line="266" selection-end-column="26" />
+          <folding>
+            <element signature="method#getTabGroup#0;class#DailyProductionReportController#0" expanded="false" />
+            <element signature="method#getTotalOdCoating#0;class#DailyProductionReportController#0" expanded="false" />
+            <element signature="method#getTotalQualifiedOdCoating#0;class#DailyProductionReportController#0" expanded="false" />
+            <element signature="method#getTotalCoatingRepair#0;class#DailyProductionReportController#0" expanded="false" />
+            <element signature="method#getTotalBarePipeGrindingCutoff#0;class#DailyProductionReportController#0" expanded="false" />
+            <element signature="method#getTotalOdWastePipe#0;class#DailyProductionReportController#0" expanded="false" />
+            <element signature="method#getTotalBarePipeGrindingInfo#0;class#DailyProductionReportController#0" expanded="false" />
+            <element signature="method#getTotalIdCoating#0;class#DailyProductionReportController#0" expanded="false" />
+            <element signature="method#getTotalQualifiedIdCoating#0;class#DailyProductionReportController#0" expanded="false" />
+            <element signature="method#getTotalIdWastePipe#0;class#DailyProductionReportController#0" expanded="false" />
+            <element signature="method#getPipeSamplingInfo#0;class#DailyProductionReportController#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastProcess.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="389">
+          <caret line="142" column="17" lean-forward="true" selection-start-line="142" selection-start-column="17" selection-end-line="142" selection-end-column="17" />
+          <folding>
+            <marker date="1523326406000" expanded="true" signature="319:981" ph="INSERT INTO od_blast_process... " />
+            <marker date="1523326406000" expanded="true" signature="1306:1336" ph="SELECT * fro... od_blast_process" />
+            <marker date="1523326406000" expanded="true" signature="1449:2115" ph="UPDATE od_blast_process... " />
+            <marker date="1523326406000" expanded="true" signature="2184:2221" ph="select count... od_blast_process" />
+            <marker date="1523326406000" expanded="true" signature="4009:4754" ph="select * FRO... od_blast_process" />
+            <marker date="1523326406000" expanded="true" signature="4828:6075" ph="Select pro.p... od_blast_process" />
+            <marker date="1523326406000" expanded="true" signature="7383:7428" ph="select * fro... od_blast_process" />
+            <marker date="1523326406000" expanded="true" signature="7525:8535" ph="Select pro.p... od_blast_process" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1551,61 +1451,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeSamplingRecord.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ContractInfo.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="83" column="13" lean-forward="true" selection-start-line="83" selection-start-column="13" selection-end-line="83" selection-end-column="13" />
+        <state relative-caret-position="468">
+          <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
           <folding>
-            <marker date="1523345280000" expanded="true" signature="1344:2481" ph="Select pro.p... pipe_sampling_record" />
-            <marker date="1523345280000" expanded="true" signature="2600:2936" ph="INSERT INTO pipe_sampling_record... " />
-            <marker date="1523345280000" expanded="true" signature="3051:3085" ph="SELECT * fro... pipe_sampling_record" />
-            <marker date="1523345280000" expanded="true" signature="3206:3569" ph="UPDATE pipe_sampling_record... " />
-            <marker date="1523345280000" expanded="true" signature="3638:3679" ph="select count... pipe_sampling_record" />
+            <marker date="1523347223000" expanded="true" signature="1394:1428" ph="select count... contract_info" />
+            <marker date="1523347223000" expanded="true" signature="2152:2783" ph="select co.*,... contract_info" />
+            <marker date="1523347223000" expanded="true" signature="2893:3327" ph="UPDATE contract_info... " />
+            <marker date="1523347223000" expanded="true" signature="3433:3871" ph="INSERT INTO contract_info... " />
+            <marker date="1523347223000" expanded="true" signature="4205:4457" ph="SELECT * fro... contract_info" />
+            <marker date="1523347223000" expanded="true" signature="4571:4629" ph="SELECT * fro... contract_info" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/DailyProductionReportController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTesting2Fbe.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1410">
-          <caret line="279" column="13" lean-forward="true" selection-start-line="279" selection-start-column="13" selection-end-line="279" selection-end-column="13" />
-          <folding>
-            <element signature="method#getTabGroup#0;class#DailyProductionReportController#0" expanded="false" />
-            <element signature="method#getTotalOdCoating#0;class#DailyProductionReportController#0" expanded="false" />
-            <element signature="method#getTotalQualifiedOdCoating#0;class#DailyProductionReportController#0" expanded="false" />
-            <element signature="method#getTotalCoatingRepair#0;class#DailyProductionReportController#0" expanded="false" />
-            <element signature="method#getTotalBarePipeGrindingCutoff#0;class#DailyProductionReportController#0" expanded="false" />
-            <element signature="method#getTotalOdWastePipe#0;class#DailyProductionReportController#0" expanded="false" />
-            <element signature="method#getTotalBarePipeGrindingInfo#0;class#DailyProductionReportController#0" expanded="false" />
-            <element signature="method#getTotalIdCoating#0;class#DailyProductionReportController#0" expanded="false" />
-            <element signature="method#getTotalQualifiedIdCoating#0;class#DailyProductionReportController#0" expanded="false" />
-            <element signature="method#getTotalIdWastePipe#0;class#DailyProductionReportController#0" expanded="false" />
-            <element signature="method#getPipeSamplingInfo#0;class#DailyProductionReportController#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="493">
+          <caret line="28" column="27" lean-forward="true" selection-start-line="28" selection-start-column="27" selection-end-line="28" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastProcess.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingProcess.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="142" column="17" lean-forward="true" selection-start-line="142" selection-start-column="17" selection-end-line="142" selection-end-column="17" />
+        <state relative-caret-position="235">
+          <caret line="93" column="76" lean-forward="false" selection-start-line="93" selection-start-column="76" selection-end-line="93" selection-end-column="76" />
           <folding>
-            <marker date="1523326406000" expanded="true" signature="319:981" ph="INSERT INTO od_blast_process... " />
-            <marker date="1523326406000" expanded="true" signature="1306:1336" ph="SELECT * fro... od_blast_process" />
-            <marker date="1523326406000" expanded="true" signature="1449:2115" ph="UPDATE od_blast_process... " />
-            <marker date="1523326406000" expanded="true" signature="2184:2221" ph="select count... od_blast_process" />
-            <marker date="1523326406000" expanded="true" signature="4009:4754" ph="select * FRO... od_blast_process" />
-            <marker date="1523326406000" expanded="true" signature="4828:6075" ph="Select pro.p... od_blast_process" />
-            <marker date="1523326406000" expanded="true" signature="7383:7428" ph="select * fro... od_blast_process" />
-            <marker date="1523326406000" expanded="true" signature="7525:8535" ph="Select pro.p... od_blast_process" />
+            <marker date="1523342411000" expanded="true" signature="359:1118" ph="INSERT INTO od_coating_2fbe_process... " />
+            <marker date="1523342411000" expanded="true" signature="1231:1994" ph="UPDATE od_coating_2fbe_process... " />
+            <marker date="1523342411000" expanded="true" signature="2292:2336" ph="select count... od_coating_2fbe_process" />
+            <marker date="1523342411000" expanded="true" signature="3589:4843" ph="Select pro.p... od_coating_2fbe_process" />
+            <marker date="1523342411000" expanded="true" signature="4982:5034" ph="select * fro... od_coating_2fbe_process" />
+            <marker date="1523342411000" expanded="true" signature="5137:5925" ph="Select pro.p... od_coating_2fbe_process" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/InspectionRecordPDFController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="1304" column="5" lean-forward="true" selection-start-line="1304" selection-start-column="5" selection-end-line="1304" selection-end-column="5" />
+        <state relative-caret-position="264">
+          <caret line="1325" column="21" lean-forward="true" selection-start-line="1325" selection-start-column="21" selection-end-line="1325" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#InspectionRecordPDFController#0;class#InspectionRecordPDFController#0" expanded="false" />
@@ -1616,11 +1503,11 @@
             <element signature="method#OdCoat3LPERecord#0;class#InspectionRecordPDFController#0" expanded="false" />
             <element signature="method#OdCoat3LPEInspectionRecord#0;class#InspectionRecordPDFController#0" expanded="false" />
             <element signature="method#OdCoatFinalInspectionRecord#0;class#InspectionRecordPDFController#0" expanded="false" />
-            <element signature="e#50799#50806#0" expanded="true" />
+            <element signature="e#50871#50878#0" expanded="true" />
             <element signature="method#IdBlastInspectionRecord#0;class#InspectionRecordPDFController#0" expanded="false" />
-            <element signature="e#57731#57738#0" expanded="true" />
+            <element signature="e#57803#57810#0" expanded="true" />
             <element signature="method#IdCoatRecord#0;class#InspectionRecordPDFController#0" expanded="false" />
-            <element signature="e#62755#62762#0" expanded="true" />
+            <element signature="e#62827#62834#0" expanded="true" />
             <element signature="method#IdCoatInspectionRecord#0;class#InspectionRecordPDFController#0" expanded="false" />
             <element signature="method#IdFinalInspectionRecord#0;class#InspectionRecordPDFController#0" expanded="false" />
             <element signature="method#exportBlastRecordToPDF#0;class#InspectionRecordPDFController#0" expanded="false" />
@@ -1631,6 +1518,28 @@
             <element signature="method#getFormatString#0;class#InspectionRecordPDFController#0" expanded="false" />
             <element signature="method#getSplitList#0;class#InspectionRecordPDFController#0" expanded="false" />
             <element signature="method#getAvgOfMagnetism#0;class#InspectionRecordPDFController#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PipeSamplingRecordDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="21" column="0" lean-forward="true" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeSamplingRecord.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="110" column="13" lean-forward="true" selection-start-line="110" selection-start-column="13" selection-end-line="110" selection-end-column="13" />
+          <folding>
+            <marker date="1523354165000" expanded="true" signature="1459:2710" ph="Select pro.p... pipe_sampling_record" />
+            <marker date="1523354165000" expanded="true" signature="2829:3184" ph="INSERT INTO pipe_sampling_record... " />
+            <marker date="1523354165000" expanded="true" signature="3299:3333" ph="SELECT * fro... pipe_sampling_record" />
+            <marker date="1523354165000" expanded="true" signature="3454:3836" ph="UPDATE pipe_sampling_record... " />
+            <marker date="1523354165000" expanded="true" signature="3905:3946" ph="select count... pipe_sampling_record" />
           </folding>
         </state>
       </provider>
