@@ -15,5 +15,5 @@ public interface PipeRebevelRecordDao {
     public int updatePipeRebevelRecord(PipeRebevelRecord pipeRebevelRecord);
     public List<HashMap<String,Object>> getAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no") String operator_no, @Param("begin_time") Date begin_time, @Param("end_time") Date end_time,  @Param("skip") int skip, @Param("take") int take);
     public int getCountAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no") String operator_no, @Param("begin_time") Date begin_time, @Param("end_time") Date end_time);
-
+    public List<HashMap<String,Object>>getPipeBevelOfDay(@Param("project_no")String project_no,@Param("external_coating")String external_coating,@Param("internal_coating")String internal_coating,@Param("result")String result,@Param("od")float od,@Param("wt")float wt,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
 }

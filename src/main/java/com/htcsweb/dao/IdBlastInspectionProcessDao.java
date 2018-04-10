@@ -25,5 +25,5 @@ public interface IdBlastInspectionProcessDao {
     public int updateElapsedTime(@Param("elapsed_time")float elapsed_time,@Param("id")int id);
 
     //获取内打砂检验记录PDF
-    public List<HashMap<String,Object>>getIdBlastInspectionRecord(@Param("project_no")String project_no,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
+    public List<HashMap<String,Object>>getIdBlastInspectionRecord(@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
 }

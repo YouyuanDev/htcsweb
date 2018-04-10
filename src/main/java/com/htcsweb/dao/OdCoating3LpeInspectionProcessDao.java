@@ -15,5 +15,8 @@ public interface OdCoating3LpeInspectionProcessDao {
     public List<HashMap<String,Object>> getAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no") String operator_no, @Param("begin_time") Date begin_time, @Param("end_time") Date end_time, @Param("mill_no") String mill_no,@Param("skip") int skip, @Param("take") int take);
     public int getCountAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no") String operator_no, @Param("begin_time") Date begin_time, @Param("end_time") Date end_time,@Param("mill_no") String mill_no);
     //获取3lpe外涂检验记录
-    public List<HashMap<String,Object>>getOd3LPECoatInspectionRecord(@Param("project_no")String project_no,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
+    public List<HashMap<String,Object>>getOd3LPECoatInspectionRecord(@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
+    //获取当天3lpe外防待扒皮数量
+    public int getTotalOdWastePipe(@Param("project_no")String project_no,@Param("external_coating")String external_coating,@Param("internal_coating")String internal_coating,@Param("od")float od,@Param("wt")float wt,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
 }
+

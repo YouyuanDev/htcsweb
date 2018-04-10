@@ -96,4 +96,5 @@
    <select id="getAllContractInfoByProjectNo" resultType="map">
        SELECT * from contract_info WHERE project_no=#{project_no}
    </select>
+
 </mapper>

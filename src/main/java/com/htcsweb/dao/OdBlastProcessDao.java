@@ -21,5 +21,5 @@ public interface OdBlastProcessDao {
     public int getCountNewAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no")String operator_no, @Param("begin_time")Date begin_time, @Param("end_time")Date end_time,@Param("mill_no")String mill_no);
 
     //获取当天外打砂记录
-    public List<HashMap<String,Object>> getOdBlastRecord(@Param("project_no")String project_no,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
+    public List<HashMap<String,Object>> getOdBlastRecord(@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
 }

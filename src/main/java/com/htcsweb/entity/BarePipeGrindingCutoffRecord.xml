@@ -93,7 +93,66 @@
             #{item}
         </foreach>
     </delete>
-
-
+    <!--获取当天的外防腐光管隔离数,光管隔离修磨数量,光管隔离切管数量-->
+    <select id="getTotalBarePipeGrindingCutoff" resultType="map">
+        SELECT count(*) as count1 from bare_pipe_grinding_cutoff_record o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+            c.external_coating=#{external_coating}
+            AND c.internal_coating=#{internal_coating}
+            AND o.odid=#{odid}
+            AND pro.project_no=#{project_no}
+            AND c.od=#{od}
+            and c.wt=#{wt}
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+        UNION
+        SELECT count(*) as count2 from bare_pipe_grinding_cutoff_record o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+            c.external_coating=#{external_coating}
+            AND c.internal_coating=#{internal_coating}
+            AND o.odid=#{odid}
+            AND o.grinding_cutoff='G'
+            AND pro.project_no=#{project_no}
+            AND c.od=#{od}
+            and c.wt=#{wt}
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+        UNION
+        SELECT count(*) as count3 from bare_pipe_grinding_cutoff_record o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+            c.external_coating=#{external_coating}
+            AND c.internal_coating=#{internal_coating}
+            AND o.odid=#{odid}
+            AND o.grinding_cutoff='C'
+            AND pro.project_no=#{project_no}
+            AND c.od=#{od}
+            and c.wt=#{wt}
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+    </select>
 
 </mapper>
