@@ -152,7 +152,7 @@
 
 
 
-        function searchBarePipeGrindingPro() {
+        function searchPipeSamplingPro() {
             $('#PipeSamplingProDatagrids').datagrid('load',{
                 'pipe_no': $('#pipeno').val(),
                 'operator_no': $('#operatorno').val(),
@@ -459,7 +459,7 @@
     </div>
     <div id="datagrid1" class="mini-datagrid" style="width:100%;height:100%;"
          borderStyle="border:0" showPageSize="false" showPageIndex="false"
-         url="/pipeinfo/getPipeNumbers.action">
+         url="/pipeinfo/getODSamplePipeNumbers.action">
         <div property="columns">
             <div type="checkcolumn" ></div>
             <div field="pipe_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="pipeno">钢管编号</div>
