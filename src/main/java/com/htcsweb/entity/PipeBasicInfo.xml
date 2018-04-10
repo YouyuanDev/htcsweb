@@ -53,9 +53,9 @@
          limit 1000
      </select>
 
-    <select id="getPipeNumberBySample" resultType="com.htcsweb.entity.PipeBasicInfo">
+    <select id="getODSamplePipeNumbers" resultType="com.htcsweb.entity.PipeBasicInfo">
         select * from pipe_basic_info where  pipe_no in(
-        select pipe_no from id_coating_inspection_process ic where is_sample='1' UNION
+--         select pipe_no from id_coating_inspection_process ic where is_sample='1' UNION
         select pipe_no from od_coating_2fbe_inspection_process ic where is_sample='1' UNION
         select pipe_no from od_coating_3lpe_inspection_process ic where is_sample='1'
         )

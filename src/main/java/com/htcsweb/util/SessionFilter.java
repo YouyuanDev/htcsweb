@@ -28,6 +28,7 @@ public class SessionFilter extends OncePerRequestFilter{
             "getAllMills",
             "getODAcceptanceCriteriaByContractNo",
             "getPipeNumbers",
+            "getODSamplePipeNumbers",
             "getPersonNoByName",
             "getPipeInfoByNo",
             "delUploadPicture",
@@ -64,7 +65,7 @@ public class SessionFilter extends OncePerRequestFilter{
             "getOdCoat3LPEInspectionRecord",
             "getOdCoatFinalInspectionRecord",
             "getProductionRecord",
-             "getRecordReportPDF",
+            "getRecordReportPDF",
             "getProjectNoAndName",
             "downloadPDF",
             "addDialyReportAndCreateExcel"

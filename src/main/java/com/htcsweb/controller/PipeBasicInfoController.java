@@ -59,6 +59,9 @@ public class PipeBasicInfoController {
         }
         return map;
     }
+
+
+    //查询样管信息
     @RequestMapping("/getPipeNumberBySample")
     @ResponseBody
     public String getPipeNumberBySample(HttpServletRequest request){
