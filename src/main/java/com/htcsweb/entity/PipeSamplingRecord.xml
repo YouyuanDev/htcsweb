@@ -56,7 +56,7 @@
 
 
     <insert id="addPipeSamplingRecord" parameterType="com.htcsweb.entity.PipeSamplingRecord">
-        INSERT INTO pipe_sampling_record(pipe_no,operation_time,operator_no, sample_no, cut_off_length,original_pipe_length,pipe_length_after_cut,upload_files,remark,result) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{sample_no}, #{cut_off_length},#{original_pipe_length},#{pipe_length_after_cut} ,#{upload_files},#{remark},#{result})
+        INSERT INTO pipe_sampling_record(pipe_no,operation_time,operator_no, sample_no, cut_off_length,original_pipe_length,pipe_length_after_cut,upload_files,remark,result,mill_no) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{sample_no}, #{cut_off_length},#{original_pipe_length},#{pipe_length_after_cut} ,#{upload_files},#{remark},#{result},#{mill_no})
     </insert>
 
     <select id="getPipeSamplingRecord" resultType="com.htcsweb.entity.PipeSamplingRecord">
@@ -66,7 +66,7 @@
     <update id="updatePipeSamplingRecord" parameterType="com.htcsweb.entity.PipeSamplingRecord">
         UPDATE pipe_sampling_record set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},
         sample_no=#{sample_no}, cut_off_length=#{cut_off_length},original_pipe_length=#{original_pipe_length},pipe_length_after_cut=#{pipe_length_after_cut},
-        upload_files=#{upload_files},remark=#{remark},result=#{result}
+        upload_files=#{upload_files},remark=#{remark},result=#{result},mill_no=#{mill_no}
         where id=#{id}
     </update>
 

@@ -6,10 +6,10 @@ import java.util.Date;
 
 public class PipeSamplingRecord {
 
-    private  int id; //流水号
+    private int id; //流水号
     private String pipe_no;    //钢管编号
     private String operator_no;  //操作工编号
-    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date operation_time;
 
     private String sample_no;
@@ -20,11 +20,12 @@ public class PipeSamplingRecord {
     private String upload_files;
     private String result;
     private String remark;
+    private String mill_no;
 
     public PipeSamplingRecord() {
     }
 
-    public PipeSamplingRecord(int id, String pipe_no, String operator_no, Date operation_time, String sample_no, float cut_off_length, float original_pipe_length, float pipe_length_after_cut, String upload_files, String result, String remark) {
+    public PipeSamplingRecord(int id, String pipe_no, String operator_no, Date operation_time, String sample_no, float cut_off_length, float original_pipe_length, float pipe_length_after_cut, String upload_files, String result, String remark, String mill_no) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operator_no = operator_no;
@@ -36,6 +37,7 @@ public class PipeSamplingRecord {
         this.upload_files = upload_files;
         this.result = result;
         this.remark = remark;
+        this.mill_no = mill_no;
     }
 
     public int getId() {
@@ -124,5 +126,13 @@ public class PipeSamplingRecord {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getMill_no() {
+        return mill_no;
+    }
+
+    public void setMill_no(String mill_no) {
+        this.mill_no = mill_no;
     }
 }
