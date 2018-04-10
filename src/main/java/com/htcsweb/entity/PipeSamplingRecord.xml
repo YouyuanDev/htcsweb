@@ -12,6 +12,10 @@
         left join project_info pro on c.project_no=pro.project_no
         left join pipe_status s on s.status_code=p.status
         <where>
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no =#{mill_no}
+            </if>
+
             <if test="pipe_no!=null and pipe_no!=''">
                 AND o.pipe_no LIKE CONCAT('%',#{pipe_no},'%')
             </if>
@@ -37,6 +41,9 @@
         left join project_info pro on c.project_no=pro.project_no
         left join pipe_status s on s.status_code=p.status
         <where>
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no =#{mill_no}
+            </if>
             <if test="pipe_no!=null and pipe_no!=''">
                 AND o.pipe_no LIKE CONCAT('%',#{pipe_no},'%')
             </if>

@@ -157,7 +157,8 @@
                 'pipe_no': $('#pipeno').val(),
                 'operator_no': $('#operatorno').val(),
                 'begin_time': $('#begintime').val(),
-                'end_time': $('#endtime').val()
+                'end_time': $('#endtime').val(),
+                'mill_no': $('#millno').val()
             });
         }
         function pipeSamplingProFormSubmit() {
@@ -176,17 +177,17 @@
                         hlAlertFour("请选择操作工工号");
                         return false;
                     }
-                    // if($("input[name='mill_no']").val()==""){
-                    //
-                    //     hlAlertFour("请输入分厂信息");
-                    //     return false;
-                    // }
+                    if($("input[name='mill_no']").val()==""){
 
+                        hlAlertFour("请输入分厂信息");
+                        return false;
+                    }
                     if($("input[name='operation-time']").val()==""){
 
                         hlAlertFour("请输入操作时间");
                         return false;
                     }
+
                     setParams($("input[name='cut_off_length']"));
                     setParams($("input[name='original_pipe_length']"));
                     setParams($("input[name='pipe_length_after_cut']"));
@@ -265,6 +266,7 @@
                 <th field="pipe_length_after_cut" align="center" width="100"  class="i18n1" name="pipelengthaftercut">钢管切除后长度</th>
                 <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                 <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
+                <th field="mill_no" align="center" width="150" class="i18n1" name="millno">分厂</th>
                 <th field="operation_time" align="center" width="150" class="i18n1" name="operationtime" data-options="formatter:formatterdate">操作时间</th>
             </tr>
             </thead>
@@ -276,7 +278,15 @@
 
 <!--工具栏-->
 <div id="hlPipeSamplingProTb" style="padding:10px;">
-
+    <span class="i18n1" name="millno">分厂编号</span>:
+    <input id="millno" class="easyui-combobox" type="text" name="millno"  data-options=
+            "url:'/millInfo/getAllMillsWithComboboxSelectAll.action',
+					        method:'get',
+					        valueField:'id',
+					        width: 150,
+					        editable:false,
+					        textField:'text',
+					        panelHeight:'auto'"/>
     <span class="i18n1" name="pipeno">钢管编号</span>:
     <input id="pipeno" name="pipeno" style="line-height:26px;border:1px solid #ccc">
     <span class="i18n1" name="operatorno">操作工编号</span>:
@@ -348,9 +358,16 @@
                 <tr>
                     <td class="i18n1" name="id" width="20%">流水号</td>
                     <td colspan="1" width="30%"><input class="easyui-textbox" type="text" id="idbinpid" name="idbinpid" readonly="true" value="0"/></td>
-                    <td   width="20%"></td>
+                    <td class="i18n1" name="millno" width="20%">分厂</td>
                     <td colspan="1" width="30%">
-
+                        <input id="mill_no" class="easyui-combobox" type="text" name="mill_no"  data-options=
+                                "url:'/millInfo/getAllMills.action',
+					        method:'get',
+					        valueField:'id',
+					        width: 185,
+					        editable:false,
+					        textField:'text',
+					        panelHeight:'auto'"/>
                     </td>
                 </tr>
                 <tr>

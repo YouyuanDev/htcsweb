@@ -174,8 +174,8 @@ public class PipeSamplingProcessController {
             e.printStackTrace();
         }
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
-        List<HashMap<String,Object>>list=pipeSamplingRecordDao.getAllByLike(pipe_no,operator_no,beginTime,endTime,start,Integer.parseInt(rows));
-        int count=pipeSamplingRecordDao.getCountAllByLike(pipe_no,operator_no,beginTime,endTime);
+        List<HashMap<String,Object>>list=pipeSamplingRecordDao.getAllByLike(pipe_no,operator_no,beginTime,endTime,mill_no,start,Integer.parseInt(rows));
+        int count=pipeSamplingRecordDao.getCountAllByLike(pipe_no,operator_no,beginTime,endTime,mill_no);
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
         maps.put("rows",list);
