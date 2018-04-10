@@ -12,6 +12,9 @@ public interface PipeBasicInfoDao {
     public List<PipeBasicInfo>getPipeNumbers(@Param("pipe_no")String pipe_no,@Param("pipestatus")String[] pipestatus);
 
     public List<PipeBasicInfo> getODSamplePipeNumbers(@Param("pipe_no")String pipe_no);
+
+    public List<PipeBasicInfo> getNeedRebevelPipeNumbers(@Param("pipe_no")String pipe_no);
+
     public List<HashMap<String,Object>> getAllByLike(@Param("project_no") String project_no,  @Param("contract_no")String contract_no,@Param("pipe_no")String pipe_no, @Param("status")String status, @Param("skip")int skip, @Param("take")int take);
     //public int getCount();
     public int getCountAllByLike(@Param("project_no") String project_no,  @Param("contract_no")String contract_no,@Param("pipe_no")String pipe_no,@Param("status")String status);

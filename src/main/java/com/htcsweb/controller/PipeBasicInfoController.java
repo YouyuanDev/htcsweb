@@ -62,19 +62,32 @@ public class PipeBasicInfoController {
 
 
     //查询样管信息
-    @RequestMapping("/getPipeNumberBySample")
+    @RequestMapping("/getODSamplePipeNumbers")
     @ResponseBody
-    public String getPipeNumberBySample(HttpServletRequest request){
+    public String getODSamplePipeNumbers(HttpServletRequest request){
         String map="";
         try{
             String pipe_no=request.getParameter("pipe_no");
-            List<PipeBasicInfo>list=pipeBasicInfoDao.getPipeNumberBySample(pipe_no);
+            List<PipeBasicInfo>list=pipeBasicInfoDao.getODSamplePipeNumbers(pipe_no);
             map= JSONObject.toJSONString(list);
         }catch (Exception e){
         }
         return map;
     }
 
+    //查询需要倒棱的管号信息
+    @RequestMapping("/getNeedRebevelPipeNumbers")
+    @ResponseBody
+    public String getNeedRebevelPipeNumbers(HttpServletRequest request){
+        String map="";
+        try{
+            String pipe_no=request.getParameter("pipe_no");
+            List<PipeBasicInfo>list=pipeBasicInfoDao.getNeedRebevelPipeNumbers(pipe_no);
+            map= JSONObject.toJSONString(list);
+        }catch (Exception e){
+        }
+        return map;
+    }
 
     //用于搜索的pipe状态下拉框，带All 选项
     @RequestMapping("/getAllPipeStatusWithComboboxSelectAll")

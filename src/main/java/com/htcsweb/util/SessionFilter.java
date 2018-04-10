@@ -29,6 +29,7 @@ public class SessionFilter extends OncePerRequestFilter{
             "getODAcceptanceCriteriaByContractNo",
             "getPipeNumbers",
             "getODSamplePipeNumbers",
+            "getNeedRebevelPipeNumbers",
             "getPersonNoByName",
             "getPipeInfoByNo",
             "delUploadPicture",

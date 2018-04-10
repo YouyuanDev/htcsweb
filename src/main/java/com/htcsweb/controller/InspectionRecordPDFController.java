@@ -1328,36 +1328,36 @@ public class InspectionRecordPDFController {
                     datalist.add(new Label(2, row+10, String.valueOf(list.get(i).get("cut_off_length")), wcf));
                     datalist.add(new Label(3, row+10, String.valueOf(list.get(i).get("holiday_tester_volts")), wcf));
                     datalist.add(new Label(4, row+10, String.valueOf(list.get(i).get("internal_repairs")), wcf));
-                    bevelRes=String.valueOf(list.get(i).get("bevel_check"));
-
-                    datalist.add(new Label(5, row+9, bevelStr, wcf));
-                    datalist.add(new Label(6, row+9,String.valueOf(list.get(i).get("magnetism_list")), wcf));
-                    stencilRes=String.valueOf(list.get(i).get("stencil_verification"));
-
-                    datalist.add(new Label(7, row+9, stencilStr, wcf));
-                    datalist.add(new Label(8, row+9,getFormatString(String.valueOf(list.get(i).get("surface_condition"))), wcf));
-
-                    datalist.add(new Label(2, row+10, String.valueOf(list.get(i).get("dry_film_thickness_list")), wcf));
-                    datalist.add(new Label(5, row+10, String.valueOf(list.get(i).get("cutback_length")), wcf));
-                    datalist.add(new Label(8, row+10, String.valueOf(list.get(i).get("roughness_list")), wcf));
-
-                    result=String.valueOf(list.get(i).get("result"));
-
-
-                    //最后一行数据为空问题
-                    index+=2;
-                    row+=2;
-                    if(index%11==0){
-                        createRecordPdfTitle(datalist,3,8,12,4,5,title_project_name,title_pipe_size,title_standard,title_coating_type,dayOrNight,begin_time);
-                        createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,dayOrNight,stationIdDayList,stationIdNightList);
-                    }
+//                    bevelRes=String.valueOf(list.get(i).get("bevel_check"));
+//
+//                    datalist.add(new Label(5, row+9, bevelStr, wcf));
+//                    datalist.add(new Label(6, row+9,String.valueOf(list.get(i).get("magnetism_list")), wcf));
+//                    stencilRes=String.valueOf(list.get(i).get("stencil_verification"));
+//
+//                    datalist.add(new Label(7, row+9, stencilStr, wcf));
+//                    datalist.add(new Label(8, row+9,getFormatString(String.valueOf(list.get(i).get("surface_condition"))), wcf));
+//
+//                    datalist.add(new Label(2, row+10, String.valueOf(list.get(i).get("dry_film_thickness_list")), wcf));
+//                    datalist.add(new Label(5, row+10, String.valueOf(list.get(i).get("cutback_length")), wcf));
+//                    datalist.add(new Label(8, row+10, String.valueOf(list.get(i).get("roughness_list")), wcf));
+//
+//                    result=String.valueOf(list.get(i).get("result"));
+//
+//
+//                    //最后一行数据为空问题
+//                    index+=2;
+//                    row+=2;
+//                    if(index%11==0){
+//                        createRecordPdfTitle(datalist,3,8,12,4,5,title_project_name,title_pipe_size,title_standard,title_coating_type,dayOrNight,begin_time);
+//                        createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,dayOrNight,stationIdDayList,stationIdNightList);
+//                    }
                 }
-                if(datalist.size()>0){
-                    createRecordPdfTitle(datalist,3,8,12,4,5,title_project_name,title_pipe_size,title_standard,title_coating_type,dayOrNight,begin_time);
-                    createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,dayOrNight,stationIdDayList,stationIdNightList);
-                }
+//                if(datalist.size()>0){
+//                    createRecordPdfTitle(datalist,3,8,12,4,5,title_project_name,title_pipe_size,title_standard,title_coating_type,dayOrNight,begin_time);
+//                    createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,dayOrNight,stationIdDayList,stationIdNightList);
+//                }
             }else {
-                createRecordNullPdf(datalist,3,8,12,1,4,5,9,newPdfName,templateFullName,dayOrNight,stationIdDayList,stationIdNightList);
+               // createRecordNullPdf(datalist,3,8,12,1,4,5,9,newPdfName,templateFullName,dayOrNight,stationIdDayList,stationIdNightList);
             }
         }catch (Exception e){
             e.printStackTrace();

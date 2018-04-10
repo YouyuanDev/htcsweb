@@ -67,6 +67,25 @@
         ORDER BY id DESC
         limit 1000
     </select>
+
+
+    <select id="getNeedRebevelPipeNumbers" resultType="com.htcsweb.entity.PipeBasicInfo">
+        select * from pipe_basic_info where  pipe_no in(
+        select pipe_no from pipe_sampling_record spl  UNION
+        select pipe_no from bare_pipe_grinding_cutoff_record gc where grinding_cutoff='C' or grinding_cutoff='GC'
+        ) and pipe_no not in(
+        select pipe_no from pipe_rebevel_record reb where result=1
+        )
+        <where>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+        </where>
+        ORDER BY id DESC
+        limit 1000
+    </select>
+
+
     <!--<delete id="delOdCoatingProcess">-->
         <!--delete from od_coating_2fbe_process WHERE-->
         <!--<foreach collection="array" item="item" open="id in (" separator="," close=")">-->
