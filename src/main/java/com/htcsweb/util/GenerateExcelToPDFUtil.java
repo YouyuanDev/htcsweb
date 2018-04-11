@@ -35,14 +35,14 @@ public class GenerateExcelToPDFUtil {
             //String newexcelfile=GenerateExcelToPDFUtil.FillExcelTemplate(excelTemplateFullName,null);
             //GenerateExcelToPDFUtil.ExcelToPDFRecord(newexcelfile,"/Users/kurt/Documents/testPDF.pdf","/Users/kurt/Documents/image002.jpg");
         //GenerateExcelToPDFUtil.PDFAutoMation(excelTemplateFullName,null,"/Users/kurt/Documents/testPDF.pdf","/Users/kurt/Documents/image002.jpg","/Users/kurt/Documents/simhei.ttf","");
-        GenerateExcelToPDFUtil.PDFAutoMation(excelTemplateFullName,null,"/Users/kurt/Documents/testPDF.pdf","/Users/kurt/Documents/image002.jpg","/Users/kurt/Documents/simhei.ttf","");
+        GenerateExcelToPDFUtil.PDFAutoMation(excelTemplateFullName,null,"/Users/kurt/Documents/testPDF.pdf","/Users/kurt/Documents/image002.jpg","/Users/kurt/Documents/simhei.ttf");
 
     }
 
     //PDF生成方法入口
-    public static String PDFAutoMation(String excelTemplateFullName,ArrayList<Label> dataList,String pdfFullName,String imagePath,String fontPath,String basePath) {
+    public static String PDFAutoMation(String excelTemplateFullName,ArrayList<Label> dataList,String pdfFullName,String imagePath,String fontPath) {
         String newexcelfile=GenerateExcelToPDFUtil.FillExcelTemplate(excelTemplateFullName,dataList);
-        String newpdfName=GenerateExcelToPDFUtil.ExcelToPDFRecord(newexcelfile,pdfFullName,imagePath,fontPath,basePath);
+        String newpdfName=GenerateExcelToPDFUtil.ExcelToPDFRecord(newexcelfile,pdfFullName,imagePath,fontPath);
         return  newpdfName;
     }
 
@@ -209,7 +209,7 @@ public class GenerateExcelToPDFUtil {
     }
 
     //根据excel名称，转成PDF
-    private static String ExcelToPDFRecord(String excelFullName,String pdfFullName,String imagePath,String fontPath,String basePath){
+    private static String ExcelToPDFRecord(String excelFullName,String pdfFullName,String imagePath,String fontPath){
         File pdf=new File(pdfFullName);
         try{
             if(!pdf.exists()){
