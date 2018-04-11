@@ -22,6 +22,7 @@ public interface DailyProductionReportDao {
     public int addDailyProductionReport(DailyProductionReport dailyProductionReport);
     //删除function
     public int delDailyProductionReport(String[]arrId);
-
+    //判断是否存在日报数据
+    public List<DailyProductionReport>getDailyReportByParams(@Param("project_no") String project_no,@Param("od_coating_type")String od_coating_type,@Param("od_wt")String od_wt,@Param("production_date") Date production_date);
 
 }

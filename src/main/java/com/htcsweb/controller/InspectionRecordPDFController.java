@@ -100,6 +100,17 @@ public class InspectionRecordPDFController {
     private PipeSamplingRecordDao pipeSamplingRecordDao;
     @Autowired
     private MillInfoDao millInfoDao;
+    @Autowired
+    private CoatingRepairDao coatingRepairDao;
+    @Autowired
+    private CoatingStripDao coatingStripDao;
+    @Autowired
+    private LabTesting2FbeDao labTesting2FbeDao;
+    @Autowired
+    private LabTesting3LpeDao labTesting3LpeDao;
+    @Autowired
+    private LabTestingEpoxyDao labTestingEpoxyDao;
+    private BarePipeGrindingCutoffRecordDao barePipeGrindingCutoffRecordDao;
     @RequestMapping(value="getRecordReportPDF",produces="application/json;charset=UTF-8")
     @ResponseBody
     public  String getRecordReportPDF(HttpServletRequest request, HttpServletResponse response){
@@ -187,8 +198,9 @@ public class InspectionRecordPDFController {
                         day_end_time=timeformat.parse(listDate.get(i)+" 20:00:00");
                         night_begin_time=timeformat.parse(listDate.get(i)+" 20:00:00");
                         night_end_time=timeformat.parse(DateTimeUtil.getNextDay(listDate.get(i))+" 08:00:00");
-                        //-------------------生成封面-------------------
-
+                        //-------------------外防生成封面-------------------
+                        createCoverOne(request,0,project_no,millInfo.getMill_no(),millInfo.getMill_name(),0,day_begin_time,day_end_time);
+                        createCoverOne(request,0,project_no,millInfo.getMill_no(),millInfo.getMill_name(),1,night_begin_time,night_end_time);
                         //-------------------外防腐---------------------
 
                         //1.生成当天的外打砂工位的模板
@@ -212,7 +224,9 @@ public class InspectionRecordPDFController {
                         //7.生成当天的外防终检工位的模板
                         OdCoatFinalInspectionRecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
                         OdCoatFinalInspectionRecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
-
+                        //-------------------内防生成封面-------------------
+                        createCoverOne(request,1,project_no,millInfo.getMill_no(),millInfo.getMill_name(),0,day_begin_time,day_end_time);
+                        createCoverOne(request,1,project_no,millInfo.getMill_no(),millInfo.getMill_name(),1,night_begin_time,night_end_time);
                         //-------------------内防腐---------------------
 
                         //8.内打砂检验记录PDF
@@ -1302,70 +1316,355 @@ public class InspectionRecordPDFController {
     }
 
     //12.---------------生成封面1
-    public void  createCoverOne( HttpServletRequest request,String project_no,String mill_no,int dayOrNight,Date begin_time,Date end_time){
+    //createCoverOne(request,0,project_no,project_name,millInfo.getMill_name(),0,day_begin_time,day_end_time);
+    public void  createCoverOne( HttpServletRequest request,int type,String project_no,String mill_no,String mill_name,int dayOrNight,Date begin_time,Date end_time){
         //获取试验管
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/online_production_inspection_record_list_cover_1.xls";
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String newPdfName=null;
+        String title_project_name=" ",title_pipe_size=" ",title_standard=" ",title_coating_type=" ";
         try{
             List<HashMap<String,Object>>list=pipeSamplingRecordDao.getCoverPipeSamplingInfo(project_no,mill_no,begin_time,end_time);
+
+            List<HashMap<String,String>>labPipenoList=new ArrayList<>();
+            if(type==0){
+                List<HashMap<String,Object>>labListOf2FBE=labTesting2FbeDao.getCoverLabTestingInfo(project_no,mill_no,begin_time,end_time);
+                List<HashMap<String,Object>>labListOf3LPE=labTesting3LpeDao.getCoverLabTestingInfo(project_no,mill_no,begin_time,end_time);
+                for (HashMap<String,Object> item:labListOf2FBE){
+                    HashMap<String,String>hs=new HashMap<>();
+                    hs.put("pipe_no",String.valueOf(item.get("pipe_no")));
+                    hs.put("cut_off_length",String.valueOf(item.get("cut_off_length")));
+                    labPipenoList.add(hs);
+                }
+                for (HashMap<String,Object> item:labListOf3LPE){
+                    HashMap<String,String>hs=new HashMap<>();
+                    hs.put("pipe_no",String.valueOf(item.get("pipe_no")));
+                    hs.put("cut_off_length",String.valueOf(item.get("cut_off_length")));
+                    labPipenoList.add(hs);
+                }
+            }else{
+                List<HashMap<String,Object>>labListOfId=labTestingEpoxyDao.getCoverLabTestingInfo(project_no,mill_no,begin_time,end_time);
+                for (HashMap<String,Object> item:labListOfId){
+                    HashMap<String,String>hs=new HashMap<>();
+                    hs.put("pipe_no",String.valueOf(item.get("pipe_no")));
+                    hs.put("cut_off_length",String.valueOf(item.get("cut_off_length")));
+                    labPipenoList.add(hs);
+                }
+            }
+            //比较labPipenoList和list大小,比较大的值用作循环遍历
+            int maxSize=labPipenoList.size()>=list.size()?labPipenoList.size():list.size();
             ArrayList<Label> datalist=new ArrayList<Label>();
-            if(list.size()>0){
-                int index=1,row=0;
+            if(maxSize>0){
+                int index=1,row=0,flag=1;
                 boolean isHaveTitle=true;
-                String title_project_name=" ",title_pipe_size=" ",title_standard=" ",title_coating_type=" ";
+                int res0=0,res1=0,res2=0,res3=0,res4=0;
+                //获取班次内防或者外防的防腐数,获取班次内防或者外防的合格防腐数
+                if(type==0){
+                    res0=odFinalInspectionProcessDao.getTotalOdOfTime(project_no,mill_no,null,null,0,0,begin_time,end_time);
+                    res1=odFinalInspectionProcessDao.getTotalOdQualifiedOfTime(project_no,mill_no,null,null,0,0,begin_time,end_time);
+                    res2=coatingRepairDao.getTotalCoatingRepairOfTime(project_no,mill_no,null,null,"od",0,0,begin_time,end_time);
+                    res3=coatingStripDao.getTotalStripOfTime(project_no,mill_no,null,null,"od",0,0,begin_time,end_time);
+                    res4=barePipeGrindingCutoffRecordDao.getTotalBarePipeGrindCutoffOfTime(project_no,mill_no,null,null,"od",0,0,begin_time,end_time);
+                }else{
+                    res0=idFinalInspectionProcessDao.getTotalIdOfTime(project_no,mill_no,null,null,0,0,begin_time,end_time);
+                    res1=idFinalInspectionProcessDao.getTotalIdQualifiedOfTime(project_no,mill_no,null,null,0,0,begin_time,end_time);
+                    res2=coatingRepairDao.getTotalCoatingRepairOfTime(project_no,mill_no,null,null,"id",0,0,begin_time,end_time);
+                    res3=coatingStripDao.getTotalStripOfTime(project_no,mill_no,null,null,"id",0,0,begin_time,end_time);
+                    res4=barePipeGrindingCutoffRecordDao.getTotalBarePipeGrindCutoffOfTime(project_no,mill_no,null,null,"id",0,0,begin_time,end_time);
+                }
                 for (int i=0;i<list.size();i++){
                     if(isHaveTitle){
                         //添加模板头部信息
-                        title_project_name=String.valueOf(list.get(i).get("project_name"));
-                        title_pipe_size=("Φ"+String.valueOf(list.get(i).get("od"))+"*"+String.valueOf(list.get(i).get("wt"))+"mm");
-                        title_standard=(String.valueOf(list.get(i).get("client_spec"))+" "+String.valueOf(list.get(i).get("coating_standard")));
-                        title_coating_type=getFormatString(String.valueOf(list.get(i).get("internal_coating")));
+                        if(list.size()>0){
+                            title_project_name=String.valueOf(list.get(i).get("project_name"));
+                            title_pipe_size=("Φ"+String.valueOf(list.get(i).get("od"))+"*"+String.valueOf(list.get(i).get("wt"))+"mm");
+                            title_standard=(String.valueOf(list.get(i).get("client_spec"))+" "+String.valueOf(list.get(i).get("coating_standard")));
+                            title_coating_type=getFormatString(String.valueOf(list.get(i).get("internal_coating")));
+                        }
                         isHaveTitle=false;
                     }
-                    datalist.add(new Label(1, row+10, String.valueOf(list.get(i).get("pipe_no")), wcf));
-                    datalist.add(new Label(2, row+10, String.valueOf(list.get(i).get("cut_off_length")), wcf));
-                    datalist.add(new Label(3, row+10, String.valueOf(list.get(i).get("holiday_tester_volts")), wcf));
-                    datalist.add(new Label(4, row+10, String.valueOf(list.get(i).get("internal_repairs")), wcf));
-//                    bevelRes=String.valueOf(list.get(i).get("bevel_check"));
-//
-//                    datalist.add(new Label(5, row+9, bevelStr, wcf));
-//                    datalist.add(new Label(6, row+9,String.valueOf(list.get(i).get("magnetism_list")), wcf));
-//                    stencilRes=String.valueOf(list.get(i).get("stencil_verification"));
-//
-//                    datalist.add(new Label(7, row+9, stencilStr, wcf));
-//                    datalist.add(new Label(8, row+9,getFormatString(String.valueOf(list.get(i).get("surface_condition"))), wcf));
-//
-//                    datalist.add(new Label(2, row+10, String.valueOf(list.get(i).get("dry_film_thickness_list")), wcf));
-//                    datalist.add(new Label(5, row+10, String.valueOf(list.get(i).get("cutback_length")), wcf));
-//                    datalist.add(new Label(8, row+10, String.valueOf(list.get(i).get("roughness_list")), wcf));
-//
-//                    result=String.valueOf(list.get(i).get("result"));
-//
-//
-//                    //最后一行数据为空问题
-//                    index+=2;
-//                    row+=2;
-//                    if(index%11==0){
-//                        createRecordPdfTitle(datalist,3,8,12,4,5,title_project_name,title_pipe_size,title_standard,title_coating_type,dayOrNight,begin_time);
-//                        createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,dayOrNight,stationIdDayList,stationIdNightList);
-//                    }
+                    if(list.size()>=labPipenoList.size()){
+                        if(flag>=labPipenoList.size()){
+                            datalist.add(new Label(7, row+10," ", wcf));
+                        }else{
+                            datalist.add(new Label(7, row+10, String.valueOf(labPipenoList.get(i)), wcf));
+                        }
+                        datalist.add(new Label(1, row+10, String.valueOf(list.get(i).get("pipe_no")), wcf));
+                        datalist.add(new Label(4, row+10, String.valueOf(list.get(i).get("cut_off_length")), wcf));
+                    }else{
+                        if(flag>=list.size()){
+                            datalist.add(new Label(1, row+10, " ", wcf));
+                            datalist.add(new Label(4, row+10, " ", wcf));
+                        }else{
+                            datalist.add(new Label(1, row+10, String.valueOf(list.get(i).get("pipe_no")), wcf));
+                            datalist.add(new Label(4, row+10, String.valueOf(list.get(i).get("cut_off_length")), wcf));
+                        }
+                        datalist.add(new Label(7, row+10, String.valueOf(labPipenoList.get(i)), wcf));
+                    }
+                    index++;
+                    row++;
+                    if(index%11==0){
+                        createRecordPdfTitle(datalist,3,8,12,4,5,title_project_name,title_pipe_size,title_standard,title_coating_type,dayOrNight,begin_time);
+                        datalist.add(new Label(20,11,mill_name,wcf));
+                        newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+                        datalist.clear();
+                        index=1;
+                        row=0;
+                        if(newPdfName!=null){
+                            if(dayOrNight==0){
+                                if(type==0){
+                                    stationOdDayList.add(newPdfName);
+                                }else{
+                                    stationIdDayList.add(newPdfName);
+                                }
+                            }else{
+                                if(type==0){
+                                    stationOdNightList.add(newPdfName);
+                                }else{
+                                    stationIdNightList.add(newPdfName);
+                                }
+                            }
+                            delSetPath.add(newPdfName);
+                        }
+                    }
                 }
-//                if(datalist.size()>0){
-//                    createRecordPdfTitle(datalist,3,8,12,4,5,title_project_name,title_pipe_size,title_standard,title_coating_type,dayOrNight,begin_time);
-//                    createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,dayOrNight,stationIdDayList,stationIdNightList);
-//                }
+                if(datalist.size()>0){
+                    createRecordPdfTitle(datalist,3,8,12,4,5,title_project_name,title_pipe_size,title_standard,title_coating_type,dayOrNight,begin_time);
+                    datalist.add(new Label(20,11,mill_name,wcf));
+                    newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+                    datalist.clear();
+                    index=1;
+                    row=0;
+                    if(newPdfName!=null){
+                        if(dayOrNight==0){
+                            if(type==0){
+                                stationOdDayList.add(newPdfName);
+                            }else{
+                                stationIdDayList.add(newPdfName);
+                            }
+                        }else{
+                            if(type==0){
+                                stationOdNightList.add(newPdfName);
+                            }else{
+                                stationIdNightList.add(newPdfName);
+                            }
+                        }
+                        delSetPath.add(newPdfName);
+                    }
+                }
             }else {
-               // createRecordNullPdf(datalist,3,8,12,1,4,5,9,newPdfName,templateFullName,dayOrNight,stationIdDayList,stationIdNightList);
+                createRecordPdfTitle(datalist,3,8,12,4,5,title_project_name,title_pipe_size,title_standard,title_coating_type,dayOrNight,begin_time);
+                datalist.add(new Label(20,11,mill_name,wcf));
+                newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+                datalist.clear();
+                if(newPdfName!=null){
+                    if(dayOrNight==0){
+                        if(type==0){
+                            stationOdDayList.add(newPdfName);
+                        }else{
+                            stationIdDayList.add(newPdfName);
+                        }
+                    }else{
+                        if(type==0){
+                            stationOdNightList.add(newPdfName);
+                        }else{
+                            stationIdNightList.add(newPdfName);
+                        }
+                    }
+                    delSetPath.add(newPdfName);
+                }
             }
         }catch (Exception e){
             e.printStackTrace();
         }
+        createCoverTwo(request,type,project_no,mill_no,mill_name,title_project_name,title_pipe_size,title_standard,title_coating_type,dayOrNight,begin_time,end_time);
     }
     //13.---------------生成封面2
-    public void  createCoverTwo(){
+    public void  createCoverTwo(HttpServletRequest request,int type,String project_no,String mill_no,String mill_name,String project_name,String title_pipe_size,String title_standard,String title_coating_type,int dayOrNight,Date begin_time,Date end_time){
+        String templateFullName=request.getSession().getServletContext().getRealPath("/")
+                +"template/online_production_inspection_record_list_cover_2.xls";
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String newPdfName=null;
+        List<CoatingRepair>repairList=null;
+        List<CoatingStrip>stripList=null;
+        List<BarePipeGrindingCutoffRecord>bareList=new ArrayList<>();
+        List<HashMap<String,Object>>allList=new ArrayList<>();
+        int maxSize=0;
+        try{
+            if(type==0){
+                 repairList=coatingRepairDao.getCoatingRepairOfTime(project_no,mill_no,null,null,"od",0,0,begin_time,end_time);
+                 stripList=coatingStripDao.getStripOfTime(project_no,mill_no,null,null,"od",0,0,begin_time,end_time);
 
+                 //bareList=barePipeGrindingCutoffRecordDao.getBarePipeCutoffOfTime(project_no,mill_no,null,null,"od",0,0,begin_time,end_time);
+            }else{
+                repairList=coatingRepairDao.getCoatingRepairOfTime(project_no,mill_no,null,null,"id",0,0,begin_time,end_time);
+                stripList=coatingStripDao.getStripOfTime(project_no,mill_no,null,null,"id",0,0,begin_time,end_time);
+                //bareList=barePipeGrindingCutoffRecordDao.getBarePipeCutoffOfTime(project_no,mill_no,null,null,"id",0,0,begin_time,end_time);
+            }
+
+            maxSize=repairList.size()>=stripList.size()?repairList.size():stripList.size();
+            maxSize=maxSize>=bareList.size()?maxSize:bareList.size();
+            ArrayList<Label> datalist=new ArrayList<Label>();
+            if(maxSize>0){
+                int index=1,row=0,flag=1,temp1=0,temp2=0,temp3=0;
+                for (int i=0;i<maxSize;i++){
+                    if(i<repairList.size()/2){
+                        datalist.add(new Label(1,row+8,repairList.get(2*temp1).getPipe_no(),wcf));
+                        datalist.add(new Label(2,row+8,getFormatString(repairList.get(2*temp1).getUnqualified_reason()),wcf));
+                        datalist.add(new Label(7,row+8,repairList.get(2*temp1+1).getPipe_no(),wcf));
+                        datalist.add(new Label(8,row+8,getFormatString(repairList.get(2*temp1+1).getUnqualified_reason()),wcf));
+                        temp1++;
+                    }else{
+                        datalist.add(new Label(1,row+8," ",wcf));
+                        datalist.add(new Label(2,row+8," ",wcf));
+                        datalist.add(new Label(7,row+8," ",wcf));
+                        datalist.add(new Label(8,row+8," ",wcf));
+                    }
+                    if(repairList.size()%2!=0){
+                        datalist.add(new Label(1,row+8,repairList.get(repairList.size()-1).getPipe_no(),wcf));
+                        datalist.add(new Label(2,row+8,repairList.get(repairList.size()-1).getUnqualified_reason(),wcf));
+                    }
+                    if(i<stripList.size()/2){
+                        datalist.add(new Label(3,row+8,stripList.get(2*temp1).getPipe_no(),wcf));
+                        datalist.add(new Label(4,row+8," ",wcf));
+                        datalist.add(new Label(9,row+8,repairList.get(2*temp1+1).getPipe_no(),wcf));
+                        datalist.add(new Label(10,row+8," ",wcf));
+                        temp2++;
+                    }else{
+                        datalist.add(new Label(3,row+8," ",wcf));
+                        datalist.add(new Label(4,row+8," ",wcf));
+                        datalist.add(new Label(9,row+8," ",wcf));
+                        datalist.add(new Label(10,row+8," ",wcf));
+                    }
+                    if(stripList.size()%2!=0){
+                        datalist.add(new Label(1,row+8,stripList.get(stripList.size()-1).getPipe_no(),wcf));
+                        datalist.add(new Label(2,row+8," ",wcf));
+                    }
+                    String bareType0=" ",bareType1=" ",bareType2=" ";
+                    if(i<bareList.size()){
+
+                        datalist.add(new Label(5,row+8,bareList.get(2*temp3).getPipe_no(),wcf));
+                        bareType0=bareList.get(2*temp3).getGrinding_cutoff();
+                        if(bareType0!=null){
+                            if(bareType0.equals("G")){
+                                bareType0="需要修磨";
+                            }else if(bareType0.equals("C")){
+                                bareType0="需要切割";
+                            }else if(bareType0.equals("GC")){
+                                bareType0="需要修磨和切割";
+                            }
+                        }
+                        datalist.add(new Label(6,row+8,bareType0,wcf));
+                        datalist.add(new Label(11,row+8,bareList.get(2*temp3+1).getPipe_no(),wcf));
+                        bareType1=bareList.get(2*temp3+1).getGrinding_cutoff();
+                        if(bareType1!=null){
+                            if(bareType1.equals("G")){
+                                bareType1="需要修磨";
+                            }else if(bareType1.equals("C")){
+                                bareType1="需要切割";
+                            }else if(bareType1.equals("GC")){
+                                bareType1="需要修磨和切割";
+                            }
+                        }
+                        datalist.add(new Label(12,row+8,bareType1,wcf));
+                        temp3++;
+                    }else{
+                        datalist.add(new Label(5,row+8," ",wcf));
+                        datalist.add(new Label(6,row+8," ",wcf));
+                        datalist.add(new Label(11,row+8," ",wcf));
+                        datalist.add(new Label(12,row+8," ",wcf));
+                    }
+                    if(bareList.size()%2!=0){
+                        bareType2=bareList.get(bareList.size()-1).getGrinding_cutoff();
+                        if(bareType2!=null){
+                            if(bareType2.equals("G")){
+                                bareType2="需要修磨";
+                            }else if(bareType2.equals("C")){
+                                bareType2="需要切割";
+                            }else if(bareType2.equals("GC")){
+                                bareType2="需要修磨和切割";
+                            }
+                        }
+                        datalist.add(new Label(1,row+8,bareList.get(bareList.size()-1).getPipe_no(),wcf));
+                        datalist.add(new Label(2,row+8,bareType2,wcf));
+                    }
+                    index++;
+                    row++;
+                    if(index%11==0){
+                        createRecordPdfTitle(datalist,3,8,12,4,5,project_name,title_pipe_size,title_standard,title_coating_type,dayOrNight,begin_time);
+                        datalist.add(new Label(20,11,mill_name,wcf));
+                        newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+                        datalist.clear();
+                        index=1;
+                        row=0;
+                        if(newPdfName!=null){
+                            if(dayOrNight==0){
+                                if(type==0){
+                                    stationOdDayList.add(newPdfName);
+                                }else{
+                                    stationIdDayList.add(newPdfName);
+                                }
+                            }else{
+                                if(type==0){
+                                    stationOdNightList.add(newPdfName);
+                                }else{
+                                    stationIdNightList.add(newPdfName);
+                                }
+                            }
+                            delSetPath.add(newPdfName);
+                        }
+                    }
+                }
+                if(datalist.size()>0){
+                    createRecordPdfTitle(datalist,3,8,12,4,5,project_name,title_pipe_size,title_standard,title_coating_type,dayOrNight,begin_time);
+                    datalist.add(new Label(20,11,mill_name,wcf));
+                    newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+                    datalist.clear();
+                    index=1;
+                    row=0;
+                    if(newPdfName!=null){
+                        if(dayOrNight==0){
+                            if(type==0){
+                                stationOdDayList.add(newPdfName);
+                            }else{
+                                stationIdDayList.add(newPdfName);
+                            }
+                        }else{
+                            if(type==0){
+                                stationOdNightList.add(newPdfName);
+                            }else{
+                                stationIdNightList.add(newPdfName);
+                            }
+                        }
+                        delSetPath.add(newPdfName);
+                    }
+                }
+            }else {
+                createRecordPdfTitle(datalist,3,8,12,4,5,project_name,title_pipe_size,title_standard,title_coating_type,dayOrNight,begin_time);
+                datalist.add(new Label(20,11,mill_name,wcf));
+                newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+                datalist.clear();
+                if(newPdfName!=null){
+                    if(dayOrNight==0){
+                        if(type==0){
+                            stationOdDayList.add(newPdfName);
+                        }else{
+                            stationIdDayList.add(newPdfName);
+                        }
+                    }else{
+                        if(type==0){
+                            stationOdNightList.add(newPdfName);
+                        }else{
+                            stationIdNightList.add(newPdfName);
+                        }
+                    }
+                    delSetPath.add(newPdfName);
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 
@@ -1431,7 +1730,7 @@ public class InspectionRecordPDFController {
         datalist.add(new Label(column3, row2," ", wcf));
         datalist.add(new Label(column3, row1, " ", wcf));
         datalist.add(new Label(column4,row3,"今天暂无记录!",wcf));
-        newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
+        newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
         if(newPdfName!=null){
             if(dayOrNight==0){
                 stationDayList.add(newPdfName);
@@ -1462,7 +1761,7 @@ public class InspectionRecordPDFController {
         datalist.add(new Label(x1,y1,String.valueOf(sb.toString()),wcf));
         //添加合格数
         datalist.add(new Label(x2,y2,String.valueOf(qualifiedTotal),wcf));
-        newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,basePath);
+        newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
         datalist.clear();
         qualifiedTotal=0;
         index=1;

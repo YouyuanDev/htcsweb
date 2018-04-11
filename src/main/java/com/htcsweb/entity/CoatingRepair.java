@@ -29,11 +29,11 @@ public class CoatingRepair {
     private String upload_files;
     private String result;
     private String remark;
-
+    private String mill_no;
     public CoatingRepair() {
     }
 
-    public CoatingRepair(int id, String pipe_no, String operator_no, Date operation_time, String coating_type, String odid, String repair_size, int repair_number, int holiday_number, String repair_method, String unqualified_reason, String inspector_no, Date inspection_time, String surface_condition, String repair_thickness, String holiday_testing, String adhesion, String upload_files, String result, String remark) {
+    public CoatingRepair(int id, String pipe_no, String operator_no, Date operation_time, String coating_type, String odid, String repair_size, int repair_number, int holiday_number, String repair_method, String unqualified_reason, String inspector_no, Date inspection_time, String surface_condition, String repair_thickness, String holiday_testing, String adhesion, String upload_files, String result, String remark, String mill_no) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operator_no = operator_no;
@@ -54,6 +54,7 @@ public class CoatingRepair {
         this.upload_files = upload_files;
         this.result = result;
         this.remark = remark;
+        this.mill_no = mill_no;
     }
 
     public int getId() {
@@ -214,5 +215,13 @@ public class CoatingRepair {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getMill_no() {
+        return mill_no;
+    }
+
+    public void setMill_no(String mill_no) {
+        this.mill_no = mill_no;
     }
 }

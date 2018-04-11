@@ -33,7 +33,7 @@
 
 
     <insert id="addCoatingRepair" parameterType="com.htcsweb.entity.CoatingRepair">
-         INSERT INTO coating_repair(pipe_no,operator_no,operation_time,coating_type,odid,repair_size,repair_number,holiday_number,repair_method,unqualified_reason,inspector_no,inspection_time,surface_condition,repair_thickness,holiday_testing,adhesion,upload_files,result,remark) VALUES (#{pipe_no},#{operator_no},#{operation_time},#{coating_type},#{odid},#{repair_size},#{repair_number},#{holiday_number},#{repair_method},#{unqualified_reason},#{inspector_no},#{inspection_time},#{surface_condition},#{repair_thickness},#{holiday_testing},#{adhesion},#{upload_files},#{result},#{remark})
+         INSERT INTO coating_repair(pipe_no,operator_no,operation_time,coating_type,odid,repair_size,repair_number,holiday_number,repair_method,unqualified_reason,inspector_no,inspection_time,surface_condition,repair_thickness,holiday_testing,adhesion,upload_files,result,remark,mill_no) VALUES (#{pipe_no},#{operator_no},#{operation_time},#{coating_type},#{odid},#{repair_size},#{repair_number},#{holiday_number},#{repair_method},#{unqualified_reason},#{inspector_no},#{inspection_time},#{surface_condition},#{repair_thickness},#{holiday_testing},#{adhesion},#{upload_files},#{result},#{remark},#{mill_no})
     </insert>
     <delete id="delCoatingRepair">
         delete from coating_repair WHERE
@@ -43,7 +43,7 @@
     </delete>
 
     <update id="updateCoatingRepair" parameterType="com.htcsweb.entity.CoatingRepair">
-        UPDATE coating_repair set pipe_no=#{pipe_no},operator_no=#{operator_no},operation_time=#{operation_time},coating_type=#{coating_type}, odid=#{odid},repair_size=#{repair_size},repair_number=#{repair_number},holiday_number=#{holiday_number},repair_method=#{repair_method},unqualified_reason=#{unqualified_reason},inspector_no=#{inspector_no},inspection_time=#{inspection_time},surface_condition=#{surface_condition},repair_thickness=#{repair_thickness},holiday_testing=#{holiday_testing},adhesion=#{adhesion},upload_files=#{upload_files},result=#{result},remark=#{remark} WHERE id=#{id}
+        UPDATE coating_repair set pipe_no=#{pipe_no},operator_no=#{operator_no},operation_time=#{operation_time},coating_type=#{coating_type}, odid=#{odid},repair_size=#{repair_size},repair_number=#{repair_number},holiday_number=#{holiday_number},repair_method=#{repair_method},unqualified_reason=#{unqualified_reason},inspector_no=#{inspector_no},inspection_time=#{inspection_time},surface_condition=#{surface_condition},repair_thickness=#{repair_thickness},holiday_testing=#{holiday_testing},adhesion=#{adhesion},upload_files=#{upload_files},result=#{result},remark=#{remark},mill_no=#{mill_no} WHERE id=#{id}
     </update>
 
 
@@ -65,6 +65,9 @@
             </if>
             <if test="contract_no!=null and contract_no!=''">
                 AND p.contract_no LIKE CONCAT('%',#{contract_no},'%')
+            </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no LIKE CONCAT('%',#{mill_no},'%')
             </if>
             <if test="begin_time!=null">
                 <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
@@ -98,6 +101,9 @@
             <if test="contract_no!=null and contract_no!=''">
                 AND p.contract_no LIKE CONCAT('%',#{contract_no},'%')
             </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no LIKE CONCAT('%',#{mill_no},'%')
+            </if>
             <if test="begin_time!=null">
                 <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
             </if>
@@ -111,18 +117,69 @@
     </select>
 
     <!--获取修补数-->
-    <select id="getTotalCoatingRepairOfDay" resultType="java.lang.Integer">
-        SELECT count(*) from coating_repair o
+    <select id="getTotalCoatingRepairOfTime" resultType="java.lang.Integer">
+        SELECT count(DISTINCT(o.pipe_no)) from coating_repair o
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no
         left join project_info pro on c.project_no=pro.project_no
         <where>
-            c.external_coating=#{external_coating}
-            AND c.internal_coating=#{internal_coating}
-            AND o.odid=#{odid}
-            AND pro.project_no=#{project_no}
-            AND c.od=#{od}
-            and c.wt=#{wt}
+            <if test="project_no!=null and project_no!=''">
+                AND  pro.project_no=#{project_no}
+            </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no=#{mill_no}
+            </if>
+            <if test="odid!=null and odid!=''">
+                AND o.odid=#{odid}
+            </if>
+            <if test="external_coating!=null">
+                AND c.external_coating=#{external_coating}
+            </if>
+            <if test="internal_coating!=null">
+                AND  c.internal_coating=#{internal_coating}
+            </if>
+            <if test="od>0">
+                AND  c.od=#{od}
+            </if>
+            <if test="wt>0">
+                AND c.wt=#{wt}
+            </if>
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+    </select>
+    <!--获取修补内容-->
+    <select id="getCoatingRepairOfTime" resultType="com.htcsweb.entity.CoatingRepair">
+        SELECT o.* from coating_repair o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no=#{project_no}
+            </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no=#{mill_no}
+            </if>
+            <if test="odid!=null and odid!=''">
+                AND o.odid=#{odid}
+            </if>
+            <if test="external_coating!=null">
+                AND c.external_coating=#{external_coating}
+            </if>
+            <if test="internal_coating!=null">
+                AND c.internal_coating=#{internal_coating}
+            </if>
+            <if test="od>0">
+                AND c.od=#{od}
+            </if>
+            <if test="wt>0">
+                AND c.wt=#{wt}
+            </if>
             <if test="begin_time!=null">
                 <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
             </if>

@@ -39,7 +39,8 @@
                 'pipe_no':$('#pipeno').val(),
                 'operator_no': $('#operatorno').val(),
                 'begin_time': $('#begintime').val(),
-                'end_time': $('#endtime').val()
+                'end_time': $('#endtime').val(),
+                'mill_no': $('#millno').val()
             });
         }
         $(function () {
@@ -214,7 +215,11 @@
                         hlAlertFour("请选择操作工工号");
                         return false;
                     }
+                    if($("input[name='mill_no']").val()==""){
 
+                        hlAlertFour("请输入分厂信息");
+                        return false;
+                    }
                     if($("input[name='operation-time']").val()==""){
 
                         hlAlertFour("请输入操作时间");
@@ -372,6 +377,15 @@
 
 <!--工具栏-->
 <div id="hlcoatingRepairTb" style="padding:10px;">
+    <span class="i18n1" name="millno">分厂编号</span>:
+    <input id="millno" class="easyui-combobox" type="text" name="millno"  data-options=
+            "url:'/millInfo/getAllMillsWithComboboxSelectAll.action',
+					        method:'get',
+					        valueField:'id',
+					        width: 150,
+					        editable:false,
+					        textField:'text',
+					        panelHeight:'auto'"/>
     <span class="i18n1" name="pipeno">钢管编号</span>:
     <input id="pipeno" name="pipeno"  style="width:100px;line-height:22px;border:1px solid #ccc">
     <span class="i18n1" name="contractno">合同编号</span>:
@@ -474,13 +488,18 @@
                             <option value="Other">Other</option>
                         </select>
                     </td>
-                    <td class="i18n1" name="odid" width="20%">外/内防</td>
-                    <td width="30%">
-                        <select id="odid" class="easyui-combobox" data-options="editable:false" name="odid"   style="width:185px;">
-                          <option value="od">外涂层</option>
-                          <option value="id">内涂层</option>
-                        </select>
+                    <td class="i18n1" name="millno" width="20%">分厂</td>
+                    <td colspan="1" width="30%">
+                        <input id="mill_no" class="easyui-combobox" type="text" name="mill_no"  data-options=
+                                "url:'/millInfo/getAllMills.action',
+					        method:'get',
+					        valueField:'id',
+					        width: 185,
+					        editable:false,
+					        textField:'text',
+					        panelHeight:'auto'"/>
                     </td>
+
 
                 </tr>
                 <tr>
@@ -489,10 +508,14 @@
                         <input class="easyui-textbox"  type="text" name="repair_size" value=""/>
 
                     </td>
-                    <td width="20%" class="i18n1" name="repairnumber">修补数量</td>
+                    <td class="i18n1" name="odid" width="20%">外/内防</td>
                     <td width="30%">
-                        <input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="repair_number" value=""/>
+                        <select id="odid" class="easyui-combobox" data-options="editable:false" name="odid"   style="width:185px;">
+                            <option value="od">外涂层</option>
+                            <option value="id">内涂层</option>
+                        </select>
                     </td>
+
                 </tr>
                 <tr>
                     <td width="20%" class="i18n1" name="holidaynumber">漏点数量</td>
@@ -500,13 +523,11 @@
                         <input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="holiday_number" value=""/>
 
                     </td>
-                    <td width="20%" class="i18n1" name="repairmethod">修补方法</td>
+                    <td width="20%" class="i18n1" name="repairnumber">修补数量</td>
                     <td width="30%">
-                        <select id="repair_method" class="easyui-combobox" data-options="editable:false" name="repair_method"   style="width:185px;">
-                            <option value="2POXY">2POXY</option>
-                            <option value="XXXXX">XXXXX</option>
-                        </select>
+                        <input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="repair_number" value=""/>
                     </td>
+
                 </tr>
                 <tr>
                     <td width="20%"  class="i18n1" name="unqualifiedreason">不合格原因</td>
@@ -520,6 +541,21 @@
                             <option value="5">有杂质</option>
                         </select>
                     </td>
+                    <td width="20%" class="i18n1" name="repairmethod">修补方法</td>
+                    <td width="30%">
+                        <select id="repair_method" class="easyui-combobox" data-options="editable:false" name="repair_method"   style="width:185px;">
+                            <option value="2POXY">2POXY</option>
+                            <option value="XXXXX">XXXXX</option>
+                        </select>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td width="20%" class="i18n1" name="inspectiontime">检验时间</td>
+                    <td width="30%">
+                        <input class="easyui-datetimebox" id="inspection-time" type="text" name="instime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+
+                    </td>
                     <td width="20%"  class="i18n1" name="inspectorno">检验员编号</td>
                     <td width="30%">
                         <input id="lookup3" name="inspector_no" class="mini-lookup" style="text-align:center;width:180px;"
@@ -527,11 +563,12 @@
                                popup="#gridPanel3" grid="#datagrid3" multiSelect="false"
                         />
                     </td>
+
                 </tr>
                 <tr>
-                    <td width="20%" class="i18n1" name="inspectiontime">检验时间</td>
-                    <td width="30%">
-                        <input class="easyui-datetimebox" id="inspection-time" type="text" name="instime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                    <td width="20%" class="i18n1" name="repairthickness">修补厚度（,分隔）</td>
+                    <td width="30%" >
+                        <input class="easyui-textbox"  type="text" name="repair_thickness" value=""/>
 
                     </td>
                     <td width="20%" class="i18n1" name="surfacecondition1">表面质量</td>
@@ -541,20 +578,7 @@
                             <option value="Not OK">Not OK</option>
                         </select>
                     </td>
-                </tr>
-                <tr>
-                    <td width="20%" class="i18n1" name="repairthickness">修补厚度（,分隔）</td>
-                    <td width="30%" >
-                        <input class="easyui-textbox"  type="text" name="repair_thickness" value=""/>
 
-                    </td>
-                    <td width="20%" class="i18n1" name="holidaytesting">漏点检测</td>
-                    <td width="30%">
-                        <select id="holiday_testing" class="easyui-combobox" data-options="editable:false" name="holiday_testing"   style="width:185px;">
-                            <option value="OK">OK</option>
-                            <option value="Not OK">Not OK</option>
-                        </select>
-                    </td>
                 </tr>
                 <tr>
                     <td width="20%" class="i18n1" name="adhesion">附着力</td>
@@ -565,10 +589,14 @@
                         </select>
 
                     </td>
-                    <td width="20%" class="i18n1" name="remark">备注</td>
+                    <td width="20%" class="i18n1" name="holidaytesting">漏点检测</td>
                     <td width="30%">
-                        <input class="easyui-textbox"  data-options="multiline:true" type="text" name="remark" value=""/>
+                        <select id="holiday_testing" class="easyui-combobox" data-options="editable:false" name="holiday_testing"   style="width:185px;">
+                            <option value="OK">OK</option>
+                            <option value="Not OK">Not OK</option>
+                        </select>
                     </td>
+
                 </tr>
                 <tr>
                     <td width="20%"  class="i18n1" name="result">结论</td>
@@ -578,6 +606,10 @@
                         <option value="2">不合格,扒皮处理</option>
                         <option value="3">待定</option>
                     </select></td>
+                    <td width="20%" class="i18n1" name="remark">备注</td>
+                    <td width="30%">
+                        <input class="easyui-textbox"  data-options="multiline:true" type="text" name="remark" value=""/>
+                    </td>
                 </tr>
             </table>
             <input type="hidden" id="fileslist" name="upload_files" value=""/>

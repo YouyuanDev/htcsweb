@@ -94,4 +94,23 @@
             #{item}
         </foreach>
     </delete>
+
+    <select id="getDailyReportByParams" resultType="com.htcsweb.entity.DailyProductionReport">
+        SELECT * FROM daily_production_report dr
+        <where>
+            <if test="project_no!=null and project_no!=''">
+                AND dr.project_no=#{project_no}
+            </if>
+            <if test="od_coating_type!=null and od_coating_type!=''">
+                AND dr.od_coating_type=#{od_coating_type}
+             </if>
+            <if test="od_wt!=null and od_wt!=''">
+                AND dr.od_wt=#{od_wt}
+            </if>
+            <if test="production_date!=null">
+                <![CDATA[ AND DATE_FORMAT(dr.production_date,'%Y-%m-%d %H:%T:%s')==DATE_FORMAT(#{production_date},'%Y-%m-%d %H:%T:%s')]]>
+            </if>
+        </where>
+    </select>
+
 </mapper>

@@ -32,7 +32,7 @@ public class CoatingRepairController {
 
     @RequestMapping(value = "/getCoatingRepairInfoByLike")
     @ResponseBody
-    public String getCoatingRepairInfoByLike(@RequestParam(value = "pipe_no",required = false)String pipe_no, @RequestParam(value = "operator_no",required = false)String operator_no, @RequestParam(value = "project_no",required = false)String project_no,@RequestParam(value = "contract_no",required = false)String contract_no,@RequestParam(value = "status",required = false)String status, @RequestParam(value = "begin_time",required = false)String begin_time, @RequestParam(value = "end_time",required = false)String end_time, HttpServletRequest request){
+    public String getCoatingRepairInfoByLike(@RequestParam(value = "pipe_no",required = false)String pipe_no, @RequestParam(value = "operator_no",required = false)String operator_no, @RequestParam(value = "project_no",required = false)String project_no,@RequestParam(value = "mill_no",required = false)String mill_no,@RequestParam(value = "contract_no",required = false)String contract_no,@RequestParam(value = "status",required = false)String status, @RequestParam(value = "begin_time",required = false)String begin_time, @RequestParam(value = "end_time",required = false)String end_time, HttpServletRequest request){
         String page= request.getParameter("page");
         String rows= request.getParameter("rows");
         if(page==null){
@@ -58,8 +58,8 @@ public class CoatingRepairController {
             e.printStackTrace();
         }
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
-        List<HashMap<String,Object>>list=coatingRepairDao.getCoatingRepairInfoByLike(pipe_no,operator_no,project_no,contract_no,status,beginTime,endTime,start,Integer.parseInt(rows));
-        int count=coatingRepairDao.getCountCoatingRepairInfoByLike(pipe_no,operator_no,project_no,contract_no,status,beginTime,endTime);
+        List<HashMap<String,Object>>list=coatingRepairDao.getCoatingRepairInfoByLike(pipe_no,operator_no,project_no,contract_no,mill_no,status,beginTime,endTime,start,Integer.parseInt(rows));
+        int count=coatingRepairDao.getCountCoatingRepairInfoByLike(pipe_no,operator_no,project_no,contract_no,mill_no,status,beginTime,endTime);
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
         maps.put("rows",list);

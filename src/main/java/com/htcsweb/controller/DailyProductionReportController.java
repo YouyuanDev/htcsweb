@@ -183,8 +183,10 @@ public class DailyProductionReportController {
                     //遍历排列组合，生成组合对应的tab
                     float od=0f,wt=0f;
                     String external_coating="",internal_coating="";
+                    String od_wt="";
                     for (GroupEntity entity:list){
                         od=entity.getOd(); wt=entity.getWt();
+                        od_wt=String.valueOf(od)+String.valueOf(wt);
                         external_coating=entity.getExternal_coating();internal_coating=entity.getInternal_coating();
                         for (String item:dateList){
                             //根据日期填充对应的tab
@@ -209,73 +211,158 @@ public class DailyProductionReportController {
                             //外防修补数
                             int res9=getTotalCoatingRepair(item,project_no,external_coating,internal_coating,"od",od,wt);
                             //外防光管隔离数
-                            List<String>bareList=getTotalBarePipeGrindingCutoff(item,project_no,external_coating,internal_coating,"od",od,wt);
-                            int res10=Integer.parseInt(bareList.get(0));
+
+                            //List<String>bareList=getTotalBarePipeGrindingCutoff(item,project_no,external_coating,internal_coating,"od",od,wt);
+                            int res10=getTotalBarePipeGrindCutoffOfTime(item,project_no,external_coating,internal_coating,"od",od,wt);
                             //外防光管隔离管修磨
-                            int res11=Integer.parseInt(bareList.get(1));
+                            int res11=getTotalBarePipeGrindOfTime(item,project_no,external_coating,internal_coating,"od",od,wt);
                             //外防光管隔离管切管
-                            int res12=Integer.parseInt(bareList.get(2));
+                            int res12=getTotalBarePipeCutoffOfTime(item,project_no,external_coating,internal_coating,"od",od,wt);
                             //外防涂层管废管数
-                            List<String>wasteList=getTotalOdWastePipe(item,project_no,external_coating,internal_coating,od,wt);
-                            int res13=Integer.parseInt(wasteList.get(0));
+                            //List<String>wasteList=getTotalOdWastePipe(item,project_no,external_coating,internal_coating,od,wt);
+                            int res13=getTotalWastePipe(item,project_no,external_coating,internal_coating,"od",od,wt);
                             //外防涂层管废管处理
-                            int res14=Integer.parseInt(wasteList.get(1));
+                            int res14=getTotalHandleWastePipe(item,project_no,external_coating,internal_coating,"od",od,wt);
 
                             //获取内防腐总数
                             int res15=getTotalIdCoating(item,project_no,external_coating,internal_coating,od,wt);
+                            List<String>idlist= getTotalQualifiedIdCoating(item,project_no,external_coating,internal_coating,od,wt);
+                            int res16=Integer.parseInt(idlist.get(0));
+                            //合格长度
+                            float res17=Float.parseFloat(idlist.get(1));
+                            BigDecimal b1=new  BigDecimal(res16);
+                            res17=  b1.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
                             //内防目标合格数
-                            int res16=0;
+                            int res18=0;
                             //内防目标合格长度
-                            float res17=0f;
+                            float res19=0f;
                             //内防修补数
-                            int res18=getTotalCoatingRepair(item,project_no,external_coating,internal_coating,"id",od,wt);
+                            int res20=getTotalCoatingRepair(item,project_no,external_coating,internal_coating,"id",od,wt);
                             //内防光管隔离数
-                            List<String>bareIdList=getTotalBarePipeGrindingCutoff(item,project_no,external_coating,internal_coating,"id",od,wt);
-                            int res19=Integer.parseInt(bareIdList.get(0));
+                            int res21=getTotalBarePipeGrindCutoffOfTime(item,project_no,external_coating,internal_coating,"id",od,wt);
                             //内防光管隔离管修磨
-                            int res20=Integer.parseInt(bareIdList.get(1));
+                            int res22=getTotalBarePipeGrindOfTime(item,project_no,external_coating,internal_coating,"id",od,wt);
                             //内防光管隔离管切管
-                            int res21=Integer.parseInt(bareIdList.get(2));
+                            int res23=getTotalBarePipeCutoffOfTime(item,project_no,external_coating,internal_coating,"id",od,wt);
                             //内防涂层管废管数
-                            List<String>wasteIdList=getTotalIdWastePipe(item,project_no,external_coating,internal_coating,od,wt);
-                            int res22=Integer.parseInt(wasteIdList.get(0));
+                            //List<String>wasteIdList=getTotalIdWastePipe(item,project_no,external_coating,internal_coating,od,wt);
+                            int res24=getTotalWastePipe(item,project_no,external_coating,internal_coating,"id",od,wt);
                             //内防涂层管废管处理
-                            int res23=Integer.parseInt(wasteIdList.get(1));
+                            int res25=getTotalHandleWastePipe(item,project_no,external_coating,internal_coating,"id",od,wt);
                             //试验管白班
                             List<PipeSamplingRecord>sampleDayList=getPipeSamplingInfo(item,0,project_no,external_coating,internal_coating,od,wt);
-                            String res24=" ";float  res25=0f,res26=0f;
+                            String res26=" ";float  res27=0f,res28=0f;
                             if(sampleDayList!=null){
                                 PipeSamplingRecord record=sampleDayList.get(0);
-                                res24=record.getPipe_no();
-                                res25=record.getOriginal_pipe_length();
-                                BigDecimal b1=new  BigDecimal(res25);
-                                res25=b1.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
-                                res26=record.getCut_off_length();
-                                BigDecimal b2=new  BigDecimal(res26);
-                                res26=b2.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
+                                res26=record.getPipe_no();
+                                res27=record.getOriginal_pipe_length();
+                                BigDecimal b2=new  BigDecimal(res27);
+                                res27=b2.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
+                                res28=record.getCut_off_length();
+                                BigDecimal b3=new  BigDecimal(res28);
+                                res28=b3.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
                             }
                             //试验管夜班
                             List<PipeSamplingRecord>sampleNightList=getPipeSamplingInfo(item,1,project_no,external_coating,internal_coating,od,wt);
-                            String res27=" ";float  res28=0f,res29=0f;
+                            String res29=" ";float  res30=0f,res31=0f;
                             if(sampleDayList!=null){
                                 PipeSamplingRecord record=sampleDayList.get(0);
-                                res27=record.getPipe_no();
-                                res28=record.getOriginal_pipe_length();
-                                BigDecimal b1=new  BigDecimal(res28);
-                                res28=b1.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
-                                res29=record.getCut_off_length();
-                                BigDecimal b2=new  BigDecimal(res29);
-                                res29=b2.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
+                                res29=record.getPipe_no();
+                                res30=record.getOriginal_pipe_length();
+                                BigDecimal b4=new  BigDecimal(res30);
+                                res30=b4.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
+                                res31=record.getCut_off_length();
+                                BigDecimal b5=new  BigDecimal(res31);
+                                res31=b5.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
                             }
                             //管段重切
-                            List<String>cutList=getPipeBevelOfDay(item,project_no,external_coating,internal_coating,od,wt);
-                            int res30=Integer.parseInt(cutList.get(0));
-                            int res31=Integer.parseInt(cutList.get(1));
-                            //发运成品管
-                            int res32=0;
-                            float res33=0f;
-                            //向日报中填充数据
+                            //List<String>cutList=getPipeBevelOfDay(item,project_no,external_coating,internal_coating,od,wt);
 
+                            int res32=getTotalOfSampleCutoff(item,project_no,external_coating,internal_coating,od,wt);
+                            int res33=getTotalOfBarePipeGrindCutOff(item,project_no,external_coating,internal_coating,od,wt);
+                            //int res32=Integer.parseInt(cutList.get(1));
+                            //发运成品管
+                            int res34=0;
+                            float res35=0f;
+                            //向日报中填充数据
+                            //首先判断日报表中是否有此数据，如果没有则添加，否则进行更新,参数(time,project_no,od_wt,外防类型)
+                            List<DailyProductionReport>list1=dailyProductionReportDao.getDailyReportByParams(project_no,external_coating,od_wt,timeformat.parse(item));
+                            if(list1.size()>0){
+                                //更新
+                                int id=list1.get(0).getId();
+                                DailyProductionReport report=list1.get(0);
+                                report.setBare_pipe_count(0);
+                                report.setBare_pipe_length(0);
+                                report.setOd_total_coated_count(res4);
+                                report.setOd_total_accepted_count(res5);
+                                report.setOd_aiming_accepted_count(res7);
+                                report.setOd_total_accepted_length(res6);
+                                report.setOd_repair_pipe_count(res9);
+                                report.setOd_bare_pipe_onhold_count(res10);
+                                report.setOd_bare_pipe_grinded_count(res11);
+                                report.setOd_bare_pipe_cut_count(res12);
+                                report.setOd_coated_pipe_rejected_count(res13);
+                                report.setOd_coated_pipe_strip_count(res14);
+                                report.setId_total_accepted_count(res15);
+                                report.setId_aiming_accepted_count(0);
+                                report.setId_total_accepted_length(res17);
+                                report.setId_aiming_total_accepted_length(0);
+                                report.setId_repair_pipe_count(res20);
+                                report.setId_bare_pipe_onhold_count(res21);
+                                report.setId_bare_pipe_grinded_count(res22);
+                                report.setId_bare_pipe_cut_count(res23);
+                                report.setId_coated_pipe_rejected_count(res24);
+                                report.setId_coated_pipe_strip_count(res25);
+                                report.setOd_test_pipe_no_dayshift(res26);
+                                report.setOd_test_pipe_length_before_cut_dayshift(res27);
+                                report.setOd_test_pipe_cutting_length_dayshift(res28);
+                                report.setOd_test_pipe_no_nightshift(res29);
+                                report.setOd_test_pipe_length_before_cut_nightshift(res30);
+                                report.setOd_test_pipe_cutting_length_nightshift(res31);
+                                report.setOd_test_pipe_count(res32);
+                                report.setRebevel_pipe_count(res33);
+                                report.setPipe_accepted_count_after_rebevel(res33);
+                                report.setPipe_delivered_count(0);
+                                report.setPipe_delivered_length(0);
+                                dailyProductionReportDao.updateDailyProductionReport(report);
+                            }else{
+                                //添加
+                                DailyProductionReport report=new DailyProductionReport();
+                                report.setBare_pipe_count(0);
+                                report.setBare_pipe_length(0);
+                                report.setOd_total_coated_count(res4);
+                                report.setOd_total_accepted_count(res5);
+                                report.setOd_aiming_accepted_count(res7);
+                                report.setOd_total_accepted_length(res6);
+                                report.setOd_repair_pipe_count(res9);
+                                report.setOd_bare_pipe_onhold_count(res10);
+                                report.setOd_bare_pipe_grinded_count(res11);
+                                report.setOd_bare_pipe_cut_count(res12);
+                                report.setOd_coated_pipe_rejected_count(res13);
+                                report.setOd_coated_pipe_strip_count(res14);
+                                report.setId_total_accepted_count(res15);
+                                report.setId_aiming_accepted_count(0);
+                                report.setId_total_accepted_length(res17);
+                                report.setId_aiming_total_accepted_length(0);
+                                report.setId_repair_pipe_count(res20);
+                                report.setId_bare_pipe_onhold_count(res21);
+                                report.setId_bare_pipe_grinded_count(res22);
+                                report.setId_bare_pipe_cut_count(res23);
+                                report.setId_coated_pipe_rejected_count(res24);
+                                report.setId_coated_pipe_strip_count(res25);
+                                report.setOd_test_pipe_no_dayshift(res26);
+                                report.setOd_test_pipe_length_before_cut_dayshift(res27);
+                                report.setOd_test_pipe_cutting_length_dayshift(res28);
+                                report.setOd_test_pipe_no_nightshift(res29);
+                                report.setOd_test_pipe_length_before_cut_nightshift(res30);
+                                report.setOd_test_pipe_cutting_length_nightshift(res31);
+                                report.setOd_test_pipe_count(res32);
+                                report.setRebevel_pipe_count(res33);
+                                report.setPipe_accepted_count_after_rebevel(res33);
+                                report.setPipe_delivered_count(0);
+                                report.setPipe_delivered_length(0);
+                                dailyProductionReportDao.addDailyProductionReport(report);
+                            }
                         }
                     }
                 }
@@ -389,76 +476,126 @@ public class DailyProductionReportController {
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            total=coatingRepairDao.getTotalCoatingRepairOfDay(project_no,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
+            total=coatingRepairDao.getTotalCoatingRepairOfTime(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
         }
         return total;
     }
-    //4.获取当天的外防腐光管隔离数,光管隔离修磨数量,光管隔离切管数量(根据od或者id划分)
-    private List<String>getTotalBarePipeGrindingCutoff(String now,String project_no,String external_coating,String internal_coating,String odid,float od,float wt){
+    //4.获取当天的防腐光管隔离数
+    private int getTotalBarePipeGrindCutoffOfTime(String now,String project_no,String external_coating,String internal_coating,String odid,float od,float wt){
         String nextday=DateTimeUtil.getNextDay(now);
-        List<String> list=new ArrayList<>();
-        String total0="0",total1="0",total2="0";
+        int total=0;
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            List<HashMap<String,Object>> list1=barePipeGrindingCutoffRecordDao.getTotalBarePipeGrindingCutoff(project_no,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
-            if(list1!=null){
-                HashMap<String,Object>hs=list1.get(0);
-                if(hs!=null){
-                    total0=String.valueOf(hs.get("count1"));
-                    total1=String.valueOf(hs.get("count2"));
-                    total2=String.valueOf(hs.get("count3"));
-                }
-            }
+            barePipeGrindingCutoffRecordDao.getTotalBarePipeGrindCutoffOfTime(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
         }finally {
-            list.add(total0);
-            list.add(total1);
-            list.add(total2);
+
         }
-        return list;
+        return total;
     }
-    //5.获取外防腐涂层管废管数量和废管处理数量(当天符合参数的待扒皮数量和扒皮完成的和是废管数量)
-    private List<String> getTotalOdWastePipe(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
-        List<String>list=new ArrayList<>();
-        int total0=0,total1=0,total2=0;
+    //5.光管隔离修磨数量
+    private int getTotalBarePipeGrindOfTime(String now,String project_no,String external_coating,String internal_coating,String odid,float od,float wt){
+        String nextday=DateTimeUtil.getNextDay(now);
+        int total=0;
         try{
-            String nextday=DateTimeUtil.getNextDay(now);
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            if(external_coating.equals("2FBE")){
-                total0=odCoatingInspectionProcessDao.getTotalOdWastePipe(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);//待扒皮数量
-            }else if(external_coating.equals("3LPE")){
-                total0=odCoating3LpeInspectionProcessDao.getTotalOdWastePipe(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);//待扒皮数量
-            }
-            total1=getTotalBarePipeGrindingInfo(now,project_no,external_coating,internal_coating,"od",od,wt);//废管处理数量
-            total2=total0+total1;//废管数量
+            barePipeGrindingCutoffRecordDao.getTotalBarePipeGrindOfTime(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
         }finally {
-            list.add(String.valueOf(total2));
-            list.add(String.valueOf(total1));
+
         }
-        return list;
+        return total;
     }
-    //6.获取废管处理数量
+    //6.光管隔离切管数量
+    private int getTotalBarePipeCutoffOfTime(String now,String project_no,String external_coating,String internal_coating,String odid,float od,float wt){
+        String nextday=DateTimeUtil.getNextDay(now);
+        int total=0;
+        try{
+            Date beginTime=timeformat.parse(now+" 08:00:00");
+            Date endTime=timeformat.parse(nextday+" 08:00:00");
+            barePipeGrindingCutoffRecordDao.getTotalBarePipeCutoffOfTime(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+
+        }
+        return total;
+    }
+    //7.获取废管数量
+    private int getTotalWastePipe(String now,String project_no,String external_coating,String internal_coating,String odid,float od,float wt){
+        String nextday=DateTimeUtil.getNextDay(now);
+        int total=0;
+        try{
+            Date beginTime=timeformat.parse(now+" 08:00:00");
+            Date endTime=timeformat.parse(nextday+" 08:00:00");
+            coatingStripDao.getStripOfTime(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+
+        }
+        return total;
+    }
+    //8.获取废管处理数量
+    private int getTotalHandleWastePipe(String now,String project_no,String external_coating,String internal_coating,String odid,float od,float wt){
+        String nextday=DateTimeUtil.getNextDay(now);
+        int total=0;
+        try{
+            Date beginTime=timeformat.parse(now+" 08:00:00");
+            Date endTime=timeformat.parse(nextday+" 08:00:00");
+            coatingStripDao.getTotalStripQuailfiedOfTime(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+
+        }
+        return total;
+    }
+
+    //7.获取外防腐涂层管废管数量和废管处理数量(当天符合参数的待扒皮数量和扒皮完成的和是废管数量)
+//    private List<String> getTotalOdWastePipe(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
+//        List<String>list=new ArrayList<>();
+//        int total0=0,total1=0,total2=0;
+//        try{
+//            String nextday=DateTimeUtil.getNextDay(now);
+//            Date beginTime=timeformat.parse(now+" 08:00:00");
+//            Date endTime=timeformat.parse(nextday+" 08:00:00");
+//            if(external_coating.equals("2FBE")){
+//                total0=odCoatingInspectionProcessDao.getTotalOdWastePipe(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);//待扒皮数量
+//            }else if(external_coating.equals("3LPE")){
+//                total0=odCoating3LpeInspectionProcessDao.getTotalOdWastePipe(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);//待扒皮数量
+//            }
+//            total1=getTotalBarePipeGrindingInfo(now,project_no,external_coating,internal_coating,"od",od,wt);//废管处理数量
+//            total2=total0+total1;//废管数量
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }finally {
+//            list.add(String.valueOf(total2));
+//            list.add(String.valueOf(total1));
+//        }
+//        return list;
+//    }
+    //8.获取废管处理数量
     private int getTotalBarePipeGrindingInfo(String now,String project_no,String external_coating,String internal_coating,String odid,float od,float wt){
         String nextday=DateTimeUtil.getNextDay(now);
         int total=0;
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            total=coatingStripDao.getTotalBarePipeGrindingInfo(project_no,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
+            total=coatingStripDao.getTotalStripOfTime(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
         }
         return total;
     }
     //---------------内防腐------------
-    //7.获取当天内防腐总数
+    //9.获取当天内防腐总数
     private int getTotalIdCoating(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
         String nextday=DateTimeUtil.getNextDay(now);
         int total=0;
@@ -471,7 +608,7 @@ public class DailyProductionReportController {
         }
         return total;
     }
-    //8.获取当天的内防腐合格数
+    //10.获取当天的内防腐合格数
     private List<String> getTotalQualifiedIdCoating(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
         String nextday=DateTimeUtil.getNextDay(now);
         List<String>list=new ArrayList<>();
@@ -496,26 +633,26 @@ public class DailyProductionReportController {
         return list;
     }
 
-    //10.获取内防腐涂层管废管数量和废管处理数量(当天符合参数的待扒皮数量和扒皮完成的和是废管数量)
-    private List<String> getTotalIdWastePipe(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
-        List<String>list=new ArrayList<>();
-        int total0=0,total1=0,total2=0;
-        try{
-            String nextday=DateTimeUtil.getNextDay(now);
-            Date beginTime=timeformat.parse(now+" 08:00:00");
-            Date endTime=timeformat.parse(nextday+" 08:00:00");
-            total0=idCoatingInspectionProcessDao.getTotalIdWastePipe(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);
-            total1=getTotalBarePipeGrindingInfo(now,project_no,external_coating,internal_coating,"id",od,wt);//废管处理数量
-            total2=total0+total1;//废管数量
-        }catch (Exception e){
-            e.printStackTrace();
-        }finally {
-            list.add(String.valueOf(total2));
-            list.add(String.valueOf(total1));
-        }
-        return list;
-    }
-    //11.白班、夜班样管信息
+    //11.获取内防腐涂层管废管数量和废管处理数量(当天符合参数的待扒皮数量和扒皮完成的和是废管数量)
+//    private List<String> getTotalIdWastePipe(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
+//        List<String>list=new ArrayList<>();
+//        int total0=0,total1=0,total2=0;
+//        try{
+//            String nextday=DateTimeUtil.getNextDay(now);
+//            Date beginTime=timeformat.parse(now+" 08:00:00");
+//            Date endTime=timeformat.parse(nextday+" 08:00:00");
+//            total0=idCoatingInspectionProcessDao.getTotalIdWastePipe(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);
+//            total1=getTotalBarePipeGrindingInfo(now,project_no,external_coating,internal_coating,"id",od,wt);//废管处理数量
+//            total2=total0+total1;//废管数量
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }finally {
+//            list.add(String.valueOf(total2));
+//            list.add(String.valueOf(total1));
+//        }
+//        return list;
+//    }
+    //12.白班、夜班样管信息
     private List<PipeSamplingRecord>getPipeSamplingInfo(String now,int type,String project_no,String external_coating,String internal_coating,float od,float wt){
         List<PipeSamplingRecord>list=new ArrayList<>();
         Date begin_time=null,end_time=null;
@@ -539,29 +676,69 @@ public class DailyProductionReportController {
         }
         return list;
     }
-    //12.管段切斜信息(管切数量，合格数量)
-    private List<String>getPipeBevelOfDay(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
-        List<String>list=new ArrayList<>();
-        int total0=0,total1=0;
+    //13.管段切斜信息(切割分为两种，一种是样管切割，一种是瑕疵切割)
+    //13.1获取样管切割个数
+    private int getTotalOfSampleCutoff(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
+        String nextday=DateTimeUtil.getNextDay(now);
+        int total=0;
         try{
-            String nextday=DateTimeUtil.getNextDay(now);
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            List<HashMap<String,Object>>list1=pipeRebevelRecordDao.getPipeBevelOfDay(project_no,external_coating,internal_coating,"1",od,wt,beginTime,endTime);
-            if(list1!=null){
-                HashMap<String,Object>hs=list1.get(0);
-                if(hs!=null){
-                    total0=Integer.parseInt(String.valueOf(hs.get("count1")));
-                    total1=Integer.parseInt(String.valueOf(hs.get("count2")));
-                }
-            }
-
+            total=pipeSamplingRecordDao.getTotalCutOffOfSample(project_no,null,external_coating,internal_coating,null,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
-        }finally {
-            list.add(String.valueOf(total0));
-            list.add(String.valueOf(total1));
         }
-        return list;
+        return total;
     }
+    //13.2获取瑕疵切割个数
+    private int getTotalOfBarePipeGrindCutOff(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
+        String nextday=DateTimeUtil.getNextDay(now);
+        int total=0;
+        try{
+            Date beginTime=timeformat.parse(now+" 08:00:00");
+            Date endTime=timeformat.parse(nextday+" 08:00:00");
+            total=barePipeGrindingCutoffRecordDao.getTotalCutoffOfBare(project_no,null,external_coating,internal_coating,null,od,wt,beginTime,endTime);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return total;
+    }
+    //13.3获取切割合格数
+    private int getTotalQualifiedCutOff(String now,int type,String project_no,String external_coating,String internal_coating,float od,float wt){
+        String nextday=DateTimeUtil.getNextDay(now);
+        int total=0;
+        try{
+            Date beginTime=timeformat.parse(now+" 08:00:00");
+            Date endTime=timeformat.parse(nextday+" 08:00:00");
+            total=pipeRebevelRecordDao.getQualifiedOfCutoff(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return total;
+    }
+
+//    private List<String>getPipeBevelOfDay(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
+//        List<String>list=new ArrayList<>();
+//        int total0=0,total1=0;
+//        try{
+//            String nextday=DateTimeUtil.getNextDay(now);
+//            Date beginTime=timeformat.parse(now+" 08:00:00");
+//            Date endTime=timeformat.parse(nextday+" 08:00:00");
+//            List<HashMap<String,Object>>list1=pipeRebevelRecordDao.getPipeBevelOfDay(project_no,external_coating,internal_coating,"1",od,wt,beginTime,endTime);
+//            if(list1!=null){
+//                HashMap<String,Object>hs=list1.get(0);
+//                if(hs!=null){
+//                    total0=Integer.parseInt(String.valueOf(hs.get("count1")));
+//                    total1=Integer.parseInt(String.valueOf(hs.get("count2")));
+//                }
+//            }
+//
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }finally {
+//            list.add(String.valueOf(total0));
+//            list.add(String.valueOf(total1));
+//        }
+//        return list;
+//    }
 }
