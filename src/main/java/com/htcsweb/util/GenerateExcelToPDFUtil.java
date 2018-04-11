@@ -36,7 +36,10 @@ public class GenerateExcelToPDFUtil {
             //GenerateExcelToPDFUtil.ExcelToPDFRecord(newexcelfile,"/Users/kurt/Documents/testPDF.pdf","/Users/kurt/Documents/image002.jpg");
 
          //GenerateExcelToPDFUtil.PDFAutoMation(excelTemplateFullName,null,"/Users/kurt/Documents/testPDF.pdf","/Users/kurt/Documents/image002.jpg","/Users/kurt/Documents/simhei.ttf");
-        GenerateExcelToPDFUtil.FillExcelTemplate(excelTemplateFullName,null,"123");
+        String newExcelfilename=null;
+        for(int i=0;i<=3;i++) {
+            newExcelfilename=GenerateExcelToPDFUtil.FillExcelTemplate(excelTemplateFullName, newExcelfilename, null, String.valueOf(i));
+        }
     }
 
     //PDF生成方法入口
@@ -136,10 +139,12 @@ public class GenerateExcelToPDFUtil {
     }
 
     //根据模版名字，将数据填入相应excel模版中
-    public static String FillExcelTemplate(String excelTemplateFullName,ArrayList<Label> dataList,String tabName) {
+    public static String FillExcelTemplate(String excelTemplateFullName,String newExcelFileName,ArrayList<Label> dataList,String tabName) {
+        if(newExcelFileName==null) {//循环写入
+            newExcelFileName = excelTemplateFullName.substring(0, excelTemplateFullName.lastIndexOf('.')) + String.valueOf(System.currentTimeMillis()) + ".xls";
+            fileChannelCopy(excelTemplateFullName,newExcelFileName);
+        }
 
-        newExcelFileName=excelTemplateFullName.substring(0,excelTemplateFullName.lastIndexOf('.'))+ String.valueOf(System.currentTimeMillis())+".xls";
-        fileChannelCopy(excelTemplateFullName,newExcelFileName);
         try {
             Workbook wb = Workbook.getWorkbook(new File(newExcelFileName));
             WritableWorkbook wwb = Workbook.createWorkbook(new File(newExcelFileName), wb);
