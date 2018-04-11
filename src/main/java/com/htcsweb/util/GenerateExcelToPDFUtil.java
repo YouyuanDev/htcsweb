@@ -34,9 +34,9 @@ public class GenerateExcelToPDFUtil {
             String excelTemplateFullName = "/Users/kurt/Documents/od_coating_3lpe_record_template.xls";
             //String newexcelfile=GenerateExcelToPDFUtil.FillExcelTemplate(excelTemplateFullName,null);
             //GenerateExcelToPDFUtil.ExcelToPDFRecord(newexcelfile,"/Users/kurt/Documents/testPDF.pdf","/Users/kurt/Documents/image002.jpg");
-        //GenerateExcelToPDFUtil.PDFAutoMation(excelTemplateFullName,null,"/Users/kurt/Documents/testPDF.pdf","/Users/kurt/Documents/image002.jpg","/Users/kurt/Documents/simhei.ttf","");
-        GenerateExcelToPDFUtil.PDFAutoMation(excelTemplateFullName,null,"/Users/kurt/Documents/testPDF.pdf","/Users/kurt/Documents/image002.jpg","/Users/kurt/Documents/simhei.ttf");
 
+         //GenerateExcelToPDFUtil.PDFAutoMation(excelTemplateFullName,null,"/Users/kurt/Documents/testPDF.pdf","/Users/kurt/Documents/image002.jpg","/Users/kurt/Documents/simhei.ttf");
+        GenerateExcelToPDFUtil.FillExcelTemplate(excelTemplateFullName,null,"123");
     }
 
     //PDF生成方法入口
@@ -135,7 +135,41 @@ public class GenerateExcelToPDFUtil {
 
     }
 
+    //根据模版名字，将数据填入相应excel模版中
+    public static String FillExcelTemplate(String excelTemplateFullName,ArrayList<Label> dataList,String tabName) {
 
+        newExcelFileName=excelTemplateFullName.substring(0,excelTemplateFullName.lastIndexOf('.'))+ String.valueOf(System.currentTimeMillis())+".xls";
+        fileChannelCopy(excelTemplateFullName,newExcelFileName);
+        try {
+            Workbook wb = Workbook.getWorkbook(new File(newExcelFileName));
+            WritableWorkbook wwb = Workbook.createWorkbook(new File(newExcelFileName), wb);
+            //复制一份sheet到index=1处
+            wwb.copySheet(0,tabName,1);
+            //得到复制的sheet
+            WritableSheet wsheet  = wwb.getSheet(1);
+            try {
+                //把datalist中的数据填到相应位置，由相关业务controller设置datalist数据
+                for(int i=0;dataList!=null&&i<dataList.size();i++){
+                    Label label_data=(Label) dataList.get(i);
+                    wsheet.addCell(label_data);
+                }
+
+                wwb.write();//把表格信息写入文件
+            } catch (Exception e) {
+                System.out.println("Exception:"+e.getMessage());
+            } finally {
+                wwb.close();//关闭
+                wb.close();
+            }
+
+        } catch (Exception e) {
+            System.out.println("Exception:"+e.getMessage());
+        } finally {
+            System.out.println("表格生成！");
+            return  newExcelFileName;
+        }
+
+    }
 
 
 
