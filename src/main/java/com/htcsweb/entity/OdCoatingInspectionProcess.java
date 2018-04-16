@@ -21,11 +21,12 @@ public class OdCoatingInspectionProcess {
     private String result;
     private String mill_no;
     private String is_sample;
+    private String is_dsc_sample;
 
     public OdCoatingInspectionProcess() {
     }
 
-    public OdCoatingInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, String base_coat_thickness_list, String top_coat_thickness_list, String total_coating_thickness_list, int holidays, float holiday_tester_volts, int repairs, String bevel, String surface_condition, String adhesion_rating, String upload_files, String remark, String result, String mill_no, String is_sample) {
+    public OdCoatingInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, String base_coat_thickness_list, String top_coat_thickness_list, String total_coating_thickness_list, int holidays, float holiday_tester_volts, int repairs, String bevel, String surface_condition, String adhesion_rating, String upload_files, String remark, String result, String mill_no, String is_sample, String is_dsc_sample) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -44,6 +45,7 @@ public class OdCoatingInspectionProcess {
         this.result = result;
         this.mill_no = mill_no;
         this.is_sample = is_sample;
+        this.is_dsc_sample = is_dsc_sample;
     }
 
     public int getId() {
@@ -188,5 +190,13 @@ public class OdCoatingInspectionProcess {
 
     public void setIs_sample(String is_sample) {
         this.is_sample = is_sample;
+    }
+
+    public String getIs_dsc_sample() {
+        return is_dsc_sample;
+    }
+
+    public void setIs_dsc_sample(String is_dsc_sample) {
+        this.is_dsc_sample = is_dsc_sample;
     }
 }

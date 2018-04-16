@@ -247,6 +247,37 @@ function selectIsSample() {
         $("input[name='is_sample']").val(0);
     }
 }
+//DSC选样改变事件
+function selectIsDscSample(){
+    if($('#is-dsc-sample').is(":checked")){
+        $('#is-dsc-sample').prop('checked', true);
+        $("input[name='is_dsc_sample']").val(1);
+    }else{
+        $('#is-dsc-sample').prop('checked', false);
+        $("input[name='is_dsc_sample']").val(0);
+    }
+}
+//PE选样改变事件
+function selectIsPESample(){
+    if($('#is-pe-sample').is(":checked")){
+        $('#is-pe-sample').prop('checked', true);
+        $("input[name='is_pe_sample']").val(1);
+    }else{
+        $('#is-pe-sample').prop('checked', false);
+        $("input[name='is_pe_sample']").val(0);
+    }
+}
+//玻璃片选样改变事件
+function selectIsGlassSample(){
+    if($('#is-glass-sample').is(":checked")){
+        $('#is-glass-sample').prop('checked', true);
+        $("input[name='is_glass_sample']").val(1);
+    }else{
+        $('#is-glass-sample').prop('checked', false);
+        $("input[name='is_glass_sample']").val(0);
+    }
+}
+
 //字符串转换，全角转,半角
 function  changeComma(str) {
     var reg=new RegExp("，","g");

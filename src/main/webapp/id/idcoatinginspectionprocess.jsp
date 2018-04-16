@@ -102,6 +102,16 @@
                     $('#is-sample').prop('checked', false);
                     $("input[name='is_sample']").val(0);
                 }
+
+                var glasssample=row.is_glass_sample;
+                if(glasssample=="1"){
+                    $('#is-glass-sample').prop('checked', true);
+                    $("input[name='is_glass_sample']").val(1);
+                }else{
+                    $('#is-glass-sample').prop('checked', false);
+                    $("input[name='is_glass_sample']").val(0);
+                }
+
                 look1.setText(row.pipe_no);
                 look1.setValue(row.pipe_no);
                 look2.setText(row.operator_no);
@@ -291,6 +301,8 @@
                 <th field="heat_no" align="center" hidden="true" width="50" class="i18n1" name="heat_no">炉号</th>
                 <th field="operator_no" align="center" width="100" class="i18n1" name="operatorno">操作工编号</th>
                 <th field="is_sample" align="center" width="80" class="i18n1" name="issample">取样管</th>
+                <th field="is_glass_sample" align="center" width="80" class="i18n1" name="isglasssample">玻璃片取样</th>
+
                 <%--<th field="dry_film_thickness_max" align="center" width="80" class="i18n1" name="dryfilmthicknessmax">最大干膜厚度</th>--%>
                 <%--<th field="dry_film_thickness_min" align="center" width="100" class="i18n1" name="dryfilmthicknessmin">最小干膜厚度</th>--%>
                 <%--<th field="cutback" align="center" width="100" hidden="true" class="i18n1" name="cutback">预留端长度</th>--%>
@@ -447,12 +459,7 @@
                             <input class="easyui-textbox"  type="text" name="wet_film_thickness_list" value=""/>
                         </td>
                         <td></td>
-                        <td width="16%" class="i18n1" name="issample">取样管</td>
-                        <td colspan="1">
-                            <input type="checkbox" id="is-sample" value="0" checked="false" onchange="selectIsSample()"/>
-                            <input type="hidden" name="is_sample" value="0">
-                        </td>
-                        <td></td>
+
                     <%--<td width="16%" class="i18n1" name="bevelcheck">坡口质量</td>--%>
                     <%--<td>--%>
                         <%--<select id="bev" class="easyui-combobox" data-options="editable:false" name="bevel_check" style="width:200px;">--%>
@@ -465,7 +472,20 @@
                     <%--<td></td>--%>
 
                 </tr>
-
+                <tr>
+                    <td width="16%" class="i18n1" name="issample">取样管</td>
+                    <td colspan="1">
+                        <input type="checkbox" id="is-sample" value="0" checked="false" onchange="selectIsSample()"/>
+                        <input type="hidden" name="is_sample" value="0">
+                    </td>
+                    <td></td>
+                    <td width="16%" class="i18n1" name="isglasssample">玻璃片样</td>
+                    <td colspan="1">
+                        <input type="checkbox" id="is-glass-sample" value="0" checked="false" onchange="selectIsGlassSample()"/>
+                        <input type="hidden" name="is_glass_sample" value="0">
+                    </td>
+                    <td></td>
+                </tr>
                 <%--<tr>--%>
                     <%--<td class="i18n1" name="magnetism">剩磁</td>--%>
                     <%--<td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="magnetism" value=""/></td>--%>

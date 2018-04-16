@@ -95,6 +95,16 @@
                     $('#is-sample').prop('checked', false);
                     $("input[name='is_sample']").val(0);
                 }
+                var dscsample=row.is_dsc_sample;
+                if(dscsample=="1"){
+                    $('#is-dsc-sample').prop('checked', true);
+                    $("input[name='is_dsc_sample']").val(1);
+                }else{
+                    $('#is-dsc-sample').prop('checked', false);
+                    $("input[name='is_dsc_sample']").val(0);
+                }
+
+
                 look1.setText(row.pipe_no);
                 look1.setValue(row.pipe_no);
                 look2.setText(row.operator_no);
@@ -332,6 +342,7 @@
                 <th field="heat_no" align="center" hidden="true" width="50" class="i18n1" name="heat_no">炉号</th>
                 <th field="operator_no" align="center" width="100" class="i18n1" name="operatorno">操作工编号</th>
                 <th field="is_sample" align="center" width="80" class="i18n1" name="issample">取样管</th>
+                <th field="is_dsc_sample" align="center" width="80" class="i18n1" name="isdscsample">DSC取样管</th>
 
                 <th field="base_coat_thickness_list" align="center" width="80" class="i18n1" name="basecoatthicknesslist">底层涂层厚度列表</th>
                 <th field="top_coat_thickness_list" align="center" width="100" class="i18n1" name="topcoatthicknesslist">面层涂层厚度列表</th>
@@ -533,7 +544,7 @@
                 <%--</tr>--%>
                 <tr>
                     <td width="16%" class="i18n1" name="adhesionrating">附着力测试</td>
-                    <td colspan="2">
+                    <td colspan="5">
                         <select id="at" class="easyui-combobox" data-options="editable:false" name="adhesion_rating" style="width:200px;">
                             <option value="0" selected="selected">未检测</option>
                             <option value="1">等级1</option>
@@ -545,12 +556,22 @@
                         <%--<input class="easyui-textbox"  type="text" name="adhesion_rating" value=""/>--%>
                     </td>
 
+
+                </tr>
+                <tr>
                     <td width="16%" class="i18n1" name="issample">取样管</td>
                     <td colspan="2">
                         <input type="checkbox" id="is-sample" value="0" checked="false" onchange="selectIsSample()"/>
                         <input type="hidden" name="is_sample" value="0">
                     </td>
+                    <td width="16%" class="i18n1" name="isdscsample">DSC取样管</td>
+                    <td colspan="2">
+                        <input type="checkbox" id="is-dsc-sample" value="0" checked="false" onchange="selectIsDscSample()"/>
+                        <input type="hidden" name="is_dsc_sample" value="0">
+                    </td>
                 </tr>
+
+
                 <tr>
                     <td width="16%" class="i18n1" name="result">结论</td>
                     <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">

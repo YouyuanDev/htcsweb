@@ -7,13 +7,13 @@
 
 
     <insert id="addOdCoatingInProcess" parameterType="com.htcsweb.entity.OdCoatingInspectionProcess">
-     INSERT INTO od_coating_2fbe_inspection_process(pipe_no,operation_time,operator_no,base_coat_thickness_list,top_coat_thickness_list,total_coating_thickness_list,holidays,holiday_tester_volts,repairs,bevel,surface_condition,adhesion_rating,upload_files,remark,result,mill_no,is_sample) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{base_coat_thickness_list},#{top_coat_thickness_list},#{total_coating_thickness_list},#{holidays},#{holiday_tester_volts},#{repairs},#{bevel},#{surface_condition},#{adhesion_rating},#{upload_files},#{remark},#{result},#{mill_no},#{is_sample})
+     INSERT INTO od_coating_2fbe_inspection_process(pipe_no,operation_time,operator_no,base_coat_thickness_list,top_coat_thickness_list,total_coating_thickness_list,holidays,holiday_tester_volts,repairs,bevel,surface_condition,adhesion_rating,upload_files,remark,result,mill_no,is_sample,is_dsc_sample) VALUES (#{pipe_no},#{operation_time},#{operator_no},#{base_coat_thickness_list},#{top_coat_thickness_list},#{total_coating_thickness_list},#{holidays},#{holiday_tester_volts},#{repairs},#{bevel},#{surface_condition},#{adhesion_rating},#{upload_files},#{remark},#{result},#{mill_no},#{is_sample},#{is_dsc_sample})
     </insert>
 
 
 
     <update id="updateOdCoatingInProcess" parameterType="com.htcsweb.entity.OdCoatingInspectionProcess">
-    UPDATE od_coating_2fbe_inspection_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},base_coat_thickness_list=#{base_coat_thickness_list},top_coat_thickness_list=#{top_coat_thickness_list},total_coating_thickness_list=#{total_coating_thickness_list},holidays=#{holidays},holiday_tester_volts=#{holiday_tester_volts},repairs=#{repairs},bevel=#{bevel},surface_condition=#{surface_condition},adhesion_rating=#{adhesion_rating},upload_files=#{upload_files},remark=#{remark},result=#{result},mill_no=#{mill_no},is_sample=#{is_sample} where id=#{id}
+    UPDATE od_coating_2fbe_inspection_process set pipe_no=#{pipe_no},operation_time=#{operation_time},operator_no=#{operator_no},base_coat_thickness_list=#{base_coat_thickness_list},top_coat_thickness_list=#{top_coat_thickness_list},total_coating_thickness_list=#{total_coating_thickness_list},holidays=#{holidays},holiday_tester_volts=#{holiday_tester_volts},repairs=#{repairs},bevel=#{bevel},surface_condition=#{surface_condition},adhesion_rating=#{adhesion_rating},upload_files=#{upload_files},remark=#{remark},result=#{result},mill_no=#{mill_no},is_sample=#{is_sample},is_dsc_sample=#{is_dsc_sample} where id=#{id}
     </update>
     <delete id="delOdCoatingInProcess">
         delete from od_coating_2fbe_inspection_process WHERE

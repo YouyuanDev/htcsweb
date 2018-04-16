@@ -21,11 +21,12 @@ public class IdCoatingInspectionProcess {
     private String mill_no;
     private String is_sample;
     private String wet_film_thickness_list;
+    private String is_glass_sample;
 
     public IdCoatingInspectionProcess() {
     }
 
-    public IdCoatingInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, String upload_files, String remark, String result, String mill_no, String is_sample, String wet_film_thickness_list) {
+    public IdCoatingInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, String upload_files, String remark, String result, String mill_no, String is_sample, String wet_film_thickness_list, String is_glass_sample) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -36,6 +37,7 @@ public class IdCoatingInspectionProcess {
         this.mill_no = mill_no;
         this.is_sample = is_sample;
         this.wet_film_thickness_list = wet_film_thickness_list;
+        this.is_glass_sample = is_glass_sample;
     }
 
     public int getId() {
@@ -116,5 +118,13 @@ public class IdCoatingInspectionProcess {
 
     public void setWet_film_thickness_list(String wet_film_thickness_list) {
         this.wet_film_thickness_list = wet_film_thickness_list;
+    }
+
+    public String getIs_glass_sample() {
+        return is_glass_sample;
+    }
+
+    public void setIs_glass_sample(String is_glass_sample) {
+        this.is_glass_sample = is_glass_sample;
     }
 }

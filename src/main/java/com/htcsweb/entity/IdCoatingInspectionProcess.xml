@@ -8,15 +8,15 @@
 
     <insert id="addIdCoatingInProcess" parameterType="com.htcsweb.entity.IdCoatingInspectionProcess">
         INSERT INTO id_coating_inspection_process(pipe_no,operation_time,operator_no,
-        upload_files,remark,result,mill_no,is_sample,wet_film_thickness_list)
+        upload_files,remark,result,mill_no,is_sample,wet_film_thickness_list,is_glass_sample)
         VALUES (#{pipe_no},#{operation_time},#{operator_no},
-        #{upload_files},#{remark},#{result},#{mill_no},#{is_sample},#{wet_film_thickness_list})
+        #{upload_files},#{remark},#{result},#{mill_no},#{is_sample},#{wet_film_thickness_list},#{is_glass_sample})
     </insert>
 
     <update id="updateIdCoatingInProcess" parameterType="com.htcsweb.entity.IdCoatingInspectionProcess">
         UPDATE id_coating_inspection_process set pipe_no=#{pipe_no},operation_time=#{operation_time},
         operator_no=#{operator_no},upload_files=#{upload_files},remark=#{remark},result=#{result},
-        mill_no=#{mill_no},is_sample=#{is_sample},wet_film_thickness_list=#{wet_film_thickness_list}
+        mill_no=#{mill_no},is_sample=#{is_sample},wet_film_thickness_list=#{wet_film_thickness_list},is_glass_sample=#{is_glass_sample}
         where id=#{id}
     </update>
 
