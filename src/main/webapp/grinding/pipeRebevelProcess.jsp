@@ -142,9 +142,9 @@
                             var res4=$obj4.val();
                             var OD=row.od;
 
-                            //Ovality = Max-Min ,  Ovality<= factor* D
-                            var maximumOvality=data.pipe_end_ovality_factor_max*OD;
-                            var minimumOvality=data.pipe_end_ovality_factor_min*OD;
+                            //Ovality = (Max(OD)-Min(OD))/OD ,  Ovality<= factor
+                            var maximumOvality=data.pipe_end_ovality_factor_max;
+                            var minimumOvality=data.pipe_end_ovality_factor_min;
 
 
                             if(!((res1>=data.pipe_squareness_min)&&(res1<=data.pipe_squareness_max)))
