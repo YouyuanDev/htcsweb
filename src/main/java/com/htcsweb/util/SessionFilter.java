@@ -69,7 +69,10 @@ public class SessionFilter extends OncePerRequestFilter{
             "getRecordReportPDF",
             "getProjectNoAndName",
             "downloadPDF",
-            "addDialyReportAndCreateExcel"
+            "addDialyReportAndCreateExcel",
+            "get2FBESamplePipeNo",
+            "get3LPESamplePipeNo",
+            "getLiquidEpoxySamplePipeNo"
 
     }; // 不过滤的uri
 

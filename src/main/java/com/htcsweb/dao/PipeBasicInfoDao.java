@@ -52,4 +52,13 @@ public interface PipeBasicInfoDao {
 
     public List<String>getPipeNoByContractNo(@Param("array")String[] array);
 
+    public List<PipeBasicInfo> get2FBESamplePipeNo(@Param("pipe_no")String pipe_no);
+
+    public List<PipeBasicInfo> get3LPESamplePipeNo(@Param("pipe_no")String pipe_no);
+
+    public List<PipeBasicInfo> getLiquidEpoxySamplePipeNo(@Param("pipe_no")String pipe_no);
+
+
+
+
 }

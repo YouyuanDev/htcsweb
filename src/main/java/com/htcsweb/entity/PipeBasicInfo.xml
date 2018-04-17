@@ -53,6 +53,57 @@
          limit 1000
      </select>
 
+
+<!--
+    得到2fbe实验管的管号，包括dsc实验
+-->
+    <select id="get2FBESamplePipeNo" resultType="com.htcsweb.entity.PipeBasicInfo">
+        select * from pipe_basic_info where  pipe_no in(
+        select pipe_no from od_coating_2fbe_inspection_process ic where is_sample='1' or is_dsc_sample='1'
+        )
+        <where>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+        </where>
+        ORDER BY id DESC
+        limit 1000
+    </select>
+
+    <!--
+    得到3lpe实验管的管号，包括dsc实验,pe实验
+-->
+    <select id="get3LPESamplePipeNo" resultType="com.htcsweb.entity.PipeBasicInfo">
+        select * from pipe_basic_info where  pipe_no in(
+        select pipe_no from od_coating_3lpe_inspection_process ic where is_sample='1' or is_dsc_sample='1' or is_pe_sample='1'
+         )
+        <where>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+        </where>
+        ORDER BY id DESC
+        limit 1000
+    </select>
+    <!--
+       得到Liquid Epoxy实验管的管号，包括玻璃片实验,常规实验
+   -->
+    <select id="getLiquidEpoxySamplePipeNo" resultType="com.htcsweb.entity.PipeBasicInfo">
+        select * from pipe_basic_info where  pipe_no in(
+        select pipe_no from id_coating_inspection_process ic where is_sample='1' or is_glass_sample='1'
+        )
+        <where>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+        </where>
+        ORDER BY id DESC
+        limit 1000
+    </select>
+
+
+
+
     <select id="getODSamplePipeNumbers" resultType="com.htcsweb.entity.PipeBasicInfo">
         select * from pipe_basic_info where  pipe_no in(
 --         select pipe_no from id_coating_inspection_process ic where is_sample='1' UNION

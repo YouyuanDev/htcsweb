@@ -431,7 +431,7 @@
     </div>
     <div id="datagrid1" class="mini-datagrid" style="width:100%;height:100%;"
          borderStyle="border:0" showPageSize="false" showPageIndex="false"
-         url="/pipeinfo/getPipeNumberBySample.action">
+         url="/pipeinfo/getLiquidEpoxySamplePipeNo.action">
         <div property="columns">
             <div type="checkcolumn" ></div>
             <div field="pipe_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="pipeno">钢管编号</div>
@@ -486,8 +486,8 @@
         if(type==1)
         {
             grid1.load({
-                pipe_no:keyText1.value,
-                pipestatus:'bare1,'
+                pipe_no:keyText1.value
+                //pipestatus:'bare1,'
             });
         }else if(type==2){
             grid2.load({
@@ -514,7 +514,7 @@
         $("input[name='pipe_no']").val(rows.pipe_no);
         clearLabelPipeInfo();
         $.ajax({
-            url:'../pipeinfo/getPipeInfoByNo.action',
+            url:'../pipeinfo/getLiquidEpoxySamplePipeNo.action',
             data:{'pipe_no':rows.pipe_no},
             dataType:'json',
             success:function (data) {
