@@ -16,6 +16,32 @@
     <link rel="stylesheet" type="text/css" href="../easyui/themes/bootstrap/window.css">
     <link rel="stylesheet" type="text/css" href="../easyui/themes/icon.css">
     <link rel="stylesheet" href="../css/common.css"/>
+
+    <style type="text/css">.box {
+        background: url(../images/bg1.jpg);
+
+        position:fixed;
+        top: 0;
+        left: 0;
+        width:50%;
+        height:50%;
+        min-width: 800px;
+        z-index:-10;
+        zoom: 1;
+        background-color: #fff;
+        background-repeat: no-repeat;
+        background-size: cover;
+        -webkit-background-size: cover;
+        -o-background-size: cover;
+        background-position: center 0;
+
+
+    }
+
+    </style>
+
+
+
     <script type="text/javascript" src="../easyui/jquery.min.js"></script>
     <script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
     <script src="../js/common.js" type="text/javascript"></script>
@@ -74,7 +100,7 @@
         }
     </script>
 </head>
-<body >
+<body class="box" >
 
 <%--<div style="margin:20px 0;">--%>
     <%--<a href="javascript:void(0)" class="easyui-linkbutton" onclick="$('#w').window('open')">Open</a>--%>
