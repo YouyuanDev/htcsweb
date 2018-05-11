@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.*;
 import com.htcsweb.entity.*;
 import com.htcsweb.util.*;
+import jdk.internal.org.objectweb.asm.tree.TryCatchBlockNode;
 import jxl.format.Alignment;
 import jxl.write.Label;
 import jxl.write.WritableCellFormat;
@@ -26,6 +27,7 @@ import javax.sql.DataSource;
 import java.awt.geom.FlatteningPathIterator;
 import java.io.File;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -45,7 +47,13 @@ public class InspectionRecordPDFController {
     WritableCellFormat wcf=null;
     //定义临时文件名
     String tempDayName=null,tempNightName=null;
+    //定义分厂、标准和涂层类型集合
+    private List<MillInfo>millInfoList=new ArrayList<>();
+    private List<String>standardList=new ArrayList<>();
+    private List<String>odCoatingTypeList=new ArrayList<>();
+    private List<String>idCoatingTypeList=new ArrayList<>();
     //定义工位的生成pdf的集合
+    List<String>stationDayList=new ArrayList<String>();
     List<String>stationOdDayList=new ArrayList<String>();
     List<String>stationOdNightList=new ArrayList<String>();
     List<String>stationIdDayList=new ArrayList<String>();
@@ -110,6 +118,8 @@ public class InspectionRecordPDFController {
     private LabTesting3LpeDao labTesting3LpeDao;
     @Autowired
     private LabTestingEpoxyDao labTestingEpoxyDao;
+    @Autowired
+    private ContractInfoDao contractInfoDao;
     private BarePipeGrindingCutoffRecordDao barePipeGrindingCutoffRecordDao;
     @RequestMapping(value="getRecordReportPDF",produces="application/json;charset=UTF-8")
     @ResponseBody
@@ -117,7 +127,7 @@ public class InspectionRecordPDFController {
         String basePath=request.getSession().getServletContext().getRealPath("/");
         Date start_time=null;
         Date finish_time=null;
-        List<String>listDate=new ArrayList<>();//时间区间集合
+
         //List<String>listPdfSetPath=new ArrayList<>();//pdf白班夜班集合
         String pdfSetOdDayPath="",pdfSetOdNightPath="",pdfSetIdDayPath="",pdfSetIdNightPath="";
         Date day_begin_time=null,day_end_time=null,night_begin_time=null,night_end_time=null;//定义每天班次的开始结束时间
@@ -127,208 +137,260 @@ public class InspectionRecordPDFController {
         //先获取选择的日期区间之间的所有日期
         String project_no=request.getParameter("project_no");
         String project_name=request.getParameter("project_name");
-        if(project_name==null||project_name.equals("")){
-            project_name=getFormatString("");
-        }
         String beginTimeStr=request.getParameter("beginTime");
         String endTimeStr=request.getParameter("endTime");
         List<String>dayNightPdf=new ArrayList<>();
-        //先清理.zip垃圾文件
-        try{
-            File fileZip=new File(basePath+"upload/pdf/");
-            if(fileZip.exists()&&fileZip.isDirectory()){
-                String zipList[]=fileZip.list();
-                for (String zippath:zipList){
-                    File file=new File(basePath+"/upload/pdf/"+zippath);
-                    if(file.isFile()&&file.getName().endsWith(".zip")){
-                        file.delete();
+        String pdfOdPath="",pdfIdPath="";
+        //岗位报表pdf命名格式：项目名＋分厂＋日期＋内／外防＋班次+ 规格 + 涂层类型
+        long startTime = System.currentTimeMillis();//获取开始时间
+        if(project_no!=null&&!project_no.equals("")&&project_name!=null&&!project_name.equals("")&&beginTimeStr!=null&&!beginTimeStr.equals("")&&endTimeStr!=null&&!endTimeStr.equals("")){
+            try{
+                //先清理.zip垃圾文件
+                File fileZip=new File(basePath+"upload/pdf/");
+                if(fileZip.exists()&&fileZip.isDirectory()){
+                    String zipList[]=fileZip.list();
+                    for (String zippath:zipList){
+                        File file=new File(basePath+"/upload/pdf/"+zippath);
+                        if(file.isFile()&&file.getName().endsWith(".zip")){
+                            file.delete();
+                        }
                     }
                 }
-            }
-        }catch (Exception ex){
-            ex.printStackTrace();
-        }
-        //获取所有分厂
-        List<MillInfo>millList=millInfoDao.getAllMillInfo();
+                //定义pdf头部所需的信息
 
-        long startTime = System.currentTimeMillis();    //获取开始时间
-
-        if(project_no!=null&&!project_no.equals("")){
-            try{
-                if(beginTimeStr==null||beginTimeStr.equals("")||endTimeStr==null||endTimeStr.equals("")){
-                    beginTimeStr=sdf.format(new Date());
-                    endTimeStr=sdf.format(new Date());
-                }
+                //1.－－－－－－－－获取所有分厂集合
+                List<MillInfo>millList=millInfoDao.getAllMillInfo();
+                //2.－－－－－－－－时间区间集合
                 start_time=sdf.parse(beginTimeStr);
                 finish_time=sdf.parse(endTimeStr);
-                listDate= DateTimeUtil.getBetweenDates(start_time,finish_time);
-                //遍历时间区间，生成白班、夜班集合PDF文件
-                for (int i=0;i<listDate.size();i++){
-                    for (MillInfo millInfo:millList){
-                        pdfSetOdDayPath=basePath+"upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+"_"+listDate.get(i)+"_外防白班(Day).pdf");
-                        pdfSetOdNightPath=basePath+"upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+"_"+listDate.get(i)+"_外防夜班(Night).pdf");
-                        pdfSetIdDayPath=basePath+"upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+"_"+listDate.get(i)+"_内防白班(Day).pdf");
-                        pdfSetIdNightPath=basePath+"upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+"_"+listDate.get(i)+"_内防夜班(Night).pdf");
-                        File fileodday=new File(pdfSetOdDayPath);
-                        File fileodnight=new File(pdfSetOdNightPath);
-                        File fileidday=new File(pdfSetIdDayPath);
-                        File fileidnight=new File(pdfSetIdNightPath);
-                        if(!fileodday.exists()){
-                            fileodday.createNewFile();
-                        }
-                        if(!fileodnight.exists()){
-                            fileodnight.createNewFile();
-                        }
-                        if(!fileidday.exists()){
-                            fileidday.createNewFile();
-                        }
-                        if(!fileidnight.exists()){
-                            fileidnight.createNewFile();
-                        }
-                    }
+                List<String>listDate= DateTimeUtil.getBetweenDates(start_time,finish_time);
+
+                //4.－－－－－－－－班次集合
+                List<String>shiftList=new ArrayList<>();
+                shiftList.add("白班");
+                shiftList.add("夜班");
+                //5.－－－－－－－－获取所有规格集合、涂层类型
+                getStandardAndCoatingTypeList(project_no);
+
+                //6.-------开始生成笛卡尔集pdf，并填充pdf
+                for (MillInfo millInfo:millInfoList){//分厂
+                   for (String recordTime:listDate){//日期
+                           for(String standard:standardList){//规格
+                                 for (String shift0:shiftList){
+                                     if(shift0.equals("白班")){
+                                         start_time=timeformat.parse(recordTime+" 08:00:00");
+                                         finish_time=timeformat.parse(recordTime+" 20:00:00");
+                                     } else{
+                                         start_time=timeformat.parse(recordTime+" 20:00:00");
+                                         finish_time=timeformat.parse(DateTimeUtil.getNextDay(recordTime+" 08:00:00"));
+                                     }
+                                     //外防
+                                     for (String odCoatingType:odCoatingTypeList){
+                                         pdfOdPath=basePath+"upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+"_"+recordTime+"_外防"+shift0+"(Day)_"+standard+"_"+odCoatingType+".pdf");
+                                         File file0=new File(pdfOdPath);
+                                         if(!file0.exists()){
+                                             file0.createNewFile();
+                                         }
+                                         //开始填充pdf
+                                         //6.1.1---------外防生成封面PDF
+
+                                         //6.1.2---------生成当天的外打砂工位的PDF
+
+                                         //6.1.3---------生成当天的外打砂检验工位的PDF
+
+                                         //6.1.4---------生成当天的外涂工位的PDF(2FBE、3LPE)
+
+                                         //6.1.5---------生成当天的外涂检验工位的PDF(2FBE、3LPE)
+
+                                         //6.1.6---------生成当天的外防终检工位的PDF
+
+                                     }
+                                     //内防
+                                     for (String idCoatingType:idCoatingTypeList){
+                                         pdfIdPath=basePath+"upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+"_"+recordTime+"_内防"+shift0+"(Day)_"+standard+"_"+idCoatingType+".pdf");
+                                         File file1=new File(pdfIdPath);
+                                         //开始填充pdf
+                                         //6.2.1---------内防生成封面PDF
+
+                                         //6.2.2---------内打砂检验记录PDF
+
+                                         //6.2.3---------内涂记录PDF
+
+                                         //6.2.4---------内涂检验记录PDF
+
+                                         //6.2.5---------内涂终验记录PDF
+                                     }
+                                 }
+                           }
+                   }
                 }
+//                for (int i=0;i<listDate.size();i++){
+//                    for (MillInfo millInfo:millList){
+//                        pdfSetOdDayPath=basePath+"upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+"_"+listDate.get(i)+"_外防白班(Day).pdf");
+//                        pdfSetOdNightPath=basePath+"upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+"_"+listDate.get(i)+"_外防夜班(Night).pdf");
+//                        pdfSetIdDayPath=basePath+"upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+"_"+listDate.get(i)+"_内防白班(Day).pdf");
+//                        pdfSetIdNightPath=basePath+"upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+"_"+listDate.get(i)+"_内防夜班(Night).pdf");
+//                        File fileodday=new File(pdfSetOdDayPath);
+//                        File fileodnight=new File(pdfSetOdNightPath);
+//                        File fileidday=new File(pdfSetIdDayPath);
+//                        File fileidnight=new File(pdfSetIdNightPath);
+//                        if(!fileodday.exists()){
+//                            fileodday.createNewFile();
+//                        }
+//                        if(!fileodnight.exists()){
+//                            fileodnight.createNewFile();
+//                        }
+//                        if(!fileidday.exists()){
+//                            fileidday.createNewFile();
+//                        }
+//                        if(!fileidnight.exists()){
+//                            fileidnight.createNewFile();
+//                        }
+//                    }
+//                }
+                //-------结束生成笛卡尔集pdf
                 long endTime1 = System.currentTimeMillis();
                 System.out.println("程序运行时间1：" + (endTime1 - startTime) + "ms");    //输出程序运行时间
                 //按天生成白班和夜班的pdf,然后融合到白班的pdf和夜班的pdf中
-                for (int i=0;i<listDate.size();i++){
-                    for (MillInfo millInfo:millList){
-                        pdfSetOdDayPath=basePath+"upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+"_"+listDate.get(i)+"_外防白班(Day).pdf");
-                        pdfSetOdNightPath=basePath+"upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+"_"+listDate.get(i)+"_外防夜班(Night).pdf");
-                        pdfSetIdDayPath=basePath+"upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+"_"+listDate.get(i)+"_内防白班(Day).pdf");
-                        pdfSetIdNightPath=basePath+"upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+"_"+listDate.get(i)+"_内防夜班(Night).pdf");
-                        day_begin_time=timeformat.parse(listDate.get(i)+" 08:00:00");
-                        day_end_time=timeformat.parse(listDate.get(i)+" 20:00:00");
-                        night_begin_time=timeformat.parse(listDate.get(i)+" 20:00:00");
-                        night_end_time=timeformat.parse(DateTimeUtil.getNextDay(listDate.get(i))+" 08:00:00");
-
-                        long endTime2 = System.currentTimeMillis();
-                        System.out.println("程序运行时间2：" + (endTime2 - endTime1) + "ms");    //输出程序运行时间
-
-                        //-------------------外防生成封面-------------------
-                        createCoverOne(request,0,project_no,millInfo.getMill_no(),millInfo.getMill_name(),0,day_begin_time,day_end_time);
-                        createCoverOne(request,0,project_no,millInfo.getMill_no(),millInfo.getMill_name(),1,night_begin_time,night_end_time);
-
-                        long endTime3 = System.currentTimeMillis();
-                        System.out.println("程序运行时间3：" + (endTime3 - endTime2) + "ms");    //输出程序运行时间
-
-                        //-------------------外防腐---------------------
-
-                        //1.生成当天的外打砂工位的模板
-                        OdBlastRecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);//生成白班报表PDF
-                        OdBlastRecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);//生成夜班报表PDF
-                        long endTime4 = System.currentTimeMillis();
-                        System.out.println("程序运行时间4：" + (endTime4 - endTime3) + "ms");    //输出程序运行时间
-
-                        //2.生成当天的外打砂检验工位的模板
-                        OdBlastInspectionRecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
-                        OdBlastInspectionRecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
-
-                        long endTime5 = System.currentTimeMillis();
-                        System.out.println("程序运行时间5：" + (endTime5 - endTime4) + "ms");    //输出程序运行时间
-
-                        //3.生成当天的外涂(2FBE)工位的模板
-                        OdCoat2FBERecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
-                        OdCoat2FBERecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
-
-                        long endTime6 = System.currentTimeMillis();
-                        System.out.println("程序运行时间6：" + (endTime6 - endTime5) + "ms");    //输出程序运行时间
-
-                        //4.生成当天的外涂检验(2FBE)工位的模板
-                        OdCoat2FBEInspectionRecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
-                        OdCoat2FBEInspectionRecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
-
-                        long endTime7 = System.currentTimeMillis();
-                        System.out.println("程序运行时间7：" + (endTime7 - endTime6) + "ms");    //输出程序运行时间
-
-
-                        //5.生成当天的外涂(3LPE)工位的模板
-                        OdCoat3LPERecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
-                        OdCoat3LPERecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
-
-                        long endTime8 = System.currentTimeMillis();
-                        System.out.println("程序运行时间8：" + (endTime8 - endTime7) + "ms");    //输出程序运行时间
-
-                        //6.生成当天的外涂检验(3LPE)工位的模板
-                        OdCoat3LPEInspectionRecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
-                        OdCoat3LPEInspectionRecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
-
-                        long endTime9 = System.currentTimeMillis();
-                        System.out.println("程序运行时间9：" + (endTime9 - endTime8) + "ms");    //输出程序运行时间
-
-
-                        //7.生成当天的外防终检工位的模板
-                        OdCoatFinalInspectionRecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
-                        OdCoatFinalInspectionRecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
-
-                        long endTime10 = System.currentTimeMillis();
-                        System.out.println("程序运行时间10：" + (endTime10 - endTime9) + "ms");    //输出程序运行时间
-
-                        //-------------------内防生成封面-------------------
-                        createCoverOne(request,1,project_no,millInfo.getMill_no(),millInfo.getMill_name(),0,day_begin_time,day_end_time);
-                        createCoverOne(request,1,project_no,millInfo.getMill_no(),millInfo.getMill_name(),1,night_begin_time,night_end_time);
-                        //-------------------内防腐---------------------
-
-                        long endTime11 = System.currentTimeMillis();
-                        System.out.println("程序运行时间11：" + (endTime11 - endTime10) + "ms");    //输出程序运行时间
-
-
-                        //8.内打砂检验记录PDF
-                        IdBlastInspectionRecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
-                        IdBlastInspectionRecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
-
-                        long endTime12 = System.currentTimeMillis();
-                        System.out.println("程序运行时间12：" + (endTime12 - endTime11) + "ms");    //输出程序运行时间
-
-
-                        //9.内涂记录PDF
-                        IdCoatRecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
-                        IdCoatRecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
-
-                        long endTime13 = System.currentTimeMillis();
-                        System.out.println("程序运行时间13：" + (endTime13 - endTime12) + "ms");    //输出程序运行时间
-
-                        //10.内涂检验记录PDF
-                        IdCoatInspectionRecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
-                        IdCoatInspectionRecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
-
-                        long endTime14 = System.currentTimeMillis();
-                        System.out.println("程序运行时间14：" + (endTime14 - endTime13) + "ms");    //输出程序运行时间
-
-                        //11.内涂终验记录PDF
-                        IdFinalInspectionRecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
-                        IdFinalInspectionRecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
-
-                        long endTime15 = System.currentTimeMillis();
-                        System.out.println("程序运行时间15：" + (endTime15 - endTime14) + "ms");    //输出程序运行时间
-
-                        //最后分别融合外访和内防的白班集合和夜班集合
-                        if(stationOdDayList.size()>0){
-                            MergePDF.MergePDFs(stationOdDayList,pdfSetOdDayPath);
-                        }
-                        if(stationOdNightList.size()>0){
-                            MergePDF.MergePDFs(stationOdNightList,pdfSetOdNightPath);
-                        }
-                        if(stationIdDayList.size()>0){
-                            MergePDF.MergePDFs(stationIdDayList,pdfSetIdDayPath);
-                        }
-                        if(stationIdNightList.size()>0){
-                            MergePDF.MergePDFs(stationIdNightList,pdfSetIdNightPath);
-                        }
-                        dayNightPdf.add(pdfSetOdDayPath);
-                        dayNightPdf.add(pdfSetOdNightPath);
-                        dayNightPdf.add(pdfSetIdDayPath);
-                        dayNightPdf.add(pdfSetIdNightPath);
-                        delSetPath.add(pdfSetOdDayPath);
-                        delSetPath.add(pdfSetOdNightPath);
-                        delSetPath.add(pdfSetIdDayPath);
-                        delSetPath.add(pdfSetIdNightPath);
-                        //清空stationDayList和stationNightList
-                        stationOdDayList.clear();
-                        stationOdNightList.clear();
-                        stationIdDayList.clear();
-                        stationIdNightList.clear();
-                    }
-                }
+//                for (int i=0;i<listDate.size();i++){
+//                    for (MillInfo millInfo:millList){
+//                        pdfSetOdDayPath=basePath+"upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+"_"+listDate.get(i)+"_外防白班(Day).pdf");
+//                        pdfSetOdNightPath=basePath+"upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+"_"+listDate.get(i)+"_外防夜班(Night).pdf");
+//                        pdfSetIdDayPath=basePath+"upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+"_"+listDate.get(i)+"_内防白班(Day).pdf");
+//                        pdfSetIdNightPath=basePath+"upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+"_"+listDate.get(i)+"_内防夜班(Night).pdf");
+//                        day_begin_time=timeformat.parse(listDate.get(i)+" 08:00:00");
+//                        day_end_time=timeformat.parse(listDate.get(i)+" 20:00:00");
+//                        night_begin_time=timeformat.parse(listDate.get(i)+" 20:00:00");
+//                        night_end_time=timeformat.parse(DateTimeUtil.getNextDay(listDate.get(i))+" 08:00:00");
+//
+//                        long endTime2 = System.currentTimeMillis();
+//                        System.out.println("程序运行时间2：" + (endTime2 - endTime1) + "ms");    //输出程序运行时间
+//
+//                        //-------------------外防生成封面-------------------
+//                        createCoverOne(request,0,project_no,millInfo.getMill_no(),millInfo.getMill_name(),0,day_begin_time,day_end_time);
+//                        createCoverOne(request,0,project_no,millInfo.getMill_no(),millInfo.getMill_name(),1,night_begin_time,night_end_time);
+//
+//                        long endTime3 = System.currentTimeMillis();
+//                        System.out.println("程序运行时间3：" + (endTime3 - endTime2) + "ms");    //输出程序运行时间
+//
+//                        //-------------------外防腐---------------------
+//
+//                        //1.生成当天的外打砂工位的模板
+//                        OdBlastRecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);//生成白班报表PDF
+//                        OdBlastRecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);//生成夜班报表PDF
+//                        long endTime4 = System.currentTimeMillis();
+//                        System.out.println("程序运行时间4：" + (endTime4 - endTime3) + "ms");    //输出程序运行时间
+//
+//                        //2.生成当天的外打砂检验工位的模板
+//                        OdBlastInspectionRecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
+//                        OdBlastInspectionRecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
+//
+//                        long endTime5 = System.currentTimeMillis();
+//                        System.out.println("程序运行时间5：" + (endTime5 - endTime4) + "ms");    //输出程序运行时间
+//
+//                        //3.生成当天的外涂(2FBE)工位的模板
+//                        OdCoat2FBERecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
+//                        OdCoat2FBERecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
+//
+//                        long endTime6 = System.currentTimeMillis();
+//                        System.out.println("程序运行时间6：" + (endTime6 - endTime5) + "ms");    //输出程序运行时间
+//
+//                        //4.生成当天的外涂检验(2FBE)工位的模板
+//                        OdCoat2FBEInspectionRecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
+//                        OdCoat2FBEInspectionRecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
+//
+//                        long endTime7 = System.currentTimeMillis();
+//                        System.out.println("程序运行时间7：" + (endTime7 - endTime6) + "ms");    //输出程序运行时间
+//
+//
+//                        //5.生成当天的外涂(3LPE)工位的模板
+//                        OdCoat3LPERecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
+//                        OdCoat3LPERecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
+//
+//                        long endTime8 = System.currentTimeMillis();
+//                        System.out.println("程序运行时间8：" + (endTime8 - endTime7) + "ms");    //输出程序运行时间
+//
+//                        //6.生成当天的外涂检验(3LPE)工位的模板
+//                        OdCoat3LPEInspectionRecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
+//                        OdCoat3LPEInspectionRecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
+//
+//                        long endTime9 = System.currentTimeMillis();
+//                        System.out.println("程序运行时间9：" + (endTime9 - endTime8) + "ms");    //输出程序运行时间
+//
+//
+//                        //7.生成当天的外防终检工位的模板
+//                        OdCoatFinalInspectionRecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
+//                        OdCoatFinalInspectionRecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
+//
+//                        long endTime10 = System.currentTimeMillis();
+//                        System.out.println("程序运行时间10：" + (endTime10 - endTime9) + "ms");    //输出程序运行时间
+//
+//                        //-------------------内防生成封面-------------------
+//                        createCoverOne(request,1,project_no,millInfo.getMill_no(),millInfo.getMill_name(),0,day_begin_time,day_end_time);
+//                        createCoverOne(request,1,project_no,millInfo.getMill_no(),millInfo.getMill_name(),1,night_begin_time,night_end_time);
+//                        //-------------------内防腐---------------------
+//
+//                        long endTime11 = System.currentTimeMillis();
+//                        System.out.println("程序运行时间11：" + (endTime11 - endTime10) + "ms");    //输出程序运行时间
+//
+//
+//                        //8.内打砂检验记录PDF
+//                        IdBlastInspectionRecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
+//                        IdBlastInspectionRecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
+//
+//                        long endTime12 = System.currentTimeMillis();
+//                        System.out.println("程序运行时间12：" + (endTime12 - endTime11) + "ms");    //输出程序运行时间
+//
+//
+//                        //9.内涂记录PDF
+//                        IdCoatRecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
+//                        IdCoatRecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
+//
+//                        long endTime13 = System.currentTimeMillis();
+//                        System.out.println("程序运行时间13：" + (endTime13 - endTime12) + "ms");    //输出程序运行时间
+//
+//                        //10.内涂检验记录PDF
+//                        IdCoatInspectionRecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
+//                        IdCoatInspectionRecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
+//
+//                        long endTime14 = System.currentTimeMillis();
+//                        System.out.println("程序运行时间14：" + (endTime14 - endTime13) + "ms");    //输出程序运行时间
+//
+//                        //11.内涂终验记录PDF
+//                        IdFinalInspectionRecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
+//                        IdFinalInspectionRecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
+//
+//                        long endTime15 = System.currentTimeMillis();
+//                        System.out.println("程序运行时间15：" + (endTime15 - endTime14) + "ms");    //输出程序运行时间
+//
+//                        //最后分别融合外访和内防的白班集合和夜班集合
+//                        if(stationOdDayList.size()>0){
+//                            MergePDF.MergePDFs(stationOdDayList,pdfSetOdDayPath);
+//                        }
+//                        if(stationOdNightList.size()>0){
+//                            MergePDF.MergePDFs(stationOdNightList,pdfSetOdNightPath);
+//                        }
+//                        if(stationIdDayList.size()>0){
+//                            MergePDF.MergePDFs(stationIdDayList,pdfSetIdDayPath);
+//                        }
+//                        if(stationIdNightList.size()>0){
+//                            MergePDF.MergePDFs(stationIdNightList,pdfSetIdNightPath);
+//                        }
+//                        dayNightPdf.add(pdfSetOdDayPath);
+//                        dayNightPdf.add(pdfSetOdNightPath);
+//                        dayNightPdf.add(pdfSetIdDayPath);
+//                        dayNightPdf.add(pdfSetIdNightPath);
+//                        delSetPath.add(pdfSetOdDayPath);
+//                        delSetPath.add(pdfSetOdNightPath);
+//                        delSetPath.add(pdfSetIdDayPath);
+//                        delSetPath.add(pdfSetIdNightPath);
+//                        //清空stationDayList和stationNightList
+//                        stationOdDayList.clear();
+//                        stationOdNightList.clear();
+//                        stationIdDayList.clear();
+//                        stationIdNightList.clear();
+//                    }
+//                }
                 long endTime15 = System.currentTimeMillis();
                 System.out.println("程序运行时间15：" + (endTime15 - startTime) + "ms");    //输出程序运行时间
                 Collections.sort(dayNightPdf);
@@ -359,6 +421,84 @@ public class InspectionRecordPDFController {
         ResponseUtil.downLoadPdf(dayNightPdf,request,response);
         return null;
     }
+    private void OdBlastRecord0(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String odWt,String standard,String coatingType,String shift,float od,float wt,String title_time,Date begin_time,Date end_time){
+        String templateFullName=request.getSession().getServletContext().getRealPath("/")
+                +"template/od_blast_record_template.xls";
+        String newPdfName=null;
+        try{
+            List<HashMap<String,Object>>list=odblastprocessDao.getOdBlastRecord(project_no,mill_no,begin_time,end_time);
+            ArrayList<Label> datalist=new ArrayList<Label>();
+            //如果数据不为空
+            if(list.size()>0){
+                int index=1,row=0;
+                StringBuilder sb=new StringBuilder();
+                String result="";
+                int qualifiedTotal=0;
+                for (int i=0;i<list.size();i++){
+                    datalist.add(new Label(1, row+8, list.get(i).get("pipe_no").toString(), wcf));
+                    String isClear="是";
+                    String marking=String.valueOf(list.get(i).get("marking"));
+                    if(marking!=null){
+                        if(!marking.equals("0")){
+                            isClear="否";
+                        }
+                    }else {
+                        isClear=" ";
+                    }
+                    datalist.add(new Label(2, row+8, isClear, wcf));
+                    datalist.add(new Label(3, row+8, String.valueOf(list.get(i).get("surface_condition")), wcf));
+                    datalist.add(new Label(4, row+8, String.valueOf(list.get(i).get("salt_contamination_before_blasting")), wcf));
+                    datalist.add(new Label(5, row+8, String.valueOf(list.get(i).get("preheat_temp")), wcf));
+                    datalist.add(new Label(6, row+8, String.valueOf(list.get(i).get("blast_line_speed")), wcf));
+                    datalist.add(new Label(7, row+8, String.valueOf(list.get(i).get("rinse_water_conductivity")), wcf));
+                    datalist.add(new Label(8, row+8, String.valueOf(list.get(i).get("abrasive_conductivity")), wcf));
+                    datalist.add(new Label(9, row+8, String.valueOf(list.get(i).get("alkaline_dwell_time")), wcf));
+                    datalist.add(new Label(10, row+8, String.valueOf(list.get(i).get("acid_concentration")), wcf));
+                    datalist.add(new Label(11, row+8, String.valueOf(list.get(i).get("acid_wash_time")), wcf));
+                    datalist.add(new Label(12, row+8, String.valueOf(list.get(i).get("acid_concentration")), wcf));
+                    result=String.valueOf(list.get(i).get("result"));
+                    if(result!=null){
+                        if(result.equals("0")){
+                            result="不合格";
+                        }else if(result.equals("1")){
+                            result="合格";
+                            qualifiedTotal++;
+                        }else if(result.equals("2")){
+                            result="待定";
+                        }
+                        else if(result.equals("3")){
+                            result="表面缺陷";
+                        }else{
+                            result=" ";
+                        }
+                    }else{
+                        result=" ";
+                    }
+                    datalist.add(new Label(13, row+8, result, wcf));
+                    if(list.get(i).get("remark")!=null&&!list.get(i).get("remark").equals("")) {
+                        sb.append("#" + list.get(i).get("pipe_no") + ":" + list.get(i).get("remark") + " ");
+                    }
+                    //最后一行数据为空问题
+                    index++;
+                    row++;
+                    if(index%13==0){
+                        createRecordPdfTitle1(datalist,3,9,13,4,5,project_name,odWt,standard,coatingType,shift,title_time);
+                        createRecordPdf1(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,13,20,index,row,sb);
+                    }
+                }
+                if(datalist.size()>0){
+                    createRecordPdfTitle1(datalist,3,9,13,4,5,project_name,odWt,standard,coatingType,shift,title_time);
+                    createRecordPdf1(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,13,20,index,row,sb);
+                }
+            }else{
+                createRecordNullPdf1(datalist,3,9,13,1,4,5,8,newPdfName,templateFullName);
+            }
+        }catch (Exception e){
+            System.out.println("填充外打砂pdf数据时出错!");
+            e.printStackTrace();
+        }
+    }
+
     //1.---------------获取外打砂记录PDF
     public  void OdBlastRecord(HttpServletRequest request,String project_no,String mill_no,int dayOrNight,Date begin_time,Date end_time){
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
@@ -432,15 +572,15 @@ public class InspectionRecordPDFController {
                     row++;
                     if(index%13==0){
                         createRecordPdfTitle(datalist,3,9,13,4,5,title_project_name,title_pipe_size,title_standard,title_coating_type,dayOrNight,begin_time);
-                        createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,13,20,index,row,sb,dayOrNight,stationOdDayList,stationOdNightList);
+                        createRecordPdf1(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,13,20,index,row,sb);
                     }
                 }
                 if(datalist.size()>0){
-                     createRecordPdfTitle(datalist,3,9,13,4,5,title_project_name,title_pipe_size,title_standard,title_coating_type,dayOrNight,begin_time);
-                     createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,13,20,index,row,sb,dayOrNight,stationOdDayList,stationOdNightList);
+                    createRecordPdfTitle(datalist,3,9,13,4,5,title_project_name,title_pipe_size,title_standard,title_coating_type,dayOrNight,begin_time);
+                    createRecordPdf1(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,13,20,index,row,sb);
                 }
             }else{
-                createRecordNullPdf(datalist,3,9,13,1,4,5,8,newPdfName,templateFullName,dayOrNight,stationOdDayList,stationOdNightList);
+                createRecordNullPdf1(datalist,3,9,13,1,4,5,8,newPdfName,templateFullName);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -1370,7 +1510,7 @@ public class InspectionRecordPDFController {
                     createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,dayOrNight,stationIdDayList,stationIdNightList);
                 }
             }else {
-                 createRecordNullPdf(datalist,3,8,12,1,4,5,9,newPdfName,templateFullName,dayOrNight,stationIdDayList,stationIdNightList);
+                createRecordNullPdf(datalist,3,8,12,1,4,5,9,newPdfName,templateFullName,dayOrNight,stationIdDayList,stationIdNightList);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -1555,10 +1695,10 @@ public class InspectionRecordPDFController {
         int maxSize=0;
         try{
             if(type==0){
-                 repairList=coatingRepairDao.getCoatingRepairOfTime(project_no,mill_no,null,null,"od",0,0,begin_time,end_time);
-                 stripList=coatingStripDao.getStripOfTime(project_no,mill_no,null,null,"od",0,0,begin_time,end_time);
+                repairList=coatingRepairDao.getCoatingRepairOfTime(project_no,mill_no,null,null,"od",0,0,begin_time,end_time);
+                stripList=coatingStripDao.getStripOfTime(project_no,mill_no,null,null,"od",0,0,begin_time,end_time);
 
-                 //bareList=barePipeGrindingCutoffRecordDao.getBarePipeCutoffOfTime(project_no,mill_no,null,null,"od",0,0,begin_time,end_time);
+                //bareList=barePipeGrindingCutoffRecordDao.getBarePipeCutoffOfTime(project_no,mill_no,null,null,"od",0,0,begin_time,end_time);
             }else{
                 repairList=coatingRepairDao.getCoatingRepairOfTime(project_no,mill_no,null,null,"id",0,0,begin_time,end_time);
                 stripList=coatingStripDao.getStripOfTime(project_no,mill_no,null,null,"id",0,0,begin_time,end_time);
@@ -1729,6 +1869,7 @@ public class InspectionRecordPDFController {
         }
     }
     //填补空白Bug
+
     private void AddLastWhiteSpace(ArrayList<Label> datalist,String remark,WritableCellFormat wcf){
         datalist.add(new Label(2,20,remark,wcf));
     }
@@ -1774,6 +1915,9 @@ public class InspectionRecordPDFController {
         return "";
     }
 
+
+
+
     //添加分厂信息
     private void createMillInfo(ArrayList<Label> datalist,int column1,int column2,int column3,int row,String mill_name){
         datalist.add(new Label(column1, row,"分厂", wcf));
@@ -1800,6 +1944,20 @@ public class InspectionRecordPDFController {
             delSetPath.add(newPdfName);
         }
     }
+    private void createRecordNullPdf1(ArrayList<Label> datalist,int column1,int column2,int column3,int column4,int row1,int row2,int row3,String newPdfName,String templateFullName){
+        datalist.add(new Label(column1, row1," ", wcf));
+        datalist.add(new Label(column2, row1," ", wcf));
+        datalist.add(new Label(column1, row2," ", wcf));
+        datalist.add(new Label(column2, row2," ", wcf));
+        datalist.add(new Label(column3, row2," ", wcf));
+        datalist.add(new Label(column3, row1, " ", wcf));
+        datalist.add(new Label(column4,row3,"今天暂无记录!",wcf));
+        newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+        if(newPdfName!=null){
+            standardList.add(newPdfName);
+            delSetPath.add(newPdfName);
+        }
+    }
     //公共函数生成PDF头部信息,参数(column1:project_name、standard所在列,column2:pipe_size、coating_type所在列,column3:班次、时间所在列,
     // row1:project_name、pipe_size、时间所在行,row2:standard、coating_type、班次所在行)
     private void createRecordPdfTitle(ArrayList<Label> datalist,int column1,int column2,int column3,int row1,int row2,String title_project_name,String title_pipe_size,String title_standard,String title_coating_type,int dayOrNight,Date begin_time){
@@ -1814,6 +1972,15 @@ public class InspectionRecordPDFController {
                 datalist.add(new Label(column3, row2, "夜班(Night)", wcf));
                 datalist.add(new Label(column3, row1,sdf.format(begin_time), wcf));
             }
+    }
+    private void createRecordPdfTitle1(ArrayList<Label> datalist,int column1,int column2,int column3,int row1,int row2,String title_project_name,String title_pipe_size,String title_standard,String title_coating_type,String title_shift,String title_time){
+        datalist.add(new Label(column1, row1,title_project_name, wcf));
+        datalist.add(new Label(column2, row1,title_pipe_size, wcf));
+        datalist.add(new Label(column1, row2,title_standard, wcf));
+        datalist.add(new Label(column2, row2,title_coating_type, wcf));
+        datalist.add(new Label(column3, row2,title_shift, wcf));
+        datalist.add(new Label(column3, row1,title_time, wcf));
+
     }
     //公共生成pdf的函数，参数列表(dataList:表格数据集合,newPdfName:pdf名字,templateFullName:pdf模板名字,x1为备注所在列 y1为备注所在行
     //x2为合格数所在列 y2为合格数所在行，qualifiedTotal:合格数,index:循环索引,row:行数,sb:备注内容,dayOrNight:班次判定))
@@ -1835,6 +2002,21 @@ public class InspectionRecordPDFController {
                 stationNightList.add(newPdfName);
                 //stationIdNightList.add(newPdfName);
             }
+            delSetPath.add(newPdfName);
+        }
+    }
+    private void createRecordPdf1(ArrayList<Label> datalist,String newPdfName,String templateFullName,int qualifiedTotal,int x1,int y1,int x2,int y2,int index,int row,StringBuilder sb){
+        datalist.add(new Label(x1,y1,String.valueOf(sb.toString()),wcf));
+        //添加合格数
+        datalist.add(new Label(x2,y2,String.valueOf(qualifiedTotal),wcf));
+        newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+        datalist.clear();
+        qualifiedTotal=0;
+        index=1;
+        row=0;
+        sb.setLength(0);
+        if(newPdfName!=null){
+            stationDayList.add(newPdfName);
             delSetPath.add(newPdfName);
         }
     }
@@ -1907,5 +2089,35 @@ public class InspectionRecordPDFController {
             returnVal=String.valueOf(new BigDecimal(totalNumber/valArr.length).setScale(0, BigDecimal.ROUND_HALF_UP));
         }
         return  returnVal;
+    }
+    //获取分厂集合
+    private void  getMillNameList(){
+        try{
+           millInfoList=millInfoDao.getAllMillInfo();
+        }catch (Exception e){
+           System.out.println("获取分厂集合时出错!");
+        }
+    }
+    //根据项目编号获取标准、涂层集合
+    private void getStandardAndCoatingTypeList(String project_no){
+        try{
+            String temp="";
+            DecimalFormat decimalFormat=new DecimalFormat(".00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+            //String p=decimalFormat.format(price);
+            List<ContractInfo>contractInfoList=contractInfoDao.getAllContractInfoByProjectNo(project_no);
+            for (ContractInfo item:contractInfoList){
+                 temp="Φ"+decimalFormat.format(item.getOd())+"*"+decimalFormat.format(item.getWt())+"mm";
+                 if(!standardList.contains(temp))
+                     standardList.add(temp);
+                 temp=item.getExternal_coating();
+                 if(!odCoatingTypeList.contains(temp))
+                     odCoatingTypeList.add(temp);
+                 temp=item.getInternal_coating();
+                 if(!idCoatingTypeList.contains(temp))
+                     idCoatingTypeList.add(temp);
+            }
+        }catch (Exception e){
+            System.out.println("根据项目编号获取标准、涂层集合时出错!");
+        }
     }
 }
