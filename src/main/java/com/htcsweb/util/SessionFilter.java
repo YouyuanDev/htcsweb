@@ -72,7 +72,8 @@ public class SessionFilter extends OncePerRequestFilter{
             "addDialyReportAndCreateExcel",
             "get2FBESamplePipeNo",
             "get3LPESamplePipeNo",
-            "getLiquidEpoxySamplePipeNo"
+            "getLiquidEpoxySamplePipeNo",
+            "getPDFProgress"
 
     }; // 不过滤的uri
 

@@ -44,8 +44,16 @@ public class GenerateExcelToPDFUtil {
 
     //PDF生成方法入口
     public static String PDFAutoMation(String excelTemplateFullName,ArrayList<Label> dataList,String pdfFullName,String imagePath,String fontPath) {
+        long startTime = System.currentTimeMillis();    //获取开始时间
+
         String newexcelfile=GenerateExcelToPDFUtil.FillExcelTemplate(excelTemplateFullName,dataList);
+        long endTime1 = System.currentTimeMillis();
         String newpdfName=GenerateExcelToPDFUtil.ExcelToPDFRecord(newexcelfile,pdfFullName,imagePath,fontPath);
+        long endTime2= System.currentTimeMillis();
+
+        System.out.println("程序PDFAutoMation运行时间1：" + (endTime1 - startTime) + "ms");    //输出程序运行时间
+        System.out.println("程序PDFAutoMation运行时间2：" + (endTime2 - endTime1) + "ms");    //输出程序运行时间
+        System.out.println("程序PDFAutoMation运行时间：" + (endTime2 - startTime) + "ms");    //输出程序运行时间
         return  newpdfName;
     }
 
@@ -184,22 +192,33 @@ public class GenerateExcelToPDFUtil {
         //excelTemplateFullName = "/Users/kurt/Documents/pipe_coating_surface_inspection_record_template.xls";
         //复制模版
         //String newExcelFileName=excelTemplateFullName.substring(0,excelTemplateFullName.lastIndexOf('.'))+ String.valueOf(System.currentTimeMillis()+".xls");
+        long startTime = System.currentTimeMillis();    //获取开始时间
+
         newExcelFileName=excelTemplateFullName.substring(0,excelTemplateFullName.lastIndexOf('.'))+ String.valueOf(System.currentTimeMillis())+".xls";
         fileChannelCopy(excelTemplateFullName,newExcelFileName);
+
+        long endTime1= System.currentTimeMillis();
+
+        System.out.println("程序FillExcelTemplate运行时间1：" + (endTime1 - startTime) + "ms");    //输出程序运行时间
+
         try {
-            Workbook wb = Workbook.getWorkbook(new File(newExcelFileName));
-            WritableWorkbook wwb = Workbook.createWorkbook(new File(newExcelFileName), wb);
+            File newxlsfile = new File(newExcelFileName);
+            Workbook wb = Workbook.getWorkbook(newxlsfile);
+            WritableWorkbook wwb = Workbook.createWorkbook(newxlsfile, wb);
             WritableSheet wsheet  = wwb.getSheet(0);
             try {
 
                 //创建sheet对象
 
                 //把datalist中的数据填到相应位置，由相关业务controller设置datalist数据
-                for(int i=0;dataList!=null&&i<dataList.size();i++){
-                       Label label_data=(Label) dataList.get(i);
-                       String cont=label_data.getContents();
-                       if(cont!=null&&!cont.equals(""))
-                        wsheet.addCell(label_data);
+                if(dataList!=null) {
+                    System.out.println("dataList.size()="+dataList.size());
+                    for (int i = 0; i < dataList.size(); i++) {
+                        //Label label_data = (Label) dataList.get(i);
+                        //String cont = label_data.getContents();
+                       // if (cont != null && !cont.equals(""))
+                        wsheet.addCell((Label) dataList.get(i));
+                    }
                 }
 
                 wwb.write();//把表格信息写入文件
@@ -209,7 +228,8 @@ public class GenerateExcelToPDFUtil {
                 wwb.close();//关闭
                 wb.close();
             }
-
+            long endTime2= System.currentTimeMillis();
+            System.out.println("程序FillExcelTemplate运行时间2：" + (endTime2 - endTime1) + "ms");    //输出程序运行时间
         } catch (Exception e) {
             System.out.println("Exception:"+e.getMessage());
         } finally {

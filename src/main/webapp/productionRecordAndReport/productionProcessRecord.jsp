@@ -169,10 +169,12 @@
                 left: ($(document.body).outerWidth(true) - 190) / 2,
                 top: ($(window).height() - 45) / 2
             });
+            showCheckProgress();
         }
         function ajaxLoadEnd() {
             $(".datagrid-mask").remove();
             $(".datagrid-mask-msg").remove();
+            window.clearInterval(timerId);
         }
         // function downloadPdf(pathList) {
         //     var form=$("<form>");//定义一个form表单
@@ -188,6 +190,58 @@
         //     form.append(input1);
         //     form.submit();//表单提交
         // }
+
+
+
+        //展示进度条
+        var timerId;
+        function showCheckProgress(){
+
+            //想要修改进度条的颜色去css文件中去修改
+            // $('#p').progressbar({
+            //     value : 0,          //设置进度条值 默认0
+            //     text : '{value}%'  //设置进度条百分比模板 默认 {value}%
+            //     //在value改变的时候触发
+            //     /*onChange : function (newValue, oldValue) {
+            //         console.log('新:' + newValue + ',旧:' + oldValue);
+            //     },  */
+            // });
+            $('#p').progressbar('setValue',0);
+            timerId = window.setInterval(getCheckProgress,1000);
+        }
+
+
+        //通过session得到进度
+        //通过post请求得到进度
+        function getCheckProgress(){
+            var progressUrl = '/InspectionRecordPDFOperation/getPDFProgress.action';
+            //使用JQuery从后台获取JSON格式的数据
+            $.ajax({
+                type:"post",//请求方式
+                url:progressUrl,//发送请求地址
+                timeout:3000,//超时时间：30秒
+                dataType:"json",//设置返回数据的格式
+                //请求成功后的回调函数 data为json格式
+                success:function(data){
+                    if(data.pdfProgress>=100){
+                        $('#p').progressbar('setValue',"100");
+                        window.clearInterval(timerId);
+                        $('#dg').datagrid('load');
+                        $('#importBtn').css('display','inline-block');
+                        $('#showProgress').css('display','none');
+                    }
+                    $('#p').progressbar('setValue',data.pdfProgress);
+                },
+                //请求出错的处理
+                error:function(){
+                    window.clearInterval(timerId);
+                    //alert("请求出错");
+                }
+            });
+        }
+
+
+
     </script>
 </head>
 <body>
@@ -214,8 +268,14 @@
     <span class="i18n1" name="endtime">结束时间</span>:
     <input id="endtime" name="endtime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
     <button class="btnReport">开始生成</button>
-
+<br><br>
+    <div id="p" class="easyui-progressbar" data-options="value:0" style="width:600px;"></div>
 </div>
+
+
+
+
+
 <script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
 </body>
 </html>
