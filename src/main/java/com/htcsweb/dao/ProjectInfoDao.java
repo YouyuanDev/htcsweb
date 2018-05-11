@@ -25,4 +25,6 @@ public interface ProjectInfoDao {
     public List<HashMap<String,Object>>getProjectInfoByNoOrName(@Param("project_no")String project_no,@Param("project_name")String project_name);
     //获取项目编号和名字
     public  List<HashMap<String,Object>>getProjectNoAndName();
+    //根据项目编号获取项目信息
+    public List<ProjectInfo>getProjectInfoByProjectNo(@Param("project_no")String project_no);
 }

@@ -147,4 +147,8 @@
     <select id="getProjectNoAndName" resultType="map">
         SELECT p.project_no,p.project_name FROM  project_info p
     </select>
+    <!--根据项目编号获取项目信息-->
+    <select id="getProjectInfoByProjectNo" resultType="com.htcsweb.entity.ProjectInfo">
+        SELECT * FROM project_info WHERE project_no=#{project_no}
+    </select>
 </mapper>
