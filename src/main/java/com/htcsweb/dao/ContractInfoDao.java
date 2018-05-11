@@ -20,5 +20,5 @@ public interface ContractInfoDao {
     public List<ContractInfo> getContractInfoByContractNo(@Param("contract_no")String contract_no);
 
     //根据项目编号获取所属的所有合同信息
-    public List<HashMap<String,Object>>getAllContractInfoByProjectNo(@Param("project_no")String project_no);
+    public List<ContractInfo>getAllContractInfoByProjectNo(@Param("project_no")String project_no);
 }

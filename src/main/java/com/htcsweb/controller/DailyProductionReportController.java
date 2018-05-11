@@ -178,7 +178,7 @@ public class DailyProductionReportController {
                     end_time=sdf.parse(endTime);
                     dateList= DateTimeUtil.getBetweenDates(begin_time,end_time);
                     //遍历日期
-                    List<HashMap<String,Object>>hashMapList=getAllContractInfo(project_no);
+                    List<ContractInfo>hashMapList=getAllContractInfo(project_no);
                     List<GroupEntity>list=getTabGroup(hashMapList);
                     //遍历排列组合，生成组合对应的tab
                     float od=0f,wt=0f;
@@ -375,39 +375,38 @@ public class DailyProductionReportController {
     //
 
     //根据项目编号查找该项目中所有的合同
-    private List<HashMap<String,Object>> getAllContractInfo(String project_no){
-          List<HashMap<String,Object>>list=contractInfoDao.getAllContractInfoByProjectNo(project_no);
+    private List<ContractInfo> getAllContractInfo(String project_no){
+          List<ContractInfo>list=contractInfoDao.getAllContractInfoByProjectNo(project_no);
           return list;
     }
     //生成tab的排列组合,根据od-wt,external_coating,internal_coating进行组合
-    private List<GroupEntity>getTabGroup(List<HashMap<String,Object>>contractInfoList){
+    private List<GroupEntity>getTabGroup(List<ContractInfo>contractInfoList){
         List<GroupEntity>tabGroupList=new ArrayList<>();//od-wt,external_coating,internal_coating组合
         List<String>odWtStrList=new ArrayList<>();//od-wt组合
         List<HashMap<String,String>>odwtNewList=new ArrayList<>();
         List<String>externalList=new ArrayList<>();//外防组合
         List<String>internalList=new ArrayList<>();//内防组合
         String odwtKey="",odwtValue="";
-        for (HashMap<String,Object>item:contractInfoList){
+        for (ContractInfo item:contractInfoList){
            //获取od-wt的组合数
-            odwtKey =String.valueOf(item.get("od"));
-            odwtValue=String.valueOf(item.get("wt"));
+            odwtKey =String.valueOf(item.getOd());
+            odwtValue=String.valueOf(item.getWt());
             if(!odWtStrList.contains(odwtKey+"*"+odwtValue)){
                HashMap<String,String>tempMap=new HashMap<>();
-               tempMap.put("od",String.valueOf(item.get("od")));
-               tempMap.put("wt",String.valueOf(item.get("wt")));
+               tempMap.put("od",String.valueOf(item.getOd()));
+               tempMap.put("wt",String.valueOf(item.getWt()));
                odwtNewList.add(tempMap);
-               odWtStrList.add(String.valueOf(item.get("od"))+"*"+String.valueOf(item.get("wt")));
+               odWtStrList.add(String.valueOf(item.getOd())+"*"+String.valueOf(item.getWt()));
             }
             //获取外防组合数
-            if(!externalList.contains(String.valueOf(item.get("external_coating")))){
-                   externalList.add(String.valueOf(item.get("external_coating")));
+            if(!externalList.contains(String.valueOf(item.getExternal_coating()))){
+                   externalList.add(String.valueOf(item.getExternal_coating()));
             }
 
             //获取内防组合数
-            if(!internalList.contains(String.valueOf(item.get("internal_coating")))){
-                internalList.add(String.valueOf(item.get("internal_coating")));
+            if(!internalList.contains(String.valueOf(item.getInternal_coating()))){
+                internalList.add(String.valueOf(item.getInternal_coating()));
             }
-
         }
         for (HashMap<String,String>item:odwtNewList){
                 odwtKey = item.get("od");
