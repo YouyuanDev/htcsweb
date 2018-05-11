@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import java.awt.geom.FlatteningPathIterator;
@@ -121,6 +122,33 @@ public class InspectionRecordPDFController {
     @Autowired
     private ContractInfoDao contractInfoDao;
     private BarePipeGrindingCutoffRecordDao barePipeGrindingCutoffRecordDao;
+
+
+
+    //获取PDF生成进度
+    @RequestMapping(value="getPDFProgress",produces="application/json;charset=UTF-8")
+    @ResponseBody
+    public  String getPDFProgress(HttpServletRequest request, HttpServletResponse response) {
+        JSONObject json=new JSONObject();
+        try{
+
+            HttpSession session = request.getSession();
+            String pdfProgress=(String)session.getAttribute("pdfProgress");
+            if(pdfProgress==null||pdfProgress.equals(""))
+                pdfProgress="0";
+            //跳转到用户主页
+            json.put("success",true);
+            System.out.println("ggggggete getAttribute pdfProgress：" + pdfProgress);    //输出程序运行时间
+            json.put("pdfProgress",pdfProgress);
+            ResponseUtil.write(response,json);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
     @RequestMapping(value="getRecordReportPDF",produces="application/json;charset=UTF-8")
     @ResponseBody
     public  String getRecordReportPDF(HttpServletRequest request, HttpServletResponse response){
@@ -172,6 +200,15 @@ public class InspectionRecordPDFController {
                 //5.－－－－－－－－获取所有规格集合、涂层类型
                 getStandardAndCoatingTypeList(project_no);
 
+
+
+                int totalPDFCount=listDate.size()*millList.size()*standardList.size()*shiftList.size();
+                int n=0;
+                HttpSession session = request.getSession();
+                session.setAttribute("pdfProgress", String.valueOf(0));
+
+
+
                 //6.-------开始生成笛卡尔集pdf，并填充pdf
                 for (MillInfo millInfo:millInfoList){//分厂
                    for (String recordTime:listDate){//日期
@@ -220,6 +257,17 @@ public class InspectionRecordPDFController {
 
                                          //6.2.5---------内涂终验记录PDF
                                      }
+
+                                     //计算
+                                     n+=1;
+                                     //把用户数据保存在session域对象中
+                                     float percent=n*100/totalPDFCount;
+                                     session.setAttribute("pdfProgress", String.valueOf(percent));
+                                     System.out.println("percent：" + percent);
+                                     System.out.println("n：" + n);
+                                     System.out.println("totalPDFCount：" + totalPDFCount);
+
+
                                  }
                            }
                    }
