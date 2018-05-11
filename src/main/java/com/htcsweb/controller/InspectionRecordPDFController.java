@@ -151,7 +151,7 @@ public class InspectionRecordPDFController {
         //获取所有分厂
         List<MillInfo>millList=millInfoDao.getAllMillInfo();
 
-
+        long startTime = System.currentTimeMillis();    //获取开始时间
 
         if(project_no!=null&&!project_no.equals("")){
             try{
@@ -187,6 +187,8 @@ public class InspectionRecordPDFController {
                         }
                     }
                 }
+                long endTime1 = System.currentTimeMillis();
+                System.out.println("程序运行时间1：" + (endTime1 - startTime) + "ms");    //输出程序运行时间
                 //按天生成白班和夜班的pdf,然后融合到白班的pdf和夜班的pdf中
                 for (int i=0;i<listDate.size();i++){
                     for (MillInfo millInfo:millList){
@@ -198,49 +200,107 @@ public class InspectionRecordPDFController {
                         day_end_time=timeformat.parse(listDate.get(i)+" 20:00:00");
                         night_begin_time=timeformat.parse(listDate.get(i)+" 20:00:00");
                         night_end_time=timeformat.parse(DateTimeUtil.getNextDay(listDate.get(i))+" 08:00:00");
+
+                        long endTime2 = System.currentTimeMillis();
+                        System.out.println("程序运行时间2：" + (endTime2 - endTime1) + "ms");    //输出程序运行时间
+
                         //-------------------外防生成封面-------------------
                         createCoverOne(request,0,project_no,millInfo.getMill_no(),millInfo.getMill_name(),0,day_begin_time,day_end_time);
                         createCoverOne(request,0,project_no,millInfo.getMill_no(),millInfo.getMill_name(),1,night_begin_time,night_end_time);
+
+                        long endTime3 = System.currentTimeMillis();
+                        System.out.println("程序运行时间3：" + (endTime3 - endTime2) + "ms");    //输出程序运行时间
+
                         //-------------------外防腐---------------------
 
                         //1.生成当天的外打砂工位的模板
                         OdBlastRecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);//生成白班报表PDF
                         OdBlastRecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);//生成夜班报表PDF
+                        long endTime4 = System.currentTimeMillis();
+                        System.out.println("程序运行时间4：" + (endTime4 - endTime3) + "ms");    //输出程序运行时间
+
                         //2.生成当天的外打砂检验工位的模板
                         OdBlastInspectionRecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
                         OdBlastInspectionRecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
+
+                        long endTime5 = System.currentTimeMillis();
+                        System.out.println("程序运行时间5：" + (endTime5 - endTime4) + "ms");    //输出程序运行时间
+
                         //3.生成当天的外涂(2FBE)工位的模板
                         OdCoat2FBERecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
                         OdCoat2FBERecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
+
+                        long endTime6 = System.currentTimeMillis();
+                        System.out.println("程序运行时间6：" + (endTime6 - endTime5) + "ms");    //输出程序运行时间
+
                         //4.生成当天的外涂检验(2FBE)工位的模板
                         OdCoat2FBEInspectionRecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
                         OdCoat2FBEInspectionRecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
+
+                        long endTime7 = System.currentTimeMillis();
+                        System.out.println("程序运行时间7：" + (endTime7 - endTime6) + "ms");    //输出程序运行时间
+
+
                         //5.生成当天的外涂(3LPE)工位的模板
                         OdCoat3LPERecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
                         OdCoat3LPERecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
+
+                        long endTime8 = System.currentTimeMillis();
+                        System.out.println("程序运行时间8：" + (endTime8 - endTime7) + "ms");    //输出程序运行时间
+
                         //6.生成当天的外涂检验(3LPE)工位的模板
                         OdCoat3LPEInspectionRecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
                         OdCoat3LPEInspectionRecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
+
+                        long endTime9 = System.currentTimeMillis();
+                        System.out.println("程序运行时间9：" + (endTime9 - endTime8) + "ms");    //输出程序运行时间
+
+
                         //7.生成当天的外防终检工位的模板
                         OdCoatFinalInspectionRecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
                         OdCoatFinalInspectionRecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
+
+                        long endTime10 = System.currentTimeMillis();
+                        System.out.println("程序运行时间10：" + (endTime10 - endTime9) + "ms");    //输出程序运行时间
+
                         //-------------------内防生成封面-------------------
                         createCoverOne(request,1,project_no,millInfo.getMill_no(),millInfo.getMill_name(),0,day_begin_time,day_end_time);
                         createCoverOne(request,1,project_no,millInfo.getMill_no(),millInfo.getMill_name(),1,night_begin_time,night_end_time);
                         //-------------------内防腐---------------------
 
+                        long endTime11 = System.currentTimeMillis();
+                        System.out.println("程序运行时间11：" + (endTime11 - endTime10) + "ms");    //输出程序运行时间
+
+
                         //8.内打砂检验记录PDF
                         IdBlastInspectionRecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
                         IdBlastInspectionRecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
+
+                        long endTime12 = System.currentTimeMillis();
+                        System.out.println("程序运行时间12：" + (endTime12 - endTime11) + "ms");    //输出程序运行时间
+
+
                         //9.内涂记录PDF
                         IdCoatRecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
                         IdCoatRecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
+
+                        long endTime13 = System.currentTimeMillis();
+                        System.out.println("程序运行时间13：" + (endTime13 - endTime12) + "ms");    //输出程序运行时间
+
                         //10.内涂检验记录PDF
                         IdCoatInspectionRecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
                         IdCoatInspectionRecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
+
+                        long endTime14 = System.currentTimeMillis();
+                        System.out.println("程序运行时间14：" + (endTime14 - endTime13) + "ms");    //输出程序运行时间
+
                         //11.内涂终验记录PDF
                         IdFinalInspectionRecord(request,project_no,millInfo.getMill_no(),0,day_begin_time,day_end_time);
                         IdFinalInspectionRecord(request,project_no,millInfo.getMill_no(),1,night_begin_time,night_end_time);
+
+                        long endTime15 = System.currentTimeMillis();
+                        System.out.println("程序运行时间15：" + (endTime15 - endTime14) + "ms");    //输出程序运行时间
+
                         //最后分别融合外访和内防的白班集合和夜班集合
                         if(stationOdDayList.size()>0){
                             MergePDF.MergePDFs(stationOdDayList,pdfSetOdDayPath);
@@ -269,6 +329,8 @@ public class InspectionRecordPDFController {
                         stationIdNightList.clear();
                     }
                 }
+                long endTime15 = System.currentTimeMillis();
+                System.out.println("程序运行时间15：" + (endTime15 - startTime) + "ms");    //输出程序运行时间
                 Collections.sort(dayNightPdf);
                 zipName="upload/pdf/"+ResponseUtil.downLoadPdf(dayNightPdf,request,response);
                 //定时删除临时文件

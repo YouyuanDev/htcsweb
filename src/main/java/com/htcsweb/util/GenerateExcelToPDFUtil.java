@@ -197,6 +197,8 @@ public class GenerateExcelToPDFUtil {
                 //把datalist中的数据填到相应位置，由相关业务controller设置datalist数据
                 for(int i=0;dataList!=null&&i<dataList.size();i++){
                        Label label_data=(Label) dataList.get(i);
+                       String cont=label_data.getContents();
+                       if(cont!=null&&!cont.equals(""))
                         wsheet.addCell(label_data);
                 }
 
