@@ -1468,7 +1468,7 @@ public class InspectionRecordPDFController {
                     row++;
                     if(index%11==0){
                         createRecordPdfTitle(datalist,3,8,12,4,5,title_project_name,title_pipe_size,title_standard,title_coating_type,dayOrNight,begin_time);
-                        datalist.add(new Label(20,11,mill_name,wcf));
+                        datalist.add(new Label(11,20,mill_name,wcf));
                         newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
                         datalist.clear();
                         index=1;
@@ -1493,7 +1493,7 @@ public class InspectionRecordPDFController {
                 }
                 if(datalist.size()>0){
                     createRecordPdfTitle(datalist,3,8,12,4,5,title_project_name,title_pipe_size,title_standard,title_coating_type,dayOrNight,begin_time);
-                    datalist.add(new Label(20,11,mill_name,wcf));
+                    datalist.add(new Label(11,20,mill_name,wcf));
                     newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
                     datalist.clear();
                     index=1;
@@ -1517,7 +1517,7 @@ public class InspectionRecordPDFController {
                 }
             }else {
                 createRecordPdfTitle(datalist,3,8,12,4,5,title_project_name,title_pipe_size,title_standard,title_coating_type,dayOrNight,begin_time);
-                datalist.add(new Label(20,11,mill_name,wcf));
+                datalist.add(new Label(11,20,mill_name,wcf));
                 newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
                 datalist.clear();
                 if(newPdfName!=null){
@@ -1655,7 +1655,7 @@ public class InspectionRecordPDFController {
                     row++;
                     if(index%11==0){
                         createRecordPdfTitle(datalist,3,8,12,4,5,project_name,title_pipe_size,title_standard,title_coating_type,dayOrNight,begin_time);
-                        datalist.add(new Label(20,11,mill_name,wcf));
+                        datalist.add(new Label(11,20,mill_name,wcf));
                         newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
                         datalist.clear();
                         index=1;
@@ -1680,7 +1680,7 @@ public class InspectionRecordPDFController {
                 }
                 if(datalist.size()>0){
                     createRecordPdfTitle(datalist,3,8,12,4,5,project_name,title_pipe_size,title_standard,title_coating_type,dayOrNight,begin_time);
-                    datalist.add(new Label(20,11,mill_name,wcf));
+                    datalist.add(new Label(11,20,mill_name,wcf));
                     newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
                     datalist.clear();
                     index=1;
@@ -1704,7 +1704,7 @@ public class InspectionRecordPDFController {
                 }
             }else {
                 createRecordPdfTitle(datalist,3,8,12,4,5,project_name,title_pipe_size,title_standard,title_coating_type,dayOrNight,begin_time);
-                datalist.add(new Label(20,11,mill_name,wcf));
+                datalist.add(new Label(11,20,mill_name,wcf));
                 newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
                 datalist.clear();
                 if(newPdfName!=null){
@@ -1728,8 +1728,6 @@ public class InspectionRecordPDFController {
             e.printStackTrace();
         }
     }
-
-
     //填补空白Bug
     private void AddLastWhiteSpace(ArrayList<Label> datalist,String remark,WritableCellFormat wcf){
         datalist.add(new Label(2,20,remark,wcf));
