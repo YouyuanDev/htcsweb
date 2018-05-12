@@ -190,184 +190,192 @@ public class DailyProductionReportController {
                         external_coating=entity.getExternal_coating();internal_coating=entity.getInternal_coating();
                         for (String item:dateList){
                             //根据日期填充对应的tab
-                            // DailyProductionReport dailyReport=new DailyProductionReport();
                             //获取外防腐总数
-                            int res1=getTotalOdCoating(item,project_no,external_coating,internal_coating,od,wt);
+                            int odTotal=getTotalOdCoating(item,project_no,external_coating,internal_coating,od,wt);
                             //接收光管数量，长度
-                            int res2=0,res3=0;
+                            int bareTotal=0,bareLength=0;
                             //外涂总防腐数
-                            int res4=getTotalOdCoating(item,project_no,external_coating,internal_coating,od,wt);
-                            //外防腐合格数
+                            int odCoatingTotal=getTotalOdCoating(item,project_no,external_coating,internal_coating,od,wt);
+                            //外防腐合格数和长度
                             List<Object>odlist=getTotalQualifiedOdCoating(item,project_no,external_coating,internal_coating,od,wt);
-                            int res5=0;float res6=0;
+                            int odQualifiedTotal=0;float odQualifiedLength=0;
                             if(odlist!=null&&odlist.size()>0){
-                                res5=((Integer)odlist.get(0)).intValue();
+                                odQualifiedTotal=((Integer)odlist.get(0)).intValue();
                                 //合格长度
-                                res6=((Float)odlist.get(1)).floatValue();
+                                odQualifiedLength=((Float)odlist.get(1)).floatValue();
                             }
-                            BigDecimal b=new  BigDecimal(res6);
-                            res6=  b.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
+                            BigDecimal b=new  BigDecimal(odQualifiedLength);
+                            odQualifiedLength=  b.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
                             //外防目标合格数
-                            int res7=0;
+                            int odTargetQualifiedTotal=0;
                             //外防目标合格长度
-                            float res8=0f;
+                            float odTargetQualifiedLength=0;
                             //外防修补数
-                            int res9=getTotalCoatingRepair(item,project_no,external_coating,internal_coating,"od",od,wt);
+                            int odRepairTotal=getTotalCoatingRepair(item,project_no,external_coating,internal_coating,"od",od,wt);
                             //外防光管隔离数
-
-                            //List<String>bareList=getTotalBarePipeGrindingCutoff(item,project_no,external_coating,internal_coating,"od",od,wt);
-                            int res10=getTotalBarePipeGrindCutoffOfTime(item,project_no,external_coating,internal_coating,"od",od,wt);
+                            int odBareKeepApartTotal=getTotalBarePipeGrindCutoffOfTime(item,project_no,external_coating,internal_coating,"od",od,wt);
                             //外防光管隔离管修磨
-                            int res11=getTotalBarePipeGrindOfTime(item,project_no,external_coating,internal_coating,"od",od,wt);
+                            int odGrindBareKeepApartTotal=getTotalBarePipeGrindOfTime(item,project_no,external_coating,internal_coating,"od",od,wt);
                             //外防光管隔离管切管
-                            int res12=getTotalBarePipeCutoffOfTime(item,project_no,external_coating,internal_coating,"od",od,wt);
+                            int odCutBareKeepApartTotal=getTotalBarePipeCutoffOfTime(item,project_no,external_coating,internal_coating,"od",od,wt);
                             //外防涂层管废管数
-                            //List<String>wasteList=getTotalOdWastePipe(item,project_no,external_coating,internal_coating,od,wt);
-                            int res13=getTotalWastePipe(item,project_no,external_coating,internal_coating,"od",od,wt);
+                            int odScrapTotal=getTotalWastePipe(item,project_no,external_coating,internal_coating,"od",od,wt);
                             //外防涂层管废管处理
-                            int res14=getTotalHandleWastePipe(item,project_no,external_coating,internal_coating,"od",od,wt);
-
+                            int odScrapHandleTotal=getTotalHandleWastePipe(item,project_no,external_coating,internal_coating,"od",od,wt);
                             //获取内防腐总数
-                            int res15=getTotalIdCoating(item,project_no,external_coating,internal_coating,od,wt);
+                            int idTotal=getTotalIdCoating(item,project_no,external_coating,internal_coating,od,wt);
                             List<Object>idlist= getTotalQualifiedIdCoating(item,project_no,external_coating,internal_coating,od,wt);
-                            int res16=0;float res17=0;
+                            //内防腐合格数和长度
+                            int idQualifiedTotal=0;float idQualifiedLength=0;
                             if(idlist!=null&&idlist.size()>0){
-                                 res16=((Integer)odlist.get(0)).intValue();
+                                idQualifiedTotal=((Integer)odlist.get(0)).intValue();
                                 //合格长度
-                                 res17=((Float)odlist.get(1)).floatValue();
+                                idQualifiedLength=((Float)odlist.get(1)).floatValue();
                             }
-                            BigDecimal b1=new  BigDecimal(res17);
-
-                            res17=  b1.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
+                            BigDecimal b1=new  BigDecimal(idQualifiedLength);
+                            idQualifiedLength=  b1.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
                             //内防目标合格数
-                            int res18=0;
+                            int idTargetQualifiedTotal=0;
                             //内防目标合格长度
-                            float res19=0f;
+                            float idTargetQualifiedLength=0f;
                             //内防修补数
-                            int res20=getTotalCoatingRepair(item,project_no,external_coating,internal_coating,"id",od,wt);
+                            int idRepairTotal=getTotalCoatingRepair(item,project_no,external_coating,internal_coating,"id",od,wt);
                             //内防光管隔离数
-                            int res21=getTotalBarePipeGrindCutoffOfTime(item,project_no,external_coating,internal_coating,"id",od,wt);
+                            int idBareKeepApartTotal=getTotalBarePipeGrindCutoffOfTime(item,project_no,external_coating,internal_coating,"id",od,wt);
                             //内防光管隔离管修磨
-                            int res22=getTotalBarePipeGrindOfTime(item,project_no,external_coating,internal_coating,"id",od,wt);
+                            int idGrindBareKeepApartTotal=getTotalBarePipeGrindOfTime(item,project_no,external_coating,internal_coating,"id",od,wt);
                             //内防光管隔离管切管
-                            int res23=getTotalBarePipeCutoffOfTime(item,project_no,external_coating,internal_coating,"id",od,wt);
+                            int idCutBareKeepApartTotal=getTotalBarePipeCutoffOfTime(item,project_no,external_coating,internal_coating,"id",od,wt);
                             //内防涂层管废管数
-                            //List<String>wasteIdList=getTotalIdWastePipe(item,project_no,external_coating,internal_coating,od,wt);
-                            int res24=getTotalWastePipe(item,project_no,external_coating,internal_coating,"id",od,wt);
+                            int idScrapTotal=getTotalWastePipe(item,project_no,external_coating,internal_coating,"id",od,wt);
                             //内防涂层管废管处理
-                            int res25=getTotalHandleWastePipe(item,project_no,external_coating,internal_coating,"id",od,wt);
+                            int idScrapHandleTotal=getTotalHandleWastePipe(item,project_no,external_coating,internal_coating,"id",od,wt);
                             //试验管白班
                             List<PipeSamplingRecord>sampleDayList=getPipeSamplingInfo(item,0,project_no,external_coating,internal_coating,od,wt);
-                            String res26=" ";float  res27=0f,res28=0f;
-                            if(sampleDayList!=null){
+                            //白班试验管编号、原始长度、切样长度
+                            String samplePipeNoOfDay=" ";float  samplePipeOriginalLengthOfDay=0f,samplePipeCutLengthOfDay=0f;
+                            if(sampleDayList!=null&&sampleDayList.size()>0){
                                 PipeSamplingRecord record=sampleDayList.get(0);
-                                res26=record.getPipe_no();
-                                res27=record.getOriginal_pipe_length();
-                                BigDecimal b2=new  BigDecimal(res27);
-                                res27=b2.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
-                                res28=record.getCut_off_length();
-                                BigDecimal b3=new  BigDecimal(res28);
-                                res28=b3.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
+                                samplePipeNoOfDay=record.getPipe_no();
+                                samplePipeOriginalLengthOfDay=record.getOriginal_pipe_length();
+                                BigDecimal b2=new  BigDecimal(samplePipeOriginalLengthOfDay);
+                                samplePipeOriginalLengthOfDay=b2.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
+                                samplePipeCutLengthOfDay=record.getCut_off_length();
+                                BigDecimal b3=new  BigDecimal(samplePipeCutLengthOfDay);
+                                samplePipeCutLengthOfDay=b3.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
                             }
-                            //试验管夜班
+                            //试验管数量
+                            int samplePipeTotal=0;
                             List<PipeSamplingRecord>sampleNightList=getPipeSamplingInfo(item,1,project_no,external_coating,internal_coating,od,wt);
-                            String res29=" ";float  res30=0f,res31=0f;
+                            //夜班试验管编号、原始长度、切样长度
+                            String samplePipeNoOfNight=" ";float  samplePipeOriginalLengthOfNight=0f,samplePipeCutLengthOfNight=0f;
                             if(sampleDayList!=null){
                                 PipeSamplingRecord record=sampleDayList.get(0);
-                                res29=record.getPipe_no();
-                                res30=record.getOriginal_pipe_length();
-                                BigDecimal b4=new  BigDecimal(res30);
-                                res30=b4.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
-                                res31=record.getCut_off_length();
-                                BigDecimal b5=new  BigDecimal(res31);
-                                res31=b5.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
+                                samplePipeNoOfNight=record.getPipe_no();
+                                samplePipeOriginalLengthOfNight=record.getOriginal_pipe_length();
+                                BigDecimal b4=new  BigDecimal(samplePipeOriginalLengthOfNight);
+                                samplePipeOriginalLengthOfNight=b4.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
+                                samplePipeCutLengthOfNight=record.getCut_off_length();
+                                BigDecimal b5=new  BigDecimal(samplePipeCutLengthOfNight);
+                                samplePipeCutLengthOfNight=b5.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
+                                samplePipeTotal++;
                             }
                             //管段重切
-                            //List<String>cutList=getPipeBevelOfDay(item,project_no,external_coating,internal_coating,od,wt);
-
-                            int res32=getTotalOfSampleCutoff(item,project_no,external_coating,internal_coating,od,wt);
-                            int res33=getTotalOfBarePipeGrindCutOff(item,project_no,external_coating,internal_coating,od,wt);
-                            //int res32=Integer.parseInt(cutList.get(1));
-                            //发运成品管
-                            int res34=0;
-                            float res35=0f;
+                            //需切斜管数量(样管切斜＋修补切斜)
+                            int sampleCutoffTotal=getTotalOfSampleCutoff(item,project_no,external_coating,internal_coating,od,wt);
+                            int grindCutOffTotal=getTotalOfBarePipeGrindCutOff(item,project_no,external_coating,internal_coating,od,wt);
+                            int cutOffTotal=sampleCutoffTotal+grindCutOffTotal;
+                            //发运成品管数量
+                            int finishPipeTotal=0;
+                            //发运成品管长度
+                            float finishPipeLength=0f;
                             //向日报中填充数据
                             //首先判断日报表中是否有此数据，如果没有则添加，否则进行更新,参数(time,project_no,od_wt,外防类型)
                             List<DailyProductionReport>list1=dailyProductionReportDao.getDailyReportByParams(project_no,external_coating,od_wt,timeformat.parse(item));
                             if(list1.size()>0){
                                 //更新
-                                int id=list1.get(0).getId();
+                                //int id=list1.get(0).getId();
                                 DailyProductionReport report=list1.get(0);
-                                report.setBare_pipe_count(0);
-                                report.setBare_pipe_length(0);
-                                report.setOd_total_coated_count(res4);
-                                report.setOd_total_accepted_count(res5);
-                                report.setOd_aiming_accepted_count(res7);
-                                report.setOd_total_accepted_length(res6);
-                                report.setOd_repair_pipe_count(res9);
-                                report.setOd_bare_pipe_onhold_count(res10);
-                                report.setOd_bare_pipe_grinded_count(res11);
-                                report.setOd_bare_pipe_cut_count(res12);
-                                report.setOd_coated_pipe_rejected_count(res13);
-                                report.setOd_coated_pipe_strip_count(res14);
-                                report.setId_total_accepted_count(res15);
-                                report.setId_aiming_accepted_count(0);
-                                report.setId_total_accepted_length(res17);
-                                report.setId_aiming_total_accepted_length(0);
-                                report.setId_repair_pipe_count(res20);
-                                report.setId_bare_pipe_onhold_count(res21);
-                                report.setId_bare_pipe_grinded_count(res22);
-                                report.setId_bare_pipe_cut_count(res23);
-                                report.setId_coated_pipe_rejected_count(res24);
-                                report.setId_coated_pipe_strip_count(res25);
-                                report.setOd_test_pipe_no_dayshift(res26);
-                                report.setOd_test_pipe_length_before_cut_dayshift(res27);
-                                report.setOd_test_pipe_cutting_length_dayshift(res28);
-                                report.setOd_test_pipe_no_nightshift(res29);
-                                report.setOd_test_pipe_length_before_cut_nightshift(res30);
-                                report.setOd_test_pipe_cutting_length_nightshift(res31);
-                                report.setOd_test_pipe_count(res32);
-                                report.setRebevel_pipe_count(res33);
-                                report.setPipe_accepted_count_after_rebevel(res33);
-                                report.setPipe_delivered_count(0);
-                                report.setPipe_delivered_length(0);
+                                report.setBare_pipe_count(bareTotal);
+                                report.setBare_pipe_length(bareLength);
+                                report.setOd_total_coated_count(odTotal);
+                                report.setOd_total_accepted_count(odQualifiedTotal);
+                                report.setOd_total_accepted_length(odQualifiedLength);
+                                report.setOd_aiming_accepted_count(odTargetQualifiedTotal);
+                                report.setOd_aiming_total_accepted_length(odTargetQualifiedLength);
+                                report.setOd_repair_pipe_count(odRepairTotal);
+                                report.setOd_bare_pipe_onhold_count(odBareKeepApartTotal);
+                                report.setOd_bare_pipe_grinded_count(odGrindBareKeepApartTotal);
+                                report.setOd_bare_pipe_cut_count(odCutBareKeepApartTotal);
+                                report.setOd_coated_pipe_rejected_count(odScrapTotal);
+                                report.setOd_coated_pipe_strip_count(odScrapHandleTotal);
+
+                                report.setId_total_coated_count(idTotal);
+                                report.setId_total_accepted_count(idQualifiedTotal);
+                                report.setId_total_accepted_length(idQualifiedLength);
+                                report.setId_aiming_accepted_count(idTargetQualifiedTotal);
+                                report.setId_aiming_total_accepted_length(idTargetQualifiedLength);
+                                report.setId_repair_pipe_count(idRepairTotal);
+                                report.setId_bare_pipe_onhold_count(idBareKeepApartTotal);
+                                report.setId_bare_pipe_grinded_count(idGrindBareKeepApartTotal);
+                                report.setId_bare_pipe_cut_count(idCutBareKeepApartTotal);
+                                report.setId_coated_pipe_rejected_count(idScrapTotal);
+                                report.setId_coated_pipe_strip_count(idScrapHandleTotal);
+
+                                report.setOd_test_pipe_no_dayshift(samplePipeNoOfDay);
+                                report.setOd_test_pipe_length_before_cut_dayshift(samplePipeOriginalLengthOfDay);
+                                report.setOd_test_pipe_cutting_length_dayshift(samplePipeCutLengthOfDay);
+                                report.setOd_test_pipe_no_nightshift(samplePipeNoOfNight);
+                                report.setOd_test_pipe_length_before_cut_nightshift(samplePipeOriginalLengthOfNight);
+                                report.setOd_test_pipe_cutting_length_nightshift(samplePipeCutLengthOfNight);
+
+                                report.setOd_test_pipe_count(samplePipeTotal);
+                                report.setRebevel_pipe_count(cutOffTotal);
+                                report.setPipe_accepted_count_after_rebevel(grindCutOffTotal);
+                                report.setPipe_delivered_count(finishPipeTotal);
+                                report.setPipe_delivered_length(finishPipeLength);
                                 dailyProductionReportDao.updateDailyProductionReport(report);
                             }else{
                                 //添加
                                 DailyProductionReport report=new DailyProductionReport();
-                                report.setBare_pipe_count(0);
-                                report.setBare_pipe_length(0);
-                                report.setOd_total_coated_count(res4);
-                                report.setOd_total_accepted_count(res5);
-                                report.setOd_aiming_accepted_count(res7);
-                                report.setOd_total_accepted_length(res6);
-                                report.setOd_repair_pipe_count(res9);
-                                report.setOd_bare_pipe_onhold_count(res10);
-                                report.setOd_bare_pipe_grinded_count(res11);
-                                report.setOd_bare_pipe_cut_count(res12);
-                                report.setOd_coated_pipe_rejected_count(res13);
-                                report.setOd_coated_pipe_strip_count(res14);
-                                report.setId_total_accepted_count(res15);
-                                report.setId_aiming_accepted_count(0);
-                                report.setId_total_accepted_length(res17);
-                                report.setId_aiming_total_accepted_length(0);
-                                report.setId_repair_pipe_count(res20);
-                                report.setId_bare_pipe_onhold_count(res21);
-                                report.setId_bare_pipe_grinded_count(res22);
-                                report.setId_bare_pipe_cut_count(res23);
-                                report.setId_coated_pipe_rejected_count(res24);
-                                report.setId_coated_pipe_strip_count(res25);
-                                report.setOd_test_pipe_no_dayshift(res26);
-                                report.setOd_test_pipe_length_before_cut_dayshift(res27);
-                                report.setOd_test_pipe_cutting_length_dayshift(res28);
-                                report.setOd_test_pipe_no_nightshift(res29);
-                                report.setOd_test_pipe_length_before_cut_nightshift(res30);
-                                report.setOd_test_pipe_cutting_length_nightshift(res31);
-                                report.setOd_test_pipe_count(res32);
-                                report.setRebevel_pipe_count(res33);
-                                report.setPipe_accepted_count_after_rebevel(res33);
-                                report.setPipe_delivered_count(0);
-                                report.setPipe_delivered_length(0);
+                                report.setBare_pipe_count(bareTotal);
+                                report.setBare_pipe_length(bareLength);
+                                report.setOd_total_coated_count(odTotal);
+                                report.setOd_total_accepted_count(odCoatingTotal);
+                                report.setOd_aiming_accepted_count(odTargetQualifiedTotal);
+                                report.setOd_aiming_total_accepted_length(odTargetQualifiedLength);
+                                report.setOd_total_accepted_length(odQualifiedLength);
+                                report.setOd_repair_pipe_count(odRepairTotal);
+                                report.setOd_bare_pipe_onhold_count(odBareKeepApartTotal);
+                                report.setOd_bare_pipe_grinded_count(odGrindBareKeepApartTotal);
+                                report.setOd_bare_pipe_cut_count(odCutBareKeepApartTotal);
+                                report.setOd_coated_pipe_rejected_count(odScrapTotal);
+                                report.setOd_coated_pipe_strip_count(odScrapHandleTotal);
+
+                                report.setId_total_coated_count(idTotal);
+                                report.setId_total_accepted_count(idQualifiedTotal);
+                                report.setId_total_accepted_length(idQualifiedLength);
+                                report.setId_aiming_accepted_count(idTargetQualifiedTotal);
+                                report.setId_aiming_total_accepted_length(idTargetQualifiedLength);
+                                report.setId_repair_pipe_count(idRepairTotal);
+                                report.setId_bare_pipe_onhold_count(idBareKeepApartTotal);
+                                report.setId_bare_pipe_grinded_count(idGrindBareKeepApartTotal);
+                                report.setId_bare_pipe_cut_count(idCutBareKeepApartTotal);
+                                report.setId_coated_pipe_rejected_count(idScrapTotal);
+                                report.setId_coated_pipe_strip_count(idScrapHandleTotal);
+
+                                report.setOd_test_pipe_no_dayshift(samplePipeNoOfDay);
+                                report.setOd_test_pipe_length_before_cut_dayshift(samplePipeOriginalLengthOfDay);
+                                report.setOd_test_pipe_cutting_length_dayshift(samplePipeCutLengthOfDay);
+                                report.setOd_test_pipe_no_nightshift(samplePipeNoOfNight);
+                                report.setOd_test_pipe_length_before_cut_nightshift(samplePipeOriginalLengthOfNight);
+                                report.setOd_test_pipe_cutting_length_nightshift(samplePipeCutLengthOfNight);
+
+                                report.setOd_test_pipe_count(samplePipeTotal);
+                                report.setRebevel_pipe_count(cutOffTotal);
+                                report.setPipe_accepted_count_after_rebevel(grindCutOffTotal);
+                                report.setPipe_delivered_count(finishPipeTotal);
+                                report.setPipe_delivered_length(finishPipeLength);
                                 dailyProductionReportDao.addDailyProductionReport(report);
                             }
                         }
