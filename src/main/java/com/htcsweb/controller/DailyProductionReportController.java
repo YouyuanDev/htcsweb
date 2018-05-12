@@ -197,6 +197,7 @@ public class DailyProductionReportController {
                         od_wt=String.valueOf(od)+"*"+String.valueOf(wt);
                         external_coating=entity.getExternal_coating();internal_coating=entity.getInternal_coating();
                         for (String item:dateList){
+                            System.out.println("od="+od+":wt="+wt+"------------------------");
                             //根据日期填充对应的tab
                             //获取外防腐总数
                             int odTotal=getTotalOdCoating(item,project_no,external_coating,internal_coating,od,wt);
@@ -394,6 +395,7 @@ public class DailyProductionReportController {
                     }
                 }
             }
+            flag="success";
         }catch (Exception e){
             e.printStackTrace();
             flag="error";

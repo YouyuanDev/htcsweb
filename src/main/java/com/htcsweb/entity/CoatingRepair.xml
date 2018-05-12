@@ -73,9 +73,8 @@
                 <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
             </if>
             <if test="end_time!=null">
-                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d 23:59:59')]]>
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')<DATE_FORMAT(DATE_ADD(#{end_time},INTERVAL 1 DAY),'%Y-%m-%d 00:00:00')]]>
             </if>
-
         </where>
     </select>
 
@@ -108,7 +107,7 @@
                 <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
             </if>
             <if test="end_time!=null">
-                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d 23:59:59')]]>
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')<DATE_FORMAT(DATE_ADD(#{end_time},INTERVAL 1 DAY),'%Y-%m-%d 00:00:00')]]>
             </if>
 
         </where>
@@ -138,17 +137,13 @@
             <if test="internal_coating!=null">
                 AND  c.internal_coating=#{internal_coating}
             </if>
-            <if test="od>0">
-                AND  c.od=#{od}
-            </if>
-            <if test="wt>0">
-                AND c.wt=#{wt}
-            </if>
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
             <if test="begin_time!=null">
                 <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
             </if>
             <if test="end_time!=null">
-                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
             </if>
         </where>
     </select>
@@ -174,17 +169,13 @@
             <if test="internal_coating!=null">
                 AND c.internal_coating=#{internal_coating}
             </if>
-            <if test="od>0">
-                AND c.od=#{od}
-            </if>
-            <if test="wt>0">
-                AND c.wt=#{wt}
-            </if>
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
             <if test="begin_time!=null">
                 <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
             </if>
             <if test="end_time!=null">
-                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
             </if>
         </where>
     </select>

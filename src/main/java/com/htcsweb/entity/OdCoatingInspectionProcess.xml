@@ -43,7 +43,7 @@
                 <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
             </if>
             <if test="end_time!=null">
-                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d 23:59:59')]]>
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')<DATE_FORMAT(DATE_ADD(#{end_time},INTERVAL 1 DAY),'%Y-%m-%d 00:00:00')]]>
             </if>
         </where>
         ORDER BY o.id DESC
@@ -77,7 +77,7 @@
                 <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
             </if>
             <if test="end_time!=null">
-                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d 23:59:59')]]>
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')<DATE_FORMAT(DATE_ADD(#{end_time},INTERVAL 1 DAY),'%Y-%m-%d 00:00:00')]]>
             </if>
         </where>
     </select>
@@ -97,7 +97,7 @@
             <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
         </if>
         <if test="end_time!=null">
-            <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
         </if>
         ORDER BY o.id DESC
     </select>
@@ -112,13 +112,13 @@
             AND c.internal_coating=#{internal_coating}
             AND p.status='odstrip1'
             AND pro.project_no=#{project_no}
-            AND c.od=#{od}
-            and c.wt=#{wt}
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
             <if test="begin_time!=null">
                 <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
             </if>
             <if test="end_time!=null">
-                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<=DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
             </if>
         </where>
     </select>
