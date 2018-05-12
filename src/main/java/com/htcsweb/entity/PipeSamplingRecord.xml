@@ -125,8 +125,8 @@
             </if>
         </where>
     </select>
-    <!--获取需切斜的个数-->
-    <select id="getTotalCutOffOfSample" resultType="java.lang.Integer">
+    <!--获取样管切割的个数-->
+    <select id="getSampleCutoffCount" resultType="java.lang.Integer">
         SELECT COUNT(DISTINCT(o.pipe_no)) from pipe_sampling_record o
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no

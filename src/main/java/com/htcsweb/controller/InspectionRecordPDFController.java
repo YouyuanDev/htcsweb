@@ -1282,19 +1282,25 @@ public class InspectionRecordPDFController {
                 int index=1,row=0,flag=1;
                 boolean isHaveTitle=true;
                 int res0=0,res1=0,res2=0,res3=0,res4=0;
+                int odCoatingRejectCout=0;
+                int idCoatingRejectCout=0;
+                int BarePipeCutoffCount=0;
                 //获取班次内防或者外防的防腐数,获取班次内防或者外防的合格防腐数
                 if(type==0){
                     res0=odFinalInspectionProcessDao.getTotalOdOfTime(project_no,mill_no,null,null,0,0,begin_time,end_time);
                     res1=odFinalInspectionProcessDao.getTotalOdQualifiedOfTime(project_no,mill_no,null,null,0,0,begin_time,end_time);
-                    res2=coatingRepairDao.getTotalCoatingRepairOfTime(project_no,mill_no,null,null,"od",0,0,begin_time,end_time);
-                    res3=coatingStripDao.getTotalStripOfTime(project_no,mill_no,null,null,"od",0,0,begin_time,end_time);
-                    res4=barePipeGrindingCutoffRecordDao.getTotalBarePipeGrindCutoffOfTime(project_no,mill_no,null,null,"od",0,0,begin_time,end_time);
+                    res2=coatingRepairDao.getCoatingRepairCount(project_no,mill_no,null,null,"od",0,0,begin_time,end_time);
+
+                    //需要修改下面
+                    //odCoatingRejectCout=coatingStripDao.getODCoatingRejectedPipe(project_no,mill_no,null,null,"od",0,0,begin_time,end_time);
+
+                    BarePipeCutoffCount=barePipeGrindingCutoffRecordDao.getBarePipeCutoffCount(project_no,mill_no,null,null,"od",0,0,begin_time,end_time);
                 }else{
                     res0=idFinalInspectionProcessDao.getTotalIdOfTime(project_no,mill_no,null,null,0,0,begin_time,end_time);
                     res1=idFinalInspectionProcessDao.getTotalIdQualifiedOfTime(project_no,mill_no,null,null,0,0,begin_time,end_time);
-                    res2=coatingRepairDao.getTotalCoatingRepairOfTime(project_no,mill_no,null,null,"id",0,0,begin_time,end_time);
-                    res3=coatingStripDao.getTotalStripOfTime(project_no,mill_no,null,null,"id",0,0,begin_time,end_time);
-                    res4=barePipeGrindingCutoffRecordDao.getTotalBarePipeGrindCutoffOfTime(project_no,mill_no,null,null,"id",0,0,begin_time,end_time);
+                    res2=coatingRepairDao.getCoatingRepairCount(project_no,mill_no,null,null,"id",0,0,begin_time,end_time);
+                    //idCoatingRejectCout=coatingStripDao.getIDCoatingRejectedPipe(project_no,mill_no,null,null,"id",0,0,begin_time,end_time);
+                    BarePipeCutoffCount=barePipeGrindingCutoffRecordDao.getBarePipeCutoffCount(project_no,mill_no,null,null,"id",0,0,begin_time,end_time);
                 }
                 for (int i=0;i<list.size();i++){
                     if(list.size()>=labPipenoList.size()){
@@ -1371,12 +1377,12 @@ public class InspectionRecordPDFController {
         int maxSize=0;
         try{
             if(type==0){
-                repairList=coatingRepairDao.getCoatingRepairOfTime(project_no,mill_no,null,null,"od",0,0,begin_time,end_time);
+                repairList=coatingRepairDao.getCoatingRepairInfo(project_no,mill_no,null,null,"od",0,0,begin_time,end_time);
                 stripList=coatingStripDao.getStripOfTime(project_no,mill_no,null,null,"od",0,0,begin_time,end_time);
 
                 //bareList=barePipeGrindingCutoffRecordDao.getBarePipeCutoffOfTime(project_no,mill_no,null,null,"od",0,0,begin_time,end_time);
             }else{
-                repairList=coatingRepairDao.getCoatingRepairOfTime(project_no,mill_no,null,null,"id",0,0,begin_time,end_time);
+                repairList=coatingRepairDao.getCoatingRepairInfo(project_no,mill_no,null,null,"id",0,0,begin_time,end_time);
                 stripList=coatingStripDao.getStripOfTime(project_no,mill_no,null,null,"id",0,0,begin_time,end_time);
                 //bareList=barePipeGrindingCutoffRecordDao.getBarePipeCutoffOfTime(project_no,mill_no,null,null,"id",0,0,begin_time,end_time);
             }

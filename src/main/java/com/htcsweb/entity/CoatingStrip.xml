@@ -102,22 +102,87 @@
         ORDER BY o.id DESC
         limit #{skip},#{take}
     </select>
-    <!--获取扒皮数量-->
-    <select id="getTotalStripOfTime" resultType="java.lang.Integer">
-        SELECT count(DISTINCT(o.pipe_no)) from coating_strip_process o
+    <!--获取外防废管数量-->
+    <select id="getODCoatingRejectedPipe" resultType="java.lang.Integer">
+        select Count(pipe_no)  from  pipe_basic_info where pipe_no in
+        (
+        SELECT DISTINCT o.pipe_no from od_final_inspection_process o
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no
         left join project_info pro on c.project_no=pro.project_no
         <where>
+            AND o.result='2'
             <if test="project_no!=null and project_no!=''">
                 AND pro.project_no=#{project_no}
             </if>
             <if test="mill_no!=null and mill_no!=''">
                 AND o.mill_no=#{mill_no}
             </if>
-            <if test="odid!=null and odid!=''">
-                AND o.odid=#{odid}
+
+            <if test="external_coating!=null">
+                AND c.external_coating=#{external_coating}
             </if>
+            <if test="internal_coating!=null">
+                AND c.internal_coating=#{internal_coating}
+            </if>
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+        )
+        UNION
+        (
+        SELECT DISTINCT o.pipe_no from id_final_inspection_process o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+            AND o.result='2'
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no=#{project_no}
+            </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no=#{mill_no}
+            </if>
+
+            <if test="external_coating!=null">
+                AND c.external_coating=#{external_coating}
+            </if>
+            <if test="internal_coating!=null">
+                AND c.internal_coating=#{internal_coating}
+            </if>
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+        )
+    </select>
+
+    <!--获取内防废管数量-->
+    <select id="getIDCoatingRejectedPipe" resultType="java.lang.Integer">
+        SELECT count(o.pipe_no) from id_final_inspection_process o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+            AND o.result='5'
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no=#{project_no}
+            </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no=#{mill_no}
+            </if>
+
             <if test="external_coating!=null">
                 AND c.external_coating=#{external_coating}
             </if>
@@ -134,14 +199,17 @@
             </if>
         </where>
     </select>
+
+
+
     <!--获取扒皮后合格的数-->
-    <select id="getTotalStripQuailfiedOfTime" resultType="java.lang.Integer">
+    <select id="getStripPipeAcceptedCount" resultType="java.lang.Integer">
         SELECT count(DISTINCT(o.pipe_no)) from coating_strip_process o
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no
         left join project_info pro on c.project_no=pro.project_no
         <where>
-            o.result='1'
+            AND o.result='1'
             <if test="project_no!=null and project_no!=''">
                 AND  pro.project_no=#{project_no}
             </if>

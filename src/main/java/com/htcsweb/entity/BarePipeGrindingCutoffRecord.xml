@@ -95,12 +95,15 @@
     </delete>
 
     <!--获取光管隔离数量-->
-    <select id="getTotalBarePipeGrindCutoffOfTime" resultType="java.lang.Integer">
+    <select id="getBarePipeOnholdCount" resultType="java.lang.Integer">
         SELECT count(DISTINCT(o.pipe_no)) from bare_pipe_grinding_cutoff_record o
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no
         left join project_info pro on c.project_no=pro.project_no
         <where>
+
+            AND p.status = 'onhold'
+
             <if test="project_no!=null and project_no!=''">
                 AND   pro.project_no=#{project_no}
             </if>
@@ -127,13 +130,13 @@
         </where>
     </select>
     <!--获取光管隔离修磨数量-->
-    <select id="getTotalBarePipeGrindOfTime" resultType="java.lang.Integer">
+    <select id="getBarePipeGrindingCount" resultType="java.lang.Integer">
         SELECT count(DISTINCT(o.pipe_no)) from bare_pipe_grinding_cutoff_record o
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no
         left join project_info pro on c.project_no=pro.project_no
         <where>
-            o.grinding_cutoff='G'
+            AND (o.grinding_cutoff='G' or o.grinding_cutoff='GC')
             <if test="project_no!=null and project_no!=''">
                 AND  pro.project_no=#{project_no}
             </if>
@@ -160,13 +163,13 @@
         </where>
     </select>
     <!--获取光管隔离切割数量-->
-    <select id="getTotalBarePipeCutoffOfTime" resultType="java.lang.Integer">
+    <select id="getBarePipeCutoffCount" resultType="java.lang.Integer">
         SELECT count(DISTINCT(o.pipe_no)) from bare_pipe_grinding_cutoff_record o
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no
         left join project_info pro on c.project_no=pro.project_no
         <where>
-            o.grinding_cutoff='C'
+            AND (o.grinding_cutoff='C' or o.grinding_cutoff='GC')
             <if test="project_no!=null and project_no!=''">
                 AND  pro.project_no=#{project_no}
             </if>
@@ -192,8 +195,8 @@
             </if>
         </where>
     </select>
-    <!--获取光管隔离信息-->
-    <select id="getBarePipeCutoffOfTime" resultType="com.htcsweb.entity.BarePipeGrindingCutoffRecord">
+    <!--获取光管隔离切割及修磨信息-->
+    <select id="getBarePipeGrindingCutoffInfo" resultType="com.htcsweb.entity.BarePipeGrindingCutoffRecord">
         SELECT o.* from bare_pipe_grinding_cutoff_record o
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no
@@ -224,14 +227,14 @@
             </if>
         </where>
     </select>
-    <!--获取瑕疵管需切斜的个数-->
-    <select id="getTotalCutoffOfBare" resultType="java.lang.Integer">
+    <!--获取瑕疵管需倒棱个数-->
+    <select id="getNeedRebevelPipeCount" resultType="java.lang.Integer">
         SELECT COUNT(DISTINCT(o.pipe_no)) from bare_pipe_grinding_cutoff_record o
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no
         left join project_info pro on c.project_no=pro.project_no
         <where>
-            (o.grinding_cutoff='C' or o.grinding_cutoff='GC')
+            AND (o.grinding_cutoff='C' or o.grinding_cutoff='GC')
             <if test="project_no!=null and project_no!=''">
                 AND  pro.project_no=#{project_no}
             </if>
