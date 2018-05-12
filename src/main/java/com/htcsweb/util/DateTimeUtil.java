@@ -21,7 +21,8 @@ public class DateTimeUtil {
             result.add(sdf.format(tempStart.getTime()));
             tempStart.add(Calendar.DAY_OF_YEAR, 1);
         }
-        result.add(sdf.format(end));
+        if(!result.contains(sdf.format(end)))
+          result.add(sdf.format(end));
         return result;
     }
     //获取传过来日期的下一天的日期字符串

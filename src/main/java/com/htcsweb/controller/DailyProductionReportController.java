@@ -82,11 +82,11 @@ public class DailyProductionReportController {
         try{
             if(begin_time!=null&&begin_time!=""){
                 beginTime=sdf.parse(begin_time);
-                System.out.println(beginTime.toString());
+                //System.out.println(beginTime.toString());
             }
             if(end_time!=null&&end_time!=""){
                 endTime=sdf.parse(end_time);
-                System.out.println(endTime.toString());
+                //System.out.println(endTime.toString());
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -185,26 +185,31 @@ public class DailyProductionReportController {
                     begin_time=sdf.parse(beginTime);
                     end_time=sdf.parse(endTime);
                     dateList= DateTimeUtil.getBetweenDates(begin_time,end_time);
+
                     //遍历日期
-                    List<ContractInfo>hashMapList=getAllContractInfo(project_no);
-                    List<GroupEntity>list=getTabGroup(hashMapList);
+                    List<GroupEntity>grouplist=getTabGroup(project_no);
                     //遍历排列组合，生成组合对应的tab
                     float od=0f,wt=0f;
                     String external_coating="",internal_coating="";
                     String od_wt="";
-                    for (GroupEntity entity:list){
+                     System.out.println(grouplist.size()+"]]]]]]]]]]]]]");
+                    for (GroupEntity entity:grouplist){
+                        for (String item:dateList){
+                            System.out.println(item+":"+entity.getOd()+":"+entity.getWt()+":"+entity.getExternal_coating()+":"+entity.getInternal_coating());
+                        }
+                    }
+                    for (GroupEntity entity:grouplist){
                         od=entity.getOd(); wt=entity.getWt();
                         od_wt=String.valueOf(od)+"*"+String.valueOf(wt);
                         external_coating=entity.getExternal_coating();internal_coating=entity.getInternal_coating();
                         for (String item:dateList){
                             //根据日期填充对应的tab
                             //获取外防腐总数
-                            System.out.println(item+":"+project_no+":"+external_coating+":"+internal_coating+":"+od+":"+wt+"-----------");
                             int odTotal=getTotalOdCoating(item,project_no,external_coating,internal_coating,od,wt);
                             //接收光管数量，长度
                             int bareTotal=0,bareLength=0;
-                            //外涂总防腐数
-                            int odCoatingTotal=getTotalOdCoating(item,project_no,external_coating,internal_coating,od,wt);
+                            System.out.println(item+":"+project_no+":"+external_coating+":"+internal_coating+":"+od+":"+wt+"-----------");
+                            System.out.println("外涂总防腐数："+odTotal);
                             //外防腐合格数和长度
                             CountSum countSum=getTotalQualifiedOdCoating(item,project_no,external_coating,internal_coating,od,wt);
                             int odQualifiedTotal=0;float odQualifiedLength=0;
@@ -226,7 +231,9 @@ public class DailyProductionReportController {
                             //外防涂层管废管数
                             int odScrapTotal=getTotalWastePipe(item,project_no,external_coating,internal_coating,"od",od,wt);
                             //外防涂层管废管处理
+
                             int odScrapHandleTotal=getTotalHandleWastePipe(item,project_no,external_coating,internal_coating,"od",od,wt);
+                           System.out.println(odScrapHandleTotal+"////////////////");
                             //获取内防腐总数
                             int idTotal=getTotalIdCoating(item,project_no,external_coating,internal_coating,od,wt);
                             CountSum countSum1= getTotalQualifiedIdCoating(item,project_no,external_coating,internal_coating,od,wt);
@@ -286,7 +293,7 @@ public class DailyProductionReportController {
                             //需切斜管数量(样管切斜＋修补切斜)
                             int sampleCutoffTotal=getTotalOfSampleCutoff(item,project_no,external_coating,internal_coating,od,wt);
                             int grindCutOffTotal=getTotalOfBarePipeGrindCutOff(item,project_no,external_coating,internal_coating,od,wt);
-                            System.out.println(sampleCutoffTotal+":"+grindCutOffTotal+"----------------");
+                            //System.out.println(sampleCutoffTotal+":"+grindCutOffTotal+"----------------");
                             int cutOffTotal=sampleCutoffTotal+grindCutOffTotal;
                             //发运成品管数量
                             int finishPipeTotal=0;
@@ -295,6 +302,7 @@ public class DailyProductionReportController {
                             //向日报中填充数据
                             //首先判断日报表中是否有此数据，如果没有则添加，否则进行更新,参数(time,project_no,od_wt,外防类型)
                             List<DailyProductionReport>list1=dailyProductionReportDao.getDailyReportByParams(project_no,external_coating,od_wt,sdf.parse(item));
+                            System.out.println(odScrapHandleTotal+"呗、、、、、、、、、、、、、、");
                             if(list1.size()>0){
                                 //更新
                                 //int id=list1.get(0).getId();
@@ -312,7 +320,6 @@ public class DailyProductionReportController {
                                 report.setOd_bare_pipe_cut_count(odCutBareKeepApartTotal);
                                 report.setOd_coated_pipe_rejected_count(odScrapTotal);
                                 report.setOd_coated_pipe_strip_count(odScrapHandleTotal);
-
                                 report.setId_total_coated_count(idTotal);
                                 report.setId_total_accepted_count(idQualifiedTotal);
                                 report.setId_total_accepted_length(idQualifiedLength);
@@ -349,7 +356,7 @@ public class DailyProductionReportController {
                                 report.setBare_pipe_count(bareTotal);
                                 report.setBare_pipe_length(bareLength);
                                 report.setOd_total_coated_count(odTotal);
-                                report.setOd_total_accepted_count(odCoatingTotal);
+                                report.setOd_total_accepted_count(odQualifiedTotal);
                                 report.setOd_aiming_accepted_count(odTargetQualifiedTotal);
                                 report.setOd_aiming_total_accepted_length(odTargetQualifiedLength);
                                 report.setOd_total_accepted_length(odQualifiedLength);
@@ -389,7 +396,10 @@ public class DailyProductionReportController {
                                 report.setProject_no(project_no);
                                 report.setOd_coating_type(external_coating);
                                 report.setOd_wt(od_wt);
-                                dailyProductionReportDao.addDailyProductionReport(report);
+
+                                System.out.println(report.getOd_total_coated_count()+"++++++++++++++++++++++++++");
+                                 int result=dailyProductionReportDao.addDailyProductionReport(report);
+                                System.out.println("执行结果++++++++++++++++++++++++++"+result);
                             }
                         }
                     }
@@ -404,54 +414,24 @@ public class DailyProductionReportController {
     }
     //
 
-    //根据项目编号查找该项目中所有的合同
-    private List<ContractInfo> getAllContractInfo(String project_no){
-          List<ContractInfo>list=contractInfoDao.getAllContractInfoByProjectNo(project_no);
-          return list;
-    }
-    //生成tab的排列组合,根据od-wt,external_coating,internal_coating进行组合
-    private List<GroupEntity>getTabGroup(List<ContractInfo>contractInfoList){
-        List<GroupEntity>tabGroupList=new ArrayList<>();//od-wt,external_coating,internal_coating组合
-        List<String>odWtStrList=new ArrayList<>();//od-wt组合
-        List<HashMap<String,String>>odwtNewList=new ArrayList<>();
-        List<String>externalList=new ArrayList<>();//外防组合
-        List<String>internalList=new ArrayList<>();//内防组合
-        String odwtKey="",odwtValue="";
-        for (ContractInfo item:contractInfoList){
-           //获取od-wt的组合数
-            odwtKey =String.valueOf(item.getOd());
-            odwtValue=String.valueOf(item.getWt());
-            if(!odWtStrList.contains(odwtKey+"*"+odwtValue)){
-               HashMap<String,String>tempMap=new HashMap<>();
-               tempMap.put("od",String.valueOf(item.getOd()));
-               tempMap.put("wt",String.valueOf(item.getWt()));
-               odwtNewList.add(tempMap);
-               odWtStrList.add(String.valueOf(item.getOd())+"*"+String.valueOf(item.getWt()));
-            }
-            //获取外防组合数
-            if(!externalList.contains(String.valueOf(item.getExternal_coating()))){
-                   externalList.add(String.valueOf(item.getExternal_coating()));
-            }
 
-            //获取内防组合数
-            if(!internalList.contains(String.valueOf(item.getInternal_coating()))){
-                internalList.add(String.valueOf(item.getInternal_coating()));
+    //生成tab的排列组合,根据od-wt,external_coating,internal_coating进行组合
+    private List<GroupEntity>getTabGroup(String project_no){
+        List<GroupEntity>tabGroupList=new ArrayList<>();
+        List<ContractInfo>list=contractInfoDao.getAllContractInfoByProjectNo(project_no);
+        List<String> GroupList=new ArrayList<>();
+        for (ContractInfo item:list){
+            if(!GroupList.contains(item.getOd()+item.getWt()+item.getExternal_coating()+item.getInternal_coating())){
+                GroupList.add(item.getOd()+item.getWt()+item.getExternal_coating()+item.getInternal_coating());
+                GroupEntity entity=new GroupEntity();
+                entity.setOd(item.getOd());
+                entity.setWt(item.getWt());
+                entity.setExternal_coating(item.getExternal_coating());
+                entity.setInternal_coating(item.getInternal_coating());
+                tabGroupList.add(entity);
             }
         }
-        for (HashMap<String,String>item:odwtNewList){
-                odwtKey = item.get("od");
-                odwtValue=item.get("wt");
-                for (String item1:externalList){
-                    for (String item2:internalList){
-                        GroupEntity entity=new GroupEntity();
-                        entity.setOd(Float.parseFloat(odwtKey));
-                        entity.setWt(Float.parseFloat(odwtValue));
-                        entity.setExternal_coating(item1);
-                        entity.setInternal_coating(item2);
-                        tabGroupList.add(entity);
-                    }
-                }
-        }
+
         return tabGroupList;
     }
 
@@ -484,8 +464,9 @@ public class DailyProductionReportController {
             if(list1!=null&&list1.size()>0){
                 HashMap<String,Object>hs=list1.get(0);
                 if(hs!=null){
-                    System.out.println(hs.get("odtotalcount").toString()+"－－－－－－－－");
+                    //System.out.println(hs.get("odtotalcount").toString()+"－－－－－－－－");
                     countSum.count=((Long) hs.get("odtotalcount")).intValue();
+                    System.out.println(countSum.count+"外防腐合格数");
                     if(hs.get("odtotallength")!=null){
                         countSum.sum=((Double) (hs.get("odtotallength"))).floatValue();
                     }
@@ -561,7 +542,9 @@ public class DailyProductionReportController {
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            coatingStripDao.getStripOfTime(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
+            List<CoatingStrip> lt= coatingStripDao.getStripOfTime(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
+            if(lt!=null)
+                total=lt.size();
         }catch (Exception e){
             e.printStackTrace();
         }finally {
@@ -572,11 +555,12 @@ public class DailyProductionReportController {
     //8.获取废管处理数量
     private int getTotalHandleWastePipe(String now,String project_no,String external_coating,String internal_coating,String odid,float od,float wt){
         String nextday=DateTimeUtil.getNextDay(now);
+        System.out.println(now+":"+nextday+":"+project_no+":"+external_coating+":"+internal_coating+":"+od+":"+wt+":"+odid+"LLLLLLLLLLLLLLLLL");
         int total=0;
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            coatingStripDao.getTotalStripQuailfiedOfTime(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
+            total=coatingStripDao.getTotalStripQuailfiedOfTime(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
         }finally {

@@ -110,8 +110,8 @@
         left join contract_info c on p.contract_no=c.contract_no
         left join project_info pro on c.project_no=pro.project_no
         <where>
-            c.internal_coating=#{internal_coating}
-            AND  c.internal_coating=#{internal_coating}
+            c.external_coating=#{external_coating}
+            AND c.internal_coating=#{internal_coating}
             AND pro.project_no=#{project_no}
             AND format(c.od,3)=format(#{od},3)
             AND format(c.wt,3)=format(#{wt},3)
