@@ -117,7 +117,7 @@
             <if test="external_coating!=null and external_coating!=''">
                 AND  c.external_coating=#{external_coating}
             </if>
-            <if test="external_coating!=null and external_coating!=''">
+            <if test="internal_coating!=null and internal_coating!=''">
                 AND c.internal_coating=#{internal_coating}
             </if>
             <if test="project_no!=null and project_no!=''">
