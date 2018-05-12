@@ -213,12 +213,12 @@ public class InspectionRecordPDFController {
                 //5.－－－－－－－－获取所有规格集合、涂层类型
                 getStandardAndCoatingTypeList(project_no);
 
-                int totalPDFCount=listDate.size()*millList.size()*standardList.size()*shiftList.size();
+                int totalPDFCount=listDate.size()*millList.size()*contractInfoList.size()*shiftList.size();
                 int n=0;
                 HttpSession session = request.getSession();
                 session.setAttribute("pdfProgress", String.valueOf(0));
 
-                System.out.println("分厂数量="+millList.size()+",日期区间="+listDate.size()+",规格="+standardList.size()+",外防涂层类型＝"+odCoatingTypeList.size());
+                System.out.println("分厂数量="+millList.size()+",日期区间="+listDate.size()+",规格="+contractInfoList.size()+",外防涂层类型＝"+odCoatingTypeList.size());
                 String pipe_size="";
                 //6.-------开始生成笛卡尔集pdf，并填充pdf
                 for (MillInfo millInfo:millList){//分厂
@@ -234,8 +234,6 @@ public class InspectionRecordPDFController {
                                     finish_time=timeformat.parse(DateTimeUtil.getNextDay(recordTime)+" 08:00:00");
                                 }
                                 //外防
-                                //for (String odCoatingType:odCoatingTypeList){
-
                                 pdfOdPath=basePath+"upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+"_"+recordTime+"_外防_"+shift0+"(Day)_"+pipe_size+"_"+contractInfo.getExternal_coating()+".pdf");
                                 System.out.println(pdfOdPath+"------------------------");
                                 File file0=new File(pdfOdPath);
@@ -244,64 +242,69 @@ public class InspectionRecordPDFController {
                                 }
                                 //开始填充pdf
                                 //6.1.1---------外防生成封面PDF
-                                //createCoverOne(request,project_no,project_name,millInfo.getMill_no(),millInfo.getMill_name(), pipe_size,client_standard,contractInfo.getExternal_coating(),shift0,recordTime,start_time,finish_time,stationOdList);
+                                createCoverOne(request,0,project_no,project_name,millInfo.getMill_no(),millInfo.getMill_name(), pipe_size,client_standard,contractInfo.getExternal_coating(),shift0,recordTime,start_time,finish_time,stationOdList);
+                                createCoverTwo(request,0,project_no,project_name,millInfo.getMill_no(),millInfo.getMill_name(), pipe_size,client_standard,contractInfo.getExternal_coating(),shift0,recordTime,start_time,finish_time,stationOdList);
                                 //6.1.2---------生成当天的外打砂工位的PDF
                                 OdBlastRecord(request,project_no,project_name,millInfo.getMill_no(),millInfo.getMill_name(), pipe_size,client_standard,contractInfo.getExternal_coating(),shift0,recordTime,start_time,finish_time,stationOdList);
                                 //6.1.3---------生成当天的外打砂检验工位的PDF
-
+                                OdBlastInspectionRecord(request,project_no,project_name,millInfo.getMill_no(),millInfo.getMill_name(), pipe_size,client_standard,contractInfo.getExternal_coating(),shift0,recordTime,start_time,finish_time,stationOdList);
                                 //6.1.4---------生成当天的外涂工位的PDF(2FBE、3LPE)
-
-                                //6.1.5---------生成当天的外涂检验工位的PDF(2FBE、3LPE)
-
+                                if(contractInfo.getExternal_coating()!=null) {
+                                    if (contractInfo.getExternal_coating().equals("2FBE")) {
+                                        OdCoat2FBERecord(request, project_no, project_name, millInfo.getMill_no(), millInfo.getMill_name(), pipe_size, client_standard, contractInfo.getExternal_coating(), shift0, recordTime, start_time, finish_time, stationOdList);
+                                        //6.1.5---------生成当天的外涂检验工位的PDF(2FBE、3LPE)
+                                        OdCoat2FBEInspectionRecord(request, project_no, project_name, millInfo.getMill_no(), millInfo.getMill_name(), pipe_size, client_standard, contractInfo.getExternal_coating(), shift0, recordTime, start_time, finish_time, stationOdList);
+                                    } else if (contractInfo.getExternal_coating().equals("3LPE")){
+                                        OdCoat3LPERecord(request, project_no, project_name, millInfo.getMill_no(), millInfo.getMill_name(), pipe_size, client_standard, contractInfo.getExternal_coating(), shift0, recordTime, start_time, finish_time, stationOdList);
+                                        //6.1.5---------生成当天的外涂检验工位的PDF(2FBE、3LPE)
+                                        OdCoat3LPEInspectionRecord(request, project_no, project_name, millInfo.getMill_no(), millInfo.getMill_name(), pipe_size, client_standard, contractInfo.getExternal_coating(), shift0, recordTime, start_time, finish_time, stationOdList);
+                                    }
+                                }
                                 //6.1.6---------生成当天的外防终检工位的PDF
+                                OdCoatFinalInspectionRecord(request, project_no, project_name, millInfo.getMill_no(), millInfo.getMill_name(), pipe_size, client_standard, contractInfo.getExternal_coating(), shift0, recordTime, start_time, finish_time, stationOdList);
                                 System.out.println(stationOdList.size()+"外防---------");
                                 if(stationOdList.size()>0){
                                     MergePDF.MergePDFs(stationOdList,pdfOdPath);
                                     stationOdList.clear();
                                     dayNightPdf.add(pdfOdPath);
                                 }
-                                // }
                                 //内防
-                                // for (String idCoatingType:idCoatingTypeList){
                                 pdfIdPath=basePath+"upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+"_"+recordTime+"_内防_"+shift0+"(Day)_"+pipe_size+"_"+contractInfo.getInternal_coating()+".pdf");
                                 File file1=new File(pdfIdPath);
                                 //开始填充pdf
                                 //6.2.1---------内防生成封面PDF
-
+                                createCoverOne(request,1,project_no,project_name,millInfo.getMill_no(),millInfo.getMill_name(), pipe_size,client_standard,contractInfo.getExternal_coating(),shift0,recordTime,start_time,finish_time,stationIdList);
+                                createCoverTwo(request,1,project_no,project_name,millInfo.getMill_no(),millInfo.getMill_name(), pipe_size,client_standard,contractInfo.getExternal_coating(),shift0,recordTime,start_time,finish_time,stationIdList);
                                 //6.2.2---------内打砂检验记录PDF
-
+                                IdBlastInspectionRecord(request, project_no, project_name, millInfo.getMill_no(), millInfo.getMill_name(), pipe_size, client_standard, contractInfo.getExternal_coating(), shift0, recordTime, start_time, finish_time, stationIdList);
                                 //6.2.3---------内涂记录PDF
-
+                                IdCoatRecord(request, project_no, project_name, millInfo.getMill_no(), millInfo.getMill_name(), pipe_size, client_standard, contractInfo.getExternal_coating(), shift0, recordTime, start_time, finish_time, stationIdList);
                                 //6.2.4---------内涂检验记录PDF
-
+                                IdCoatInspectionRecord(request, project_no, project_name, millInfo.getMill_no(), millInfo.getMill_name(), pipe_size, client_standard, contractInfo.getExternal_coating(), shift0, recordTime, start_time, finish_time, stationIdList);
                                 //6.2.5---------内涂终验记录PDF
+                                IdFinalInspectionRecord(request, project_no, project_name, millInfo.getMill_no(), millInfo.getMill_name(), pipe_size, client_standard, contractInfo.getExternal_coating(), shift0, recordTime, start_time, finish_time, stationIdList);
                                 System.out.println(stationIdList.size()+"内防---------");
                                 if(stationIdList.size()>0){
                                     MergePDF.MergePDFs(stationIdList,pdfIdPath);
                                     stationIdList.clear();
                                     dayNightPdf.add(pdfIdPath);
                                 }
-                                // }
-
                                 //计算
                                 n+=1;
                                 //把用户数据保存在session域对象中
-                                float percent=n*100/totalPDFCount;
+                                float percent=0;
+                                if(totalPDFCount!=0)
+                                    percent=n*100/totalPDFCount;
                                 session.setAttribute("pdfProgress", String.valueOf(percent));
                                 System.out.println("percent：" + percent);
                                 System.out.println("n：" + n);
                                 System.out.println("totalPDFCount：" + totalPDFCount);
-
-
                             }
                         }
-                        //for(String pipe_size:standardList){//规格
-
-                        //}
                     }
                 }
                 //-------结束生成笛卡尔集pdf
-                Collections.sort(dayNightPdf);
+                //Collections.sort(dayNightPdf);
                 zipName="upload/pdf/"+ResponseUtil.downLoadPdf(dayNightPdf,request,response);
                 //定时删除临时文件
                 for (int j=0;j<delSetPath.size();j++){
@@ -1353,7 +1356,7 @@ public class InspectionRecordPDFController {
         }catch (Exception e){
             e.printStackTrace();
         }
-        createCoverTwo(request,type,project_no,mill_no,mill_name,project_name,pipe_size,standard,coatingType,shift,title_time,begin_time,end_time,stringList);
+        //createCoverTwo(request,type,project_no,mill_no,mill_name,project_name,pipe_size,standard,coatingType,shift,title_time,begin_time,end_time,stringList);
     }
     //13.---------------生成封面2
     public void  createCoverTwo(HttpServletRequest request,int type,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList){

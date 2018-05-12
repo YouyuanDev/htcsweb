@@ -166,7 +166,6 @@
 
                 },
                 success: function(result){
-
                     var result = eval('('+result+')');
                     $('#hldailyProRptDialog').dialog('close');
                     if (result.success){
@@ -174,10 +173,8 @@
                     }
                     clearFormLabel();
                     hlAlertFour(result.message);
-
                 },
                 error:function () {
-                    //clearFormLabel();
                     hlAlertThree();
                 }
             });
@@ -197,11 +194,11 @@
                 return false;
             }
             if(begin_time==null||begin_time==""){
-                alert("请输入项目编号");
+                alert("请输入开始时间");
                 return false;
             }
             if(end_time==null||end_time==""){
-                alert("请输入项目编号");
+                alert("请输入结束时间");
                 return false;
             }
             $.ajax({
@@ -209,10 +206,14 @@
                dataType:'json',
                data:{project_no:project_no,begin_time:begin_time,end_time:end_time},
                success:function (data) {
-
+                   alert(data);
+                   if (data=="success"){
+                       $('#dailyProRptDatagrids').datagrid('reload');
+                   }
+                   hlAlertFour("生成成功!");
                },
                 error:function () {
-                    
+                    hlAlertFour("生成日报时出错!");
                 }
             });
         }

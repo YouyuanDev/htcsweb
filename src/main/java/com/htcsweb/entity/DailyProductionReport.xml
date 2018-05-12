@@ -108,7 +108,7 @@
                 AND dr.od_wt=#{od_wt}
             </if>
             <if test="production_date!=null">
-                <![CDATA[ AND DATE_FORMAT(dr.production_date,'%Y-%m-%d %H:%T:%s')==DATE_FORMAT(#{production_date},'%Y-%m-%d %H:%T:%s')]]>
+                <![CDATA[ AND DATE_FORMAT(dr.production_date,'%Y-%m-%d')=DATE_FORMAT(#{production_date},'%Y-%m-%d')]]>
             </if>
         </where>
     </select>

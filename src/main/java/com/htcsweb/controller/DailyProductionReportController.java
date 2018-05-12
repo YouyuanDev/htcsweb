@@ -7,6 +7,7 @@ import com.htcsweb.entity.*;
 import com.htcsweb.util.DateTimeUtil;
 import com.htcsweb.util.GroupEntity;
 import com.htcsweb.util.ResponseUtil;
+import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.support.incrementer.HsqlMaxValueIncrementer;
 import org.springframework.stereotype.Controller;
@@ -56,6 +57,13 @@ public class DailyProductionReportController {
     private PipeSamplingRecordDao pipeSamplingRecordDao;
     @Autowired
     private PipeRebevelRecordDao pipeRebevelRecordDao;
+
+    //统计数量和长度
+    private class CountSum{
+        public int count=0;
+        public float sum=0;
+    }
+
     //模糊查询DailyProductionReport信息列表
     @RequestMapping(value = "/getDailProductionReportByLike")
     @ResponseBody
@@ -186,7 +194,7 @@ public class DailyProductionReportController {
                     String od_wt="";
                     for (GroupEntity entity:list){
                         od=entity.getOd(); wt=entity.getWt();
-                        od_wt=String.valueOf(od)+String.valueOf(wt);
+                        od_wt=String.valueOf(od)+"*"+String.valueOf(wt);
                         external_coating=entity.getExternal_coating();internal_coating=entity.getInternal_coating();
                         for (String item:dateList){
                             //根据日期填充对应的tab
@@ -197,15 +205,11 @@ public class DailyProductionReportController {
                             //外涂总防腐数
                             int odCoatingTotal=getTotalOdCoating(item,project_no,external_coating,internal_coating,od,wt);
                             //外防腐合格数和长度
-                            List<Object>odlist=getTotalQualifiedOdCoating(item,project_no,external_coating,internal_coating,od,wt);
+                            CountSum countSum=getTotalQualifiedOdCoating(item,project_no,external_coating,internal_coating,od,wt);
                             int odQualifiedTotal=0;float odQualifiedLength=0;
-                            if(odlist!=null&&odlist.size()>0){
-                                odQualifiedTotal=((Integer)odlist.get(0)).intValue();
+                                odQualifiedTotal=countSum.count;
                                 //合格长度
-                                odQualifiedLength=((Float)odlist.get(1)).floatValue();
-                            }
-                            BigDecimal b=new  BigDecimal(odQualifiedLength);
-                            odQualifiedLength=  b.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
+                                odQualifiedLength=countSum.sum;
                             //外防目标合格数
                             int odTargetQualifiedTotal=0;
                             //外防目标合格长度
@@ -224,16 +228,13 @@ public class DailyProductionReportController {
                             int odScrapHandleTotal=getTotalHandleWastePipe(item,project_no,external_coating,internal_coating,"od",od,wt);
                             //获取内防腐总数
                             int idTotal=getTotalIdCoating(item,project_no,external_coating,internal_coating,od,wt);
-                            List<Object>idlist= getTotalQualifiedIdCoating(item,project_no,external_coating,internal_coating,od,wt);
+                            CountSum countSum1= getTotalQualifiedIdCoating(item,project_no,external_coating,internal_coating,od,wt);
                             //内防腐合格数和长度
                             int idQualifiedTotal=0;float idQualifiedLength=0;
-                            if(idlist!=null&&idlist.size()>0){
-                                idQualifiedTotal=((Integer)odlist.get(0)).intValue();
+                                //idQualifiedTotal=((Double)odlist.get(0)).intValue();
+                                idQualifiedTotal=countSum1.count;
                                 //合格长度
-                                idQualifiedLength=((Float)odlist.get(1)).floatValue();
-                            }
-                            BigDecimal b1=new  BigDecimal(idQualifiedLength);
-                            idQualifiedLength=  b1.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
+                                idQualifiedLength=countSum1.sum;
                             //内防目标合格数
                             int idTargetQualifiedTotal=0;
                             //内防目标合格长度
@@ -255,22 +256,22 @@ public class DailyProductionReportController {
                             //白班试验管编号、原始长度、切样长度
                             String samplePipeNoOfDay=" ";float  samplePipeOriginalLengthOfDay=0f,samplePipeCutLengthOfDay=0f;
                             if(sampleDayList!=null&&sampleDayList.size()>0){
-                                PipeSamplingRecord record=sampleDayList.get(0);
-                                samplePipeNoOfDay=record.getPipe_no();
-                                samplePipeOriginalLengthOfDay=record.getOriginal_pipe_length();
-                                BigDecimal b2=new  BigDecimal(samplePipeOriginalLengthOfDay);
-                                samplePipeOriginalLengthOfDay=b2.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
-                                samplePipeCutLengthOfDay=record.getCut_off_length();
-                                BigDecimal b3=new  BigDecimal(samplePipeCutLengthOfDay);
-                                samplePipeCutLengthOfDay=b3.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
+                                    PipeSamplingRecord record=sampleDayList.get(0);
+                                    samplePipeNoOfDay=record.getPipe_no();
+                                    samplePipeOriginalLengthOfDay=record.getOriginal_pipe_length();
+                                    BigDecimal b2=new  BigDecimal(samplePipeOriginalLengthOfDay);
+                                    samplePipeOriginalLengthOfDay=b2.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
+                                    samplePipeCutLengthOfDay=record.getCut_off_length();
+                                    BigDecimal b3=new  BigDecimal(samplePipeCutLengthOfDay);
+                                    samplePipeCutLengthOfDay=b3.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
                             }
                             //试验管数量
                             int samplePipeTotal=0;
                             List<PipeSamplingRecord>sampleNightList=getPipeSamplingInfo(item,1,project_no,external_coating,internal_coating,od,wt);
                             //夜班试验管编号、原始长度、切样长度
                             String samplePipeNoOfNight=" ";float  samplePipeOriginalLengthOfNight=0f,samplePipeCutLengthOfNight=0f;
-                            if(sampleDayList!=null){
-                                PipeSamplingRecord record=sampleDayList.get(0);
+                            if(sampleNightList!=null&&sampleNightList.size()>0){
+                                PipeSamplingRecord record=sampleNightList.get(0);
                                 samplePipeNoOfNight=record.getPipe_no();
                                 samplePipeOriginalLengthOfNight=record.getOriginal_pipe_length();
                                 BigDecimal b4=new  BigDecimal(samplePipeOriginalLengthOfNight);
@@ -284,6 +285,7 @@ public class DailyProductionReportController {
                             //需切斜管数量(样管切斜＋修补切斜)
                             int sampleCutoffTotal=getTotalOfSampleCutoff(item,project_no,external_coating,internal_coating,od,wt);
                             int grindCutOffTotal=getTotalOfBarePipeGrindCutOff(item,project_no,external_coating,internal_coating,od,wt);
+                            System.out.println(sampleCutoffTotal+":"+grindCutOffTotal+"----------------");
                             int cutOffTotal=sampleCutoffTotal+grindCutOffTotal;
                             //发运成品管数量
                             int finishPipeTotal=0;
@@ -291,7 +293,7 @@ public class DailyProductionReportController {
                             float finishPipeLength=0f;
                             //向日报中填充数据
                             //首先判断日报表中是否有此数据，如果没有则添加，否则进行更新,参数(time,project_no,od_wt,外防类型)
-                            List<DailyProductionReport>list1=dailyProductionReportDao.getDailyReportByParams(project_no,external_coating,od_wt,timeformat.parse(item));
+                            List<DailyProductionReport>list1=dailyProductionReportDao.getDailyReportByParams(project_no,external_coating,od_wt,sdf.parse(item));
                             if(list1.size()>0){
                                 //更新
                                 //int id=list1.get(0).getId();
@@ -334,6 +336,11 @@ public class DailyProductionReportController {
                                 report.setPipe_accepted_count_after_rebevel(grindCutOffTotal);
                                 report.setPipe_delivered_count(finishPipeTotal);
                                 report.setPipe_delivered_length(finishPipeLength);
+
+                                report.setProduction_date(timeformat.parse(item+" 00:00:00"));
+                                report.setProject_no(project_no);
+                                report.setOd_coating_type(external_coating);
+                                report.setOd_wt(od_wt);
                                 dailyProductionReportDao.updateDailyProductionReport(report);
                             }else{
                                 //添加
@@ -376,6 +383,11 @@ public class DailyProductionReportController {
                                 report.setPipe_accepted_count_after_rebevel(grindCutOffTotal);
                                 report.setPipe_delivered_count(finishPipeTotal);
                                 report.setPipe_delivered_length(finishPipeLength);
+
+                                report.setProduction_date(timeformat.parse(item+" 00:00:00"));
+                                report.setProject_no(project_no);
+                                report.setOd_coating_type(external_coating);
+                                report.setOd_wt(od_wt);
                                 dailyProductionReportDao.addDailyProductionReport(report);
                             }
                         }
@@ -384,6 +396,7 @@ public class DailyProductionReportController {
             }
         }catch (Exception e){
             e.printStackTrace();
+            flag="error";
         }
         return JSONArray.toJSONString(flag);
     }
@@ -459,24 +472,27 @@ public class DailyProductionReportController {
         return total;
     }
     //2.获取当天外防腐合格数
-    private List<Object> getTotalQualifiedOdCoating(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
+    private CountSum getTotalQualifiedOdCoating(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
         String nextday=DateTimeUtil.getNextDay(now);
-        List<Object>list=new ArrayList<>();
+        CountSum countSum=new CountSum();
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
             List<HashMap<String,Object>>list1=odFinalInspectionProcessDao.getTotalQualifiedOfDay(project_no,external_coating,internal_coating,od,wt,beginTime,endTime,"1");
-            if(list1!=null){
+            if(list1!=null&&list1.size()>0){
                 HashMap<String,Object>hs=list1.get(0);
                 if(hs!=null){
-                    list.add(hs.get("count1"));
-                    list.add(hs.get("count2"));
+                    System.out.println(hs.get("odtotalcount").toString()+"－－－－－－－－");
+                    countSum.count=((Long) hs.get("odtotalcount")).intValue();
+                    if(hs.get("odtotallength")!=null){
+                        countSum.sum=((Float) (hs.get("odtotallength"))).floatValue();
+                    }
                 }
             }
         }catch (Exception e){
             e.printStackTrace();
         }
-        return list;
+        return countSum;
     }
     //3.获取当天的修补支数(根据od或者id划分)
     private int getTotalCoatingRepair(String now,String project_no,String external_coating,String internal_coating,String odid,float od,float wt){
@@ -618,25 +634,26 @@ public class DailyProductionReportController {
         return total;
     }
     //10.获取当天的内防腐合格数和长度
-    private List<Object> getTotalQualifiedIdCoating(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
+    private CountSum getTotalQualifiedIdCoating(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
         String nextday=DateTimeUtil.getNextDay(now);
-        List<Object>list=new ArrayList<>();
-        //String total0="0",total1="0";
+        CountSum countSum=new CountSum();
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
             List<HashMap<String,Object>>list1=idFinalInspectionProcessDao.getTotalQualifiedOfDay(project_no,external_coating,internal_coating,od,wt,beginTime,endTime,"1");
-            if(list1!=null){
+            if(list1!=null&&list1.size()>0){
                 HashMap<String,Object>hs=list1.get(0);
                 if(hs!=null){
-                    list.add(hs.get("count1"));
-                    list.add(hs.get("count2"));
+                    countSum.count=((Long)hs.get("idtotalcount")).intValue();
+                    if(hs.get("idtotallength")!=null){
+                        countSum.sum=((Float) hs.get("idtotallength")).floatValue();
+                    }
                 }
             }
         }catch (Exception e){
             e.printStackTrace();
         }
-        return list;
+        return countSum;
     }
 
     //11.获取内防腐涂层管废管数量和废管处理数量(当天符合参数的待扒皮数量和扒皮完成的和是废管数量)
