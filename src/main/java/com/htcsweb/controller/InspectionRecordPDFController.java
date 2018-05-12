@@ -142,7 +142,7 @@ public class InspectionRecordPDFController {
                 pdfProgress="0";
             //跳转到用户主页
             json.put("success",true);
-            System.out.println("ggggggete getAttribute pdfProgress：" + pdfProgress);    //输出程序运行时间
+            System.out.println("getAttribute pdfProgress：" + pdfProgress);    //输出程序运行时间
             json.put("pdfProgress",pdfProgress);
             ResponseUtil.write(response,json);
         }catch (Exception e){
@@ -289,7 +289,6 @@ public class InspectionRecordPDFController {
                                      System.out.println("percent：" + percent);
                                      System.out.println("n：" + n);
                                      System.out.println("totalPDFCount：" + totalPDFCount);
-
 
                                  }
                            }

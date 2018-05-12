@@ -174,7 +174,6 @@
         function ajaxLoadEnd() {
             $(".datagrid-mask").remove();
             $(".datagrid-mask-msg").remove();
-            window.clearInterval(timerId);
         }
         // function downloadPdf(pathList) {
         //     var form=$("<form>");//定义一个form表单
@@ -207,7 +206,7 @@
             //     },  */
             // });
             $('#p').progressbar('setValue',0);
-            timerId = window.setInterval(getCheckProgress,1000);
+            timerId = window.setInterval(getCheckProgress,400);
         }
 
 
@@ -224,7 +223,7 @@
                 //请求成功后的回调函数 data为json格式
                 success:function(data){
                     if(data.pdfProgress>=100){
-                        $('#p').progressbar('setValue',"100");
+                        $('#p').progressbar('setValue',100);
                         window.clearInterval(timerId);
                         $('#dg').datagrid('load');
                         $('#importBtn').css('display','inline-block');
