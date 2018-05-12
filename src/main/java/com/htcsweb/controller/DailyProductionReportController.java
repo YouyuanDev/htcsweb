@@ -201,9 +201,9 @@ public class DailyProductionReportController {
                             List<Object>odlist=getTotalQualifiedOdCoating(item,project_no,external_coating,internal_coating,od,wt);
                             int res5=0;float res6=0;
                             if(odlist!=null&&odlist.size()>0){
-                                res5=Integer.parseInt(String.valueOf(odlist.get(0)));
+                                res5=((Integer)odlist.get(0)).intValue();
                                 //合格长度
-                                res6=Float.parseFloat(String.valueOf(odlist.get(1)));
+                                res6=((Float)odlist.get(1)).floatValue();
                             }
                             BigDecimal b=new  BigDecimal(res6);
                             res6=  b.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
@@ -232,11 +232,12 @@ public class DailyProductionReportController {
                             List<Object>idlist= getTotalQualifiedIdCoating(item,project_no,external_coating,internal_coating,od,wt);
                             int res16=0;float res17=0;
                             if(idlist!=null&&idlist.size()>0){
-                                 res16=Integer.parseInt(String.valueOf(idlist.get(0)));
+                                 res16=((Integer)odlist.get(0)).intValue();
                                 //合格长度
-                                 res17=Float.parseFloat(String.valueOf(idlist.get(1)));
+                                 res17=((Float)odlist.get(1)).floatValue();
                             }
-                            BigDecimal b1=new  BigDecimal(res16);
+                            BigDecimal b1=new  BigDecimal(res17);
+
                             res17=  b1.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
                             //内防目标合格数
                             int res18=0;
