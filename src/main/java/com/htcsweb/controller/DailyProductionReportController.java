@@ -198,10 +198,13 @@ public class DailyProductionReportController {
                             //外涂总防腐数
                             int res4=getTotalOdCoating(item,project_no,external_coating,internal_coating,od,wt);
                             //外防腐合格数
-                            List<String>odlist=getTotalQualifiedOdCoating(item,project_no,external_coating,internal_coating,od,wt);
-                            int res5=Integer.parseInt(odlist.get(0));
-                            //合格长度
-                            float res6=Float.parseFloat(odlist.get(1));
+                            List<Object>odlist=getTotalQualifiedOdCoating(item,project_no,external_coating,internal_coating,od,wt);
+                            int res5=0;float res6=0;
+                            if(odlist!=null&&odlist.size()>0){
+                                res5=Integer.parseInt(String.valueOf(odlist.get(0)));
+                                //合格长度
+                                res6=Float.parseFloat(String.valueOf(odlist.get(1)));
+                            }
                             BigDecimal b=new  BigDecimal(res6);
                             res6=  b.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
                             //外防目标合格数
@@ -226,10 +229,13 @@ public class DailyProductionReportController {
 
                             //获取内防腐总数
                             int res15=getTotalIdCoating(item,project_no,external_coating,internal_coating,od,wt);
-                            List<String>idlist= getTotalQualifiedIdCoating(item,project_no,external_coating,internal_coating,od,wt);
-                            int res16=Integer.parseInt(idlist.get(0));
-                            //合格长度
-                            float res17=Float.parseFloat(idlist.get(1));
+                            List<Object>idlist= getTotalQualifiedIdCoating(item,project_no,external_coating,internal_coating,od,wt);
+                            int res16=0;float res17=0;
+                            if(idlist!=null&&idlist.size()>0){
+                                 res16=Integer.parseInt(String.valueOf(idlist.get(0)));
+                                //合格长度
+                                 res17=Float.parseFloat(String.valueOf(idlist.get(1)));
+                            }
                             BigDecimal b1=new  BigDecimal(res16);
                             res17=  b1.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
                             //内防目标合格数
@@ -444,10 +450,9 @@ public class DailyProductionReportController {
         return total;
     }
     //2.获取当天外防腐合格数
-    private List<String> getTotalQualifiedOdCoating(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
+    private List<Object> getTotalQualifiedOdCoating(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
         String nextday=DateTimeUtil.getNextDay(now);
-        List<String>list=new ArrayList<>();
-        String total0="0",total1="0";
+        List<Object>list=new ArrayList<>();
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
@@ -455,16 +460,12 @@ public class DailyProductionReportController {
             if(list1!=null){
                 HashMap<String,Object>hs=list1.get(0);
                 if(hs!=null){
-                    total0=String.valueOf("count1");
-                    total1=String.valueOf("count2");
-
+                    list.add(hs.get("count1"));
+                    list.add(hs.get("count2"));
                 }
             }
         }catch (Exception e){
             e.printStackTrace();
-        }finally {
-            list.add(total0);
-            list.add(total1);
         }
         return list;
     }
@@ -607,11 +608,11 @@ public class DailyProductionReportController {
         }
         return total;
     }
-    //10.获取当天的内防腐合格数
-    private List<String> getTotalQualifiedIdCoating(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
+    //10.获取当天的内防腐合格数和长度
+    private List<Object> getTotalQualifiedIdCoating(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
         String nextday=DateTimeUtil.getNextDay(now);
-        List<String>list=new ArrayList<>();
-        String total0="0",total1="0";
+        List<Object>list=new ArrayList<>();
+        //String total0="0",total1="0";
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
@@ -619,15 +620,12 @@ public class DailyProductionReportController {
             if(list1!=null){
                 HashMap<String,Object>hs=list1.get(0);
                 if(hs!=null){
-                    total0=String.valueOf("count1");
-                    total1=String.valueOf("count2");
+                    list.add(hs.get("count1"));
+                    list.add(hs.get("count2"));
                 }
             }
         }catch (Exception e){
             e.printStackTrace();
-        }finally {
-            list.add(total0);
-            list.add(total1);
         }
         return list;
     }
