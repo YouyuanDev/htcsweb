@@ -197,9 +197,9 @@ public class DailyProductionReportController {
                         od_wt=String.valueOf(od)+"*"+String.valueOf(wt);
                         external_coating=entity.getExternal_coating();internal_coating=entity.getInternal_coating();
                         for (String item:dateList){
-                            System.out.println("od="+od+":wt="+wt+"------------------------");
                             //根据日期填充对应的tab
                             //获取外防腐总数
+                            System.out.println(item+":"+project_no+":"+external_coating+":"+internal_coating+":"+od+":"+wt+"-----------");
                             int odTotal=getTotalOdCoating(item,project_no,external_coating,internal_coating,od,wt);
                             //接收光管数量，长度
                             int bareTotal=0,bareLength=0;
@@ -487,7 +487,7 @@ public class DailyProductionReportController {
                     System.out.println(hs.get("odtotalcount").toString()+"－－－－－－－－");
                     countSum.count=((Long) hs.get("odtotalcount")).intValue();
                     if(hs.get("odtotallength")!=null){
-                        countSum.sum=((Float) (hs.get("odtotallength"))).floatValue();
+                        countSum.sum=((Double) (hs.get("odtotallength"))).floatValue();
                     }
                 }
             }
@@ -648,7 +648,7 @@ public class DailyProductionReportController {
                 if(hs!=null){
                     countSum.count=((Long)hs.get("idtotalcount")).intValue();
                     if(hs.get("idtotallength")!=null){
-                        countSum.sum=((Float) hs.get("idtotallength")).floatValue();
+                        countSum.sum=((Double) hs.get("idtotallength")).floatValue();
                     }
                 }
             }
