@@ -338,7 +338,7 @@ public class DailyProductionReportController {
                                 report.setPipe_delivered_count(finishPipeTotal);
                                 report.setPipe_delivered_length(finishPipeLength);
 
-                                report.setProduction_date(timeformat.parse(item+" 00:00:00"));
+                                report.setProduction_date(timeformat.parse(item+" 08:00:00"));
                                 report.setProject_no(project_no);
                                 report.setOd_coating_type(external_coating);
                                 report.setOd_wt(od_wt);
@@ -385,7 +385,7 @@ public class DailyProductionReportController {
                                 report.setPipe_delivered_count(finishPipeTotal);
                                 report.setPipe_delivered_length(finishPipeLength);
 
-                                report.setProduction_date(timeformat.parse(item+" 00:00:00"));
+                                report.setProduction_date(timeformat.parse(item+" 08:00:00"));
                                 report.setProject_no(project_no);
                                 report.setOd_coating_type(external_coating);
                                 report.setOd_wt(od_wt);
