@@ -462,14 +462,19 @@ public class DailyProductionReportController {
         }
         return total;
     }
-    //4.获取当天的防腐光管隔离数
+    //4.获取当天的防腐光管隔离数（可能并未处理）
     private int getBarePipeOnholdCount(String now,String project_no,String external_coating,String internal_coating,String odid,float od,float wt){
         String nextday=DateTimeUtil.getNextDay(now);
         int total=0;
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            total=barePipeGrindingCutoffRecordDao.getBarePipeOnholdCount(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
+            if(odid!=null&&odid.equals("od")){
+                total=barePipeGrindingCutoffRecordDao.getODBarePipeOnholdCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
+            }
+            else if(odid!=null&&odid.equals("id")){
+                total=barePipeGrindingCutoffRecordDao.getIDBarePipeOnholdCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
+            }
         }catch (Exception e){
             e.printStackTrace();
         }finally {

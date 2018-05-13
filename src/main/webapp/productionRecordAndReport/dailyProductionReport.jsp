@@ -335,7 +335,7 @@
                     <td></td>
                     <td class="i18n1" name="productiondate" width="20%">生产日期</td>
                     <td colspan="1" width="30%">
-                        <input class="easyui-datetimebox" id="production-date" type="text" name="production-date" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                        <input class="easyui-datetimebox" id="production-date" type="text" readonly="true" name="production-date" value="" data-options="formatter:myformatter2,parser:myparser2"/>
 
                     </td>
                     <td></td>
@@ -345,18 +345,18 @@
             <table class="ht-table">
                 <tr>
                     <td width="16%" class="i18n1" name="projectno">项目编号</td>
-                    <td><input class="easyui-textbox" type="text" name="project_no" value=""/></td>
+                    <td><input class="easyui-textbox" type="text" name="project_no" readonly="true" value=""/></td>
                     <td></td>
                     <td width="16%" class="i18n1" name="projectname">项目名称</td>
-                    <td><label class="hl-label" name="project_name"></label></td>
+                    <td><input class="easyui-textbox" readonly="true" type="text" name="project_name" value=""/></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="odwt">外径*壁厚</td>
-                    <td><input class="easyui-textbox" type="text" name="od_wt" value=""/></td>
+                    <td><input class="easyui-textbox" type="text" readonly="true" name="od_wt" value=""/></td>
                     <td></td>
                     <td width="16%" class="i18n1" name="odcoatingtype">外涂种类</td>
-                    <td><input class="easyui-textbox" type="text" name="od_coating_type" value=""/></td>
+                    <td><input class="easyui-textbox" type="text" name="od_coating_type" readonly="true" value=""/></td>
                     <td></td>
                 </tr>
                 <tr>
@@ -395,7 +395,7 @@
                 </tr>
 
                 <tr>
-                    <td width="16%" class="i18n1" name="odbarepipeonholdcount">光管待处理数量</td>
+                    <td width="16%" class="i18n1" name="odbarepipeonholdcount">外光管待处理数量</td>
                     <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="od_bare_pipe_onhold_count" value=""/></td>
                     <td></td>
                     <td width="16%" class="i18n1" name="odbarepipegrindedcount">外光管修磨数量</td>

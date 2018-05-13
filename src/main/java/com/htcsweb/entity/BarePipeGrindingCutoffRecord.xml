@@ -94,30 +94,28 @@
         </foreach>
     </delete>
 
-    <!--获取光管隔离数量-->
-    <select id="getBarePipeOnholdCount" resultType="java.lang.Integer">
-        SELECT count(DISTINCT(o.pipe_no)) from bare_pipe_grinding_cutoff_record o
+    <!--获取外防光管隔离数量-->
+    <select id="getODBarePipeOnholdCount" resultType="java.lang.Integer">
+
+        select count(DISTINCT(pipe_no)) from pipe_basic_info where pipe_no in
+        (
+        SELECT o.pipe_no from od_blast_process o
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no
         left join project_info pro on c.project_no=pro.project_no
         <where>
-
-            AND p.status = 'onhold'
-
+            AND o.result='3'
             <if test="project_no!=null and project_no!=''">
-                AND   pro.project_no=#{project_no}
+                AND pro.project_no=#{project_no}
             </if>
             <if test="mill_no!=null and mill_no!=''">
-                AND  o.mill_no=#{mill_no}
-            </if>
-            <if test="odid!=null and odid!=''">
-                AND  o.odid=#{odid}
+                AND o.mill_no=#{mill_no}
             </if>
             <if test="external_coating!=null">
-                AND  c.external_coating=#{external_coating}
+                AND c.external_coating=#{external_coating}
             </if>
             <if test="internal_coating!=null">
-                AND  c.internal_coating=#{internal_coating}
+                AND c.internal_coating=#{internal_coating}
             </if>
             AND format(c.od,3)=format(#{od},3)
             AND format(c.wt,3)=format(#{wt},3)
@@ -128,7 +126,111 @@
                 <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
             </if>
         </where>
+        )
+        UNION
+        (
+        SELECT o.pipe_no from od_blast_inspection_process o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+            AND o.result='3'
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no=#{project_no}
+            </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no=#{mill_no}
+            </if>
+            <if test="external_coating!=null">
+                AND c.external_coating=#{external_coating}
+            </if>
+            <if test="internal_coating!=null">
+                AND c.internal_coating=#{internal_coating}
+            </if>
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+
+        )
     </select>
+
+
+    <!--获取内防光管隔离数量-->
+    <select id="getIDBarePipeOnholdCount" resultType="java.lang.Integer">
+
+        select count(DISTINCT(pipe_no)) from pipe_basic_info where pipe_no in
+        (
+        SELECT o.pipe_no from id_blast_process o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+            AND o.result='3'
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no=#{project_no}
+            </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no=#{mill_no}
+            </if>
+            <if test="external_coating!=null">
+                AND c.external_coating=#{external_coating}
+            </if>
+            <if test="internal_coating!=null">
+                AND c.internal_coating=#{internal_coating}
+            </if>
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+        )
+        UNION
+        (
+        SELECT o.pipe_no from id_blast_inspection_process o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+            AND o.result='3'
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no=#{project_no}
+            </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no=#{mill_no}
+            </if>
+            <if test="external_coating!=null">
+                AND c.external_coating=#{external_coating}
+            </if>
+            <if test="internal_coating!=null">
+                AND c.internal_coating=#{internal_coating}
+            </if>
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+
+        )
+    </select>
+
+
+
+
+
     <!--获取光管隔离修磨数量-->
     <select id="getBarePipeGrindingCount" resultType="java.lang.Integer">
         SELECT count(DISTINCT(o.pipe_no)) from bare_pipe_grinding_cutoff_record o

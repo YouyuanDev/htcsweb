@@ -115,13 +115,14 @@
         limit #{skip},#{take}
     </select>
 
-    <!--获取修补数-->
+    <!--获取修补合格数-->
     <select id="getCoatingRepairCount" resultType="java.lang.Integer">
         SELECT count(DISTINCT(o.pipe_no)) from coating_repair o
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no
         left join project_info pro on c.project_no=pro.project_no
         <where>
+
             <if test="project_no!=null and project_no!=''">
                 AND  pro.project_no=#{project_no}
             </if>
