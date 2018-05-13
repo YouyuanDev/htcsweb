@@ -106,7 +106,7 @@
         ORDER BY o.id DESC
     </select>
     <!--获取外防腐2FBE总数-->
-    <select id="getTotalOd2FBEOfDay" resultType="java.lang.Integer">
+    <select id="getODCoating2FBECount" resultType="java.lang.Integer">
         SELECT count(*) from od_coating_2fbe_process o
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no

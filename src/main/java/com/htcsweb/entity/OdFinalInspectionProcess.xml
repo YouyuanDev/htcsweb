@@ -100,7 +100,7 @@
         ORDER BY o.id DESC
     </select>
     <!--获取外防腐合格总数和合格长度-->
-    <select id="getTotalQualifiedOfDay" resultType="map">
+    <select id="getODCoatingAcceptedInfo" resultType="map">
         SELECT count(*) as odtotalcount,SUM(p.p_length) as odtotallength from od_final_inspection_process o
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no
@@ -121,23 +121,23 @@
         </where>
     </select>
     <!--获取封面上,日报上的外防腐总数-->
-    <select id="getTotalOdOfDay" resultType="java.lang.Integer">
+    <select id="getODCoatingCount" resultType="java.lang.Integer">
         SELECT count(*) from od_final_inspection_process o
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no
         left join project_info pro on c.project_no=pro.project_no
         <where>
             <if test="project_no!=null and project_no!=''">
-                pro.project_no=#{project_no}
+                AND pro.project_no=#{project_no}
             </if>
             <if test="mill_no!=null and mill_no!=''">
-                o.mill_no=#{mill_no}
+                AND o.mill_no=#{mill_no}
             </if>
             <if test="external_coating!=null">
-                c.external_coating=#{external_coating}
+                AND c.external_coating=#{external_coating}
             </if>
             <if test="internal_coating!=null">
-                c.internal_coating=#{internal_coating}
+                AND c.internal_coating=#{internal_coating}
             </if>
             AND format(c.od,3)=format(#{od},3)
             AND format(c.wt,3)=format(#{wt},3)
@@ -150,24 +150,24 @@
         </where>
     </select>
     <!--获取封面上外防腐合格总数-->
-    <select id="getTotaldOfDay" resultType="java.lang.Integer">
-        SELECT count(DISTINCT(o.pipe_no)) from id_final_inspection_process o
+    <select id="getODCoatingAcceptedCount" resultType="java.lang.Integer">
+        SELECT count(DISTINCT(o.pipe_no)) from od_final_inspection_process o
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no
         left join project_info pro on c.project_no=pro.project_no
         <where>
-            o.result='1'
+                AND o.result='1'
             <if test="project_no!=null and project_no!=''">
-                pro.project_no=#{project_no}
+                AND pro.project_no=#{project_no}
             </if>
             <if test="mill_no!=null and mill_no!=''">
-                o.mill_no=#{mill_no}
+                AND  o.mill_no=#{mill_no}
             </if>
             <if test="external_coating!=null">
-                c.external_coating=#{external_coating}
+                AND  c.external_coating=#{external_coating}
             </if>
             <if test="internal_coating!=null">
-                c.internal_coating=#{internal_coating}
+                AND c.internal_coating=#{internal_coating}
             </if>
             AND format(c.od,3)=format(#{od},3)
             AND format(c.wt,3)=format(#{wt},3)

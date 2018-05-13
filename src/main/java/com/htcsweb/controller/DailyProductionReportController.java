@@ -262,32 +262,32 @@ public class DailyProductionReportController {
                             //试验管白班
                             List<PipeSamplingRecord>sampleDayList=getPipeSamplingInfo(item,0,project_no,external_coating,internal_coating,od,wt);
                             //白班试验管编号、原始长度、切样长度
-                            String samplePipeNoOfDay=" ";
-                            float samplePipeOriginalLengthOfDay=0f,samplePipeCutLengthOfDay=0f;
+                            String samplePipeNoDayShift=" ";
+                            float samplePipeOriginalLengthDayShift=0f,samplePipeCutLengthDayShift=0f;
                             if(sampleDayList!=null&&sampleDayList.size()>0){
                                     PipeSamplingRecord record=sampleDayList.get(0);
-                                    samplePipeNoOfDay=record.getPipe_no();
-                                    samplePipeOriginalLengthOfDay=record.getOriginal_pipe_length();
-                                    BigDecimal b2=new  BigDecimal(samplePipeOriginalLengthOfDay);
-                                    samplePipeOriginalLengthOfDay=b2.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
-                                    samplePipeCutLengthOfDay=record.getCut_off_length();
-                                    BigDecimal b3=new  BigDecimal(samplePipeCutLengthOfDay);
-                                    samplePipeCutLengthOfDay=b3.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
+                                    samplePipeNoDayShift=record.getPipe_no();
+                                    samplePipeOriginalLengthDayShift=record.getOriginal_pipe_length();
+                                    BigDecimal b2=new  BigDecimal(samplePipeOriginalLengthDayShift);
+                                    samplePipeOriginalLengthDayShift=b2.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
+                                    samplePipeCutLengthDayShift=record.getCut_off_length();
+                                    BigDecimal b3=new  BigDecimal(samplePipeCutLengthDayShift);
+                                    samplePipeCutLengthDayShift=b3.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
                             }
                             //试验管数量
                             int samplePipeTotal=0;
                             List<PipeSamplingRecord>sampleNightList=getPipeSamplingInfo(item,1,project_no,external_coating,internal_coating,od,wt);
                             //夜班试验管编号、原始长度、切样长度
-                            String samplePipeNoOfNight=" ";float  samplePipeOriginalLengthOfNight=0f,samplePipeCutLengthOfNight=0f;
+                            String samplePipeNoNightShift=" ";float  samplePipeOriginalLengthNightShift=0f,samplePipeCutLengthNightShift=0f;
                             if(sampleNightList!=null&&sampleNightList.size()>0){
                                 PipeSamplingRecord record=sampleNightList.get(0);
-                                samplePipeNoOfNight=record.getPipe_no();
-                                samplePipeOriginalLengthOfNight=record.getOriginal_pipe_length();
-                                BigDecimal b4=new  BigDecimal(samplePipeOriginalLengthOfNight);
-                                samplePipeOriginalLengthOfNight=b4.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
-                                samplePipeCutLengthOfNight=record.getCut_off_length();
-                                BigDecimal b5=new  BigDecimal(samplePipeCutLengthOfNight);
-                                samplePipeCutLengthOfNight=b5.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
+                                samplePipeNoNightShift=record.getPipe_no();
+                                samplePipeOriginalLengthNightShift=record.getOriginal_pipe_length();
+                                BigDecimal b4=new  BigDecimal(samplePipeOriginalLengthNightShift);
+                                samplePipeOriginalLengthNightShift=b4.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
+                                samplePipeCutLengthNightShift=record.getCut_off_length();
+                                BigDecimal b5=new  BigDecimal(samplePipeCutLengthNightShift);
+                                samplePipeCutLengthNightShift=b5.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
                                 samplePipeTotal++;
                             }
 
@@ -341,12 +341,12 @@ public class DailyProductionReportController {
                             report.setId_coated_pipe_rejected_count(idCoatingRejectCount);
                             report.setId_coated_pipe_strip_count(idCoatingStripAcceptedCount);
 
-                            report.setOd_test_pipe_no_dayshift(samplePipeNoOfDay);
-                            report.setOd_test_pipe_length_before_cut_dayshift(samplePipeOriginalLengthOfDay);
-                            report.setOd_test_pipe_cutting_length_dayshift(samplePipeCutLengthOfDay);
-                            report.setOd_test_pipe_no_nightshift(samplePipeNoOfNight);
-                            report.setOd_test_pipe_length_before_cut_nightshift(samplePipeOriginalLengthOfNight);
-                            report.setOd_test_pipe_cutting_length_nightshift(samplePipeCutLengthOfNight);
+                            report.setOd_test_pipe_no_dayshift(samplePipeNoDayShift);
+                            report.setOd_test_pipe_length_before_cut_dayshift(samplePipeOriginalLengthDayShift);
+                            report.setOd_test_pipe_cutting_length_dayshift(samplePipeCutLengthDayShift);
+                            report.setOd_test_pipe_no_nightshift(samplePipeNoNightShift);
+                            report.setOd_test_pipe_length_before_cut_nightshift(samplePipeOriginalLengthNightShift);
+                            report.setOd_test_pipe_cutting_length_nightshift(samplePipeCutLengthNightShift);
 
                             report.setOd_test_pipe_count(samplePipeTotal);
                             report.setRebevel_pipe_count(cutOffTotalCount);
@@ -416,23 +416,23 @@ public class DailyProductionReportController {
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
             if(external_coating.equals("2FBE")){
-                total=odCoatingProcessDao.getTotalOd2FBEOfDay(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);
+                total=odCoatingProcessDao.getODCoating2FBECount(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);
             }else if(external_coating.equals("3LPE")){
-                total=odCoating3LpeProcessDao.getTotalOd3LPEOfDay(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);
+                total=odCoating3LpeProcessDao.getODCoating3LPECount(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);
             }
         }catch (Exception e){
             e.printStackTrace();
         }
         return total;
     }
-    //2.获取当天外防腐合格数
+    //2.获取当天外防腐合格支数与合格长度
     private CountSum getTotalQualifiedOdCoating(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
         String nextday=DateTimeUtil.getNextDay(now);
         CountSum countSum=new CountSum();
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            List<HashMap<String,Object>>list1=odFinalInspectionProcessDao.getTotalQualifiedOfDay(project_no,external_coating,internal_coating,od,wt,beginTime,endTime,"1");
+            List<HashMap<String,Object>>list1=odFinalInspectionProcessDao.getODCoatingAcceptedInfo(project_no,external_coating,internal_coating,od,wt,beginTime,endTime,"1");
             if(list1!=null&&list1.size()>0){
                 HashMap<String,Object>hs=list1.get(0);
                 if(hs!=null){
@@ -582,7 +582,7 @@ public class DailyProductionReportController {
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            total=idCoatingProcessDao.getTotalIdOfDay(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);
+            total=idCoatingProcessDao.getIDCoatingCount(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -595,7 +595,7 @@ public class DailyProductionReportController {
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            List<HashMap<String,Object>>list1=idFinalInspectionProcessDao.getTotalQualifiedOfDay(project_no,external_coating,internal_coating,od,wt,beginTime,endTime,"1");
+            List<HashMap<String,Object>>list1=idFinalInspectionProcessDao.getIDCoatingAcceptedInfo(project_no,external_coating,internal_coating,od,wt,beginTime,endTime,"1");
             if(list1!=null&&list1.size()>0){
                 HashMap<String,Object>hs=list1.get(0);
                 if(hs!=null){

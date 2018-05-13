@@ -235,8 +235,8 @@
             </if>
         </where>
     </select>
-    <!--获取废管信息-->
-    <select id="getStripOfTime" resultType="com.htcsweb.entity.CoatingStrip">
+    <!--获取废管扒皮信息-->
+    <select id="getCoatingStripInfo" resultType="com.htcsweb.entity.CoatingStrip">
         SELECT o.* from coating_strip_process o
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no
