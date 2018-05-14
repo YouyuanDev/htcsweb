@@ -9,7 +9,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
     String basePath=request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+    String path = request.getContextPath();
+    String bPath =request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+            + path + "/";
 %>
+
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -208,7 +212,9 @@
                success:function (data) {
                    if (data=="success"){
                        $('#dailyProRptDatagrids').datagrid('reload');
-                       hlAlertFour("生成成功!");
+                       //hlAlertFour("生成成功!");
+                       //开始下载excel
+                       downloadExcelOfDailyReport(project_no,begin_time,end_time);
                    }else{
                        hlAlertFour("生成日报时出错!");
                    }
@@ -223,6 +229,38 @@
         function  clearFormLabel(){
             $('#dailyProRptForm').form('clear');
             $('.hl-label').text('');
+        }
+        function downloadExcelOfDailyReport(project_no,begin_time,end_time) {
+            var form = $("<form>");//定义一个form表单
+            form.attr("style", "display:none");
+            form.attr("target", "");
+            form.attr("method", "post");//请求类型
+            form.attr("action","/InspectionRecordPDFOperation/getRecordReportPDF.action");//请求地址
+            $("body").append(form);//将表单放置在web中
+            var input1 = $("<input type='hidden' name='project_no' value='" + selectValue + "'/>");
+            form.append(input1);
+            var input2 = $("<input type='hidden' name='beginTime' value='" + begin_time + "'/>");
+            form.append(input2);
+            var input3 = $("<input type='hidden' name='endTime' value='" + end_time + "'/>");
+            form.append(input3);
+            // form.submit();
+            var options={
+                type:'POST',
+                url:'/DailyProductionReportOperation/getRecordReportPDF.action',
+                dataType:'json',
+                beforeSubmit:function () {
+                    ajaxLoading();
+                },
+                success:function (data) {
+                    window.location.href="<%=bPath%>"+data;
+                    ajaxLoadEnd();
+                },error:function () {
+                    ajaxLoadEnd();
+                }
+            };
+            //form.submit(function (e) {
+            form.ajaxSubmit(options);
+            return false;
         }
     </script>
 

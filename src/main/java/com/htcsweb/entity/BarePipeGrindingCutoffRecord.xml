@@ -97,7 +97,7 @@
     <!--获取外防光管隔离数量-->
     <select id="getODBarePipeOnholdCount" resultType="java.lang.Integer">
 
-        select count(DISTINCT(pipe_no)) from pipe_basic_info where pipe_no in
+        select count(*) from (
         (
         SELECT o.pipe_no from od_blast_process o
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
@@ -157,7 +157,7 @@
             </if>
         </where>
 
-        )
+        ))temp
     </select>
 
 
@@ -165,7 +165,7 @@
     <!--获取内防光管隔离数量-->
     <select id="getIDBarePipeOnholdCount" resultType="java.lang.Integer">
 
-        select count(DISTINCT(pipe_no)) from pipe_basic_info where pipe_no in
+        select count(*) from (
         (
         SELECT o.pipe_no from id_blast_process o
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
@@ -225,7 +225,7 @@
             </if>
         </where>
 
-        )
+        ))temp
     </select>
 
 
