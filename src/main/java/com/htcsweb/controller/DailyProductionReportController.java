@@ -205,19 +205,18 @@ public class DailyProductionReportController {
                         for (String item:dateList){
                             //根据日期填充对应的tab
                             //获取外防腐总数
-                            int odCoatingCount=getTotalOdCoating(item,project_no,external_coating,internal_coating,od,wt);
+                            int odCoatingCount=getOdCoatingCount(item,project_no,external_coating,internal_coating,od,wt);
                             //接收光管数量，长度
                             int bareTotal=0,bareLength=0;
-                            System.out.println(item+":"+project_no+":"+external_coating+":"+internal_coating+":"+od+":"+wt+"开始计算：");
-                            System.out.println("外涂总防腐数："+odCoatingCount);
                             //外防腐合格数和长度
-                            CountSum countSum=getTotalQualifiedOdCoating(item,project_no,external_coating,internal_coating,od,wt);
-                            int odQualifiedTotal=0;float odQualifiedLength=0;
-                                odQualifiedTotal=countSum.count;
-                                //合格长度
-                                odQualifiedLength=countSum.sum;
+                            CountSum countSum=getOdCoatingAcceptedCount(item,project_no,external_coating,internal_coating,od,wt);
+                            int odAcceptedCount=0;float odAcceptedLength=0;
+                            //外防腐合格数
+                            odAcceptedCount=countSum.count;
+                            //合格长度
+                            odAcceptedLength=countSum.sum;
                             //外防目标合格数
-                            int odTargetQualifiedTotal=0;
+                            int odTargetQualifiedCount=0;
                             //外防目标合格长度
                             float odTargetQualifiedLength=0;
                             //外防修补数
@@ -232,16 +231,15 @@ public class DailyProductionReportController {
                             int odCoatingRejectedPipe=getCoatingRejectedPipe(item,project_no,external_coating,internal_coating,"od",od,wt);
                             //外防涂层管废管扒皮处理合格数量
                             int odCoatingStripAcceptedCount=getStripPipeAcceptedCount(item,project_no,external_coating,internal_coating,"od",od,wt);
-                            System.out.println(odCoatingStripAcceptedCount+"外防涂层管废管扒皮处理合格数量");
                             //获取内防腐总数
-                            int idCoatingCount=getTotalIdCoating(item,project_no,external_coating,internal_coating,od,wt);
-                            CountSum countSum1= getTotalQualifiedIdCoating(item,project_no,external_coating,internal_coating,od,wt);
+                            int idCoatingCount=getIdCoatingCount(item,project_no,external_coating,internal_coating,od,wt);
+                            CountSum countSum1= getIdCoatingAcceptedCount(item,project_no,external_coating,internal_coating,od,wt);
                             //内防腐合格数和长度
-                            int idQualifiedTotal=0;float idQualifiedLength=0;
-                                //idQualifiedTotal=((Double)odlist.get(0)).intValue();
-                                idQualifiedTotal=countSum1.count;
-                                //合格长度
-                                idQualifiedLength=countSum1.sum;
+                            int idAcceptedCount=0;float idAcceptedLength=0;
+                            //合格数
+                            idAcceptedCount=countSum1.count;
+                            //合格长度
+                            idAcceptedLength=countSum1.sum;
                             //内防目标合格数
                             int idTargetQualifiedTotal=0;
                             //内防目标合格长度
@@ -319,9 +317,9 @@ public class DailyProductionReportController {
                             report.setBare_pipe_count(bareTotal);
                             report.setBare_pipe_length(bareLength);
                             report.setOd_total_coated_count(odCoatingCount);
-                            report.setOd_total_accepted_count(odQualifiedTotal);
-                            report.setOd_total_accepted_length(odQualifiedLength);
-                            report.setOd_aiming_accepted_count(odTargetQualifiedTotal);
+                            report.setOd_total_accepted_count(odAcceptedCount);
+                            report.setOd_total_accepted_length(odAcceptedLength);
+                            report.setOd_aiming_accepted_count(odTargetQualifiedCount);
                             report.setOd_aiming_total_accepted_length(odTargetQualifiedLength);
                             report.setOd_repair_pipe_count(odCoatingRepairCount);
                             report.setOd_bare_pipe_onhold_count(odPipeOnholdCount);
@@ -330,8 +328,8 @@ public class DailyProductionReportController {
                             report.setOd_coated_pipe_rejected_count(odCoatingRejectedPipe);
                             report.setOd_coated_pipe_strip_count(odCoatingStripAcceptedCount);
                             report.setId_total_coated_count(idCoatingCount);
-                            report.setId_total_accepted_count(idQualifiedTotal);
-                            report.setId_total_accepted_length(idQualifiedLength);
+                            report.setId_total_accepted_count(idAcceptedCount);
+                            report.setId_total_accepted_length(idAcceptedLength);
                             report.setId_aiming_accepted_count(idTargetQualifiedTotal);
                             report.setId_aiming_total_accepted_length(idTargetQualifiedLength);
                             report.setId_repair_pipe_count(idCoatingRepairCount);
@@ -408,25 +406,26 @@ public class DailyProductionReportController {
     }
 
     //------------获取各个数据-------
-    //1.获取当天外防腐总数(分为2FBE和3LPE两种)
-    private int getTotalOdCoating(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
+    //1.获取当天外防腐总数(获取外防终检表中数)
+    private int getOdCoatingCount(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
         String nextday=DateTimeUtil.getNextDay(now);
-        int total=0;
+        int count=0;
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            if(external_coating.equals("2FBE")){
-                total=odCoatingProcessDao.getODCoating2FBECount(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);
-            }else if(external_coating.equals("3LPE")){
-                total=odCoating3LpeProcessDao.getODCoating3LPECount(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);
-            }
+            count=odFinalInspectionProcessDao.getODCoatingCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
+//            if(external_coating.equals("2FBE")){
+//                count=odCoatingProcessDao.getODCoating2FBECount(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);
+//            }else if(external_coating.equals("3LPE")){
+//                count=odCoating3LpeProcessDao.getODCoating3LPECount(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);
+//            }
         }catch (Exception e){
             e.printStackTrace();
         }
-        return total;
+        return count;
     }
     //2.获取当天外防腐合格支数与合格长度
-    private CountSum getTotalQualifiedOdCoating(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
+    private CountSum getOdCoatingAcceptedCount(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
         String nextday=DateTimeUtil.getNextDay(now);
         CountSum countSum=new CountSum();
         try{
@@ -438,7 +437,6 @@ public class DailyProductionReportController {
                 if(hs!=null){
                     //System.out.println(hs.get("odtotalcount").toString()+"－－－－－－－－");
                     countSum.count=((Long) hs.get("odtotalcount")).intValue();
-                    System.out.println(countSum.count+"外防腐合格数");
                     if(hs.get("odtotallength")!=null){
                         countSum.sum=((Double) (hs.get("odtotallength"))).floatValue();
                     }
@@ -452,144 +450,114 @@ public class DailyProductionReportController {
     //3.获取当天的修补支数(根据od或者id划分)
     private int getDailyCoatingRepairCount(String now,String project_no,String external_coating,String internal_coating,String odid,float od,float wt){
         String nextday=DateTimeUtil.getNextDay(now);
-        int total=0;
+        int count=0;
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            total=coatingRepairDao.getCoatingRepairCount(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
+            count=coatingRepairDao.getCoatingRepairCount(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
         }
-        return total;
+        return count;
     }
     //4.获取当天的防腐光管隔离数（可能并未处理）
     private int getBarePipeOnholdCount(String now,String project_no,String external_coating,String internal_coating,String odid,float od,float wt){
         String nextday=DateTimeUtil.getNextDay(now);
-        int total=0;
+        int count=0;
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
             if(odid!=null&&odid.equals("od")){
-                total=barePipeGrindingCutoffRecordDao.getODBarePipeOnholdCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
+                count=barePipeGrindingCutoffRecordDao.getODBarePipeOnholdCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
             }
             else if(odid!=null&&odid.equals("id")){
-                total=barePipeGrindingCutoffRecordDao.getIDBarePipeOnholdCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
+                count=barePipeGrindingCutoffRecordDao.getIDBarePipeOnholdCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
             }
         }catch (Exception e){
             e.printStackTrace();
-        }finally {
-
         }
-        return total;
+        return count;
     }
     //5.光管隔离修磨数量
     private int getBarePipeGrindingCount(String now,String project_no,String external_coating,String internal_coating,String odid,float od,float wt){
         String nextday=DateTimeUtil.getNextDay(now);
-        int total=0;
+        int count=0;
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            total=barePipeGrindingCutoffRecordDao.getBarePipeGrindingCount(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
+            count=barePipeGrindingCutoffRecordDao.getBarePipeGrindingCount(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
-        }finally {
-
         }
-        return total;
+        return count;
     }
     //6.光管隔离切管数量
     private int getBarePipeCutoffCount(String now,String project_no,String external_coating,String internal_coating,String odid,float od,float wt){
         String nextday=DateTimeUtil.getNextDay(now);
-        int total=0;
+        int count=0;
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            total=barePipeGrindingCutoffRecordDao.getBarePipeCutoffCount(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
+            count=barePipeGrindingCutoffRecordDao.getBarePipeCutoffCount(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
-        }finally {
-
         }
-        return total;
+        return count;
     }
     //7.获取涂层废管数量
     private int getCoatingRejectedPipe(String now,String project_no,String external_coating,String internal_coating,String odid,float od,float wt){
         String nextday=DateTimeUtil.getNextDay(now);
-        int total=0;
+        int count=0;
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
             if(odid!=null&&odid.equals("od")){
-                total=coatingStripDao.getODCoatingRejectedPipe(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
+                count=coatingStripDao.getODCoatingRejectedPipe(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
             }
             else if(odid!=null&&odid.equals("id")){
-                total=coatingStripDao.getIDCoatingRejectedPipe(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
+                count=coatingStripDao.getIDCoatingRejectedPipe(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
             }
         }catch (Exception e){
             e.printStackTrace();
         }finally {
 
         }
-        return total;
+        return count;
     }
     //8.涂层废管扒皮处理合格数量
     private int getStripPipeAcceptedCount(String now,String project_no,String external_coating,String internal_coating,String odid,float od,float wt){
         String nextday=DateTimeUtil.getNextDay(now);
         System.out.println(now+":"+nextday+":"+project_no+":"+external_coating+":"+internal_coating+":"+od+":"+wt+":"+odid);
-        int total=0;
+        int count=0;
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            total=coatingStripDao.getStripPipeAcceptedCount(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
+            count=coatingStripDao.getStripPipeAcceptedCount(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
         }finally {
 
         }
-        return total;
+        return count;
     }
-
-    //7.获取外防腐涂层管废管数量和废管处理数量(当天符合参数的待扒皮数量和扒皮完成的和是废管数量)
-//    private List<String> getTotalOdWastePipe(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
-//        List<String>list=new ArrayList<>();
-//        int total0=0,total1=0,total2=0;
-//        try{
-//            String nextday=DateTimeUtil.getNextDay(now);
-//            Date beginTime=timeformat.parse(now+" 08:00:00");
-//            Date endTime=timeformat.parse(nextday+" 08:00:00");
-//            if(external_coating.equals("2FBE")){
-//                total0=odCoatingInspectionProcessDao.getTotalOdWastePipe(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);//待扒皮数量
-//            }else if(external_coating.equals("3LPE")){
-//                total0=odCoating3LpeInspectionProcessDao.getTotalOdWastePipe(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);//待扒皮数量
-//            }
-//            total1=getTotalBarePipeGrindingInfo(now,project_no,external_coating,internal_coating,"od",od,wt);//废管处理数量
-//            total2=total0+total1;//废管数量
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }finally {
-//            list.add(String.valueOf(total2));
-//            list.add(String.valueOf(total1));
-//        }
-//        return list;
-//    }
-
 
     //---------------内防腐------------
     //9.获取当天内防腐总数
-    private int getTotalIdCoating(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
+    private int getIdCoatingCount(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
         String nextday=DateTimeUtil.getNextDay(now);
-        int total=0;
+        int count=0;
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            total=idCoatingProcessDao.getIDCoatingCount(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);
+            //total=idCoatingProcessDao.getIDCoatingCount(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);
+            count=idFinalInspectionProcessDao.getIDCoatingCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
         }
-        return total;
+        return count;
     }
     //10.获取当天的内防腐合格数和长度
-    private CountSum getTotalQualifiedIdCoating(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
+    private CountSum getIdCoatingAcceptedCount(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
         String nextday=DateTimeUtil.getNextDay(now);
         CountSum countSum=new CountSum();
         try{
@@ -610,26 +578,6 @@ public class DailyProductionReportController {
         }
         return countSum;
     }
-
-    //11.获取内防腐涂层管废管数量和废管处理数量(当天符合参数的待扒皮数量和扒皮完成的和是废管数量)
-//    private List<String> getTotalIdWastePipe(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
-//        List<String>list=new ArrayList<>();
-//        int total0=0,total1=0,total2=0;
-//        try{
-//            String nextday=DateTimeUtil.getNextDay(now);
-//            Date beginTime=timeformat.parse(now+" 08:00:00");
-//            Date endTime=timeformat.parse(nextday+" 08:00:00");
-//            total0=idCoatingInspectionProcessDao.getTotalIdWastePipe(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);
-//            total1=getTotalBarePipeGrindingInfo(now,project_no,external_coating,internal_coating,"id",od,wt);//废管处理数量
-//            total2=total0+total1;//废管数量
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }finally {
-//            list.add(String.valueOf(total2));
-//            list.add(String.valueOf(total1));
-//        }
-//        return list;
-//    }
     //12.白班、夜班样管信息
     private List<PipeSamplingRecord>getPipeSamplingInfo(String now,int type,String project_no,String external_coating,String internal_coating,float od,float wt){
         List<PipeSamplingRecord>list=new ArrayList<>();
@@ -658,41 +606,41 @@ public class DailyProductionReportController {
     //13.1获取样管切割个数
     private int getSampleCutoffCount(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
         String nextday=DateTimeUtil.getNextDay(now);
-        int total=0;
+        int count=0;
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            total=pipeSamplingRecordDao.getSampleCutoffCount(project_no,null,external_coating,internal_coating,null,od,wt,beginTime,endTime);
+            count=pipeSamplingRecordDao.getSampleCutoffCount(project_no,null,external_coating,internal_coating,null,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
         }
-        return total;
+        return count;
     }
     //13.2获取隔离管切割管数量
     private int getBarePipeCutoffCount(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
         String nextday=DateTimeUtil.getNextDay(now);
-        int total=0;
+        int count=0;
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            total=barePipeGrindingCutoffRecordDao.getBarePipeCutoffCount(project_no,null,external_coating,internal_coating,null,od,wt,beginTime,endTime);
+            count=barePipeGrindingCutoffRecordDao.getBarePipeCutoffCount(project_no,null,external_coating,internal_coating,null,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
         }
-        return total;
+        return count;
     }
     //13.3获取重倒棱合格管数量
     private int getAcceptedRebevelCount(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
         String nextday=DateTimeUtil.getNextDay(now);
-        int total=0;
+        int count=0;
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            total=pipeRebevelRecordDao.getAcceptedRebevelCount(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);
+            count=pipeRebevelRecordDao.getAcceptedRebevelCount(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
         }
-        return total;
+        return count;
     }
 
 //    private List<String>getPipeBevelOfDay(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
