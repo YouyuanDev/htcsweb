@@ -73,7 +73,8 @@ public class SessionFilter extends OncePerRequestFilter{
             "get2FBESamplePipeNo",
             "get3LPESamplePipeNo",
             "getLiquidEpoxySamplePipeNo",
-            "getPDFProgress"
+            "getPDFProgress",
+            "getDailyRecordReportPDF"
 
     }; // 不过滤的uri
 

@@ -5,8 +5,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.*;
 import com.htcsweb.entity.*;
 import com.htcsweb.util.DateTimeUtil;
+import com.htcsweb.util.GenerateExcelToPDFUtil;
 import com.htcsweb.util.GroupEntity;
 import com.htcsweb.util.ResponseUtil;
+import jxl.write.Label;
+import jxl.write.WritableCellFormat;
 import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.support.incrementer.HsqlMaxValueIncrementer;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
@@ -63,28 +67,151 @@ public class DailyProductionReportController {
         public int count=0;
         public float sum=0;
     }
-    @RequestMapping(value="getRecordReportPDF",produces="application/json;charset=UTF-8")
+
+    //
+    @RequestMapping(value="getDailyRecordReportPDF",produces="application/json;charset=UTF-8")
     @ResponseBody
-    public  String getRecordReportPDF(HttpServletRequest request, HttpServletResponse response) {
+    public  String getDailyRecordReportPDF(HttpServletRequest request, HttpServletResponse response) {
         String basePath = request.getSession().getServletContext().getRealPath("/");
         Date start_time = null;
         Date finish_time = null;
         //是否成功标识
-        String flag = "success", zipName = "";
-        //HashMap<String,Object>map=new HashMap<>();
+        String zipName = "fail";
         //先获取选择的日期区间之间的所有日期
         String project_no = request.getParameter("project_no");
-        String project_name = request.getParameter("project_name");
         String beginTimeStr = request.getParameter("beginTime");
         String endTimeStr = request.getParameter("endTime");
-        try{
-             //获取数据库中的数据
+       // String project_name=request.getParameter("project_name");
 
+        try{
+            WritableCellFormat wcf=new WritableCellFormat();
+            File fileZip=new File(basePath+"upload/pdf/");
+            if(fileZip.exists()&&fileZip.isDirectory()){
+                String zipList[]=fileZip.list();
+                for (String zippath:zipList){
+                    File file=new File(basePath+"/upload/pdf/"+zippath);
+                    if(file.isFile()&&file.getName().endsWith(".zip")){
+                        file.delete();
+                    }
+                }
+            }
+            String excelTemplateFullName=request.getSession().getServletContext().getRealPath("/")
+                    +"template/daliy_production_report_template.xls";
+            String newExcelFileName=null;
+            System.out.println(excelTemplateFullName);
+            System.out.println(newExcelFileName);
+            ArrayList<Label> datalist=new ArrayList<Label>();
+             //获取数据库中的数据
+             if(project_no!=null&&!project_no.equals("")&&beginTimeStr!=null&&!beginTimeStr.equals("")&&endTimeStr!=null&&!endTimeStr.equals("")){
+                 System.out.println("-----------------------");
+                 start_time=timeformat.parse(beginTimeStr+" 08:00:00");
+                 finish_time=timeformat.parse(endTimeStr+" 08:00:00");
+                 List<DailyProductionReport>dailyProductionReportList=null;
+//                 File file0=new File(newExcelFileName);
+//                 if(!file0.exists()){
+//                     file0.createNewFile();
+//                 }
+                 String tabName="",od_wt="",external_coating="";
+                 int row=8;
+                // Date begin_time=sdf.parse(beginTimeStr);
+                 //Date end_time=sdf.parse(endTimeStr);
+                 System.out.println(beginTimeStr+":"+endTimeStr+":"+project_no);
+                 List<GroupEntity>grouplist=getTabGroup(project_no);
+                 List<String> dateList= DateTimeUtil.getBetweenDates(start_time,finish_time);
+                 float od=0,wt=0;
+                 System.out.println(grouplist.size()+":"+dateList.size()+"~~~~~~");
+                 for (GroupEntity entity:grouplist){
+                     od=entity.getOd(); wt=entity.getWt();
+                     od_wt=String.valueOf(od)+"*"+String.valueOf(wt);
+                     tabName=od_wt;
+                     external_coating=entity.getExternal_coating();
+                     for (String item:dateList){
+                         System.out.println("----------"+od_wt+":"+external_coating);
+                         //根据笛卡尔集生成对应的tab
+                         dailyProductionReportList=dailyProductionReportDao.getDailyReportByParams(project_no,external_coating,od_wt,sdf.parse(item));
+                         System.out.println("数据："+dailyProductionReportList.size());
+                         System.out.println(JSONObject.toJSONString(dailyProductionReportList));
+                         if(dailyProductionReportList!=null&&dailyProductionReportList.size()>0){
+                             for (DailyProductionReport report:dailyProductionReportList){
+                                 FillExcelData(datalist,dailyProductionReportList,row,od_wt,wcf);
+                                 row++;
+                             }
+                         }
+                         if(datalist.size()>0){
+                             newExcelFileName=GenerateExcelToPDFUtil.FillExcelTemplate(excelTemplateFullName,newExcelFileName,datalist,tabName);
+                         }
+                         //System.out.println(datalist.size()+"------>datalist");
+                         datalist.clear();
+                         row=8;
+                     }
+                 }
+                 System.out.println(newExcelFileName+"newName");
+                 ArrayList list=new ArrayList();
+                 list.add(newExcelFileName);
+                 zipName="upload/pdf/"+ResponseUtil.downLoadPdf(list,request,response);
+                 //删除多余文件
+//                 if(file0.exists()){
+//                    file0.delete();
+//                 }
+             }
         }catch (Exception e){
+            System.out.println("]]]]]]]]]]]]]]]]]]]]]]");
             e.printStackTrace();
         }
         return JSONObject.toJSONString(zipName);
     }
+
+    private  void  FillExcelData(ArrayList<Label> datalist,List<DailyProductionReport>dailyProductionReportList,int row,String tabName,WritableCellFormat wcf){
+        for (DailyProductionReport report:dailyProductionReportList){
+            //根据循环的个数创建sheet
+            tabName=getFormatString(report.getOd_wt());
+            datalist.add(new Label(34,3,"Pipe size: "+tabName+"mm", wcf));
+            datalist.add(new Label(34,4,"Coating structure: "+getFormatString(report.getOd_coating_type()), wcf));
+            datalist.add(new Label(3,5,getFormatString(report.getOd_coating_type())+" External coated pipe", wcf));
+            datalist.add(new Label(0,row+8,sdf.format(report.getProduction_date()), wcf));
+            datalist.add(new Label(1,row+8,String.valueOf(report.getBare_pipe_count()), wcf));
+            datalist.add(new Label(2,row+8,String.valueOf(report.getBare_pipe_length()), wcf));
+            datalist.add(new Label(3,row+8,String.valueOf(report.getOd_total_coated_count()), wcf));
+            datalist.add(new Label(4,row+8,String.valueOf(report.getOd_total_accepted_count()), wcf));
+            datalist.add(new Label(5,row+8,String.valueOf(report.getOd_aiming_accepted_count()), wcf));
+            datalist.add(new Label(6,row+8,String.valueOf(report.getOd_total_accepted_length()), wcf));
+            datalist.add(new Label(7,row+8,String.valueOf(report.getOd_aiming_total_accepted_length()), wcf));
+            datalist.add(new Label(8,row+8,String.valueOf(report.getOd_repair_pipe_count()), wcf));
+            datalist.add(new Label(9,row+8,String.valueOf(report.getOd_bare_pipe_onhold_count()), wcf));
+            datalist.add(new Label(10,row+8,String.valueOf(report.getOd_bare_pipe_grinded_count()), wcf));
+            datalist.add(new Label(11,row+8,String.valueOf(report.getOd_bare_pipe_cut_count()), wcf));
+            datalist.add(new Label(12,row+8,String.valueOf(report.getOd_coated_pipe_rejected_count()), wcf));
+            datalist.add(new Label(13,row+8,String.valueOf(report.getOd_coated_pipe_strip_count()), wcf));
+
+            datalist.add(new Label(14,row+8,String.valueOf(report.getId_total_coated_count()), wcf));
+            datalist.add(new Label(15,row+8,String.valueOf(report.getId_total_accepted_count()), wcf));
+            datalist.add(new Label(16,row+8,String.valueOf(report.getId_aiming_accepted_count()), wcf));
+            datalist.add(new Label(17,row+8,String.valueOf(report.getId_total_accepted_length()), wcf));
+            datalist.add(new Label(18,row+8,String.valueOf(report.getId_aiming_total_accepted_length()), wcf));
+            datalist.add(new Label(19,row+8,String.valueOf(report.getId_repair_pipe_count()), wcf));
+            datalist.add(new Label(20,row+8,String.valueOf(report.getId_bare_pipe_onhold_count()), wcf));
+            datalist.add(new Label(21,row+8,String.valueOf(report.getId_bare_pipe_grinded_count()), wcf));
+            datalist.add(new Label(22,row+8,String.valueOf(report.getId_bare_pipe_cut_count()), wcf));
+            datalist.add(new Label(23,row+8,String.valueOf(report.getId_coated_pipe_rejected_count()), wcf));
+            datalist.add(new Label(24,row+8,String.valueOf(report.getId_coated_pipe_strip_count()), wcf));
+
+            datalist.add(new Label(25,row+8,String.valueOf(report.getOd_test_pipe_no_dayshift()), wcf));
+            datalist.add(new Label(26,row+8,String.valueOf(report.getOd_test_pipe_length_before_cut_dayshift()), wcf));
+            datalist.add(new Label(27,row+8,String.valueOf(report.getOd_test_pipe_cutting_length_dayshift()), wcf));
+            datalist.add(new Label(28,row+8,String.valueOf(report.getOd_test_pipe_no_nightshift()), wcf));
+            datalist.add(new Label(29,row+8,String.valueOf(report.getOd_test_pipe_length_before_cut_nightshift()), wcf));
+            datalist.add(new Label(30,row+8,String.valueOf(report.getOd_test_pipe_cutting_length_nightshift()), wcf));
+            datalist.add(new Label(31,row+8,String.valueOf(report.getOd_test_pipe_count()), wcf));
+
+            datalist.add(new Label(32,row+8,String.valueOf(report.getRebevel_pipe_count()), wcf));
+            datalist.add(new Label(33,row+8,String.valueOf(report.getPipe_accepted_count_after_rebevel()), wcf));
+            datalist.add(new Label(34,row+8,String.valueOf(report.getPipe_delivered_count()), wcf));
+            datalist.add(new Label(35,row+8,String.valueOf(report.getPipe_delivered_length()), wcf));
+            //工程累计
+
+        }
+    }
+
     //模糊查询DailyProductionReport信息列表
     @RequestMapping(value = "/getDailProductionReportByLike")
     @ResponseBody
@@ -649,5 +776,13 @@ public class DailyProductionReportController {
             e.printStackTrace();
         }
         return count;
+    }
+
+    public  String getFormatString(String param){
+        if(param!=null&&!param.equals("")){
+            return  param;
+        }else{
+            return  " ";
+        }
     }
 }

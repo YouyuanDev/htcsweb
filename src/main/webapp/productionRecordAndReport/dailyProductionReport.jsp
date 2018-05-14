@@ -34,8 +34,32 @@
     <script src="../js/jquery.i18n.properties-1.0.9.js" type="text/javascript"></script>
     <script src="../js/language.js" type="text/javascript"></script>
 
+    <script src="../js/jquery.form.js" type="text/javascript"></script>
+    <style type="text/css">
+        .datagrid-mask {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.5;
+            filter: alpha(opacity=50);
+            background-color:#000000;
+            display: none;
+        }
 
-
+        .datagrid-mask-msg {
+            position: absolute;
+            top: 50%;
+            margin-top: -20px;
+            padding: 12px 5px 10px 30px;
+            width: auto;
+            height: 16px;
+            border-width: 2px;
+            border-style: solid;
+            display: none;
+        }
+    </style>
     <script type="text/javascript">
         var url;
         var basePath ="<%=basePath%>"+"/upload/pictures/";
@@ -214,7 +238,6 @@
                        $('#dailyProRptDatagrids').datagrid('reload');
                        //hlAlertFour("生成成功!");
                        //开始下载excel
-                       downloadExcelOfDailyReport(project_no,begin_time,end_time);
                    }else{
                        hlAlertFour("生成日报时出错!");
                    }
@@ -230,14 +253,31 @@
             $('#dailyProRptForm').form('clear');
             $('.hl-label').text('');
         }
-        function downloadExcelOfDailyReport(project_no,begin_time,end_time) {
+        function downloadDialyReportLinkBtn() {
+            var project_no=$("input[name='projectno']").val();
+            var begin_time=$("input[name='begintime']").val();
+            var end_time=$("input[name='endtime']").val();
+            if (begin_time == null || begin_time.length == "") {
+                $.messager.alert('Warning', '请输入开始时间!');
+                return false;
+            }
+            if (end_time == null || end_time.length == "") {
+                $.messager.alert('Warning', '请输入结束时间!');
+                return false;
+            }
+            var begin_date = new Date(begin_time);
+            var end_date = new Date(end_time);
+            if (!(end_date - begin_date >= 0)) {
+                $.messager.alert('Warning', '开始时间必须小于结束时间!');
+                return false;
+            }
             var form = $("<form>");//定义一个form表单
             form.attr("style", "display:none");
             form.attr("target", "");
             form.attr("method", "post");//请求类型
-            form.attr("action","/InspectionRecordPDFOperation/getRecordReportPDF.action");//请求地址
+            form.attr("action","/DailyProductionReportOperation/getDailyRecordReportPDF.action");//请求地址
             $("body").append(form);//将表单放置在web中
-            var input1 = $("<input type='hidden' name='project_no' value='" + selectValue + "'/>");
+            var input1 = $("<input type='hidden' name='project_no' value='" + project_no + "'/>");
             form.append(input1);
             var input2 = $("<input type='hidden' name='beginTime' value='" + begin_time + "'/>");
             form.append(input2);
@@ -246,13 +286,18 @@
             // form.submit();
             var options={
                 type:'POST',
-                url:'/DailyProductionReportOperation/getRecordReportPDF.action',
+                url:'/DailyProductionReportOperation/getDailyRecordReportPDF.action',
                 dataType:'json',
                 beforeSubmit:function () {
                     ajaxLoading();
                 },
                 success:function (data) {
-                    window.location.href="<%=bPath%>"+data;
+                    alert(data);
+                    if(data=="fail"){
+                       alert("下载时出现错误!")
+                    }else{
+                        window.location.href="<%=bPath%>"+data;
+                    }
                     ajaxLoadEnd();
                 },error:function () {
                     ajaxLoadEnd();
@@ -262,11 +307,23 @@
             form.ajaxSubmit(options);
             return false;
         }
+        function ajaxLoading() {
+            $("<div class=\"datagrid-mask\"></div>").css({
+                display: "block",
+                width: "100%",
+                height: $(window).height()
+            }).appendTo("body");
+            $("<div class=\"datagrid-mask-msg\"></div>").html("正在处理，请稍候。。。").appendTo("body").css({
+                display: "block",
+                left: ($(document.body).outerWidth(true) - 190) / 2,
+                top: ($(window).height() - 45) / 2
+            });
+        }
+        function ajaxLoadEnd() {
+            $(".datagrid-mask").remove();
+            $(".datagrid-mask-msg").remove();
+        }
     </script>
-
-
-
-
 
 </head>
 
@@ -348,8 +405,10 @@
     <span class="i18n1" name="endtime">结束时间</span>:
     <input id="endtime" name="endtime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
     <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchDailyProRpt()">Search</a>
+    <a href="#" id="addDialyReportLinkBtn" class="easyui-linkbutton i18n1" name="addDialyReport" onclick="addDialyReportLinkBtn()">生成报表</a>
+    <a href="#" id="downloadDialyReportLinkBtn" class="easyui-linkbutton i18n1" name="downloadDialyReport" onclick="downloadDialyReportLinkBtn()">下载报表</a>
     <div style="float:right">
-        <a href="#" id="addDialyReportLinkBtn" class="easyui-linkbutton i18n1" name="addDialyReport" onclick="addDialyReportLinkBtn()">生成报表</a>
+
         <a href="#" id="addObpLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addDailyProRpt()">添加</a>
         <a href="#" id="editObpLinkBtn" class="easyui-linkbutton i18n1" name="edit" data-options="iconCls:'icon-edit',plain:true" onclick="editDailyProRpt()">修改</a>
         <a href="#" id="deltObpLinkBtn" class="easyui-linkbutton i18n1" name="delete" data-options="iconCls:'icon-remove',plain:true" onclick="delDailyProRpt()">删除</a>
