@@ -47,11 +47,13 @@ public class DailyProductionReport {
     private  int pipe_accepted_count_after_rebevel;
     private  int pipe_delivered_count;
     private  float pipe_delivered_length;
+    private String id_coating_type;
+
 
     public DailyProductionReport() {
     }
 
-    public DailyProductionReport(int id, Date production_date, String project_no, String od_coating_type, String od_wt, int bare_pipe_count, float bare_pipe_length, int od_total_coated_count, int od_total_accepted_count, int od_aiming_accepted_count, float od_total_accepted_length, float od_aiming_total_accepted_length, int od_repair_pipe_count, int od_bare_pipe_onhold_count, int od_bare_pipe_grinded_count, int od_bare_pipe_cut_count, int od_coated_pipe_rejected_count, int od_coated_pipe_strip_count, int id_total_coated_count, int id_total_accepted_count, int id_aiming_accepted_count, float id_total_accepted_length, float id_aiming_total_accepted_length, int id_repair_pipe_count, int id_bare_pipe_onhold_count, int id_bare_pipe_grinded_count, int id_bare_pipe_cut_count, int id_coated_pipe_rejected_count, int id_coated_pipe_strip_count, String od_test_pipe_no_dayshift, float od_test_pipe_length_before_cut_dayshift, float od_test_pipe_cutting_length_dayshift, String od_test_pipe_no_nightshift, float od_test_pipe_length_before_cut_nightshift, float od_test_pipe_cutting_length_nightshift, int od_test_pipe_count, int rebevel_pipe_count, int pipe_accepted_count_after_rebevel, int pipe_delivered_count, float pipe_delivered_length) {
+    public DailyProductionReport(int id, Date production_date, String project_no, String od_coating_type, String od_wt, int bare_pipe_count, float bare_pipe_length, int od_total_coated_count, int od_total_accepted_count, int od_aiming_accepted_count, float od_total_accepted_length, float od_aiming_total_accepted_length, int od_repair_pipe_count, int od_bare_pipe_onhold_count, int od_bare_pipe_grinded_count, int od_bare_pipe_cut_count, int od_coated_pipe_rejected_count, int od_coated_pipe_strip_count, int id_total_coated_count, int id_total_accepted_count, int id_aiming_accepted_count, float id_total_accepted_length, float id_aiming_total_accepted_length, int id_repair_pipe_count, int id_bare_pipe_onhold_count, int id_bare_pipe_grinded_count, int id_bare_pipe_cut_count, int id_coated_pipe_rejected_count, int id_coated_pipe_strip_count, String od_test_pipe_no_dayshift, float od_test_pipe_length_before_cut_dayshift, float od_test_pipe_cutting_length_dayshift, String od_test_pipe_no_nightshift, float od_test_pipe_length_before_cut_nightshift, float od_test_pipe_cutting_length_nightshift, int od_test_pipe_count, int rebevel_pipe_count, int pipe_accepted_count_after_rebevel, int pipe_delivered_count, float pipe_delivered_length, String id_coating_type) {
         this.id = id;
         this.production_date = production_date;
         this.project_no = project_no;
@@ -92,6 +94,7 @@ public class DailyProductionReport {
         this.pipe_accepted_count_after_rebevel = pipe_accepted_count_after_rebevel;
         this.pipe_delivered_count = pipe_delivered_count;
         this.pipe_delivered_length = pipe_delivered_length;
+        this.id_coating_type = id_coating_type;
     }
 
     public int getId() {
@@ -412,5 +415,13 @@ public class DailyProductionReport {
 
     public void setPipe_delivered_length(float pipe_delivered_length) {
         this.pipe_delivered_length = pipe_delivered_length;
+    }
+
+    public String getId_coating_type() {
+        return id_coating_type;
+    }
+
+    public void setId_coating_type(String id_coating_type) {
+        this.id_coating_type = id_coating_type;
     }
 }

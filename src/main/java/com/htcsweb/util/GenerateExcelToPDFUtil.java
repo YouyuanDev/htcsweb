@@ -11,6 +11,7 @@ import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 import jxl.write.Label;
+import jxl.write.WritableImage;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 
@@ -38,7 +39,7 @@ public class GenerateExcelToPDFUtil {
          //GenerateExcelToPDFUtil.PDFAutoMation(excelTemplateFullName,null,"/Users/kurt/Documents/testPDF.pdf","/Users/kurt/Documents/image002.jpg","/Users/kurt/Documents/simhei.ttf");
         String newExcelfilename=null;
         for(int i=0;i<=3;i++) {
-            newExcelfilename=GenerateExcelToPDFUtil.FillExcelTemplate(excelTemplateFullName, newExcelfilename, null, String.valueOf(i));
+            newExcelfilename=GenerateExcelToPDFUtil.FillExcelTemplate(excelTemplateFullName, newExcelfilename, null, String.valueOf(i),null);
         }
     }
 
@@ -147,7 +148,7 @@ public class GenerateExcelToPDFUtil {
     }
 
     //根据模版名字，将数据填入相应excel模版中
-    public static String FillExcelTemplate(String excelTemplateFullName,String newExcelFileName,ArrayList<Label> dataList,String tabName) {
+    public static String FillExcelTemplate(String excelTemplateFullName,String newExcelFileName,ArrayList<Label> dataList,String tabName,String imgPath) {
         if(newExcelFileName==null) {//循环写入
             newExcelFileName = excelTemplateFullName.substring(0, excelTemplateFullName.lastIndexOf('.')) + String.valueOf(System.currentTimeMillis()) + ".xls";
             fileChannelCopy(excelTemplateFullName,newExcelFileName);
@@ -161,6 +162,16 @@ public class GenerateExcelToPDFUtil {
             //得到复制的sheet
             WritableSheet wsheet  = wwb.getSheet(1);
             try {
+                if(imgPath!=null&&!imgPath.equals("")) {
+                    String basePath= GenerateExcelToPDFUtil.class.getClassLoader().getResource("../../").getPath();
+                    imgPath=basePath + imgPath;
+                    File imgFile = new File(imgPath);
+                    //col row是图片的起始行起始列  width height是定义图片跨越的行数与列数
+                    WritableImage image = new WritableImage(0, 0, 36, 2, imgFile);
+                    wsheet.addImage(image);
+                }
+
+
                 //把datalist中的数据填到相应位置，由相关业务controller设置datalist数据
                 for(int i=0;dataList!=null&&i<dataList.size();i++){
                     Label label_data=(Label) dataList.get(i);

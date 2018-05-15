@@ -103,7 +103,7 @@ public class DailyProductionReportController {
             String newExcelFileName=null;
             System.out.println(excelTemplateFullName);
             System.out.println(newExcelFileName);
-            ArrayList<Label> datalist=new ArrayList<Label>();
+
              //获取数据库中的数据
              if(project_no!=null&&!project_no.equals("")&&beginTimeStr!=null&&!beginTimeStr.equals("")&&endTimeStr!=null&&!endTimeStr.equals("")){
                  System.out.println("-----------------------");
@@ -114,9 +114,8 @@ public class DailyProductionReportController {
 //                 if(!file0.exists()){
 //                     file0.createNewFile();
 //                 }
-                 String tabName="",od_wt="",external_coating="";
-                 //模版第8行开始
-                 int row=8;
+                 String tabName="",od_wt="",external_coating="",internal_coating="";
+
                 // Date begin_time=sdf.parse(beginTimeStr);
                  //Date end_time=sdf.parse(endTimeStr);
                  System.out.println(beginTimeStr+":"+endTimeStr+":"+project_no);
@@ -125,10 +124,18 @@ public class DailyProductionReportController {
                  float od=0,wt=0;
                  System.out.println(grouplist.size()+":"+dateList.size()+"~~~~~~");
                  for (GroupEntity entity:grouplist){
+                     //模版第8行开始
+                     int row=8;
+                     ArrayList<Label> datalist=new ArrayList<Label>();
+
                      od=entity.getOd(); wt=entity.getWt();
-                     od_wt=String.valueOf(od)+"*"+String.valueOf(wt);
-                     tabName=od_wt;
+                     od_wt=String.valueOf(od)+"x"+String.valueOf(wt);
+
                      external_coating=entity.getExternal_coating();
+                     internal_coating=entity.getInternal_coating();
+
+                     tabName=od_wt+external_coating+internal_coating;
+
                      //定义统计total字段
                      int total_odCoatingCount=0;
                      int total_bareCount=0;
@@ -200,9 +207,9 @@ public class DailyProductionReportController {
                      float total_shippedPipeLength=0f;
 
                      for (String item:dateList){
-                         System.out.println("----------"+od_wt+":"+external_coating);
+                         System.out.println("----------"+od_wt+"external coating:"+external_coating+"internal coating:"+internal_coating);
                          //根据笛卡尔集生成对应的tab
-                         dailyProductionReportList=dailyProductionReportDao.getDailyReportByParams(project_no,external_coating,od_wt,sdf.parse(item));
+                         dailyProductionReportList=dailyProductionReportDao.getDailyReportByParams(project_no,external_coating,internal_coating,od_wt,sdf.parse(item));
                          System.out.println("数据："+dailyProductionReportList.size());
                          System.out.println(JSONObject.toJSONString(dailyProductionReportList));
                          if(dailyProductionReportList!=null&&dailyProductionReportList.size()>0){
@@ -252,61 +259,68 @@ public class DailyProductionReportController {
                                  FillExcelData(datalist,dailyProductionReportList,row,od_wt,wcf);
                                  row++;
                              }
-                             //设置最后一行统计数据行
-                             datalist.add(new Label(0,row,"Total：", wcf));
-                             datalist.add(new Label(1,row,String.valueOf(total_bareCount), wcf));
-                             datalist.add(new Label(2,row,String.valueOf(total_bareLength), wcf));
-                             datalist.add(new Label(3,row,String.valueOf(total_odCoatingCount), wcf));
-                             datalist.add(new Label(4,row,String.valueOf(total_odAcceptedCount), wcf));
-                             datalist.add(new Label(5,row,String.valueOf(total_odTargetAcceptedCount), wcf));
-                             datalist.add(new Label(6,row,String.valueOf(total_odAcceptedLength), wcf));
-                             datalist.add(new Label(7,row,String.valueOf(total_odTargetAcceptedLength), wcf));
-                             datalist.add(new Label(8,row,String.valueOf(total_odCoatingRepairCount), wcf));
-                             datalist.add(new Label(9,row,String.valueOf(total_odPipeOnholdCount), wcf));
-                             datalist.add(new Label(10,row,String.valueOf(total_odBarePipeGrindingCount), wcf));
-                             datalist.add(new Label(11,row,String.valueOf(total_odBareCutoffCount), wcf));
-                             datalist.add(new Label(12,row,String.valueOf(total_odCoatingRejectedPipe), wcf));
-                             datalist.add(new Label(13,row,String.valueOf(total_odCoatingStripAcceptedCount), wcf));
-
-                             datalist.add(new Label(14,row,String.valueOf(total_idCoatingCount), wcf));
-                             datalist.add(new Label(15,row,String.valueOf(total_idAcceptedCount), wcf));
-                             datalist.add(new Label(16,row,String.valueOf(total_idTargetAcceptedTotal), wcf));
-                             datalist.add(new Label(17,row,String.valueOf(total_idAcceptedLength), wcf));
-                             datalist.add(new Label(18,row,String.valueOf(total_idTargetAcceptedLength), wcf));
-                             datalist.add(new Label(19,row,String.valueOf(total_idCoatingRepairCount), wcf));
-                             datalist.add(new Label(20,row,String.valueOf(total_idPipeOnholdCount), wcf));
-                             datalist.add(new Label(21,row,String.valueOf(total_idBarePipeGrindingCount), wcf));
-                             datalist.add(new Label(22,row,String.valueOf(total_idBareCutoffCount), wcf));
-                             datalist.add(new Label(23,row,String.valueOf(total_idCoatingRejectCount), wcf));
-                             datalist.add(new Label(24,row,String.valueOf(total_idCoatingStripAcceptedCount), wcf));
-
-                             datalist.add(new Label(25,row,String.valueOf("NA"), wcf));
-                             datalist.add(new Label(26,row,String.valueOf(total_samplePipeOriginalLengthDayShift), wcf));
-                             datalist.add(new Label(27,row,String.valueOf(total_samplePipeCutLengthDayShift), wcf));
-                             datalist.add(new Label(28,row,String.valueOf("NA"), wcf));
-                             datalist.add(new Label(29,row,String.valueOf(total_samplePipeOriginalLengthNightShift), wcf));
-                             datalist.add(new Label(30,row,String.valueOf(total_samplePipeCutLengthNightShift), wcf));
-                             datalist.add(new Label(31,row,String.valueOf(total_samplePipeCount), wcf));
-
-                             datalist.add(new Label(32,row,String.valueOf(total_NeedRebevelCount), wcf));
-                             datalist.add(new Label(33,row,String.valueOf(total_acceptedRebevelCount), wcf));
-                             datalist.add(new Label(34,row,String.valueOf(total_shippedPipeCount), wcf));
-                             datalist.add(new Label(35,row,String.valueOf(total_shippedPipeLength), wcf));
-                             row++;
 
                          }
-                         if(datalist.size()>0){
-                             newExcelFileName=GenerateExcelToPDFUtil.FillExcelTemplate(excelTemplateFullName,newExcelFileName,datalist,tabName);
-                         }
-                         //System.out.println(datalist.size()+"------>datalist");
-                         datalist.clear();
-                         row=8;
+
                      }
+
+
+                     //设置最后一行统计数据行
+                     datalist.add(new Label(0,row,"Total：", wcf));
+                     datalist.add(new Label(1,row,String.valueOf(total_bareCount), wcf));
+                     datalist.add(new Label(2,row,String.valueOf(total_bareLength), wcf));
+                     datalist.add(new Label(3,row,String.valueOf(total_odCoatingCount), wcf));
+                     datalist.add(new Label(4,row,String.valueOf(total_odAcceptedCount), wcf));
+                     datalist.add(new Label(5,row,String.valueOf(total_odTargetAcceptedCount), wcf));
+                     datalist.add(new Label(6,row,String.valueOf(total_odAcceptedLength), wcf));
+                     datalist.add(new Label(7,row,String.valueOf(total_odTargetAcceptedLength), wcf));
+                     datalist.add(new Label(8,row,String.valueOf(total_odCoatingRepairCount), wcf));
+                     datalist.add(new Label(9,row,String.valueOf(total_odPipeOnholdCount), wcf));
+                     datalist.add(new Label(10,row,String.valueOf(total_odBarePipeGrindingCount), wcf));
+                     datalist.add(new Label(11,row,String.valueOf(total_odBareCutoffCount), wcf));
+                     datalist.add(new Label(12,row,String.valueOf(total_odCoatingRejectedPipe), wcf));
+                     datalist.add(new Label(13,row,String.valueOf(total_odCoatingStripAcceptedCount), wcf));
+
+                     datalist.add(new Label(14,row,String.valueOf(total_idCoatingCount), wcf));
+                     datalist.add(new Label(15,row,String.valueOf(total_idAcceptedCount), wcf));
+                     datalist.add(new Label(16,row,String.valueOf(total_idTargetAcceptedTotal), wcf));
+                     datalist.add(new Label(17,row,String.valueOf(total_idAcceptedLength), wcf));
+                     datalist.add(new Label(18,row,String.valueOf(total_idTargetAcceptedLength), wcf));
+                     datalist.add(new Label(19,row,String.valueOf(total_idCoatingRepairCount), wcf));
+                     datalist.add(new Label(20,row,String.valueOf(total_idPipeOnholdCount), wcf));
+                     datalist.add(new Label(21,row,String.valueOf(total_idBarePipeGrindingCount), wcf));
+                     datalist.add(new Label(22,row,String.valueOf(total_idBareCutoffCount), wcf));
+                     datalist.add(new Label(23,row,String.valueOf(total_idCoatingRejectCount), wcf));
+                     datalist.add(new Label(24,row,String.valueOf(total_idCoatingStripAcceptedCount), wcf));
+
+                     datalist.add(new Label(25,row,String.valueOf("NA"), wcf));
+                     datalist.add(new Label(26,row,String.valueOf(total_samplePipeOriginalLengthDayShift), wcf));
+                     datalist.add(new Label(27,row,String.valueOf(total_samplePipeCutLengthDayShift), wcf));
+                     datalist.add(new Label(28,row,String.valueOf("NA"), wcf));
+                     datalist.add(new Label(29,row,String.valueOf(total_samplePipeOriginalLengthNightShift), wcf));
+                     datalist.add(new Label(30,row,String.valueOf(total_samplePipeCutLengthNightShift), wcf));
+                     datalist.add(new Label(31,row,String.valueOf(total_samplePipeCount), wcf));
+
+                     datalist.add(new Label(32,row,String.valueOf(total_NeedRebevelCount), wcf));
+                     datalist.add(new Label(33,row,String.valueOf(total_acceptedRebevelCount), wcf));
+                     datalist.add(new Label(34,row,String.valueOf(total_shippedPipeCount), wcf));
+                     datalist.add(new Label(35,row,String.valueOf(total_shippedPipeLength), wcf));
+                     row++;
+
+
+                     if(datalist.size()>=0){
+                         newExcelFileName=GenerateExcelToPDFUtil.FillExcelTemplate(excelTemplateFullName,newExcelFileName,datalist,tabName,"template/img/image002.jpg");
+                     }
+                     //System.out.println(datalist.size()+"------>datalist");
+
+
                  }
                  System.out.println(newExcelFileName+"newName");
-                 ArrayList list=new ArrayList();
-                 list.add(newExcelFileName);
-                 zipName="upload/pdf/"+ResponseUtil.downLoadPdf(list,request,response);
+                 if(dailyProductionReportList!=null&&dailyProductionReportList.size()>0) {
+                     ArrayList list = new ArrayList();
+                     list.add(newExcelFileName);
+                     zipName = "upload/pdf/" + ResponseUtil.downLoadPdf(list, request, response);
+                 }
                  //删除多余文件
 //                 if(file0.exists()){
 //                    file0.delete();
@@ -320,13 +334,17 @@ public class DailyProductionReportController {
     }
 
     private  void  FillExcelData(ArrayList<Label> datalist,List<DailyProductionReport>dailyProductionReportList,int row,String tabName,WritableCellFormat wcf){
+            int i =0;
         for (DailyProductionReport report:dailyProductionReportList){
+
             //根据循环的个数创建sheet
             tabName=getFormatString(report.getOd_wt());
-            if(row==0) {
-                datalist.add(new Label(34, 3, "Pipe size: " + tabName + "mm", wcf));
-                datalist.add(new Label(34, 4, "Coating structure: " + getFormatString(report.getOd_coating_type()), wcf));
+            if(i==0) {
+                i++;
+                datalist.add(new Label(34, 3, tabName + "mm", wcf));
+                datalist.add(new Label(34, 4, getFormatString(report.getOd_coating_type()), wcf));
                 datalist.add(new Label(3, 5, getFormatString(report.getOd_coating_type()) + " External coated pipe", wcf));
+                datalist.add(new Label(14, 5, getFormatString(report.getId_coating_type()) + " Internal coated pipe", wcf));
             }
             datalist.add(new Label(0,row,sdf.format(report.getProduction_date()), wcf));
             datalist.add(new Label(1,row,String.valueOf(report.getBare_pipe_count()), wcf));
@@ -510,7 +528,7 @@ public class DailyProductionReportController {
                     for (GroupEntity entity:grouplist){
                         od=entity.getOd();
                         wt=entity.getWt();
-                        od_wt=String.valueOf(od)+"*"+String.valueOf(wt);
+                        od_wt=String.valueOf(od)+"x"+String.valueOf(wt);
                         external_coating=entity.getExternal_coating();
                         internal_coating=entity.getInternal_coating();
 
@@ -617,7 +635,7 @@ public class DailyProductionReportController {
                             float shippedPipeLength=0f;
                             //向日报中填充数据
                             //首先判断日报表中是否有此数据，如果没有则添加，否则进行更新,参数(time,project_no,od_wt,外防类型)
-                            List<DailyProductionReport>list1=dailyProductionReportDao.getDailyReportByParams(project_no,external_coating,od_wt,sdf.parse(item));
+                            List<DailyProductionReport>list1=dailyProductionReportDao.getDailyReportByParams(project_no,external_coating,internal_coating,od_wt,sdf.parse(item));
                             //System.out.println("odCoatingStripAcceptedCount："+odCoatingStripAcceptedCount);
                             DailyProductionReport report=new DailyProductionReport();
                             if(list1!=null&&list1.size()>0){
@@ -666,6 +684,7 @@ public class DailyProductionReportController {
                             report.setProduction_date(timeformat.parse(item+" 08:00:00"));
                             report.setProject_no(project_no);
                             report.setOd_coating_type(external_coating);
+                            report.setId_coating_type(internal_coating);
                             report.setOd_wt(od_wt);
                             if(list1.size()>0){
                                 //更新

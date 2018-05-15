@@ -23,7 +23,7 @@ public interface DailyProductionReportDao {
     //删除function
     public int delDailyProductionReport(String[]arrId);
     //判断是否存在日报数据
-    public List<DailyProductionReport>getDailyReportByParams(@Param("project_no") String project_no,@Param("od_coating_type")String od_coating_type,@Param("od_wt")String od_wt,@Param("production_date") Date production_date);
+    public List<DailyProductionReport>getDailyReportByParams(@Param("project_no") String project_no,@Param("od_coating_type")String od_coating_type,@Param("id_coating_type")String id_coating_type,@Param("od_wt")String od_wt,@Param("production_date") Date production_date);
     //根据项目编号和时间查询日报
     //public List<DailyProductionReport>getDailyReportByProjectNoAndTime(@Param("project_no") String project_no,@Param("od_wt")String od_wt,@Param("external_coating")String external_coating,@Param("begin_time") Date begin_time, @Param("end_time") Date end_time);
 }

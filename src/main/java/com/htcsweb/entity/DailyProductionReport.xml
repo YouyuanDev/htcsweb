@@ -55,7 +55,8 @@
               id_coated_pipe_rejected_count,id_coated_pipe_strip_count,od_test_pipe_no_dayshift,od_test_pipe_length_before_cut_dayshift,
               od_test_pipe_cutting_length_dayshift,od_test_pipe_no_nightshift,od_test_pipe_length_before_cut_nightshift,
               od_test_pipe_cutting_length_nightshift,od_test_pipe_count,rebevel_pipe_count,
-              pipe_accepted_count_after_rebevel,pipe_delivered_count,pipe_delivered_length
+              pipe_accepted_count_after_rebevel,pipe_delivered_count,pipe_delivered_length,
+              id_coating_type
 
         ) VALUES (
               #{production_date},#{project_no},#{od_coating_type},#{od_wt},#{bare_pipe_count},#{bare_pipe_length},
@@ -67,7 +68,7 @@
               #{id_coated_pipe_rejected_count},#{id_coated_pipe_strip_count},#{od_test_pipe_no_dayshift},#{od_test_pipe_length_before_cut_dayshift},
               #{od_test_pipe_cutting_length_dayshift},#{od_test_pipe_no_nightshift},#{od_test_pipe_length_before_cut_nightshift},
               #{od_test_pipe_cutting_length_nightshift},#{od_test_pipe_count},#{rebevel_pipe_count},
-              #{pipe_accepted_count_after_rebevel},#{pipe_delivered_count},#{pipe_delivered_length}
+              #{pipe_accepted_count_after_rebevel},#{pipe_delivered_count},#{pipe_delivered_length},#{id_coating_type}
         )
     </insert>
 
@@ -82,7 +83,8 @@
               id_coated_pipe_rejected_count=#{id_coated_pipe_rejected_count},id_coated_pipe_strip_count=#{id_coated_pipe_strip_count},od_test_pipe_no_dayshift=#{od_test_pipe_no_dayshift},od_test_pipe_length_before_cut_dayshift=#{od_test_pipe_length_before_cut_dayshift},
               od_test_pipe_cutting_length_dayshift=#{od_test_pipe_cutting_length_dayshift},od_test_pipe_no_nightshift=#{od_test_pipe_no_nightshift},od_test_pipe_length_before_cut_nightshift=#{od_test_pipe_length_before_cut_nightshift},
               od_test_pipe_cutting_length_nightshift=#{od_test_pipe_cutting_length_nightshift},od_test_pipe_count=#{od_test_pipe_count},rebevel_pipe_count=#{rebevel_pipe_count},
-              pipe_accepted_count_after_rebevel=#{pipe_accepted_count_after_rebevel},pipe_delivered_count=#{pipe_delivered_count},pipe_delivered_length=#{pipe_delivered_length}
+              pipe_accepted_count_after_rebevel=#{pipe_accepted_count_after_rebevel},pipe_delivered_count=#{pipe_delivered_count},pipe_delivered_length=#{pipe_delivered_length},
+              id_coating_type=#{id_coating_type}
 
         where id=#{id}
     </update>
@@ -104,6 +106,9 @@
             <if test="od_coating_type!=null and od_coating_type!=''">
                 AND dr.od_coating_type=#{od_coating_type}
              </if>
+            <if test="id_coating_type!=null and id_coating_type!=''">
+                AND dr.id_coating_type=#{id_coating_type}
+            </if>
             <if test="od_wt!=null and od_wt!=''">
                 AND dr.od_wt=#{od_wt}
             </if>

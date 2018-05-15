@@ -275,7 +275,7 @@
             form.attr("style", "display:none");
             form.attr("target", "");
             form.attr("method", "post");//请求类型
-            form.attr("action","/DailyProductionReportOperation/getDailyRecordReportPDF.action");//请求地址
+            form.attr("action","/DailyProductionReportOperation/getDailyRecordReportExcel.action");//请求地址
             $("body").append(form);//将表单放置在web中
             var input1 = $("<input type='hidden' name='project_no' value='" + project_no + "'/>");
             form.append(input1);
@@ -292,7 +292,7 @@
                     ajaxLoading();
                 },
                 success:function (data) {
-                    alert(data);
+                    //alert(data);
                     if(data=="fail"){
                        alert("下载时出现错误!")
                     }else{
