@@ -286,7 +286,7 @@
             // form.submit();
             var options={
                 type:'POST',
-                url:'/DailyProductionReportOperation/getDailyRecordReportPDF.action',
+                url:'/DailyProductionReportOperation/getDailyRecordReportExcel.action',
                 dataType:'json',
                 beforeSubmit:function () {
                     ajaxLoading();
