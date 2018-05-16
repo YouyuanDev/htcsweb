@@ -61,7 +61,8 @@ public class DailyProductionReportController {
     private PipeSamplingRecordDao pipeSamplingRecordDao;
     @Autowired
     private PipeRebevelRecordDao pipeRebevelRecordDao;
-
+    @Autowired
+    private ProjectInfoDao projectInfoDao;
     //统计数量和长度
     private class CountSum{
         public int count=0;
@@ -106,7 +107,15 @@ public class DailyProductionReportController {
 
              //获取数据库中的数据
              if(project_no!=null&&!project_no.equals("")&&beginTimeStr!=null&&!beginTimeStr.equals("")&&endTimeStr!=null&&!endTimeStr.equals("")){
-                 System.out.println("-----------------------");
+                 String project_name=" ",client_name=" ";
+                 List<ProjectInfo>projectInfoList=projectInfoDao.getProjectInfoByProjectNo(project_no);
+                 if(projectInfoList!=null&&projectInfoList.size()>0){
+                     ProjectInfo projectInfo=projectInfoList.get(0);
+                     if(projectInfo.getProject_name()!=null)
+                         project_name=projectInfo.getProject_name();
+                     if(projectInfo.getClient_name()!=null)
+                         client_name=projectInfo.getClient_name();
+                 }
                  start_time=timeformat.parse(beginTimeStr+" 08:00:00");
                  finish_time=timeformat.parse(endTimeStr+" 08:00:00");
                  List<DailyProductionReport>dailyProductionReportList=null;
@@ -256,7 +265,7 @@ public class DailyProductionReportController {
                                  total_shippedPipeCount+=report.getPipe_delivered_count();
                                  total_shippedPipeLength+=report.getPipe_delivered_length();
 
-                                 FillExcelData(datalist,dailyProductionReportList,row,od_wt,wcf);
+                                 FillExcelData(datalist,dailyProductionReportList,row,od_wt,project_name,client_name,wcf);
                                  row++;
                              }
 
@@ -333,7 +342,7 @@ public class DailyProductionReportController {
         return JSONObject.toJSONString(zipName);
     }
 
-    private  void  FillExcelData(ArrayList<Label> datalist,List<DailyProductionReport>dailyProductionReportList,int row,String tabName,WritableCellFormat wcf){
+    private  void  FillExcelData(ArrayList<Label> datalist,List<DailyProductionReport>dailyProductionReportList,int row,String tabName,String project_name,String client_name,WritableCellFormat wcf){
             int i =0;
         for (DailyProductionReport report:dailyProductionReportList){
 
@@ -341,6 +350,8 @@ public class DailyProductionReportController {
             tabName=getFormatString(report.getOd_wt());
             if(i==0) {
                 i++;
+                datalist.add(new Label(1, 3, project_name, wcf));
+                datalist.add(new Label(3, 3, client_name, wcf));
                 datalist.add(new Label(34, 3, tabName + "mm", wcf));
                 datalist.add(new Label(34, 4, getFormatString(report.getOd_coating_type()), wcf));
                 datalist.add(new Label(3, 5, getFormatString(report.getOd_coating_type()) + " External coated pipe", wcf));
