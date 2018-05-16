@@ -10,6 +10,8 @@ import com.htcsweb.util.GroupEntity;
 import com.htcsweb.util.ResponseUtil;
 import jxl.Workbook;
 import jxl.format.Alignment;
+import jxl.format.Border;
+import jxl.format.BorderLineStyle;
 import jxl.format.Colour;
 import jxl.format.UnderlineStyle;
 import jxl.format.VerticalAlignment;
@@ -97,6 +99,8 @@ public class DailyProductionReportController {
             cellFormat1.setAlignment(Alignment.CENTRE);
             cellFormat2.setVerticalAlignment(VerticalAlignment.CENTRE);
             cellFormat2.setAlignment(Alignment.CENTRE);
+            cellFormat1.setBorder(Border.ALL, BorderLineStyle.THIN);
+            cellFormat2.setBorder(Border.ALL, BorderLineStyle.THIN);
             //先清理.zip垃圾文件
             File fileZip=new File(basePath+"upload/pdf/");
             if(fileZip.exists()&&fileZip.isDirectory()){
@@ -110,8 +114,8 @@ public class DailyProductionReportController {
             }
 
             WritableCellFormat wcf=new WritableCellFormat();
-
-
+            wcf.setBorder(Border.ALL, BorderLineStyle.THIN);
+            wcf.setAlignment(Alignment.CENTRE);
             String excelTemplateFullName=request.getSession().getServletContext().getRealPath("/")
                     +"template/daliy_production_report_template.xls";
             String newExcelFileName=null;
@@ -356,8 +360,8 @@ public class DailyProductionReportController {
             tabName=getFormatString(report.getOd_wt());
             if(i==0) {
                 i++;
-                datalist.add(new Label(1, 3, project_name, wcf));
-                datalist.add(new Label(3, 3, client_name, cellFormat1));
+                datalist.add(new Label(1, 3,client_name , wcf));
+                datalist.add(new Label(3, 3, project_name, cellFormat1));
                 datalist.add(new Label(34, 3, tabName + "mm", wcf));
                 datalist.add(new Label(34, 4, getFormatString(report.getOd_coating_type()), wcf));
                 datalist.add(new Label(3, 5, getFormatString(report.getOd_coating_type()) + " External coated pipe", cellFormat2));

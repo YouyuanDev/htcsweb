@@ -1,6 +1,7 @@
 package com.htcsweb.util;
 
 import com.itextpdf.text.*;
+import com.itextpdf.text.Font;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
@@ -9,11 +10,10 @@ import jxl.Cell;
 import jxl.Range;
 import jxl.Sheet;
 import jxl.Workbook;
+import jxl.format.CellFormat;
+import jxl.format.UnderlineStyle;
 import jxl.read.biff.BiffException;
-import jxl.write.Label;
-import jxl.write.WritableImage;
-import jxl.write.WritableSheet;
-import jxl.write.WritableWorkbook;
+import jxl.write.*;
 
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.io.*;
@@ -149,6 +149,7 @@ public class GenerateExcelToPDFUtil {
 
     //根据模版名字，将数据填入相应excel模版中
     public static String FillExcelTemplate(String excelTemplateFullName,String newExcelFileName,ArrayList<Label> dataList,String tabName,String imgPath) {
+
         if(newExcelFileName==null) {//循环写入
             newExcelFileName = excelTemplateFullName.substring(0, excelTemplateFullName.lastIndexOf('.')) + String.valueOf(System.currentTimeMillis()) + ".xls";
             fileChannelCopy(excelTemplateFullName,newExcelFileName);
@@ -160,7 +161,6 @@ public class GenerateExcelToPDFUtil {
             wwb.copySheet(0,tabName,wwb.getNumberOfSheets());
             //得到复制的sheet
             WritableSheet wsheet=wwb.getSheet(tabName);
-            System.out.println(wsheet==null);
             try {
                 if(imgPath!=null&&!imgPath.equals("")) {
                     String basePath= GenerateExcelToPDFUtil.class.getClassLoader().getResource("../../").getPath();
