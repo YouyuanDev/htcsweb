@@ -153,35 +153,32 @@ public class GenerateExcelToPDFUtil {
             newExcelFileName = excelTemplateFullName.substring(0, excelTemplateFullName.lastIndexOf('.')) + String.valueOf(System.currentTimeMillis()) + ".xls";
             fileChannelCopy(excelTemplateFullName,newExcelFileName);
         }
-
         try {
             Workbook wb = Workbook.getWorkbook(new File(newExcelFileName));
-            WritableWorkbook wwb = Workbook.createWorkbook(new File(newExcelFileName), wb);
+            WritableWorkbook wwb = Workbook.createWorkbook(new File(newExcelFileName),wb);
             //复制一份sheet到index=1处
-            wwb.copySheet(0,tabName,1);
+            wwb.copySheet(0,tabName,wwb.getNumberOfSheets());
             //得到复制的sheet
-            WritableSheet wsheet  = wwb.getSheet(1);
+            WritableSheet wsheet=wwb.getSheet(tabName);
+            System.out.println(wsheet==null);
             try {
                 if(imgPath!=null&&!imgPath.equals("")) {
                     String basePath= GenerateExcelToPDFUtil.class.getClassLoader().getResource("../../").getPath();
                     imgPath=basePath + imgPath;
-                    File imgFile = new File(imgPath);
-                    //col row是图片的起始行起始列  width height是定义图片跨越的行数与列数
-                    WritableImage image = new WritableImage(0, 0, 36, 2, imgFile);
-                    wsheet.addImage(image);
                 }
-
-
+                File imgFile = new File(imgPath);
+                WritableImage image = new WritableImage(0, 0, 36, 2, imgFile);
+                wsheet.addImage(image);
                 //把datalist中的数据填到相应位置，由相关业务controller设置datalist数据
                 for(int i=0;dataList!=null&&i<dataList.size();i++){
                     Label label_data=(Label) dataList.get(i);
                     wsheet.addCell(label_data);
                 }
-
                 wwb.write();//把表格信息写入文件
             } catch (Exception e) {
                 System.out.println("Exception:"+e.getMessage());
             } finally {
+                System.out.println("--------------------------");
                 wwb.close();//关闭
                 wb.close();
             }

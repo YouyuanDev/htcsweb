@@ -8,8 +8,12 @@ import com.htcsweb.util.DateTimeUtil;
 import com.htcsweb.util.GenerateExcelToPDFUtil;
 import com.htcsweb.util.GroupEntity;
 import com.htcsweb.util.ResponseUtil;
-import jxl.write.Label;
-import jxl.write.WritableCellFormat;
+import jxl.Workbook;
+import jxl.format.Alignment;
+import jxl.format.Colour;
+import jxl.format.UnderlineStyle;
+import jxl.format.VerticalAlignment;
+import jxl.write.*;
 import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.support.incrementer.HsqlMaxValueIncrementer;
@@ -31,6 +35,10 @@ import java.util.*;
 public class DailyProductionReportController {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     SimpleDateFormat timeformat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    WritableFont font1=new WritableFont(WritableFont.ARIAL,28,WritableFont.BOLD,false, UnderlineStyle.NO_UNDERLINE);
+    WritableFont font2=new WritableFont(WritableFont.ARIAL,9,WritableFont.BOLD,false, UnderlineStyle.NO_UNDERLINE);
+    WritableCellFormat cellFormat1=new WritableCellFormat(font1);
+    WritableCellFormat cellFormat2=new WritableCellFormat(font2);
     @Autowired
     private DailyProductionReportDao dailyProductionReportDao;
     @Autowired
@@ -85,6 +93,10 @@ public class DailyProductionReportController {
        // String project_name=request.getParameter("project_name");
 
         try{
+            cellFormat1.setVerticalAlignment(VerticalAlignment.CENTRE);
+            cellFormat1.setAlignment(Alignment.CENTRE);
+            cellFormat2.setVerticalAlignment(VerticalAlignment.CENTRE);
+            cellFormat2.setAlignment(Alignment.CENTRE);
             //先清理.zip垃圾文件
             File fileZip=new File(basePath+"upload/pdf/");
             if(fileZip.exists()&&fileZip.isDirectory()){
@@ -98,6 +110,7 @@ public class DailyProductionReportController {
             }
 
             WritableCellFormat wcf=new WritableCellFormat();
+
 
             String excelTemplateFullName=request.getSession().getServletContext().getRealPath("/")
                     +"template/daliy_production_report_template.xls";
@@ -216,11 +229,9 @@ public class DailyProductionReportController {
                      float total_shippedPipeLength=0f;
 
                      for (String item:dateList){
-                         System.out.println("----------"+od_wt+"external coating:"+external_coating+"internal coating:"+internal_coating);
                          //根据笛卡尔集生成对应的tab
                          dailyProductionReportList=dailyProductionReportDao.getDailyReportByParams(project_no,external_coating,internal_coating,od_wt,sdf.parse(item));
                          System.out.println("数据："+dailyProductionReportList.size());
-                         System.out.println(JSONObject.toJSONString(dailyProductionReportList));
                          if(dailyProductionReportList!=null&&dailyProductionReportList.size()>0){
                              for (DailyProductionReport report:dailyProductionReportList){
                                 //od外防统计
@@ -316,15 +327,10 @@ public class DailyProductionReportController {
                      datalist.add(new Label(35,row,String.valueOf(total_shippedPipeLength), wcf));
                      row++;
 
-
                      if(datalist.size()>=0){
-                         newExcelFileName=GenerateExcelToPDFUtil.FillExcelTemplate(excelTemplateFullName,newExcelFileName,datalist,tabName,"template/img/image002.jpg");
+                         newExcelFileName=GenerateExcelToPDFUtil.FillExcelTemplate(excelTemplateFullName,newExcelFileName,datalist,tabName,"template/img/image004.png");
                      }
-                     //System.out.println(datalist.size()+"------>datalist");
-
-
                  }
-                 System.out.println(newExcelFileName+"newName");
                  if(dailyProductionReportList!=null&&dailyProductionReportList.size()>0) {
                      ArrayList list = new ArrayList();
                      list.add(newExcelFileName);
@@ -336,14 +342,14 @@ public class DailyProductionReportController {
 //                 }
              }
         }catch (Exception e){
-            System.out.println("]]]]]]]]]]]]]]]]]]]]]]");
             e.printStackTrace();
         }
         return JSONObject.toJSONString(zipName);
     }
 
     private  void  FillExcelData(ArrayList<Label> datalist,List<DailyProductionReport>dailyProductionReportList,int row,String tabName,String project_name,String client_name,WritableCellFormat wcf){
-            int i =0;
+        int i =0;
+
         for (DailyProductionReport report:dailyProductionReportList){
 
             //根据循环的个数创建sheet
@@ -351,11 +357,11 @@ public class DailyProductionReportController {
             if(i==0) {
                 i++;
                 datalist.add(new Label(1, 3, project_name, wcf));
-                datalist.add(new Label(3, 3, client_name, wcf));
+                datalist.add(new Label(3, 3, client_name, cellFormat1));
                 datalist.add(new Label(34, 3, tabName + "mm", wcf));
                 datalist.add(new Label(34, 4, getFormatString(report.getOd_coating_type()), wcf));
-                datalist.add(new Label(3, 5, getFormatString(report.getOd_coating_type()) + " External coated pipe", wcf));
-                datalist.add(new Label(14, 5, getFormatString(report.getId_coating_type()) + " Internal coated pipe", wcf));
+                datalist.add(new Label(3, 5, getFormatString(report.getOd_coating_type()) + " External coated pipe", cellFormat2));
+                datalist.add(new Label(14, 5, getFormatString(report.getId_coating_type()) + " Internal coated pipe", cellFormat2));
             }
             datalist.add(new Label(0,row,sdf.format(report.getProduction_date()), wcf));
             datalist.add(new Label(1,row,String.valueOf(report.getBare_pipe_count()), wcf));
@@ -511,6 +517,7 @@ public class DailyProductionReportController {
         int result=-1;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try{
+
           String project_no=request.getParameter("project_no");
           String beginTime=request.getParameter("begin_time");
           String endTime=request.getParameter("end_time");
@@ -710,6 +717,7 @@ public class DailyProductionReportController {
                     }
                 }
             }
+
             if(result>0){
                 flag="success";
             }
@@ -717,6 +725,8 @@ public class DailyProductionReportController {
             e.printStackTrace();
             flag="error";
         }
+
+
         return JSONArray.toJSONString(flag);
     }
     //
