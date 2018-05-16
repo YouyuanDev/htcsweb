@@ -295,7 +295,10 @@
                     //alert(data);
                     if(data=="fail"){
                        alert("下载时出现错误!")
-                    }else{
+                    }else if(data=="nodata"){
+                        alert("暂时没有数据!")
+                    }
+                    else{
                         window.location.href="<%=bPath%>"+data;
                     }
                     ajaxLoadEnd();

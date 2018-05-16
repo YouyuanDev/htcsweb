@@ -132,7 +132,7 @@ public class DailyProductionReportController {
                  List<GroupEntity>grouplist=getTabGroup(project_no);
                  List<String> dateList= DateTimeUtil.getBetweenDates(start_time,finish_time);
                  float od=0,wt=0;
-                 System.out.println(grouplist.size()+":"+dateList.size()+"~~~~~~");
+
                  for (GroupEntity entity:grouplist){
                      //模版第8行开始
                      int row=8;
@@ -219,7 +219,6 @@ public class DailyProductionReportController {
                      for (String item:dateList){
                          //根据笛卡尔集生成对应的tab
                          dailyProductionReportList=dailyProductionReportDao.getDailyReportByParams(project_no,external_coating,internal_coating,od_wt,sdf.parse(item));
-                         System.out.println("数据："+dailyProductionReportList.size());
                          if(dailyProductionReportList!=null&&dailyProductionReportList.size()>0){
                              for (DailyProductionReport report:dailyProductionReportList){
                                 //od外防统计
@@ -323,6 +322,8 @@ public class DailyProductionReportController {
                      ArrayList list = new ArrayList();
                      list.add(newExcelFileName);
                      zipName = "upload/pdf/" + ResponseUtil.downLoadPdf(list, request, response);
+                 }else{
+                     zipName="nodata";
                  }
                  //删除多余文件
 //                 if(file0.exists()){
@@ -345,11 +346,11 @@ public class DailyProductionReportController {
                 if(i==0) {
                     i++;
                     datalist.add(new Label(1, 3,client_name , wcf));
-                    datalist.add(new Label(3, 3, project_name, cellFormat2()));
+                    datalist.add(new Label(3, 3, project_name, cellFormat_ProjectName()));
                     datalist.add(new Label(34, 3, tabName + "mm", wcf));
                     datalist.add(new Label(34, 4, getFormatString(report.getOd_coating_type()), wcf));
-                    datalist.add(new Label(3, 5, getFormatString(report.getOd_coating_type()) + " External coated pipe", cellFormat1()));
-                    datalist.add(new Label(14, 5, getFormatString(report.getId_coating_type()) + " Internal coated pipe", cellFormat1()));
+                    datalist.add(new Label(3, 5, getFormatString(report.getOd_coating_type()) + " External coated pipe", cellFormat_CoatingType()));
+                    datalist.add(new Label(14, 5, getFormatString(report.getId_coating_type()) + " Internal coated pipe", cellFormat_CoatingType()));
                 }
                 datalist.add(new Label(0,row,sdf.format(report.getProduction_date()), wcf));
                 datalist.add(new Label(1,row,String.valueOf(report.getBare_pipe_count()), wcf));
@@ -982,7 +983,7 @@ public class DailyProductionReportController {
             return  " ";
         }
     }
-    private WritableCellFormat cellFormat1(){
+    private WritableCellFormat cellFormat_ProjectName(){
         WritableCellFormat cellFormat=null;
         try{
             WritableFont font=new WritableFont(WritableFont.ARIAL,28,WritableFont.BOLD,false, UnderlineStyle.NO_UNDERLINE);
@@ -995,7 +996,7 @@ public class DailyProductionReportController {
         }
         return cellFormat;
     }
-    private WritableCellFormat cellFormat2(){
+    private WritableCellFormat cellFormat_CoatingType(){
         WritableCellFormat cellFormat=null;
         try{
             WritableFont font=new WritableFont(WritableFont.ARIAL,9,WritableFont.BOLD,false, UnderlineStyle.NO_UNDERLINE);
@@ -1010,7 +1011,7 @@ public class DailyProductionReportController {
     private WritableCellFormat cellFormat3(){
         WritableCellFormat wcf=null;
         try{
-             wcf=new WritableCellFormat();
+            wcf=new WritableCellFormat();
             wcf.setBorder(Border.ALL, BorderLineStyle.THIN);
             wcf.setAlignment(Alignment.CENTRE);
         }catch (Exception e){
