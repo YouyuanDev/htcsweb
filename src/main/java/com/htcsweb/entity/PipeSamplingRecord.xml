@@ -110,13 +110,19 @@
     </select>
     <!--获取封面上样管信息-->
     <select id="getCoverPipeSamplingInfo" resultType="map">
-        SELECT pro.project_name,pro.client_spec,pro.coating_standard,c.od,c.wt,c.external_coating,c.internal_coating,o.* from pipe_sampling_record o
+        SELECT o.pipe_no,o.cut_off_length from pipe_sampling_record o
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no
         left join project_info pro on c.project_no=pro.project_no
         <where>
-            o.mill_no=#{mill_no}
-            AND pro.project_no=#{project_no}
+            <if test="mill_no!=null and mill_no!=''">
+                AND  o.mill_no=#{mill_no}
+            </if>
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no=#{project_no}
+            </if>
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
             <if test="begin_time!=null">
                 <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
             </if>

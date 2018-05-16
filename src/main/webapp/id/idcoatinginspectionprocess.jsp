@@ -473,7 +473,7 @@
 
                 </tr>
                 <tr>
-                    <td width="16%" class="i18n1" name="issample">取样管</td>
+                    <td width="16%" class="i18n1" name="issteelsample">钢试片样</td>
                     <td colspan="1">
                         <input type="checkbox" id="is-sample" value="0" checked="false" onchange="selectIsSample()"/>
                         <input type="hidden" name="is_sample" value="0">

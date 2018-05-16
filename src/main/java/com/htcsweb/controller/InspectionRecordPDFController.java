@@ -1,32 +1,24 @@
 package com.htcsweb.controller;
 
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.*;
 import com.htcsweb.entity.*;
 import com.htcsweb.util.*;
-import jdk.internal.org.objectweb.asm.tree.TryCatchBlockNode;
 import jxl.format.Alignment;
 import jxl.write.Label;
 import jxl.write.WritableCellFormat;
 import jxl.write.WritableFont;
-import org.apache.ibatis.jdbc.Null;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.sql.DataSource;
 
-import java.awt.geom.FlatteningPathIterator;
-import java.awt.image.TileObserver;
 import java.io.File;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -242,8 +234,8 @@ public class InspectionRecordPDFController {
                                 }
                                 //开始填充pdf
                                 //6.1.1---------外防生成封面PDF
-                                createCoverOne(request,0,project_no,project_name,millInfo.getMill_no(),millInfo.getMill_name(), pipe_size,client_standard,contractInfo.getExternal_coating(),shift0,recordTime,start_time,finish_time,stationOdList);
-                                createCoverTwo(request,0,project_no,project_name,millInfo.getMill_no(),millInfo.getMill_name(), pipe_size,client_standard,contractInfo.getExternal_coating(),shift0,recordTime,start_time,finish_time,stationOdList);
+                                createCoverOneOd(request,project_no,project_name,millInfo.getMill_no(),millInfo.getMill_name(), pipe_size,client_standard,contractInfo.getExternal_coating(),null,contractInfo.getOd(),contractInfo.getWt(),shift0,recordTime,start_time,finish_time,stationOdList);
+                                createCoverTwo(request,1,project_no,project_name,millInfo.getMill_no(),millInfo.getMill_name(), pipe_size,client_standard,contractInfo.getExternal_coating(),null,contractInfo.getOd(),contractInfo.getWt(),shift0,recordTime,start_time,finish_time,stationOdList);
                                 //6.1.2---------生成当天的外打砂工位的PDF
                                 OdBlastRecord(request,project_no,project_name,millInfo.getMill_no(),millInfo.getMill_name(), pipe_size,client_standard,contractInfo.getExternal_coating(),shift0,recordTime,start_time,finish_time,stationOdList);
                                 //6.1.3---------生成当天的外打砂检验工位的PDF
@@ -273,8 +265,8 @@ public class InspectionRecordPDFController {
                                 File file1=new File(pdfIdPath);
                                 //开始填充pdf
                                 //6.2.1---------内防生成封面PDF
-                                createCoverOne(request,1,project_no,project_name,millInfo.getMill_no(),millInfo.getMill_name(), pipe_size,client_standard,contractInfo.getExternal_coating(),shift0,recordTime,start_time,finish_time,stationIdList);
-                                createCoverTwo(request,1,project_no,project_name,millInfo.getMill_no(),millInfo.getMill_name(), pipe_size,client_standard,contractInfo.getExternal_coating(),shift0,recordTime,start_time,finish_time,stationIdList);
+                                createCoverOneId(request,project_no,project_name,millInfo.getMill_no(),millInfo.getMill_name(), pipe_size,client_standard,contractInfo.getInternal_coating(),contractInfo.getOd(),contractInfo.getWt(),shift0,recordTime,start_time,finish_time,stationIdList);
+                                createCoverTwo(request,1,project_no,project_name,millInfo.getMill_no(),millInfo.getMill_name(), pipe_size,client_standard,contractInfo.getExternal_coating(),contractInfo.getInternal_coating(),contractInfo.getOd(),contractInfo.getWt(),shift0,recordTime,start_time,finish_time,stationIdList);
                                 //6.2.2---------内打砂检验记录PDF
                                 IdBlastInspectionRecord(request, project_no, project_name, millInfo.getMill_no(), millInfo.getMill_name(), pipe_size, client_standard, contractInfo.getExternal_coating(), shift0, recordTime, start_time, finish_time, stationIdList);
                                 //6.2.3---------内涂记录PDF
@@ -1239,274 +1231,358 @@ public class InspectionRecordPDFController {
     }
 
     //12.---------------生成封面1
-    //createCoverOne(request,0,project_no,project_name,millInfo.getMill_name(),0,day_begin_time,day_end_time);
-    public void  createCoverOne( HttpServletRequest request,int type,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList){
+    public void  createCoverOneId( HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String internal_coating,float od,float wt,
+            String shift,String title_time,Date begin_time,Date end_time,List<String>stringList){
         //获取试验管
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
-                +"template/online_production_inspection_record_list_cover_1.xls";
+                +"template/online_production_inspection_record_list_cover_1_id.xls";
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String newPdfName=null;
         //String title_project_name=" ",title_pipe_size=" ",title_standard=" ",title_coating_type=" ";
         try{
-            List<HashMap<String,Object>>list=pipeSamplingRecordDao.getCoverPipeSamplingInfo(project_no,mill_no,begin_time,end_time);
-
-            List<HashMap<String,String>>labPipenoList=new ArrayList<>();
-            if(type==0){
-                List<HashMap<String,Object>>labListOf2FBE=labTesting2FbeDao.getCoverLabTestingInfo(project_no,mill_no,begin_time,end_time);
-                List<HashMap<String,Object>>labListOf3LPE=labTesting3LpeDao.getCoverLabTestingInfo(project_no,mill_no,begin_time,end_time);
-                for (HashMap<String,Object> item:labListOf2FBE){
-                    HashMap<String,String>hs=new HashMap<>();
-                    hs.put("pipe_no",String.valueOf(item.get("pipe_no")));
-                    hs.put("cut_off_length",String.valueOf(item.get("cut_off_length")));
-                    labPipenoList.add(hs);
-                }
-                for (HashMap<String,Object> item:labListOf3LPE){
-                    HashMap<String,String>hs=new HashMap<>();
-                    hs.put("pipe_no",String.valueOf(item.get("pipe_no")));
-                    hs.put("cut_off_length",String.valueOf(item.get("cut_off_length")));
-                    labPipenoList.add(hs);
-                }
-            }else{
-                List<HashMap<String,Object>>labListOfId=labTestingEpoxyDao.getCoverLabTestingInfo(project_no,mill_no,begin_time,end_time);
-                for (HashMap<String,Object> item:labListOfId){
-                    HashMap<String,String>hs=new HashMap<>();
-                    hs.put("pipe_no",String.valueOf(item.get("pipe_no")));
-                    hs.put("cut_off_length",String.valueOf(item.get("cut_off_length")));
-                    labPipenoList.add(hs);
+            int idCoatingCount=0,idAcceptedPipeCount=0,idRepairPipeCount=0,idRejectedPipeCount=0,idOnholdPipeCount=0;
+            //coatingCount代表防腐数，acceptedPipeCount代表防腐合格数，repairPipeCount代表修补数，rejectedPipeCount代表废管数，onholdPipeCount代表隔离数
+            idCoatingCount=idFinalInspectionProcessDao.getIDCoatingCount(project_no,mill_no,null,internal_coating,od,wt,beginTime,endTime);
+            List<HashMap<String,Object>>list1=idFinalInspectionProcessDao.getIDCoatingAcceptedInfo(project_no,null,internal_coating,od,wt,beginTime,endTime,"1");
+            if(list1!=null&&list1.size()>0){
+                HashMap<String,Object>hs=list1.get(0);
+                if(hs!=null){
+                    idAcceptedPipeCount=((Long)hs.get("idtotalcount")).intValue();
                 }
             }
-            //比较labPipenoList和list大小,比较大的值用作循环遍历
-            int maxSize=labPipenoList.size()>=list.size()?labPipenoList.size():list.size();
-            ArrayList<Label> datalist=new ArrayList<Label>();
-            if(maxSize>0){
-                int index=1,row=0,flag=1;
-                boolean isHaveTitle=true;
-                int CoatingCount=0,CoatingAcceptedCount=0,CoatingRepairCount=0;
-                int CoatingRejectCount=0;
-                int BarePipeCutoffCount=0;
+            idRepairPipeCount=coatingRepairDao.getCoatingRepairCount(project_no,mill_no,null,internal_coating,"id",od,wt,beginTime,endTime);
+            idRejectedPipeCount=coatingStripDao.getIDCoatingRejectedPipeCount(project_no,mill_no,null,internal_coating,od,wt,beginTime,endTime);
+            idOnholdPipeCount=barePipeGrindingCutoffRecordDao.getODBarePipeOnholdCount(project_no,mill_no,null,internal_coating,od,wt,beginTime,endTime);
 
-                //获取班次内防或者外防的防腐数,获取班次内防或者外防的合格防腐数
-                if(type==0){
-                    CoatingCount=odFinalInspectionProcessDao.getODCoatingCount(project_no,mill_no,null,null,0,0,begin_time,end_time);
-                    CoatingAcceptedCount=odFinalInspectionProcessDao.getODCoatingAcceptedCount(project_no,mill_no,null,null,0,0,begin_time,end_time);
-                    CoatingRepairCount=coatingRepairDao.getCoatingRepairCount(project_no,mill_no,null,null,"od",0,0,begin_time,end_time);
+            //获取钢试片管号和玻璃试片管号
+            List<HashMap<String,Object>>sampleInfoList=idCoatingInspectionProcessDao.getCoverIdSampleInfo(project_no,mill_no,od,wt,begin_time,end_time);
+            List<HashMap<String,Object>>glassSampleInfoList=idCoatingInspectionProcessDao.getCoverIdGlassSampleInfo(project_no,mill_no,od,wt,begin_time,end_time);
 
-                    //需要修改下面
-                    //CoatingRejectCount=coatingStripDao.getODCoatingRejectedPipe(project_no,mill_no,null,null,"od",0,0,begin_time,end_time);
-
-                    BarePipeCutoffCount=barePipeGrindingCutoffRecordDao.getBarePipeCutoffCount(project_no,mill_no,null,null,"od",0,0,begin_time,end_time);
+            int maxSize=0,sampleCount=0,glassSampleCount=0;
+            if(sampleInfoList!=null)
+                sampleCount=sampleInfoList.size();
+            if(glassSampleInfoList!=null)
+                glassSampleCount=glassSampleInfoList.size();
+            maxSize=sampleCount>glassSampleCount?sampleCount:glassSampleCount;
+            List<CoverOneRecordID>oneRecordIDList=new ArrayList<>();
+            for (int i=0;i<maxSize;i++){
+                CoverOneRecordID recordID=new CoverOneRecordID();
+                if (i<sampleCount){
+                    if(sampleInfoList.get(i).get("pipe_no")!=null&&!sampleInfoList.get(i).get("pipe_no").toString().equals(""))
+                        recordID.setSteelPanelNo(sampleInfoList.get(i).get("pipe_no").toString());
+                    else
+                        recordID.setSteelPanelNo(" ");
                 }else{
-                    CoatingCount=idFinalInspectionProcessDao.getIDCoatingCount(project_no,mill_no,null,null,0,0,begin_time,end_time);
-                    CoatingAcceptedCount=idFinalInspectionProcessDao.getIDCoatingAcceptedCount(project_no,mill_no,null,null,0,0,begin_time,end_time);
-                    CoatingRepairCount=coatingRepairDao.getCoatingRepairCount(project_no,mill_no,null,null,"id",0,0,begin_time,end_time);
-                    //需要修改下面
-                    //CoatingRejectCount=coatingStripDao.getIDCoatingRejectedPipe(project_no,mill_no,null,null,"id",0,0,begin_time,end_time);
-                    BarePipeCutoffCount=barePipeGrindingCutoffRecordDao.getBarePipeCutoffCount(project_no,mill_no,null,null,"id",0,0,begin_time,end_time);
+                    recordID.setSteelPanelNo(" ");
                 }
-                for (int i=0;i<list.size();i++){
-                    if(list.size()>=labPipenoList.size()){
-                        if(flag>=labPipenoList.size()){
-                            datalist.add(new Label(7, row+10," ", wcf));
-                        }else{
-                            datalist.add(new Label(7, row+10, String.valueOf(labPipenoList.get(i)), wcf));
-                        }
-                        datalist.add(new Label(1, row+10, String.valueOf(list.get(i).get("pipe_no")), wcf));
-                        datalist.add(new Label(4, row+10, String.valueOf(list.get(i).get("cut_off_length")), wcf));
+                if(i<glassSampleCount){
+                    if(glassSampleInfoList.get(i).get("pipe_no")!=null&&!sampleInfoList.get(i).get("pipe_no").toString().equals(""))
+                        recordID.setGlassPanelNo(glassSampleInfoList.get(i).get("pipe_no").toString());
+                    else
+                        recordID.setGlassPanelNo(" ");
+                }else{
+                    recordID.setGlassPanelNo(" ");
+                }
+                oneRecordIDList.add(recordID);
+            }
+            ArrayList<Label> datalist=new ArrayList<Label>();
+            if(oneRecordIDList.size()>0){
+                int index=1,row=0,column=0;
+                for (int i=0;i<oneRecordIDList.size();i++){
+                    if(i%2!=0){
+                        datalist.add(new Label(column+1,row+10,oneRecordIDList.get(i).getSteelPanelNo() ,wcf));
+                        datalist.add(new Label(column+4,row+10, oneRecordIDList.get(i).getGlassPanelNo(),wcf));
                     }else{
-                        if(flag>=list.size()){
-                            datalist.add(new Label(1, row+10, " ", wcf));
-                            datalist.add(new Label(4, row+10, " ", wcf));
-                        }else{
-                            datalist.add(new Label(1, row+10, String.valueOf(list.get(i).get("pipe_no")), wcf));
-                            datalist.add(new Label(4, row+10, String.valueOf(list.get(i).get("cut_off_length")), wcf));
-                        }
-                        datalist.add(new Label(7, row+10, String.valueOf(labPipenoList.get(i)), wcf));
+                        datalist.add(new Label(column+7,row+10,oneRecordIDList.get(i).getSteelPanelNo() ,wcf));
+                        datalist.add(new Label(column+10,row+10, oneRecordIDList.get(i).getGlassPanelNo(),wcf));
+                        row++;
                     }
                     index++;
-                    row++;
-                    if(index%11==0){
-                        createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
-                        datalist.add(new Label(11,20,mill_name,wcf));
-
+                    if(index%19==0){
+                        createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,internal_coating,shift,title_time);
+                        datalist.add(new Label(11,12,mill_name,wcf));
+                        datalist.add(new Label(2,6,String.valueOf(idCoatingCount),wcf));
+                        datalist.add(new Label(5,6,String.valueOf(idRepairPipeCount),wcf));
+                        datalist.add(new Label(7,6,String.valueOf(idRejectedPipeCount),wcf));
+                        datalist.add(new Label(12,6,String.valueOf(idOnholdPipeCount),wcf));
                         newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+                        index=1;row=0;
                         datalist.clear();
-                        index=1;
-                        row=0;
-                        if(newPdfName!=null){
-                            stringList.add(newPdfName);
-                            delSetPath.add(newPdfName);
-                        }
-                    }
-                }
-                if(datalist.size()>0){
-                    createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
-                    datalist.add(new Label(11,20,mill_name,wcf));
-                    newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
-                    datalist.clear();
-                    index=1;
-                    row=0;
-                    if(newPdfName!=null){
                         stringList.add(newPdfName);
                         delSetPath.add(newPdfName);
                     }
                 }
-            }else {
-                createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
+                if(datalist.size()>0){
+                    createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,internal_coating,shift,title_time);
+                    datalist.add(new Label(11,12,mill_name,wcf));
+                    datalist.add(new Label(2,6,String.valueOf(idCoatingCount),wcf));
+                    datalist.add(new Label(5,6,String.valueOf(idRepairPipeCount),wcf));
+                    datalist.add(new Label(7,6,String.valueOf(idRejectedPipeCount),wcf));
+                    datalist.add(new Label(12,6,String.valueOf(idOnholdPipeCount),wcf));
+                    newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+                    index=1;row=0;
+                    datalist.clear();
+                    stringList.add(newPdfName);
+                    delSetPath.add(newPdfName);
+                }
+            }else{
+                createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,internal_coating,shift,title_time);
                 datalist.add(new Label(11,20,mill_name,wcf));
+                datalist.add(new Label(2,6,String.valueOf(idCoatingCount),wcf));
+                datalist.add(new Label(5,6,String.valueOf(idRepairPipeCount),wcf));
+                datalist.add(new Label(7,6,String.valueOf(idRejectedPipeCount),wcf));
+                datalist.add(new Label(12,6,String.valueOf(idOnholdPipeCount),wcf));
+                datalist.add(new Label(1,10,"今天暂无记录!",wcf));
                 newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
-                datalist.clear();
                 if(newPdfName!=null){
                     stringList.add(newPdfName);
                     delSetPath.add(newPdfName);
                 }
             }
+
         }catch (Exception e){
             e.printStackTrace();
         }
         //createCoverTwo(request,type,project_no,mill_no,mill_name,project_name,pipe_size,standard,coatingType,shift,title_time,begin_time,end_time,stringList);
     }
     //13.---------------生成封面2
-    public void  createCoverTwo(HttpServletRequest request,int type,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList){
+    public void  createCoverTwo(HttpServletRequest request,int type,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String external_coating,String internal_coating,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList){
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/online_production_inspection_record_list_cover_2.xls";
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String newPdfName=null;
+        String newPdfName=null,coatingType=" ";
         List<CoatingRepair>repairList=null;
-        List<CoatingStrip>stripList=null;
-        List<BarePipeGrindingCutoffRecord>bareList=new ArrayList<>();
+        List<HashMap<String,Object>>stripList=null;
+        List<HashMap<String,Object>>onholdList=null;
+
         List<HashMap<String,Object>>allList=new ArrayList<>();
-        int maxSize=0;
+        int repairCount=0,stripCount=0,onholdCount=0,maxSize=0;
         try{
             if(type==0){
+                //获取外防修补涂层管管号和原因  ?修补前还是修补后
                 repairList=coatingRepairDao.getCoatingRepairInfo(project_no,mill_no,null,null,"od",0,0,begin_time,end_time);
-                stripList=coatingStripDao.getCoatingStripInfo(project_no,mill_no,null,null,"od",0,0,begin_time,end_time);
-
-                //bareList=barePipeGrindingCutoffRecordDao.getBarePipeGrindingCutoffInfo(project_no,mill_no,null,null,"od",0,0,begin_time,end_time);
+                //获取外防涂层管废管管号和原因  OK
+                stripList=coatingStripDao.getODCoatingRejectedPipeInfo(project_no,mill_no,external_coating,null,od,wt,begin_time,end_time);
+                //获取外防隔离光管管号和原因  OK
+                onholdList=barePipeGrindingCutoffRecordDao.getODBarePipeOnholdInfo(project_no,mill_no,external_coating,null,od,wt,begin_time,end_time);
+                if(external_coating!=null&&!external_coating.equals(""))
+                 coatingType=external_coating;
             }else{
+                //获取内防修补涂层管管号和原因  ?修补前还是修补后
                 repairList=coatingRepairDao.getCoatingRepairInfo(project_no,mill_no,null,null,"id",0,0,begin_time,end_time);
-                stripList=coatingStripDao.getCoatingStripInfo(project_no,mill_no,null,null,"id",0,0,begin_time,end_time);
-                //bareList=barePipeGrindingCutoffRecordDao.getBarePipeGrindingCutoffInfo(project_no,mill_no,null,null,"id",0,0,begin_time,end_time);
+                //获取内防涂层管废管管号和原因  OK
+                stripList=coatingStripDao.getIDCoatingRejectedPipeInfo(project_no,mill_no,null,internal_coating,od,wt,begin_time,end_time);
+                //获取内防隔离光管管号和原因  OK
+                onholdList=barePipeGrindingCutoffRecordDao.getIDBarePipeOnholdInfo(project_no,mill_no,null,internal_coating,od,wt,begin_time,end_time);
+                if(internal_coating!=null&&!internal_coating.equals(""))
+                  coatingType=internal_coating;
             }
-
-            maxSize=repairList.size()>=stripList.size()?repairList.size():stripList.size();
-            if(bareList!=null)
-            maxSize=maxSize>=bareList.size()?maxSize:bareList.size();
+            if(repairList!=null)
+                repairCount=repairList.size();
+            if(stripList!=null)
+                stripCount=stripList.size();
+            if(onholdList!=null)
+                onholdCount=onholdList.size();
+            maxSize=repairCount>=stripCount?repairCount:stripCount;
+            maxSize=maxSize>=onholdCount?maxSize:onholdCount;
+            List<CoverTwoRecord>coverRecordList=new ArrayList<>();
+            for (int i=0;i<maxSize;i++){
+                CoverTwoRecord record=new CoverTwoRecord();
+                if(i<repairCount){
+                    if(repairList.get(i).getPipe_no()!=null&&!repairList.get(i).getPipe_no().equals(""))
+                    record.setRepairNo(repairList.get(i).getPipe_no());
+                    if(repairList.get(i).getRemark()!=null&&!repairList.get(i).getRemark().equals(""))
+                    record.setRepairRemark(repairList.get(i).getRemark());
+                }else{
+                    record.setRepairNo(" ");
+                    record.setRepairRemark(" ");
+                }
+                if(i<stripCount)
+                {
+                    if(stripList.get(i).get("pipe_no")!=null&&!stripList.get(i).get("pipe_no").toString().equals(""))
+                       record.setStripNo(String.valueOf(stripList.get(i).get("pipe_no")));
+                    else
+                        record.setStripNo(" ");
+                    if(stripList.get(i).get("remark")!=null&&!stripList.get(i).get("remark").toString().equals(""))
+                        record.setStripRemark(String.valueOf(stripList.get(i).get("remark")));
+                    else
+                        record.setStripRemark(" ");
+                }else{
+                    record.setStripNo(" ");
+                    record.setStripRemark(" ");
+                }
+                if(i<onholdCount)
+                {
+                    if(onholdList.get(i).get("pipe_no")!=null&&!onholdList.get(i).get("pipe_no").toString().equals(""))
+                        record.setOnholdNo(String.valueOf(onholdList.get(i).get("pipe_no")));
+                    else
+                        record.setOnholdNo(" ");
+                    if(stripList.get(i).get("remark")!=null&&!stripList.get(i).get("remark").toString().equals(""))
+                        record.setOnholdRemark(String.valueOf(onholdList.get(i).get("remark")));
+                    else
+                        record.setOnholdRemark(" ");
+                }else{
+                    record.setOnholdNo(" ");
+                    record.setOnholdRemark(" ");
+                }
+                coverRecordList.add(record);
+            }
             ArrayList<Label> datalist=new ArrayList<Label>();
-            if(maxSize>0){
-                int index=1,row=0,flag=1,temp1=0,temp2=0,temp3=0;
-                for (int i=0;i<maxSize;i++){
-                    if(i<repairList.size()/2){
-                        datalist.add(new Label(1,row+8,repairList.get(2*temp1).getPipe_no(),wcf));
-                        datalist.add(new Label(2,row+8,getFormatString(repairList.get(2*temp1).getUnqualified_reason()),wcf));
-                        datalist.add(new Label(7,row+8,repairList.get(2*temp1+1).getPipe_no(),wcf));
-                        datalist.add(new Label(8,row+8,getFormatString(repairList.get(2*temp1+1).getUnqualified_reason()),wcf));
-                        temp1++;
+            if(coverRecordList.size()>0){
+                int index=1,row=0,column=0;
+                for (int i=0;i<coverRecordList.size();i++){
+                    if(i%2!=0){
+                        datalist.add(new Label(column+1,row+8,coverRecordList.get(i).getRepairNo() ,wcf));
+                        datalist.add(new Label(column+2,row+8, coverRecordList.get(i).getRepairRemark(),wcf));
+                        datalist.add(new Label(column+3,row+8,coverRecordList.get(i).getStripNo() ,wcf));
+                        datalist.add(new Label(column+4,row+8,coverRecordList.get(i).getStripRemark(),wcf));
+                        datalist.add(new Label(column+5,row+8,coverRecordList.get(i).getOnholdNo() ,wcf));
+                        datalist.add(new Label(column+6,row+8,coverRecordList.get(i).getOnholdRemark() ,wcf));
                     }else{
-                        datalist.add(new Label(1,row+8," ",wcf));
-                        datalist.add(new Label(2,row+8," ",wcf));
-                        datalist.add(new Label(7,row+8," ",wcf));
-                        datalist.add(new Label(8,row+8," ",wcf));
-                    }
-                    if(repairList.size()%2!=0){
-                        datalist.add(new Label(1,row+8,repairList.get(repairList.size()-1).getPipe_no(),wcf));
-                        datalist.add(new Label(2,row+8,repairList.get(repairList.size()-1).getUnqualified_reason(),wcf));
-                    }
-                    if(i<stripList.size()/2){
-                        datalist.add(new Label(3,row+8,stripList.get(2*temp1).getPipe_no(),wcf));
-                        datalist.add(new Label(4,row+8," ",wcf));
-                        datalist.add(new Label(9,row+8,repairList.get(2*temp1+1).getPipe_no(),wcf));
-                        datalist.add(new Label(10,row+8," ",wcf));
-                        temp2++;
-                    }else{
-                        datalist.add(new Label(3,row+8," ",wcf));
-                        datalist.add(new Label(4,row+8," ",wcf));
-                        datalist.add(new Label(9,row+8," ",wcf));
-                        datalist.add(new Label(10,row+8," ",wcf));
-                    }
-                    if(stripList.size()%2!=0){
-                        datalist.add(new Label(1,row+8,stripList.get(stripList.size()-1).getPipe_no(),wcf));
-                        datalist.add(new Label(2,row+8," ",wcf));
-                    }
-                    String bareType0=" ",bareType1=" ",bareType2=" ";
-                    if(i<bareList.size()){
-
-                        datalist.add(new Label(5,row+8,bareList.get(2*temp3).getPipe_no(),wcf));
-                        bareType0=bareList.get(2*temp3).getGrinding_cutoff();
-                        if(bareType0!=null){
-                            if(bareType0.equals("G")){
-                                bareType0="需要修磨";
-                            }else if(bareType0.equals("C")){
-                                bareType0="需要切割";
-                            }else if(bareType0.equals("GC")){
-                                bareType0="需要修磨和切割";
-                            }
-                        }
-                        datalist.add(new Label(6,row+8,bareType0,wcf));
-                        datalist.add(new Label(11,row+8,bareList.get(2*temp3+1).getPipe_no(),wcf));
-                        bareType1=bareList.get(2*temp3+1).getGrinding_cutoff();
-                        if(bareType1!=null){
-                            if(bareType1.equals("G")){
-                                bareType1="需要修磨";
-                            }else if(bareType1.equals("C")){
-                                bareType1="需要切割";
-                            }else if(bareType1.equals("GC")){
-                                bareType1="需要修磨和切割";
-                            }
-                        }
-                        datalist.add(new Label(12,row+8,bareType1,wcf));
-                        temp3++;
-                    }else{
-                        datalist.add(new Label(5,row+8," ",wcf));
-                        datalist.add(new Label(6,row+8," ",wcf));
-                        datalist.add(new Label(11,row+8," ",wcf));
-                        datalist.add(new Label(12,row+8," ",wcf));
-                    }
-                    if(bareList.size()%2!=0){
-                        bareType2=bareList.get(bareList.size()-1).getGrinding_cutoff();
-                        if(bareType2!=null){
-                            if(bareType2.equals("G")){
-                                bareType2="需要修磨";
-                            }else if(bareType2.equals("C")){
-                                bareType2="需要切割";
-                            }else if(bareType2.equals("GC")){
-                                bareType2="需要修磨和切割";
-                            }
-                        }
-                        datalist.add(new Label(1,row+8,bareList.get(bareList.size()-1).getPipe_no(),wcf));
-                        datalist.add(new Label(2,row+8,bareType2,wcf));
+                        datalist.add(new Label(column+7,row+8,coverRecordList.get(i).getRepairNo() ,wcf));
+                        datalist.add(new Label(column+8,row+8, coverRecordList.get(i).getRepairRemark(),wcf));
+                        datalist.add(new Label(column+9,row+8,coverRecordList.get(i).getStripNo() ,wcf));
+                        datalist.add(new Label(column+10,row+8,coverRecordList.get(i).getStripRemark(),wcf));
+                        datalist.add(new Label(column+11,row+8,coverRecordList.get(i).getOnholdNo() ,wcf));
+                        datalist.add(new Label(column+12,row+8,coverRecordList.get(i).getOnholdRemark() ,wcf));
+                        row++;
                     }
                     index++;
-                    row++;
-                    if(index%11==0){
+                    if(index%23==0){
                         createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
                         datalist.add(new Label(11,20,mill_name,wcf));
                         newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+                        index=1;row=0;
                         datalist.clear();
-                        index=1;
-                        row=0;
-                        if(newPdfName!=null){
-                            stringList.add(newPdfName);
-                            delSetPath.add(newPdfName);
-                        }
+                        stringList.add(newPdfName);
+                        delSetPath.add(newPdfName);
                     }
                 }
                 if(datalist.size()>0){
                     createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
                     datalist.add(new Label(11,20,mill_name,wcf));
                     newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+                    index=1;row=0;
                     datalist.clear();
-                    index=1;
-                    row=0;
-                    if(newPdfName!=null){
+                    stringList.add(newPdfName);
+                    delSetPath.add(newPdfName);
+                }
+            }else{
+                createRecordNullPdf(datalist,1,3,8,12,4,5,8,project_name,pipe_size,standard,coatingType,shift,title_time,newPdfName,templateFullName,stringList);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    //14.---------------生成封面3
+    public void  createCoverOneOd( HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String external_coating,String internal_coating,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList){
+        //获取试验管
+        String templateFullName=request.getSession().getServletContext().getRealPath("/")
+                +"template/online_production_inspection_record_list_cover_1_od.xls";
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String newPdfName=null;
+        //String title_project_name=" ",title_pipe_size=" ",title_standard=" ",title_coating_type=" ";
+        try{
+            int odCoatingCount=0,odAcceptedPipeCount=0,odRepairPipeCount=0,odRejectedPipeCount=0,odOnholdPipeCount=0;
+            //coatingCount代表防腐数，acceptedPipeCount代表防腐合格数，repairPipeCount代表修补数，rejectedPipeCount代表废管数，onholdPipeCount代表隔离数
+            odCoatingCount=odFinalInspectionProcessDao.getODCoatingCount(project_no,mill_no,external_coating,null,od,wt,beginTime,endTime);
+            List<HashMap<String,Object>>list1=odFinalInspectionProcessDao.getODCoatingAcceptedInfo(project_no,external_coating,null,od,wt,beginTime,endTime,"1");
+            if(list1!=null&&list1.size()>0){
+                    HashMap<String,Object>hs=list1.get(0);
+                    if(hs!=null){
+                        odAcceptedPipeCount=((Long) hs.get("odtotalcount")).intValue();
+                    }
+            }
+            odRepairPipeCount=coatingRepairDao.getCoatingRepairCount(project_no,mill_no,external_coating,null,"od",od,wt,beginTime,endTime);
+            odRejectedPipeCount=coatingStripDao.getODCoatingRejectedPipeCount(project_no,mill_no,external_coating,null,od,wt,beginTime,endTime);
+            odOnholdPipeCount=barePipeGrindingCutoffRecordDao.getODBarePipeOnholdCount(project_no,mill_no,external_coating,null,od,wt,beginTime,endTime);
+            //获取试验管管号和切样长度
+            List<HashMap<String,Object>>sampleList=pipeSamplingRecordDao.getCoverPipeSamplingInfo(project_no,mill_no,od,wt,begin_time,end_time);
+            //固化度试验管管号
+            List<HashMap<String,Object>>dscList=new ArrayList<>();
+            if(external_coating.contains("2FBE"))
+                dscList=odCoatingInspectionProcessDao.getCover2FBEDscTestingInfo(project_no,mill_no,od,wt,begin_time,end_time);
+            else if(external_coating.contains("3LPE"))
+                dscList=odCoating3LpeInspectionProcessDao.getCover3LPEDscTestingInfo(project_no,mill_no,od,wt,begin_time,end_time);
+            List<HashMap<String,String>>labPipenoList=new ArrayList<>();
+
+            int samplePipeCount=0,dscPipeCount=0;
+            if(sampleList!=null)
+                samplePipeCount=sampleList.size();
+            if(dscList!=null)
+                dscPipeCount=dscList.size();
+            int maxSize=samplePipeCount>dscPipeCount?samplePipeCount:dscPipeCount;
+            List<CoverOneRecordOD>recordODList=new ArrayList<>();
+            for (int i=0;i<maxSize;i++)
+            {
+                CoverOneRecordOD recordOD=new CoverOneRecordOD();
+                if(i<samplePipeCount)
+                {
+                   if(sampleList.get(i).get("pipe_no")!=null&&!sampleList.get(i).get("pipe_no").toString().equals(""))
+                      recordOD.setTestSampleNo(sampleList.get(i).get("pipe_no").toString());
+                   else
+                       recordOD.setTestSampleNo(" ");
+                   if(sampleList.get(i).get("cut_off_length")!=null&&!sampleList.get(i).get("cut_off_length").toString().equals(""))
+                       recordOD.setCutLength(sampleList.get(i).get("cut_off_length").toString());
+                   else
+                       recordOD.setCutLength(" ");
+                }else{
+                    recordOD.setTestSampleNo(" ");recordOD.setCutLength(" ");
+                }
+                if(i<dscPipeCount){
+                   if(dscList.get(i).get("pipe_no")!=null&&!dscList.get(i).get("pipe_no").toString().equals(""))
+                       recordOD.setDscSampleNo(dscList.get(i).get("pipe_no").toString());
+                   else
+                       recordOD.setDscSampleNo(" ");
+                }else{
+                    recordOD.setDscSampleNo(" ");
+                }
+                recordODList.add(recordOD);
+            }
+            ArrayList<Label> datalist=new ArrayList<Label>();
+            if(recordODList.size()>0){
+                int index=1,row=0;
+                for (int i=0;i<recordODList.size();i++){
+                    datalist.add(new Label(1,row+10,recordODList.get(i).getTestSampleNo() ,wcf));
+                    datalist.add(new Label(4,row+10, recordODList.get(i).getCutLength(),wcf));
+                    datalist.add(new Label(8,row+10,recordODList.get(i).getDscSampleNo() ,wcf));
+                    index++;
+                    if(index%9==0){
+                        createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,external_coating,shift,title_time);
+                        datalist.add(new Label(11,20,mill_name,wcf));
+                        datalist.add(new Label(2,7,String.valueOf(odCoatingCount),wcf));
+                        datalist.add(new Label(5,7,String.valueOf(odRepairPipeCount),wcf));
+                        datalist.add(new Label(7,7,String.valueOf(odRejectedPipeCount),wcf));
+                        datalist.add(new Label(12,7,String.valueOf(odOnholdPipeCount),wcf));
+                        newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+                        index=1;row=0;
+                        datalist.clear();
                         stringList.add(newPdfName);
                         delSetPath.add(newPdfName);
                     }
                 }
-            }else {
-                createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
+                if(datalist.size()>0){
+                    createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,external_coating,shift,title_time);
+                    datalist.add(new Label(11,20,mill_name,wcf));
+                    datalist.add(new Label(2,7,String.valueOf(odCoatingCount),wcf));
+                    datalist.add(new Label(5,7,String.valueOf(odRepairPipeCount),wcf));
+                    datalist.add(new Label(7,7,String.valueOf(odRejectedPipeCount),wcf));
+                    datalist.add(new Label(12,7,String.valueOf(odOnholdPipeCount),wcf));
+                    newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+                    index=1;row=0;
+                    datalist.clear();
+                    stringList.add(newPdfName);
+                    delSetPath.add(newPdfName);
+                }
+            }else{
+                createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,external_coating,shift,title_time);
                 datalist.add(new Label(11,20,mill_name,wcf));
+                datalist.add(new Label(2,7,String.valueOf(odCoatingCount),wcf));
+                datalist.add(new Label(5,7,String.valueOf(odRepairPipeCount),wcf));
+                datalist.add(new Label(7,7,String.valueOf(odRejectedPipeCount),wcf));
+                datalist.add(new Label(12,7,String.valueOf(odOnholdPipeCount),wcf));
+                datalist.add(new Label(1,10,"今天暂无记录!",wcf));
                 newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
-                datalist.clear();
                 if(newPdfName!=null){
                     stringList.add(newPdfName);
                     delSetPath.add(newPdfName);
@@ -1516,8 +1592,9 @@ public class InspectionRecordPDFController {
             e.printStackTrace();
         }
     }
-    //填补空白Bug
 
+
+    //填补空白Bug
     private void AddLastWhiteSpace(ArrayList<Label> datalist,String remark,WritableCellFormat wcf){
         datalist.add(new Label(2,20,remark,wcf));
     }
