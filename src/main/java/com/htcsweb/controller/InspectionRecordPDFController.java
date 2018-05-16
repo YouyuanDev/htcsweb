@@ -120,6 +120,7 @@ public class InspectionRecordPDFController {
     private ContractInfoDao contractInfoDao;
     @Autowired
     private ProjectInfoDao projectInfoDao;
+    @Autowired
     private BarePipeGrindingCutoffRecordDao barePipeGrindingCutoffRecordDao;
 
 
