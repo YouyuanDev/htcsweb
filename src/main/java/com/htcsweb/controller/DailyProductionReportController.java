@@ -37,10 +37,7 @@ import java.util.*;
 public class DailyProductionReportController {
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     SimpleDateFormat timeformat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    WritableFont font1=new WritableFont(WritableFont.ARIAL,28,WritableFont.BOLD,false, UnderlineStyle.NO_UNDERLINE);
-    WritableFont font2=new WritableFont(WritableFont.ARIAL,9,WritableFont.BOLD,false, UnderlineStyle.NO_UNDERLINE);
-    WritableCellFormat cellFormat1=new WritableCellFormat(font1);
-    WritableCellFormat cellFormat2=new WritableCellFormat(font2);
+
     @Autowired
     private DailyProductionReportDao dailyProductionReportDao;
     @Autowired
@@ -93,14 +90,7 @@ public class DailyProductionReportController {
         String beginTimeStr = request.getParameter("beginTime");
         String endTimeStr = request.getParameter("endTime");
        // String project_name=request.getParameter("project_name");
-
         try{
-            cellFormat1.setVerticalAlignment(VerticalAlignment.CENTRE);
-            cellFormat1.setAlignment(Alignment.CENTRE);
-            cellFormat2.setVerticalAlignment(VerticalAlignment.CENTRE);
-            cellFormat2.setAlignment(Alignment.CENTRE);
-            cellFormat1.setBorder(Border.ALL, BorderLineStyle.THIN);
-            cellFormat2.setBorder(Border.ALL, BorderLineStyle.THIN);
             //先清理.zip垃圾文件
             File fileZip=new File(basePath+"upload/pdf/");
             if(fileZip.exists()&&fileZip.isDirectory()){
@@ -112,16 +102,10 @@ public class DailyProductionReportController {
                     }
                 }
             }
-
-            WritableCellFormat wcf=new WritableCellFormat();
-            wcf.setBorder(Border.ALL, BorderLineStyle.THIN);
-            wcf.setAlignment(Alignment.CENTRE);
+            WritableCellFormat wcf=cellFormat3();
             String excelTemplateFullName=request.getSession().getServletContext().getRealPath("/")
                     +"template/daliy_production_report_template.xls";
             String newExcelFileName=null;
-            System.out.println(excelTemplateFullName);
-            System.out.println(newExcelFileName);
-
              //获取数据库中的数据
              if(project_no!=null&&!project_no.equals("")&&beginTimeStr!=null&&!beginTimeStr.equals("")&&endTimeStr!=null&&!endTimeStr.equals("")){
                  String project_name=" ",client_name=" ";
@@ -353,62 +337,67 @@ public class DailyProductionReportController {
 
     private  void  FillExcelData(ArrayList<Label> datalist,List<DailyProductionReport>dailyProductionReportList,int row,String tabName,String project_name,String client_name,WritableCellFormat wcf){
         int i =0;
+        try{
+            for (DailyProductionReport report:dailyProductionReportList){
 
-        for (DailyProductionReport report:dailyProductionReportList){
+                //根据循环的个数创建sheet
+                tabName=getFormatString(report.getOd_wt());
+                if(i==0) {
+                    i++;
+                    datalist.add(new Label(1, 3,client_name , wcf));
+                    datalist.add(new Label(3, 3, project_name, cellFormat2()));
+                    datalist.add(new Label(34, 3, tabName + "mm", wcf));
+                    datalist.add(new Label(34, 4, getFormatString(report.getOd_coating_type()), wcf));
+                    datalist.add(new Label(3, 5, getFormatString(report.getOd_coating_type()) + " External coated pipe", cellFormat1()));
+                    datalist.add(new Label(14, 5, getFormatString(report.getId_coating_type()) + " Internal coated pipe", cellFormat1()));
+                }
+                datalist.add(new Label(0,row,sdf.format(report.getProduction_date()), wcf));
+                datalist.add(new Label(1,row,String.valueOf(report.getBare_pipe_count()), wcf));
+                datalist.add(new Label(2,row,String.valueOf(report.getBare_pipe_length()), wcf));
+                datalist.add(new Label(3,row,String.valueOf(report.getOd_total_coated_count()), wcf));
+                datalist.add(new Label(4,row,String.valueOf(report.getOd_total_accepted_count()), wcf));
+                datalist.add(new Label(5,row,String.valueOf(report.getOd_aiming_accepted_count()), wcf));
+                datalist.add(new Label(6,row,String.valueOf(report.getOd_total_accepted_length()), wcf));
+                datalist.add(new Label(7,row,String.valueOf(report.getOd_aiming_total_accepted_length()), wcf));
+                datalist.add(new Label(8,row,String.valueOf(report.getOd_repair_pipe_count()), wcf));
+                datalist.add(new Label(9,row,String.valueOf(report.getOd_bare_pipe_onhold_count()), wcf));
+                datalist.add(new Label(10,row,String.valueOf(report.getOd_bare_pipe_grinded_count()), wcf));
+                datalist.add(new Label(11,row,String.valueOf(report.getOd_bare_pipe_cut_count()), wcf));
+                datalist.add(new Label(12,row,String.valueOf(report.getOd_coated_pipe_rejected_count()), wcf));
+                datalist.add(new Label(13,row,String.valueOf(report.getOd_coated_pipe_strip_count()), wcf));
 
-            //根据循环的个数创建sheet
-            tabName=getFormatString(report.getOd_wt());
-            if(i==0) {
-                i++;
-                datalist.add(new Label(1, 3,client_name , wcf));
-                datalist.add(new Label(3, 3, project_name, cellFormat1));
-                datalist.add(new Label(34, 3, tabName + "mm", wcf));
-                datalist.add(new Label(34, 4, getFormatString(report.getOd_coating_type()), wcf));
-                datalist.add(new Label(3, 5, getFormatString(report.getOd_coating_type()) + " External coated pipe", cellFormat2));
-                datalist.add(new Label(14, 5, getFormatString(report.getId_coating_type()) + " Internal coated pipe", cellFormat2));
+                datalist.add(new Label(14,row,String.valueOf(report.getId_total_coated_count()), wcf));
+                datalist.add(new Label(15,row,String.valueOf(report.getId_total_accepted_count()), wcf));
+                datalist.add(new Label(16,row,String.valueOf(report.getId_aiming_accepted_count()), wcf));
+                datalist.add(new Label(17,row,String.valueOf(report.getId_total_accepted_length()), wcf));
+                datalist.add(new Label(18,row,String.valueOf(report.getId_aiming_total_accepted_length()), wcf));
+                datalist.add(new Label(19,row,String.valueOf(report.getId_repair_pipe_count()), wcf));
+                datalist.add(new Label(20,row,String.valueOf(report.getId_bare_pipe_onhold_count()), wcf));
+                datalist.add(new Label(21,row,String.valueOf(report.getId_bare_pipe_grinded_count()), wcf));
+                datalist.add(new Label(22,row,String.valueOf(report.getId_bare_pipe_cut_count()), wcf));
+                datalist.add(new Label(23,row,String.valueOf(report.getId_coated_pipe_rejected_count()), wcf));
+                datalist.add(new Label(24,row,String.valueOf(report.getId_coated_pipe_strip_count()), wcf));
+
+                datalist.add(new Label(25,row,String.valueOf(report.getOd_test_pipe_no_dayshift()), wcf));
+                datalist.add(new Label(26,row,String.valueOf(report.getOd_test_pipe_length_before_cut_dayshift()), wcf));
+                datalist.add(new Label(27,row,String.valueOf(report.getOd_test_pipe_cutting_length_dayshift()), wcf));
+                datalist.add(new Label(28,row,String.valueOf(report.getOd_test_pipe_no_nightshift()), wcf));
+                datalist.add(new Label(29,row,String.valueOf(report.getOd_test_pipe_length_before_cut_nightshift()), wcf));
+                datalist.add(new Label(30,row,String.valueOf(report.getOd_test_pipe_cutting_length_nightshift()), wcf));
+                datalist.add(new Label(31,row,String.valueOf(report.getOd_test_pipe_count()), wcf));
+
+                datalist.add(new Label(32,row,String.valueOf(report.getRebevel_pipe_count()), wcf));
+                datalist.add(new Label(33,row,String.valueOf(report.getPipe_accepted_count_after_rebevel()), wcf));
+                datalist.add(new Label(34,row,String.valueOf(report.getPipe_delivered_count()), wcf));
+                datalist.add(new Label(35,row,String.valueOf(report.getPipe_delivered_length()), wcf));
+                //工程累计
+
             }
-            datalist.add(new Label(0,row,sdf.format(report.getProduction_date()), wcf));
-            datalist.add(new Label(1,row,String.valueOf(report.getBare_pipe_count()), wcf));
-            datalist.add(new Label(2,row,String.valueOf(report.getBare_pipe_length()), wcf));
-            datalist.add(new Label(3,row,String.valueOf(report.getOd_total_coated_count()), wcf));
-            datalist.add(new Label(4,row,String.valueOf(report.getOd_total_accepted_count()), wcf));
-            datalist.add(new Label(5,row,String.valueOf(report.getOd_aiming_accepted_count()), wcf));
-            datalist.add(new Label(6,row,String.valueOf(report.getOd_total_accepted_length()), wcf));
-            datalist.add(new Label(7,row,String.valueOf(report.getOd_aiming_total_accepted_length()), wcf));
-            datalist.add(new Label(8,row,String.valueOf(report.getOd_repair_pipe_count()), wcf));
-            datalist.add(new Label(9,row,String.valueOf(report.getOd_bare_pipe_onhold_count()), wcf));
-            datalist.add(new Label(10,row,String.valueOf(report.getOd_bare_pipe_grinded_count()), wcf));
-            datalist.add(new Label(11,row,String.valueOf(report.getOd_bare_pipe_cut_count()), wcf));
-            datalist.add(new Label(12,row,String.valueOf(report.getOd_coated_pipe_rejected_count()), wcf));
-            datalist.add(new Label(13,row,String.valueOf(report.getOd_coated_pipe_strip_count()), wcf));
-
-            datalist.add(new Label(14,row,String.valueOf(report.getId_total_coated_count()), wcf));
-            datalist.add(new Label(15,row,String.valueOf(report.getId_total_accepted_count()), wcf));
-            datalist.add(new Label(16,row,String.valueOf(report.getId_aiming_accepted_count()), wcf));
-            datalist.add(new Label(17,row,String.valueOf(report.getId_total_accepted_length()), wcf));
-            datalist.add(new Label(18,row,String.valueOf(report.getId_aiming_total_accepted_length()), wcf));
-            datalist.add(new Label(19,row,String.valueOf(report.getId_repair_pipe_count()), wcf));
-            datalist.add(new Label(20,row,String.valueOf(report.getId_bare_pipe_onhold_count()), wcf));
-            datalist.add(new Label(21,row,String.valueOf(report.getId_bare_pipe_grinded_count()), wcf));
-            datalist.add(new Label(22,row,String.valueOf(report.getId_bare_pipe_cut_count()), wcf));
-            datalist.add(new Label(23,row,String.valueOf(report.getId_coated_pipe_rejected_count()), wcf));
-            datalist.add(new Label(24,row,String.valueOf(report.getId_coated_pipe_strip_count()), wcf));
-
-            datalist.add(new Label(25,row,String.valueOf(report.getOd_test_pipe_no_dayshift()), wcf));
-            datalist.add(new Label(26,row,String.valueOf(report.getOd_test_pipe_length_before_cut_dayshift()), wcf));
-            datalist.add(new Label(27,row,String.valueOf(report.getOd_test_pipe_cutting_length_dayshift()), wcf));
-            datalist.add(new Label(28,row,String.valueOf(report.getOd_test_pipe_no_nightshift()), wcf));
-            datalist.add(new Label(29,row,String.valueOf(report.getOd_test_pipe_length_before_cut_nightshift()), wcf));
-            datalist.add(new Label(30,row,String.valueOf(report.getOd_test_pipe_cutting_length_nightshift()), wcf));
-            datalist.add(new Label(31,row,String.valueOf(report.getOd_test_pipe_count()), wcf));
-
-            datalist.add(new Label(32,row,String.valueOf(report.getRebevel_pipe_count()), wcf));
-            datalist.add(new Label(33,row,String.valueOf(report.getPipe_accepted_count_after_rebevel()), wcf));
-            datalist.add(new Label(34,row,String.valueOf(report.getPipe_delivered_count()), wcf));
-            datalist.add(new Label(35,row,String.valueOf(report.getPipe_delivered_length()), wcf));
-            //工程累计
+        }catch (Exception e){
 
         }
+
+
     }
 
     //模糊查询DailyProductionReport信息列表
@@ -992,5 +981,40 @@ public class DailyProductionReportController {
         }else{
             return  " ";
         }
+    }
+    private WritableCellFormat cellFormat1(){
+        WritableCellFormat cellFormat=null;
+        try{
+            WritableFont font=new WritableFont(WritableFont.ARIAL,28,WritableFont.BOLD,false, UnderlineStyle.NO_UNDERLINE);
+            cellFormat=new WritableCellFormat(font);
+            cellFormat.setVerticalAlignment(VerticalAlignment.CENTRE);
+            cellFormat.setAlignment(Alignment.CENTRE);
+            cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
+        }catch (Exception e){
+
+        }
+        return cellFormat;
+    }
+    private WritableCellFormat cellFormat2(){
+        WritableCellFormat cellFormat=null;
+        try{
+            WritableFont font=new WritableFont(WritableFont.ARIAL,9,WritableFont.BOLD,false, UnderlineStyle.NO_UNDERLINE);
+            cellFormat=new WritableCellFormat(font);
+            cellFormat.setVerticalAlignment(VerticalAlignment.CENTRE);
+            cellFormat.setAlignment(Alignment.CENTRE);
+            cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
+        }catch (Exception e){
+        }
+        return cellFormat;
+    }
+    private WritableCellFormat cellFormat3(){
+        WritableCellFormat wcf=null;
+        try{
+             wcf=new WritableCellFormat();
+            wcf.setBorder(Border.ALL, BorderLineStyle.THIN);
+            wcf.setAlignment(Alignment.CENTRE);
+        }catch (Exception e){
+        }
+        return wcf;
     }
 }
