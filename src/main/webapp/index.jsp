@@ -7,10 +7,15 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getContextPath();
+    String bPath =request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+            + path + "/";
+%>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Insert title here</title>
+    <title>钢管涂层生产控制信息系统 主页</title>
 
     <link rel="stylesheet" type="text/css" href="easyui/themes/bootstrap/easyui.css">
 
@@ -21,12 +26,42 @@
     <script src="js/jquery.i18n.properties-1.0.9.js" type="text/javascript"></script>
     <script src="js/language.js" type="text/javascript"></script>
     <script src="js/common.js" type="text/javascript"></script>
+    <script src="../js/jquery.form.js" type="text/javascript"></script>
     <style type="text/css" >
         .ht-table,.ht-table td{border-collapse:collapse;border:1px solid #F0F0F0;}
         .ht-table{width:100%;margin-bottom:10px;}
         .hltr{border-bottom:2px solid #1f1f1f ;}
         .b3{border-style:inset;border-width:thin;}
+
+        .datagrid-mask {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.5;
+            filter: alpha(opacity=50);
+            background-color:#000000;
+            display: none;
+        }
+
+        .datagrid-mask-msg {
+            position: absolute;
+            top: 50%;
+            margin-top: -20px;
+            padding: 12px 5px 10px 30px;
+            width: auto;
+            min-height:30px;
+            border-width: 2px;
+            border-style: solid;
+            display: none;
+        }
+
+
     </style>
+
+
+
     <script type="text/javascript">
         var url;
         $(function(){
@@ -700,6 +735,58 @@
 
 
             //makeMenu("外喷砂工序",odParams,"odblastprocess");
+            $('.btnLogout').click(function () {
+
+                var form = $("<form>");//定义一个form表单
+                form.attr("style", "display:none");
+                form.attr("target", "");
+                form.attr("method", "post");//请求类型
+                form.attr("action","/Login/logout.action");//请求地址
+                $("body").append(form);//将表单放置在web中
+
+                var options={
+                    type:'POST',
+                    url:'/Login/Logout.action',
+                    dataType:'json',
+                    beforeSubmit:function () {
+                        ajaxLoading();
+                    },
+                    success:function (data) {
+                        ajaxLoadEnd();
+                        //alert(data.msg);
+                        if(data.success){
+                            window.location.href="<%=bPath%>"+"login/login.jsp";
+                        }
+
+
+                    },error:function () {
+                        ajaxLoadEnd();
+                    }
+                };
+                //form.submit(function (e) {
+                form.ajaxSubmit(options);
+                return false;
+            });
+
+            function ajaxLoadEnd() {
+                $(".datagrid-mask").remove();
+                $(".datagrid-mask-msg").remove();
+            }
+
+            function ajaxLoading() {
+                $("<div class=\"datagrid-mask\"></div>").css({
+                    display: "block",
+                    width: "100%",
+                    height: $(window).height()
+                }).appendTo("body");
+                $("<div class=\"datagrid-mask-msg\"></div>").html("正在退出，请稍候。。。").appendTo("body").css({
+                    display: "block",
+                    left: ($(document.body).outerWidth(true) - 190) / 2,
+                    top: ($(window).height() - 45) / 2
+                });
+            }
+
+
         });
 
         function  MakeMenus(name) {
@@ -707,21 +794,25 @@
             return res;
         }
 
+
+
+
     </script>
 </head>
 <body class="easyui-layout">
 <div data-options="region:'south',split:true" style="height:50px;">
-    <div style="text-align: center"><h3>@2018 友元科技 版权所有</h3></div>
+    <div style="text-align: center"><h3>Dr.K Inspection &copy;2018 友元科技 版权所有</h3></div>
 </div>
 <div data-options="region:'north',split:true">
-    <%--<div>--%>
-        <%--<button class="pdfbtn">转PDF</button>--%>
-    <%--</div>--%>
+
+
+
     <div style="float: right;padding:10px">
         <select id="language">
             <option value="zh-CN">中文</option>
             <option value="en">ENGLISH</option>
         </select>
+        <button class="btnLogout">退出</button>
     </div>
 </div>
 

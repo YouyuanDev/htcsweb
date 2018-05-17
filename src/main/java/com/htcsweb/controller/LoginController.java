@@ -138,4 +138,33 @@ public class LoginController {
     }
 
 
+    //登录验证
+    @RequestMapping("/Logout")
+    @ResponseBody
+    public String Logout(HttpServletRequest request,HttpServletResponse response){
+        JSONObject json=new JSONObject();
+        try{
+
+                HttpSession session = request.getSession();
+                //把用户数据保存在session域对象中
+                session.removeAttribute("userSession");
+                session.removeAttribute("userfunctionMap");
+
+
+                if(session.getAttribute("userSession")==null){
+                    //跳转到登录页面
+                    json.put("success",true);
+                    json.put("msg","登出成功");
+                }else{
+                    json.put("success",false);
+                    json.put("msg","登出错误");
+                }
+
+            ResponseUtil.write(response,json);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
