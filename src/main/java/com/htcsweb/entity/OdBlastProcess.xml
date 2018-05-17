@@ -144,6 +144,9 @@
             <if test="project_no!=null and project_no!=''">
                 AND pro.project_no=#{project_no}
             </if>
+            <if test="external_coating!=null and external_coating!=''">
+                AND c.external_coating=#{external_coating}
+            </if>
             <if test="begin_time!=null">
                 <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
             </if>

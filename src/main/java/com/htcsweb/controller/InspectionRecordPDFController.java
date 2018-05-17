@@ -331,7 +331,7 @@ public class InspectionRecordPDFController {
                 +"template/od_blast_record_template.xls";
         String newPdfName=null;
         try{
-            List<HashMap<String,Object>>list=odblastprocessDao.getOdBlastRecord(project_no,mill_no,begin_time,end_time);
+            List<HashMap<String,Object>>list=odblastprocessDao.getOdBlastRecord(project_no,mill_no,coatingType ,begin_time,end_time);
             ArrayList<Label> datalist=new ArrayList<Label>();
             //如果数据不为空
             if(list.size()>0){
@@ -410,7 +410,7 @@ public class InspectionRecordPDFController {
                 +"template/od_blast_inspection_record_template.xls";
         String newPdfName=null;
         try{
-            List<HashMap<String,Object>>list=odBlastInspectionProcessDao.getOdBlastInspectionRecord(project_no,mill_no,begin_time,end_time);
+            List<HashMap<String,Object>>list=odBlastInspectionProcessDao.getOdBlastInspectionRecord(project_no,mill_no,coatingType,begin_time,end_time);
             //System.out.println("外打砂检验"+timeformat.format(begin_time)+":"+timeformat.format(end_time)+"的数据个数是:"+list.size());
             ArrayList<Label> datalist=new ArrayList<Label>();
             int index=1,row=0;
@@ -1561,7 +1561,7 @@ public class InspectionRecordPDFController {
                         record.setOnholdNo(String.valueOf(onholdList.get(i).get("pipe_no")));
                     else
                         record.setOnholdNo(" ");
-                    if(stripList.get(i).get("remark")!=null&&!stripList.get(i).get("remark").toString().equals(""))
+                    if(onholdList.get(i).get("remark")!=null&&!onholdList.get(i).get("remark").toString().equals(""))
                         record.setOnholdRemark(String.valueOf(onholdList.get(i).get("remark")));
                     else
                         record.setOnholdRemark(" ");
