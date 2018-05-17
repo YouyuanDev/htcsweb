@@ -62,11 +62,20 @@ public class InspectionRecordPDFController {
     //String fontPath=this.getClass().getClassLoader().getResource("").getPath()+"font/simhei.ttf";
     //String pdfFullName=this.getClass().getClassLoader().getResource("").getPath() + "upload/pdf/BlastRecord.pdf";
     public InspectionRecordPDFController(){
+        String path=this.getClass().getClassLoader().getResource("../../").getPath();
         basePath= this.getClass().getClassLoader().getResource("../../").getPath();
-        logoImageFullName=basePath + "template/img/image002.jpg";
-        pdfDirPath=basePath+"upload/pdf/";
-        fontPath=basePath+"font/simhei.ttf";
-        pdfFullName=basePath + "upload/pdf/BlastRecord.pdf";
+
+        System.out.println("basePaththis.getClass().getClassLoader()getPath()="+basePath);
+        if(UploadFileController.isServerTomcat) {//若果是tomcat需要重新定义upload的入口
+            basePath = basePath.substring(0, basePath.lastIndexOf('/'));
+            basePath = basePath.substring(0, basePath.lastIndexOf('/'));
+        }
+
+        logoImageFullName=path + "template/img/image002.jpg";
+        fontPath=path+"font/simhei.ttf";
+
+        pdfDirPath=basePath+"/upload/pdf/";
+        pdfFullName=basePath + "/upload/pdf/DailyProductionRecord.pdf";
         File pdfDirFile=new File(pdfDirPath);
         if(!pdfDirFile.exists()){
             pdfDirFile.mkdir();
@@ -153,6 +162,13 @@ public class InspectionRecordPDFController {
     @ResponseBody
     public  String getRecordReportPDF(HttpServletRequest request, HttpServletResponse response){
         String basePath=request.getSession().getServletContext().getRealPath("/");
+        System.out.println("basePath=request.getSession()="+basePath);
+        if(UploadFileController.isServerTomcat) {
+            basePath = basePath.substring(0, basePath.lastIndexOf('/'));
+            basePath = basePath.substring(0, basePath.lastIndexOf('/'));
+
+        }
+
         Date start_time=null;
         Date finish_time=null;
 
@@ -174,7 +190,7 @@ public class InspectionRecordPDFController {
         if(project_no!=null&&!project_no.equals("")&&project_name!=null&&!project_name.equals("")&&beginTimeStr!=null&&!beginTimeStr.equals("")&&endTimeStr!=null&&!endTimeStr.equals("")){
             try{
                 //先清理.zip垃圾文件
-                File fileZip=new File(basePath+"upload/pdf/");
+                File fileZip=new File(basePath+"/upload/pdf/");
                 if(fileZip.exists()&&fileZip.isDirectory()){
                     String zipList[]=fileZip.list();
                     for (String zippath:zipList){
@@ -227,7 +243,7 @@ public class InspectionRecordPDFController {
                                     finish_time=timeformat.parse(DateTimeUtil.getNextDay(recordTime)+" 08:00:00");
                                 }
                                 //外防
-                                pdfOdPath=basePath+"upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+"_"+recordTime+"_外防_"+shift0+"(Day)_"+pipe_size+"_"+contractInfo.getExternal_coating()+".pdf");
+                                pdfOdPath=basePath+"/upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+"_"+recordTime+"_外防_"+shift0+"(Day)_"+pipe_size+"_"+contractInfo.getExternal_coating()+".pdf");
                                 System.out.println(pdfOdPath+"------------------------");
                                 File file0=new File(pdfOdPath);
                                 if(!file0.exists()){
@@ -261,7 +277,7 @@ public class InspectionRecordPDFController {
                                     dayNightPdf.add(pdfOdPath);
                                 }
                                 //内防
-                                pdfIdPath=basePath+"upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+"_"+recordTime+"_内防_"+shift0+"(Day)_"+pipe_size+"_"+contractInfo.getInternal_coating()+".pdf");
+                                pdfIdPath=basePath+"/upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+"_"+recordTime+"_内防_"+shift0+"(Day)_"+pipe_size+"_"+contractInfo.getInternal_coating()+".pdf");
                                 File file1=new File(pdfIdPath);
                                 //开始填充pdf
                                 //6.2.1---------内防生成封面PDF
@@ -296,7 +312,7 @@ public class InspectionRecordPDFController {
                 }
                 //-------结束生成笛卡尔集pdf
                 //Collections.sort(dayNightPdf);
-                zipName="upload/pdf/"+ResponseUtil.downLoadPdf(dayNightPdf,request,response);
+                zipName="/upload/pdf/"+ResponseUtil.downLoadPdf(dayNightPdf,request,response);
                 //定时删除临时文件
                 for (int j=0;j<delSetPath.size();j++){
                     if(delSetPath.get(j)!=null){

@@ -80,7 +80,13 @@ public class DailyProductionReportController {
     @RequestMapping(value="getDailyRecordReportExcel",produces="application/json;charset=UTF-8")
     @ResponseBody
     public  String getDailyRecordReportExcel(HttpServletRequest request, HttpServletResponse response) {
+
         String basePath = request.getSession().getServletContext().getRealPath("/");
+        if(UploadFileController.isServerTomcat) {//若果是tomcat需要重新定义upload的入口
+            basePath = basePath.substring(0, basePath.lastIndexOf('/'));
+            basePath = basePath.substring(0, basePath.lastIndexOf('/'));
+        }
+
         Date start_time = null;
         Date finish_time = null;
         //是否成功标识
@@ -92,7 +98,7 @@ public class DailyProductionReportController {
        // String project_name=request.getParameter("project_name");
         try{
             //先清理.zip垃圾文件
-            File fileZip=new File(basePath+"upload/pdf/");
+            File fileZip=new File(basePath+"/upload/pdf/");
             if(fileZip.exists()&&fileZip.isDirectory()){
                 String zipList[]=fileZip.list();
                 for (String zippath:zipList){
@@ -321,7 +327,7 @@ public class DailyProductionReportController {
                  if(dailyProductionReportList!=null&&dailyProductionReportList.size()>0) {
                      ArrayList list = new ArrayList();
                      list.add(newExcelFileName);
-                     zipName = "upload/pdf/" + ResponseUtil.downLoadPdf(list, request, response);
+                     zipName = "/upload/pdf/" + ResponseUtil.downLoadPdf(list, request, response);
                  }else{
                      zipName="nodata";
                  }

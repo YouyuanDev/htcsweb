@@ -1,5 +1,7 @@
 package com.htcsweb.util;
 
+import com.htcsweb.controller.UploadFileController;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
@@ -175,7 +177,21 @@ public class ResponseUtil {
             sbzip.append(timenow);
             sbzip.append(".zip");
             zipName = sbzip.toString();
-            String basePath=request.getSession().getServletContext().getRealPath("/")+"upload/pdf/";
+
+
+            String basePath=request.getSession().getServletContext().getRealPath("/");
+            if(UploadFileController.isServerTomcat) {
+                basePath = basePath.substring(0, basePath.lastIndexOf('/'));
+                basePath = basePath.substring(0, basePath.lastIndexOf('/'));
+
+            }
+            basePath = basePath + "/upload/pdf/";
+            File uploadPath = new File(basePath);
+            if (!uploadPath.exists()) {
+                uploadPath.mkdirs();
+            }
+
+
             File filezip=new File(basePath+zipName);
             //response.setContentType("APPLICATION/OCTET-STREAM");
             //response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(zipName, "UTF-8"));

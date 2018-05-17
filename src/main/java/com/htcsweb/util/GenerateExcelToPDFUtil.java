@@ -287,26 +287,25 @@ public class GenerateExcelToPDFUtil {
 
     //根据excel名称，转成PDF
     private static String ExcelToPDFRecord(String excelFullName,String pdfFullName,String imagePath,String fontPath){
-        File pdf=new File(pdfFullName);
-        try{
-            if(!pdf.exists()){
-                pdf.createNewFile();
-            }
-        }catch (Exception e){
-
-        }
+//        File pdf=new File(pdfFullName);
+//        try{
+//            if(!pdf.exists()){
+//                pdf.createNewFile();
+//            }
+//        }catch (Exception e){
+//
+//        }
         float excelTableTotalWidth=800;
         //excelFullName="/Users/kurt/Documents/pipe_coating_surface_inspection_record_template.xls";
         File excelfile = new File(excelFullName);
-        StringBuffer sb = new StringBuffer();
+        //StringBuffer sb = new StringBuffer();
 
-        //imagePath = "/Users/kurt/Documents/image002.jpg";
+
         //输出pdf文件名增加时间戳
         pdfFullName=pdfFullName.substring(0,pdfFullName.lastIndexOf('.'))+ String.valueOf(System.currentTimeMillis()+".pdf");
 
         //写入pdf
-        //pdfFullName="/Users/kurt/Documents/testPDF.pdf";
-        File pdffile = new File(pdfFullName);
+        //File pdffile = new File(pdfFullName);
         try {
             //BufferedImage logoimg = ImageIO.read(new File(imagePath));
             Image image = Image.getInstance(imagePath);

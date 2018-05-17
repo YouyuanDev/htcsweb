@@ -9,7 +9,7 @@
 <%
     String path = request.getContextPath();
     String bPath =request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-            + path + "/";
+            + path ;
 %>
 <html>
 <head>

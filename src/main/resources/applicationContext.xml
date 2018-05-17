@@ -36,6 +36,9 @@
     <property name="basePackage" value="com.htcsweb.dao"></property>
   </bean>
 
+
+
+
   <!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">-->
      <!--&lt;!&ndash;上传最大数据100M&ndash;&gt;-->
      <!--<property name="maxUploadSize">-->

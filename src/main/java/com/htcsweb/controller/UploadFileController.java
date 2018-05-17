@@ -12,6 +12,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,10 +53,22 @@ public class UploadFileController {
     @Autowired
     private ContractInfoDao contractInfoDao;
 
+    public static boolean isServerTomcat=true;//是否服务器为tomcat 还是 本地debug服务器
+
+
     @RequestMapping(value = "/uploadPicture")
     public String uploadPicture(HttpServletRequest request, HttpServletResponse response) {
         try {
-            String saveDirectory = request.getSession().getServletContext().getRealPath("/upload/pictures");
+            String saveDirectory=request.getSession().getServletContext().getRealPath("/");
+            //照片放在web目录以外，需要tomcat conf/server.xml增加 <Context path="/upload" docBase="XXXXX/apache-tomcat-8.5.27/webapps/upload" reloadable="false"/>
+            //conf/server.xml   <Context path="/upload" docBase="/Users/kurt/Documents/apache-tomcat-8.5.27/webapps/upload" reloadable="false"/>
+            if(isServerTomcat) {
+                saveDirectory = saveDirectory.substring(0, saveDirectory.lastIndexOf('/'));
+                saveDirectory = saveDirectory.substring(0, saveDirectory.lastIndexOf('/'));
+            }
+            saveDirectory = saveDirectory + "/upload/pictures";
+            System.out.println("saveDirectory="+saveDirectory);
+
             File uploadPath = new File(saveDirectory);
             if (!uploadPath.exists()) {
                 uploadPath.mkdirs();
@@ -93,7 +106,13 @@ public class UploadFileController {
             String imgList=request.getParameter("imgList");
             if(imgList!=null&&imgList!=""){
                 String []listArr=imgList.split(";");
-                String saveDirectory = request.getSession().getServletContext().getRealPath("/upload/pictures");
+                String saveDirectory =request.getSession().getServletContext().getRealPath("/");
+                if(isServerTomcat) {
+                    saveDirectory = saveDirectory.substring(0, saveDirectory.lastIndexOf('/'));
+                    saveDirectory = saveDirectory.substring(0, saveDirectory.lastIndexOf('/'));
+
+                }
+                saveDirectory = saveDirectory + "/upload/pictures";
                 String imgPath="";
                 for(int i=0;i<listArr.length;i++){
                     imgPath=saveDirectory+"/"+listArr[i];
@@ -122,7 +141,12 @@ public class UploadFileController {
             String fileList=request.getParameter("fileList");
             if(fileList!=null&&fileList!=""){
                 String []listArr=fileList.split(";");
-                String saveDirectory = request.getSession().getServletContext().getRealPath("/upload/files");
+                String saveDirectory=request.getSession().getServletContext().getRealPath("/");
+                if(isServerTomcat) {
+                    saveDirectory = saveDirectory.substring(0, saveDirectory.lastIndexOf('/'));
+                    saveDirectory = saveDirectory.substring(0, saveDirectory.lastIndexOf('/'));
+                }
+                saveDirectory = saveDirectory + "/upload/files";
                 String filePath="";
                 for(int i=0;i<listArr.length;i++){
                     filePath=saveDirectory+"/"+listArr[i];
@@ -145,7 +169,13 @@ public class UploadFileController {
     @RequestMapping(value = "/uploadFile")
     public String uploadFile(HttpServletRequest request, HttpServletResponse response) {
         try {
-            String saveDirectory = request.getSession().getServletContext().getRealPath("/upload/files");
+            //String saveDirectory = request.getSession().getServletContext().getRealPath("/upload/files");
+            String saveDirectory=request.getSession().getServletContext().getRealPath("/");
+            if(isServerTomcat) {
+                saveDirectory = saveDirectory.substring(0, saveDirectory.lastIndexOf('/'));
+                saveDirectory = saveDirectory.substring(0, saveDirectory.lastIndexOf('/'));
+            }
+            saveDirectory = saveDirectory + "/upload/files";
             File uploadPath = new File(saveDirectory);
             if (!uploadPath.exists()) {
                 uploadPath.mkdirs();
@@ -187,9 +217,13 @@ public class UploadFileController {
             if(entrance!=null&&entrance.equals("1")) {
                 inODBareStorage = false;
             }
-
-
-            String saveDirectory = request.getSession().getServletContext().getRealPath("/upload/pipes");
+            //String saveDirectory = request.getSession().getServletContext().getRealPath("/upload/pipes");
+            String saveDirectory=request.getSession().getServletContext().getRealPath("/");
+            if(isServerTomcat) {
+                saveDirectory = saveDirectory.substring(0, saveDirectory.lastIndexOf('/'));
+                saveDirectory = saveDirectory.substring(0, saveDirectory.lastIndexOf('/'));
+            }
+            saveDirectory = saveDirectory + "/upload/pipes";
             File uploadPath = new File(saveDirectory);
             if (!uploadPath.exists()) {
                 uploadPath.mkdirs();
@@ -247,7 +281,6 @@ public class UploadFileController {
 
             List<List<Object>> listob =ExcelUtil.readFromFiletoList(fullfilename);
             //遍历listob数据，把数据放到List中
-
 
             for (int i = 0; i < listob.size(); i++) {
                 List<Object> ob = listob.get(i);
