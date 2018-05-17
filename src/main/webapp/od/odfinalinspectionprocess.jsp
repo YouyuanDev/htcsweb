@@ -219,7 +219,10 @@
                             return false;
                         }
                     }
-
+                    if($("input[name='result']").val()==""){
+                        hlAlertFour("请输入结论!");
+                        return false;
+                    }
 
                     $("input[name='cutback_length']").val(changeComma(arg1));
                     $("input[name='magnetism_list']").val(changeComma(arg2));

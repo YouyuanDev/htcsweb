@@ -239,7 +239,10 @@
                         hlAlertFour("请输入操作时间");
                         return false;
                     }
-
+                    if($("input[name='result']").val()==""){
+                        hlAlertFour("请输入结论!");
+                        return false;
+                    }
                     var arg4=$("input[name='magnetism_list']").val().trim();
 
                     $("input[name='dry_film_thickness_list']").val(changeComma(arg1));

@@ -188,7 +188,10 @@
                         hlAlertFour("请输入扒皮内防/外防");
                         return false;
                     }
-
+                    if($("input[name='result']").val()==""){
+                        hlAlertFour("请输入结论!");
+                        return false;
+                    }
                     setParams($("input[name='strip_temperature']"));
 
                     //return $('#coatingStripForm').form('enableValidation').form('validate');

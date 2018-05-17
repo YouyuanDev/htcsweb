@@ -257,6 +257,10 @@
                         hlAlertFour("请输入操作时间");
                         return false;
                     }
+                    if($("input[name='result']").val()==""){
+                        hlAlertFour("请输入结论!");
+                        return false;
+                    }
                     // setParams($("input[name='coating_line_speed']"));
                     // setParams($("input[name='application_temp']"));
                     // setParams($("input[name='base_coat_gun_count']"));
@@ -721,7 +725,7 @@
             grid1.load({
                 pipe_no:keyText1.value,
                 external_coatingtype:'3LPE',
-                pipestatus:'od3,'
+                pipestatus:'od3,odrepair2'
             });
         }else if(type==2){
             grid2.load({
@@ -773,7 +777,7 @@
         grid1.load({
             pipe_no:keyText1.value,
             external_coatingtype:'3LPE',
-            pipestatus:'od3,'
+            pipestatus:'od3,odrepair2'
         });
     });
     look2.on("showpopup",function(e){

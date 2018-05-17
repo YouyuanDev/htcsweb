@@ -184,6 +184,10 @@
                         hlAlertFour("请输入操作时间");
                         return false;
                     }
+                    if($("input[name='result']").val()==""){
+                        hlAlertFour("请输入结论!");
+                        return false;
+                    }
                 },
                 success: function(result){
                     var result = eval('('+result+')');

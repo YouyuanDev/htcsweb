@@ -207,7 +207,10 @@
                         hlAlertFour("请输入分厂信息");
                         return false;
                     }
-
+                    if($("input[name='result']").val()==""){
+                        hlAlertFour("请输入结论!");
+                        return false;
+                    }
                     // setParams($("input[name='dry_film_thickness_max']"));
                     // setParams($("input[name='dry_film_thickness_min']"));
                     var arg1=$("input[name='wet_film_thickness_list']").val().trim();
@@ -617,7 +620,7 @@
         {
             grid1.load({
                 pipe_no:keyText1.value,
-                pipestatus:'id3,'
+                pipestatus:'id3,idrepair2'
             });
         }else if(type==2){
             grid2.load({
@@ -668,7 +671,7 @@
         $('#searchBar1').css('display','block');
         grid1.load({
             pipe_no:keyText1.value,
-            pipestatus:'id3,'
+            pipestatus:'id3,idrepair2'
         });
 
     });

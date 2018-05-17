@@ -235,6 +235,10 @@
                         hlAlertFour("请输入检验时间");
                         return false;
                     }
+                    if($("input[name='result']").val()==""){
+                        hlAlertFour("请输入结论!");
+                        return false;
+                    }
                     var arg1=$("input[name='repair_thickness']").val().trim();
                     $("input[name='repair_thickness']").val(changeComma(arg1));
 
@@ -736,7 +740,7 @@
         {
             grid1.load({
                 pipe_no:keyText1.value,
-                pipestatus:'odrepair1,idrepair1,odrepair2,idrepair2'
+                pipestatus:'odrepair1,idrepair1'
             });
         }else if(type==2){
             grid2.load({
@@ -803,7 +807,7 @@
         $('#searchBar1').css('display','block');
         grid1.load({
             pipe_no:keyText1.value,
-            pipestatus:'odrepair1,idrepair1,odrepair2,idrepair2'
+            pipestatus:'odrepair1,idrepair1'
         });
     });
     look2.on("showpopup",function(e){

@@ -95,7 +95,7 @@ public class IdCoatingInspectionProcessController {
                 List<PipeBasicInfo> list=pipeBasicInfoDao.getPipeNumber(pipeno);
                 if(list.size()>0){
                     PipeBasicInfo p=list.get(0);
-                    if(p.getStatus().equals("id3")) {
+                    if(p.getStatus().equals("id3")||p.getStatus().equals("idrepair2")) {
                         //验证钢管状态为光管
                         if(idCoatingInspectionProcess.getResult().equals("1")) {//当合格时才更新钢管状态
                             p.setStatus("id4");
