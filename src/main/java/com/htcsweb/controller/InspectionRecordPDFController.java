@@ -1308,7 +1308,7 @@ public class InspectionRecordPDFController {
                     index++;
                     if(index%19==0){
                         createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,internal_coating,shift,title_time);
-                        datalist.add(new Label(11,12,mill_name,wcf));
+                        datalist.add(new Label(11,20,mill_name,wcf));
                         datalist.add(new Label(2,6,String.valueOf(idCoatingCount),wcf));
                         datalist.add(new Label(5,6,String.valueOf(idAcceptedPipeCount),wcf));
                         datalist.add(new Label(7,6,String.valueOf(idRepairPipeCount),wcf));
@@ -1323,7 +1323,7 @@ public class InspectionRecordPDFController {
                 }
                 if(datalist.size()>0){
                     createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,internal_coating,shift,title_time);
-                    datalist.add(new Label(11,12,mill_name,wcf));
+                    datalist.add(new Label(11,20,mill_name,wcf));
                     datalist.add(new Label(2,6,String.valueOf(idCoatingCount),wcf));
                     datalist.add(new Label(5,6,String.valueOf(idAcceptedPipeCount),wcf));
                     datalist.add(new Label(7,6,String.valueOf(idRepairPipeCount),wcf));
