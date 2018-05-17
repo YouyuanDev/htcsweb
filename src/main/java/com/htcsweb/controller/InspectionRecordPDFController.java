@@ -597,10 +597,10 @@ public class InspectionRecordPDFController {
                         }
                     }
                     datalist.add(new Label(7, row+9,label7Txt, wcf));
-                    datalist.add(new Label(8, row+9, getFormatString(list.get(i).get("surface_condition").toString()), wcf));
-                    datalist.add(new Label(2, row+10,getFormatString(String.valueOf(list.get(i).get("base_coat_thickness_list"))), wcf));
-                    datalist.add(new Label(5, row+10,getFormatString(String.valueOf(list.get(i).get("top_coat_thickness_list"))), wcf));
-                    datalist.add(new Label(8, row+10,getFormatString(String.valueOf(list.get(i).get("total_coating_thickness_list"))), wcf));
+                    datalist.add(new Label(8, row+9, list.get(i).get("surface_condition").toString(), wcf));
+                    datalist.add(new Label(2, row+10,String.valueOf(list.get(i).get("base_coat_thickness_list")), wcf));
+                    datalist.add(new Label(5, row+10,String.valueOf(list.get(i).get("top_coat_thickness_list")), wcf));
+                    datalist.add(new Label(8, row+10,String.valueOf(list.get(i).get("total_coating_thickness_list")), wcf));
                     result=String.valueOf(list.get(i).get("result"));
                     if(result!=null){
                         if(result.equals("0")){
@@ -775,7 +775,7 @@ public class InspectionRecordPDFController {
                     }
                     Label label7 = new Label(7, row+9,label7Txt, wcf);
                     datalist.add(label7);
-                    Label label8 = new Label(8, row+9,getFormatString(String.valueOf(list.get(i).get("surface_condition"))), wcf);
+                    Label label8 = new Label(8, row+9,String.valueOf(list.get(i).get("surface_condition")), wcf);
                     datalist.add(label8);
                     Label label9 = new Label(2, row+10, String.valueOf(list.get(i).get("base_coat_thickness_list")), wcf);
                     datalist.add(label9);
@@ -957,8 +957,8 @@ public class InspectionRecordPDFController {
                     datalist.add(new Label(3, row+8, String.valueOf(list.get(i).get("relative_humidity")), wcf));
                     datalist.add(new Label(4, row+8, String.valueOf(list.get(i).get("dew_point")), wcf));
                     datalist.add(new Label(5, row+8, String.valueOf(list.get(i).get("pipe_temp")), wcf));
-                    datalist.add(new Label(6, row+8, getFormatString(String.valueOf(list.get(i).get("surface_condition"))) , wcf));
-                    datalist.add(new Label(7, row+8, getFormatString(String.valueOf(list.get(i).get("blast_finish_sa25"))), wcf));
+                    datalist.add(new Label(6, row+8, String.valueOf(list.get(i).get("surface_condition")) , wcf));
+                    datalist.add(new Label(7, row+8, String.valueOf(list.get(i).get("blast_finish_sa25")), wcf));
                     datalist.add(new Label(8, row+8, String.valueOf(list.get(i).get("surface_dust_rating"))+"级", wcf));
                     datalist.add(new Label(9, row+8, String.valueOf(list.get(i).get("profile")), wcf));
                     datalist.add(new Label(10, row+8, String.valueOf(list.get(i).get("salt_contamination_after_blasting")), wcf));
@@ -1086,7 +1086,7 @@ public class InspectionRecordPDFController {
                 String result="";
                 int qualifiedTotal=0;
                 for (int i=0;i<list.size();i++){
-                    datalist.add(new Label(1, row+8,getFormatString(String.valueOf(list.get(i).get("pipe_no"))), wcf));
+                    datalist.add(new Label(1, row+8,String.valueOf(list.get(i).get("pipe_no")), wcf));
                     String isSample=String.valueOf(list.get(i).get("is_sample"));
                     if(isSample!=null&&!isSample.equals("")){
                         if(isSample.equals("0")){
@@ -1100,7 +1100,7 @@ public class InspectionRecordPDFController {
                         isSample=" ";
                     }
                     datalist.add(new Label(2, row+8,isSample, wcf));
-                    datalist.add(new Label(3, row+8,getFormatString(String.valueOf(list.get(i).get("wet_film_thickness_list"))), wcf));
+                    datalist.add(new Label(3, row+8,String.valueOf(list.get(i).get("wet_film_thickness_list")), wcf));
                     result=String.valueOf(list.get(i).get("result"));
                     if(result!=null){
                         if(result.equals("0")){
@@ -1157,10 +1157,10 @@ public class InspectionRecordPDFController {
                 String result="",stencilRes="",stencilStr="",bevelRes="",bevelStr="";
                 int qualifiedTotal=0;
                 for (int i=0;i<list.size();i++){
-                    datalist.add(new Label(1, row+9,getFormatString(String.valueOf(list.get(i).get("pipe_no"))), wcf));
-                    datalist.add(new Label(2, row+9, getFormatString(String.valueOf(list.get(i).get("holidays"))), wcf));
-                    datalist.add(new Label(3, row+9,getFormatString( String.valueOf(list.get(i).get("holiday_tester_volts"))), wcf));
-                    datalist.add(new Label(4, row+9,getFormatString( String.valueOf(list.get(i).get("internal_repairs"))), wcf));
+                    datalist.add(new Label(1, row+9,String.valueOf(list.get(i).get("pipe_no")), wcf));
+                    datalist.add(new Label(2, row+9, String.valueOf(list.get(i).get("holidays")), wcf));
+                    datalist.add(new Label(3, row+9, String.valueOf(list.get(i).get("holiday_tester_volts")), wcf));
+                    datalist.add(new Label(4, row+9,String.valueOf(list.get(i).get("internal_repairs")), wcf));
                     bevelRes=String.valueOf(list.get(i).get("bevel_check"));
                     if(bevelRes!=null&&!bevelRes.equals("")){
                         if(bevelRes.equals("0")){
@@ -1176,7 +1176,7 @@ public class InspectionRecordPDFController {
                         bevelStr=" ";
                     }
                     datalist.add(new Label(5, row+9, bevelStr, wcf));
-                    datalist.add(new Label(6, row+9,getFormatString(String.valueOf(list.get(i).get("magnetism_list"))), wcf));
+                    datalist.add(new Label(6, row+9,String.valueOf(list.get(i).get("magnetism_list")), wcf));
                     stencilRes=String.valueOf(list.get(i).get("stencil_verification"));
                     if(stencilRes!=null&&!stencilRes.equals("")){
                         if(stencilRes.equals("0")){
@@ -1192,11 +1192,11 @@ public class InspectionRecordPDFController {
                         stencilStr=" ";
                     }
                     datalist.add(new Label(7, row+9, stencilStr, wcf));
-                    datalist.add(new Label(8, row+9,getFormatString(String.valueOf(list.get(i).get("surface_condition"))), wcf));
+                    datalist.add(new Label(8, row+9,String.valueOf(list.get(i).get("surface_condition")), wcf));
 
-                    datalist.add(new Label(2, row+10,getFormatString( String.valueOf(list.get(i).get("dry_film_thickness_list"))), wcf));
-                    datalist.add(new Label(5, row+10,getFormatString( String.valueOf(list.get(i).get("cutback_length"))), wcf));
-                    datalist.add(new Label(8, row+10,getFormatString( String.valueOf(list.get(i).get("roughness_list"))), wcf));
+                    datalist.add(new Label(2, row+10, String.valueOf(list.get(i).get("dry_film_thickness_list")), wcf));
+                    datalist.add(new Label(5, row+10, String.valueOf(list.get(i).get("cutback_length")), wcf));
+                    datalist.add(new Label(8, row+10, String.valueOf(list.get(i).get("roughness_list")), wcf));
 
                     result=String.valueOf(list.get(i).get("result"));
                     if(result!=null){
@@ -1717,12 +1717,12 @@ public class InspectionRecordPDFController {
         }
     }
     private void createRecordPdfTitle(ArrayList<Label> datalist,int column1,int column2,int column3,int row1,int row2,String title_project_name,String title_pipe_size,String title_standard,String title_coating_type,String title_shift,String title_time){
-        datalist.add(new Label(column1, row1,getFormatString(title_project_name), wcf));
-        datalist.add(new Label(column2, row1,getFormatString(title_pipe_size), wcf));
-        datalist.add(new Label(column1, row2,getFormatString(title_standard), wcf));
-        datalist.add(new Label(column2, row2,getFormatString(title_coating_type), wcf));
-        datalist.add(new Label(column3, row2,getFormatString(title_shift), wcf));
-        datalist.add(new Label(column3, row1,getFormatString(title_time), wcf));
+        datalist.add(new Label(column1, row1,title_project_name, wcf));
+        datalist.add(new Label(column2, row1,title_pipe_size, wcf));
+        datalist.add(new Label(column1, row2,title_standard, wcf));
+        datalist.add(new Label(column2, row2,title_coating_type, wcf));
+        datalist.add(new Label(column3, row2,title_shift, wcf));
+        datalist.add(new Label(column3, row1,title_time, wcf));
 
     }
     //公共生成pdf的函数，参数列表(dataList:表格数据集合,newPdfName:pdf名字,templateFullName:pdf模板名字,x1为备注所在列 y1为备注所在行
@@ -1751,7 +1751,7 @@ public class InspectionRecordPDFController {
     private void createRecordPdf(ArrayList<Label> datalist,String newPdfName,String templateFullName,int qualifiedTotal,int x1,int y1,int x2,int y2,int index,int row,StringBuilder sb,List<String>stringList){
         datalist.add(new Label(x1,y1,String.valueOf(sb.toString()),wcf));
         //添加合格数
-        datalist.add(new Label(x2,y2,getFormatString(String.valueOf(qualifiedTotal)),wcf));
+        datalist.add(new Label(x2,y2,String.valueOf(qualifiedTotal),wcf));
         newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
         datalist.clear();
         qualifiedTotal=0;
@@ -1764,13 +1764,13 @@ public class InspectionRecordPDFController {
         }
     }
     //格式化为空的字符串
-    public  String getFormatString(String param){
-        if(param!=null&&!param.equals("")){
-            return  param;
-        }else{
-            return  " ";
-        }
-    }
+//    public  String getFormatString(String param){
+//        if(param!=null&&!param.equals("")){
+//            return  param;
+//        }else{
+//            return  " ";
+//        }
+//    }
     //数组拆分两部分
     private List<String>getSplitList(String strVal){
         String leftArr=" ",rightArr=" ";
