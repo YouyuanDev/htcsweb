@@ -269,6 +269,10 @@ public class GenerateExcelToPDFUtil {
             //System.out.println("set Bottom border i="+i+"  j="+j);
             cell.setBorderWidthBottom(2);
         }
+        if(i==tableBottomIndex-1){//如果最后一行是占2个row，则提前设置bottom的边框宽度
+            if(cell.getRowspan()==2)
+                cell.setBorderWidthBottom(2);
+        }
         if(j==tableLeftIndex&&(i>=tableTopIndex&&i<=tableBottomIndex)){//设置左侧外边框
             //System.out.println("set Left border i="+i+"  j="+j);
             cell.setBorderWidthLeft(2);
