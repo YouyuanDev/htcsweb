@@ -46,7 +46,7 @@
             margin-top: -20px;
             padding: 12px 5px 10px 30px;
             width: auto;
-            height: 16px;
+            min-height:30px;
             border-width: 2px;
             border-style: solid;
             display: none;
@@ -164,11 +164,18 @@
                 width: "100%",
                 height: $(window).height()
             }).appendTo("body");
-            $("<div class=\"datagrid-mask-msg\"></div>").html("正在处理，请稍候。。。").appendTo("body").css({
+            $("<div class=\"datagrid-mask-msg\"></div>").html("<a style='display: block'>正在处理，请稍候。。。</a>").appendTo("body").css({
                 display: "block",
                 left: ($(document.body).outerWidth(true) - 190) / 2,
                 top: ($(window).height() - 45) / 2
             });
+            $('#p').css({
+                display: "block",
+                left: ($(document.body).outerWidth(true)-600) / 2,
+                top: ($(window).height()) / 2,
+                'z-index':10000
+            })
+
             showCheckProgress();
         }
         function ajaxLoadEnd() {
@@ -228,13 +235,14 @@
                         $('#dg').datagrid('load');
                         $('#importBtn').css('display','inline-block');
                         $('#showProgress').css('display','none');
+                        $('#p').css('display','none');
                     }
                     $('#p').progressbar('setValue',data.pdfProgress);
                 },
                 //请求出错的处理
                 error:function(){
                     window.clearInterval(timerId);
-                    //alert("请求出错");
+                    $('#p').css('display','none');
                 }
             });
         }
@@ -268,7 +276,7 @@
     <input id="endtime" name="endtime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
     <button class="btnReport">开始生成</button>
 <br><br>
-    <div id="p" class="easyui-progressbar" data-options="value:0" style="width:600px;"></div>
+    <div id="p" class="easyui-progressbar" data-options="value:0" style="width:600px;display:none"></div>
 </div>
 
 
