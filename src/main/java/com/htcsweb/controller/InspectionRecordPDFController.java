@@ -622,7 +622,7 @@ public class InspectionRecordPDFController {
                     }else{
                         result=" ";
                     }
-                    datalist.add(new Label(12, row+10, result, wcf));
+                    datalist.add(new Label(12, row+9, result, wcf));
                     if(String.valueOf(list.get(i).get("remark"))!=null&&!String.valueOf(list.get(i).get("remark")).equals("")){
                         sb.append("#"+list.get(i).get("pipe_no")+":"+list.get(i).get("remark")+" ");
                     }
@@ -698,7 +698,7 @@ public class InspectionRecordPDFController {
                     }else{
                         result=" ";
                     }
-                    Label label19 = new Label(12, row+10, result, wcf);
+                    Label label19 = new Label(12, row+9, result, wcf);
                     datalist.add(label19);
                     if(String.valueOf(list.get(i).get("remark"))!=null&&!String.valueOf(list.get(i).get("remark")).equals("")){
                         sb.append("#"+list.get(i).get("pipe_no")+":"+list.get(i).get("remark")+" ");
@@ -809,7 +809,7 @@ public class InspectionRecordPDFController {
                     }else{
                         result=" ";
                     }
-                    Label label13= new Label(12, row+10, result, wcf);
+                    Label label13= new Label(12, row+9, result, wcf);
                     datalist.add(label13);
                     if(String.valueOf(list.get(i).get("remark"))!=null&&!String.valueOf(list.get(i).get("remark")).equals("")){
                         sb.append("#"+list.get(i).get("pipe_no")+":"+list.get(i).get("remark")+" ");
