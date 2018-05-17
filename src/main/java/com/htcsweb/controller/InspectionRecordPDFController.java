@@ -842,7 +842,7 @@ public class InspectionRecordPDFController {
         String newPdfName=null;
         List<String>splitList=new ArrayList<>();
         try{
-            List<HashMap<String,Object>>list=odFinalInspectionProcessDao.getOdFianlInspectionRecord(project_no,mill_no,begin_time,end_time);
+            List<HashMap<String,Object>>list=odFinalInspectionProcessDao.getOdFianlInspectionRecord(project_no,mill_no,coatingType,begin_time,end_time);
             ArrayList<Label> datalist=new ArrayList<Label>();
             if(list.size()>0){
                 int index=1,row=0;
