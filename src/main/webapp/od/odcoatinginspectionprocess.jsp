@@ -681,6 +681,7 @@
         {
             grid1.load({
                 pipe_no:keyText1.value,
+                external_coatingtype:'2FBE',
                 pipestatus:'od3,'
             });
         }else if(type==2){
@@ -732,6 +733,7 @@
         $('#searchBar1').css('display','block');
         grid1.load({
             pipe_no:keyText1.value,
+            external_coatingtype:'2FBE',
             pipestatus:'od3,'
         });
     });

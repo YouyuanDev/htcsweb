@@ -25,7 +25,8 @@
     </resultMap>
 
     <select id="getPipeNumbers" resultType="com.htcsweb.entity.PipeBasicInfo">
-        SELECT  *  from pipe_basic_info
+        SELECT  p.*  from pipe_basic_info p INNER JOIN contract_info c ON
+        p.contract_no=c.contract_no
         <where>
             <if test="pipestatus!=null">
                 <foreach collection="pipestatus" item="item" open="status in (" separator="," close=")">
@@ -34,6 +35,9 @@
             </if>
             <if test="pipe_no!=null and pipe_no!=''">
                 AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+            <if test="external_coatingtype!=null and external_coatingtype!=''">
+                AND c.external_coating=#{external_coatingtype}
             </if>
         </where>
 

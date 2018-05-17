@@ -16,7 +16,7 @@ public interface OdFinalInspectionProcessDao {
     //public int getCount();
     public int getCountAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no")String operator_no, @Param("begin_time")Date begin_time, @Param("end_time")Date end_time,@Param("mill_no")String mill_no);
     //获取外涂终检记录
-    public List<HashMap<String,Object>>getOdFianlInspectionRecord(@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("external_coating")String external_coating,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
+    public List<HashMap<String,Object>>getOdFianlInspectionRecord(@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("external_coating")String external_coating,@Param("od")float od,@Param("wt")float wt,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
     //获取当天外防腐合格总数与合格长度
     public List<HashMap<String,Object>> getODCoatingAcceptedInfo(@Param("project_no")String project_no,@Param("external_coating")String external_coating,@Param("internal_coating")String internal_coating,@Param("od")float od,@Param("wt")float wt,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time,@Param("result")String result);
     //获取外防腐支数(4.11)

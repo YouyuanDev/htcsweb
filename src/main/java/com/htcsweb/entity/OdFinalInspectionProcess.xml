@@ -94,6 +94,8 @@
         <if test="external_coating!=null and external_coating!=''">
             AND c.external_coating=#{external_coating}
         </if>
+        AND format(c.od,3)=format(#{od},3)
+        AND format(c.wt,3)=format(#{wt},3)
         <if test="begin_time!=null">
             <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
         </if>

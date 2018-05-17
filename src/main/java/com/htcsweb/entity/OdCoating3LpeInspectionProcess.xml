@@ -83,12 +83,14 @@
 
     <!--获取当天3LPE外涂检验记录-->
     <select id="getOd3LPECoatInspectionRecord" resultType="map">
-        Select pro.project_name,pro.client_spec,pro.coating_standard,c.od,c.wt,c.external_coating,c.internal_coating,o.*
+        Select  o.*
         from od_coating_3lpe_inspection_process o
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no
         left join project_info pro on c.project_no=pro.project_no
         WHERE pro.project_no=#{project_no} AND o.mill_no=#{mill_no}
+        AND format(c.od,3)=format(#{od},3)
+        AND format(c.wt,3)=format(#{wt},3)
         <if test="begin_time!=null">
             <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
         </if>

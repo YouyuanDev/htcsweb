@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface PipeBasicInfoDao {
     public List<PipeBasicInfo> getPipeNumber(@Param("pipe_no")String pipe_no);
-    public List<PipeBasicInfo>getPipeNumbers(@Param("pipe_no")String pipe_no,@Param("pipestatus")String[] pipestatus);
+    public List<PipeBasicInfo>getPipeNumbers(@Param("pipe_no")String pipe_no,@Param("external_coatingtype")String external_coatingtype,@Param("pipestatus")String[] pipestatus);
 
     public List<PipeBasicInfo> getODSamplePipeNumbers(@Param("pipe_no")String pipe_no);
 

@@ -48,14 +48,16 @@ public class PipeBasicInfoController {
         String map="";
         try{
             String pipe_no=request.getParameter("pipe_no");
+            String external_coatingtype=request.getParameter("external_coatingtype");
             String pipestatus=request.getParameter("pipestatus");
             String[]idArr={};
             if(pipestatus!=null){
                 idArr=pipestatus.split(",");
             }
-            List<PipeBasicInfo>list=pipeBasicInfoDao.getPipeNumbers(pipe_no,idArr);
+            List<PipeBasicInfo>list=pipeBasicInfoDao.getPipeNumbers(pipe_no,external_coatingtype,idArr);
             map= JSONObject.toJSONString(list);
         }catch (Exception e){
+            e.printStackTrace();
         }
         return map;
     }
