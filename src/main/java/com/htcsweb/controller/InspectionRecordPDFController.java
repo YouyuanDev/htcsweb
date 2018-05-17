@@ -394,6 +394,7 @@ public class InspectionRecordPDFController {
                 if(datalist.size()>0){
                     createRecordPdfTitle(datalist,3,9,13,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
                     createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,13,20,index,row,sb,stringList);
+                    index=1;row=0;qualifiedTotal=0;//另起一页，初始化参数
                 }
             }else{
                 createRecordNullPdf(datalist,1,3,9,13,4,5,8,project_name,pipe_size,standard,coatingType,shift,title_time,newPdfName,templateFullName,stringList);
@@ -466,6 +467,7 @@ public class InspectionRecordPDFController {
                 if(index%13==0){
                     createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
                     createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,13,20,index,row,sb,stringList);
+                    index=1;row=0;qualifiedTotal=0;//另起一页，初始化参数
                 }
             }
             if(datalist.size()>0){
@@ -536,6 +538,7 @@ public class InspectionRecordPDFController {
                     if(index%11==0){
                         createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
                         createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList);
+                        index=1;row=0;qualifiedTotal=0;//另起一页，初始化参数
                     }
                 }
                 if(datalist.size()>0){
@@ -629,6 +632,7 @@ public class InspectionRecordPDFController {
                     if(index%11==0){
                         createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
                         createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList);
+                        index=1;row=0;qualifiedTotal=0;//另起一页，初始化参数
                     }
                 }
                 if(datalist.size()>0){
@@ -705,11 +709,13 @@ public class InspectionRecordPDFController {
                     if(index%11==0){
                         createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
                         createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList);
+                        index=1;row=0;qualifiedTotal=0;
                     }
                 }
                 if(datalist.size()>0){
                     createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
                     createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList);
+                    index=1;row=0;qualifiedTotal=0;
                 }
             }else{
                 createRecordNullPdf(datalist,1,3,8,12,4,5,9,project_name,pipe_size,standard,coatingType,shift,title_time,newPdfName,templateFullName,stringList);
@@ -814,6 +820,7 @@ public class InspectionRecordPDFController {
                     if(index%5==0){
                         createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
                         createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList);
+                        index=1;row=0;qualifiedTotal=0;//另起一页，初始化参数
                     }
                 }
                 if(datalist.size()>0){
@@ -922,6 +929,7 @@ public class InspectionRecordPDFController {
                     if(index%5==0){
                         createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
                         createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList);
+                        index=1;row=0;qualifiedTotal=0;//另起一页，初始化参数
                     }
                 }
                 if(datalist.size()>0){
@@ -991,6 +999,7 @@ public class InspectionRecordPDFController {
                     if(index%13==0){
                         createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
                         createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,12,20,index,row,sb,stringList);
+                        index=1;row=0;qualifiedTotal=0;//另起一页，初始化参数
                     }
                 }
                 if(datalist.size()>0){
@@ -1058,6 +1067,7 @@ public class InspectionRecordPDFController {
                     if(index%13==0){
                         createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
                         createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,12,20,index,row,sb,stringList);
+                        index=1;row=0;qualifiedTotal=0;//另起一页，初始化参数
                     }
                 }
                 if(datalist.size()>0){
@@ -1128,6 +1138,7 @@ public class InspectionRecordPDFController {
                     if(index%13==0){
                         createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
                         createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,12,20,index,row,sb,stringList);
+                        index=1;row=0;qualifiedTotal=0;//另起一页，初始化参数
                     }
                 }
                 if(datalist.size()>0){
@@ -1225,6 +1236,7 @@ public class InspectionRecordPDFController {
                     if(index%11==0){
                         createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
                         createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList);
+                        index=1;row=0;qualifiedTotal=0;//另起一页，初始化参数
                     }
                 }
                 if(datalist.size()>0){
@@ -1733,17 +1745,15 @@ public class InspectionRecordPDFController {
         datalist.add(new Label(x2,y2,String.valueOf(qualifiedTotal),wcf));
         newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
         datalist.clear();
-        qualifiedTotal=0;
-        index=1;
-        row=0;
+//        qualifiedTotal=0;
+//        index=1;
+//        row=0;
         sb.setLength(0);
         if(newPdfName!=null){
             if(dayOrNight==0){
                 stationDayList.add(newPdfName);
-                //stationIdDayList.add(newPdfName);
             }else{
                 stationNightList.add(newPdfName);
-                //stationIdNightList.add(newPdfName);
             }
             delSetPath.add(newPdfName);
         }
