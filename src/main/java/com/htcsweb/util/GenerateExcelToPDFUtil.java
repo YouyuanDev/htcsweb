@@ -172,7 +172,9 @@ public class GenerateExcelToPDFUtil {
                 //把datalist中的数据填到相应位置，由相关业务controller设置datalist数据
                 for(int i=0;dataList!=null&&i<dataList.size();i++){
                     Label label_data=(Label) dataList.get(i);
-                    wsheet.addCell(label_data);
+                    if(label_data.getContents()!=null&&!label_data.getContents().equals(""))
+                        wsheet.addCell(label_data);
+
                 }
                 wwb.write();//把表格信息写入文件
             } catch (Exception e) {
@@ -223,10 +225,11 @@ public class GenerateExcelToPDFUtil {
                 if(dataList!=null) {
                     System.out.println("dataList.size()="+dataList.size());
                     for (int i = 0; i < dataList.size(); i++) {
-                        //Label label_data = (Label) dataList.get(i);
+                        Label label_data = (Label) dataList.get(i);
                         //String cont = label_data.getContents();
                        // if (cont != null && !cont.equals(""))
-                        wsheet.addCell((Label) dataList.get(i));
+                        if(label_data.getContents()!=null&&!label_data.getContents().equals(""))
+                            wsheet.addCell((Label) dataList.get(i));
                     }
                 }
 
