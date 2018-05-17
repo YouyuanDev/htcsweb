@@ -117,9 +117,11 @@
                         ajaxLoading();
                     },
                     success:function (data) {
+                        $('#p').css('display','none');
                         window.location.href="<%=bPath%>"+data;
                         ajaxLoadEnd();
                     },error:function () {
+                        $('#p').css('display','none');
                         ajaxLoadEnd();
                     }
                 };
@@ -235,7 +237,7 @@
                         $('#dg').datagrid('load');
                         $('#importBtn').css('display','inline-block');
                         $('#showProgress').css('display','none');
-                        $('#p').css('display','none');
+
                     }
                     $('#p').progressbar('setValue',data.pdfProgress);
                 },
