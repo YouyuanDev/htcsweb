@@ -90,6 +90,7 @@ public class UploadFileController {
                     PictureCompressorUtil.reduceImg(srcimgfilename, distimgFilename, 1000, 1000,0.5f);
                 }
             }
+            System.out.println(newName+":newName");
             JSONObject json = new JSONObject();
             json.put("imgUrl", newName);
             ResponseUtil.write(response, json);

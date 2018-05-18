@@ -190,16 +190,7 @@ public class InspectionRecordPDFController {
         if(project_no!=null&&!project_no.equals("")&&project_name!=null&&!project_name.equals("")&&beginTimeStr!=null&&!beginTimeStr.equals("")&&endTimeStr!=null&&!endTimeStr.equals("")){
             try{
                 //先清理.zip垃圾文件
-                File fileZip=new File(basePath+"/upload/pdf/");
-                if(fileZip.exists()&&fileZip.isDirectory()){
-                    String zipList[]=fileZip.list();
-                    for (String zippath:zipList){
-                        File file=new File(basePath+"/upload/pdf/"+zippath);
-                        if(file.isFile()&&file.getName().endsWith(".zip")){
-                            file.delete();
-                        }
-                    }
-                }
+                FileRenameUtil.cleanTrashFiles(basePath);
                 //定义pdf头部所需的信息
                 //根据项目编号获取项目信息
                 String client_standard=" ";

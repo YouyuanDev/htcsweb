@@ -4,10 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.*;
 import com.htcsweb.entity.*;
-import com.htcsweb.util.DateTimeUtil;
-import com.htcsweb.util.GenerateExcelToPDFUtil;
-import com.htcsweb.util.GroupEntity;
-import com.htcsweb.util.ResponseUtil;
+import com.htcsweb.util.*;
 import jxl.Workbook;
 import jxl.format.Alignment;
 import jxl.format.Border;
@@ -98,16 +95,7 @@ public class DailyProductionReportController {
        // String project_name=request.getParameter("project_name");
         try{
             //先清理.zip垃圾文件
-            File fileZip=new File(basePath+"/upload/pdf/");
-            if(fileZip.exists()&&fileZip.isDirectory()){
-                String zipList[]=fileZip.list();
-                for (String zippath:zipList){
-                    File file=new File(basePath+"/upload/pdf/"+zippath);
-                    if(file.isFile()&&file.getName().endsWith(".zip")){
-                        file.delete();
-                    }
-                }
-            }
+            FileRenameUtil.cleanTrashFiles(basePath);
             WritableCellFormat wcf=cellFormat3();
             String excelTemplateFullName=request.getSession().getServletContext().getRealPath("/")
                     +"template/daliy_production_report_template.xls";

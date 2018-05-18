@@ -3,6 +3,7 @@ package com.htcsweb.util;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -66,8 +67,9 @@ public class PictureCompressorUtil {
                             Image.SCALE_SMOOTH), 0, 0, null);
 
             FileOutputStream out = new FileOutputStream(imgdist);
-            JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
-            encoder.encode(tag);
+            //JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
+            //encoder.encode(tag);
+            ImageIO.write(tag,"jpg", out);
             out.close();
 
         } catch (IOException ex) {
