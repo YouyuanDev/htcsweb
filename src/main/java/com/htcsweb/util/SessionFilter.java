@@ -106,7 +106,21 @@ public class SessionFilter extends OncePerRequestFilter{
                 return;
             }else{//uri需要被过滤
                 System.out.println("目标URI禁止访问，请先登录"+strUri);
-                response.sendRedirect("/login/login.jsp") ;
+                if(suffix.equals("jsp")) {
+                    response.sendRedirect("/login/login.jsp");
+
+                }else{
+                    JSONObject json = new JSONObject();
+                    StringBuilder sbmessage = new StringBuilder();
+                    sbmessage.append("没有权限\n");
+                    json.put("success", false);
+                    json.put("message", sbmessage.toString());
+                    try {
+                        ResponseUtil.write(response, json);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
 
             }
         }else{//存在登录信息session
@@ -141,7 +155,7 @@ public class SessionFilter extends OncePerRequestFilter{
                     try {
                         ResponseUtil.write(response, json);
                     } catch (Exception e) {
-
+                        e.printStackTrace();
                     }
                 }
 
