@@ -51,11 +51,9 @@
     -->
     <select id="searchPipe" resultType="map">
         SELECT p.*,s.status_name,odb.operation_time,idb.operation_time from pipe_basic_info p inner join pipe_status s on p.status=s.status_code
-
-        left join (select  pipe_no, max(operation_time) as operation_time from od_blast_process   group by operation_time) as odb
+        left join (select  pipe_no, max(operation_time) as operation_time from od_blast_process   group by pipe_no) as odb
         on odb.pipe_no=p.pipe_no
-
-        left join (select  pipe_no, max(operation_time) as operation_time  from id_blast_process  group by operation_time) as idb
+        left join (select  pipe_no, max(operation_time) as operation_time  from id_blast_process  group by pipe_no) as idb
         on idb.pipe_no=p.pipe_no
 
         <where>
