@@ -34,6 +34,8 @@ public class PipeBasicInfoController {
     private PipeStatusDao pipeStatusDao;
 
 
+
+    //给app搜索使用，无需登录
     @RequestMapping("/getPipeNumber")
     @ResponseBody
     public String getPipeNumber(HttpServletRequest request){
@@ -42,6 +44,8 @@ public class PipeBasicInfoController {
         String map= JSONObject.toJSONString(list);
         return map;
     }
+
+
     @RequestMapping("/getPipeNumbers")
     @ResponseBody
     public String getPipeNumbers(HttpServletRequest request){
@@ -218,7 +222,7 @@ public class PipeBasicInfoController {
         }
         return null;
     }
-
+    
 //
 
     //模糊查询OD ID 光管的Pipe信息列表
