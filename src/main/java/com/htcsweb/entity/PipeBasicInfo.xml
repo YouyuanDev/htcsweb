@@ -45,15 +45,25 @@
         limit 1000
     </select>
 
-
+    <!--
+    app 搜索算法
+    排序规则：最新生产的最优先（比较时间为od打砂时间然后是id打砂时间，降序排列），其次是已生产完成的，最后是光管
+    -->
     <select id="searchPipe" resultType="map">
-        SELECT p.*,s.status_name from pipe_basic_info p inner join pipe_status s on p.status=s.status_code
+        SELECT p.*,s.status_name,odb.operation_time,idb.operation_time from pipe_basic_info p inner join pipe_status s on p.status=s.status_code
+
+        left join (select  pipe_no, max(operation_time) as operation_time from od_blast_process   group by operation_time) as odb
+        on odb.pipe_no=p.pipe_no
+
+        left join (select  pipe_no, max(operation_time) as operation_time  from id_blast_process  group by operation_time) as idb
+        on idb.pipe_no=p.pipe_no
+
         <where>
             <if test="pipe_no!=null and pipe_no!=''">
                 AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
             </if>
         </where>
-        ORDER BY id DESC
+        ORDER BY odb.operation_time DESC,idb.operation_time DESC
         limit 1000
     </select>
 

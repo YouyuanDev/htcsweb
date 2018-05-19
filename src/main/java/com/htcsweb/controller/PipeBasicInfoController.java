@@ -51,7 +51,7 @@ public class PipeBasicInfoController {
     @ResponseBody
     public String searchPipe(HttpServletRequest request){
         String pipe_no=request.getParameter("pipe_no");
-        List<PipeBasicInfo>list=pipeBasicInfoDao.getPipeNumber(pipe_no);
+        List<HashMap<String,Object>>list=pipeBasicInfoDao.searchPipe(pipe_no);
         String map= JSONObject.toJSONString(list);
         return map;
     }
