@@ -36,14 +36,27 @@ public class PipeBasicInfoController {
 
 
     //给app搜索使用，无需登录
-    @RequestMapping("/getPipeNumber")
+//    @RequestMapping("/getPipeNumber")
+//    @ResponseBody
+//    public String getPipeNumber(HttpServletRequest request){
+//        String pipe_no=request.getParameter("pipe_no");
+//        List<PipeBasicInfo>list=pipeBasicInfoDao.getPipeNumber(pipe_no);
+//        String map= JSONObject.toJSONString(list);
+//        return map;
+//    }
+
+
+    //给app搜索使用，无需登录
+    @RequestMapping("/searchPipe")
     @ResponseBody
-    public String getPipeNumber(HttpServletRequest request){
+    public String searchPipe(HttpServletRequest request){
         String pipe_no=request.getParameter("pipe_no");
         List<PipeBasicInfo>list=pipeBasicInfoDao.getPipeNumber(pipe_no);
         String map= JSONObject.toJSONString(list);
         return map;
     }
+
+
 
 
     @RequestMapping("/getPipeNumbers")

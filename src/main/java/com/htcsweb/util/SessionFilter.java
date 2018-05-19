@@ -76,7 +76,7 @@ public class SessionFilter extends OncePerRequestFilter{
             "getPDFProgress",
             "getDailyRecordReportExcel",
             "Logout",
-            "getPipeNumber"
+            "searchPipe"
 
     }; // 不过滤的uri
 

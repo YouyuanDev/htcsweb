@@ -46,11 +46,25 @@
     </select>
 
 
+    <select id="searchPipe" resultType="map">
+        SELECT p.*,s.status_name from pipe_basic_info p inner join p.status=s.status_code
+        <where>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+        </where>
+        ORDER BY id DESC
+        limit 1000
+    </select>
+
+
+
+
      <select id="getPipeNumber" resultType="com.htcsweb.entity.PipeBasicInfo">
-         SELECT  *  from pipe_basic_info
+         SELECT *  from pipe_basic_info
          <where>
              <if test="pipe_no!=null and pipe_no!=''">
-                 AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+                 AND pipe_no =#{pipe_no}
              </if>
          </where>
          ORDER BY id DESC
