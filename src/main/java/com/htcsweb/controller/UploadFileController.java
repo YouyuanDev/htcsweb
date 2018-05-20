@@ -28,19 +28,12 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.Iterator;
-import java.util.Random;
+import java.util.*;
 import java.io.InputStream;
 import java.io.FileInputStream;
-import java.util.List;
+
 import com.htcsweb.entity.PipeBasicInfo;
-import java.util.ArrayList;
 import com.htcsweb.dao.ContractInfoDao;
-import java.util.HashMap;
-
-
 
 
 @Controller
@@ -54,6 +47,84 @@ public class UploadFileController {
     private ContractInfoDao contractInfoDao;
 
     public static boolean isServerTomcat=true;//是否服务器为tomcat 还是 本地debug服务器
+
+
+    /**
+     *
+     * 获取目录下所有文件
+     *
+     * @param realpath
+     * @param files
+     * @return
+     */
+    public static List<File> getFiles(String realpath, List<File> files) {
+
+        File realFile = new File(realpath);
+        if (realFile.isDirectory()) {
+            File[] subfiles = realFile.listFiles();
+            for (File file : subfiles) {
+                if (file.isDirectory()) {
+                    getFiles(file.getAbsolutePath(), files);
+                } else {
+                    if(file.isFile()&&(file.getName().endsWith(".jpg")||file.getName().endsWith(".JPG")||file.getName().endsWith(".png")))
+                        files.add(file);
+                }
+            }
+        }
+        return files;
+    }
+
+    //app 请求最新的10张照片的url
+    @RequestMapping("/getTopTenPictures")
+    @ResponseBody
+    public String getTopTenPictures(HttpServletRequest request){
+        List<HashMap<String,Object>>list=new ArrayList<HashMap<String,Object>>();
+
+        try{
+            String basePath = request.getSession().getServletContext().getRealPath("/");
+            if(isServerTomcat) {//若果是tomcat需要重新定义upload的入口
+                basePath = basePath.substring(0, basePath.lastIndexOf('/'));
+                basePath = basePath.substring(0, basePath.lastIndexOf('/'));
+            }
+
+            File fileFolder=new File(basePath+"/upload/pictures/");
+            System.out.println("path="+basePath+"/upload/pictures/");
+            if(fileFolder.exists()&&fileFolder.isDirectory()){
+                List<File> flist = getFiles(basePath+"/upload/pictures/", new ArrayList<File>());
+                Collections.sort(flist, new Comparator<File>() {
+                    public int compare(File file, File newFile) {
+                        if (file.lastModified() < newFile.lastModified()) {
+                            return 1;
+                        } else if (file.lastModified() == newFile.lastModified()) {
+                            return 0;
+                        } else {
+                            return -1;
+                        }
+
+                    }
+                });
+                int i=0;
+                for (File f : flist) {
+                    HashMap<String,Object>hm=new HashMap<String,Object>();
+                    hm.put("pictureName",f.getName());
+                    list.add(hm);
+                    System.out.println(f.getName() + " : " + f.lastModified());
+                    i++;
+                    if(i==10)
+                        break;
+                }
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            String map= JSONObject.toJSONString(list);
+            return map;
+        }
+
+    }
+
 
 
     @RequestMapping(value = "/uploadPicture")
