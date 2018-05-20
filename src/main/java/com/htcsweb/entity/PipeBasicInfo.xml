@@ -58,7 +58,7 @@
 
         <where>
             <if test="pipe_no!=null and pipe_no!=''">
-                AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+                AND p.pipe_no LIKE CONCAT('%',#{pipe_no},'%')
             </if>
         </where>
         ORDER BY odb.operation_time DESC,idb.operation_time DESC
