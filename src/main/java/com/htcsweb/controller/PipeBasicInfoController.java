@@ -51,9 +51,25 @@ public class PipeBasicInfoController {
     @ResponseBody
     public String searchPipe(HttpServletRequest request){
         String pipe_no=request.getParameter("pipe_no");
-        List<HashMap<String,Object>>list=pipeBasicInfoDao.searchPipe(pipe_no);
-        String map= JSONObject.toJSONString(list);
-        return map;
+        String page= request.getParameter("page");
+        String rows= request.getParameter("rows");
+        if(page==null){
+            page="1";
+        }
+        if(rows==null){
+            rows="20";
+        }
+
+        int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
+        List<HashMap<String,Object>>list=pipeBasicInfoDao.searchPipe(pipe_no,start,Integer.parseInt(rows));
+        int count=pipeBasicInfoDao.searchPipeCount(pipe_no);
+
+        Map<String,Object> maps=new HashMap<String,Object>();
+        maps.put("total",count);
+        maps.put("rows",list);
+        String mmp= JSONArray.toJSONString(maps);
+        return mmp;
+
     }
 
 
