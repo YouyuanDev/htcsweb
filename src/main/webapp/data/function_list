@@ -173,3 +173,11 @@
 177	钢管管体标准管理	pbstds	搜索	r	getAllPipeBodyAcceptanceCriteriaByLike
 178	钢管管体标准管理	pbstde	编辑	w	saveAllPipeBodyAcceptanceCriteria
 179	钢管管体标准管理	pbstdd	删除	d	delAllPipeBodyAcceptanceCriteria
+180	生产日报管理	dprmr	查看	r	dailyProductionReport
+181	生产日报管理	dprms	搜索	r	getDailProductionReportByLike
+182	生产日报管理	dprme	编辑	w	saveDailyProductionReport
+183	生产日报管理	dprmd	删除	d	delDailyProductionReport
+184	检验频率标准管理	ifsr	查看	r	inspectionFrequencyStandard
+185	检验频率标准管理	ifss	搜索	r	getAllInspectionFrequencyByLike
+186	检验频率标准管理	ifse	编辑	w	saveInspectionFrequency
+187	检验频率标准管理	ifsd	删除	d	delInspectionFrequency

@@ -46,6 +46,7 @@ public class SessionFilter extends OncePerRequestFilter{
             "getContractInfoByContractNo",
             "getAllPipeStatus",
             "getAllPipeStatusWithComboboxSelectAll",
+            "getAllInspectionFrequency",
             "getAcceptanceCriteria2FbeByContractNo",
             "getAcceptanceCriteria3LpeByContractNo",
             "getRawMaterialStandard2FbeByProjectNo",

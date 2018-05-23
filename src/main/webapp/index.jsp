@@ -73,21 +73,22 @@
                 "coatingrepair","coatingstrip",
                 "barepipegrindingProcess","pipeSamplingProcess","pipeRebevelProcess",
                 "projectManagement","contractManagement","pipeManagement","uploadPipe","twodimensionalcode",
-                "odstandard","idstandard","labtestingstandard2fbe","labtestingstandard3lpe","rawmaterialtestingstandard2fbe","rawmaterialtestingstandard3lpe","pipebodystandard",
+                "odstandard","idstandard","labtestingstandard2fbe","labtestingstandard3lpe","rawmaterialtestingstandard2fbe","rawmaterialtestingstandard3lpe","pipebodystandard","inspectionFrequencyStandard",
                 "labtesting2fbe","labtesting3lpe","labtestingepoxy","rawmaterialtesting2fbe","rawmaterialtesting3lpe","rawmaterialtestingliquidepoxy",
                 "person","role","function",
-                "productionProcessRecord","dailyProductionReport"];
+                "productionProcessRecord","dailyProductionReport"
+
+        ];
             var odArr=uriArr.slice(0,8);
             var idArr=uriArr.slice(8,14);
             var outinArr=uriArr.slice(14,18);
             var repairArr=uriArr.slice(18,20);
             var pipeArr=uriArr.slice(20,23);
             var basicArr=uriArr.slice(23,28);
-            var standArr=uriArr.slice(28,35);
-            var labArr=uriArr.slice(35,41);
-            var accountArr=uriArr.slice(41,44);
-            var reportArr=uriArr.slice(44,46);
-
+            var standArr=uriArr.slice(28,36);
+            var labArr=uriArr.slice(36,42);
+            var accountArr=uriArr.slice(42,45);
+            var reportArr=uriArr.slice(45,47);
 
 
             var hsMapList="<%=session.getAttribute("userfunctionMap")%>";
@@ -597,6 +598,13 @@
                             $('#hlTab').tabs('add',{
                                 title:node.text,
                                 content:"<iframe scrolling='auto' frameborder='0'  src='production/pipebodystandard.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                            hlLanguage();
+                        }else if("检验频率标准"==nodeTxt||"Inspection Frequency Standard"==nodeTxt){
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='production/inspectionFrequencyStandard.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable:true
                             });
                             hlLanguage();

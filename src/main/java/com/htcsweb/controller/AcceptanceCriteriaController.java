@@ -3,7 +3,9 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 
+import com.htcsweb.dao.InspectionFrequencyDao;
 import com.htcsweb.dao.PipeBodyAcceptanceCriteriaDao;
+import com.htcsweb.entity.InspectionFrequency;
 import com.htcsweb.entity.ODCoatingAcceptanceCriteria;
 import com.htcsweb.entity.IDCoatingAcceptanceCriteria;
 import com.htcsweb.entity.PipeBodyAcceptanceCriteria;
@@ -33,6 +35,9 @@ public class AcceptanceCriteriaController {
 
     @Autowired
     private PipeBodyAcceptanceCriteriaDao pipeBodyAcceptanceCriteriaDao;
+
+
+
 
     @RequestMapping("/getAllODAcceptanceCriteria")
     @ResponseBody

@@ -148,6 +148,7 @@
                     //'project_time':str,
                     'upload_files':row.upload_files,
                     'pipe_body_acceptance_criteria_no':row.pipe_body_acceptance_criteria_no,
+                    'inspection_frequency_no':row.inspection_frequency_no,
                     'od_coating_acceptance_criteria_no':row.od_coating_acceptance_criteria_no,
                     'id_coating_acceptance_criteria_no':row.id_coating_acceptance_criteria_no,
                     'lab_testing_acceptance_criteria_2fbe_no':row.lab_testing_acceptance_criteria_2fbe_no,
@@ -521,9 +522,15 @@
 					        panelHeight:'auto'"/>
 
                     </td>
-                    <td  width="16%"></td>
+                    <td class="i18n1" name="inspectionfrequencyno" width="16%">检验频率标准</td>
                     <td   width="33%">
-
+                        <input class="easyui-combobox" type="text" name="inspection_frequency_no"  data-options=
+                                "url:'/InspectionFrequencyOperation/getAllInspectionFrequency.action',
+					        method:'get',
+					        valueField:'id',
+					        editable:false,
+					        textField:'text',
+					        panelHeight:'auto'"/>
 
 
 
