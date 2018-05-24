@@ -4,8 +4,10 @@ package com.htcsweb.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.htcsweb.dao.InspectionTimeRecordDao;
 import com.htcsweb.dao.OdCoatingInspectionProcessDao;
 import com.htcsweb.dao.PipeBasicInfoDao;
+import com.htcsweb.entity.InspectionTimeRecord;
 import com.htcsweb.entity.OdCoatingInspectionProcess;
 import com.htcsweb.entity.PipeBasicInfo;
 import com.htcsweb.util.ResponseUtil;
@@ -30,6 +32,8 @@ public class OdCoatingInspectionProcessController {
     private OdCoatingInspectionProcessDao odCoatingInspectionProcessDao;
     @Autowired
     private PipeBasicInfoDao pipeBasicInfoDao;
+    @Autowired
+    private InspectionTimeRecordDao inspectionTimeRecordDao;
 
     //查询
     @RequestMapping(value = "/getOdCoatingInByLike")
@@ -85,6 +89,100 @@ public class OdCoatingInspectionProcessController {
             if(odCoatingInspectionProcess.getId()==0){
                 //添加
                 resTotal=odCoatingInspectionProcessDao.addOdCoatingInProcess(odCoatingInspectionProcess);
+
+                List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoByNo(odCoatingInspectionProcess.getPipe_no());
+                String project_no="";
+                String mill_no=odCoatingInspectionProcess.getMill_no();
+                if(list.size()>0){
+                    project_no=(String)list.get(0).get("project_no");
+                }
+                System.out.println("project_no="+project_no);
+
+                //更新增量 inspectionTimeMap
+                if (!odCoatingInspectionProcess.getBase_coat_thickness_list().equals("")) {
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_base_2fbe_coat_thickness_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(odCoatingInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("od_base_2fbe_coat_thickness_freq");
+                        itr.setInspction_time(odCoatingInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+                }
+                if (!odCoatingInspectionProcess.getTop_coat_thickness_list().equals("")) {
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_top_2fbe_coat_thickness_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(odCoatingInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("od_top_2fbe_coat_thickness_freq");
+                        itr.setInspction_time(odCoatingInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+
+                }
+                if (!odCoatingInspectionProcess.getTotal_coating_thickness_list().equals("")) {
+
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_total_2fbe_coat_thickness_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(odCoatingInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("od_total_2fbe_coat_thickness_freq");
+                        itr.setInspction_time(odCoatingInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+
+                }
+                if (odCoatingInspectionProcess.getHolidays()!=-99) {
+
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_holiday_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(odCoatingInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("od_holiday_freq");
+                        itr.setInspction_time(odCoatingInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+
+                }
+                if (!odCoatingInspectionProcess.getAdhesion_rating().equals("")) {
+
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_adhesion_rating_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(odCoatingInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("od_adhesion_rating_freq");
+                        itr.setInspction_time(odCoatingInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+
+                }
+
+
             }else{
                 //修改！
                 //System.out.println("sample="+odCoatingInspectionProcess.getIs_sample());

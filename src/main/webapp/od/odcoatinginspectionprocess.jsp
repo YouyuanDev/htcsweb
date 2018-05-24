@@ -494,16 +494,16 @@
                     <td><input class="easyui-textbox"  type="text" name="total_coating_thickness_list" value=""/></td>
                     <td></td>
                     <td class="i18n1" name="holidays">漏点数量</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="holidays" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="min:-99,precision:0" type="text" name="holidays" value=""/></td>
                     <td></td>
                 </tr>
 
                 <tr>
                     <td width="16%" class="i18n1" name="holidaytestervolts">电火花检测电压</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="holiday_tester_volts" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="holiday_tester_volts" value=""/></td>
                     <td></td>
                     <td width="16%" class="i18n1" name="repairs">修补点数</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:0"  type="text" name="repairs" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="min:-99,precision:0"  type="text" name="repairs" value=""/></td>
                     <td></td>
                 </tr>
                 <tr>

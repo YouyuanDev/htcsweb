@@ -4,8 +4,10 @@ package com.htcsweb.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.htcsweb.dao.InspectionTimeRecordDao;
 import com.htcsweb.dao.OdCoating3LpeInspectionProcessDao;
 import com.htcsweb.dao.PipeBasicInfoDao;
+import com.htcsweb.entity.InspectionTimeRecord;
 import com.htcsweb.entity.OdCoating3LpeInspectionProcess;
 import com.htcsweb.entity.PipeBasicInfo;
 import com.htcsweb.util.ResponseUtil;
@@ -30,7 +32,8 @@ public class OdCoating3LpeInspectionProcessController {
     private OdCoating3LpeInspectionProcessDao odCoating3LpeInspectionProcessDao;
     @Autowired
     private PipeBasicInfoDao pipeBasicInfoDao;
-
+    @Autowired
+    private InspectionTimeRecordDao inspectionTimeRecordDao;
     //查询
     @RequestMapping(value = "/getOdCoating3LpeInByLike")
     @ResponseBody
@@ -85,6 +88,108 @@ public class OdCoating3LpeInspectionProcessController {
             if(odCoating3LpeInspectionProcess.getId()==0){
                 //添加
                 resTotal=odCoating3LpeInspectionProcessDao.addOdCoating3LpeInProcess(odCoating3LpeInspectionProcess);
+                List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoByNo(odCoating3LpeInspectionProcess.getPipe_no());
+                String project_no="";
+                String mill_no=odCoating3LpeInspectionProcess.getMill_no();
+                if(list.size()>0){
+                    project_no=(String)list.get(0).get("project_no");
+                }
+                System.out.println("project_no="+project_no);
+
+                //更新增量 inspectionTimeMap
+                if (!odCoating3LpeInspectionProcess.getTop_coat_thickness_list().equals("")) {
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_top_3lpe_coat_thickness_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(odCoating3LpeInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("od_top_3lpe_coat_thickness_freq");
+                        itr.setInspction_time(odCoating3LpeInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+                }
+                if (!odCoating3LpeInspectionProcess.getMiddle_coat_thickness_list().equals("")) {
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_middle_3lpe_coat_thickness_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(odCoating3LpeInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("od_middle_3lpe_coat_thickness_freq");
+                        itr.setInspction_time(odCoating3LpeInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+                }
+                if (!odCoating3LpeInspectionProcess.getBase_coat_thickness_list().equals("")) {
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_base_3lpe_coat_thickness_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(odCoating3LpeInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("od_base_3lpe_coat_thickness_freq");
+                        itr.setInspction_time(odCoating3LpeInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+                }
+                if (!odCoating3LpeInspectionProcess.getTotal_coating_thickness_list().equals("")) {
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_total_3lpe_coat_thickness_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(odCoating3LpeInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("od_total_3lpe_coat_thickness_freq");
+                        itr.setInspction_time(odCoating3LpeInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+                }
+                if (odCoating3LpeInspectionProcess.getHolidays()!=-99) {
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_holiday_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(odCoating3LpeInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("od_holiday_freq");
+                        itr.setInspction_time(odCoating3LpeInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+                }
+                if (odCoating3LpeInspectionProcess.getAdhesion_rating()!=-99) {
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_adhesion_rating_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(odCoating3LpeInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("od_adhesion_rating_freq");
+                        itr.setInspction_time(odCoating3LpeInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+                }
+
+
+
             }else{
                 //修改！
                 resTotal=odCoating3LpeInspectionProcessDao.updateOdCoating3LpeInProcess(odCoating3LpeInspectionProcess);

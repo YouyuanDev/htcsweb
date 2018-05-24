@@ -7,13 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa3f659b-6ccf-4ae8-84a0-55d0a3756f6f" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdBlastInspectionProcessController.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdBlastInspectionProcessController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdBlastProcessController.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdBlastProcessController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoating3LpeProcessController.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoating3LpeProcessController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoatingProcessController.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoatingProcessController.java" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/od/odblastinspectionprocess.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/od/odblastinspectionprocess.jsp" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/od/odcoating3lpeprocess.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/od/odcoating3lpeprocess.jsp" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/od/odcoatingprocess.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/od/odcoatingprocess.jsp" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoating3LpeInspectionProcessController.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoating3LpeInspectionProcessController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoatingInspectionProcessController.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoatingInspectionProcessController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdFinalInspectionProcessController.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdFinalInspectionProcessController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/od/odcoatinginspectionprocess.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/od/odcoatinginspectionprocess.jsp" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/production/inspectionFrequencyStandard.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/production/inspectionFrequencyStandard.jsp" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -44,38 +42,48 @@
       <file leaf-file-name="odcoating3lpeprocess.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/od/odcoating3lpeprocess.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="293">
-              <caret line="121" column="66" lean-forward="false" selection-start-line="121" selection-start-column="42" selection-end-line="121" selection-end-column="66" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OdCoating3LpeProcessController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoating3LpeProcessController.java">
-          <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="116">
-              <caret line="112" column="53" lean-forward="false" selection-start-line="112" selection-start-column="53" selection-end-line="112" selection-end-column="53" />
+              <caret line="381" column="74" lean-forward="false" selection-start-line="381" selection-start-column="74" selection-end-line="381" selection-end-column="74" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OdCoatingProcessController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoatingProcessController.java">
+      <file leaf-file-name="odfinalinspectionprocess.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/od/odfinalinspectionprocess.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="114" column="48" lean-forward="true" selection-start-line="114" selection-start-column="48" selection-end-line="114" selection-end-column="48" />
+            <state relative-caret-position="169">
+              <caret line="56" column="57" lean-forward="false" selection-start-line="56" selection-start-column="37" selection-end-line="56" selection-end-column="57" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="odcoatingprocess.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/od/odcoatingprocess.jsp">
+      <file leaf-file-name="OdFinalInspectionProcessController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdFinalInspectionProcessController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="86">
-              <caret line="442" column="20" lean-forward="false" selection-start-line="442" selection-start-column="20" selection-end-line="442" selection-end-column="20" />
+            <state relative-caret-position="227">
+              <caret line="163" column="0" lean-forward="false" selection-start-line="163" selection-start-column="0" selection-end-line="163" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="odcoating3lpeinspectionprocess.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/od/odcoating3lpeinspectionprocess.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OdCoating3LpeInspectionProcessController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoating3LpeInspectionProcessController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="33">
+              <caret line="174" column="79" lean-forward="false" selection-start-line="174" selection-start-column="79" selection-end-line="174" selection-end-column="79" />
               <folding />
             </state>
           </provider>
@@ -84,8 +92,8 @@
       <file leaf-file-name="inspectionFrequencyStandard.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/production/inspectionFrequencyStandard.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
-              <caret line="597" column="124" lean-forward="false" selection-start-line="597" selection-start-column="93" selection-end-line="597" selection-end-column="124" />
+            <state relative-caret-position="130">
+              <caret line="807" column="0" lean-forward="false" selection-start-line="807" selection-start-column="0" selection-end-line="807" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -109,7 +117,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>pipe_body_acceptance_criteria_no</find>
       <find>idAcceptance</find>
       <find>getAllInspectionFrequency</find>
       <find>od_epoxy_cutback_freq</find>
@@ -135,10 +142,11 @@
       <find>delInspectionFrequency</find>
       <find>saveOdBlastProcess</find>
       <find>blast_finish_sa25</find>
-      <find>save</find>
-      <find>min:0</find>
       <find>saveOdCoating3LpeProcess</find>
       <find>new Date</find>
+      <find>min:0</find>
+      <find>save</find>
+      <find>saveOdFinalInProcess</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src/main/webapp/WEB-INF/lib</dir>
@@ -165,10 +173,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IdFinalInspectionProcess.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/CoatingStripDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/CoatingStrip.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/IdCoatingProcessDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IdCoatingProcess.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingProcess.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdCoating3LpeProcessDao.java" />
@@ -206,7 +210,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/InspectionTimeRecord.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/InspectionFrequencyController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/js/common.js" />
-        <option value="$PROJECT_DIR$/src/main/webapp/production/inspectionFrequencyStandard.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/od/odblastprocess.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/util/GenerateExcelToPDFUtil.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/od/odblastinspectionprocess.jsp" />
@@ -216,6 +219,11 @@
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoatingProcessController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdBlastInspectionProcessController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdBlastProcessController.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/od/odcoatinginspectionprocess.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/production/inspectionFrequencyStandard.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoatingInspectionProcessController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoating3LpeInspectionProcessController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdFinalInspectionProcessController.java" />
       </list>
     </option>
   </component>
@@ -382,7 +390,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Tomcat Server.index.jsp (2)">
+  <component name="RunManager" selected="Tomcat Server.index.jsp (5)">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -536,6 +544,45 @@
         </option>
       </method>
     </configuration>
+    <configuration name="index.jsp (3)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/index.jsp" />
+      <deployment>
+        <artifact name="htcsweb:war exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="index_jsp_(3)_htcsweb_203" />
+      </server-settings>
+      <predefined_log_file id="Tomcat" enabled="true" />
+      <predefined_log_file id="Tomcat Catalina" enabled="true" />
+      <predefined_log_file id="Tomcat Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method>
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="htcsweb:war exploded" />
+        </option>
+      </method>
+    </configuration>
     <configuration name="index.jsp (4)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/index.jsp" />
       <deployment>
@@ -546,7 +593,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="index_jsp_(4)_htcsweb_177" />
+        <option name="BASE_DIRECTORY_NAME" value="index_jsp_(4)_htcsweb_178" />
       </server-settings>
       <predefined_log_file id="Tomcat" enabled="true" />
       <predefined_log_file id="Tomcat Catalina" enabled="true" />
@@ -585,46 +632,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="index_jsp_(5)_htcsweb_160" />
-      </server-settings>
-      <predefined_log_file id="Tomcat" enabled="true" />
-      <predefined_log_file id="Tomcat Catalina" enabled="true" />
-      <predefined_log_file id="Tomcat Manager" enabled="false" />
-      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
-      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
-        <option name="USE_ENV_VARIABLES" value="true" />
-        <STARTUP>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </STARTUP>
-        <SHUTDOWN>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </SHUTDOWN>
-      </ConfigurationWrapper>
-      <method>
-        <option name="BuildArtifacts" enabled="true">
-          <artifact name="htcsweb:war exploded" />
-        </option>
-      </method>
-    </configuration>
-    <configuration name="index.jsp" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/index.jsp" />
-      <deployment>
-        <artifact name="htcsweb:war exploded">
-          <settings>
-            <option name="CONTEXT_PATH" value="/" />
-          </settings>
-        </artifact>
-      </deployment>
-      <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="index_jsp_htcsweb_231" />
+        <option name="BASE_DIRECTORY_NAME" value="index_jsp_(5)_htcsweb_161" />
       </server-settings>
       <predefined_log_file id="Tomcat" enabled="true" />
       <predefined_log_file id="Tomcat Catalina" enabled="true" />
@@ -660,19 +668,19 @@
       <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (4)" />
-      <item index="1" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (5)" />
-      <item index="2" class="java.lang.String" itemvalue="Tomcat Server.index.jsp" />
-      <item index="3" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (1)" />
-      <item index="4" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (2)" />
+      <item index="0" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (1)" />
+      <item index="1" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (2)" />
+      <item index="2" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (3)" />
+      <item index="3" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (4)" />
+      <item index="4" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (5)" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (2)" />
-        <item index="1" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (1)" />
-        <item index="2" class="java.lang.String" itemvalue="Tomcat Server.index.jsp" />
-        <item index="3" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (5)" />
-        <item index="4" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (4)" />
+        <item index="0" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (5)" />
+        <item index="1" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (4)" />
+        <item index="2" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (3)" />
+        <item index="3" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (2)" />
+        <item index="4" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -805,7 +813,7 @@
       <workItem from="1526972454887" duration="2483000" />
       <workItem from="1527008414330" duration="550000" />
       <workItem from="1527055764861" duration="13811000" />
-      <workItem from="1527133937744" duration="12434000" />
+      <workItem from="1527133937744" duration="13977000" />
     </task>
     <servers />
   </component>
@@ -818,11 +826,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1098199000" />
+    <option name="totallyTimeSpent" value="1099742000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="835" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34371397" sideWeight="0.50692225" order="7" side_tool="true" content_ui="tabs" />
@@ -845,7 +852,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896462" sideWeight="0.49444443" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891247" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947975" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28611112" sideWeight="0.56437767" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28611112" sideWeight="0.56437767" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24444444" sideWeight="0.43683085" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896462" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -930,86 +937,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IDCoatingAcceptanceCriteria.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/IDCoatingAcceptanceCriteria.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="67" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="84" selection-end-column="9" />
-          <folding>
-            <marker date="1522659219498" expanded="true" signature="349:2326" ph="INSERT INTO id_coating_acceptance_criteria... " />
-            <marker date="1522659219498" expanded="true" signature="2702:4703" ph="UPDATE id_coating_acceptance_criteria... " />
-            <marker date="1522659219498" expanded="true" signature="5151:5507" ph="Select * fro... id_coating_acceptance_criteria" />
-            <marker date="1522659219498" expanded="true" signature="5636:5706" ph="SELECT * fro... id_coating_acceptance_criteria" />
-            <marker date="1522659219498" expanded="true" signature="5843:6080" ph="select o.* f... contract_info" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ODCoatingAcceptanceCriteria.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="41" column="42" lean-forward="false" selection-start-line="41" selection-start-column="16" selection-end-line="41" selection-end-column="42" />
-          <folding>
-            <marker date="1522666182127" expanded="true" signature="351:3344" ph="INSERT INTO od_coating_acceptance_criteria... " />
-            <marker date="1522666182127" expanded="true" signature="3719:6717" ph="UPDATE od_coating_acceptance_criteria... " />
-            <marker date="1522666182127" expanded="true" signature="7165:7527" ph="Select o.* f... od_coating_acceptance_criteria" />
-            <marker date="1522666182127" expanded="true" signature="7656:7726" ph="SELECT * fro... od_coating_acceptance_criteria" />
-            <marker date="1522666182127" expanded="true" signature="7865:8102" ph="select o.* f... contract_info" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ProjectInfo.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="100" column="57" lean-forward="false" selection-start-line="100" selection-start-column="34" selection-end-line="100" selection-end-column="57" />
-          <folding>
-            <marker date="1527058747973" expanded="true" signature="1954:1987" ph="select count... project_info" />
-            <marker date="1527058747973" expanded="true" signature="3039:3103" ph="select count... project_info" />
-            <marker date="1527058747973" expanded="true" signature="3176:4128" ph="Select * fro... project_info" />
-            <marker date="1527058747973" expanded="true" signature="4235:5206" ph="UPDATE project_info... " />
-            <marker date="1527058747973" expanded="true" signature="5310:6176" ph="INSERT INTO project_info... " />
-            <marker date="1527058747973" expanded="true" signature="6784:6852" ph="SELECT proje... project_info" />
-            <marker date="1527058747973" expanded="true" signature="6967:7089" ph="SELECT p.* f... project_info" />
-            <marker date="1527058747973" expanded="true" signature="7198:7239" ph="SELECT * fro... project_info" />
-            <marker date="1527058747973" expanded="true" signature="7792:7847" ph="SELECT p.pro... project_info" />
-            <marker date="1527058747973" expanded="true" signature="7982:8039" ph="SELECT * FRO... project_info" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/production/idstandard.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="6" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="465" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/project/projectManagement.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="530" column="43" lean-forward="true" selection-start-line="530" selection-start-column="43" selection-end-line="530" selection-end-column="43" />
-          <folding>
-            <marker date="1527063147879" expanded="true" signature="9489:9495" ph="&amp;nbsp;" />
-            <marker date="1527063147879" expanded="true" signature="9495:9501" ph="&amp;nbsp;" />
-            <marker date="1527063147879" expanded="true" signature="9501:9507" ph="&amp;nbsp;" />
-            <marker date="1527063147879" expanded="true" signature="9507:9513" ph="&amp;nbsp;" />
-            <marker date="1527063147879" expanded="true" signature="9513:9519" ph="&amp;nbsp;" />
-            <marker date="1527063147879" expanded="true" signature="9519:9525" ph="&amp;nbsp;" />
-            <marker date="1527063147879" expanded="true" signature="9525:9531" ph="&amp;nbsp;" />
-            <marker date="1527063147879" expanded="true" signature="9531:9537" ph="&amp;nbsp;" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/AcceptanceCriteriaController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
@@ -1455,22 +1382,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/od/odcoating3lpeprocess.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="121" column="66" lean-forward="false" selection-start-line="121" selection-start-column="42" selection-end-line="121" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/production/inspectionFrequencyStandard.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="597" column="124" lean-forward="false" selection-start-line="597" selection-start-column="93" selection-end-line="597" selection-end-column="124" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/od/odcoatingprocess.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="86">
@@ -1495,18 +1406,82 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoating3LpeProcessController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoatingProcessController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="112" column="53" lean-forward="false" selection-start-line="112" selection-start-column="53" selection-end-line="112" selection-end-column="53" />
+        <state relative-caret-position="252">
+          <caret line="120" column="17" lean-forward="true" selection-start-line="95" selection-start-column="16" selection-end-line="120" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoatingProcessController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/od/odcoating3lpeinspectionprocess.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="114" column="48" lean-forward="true" selection-start-line="114" selection-start-column="48" selection-end-line="114" selection-end-column="48" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/od/odcoatinginspectionprocess.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="481" column="36" lean-forward="true" selection-start-line="481" selection-start-column="36" selection-end-line="481" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoating3LpeProcessController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1062">
+          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/od/odcoating3lpeprocess.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="381" column="74" lean-forward="false" selection-start-line="381" selection-start-column="74" selection-end-line="381" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/od/odfinalinspectionprocess.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="169">
+          <caret line="56" column="57" lean-forward="false" selection-start-line="56" selection-start-column="37" selection-end-line="56" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoatingInspectionProcessController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="35" column="60" lean-forward="true" selection-start-line="34" selection-start-column="3" selection-end-line="35" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoating3LpeInspectionProcessController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="33">
+          <caret line="174" column="79" lean-forward="false" selection-start-line="174" selection-start-column="79" selection-end-line="174" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/production/inspectionFrequencyStandard.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="807" column="0" lean-forward="false" selection-start-line="807" selection-start-column="0" selection-end-line="807" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdFinalInspectionProcessController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="163" column="0" lean-forward="false" selection-start-line="163" selection-start-column="0" selection-end-line="163" selection-end-column="0" />
           <folding />
         </state>
       </provider>

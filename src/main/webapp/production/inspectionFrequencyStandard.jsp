@@ -677,9 +677,6 @@
 
 
                 <tr>
-                    <td class="i18n1" name="holidaytestervoltagemax">检漏仪电压最大值</td>
-                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="holiday_tester_voltage_max" value=""/></td>
-                    <td></td>
 
                     <td class="i18n1" name="odholidayfreq">漏点检验频率</td>
                     <td ><select class="easyui-combobox" data-options="editable:false" name="od_holiday_freq" style="width:200px;">

@@ -4,9 +4,11 @@ package com.htcsweb.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.htcsweb.dao.InspectionTimeRecordDao;
 import com.htcsweb.dao.OdFinalInspectionProcessDao;
 
 import com.htcsweb.dao.PipeBasicInfoDao;
+import com.htcsweb.entity.InspectionTimeRecord;
 import com.htcsweb.entity.PipeBasicInfo;
 import com.htcsweb.entity.OdFinalInspectionProcess;
 import com.htcsweb.util.ResponseUtil;
@@ -31,6 +33,8 @@ public class OdFinalInspectionProcessController {
     private OdFinalInspectionProcessDao odFinalInspectionProcessDao;
     @Autowired
     private PipeBasicInfoDao pipeBasicInfoDao;
+    @Autowired
+    private InspectionTimeRecordDao inspectionTimeRecordDao;
 
     //查询
     @RequestMapping(value = "/getOdFinalInByLike")
@@ -88,6 +92,76 @@ public class OdFinalInspectionProcessController {
             if(odFinalInspectionProcess.getId()==0){
                 //添加
                 resTotal=odFinalInspectionProcessDao.addOdFinalInProcess(odFinalInspectionProcess);
+                List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoByNo(odFinalInspectionProcess.getPipe_no());
+                String project_no="";
+                String mill_no=odFinalInspectionProcess.getMill_no();
+                if(list.size()>0){
+                    project_no=(String)list.get(0).get("project_no");
+                }
+                System.out.println("project_no="+project_no);
+
+                //更新增量 inspectionTimeMap
+                if (!odFinalInspectionProcess.getCutback_length().equals("")) {
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_cutback_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(odFinalInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("od_cutback_freq");
+                        itr.setInspction_time(odFinalInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+                }
+                if (!odFinalInspectionProcess.getEpoxy_cutback_list().equals("")) {
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_epoxy_cutback_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(odFinalInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("od_epoxy_cutback_freq");
+                        itr.setInspction_time(odFinalInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+                }
+                if (!odFinalInspectionProcess.getMagnetism_list().equals("")) {
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_magnetism_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(odFinalInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("od_magnetism_freq");
+                        itr.setInspction_time(odFinalInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+                }
+                if (!odFinalInspectionProcess.getCoating_bevel_angle_list().equals("")) {
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_coating_bevel_angle_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(odFinalInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("od_coating_bevel_angle_freq");
+                        itr.setInspction_time(odFinalInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+                }
+
             }else{
                 //修改！
                 resTotal=odFinalInspectionProcessDao.updateOdFinalInProcess(odFinalInspectionProcess);
