@@ -2,8 +2,10 @@ package com.htcsweb.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.htcsweb.dao.InspectionTimeRecordDao;
 import com.htcsweb.dao.OdBlastProcessDao;
 import com.htcsweb.dao.PipeBasicInfoDao;
+import com.htcsweb.entity.InspectionTimeRecord;
 import com.htcsweb.entity.OdBlastProcess;
 import com.htcsweb.entity.PipeBasicInfo;
 
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Date;
@@ -32,6 +35,9 @@ public class OdBlastProcessController {
 
     @Autowired
     private PipeBasicInfoDao pipeBasicInfoDao;
+
+    @Autowired
+    private InspectionTimeRecordDao inspectionTimeRecordDao;
 
     @RequestMapping("/saveOdBlastProcess")
     @ResponseBody
@@ -51,6 +57,86 @@ public class OdBlastProcessController {
             if(odblastprocess.getId()==0){
                 //添加
                 resTotal=odblastprocessDao.addOdBlastProcess(odblastprocess);
+                if(resTotal>0){
+                    //更新检验时间
+                    List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoByNo(odblastprocess.getPipe_no());
+                    String project_no="";
+                    String mill_no=odblastprocess.getMill_no();
+                    if(list.size()>0){
+                        project_no=(String)list.get(0).get("project_no");
+                    }
+                    System.out.println("project_no="+project_no);
+
+                    //更新增量 inspectionTimeMap
+                    if (odblastprocess.getRinse_water_conductivity() != -99) {
+
+                        List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_rinse_water_conductivity_freq");
+                        if(lt.size()>0) {
+                            InspectionTimeRecord itr=lt.get(0);
+                            itr.setInspction_time(new Date());
+                            inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                        }else{
+                            InspectionTimeRecord itr=new InspectionTimeRecord();
+                            itr.setProject_no(project_no);
+                            itr.setMill_no(mill_no);
+                            itr.setInspection_item("od_rinse_water_conductivity_freq");
+                            itr.setInspction_time(new Date());
+                            inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                        }
+
+                    }
+                    if (odblastprocess.getAbrasive_conductivity() != -99) {
+                        List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_abrasive_conductivity_freq");
+                        if(lt.size()>0) {
+                            InspectionTimeRecord itr=lt.get(0);
+                            itr.setInspction_time(new Date());
+                            inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+
+                        }else{
+                            InspectionTimeRecord itr=new InspectionTimeRecord();
+                            itr.setProject_no(project_no);
+                            itr.setMill_no(mill_no);
+                            itr.setInspection_item("od_abrasive_conductivity_freq");
+                            itr.setInspction_time(new Date());
+                            inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                        }
+                    }
+                    if (odblastprocess.getSalt_contamination_before_blasting() != -99) {
+                        List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_salt_contamination_before_blast_freq");
+                        if(lt.size()>0) {
+                            InspectionTimeRecord itr=lt.get(0);
+                            itr.setInspction_time(new Date());
+                            inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                        }else{
+                            InspectionTimeRecord itr=new InspectionTimeRecord();
+                            itr.setProject_no(project_no);
+                            itr.setMill_no(mill_no);
+                            itr.setInspection_item("od_salt_contamination_before_blast_freq");
+                            itr.setInspction_time(new Date());
+                            inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                        }
+
+                    }
+                    if (odblastprocess.getPreheat_temp() != -99) {
+                        List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_preheat_temp_freq");
+                        if(lt.size()>0) {
+                            InspectionTimeRecord itr=lt.get(0);
+                            itr.setInspction_time(new Date());
+                            inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                        }else{
+                            InspectionTimeRecord itr=new InspectionTimeRecord();
+                            itr.setProject_no(project_no);
+                            itr.setMill_no(mill_no);
+                            itr.setInspection_item("od_preheat_temp_freq");
+                            itr.setInspction_time(new Date());
+                            inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+
+                        }
+
+                    }
+
+                }
+
             }else{
                 //修改！
                 resTotal=odblastprocessDao.updateOdBlastProcess(odblastprocess);

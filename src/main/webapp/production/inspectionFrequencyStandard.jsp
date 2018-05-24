@@ -60,7 +60,7 @@
                 var idArrs=idArr.join(',');
                 $.messager.confirm('系统提示',"您确定要删除这<font color=red>"+idArr.length+ "</font>条数据吗？",function (r) {
                     if(r){
-                        $.post("/AcceptanceCriteriaOperation/delAllInspectionFrequency.action",{hlparam:idArrs},function (data) {
+                        $.post("/InspectionFrequencyOperation/delInspectionFrequency.action",{hlparam:idArrs},function (data) {
                             if(data.success){
                                 $("#InspectionFrequencyDatagrids").datagrid("reload");
                             }

@@ -3,8 +3,10 @@ package com.htcsweb.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.InspectionFrequencyDao;
+import com.htcsweb.dao.InspectionTimeRecordDao;
 import com.htcsweb.entity.IdStencilProcess;
 import com.htcsweb.entity.InspectionFrequency;
+import com.htcsweb.entity.InspectionTimeRecord;
 import com.htcsweb.entity.PipeBasicInfo;
 import com.htcsweb.util.ComboxItem;
 import com.htcsweb.util.ResponseUtil;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -27,7 +30,8 @@ public class InspectionFrequencyController {
 
     @Autowired
     private InspectionFrequencyDao inspectionFrequencyDao;
-
+    @Autowired
+    private InspectionTimeRecordDao inspectionTimeRecordDao;
 
 
     //查找检验频率标准
@@ -131,6 +135,55 @@ public class InspectionFrequencyController {
         json.put("message",sbmessage.toString());
         ResponseUtil.write(response,json);
         return null;
+    }
+
+
+    //检测某检测项此刻是否需要检测
+    @RequestMapping("/getAllInspectionTimeMap")
+    @ResponseBody
+    public String getAllInspectionTimeMap(@RequestParam(value = "project_no",required = false)String project_no, @RequestParam(value = "mill_no",required = false)String mill_no, HttpServletRequest request){
+
+        //InspectionFrequencyOperation/getAllInspectionTimeMap.action?project_no=20180208&mill_no=mill_1
+        List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,null);
+        Map<String,Object> maps=new HashMap<String,Object>();
+        for(int i=0;i<lt.size();i++){
+            InspectionTimeRecord itr=lt.get(i);
+            maps.put(itr.getInspection_item(),itr.getInspction_time());
+        }
+
+        String mmp= JSONArray.toJSONString(maps);
+        return mmp;
+    }
+
+
+    //设置检测项检测时间
+    @RequestMapping("/setInspectionTimeMap")
+    @ResponseBody
+    public String setInspectionTimeMap(@RequestParam(value = "project_no",required = false)String project_no,@RequestParam(value = "mill_no",required = false)String mill_no,@RequestParam(value = "new_inspectionTimeMap",required = false)Map<String,Object> new_inspectionTimeMap, HttpServletRequest request){
+
+        int change=0;
+        //更新增量new_inspectionTimeMap
+        Iterator iter = new_inspectionTimeMap.entrySet().iterator();
+        while (iter.hasNext()) {
+            Map.Entry entry = (Map.Entry) iter.next();
+            Object key = entry.getKey();
+            Object val = entry.getValue();
+
+        }
+
+
+
+        Map<String,Object> result=new HashMap<String,Object>();
+        if(change>0) {
+            result.put("success", true);
+            result.put("message","insepctionTimeMapSession 设置成功");
+        }else{
+            result.put("success", false);
+            result.put("message","insepctionTimeMapSession 设置失败");
+        }
+
+        String mmp= JSONArray.toJSONString(result);
+        return mmp;
     }
 
 

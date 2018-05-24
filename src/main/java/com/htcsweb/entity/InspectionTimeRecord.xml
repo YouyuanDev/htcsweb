@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.htcsweb.dao.InspectionTimeRecordDao">
+
+
+    <insert id="addInspectionTimeRecord" parameterType="com.htcsweb.entity.InspectionTimeRecord">
+        INSERT INTO inspection_time_record (project_no,mill_no,inspection_item,inspection_time) VALUES (#{project_no},#{mill_no},#{inspection_item},#{inspection_time})
+    </insert>
+
+    <update id="updateInspectionTimeRecord" parameterType="com.htcsweb.entity.InspectionTimeRecord">
+        UPDATE inspection_time_record set project_no=#{project_no},mill_no=#{mill_no},inspection_item=#{inspection_item},inspection_time=#{inspection_time} where id=#{id}
+    </update>
+
+    <delete id="delInspectionTimeRecord">
+        delete from inspection_time_record WHERE
+        <foreach collection="array" item="item" open="id in (" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+
+
+    <select id="getRecordByProjectNoMillNo" resultType="InspectionTimeRecord">
+        Select o.* from inspection_time_record o
+        <where>
+            <if test="project_no!=null and project_no!=''">
+                AND o.project_no =#{project_no}
+            </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no =#{mill_no}
+            </if>
+            <if test="inspection_item!=null and inspection_item!=''">
+                AND o.inspection_item =#{inspection_item}
+            </if>
+
+        </where>
+        ORDER BY o.id DESC
+    </select>
+
+
+
+
+
+</mapper>

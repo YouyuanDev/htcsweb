@@ -228,7 +228,7 @@ public class GenerateExcelToPDFUtil {
                         Label label_data = (Label) dataList.get(i);
                         //String cont = label_data.getContents();
                        // if (cont != null && !cont.equals(""))
-                        if(label_data.getContents()!=null&&!label_data.getContents().equals(""))
+                        if(label_data.getContents()!=null&&!label_data.getContents().equals("")&&!label_data.getContents().equals("-99"))
                             wsheet.addCell((Label) dataList.get(i));
                     }
                 }

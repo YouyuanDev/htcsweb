@@ -209,7 +209,7 @@ function  createPictureModel(basePath,imgList) {
 //设置空值
 function  setParams($obj) {
     if($obj.val()==null||$obj.val()=="")
-        $obj.val(0);
+        $obj.val(-99);
 }
 //钢管编号异步获取钢管信息清理数据
 function  clearLabelPipeInfo() {

@@ -400,7 +400,7 @@
                        <option value="0" selected="selected">清晰</option>
                        <option value="1">不清晰</option>
                    </select>
-                   <%--<input class="easyui-numberbox" data-options="min:0,precision:1" type="text" name="preheat_temp" value=""/>--%>
+                   <%--<input class="easyui-numberbox" data-options="min:-99,precision:1" type="text" name="preheat_temp" value=""/>--%>
                </td>
                <td></td>
                <td width="16%"  class="i18n1" name="surfacecondition">外观缺陷</td>
@@ -419,42 +419,42 @@
            </tr>
            <tr>
                <td width="16%" class="i18n1" name="preheattemp">预热温度</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:1" type="text" name="preheat_temp" value=""/></td>
+               <td><input class="easyui-numberbox" data-options="min:-99,precision:1" type="text" name="preheat_temp" value=""/></td>
                <td></td>
                <td width="16%" class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="salt_contamination_before_blasting" value=""/></td>
+               <td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="salt_contamination_before_blasting" value=""/></td>
                <td></td>
            </tr>
            <tr>
                <td class="i18n1" name="alkalinedwelltime">碱洗时间</td>
-               <td><input class="easyui-numberbox hl-errorcolor" data-options="min:0,precision:0" type="text" name="alkaline_dwell_time" value=""/></td>
+               <td><input class="easyui-numberbox hl-errorcolor" data-options="min:-99,precision:0" type="text" name="alkaline_dwell_time" value=""/></td>
                <td></td>
                <td class="i18n1" name="alkalineconcentration">碱浓度</td>
-               <td><input class="easyui-numberbox"  data-options="min:0,precision:2" type="text" name="alkaline_concentration" value=""/></td>
+               <td><input class="easyui-numberbox"  data-options="min:-99,precision:2" type="text" name="alkaline_concentration" value=""/></td>
                <td></td>
            </tr>
 
            <tr>
                <td class="i18n1" name="acidwashtime">酸洗时间</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="acid_wash_time" value=""/></td>
+               <td><input class="easyui-numberbox" data-options="min:-99,precision:0" type="text" name="acid_wash_time" value=""/></td>
                <td></td>
                <td class="i18n1" name="acidconcentration">酸浓度</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="acid_concentration" value=""/></td>
+               <td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="acid_concentration" value=""/></td>
                <td></td>
            </tr>
 
 
            <tr>
                <td width="16%" class="i18n1" name="rinsewaterconductivity">冲洗水电导率</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="rinse_water_conductivity" value=""/></td>
+               <td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="rinse_water_conductivity" value=""/></td>
                <td></td>
                <td width="16%" class="i18n1" name="abrasiveconductivity">磨料电导率</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="abrasive_conductivity" value=""/></td>
+               <td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="abrasive_conductivity" value=""/></td>
                <td></td>
            </tr>
            <tr>
                <td width="16%" class="i18n1" name="blastlinespeed">打砂传送速度</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="blast_line_speed" value=""/></td>
+               <td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="blast_line_speed" value=""/></td>
                <td></td>
                <td></td>
                <td></td>
