@@ -145,46 +145,69 @@ public class InspectionFrequencyController {
 
         //InspectionFrequencyOperation/getAllInspectionTimeMap.action?project_no=20180208&mill_no=mill_1
         List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,null);
-        Map<String,Object> maps=new HashMap<String,Object>();
-        for(int i=0;i<lt.size();i++){
-            InspectionTimeRecord itr=lt.get(i);
-            maps.put(itr.getInspection_item(),itr.getInspction_time());
+        List<HashMap<String,Object>> ltif= inspectionFrequencyDao.getFrequencyInfoByProjectNo(project_no);
+        Map<String,HashMap<String,Object>> maps=new HashMap<String,HashMap<String,Object>>();
+        HashMap<String,Object> insmap=new HashMap<String,Object>();
+        Date now=new Date();
+        if(ltif.size()>0){
+             insmap=ltif.get(0);
+
+            for(int i=0;i<lt.size();i++){
+                InspectionTimeRecord timeRecord=lt.get(i);
+                float freq=(float)insmap.get(timeRecord.getInspection_item());
+                //检验频率 秒
+                float freqSec=freq*60*60;
+                //间隔秒
+                long interval = (now.getTime() - timeRecord.getInspction_time().getTime())/1000;
+
+                boolean needInspectNow=false;
+                if(interval>=freqSec){
+                    //间隔已大于检验频率，需要检验
+                    needInspectNow=true;
+                }
+                HashMap<String,Object> m=new HashMap<String,Object>();
+                m.put("lastInspectionTime",timeRecord.getInspction_time());
+                m.put("needInspectNow",needInspectNow);
+                maps.put(timeRecord.getInspection_item(),m);
+            }
         }
+
+
 
         String mmp= JSONArray.toJSONString(maps);
         return mmp;
     }
 
 
-    //设置检测项检测时间
-    @RequestMapping("/setInspectionTimeMap")
-    @ResponseBody
-    public String setInspectionTimeMap(@RequestParam(value = "project_no",required = false)String project_no,@RequestParam(value = "mill_no",required = false)String mill_no,@RequestParam(value = "new_inspectionTimeMap",required = false)Map<String,Object> new_inspectionTimeMap, HttpServletRequest request){
-
-        int change=0;
-        //更新增量new_inspectionTimeMap
-        Iterator iter = new_inspectionTimeMap.entrySet().iterator();
-        while (iter.hasNext()) {
-            Map.Entry entry = (Map.Entry) iter.next();
-            Object key = entry.getKey();
-            Object val = entry.getValue();
-
-        }
-
-
-
-        Map<String,Object> result=new HashMap<String,Object>();
-        if(change>0) {
-            result.put("success", true);
-            result.put("message","insepctionTimeMapSession 设置成功");
-        }else{
-            result.put("success", false);
-            result.put("message","insepctionTimeMapSession 设置失败");
-        }
-
-        String mmp= JSONArray.toJSONString(result);
-        return mmp;
-    }
+//    //设置检测项检测时间
+//    @RequestMapping("/setInspectionTimeMap")
+//    @ResponseBody
+//    public String setInspectionTimeMap(@RequestParam(value = "project_no",required = false)String project_no,@RequestParam(value = "mill_no",required = false)String mill_no,@RequestParam(value = "new_inspectionTimeMap",required = false)Map<String,Object> new_inspectionTimeMap, HttpServletRequest request){
+//
+//        int change=0;
+//        //更新增量new_inspectionTimeMap
+//        Iterator iter = new_inspectionTimeMap.entrySet().iterator();
+//        while (iter.hasNext()) {
+//            Map.Entry entry = (Map.Entry) iter.next();
+//            Object key = entry.getKey();
+//            Object val = entry.getValue();
+//
+//        }
+//
+//
+//
+//        Map<String,Object> result=new HashMap<String,Object>();
+//        if(change>0) {
+//            result.put("success", true);
+//            result.put("message","insepctionTimeMapSession 设置成功");
+//        }else{
+//            result.put("success", false);
+//            result.put("message","insepctionTimeMapSession 设置失败");
+//        }
+//
+//        String mmp= JSONArray.toJSONString(result);
+//        return mmp;
+//    }
 
 
 }

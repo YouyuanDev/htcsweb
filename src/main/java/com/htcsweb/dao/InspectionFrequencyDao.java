@@ -18,4 +18,6 @@ public interface InspectionFrequencyDao {
     public int getCount(@Param("inspection_frequency_no") String inspection_frequency_no);
     public InspectionFrequency getInspectionFrequencyByContractNo(@Param("contract_no")String contract_no);
 
+    public List<HashMap<String,Object>> getFrequencyInfoByProjectNo(@Param("project_no") String project_no);
+
 }

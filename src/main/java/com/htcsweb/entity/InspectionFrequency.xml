@@ -80,4 +80,18 @@
     <select id="getInspectionFrequencyByContractNo" resultType="com.htcsweb.entity.InspectionFrequency">
         select o.* from contract_info c inner JOIN project_info p on c.project_no=p.project_no inner JOIN inspection_frequency o on p.inspection_frequency_no=o.inspection_frequency_no WHERE c.contract_no=#{contract_no}
     </select>
+
+
+    <select id="getFrequencyInfoByProjectNo" resultType="map">
+        SELECT  i.* from inspection_frequency i inner join project_info pro on pro.inspection_frequency_no=i.inspection_frequency_no
+        <where>
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no =#{project_no}
+            </if>
+        </where>
+    </select>
+
+
+
+
 </mapper>
