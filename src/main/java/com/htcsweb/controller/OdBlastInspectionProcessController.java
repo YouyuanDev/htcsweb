@@ -123,7 +123,7 @@ public class OdBlastInspectionProcessController {
                     }
 
                 }
-                if (odblastinspectionprocess.getRelative_humidity() != -99) {
+                if (!odblastinspectionprocess.getBlast_finish_sa25().equals("")) {
                     List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_blast_finish_sa25_freq");
                     if(lt.size()>0) {
                         InspectionTimeRecord itr=lt.get(0);
@@ -139,7 +139,7 @@ public class OdBlastInspectionProcessController {
                     }
 
                 }
-                if (odblastinspectionprocess.getRelative_humidity() != -99) {
+                if (odblastinspectionprocess.getSurface_dust_rating() != -99) {
                     List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_surface_dust_rating_freq");
                     if(lt.size()>0) {
                         InspectionTimeRecord itr=lt.get(0);
@@ -155,7 +155,7 @@ public class OdBlastInspectionProcessController {
                     }
 
                 }
-                if (odblastinspectionprocess.getRelative_humidity() != -99) {
+                if (odblastinspectionprocess.getProfile() != -99) {
                     List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_profile_freq");
                     if(lt.size()>0) {
                         InspectionTimeRecord itr=lt.get(0);
@@ -171,7 +171,7 @@ public class OdBlastInspectionProcessController {
                     }
 
                 }
-                if (odblastinspectionprocess.getRelative_humidity() != -99) {
+                if (odblastinspectionprocess.getSalt_contamination_after_blasting() != -99) {
                     List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_salt_contamination_after_blasting_freq");
                     if(lt.size()>0) {
                         InspectionTimeRecord itr=lt.get(0);
@@ -187,7 +187,7 @@ public class OdBlastInspectionProcessController {
                     }
 
                 }
-                if (odblastinspectionprocess.getRelative_humidity() != -99) {
+                if (odblastinspectionprocess.getPipe_temp() != -99) {
                     List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_pipe_temp_after_blast_freq");
                     if(lt.size()>0) {
                         InspectionTimeRecord itr=lt.get(0);

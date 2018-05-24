@@ -460,7 +460,7 @@
                </td>
                <td></td>
                <td width="16%" class="i18n1" name="abrasiveconductivity">磨料电导率</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="abrasive_conductivity" value=""/></td>
+               <td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="abrasive_conductivity" value=""/></td>
                <td></td>
            </tr>
 

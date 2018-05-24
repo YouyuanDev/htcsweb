@@ -351,7 +351,7 @@
             <table class="ht-table">
                 <tr>
                     <td class="i18n1" name="coatingspeed">喷涂速度</td>
-                    <td colspan="5"><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="coating_speed" value=""/></td>
+                    <td colspan="5"><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="coating_speed" value=""/></td>
                 </tr>
 
                 <tr>
@@ -385,7 +385,7 @@
                 </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="curingtemp">固化房温度</td>
-                    <td colspan="5"><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="curing_temp" value=""/></td>
+                    <td colspan="5"><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="curing_temp" value=""/></td>
                 </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="result">结论</td>

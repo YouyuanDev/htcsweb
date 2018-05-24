@@ -4,8 +4,10 @@ package com.htcsweb.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.IdFinalInspectionProcessDao;
+import com.htcsweb.dao.InspectionTimeRecordDao;
 import com.htcsweb.dao.PipeBasicInfoDao;
 import com.htcsweb.entity.IdFinalInspectionProcess;
+import com.htcsweb.entity.InspectionTimeRecord;
 import com.htcsweb.entity.PipeBasicInfo;
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,8 @@ public class IdFinalInspectionProcessController {
     private IdFinalInspectionProcessDao idFinalInspectionProcessDao;
     @Autowired
     private PipeBasicInfoDao pipeBasicInfoDao;
+    @Autowired
+    private InspectionTimeRecordDao inspectionTimeRecordDao;
 
     //查询
     @RequestMapping(value = "/getIdFinalInByLike")
@@ -86,6 +90,100 @@ public class IdFinalInspectionProcessController {
             if(idFinalInspectionProcess.getId()==0){
                 //添加
                 resTotal=idFinalInspectionProcessDao.addIdFinalInProcess(idFinalInspectionProcess);
+                List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoByNo(idFinalInspectionProcess.getPipe_no());
+                String project_no="";
+                String mill_no=idFinalInspectionProcess.getMill_no();
+                if(list.size()>0){
+                    project_no=(String)list.get(0).get("project_no");
+                }
+                System.out.println("project_no="+project_no);
+
+                //更新增量 inspectionTimeMap
+                if (!idFinalInspectionProcess.getDry_film_thickness_list().equals("")) {
+
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"id_dry_film_thickness_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(idFinalInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("id_dry_film_thickness_freq");
+                        itr.setInspction_time(idFinalInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+
+                }
+                if (!idFinalInspectionProcess.getRoughness_list().equals("")) {
+
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"id_roughness_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(idFinalInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("id_roughness_freq");
+                        itr.setInspction_time(idFinalInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+
+                }
+                if (!idFinalInspectionProcess.getCutback_length().equals("")) {
+
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"id_cutback_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(idFinalInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("id_cutback_freq");
+                        itr.setInspction_time(idFinalInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+
+                }
+                if (!idFinalInspectionProcess.getMagnetism_list().equals("")) {
+
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"id_residual_magnetism_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(idFinalInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("id_residual_magnetism_freq");
+                        itr.setInspction_time(idFinalInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+
+                }
+                if (idFinalInspectionProcess.getHolidays()!=-99) {
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"id_holiday_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(idFinalInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("id_holiday_freq");
+                        itr.setInspction_time(idFinalInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+
+                }
+
             }else{
                 //修改！
                 resTotal=idFinalInspectionProcessDao.updateIdFinalInProcess(idFinalInspectionProcess);

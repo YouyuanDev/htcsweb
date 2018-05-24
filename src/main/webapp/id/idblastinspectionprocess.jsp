@@ -429,20 +429,20 @@
             <table class="ht-table">
                 <tr>
                     <td width="16%"  class="i18n1" name="airtemp">环境温度</td>
-                    <td><input class="easyui-numberbox" type="text" data-options="min:0,precision:2" name="air_temp" value=""/></td>
+                    <td><input class="easyui-numberbox" type="text" data-options="min:-99,precision:2" name="air_temp" value=""/></td>
                     <td></td>
                     <td class="i18n1" name="relativehumidity">相对湿度</td>
-                    <td><input class="easyui-numberbox"  data-options="min:0,precision:1" type="text" name="relative_humidity" value=""/></td>
+                    <td><input class="easyui-numberbox"  data-options="min:-99,precision:1" type="text" name="relative_humidity" value=""/></td>
                     <td></td>
 
                 </tr>
 
                 <tr>
                     <td class="i18n1" name="dewpoint">露点</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:1" type="text" name="dew_point" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="min:-99,precision:1" type="text" name="dew_point" value=""/></td>
                     <td></td>
                     <td width="16%" class="i18n1" name="pipetemp">钢管温度</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="pipe_temp" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="pipe_temp" value=""/></td>
                     <td></td>
                 </tr>
 
@@ -453,6 +453,7 @@
                             <option value="2.0" selected="selected">Sa2.0</option>
                             <option value="2.5">Sa2.5</option>
                             <option value="3.0">Sa3.0</option>
+                            <option value="">未测</option>
                         </select>
                         <%--<input class="easyui-textbox" type="text" name="blast_finish_sa25" value=""/>--%>
                     </td>
@@ -465,17 +466,18 @@
                             <option value="3">3级</option>
                             <option value="4">4级</option>
                             <option value="5">5级</option>
+                            <option value="-99">未测</option>
                         </select>
-                        <%--<input class="easyui-numberbox" type="text" data-options="min:0,precision:0" name="surface_dust_rating" value=""/>--%>
+                        <%--<input class="easyui-numberbox" type="text" data-options="min:-99,precision:0" name="surface_dust_rating" value=""/>--%>
                     </td>
                     <td></td>
                 </tr>
                 <tr>
                     <td width="16%"  class="i18n1" name="profile">锚纹深度</td>
-                    <td><input class="easyui-numberbox" type="text" data-options="min:0,precision:1" name="profile" value=""/></td>
+                    <td><input class="easyui-numberbox" type="text" data-options="min:-99,precision:1" name="profile" value=""/></td>
                     <td></td>
                     <td width="16%"  class="i18n1" name="saltcontaminationafterblasting">打砂后盐度</td>
-                    <td><input class="easyui-numberbox" type="text" data-options="min:0,precision:2" name="salt_contamination_after_blasting" value=""/></td>
+                    <td><input class="easyui-numberbox" type="text" data-options="min:-99,precision:2" name="salt_contamination_after_blasting" value=""/></td>
                     <td></td>
 
                 </tr>
@@ -493,13 +495,13 @@
                     </td>
                     <td></td>
                     <td width="16%"  class="i18n1" name="elapsedtime">涂敷前等待时间</td>
-                    <td><input class="easyui-numberbox" type="text" data-options="min:0,precision:2" name="elapsed_time" value=""/></td>
+                    <td><input class="easyui-numberbox" type="text" data-options="min:-99,precision:2" name="elapsed_time" value=""/></td>
                     <td></td>
                 </tr>
 
                 <tr>
                     <td width="16%"  class="i18n1" name="blasttime">打砂时间</td>
-                    <td><input class="easyui-numberbox" type="text" data-options="min:0,precision:2" name="blast_time" value=""/></td>
+                    <td><input class="easyui-numberbox" type="text" data-options="min:-99,precision:2" name="blast_time" value=""/></td>
                     <td></td>
 
                 </tr>

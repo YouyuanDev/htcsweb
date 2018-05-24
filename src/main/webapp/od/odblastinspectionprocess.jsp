@@ -197,7 +197,6 @@
                     setParams($("input[name='relative_humidity']"));
                     setParams($("input[name='dew_point']"));
                     setParams($("input[name='profile']"));
-                    setParams($("input[name='blast_finish_sa25']"));
                     setParams($("input[name='surface_dust_rating']"));
                     setParams($("input[name='pipe_temp']"));
                     setParams($("input[name='salt_contamination_after_blasting']"));
@@ -469,6 +468,8 @@
                             <option value="2.0" selected="selected">Sa2.0</option>
                             <option value="2.5">Sa2.5</option>
                             <option value="3.0">Sa3.0</option>
+                            <option value="">未测</option>
+
                         </select>
                         <%--<input class="easyui-validatebox" type="text" name="blast_finish_sa25" value=""/>--%>
                     </td>
@@ -481,6 +482,7 @@
                             <option value="3">3级</option>
                             <option value="4">4级</option>
                             <option value="5">5级</option>
+                            <option value="-99">未测</option>
                         </select>
                         <%--<input class="easyui-numberbox" data-options="min:-99,precision:0" type="text" name="surface_dust_rating" value=""/>--%>
                     </td>

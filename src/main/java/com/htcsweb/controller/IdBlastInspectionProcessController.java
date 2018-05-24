@@ -3,8 +3,10 @@ package com.htcsweb.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.IdBlastInspectionProcessDao;
+import com.htcsweb.dao.InspectionTimeRecordDao;
 import com.htcsweb.dao.PipeBasicInfoDao;
 import com.htcsweb.entity.IdBlastInspectionProcess;
+import com.htcsweb.entity.InspectionTimeRecord;
 import com.htcsweb.entity.PipeBasicInfo;
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,9 @@ public class IdBlastInspectionProcessController {
     private PipeBasicInfoDao pipeBasicInfoDao;
     @Autowired
     private IdBlastInspectionProcessDao idBlastInspectionProcessDao;
+
+    @Autowired
+    private InspectionTimeRecordDao inspectionTimeRecordDao;
 
     @RequestMapping(value = "/getIdBlastInspectionByLike")
     @ResponseBody
@@ -90,6 +95,122 @@ public class IdBlastInspectionProcessController {
             if(idBlastInspectionProcess.getId()==0){
                 //添加
                 resTotal=idBlastInspectionProcessDao.addIdBlastInProcess(idBlastInspectionProcess);
+                List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoByNo(idBlastInspectionProcess.getPipe_no());
+                String project_no="";
+                String mill_no=idBlastInspectionProcess.getMill_no();
+                if(list.size()>0){
+                    project_no=(String)list.get(0).get("project_no");
+                }
+                System.out.println("project_no="+project_no);
+
+                //更新增量 inspectionTimeMap
+                if (idBlastInspectionProcess.getRelative_humidity()!=-99) {
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"id_relative_humidity_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(idBlastInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("id_relative_humidity_freq");
+                        itr.setInspction_time(idBlastInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+                }
+                if (idBlastInspectionProcess.getPipe_temp()!=-99) {
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"id_pipe_temp_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(idBlastInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("id_pipe_temp_freq");
+                        itr.setInspction_time(idBlastInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+                }
+                if (idBlastInspectionProcess.getAir_temp()!=-99) {
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"id_room_temp_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(idBlastInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("id_room_temp_freq");
+                        itr.setInspction_time(idBlastInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+                }
+                if (!idBlastInspectionProcess.getBlast_finish_sa25().equals("")) {
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"id_blast_finish_sa25_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(idBlastInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("id_blast_finish_sa25_freq");
+                        itr.setInspction_time(idBlastInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+                }
+                if (idBlastInspectionProcess.getSurface_dust_rating()!=-99) {
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"id_surface_dust_rating_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(idBlastInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("id_surface_dust_rating_freq");
+                        itr.setInspction_time(idBlastInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+                }
+                if (idBlastInspectionProcess.getSalt_contamination_after_blasting()!=-99) {
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"id_salt_contamination_after_blasting_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(idBlastInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("id_salt_contamination_after_blasting_freq");
+                        itr.setInspction_time(idBlastInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+                }
+                if (idBlastInspectionProcess.getProfile()!=-99) {
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"id_profile_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(idBlastInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("id_profile_freq");
+                        itr.setInspction_time(idBlastInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+                }
+
+
             }else{
                 //修改！
                 System.out.println("ID"+idBlastInspectionProcess.getId());

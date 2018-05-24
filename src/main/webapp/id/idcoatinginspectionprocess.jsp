@@ -438,18 +438,18 @@
             <table class="ht-table">
                 <%--<tr>--%>
                     <%--<td class="i18n1" name="dryfilmthicknessmax">最大干膜厚度</td>--%>
-                    <%--<td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="dry_film_thickness_max" value=""/></td>--%>
+                    <%--<td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="dry_film_thickness_max" value=""/></td>--%>
                     <%--<td></td>--%>
                     <%--<td class="i18n1" name="dryfilmthicknessmin">最小干膜厚度</td>--%>
-                    <%--<td><input class="easyui-numberbox"  data-options="min:0,precision:2" type="text" name="dry_film_thickness_min" value=""/></td>--%>
+                    <%--<td><input class="easyui-numberbox"  data-options="min:-99,precision:2" type="text" name="dry_film_thickness_min" value=""/></td>--%>
                     <%--<td></td>--%>
                 <%--</tr>--%>
                 <%--<tr>--%>
                     <%--<td width="16%" class="i18n1" name="holidaytestervolts">电火花检测电压</td>--%>
-                    <%--<td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="holiday_tester_volts" value=""/></td>--%>
+                    <%--<td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="holiday_tester_volts" value=""/></td>--%>
                     <%--<td></td>--%>
                     <%--<td width="16%" class="i18n1" name="holidaytestresults">漏点</td>--%>
-                    <%--<td><input class="easyui-numberbox" data-options="min:0,precision:0"  type="text" name="holidays" value=""/></td>--%>
+                    <%--<td><input class="easyui-numberbox" data-options="min:-99,precision:0"  type="text" name="holidays" value=""/></td>--%>
                     <%--<td></td>--%>
                 <%--</tr>--%>
                 <tr>
@@ -491,10 +491,10 @@
                 </tr>
                 <%--<tr>--%>
                     <%--<td class="i18n1" name="magnetism">剩磁</td>--%>
-                    <%--<td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="magnetism" value=""/></td>--%>
+                    <%--<td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="magnetism" value=""/></td>--%>
                     <%--<td></td>--%>
                     <%--<td class="i18n1" name="internalrepairs">内涂层修补数</td>--%>
-                    <%--<td><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="internal_repairs" value=""/></td>--%>
+                    <%--<td><input class="easyui-numberbox" data-options="min:-99,precision:0" type="text" name="internal_repairs" value=""/></td>--%>
                     <%--<td></td>--%>
                 <%--</tr>--%>
                 <%--<tr>--%>

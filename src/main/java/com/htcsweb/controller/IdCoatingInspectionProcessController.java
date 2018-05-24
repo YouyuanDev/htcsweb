@@ -5,8 +5,10 @@ package com.htcsweb.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.IdCoatingInspectionProcessDao;
+import com.htcsweb.dao.InspectionTimeRecordDao;
 import com.htcsweb.dao.PipeBasicInfoDao;
 import com.htcsweb.entity.IdCoatingInspectionProcess;
+import com.htcsweb.entity.InspectionTimeRecord;
 import com.htcsweb.entity.PipeBasicInfo;
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,9 @@ public class IdCoatingInspectionProcessController {
     private IdCoatingInspectionProcessDao idCoatingInspectionProcessDao;
     @Autowired
     private PipeBasicInfoDao pipeBasicInfoDao;
+    @Autowired
+    private InspectionTimeRecordDao inspectionTimeRecordDao;
+
     //查询
     @RequestMapping(value = "/getIdCoatingInByLike")
     @ResponseBody
@@ -86,6 +91,34 @@ public class IdCoatingInspectionProcessController {
             if(idCoatingInspectionProcess.getId()==0){
                 //添加
                 resTotal=idCoatingInspectionProcessDao.addIdCoatingInProcess(idCoatingInspectionProcess);
+                List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoByNo(idCoatingInspectionProcess.getPipe_no());
+                String project_no="";
+                String mill_no=idCoatingInspectionProcess.getMill_no();
+                if(list.size()>0){
+                    project_no=(String)list.get(0).get("project_no");
+                }
+                System.out.println("project_no="+project_no);
+
+                //更新增量 inspectionTimeMap
+                if (!idCoatingInspectionProcess.getWet_film_thickness_list().equals("")) {
+
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"id_wet_film_thickness_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(idCoatingInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("id_wet_film_thickness_freq");
+                        itr.setInspction_time(idCoatingInspectionProcess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+
+                }
+
+
             }else{
                 //修改！
                 resTotal=idCoatingInspectionProcessDao.updateIdCoatingInProcess(idCoatingInspectionProcess);
