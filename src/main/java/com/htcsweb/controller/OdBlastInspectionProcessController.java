@@ -2,8 +2,10 @@ package com.htcsweb.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.htcsweb.dao.InspectionTimeRecordDao;
 import com.htcsweb.dao.OdBlastInspectionProcessDao;
 import com.htcsweb.dao.PipeBasicInfoDao;
+import com.htcsweb.entity.InspectionTimeRecord;
 import com.htcsweb.entity.OdBlastInspectionProcess;
 import com.htcsweb.entity.PipeBasicInfo;
 
@@ -31,6 +33,9 @@ public class OdBlastInspectionProcessController {
     private PipeBasicInfoDao pipeBasicInfoDao;
     @Autowired
     private OdBlastInspectionProcessDao odBlastInspectionProcessDao;
+
+    @Autowired
+    private InspectionTimeRecordDao inspectionTimeRecordDao;
 
     @RequestMapping(value = "/getOdBlastInspectionByLike")
     @ResponseBody
@@ -93,6 +98,112 @@ public class OdBlastInspectionProcessController {
             if(odblastinspectionprocess.getId()==0){
                 //添加
                 resTotal=odBlastInspectionProcessDao.addOdBlastInProcess(odblastinspectionprocess);
+                List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoByNo(odblastinspectionprocess.getPipe_no());
+                String project_no="";
+                String mill_no=odblastinspectionprocess.getMill_no();
+                if(list.size()>0){
+                    project_no=(String)list.get(0).get("project_no");
+                }
+                System.out.println("project_no="+project_no);
+
+                //更新增量 inspectionTimeMap
+                if (odblastinspectionprocess.getRelative_humidity() != -99) {
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_relative_humidity_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(odblastinspectionprocess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("od_relative_humidity_freq");
+                        itr.setInspction_time(odblastinspectionprocess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+
+                }
+                if (odblastinspectionprocess.getRelative_humidity() != -99) {
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_blast_finish_sa25_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(odblastinspectionprocess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("od_blast_finish_sa25_freq");
+                        itr.setInspction_time(odblastinspectionprocess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+
+                }
+                if (odblastinspectionprocess.getRelative_humidity() != -99) {
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_surface_dust_rating_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(odblastinspectionprocess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("od_surface_dust_rating_freq");
+                        itr.setInspction_time(odblastinspectionprocess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+
+                }
+                if (odblastinspectionprocess.getRelative_humidity() != -99) {
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_profile_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(odblastinspectionprocess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("od_profile_freq");
+                        itr.setInspction_time(odblastinspectionprocess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+
+                }
+                if (odblastinspectionprocess.getRelative_humidity() != -99) {
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_salt_contamination_after_blasting_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(odblastinspectionprocess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("od_salt_contamination_after_blasting_freq");
+                        itr.setInspction_time(odblastinspectionprocess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+
+                }
+                if (odblastinspectionprocess.getRelative_humidity() != -99) {
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_pipe_temp_after_blast_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(odblastinspectionprocess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("od_pipe_temp_after_blast_freq");
+                        itr.setInspction_time(odblastinspectionprocess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+
+                }
+
             }else{
                 //修改！
                 resTotal=odBlastInspectionProcessDao.updateOdBlastInProcess(odblastinspectionprocess);

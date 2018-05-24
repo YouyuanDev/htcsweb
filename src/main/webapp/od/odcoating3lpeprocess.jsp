@@ -379,10 +379,10 @@
             <table class="ht-table">
                 <tr>
                     <td class="i18n1" name="coatinglinespeed">涂敷线速度</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="coating_line_speed" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="coating_line_speed" value=""/></td>
                     <td></td>
                     <td class="i18n1" name="applicationtemp">中频温度</td>
-                    <td><input class="easyui-numberbox"  data-options="min:0,precision:2" type="text" name="application_temp" value=""/></td>
+                    <td><input class="easyui-numberbox"  data-options="min:-99,precision:2" type="text" name="application_temp" value=""/></td>
                     <td></td>
                 </tr>
 
@@ -413,36 +413,36 @@
                 </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="topcoatguncount">面层粉末喷枪数</td>
-                    <td colspan="5"><input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="base_coat_gun_count" value=""/></td>
+                    <td colspan="5"><input class="easyui-numberbox" data-options="min:-99,precision:0" type="text" name="base_coat_gun_count" value=""/></td>
                 </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="tofirsttouchduration">首次到达接触点时间</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="to_first_touch_duration" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="to_first_touch_duration" value=""/></td>
                     <td></td>
                     <td width="16%" class="i18n1" name="toquenchduration">到达水淋处所用时间</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="to_quench_duration" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="to_quench_duration" value=""/></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="airpressure">供气压力(psi)</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="air_pressure" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="air_pressure" value=""/></td>
                     <td></td>
                     <td width="16%" class="i18n1" name="coatingvoltage">喷涂电压(V)</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="coating_voltage" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="coating_voltage" value=""/></td>
                     <td></td>
 
                 </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="gundistance">喷枪距离(cm)</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="gun_distance" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="gun_distance" value=""/></td>
                     <td></td>
                     <td width="16%" class="i18n1" name="sprayspeed">粉量(m/s)</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="spray_speed" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="spray_speed" value=""/></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="applicationvoltage">中频电压(V)</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="application_voltage" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="application_voltage" value=""/></td>
                     <td></td>
                     <td width="16%" class="i18n1" name="result">结论</td>
                     <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">

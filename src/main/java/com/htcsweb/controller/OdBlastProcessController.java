@@ -73,14 +73,14 @@ public class OdBlastProcessController {
                         List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_rinse_water_conductivity_freq");
                         if(lt.size()>0) {
                             InspectionTimeRecord itr=lt.get(0);
-                            itr.setInspction_time(new Date());
+                            itr.setInspction_time(odblastprocess.getOperation_time());
                             inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
                         }else{
                             InspectionTimeRecord itr=new InspectionTimeRecord();
                             itr.setProject_no(project_no);
                             itr.setMill_no(mill_no);
                             itr.setInspection_item("od_rinse_water_conductivity_freq");
-                            itr.setInspction_time(new Date());
+                            itr.setInspction_time(odblastprocess.getOperation_time());
                             inspectionTimeRecordDao.addInspectionTimeRecord(itr);
                         }
 
@@ -89,7 +89,7 @@ public class OdBlastProcessController {
                         List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_abrasive_conductivity_freq");
                         if(lt.size()>0) {
                             InspectionTimeRecord itr=lt.get(0);
-                            itr.setInspction_time(new Date());
+                            itr.setInspction_time(odblastprocess.getOperation_time());
                             inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
 
                         }else{
@@ -97,7 +97,7 @@ public class OdBlastProcessController {
                             itr.setProject_no(project_no);
                             itr.setMill_no(mill_no);
                             itr.setInspection_item("od_abrasive_conductivity_freq");
-                            itr.setInspction_time(new Date());
+                            itr.setInspction_time(odblastprocess.getOperation_time());
                             inspectionTimeRecordDao.addInspectionTimeRecord(itr);
                         }
                     }
@@ -105,14 +105,14 @@ public class OdBlastProcessController {
                         List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_salt_contamination_before_blast_freq");
                         if(lt.size()>0) {
                             InspectionTimeRecord itr=lt.get(0);
-                            itr.setInspction_time(new Date());
+                            itr.setInspction_time(odblastprocess.getOperation_time());
                             inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
                         }else{
                             InspectionTimeRecord itr=new InspectionTimeRecord();
                             itr.setProject_no(project_no);
                             itr.setMill_no(mill_no);
                             itr.setInspection_item("od_salt_contamination_before_blast_freq");
-                            itr.setInspction_time(new Date());
+                            itr.setInspction_time(odblastprocess.getOperation_time());
                             inspectionTimeRecordDao.addInspectionTimeRecord(itr);
                         }
 
@@ -121,14 +121,14 @@ public class OdBlastProcessController {
                         List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_preheat_temp_freq");
                         if(lt.size()>0) {
                             InspectionTimeRecord itr=lt.get(0);
-                            itr.setInspction_time(new Date());
+                            itr.setInspction_time(odblastprocess.getOperation_time());
                             inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
                         }else{
                             InspectionTimeRecord itr=new InspectionTimeRecord();
                             itr.setProject_no(project_no);
                             itr.setMill_no(mill_no);
                             itr.setInspection_item("od_preheat_temp_freq");
-                            itr.setInspction_time(new Date());
+                            itr.setInspction_time(odblastprocess.getOperation_time());
                             inspectionTimeRecordDao.addInspectionTimeRecord(itr);
 
                         }

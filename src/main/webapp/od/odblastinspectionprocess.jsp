@@ -197,10 +197,12 @@
                     setParams($("input[name='relative_humidity']"));
                     setParams($("input[name='dew_point']"));
                     setParams($("input[name='profile']"));
+                    setParams($("input[name='blast_finish_sa25']"));
                     setParams($("input[name='surface_dust_rating']"));
                     setParams($("input[name='pipe_temp']"));
                     setParams($("input[name='salt_contamination_after_blasting']"));
                     setParams($("input[name='elapsed_time']"));
+
 
                     if($("input[name='pipe_no']").val()==""){
 
@@ -435,28 +437,28 @@
             <table class="ht-table">
                 <tr>
                     <td class="i18n1" name="airtemp">环境温度</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:1" type="text" name="air_temp" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="min:-99,precision:1" type="text" name="air_temp" value=""/></td>
                     <td></td>
                     <td class="i18n1" name="relativehumidity">相对湿度</td>
-                    <td><input class="easyui-numberbox"  data-options="min:0,precision:1" type="text" name="relative_humidity" value=""/></td>
+                    <td><input class="easyui-numberbox"  data-options="min:-99,precision:1" type="text" name="relative_humidity" value=""/></td>
                     <td></td>
                 </tr>
 
                 <tr>
                     <td class="i18n1" name="dewpoint">露点</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:1" type="text" name="dew_point" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="min:-99,precision:1" type="text" name="dew_point" value=""/></td>
                     <td></td>
                     <td width="16%" class="i18n1" name="pipetemp">钢管温度</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="pipe_temp" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="pipe_temp" value=""/></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td width="16%"  class="i18n1" name="profile">锚纹深度</td>
-                    <td><input class="easyui-numberbox" type="text" data-options="min:0,precision:1" name="profile" value=""/></td>
+                    <td><input class="easyui-numberbox" type="text" data-options="min:-99,precision:1" name="profile" value=""/></td>
                     <td></td>
 
                     <td width="16%" class="i18n1" name="saltcontaminationafterblasting">打砂后盐度</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="salt_contamination_after_blasting" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="salt_contamination_after_blasting" value=""/></td>
                     <td></td>
                 </tr>
 
@@ -480,7 +482,7 @@
                             <option value="4">4级</option>
                             <option value="5">5级</option>
                         </select>
-                        <%--<input class="easyui-numberbox" data-options="min:0,precision:0" type="text" name="surface_dust_rating" value=""/>--%>
+                        <%--<input class="easyui-numberbox" data-options="min:-99,precision:0" type="text" name="surface_dust_rating" value=""/>--%>
                     </td>
                     <td></td>
 
@@ -508,7 +510,7 @@
                 </tr>
                 <tr>
                     <td width="16%" class="i18n1" name="elapsedtime">涂敷前等待时间(分钟)</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="elapsed_time" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="elapsed_time" value=""/></td>
                     <td></td>
                     <td width="16%" class="i18n1" name="result">结论</td>
                     <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">

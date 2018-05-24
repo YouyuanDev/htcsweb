@@ -4,9 +4,11 @@ package com.htcsweb.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.htcsweb.dao.InspectionTimeRecordDao;
 import com.htcsweb.dao.OdBlastInspectionProcessDao;
 import com.htcsweb.dao.OdCoating3LpeProcessDao;
 import com.htcsweb.dao.PipeBasicInfoDao;
+import com.htcsweb.entity.InspectionTimeRecord;
 import com.htcsweb.entity.OdCoating3LpeProcess;
 import com.htcsweb.entity.PipeBasicInfo;
 import com.htcsweb.util.ResponseUtil;
@@ -33,6 +35,9 @@ public class OdCoating3LpeProcessController {
     private PipeBasicInfoDao pipeBasicInfoDao;
     @Autowired
     private OdBlastInspectionProcessDao odBlastInspectionProcessDao;
+    @Autowired
+    private InspectionTimeRecordDao inspectionTimeRecordDao;
+
     //查询
     @RequestMapping(value = "/getOdCoating3LpeByLike")
     @ResponseBody
@@ -87,6 +92,36 @@ public class OdCoating3LpeProcessController {
             if(odCoating3LpeProcess.getId()==0){
                 //添加
                 resTotal=odCoating3LpeProcessDao.addOdCoating3LpeProcess(odCoating3LpeProcess);
+
+                List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoByNo(odCoating3LpeProcess.getPipe_no());
+                String project_no="";
+                String mill_no=odCoating3LpeProcess.getMill_no();
+                if(list.size()>0){
+                    project_no=(String)list.get(0).get("project_no");
+                }
+                System.out.println("project_no="+project_no);
+
+                //更新增量 inspectionTimeMap
+                if (odCoating3LpeProcess.getApplication_temp() != -99) {
+
+                    List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_application_temp_freq");
+                    if(lt.size()>0) {
+                        InspectionTimeRecord itr=lt.get(0);
+                        itr.setInspction_time(odCoating3LpeProcess.getOperation_time());
+                        inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                    }else{
+                        InspectionTimeRecord itr=new InspectionTimeRecord();
+                        itr.setProject_no(project_no);
+                        itr.setMill_no(mill_no);
+                        itr.setInspection_item("od_application_temp_freq");
+                        itr.setInspction_time(odCoating3LpeProcess.getOperation_time());
+                        inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                    }
+
+                }
+
+
+
             }else{
                 //修改！
                 resTotal=odCoating3LpeProcessDao.updateOdCoating3LpeProcess(odCoating3LpeProcess);
