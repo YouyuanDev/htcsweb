@@ -21,6 +21,11 @@
         <result property="stack_level" column="stack_level"></result>
         <result property="od_coating_date" column="od_coating_date"></result>
         <result property="id_coating_date" column="id_coating_date"></result>
+        <result property="level_direction" column="level_direction"></result>
+        <result property="level_sequence" column="level_sequence"></result>
+
+
+
 
     </resultMap>
 
@@ -380,12 +385,12 @@
     </select>
 
     <update id="updatePipeBasicInfo" parameterType="com.htcsweb.entity.PipeBasicInfo">
-        UPDATE pipe_basic_info set contract_no=#{contract_no},pipe_no=#{pipe_no},grade=#{grade},od=#{od},wt=#{wt},p_length=#{p_length}, weight=#{weight},pipe_making_lot_no=#{pipe_making_lot_no},status=#{status}, heat_no=#{heat_no},storage_stack=#{storage_stack},stack_level=#{stack_level},od_coating_date=#{od_coating_date},id_coating_date=#{id_coating_date} WHERE id=#{id}
+        UPDATE pipe_basic_info set contract_no=#{contract_no},pipe_no=#{pipe_no},grade=#{grade},od=#{od},wt=#{wt},p_length=#{p_length}, weight=#{weight},pipe_making_lot_no=#{pipe_making_lot_no},status=#{status}, heat_no=#{heat_no},storage_stack=#{storage_stack},stack_level=#{stack_level},od_coating_date=#{od_coating_date},id_coating_date=#{id_coating_date},level_direction=#{level_direction},level_sequence=#{level_sequence},shipment_date=#{shipment_date} WHERE id=#{id}
     </update>
 
     <insert id="addPipeBasicInfo" parameterType="com.htcsweb.entity.PipeBasicInfo">
-        INSERT INTO pipe_basic_info(contract_no,pipe_no,grade,od,wt,p_length,weight,pipe_making_lot_no,status,heat_no,storage_stack,stack_level,od_coating_date,id_coating_date)
-        VALUES (#{contract_no},#{pipe_no},#{grade},#{od},#{wt},#{p_length},#{weight},#{pipe_making_lot_no},#{status},#{heat_no},#{storage_stack},#{stack_level},#{od_coating_date},#{id_coating_date})
+        INSERT INTO pipe_basic_info(contract_no,pipe_no,grade,od,wt,p_length,weight,pipe_making_lot_no,status,heat_no,storage_stack,stack_level,od_coating_date,id_coating_date,level_direction,level_sequence,shipment_date)
+        VALUES (#{contract_no},#{pipe_no},#{grade},#{od},#{wt},#{p_length},#{weight},#{pipe_making_lot_no},#{status},#{heat_no},#{storage_stack},#{stack_level},#{od_coating_date},#{id_coating_date},#{level_direction},#{level_sequence},#{shipment_date})
     </insert>
 
     <delete id="delPipeBasicInfo">
@@ -396,14 +401,14 @@
     </delete>
 
     <update id="odProductStockin" parameterType="com.htcsweb.entity.PipeBasicInfo">
-        UPDATE pipe_basic_info set status='odstockin',storage_stack=#{storage_stack}, stack_level=#{stack_level} WHERE  status='od6' AND
+        UPDATE pipe_basic_info set status='odstockin',storage_stack=#{storage_stack}, stack_level=#{stack_level},level_direction=#{level_direction},level_sequence=#{level_sequence} WHERE  status='od6' AND
         <foreach collection="array" item="item" open="id in (" separator="," close=")">
             #{item}
         </foreach>
     </update>
 
     <update id="idProductStockin" parameterType="com.htcsweb.entity.PipeBasicInfo">
-        UPDATE pipe_basic_info set status='idstockin', storage_stack=#{storage_stack}, stack_level=#{stack_level}  WHERE  status='id6' AND
+        UPDATE pipe_basic_info set status='idstockin', storage_stack=#{storage_stack}, stack_level=#{stack_level},level_direction=#{level_direction},level_sequence=#{level_sequence}  WHERE  status='id6' AND
         <foreach collection="array" item="item" open="id in (" separator="," close=")">
             #{item}
         </foreach>

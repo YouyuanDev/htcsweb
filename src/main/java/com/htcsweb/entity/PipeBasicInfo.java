@@ -20,10 +20,14 @@ public class PipeBasicInfo {
     private Date od_coating_date;
     private Date id_coating_date;
 
+    private String level_direction;
+    private String level_sequence;
+    private Date shipment_date;
+
     public PipeBasicInfo() {
     }
 
-    public PipeBasicInfo(int id, String contract_no, String pipe_no, String grade, float od, float wt, float p_length, float weight, String pipe_making_lot_no, String status, String heat_no, String storage_stack, String stack_level, Date od_coating_date, Date id_coating_date) {
+    public PipeBasicInfo(int id, String contract_no, String pipe_no, String grade, float od, float wt, float p_length, float weight, String pipe_making_lot_no, String status, String heat_no, String storage_stack, String stack_level, Date od_coating_date, Date id_coating_date, String level_direction, String level_sequence, Date shipment_date) {
         this.id = id;
         this.contract_no = contract_no;
         this.pipe_no = pipe_no;
@@ -39,6 +43,9 @@ public class PipeBasicInfo {
         this.stack_level = stack_level;
         this.od_coating_date = od_coating_date;
         this.id_coating_date = id_coating_date;
+        this.level_direction = level_direction;
+        this.level_sequence = level_sequence;
+        this.shipment_date = shipment_date;
     }
 
     public int getId() {
@@ -159,5 +166,29 @@ public class PipeBasicInfo {
 
     public void setId_coating_date(Date id_coating_date) {
         this.id_coating_date = id_coating_date;
+    }
+
+    public String getLevel_direction() {
+        return level_direction;
+    }
+
+    public void setLevel_direction(String level_direction) {
+        this.level_direction = level_direction;
+    }
+
+    public String getLevel_sequence() {
+        return level_sequence;
+    }
+
+    public void setLevel_sequence(String level_sequence) {
+        this.level_sequence = level_sequence;
+    }
+
+    public Date getShipment_date() {
+        return shipment_date;
+    }
+
+    public void setShipment_date(Date shipment_date) {
+        this.shipment_date = shipment_date;
     }
 }

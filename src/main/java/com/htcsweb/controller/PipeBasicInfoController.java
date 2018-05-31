@@ -402,11 +402,11 @@ public class PipeBasicInfoController {
 
     //外访成品管入库
     @RequestMapping("/odproductstockin")
-    public String odproductstockin(@RequestParam(value = "hlparam")String hlparam,@RequestParam(value = "storage_stack")String storage_stack,@RequestParam(value = "stack_level")String stack_level,HttpServletResponse response)throws Exception{
+    public String odproductstockin(@RequestParam(value = "hlparam")String hlparam,@RequestParam(value = "storage_stack")String storage_stack,@RequestParam(value = "stack_level")String stack_level,@RequestParam(value = "level_direction")String level_direction,@RequestParam(value = "level_sequence")String level_sequence,HttpServletResponse response)throws Exception{
         //System.out.println("-----------"+hlparam);
         String[]idArr=hlparam.split(",");
         int resTotal=0;
-        resTotal=pipeBasicInfoDao.odProductStockin(idArr,storage_stack,stack_level);
+        resTotal=pipeBasicInfoDao.odProductStockin(idArr,storage_stack,stack_level,level_direction,level_sequence);
         JSONObject json=new JSONObject();
         StringBuilder sbmessage = new StringBuilder();
         sbmessage.append("总共");
@@ -427,10 +427,10 @@ public class PipeBasicInfoController {
 
     //内访成品管入库
     @RequestMapping("/idproductstockin")
-    public String idproductstockin(@RequestParam(value = "hlparam")String hlparam,@RequestParam(value = "storage_stack")String storage_stack,@RequestParam(value = "stack_level")String stack_level,HttpServletResponse response)throws Exception{
+    public String idproductstockin(@RequestParam(value = "hlparam")String hlparam,@RequestParam(value = "storage_stack")String storage_stack,@RequestParam(value = "stack_level")String stack_level,@RequestParam(value = "level_direction")String level_direction,@RequestParam(value = "level_sequence")String level_sequence,HttpServletResponse response)throws Exception{
         String[]idArr=hlparam.split(",");
         int resTotal=0;
-        resTotal=pipeBasicInfoDao.idProductStockin(idArr,storage_stack,stack_level);
+        resTotal=pipeBasicInfoDao.idProductStockin(idArr,storage_stack,stack_level,level_direction,level_sequence);
         JSONObject json=new JSONObject();
         StringBuilder sbmessage = new StringBuilder();
         sbmessage.append("总共");

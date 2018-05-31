@@ -38,8 +38,8 @@ public interface PipeBasicInfoDao {
     public int getCountODInspectedPipeInfoByLike(@Param("project_no") String project_no,  @Param("contract_no")String contract_no,@Param("pipe_no")String pipe_no);
     public int getCountIDInspectedPipeInfoByLike(@Param("project_no") String project_no,  @Param("contract_no")String contract_no,@Param("pipe_no")String pipe_no);
 
-    public int odProductStockin(@Param("array")String[]array,@Param("storage_stack") String storage_stack,@Param("stack_level")String stack_level);
-    public int idProductStockin(@Param("array")String[]array,@Param("storage_stack") String storage_stack,@Param("stack_level")String stack_level);
+    public int odProductStockin(@Param("array")String[]array,@Param("storage_stack") String storage_stack,@Param("stack_level")String stack_level,@Param("level_direction")String level_direction,@Param("level_sequence")String level_sequence);
+    public int idProductStockin(@Param("array")String[]array,@Param("storage_stack") String storage_stack,@Param("stack_level")String stack_level,@Param("level_direction")String level_direction,@Param("level_sequence")String level_sequence);
 
     public int SetToODBare(String[]arrId);
     public int SetToIDBare(String[]arrId);

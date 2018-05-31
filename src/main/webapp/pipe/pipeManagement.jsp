@@ -276,6 +276,8 @@
                 <th field="status" align="center" width="100" class="i18n1" name="status">状态</th>
                 <th field="storage_stack" align="center" width="100" class="i18n1" name="storagestack">垛位号</th>
                 <th field="stack_level" align="center" width="100" class="i18n1" name="stacklevel">层数</th>
+                <th field="level_direction" align="center" width="100" class="i18n1" name="leveldirection">堆垛方向</th>
+                <th field="level_sequence" align="center" width="100" class="i18n1" name="levelsequence">序号</th>
                 <th field="od_coating_date" align="center" width="100" class="i18n1" name="odcoatingdate" data-options="formatter:formatterdate">外涂日期</th>
                 <th field="id_coating_date" align="center" width="100" class="i18n1" name="idcoatingdate" data-options="formatter:formatterdate">内涂日期</th>
             </tr>
@@ -409,8 +411,40 @@
                             <option value="l8">8层</option>
                             <option value="l9">9层</option>
                             <option value="l10">10层</option>
+                            <option value="l11">11层</option>
+                            <option value="l12">12层</option>
+                            <option value="l13">13层</option>
+                            <option value="l14">14层</option>
+                            <option value="l15">15层</option>
+                            <option value="l16">16层</option>
+                            <option value="l17">17层</option>
+                            <option value="l18">18层</option>
+                            <option value="l19">19层</option>
+                            <option value="l20">20层</option>
                         </select>
                     </td>
+                </tr>
+                <tr>
+                    <td class="i18n1" name="leveldirection" width="16%">堆垛起始方向</td>
+                    <td   width="33%">
+                        <select id="level_direction" class="easyui-combobox" data-options="editable:false" name="level_direction" style="width:200px;">
+                            <option value="East">东</option>
+                            <option value="South">南</option>
+                            <option value="West">西</option>
+                            <option value="North">北</option>
+
+                        </select>
+                    </td>
+                    <td class="i18n1" name="levelsequence" width="16%">序号</td>
+                    <td   width="33%">
+                        <input id="level_sequence" class="easyui-textbox" type="text" name="level_sequence" value=""/>
+                    </td>
+
+                </tr>
+
+
+
+
                 <tr>
                     <td class="i18n1" name="odcoatingdate" width="16%">外涂日期</td>
                     <td   width="33%"><label class="hl-label" id="od_coating_date"></label>

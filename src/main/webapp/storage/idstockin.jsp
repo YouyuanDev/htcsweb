@@ -67,12 +67,14 @@
                 var idArrs=idArr.join(',');
                 var storage_stack=$('#storage_stack').val();
                 var stack_level=$('#stack_level').val();
+                var level_direction=$('#level_direction').val();
+                var level_sequence=$('#level_sequence').val();
 
                 $.messager.confirm('系统提示',"您确定要将这<font color=red>"+idArr.length+ "</font>根内防成品管入库吗？",function (r) {
                     if(r){
                         $.post(
                             "/pipeinfo/idproductstockin.action",
-                            {hlparam:idArrs,storage_stack:storage_stack,stack_level:stack_level},function (data) {
+                            {hlparam:idArrs,storage_stack:storage_stack,stack_level:stack_level,level_direction:level_direction,level_sequence:level_sequence},function (data) {
                                 if(data.success){
                                     $("#pipeDatagrids").datagrid("reload");
                                     $('#hlIdStockinDialog').dialog('close');
@@ -190,11 +192,37 @@
                             <option value="l8">8层</option>
                             <option value="l9">9层</option>
                             <option value="l10">10层</option>
+                            <option value="l11">11层</option>
+                            <option value="l12">12层</option>
+                            <option value="l13">13层</option>
+                            <option value="l14">14层</option>
+                            <option value="l15">15层</option>
+                            <option value="l16">16层</option>
+                            <option value="l17">17层</option>
+                            <option value="l18">18层</option>
+                            <option value="l19">19层</option>
+                            <option value="l20">20层</option>
                         </select>
                     </td>
 
                 </tr>
+                <tr>
+                    <td class="i18n1" name="leveldirection" width="16%">堆垛起始方向</td>
+                    <td   width="33%">
+                        <select id="level_direction" class="easyui-combobox" data-options="editable:false" name="level_direction" style="width:200px;">
+                            <option value="East">东</option>
+                            <option value="South">南</option>
+                            <option value="West">西</option>
+                            <option value="North">北</option>
 
+                        </select>
+                    </td>
+                    <td class="i18n1" name="levelsequence" width="16%">序号</td>
+                    <td   width="33%">
+                        <input id="level_sequence" class="easyui-textbox" type="text" name="level_sequence" value=""/>
+                    </td>
+
+                </tr>
 
             </table>
 
