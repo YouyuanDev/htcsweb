@@ -308,6 +308,7 @@ public class InspectionRecordPDFController {
                 //-------结束生成笛卡尔集pdf
                 //Collections.sort(dayNightPdf);
                 zipName="/upload/pdf/"+ResponseUtil.downLoadPdf(dayNightPdf,request,response);
+                dayNightPdf.clear();
                 //定时删除临时文件
                 for (int j=0;j<delSetPath.size();j++){
                     if(delSetPath.get(j)!=null){
