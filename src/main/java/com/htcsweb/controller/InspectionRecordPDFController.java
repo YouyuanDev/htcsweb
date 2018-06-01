@@ -64,10 +64,11 @@ public class InspectionRecordPDFController {
     public InspectionRecordPDFController(){
         String path=this.getClass().getClassLoader().getResource("../../").getPath();
         basePath= this.getClass().getClassLoader().getResource("../../").getPath();
+        basePath = basePath.substring(0, basePath.lastIndexOf('/'));
+
 
         System.out.println("basePaththis.getClass().getClassLoader()getPath()="+basePath);
         if(UploadFileController.isServerTomcat) {//若果是tomcat需要重新定义upload的入口
-            basePath = basePath.substring(0, basePath.lastIndexOf('/'));
             basePath = basePath.substring(0, basePath.lastIndexOf('/'));
         }
 
@@ -76,6 +77,9 @@ public class InspectionRecordPDFController {
 
         pdfDirPath=basePath+"/upload/pdf/";
         pdfFullName=basePath + "/upload/pdf/DailyProductionRecord.pdf";
+
+        System.out.println("basePath，pdfFullName="+pdfFullName);
+
         File pdfDirFile=new File(pdfDirPath);
         if(!pdfDirFile.exists()){
             pdfDirFile.mkdir();
