@@ -477,7 +477,7 @@
 
 
     <update id="coatingProductStockout" parameterType="com.htcsweb.entity.PipeBasicInfo">
-        UPDATE pipe_basic_info set status='out' WHERE  (status='odstockin' or status='idstockin') AND
+        UPDATE pipe_basic_info set status='out', shipment_date=sysdate() WHERE  (status='odstockin' or status='idstockin') AND
         <foreach collection="array" item="item" open="id in (" separator="," close=")">
             #{item}
         </foreach>
