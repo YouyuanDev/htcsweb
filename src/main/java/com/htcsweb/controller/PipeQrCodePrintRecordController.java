@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
@@ -100,10 +101,17 @@ public class PipeQrCodePrintRecordController {
         String[]pipeNoArr=new String[list.size()];
         String[] pipeNos=list.toArray(pipeNoArr);
         List<PipeQrCodePrintRecord>list1=new ArrayList<PipeQrCodePrintRecord>();
+        HttpSession session = request.getSession();
+        String employee_no=(String)session.getAttribute("userSession");
         for (int i=0;i<pipeNos.length;i++){
             PipeQrCodePrintRecord record=new PipeQrCodePrintRecord();
             record.setPipe_no(pipeNos[i]);
-            record.setOperator_no("0000000");
+            //把用户数据保存在session域对象中
+            if(employee_no!=null) {
+                record.setOperator_no(employee_no);
+            }else{
+                record.setOperator_no("0000000");
+            }
             record.setOperation_time(new Date());
             record.setRemark("合同信息管理页面下载");
             list1.add(record);
@@ -122,7 +130,15 @@ public class PipeQrCodePrintRecordController {
         for (int i=0;i<arr.length;i++){
             PipeQrCodePrintRecord record=new PipeQrCodePrintRecord();
             record.setPipe_no(arr[i]);
-            record.setOperator_no("0000000");
+            //session 读取用户id
+            HttpSession session = request.getSession();
+            //把用户数据保存在session域对象中
+            String employee_no=(String)session.getAttribute("userSession");
+            if(employee_no!=null) {
+                record.setOperator_no(employee_no);
+            }else{
+                record.setOperator_no("0000000");
+            }
             record.setOperation_time(new Date());
             record.setRemark("钢管信息管理页面下载");
             list1.add(record);

@@ -49,6 +49,7 @@
                 <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')<DATE_FORMAT(DATE_ADD(#{end_time},INTERVAL 1 DAY),'%Y-%m-%d 00:00:00')]]>
             </if>
         </where>
+        order by id desc
         limit #{skip},#{take}
     </select>
 
