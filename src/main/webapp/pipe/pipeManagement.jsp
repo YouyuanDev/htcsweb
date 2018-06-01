@@ -258,10 +258,62 @@
                      dataType:'json',
                      data:{pipe_no:pipe_no},
                      success:function (data) {
-                          $.messager.alert('Warning',data.odBlastProcessRecord);
-                          if(data.odBlastProcessRecord!=null&&data.odBlastProcessRecord!=undefined){
+                         //外打砂
+                         if(data.odBlastProcessRecord!=null&&data.odBlastProcessRecord!=undefined){
                               $('#pipeRecordDialog').append(JSON.stringify(data.odBlastProcessRecord));
-                          }
+                         }
+                         //外打砂检验
+                         if(data.odBlastInspectionProcessRecord!=null&&data.odBlastInspectionProcessRecord!=undefined){
+                              $('#pipeRecordDialog').append(JSON.stringify(data.odBlastInspectionProcessRecord));
+                         }
+                         //外涂2fbe
+                         if(data.odCoatingProcessRecord!=null&&data.odCoatingProcessRecord!=undefined){
+                             $('#pipeRecordDialog').append(JSON.stringify(data.odCoatingProcessRecord));
+                         }
+                         //外涂检验2fbe
+                         if(data.odCoatingInspectionProcessRecord!=null&&data.odCoatingInspectionProcessRecord!=undefined){
+                             $('#pipeRecordDialog').append(JSON.stringify(data.odCoatingInspectionProcessRecord));
+                         }
+                         //外涂3lpe
+                         if(data.odCoating3LpeProcessRecord!=null&&data.odCoating3LpeProcessRecord!=undefined){
+                             $('#pipeRecordDialog').append(JSON.stringify(data.odCoating3LpeProcessRecord));
+                         }
+                         //外涂检验3lpe
+                         if(data.odCoating3LpeInspectionProcessRecord!=null&&data.odCoating3LpeInspectionProcessRecord!=undefined){
+                             $('#pipeRecordDialog').append(JSON.stringify(data.odCoating3LpeInspectionProcessRecord));
+                         }
+                         //外喷标
+                         if(data.odStencilProcessRecord!=null&&data.odStencilProcessRecord!=undefined){
+                             $('#pipeRecordDialog').append(JSON.stringify(data.odStencilProcessRecord));
+                         }
+                         //外防终检
+                         if(data.odFinalInspectionProcessRecord!=null&&data.odFinalInspectionProcessRecord!=undefined){
+                             $('#pipeRecordDialog').append(JSON.stringify(data.odFinalInspectionProcessRecord));
+                         }
+                         //内打砂
+                         if(data.idBlastProcessRecord!=null&&data.idBlastProcessRecord!=undefined){
+                             $('#pipeRecordDialog').append(JSON.stringify(data.idBlastProcessRecord));
+                         }
+                         //内打砂检验
+                         if(data.idBlastInspectionProcessRecord!=null&&data.idBlastInspectionProcessRecord!=undefined){
+                             $('#pipeRecordDialog').append(JSON.stringify(data.idBlastInspectionProcessRecord));
+                         }
+                         //内涂
+                         if(data.idCoatingProcessRecord!=null&&data.idCoatingProcessRecord!=undefined){
+                             $('#pipeRecordDialog').append(JSON.stringify(data.idCoatingProcessRecord));
+                         }
+                         //内涂检验
+                         if(data.idCoatingInspectionProcessRecord!=null&&data.idCoatingInspectionProcessRecord!=undefined){
+                             $('#pipeRecordDialog').append(JSON.stringify(data.idCoatingInspectionProcessRecord));
+                         }
+                         //内喷标
+                         if(data.idStencilProcessRecord!=null&&data.idStencilProcessRecord!=undefined){
+                             $('#pipeRecordDialog').append(JSON.stringify(data.idStencilProcessRecord));
+                         }
+                         //内防终检
+                         if(data.idFinalInspectionProcess!=null&&data.idFinalInspectionProcess!=undefined){
+                             $('#pipeRecordDialog').append(JSON.stringify(data.idFinalInspectionProcess));
+                         }
                      },
                      error:function () {
                          $.messager.alert('Warning','系统繁忙,请稍后查看!');
@@ -540,7 +592,7 @@
 
         </div>
     </div>
-    <div id="pipeRecordDialog" class="easyui-dialog" title="钢管流程信息" closed="true" data-options="iconCls:'icon-save'" style="width:800px;height:400px;padding:10px;overflow-y: scroll;">
+    <div id="pipeRecordDialog" class="easyui-dialog" title="钢管流程信息" closed="true" data-options="iconCls:'icon-save'" style="width:800px;height:400px;padding:10px;word-break: break-all; word-wrap:break-word;overflow-y: scroll;">
 
     </div>
 </div>

@@ -73,6 +73,7 @@ public class PipeQrCodePrintRecordController {
         Date beginTime=null;
         Date endTime=null;
         try{
+            System.out.println(begin_time+":"+end_time);
             if(begin_time!=null&&begin_time!=""){
                 beginTime=sdf.parse(begin_time);
                 System.out.println(beginTime.toString());

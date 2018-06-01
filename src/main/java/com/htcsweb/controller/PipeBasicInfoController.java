@@ -614,7 +614,7 @@ public class PipeBasicInfoController {
         ResponseUtil.write(response,json);
         return null;
     }
-
+    //根据钢管编号查询钢管的防腐记录
     @RequestMapping("/searchPipeRecord")
     @ResponseBody
     public String searchPipeRecord(HttpServletRequest request){
