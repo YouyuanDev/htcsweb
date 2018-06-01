@@ -55,7 +55,14 @@ public class GenerateExcelToPDFUtil {
         System.out.println("程序PDFAutoMation运行时间1：" + (endTime1 - startTime) + "ms");    //输出程序运行时间
         System.out.println("程序PDFAutoMation运行时间2：" + (endTime2 - endTime1) + "ms");    //输出程序运行时间
         System.out.println("程序PDFAutoMation运行时间：" + (endTime2 - startTime) + "ms");    //输出程序运行时间
-        return  newpdfName;
+
+        try {
+            return new String(newpdfName.getBytes("UTF-8"));
+        }catch (Exception e){
+            return  "";
+        }
+
+
     }
 
 
