@@ -259,8 +259,8 @@
                      data:{pipe_no:pipe_no},
                      success:function (data) {
                           $.messager.alert('Warning',data.odBlastProcessRecord);
-                          if(data.odBlastProcessRecord!=null){
-                              $('#pipeRecordDialog').append(data.odBlastProcessRecord);
+                          if(data.odBlastProcessRecord!=null&&data.odBlastProcessRecord!=undefined){
+                              $('#pipeRecordDialog').append(JSON.stringify(data.odBlastProcessRecord));
                           }
                      },
                      error:function () {
