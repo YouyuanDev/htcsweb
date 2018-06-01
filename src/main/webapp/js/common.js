@@ -103,7 +103,11 @@ function getDateWithoutTime(str){
 }
 //时间格式化
 function formatterdate(value,row,index){
-    return getDate1(value);
+    //alert(toString.call(value));
+    if(value!=undefined&&value!=null)
+        return getDate1(value);
+    else
+        return "";
 }
 function myformatter(date){
     var y = date.getFullYear();

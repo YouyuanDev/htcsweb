@@ -14,10 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.htcsweb.util.ResponseUtil;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
 import com.htcsweb.util.ComboxItem;
 
 
@@ -365,12 +364,16 @@ public class PipeBasicInfoController {
     //增加或修改Pipe信息
     @RequestMapping(value = "/savePipe")
     @ResponseBody
-    public String savePipe(PipeBasicInfo pipeBasicInfo, HttpServletResponse response){
+    public String savePipe(PipeBasicInfo pipeBasicInfo,HttpServletRequest request, HttpServletResponse response){
         JSONObject json=new JSONObject();
         try{
             int resTotal=0;
-
-
+            String shipment_date=request.getParameter("shipmentDate");
+            if(shipment_date!=null&&shipment_date!=""){
+                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date new_odbptime = simFormat.parse(shipment_date);
+                pipeBasicInfo.setShipment_date(new_odbptime);
+            }
             if(pipeBasicInfo.getId()==0){
                 //添加
                 resTotal=pipeBasicInfoDao.addPipeBasicInfo(pipeBasicInfo);
