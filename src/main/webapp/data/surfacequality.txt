@@ -6,6 +6,6 @@
     { "id": "thicknesshigh", "text": "厚度高" },
     { "id": "scratch", "text": "划伤" },
     { "id": "notsmooth", "text": "不平整" },
-    { "id": "other", "text": "其他缺陷" }
+    { "id": "other", "text": "其他缺陷,见备注" }
 
 ]

@@ -24,7 +24,7 @@ import java.util.List;
 
 public class GenerateExcelToPDFUtil {
 
-    private static String  newExcelFileName=null;
+   // private static String  newExcelFileName=null;
 
     private static int tableTopIndex=4;
     private static int tableBottomIndex=20;
@@ -211,7 +211,7 @@ public class GenerateExcelToPDFUtil {
         //复制模版
         //String newExcelFileName=excelTemplateFullName.substring(0,excelTemplateFullName.lastIndexOf('.'))+ String.valueOf(System.currentTimeMillis()+".xls");
         long startTime = System.currentTimeMillis();    //获取开始时间
-
+        String newExcelFileName=null;
         newExcelFileName=excelTemplateFullName.substring(0,excelTemplateFullName.lastIndexOf('.'))+ String.valueOf(System.currentTimeMillis())+".xls";
         fileChannelCopy(excelTemplateFullName,newExcelFileName);
 
@@ -485,8 +485,8 @@ public class GenerateExcelToPDFUtil {
                     writer.close();
                     System.out.println("PDF生成！");
                     //删除临时生成的.xls文件
-                    if(newExcelFileName!=null){
-                        File file=new File(newExcelFileName);
+                    if(excelFullName!=null){
+                        File file=new File(excelFullName);
                         if(file.exists()){
                             file.delete();
                         }
