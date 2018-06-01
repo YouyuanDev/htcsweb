@@ -26,5 +26,6 @@ public interface OdBlastInspectionProcessDao {
     public List<HashMap<String,Object>>getOdBlastInfoBy3lpeCoatingInfo(@Param("pipe_no")String pipe_no,@Param("id")int id);
     //根据2fbe外涂的信息查询对应的外打砂信息
     public List<HashMap<String,Object>>getOdBlastInfoBy2fbeCoatingInfo(@Param("pipe_no")String pipe_no,@Param("id")int id);
-
+    //根据钢管编号查询最新一条记录
+    public OdBlastInspectionProcess getRecentRecordByPipeNo(@Param("pipe_no")String pipe_no);
 }

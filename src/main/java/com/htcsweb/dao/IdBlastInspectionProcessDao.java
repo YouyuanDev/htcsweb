@@ -26,4 +26,6 @@ public interface IdBlastInspectionProcessDao {
 
     //获取内打砂检验记录PDF
     public List<HashMap<String,Object>>getIdBlastInspectionRecord(@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("od")float od,@Param("wt")float wt,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
+    //根据钢管编号查询最新一条记录
+    public IdBlastInspectionProcess getRecentRecordByPipeNo(@Param("pipe_no")String pipe_no);
 }

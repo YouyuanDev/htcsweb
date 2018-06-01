@@ -144,4 +144,8 @@
             </if>
         </where>
     </select>
+    <!--根据钢管编号查询最新一条记录-->
+    <select id="getRecentRecordByPipeNo" resultType="com.htcsweb.entity.OdCoating3LpeInspectionProcess">
+        SELECT  * from od_coating_3lpe_inspection_process where pipe_no=#{pipe_no} order by operation_time desc LIMIT 1
+    </select>
 </mapper>

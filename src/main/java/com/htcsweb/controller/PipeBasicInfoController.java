@@ -4,10 +4,8 @@ package com.htcsweb.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.htcsweb.dao.PipeBasicInfoDao;
-import com.htcsweb.dao.PipeStatusDao;
-import com.htcsweb.entity.PipeBasicInfo;
-import com.htcsweb.entity.PipeStatus;
+import com.htcsweb.dao.*;
+import com.htcsweb.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +30,34 @@ public class PipeBasicInfoController {
 
     @Autowired
     private PipeStatusDao pipeStatusDao;
-
+    @Autowired
+    private OdBlastProcessDao odBlastProcessDao;
+    @Autowired
+    private OdBlastInspectionProcessDao odBlastInspectionProcessDao;
+    @Autowired
+    private OdCoatingProcessDao odCoatingProcessDao;
+    @Autowired
+    private OdCoatingInspectionProcessDao odCoatingInspectionProcessDao;
+    @Autowired
+    private OdCoating3LpeProcessDao odCoating3LpeProcessDao;
+    @Autowired
+    private OdCoating3LpeInspectionProcessDao odCoating3LpeInspectionProcessDao;
+    @Autowired
+    private OdStencilProcessDao odStencilProcessDao;
+    @Autowired
+    private OdFinalInspectionProcessDao odFinalInspectionProcessDao;
+    @Autowired
+    private IdBlastProcessDao idBlastProcessDao;
+    @Autowired
+     private  IdBlastInspectionProcessDao idBlastInspectionProcessDao;
+    @Autowired
+    private IdCoatingProcessDao idCoatingProcessDao;
+    @Autowired
+    private IdCoatingInspectionProcessDao idCoatingInspectionProcessDao;
+    @Autowired
+    private IdStencilProcessDao idStencilProcessDao;
+    @Autowired
+    private IdFinalInspectionProcessDao idFinalInspectionProcessDao;
 
 
     //给app搜索使用，无需登录
@@ -590,4 +615,74 @@ public class PipeBasicInfoController {
         return null;
     }
 
+    @RequestMapping("/searchPipeRecord")
+    @ResponseBody
+    public String searchPipeRecord(HttpServletRequest request){
+        String mmp="";
+        try{
+            Map<String,Object> maps=new HashMap<String,Object>();
+            String pipe_no=request.getParameter("pipe_no");
+            if(pipe_no!=null&&!pipe_no.equals("")){
+                //根据钢管编号查询钢管的所有记录
+                //1.查询外打砂记录
+                OdBlastProcess odBlastProcessRecord=odBlastProcessDao.getRecentRecordByPipeNo(pipe_no);
+                //2.查询外打砂检验记录
+                OdBlastInspectionProcess odBlastInspectionProcessRecord=odBlastInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
+                //3.查询外涂记录
+                OdCoatingProcess odCoatingProcessRecord=odCoatingProcessDao.getRecentRecordByPipeNo(pipe_no);
+                OdCoating3LpeProcess odCoating3LpeProcessRecord=odCoating3LpeProcessDao.getRecentRecordByPipeNo(pipe_no);
+                //4.查询外涂检验记录
+                OdCoatingInspectionProcess odCoatingInspectionProcessRecord=odCoatingInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
+                OdCoating3LpeInspectionProcess odCoating3LpeInspectionProcessRecord=odCoating3LpeInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
+                //5.查询外喷标记录
+                OdStencilProcess odStencilProcessRecord=odStencilProcessDao.getRecentRecordByPipeNo(pipe_no);
+                //6.查询外涂终检记录
+                OdFinalInspectionProcess odFinalInspectionProcessRecord=odFinalInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
+                //7.查询内打砂记录
+                IdBlastProcess idBlastProcessRecord=idBlastProcessDao.getRecentRecordByPipeNo(pipe_no);
+                //8.查询内打砂检验记录
+                IdBlastInspectionProcess idBlastInspectionProcessRecord=idBlastInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
+                //9.查询内涂记录
+                IdCoatingProcess idCoatingProcessRecord=idCoatingProcessDao.getRecentRecordByPipeNo(pipe_no);
+                //10.查询内涂检验记录
+                IdCoatingInspectionProcess idCoatingInspectionProcessRecord=idCoatingInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
+                //11.查询内喷标记录
+                IdStencilProcess idStencilProcessRecord=idStencilProcessDao.getRecentRecordByPipeNo(pipe_no);
+                //12.查询内涂终检记录
+                IdFinalInspectionProcess idFinalInspectionProcess=idFinalInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
+                if(odBlastProcessRecord!=null)
+                   maps.put("odBlastProcessRecord",odBlastProcessRecord);
+                if(odBlastInspectionProcessRecord!=null)
+                    maps.put("odBlastInspectionProcessRecord",odBlastInspectionProcessRecord);
+                if(odCoatingProcessRecord!=null)
+                    maps.put("odCoatingProcessRecord",odCoatingProcessRecord);
+                if(odCoatingInspectionProcessRecord!=null)
+                    maps.put("odCoatingInspectionProcessRecord",odCoatingInspectionProcessRecord);
+                if(odCoating3LpeProcessRecord!=null)
+                    maps.put("odCoating3LpeProcessRecord",odCoating3LpeProcessRecord);
+                if(odCoating3LpeInspectionProcessRecord!=null)
+                    maps.put("odCoating3LpeInspectionProcessRecord",odCoating3LpeInspectionProcessRecord);
+                if(odStencilProcessRecord!=null)
+                    maps.put("odStencilProcessRecord",odStencilProcessRecord);
+                if(odFinalInspectionProcessRecord!=null)
+                    maps.put("odFinalInspectionProcessRecord",odFinalInspectionProcessRecord);
+                if(idBlastProcessRecord!=null)
+                    maps.put("idBlastProcessRecord",idBlastProcessRecord);
+                if(idBlastInspectionProcessRecord!=null)
+                    maps.put("idBlastInspectionProcessRecord",idBlastInspectionProcessRecord);
+                if(idCoatingProcessRecord!=null)
+                    maps.put("idCoatingProcessRecord",idCoatingProcessRecord);
+                if(idCoatingInspectionProcessRecord!=null)
+                    maps.put("idCoatingInspectionProcessRecord",idCoatingInspectionProcessRecord);
+                if(idStencilProcessRecord!=null)
+                    maps.put("idStencilProcessRecord",idStencilProcessRecord);
+                if(idFinalInspectionProcess!=null)
+                    maps.put("idFinalInspectionProcess",idFinalInspectionProcess);
+                mmp= JSONArray.toJSONString(maps);
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return mmp;
+    }
 }

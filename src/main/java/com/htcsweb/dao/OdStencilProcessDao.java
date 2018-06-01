@@ -15,4 +15,6 @@ public interface OdStencilProcessDao {
     public List<HashMap<String,Object>> getAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no")String operator_no, @Param("begin_time")Date begin_time, @Param("end_time")Date end_time, @Param("mill_no")String mill_no, @Param("skip")int skip, @Param("take")int take);
     //public int getCount();
     public int getCountAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no")String operator_no, @Param("begin_time")Date begin_time, @Param("end_time")Date end_time,@Param("mill_no")String mill_no);
+    //根据钢管编号查询最新一条记录
+    public OdStencilProcess getRecentRecordByPipeNo(@Param("pipe_no")String pipe_no);
 }

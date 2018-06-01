@@ -249,7 +249,29 @@
             $('#pipeForm').form('clear');
 
         }
-
+         function SearchPipeRecord() {
+             var row = $('#pipeDatagrids').datagrid('getSelected');
+             if(row) {
+                 var pipe_no=row.pipe_no;
+                 $.ajax({
+                     url:'/pipeinfo/searchPipeRecord.action',
+                     dataType:'json',
+                     data:{pipe_no:pipe_no},
+                     success:function (data) {
+                          $.messager.alert('Warning',data.odBlastProcessRecord);
+                          if(data.odBlastProcessRecord!=null){
+                              $('#pipeRecordDialog').append(data.odBlastProcessRecord);
+                          }
+                     },
+                     error:function () {
+                         $.messager.alert('Warning','系统繁忙,请稍后查看!');
+                     }
+                 });
+                 $('#pipeRecordDialog').dialog('open')
+             }else{
+                 $.messager.alert('Warning','请选择要查看的钢管编号!');
+             }
+         }
     </script>
 
 </head>
@@ -306,6 +328,7 @@
 
     <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchPipe()">Search</a>
     <div style="float:right">
+        <a href="#" id="pipeRecordBtn" class="easyui-linkbutton i18n1" name="searchPipeRecord"  onclick="SearchPipeRecord()">钢管流程信息</a>
         <a href="#" id="genQRLinkBtn" class="easyui-linkbutton i18n1" name="genQR"  onclick="GenQRCode()">生成QRCode</a>
 
         <a href="#" id="addPipeLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addPipe()">添加</a>
@@ -517,7 +540,9 @@
 
         </div>
     </div>
+    <div id="pipeRecordDialog" class="easyui-dialog" title="钢管流程信息" closed="true" data-options="iconCls:'icon-save'" style="width:800px;height:400px;padding:10px;overflow-y: scroll;">
 
+    </div>
 </div>
 
 
