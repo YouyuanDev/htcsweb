@@ -28,11 +28,11 @@ import java.util.*;
 @Controller
 @RequestMapping("/InspectionRecordPDFOperation")
 public class InspectionRecordPDFController {
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    SimpleDateFormat timeformat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//    SimpleDateFormat timeformat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     DecimalFormat decimalFormat=new DecimalFormat(".00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
-    Date beginTime=new Date();
-    Date endTime=new Date();
+    //Date beginTime=new Date();
+    //Date endTime=new Date();
     String basePath="";
     String logoImageFullName="";
     String pdfDirPath="";
@@ -41,22 +41,9 @@ public class InspectionRecordPDFController {
     WritableFont wf=null;
     WritableCellFormat wcf=null;
     //定义临时文件名
-    String tempDayName=null,tempNightName=null;
+    //String tempDayName=null,tempNightName=null;
     //定义分厂、标准和涂层类型集合
-    private List<MillInfo>millInfoList=new ArrayList<>();
-    private List<String>standardList=new ArrayList<>();
-    private List<String>odCoatingTypeList=new ArrayList<>();
-    private List<String>idCoatingTypeList=new ArrayList<>();
-    //定义根据项目编号获取的合同集合
-    List<ContractInfo>contractInfoList=new ArrayList<>();
-    //定义工位的生成pdf的集合
-    List<String>stationOdList=new ArrayList<String>();
-    List<String>stationIdList=new ArrayList<String>();
-    List<String>stationOdDayList=new ArrayList<String>();
-    List<String>stationOdNightList=new ArrayList<String>();
-    List<String>stationIdDayList=new ArrayList<String>();
-    List<String>stationIdNightList=new ArrayList<String>();
-    List<String>delSetPath=new ArrayList<String>();//定义删除pdf集合，用于生成zip后删除所有的临时文件
+
     //String logoImageFullName=this.getClass().getClassLoader().getResource("").getPath() + "template/img/image002.jpg";
     //String pdfDirPath=this.getClass().getClassLoader().getResource("").getPath()+"upload/pdf/";
     //String fontPath=this.getClass().getClassLoader().getResource("").getPath()+"font/simhei.ttf";
@@ -151,7 +138,7 @@ public class InspectionRecordPDFController {
                 pdfProgress="0";
             //跳转到用户主页
             json.put("success",true);
-            System.out.println("ggggggete getAttribute pdfProgress：" + pdfProgress);    //输出程序运行时间
+            //System.out.println("ggggggete getAttribute pdfProgress：" + pdfProgress);    //输出程序运行时间
             json.put("pdfProgress",pdfProgress);
             ResponseUtil.write(response,json);
         }catch (Exception e){
@@ -166,7 +153,14 @@ public class InspectionRecordPDFController {
     @ResponseBody
     public  String getRecordReportPDF(HttpServletRequest request, HttpServletResponse response){
         String basePath=request.getSession().getServletContext().getRealPath("/");
-        System.out.println("basePath=request.getSession()="+basePath);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat timeformat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        //定义根据项目编号获取的合同集合
+        List<ContractInfo>contractInfoList=null;
+        //定义工位的生成pdf的集合
+        List<String>stationOdList=new ArrayList<String>();
+        List<String>stationIdList=new ArrayList<String>();
+        List<String>delSetPath=new ArrayList<String>();//定义删除pdf集合，用于生成zip后删除所有的临时文件
         if(UploadFileController.isServerTomcat) {
             basePath = basePath.substring(0, basePath.lastIndexOf('/'));
             basePath = basePath.substring(0, basePath.lastIndexOf('/'));
@@ -176,7 +170,6 @@ public class InspectionRecordPDFController {
         Date start_time=null;
         Date finish_time=null;
 
-        //List<String>listPdfSetPath=new ArrayList<>();//pdf白班夜班集合
         String pdfSetOdDayPath="",pdfSetOdNightPath="",pdfSetIdDayPath="",pdfSetIdNightPath="";
         Date day_begin_time=null,day_end_time=null,night_begin_time=null,night_end_time=null;//定义每天班次的开始结束时间
         //是否成功标识
@@ -193,6 +186,7 @@ public class InspectionRecordPDFController {
         long startTime = System.currentTimeMillis();//获取开始时间
         if(project_no!=null&&!project_no.equals("")&&project_name!=null&&!project_name.equals("")&&beginTimeStr!=null&&!beginTimeStr.equals("")&&endTimeStr!=null&&!endTimeStr.equals("")){
             try{
+                contractInfoList=getStandardAndCoatingTypeList(project_no);
                 //先清理.zip垃圾文件
                 FileRenameUtil.cleanTrashFiles(basePath);
                 //定义pdf头部所需的信息
@@ -215,14 +209,14 @@ public class InspectionRecordPDFController {
                 shiftList.add("白班");
                 shiftList.add("夜班");
                 //5.－－－－－－－－获取所有规格集合、涂层类型
-                getStandardAndCoatingTypeList(project_no);
+                //getStandardAndCoatingTypeList(project_no);
 
                 int totalPDFCount=listDate.size()*millList.size()*contractInfoList.size()*shiftList.size();
                 int n=0;
                 HttpSession session = request.getSession();
                 session.setAttribute("pdfProgress", String.valueOf(0));
 
-                System.out.println("分厂数量="+millList.size()+",日期区间="+listDate.size()+",规格="+contractInfoList.size()+",外防涂层类型＝"+odCoatingTypeList.size());
+                //System.out.println("分厂数量="+millList.size()+",日期区间="+listDate.size()+",规格="+contractInfoList.size()+",外防涂层类型＝"+odCoatingTypeList.size());
                 String pipe_size="";
                 //6.-------开始生成笛卡尔集pdf，并填充pdf
                 for (MillInfo millInfo:millList){//分厂
@@ -246,26 +240,26 @@ public class InspectionRecordPDFController {
                                 }
                                 //开始填充pdf
                                 //6.1.1---------外防生成封面PDF
-                                createCoverOneOd(request,project_no,project_name,millInfo.getMill_no(),millInfo.getMill_name(), pipe_size,client_standard,contractInfo.getExternal_coating(),null,contractInfo.getOd(),contractInfo.getWt(),shift0,recordTime,start_time,finish_time,stationOdList);
-                                createCoverTwo(request,0,project_no,project_name,millInfo.getMill_no(),millInfo.getMill_name(), pipe_size,client_standard,contractInfo.getExternal_coating(),null,contractInfo.getOd(),contractInfo.getWt(),shift0,recordTime,start_time,finish_time,stationOdList);
+                                createCoverOneOd(request,project_no,project_name,millInfo.getMill_no(),millInfo.getMill_name(), pipe_size,client_standard,contractInfo.getExternal_coating(),null,contractInfo.getOd(),contractInfo.getWt(),shift0,recordTime,start_time,finish_time,stationOdList,delSetPath);
+                                createCoverTwo(request,0,project_no,project_name,millInfo.getMill_no(),millInfo.getMill_name(), pipe_size,client_standard,contractInfo.getExternal_coating(),null,contractInfo.getOd(),contractInfo.getWt(),shift0,recordTime,start_time,finish_time,stationOdList,delSetPath);
                                 //6.1.2---------生成当天的外打砂工位的PDF
-                                OdBlastRecord(request,project_no,project_name,millInfo.getMill_no(),millInfo.getMill_name(), pipe_size,client_standard,contractInfo.getExternal_coating(),contractInfo.getOd(),contractInfo.getWt(),shift0,recordTime,start_time,finish_time,stationOdList);
+                                OdBlastRecord(request,project_no,project_name,millInfo.getMill_no(),millInfo.getMill_name(), pipe_size,client_standard,contractInfo.getExternal_coating(),contractInfo.getOd(),contractInfo.getWt(),shift0,recordTime,start_time,finish_time,stationOdList,delSetPath);
                                 //6.1.3---------生成当天的外打砂检验工位的PDF
-                                OdBlastInspectionRecord(request,project_no,project_name,millInfo.getMill_no(),millInfo.getMill_name(), pipe_size,client_standard,contractInfo.getExternal_coating(),contractInfo.getOd(),contractInfo.getWt(),shift0,recordTime,start_time,finish_time,stationOdList);
+                                OdBlastInspectionRecord(request,project_no,project_name,millInfo.getMill_no(),millInfo.getMill_name(), pipe_size,client_standard,contractInfo.getExternal_coating(),contractInfo.getOd(),contractInfo.getWt(),shift0,recordTime,start_time,finish_time,stationOdList,delSetPath);
                                 //6.1.4---------生成当天的外涂工位的PDF(2FBE、3LPE)
                                 if(contractInfo.getExternal_coating()!=null) {
                                     if (contractInfo.getExternal_coating().equals("2FBE")) {
-                                        OdCoat2FBERecord(request, project_no, project_name, millInfo.getMill_no(), millInfo.getMill_name(), pipe_size, client_standard, contractInfo.getExternal_coating(),contractInfo.getOd(),contractInfo.getWt(), shift0, recordTime, start_time, finish_time, stationOdList);
+                                        OdCoat2FBERecord(request, project_no, project_name, millInfo.getMill_no(), millInfo.getMill_name(), pipe_size, client_standard, contractInfo.getExternal_coating(),contractInfo.getOd(),contractInfo.getWt(), shift0, recordTime, start_time, finish_time, stationOdList,delSetPath,timeformat);
                                         //6.1.5---------生成当天的外涂检验工位的PDF(2FBE、3LPE)
-                                        OdCoat2FBEInspectionRecord(request, project_no, project_name, millInfo.getMill_no(), millInfo.getMill_name(), pipe_size, client_standard, contractInfo.getExternal_coating(), contractInfo.getOd(),contractInfo.getWt(),shift0, recordTime, start_time, finish_time, stationOdList);
+                                        OdCoat2FBEInspectionRecord(request, project_no, project_name, millInfo.getMill_no(), millInfo.getMill_name(), pipe_size, client_standard, contractInfo.getExternal_coating(), contractInfo.getOd(),contractInfo.getWt(),shift0, recordTime, start_time, finish_time, stationOdList,delSetPath);
                                     } else if (contractInfo.getExternal_coating().equals("3LPE")){
-                                        OdCoat3LPERecord(request, project_no, project_name, millInfo.getMill_no(), millInfo.getMill_name(), pipe_size, client_standard, contractInfo.getExternal_coating(),contractInfo.getOd(),contractInfo.getWt(), shift0, recordTime, start_time, finish_time, stationOdList);
+                                        OdCoat3LPERecord(request, project_no, project_name, millInfo.getMill_no(), millInfo.getMill_name(), pipe_size, client_standard, contractInfo.getExternal_coating(),contractInfo.getOd(),contractInfo.getWt(), shift0, recordTime, start_time, finish_time, stationOdList,delSetPath,timeformat);
                                         //6.1.5---------生成当天的外涂检验工位的PDF(2FBE、3LPE)
-                                        OdCoat3LPEInspectionRecord(request, project_no, project_name, millInfo.getMill_no(), millInfo.getMill_name(), pipe_size, client_standard, contractInfo.getExternal_coating(),contractInfo.getOd(),contractInfo.getWt(), shift0, recordTime, start_time, finish_time, stationOdList);
+                                        OdCoat3LPEInspectionRecord(request, project_no, project_name, millInfo.getMill_no(), millInfo.getMill_name(), pipe_size, client_standard, contractInfo.getExternal_coating(),contractInfo.getOd(),contractInfo.getWt(), shift0, recordTime, start_time, finish_time, stationOdList,delSetPath);
                                     }
                                 }
                                 //6.1.6---------生成当天的外防终检工位的PDF
-                                OdCoatFinalInspectionRecord(request, project_no, project_name, millInfo.getMill_no(), millInfo.getMill_name(), pipe_size, client_standard, contractInfo.getExternal_coating(), contractInfo.getOd(),contractInfo.getWt(),shift0, recordTime, start_time, finish_time, stationOdList);
+                                OdCoatFinalInspectionRecord(request, project_no, project_name, millInfo.getMill_no(), millInfo.getMill_name(), pipe_size, client_standard, contractInfo.getExternal_coating(), contractInfo.getOd(),contractInfo.getWt(),shift0, recordTime, start_time, finish_time, stationOdList,delSetPath,sdf);
                                 if(stationOdList.size()>0){
                                     MergePDF.MergePDFs(stationOdList,pdfOdPath);
                                     stationOdList.clear();
@@ -276,16 +270,16 @@ public class InspectionRecordPDFController {
                                 File file1=new File(pdfIdPath);
                                 //开始填充pdf
                                 //6.2.1---------内防生成封面PDF
-                                createCoverOneId(request,project_no,project_name,millInfo.getMill_no(),millInfo.getMill_name(), pipe_size,client_standard,contractInfo.getInternal_coating(),contractInfo.getOd(),contractInfo.getWt(),shift0,recordTime,start_time,finish_time,stationIdList);
-                                createCoverTwo(request,1,project_no,project_name,millInfo.getMill_no(),millInfo.getMill_name(), pipe_size,client_standard,contractInfo.getExternal_coating(),contractInfo.getInternal_coating(),contractInfo.getOd(),contractInfo.getWt(),shift0,recordTime,start_time,finish_time,stationIdList);
+                                createCoverOneId(request,project_no,project_name,millInfo.getMill_no(),millInfo.getMill_name(), pipe_size,client_standard,contractInfo.getInternal_coating(),contractInfo.getOd(),contractInfo.getWt(),shift0,recordTime,start_time,finish_time,stationIdList,delSetPath);
+                                createCoverTwo(request,1,project_no,project_name,millInfo.getMill_no(),millInfo.getMill_name(), pipe_size,client_standard,contractInfo.getExternal_coating(),contractInfo.getInternal_coating(),contractInfo.getOd(),contractInfo.getWt(),shift0,recordTime,start_time,finish_time,stationIdList,delSetPath);
                                 //6.2.2---------内打砂检验记录PDF
-                                IdBlastInspectionRecord(request, project_no, project_name, millInfo.getMill_no(), millInfo.getMill_name(), pipe_size, client_standard, contractInfo.getInternal_coating(), contractInfo.getOd(),contractInfo.getWt(),shift0, recordTime, start_time, finish_time, stationIdList);
+                                IdBlastInspectionRecord(request, project_no, project_name, millInfo.getMill_no(), millInfo.getMill_name(), pipe_size, client_standard, contractInfo.getInternal_coating(), contractInfo.getOd(),contractInfo.getWt(),shift0, recordTime, start_time, finish_time, stationIdList,delSetPath);
                                 //6.2.3---------内涂记录PDF
-                                IdCoatRecord(request, project_no, project_name, millInfo.getMill_no(), millInfo.getMill_name(), pipe_size, client_standard, contractInfo.getInternal_coating(),contractInfo.getOd(),contractInfo.getWt(), shift0, recordTime, start_time, finish_time, stationIdList);
+                                IdCoatRecord(request, project_no, project_name, millInfo.getMill_no(), millInfo.getMill_name(), pipe_size, client_standard, contractInfo.getInternal_coating(),contractInfo.getOd(),contractInfo.getWt(), shift0, recordTime, start_time, finish_time, stationIdList,delSetPath,timeformat);
                                 //6.2.4---------内涂检验记录PDF
-                                IdCoatInspectionRecord(request, project_no, project_name, millInfo.getMill_no(), millInfo.getMill_name(), pipe_size, client_standard, contractInfo.getInternal_coating(),contractInfo.getOd(),contractInfo.getWt(), shift0, recordTime, start_time, finish_time, stationIdList);
+                                IdCoatInspectionRecord(request, project_no, project_name, millInfo.getMill_no(), millInfo.getMill_name(), pipe_size, client_standard, contractInfo.getInternal_coating(),contractInfo.getOd(),contractInfo.getWt(), shift0, recordTime, start_time, finish_time, stationIdList,delSetPath);
                                 //6.2.5---------内涂终验记录PDF
-                                IdFinalInspectionRecord(request, project_no, project_name, millInfo.getMill_no(), millInfo.getMill_name(), pipe_size, client_standard, contractInfo.getInternal_coating(), contractInfo.getOd(),contractInfo.getWt(),shift0, recordTime, start_time, finish_time, stationIdList);
+                                IdFinalInspectionRecord(request, project_no, project_name, millInfo.getMill_no(), millInfo.getMill_name(), pipe_size, client_standard, contractInfo.getInternal_coating(), contractInfo.getOd(),contractInfo.getWt(),shift0, recordTime, start_time, finish_time, stationIdList,delSetPath);
                                 if(stationIdList.size()>0){
                                     MergePDF.MergePDFs(stationIdList,pdfIdPath);
                                     stationIdList.clear();
@@ -337,7 +331,7 @@ public class InspectionRecordPDFController {
     }
 
     //1.---------------获取外打砂记录PDF
-    private void OdBlastRecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList){
+    private void OdBlastRecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList,List<String>delSetPath){
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/od_blast_record_template.xls";
         String newPdfName=null;
@@ -399,16 +393,16 @@ public class InspectionRecordPDFController {
                     row++;
                     if(index%13==0){
                         createRecordPdfTitle(datalist,3,9,13,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
-                        createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,13,20,index,row,sb,stringList);
+                        createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,13,20,index,row,sb,stringList,delSetPath);
                     }
                 }
                 if(datalist.size()>0){
                     createRecordPdfTitle(datalist,3,9,13,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
-                    createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,13,20,index,row,sb,stringList);
+                    createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,13,20,index,row,sb,stringList,delSetPath);
                     index=1;row=0;qualifiedTotal=0;//另起一页，初始化参数
                 }
             }else{
-                createRecordNullPdf(datalist,1,3,9,13,4,5,8,project_name,pipe_size,standard,coatingType,shift,title_time,newPdfName,templateFullName,stringList);
+                createRecordNullPdf(datalist,1,3,9,13,4,5,8,project_name,pipe_size,standard,coatingType,shift,title_time,newPdfName,templateFullName,stringList,delSetPath);
             }
         }catch (Exception e){
             System.out.println("填充外打砂pdf数据时出错!");
@@ -416,7 +410,7 @@ public class InspectionRecordPDFController {
         }
     }
     //2.---------------获取外打砂检验记录PDF
-    public  void OdBlastInspectionRecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList){
+    public  void OdBlastInspectionRecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList,List<String>delSetPath){
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/od_blast_inspection_record_template.xls";
         String newPdfName=null;
@@ -477,22 +471,22 @@ public class InspectionRecordPDFController {
                 row++;
                 if(index%13==0){
                     createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
-                    createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,13,20,index,row,sb,stringList);
+                    createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,13,20,index,row,sb,stringList,delSetPath);
                     index=1;row=0;qualifiedTotal=0;//另起一页，初始化参数
                 }
             }
             if(datalist.size()>0){
                 createRecordPdfTitle(datalist,3,8,12,4,5, project_name,pipe_size,standard,coatingType,shift,title_time);
-                createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,13,20,index,row,sb,stringList);
+                createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,13,20,index,row,sb,stringList,delSetPath);
             }else{
-                createRecordNullPdf(datalist,1,3,8,12,4,5,8,project_name,pipe_size,standard,coatingType,shift,title_time,newPdfName,templateFullName,stringList);
+                createRecordNullPdf(datalist,1,3,8,12,4,5,8,project_name,pipe_size,standard,coatingType,shift,title_time,newPdfName,templateFullName,stringList,delSetPath);
             }
         }catch (Exception e){
             e.printStackTrace();
         }
     }
     //3.---------------获取外涂(2FBE)记录PDF
-    public  void OdCoat2FBERecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList){
+    public  void OdCoat2FBERecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList,List<String>delSetPath,SimpleDateFormat timeformat){
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/od_coating_2fbe_record_template.xls";
         String newPdfName=null;
@@ -548,23 +542,23 @@ public class InspectionRecordPDFController {
                     row+=2;
                     if(index%11==0){
                         createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
-                        createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList);
+                        createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList,delSetPath);
                         index=1;row=0;qualifiedTotal=0;//另起一页，初始化参数
                     }
                 }
                 if(datalist.size()>0){
                     createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
-                    createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList);
+                    createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList,delSetPath);
                 }
             }else{
-                createRecordNullPdf(datalist,1,3,8,12,4,5,9,project_name,pipe_size,standard,coatingType,shift,title_time,newPdfName,templateFullName,stringList);
+                createRecordNullPdf(datalist,1,3,8,12,4,5,9,project_name,pipe_size,standard,coatingType,shift,title_time,newPdfName,templateFullName,stringList,delSetPath);
             }
         }catch (Exception e){
             e.printStackTrace();
         }
     }
     //4.---------------获取外涂(2FBE)检验记录PDF
-    public  void OdCoat2FBEInspectionRecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList){
+    public  void OdCoat2FBEInspectionRecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList,List<String>delSetPath){
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/od_coating_2fbe_inspection_record_template.xls";
         String newPdfName=null;
@@ -642,16 +636,16 @@ public class InspectionRecordPDFController {
                     row+=2;
                     if(index%11==0){
                         createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
-                        createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList);
+                        createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList,delSetPath);
                         index=1;row=0;qualifiedTotal=0;//另起一页，初始化参数
                     }
                 }
                 if(datalist.size()>0){
                     createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
-                    createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList);
+                    createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList,delSetPath);
                 }
             }else{
-                createRecordNullPdf(datalist,1,3,8,12,4,5,9,project_name,pipe_size,standard,coatingType,shift,title_time,newPdfName,templateFullName,stringList);
+                createRecordNullPdf(datalist,1,3,8,12,4,5,9,project_name,pipe_size,standard,coatingType,shift,title_time,newPdfName,templateFullName,stringList,delSetPath);
             }
 
         }catch (Exception e){
@@ -659,7 +653,7 @@ public class InspectionRecordPDFController {
         }
     }
     //5.---------------获取外涂(3LPE)记录PDF
-    public  void OdCoat3LPERecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList){
+    public  void OdCoat3LPERecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList,List<String>delSetPath,SimpleDateFormat timeformat){
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/od_coating_3lpe_record_template.xls";
         //SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -719,17 +713,17 @@ public class InspectionRecordPDFController {
                     row+=2;
                     if(index%11==0){
                         createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
-                        createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList);
+                        createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList,delSetPath);
                         index=1;row=0;qualifiedTotal=0;
                     }
                 }
                 if(datalist.size()>0){
                     createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
-                    createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList);
+                    createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList,delSetPath);
                     index=1;row=0;qualifiedTotal=0;
                 }
             }else{
-                createRecordNullPdf(datalist,1,3,8,12,4,5,9,project_name,pipe_size,standard,coatingType,shift,title_time,newPdfName,templateFullName,stringList);
+                createRecordNullPdf(datalist,1,3,8,12,4,5,9,project_name,pipe_size,standard,coatingType,shift,title_time,newPdfName,templateFullName,stringList,delSetPath);
             }
 
         }catch (Exception e){
@@ -737,7 +731,7 @@ public class InspectionRecordPDFController {
         }
     }
     //6.---------------获取外涂(3LPE)检验记录PDF
-    public  void OdCoat3LPEInspectionRecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList){
+    public  void OdCoat3LPEInspectionRecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList,List<String>delSetPath){
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/od_coating_3lpe_inspection_record_template.xls";
         String newPdfName=null;
@@ -830,24 +824,24 @@ public class InspectionRecordPDFController {
                     row+=2;
                     if(index%5==0){
                         createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
-                        createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList);
+                        createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList,delSetPath);
                         index=1;row=0;qualifiedTotal=0;//另起一页，初始化参数
                     }
                 }
                 if(datalist.size()>0){
                     createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
-                    createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList);
+                    createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList,delSetPath);
                 }
             }else{
                 System.out.println("----------------------------------------------------------------------");
-                createRecordNullPdf(datalist,1,3,8,12,4,5,9,project_name,pipe_size,standard,coatingType,shift,title_time,newPdfName,templateFullName,stringList);
+                createRecordNullPdf(datalist,1,3,8,12,4,5,9,project_name,pipe_size,standard,coatingType,shift,title_time,newPdfName,templateFullName,stringList,delSetPath);
             }
         }catch (Exception e){
             e.printStackTrace();
         }
     }
     //7.---------------获取外涂终检记录PDF
-    public  void OdCoatFinalInspectionRecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList){
+    public  void OdCoatFinalInspectionRecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList,List<String>delSetPath,SimpleDateFormat sdf){
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/od_final_inspection_record_template.xls";
         String newPdfName=null;
@@ -939,16 +933,16 @@ public class InspectionRecordPDFController {
                     row+=2;
                     if(index%5==0){
                         createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
-                        createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList);
+                        createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList,delSetPath);
                         index=1;row=0;qualifiedTotal=0;//另起一页，初始化参数
                     }
                 }
                 if(datalist.size()>0){
                     createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
-                    createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList);
+                    createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList,delSetPath);
                 }
             }else{
-                createRecordNullPdf(datalist,1,3,8,12,4,5,9,project_name,pipe_size,standard,coatingType,shift,title_time,newPdfName,templateFullName,stringList);
+                createRecordNullPdf(datalist,1,3,8,12,4,5,9,project_name,pipe_size,standard,coatingType,shift,title_time,newPdfName,templateFullName,stringList,delSetPath);
             }
 
         }catch (Exception e){
@@ -957,7 +951,7 @@ public class InspectionRecordPDFController {
     }
 
     //8.---------------内打砂检验记录PDF
-    public void  IdBlastInspectionRecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList){
+    public void  IdBlastInspectionRecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList,List<String>delSetPath){
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/id_blast_inspection_record_template.xls";
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -1009,16 +1003,16 @@ public class InspectionRecordPDFController {
                     row++;
                     if(index%13==0){
                         createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
-                        createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,12,20,index,row,sb,stringList);
+                        createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,12,20,index,row,sb,stringList,delSetPath);
                         index=1;row=0;qualifiedTotal=0;//另起一页，初始化参数
                     }
                 }
                 if(datalist.size()>0){
                     createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift, title_time);
-                    createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,12,20,index,row,sb,stringList);
+                    createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,12,20,index,row,sb,stringList,delSetPath);
                 }
             }else{
-                createRecordNullPdf(datalist,1,3,8,12,4,5,8,project_name,pipe_size,standard,coatingType,shift,title_time,newPdfName,templateFullName,stringList);
+                createRecordNullPdf(datalist,1,3,8,12,4,5,8,project_name,pipe_size,standard,coatingType,shift,title_time,newPdfName,templateFullName,stringList,delSetPath);
             }
 
         }catch (Exception e){
@@ -1026,7 +1020,7 @@ public class InspectionRecordPDFController {
         }
     }
     //9.---------------内涂记录PDF
-    public void  IdCoatRecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList){
+    public void  IdCoatRecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList,List<String>delSetPath,SimpleDateFormat timeformat){
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/id_coating_epoxy_record_template.xls";
         //SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -1077,23 +1071,23 @@ public class InspectionRecordPDFController {
                     row++;
                     if(index%13==0){
                         createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
-                        createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,12,20,index,row,sb,stringList);
+                        createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,12,20,index,row,sb,stringList,delSetPath);
                         index=1;row=0;qualifiedTotal=0;//另起一页，初始化参数
                     }
                 }
                 if(datalist.size()>0){
                     createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
-                    createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,12,20,index,row,sb,stringList);
+                    createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,12,20,index,row,sb,stringList,delSetPath);
                 }
             }else{
-                createRecordNullPdf(datalist,1,3,8,12,4,5,8,project_name,pipe_size,standard,coatingType,shift,title_time,newPdfName,templateFullName,stringList);
+                createRecordNullPdf(datalist,1,3,8,12,4,5,8,project_name,pipe_size,standard,coatingType,shift,title_time,newPdfName,templateFullName,stringList,delSetPath);
             }
         }catch (Exception e){
             e.printStackTrace();
         }
     }
     //10.---------------内涂检验记录PDF
-    public void  IdCoatInspectionRecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList){
+    public void  IdCoatInspectionRecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList,List<String>delSetPath){
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/id_coating_epoxy_inspection_record_template.xls";
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -1148,16 +1142,16 @@ public class InspectionRecordPDFController {
                     row++;
                     if(index%13==0){
                         createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
-                        createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,12,20,index,row,sb,stringList);
+                        createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,12,20,index,row,sb,stringList,delSetPath);
                         index=1;row=0;qualifiedTotal=0;//另起一页，初始化参数
                     }
                 }
                 if(datalist.size()>0){
                     createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
-                    createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,12,20,index,row,sb,stringList);
+                    createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,20,12,20,index,row,sb,stringList,delSetPath);
                 }
             }else{
-                createRecordNullPdf(datalist,1,3,8,12,4,5,8,project_name,pipe_size,standard,coatingType,shift,title_time,newPdfName,templateFullName,stringList);
+                createRecordNullPdf(datalist,1,3,8,12,4,5,8,project_name,pipe_size,standard,coatingType,shift,title_time,newPdfName,templateFullName,stringList,delSetPath);
             }
 
         }catch (Exception e){
@@ -1165,7 +1159,7 @@ public class InspectionRecordPDFController {
         }
     }
     //11.---------------内涂终验记录PDF
-    public void  IdFinalInspectionRecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList){
+    public void  IdFinalInspectionRecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList,List<String>delSetPath){
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/id_coating_final_inspection_record_template.xls";
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -1246,16 +1240,16 @@ public class InspectionRecordPDFController {
                     row+=2;
                     if(index%11==0){
                         createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
-                        createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList);
+                        createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList,delSetPath);
                         index=1;row=0;qualifiedTotal=0;//另起一页，初始化参数
                     }
                 }
                 if(datalist.size()>0){
                     createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
-                    createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList);
+                    createRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,2,19,12,19,index,row,sb,stringList,delSetPath);
                 }
             }else {
-                createRecordNullPdf(datalist,1,3,8,12,4,5,9,project_name,pipe_size,standard,coatingType,shift,title_time,newPdfName,templateFullName,stringList);
+                createRecordNullPdf(datalist,1,3,8,12,4,5,9,project_name,pipe_size,standard,coatingType,shift,title_time,newPdfName,templateFullName,stringList,delSetPath);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -1263,7 +1257,7 @@ public class InspectionRecordPDFController {
     }
 
     //12.---------------生成内防封面
-    public void  createCoverOneId( HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String internal_coating,float od,float wt, String shift,String title_time,Date begin_time,Date end_time,List<String>stringList){
+    public void  createCoverOneId(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String internal_coating,float od,float wt, String shift,String title_time,Date begin_time,Date end_time,List<String>stringList,List<String>delSetPath){
         //获取试验管
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/online_production_inspection_record_list_cover_1_id.xls";
@@ -1273,17 +1267,17 @@ public class InspectionRecordPDFController {
         try{
             int idCoatingCount=0,idAcceptedPipeCount=0,idRepairPipeCount=0,idRejectedPipeCount=0,idOnholdPipeCount=0;
             //coatingCount代表防腐数，acceptedPipeCount代表防腐合格数，repairPipeCount代表修补数，rejectedPipeCount代表废管数，onholdPipeCount代表隔离数
-            idCoatingCount=idFinalInspectionProcessDao.getIDCoatingCount(project_no,mill_no,null,internal_coating,od,wt,beginTime,endTime);
-            List<HashMap<String,Object>>list1=idFinalInspectionProcessDao.getIDCoatingAcceptedInfo(project_no,null,internal_coating,od,wt,beginTime,endTime,"1");
+            idCoatingCount=idFinalInspectionProcessDao.getIDCoatingCount(project_no,mill_no,null,internal_coating,od,wt,begin_time,end_time);
+            List<HashMap<String,Object>>list1=idFinalInspectionProcessDao.getIDCoatingAcceptedInfo(project_no,null,internal_coating,od,wt,begin_time,end_time,"1");
             if(list1!=null&&list1.size()>0){
                 HashMap<String,Object>hs=list1.get(0);
                 if(hs!=null){
                     idAcceptedPipeCount=((Long)hs.get("idtotalcount")).intValue();
                 }
             }
-            idRepairPipeCount=coatingRepairDao.getCoatingRepairCount(project_no,mill_no,null,internal_coating,"id",od,wt,beginTime,endTime);
-            idRejectedPipeCount=coatingStripDao.getIDCoatingRejectedPipeCount(project_no,mill_no,null,internal_coating,od,wt,beginTime,endTime);
-            idOnholdPipeCount=barePipeGrindingCutoffRecordDao.getODBarePipeOnholdCount(project_no,mill_no,null,internal_coating,od,wt,beginTime,endTime);
+            idRepairPipeCount=coatingRepairDao.getCoatingRepairCount(project_no,mill_no,null,internal_coating,"id",od,wt,begin_time,end_time);
+            idRejectedPipeCount=coatingStripDao.getIDCoatingRejectedPipeCount(project_no,mill_no,null,internal_coating,od,wt,begin_time,end_time);
+            idOnholdPipeCount=barePipeGrindingCutoffRecordDao.getODBarePipeOnholdCount(project_no,mill_no,null,internal_coating,od,wt,begin_time,end_time);
 
             //获取钢试片管号和玻璃试片管号
             List<HashMap<String,Object>>sampleInfoList=idCoatingInspectionProcessDao.getCoverIdSampleInfo(project_no,mill_no,od,wt,begin_time,end_time);
@@ -1381,7 +1375,7 @@ public class InspectionRecordPDFController {
     }
 
     //13.---------------生成外防封面
-    public void  createCoverOneOd( HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String external_coating,String internal_coating,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList){
+    public void  createCoverOneOd(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String external_coating,String internal_coating,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList,List<String>delSetPath){
         //获取试验管
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/online_production_inspection_record_list_cover_1_od.xls";
@@ -1391,17 +1385,17 @@ public class InspectionRecordPDFController {
         try{
             int odCoatingCount=0,odAcceptedPipeCount=0,odRepairPipeCount=0,odRejectedPipeCount=0,odOnholdPipeCount=0;
             //coatingCount代表防腐数，acceptedPipeCount代表防腐合格数，repairPipeCount代表修补数，rejectedPipeCount代表废管数，onholdPipeCount代表隔离数
-            odCoatingCount=odFinalInspectionProcessDao.getODCoatingCount(project_no,mill_no,external_coating,null,od,wt,beginTime,endTime);
-            List<HashMap<String,Object>>list1=odFinalInspectionProcessDao.getODCoatingAcceptedInfo(project_no,external_coating,null,od,wt,beginTime,endTime,"1");
+            odCoatingCount=odFinalInspectionProcessDao.getODCoatingCount(project_no,mill_no,external_coating,null,od,wt,begin_time,end_time);
+            List<HashMap<String,Object>>list1=odFinalInspectionProcessDao.getODCoatingAcceptedInfo(project_no,external_coating,null,od,wt,begin_time,end_time,"1");
             if(list1!=null&&list1.size()>0){
                 HashMap<String,Object>hs=list1.get(0);
                 if(hs!=null){
                     odAcceptedPipeCount=((Long) hs.get("odtotalcount")).intValue();
                 }
             }
-            odRepairPipeCount=coatingRepairDao.getCoatingRepairCount(project_no,mill_no,external_coating,null,"od",od,wt,beginTime,endTime);
-            odRejectedPipeCount=coatingStripDao.getODCoatingRejectedPipeCount(project_no,mill_no,external_coating,null,od,wt,beginTime,endTime);
-            odOnholdPipeCount=barePipeGrindingCutoffRecordDao.getODBarePipeOnholdCount(project_no,mill_no,external_coating,null,od,wt,beginTime,endTime);
+            odRepairPipeCount=coatingRepairDao.getCoatingRepairCount(project_no,mill_no,external_coating,null,"od",od,wt,begin_time,end_time);
+            odRejectedPipeCount=coatingStripDao.getODCoatingRejectedPipeCount(project_no,mill_no,external_coating,null,od,wt,begin_time,end_time);
+            odOnholdPipeCount=barePipeGrindingCutoffRecordDao.getODBarePipeOnholdCount(project_no,mill_no,external_coating,null,od,wt,begin_time,end_time);
             //获取试验管管号和切样长度
             List<HashMap<String,Object>>sampleList=pipeSamplingRecordDao.getCoverPipeSamplingInfo(project_no,mill_no,od,wt,begin_time,end_time);
             //固化度试验管管号
@@ -1503,7 +1497,7 @@ public class InspectionRecordPDFController {
     }
 
     //14.---------------生成封面2
-    public void  createCoverTwo(HttpServletRequest request,int type,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String external_coating,String internal_coating,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList){
+    public void  createCoverTwo(HttpServletRequest request,int type,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String external_coating,String internal_coating,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList,List<String>delSetPath){
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/online_production_inspection_record_list_cover_2.xls";
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -1625,7 +1619,7 @@ public class InspectionRecordPDFController {
             }else{
                 datalist.add(new Label(12,20,mill_name,wcf));
                 System.out.println("外防------------------");
-                createRecordNullPdf(datalist,1,3,8,12,4,5,8,project_name,pipe_size,standard,coatingType,shift,title_time,newPdfName,templateFullName,stringList);
+                createRecordNullPdf(datalist,1,3,8,12,4,5,8,project_name,pipe_size,standard,coatingType,shift,title_time,newPdfName,templateFullName,stringList,delSetPath);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -1690,7 +1684,7 @@ public class InspectionRecordPDFController {
     }
     //生成数据为空的pdf,参数(column1:project_name、standard所在列,column2:pipe_size、coating_type所在列,column3:班次、时间所在列,column4:空记录所在列
     //row1:project_name、pipe_size、时间所在行,row2:standard、coating_type、班次所在行,row3:空记录所在行)
-    private void createRecordNullPdf1(ArrayList<Label> datalist,int column1,int column2,int column3,int column4,int row1,int row2,int row3,String newPdfName,String templateFullName,int dayOrNight,List<String>stationDayList,List<String>stationNightList){
+    private void createRecordNullPdf1(ArrayList<Label> datalist,int column1,int column2,int column3,int column4,int row1,int row2,int row3,String newPdfName,String templateFullName,int dayOrNight,List<String>stationDayList,List<String>stationNightList,List<String>delSetPath){
         datalist.add(new Label(column1, row1," ", wcf));
         datalist.add(new Label(column2, row1," ", wcf));
         datalist.add(new Label(column1, row2," ", wcf));
@@ -1709,7 +1703,7 @@ public class InspectionRecordPDFController {
         }
     }
 
-    private void createRecordNullPdf(ArrayList<Label> datalist,int column1,int column2,int column3,int column4,int row1,int row2,int row3,String title_project_name,String title_pipe_size,String title_standard,String title_coating_type,String title_shift,String title_time,String PdfName,String templateFullName,List<String>stringList){
+    private void createRecordNullPdf(ArrayList<Label> datalist,int column1,int column2,int column3,int column4,int row1,int row2,int row3,String title_project_name,String title_pipe_size,String title_standard,String title_coating_type,String title_shift,String title_time,String PdfName,String templateFullName,List<String>stringList,List<String>delSetPath){
         datalist.add(new Label(column2, row1,title_project_name, wcf));
         datalist.add(new Label(column3, row1,title_pipe_size, wcf));
         datalist.add(new Label(column4, row1, title_time, wcf));
@@ -1726,19 +1720,19 @@ public class InspectionRecordPDFController {
     }
     //公共函数生成PDF头部信息,参数(column1:project_name、standard所在列,column2:pipe_size、coating_type所在列,column3:班次、时间所在列,
     // row1:project_name、pipe_size、时间所在行,row2:standard、coating_type、班次所在行)
-    private void createRecordPdfTitle1(ArrayList<Label> datalist,int column1,int column2,int column3,int row1,int row2,String title_project_name,String title_pipe_size,String title_standard,String title_coating_type,int dayOrNight,Date begin_time){
-        datalist.add(new Label(column1, row1,title_project_name, wcf));
-        datalist.add(new Label(column2, row1,title_pipe_size, wcf));
-        datalist.add(new Label(column1, row2,title_standard, wcf));
-        datalist.add(new Label(column2, row2,title_coating_type, wcf));
-        if(dayOrNight==0){
-            datalist.add(new Label(column3, row2,"白班(Day)", wcf));
-            datalist.add(new Label(column3, row1,sdf.format(begin_time), wcf));
-        }else{
-            datalist.add(new Label(column3, row2, "夜班(Night)", wcf));
-            datalist.add(new Label(column3, row1,sdf.format(begin_time), wcf));
-        }
-    }
+//    private void createRecordPdfTitle1(ArrayList<Label> datalist,int column1,int column2,int column3,int row1,int row2,String title_project_name,String title_pipe_size,String title_standard,String title_coating_type,int dayOrNight,Date begin_time,SimpleDateFormat sdf){
+//        datalist.add(new Label(column1, row1,title_project_name, wcf));
+//        datalist.add(new Label(column2, row1,title_pipe_size, wcf));
+//        datalist.add(new Label(column1, row2,title_standard, wcf));
+//        datalist.add(new Label(column2, row2,title_coating_type, wcf));
+//        if(dayOrNight==0){
+//            datalist.add(new Label(column3, row2,"白班(Day)", wcf));
+//            datalist.add(new Label(column3, row1,sdf.format(begin_time), wcf));
+//        }else{
+//            datalist.add(new Label(column3, row2, "夜班(Night)", wcf));
+//            datalist.add(new Label(column3, row1,sdf.format(begin_time), wcf));
+//        }
+//    }
     private void createRecordPdfTitle(ArrayList<Label> datalist,int column1,int column2,int column3,int row1,int row2,String title_project_name,String title_pipe_size,String title_standard,String title_coating_type,String title_shift,String title_time){
         datalist.add(new Label(column1, row1,title_project_name, wcf));
         datalist.add(new Label(column2, row1,title_pipe_size, wcf));
@@ -1750,26 +1744,26 @@ public class InspectionRecordPDFController {
     }
     //公共生成pdf的函数，参数列表(dataList:表格数据集合,newPdfName:pdf名字,templateFullName:pdf模板名字,x1为备注所在列 y1为备注所在行
     //x2为合格数所在列 y2为合格数所在行，qualifiedTotal:合格数,index:循环索引,row:行数,sb:备注内容,dayOrNight:班次判定))
-    private void createRecordPdf1(ArrayList<Label> datalist,String newPdfName,String templateFullName,int qualifiedTotal,int x1,int y1,int x2,int y2,int index,int row,StringBuilder sb,int dayOrNight,List<String>stationDayList,List<String>stationNightList){
-        datalist.add(new Label(x1,y1,String.valueOf(sb.toString()),wcf));
-        //添加合格数
-        datalist.add(new Label(x2,y2,String.valueOf(qualifiedTotal),wcf));
-        newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
-        datalist.clear();
-//        qualifiedTotal=0;
-//        index=1;
-//        row=0;
-        sb.setLength(0);
-        if(newPdfName!=null){
-            if(dayOrNight==0){
-                stationDayList.add(newPdfName);
-            }else{
-                stationNightList.add(newPdfName);
-            }
-            delSetPath.add(newPdfName);
-        }
-    }
-    private void createRecordPdf(ArrayList<Label> datalist,String newPdfName,String templateFullName,int qualifiedTotal,int x1,int y1,int x2,int y2,int index,int row,StringBuilder sb,List<String>stringList){
+//    private void createRecordPdf1(ArrayList<Label> datalist,String newPdfName,String templateFullName,int qualifiedTotal,int x1,int y1,int x2,int y2,int index,int row,StringBuilder sb,int dayOrNight,List<String>stationDayList,List<String>stationNightList,List<String>delSetPath){
+//        datalist.add(new Label(x1,y1,String.valueOf(sb.toString()),wcf));
+//        //添加合格数
+//        datalist.add(new Label(x2,y2,String.valueOf(qualifiedTotal),wcf));
+//        newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+//        datalist.clear();
+////        qualifiedTotal=0;
+////        index=1;
+////        row=0;
+//        sb.setLength(0);
+//        if(newPdfName!=null){
+//            if(dayOrNight==0){
+//                stationDayList.add(newPdfName);
+//            }else{
+//                stationNightList.add(newPdfName);
+//            }
+//            delSetPath.add(newPdfName);
+//        }
+//    }
+    private void createRecordPdf(ArrayList<Label> datalist,String newPdfName,String templateFullName,int qualifiedTotal,int x1,int y1,int x2,int y2,int index,int row,StringBuilder sb,List<String>stringList,List<String>delSetPath){
         datalist.add(new Label(x1,y1,String.valueOf(sb.toString()),wcf));
         //添加合格数
         datalist.add(new Label(x2,y2,String.valueOf(qualifiedTotal),wcf));
@@ -1855,15 +1849,18 @@ public class InspectionRecordPDFController {
         return  returnVal;
     }
     //获取分厂集合
-    private void  getMillNameList(){
+    private List<MillInfo>  getMillNameList(){
+        List<MillInfo> millInfoList=null;
         try{
-            millInfoList=millInfoDao.getAllMillInfo();
+             millInfoList=millInfoDao.getAllMillInfo();
         }catch (Exception e){
             System.out.println("获取分厂集合时出错!");
         }
+        return  millInfoList;
     }
     //根据项目编号获取合同对应的标准和涂层集合集合
-    private void getStandardAndCoatingTypeList(String project_no){
+    private List<ContractInfo> getStandardAndCoatingTypeList(String project_no){
+        List<ContractInfo>contractInfoList=null;
         try{
             //String temp="";
             //DecimalFormat decimalFormat=new DecimalFormat(".00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
@@ -1883,5 +1880,6 @@ public class InspectionRecordPDFController {
         }catch (Exception e){
             System.out.println("根据项目编号获取合同对应的标准和涂层集合集合出错!");
         }
+        return contractInfoList;
     }
 }
