@@ -175,6 +175,8 @@ public class ResponseUtil {
             sbzip.append(String.valueOf(pdfListPath.size()));
             sbzip.append("items_");
             sbzip.append(timenow);
+            sbzip.append("_");
+            sbzip.append(String.valueOf(System.currentTimeMillis()));
             sbzip.append(".zip");
             zipName = sbzip.toString();
 
