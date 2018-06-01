@@ -308,6 +308,12 @@
             $('#projectForm').form('submit',{
                 url:url,
                 onSubmit:function () {
+
+                    var pname=$("input[name='project_name']").val();
+                    pname=removeAllSpace(pname);
+                    $("input[name='project_name']").val(pname);
+
+
                     //表单验证
                     if($("input[name='project_no']").val()==""){
 

@@ -1,4 +1,12 @@
 //------公共函数
+
+
+//去除所有空格
+function removeAllSpace(str) {
+    return str.replace(/\s+/g, "");
+}
+
+
 //弹出框函数
 function  hlAlertOne() {
     $.messager.alert('Warning','请选择要删除的行!');
