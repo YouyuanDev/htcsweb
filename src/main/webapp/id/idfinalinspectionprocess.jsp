@@ -543,7 +543,7 @@
                         <option value="3">不合格,进入内防待扒皮工序</option>
                         <option value="4">不合格,进入内喷标工序</option>
                         <option value="5">待定</option>
-                        <option value="6">隔离</option>
+                        <option value="6">隔离,进入修磨或切割工序</option>
                     </select></td>
                     <td></td>
                     <%--<td class="i18n1" name="idinspectionresult">内涂层质检结果</td>--%>
