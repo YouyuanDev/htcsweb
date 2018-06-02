@@ -730,4 +730,32 @@ public class PipeBasicInfoController {
 
         return mmp;
     }
+    @RequestMapping("/doInStoageTransfer")
+    public String doInStoageTransfer(HttpServletRequest request,HttpServletResponse response)throws Exception{
+
+        String hlparam=request.getParameter("hlparam");
+        String storage_stack=request.getParameter("storage_stack");
+        String stack_level=request.getParameter("stack_level");
+        String level_direction=request.getParameter("level_direction");
+        String level_sequence=request.getParameter("level_sequence");
+        String[]idArr=hlparam.split(",");
+        int resTotal=0;
+        resTotal=pipeBasicInfoDao.InStoageTransfer(idArr,storage_stack,stack_level,level_direction,level_sequence);
+        JSONObject json=new JSONObject();
+        StringBuilder sbmessage = new StringBuilder();
+        sbmessage.append("总共");
+        sbmessage.append(Integer.toString(resTotal));
+        sbmessage.append("根钢管转运成功\n");
+        if(resTotal>0){
+            System.out.print("转运成功");
+            json.put("success",true);
+        }else{
+            System.out.print("转运失败");
+            json.put("success",false);
+        }
+        json.put("message",sbmessage.toString());
+        ResponseUtil.write(response,json);
+        return null;
+    }
+
 }

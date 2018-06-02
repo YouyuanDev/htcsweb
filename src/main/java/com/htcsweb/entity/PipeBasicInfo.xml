@@ -513,5 +513,10 @@
             #{item}
         </foreach>
     </select>
-
+    <update id="InStoageTransfer">
+        UPDATE pipe_basic_info set storage_stack=#{storage_stack}, stack_level=#{stack_level},level_direction=#{level_direction},level_sequence=#{level_sequence} WHERE
+        <foreach collection="array" item="item" open="id in (" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
 </mapper>

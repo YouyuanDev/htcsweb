@@ -308,7 +308,7 @@
                                   "rinsewaterconductivity":obj.rinse_water_conductivity, "marking":marking,"result":result,
                                   "remark":obj.remark
                               };
-                              $('#pipeRecord-container').append("odblastprocess",recordTemplate("外打砂记录",dic));
+                              $('#pipeRecord-container').append(recordTemplate("odblastprocess","外打砂记录",dic));
                          }
                          //外打砂检验
                          if(data.odBlastInspectionProcessRecord!=undefined&&data.odBlastInspectionProcessRecord!=null){
@@ -335,7 +335,7 @@
                                  "oilwaterinaircompressor":oilwaterinaircompressor, "elapsedtime": obj.elapsed_time,"result":result,
                                  "remark":obj.remark
                              };
-                             $('#pipeRecord-container').append("odblastinspectionprocess",recordTemplate("外打砂检验记录",dic));
+                             $('#pipeRecord-container').append(recordTemplate("odblastinspectionprocess","外打砂检验记录",dic));
                          }
                          //外涂2fbe
                          if(data.odCoatingProcessRecord!=undefined&&data.odCoatingProcessRecord!=null){
@@ -356,7 +356,7 @@
                               "coatingvoltage":obj.coating_voltage,"gundistance":obj.gun_distance, "sprayspeed":obj.spray_speed,
                                  "applicationvoltage":obj.application_voltage, "result":result,"":"",
                                  "remark":obj.remark};
-                             $('#pipeRecord-container').append("odcoatingprocess",recordTemplate("外涂记录(2FBE)",dic));
+                             $('#pipeRecord-container').append(recordTemplate("odcoatingprocess","外涂记录(2FBE)",dic));
                          }
                          //外涂检验2fbe
                          if(data.odCoatingInspectionProcessRecord!=undefined&&data.odCoatingInspectionProcessRecord!=null){
@@ -379,7 +379,7 @@
                              "bevel":obj.bevel,"surfacecondition":obj.surface_condition, "issample":obj.is_sample,
                                  "adhesionrating":obj.adhesion_rating, "isdscsample":obj.is_dsc_sample, "result":result,
                                  "remark":obj.remark};
-                             $('#pipeRecord-container').append("odcoatinginspectionprocess",recordTemplate("外涂检验记录(2FBE)",dic));
+                             $('#pipeRecord-container').append(recordTemplate("odcoatinginspectionprocess","外涂检验记录(2FBE)",dic));
                          }
                          //外涂3lpe
                          if(data.odCoating3LpeProcessRecord!=undefined&&data.odCoating3LpeProcessRecord!=null){
@@ -681,7 +681,7 @@
                               template += '<th class="i18n1" name="coatingstrip" colspan="7">扒皮记录</th>';
                               template +='</tr></thead><tbody><tr>';
                               for(var i=0;i<dicField.length;i++){
-                                  template += '<td class="i18n1" name='+dicField[i]+'>'+ dicField[i] + '</td>';
+                                  template += '<td style="text-align:center;" class="i18n1" name='+dicField[i]+'>'+ dicField[i] + '</td>';
                               }
                               template +='</tr>';
                               var odid="",result="";
@@ -723,7 +723,7 @@
 
                               template +='</tr></thead><tbody><tr>';
                               for(var i=0;i<dicField.length;i++){
-                                  template += '<td class="i18n1" name='+dicField[i]+'>'+ dicField[i] + '</td>';
+                                  template += '<td style="text-align: center;" class="i18n1" name='+dicField[i]+'>'+ dicField[i] + '</td>';
                               }
                               template +='</tr>';
                               var odid="",result="",unqualifiedreason="";
@@ -790,7 +790,7 @@
                              template += '<th class="i18n1" name="barepipegrindingProcess" colspan="11">修磨切割记录</th>';
                              template +='</tr></thead><tbody><tr>';
                              for(var i=0;i<dicField.length;i++){
-                                 template += '<td class="i18n1" name='+dicField[i]+'>'+ dicField[i] + '</td>';
+                                 template += '<td style="text-align: center;" class="i18n1" name='+dicField[i]+'>'+ dicField[i] + '</td>';
                              }
                              template +='</tr>';
                              var odid="",result="",grindingcutoff="";
@@ -838,7 +838,7 @@
                              template += '<th class="i18n1" name="pipeRebevelProcess" colspan="8">倒棱记录</th>';
                              template +='</tr></thead><tbody><tr>';
                              for(var i=0;i<dicField.length;i++){
-                                 template += '<td class="i18n1" name='+dicField[i]+'>'+ dicField[i] + '</td>';
+                                 template += '<td style="text-align: center;" class="i18n1" name='+dicField[i]+'>'+ dicField[i] + '</td>';
                              }
                              template +='</tr>';
                              var odid="",result="";
@@ -928,6 +928,9 @@
             template+='</tbody></table>';
             return template;
         }
+        function closePipeRecordDialog() {
+            $('#pipeRecordDialog').dialog('close');
+        }
     </script>
 
 </head>
@@ -982,7 +985,7 @@
 					        width: 200,
 					        editable:false,
 					        textField:'text',
-					        panelHeight:'auto'"/>
+					        panelHeight:200"/>
 
     <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchPipe()">Search</a>
     <div style="float:right">
@@ -1207,11 +1210,14 @@
 
         </div>
     </div>
-    <div id="pipeRecordDialog" class="easyui-dialog" title="钢管流程信息" closed="true" data-options="iconCls:'icon-save'" style="width:1200px;height:600px;top:25px;padding:10px;word-break: break-all; word-wrap:break-word;overflow-y: scroll;">
+    <div id="pipeRecordDialog" buttons="#dlg-buttons1" class="easyui-dialog" title="钢管流程信息" closed="true" data-options="iconCls:'icon-save'" style="width:1200px;height:600px;top:25px;padding:10px;word-break: break-all; word-wrap:break-word;overflow-y: scroll;">
         <div id="pipeRecord-container" style="width:100%;height:100%;overflow-y: scroll">
 
         </div>
 
+    </div>
+    <div id="dlg-buttons1" align="center" style="width:100%;">
+        <a href="#" class="easyui-linkbutton i18n2" name="close" iconCls="icon-cancel" onclick="closePipeRecordDialog()">关闭</a>
     </div>
 </div>
 

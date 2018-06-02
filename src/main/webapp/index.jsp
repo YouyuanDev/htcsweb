@@ -69,7 +69,7 @@
             var uriArr=["odblastprocess","odblastinspectionprocess","odcoatingprocess","odcoatinginspectionprocess",
                 "odcoating3lpeprocess","odcoating3lpeinspectionprocess","odstencilprocess","odfinalinspectionprocess",
                 "idblastprocess","idblastinspectionprocess","idcoatingprocess","idcoatinginspectionprocess","idstencilprocess","idfinalinspectionprocess",
-                "odstockin","idstockin","barepipemovement","productStockout",
+                "odstockin","idstockin","barepipemovement","productStockout","instoragetransfer",
                 "coatingrepair","coatingstrip",
                 "barepipegrindingProcess","pipeSamplingProcess","pipeRebevelProcess",
                 "projectManagement","contractManagement","pipeManagement","uploadPipe","twodimensionalcode",
@@ -81,14 +81,14 @@
         ];
             var odArr=uriArr.slice(0,8);
             var idArr=uriArr.slice(8,14);
-            var outinArr=uriArr.slice(14,18);
-            var repairArr=uriArr.slice(18,20);
-            var pipeArr=uriArr.slice(20,23);
-            var basicArr=uriArr.slice(23,28);
-            var standArr=uriArr.slice(28,36);
-            var labArr=uriArr.slice(36,42);
-            var accountArr=uriArr.slice(42,45);
-            var reportArr=uriArr.slice(45,47);
+            var outinArr=uriArr.slice(14,19);
+            var repairArr=uriArr.slice(19,21);
+            var pipeArr=uriArr.slice(21,24);
+            var basicArr=uriArr.slice(24,29);
+            var standArr=uriArr.slice(29,37);
+            var labArr=uriArr.slice(37,43);
+            var accountArr=uriArr.slice(43,46);
+            var reportArr=uriArr.slice(46,48);
 
 
             var hsMapList="<%=session.getAttribute("userfunctionMap")%>";
@@ -536,6 +536,14 @@
                             $('#hlTab').tabs('add',{
                                 title:node.text,
                                 content:"<iframe scrolling='auto' frameborder='0'  src='storage/productStockout.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                            hlLanguage();
+                        }else if("垛内转运"==nodeTxt||"In Storage Transfer"==nodeTxt){
+
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='storage/instoragetransfer.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable:true
                             });
                             hlLanguage();
