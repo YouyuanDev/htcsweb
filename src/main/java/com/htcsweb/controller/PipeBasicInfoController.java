@@ -653,6 +653,14 @@ public class PipeBasicInfoController {
                 IdStencilProcess idStencilProcessRecord=idStencilProcessDao.getRecentRecordByPipeNo(pipe_no);
                 //12.查询内涂终检记录
                 IdFinalInspectionProcess idFinalInspectionProcess=idFinalInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
+                //13.扒皮记录
+
+                //14.修补
+
+                //15.修磨切割
+
+                //16.倒棱
+
                 if(odBlastProcessRecord!=null)
                    maps.put("odBlastProcessRecord",odBlastProcessRecord);
                 if(odBlastInspectionProcessRecord!=null)

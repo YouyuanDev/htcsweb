@@ -533,7 +533,7 @@
                         <option value="4">不合格,进入外喷标工序</option>
                         <option value="1">合格,进入外防成品入库工序</option>
                         <option value="3">待定</option>
-                        <option value="5">隔离，进入修磨或切割工序</option>
+                        <option value="5">隔离,进入修磨或切割工序</option>
                     </select></td>
                     <td></td>
                 </tr>

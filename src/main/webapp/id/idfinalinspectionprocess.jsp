@@ -321,7 +321,7 @@
 
                 <th field="od_inspection_result" align="center" width="80" class="i18n1" name="odinspectionresult">外涂层质检结果</th>
                 <%--<th field="id_inspection_result" align="center" width="80" class="i18n1" name="idinspectionresult">内涂层质检结果</th>--%>
-                <th field="final_inspection_result" align="center" width="80" class="i18n1" name="finalinspectionresult">终检结果</th>
+                <%--<th field="final_inspection_result" align="center" width="80" class="i18n1" name="finalinspectionresult">终检结果</th>--%>
                 <th field="dry_film_thickness_list" align="center" width="80" class="i18n1" name="dryfilmthicknesslist">干膜厚度μm测量列表</th>
                 <th field="roughness_list" align="center" width="80" class="i18n1" name="roughnesslist">粗糙度(μm ,分隔)</th>
                 <th field="holiday_tester_volts" width="100" align="center" hidden="true" class="i18n1" name="holidaytestervolts">电火花检测电压</th>

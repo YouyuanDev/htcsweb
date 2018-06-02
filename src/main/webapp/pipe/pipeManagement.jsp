@@ -26,11 +26,37 @@
     <script  src="../js/lrscroll.js" type="text/javascript"></script>
     <script src="../js/jquery.i18n.properties-1.0.9.js" type="text/javascript"></script>
     <script src="../js/language.js" type="text/javascript"></script>
+    <style type="text/css">
+        table.dataintable {
+            margin-top:15px;
+            border-collapse:collapse;
+            border:1px solid #aaa;
+            width:100%;
+        }
+        table.dataintable th {
+            vertical-align:baseline;
+            padding:5px 15px 5px 6px;
+            background-color:#3F3F3F;
+            border:1px solid #3F3F3F;
+            text-align:center;
+            color:#fff;
+        }
+        table.dataintable td {
+            vertical-align:text-top;
+            padding:6px 15px 6px 6px;
+            border:1px solid #aaa;
+        }
+        table.dataintable tr:nth-child(odd) {
+            background-color:#F5F5F5;
+        }
+        table.dataintable tr:nth-child(even) {
+            background-color:#fff;
+        }
+    </style>
     <script type="text/javascript">
         var url;
 
         function searchPipe() {
-
             $('#pipeDatagrids').datagrid('load',{
                 'project_no': $('#projectno').val(),
                 'contract_no': $('#contractno').val(),
@@ -258,6 +284,7 @@
 
         }
          function SearchPipeRecord() {
+             $('#pipeRecord-container').empty();
              var row = $('#pipeDatagrids').datagrid('getSelected');
              if(row) {
                  var pipe_no=row.pipe_no;
@@ -269,206 +296,399 @@
                          //外打砂
                          if(data.odBlastProcessRecord!=undefined&&data.odBlastProcessRecord!=null){
                               var obj=data.odBlastProcessRecord;
-                              var dic=[];
-                              dic["操作工工号"]=obj.operator_no;dic["操作时间"]=obj.operation_time;
-                              dic["分厂号"]=obj.mill_no;
-                              dic["外观缺陷"]=obj.surface_condition;dic["打砂前盐度"]=obj.salt_contamination_before_blasting;
-                              dic["碱洗所用时间"]=obj.alkaline_dwell_time;dic["碱浓度"]=obj.alkaline_concentration;
-                              dic["酸洗所用时间"]=obj.acid_wash_time;dic["酸浓度"]=obj.alkaline_concentration;
-                              dic["磨料传导性"]=obj.abrasive_conductivity;dic["打砂传送速度"]=obj.blast_line_speed;
-                              dic["预热温度"]=obj.preheat_temp;dic["冲洗水电导率"]=obj.rinse_water_conductivity;
-                              dic["管体标识是否清晰"]=obj.marking;dic["备注"]=obj.remark;
-                              dic["结论"]=obj.result;
-                             alert(recordTemplate("外涂记录(2FBE)",dic));
-                              $('#pipeRecordDialog').append(recordTemplate("外打砂记录",dic));
+                              var result="";
+                              if(obj.result=="0")
+                                  result="不合格,重新打砂处理";
+                              else if(obj.result=="1")
+                                  result="合格,进入外喷砂检验工序";
+                              else if(obj.result=="2")
+                                  result="待定";
+                              else if(obj.result=="3")
+                                  result="表面缺陷，进入修磨或切割处理";
+                              var marking="";
+                              if(obj.marking=="0")
+                                  marking="清晰";
+                              else if(obj.marking=="1")
+                                  marking="不清晰";
+                              var dic={
+                                  "operatorno":obj.operator_no,"operationtime":getDate1(obj.operation_time),"millno":obj.mill_no,
+                                   "surfacecondition":obj.surface_condition,"saltcontaminationbeforeblasting":obj.salt_contamination_before_blasting,"alkalinedwelltime":obj.alkaline_dwell_time,
+                                  "alkalineconcentration":obj.alkaline_concentration, "acidwashtime":obj.acid_wash_time,"acidconcentration":obj.acid_concentration,
+                                  "abrasiveconductivity":obj.abrasive_conductivity,"blastlinespeed":obj.blast_line_speed, "preheattemp":obj.preheat_temp,
+                                  "rinsewaterconductivity":obj.rinse_water_conductivity, "marking":marking,"result":result,
+                                  "remark":obj.remark
+                              };
+                              $('#pipeRecord-container').append(recordTemplate("外打砂记录",dic));
                          }
                          //外打砂检验
                          if(data.odBlastInspectionProcessRecord!=undefined&&data.odBlastInspectionProcessRecord!=null){
                              var obj=data.odBlastInspectionProcessRecord;
-                             var dic=[];
-                             dic["操作工工号"]=obj.operator_no;dic["操作时间"]=obj.operation_time;
-                             dic["分厂号"]=obj.mill_no;
-                             dic["环境温度"]=obj.air_temp;dic["相对湿度"]=obj.relative_humidity;
-                             dic["露点温度"]=obj.dew_point;dic["表面清洁度"]=obj.blast_finish_sa25;
-                             dic["锚纹深度"]=obj.profile;dic["灰尘度"]=obj.surface_dust_rating;
-                             dic["钢管表面温度"]=obj.pipe_temp;dic["打砂后盐度"]=obj.salt_contamination_after_blasting;
-                             dic["表面瑕疵"]=obj.surface_condition;dic["压缩空气是否存在油水"]=obj.oil_water_in_air_compressor;
-                             dic["涂敷前等待时间"]=obj.elapsed_time;dic["备注"]=obj.remark;
-                             dic["结论"]=obj.result;
-
-                             $('#pipeRecordDialog').append(recordTemplate("外打砂检验记录",dic));
+                             var result="";
+                             if(obj.result=="0")
+                                 result="不合格,重新打砂处理";
+                             else if(obj.result=="1")
+                                 result="合格,进入外涂敷工序";
+                             else if(obj.result=="2")
+                                 result="待定";
+                             else if(obj.result=="3")
+                                 result="表面缺陷，进入修磨或切割处理";
+                             var oilwaterinaircompressor="";
+                             if(obj.oil_water_in_air_compressor=="0")
+                                 oilwaterinaircompressor="否";
+                             else if(obj.oil_water_in_air_compressor=="1")
+                                 oilwaterinaircompressor="是";
+                             var dic= {
+                                 "operatorno":obj.operator_no,"operationtime":getDate1(obj.operation_time),"millno":obj.mill_no,
+                                 "airtemp": obj.air_temp, "relativehumidity":obj.relative_humidity, "dewpoint":obj.dew_point,
+                                 "blastfinishsa25":obj.blast_finish_sa25, "profile": obj.profile, "surfacedustrating":obj.surface_dust_rating,
+                                 "pipetemp":obj.pipe_temp, "saltcontaminationafterblasting":obj.salt_contamination_after_blasting,"surfacecondition":obj.surface_condition,
+                                 "oilwaterinaircompressor":oilwaterinaircompressor, "elapsedtime": obj.elapsed_time,"result":result,
+                                 "remark":obj.remark
+                             };
+                             $('#pipeRecord-container').append(recordTemplate("外打砂检验记录",dic));
                          }
                          //外涂2fbe
                          if(data.odCoatingProcessRecord!=undefined&&data.odCoatingProcessRecord!=null){
                              var obj=data.odCoatingProcessRecord;
-                             var dic=[];
-                             dic["操作工工号"]=obj.operator_no;dic["操作时间"]=obj.operation_time;
-                             dic["分厂号"]=obj.mill_no;
-                             dic["涂敷线速度"]=obj.coating_line_speed;dic["底层粉末型号"]=obj.base_coat_used;
-                             dic["底层粉末批号"]=obj.base_coat_lot_no;dic["面层粉末型号"]=obj.top_coat_used;
-                             dic["面层粉末批号"]=obj.top_coat_lot_no;dic["底层粉末喷枪数"]=obj.base_coat_gun_count;
-                             dic["面层粉末喷枪数"]=obj.top_coat_gun_count;dic["中频温度"]=obj.application_temp;
-                             dic["表面瑕疵"]=obj.to_first_touch_duration;dic["到达水淋处所需时间"]=obj.to_quench_duration;
-                             dic["到达首次接触点所需时间"]=obj.elapsed_time;dic["供气压力"]=obj.air_pressure;
-                             dic["喷涂电压"]=obj.coating_voltage;dic["喷枪距离"]=obj.gun_distance;
-                             dic["粉量"]=obj.spray_speed;dic["中频电压"]=obj.application_voltage;
-                             dic["备注"]=obj.remark;dic["结论"]=obj.result;
-
-                             $('#pipeRecordDialog').append(recordTemplate("外涂记录(2FBE)",dic));
+                             var result="";
+                             if(obj.result=="0")
+                                 result="不合格,进入外防喷砂工序";
+                             else if(obj.result=="1")
+                                 result="合格,进入外涂敷检验工序";
+                             else if(obj.result=="2")
+                                 result="待定";
+                             var dic={
+                                 "operatorno":obj.operator_no,"operationtime":getDate1(obj.operation_time),"millno":obj.mill_no,
+                               "coatinglinespeed":obj.coating_line_speed,"basecoatused":obj.base_coat_used, "basecoatlotno":obj.base_coat_lot_no,
+                                 "topcoatused":obj.top_coat_used, "topcoatlotno":obj.top_coat_lot_no,"basecoatguncount":obj.base_coat_gun_count,
+                              "topcoatguncount":obj.top_coat_gun_count,"applicationtemp":obj.application_temp, "tofirsttouchduration":obj.to_first_touch_duration,
+                                 "toquenchduration":obj.to_quench_duration, "elapsedtime":obj.elapsed_time,"airpressure":obj.air_pressure,
+                              "coatingvoltage":obj.coating_voltage,"gundistance":obj.gun_distance, "sprayspeed":obj.spray_speed,
+                                 "applicationvoltage":obj.application_voltage, "result":result,"":"",
+                                 "remark":obj.remark};
+                             $('#pipeRecord-container').append(recordTemplate("外涂记录(2FBE)",dic));
                          }
                          //外涂检验2fbe
                          if(data.odCoatingInspectionProcessRecord!=undefined&&data.odCoatingInspectionProcessRecord!=null){
                              var obj=data.odCoatingInspectionProcessRecord;
-                             var dic=[];
-                             dic["操作工工号"]=obj.operator_no;dic["操作时间"]=obj.operation_time;
-                             dic["分厂号"]=obj.mill_no;
-                             dic["底层涂层厚度"]=obj.base_coat_thickness_list;dic["面层涂层厚度"]=obj.top_coat_thickness_list;
-                             dic["涂层总厚度"]=obj.total_coating_thickness_list;dic["漏点数量"]=obj.holidays;
-                             dic["电火花检测电压"]=obj.holiday_tester_volts;dic["修补点数"]=obj.repairs;
-                             dic["坡口检测"]=obj.bevel;dic["表面质量"]=obj.surface_condition;
-                             dic["是否是取样管"]=obj.is_sample;dic["附着力等级"]=obj.adhesion_rating;
-                             dic["是否是DSC取样管  "]=obj.is_dsc_sample;dic["备注"]=obj.remark;
-                             dic["结论"]=obj.result;
-                             $('#pipeRecordDialog').append(recordTemplate("外涂检验记录(2FBE)",dic));
+                             var result="";
+                             if(obj.result=="0")
+                                 result="不合格,进入待修补工序";
+                             else if(obj.result=="1")
+                                 result="合格,进入外喷标工序";
+                             else if(obj.result=="2")
+                                 result="不合格,进入待扒皮工序";
+                             else if(obj.result=="3")
+                                 result="待定";
+                             else if(obj.result=="4")
+                                 result="隔离,进入修磨或切割工序";
+                             var dic={
+                                 "operatorno":obj.operator_no,"operationtime":getDate1(obj.operation_time),"millno":obj.mill_no,
+                              "basecoatthicknesslist":obj.base_coat_thickness_list,"topcoatthicknesslist":obj.top_coat_thickness_list, "totalcoatingthicknesslist":obj.total_coating_thickness_list,
+                                 "holidays":obj.holidays, "holidaytestervolts":obj.holiday_tester_volts,"repairs":obj.repairs,
+                             "bevel":obj.bevel,"surfacecondition":obj.surface_condition, "issample":obj.is_sample,
+                                 "adhesionrating":obj.adhesion_rating, "isdscsample":obj.is_dsc_sample, "result":result,
+                                 "remark":obj.remark};
+                             $('#pipeRecord-container').append(recordTemplate("外涂检验记录(2FBE)",dic));
                          }
                          //外涂3lpe
                          if(data.odCoating3LpeProcessRecord!=undefined&&data.odCoating3LpeProcessRecord!=null){
                              var obj=data.odCoating3LpeProcessRecord;
-                             var dic=[];
-                             dic["操作工工号"]=obj.operator_no;dic["操作时间"]=obj.operation_time;
-                             dic["分厂号"]=obj.mill_no;
-                             dic["涂敷线速度"]=obj.coating_line_speed;dic["底层粉末型号"]=obj.base_coat_used;
-                             dic["底层粉末批号"]=obj.base_coat_lot_no;dic["中间层粉末型号"]=obj.middle_coat_used;
-                             dic["中间粉末批号"]=obj.middle_coat_lot_no;dic["面层粉末型号"]=obj.top_coat_used;
-                             dic["面层粉末批号"]=obj.top_coat_lot_no;dic["底层粉末喷枪数"]=obj.base_coat_gun_count;
-                              dic["中频温度"]=obj.application_temp; dic["供气压力"]=obj.air_pressure;
-                             dic["表面瑕疵"]=obj.to_first_touch_duration;dic["到达水淋处所需时间"]=obj.to_quench_duration;
-                             dic["喷涂电压"]=obj.coating_voltage;dic["喷枪距离"]=obj.gun_distance;
-                             dic["粉量"]=obj.spray_speed;dic["中频电压"]=obj.application_voltage;
-                             dic["备注"]=obj.remark;dic["结论"]=obj.result;
-                             $('#pipeRecordDialog').append(recordTemplate("外涂记录(3LPE)",dic));
+                             var result="";
+                             if(obj.result=="0")
+                                 result="不合格,进入外防喷砂工序";
+                             else if(obj.result=="1")
+                                 result="合格,进入外涂敷检验工序";
+                             else if(obj.result=="2")
+                                 result="待定";
+                             var dic={
+                                 "operatorno":obj.operator_no,"operationtime":getDate1(obj.operation_time),"millno":obj.mill_no,
+                              "coatinglinespeed":obj.coating_line_speed,"basecoatused":obj.base_coat_used, "basecoatlotno":obj.base_coat_lot_no,
+                                 "middlecoatused":obj.middle_coat_used, "middlecoatlotno":obj.middle_coat_lot_no,"topcoatused":obj.top_coat_used,
+                             "topcoatlotno":obj.top_coat_lot_no,"basecoatguncount":obj.base_coat_gun_count, "applicationtemp":obj.application_temp,
+                                 "airpressure":obj.air_pressure, "tofirsttouchduration":obj.to_first_touch_duration,"toquenchduration":obj.to_quench_duration,
+                             "coatingvoltage":obj.coating_voltage,"gundistance":obj.gun_distance, "sprayspeed":obj.spray_speed,
+                                 "applicationvoltage":obj.application_voltage,"result":result,"":"",
+                                 "remark":obj.remark};
+                             $('#pipeRecord-container').append(recordTemplate("外涂记录(3LPE)",dic));
                          }
                          //外涂检验3lpe
                          if(data.odCoating3LpeInspectionProcessRecord!=undefined&&data.odCoating3LpeInspectionProcessRecord!=null){
                              var obj=data.odCoating3LpeInspectionProcessRecord;
-                             var dic=[];
-                             dic["操作工工号"]=obj.operator_no;dic["操作时间"]=obj.operation_time;
-                             dic["分厂号"]=obj.mill_no;
-                             dic["底层涂层厚度"]=obj.base_coat_thickness_list;dic["面层涂层厚度"]=obj.top_coat_thickness_list;
-                             dic["中间层总厚度"]=obj.middle_coat_thickness_list;
-                             dic["涂层总厚度"]=obj.total_coating_thickness_list;dic["漏点数量"]=obj.holidays;
-                             dic["电火花检测电压"]=obj.holiday_tester_volts;dic["修补点数"]=obj.repairs;
-                             dic["坡口检测"]=obj.bevel;dic["表面质量"]=obj.surface_condition;
-                             dic["是否是取样管"]=obj.is_sample;dic["附着力等级"]=obj.adhesion_rating;
-                             dic["是否是DSC取样管  "]=obj.is_dsc_sample;dic["是否为PE取样管"]=obj.is_pe_sample;
-                             dic["备注"]=obj.remark;
-                             dic["结论"]=obj.result;
-                             $('#pipeRecordDialog').append(recordTemplate("外涂检验记录(3LPE)",dic));
+                             var result="";
+                             if(obj.result=="0")
+                                 result="不合格,进入待修补工序";
+                             else if(obj.result=="1")
+                                 result="合格,进入外喷标工序";
+                             else if(obj.result=="2")
+                                 result="不合格,进入待扒皮工序";
+                             else if(obj.result=="3")
+                                 result="待定";
+                             else if(obj.result=="4")
+                                 result="隔离,进入修磨或切割工序";
+                             var bevel="";
+                             if(obj.bevel=="0")
+                                 bevel="未检测";
+                             else if(obj.bevel=="1")
+                                 bevel="合格";
+                             else if(obj.bevel=="2")
+                                 bevel="不合格";
+                             var issample="";
+                             if(obj.is_sample=="0")
+                                 issample="否";
+                             else if(obj.is_sample=="1")
+                                 issample="是";
+                             var isdscsample="";
+                             if(obj.is_dsc_sample=="0")
+                                 isdscsample="否";
+                             else if(obj.is_dsc_sample=="1")
+                                 isdscsample="是";
+                             var ispesample="";
+                             if(obj.is_pe_sample=="0")
+                                 ispesample="否";
+                             else if(obj.is_pe_sample=="1")
+                                 ispesample="是";
+                             var dic={
+                                 "operatorno":obj.operator_no,"operationtime":getDate1(obj.operation_time),"millno":obj.mill_no,
+                             "basecoatthicknesslist":obj.base_coat_thickness_list,"topcoatthicknesslist":obj.top_coat_thickness_list, "middlecoatthicknesslist":obj.middle_coat_thickness_list,
+                             "totalcoatingthicknesslist":obj.total_coating_thickness_list,"holidays":obj.holidays, "holidaytestervolts":obj.holiday_tester_volts,
+                                 "repairs":obj.repairs, "bevel":bevel,"surfacecondition":obj.surface_condition,
+                             "issample":issample,"adhesionrating":obj.adhesion_rating, "isdscsample":isdscsample,
+                                 "ispesample":ispesample, "result":result,"":"",
+                                 "remark":obj.remark};
+                             $('#pipeRecord-container').append(recordTemplate("外涂检验记录(3LPE)",dic));
                          }
                          //外喷标
                          if(data.odStencilProcessRecord!=undefined&&data.odStencilProcessRecord!=null){
                              var obj=data.odStencilProcessRecord;
-                             var dic=[];
-                             dic["操作工工号"]=obj.operator_no;dic["操作时间"]=obj.operation_time;
-                             dic["分厂号"]=obj.mill_no;
-                             dic["喷标内容"]=obj.stencil_content;dic["中心色环"]=obj.center_line_color;
-                             dic["管端色环"]=obj.pipe_end_color;dic["备注"]=obj.remark;
-                             dic["结论"]=obj.result;
-                             $('#pipeRecordDialog').append(recordTemplate("外喷标记录",dic));
+                             var result="";
+                             if(obj.result=="0")
+                                 result="不合格,重新喷标";
+                             else if(obj.result=="1")
+                                 result="合格,进入外防终检工序";
+                             else if(obj.result=="2")
+                                 result="待定";
+                             var dic={
+                                 "operatorno":obj.operator_no,"operationtime":getDate1(obj.operation_time),"millno":obj.mill_no,
+                                 "centerlinecolor":obj.center_line_color, "pipeendcolor":obj.pipe_end_color,"result":result,
+                               "stencilcontent":obj.stencil_content,
+                                 "remark":obj.remark};
+                             $('#pipeRecord-container').append(recordTemplate("外喷标记录",dic));
                          }
                          //外防终检
                          if(data.odFinalInspectionProcessRecord!=undefined&&data.odFinalInspectionProcessRecord!=null){
                              var obj=data.odFinalInspectionProcessRecord;
-                             var dic=[];
-                             dic["操作工工号"]=obj.operator_no;dic["操作时间"]=obj.operation_time;
-                             dic["分厂号"]=obj.mill_no;
-                             dic["外涂层质检结果"]=obj.inspection_result;dic["预留端长度"]=obj.cutback_length;
-                             dic["外喷标检验"]=obj.stencil_verification;dic["预留端表面"]=obj.cutback_surface;
-                             dic["剩磁测量值"]=obj.magnetism_list;dic["涂层倒角"]=obj.coating_bevel_angle_list;
-                             dic["粉末长度  "]=obj.epoxy_cutback_list;dic["备注"]=obj.remark;
-                             dic["结论"]=obj.result;
-                             $('#pipeRecordDialog').append(recordTemplate("外防终检记录",dic));
+                             var result="";
+                             if(obj.result=="0")
+                                 result="不合格,进入外防待修补工序";
+                             else if(obj.result=="1")
+                                 result="合格,进入外防成品入库工序";
+                             else if(obj.result=="2")
+                                 result="不合格,进入外防待扒皮工序";
+                             else if(obj.result=="3")
+                                 result="待定";
+                             else if(obj.result=="4")
+                                 result="不合格,进入外喷标工序";
+                             else if(obj.result=="5")
+                                 result="隔离，进入修磨或切割工序";
+                             var inspectionresult="";
+                             if(obj.inspection_result=="0")
+                                 inspectionresult="不合格";
+                             else if(obj.inspection_result=="1")
+                                 inspectionresult="合格";
+                             else if(obj.inspection_result=="2")
+                                 inspectionresult="待定";
+                             var stencilverification="";
+                             if(obj.stencil_verification=="0")
+                                 stencilverification="未检测";
+                             else if(obj.stencil_verification=="1")
+                                 stencilverification="合格";
+                             else if(obj.stencil_verification=="2")
+                                 stencilverification="待定";
+                             var cutbacksurface="";
+                             if(obj.cutback_surface=="0")
+                                 cutbacksurface="合格";
+                             else if(obj.cutback_surface=="1")
+                                 cutbacksurface="不合格";
+                             var dic={
+                                 "operatorno":obj.operator_no,"operationtime":getDate1(obj.operation_time),"millno":obj.mill_no,
+                                 "inspectionresult":inspectionresult,"cutbacklength":obj.cutback_length, "stencilverification":stencilverification,
+                                 "cutbacksurface":obj.cutback_surface, "magnetismlist":obj.magnetism_list,"coatingbevelanglelist":obj.coating_bevel_angle_list,
+                                 "epoxycutbacklist":obj.epoxy_cutback_list, "result":result,"":"",
+                                 "remark":obj.remark};
+                             $('#pipeRecord-container').append(recordTemplate("外防终检记录",dic));
                          }
                          //内打砂
                          if(data.idBlastProcessRecord!=undefined&&data.idBlastProcessRecord!=null){
                              var obj=data.idBlastProcessRecord;
-                             var dic=[];
-                             dic["操作工工号"]=obj.operator_no;dic["操作时间"]=obj.operation_time;
-                             dic["分厂号"]=obj.mill_no;
-                             dic["原内壁标签管号"]=obj.original_pipe_no;dic["新内壁标签管号"]=obj.new_pipe_no;
-                             dic["完成标签更新"]=obj.pipe_no_update;dic["打砂前盐度"]=obj.salt_contamination_before_blasting;
-                             dic["内表面外观"]=obj.internal_surface_condition;dic["外涂层表面"]=obj.external_coating_condition;
-                             dic["管体标识是否清晰"]=obj.marking;dic["备注"]=obj.abrasive_conductivity;
-                             dic["备注"]=obj.remark;dic["磨料传导性"]=obj.result;
-                             $('#pipeRecordDialog').append(recordTemplate("内打砂记录",dic));
+                             var result="";
+                             if(obj.result=="0")
+                                 result="不合格,重新打砂处理";
+                             else if(obj.result=="1")
+                                 result="合格,进入内喷砂检验工序";
+                             else if(obj.result=="2")
+                                 result="待定";
+                             else if(obj.result=="3")
+                                 result="内表面缺陷，进入修磨或切割处理";
+                             var pipenoupdate="";
+                             if(obj.pipe_no_update=="0")
+                                 pipenoupdate="是";
+                             else if(obj.pipe_no_update=="1")
+                                 pipenoupdate="否";
+                             var marking="";
+                             if(obj.marking=="0")
+                                 marking="清晰";
+                             else if(obj.marking=="1")
+                                 marking="不清晰";
+
+                             var dic={
+                                 "operatorno":obj.operator_no,"operationtime":getDate1(obj.operation_time),"millno":obj.mill_no,
+                                 "originalpipeno":obj.original_pipe_no,"newpipeno":obj.new_pipe_no,"pipenoupdate":obj.pipe_no_update,
+                                 "saltcontaminationbeforeblasting":obj.salt_contamination_before_blasting,"internalsurfacecondition":obj.internal_surface_condition,"externalcoatingcondition":obj.external_coating_condition,
+                             "marking":obj.marking,"abrasiveconductivity":obj.abrasive_conductivity,"result":result,
+                                 "remark":obj.remark};
+                             $('#pipeRecord-container').append(recordTemplate("内打砂记录",dic));
                          }
                          //内打砂检验
                          if(data.idBlastInspectionProcessRecord!=undefined&&data.idBlastInspectionProcessRecord!=null){
                              var obj=data.idBlastInspectionProcessRecord;
-                             var dic=[];
-                             dic["操作工工号"]=obj.operator_no;dic["操作时间"]=obj.operation_time;
-                             dic["分厂号"]=obj.mill_no;
-                             dic["环境温度"]=obj.air_temp;dic["相对湿度"]=obj.relative_humidity;
-                             dic["露点温度"]=obj.dew_point;dic["表面清洁度"]=obj.blast_finish_sa25;
-                             dic["内打砂时间"]=obj.blast_time;
-                             dic["锚纹深度"]=obj.profile;dic["灰尘度"]=obj.surface_dust_rating;
-                             dic["钢管表面温度"]=obj.pipe_temp;dic["打砂后盐度"]=obj.salt_contamination_after_blasting;
-                             dic["表面质量"]=obj.surface_condition;
-                             dic["涂敷前等待时间"]=obj.elapsed_time;dic["备注"]=obj.remark;
-                             dic["结论"]=obj.result;
-                             $('#pipeRecordDialog').append(recordTemplate("内打砂检验记录",dic));
+                             var result="";
+                             if(obj.result=="0")
+                                 result="不合格,重新打砂处理";
+                             else if(obj.result=="1")
+                                 result="合格,进入内涂敷工序";
+                             else if(obj.result=="2")
+                                 result="待定";
+                             else if(obj.result=="3")
+                                 result="内表面缺陷，进入修磨或切割处理";
+                             var dic={
+                                 "operatorno":obj.operator_no,"operationtime":getDate1(obj.operation_time),"millno":obj.mill_no,
+                                 "airtemp":obj.air_temp,"relativehumidity":obj.relative_humidity, "dewpoint":obj.dew_point,
+                                 "blastfinishsa25":obj.blast_finish_sa25, "blasttime":obj.blast_time, "profile":obj.profile,
+                                 "surfacedustrating":obj.surface_dust_rating, "pipetemp":obj.pipe_temp,"saltcontaminationafterblasting":obj.salt_contamination_after_blasting,
+                                 "surfacecondition":obj.surface_condition, "elapsedtime":obj.elapsed_time, "result":result,
+                                 "remark":obj.remark};
+                             $('#pipeRecord-container').append(recordTemplate("内打砂检验记录",dic));
                          }
                          //内涂
                          if(data.idCoatingProcessRecord!=undefined&&data.idCoatingProcessRecord!=null){
                              var obj=data.idCoatingProcessRecord;
-                             var dic=[];
-                             dic["操作工工号"]=obj.operator_no;dic["操作时间"]=obj.operation_time;
-                             dic["分厂号"]=obj.mill_no;
-                             dic["喷涂速度"]=obj.coating_speed;dic["底层涂料"]=obj.base_used;
-                             dic["底层批号"]=obj.base_batch;dic["固化剂型号"]=obj.curing_agent_used;
-                             dic["固化剂批号"]=obj.curing_agent_batch;dic["固化开始时间"]=obj.curing_start_time;
-                             dic["固化结束时间  "]=obj.curing_finish_time;dic["固化房温度  "]=obj.curing_temp;
-                             dic["备注"]=obj.remark; dic["结论"]=obj.result;
-                             $('#pipeRecordDialog').append(recordTemplate("内涂记录",dic));
+                             var result="";
+                             if(obj.result=="0")
+                                 result="不合格,进入内防待修补工序";
+                             else if(obj.result=="1")
+                                 result="合格,进入内涂敷检验工序";
+                             else if(obj.result=="2")
+                                 result="待定";
+                             var dic={
+                                 "operatorno":obj.operator_no,"operationtime":getDate1(obj.operation_time),"millno":obj.mill_no,
+                                 "coatingspeed":obj.coating_speed,"baseused":obj.base_used, "basebatch":obj.base_batch,
+                                 "curingagentused":obj.curing_agent_used, "curingagentbatch":obj.curing_agent_batch,"curingstarttime":getDate1(obj.curing_start_time),
+                             "curingfinishtime":getDate1(obj.curing_finish_time),"curingtemp":obj.curing_temp,"result":result,
+                                 "remark":obj.remark};
+                             $('#pipeRecord-container').append(recordTemplate("内涂记录",dic));
                          }
                          //内涂检验
                          if(data.idCoatingInspectionProcessRecord!=undefined&&data.idCoatingInspectionProcessRecord!=null){
                              var obj=data.idCoatingInspectionProcessRecord;
-                             var dic=[];
-                             dic["操作工工号"]=obj.operator_no;dic["操作时间"]=obj.operation_time;
-                             dic["分厂号"]=obj.mill_no;
-                             dic["是否为铁片样管"]=obj.is_sample;dic["湿膜厚度"]=obj.wet_film_thickness_list;
-                             dic["是否为玻璃片样管"]=obj.is_glass_sample;
-                             dic["备注"]=obj.remark;
-                             dic["结论"]=obj.result;
-                             $('#pipeRecordDialog').append(recordTemplate("内涂检验记录",dic));
+                             var result="";
+                             if(obj.result=="0")
+                                 result="不合格,进入待修补工序";
+                             else if(obj.result=="1")
+                                 result="合格,进入内涂敷检验工序";
+                             else if(obj.result=="2")
+                                 result="待定";
+                             var issample="";
+                             if(obj.is_sample=="0")
+                                 issample="否";
+                             else if(obj.is_sample=="1")
+                                 issample="是";
+                             var isglasssample="";
+                             if(obj.is_glass_sample=="0")
+                                 isglasssample="否";
+                             else if(obj.is_glass_sample=="1")
+                                 isglasssample="是";
+                             var dic={
+                                 "operatorno":obj.operator_no,"operationtime":getDate1(obj.operation_time),"millno":obj.mill_no,
+                             "issample":issample,"wetfilmthicknesslist":obj.wet_film_thickness_list, "isglasssample":isglasssample,
+                             "result":result, "":""," ":"",
+                                 "remark":obj.remark};
+                             $('#pipeRecord-container').append(recordTemplate("内涂检验记录",dic));
                          }
                          //内喷标
                          if(data.idStencilProcessRecord!=undefined&&data.idStencilProcessRecord!=null){
                              var obj=data.idStencilProcessRecord;
-                             var dic=[];
-                             dic["操作工工号"]=obj.operator_no;dic["操作时间"]=obj.operation_time;
-                             dic["分厂号"]=obj.mill_no;
-                             dic["喷标内容"]=obj.stencil_content; dic["备注"]=obj.remark;
-                             dic["结论"]=obj.result;
-                             $('#pipeRecordDialog').append(recordTemplate("内喷标记录",dic));
+                             var result="";
+                             if(obj.result=="0")
+                                 result="不合格,重喷";
+                             else if(obj.result=="1")
+                                 result="合格,进入内防终检工序";
+                             else if(obj.result=="2")
+                                 result="待定";
+                             var dic={
+                                 "operatorno":obj.operator_no,"operationtime":getDate1(obj.operation_time),"millno":obj.mill_no,
+                                 "stencilcontent":obj.stencil_content, "result":result,"":"",
+                                 "remark":obj.remark};
+                             $('#pipeRecord-container').append(recordTemplate("内喷标记录",dic));
                          }
                          //内防终检
                          if(data.idFinalInspectionProcess!=undefined&&data.idFinalInspectionProcess!=null){
                              var obj=data.idFinalInspectionProcess;
-                             var dic=[];
-                             dic["操作工工号"]=obj.operator_no;dic["操作时间"]=obj.operation_time;
-                             dic["分厂号"]=obj.mill_no;
-                             dic["外涂层质检结果"]=obj.od_inspection_result;dic["终检结果"]=obj.final_inspection_result;
-                             dic["干膜厚度"]=obj.dry_film_thickness_list;dic["预留端长度"]=obj.cutback_length;
-                             dic["内喷标检验"]=obj.stencil_verification;dic["粗糙度"]=obj.roughness_list;
-                             dic["电火花检漏电压"]=obj.holiday_tester_volts;dic["漏点数量"]=obj.holidays;
-                             dic["表面质量"]=obj.surface_condition;dic["坡口质量"]=obj.bevel_check;
-                             dic["剩磁"]=obj.magnetism_list;dic["内涂层修补数"]=obj.internal_repairs;
-                             dic["备注"]=obj.remark;dic["结论"]=obj.result;
-                             $('#pipeRecordDialog').append(recordTemplate("内防终检记录",dic));
+                             var result="";
+                             if(obj.result=="0")
+                                 result="不合格,进入内防涂层待修补工序";
+                             else if(obj.result=="1")
+                                 result="合格,进入内防成品入库工序";
+                             else if(obj.result=="2")
+                                 result="不合格,进入外防待扒皮工序";
+                             else if(obj.result=="3")
+                                 result="不合格,进入内防待扒皮工序";
+                             else if(obj.result=="4")
+                                 result="不合格,进入内喷标工序";
+                             else if(obj.result=="5")
+                                 result="待定";
+                             else if(obj.result=="6")
+                                 result="隔离";
+                             var odinspectionresult="";
+                             if(obj.od_inspection_result=="0")
+                                 odinspectionresult="不合格";
+                             else if(obj.od_inspection_result=="1")
+                                 odinspectionresult="合格";
+                             else if(obj.od_inspection_result=="2")
+                                 odinspectionresult="待定";
+                             var idstencilverification="";
+                             if(obj.stencil_verification=="0")
+                                 idstencilverification="未检测";
+                             else if(obj.stencil_verification=="1")
+                                 idstencilverification="合格";
+                             else if(obj.stencil_verification=="2")
+                                 idstencilverification="不合格";
+                             var bevelcheck="";
+                             if(obj.bevel_check=="0")
+                                 bevelcheck="未检测";
+                             else if(obj.bevel_check=="1")
+                                 bevelcheck="合格";
+                             else if(obj.bevel_check=="2")
+                                 bevelcheck="不合格";
+                             var dic={
+                                 "operatorno":obj.operator_no,"operationtime":getDate1(obj.operation_time),"millno":obj.mill_no,
+                             "odinspectionresult":odinspectionresult,"dryfilmthicknesslist":obj.dry_film_thickness_list,"cutbacklength":obj.cutback_length,
+                                 "stencilverification":idstencilverification,"roughnesslist":obj.roughness_list,"holidaytestervolts":obj.holiday_tester_volts,
+                                 "holidays":obj.holidays, "surfacecondition":obj.surface_condition, "bevelcheck":bevelcheck,
+                                 "magnetismlist":obj.magnetism_list,"internalrepairs":obj.internal_repairs, "result":result,
+                                 "remark":obj.remark};
+                             $('#pipeRecord-container').append(recordTemplate("内防终检记录",dic));
                          }
+                         //扒皮
+
+                         //修补
+
+                         //修磨切割
+
+                         //倒棱
+
                          $('#pipeRecordDialog').dialog('open');
+                         hlLanguage("../i18n/");
                      },
                      error:function () {
                          $.messager.alert('Warning','系统繁忙,请稍后查看!');
@@ -479,15 +699,32 @@
                  $.messager.alert('Warning','请选择要查看的钢管编号!');
              }
          }
-        function recordTemplate(recordName, dic) {
+        function recordTemplate(recordName, dict) {
             var template = "";
             var i = 1;
-            template += '<table  title="" style="width:100%;height:auto;"><thead><tr><th colspan="3">' + recordName + '</th></tr></thead><tbody>';
+            template += '<table  title="" class="dataintable" style="width:100%;height:auto;"><thead><tr><th colspan="6">' + recordName + '</th></tr></thead><tbody>';
             template += '<tr>';
-                for(var key in dic) {
-                        template += '<td>'+ key +'</td>';
-                        template += ' <td>'+dic[key] +'</td>';
+            for(var key in dict) {
+                if(i > 3) {
+                    template += '</tr><tr>';
+                    i = 1;
                 }
+                if(key.trim().length>0){
+                    if(key=="remark"||(key=="stencilcontent"&&recordName=="外喷标记录")){
+                        template += ' <td class="i18n1" name='+key+' style="width:120px;vertical-align: middle;text-align: center;">' + key + '</td>';
+                        template += ' <td colspan="5" style="color:#878787;vertical-align: middle;text-align: center;">' + dict[key] + '</td>';
+                        i=3;
+                    }else{
+                        template += ' <td class="i18n1" name='+key+' style="width:120px;vertical-align: middle;text-align: center;">' + key + '</td>';
+                        template += ' <td style="width:280px;color:#878787;vertical-align: middle;text-align: center;">' + dict[key] + '</td>';
+                    }
+
+                }else{
+                    template += ' <td style="width:120px;vertical-align: middle;text-align: center;"></td>';
+                    template += ' <td style="width:280px;color:#878787;vertical-align: middle;text-align: center;"></td>';
+                }
+                i++;
+            }
             template+='</tr></tbody></table>';
             return template;
         }
@@ -765,24 +1002,11 @@
 
         </div>
     </div>
-    <div id="pipeRecordDialog" class="easyui-dialog" title="钢管流程信息" closed="true" data-options="iconCls:'icon-save'" style="width:800px;height:400px;padding:10px;word-break: break-all; word-wrap:break-word;overflow-y: scroll;">
-        <%--<table  title="" style="width:100%;height:auto;">--%>
-            <%--<thead>--%>
-            <%--<tr>--%>
-                <%--<th colspan="3">1222</th>--%>
-            <%--</tr>--%>
-            <%--</thead>--%>
-            <%--<tbody>--%>
-              <%--<tr>--%>
-                  <%--<td>外防</td>--%>
-                  <%--<td>123</td>--%>
-                  <%--<td>内防</td>--%>
-                  <%--<td>123</td>--%>
-                  <%--<td>内防</td>--%>
-                  <%--<td>123</td>--%>
-              <%--</tr>--%>
-            <%--</tbody>--%>
-        <%--</table>--%>
+    <div id="pipeRecordDialog" class="easyui-dialog" title="钢管流程信息" closed="true" data-options="iconCls:'icon-save'" style="width:1200px;height:600px;top:25px;padding:10px;word-break: break-all; word-wrap:break-word;overflow-y: scroll;">
+        <div id="pipeRecord-container" style="width:100%;height:100%;overflow-y: scroll">
+
+        </div>
+
     </div>
 </div>
 
