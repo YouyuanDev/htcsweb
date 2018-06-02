@@ -1,25 +1,25 @@
 
 Current_Status                     Result:NextStatus
 
-光管入库             bare1        0:bare1     1:od1   2:bare1
+光管入库             bare1     外喷砂工序   0:bare1     1:od1   2:bare1 3： onhold
 
-外喷砂完成            od1         0:bare1     1:od2   2:od1
+外喷砂完成            od1      外喷砂检验工序   0:bare1     1:od2   2:od1  3： onhold
 
-外喷砂检验完成         od2         0:bare1     1:od3    2:od2
+外喷砂检验完成         od2      外涂工序   0:bare1     1:od3    2:od2
 
-外涂完成              od3         0:odrepair1   1:od4   2:odstrip1 3:od3
+外涂完成              od3      外涂检验工序   0:odrepair1   1:od4   2:odstrip1 3:od3  4: onhold
 
-外涂检验完成           od4        0:od4      1:od5     2:od4
+外涂检验完成           od4      外喷标工序  0:od4      1:od5     2:od4
 
-外喷标完成            od5        0:od5       1:od6     2:od5
+外喷标完成            od5       外防终检工序  0:odrepair1       1:od6     2:odstrip1   3:od5   4: od4 5:onhold
 
-外防终检完成          od6        1:odstockin
+外防终检完成          od6       成品入库工序 1:odstockin
 
-外防成品入库          odstockin   (内喷砂工序)  0:odstockin  1:id1
+外防成品入库          odstockin  光管调拨工序 (内喷砂工序)  0:odstockin  1:id1
 
 外防待修补           odrepair1   0:odrepair1   1:odrepair2  2:odrepair1
 
-外防修补完成待检验    odrepair2   0:odrepair1   1:od4   2:odrepair2
+外防修补完成待检验    odrepair2   0:odrepair1   1:od3 或者 od5  2:odrepair2
 
 光管入库             bare2        0:bare1     1:id1   2:bare1
 
@@ -38,4 +38,4 @@ Current_Status                     Result:NextStatus
 内防待修补        idrepair1     0:idrepair1   1:idrepair2  2:idrepair1
 内防修补完成待检验    idrepair2  0:idrepair1   1:id5        2:idrepair2
 已出厂             out
-隔离             onhold
+隔离             onhold    根据被隔离时上一次的状态制定下一个状态

@@ -582,6 +582,7 @@
                         <option value="0">不合格,进入待修补工序</option>
                         <option value="2">不合格,进入待扒皮工序</option>
                         <option value="3">待定</option>
+                        <option value="4">隔离，进入修磨或切割工序</option>
                     </select></td>
                     <td></td>
                     <td width="16%" class="i18n1" name="remark">备注</td>
