@@ -401,14 +401,14 @@
     </delete>
 
     <update id="odProductStockin" parameterType="com.htcsweb.entity.PipeBasicInfo">
-        UPDATE pipe_basic_info set status='odstockin',storage_stack=#{storage_stack}, stack_level=#{stack_level},level_direction=#{level_direction},level_sequence=#{level_sequence} WHERE  status='od6' AND
+        UPDATE pipe_basic_info set last_accepted_status='odstockin',status='odstockin',storage_stack=#{storage_stack}, stack_level=#{stack_level},level_direction=#{level_direction},level_sequence=#{level_sequence} WHERE  status='od6' AND
         <foreach collection="array" item="item" open="id in (" separator="," close=")">
             #{item}
         </foreach>
     </update>
 
     <update id="idProductStockin" parameterType="com.htcsweb.entity.PipeBasicInfo">
-        UPDATE pipe_basic_info set status='idstockin', storage_stack=#{storage_stack}, stack_level=#{stack_level},level_direction=#{level_direction},level_sequence=#{level_sequence}  WHERE  status='id6' AND
+        UPDATE pipe_basic_info set last_accepted_status='idstockin',status='idstockin', storage_stack=#{storage_stack}, stack_level=#{stack_level},level_direction=#{level_direction},level_sequence=#{level_sequence}  WHERE  status='id6' AND
         <foreach collection="array" item="item" open="id in (" separator="," close=")">
             #{item}
         </foreach>
@@ -416,14 +416,14 @@
 
 
     <update id="SetToODBare" parameterType="com.htcsweb.entity.PipeBasicInfo">
-        UPDATE pipe_basic_info set status='bare1' WHERE  (status='bare2' or status='odstrip2') AND
+        UPDATE pipe_basic_info set last_accepted_status='bare1',status='bare1' WHERE  (status='bare2' or status='odstrip2') AND
         <foreach collection="array" item="item" open="id in (" separator="," close=")">
             #{item}
         </foreach>
     </update>
 
     <update id="SetToIDBare" parameterType="com.htcsweb.entity.PipeBasicInfo">
-        UPDATE pipe_basic_info set status='bare2' WHERE  (status='bare1' or status='idstrip2') AND
+        UPDATE pipe_basic_info set last_accepted_status='bare2',status='bare2' WHERE  (status='bare1' or status='idstrip2') AND
         <foreach collection="array" item="item" open="id in (" separator="," close=")">
             #{item}
         </foreach>
@@ -477,7 +477,7 @@
 
 
     <update id="coatingProductStockout" parameterType="com.htcsweb.entity.PipeBasicInfo">
-        UPDATE pipe_basic_info set status='out', shipment_date=sysdate() WHERE  (status='odstockin' or status='idstockin') AND
+        UPDATE pipe_basic_info set last_accepted_status='out',status='out', shipment_date=sysdate() WHERE  (status='odstockin' or status='idstockin') AND
         <foreach collection="array" item="item" open="id in (" separator="," close=")">
             #{item}
         </foreach>

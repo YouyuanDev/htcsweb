@@ -460,7 +460,7 @@
                         $('#hlTab').tabs('select', node.text);
                     } else {
 
-                        if ("光管修磨切割" == nodeTxt || "Bare Pipe Grinding Cut-off" == nodeTxt) {
+                        if ("钢管修磨切割" == nodeTxt || "Pipe Grinding Cut-off" == nodeTxt) {
 
                             $('#hlTab').tabs('add', {
                                 title: node.text,
