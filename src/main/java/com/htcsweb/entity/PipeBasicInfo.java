@@ -23,11 +23,14 @@ public class PipeBasicInfo {
     private String level_direction;
     private String level_sequence;
     private Date shipment_date;
+    private String last_accepted_status;
+
 
     public PipeBasicInfo() {
     }
 
-    public PipeBasicInfo(int id, String contract_no, String pipe_no, String grade, float od, float wt, float p_length, float weight, String pipe_making_lot_no, String status, String heat_no, String storage_stack, String stack_level, Date od_coating_date, Date id_coating_date, String level_direction, String level_sequence, Date shipment_date) {
+
+    public PipeBasicInfo(int id, String contract_no, String pipe_no, String grade, float od, float wt, float p_length, float weight, String pipe_making_lot_no, String status, String heat_no, String storage_stack, String stack_level, Date od_coating_date, Date id_coating_date, String level_direction, String level_sequence, Date shipment_date, String last_accepted_status) {
         this.id = id;
         this.contract_no = contract_no;
         this.pipe_no = pipe_no;
@@ -46,6 +49,7 @@ public class PipeBasicInfo {
         this.level_direction = level_direction;
         this.level_sequence = level_sequence;
         this.shipment_date = shipment_date;
+        this.last_accepted_status = last_accepted_status;
     }
 
     public int getId() {
@@ -190,5 +194,13 @@ public class PipeBasicInfo {
 
     public void setShipment_date(Date shipment_date) {
         this.shipment_date = shipment_date;
+    }
+
+    public String getLast_accepted_status() {
+        return last_accepted_status;
+    }
+
+    public void setLast_accepted_status(String last_accepted_status) {
+        this.last_accepted_status = last_accepted_status;
     }
 }
