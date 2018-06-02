@@ -193,31 +193,25 @@ public class IdFinalInspectionProcessController {
                 List<PipeBasicInfo> list=pipeBasicInfoDao.getPipeNumber(pipeno);
                 if(list.size()>0){
                     PipeBasicInfo p=list.get(0);
-                    //验证钢管状态是否为内喷标完成或者外防入库
-                    if(p.getStatus().equals("id5")||p.getStatus().equals("odstockin")||p.getStatus().equals("idrepair2")){
+                    //验证钢管状态是否为内喷标完成或者外防入库  id5  内防终检工序     0:idrepair1   1:id6   2:odstrip1   3:idstrip1  4: id4   5:id5   6:  onhold
+                    if(p.getStatus().equals("id5")){
                         //如果为合格
                         if(idFinalInspectionProcess.getResult().equals("1")) {
                             p.setStatus("id6");
-                            int statusRes=pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }else if(idFinalInspectionProcess.getResult().equals("0")){
-                            p.setStatus("odrepair1");
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                            p.setStatus("idrepair1");
                         }else if(idFinalInspectionProcess.getResult().equals("2")){
                             p.setStatus("odstrip1");
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }else if(idFinalInspectionProcess.getResult().equals("3")){
-                            p.setStatus("od4");
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
-                        }else if(idFinalInspectionProcess.getResult().equals("4")){
-                            p.setStatus("idrepair1");
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
-                        }else if(idFinalInspectionProcess.getResult().equals("5")){
                             p.setStatus("idstrip1");
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
-                        }else if(idFinalInspectionProcess.getResult().equals("6")){
+                        }else if(idFinalInspectionProcess.getResult().equals("4")){
                             p.setStatus("id4");
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        }else if(idFinalInspectionProcess.getResult().equals("5")){
+                            p.setStatus("id5");
+                        }else if(idFinalInspectionProcess.getResult().equals("6")){
+                            p.setStatus("onhold");
                         }
+                        int statusRes=pipeBasicInfoDao.updatePipeBasicInfo(p);
                     }
                 }
                 json.put("success",true);

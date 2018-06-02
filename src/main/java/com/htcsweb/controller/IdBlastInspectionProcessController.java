@@ -222,18 +222,16 @@ public class IdBlastInspectionProcessController {
                 if(list.size()>0){
                     PipeBasicInfo p=list.get(0);
                     if(p.getStatus().equals("id1")) {
-                        //验证钢管状态为内打砂完成
+                        //验证钢管状态为内打砂完成  id1   内喷砂检验工序 0:bare2     1:id2   2:id1  3： onhold
                         if(idBlastInspectionProcess.getResult().equals("1")) {//当打砂检验合格时才更新钢管状态
                             p.setStatus("id2");
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }else if(idBlastInspectionProcess.getResult().equals("0")) {
                             p.setStatus("bare2");
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }
                         else if(idBlastInspectionProcess.getResult().equals("3")) {//当需要修磨或切除时，设置为onhold状态
                             p.setStatus("onhold");
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }
+                        int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                     }
 
                 }

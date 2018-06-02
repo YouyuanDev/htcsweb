@@ -622,7 +622,7 @@
         {
             grid1.load({
                 pipe_no:keyText1.value,
-                pipestatus:'id3,idrepair2'
+                pipestatus:'id3'
             });
         }else if(type==2){
             grid2.load({
@@ -673,7 +673,7 @@
         $('#searchBar1').css('display','block');
         grid1.load({
             pipe_no:keyText1.value,
-            pipestatus:'id3,idrepair2'
+            pipestatus:'id3'
         });
 
     });

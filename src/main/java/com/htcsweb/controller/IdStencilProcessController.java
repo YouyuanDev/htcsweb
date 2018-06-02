@@ -95,7 +95,7 @@ public class IdStencilProcessController {
                 if(list.size()>0){
                     PipeBasicInfo p=list.get(0);
                     if(p.getStatus().equals("id4")){
-                        //验证钢管状态为光管
+                        //验证钢管状态为内涂检验合格管 id4       内喷标工序       0:id4     1:id5  2:id4
                         if(idStencilProcess.getResult().equals("1")) {//当合格时才更新钢管状态
                             p.setStatus("id5");
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);

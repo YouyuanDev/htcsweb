@@ -390,7 +390,7 @@
                 <tr>
                     <td width="16%" class="i18n1" name="result">结论</td>
                     <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
-                        <option value="0">不合格,进入内防待修补工序</option>
+                        <option value="0">不合格,进入内防喷砂工序</option>
                         <option value="1">合格,进入内涂敷检验工序</option>
                         <option value="2">待定</option>
                     </select></td>

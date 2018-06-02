@@ -133,16 +133,15 @@ public class IdCoatingProcessController {
                 if(list.size()>0){
                     PipeBasicInfo p=list.get(0);
                     if(p.getStatus().equals("id2")) {
-                        //验证钢管状态为光管
+                        //验证钢管状态为内喷砂检验合格管   id2       内防喷涂工序       0:bare2     1:id3   2:id2
                         if(idCoatingProcess.getResult().equals("1")) {//当合格时才更新钢管状态
                             p.setStatus("id3");
                             //同时更新钢管基础信息的id_coating_date信息，内涂日期
                             p.setId_coating_date(idCoatingProcess.getOperation_time());
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }else if(idCoatingProcess.getResult().equals("0")){
-                            p.setStatus("idrepair1");
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                            p.setStatus("bare2");
                         }
+                        int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                     }
                 }
                 json.put("success",true);

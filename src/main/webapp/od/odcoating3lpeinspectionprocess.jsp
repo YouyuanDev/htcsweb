@@ -726,7 +726,7 @@
             grid1.load({
                 pipe_no:keyText1.value,
                 external_coatingtype:'3LPE',
-                pipestatus:'od3,odrepair2'
+                pipestatus:'od3'
             });
         }else if(type==2){
             grid2.load({
@@ -778,7 +778,7 @@
         grid1.load({
             pipe_no:keyText1.value,
             external_coatingtype:'3LPE',
-            pipestatus:'od3,odrepair2'
+            pipestatus:'od3'
         });
     });
     look2.on("showpopup",function(e){

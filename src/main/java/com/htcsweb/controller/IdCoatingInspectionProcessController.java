@@ -128,18 +128,18 @@ public class IdCoatingInspectionProcessController {
                 List<PipeBasicInfo> list=pipeBasicInfoDao.getPipeNumber(pipeno);
                 if(list.size()>0){
                     PipeBasicInfo p=list.get(0);
-                    if(p.getStatus().equals("id3")||p.getStatus().equals("idrepair2")) {
-                        //验证钢管状态为光管
+                    if(p.getStatus().equals("id3")) {
+                        //验证钢管状态为内涂完成管    id3  内涂检验工序  0:idrepair1  1:id4   2:idstrip1  3:id3  4: onhold
                         if(idCoatingInspectionProcess.getResult().equals("1")) {//当合格时才更新钢管状态
                             p.setStatus("id4");
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }else if(idCoatingInspectionProcess.getResult().equals("0")){
                             p.setStatus("idrepair1");
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }else if(idCoatingInspectionProcess.getResult().equals("2")){
                             p.setStatus("idstrip1");
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        }else if(idCoatingInspectionProcess.getResult().equals("4")){
+                            p.setStatus("onhold");
                         }
+                        int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                     }
                 }
                 json.put("success",true);
