@@ -376,12 +376,21 @@ public class PipeBasicInfoController {
         try{
             int resTotal=0;
             String shipment_date=request.getParameter("shipmentDate");
+            String od_coating_date=request.getParameter("odcoatingDate");
+            String id_coating_date=request.getParameter("idcoatingDate");
+            SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             if(shipment_date!=null&&shipment_date!=""){
-                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date new_odbptime = simFormat.parse(shipment_date);
                 pipeBasicInfo.setShipment_date(new_odbptime);
             }
-
+            if(od_coating_date!=null&&od_coating_date!=""){
+                Date new_od_coating_date = simFormat.parse(od_coating_date);
+                pipeBasicInfo.setOd_coating_date(new_od_coating_date);
+            }
+            if(id_coating_date!=null&&id_coating_date!=""){
+                Date new_id_coating_date= simFormat.parse(id_coating_date);
+                pipeBasicInfo.setId_coating_date(new_id_coating_date);
+            }
             //备份一下上一个生产工序状态,用于修补管及隔离管处理后状态跳转
             String status=pipeBasicInfo.getStatus();
             if(!status.equals("odrepair1")&&!status.equals("odrepair2")&&!status.equals("idrepair1")&&!status.equals("idrepair2")&&!status.equals("onhold")){
