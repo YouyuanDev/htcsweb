@@ -538,13 +538,12 @@
                     <td width="16%" class="i18n1" name="result">结论</td>
                     <td><select id="dd" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
                         <option value="1">合格,进入内防成品入库工序</option>
-                        <option value="0">不合格,进入外防待修补工序</option>
+                        <option value="0">不合格,进入内防涂层待修补工序</option>
                         <option value="2">不合格,进入外防待扒皮工序</option>
-                        <option value="3">不合格,进入外喷标工序</option>
-                        <option value="4">不合格,进入内防待修补工序</option>
-                        <option value="5">不合格,进入内防待扒皮工序</option>
-                        <option value="6">不合格,进入内喷标工序</option>
-                        <option value="7">待定</option>
+                        <option value="3">不合格,进入内防待扒皮工序</option>
+                        <option value="4">不合格,进入内喷标工序</option>
+                        <option value="5">待定</option>
+                        <option value="6">隔离</option>
                     </select></td>
                     <td></td>
                     <%--<td class="i18n1" name="idinspectionresult">内涂层质检结果</td>--%>

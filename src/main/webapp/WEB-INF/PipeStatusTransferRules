@@ -13,29 +13,47 @@ Current_Status                     Result:NextStatus
 
 外喷标完成            od5       外防终检工序  0:odrepair1       1:od6     2:odstrip1   3:od5   4: od4 5:onhold
 
-外防终检完成          od6       成品入库工序 1:odstockin
+外防终检完成          od6       成品入库工序    odstockin
 
-外防成品入库          odstockin  光管调拨工序 (内喷砂工序)  0:odstockin  1:id1
+外防成品入库          odstockin    光管调拨工序 (内喷砂工序)  0:odstockin  1:id1
 
-外防待修补           odrepair1   0:odrepair1   1:odrepair2  2:odrepair1
+外防成品入库          odstockin    外防成品出厂     out
 
-外防修补完成待检验    odrepair2   0:odrepair1   1:od3 或者 od5  2:odrepair2
+外防待修补           odrepair1  涂层修补工序 0:odrepair1   1:odrepair2  2:odrepair1
 
-光管入库             bare2        0:bare1     1:id1   2:bare1
+外防修补完成待检验    odrepair2  涂层修补检验工序 0:odrepair1   1:od3 或者 od5  2:odrepair2
 
-内喷砂完成           id1       0:id1     1:id2   2:id1
-内喷砂检验完成        id2       0:odstockin     1:id3   2:id1
-内涂完成             id3        0:idstrip1     1:id4   2:idrepair1
-内涂检验完成          id4         0:idstrip1     1:id5  2:idrepair1
-内喷标完成           id5         0:id5       1:id6     2:id5
-内防终检完成         id6          0:id6   1:idstockin    2:id6
+外防待扒皮        odstrip1     外防涂层扒皮工序  0:odstrip1  1:odstrip2
 
-内防成品入库       idstockin       1:out
-外防待扒皮        odstrip1       0:odstrip1  1:odstrip2
-外防扒皮完成      odstrip2        1:bare1
-内防待扒皮        idstrip1        0:idstrip1  1:idstrip2
-内防扒皮完成      idstrip2        1:bare1     2:odstockin
+外防扒皮完成      odstrip2      外扒皮管转外光管工序  1:bare1
+
+
+光管入库             bare2      内喷砂工序    0:bare2     1:id1   2:bare2  3： onhold
+
+内喷砂完成           id1        内喷砂检验工序 0:id1     1:id2   2:id1  3： onhold
+
+内喷砂检验完成        id2       内防喷涂工序       0:odstockin     1:id3   2:id1
+
+内防喷涂完成             id3       内防检验工序       0:idrepair1    1:id4   2:idstrip1  3:id3  4: onhold
+
+内防检验完成          id4       内喷标工序       0:id4     1:id5  2:id4
+
+内喷标完成           id5        内防终检工序     0:idrepair1   1:id6   2:odstrip1   3:idstrip1  4: id4   5:id5   6:  onhold
+
+内防终检完成         id6        内防入库工序      idstockin
+
+内防成品入库       idstockin    内防成品出厂     out
+
+
+
+内防待扒皮        idstrip1    内防涂层扒皮工序    0:idstrip1  1:idstrip2
+
+内防扒皮完成      idstrip2    内扒皮管转内光管工序    1:bare2     2:idstockin
+
 内防待修补        idrepair1     0:idrepair1   1:idrepair2  2:idrepair1
+
 内防修补完成待检验    idrepair2  0:idrepair1   1:id5        2:idrepair2
+
 已出厂             out
+
 隔离             onhold    根据被隔离时上一次的状态制定下一个状态
