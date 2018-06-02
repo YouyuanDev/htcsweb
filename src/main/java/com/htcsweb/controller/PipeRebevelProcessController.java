@@ -50,7 +50,7 @@ public class PipeRebevelProcessController {
             String pipeno=pipeRebevelRecord.getPipe_no();
             if(pipeRebevelRecord.getId()==0){
                 //添加
-                System.out.println("11111111");
+                //System.out.println("11111111");
                 resTotal=pipeRebevelRecordDao.addPipeRebevelRecord(pipeRebevelRecord);
             }else{
                 //修改！

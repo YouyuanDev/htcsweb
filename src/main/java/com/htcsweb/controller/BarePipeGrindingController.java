@@ -73,13 +73,8 @@ public class BarePipeGrindingController {
                     if(p.getStatus().equals("onhold")) {
                         //验证钢管状态为隔离管
                         if(barePipeGrindingCutoffRecord.getResult()!=null&&barePipeGrindingCutoffRecord.getResult().equals("1")) {//当合格时才更新钢管状态
-                            if(barePipeGrindingCutoffRecord.getOdid().equals("OD")) {
-                                p.setStatus("bare1");
-                            }
-                            else {
-                                p.setStatus("bare2");
-                            }
-
+                            //返回跳转至上一生产工序
+                            p.setStatus(p.getLast_accepted_status());
                             //若切割，判断是否需要重新倒坡口
                             if(barePipeGrindingCutoffRecord.getGrinding_cutoff()!=null&&(barePipeGrindingCutoffRecord.getGrinding_cutoff().equals("C")||barePipeGrindingCutoffRecord.getGrinding_cutoff().equals("GC"))) {
                                 //判断管子是否计算过新长度
