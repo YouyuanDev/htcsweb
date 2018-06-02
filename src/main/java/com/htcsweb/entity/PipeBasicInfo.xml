@@ -236,7 +236,7 @@
             <if test="status!=null and status!=''">
                 AND status = #{status}
             </if>
-            AND (status = 'bare1' or status = 'bare2' or status = 'odstrip2' or status = 'idstrip2')
+            AND (status = 'bare1' or status = 'bare2' )
         </where>
         ORDER BY id DESC
         limit #{skip},#{take}
