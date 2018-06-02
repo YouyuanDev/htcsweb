@@ -103,9 +103,9 @@ public class SessionFilter extends OncePerRequestFilter{
         //System.out.println("strUri="+strUri);
         if(request.getSession().getAttribute("userSession")==null ){
             //进入后台,必须先登陆
-            if(isURIinNotFilterList(strUri)){//请求的URI允许不过滤,包括login等
+            if(isURIInAuthorizedList(strUri)){//请求的URI允许不过滤,包括login等
                 //System.out.println("====login 不需要验证====");
-                System.out.println("请求登录="+strUri);
+                System.out.println("免验证"+strUri);
                 filterChain.doFilter(request, response);//不执行过滤,继续执行操作
                 return;
             }else{//uri需要被过滤
@@ -128,7 +128,7 @@ public class SessionFilter extends OncePerRequestFilter{
 
             }
         }else{//存在登录信息session
-            if(isURIinNotFilterList(strUri)){//请求的URI允许不过滤,包括login等
+            if(isURIInAuthorizedList(strUri)){//请求的URI允许不过滤,包括login等
                 filterChain.doFilter(request, response);//不执行过滤,继续执行操作
                 return;
             }
@@ -173,7 +173,7 @@ public class SessionFilter extends OncePerRequestFilter{
     }
 
     //检查URI是否在免过滤列表中
-    private boolean isURIinNotFilterList(String URI){
+    private boolean isURIInAuthorizedList(String URI){
         if(URI==null)
             return false;
 
