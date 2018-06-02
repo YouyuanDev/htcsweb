@@ -52,7 +52,7 @@ Current_Status                     Result:NextStatus
 
 内防待修补        idrepair1     0:idrepair1   1:idrepair2  2:idrepair1
 
-内防修补完成待检验    idrepair2  0:idrepair1   1:id5        2:idrepair2
+内防修补完成待检验    idrepair2  0:idrepair1   1:id3 或 id5       2:idrepair2
 
 已出厂             out
 
