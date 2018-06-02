@@ -107,28 +107,42 @@ public class CoatingRepairController {
                 List<PipeBasicInfo> list=pipeBasicInfoDao.getPipeNumber(pipeno);
                 if(list.size()>0){
                     PipeBasicInfo p=list.get(0);
-                    if(p.getStatus().equals("odrepair1")) {
-                        //验证钢管状态为od 修补管
-                        if(coatingRepair.getResult().equals("1")) {//当合格时才更新钢管状态
+                    if(p.getStatus().equals("odrepair1")||p.getStatus().equals("odrepair2")) {
+                        //验证钢管状态为外防工序修补管  0:odrepair1 1：上一个工序状态 od3 或者 od5  2:odrepair2  3:odstrip1  4:idstrip1
+                        if(coatingRepair.getResult().equals("0")) {//修补不合格重修
+                            p.setStatus("odrepair1");
+                        }
+                        else if(coatingRepair.getResult().equals("1")) {//当合格时才更新钢管状态 上一个工序状态
+                            p.setStatus(p.getLast_accepted_status());
+                        }
+                        else if(coatingRepair.getResult().equals("2")) {//修补完成，待检验
                             p.setStatus("odrepair2");
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        }
+                        else if(coatingRepair.getResult().equals("3")) {//当不合格需要外扒皮时 更新钢管状态
+                            p.setStatus("odstrip1");
+                        }
+                        else if(coatingRepair.getResult().equals("4")) {//当不合格需要内扒皮时 更新钢管状态
+                            p.setStatus("idstrip1");
+                        }
+                    }else if(p.getStatus().equals("idrepair1")||p.getStatus().equals("idrepair2")) {
+                        //验证钢管状态为id 修补管  0:idrepair1 1：上一个工序状态 id3 或者 id5  2:idrepair2  3:odstrip1  4:idstrip1
+                        if(coatingRepair.getResult().equals("0")) {//修补不合格重修
+                            p.setStatus("idrepair1");
+                        }
+                        else if(coatingRepair.getResult().equals("1")) {//当合格时才更新钢管状态
+                            p.setStatus(p.getLast_accepted_status());
                         }
                         else if(coatingRepair.getResult().equals("2")) {//当不合格需要扒皮时 更新钢管状态
-                            p.setStatus("odstrip1");
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
-                        }
-
-
-                    }else if(p.getStatus().equals("idrepair1")) {
-                        //验证钢管状态为id 修补管
-                        if(coatingRepair.getResult().equals("1")) {//当合格时才更新钢管状态
                             p.setStatus("idrepair2");
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
-                        }else if(coatingRepair.getResult().equals("2")) {//当不合格需要扒皮时 更新钢管状态
+                        }
+                        else if(coatingRepair.getResult().equals("3")) {//当不合格需要外扒皮时 更新钢管状态
+                            p.setStatus("odstrip1");
+                        }
+                        else if(coatingRepair.getResult().equals("4")) {//当不合格需要内扒皮时 更新钢管状态
                             p.setStatus("idstrip1");
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }
                     }
+                    int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
 
                 }
                 json.put("success",true);

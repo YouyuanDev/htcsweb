@@ -606,9 +606,11 @@
                     <td width="20%"  class="i18n1" name="result">结论</td>
                     <td width="30%"><select id="cc" class="easyui-combobox" data-options="editable:false" name="result"   style="width:185px;">
                         <option value="0">不合格,重新修补</option>
-                        <option value="1">合格</option>
-                        <option value="2">不合格,扒皮处理</option>
-                        <option value="3">待定</option>
+                        <option value="1">修补完成,检验合格</option>
+                        <option value="2">修补完成,待检验</option>
+                        <option value="3">不合格,外防扒皮处理</option>
+                        <option value="4">不合格,内防扒皮处理</option>
+                        <option value="5">待定</option>
                     </select></td>
                     <td width="20%" class="i18n1" name="remark">备注</td>
                     <td width="30%">

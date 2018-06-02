@@ -374,6 +374,14 @@ public class PipeBasicInfoController {
                 Date new_odbptime = simFormat.parse(shipment_date);
                 pipeBasicInfo.setShipment_date(new_odbptime);
             }
+
+            //备份一下上一个生产工序状态,用于修补管及隔离管处理后状态跳转
+            String status=pipeBasicInfo.getStatus();
+            if(!status.equals("odrepair1")&&!status.equals("odrepair2")&&!status.equals("idrepair1")&&!status.equals("idrepair2")&&!status.equals("onhold")){
+                pipeBasicInfo.setLast_accepted_status(status);
+            }
+
+
             if(pipeBasicInfo.getId()==0){
                 //添加
                 resTotal=pipeBasicInfoDao.addPipeBasicInfo(pipeBasicInfo);
