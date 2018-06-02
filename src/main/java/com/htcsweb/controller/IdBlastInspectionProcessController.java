@@ -225,8 +225,10 @@ public class IdBlastInspectionProcessController {
                         //验证钢管状态为内打砂完成  id1   内喷砂检验工序 0:bare2     1:id2   2:id1  3： onhold
                         if(idBlastInspectionProcess.getResult().equals("1")) {//当打砂检验合格时才更新钢管状态
                             p.setStatus("id2");
+                            p.setLast_accepted_status(p.getStatus());
                         }else if(idBlastInspectionProcess.getResult().equals("0")) {
                             p.setStatus("bare2");
+                            p.setLast_accepted_status(p.getStatus());
                         }
                         else if(idBlastInspectionProcess.getResult().equals("3")) {//当需要修磨或切除时，设置为onhold状态
                             p.setStatus("onhold");
