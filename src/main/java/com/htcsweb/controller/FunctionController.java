@@ -44,7 +44,7 @@ public class FunctionController {
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
         maps.put("rows",list);
-        System.out.println("rrrrrrrrrrrow="+count);
+        //System.out.println("rrrrrrrrrrrow="+count);
         String mmp= JSONArray.toJSONString(maps);
         //System.out.print("mmp:"+mmp);
         return mmp;
