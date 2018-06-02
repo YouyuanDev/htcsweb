@@ -278,6 +278,11 @@
                      dataType:'json',
                      data:{pipe_no:pipe_no},
                      success:function (data) {
+                         //alert(toString.call(data.success)+":"+data.success);
+                         if(!data.success){
+                             $.messager.alert('Warning', data.message);
+                             return;
+                         }
                          //外打砂
                          if(data.odBlastProcessRecord!=undefined&&data.odBlastProcessRecord!=null){
                               var obj=data.odBlastProcessRecord;

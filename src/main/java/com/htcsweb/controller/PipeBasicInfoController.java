@@ -721,11 +721,13 @@ public class PipeBasicInfoController {
                     maps.put("barePipeGrindingCutoffRecords",barePipeGrindingCutoffRecords);
                 if(pipeRebevelRecords!=null&&pipeRebevelRecords.size()>0)
                     maps.put("pipeRebevelRecords",pipeRebevelRecords);
+                maps.put("success",true);
                 mmp= JSONArray.toJSONString(maps);
             }
         }catch (Exception ex){
             ex.printStackTrace();
         }
+
         return mmp;
     }
 }
