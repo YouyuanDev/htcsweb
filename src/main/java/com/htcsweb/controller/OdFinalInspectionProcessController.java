@@ -171,8 +171,8 @@ public class OdFinalInspectionProcessController {
                 List<PipeBasicInfo> list=pipeBasicInfoDao.getPipeNumber(pipeno);
                 if(list.size()>0){
                     PipeBasicInfo p=list.get(0);
-                    if(p.getStatus().equals("od5")||p.getStatus().equals("odrepair2")) {
-                        //验证钢管状态为光管
+                    if(p.getStatus().equals("od5")) {
+                        //验证钢管状态为喷标完成管   od5 外防终检工序  0:odrepair1  1:od6  2:odstrip1   3:od5   4: od4 5:onhold
                         if (odFinalInspectionProcess.getResult().equals("1")) {//当合格时才更新钢管状态
                             p.setStatus("od6");
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
@@ -184,6 +184,9 @@ public class OdFinalInspectionProcessController {
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         } else if (odFinalInspectionProcess.getResult().equals("4")) {
                             p.setStatus("od4");
+                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        } else if (odFinalInspectionProcess.getResult().equals("5")) {
+                            p.setStatus("onhold");
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }
                     }
