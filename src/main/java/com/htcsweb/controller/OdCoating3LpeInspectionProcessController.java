@@ -199,8 +199,8 @@ public class OdCoating3LpeInspectionProcessController {
                 List<PipeBasicInfo> list=pipeBasicInfoDao.getPipeNumber(pipeno);
                 if(list.size()>0){
                     PipeBasicInfo p=list.get(0);
-                    if(p.getStatus().equals("od3")||p.getStatus().equals("odrepair2")) {
-                        //验证钢管状态为外涂管或外防修补合格管
+                    if(p.getStatus().equals("od3")) {
+                        //验证钢管状态为外涂管   od3 外涂检验工序   0:odrepair1   1:od4   2:odstrip1 3:od3  4: onhold
                         if(odCoating3LpeInspectionProcess.getResult().equals("1")) {//当合格时才更新钢管状态
                             p.setStatus("od4");
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
@@ -209,6 +209,9 @@ public class OdCoating3LpeInspectionProcessController {
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }else if(odCoating3LpeInspectionProcess.getResult().equals("2")){
                             p.setStatus("odstrip1");
+                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        }else if(odCoating3LpeInspectionProcess.getResult().equals("4")){
+                            p.setStatus("onhold");
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }
                     }

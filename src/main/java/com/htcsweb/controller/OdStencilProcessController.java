@@ -97,7 +97,7 @@ public class OdStencilProcessController {
                 if(list.size()>0){
                     PipeBasicInfo p=list.get(0);
                     if(p.getStatus().equals("od4")) {
-                        //验证钢管状态为光管
+                        //验证钢管状态为外涂检验合格管    od4      外喷标工序  0:od4      1:od5     2:od4
                         if(odStencilProcess.getResult().equals("1")) {//当合格时才更新钢管状态
                             p.setStatus("od5");
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);

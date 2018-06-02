@@ -145,14 +145,14 @@ public class OdCoatingProcessController {
                 if(pipelist.size()>0){
                     PipeBasicInfo p=pipelist.get(0);
                     if(p.getStatus().equals("od2")) {
-                        //验证钢管状态为光管
+                        //验证钢管状态为光管  od2      外涂工序   0:bare1     1:od3    2:od2
                         if(odCoatingProcess.getResult().equals("1")) {//当合格时才更新钢管状态
                             p.setStatus("od3");
                             //同时更新钢管基础信息的od_coating_date信息，外涂日期
                             p.setOd_coating_date(odCoatingProcess.getOperation_time());
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }else if(odCoatingProcess.getResult().equals("0")){
-                            p.setStatus("odrepair1");
+                            p.setStatus("bare1");
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }
                     }
