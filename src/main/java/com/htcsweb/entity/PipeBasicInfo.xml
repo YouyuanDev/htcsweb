@@ -416,14 +416,14 @@
 
 
     <update id="SetToODBare" parameterType="com.htcsweb.entity.PipeBasicInfo">
-        UPDATE pipe_basic_info set last_accepted_status='bare1',status='bare1' WHERE  (status='bare2' or status='odstrip2') AND
+        UPDATE pipe_basic_info set last_accepted_status='bare1',status='bare1' WHERE  status='bare2' AND
         <foreach collection="array" item="item" open="id in (" separator="," close=")">
             #{item}
         </foreach>
     </update>
 
     <update id="SetToIDBare" parameterType="com.htcsweb.entity.PipeBasicInfo">
-        UPDATE pipe_basic_info set last_accepted_status='bare2',status='bare2' WHERE  (status='bare1' or status='idstrip2') AND
+        UPDATE pipe_basic_info set last_accepted_status='bare2',status='bare2' WHERE   status='bare1' AND
         <foreach collection="array" item="item" open="id in (" separator="," close=")">
             #{item}
         </foreach>

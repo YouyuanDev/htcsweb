@@ -459,7 +459,7 @@
                     <td width="20%"  class="i18n1" name="result">结论</td>
                     <td width="30%"><select id="cc" class="easyui-combobox" data-options="editable:false" name="result"   style="width:185px;">
                         <option value="0">不合格,重新扒皮</option>
-                        <option value="1">合格</option>
+                        <option value="1">合格，转为光管</option>
                         <option value="2">待定</option>
                     </select></td>
                 </tr>
