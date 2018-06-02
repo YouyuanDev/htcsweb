@@ -132,10 +132,12 @@ public class IdCoatingInspectionProcessController {
                         //验证钢管状态为内涂完成管    id3  内涂检验工序  0:idrepair1  1:id4   2:idstrip1  3:id3  4: onhold
                         if(idCoatingInspectionProcess.getResult().equals("1")) {//当合格时才更新钢管状态
                             p.setStatus("id4");
+                            p.setLast_accepted_status(p.getStatus());
                         }else if(idCoatingInspectionProcess.getResult().equals("0")){
                             p.setStatus("idrepair1");
                         }else if(idCoatingInspectionProcess.getResult().equals("2")){
                             p.setStatus("idstrip1");
+                            p.setLast_accepted_status(p.getStatus());
                         }else if(idCoatingInspectionProcess.getResult().equals("4")){
                             p.setStatus("onhold");
                         }

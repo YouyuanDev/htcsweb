@@ -198,16 +198,21 @@ public class IdFinalInspectionProcessController {
                         //如果为合格
                         if(idFinalInspectionProcess.getResult().equals("1")) {
                             p.setStatus("id6");
+                            p.setLast_accepted_status(p.getStatus());
                         }else if(idFinalInspectionProcess.getResult().equals("0")){
                             p.setStatus("idrepair1");
                         }else if(idFinalInspectionProcess.getResult().equals("2")){
                             p.setStatus("odstrip1");
+                            p.setLast_accepted_status(p.getStatus());
                         }else if(idFinalInspectionProcess.getResult().equals("3")){
                             p.setStatus("idstrip1");
+                            p.setLast_accepted_status(p.getStatus());
                         }else if(idFinalInspectionProcess.getResult().equals("4")){
                             p.setStatus("id4");
+                            p.setLast_accepted_status(p.getStatus());
                         }else if(idFinalInspectionProcess.getResult().equals("5")){
                             p.setStatus("id5");
+                            p.setLast_accepted_status(p.getStatus());
                         }else if(idFinalInspectionProcess.getResult().equals("6")){
                             p.setStatus("onhold");
                         }

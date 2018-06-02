@@ -150,12 +150,12 @@ public class OdBlastProcessController {
                         //验证钢管状态为光管  bare1     外喷砂工序   0:bare1     1:od1   2:bare1 3： onhold
                         if(odblastprocess.getResult().equals("1")) {//当合格时才更新钢管状态
                             p.setStatus("od1");
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                            p.setLast_accepted_status(p.getStatus());
                         }
                         else if(odblastprocess.getResult().equals("3")) {//当需要修磨或切除时，设置为onhold状态
                             p.setStatus("onhold");
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }
+                        int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                     }
 
                 }

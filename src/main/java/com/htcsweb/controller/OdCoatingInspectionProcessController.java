@@ -197,17 +197,16 @@ public class OdCoatingInspectionProcessController {
                         //验证钢管状态为外涂管  od3 外涂检验工序   0:odrepair1   1:od4   2:odstrip1 3:od3  4: onhold
                         if(odCoatingInspectionProcess.getResult().equals("1")) {//当合格时才更新钢管状态
                             p.setStatus("od4");
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                            p.setLast_accepted_status(p.getStatus());
                         }else if(odCoatingInspectionProcess.getResult().equals("0")){
                             p.setStatus("odrepair1");
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }else if(odCoatingInspectionProcess.getResult().equals("2")){
                             p.setStatus("odstrip1");
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                            p.setLast_accepted_status(p.getStatus());
                         }else if(odCoatingInspectionProcess.getResult().equals("4")){
                             p.setStatus("onhold");
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }
+                        int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                     }
                 }
                 json.put("success",true);

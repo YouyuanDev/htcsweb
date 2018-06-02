@@ -217,17 +217,16 @@ public class OdBlastInspectionProcessController {
                         //验证钢管状态为光管  od1      外喷砂检验工序   0:bare1     1:od2   2:od1  3： onhold
                         if(odblastinspectionprocess.getResult().equals("1")) {//当打砂检验合格时才更新钢管状态
                             p.setStatus("od2");
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                            p.setLast_accepted_status(p.getStatus());
                         }
                         else if(odblastinspectionprocess.getResult().equals("0")){//打砂检验不合格，改变状态为bare1，重新打砂处理
                             p.setStatus("bare1");
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
-
+                            p.setLast_accepted_status(p.getStatus());
                         }
                         else if(odblastinspectionprocess.getResult().equals("3")) {//当需要修磨或切除时，设置为onhold状态
                             p.setStatus("onhold");
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                         }
+                        int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                     }
 
                 }

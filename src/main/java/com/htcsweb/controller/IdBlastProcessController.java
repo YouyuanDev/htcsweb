@@ -108,6 +108,7 @@ public class IdBlastProcessController {
                         //验证钢管状态是否是成品入库或者外防腐终检完成   bare2,odstockin   内喷砂工序    0:bare2     1:id1   2:bare2  3： onhold
                         if(idBlastProcess.getResult().equals("1")) {//当合格时才更新钢管状态
                             p.setStatus("id1");
+                            p.setLast_accepted_status(p.getStatus());
                         }
                         else if(idBlastProcess.getResult().equals("3")) {//当需要修磨或切除时，设置为onhold状态
                             p.setStatus("onhold");
