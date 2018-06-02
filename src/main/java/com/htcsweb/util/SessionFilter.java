@@ -21,9 +21,9 @@ public class SessionFilter extends OncePerRequestFilter{
 
     boolean adminMode=false; //测试时暂时关闭
     String[] notFilterList = new String[] {
-            "login.jsp",
-            "commitLogin.action",
-            "error.jsp",
+            "login",
+            "commitLogin",
+            "error",
             "getAllMillsWithComboboxSelectAll",
             "getAllMills",
             "getODAcceptanceCriteriaByContractNo",
@@ -103,7 +103,7 @@ public class SessionFilter extends OncePerRequestFilter{
         //System.out.println("strUri="+strUri);
         if(request.getSession().getAttribute("userSession")==null ){
             //进入后台,必须先登陆
-            if(isURIInAuthorizedList(strUri)){//请求的URI允许不过滤,包括login等
+            if(isURIInAuthorizedList(reqfunctionCode)){//请求的URI允许不过滤,包括login等
                 //System.out.println("====login 不需要验证====");
                 System.out.println("免验证"+strUri);
                 filterChain.doFilter(request, response);//不执行过滤,继续执行操作
@@ -128,7 +128,7 @@ public class SessionFilter extends OncePerRequestFilter{
 
             }
         }else{//存在登录信息session
-            if(isURIInAuthorizedList(strUri)){//请求的URI允许不过滤,包括login等
+            if(isURIInAuthorizedList(reqfunctionCode)){//请求的URI允许不过滤,包括login等
                 filterChain.doFilter(request, response);//不执行过滤,继续执行操作
                 return;
             }
@@ -179,8 +179,11 @@ public class SessionFilter extends OncePerRequestFilter{
 
 
         for(int i=0;i<notFilterList.length;i++){
-            if( URI.indexOf(notFilterList[i])!=-1)
+            if( URI.equals(notFilterList[i])) {
+                //System.out.println("notFilterList[i]="+notFilterList[i]);
+                //System.out.println("URI"+URI);
                 return true;
+            }
         }
 
 
