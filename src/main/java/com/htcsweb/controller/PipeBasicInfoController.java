@@ -58,7 +58,14 @@ public class PipeBasicInfoController {
     @Autowired
     private IdFinalInspectionProcessDao idFinalInspectionProcessDao;
 
-
+    @Autowired
+    private CoatingStripDao coatingStripDao;
+    @Autowired
+    private CoatingRepairDao coatingRepairDao;
+    @Autowired
+    private BarePipeGrindingCutoffRecordDao barePipeGrindingCutoffRecordDao;
+    @Autowired
+    private PipeRebevelRecordDao pipeRebevelRecordDao;
     //给app搜索使用，无需登录
 //    @RequestMapping("/getPipeNumber")
 //    @ResponseBody
@@ -662,13 +669,13 @@ public class PipeBasicInfoController {
                 //12.查询内涂终检记录
                 IdFinalInspectionProcess idFinalInspectionProcess=idFinalInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
                 //13.扒皮记录
-
+                List<CoatingStrip>coatingStrips=coatingStripDao.getRecentRecordByPipeNo(pipe_no);
                 //14.修补
-
+                List<CoatingRepair>coatingRepairs=coatingRepairDao.getRecentRecordByPipeNo(pipe_no);
                 //15.修磨切割
-
+                List<BarePipeGrindingCutoffRecord>barePipeGrindingCutoffRecords=barePipeGrindingCutoffRecordDao.getRecentRecordByPipeNo(pipe_no);
                 //16.倒棱
-
+                List<PipeRebevelRecord>pipeRebevelRecords=pipeRebevelRecordDao.getRecentRecordByPipeNo(pipe_no);
                 if(odBlastProcessRecord!=null)
                    maps.put("odBlastProcessRecord",odBlastProcessRecord);
                 if(odBlastInspectionProcessRecord!=null)
@@ -697,6 +704,14 @@ public class PipeBasicInfoController {
                     maps.put("idStencilProcessRecord",idStencilProcessRecord);
                 if(idFinalInspectionProcess!=null)
                     maps.put("idFinalInspectionProcess",idFinalInspectionProcess);
+                if(coatingStrips!=null&&coatingStrips.size()>0)
+                    maps.put("coatingStrips",coatingStrips);
+                if(coatingRepairs!=null&&coatingRepairs.size()>0)
+                    maps.put("coatingRepairs",coatingRepairs);
+                if(barePipeGrindingCutoffRecords!=null&&barePipeGrindingCutoffRecords.size()>0)
+                    maps.put("barePipeGrindingCutoffRecords",barePipeGrindingCutoffRecords);
+                if(pipeRebevelRecords!=null&&pipeRebevelRecords.size()>0)
+                    maps.put("pipeRebevelRecords",pipeRebevelRecords);
                 mmp= JSONArray.toJSONString(maps);
             }
         }catch (Exception ex){

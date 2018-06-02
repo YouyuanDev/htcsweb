@@ -75,7 +75,10 @@ var execI18n = function(languagePath){
             insertEle1.each(function() {
                 $(this).text($.i18n.prop($(this).attr('name')));
             });
-
+            var insertEle1 = $(".i18n2");
+            insertEle1.each(function() {
+                $(this).find('.l-btn-text').text($.i18n.prop($(this).attr('name')));
+            });
         }
     });
         

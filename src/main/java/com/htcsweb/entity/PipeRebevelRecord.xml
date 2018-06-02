@@ -110,4 +110,8 @@
             </if>
         </where>
     </select>
+    <!--根据钢管编号查询倒棱记录-->
+    <select id="getRecentRecordByPipeNo" resultType="com.htcsweb.entity.PipeRebevelRecord">
+        SELECT  * from pipe_rebevel_record where pipe_no=#{pipe_no} order by operation_time desc
+    </select>
 </mapper>

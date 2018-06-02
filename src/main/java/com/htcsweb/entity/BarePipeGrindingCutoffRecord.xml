@@ -488,4 +488,8 @@
         </where>
         )
     </select>
+    <!--根据钢管编号查询修磨切割记录-->
+    <select id="getRecentRecordByPipeNo" resultType="com.htcsweb.entity.BarePipeGrindingCutoffRecord">
+        SELECT  * from bare_pipe_grinding_cutoff_record where pipe_no=#{pipe_no} order by operation_time desc
+    </select>
 </mapper>

@@ -108,24 +108,6 @@
                  });
                 if(row.contract_no!=null)
                     look1.setText(row.contract_no);
-                // $('#contractForm').form('load',{
-                //     'contractid':row.id,
-                //     'project_no':row.project_no,
-                //     'project_name':row.project_name,
-                //     'contract_no':row.contract_no,
-                //     'od':row.od,
-                //     'wt':row.wt,
-                //     'external_coating':row.external_coating,
-                //     'internal_coating':row.internal_coating,
-                //     'grade':row.grade,
-                //     'total_order_length':row.total_order_length,
-                //     'total_order_weight':row.total_order_weight,
-                //     'weight_per_meter':row.weight_per_meter,
-                //     'pipe_length':row.pipe_length
-                //
-                // });
-
-
                 url="/pipeinfo/savePipe.action?id="+row.id;
 
             }else{
@@ -513,7 +495,7 @@
                              var dic={
                                  "operatorno":obj.operator_no,"operationtime":getDate1(obj.operation_time),"millno":obj.mill_no,
                                  "inspectionresult":inspectionresult,"cutbacklength":obj.cutback_length, "stencilverification":stencilverification,
-                                 "cutbacksurface":obj.cutback_surface, "magnetismlist":obj.magnetism_list,"coatingbevelanglelist":obj.coating_bevel_angle_list,
+                                 "cutbacksurface":cutbacksurface, "magnetismlist":obj.magnetism_list,"coatingbevelanglelist":obj.coating_bevel_angle_list,
                                  "epoxycutbacklist":obj.epoxy_cutback_list, "result":result,"":"",
                                  "remark":obj.remark};
                              $('#pipeRecord-container').append(recordTemplate("外防终检记录",dic));
@@ -543,9 +525,9 @@
 
                              var dic={
                                  "operatorno":obj.operator_no,"operationtime":getDate1(obj.operation_time),"millno":obj.mill_no,
-                                 "originalpipeno":obj.original_pipe_no,"newpipeno":obj.new_pipe_no,"pipenoupdate":obj.pipe_no_update,
+                                 "originalpipeno":obj.original_pipe_no,"newpipeno":obj.new_pipe_no,"pipenoupdate":pipenoupdate,
                                  "saltcontaminationbeforeblasting":obj.salt_contamination_before_blasting,"internalsurfacecondition":obj.internal_surface_condition,"externalcoatingcondition":obj.external_coating_condition,
-                             "marking":obj.marking,"abrasiveconductivity":obj.abrasive_conductivity,"result":result,
+                             "marking":marking,"abrasiveconductivity":obj.abrasive_conductivity,"result":result,
                                  "remark":obj.remark};
                              $('#pipeRecord-container').append(recordTemplate("内打砂记录",dic));
                          }
@@ -680,15 +662,199 @@
                              $('#pipeRecord-container').append(recordTemplate("内防终检记录",dic));
                          }
                          //扒皮
+                          if(data.coatingStrips!=undefined&&data.coatingStrips!=null&&data.coatingStrips.length>0){
+                              var dicField=["operatorno","operationtime","millno","striptemperature","odid","result","remark"];
+                              var template = "";
+                              template += '<table  title="" class="dataintable" style="width:100%;height:auto;"><thead><tr>';
+                              template += '<th colspan="7">扒皮记录</th>';
+                              template +='</tr></thead><tbody><tr>';
+                              for(var i=0;i<dicField.length;i++){
+                                  template += '<td class="i18n1" name='+dicField[i]+'>'+ dicField[i] + '</td>';
+                              }
+                              template +='</tr>';
+                              var odid="",result="";
+                              for(var i=0;i<data.coatingStrips.length;i++){
+                                  odid="";result="";
+                                  var obj=data.coatingStrips[i];
+                                  template +='<tr>';
+                                  template +='<td>'+obj.operator_no+'</td>';
+                                  template +='<td>'+getDate1(obj.operation_time)+'</td>';
+                                  template +='<td>'+obj.mill_no+'</td>';
+                                  template +='<td>'+obj.strip_temperature+'</td>';
+                                  if(obj.odid=="od")
+                                      odid="外防";
+                                  else if(obj.odid=="id")
+                                      odid="内防";
+                                  template +='<td>'+odid+'</td>';
+                                  if(obj.result=="0")
+                                      result="不合格,重新扒皮";
+                                  else if(obj.result=="1")
+                                      result="合格";
+                                  else if(obj.result=="2")
+                                      result="待定";
+                                  template +='<td>'+result+'</td>';
+                                  template +='<td>'+obj.remark+'</td>';
+                                  template +='</tr>';
+                              }
+                              template+='</tbody></table>';
+                              $('#pipeRecord-container').append(template);
+                          }
+                          //修补
+                          if(data.coatingRepairs!=undefined&&data.coatingRepairs!=null&&data.coatingRepairs.length>0){
+                              var dicField=["operatorno","operationtime","millno","coatingtype","odid","repairsize",
+                                  "repairnumber","holidaynumber","repairmethod","unqualifiedreason","inspectorno","inspectiontime",
+                                  "surfacecondition","repairthickness","holidaytesting","adhesion",
+                                  "result","remark"];
+                              var template = "";
+                              template += '<table  title="" class="dataintable" style="width:100%;height:auto;"><thead><tr>';
+                              template += '<th colspan="18">修补记录</th>';
 
-                         //修补
-
+                              template +='</tr></thead><tbody><tr>';
+                              for(var i=0;i<dicField.length;i++){
+                                  template += '<td class="i18n1" name='+dicField[i]+'>'+ dicField[i] + '</td>';
+                              }
+                              template +='</tr>';
+                              var odid="",result="",unqualifiedreason="";
+                              for(var i=0;i<data.coatingRepairs.length;i++){
+                                  odid="";result="",unqualifiedreason="";
+                                  var obj=data.coatingRepairs[i];
+                                  template +='<tr>';
+                                  template +='<td>'+obj.operator_no+'</td>';
+                                  template +='<td>'+getDate1(obj.operation_time)+'</td>';
+                                  template +='<td>'+obj.mill_no+'</td>';
+                                  template +='<td>'+obj.coating_type+'</td>';
+                                  if(obj.odid=="od")
+                                      odid="外防";
+                                  else if(obj.odid=="id")
+                                      odid="内防";
+                                  template +='<td>'+odid+'</td>';
+                                  template +='<td>'+obj.repair_size+'</td>';
+                                  template +='<td>'+obj.repair_number+'</td>';
+                                  template +='<td>'+obj.holiday_number+'</td>';
+                                  template +='<td>'+obj.repair_method+'</td>';
+                                  if(obj.unqualified_reason=="1")
+                                      unqualifiedreason="漏点";
+                                  else if(obj.unqualified_reason=="2")
+                                      unqualifiedreason="碰伤";
+                                  else if(obj.unqualified_reason=="3")
+                                      unqualifiedreason="厚度不合";
+                                  else if(obj.unqualified_reason=="4")
+                                      unqualifiedreason="附着力不合";
+                                  else if(obj.unqualified_reason=="5")
+                                      unqualifiedreason="有杂质";
+                                  template +='<td>'+unqualifiedreason+'</td>';
+                                  template +='<td>'+obj.inspector_no+'</td>';
+                                  template +='<td>'+getDate1(obj.inspection_time)+'</td>';
+                                  template +='<td>'+obj.surface_condition+'</td>';
+                                  template +='<td>'+obj.repair_thickness+'</td>';
+                                  template +='<td>'+obj.holiday_testing+'</td>';
+                                  template +='<td>'+obj.adhesion+'</td>';
+                                  if(obj.result=="0")
+                                      result="不合格,重新修补";
+                                  else if(obj.result=="1")
+                                      result="修补完成,检验合格";
+                                  else if(obj.result=="2")
+                                      result="修补完成,待检验";
+                                  else if(obj.result=="3")
+                                      result="不合格,外防扒皮处理";
+                                  else if(obj.result=="4")
+                                      result="不合格,内防扒皮处理";
+                                  else if(obj.result=="5")
+                                      result="待定";
+                                  template +='<td>'+result+'</td>';
+                                  template +='<td>'+obj.remark+'</td>';
+                                  template +='</tr>';
+                              }
+                              template+='</tbody></table>';
+                              $('#pipeRecord-container').append(template);
+                         }
                          //修磨切割
-
+                         if(data.barePipeGrindingCutoffRecords!=undefined&&data.barePipeGrindingCutoffRecords!=null&&data.barePipeGrindingCutoffRecords.length>0){
+                             var dicField=["operatorno","operationtime","millno","odid",
+                                  "grinding_cutoff","remainingwallthicknesslist","cutofflength","originalpipelength","pipelengthaftercut",
+                                 "result","remark"];
+                             var template = "";
+                             template += '<table  title="" class="dataintable" style="width:100%;height:auto;"><thead><tr>';
+                             template += '<th colspan="11">修磨切割记录</th>';
+                             template +='</tr></thead><tbody><tr>';
+                             for(var i=0;i<dicField.length;i++){
+                                 template += '<td class="i18n1" name='+dicField[i]+'>'+ dicField[i] + '</td>';
+                             }
+                             template +='</tr>';
+                             var odid="",result="",grindingcutoff="";
+                             for(var i=0;i<data.barePipeGrindingCutoffRecords.length;i++){
+                                 odid="";result="",grindingcutoff="";
+                                 var obj=data.barePipeGrindingCutoffRecords[i];
+                                 template +='<tr>';
+                                 template +='<td>'+obj.operator_no+'</td>';
+                                 template +='<td>'+getDate1(obj.operation_time)+'</td>';
+                                 template +='<td>'+obj.mill_no+'</td>';
+                                 if(obj.odid=="OD")
+                                     odid="外表面";
+                                 else if(obj.odid=="ID")
+                                     odid="内表面";
+                                 template +='<td>'+odid+'</td>';
+                                 if(obj.grinding_cutoff="G")
+                                     grindingcutoff="修磨";
+                                 else if(obj.grinding_cutoff="C")
+                                     grindingcutoff="切割";
+                                 else if(obj.grinding_cutoff="GC")
+                                     grindingcutoff="修磨并切割";
+                                 template +='<td>'+grindingcutoff+'</td>';
+                                 template +='<td>'+obj.remaining_wall_thickness_list+'</td>';
+                                 template +='<td>'+obj.cut_off_length+'</td>';
+                                 template +='<td>'+obj.original_pipe_length+'</td>';
+                                 template +='<td>'+obj.pipe_length_after_cut+'</td>';
+                                 if(obj.result=="0")
+                                     result="不合格,重新修磨或切长处理";
+                                 else if(obj.result=="1")
+                                     result="合格,转为光管";
+                                 else if(obj.result=="2")
+                                     result="待定";
+                                 template +='<td>'+result+'</td>';
+                                 template +='<td>'+obj.remark+'</td>';
+                                 template +='</tr>';
+                             }
+                             template+='</tbody></table>';
+                             $('#pipeRecord-container').append(template);
+                         }
                          //倒棱
-
-                         $('#pipeRecordDialog').dialog('open');
+                         if(data.pipeRebevelRecords!=undefined&&data.pipeRebevelRecords!=null&&data.pipeRebevelRecords.length>0){
+                             var dicField=["operatorno","operationtime","squareness","ovality","bevelangle","rootface","result","remark"];
+                             var template = "";
+                             template += '<table  title="" class="dataintable" style="width:100%;height:auto;"><thead><tr>';
+                             template += '<th colspan="8">倒棱记录</th>';
+                             template +='</tr></thead><tbody><tr>';
+                             for(var i=0;i<dicField.length;i++){
+                                 template += '<td class="i18n1" name='+dicField[i]+'>'+ dicField[i] + '</td>';
+                             }
+                             template +='</tr>';
+                             var odid="",result="";
+                             for(var i=0;i<data.pipeRebevelRecords.length;i++){
+                                 odid="";result="";
+                                 var obj=data.pipeRebevelRecords[i];
+                                 template +='<tr>';
+                                 template +='<td>'+obj.operator_no+'</td>';
+                                 template +='<td>'+getDate1(obj.operation_time)+'</td>';
+                                 template +='<td>'+obj.squareness+'</td>';
+                                 template +='<td>'+obj.ovality+'</td>';
+                                 template +='<td>'+obj.bevel_angle+'</td>';
+                                 template +='<td>'+obj.rootface+'</td>';
+                                 if(obj.result=="0")
+                                     result="不合格,重新倒棱处理";
+                                 else if(obj.result=="1")
+                                     result="合格";
+                                 else if(obj.result=="2")
+                                     result="待定";
+                                 template +='<td>'+result+'</td>';
+                                 template +='<td>'+obj.remark+'</td>';
+                                 template +='</tr>';
+                             }
+                             template+='</tbody></table>';
+                             $('#pipeRecord-container').append(template);
+                         }
                          hlLanguage("../i18n/");
+                         $('#pipeRecordDialog').dialog('open');
                      },
                      error:function () {
                          $.messager.alert('Warning','系统繁忙,请稍后查看!');
@@ -726,6 +892,28 @@
                 i++;
             }
             template+='</tr></tbody></table>';
+            return template;
+        }
+        function recordTemplate1(recordName,dicField,dicValue) {
+            var template = "";
+            template += '<table  title="" class="dataintable" style="width:100%;height:auto;"><thead><tr>';
+            //</tr></thead><tbody>';
+            for(var key in dicField){
+                template += '<th class="i18n1" name='+dicField[key]+'>'+ dicField[key] + '</th>';
+            }
+            template +='</tr></thead><tbody>';
+            var i=1;
+            for(var key in dicValue) {
+                if(i%dicField.length==0){
+                    template += '<tr>';
+                }
+                template += ' <td>'+dicValue[key]+'</td>';
+                if(i%dicField.length==0){
+                    template += '</tr>';i=1;
+                }
+                i++;
+            }
+            template+='</tbody></table>';
             return template;
         }
     </script>

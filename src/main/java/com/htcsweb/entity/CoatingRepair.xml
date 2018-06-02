@@ -180,4 +180,8 @@
             </if>
         </where>
     </select>
+    <!--根据钢管编号查询修补记录-->
+    <select id="getRecentRecordByPipeNo" resultType="com.htcsweb.entity.CoatingRepair">
+        SELECT  * from coating_repair where pipe_no=#{pipe_no} order by operation_time desc
+    </select>
 </mapper>
