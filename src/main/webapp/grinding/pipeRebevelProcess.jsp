@@ -205,7 +205,15 @@
                         hlAlertFour("请输入操作时间");
                         return false;
                     }
+                    if($("input[name='result']").val()==""){
+                        hlAlertFour("请输入结论!");
+                        return false;
+                    }
 
+                    setParams($("input[name='squareness']"));
+                    setParams($("input[name='ovality']"));
+                    setParams($("input[name='bevel_angle']"));
+                    setParams($("input[name='rootface']"));
 
                 },
                 success: function(result){

@@ -25,6 +25,7 @@
         <result property="level_sequence" column="level_sequence"></result>
         <result property="shipment_date" column="shipment_date"></result>
         <result property="last_accepted_status" column="last_accepted_status"></result>
+        <result property="rebevel_mark" column="rebevel_mark"></result>
 
 
     </resultMap>
@@ -377,7 +378,7 @@
     </select>
 
     <select id="getPipeInfoByNo" resultType="map">
-        Select p.od_coating_date, p.id_coating_date, p.pipe_making_lot_no,client_spec, coating_standard,p.pipe_no,pro.project_no,pro.project_name,s.status_name,p.contract_no,p.grade,p.od,p.wt,p.p_length,p.weight,p.heat_no from pipe_basic_info p
+        Select c.external_coating,p.od_coating_date, p.id_coating_date, p.pipe_making_lot_no,client_spec, coating_standard,p.pipe_no,pro.project_no,pro.project_name,s.status_name,p.status,p.contract_no,p.grade,p.od,p.wt,p.p_length,p.weight,p.heat_no from pipe_basic_info p
         LEFT join contract_info c on p.contract_no=c.contract_no
         LEFT join project_info pro on c.project_no=pro.project_no
         LEFT join pipe_status s on s.status_code=p.status
@@ -385,12 +386,12 @@
     </select>
 
     <update id="updatePipeBasicInfo" parameterType="com.htcsweb.entity.PipeBasicInfo">
-        UPDATE pipe_basic_info set contract_no=#{contract_no},pipe_no=#{pipe_no},grade=#{grade},od=#{od},wt=#{wt},p_length=#{p_length}, weight=#{weight},pipe_making_lot_no=#{pipe_making_lot_no},status=#{status}, heat_no=#{heat_no},storage_stack=#{storage_stack},stack_level=#{stack_level},od_coating_date=#{od_coating_date},id_coating_date=#{id_coating_date},level_direction=#{level_direction},level_sequence=#{level_sequence},shipment_date=#{shipment_date},last_accepted_status=#{last_accepted_status} WHERE id=#{id}
+        UPDATE pipe_basic_info set contract_no=#{contract_no},pipe_no=#{pipe_no},grade=#{grade},od=#{od},wt=#{wt},p_length=#{p_length}, weight=#{weight},pipe_making_lot_no=#{pipe_making_lot_no},status=#{status}, heat_no=#{heat_no},storage_stack=#{storage_stack},stack_level=#{stack_level},od_coating_date=#{od_coating_date},id_coating_date=#{id_coating_date},level_direction=#{level_direction},level_sequence=#{level_sequence},shipment_date=#{shipment_date},last_accepted_status=#{last_accepted_status},rebevel_mark=#{rebevel_mark} WHERE id=#{id}
     </update>
 
     <insert id="addPipeBasicInfo" parameterType="com.htcsweb.entity.PipeBasicInfo">
-        INSERT INTO pipe_basic_info(contract_no,pipe_no,grade,od,wt,p_length,weight,pipe_making_lot_no,status,heat_no,storage_stack,stack_level,od_coating_date,id_coating_date,level_direction,level_sequence,shipment_date,last_accepted_status)
-        VALUES (#{contract_no},#{pipe_no},#{grade},#{od},#{wt},#{p_length},#{weight},#{pipe_making_lot_no},#{status},#{heat_no},#{storage_stack},#{stack_level},#{od_coating_date},#{id_coating_date},#{level_direction},#{level_sequence},#{shipment_date},#{last_accepted_status})
+        INSERT INTO pipe_basic_info(contract_no,pipe_no,grade,od,wt,p_length,weight,pipe_making_lot_no,status,heat_no,storage_stack,stack_level,od_coating_date,id_coating_date,level_direction,level_sequence,shipment_date,last_accepted_status,rebevel_mark)
+        VALUES (#{contract_no},#{pipe_no},#{grade},#{od},#{wt},#{p_length},#{weight},#{pipe_making_lot_no},#{status},#{heat_no},#{storage_stack},#{stack_level},#{od_coating_date},#{id_coating_date},#{level_direction},#{level_sequence},#{shipment_date},#{last_accepted_status},#{rebevel_mark})
     </insert>
 
     <delete id="delPipeBasicInfo">
@@ -449,6 +450,9 @@
                 AND p.status = #{status}
             </if>
             AND (p.status = 'odstockin' or p.status = 'idstockin')
+
+            AND p.rebevel_mark <![CDATA[ <> ]]>  '1'
+
         </where>
         ORDER BY id DESC
         limit #{skip},#{take}

@@ -25,12 +25,13 @@ public class PipeBasicInfo {
     private Date shipment_date;
     private String last_accepted_status;
 
+    private String rebevel_mark;
+
 
     public PipeBasicInfo() {
     }
 
-
-    public PipeBasicInfo(int id, String contract_no, String pipe_no, String grade, float od, float wt, float p_length, float weight, String pipe_making_lot_no, String status, String heat_no, String storage_stack, String stack_level, Date od_coating_date, Date id_coating_date, String level_direction, String level_sequence, Date shipment_date, String last_accepted_status) {
+    public PipeBasicInfo(int id, String contract_no, String pipe_no, String grade, float od, float wt, float p_length, float weight, String pipe_making_lot_no, String status, String heat_no, String storage_stack, String stack_level, Date od_coating_date, Date id_coating_date, String level_direction, String level_sequence, Date shipment_date, String last_accepted_status, String rebevel_mark) {
         this.id = id;
         this.contract_no = contract_no;
         this.pipe_no = pipe_no;
@@ -50,7 +51,9 @@ public class PipeBasicInfo {
         this.level_sequence = level_sequence;
         this.shipment_date = shipment_date;
         this.last_accepted_status = last_accepted_status;
+        this.rebevel_mark = rebevel_mark;
     }
+
 
     public int getId() {
         return id;
@@ -202,5 +205,13 @@ public class PipeBasicInfo {
 
     public void setLast_accepted_status(String last_accepted_status) {
         this.last_accepted_status = last_accepted_status;
+    }
+
+    public String getRebevel_mark() {
+        return rebevel_mark;
+    }
+
+    public void setRebevel_mark(String rebevel_mark) {
+        this.rebevel_mark = rebevel_mark;
     }
 }

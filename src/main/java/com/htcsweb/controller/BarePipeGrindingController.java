@@ -81,6 +81,8 @@ public class BarePipeGrindingController {
                                 //if(p.getP_length()>barePipeGrindingCutoffRecord.getPipe_length_after_cut()){
                                     p.setP_length(barePipeGrindingCutoffRecord.getPipe_length_after_cut());
                                     p.setWeight(PipeActWeightUtil.getActWeight(p.getP_length(),p.getOd(),p.getWt()));
+                                    //这只需倒棱标志
+                                    p.setRebevel_mark("1");
                                 //}
                             }
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);

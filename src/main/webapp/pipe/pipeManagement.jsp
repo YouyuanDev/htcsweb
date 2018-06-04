@@ -954,6 +954,7 @@
                 <th field="wt" align="center" width="100" class="i18n1" name="wt">壁厚</th>
                 <th field="p_length" align="center" width="100" class="i18n1" name="p_length">钢管长度</th>
                 <th field="weight" align="center" width="100" class="i18n1" name="weight">钢管米重</th>
+                <th field="rebevel_mark" align="center" width="100" class="i18n1" name="rebevelmark">倒棱标志</th>
                 <th field="status" align="center" width="100" class="i18n1" name="status">状态</th>
                 <th field="storage_stack" align="center" width="100" class="i18n1" name="storagestack">垛位号</th>
                 <th field="stack_level" align="center" width="100" class="i18n1" name="stacklevel">层数</th>

@@ -593,7 +593,7 @@ public class PipeBasicInfoController {
 
 
 
-    //模糊查询内防外防成品可出厂的Pipe信息列表
+    //模糊查询内防外防成品可出厂的Pipe信息列表，需倒棱的管子不可出厂
     @RequestMapping(value ="/getCoatedStockinPipeInfoByLike")
     @ResponseBody
     public String getCoatedStockinPipeInfoByLike(@RequestParam(value = "project_no",required = false)String project_no, @RequestParam(value = "contract_no",required = false)String contract_no,@RequestParam(value = "pipe_no",required = false)String pipe_no,@RequestParam(value = "status",required = false)String status, HttpServletRequest request){

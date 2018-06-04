@@ -57,6 +57,16 @@ public class PipeRebevelProcessController {
                 resTotal=pipeRebevelRecordDao.updatePipeRebevelRecord(pipeRebevelRecord);
             }
             if(resTotal>0){
+                //更新管子的状态
+                List<PipeBasicInfo> list=pipeBasicInfoDao.getPipeNumber(pipeno);
+                if(list.size()>0) {
+                    PipeBasicInfo p = list.get(0);
+                    //倒棱成功，清楚倒棱标志位
+                    if (pipeRebevelRecord.getResult() != null && pipeRebevelRecord.getResult().equals("1")) {
+                        p.setRebevel_mark("0");
+                        int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                    }
+                }
 
                 json.put("success",true);
                 json.put("message","保存成功");

@@ -420,6 +420,7 @@ public class UploadFileController {
                     }else{
                         pipe.setStatus("bare2");
                     }
+                    pipe.setRebevel_mark("0");
 
                     res = pipeBasicInfoDao.addPipeBasicInfo(pipe);
                     System.out.println("Insert res: " + res);
