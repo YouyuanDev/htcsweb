@@ -80,7 +80,8 @@ public class SessionFilter extends OncePerRequestFilter{
             "searchPipe",
             "getTopTenPictures",
             "getAllInspectionTimeMap",
-            "setInspectionTimeMap"
+            "setInspectionTimeMap",
+            "getPersonByEmployeeNo"
 
     }; // 不过滤的uri
 

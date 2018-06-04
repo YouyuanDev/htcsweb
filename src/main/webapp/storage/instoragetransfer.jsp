@@ -16,11 +16,11 @@
     <link href="../miniui/multiupload/multiupload.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="../css/common.css"/>
     <script src="../easyui/jquery.min.js" type="text/javascript"></script>
-    <script src="../js/jquery.i18n.properties-1.0.9.js" type="text/javascript"></script>
-    <script src="../js/language.js" type="text/javascript"></script>
+    <%--<script src="../js/jquery.i18n.properties-1.0.9.js" type="text/javascript"></script>--%>
+    <%--<script src="../js/language.js" type="text/javascript"></script>--%>
     <script src="../js/common.js" type="text/javascript"></script>
     <script src="../miniui/boot.js" type="text/javascript"></script>
-    <script  src="../miniui/js/miniui.js" type="text/javascript"></script>
+    <%--<script  src="../miniui/js/miniui.js" type="text/javascript"></script>--%>
     <script src="../miniui/fileupload/swfupload/swfupload.js" type="text/javascript"></script>
     <script src="../miniui/multiupload/multiupload.js" type="text/javascript"></script>
     <script  src="../js/lrscroll.js" type="text/javascript"></script>
@@ -42,11 +42,12 @@
         });
 
         function openPipeInStorageTransferPage(){
-            var row = $('#pipeDatagrids').datagrid('getSelections');
+            var row = $('#pipeDatagrids').datagrid('getSelected');
             if(row.length==0){
                 $.messager.alert('Warning','请选择要转移的钢管!');
                 return;
             }
+            $('#odInStorageTransferForm').form('load',row);
             $('#hlOdInStorageTransferDialog').dialog('open').dialog('setTitle','修改');
         }
 
@@ -240,8 +241,8 @@
 
 </div>
 <div id="dlg-buttons" align="center" style="width:900px;">
-    <a href="#" class="easyui-linkbutton" iconCls="icon-save" onclick="ODPipeInStorageTransfer()">Submit</a>
-    <a href="#" class="easyui-linkbutton" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="ODPipeInStorageTransferCancelSubmit()">Cancel</a>
+    <a href="#" class="easyui-linkbutton i18n1" name="submit" iconCls="icon-save" onclick="ODPipeInStorageTransfer()">Submit</a>
+    <a href="#" class="easyui-linkbutton i18n1" name="cancel" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="ODPipeInStorageTransferCancelSubmit()">Cancel</a>
 </div>
 
 

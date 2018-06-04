@@ -8,9 +8,8 @@ import com.htcsweb.entity.PipeBasicInfo;
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
@@ -43,7 +42,16 @@ public class PersonController {
         request.getSession().setAttribute("sa",person);
         return "personedit";
     }
-
+    @RequestMapping("/getPersonByEmployeeNo")
+    @ResponseBody
+    public String getPersonByEmployeeNo(HttpServletRequest request){
+        String employeeno=request.getParameter("employeeno");
+        List<Person> personList=personDao.getPersonByEmployeeNo(employeeno);
+        String mmp="";
+        if(personList!=null&&personList.size()>0)
+        mmp= JSONArray.toJSONString(personList.get(0));
+        return mmp;
+    }
     //搜索
     @RequestMapping("getPersonByLike")
     @ResponseBody
@@ -72,9 +80,9 @@ public class PersonController {
     //增加或修改Pipe信息
     @RequestMapping(value = "/savePerson")
     @ResponseBody
-    public String savePerson(Person person, HttpServletResponse response){
+    public String savePerson(@RequestBody(required = false)Person person, HttpServletResponse response){
         System.out.print("savePerson");
-
+        System.out.println("savePerson"+person.getEmployee_no()+":"+person.getPidcard_no());
         JSONObject json=new JSONObject();
         try{
             int resTotal=0;
@@ -135,5 +143,6 @@ public class PersonController {
         ResponseUtil.write(response,json);
         return null;
     }
+
 
 }
