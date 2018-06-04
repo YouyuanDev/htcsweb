@@ -449,7 +449,7 @@
             <if test="status!=null and status!=''">
                 AND p.status = #{status}
             </if>
-            AND (p.status = 'odstockin' or p.status = 'idstockin')
+            AND (p.status = 'odstockin' or p.status = 'idstockin' or p.status = 'bare1' or p.status = 'bare2')
 
             AND p.rebevel_mark <![CDATA[ <> ]]>  '1'
 
@@ -481,7 +481,7 @@
 
 
     <update id="coatingProductStockout" parameterType="com.htcsweb.entity.PipeBasicInfo">
-        UPDATE pipe_basic_info set last_accepted_status='out',status='out', shipment_date=sysdate() WHERE  (status='odstockin' or status='idstockin') AND
+        UPDATE pipe_basic_info set last_accepted_status='out',status='out', shipment_date=sysdate() WHERE  (status='odstockin' or status='idstockin' or status='bare1' or status='bare2') AND
         <foreach collection="array" item="item" open="id in (" separator="," close=")">
             #{item}
         </foreach>

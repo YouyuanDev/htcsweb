@@ -74,7 +74,7 @@
                 //hlAlertFive("/pipeinfo/delPipe.action",idArrs,idArr.length);
                 // $.messager.confirm('提示','您确定要删除<font>')
             }else{
-                $.messager.alert('Warning','请选择要出厂的成品涂层管!');
+                $.messager.alert('Warning','请选择要出厂的成品涂层管或光管!');
             }
         }
 
