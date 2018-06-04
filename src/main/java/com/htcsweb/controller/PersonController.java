@@ -80,14 +80,23 @@ public class PersonController {
     //增加或修改Pipe信息
     @RequestMapping(value = "/savePerson")
     @ResponseBody
-    public String savePerson(@RequestBody(required = false)Person person, HttpServletResponse response){
-        System.out.print("savePerson");
-        System.out.println("savePerson"+person.getEmployee_no()+":"+person.getPidcard_no());
+    public String savePerson(Person person, HttpServletRequest request,HttpServletResponse response){
+        //System.out.println(request.getParameter("employee_no")+"getVal");
+        System.out.println("savePerson:"+person.getId()+":"+person.getEmployee_no()+":"+person.getPidcard_no());
         JSONObject json=new JSONObject();
         try{
             int resTotal=0;
-
-
+//            String employee_no=person.getEmployee_no();
+//            List<Person>personList=personDao.getPersonByEmployeeNo(employee_no);
+//            if(personList!=null&&personList.size()>0){
+//                 Person person1=personList.get(0);
+//                 if(person.getEmployee_no())
+//                 person1.set()
+//
+//
+//            }else{
+//
+//            }
             if(person.getId()==0){
                 //添加
                 resTotal=personDao.addPerson(person);

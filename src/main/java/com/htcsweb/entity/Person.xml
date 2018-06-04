@@ -89,9 +89,20 @@
     </insert>
 
     <update id="updatePerson" parameterType="com.htcsweb.entity.Person">
-        UPDATE person set employee_no=#{employee_no},pname=#{pname},ppassword=#{ppassword},
-        pidcard_no=#{pidcard_no},pmobile=#{pmobile},page=#{page},psex=#{psex},pstatus=#{pstatus},
-        pdepartment=#{pdepartment},pregister_time=#{pregister_time} ,role_no_list=#{role_no_list}
+        UPDATE person
+        <trim prefix="set" suffixOverrides=",">
+            <if test="employee_no!=null"> employee_no=#{employee_no},</if>
+            <if test="pname!=null">pname=#{pname},</if>
+            <if test="ppassword!=null">ppassword=#{ppassword},</if>
+            <if test="pidcard_no!=null">pidcard_no=#{pidcard_no},</if>
+            <if test="pmobile!=null">pmobile=#{pmobile},</if>
+            <if test="page!=null"> page=#{page},</if>
+            <if test="psex!=null">psex=#{psex},</if>
+            <if test="pstatus!=null">pstatus=#{pstatus},</if>
+            <if test="pdepartment!=null">pdepartment=#{pdepartment},</if>
+            <if test="pregister_time!=null">pregister_time=#{pregister_time} ,</if>
+            <if test="role_no_list!=null">role_no_list=#{role_no_list},</if>
+        </trim>
         where id=#{id}
     </update>
 
