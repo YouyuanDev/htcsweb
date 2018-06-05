@@ -61,6 +61,13 @@
                 $("#logrem").attr("checked",true);
                 //alert("读取cookie完毕");
             }
+                //alert(window.parent.location.href);
+            //如果存在框架，则调用login.jsp
+            if(window.parent.location.href.indexOf("/login/login.jsp")==-1){
+
+               window.parent.location.href="/login/login.jsp";
+            }
+
 
         });
 

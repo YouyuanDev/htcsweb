@@ -113,14 +113,16 @@ public class SessionFilter extends OncePerRequestFilter{
             }else{//uri需要被过滤
                 System.out.println("目标URI禁止访问，请先登录"+strUri);
                 if(suffix.equals("jsp")) {
+                    System.out.println("返回login.jsp");
                     response.sendRedirect("/login/login.jsp");
 
                 }else{
                     JSONObject json = new JSONObject();
                     StringBuilder sbmessage = new StringBuilder();
-                    sbmessage.append("没有权限\n");
+                    sbmessage.append("session已过期，请先登录\n");
                     json.put("success", false);
                     json.put("message", sbmessage.toString());
+                    System.out.println("弹出没有权限");
                     try {
                         ResponseUtil.write(response, json);
                     } catch (Exception e) {
