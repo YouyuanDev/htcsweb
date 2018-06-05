@@ -78,7 +78,7 @@ public class PipeBasicInfoController {
 
 
     //给app搜索使用，无需登录
-    @RequestMapping("/searchPipe")
+    @RequestMapping(value = "/searchPipe", produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String searchPipe(HttpServletRequest request){
         String pipe_no=request.getParameter("pipe_no");

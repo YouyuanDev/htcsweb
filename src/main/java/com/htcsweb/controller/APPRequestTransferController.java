@@ -29,7 +29,7 @@ public class APPRequestTransferController {
     private PipeBasicInfoDao pipeBasicInfoDao;
 
     //用于APP请求重定向
-    @RequestMapping(value = "/getCoatingInfoByPipeNo")
+    @RequestMapping(value = "/getCoatingInfoByPipeNo",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String getCoatingInfoByPipeNo(@RequestParam(value = "pipe_no",required = false)String pipe_no, HttpServletRequest request,HttpServletResponse response){
 
@@ -52,101 +52,101 @@ public class APPRequestTransferController {
             //根据status，计算可跳转的状态
             //外防
             if(status.equals("bare1")){
-                urloptions.put("1","odblast");
-                urloptions.put("2","barepaipemovement");
-                urloptions.put("3","instoragetransfer");
-                urloptions.put("4","productionstockout");
+                urloptions.put("1","od/odblast");
+                urloptions.put("2","storage/barepaipemovement");
+                urloptions.put("3","storage/instoragetransfer");
+                urloptions.put("4","storage/productionstockout");
             }
             else if(status.equals("od1")){
-                urloptions.put("1","odblastinspection");
+                urloptions.put("1","od/odblastinspection");
             }
             else if(status.equals("od2")){
                 if(external_coating.equals("2FBE")) {
-                    urloptions.put("1","odcoating2FBE" );
+                    urloptions.put("1","od/odcoating2FBE" );
                 }else if(external_coating.equals("3LPE")){
-                    urloptions.put("1","odcoating3LPE");
+                    urloptions.put("1","od/odcoating3LPE");
                 }
             }
             else if(status.equals("od3")){
                 if(external_coating.equals("2FBE")) {
-                    urloptions.put("1","odcoatinginspection2FBE");
+                    urloptions.put("1","od/odcoatinginspection2FBE");
                 }else if(external_coating.equals("3LPE")){
-                    urloptions.put("1","odcoatinginspection3LPE");
+                    urloptions.put("1","od/odcoatinginspection3LPE");
                 }
             }
             else if(status.equals("od4")){
-                urloptions.put("1","odstencil");
+                urloptions.put("1","od/odstencil");
             }
             else if(status.equals("od5")){
-                urloptions.put("1","odfinalinspection");
+                urloptions.put("1","od/odfinalinspection");
             }
             else if(status.equals("od6")){
-                urloptions.put("1","odstockin");
+                urloptions.put("1","storage/stockin");
             }
             else if(status.equals("odstockin")){
-                urloptions.put("1","idblast");
-                urloptions.put("2","instoragetransfer");
+                urloptions.put("1","id/idblast");
+                urloptions.put("2","storage/instoragetransfer");
                 //需倒棱
                 if(rebevel_mark!=null&&rebevel_mark.equals("1")){
-                    urloptions.put("3","piperebevel");
+                    urloptions.put("3","addition/piperebevel");
                 }
                 //不需要倒棱
                 else if(rebevel_mark==null||!rebevel_mark.equals("1")) {
-                    urloptions.put("3", "productionstockout");
+                    urloptions.put("3", "storage/productionstockout");
                 }
 
             }
             //内防
             else if(status.equals("bare2")){
-                urloptions.put("1","idblast");
-                urloptions.put("2","barepaipemovement");
-                urloptions.put("3","instoragetransfer");
-                urloptions.put("4","productionstockout");
+                urloptions.put("1","id/idblast");
+                urloptions.put("2","storage/barepaipemovement");
+                urloptions.put("3","storage/instoragetransfer");
+                urloptions.put("4","storage/productionstockout");
             }
             else if(status.equals("id1")){
-                urloptions.put("1","idblastinspection");
+                urloptions.put("1","id/idblastinspection");
             }
             else if(status.equals("id2")){
-                urloptions.put("1","idcoating");
+                urloptions.put("1","id/idcoating");
             }
             else if(status.equals("id3")){
-                urloptions.put("1","idcoatinginspection");
+                urloptions.put("1","id/idcoatinginspection");
             }
             else if(status.equals("id4")){
-                urloptions.put("1","idstencil");
+                urloptions.put("1","id/idstencil");
             }
             else if(status.equals("id5")){
-                urloptions.put("1","idfinalinspection");
+                urloptions.put("1","id/idfinalinspection");
             }
             else if(status.equals("id6")){
-                urloptions.put("1","idstockin");
+                urloptions.put("1","storage/stockin");
             }
             else if(status.equals("idstockin")){
-                urloptions.put("1","instoragetransfer");
+                urloptions.put("1","storage/instoragetransfer");
 
                 //需倒棱
                  if(rebevel_mark!=null&&rebevel_mark.equals("1")){
-                    urloptions.put("2","piperebevel");
+                    urloptions.put("2","addition/piperebevel");
                 }
                 //不需要倒棱
                 else if(rebevel_mark==null||!rebevel_mark.equals("1")) {
-                    urloptions.put("2", "productionstockout");
+                    urloptions.put("2", "storage/productionstockout");
                 }
             }
 
             //修补
             else if(status.equals("odrepair1")||status.equals("odrepair2")||status.equals("idrepair1")||status.equals("idrepair2")){
-                urloptions.put("1","coatingrepair");
+                urloptions.put("1","addition/coatingrepair");
             }
 
             //扒皮
             else if(status.equals("odstrip1")||status.equals("idstrip1")){
-                urloptions.put("1","coatingstrip");
+                urloptions.put("1","addition/coatingstrip");
             }
 
             //修磨或切割
             else if(status.equals("onhold")){
-                urloptions.put("1","barepipegrinding");
+                urloptions.put("1","addition/barepipegrinding");
             }
 
             maps.put("urloptions",urloptions);
