@@ -53,7 +53,7 @@ public class APPRequestTransferController {
             //外防
             if(status.equals("bare1")){
                 urloptions.put("odblast","od/odblast");
-                urloptions.put("barepaipemovement","storage/barepaipemovement");
+                urloptions.put("barepipemovement","storage/barepipemovement");
                 urloptions.put("instoragetransfer","storage/instoragetransfer");
                 urloptions.put("productionstockout","storage/productionstockout");
             }
@@ -99,7 +99,7 @@ public class APPRequestTransferController {
             //内防
             else if(status.equals("bare2")){
                 urloptions.put("idblast","id/idblast");
-                urloptions.put("barepaipemovement","storage/barepaipemovement");
+                urloptions.put("barepipemovement","storage/barepipemovement");
                 urloptions.put("instoragetransfer","storage/instoragetransfer");
                 urloptions.put("productionstockout","storage/productionstockout");
             }

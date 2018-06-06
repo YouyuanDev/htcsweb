@@ -1162,7 +1162,7 @@
 					        valueField:'id',
 					        editable:false,
 					        textField:'text',
-					        panelHeight:'auto'"/></td>
+					        panelHeight:'200'"/></td>
                     <%--<td></td>--%>
                 </tr>
 
