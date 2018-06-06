@@ -10,6 +10,7 @@ import com.htcsweb.entity.Function;
 import com.htcsweb.entity.OdBlastProcess;
 import com.htcsweb.entity.Person;
 import com.htcsweb.entity.Role;
+import com.htcsweb.util.APICloudPushService;
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -128,6 +129,10 @@ public class LoginController {
                 json.put("success",true);
                 json.put("roles",role_no_list);
                 //System.out.println("登录验证 success");
+//                String basePath = request.getSession().getServletContext().getRealPath("/");
+//                System.out.println("登录验证 basePath="+basePath);
+//                APICloudPushService.SendPushNotification(basePath,"title标题","内容内容内容内容","2","0","all","");
+////
             }else{
                 json.put("success",false);
                 json.put("msg","用户名或密码错误");
