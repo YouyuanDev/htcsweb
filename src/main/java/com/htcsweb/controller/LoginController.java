@@ -77,11 +77,13 @@ public class LoginController {
                 //设置权限
                 HashMap<String,Object> functionMap=new HashMap<String,Object>();
                 //这里读取数据库设置所有权限
+
+                String role_no_list=null;
                 if(employee_no!=null) {
                     List<Person> lt=personDao.getPersonByEmployeeNo(employee_no);
                     if(lt.size()>0) {
                         Person person=lt.get(0);
-                        String role_no_list=person.getRole_no_list();
+                        role_no_list=person.getRole_no_list();
                         if(role_no_list!=null&&!role_no_list.equals("")){
                             role_no_list=role_no_list.replace(',',';');
                             String[] roles= role_no_list.split(";");
@@ -124,6 +126,7 @@ public class LoginController {
 
                 //跳转到用户主页
                 json.put("success",true);
+                json.put("roles",role_no_list);
                 //System.out.println("登录验证 success");
             }else{
                 json.put("success",false);
