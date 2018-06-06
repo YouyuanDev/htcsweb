@@ -15,11 +15,11 @@
     <link rel="stylesheet" type="text/css" href="../easyui/themes/icon.css">
     <link href="../miniui/multiupload/multiupload.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="../css/common.css"/>
-    <script src="../easyui/jquery.min.js" type="text/javascript"></script>
-    <script src="../js/jquery.i18n.properties-1.0.9.js" type="text/javascript"></script>
+    <%--<script src="../easyui/jquery.min.js" type="text/javascript"></script>--%>
+    <%--<script src="../js/jquery.i18n.properties-1.0.9.js" type="text/javascript"></script>--%>
     <script src="../js/language.js" type="text/javascript"></script>
     <script src="../js/common.js" type="text/javascript"></script>
-    <script src="../miniui/boot.js" type="text/javascript"></script>
+    <%--<script src="../miniui/boot.js" type="text/javascript"></script>--%>
     <script  src="../miniui/js/miniui.js" type="text/javascript"></script>
     <script src="../miniui/fileupload/swfupload/swfupload.js" type="text/javascript"></script>
     <script src="../miniui/multiupload/multiupload.js" type="text/javascript"></script>
