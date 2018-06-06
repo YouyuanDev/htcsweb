@@ -82,21 +82,9 @@ public class PersonController {
     @ResponseBody
     public String savePerson(Person person, HttpServletRequest request,HttpServletResponse response){
         //System.out.println(request.getParameter("employee_no")+"getVal");
-        System.out.println("savePerson:"+person.getId()+":"+person.getEmployee_no()+":"+person.getPidcard_no());
         JSONObject json=new JSONObject();
         try{
             int resTotal=0;
-//            String employee_no=person.getEmployee_no();
-//            List<Person>personList=personDao.getPersonByEmployeeNo(employee_no);
-//            if(personList!=null&&personList.size()>0){
-//                 Person person1=personList.get(0);
-//                 if(person.getEmployee_no())
-//                 person1.set()
-//
-//
-//            }else{
-//
-//            }
             if(person.getId()==0){
                 //添加
                 resTotal=personDao.addPerson(person);
@@ -108,10 +96,10 @@ public class PersonController {
             }
             if(resTotal>0){
                 json.put("success",true);
-                json.put("message","保存成功");
+                json.put("message","修改成功!");
             }else{
                 json.put("success",false);
-                json.put("message","保存失败");
+                json.put("message","修改失败!");
             }
 
         }catch (Exception e){

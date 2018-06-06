@@ -96,7 +96,7 @@
             <if test="ppassword!=null">ppassword=#{ppassword},</if>
             <if test="pidcard_no!=null">pidcard_no=#{pidcard_no},</if>
             <if test="pmobile!=null">pmobile=#{pmobile},</if>
-            <if test="page!=null"> page=#{page},</if>
+            <if test="page!=null and page&gt;0"> page=#{page},</if>
             <if test="psex!=null">psex=#{psex},</if>
             <if test="pstatus!=null">pstatus=#{pstatus},</if>
             <if test="pdepartment!=null">pdepartment=#{pdepartment},</if>
