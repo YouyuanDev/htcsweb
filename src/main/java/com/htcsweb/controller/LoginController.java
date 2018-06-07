@@ -156,18 +156,12 @@ public class LoginController {
 
                 HttpSession session = request.getSession();
                 //把用户数据保存在session域对象中
-                session.removeAttribute("userSession");
-                session.removeAttribute("userfunctionMap");
-
-
-                if(session.getAttribute("userSession")==null){
-                    //跳转到登录页面
-                    json.put("success",true);
-                    json.put("msg","登出成功");
-                }else{
-                    json.put("success",false);
-                    json.put("msg","登出错误");
-                }
+                //session.removeAttribute("userSession");
+                //session.removeAttribute("userfunctionMap");
+                session.invalidate();
+                //跳转到登录页面
+                json.put("success",true);
+                json.put("msg","登出成功");
 
             ResponseUtil.write(response,json);
         }catch (Exception e){
@@ -175,5 +169,9 @@ public class LoginController {
         }
         return null;
     }
+
+
+
+
 
 }
