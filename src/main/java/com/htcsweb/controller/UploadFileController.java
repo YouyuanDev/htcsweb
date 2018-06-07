@@ -133,8 +133,8 @@ public class UploadFileController {
             String saveDirectory=request.getSession().getServletContext().getRealPath("/");
             //照片放在web目录以外，需要tomcat conf/server.xml增加 <Context path="/upload" docBase="XXXXX/apache-tomcat-8.5.27/webapps/upload" reloadable="false"/>
             //conf/server.xml   <Context path="/upload" docBase="/Users/kurt/Documents/apache-tomcat-8.5.27/webapps/upload" reloadable="false"/>
+            saveDirectory = saveDirectory.substring(0, saveDirectory.lastIndexOf('/'));
             if(isServerTomcat) {
-                saveDirectory = saveDirectory.substring(0, saveDirectory.lastIndexOf('/'));
                 saveDirectory = saveDirectory.substring(0, saveDirectory.lastIndexOf('/'));
             }
             saveDirectory = saveDirectory + "/upload/pictures";
