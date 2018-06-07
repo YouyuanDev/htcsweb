@@ -119,7 +119,7 @@ public class SessionFilter extends OncePerRequestFilter{
                 }else{
                     JSONObject json = new JSONObject();
                     StringBuilder sbmessage = new StringBuilder();
-                    sbmessage.append("session已过期，请先登录\n");
+                    sbmessage.append("session已过期，请先登录");
                     json.put("success", false);
                     json.put("message", sbmessage.toString());
                     System.out.println("弹出没有权限");
@@ -156,7 +156,7 @@ public class SessionFilter extends OncePerRequestFilter{
                 }else{
                     JSONObject json = new JSONObject();
                     StringBuilder sbmessage = new StringBuilder();
-                    sbmessage.append("没有权限\n");
+                    sbmessage.append("没有权限");
 
                     json.put("success", false);
                     json.put("message", sbmessage.toString());
