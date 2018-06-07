@@ -59,11 +59,11 @@
 
 
     <insert id="addRole" parameterType="com.htcsweb.entity.Role">
-        INSERT INTO role(role_no,role_name,function_no_list) VALUES (#{role_no},#{role_name},#{function_no_list})
+        INSERT INTO role(role_no,role_name,function_no_list,push_event_list) VALUES (#{role_no},#{role_name},#{function_no_list},#{push_event_list})
     </insert>
 
     <update id="updateRole" parameterType="com.htcsweb.entity.Role">
-        UPDATE role set role_no=#{role_no},role_name=#{role_name},function_no_list=#{function_no_list} where id=#{id}
+        UPDATE role set role_no=#{role_no},role_name=#{role_name},function_no_list=#{function_no_list},push_event_list=#{push_event_list} where id=#{id}
     </update>
 
 

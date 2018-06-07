@@ -2,7 +2,9 @@ package com.htcsweb.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.htcsweb.dao.PushEventRuleDao;
 import com.htcsweb.dao.RoleDao;
+import com.htcsweb.entity.PushEventRule;
 import com.htcsweb.entity.Role;
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,11 @@ import java.util.Map;
 public class RoleController {
     @Autowired
     private RoleDao roleDao;
+
+
+    @Autowired
+    private PushEventRuleDao pushEventRuleDao;
+
     //获取所有role列表
     @RequestMapping("getRoleByLike")
     @ResponseBody
@@ -55,6 +62,16 @@ public class RoleController {
         String mmp= JSONArray.toJSONString(list);
         return mmp;
     }
+
+    //得到所有的推送事件
+    @RequestMapping(value ="/getAllPushEventRule",produces = "text/plain;charset=utf-8")
+    @ResponseBody
+    public String getAllPushEventRule(HttpServletRequest request){
+        List<PushEventRule> list=pushEventRuleDao.getAllPushEventRule();
+        String mmp= JSONArray.toJSONString(list);
+        return mmp;
+    }
+
 
     //保存Role
     @RequestMapping(value = "/saveRole")

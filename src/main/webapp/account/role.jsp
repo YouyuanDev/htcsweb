@@ -111,6 +111,7 @@
             if(row){
                 $('#hlRoleDialog').dialog('open').dialog('setTitle','修改');
                 $('#RoleForm').form('load',row);
+                combox1.setValue(row.push_event_list);
                 look2.setText(row.function_no_list);
                 look2.setValue(row.function_no_list);
                 url="/Role/saveRole.action?id="+row.id;
@@ -247,10 +248,22 @@
                     </td>
 
                 </tr>
-
                 <tr>
 
-                    <td >权限列表</td>
+                    <td  class="i18n1" name="pushevent">推送事件</td>
+                    <td colspan="5">
+                        <div id="combobox1" class="mini-combobox" style="width:185px;"  popupWidth="185" textField="push_event_name" valueField="push_event"
+                             url="/Role/getAllPushEventRule.action" name="push_event_list" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick" >
+                            <div property="columns">
+                                <div header="事件" field="push_event_name"></div>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+                <tr>
+
+                    <td class="i18n1" name="functionlist">权限列表</td>
                     <td colspan="5">
                         <input id="lookup2" name="function_no_list" class="mini-lookup hl-mini-input" style="width:400px;"
                                textField="function_no" valueField="function_no" popupWidth="auto"
@@ -316,7 +329,7 @@
     var grid = mini.get("datagrid1");
     var keyText = mini.get("keyText");
     var look2= mini.get("lookup2");
-
+    var combox1=mini.get("combobox1");
 
     function onSearchClick(e) {
         grid.load({
@@ -343,7 +356,11 @@
         });
         //$('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
     });
-
+    combox1.on("showpopup",function () {
+        $('.mini-shadow').css('z-index','99999');
+        $('.mini-popup').css('z-index','100000');
+        $('.mini-panel').css('z-index','100000');
+    });
     $(function () {
         $('.hl-mini-input .mini-buttonedit-border .mini-buttonedit-input').css("width","360px");
     });
