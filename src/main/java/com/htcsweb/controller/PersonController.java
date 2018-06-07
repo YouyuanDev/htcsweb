@@ -50,11 +50,10 @@ public class PersonController {
     @ResponseBody
     public String getPersonByEmployeeNo(HttpServletRequest request){
         HttpSession session = request.getSession();
-        String employeeno=request.getParameter("employeeno");
         //把用户数据保存在session域对象中
         String employee_no=(String)session.getAttribute("userSession");
         Map<String,Object> maps=new HashMap<String,Object>();
-        if(employee_no==null||employeeno==null||!employee_no.equals(employeeno)){
+        if(employee_no==null){
 
             maps.put("success",false);
             maps.put("msg","请先登录");
@@ -62,7 +61,7 @@ public class PersonController {
             return mmp;
         }
 
-        List<Person> personList=personDao.getPersonByEmployeeNo(employeeno);
+        List<Person> personList=personDao.getPersonByEmployeeNo(employee_no);
         String mmp="";
         if(personList!=null&&personList.size()>0) {
             maps.put("success",true);
