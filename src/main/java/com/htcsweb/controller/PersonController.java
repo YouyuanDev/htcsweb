@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -42,14 +43,33 @@ public class PersonController {
         request.getSession().setAttribute("sa",person);
         return "personedit";
     }
+
+
+    //供app程序使用，无需权限，需验证登录情况
     @RequestMapping("/getPersonByEmployeeNo")
     @ResponseBody
     public String getPersonByEmployeeNo(HttpServletRequest request){
+        HttpSession session = request.getSession();
         String employeeno=request.getParameter("employeeno");
+        //把用户数据保存在session域对象中
+        String employee_no=(String)session.getAttribute("userSession");
+        Map<String,Object> maps=new HashMap<String,Object>();
+        if(employee_no==null||employeeno==null||!employee_no.equals(employeeno)){
+
+            maps.put("success",false);
+            maps.put("msg","请先登录");
+            String mmp= JSONArray.toJSONString(maps);
+            return mmp;
+        }
+
         List<Person> personList=personDao.getPersonByEmployeeNo(employeeno);
         String mmp="";
-        if(personList!=null&&personList.size()>0)
-        mmp= JSONArray.toJSONString(personList.get(0));
+        if(personList!=null&&personList.size()>0) {
+            maps.put("success",true);
+            maps.put("msg","获取成功");
+            maps.put("data",personList.get(0));
+            mmp= JSONArray.toJSONString(maps);
+        }
         return mmp;
     }
     //搜索
