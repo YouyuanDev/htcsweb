@@ -84,7 +84,10 @@ public class SessionFilter extends OncePerRequestFilter{
             "getPersonByEmployeeNo",
             "getCoatingInfoByPipeNo",
             "getAllPushEventRule",
-            "getAllMillsInfo"
+            "getAllMillsInfo",
+            "getMySessionMillno",
+            "getAllSteelDefectInfo",
+            "getAllCoatingDefectInfo"
 
     }; // 不过滤的uri
 
@@ -95,7 +98,6 @@ public class SessionFilter extends OncePerRequestFilter{
             filterChain.doFilter(request, response);//不执行过滤,继续执行操作
             return;
         }
-
 
 
         //System.out.println("====测试Filter功能====拦截用户登陆====");

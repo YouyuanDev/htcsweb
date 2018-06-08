@@ -416,10 +416,10 @@
                            <%--<div header="缺陷类型" field="text"></div>--%>
                        <%--</div>--%>
                    <%--</div>--%>
-                   <div id="combobox1" class="mini-combobox" style="width:185px;"  popupWidth="185" textField="text" valueField="text"
-                        url="../data/defect.txt" name="internal_surface_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick0" >
+                   <div id="combobox1" class="mini-combobox" style="width:185px;"  popupWidth="185" textField="defect_name" valueField="defect_name"
+                        url="/DefectOperation/getAllSteelDefectInfo.action" name="internal_surface_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick0" >
                        <div property="columns">
-                           <div header="缺陷类型" field="text"></div>
+                           <div header="缺陷类型" field="defect_name"></div>
                        </div>
                    </div>
                    <%--<select id="sc" class="easyui-combobox" data-options="editable:false" name="surface_condition"   style="width:200px;">--%>
@@ -430,16 +430,16 @@
                <td></td>
                <td class="i18n1" name="externalcoatingcondition">外涂层表面</td>
                <td>
-                   <div id="combobox2" class="mini-combobox hl-combox-miniui" style="width:185px;"  popupWidth="185" textField="text" valueField="text"
-                        url="../data/surfacequality.txt" name="external_coating_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick1" >
+                   <div id="combobox2" class="mini-combobox hl-combox-miniui" style="width:185px;"  popupWidth="185" textField="defect_name" valueField="defect_name"
+                        url="/DefectOperation/getAllCoatingDefectInfo.action" name="external_coating_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick1" >
                        <div property="columns">
-                           <div header="缺陷类型" field="text"></div>
+                           <div header="缺陷类型" field="defect_name"></div>
                        </div>
                    </div>
-                   <%--<div id="combobox2" class="mini-combobox" style="width:185px;"  popupWidth="185" textField="text" valueField="text"--%>
-                        <%--url="../data/defect.txt" name="external_coating_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick1" >--%>
+                   <%--<div id="combobox2" class="mini-combobox" style="width:185px;"  popupWidth="185" textField="defect_name" valueField="defect_name"--%>
+                        <%--url="/DefectOperation/getAllSteelDefectInfo.action" name="external_coating_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick1" >--%>
                        <%--<div property="columns">--%>
-                           <%--<div header="缺陷类型" field="text"></div>--%>
+                           <%--<div header="缺陷类型" field="defect_name"></div>--%>
                        <%--</div>--%>
                    <%--</div>--%>
                    <%--<select id="ecc" class="easyui-combobox" data-options="editable:false" name="external_coating_condition"   style="width:200px;">--%>

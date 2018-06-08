@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.htcsweb.dao.DefectInfoDao">
+
+
+
+
+    <select id="getAllSteelDefectInfo" resultType="com.htcsweb.entity.DefectInfo">
+        select * from  defect_info
+        where defect_type='steel'
+        order by id asc
+    </select>
+
+
+    <select id="getAllCoatingDefectInfo" resultType="com.htcsweb.entity.DefectInfo">
+        select * from  defect_info
+        where defect_type='coating'
+        order by id asc
+    </select>
+
+</mapper>

@@ -486,10 +486,10 @@
 
                     <td width="16%" class="i18n1" name="surfacecondition">表面缺陷</td>
                     <td>
-                        <div id="combobox1" class="mini-combobox" style="width:185px;"  popupWidth="185" textField="text" valueField="text"
-                             url="../data/defect.txt" name="surface_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick" >
+                        <div id="combobox1" class="mini-combobox" style="width:185px;"  popupWidth="185" textField="defect_name" valueField="defect_name"
+                             url="/DefectOperation/getAllSteelDefectInfo.action" name="surface_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick" >
                             <div property="columns">
-                                <div header="缺陷类型" field="text"></div>
+                                <div header="缺陷类型" field="defect_name"></div>
                             </div>
                         </div>
                     </td>

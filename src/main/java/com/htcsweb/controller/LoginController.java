@@ -148,6 +148,8 @@ public class LoginController {
     }
 
 
+
+
     //登录验证
     @RequestMapping("/Logout")
     @ResponseBody
@@ -172,7 +174,34 @@ public class LoginController {
     }
 
 
+    //返回自己session中的mill_no
+    @RequestMapping("/getMySessionMillno")
+    @ResponseBody
+    public String getMySessionMillno(HttpServletRequest request,HttpServletResponse response){
+        JSONObject json=new JSONObject();
+        try{
 
+            HttpSession session = request.getSession();
+            //把用户数据保存在session域对象中
+            String millno=(String)session.getAttribute("millno");
+            //跳转到登录页面
+
+            if(millno!=null) {
+                json.put("success",true);
+                json.put("millno", millno);
+                json.put("msg","获取millno成功");
+            }else{
+                json.put("success",false);
+                json.put("millno", "");
+                json.put("msg","不存在millno");
+            }
+
+            ResponseUtil.write(response,json);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 
 }
