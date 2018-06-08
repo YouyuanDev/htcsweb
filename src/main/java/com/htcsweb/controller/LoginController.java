@@ -64,6 +64,7 @@ public class LoginController {
         JSONObject json=new JSONObject();
         String employee_no= request.getParameter("employee_no");
         String ppassword= request.getParameter("ppassword");
+        String millno= request.getParameter("mill_no");
         try{
             int resTotal=0;
             System.out.println("employee_no="+employee_no);
@@ -74,7 +75,7 @@ public class LoginController {
                 HttpSession session = request.getSession();
                 //把用户数据保存在session域对象中
                 session.setAttribute("userSession", employee_no);
-
+                session.setAttribute("millno", millno);
                 //设置权限
                 HashMap<String,Object> functionMap=new HashMap<String,Object>();
                 //这里读取数据库设置所有权限

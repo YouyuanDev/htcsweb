@@ -73,4 +73,20 @@ public class MillInfoController {
         return map;
     }
 
+    //返回mill的所有信息, APP使用
+    @RequestMapping("/getAllMillsInfo")
+    @ResponseBody
+    public String getAllMillsInfo(HttpServletRequest request){
+        List<MillInfo>list=millInfoDao.getAllMillInfo();
+        Map<String,Object> maps=new HashMap<String,Object>();
+        maps.put("success",true);
+        maps.put("millinfo",list);
+        maps.put("message","返回成功");
+        String map= JSONObject.toJSONString(maps);
+        System.out.println("="+map);
+        return map;
+    }
+
+
+
 }

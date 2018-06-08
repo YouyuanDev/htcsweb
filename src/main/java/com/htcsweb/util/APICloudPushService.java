@@ -21,7 +21,7 @@ public class APICloudPushService {
 
     public static void main(String[] args) throws IOException {
 
-        SendPushNotification("","title标题","内容内容内容内容","2","0","all","");
+        SendPushNotification("","10:59titile","内容内容内容内容","1","0","all","");
 //        try {
 //            HttpClient client = new HttpClient();
 //

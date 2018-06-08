@@ -83,7 +83,8 @@ public class SessionFilter extends OncePerRequestFilter{
             "setInspectionTimeMap",
             "getPersonByEmployeeNo",
             "getCoatingInfoByPipeNo",
-            "getAllPushEventRule"
+            "getAllPushEventRule",
+            "getAllMillsInfo"
 
     }; // 不过滤的uri
 
