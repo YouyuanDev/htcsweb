@@ -174,26 +174,33 @@ public class LoginController {
     }
 
 
-    //返回自己session中的mill_no
-    @RequestMapping("/getMySessionMillno")
+    //返回自己session，给APP使用
+    @RequestMapping("/getMySession")
     @ResponseBody
-    public String getMySessionMillno(HttpServletRequest request,HttpServletResponse response){
+    public String getMySession(HttpServletRequest request,HttpServletResponse response){
         JSONObject json=new JSONObject();
         try{
 
             HttpSession session = request.getSession();
             //把用户数据保存在session域对象中
+            String employeeno=(String)session.getAttribute("userSession");
             String millno=(String)session.getAttribute("millno");
-            //跳转到登录页面
 
-            if(millno!=null) {
+            if(employeeno!=null&&millno!=null) {
                 json.put("success",true);
+                json.put("employeeno", employeeno);
                 json.put("millno", millno);
-                json.put("msg","获取millno成功");
+                json.put("msg","获取employeeno,millno成功");
+            }else if(employeeno!=null&&millno==null){
+                json.put("success",false);
+                json.put("millno", "");
+                json.put("employeeno", employeeno);
+                json.put("msg","不存在millno");
             }else{
                 json.put("success",false);
                 json.put("millno", "");
-                json.put("msg","不存在millno");
+                json.put("employeeno", "");
+                json.put("msg","不存在session");
             }
 
             ResponseUtil.write(response,json);

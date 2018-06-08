@@ -85,7 +85,7 @@ public class SessionFilter extends OncePerRequestFilter{
             "getCoatingInfoByPipeNo",
             "getAllPushEventRule",
             "getAllMillsInfo",
-            "getMySessionMillno",
+            "getMySession",
             "getAllSteelDefectInfo",
             "getAllCoatingDefectInfo"
 
