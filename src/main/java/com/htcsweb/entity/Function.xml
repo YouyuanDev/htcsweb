@@ -19,7 +19,7 @@
     </select>
 
     <select id="getAllByNoName" resultType="map">
-        select * from  function f
+        select *, concat(module_name,function_name) as module_function_name from  function f
         <where>
             <if test="function_no!=null and function_no!=''">
                 AND f.function_no LIKE CONCAT('%',#{function_no},'%')

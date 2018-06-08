@@ -252,7 +252,7 @@
 
                     <td  class="i18n1" name="pushevent">推送事件</td>
                     <td colspan="5">
-                        <div id="combobox1" class="mini-combobox" style="width:185px;"  popupWidth="185" textField="push_event_name" valueField="push_event"
+                        <div id="combobox1" class="mini-combobox hl-mini-input" style="width:400px;"  popupWidth="185" textField="push_event_name" valueField="push_event"
                              url="/Role/getAllPushEventRule.action" name="push_event_list" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick" >
                             <div property="columns">
                                 <div header="事件" field="push_event_name"></div>
@@ -294,6 +294,7 @@
                                     <div field="module_name" width="120" headerAlign="center" allowSort="true" class="i18n1" name="modulename">功能模块</div>
                                     <div field="function_no" width="120" headerAlign="center" allowSort="true" class="i18n1" name="functionno">功能编号</div>
                                     <div field="function_name" width="120" headerAlign="center" allowSort="true" class="i18n1" name="functionname">功能名称</div>
+                                    <%--<div field="module_function_name" width="120" headerAlign="center" allowSort="true" class="i18n1" name="modulefunctionname">模块功能名称</div>--%>
                                     <div field="uri" width="120" headerAlign="center" allowSort="true" class="i18n1" name="uri">uri</div>
                                 </div>
                             </div>
