@@ -19,6 +19,18 @@
         </where>
     </select>
 
+
+
+    <select id="getRolesByEvent" resultType="map">
+        select * from  role r
+        <where>
+            <if test="event!=null and event!=''">
+                AND r.push_event_list LIKE CONCAT('%',#{event},'%')
+            </if>
+        </where>
+    </select>
+
+
     <select id="getAllRoleByLike" resultType="map">
         select * from  role r
         <where>

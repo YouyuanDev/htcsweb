@@ -2,17 +2,22 @@ package com.htcsweb.util;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 
+import com.htcsweb.dao.RoleDao;
 import org.apache.commons.httpclient.*;
 import org.apache.commons.httpclient.methods.*;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 
 public class APICloudPushService {
+
 
     //HLCoatingTrace APP 来自于APICloud
     static String appid = "A6054425848203";
@@ -21,52 +26,29 @@ public class APICloudPushService {
 
     public static void main(String[] args) throws IOException {
 
-        SendPushNotification("","10:59titile","内容内容内容内容","1","0","all","");
-//        try {
-//            HttpClient client = new HttpClient();
+
+//        @Autowired
+//        private RoleDao roleDao;
 //
-//            // post请求
-//            PostMethod post = new UTF8PostMethod(APIURL);
 //
-//            // 提交参数
-//            NameValuePair title = new NameValuePair("title","推送没121221");                 // 消息标题
-//            NameValuePair content = new NameValuePair("content","推送了哇11221212");             // 消息内容
-//            NameValuePair type = new NameValuePair("type","2");                     // 消息类型，1:消息 2:通知
-//            NameValuePair platform = new NameValuePair("platform","0");             // 0：全部平台，1：ios, 2：android
-//            // 推送组，推送用户(没有可不写)
-//            NameValuePair groupName = new NameValuePair("groupName","admin");     // 推送组名，多个组用英文逗号隔开.默认:全部组
-//            //NameValuePair userIds = new NameValuePair("userIds","id名称");         // 推送用户id, 多个用户用英文逗号分隔
+//        //发送推送消息
+//        public void SendEvent(String event, String title,String content){
+//            List<HashMap<String,Object>>  lt=roleDao.getRolesByEvent(event);
 //
-//            post.setRequestBody(new NameValuePair[]{title, content, type, platform/*, groupName, userIds*/});
+//            for(int i=0;i<lt.size();i++){
+//                String role=(String)lt.get(i).get("role_no");
+//                //发消息
+//                APICloudPushService.SendPushNotification("",title,content,"1","0",role,"");
+//            }
 //
-//            HttpMethod method = post;
 //
-//            // 生成规则
-//            String    key = testInvokeScriptMethod();
-//
-//            // 设置请求头部信息
-//            method.setRequestHeader("X-APICloud-AppId", appid);
-//            method.setRequestHeader("X-APICloud-AppKey", key);
-//
-//            // 执行方法
-//            client.executeMethod(method);
-//
-//            // 打印服务器返回的状态
-//            System.out.println(method.getStatusLine());
-//
-//            // 打印结果页面
-//            String response = new String(method.getResponseBodyAsString().getBytes("8859_1"));
-//
-//            // 打印返回的信息
-//            System.out.println(response);
-//
-//            // 释放连接
-//            method.releaseConnection();
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
 //        }
+
+
+        SendPushNotification("","10:59titile","内容内容内容内容","1","0","all","");
+
     }
+
 
 
 
@@ -147,7 +129,7 @@ public class APICloudPushService {
         return res + "." + now;
     }
 
-    public static class UTF8PostMethod extends PostMethod{
+    private static class UTF8PostMethod extends PostMethod{
         public UTF8PostMethod(String url){
             super(url);
         }

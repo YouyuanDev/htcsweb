@@ -26,6 +26,9 @@ public interface RoleDao {
     //根据Role No 得到Role
     public List<Role> getRoleByRoleNo(@Param("role_no")String role_no);
 
+    //根据事件返回所有Role
+    public List<HashMap<String,Object>> getRolesByEvent(@Param("event")String event);
+
 
 
 }
