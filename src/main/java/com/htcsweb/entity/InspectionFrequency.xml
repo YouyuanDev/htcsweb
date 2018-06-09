@@ -92,6 +92,19 @@
     </select>
 
 
+    <select id="getFrequencyInfoByPipeNo" resultType="map">
+        SELECT  i.* from inspection_frequency i
+        inner join project_info pro on pro.inspection_frequency_no=i.inspection_frequency_no
+        inner join contract_info c on c.project_no=pro.project_no
+        inner join pipe_basic_info p on p.contract_no=c.contract_no
+        <where>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND p.pipe_no =#{pipe_no}
+            </if>
+        </where>
+
+        group by inspection_frequency_no
+    </select>
 
 
 </mapper>

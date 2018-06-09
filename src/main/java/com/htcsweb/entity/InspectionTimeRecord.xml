@@ -25,6 +25,8 @@
 
     <select id="getRecordByProjectNoMillNo" resultType="InspectionTimeRecord">
         Select o.* from inspection_time_record o
+        inner join contract_info c on c.project_no=o.project_no
+        inner join pipe_basic_info p on p.contract_no=c.contract_no
         <where>
             <if test="project_no!=null and project_no!=''">
                 AND o.project_no =#{project_no}
@@ -37,8 +39,27 @@
             </if>
 
         </where>
-        ORDER BY o.id DESC
+        ORDER BY o.id asc
     </select>
+
+
+    <select id="getRecordByPipeNoMillNo" resultType="InspectionTimeRecord">
+        Select o.* from inspection_time_record o
+        inner join contract_info c on c.project_no=o.project_no
+        inner join pipe_basic_info p on p.contract_no=c.contract_no
+        <where>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND p.pipe_no=#{pipe_no}
+            </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no =#{mill_no}
+            </if>
+        </where>
+        group by o.project_no,o.mill_no,o.inspection_item
+        ORDER BY o.id asc
+    </select>
+
+
 
 
 

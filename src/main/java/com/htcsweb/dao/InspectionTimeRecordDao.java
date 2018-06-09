@@ -11,4 +11,7 @@ public interface InspectionTimeRecordDao {
     public List<InspectionTimeRecord> getRecordByProjectNoMillNo(@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("inspection_item")String inspection_item);
     public int updateInspectionTimeRecord(InspectionTimeRecord inspectionTimeRecord);
 
+    public List<InspectionTimeRecord> getRecordByPipeNoMillNo(@Param("pipe_no")String pipe_no,@Param("mill_no")String mill_no,@Param("inspection_item")String inspection_item);
+
+
 }

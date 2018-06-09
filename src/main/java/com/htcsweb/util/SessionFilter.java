@@ -79,7 +79,8 @@ public class SessionFilter extends OncePerRequestFilter{
             "Logout",
             "searchPipe",
             "getTopTenPictures",
-            "getAllInspectionTimeMap",
+            "getAllInspectionTimeMapByProjectNoMillNo",
+            "getAllInspectionTimeMapByPipeNoMillNo",
             "setInspectionTimeMap",
             "getPersonByEmployeeNo",
             "getCoatingInfoByPipeNo",
@@ -87,7 +88,8 @@ public class SessionFilter extends OncePerRequestFilter{
             "getAllMillsInfo",
             "getMySession",
             "getAllSteelDefectInfo",
-            "getAllCoatingDefectInfo"
+            "getAllCoatingDefectInfo",
+            "getRecordByPipeNoMillNo"
 
     }; // 不过滤的uri
 

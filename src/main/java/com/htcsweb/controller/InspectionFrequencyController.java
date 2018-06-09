@@ -139,11 +139,51 @@ public class InspectionFrequencyController {
 
 
     //检测某检测项此刻是否需要检测
-    @RequestMapping("/getAllInspectionTimeMap")
+    @RequestMapping("/getAllInspectionTimeMapByPipeNoMillNo")
     @ResponseBody
-    public String getAllInspectionTimeMap(@RequestParam(value = "project_no",required = false)String project_no, @RequestParam(value = "mill_no",required = false)String mill_no, HttpServletRequest request){
+    public String getAllInspectionTimeMapByPipeNoMillNo(@RequestParam(value = "pipe_no",required = false)String pipe_no, @RequestParam(value = "mill_no",required = false)String mill_no, HttpServletRequest request){
 
-        //InspectionFrequencyOperation/getAllInspectionTimeMap.action?project_no=20180208&mill_no=mill_1
+        //InspectionFrequencyOperation/getAllInspectionTimeMapByPipeNoMillNo.action?pipe_no=1524540&mill_no=mill_1
+        List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByPipeNoMillNo(pipe_no,mill_no,null);
+        List<HashMap<String,Object>> ltif= inspectionFrequencyDao.getFrequencyInfoByPipeNo(pipe_no);
+        Map<String,HashMap<String,Object>> maps=new HashMap<String,HashMap<String,Object>>();
+        HashMap<String,Object> insmap=new HashMap<String,Object>();
+        Date now=new Date();
+        if(ltif.size()>0){
+            insmap=ltif.get(0);
+
+            for(int i=0;i<lt.size();i++){
+                InspectionTimeRecord timeRecord=lt.get(i);
+                float freq=(float)insmap.get(timeRecord.getInspection_item());
+                //检验频率 秒
+                float freqSec=freq*60*60;
+                //间隔秒
+                long interval = (now.getTime() - timeRecord.getInspction_time().getTime())/1000;
+
+                boolean needInspectNow=false;
+                if(interval>=freqSec){
+                    //间隔已大于检验频率，需要检验
+                    needInspectNow=true;
+                }
+                HashMap<String,Object> m=new HashMap<String,Object>();
+                m.put("lastInspectionTime",timeRecord.getInspction_time());
+                m.put("needInspectNow",needInspectNow);
+                maps.put(timeRecord.getInspection_item(),m);
+            }
+        }
+
+
+
+        String mmp= JSONArray.toJSONString(maps);
+        return mmp;
+    }
+
+    //检测某检测项此刻是否需要检测
+    @RequestMapping("/getAllInspectionTimeMapByProjectNoMillNo")
+    @ResponseBody
+    public String getAllInspectionTimeMapByProjectNoMillNo(@RequestParam(value = "project_no",required = false)String project_no, @RequestParam(value = "mill_no",required = false)String mill_no, HttpServletRequest request){
+
+        //InspectionFrequencyOperation/getAllInspectionTimeMapByProjectNoMillNo.action?project_no=20180208&mill_no=mill_1
         List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,null);
         List<HashMap<String,Object>> ltif= inspectionFrequencyDao.getFrequencyInfoByProjectNo(project_no);
         Map<String,HashMap<String,Object>> maps=new HashMap<String,HashMap<String,Object>>();

@@ -20,4 +20,8 @@ public interface InspectionFrequencyDao {
 
     public List<HashMap<String,Object>> getFrequencyInfoByProjectNo(@Param("project_no") String project_no);
 
+    public List<HashMap<String,Object>> getFrequencyInfoByPipeNo(@Param("pipe_no") String pipe_no);
+
+
+
 }
