@@ -89,7 +89,9 @@ public class SessionFilter extends OncePerRequestFilter{
             "getMySession",
             "getAllSteelDefectInfo",
             "getAllCoatingDefectInfo",
-            "getRecordByPipeNoMillNo"
+            "getRecordByPipeNoMillNo",
+            "getODAcceptanceCriteriaByPipeNo",
+            "getIDAcceptanceCriteriaByPipeNo"
 
     }; // 不过滤的uri
 

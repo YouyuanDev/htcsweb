@@ -233,6 +233,25 @@ public class AcceptanceCriteriaController {
         ResponseUtil.write(response,json);
         return null;
     }
+
+
+    //根据钢管编号查找外防腐标准  APP使用
+    @RequestMapping("/getODAcceptanceCriteriaByPipeNo")
+    @ResponseBody
+    public String getODAcceptanceCriteriaByPipeNo(HttpServletRequest request){
+        //AcceptanceCriteriaOperation/getODAcceptanceCriteriaByPipeNo.action?pipe_no=1524540
+        String pipe_no=request.getParameter("pipe_no");
+        if(pipe_no!=null&&pipe_no!=""){
+            ODCoatingAcceptanceCriteria criteria=odcoatingacceptancecriteriaDao.getODAcceptanceCriteriaByPipeNo(pipe_no);
+            String map= JSONObject.toJSONString(criteria);
+            return map;
+        }else{
+            return  null;
+        }
+    }
+
+
+
     //根据项目编号查找外防腐标准
     @RequestMapping("/getODAcceptanceCriteriaByContractNo")
     @ResponseBody
@@ -255,6 +274,21 @@ public class AcceptanceCriteriaController {
              IDCoatingAcceptanceCriteria criteria=idcoatingacceptancecriteriaDao.getIDAcceptanceCriteriaByContractNo(contract_no);
              String map= JSONObject.toJSONString(criteria);
              return map;
+        }else{
+            return  null;
+        }
+    }
+
+    //根据钢管编号查找内防腐标准 APP使用
+    @RequestMapping("/getIDAcceptanceCriteriaByPipeNo")
+    @ResponseBody
+    public String getIDAcceptanceCriteriaByPipeNo(HttpServletRequest request){
+        //AcceptanceCriteriaOperation/getIDAcceptanceCriteriaByPipeNo.action?pipe_no=1524540
+        String pipe_no=request.getParameter("pipe_no");
+        if(pipe_no!=null&&pipe_no!=""){
+            IDCoatingAcceptanceCriteria criteria=idcoatingacceptancecriteriaDao.getIDAcceptanceCriteriaByPipeNo(pipe_no);
+            String map= JSONObject.toJSONString(criteria);
+            return map;
         }else{
             return  null;
         }

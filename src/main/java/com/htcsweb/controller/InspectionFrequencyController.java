@@ -147,9 +147,10 @@ public class InspectionFrequencyController {
         List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByPipeNoMillNo(pipe_no,mill_no,null);
         List<HashMap<String,Object>> ltif= inspectionFrequencyDao.getFrequencyInfoByPipeNo(pipe_no);
         Map<String,HashMap<String,Object>> maps=new HashMap<String,HashMap<String,Object>>();
-        HashMap<String,Object> insmap=new HashMap<String,Object>();
+        List <HashMap<String,Object>> resultlt =new ArrayList<HashMap<String,Object>>();
         Date now=new Date();
         if(ltif.size()>0){
+            HashMap<String,Object> insmap=new HashMap<String,Object>();
             insmap=ltif.get(0);
 
             for(int i=0;i<lt.size();i++){
@@ -168,13 +169,17 @@ public class InspectionFrequencyController {
                 HashMap<String,Object> m=new HashMap<String,Object>();
                 m.put("lastInspectionTime",timeRecord.getInspction_time());
                 m.put("needInspectNow",needInspectNow);
-                maps.put(timeRecord.getInspection_item(),m);
+                m.put("InspectionItem",timeRecord.getInspection_item());
+
+                resultlt.add(m);
+                //maps.put(timeRecord.getInspection_item(),m);
             }
         }
 
 
 
-        String mmp= JSONArray.toJSONString(maps);
+        String mmp= JSONArray.toJSONString(resultlt);
+        System.out.println(mmp);
         return mmp;
     }
 

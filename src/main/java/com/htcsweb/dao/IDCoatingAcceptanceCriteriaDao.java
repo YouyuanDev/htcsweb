@@ -16,6 +16,9 @@ public interface IDCoatingAcceptanceCriteriaDao {
     public List<HashMap<String,Object>> getAllByLike(@Param("coating_acceptance_criteria_no") String coating_acceptance_criteria_no, @Param("skip") int skip, @Param("take") int take);
     public int getCount(@Param("coating_acceptance_criteria_no") String coating_acceptance_criteria_no);
     public IDCoatingAcceptanceCriteria getIDAcceptanceCriteriaByContractNo(@Param("contract_no")String contract_no);
+    public IDCoatingAcceptanceCriteria getIDAcceptanceCriteriaByPipeNo(@Param("pipe_no")String pipe_no);
+
+
 
 }
 
