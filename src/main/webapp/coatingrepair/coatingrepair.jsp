@@ -610,7 +610,7 @@
                         <option value="2">修补完成,待检验</option>
                         <option value="3">不合格,外防扒皮处理</option>
                         <option value="4">不合格,内防扒皮处理</option>
-                        <option value="5">待定</option>
+                        <option value="10">待定</option>
                     </select></td>
                     <td width="20%" class="i18n1" name="remark">备注</td>
                     <td width="30%">

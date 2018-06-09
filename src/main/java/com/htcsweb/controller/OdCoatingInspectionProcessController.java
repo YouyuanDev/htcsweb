@@ -194,7 +194,7 @@ public class OdCoatingInspectionProcessController {
                 if(list.size()>0){
                     PipeBasicInfo p=list.get(0);
                     if(p.getStatus().equals("od3")) {
-                        //验证钢管状态为外涂管  od3 外涂检验工序   0:odrepair1   1:od4   2:odstrip1 3:od3  4: onhold
+                        //验证钢管状态为外涂管  od3 外涂检验工序   0:odrepair1   1:od4   2:odstrip1 10:od3  4: onhold
                         if(odCoatingInspectionProcess.getResult().equals("1")) {//当合格时才更新钢管状态
                             p.setStatus("od4");
                             p.setLast_accepted_status(p.getStatus());

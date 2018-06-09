@@ -427,7 +427,7 @@
                     <td><select id="cc" class="easyui-combobox" data-options="editable:false"  name="result" style="width:200px;">
                         <option value="0">不合格,重新倒棱处理</option>
                         <option value="1">合格</option>
-                        <option value="2">待定</option>
+                        <option value="10">待定</option>
                     </select></td>
                     <td></td>
                     <td width="16%" class="i18n1" name="remark">备注</td>

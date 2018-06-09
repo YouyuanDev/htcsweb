@@ -172,7 +172,7 @@ public class OdFinalInspectionProcessController {
                 if(list.size()>0){
                     PipeBasicInfo p=list.get(0);
                     if(p.getStatus().equals("od5")) {
-                        //验证钢管状态为喷标完成管   od5 外防终检工序  0:odrepair1  1:od6  2:odstrip1   3:od5   4: od4 5:onhold
+                        //验证钢管状态为喷标完成管   od5 外防终检工序  0:odrepair1  1:od6  2:odstrip1   10:od5   4: od4 5:onhold
                         if (odFinalInspectionProcess.getResult().equals("1")) {//当合格时才更新钢管状态
                             p.setStatus("od6");
                             p.setLast_accepted_status(p.getStatus());

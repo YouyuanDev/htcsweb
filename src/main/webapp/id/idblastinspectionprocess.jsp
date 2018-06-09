@@ -510,7 +510,7 @@
                     <td><select id="cc" class="easyui-combobox" data-options="editable:false"  name="result" style="width:200px;">
                         <option value="0">不合格,重新喷砂处理</option>
                         <option value="1">合格,进入内涂敷工序</option>
-                        <option value="2">待定</option>
+                        <option value="10">待定</option>
                         <option value="3">隔离，进入修磨或切割工序</option>
                     </select></td>
                     <td></td>

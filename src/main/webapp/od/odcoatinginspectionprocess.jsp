@@ -581,7 +581,7 @@
                         <option value="1">合格,进入外喷标工序</option>
                         <option value="0">不合格,进入待修补工序</option>
                         <option value="2">不合格,进入待扒皮工序</option>
-                        <option value="3">待定</option>
+                        <option value="10">待定</option>
                         <option value="4">隔离,进入修磨或切割工序</option>
                     </select></td>
                     <td></td>

@@ -193,7 +193,7 @@ public class IdFinalInspectionProcessController {
                 List<PipeBasicInfo> list=pipeBasicInfoDao.getPipeNumber(pipeno);
                 if(list.size()>0){
                     PipeBasicInfo p=list.get(0);
-                    //验证钢管状态是否为内喷标完成或者外防入库  id5  内防终检工序     0:idrepair1   1:id6   2:odstrip1   3:idstrip1  4: id4   5:id5   6:  onhold
+                    //验证钢管状态是否为内喷标完成或者外防入库  id5  内防终检工序     0:idrepair1   1:id6   2:odstrip1   3:idstrip1  4: id4   10:id5   6:  onhold
                     if(p.getStatus().equals("id5")){
                         //如果为合格
                         if(idFinalInspectionProcess.getResult().equals("1")) {
@@ -209,9 +209,6 @@ public class IdFinalInspectionProcessController {
                             p.setLast_accepted_status(p.getStatus());
                         }else if(idFinalInspectionProcess.getResult().equals("4")){
                             p.setStatus("id4");
-                            p.setLast_accepted_status(p.getStatus());
-                        }else if(idFinalInspectionProcess.getResult().equals("5")){
-                            p.setStatus("id5");
                             p.setLast_accepted_status(p.getStatus());
                         }else if(idFinalInspectionProcess.getResult().equals("6")){
                             p.setStatus("onhold");

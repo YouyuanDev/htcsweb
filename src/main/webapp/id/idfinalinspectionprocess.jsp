@@ -531,7 +531,7 @@
                         <select id="aa" class="easyui-combobox" data-options="editable:false" name="od_inspection_result" style="width:200px;">
                             <option value="0">不合格</option>
                             <option value="1">合格</option>
-                            <option value="2">待定</option>
+                            <option value="10">待定</option>
                         </select>
                     </td>
                     <td></td>
@@ -542,7 +542,7 @@
                         <option value="2">不合格,进入外防待扒皮工序</option>
                         <option value="3">不合格,进入内防待扒皮工序</option>
                         <option value="4">不合格,进入内喷标工序</option>
-                        <option value="5">待定</option>
+                        <option value="10">待定</option>
                         <option value="6">隔离,进入修磨或切割工序</option>
                     </select></td>
                     <td></td>
@@ -551,7 +551,7 @@
                         <%--<select id="bb" class="easyui-combobox" data-options="editable:false" name="id_inspection_result" style="width:200px;">--%>
                             <%--<option value="0">不合格</option>--%>
                             <%--<option value="1">合格</option>--%>
-                            <%--<option value="2">待定</option>--%>
+                            <%--<option value="10">待定</option>--%>
                         <%--</select>--%>
                     <%--</td>--%>
                     <%--<td></td>--%>

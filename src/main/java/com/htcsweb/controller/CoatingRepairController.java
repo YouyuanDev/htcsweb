@@ -108,7 +108,7 @@ public class CoatingRepairController {
                 if(list.size()>0){
                     PipeBasicInfo p=list.get(0);
                     if(p.getStatus().equals("odrepair1")||p.getStatus().equals("odrepair2")) {
-                        //验证钢管状态为外防工序修补管  0:odrepair1 1：上一个工序状态 od3 或者 od5  2:odrepair2  3:odstrip1  4:idstrip1
+                        //验证钢管状态为外防工序修补管  0:odrepair1 1：上一个工序状态 od3 或者 od5  2:odrepair2  3:odstrip1  4:idstrip1 10:odrepair1 or odrepair2
                         if(coatingRepair.getResult().equals("0")) {//修补不合格重修
                             p.setStatus("odrepair1");
                         }
@@ -125,7 +125,7 @@ public class CoatingRepairController {
                             p.setStatus("idstrip1");
                         }
                     }else if(p.getStatus().equals("idrepair1")||p.getStatus().equals("idrepair2")) {
-                        //验证钢管状态为id 修补管  0:idrepair1 1：上一个工序状态 id3 或者 id5  2:idrepair2  3:odstrip1  4:idstrip1
+                        //验证钢管状态为id 修补管  0:idrepair1 1：上一个工序状态 id3 或者 id5  2:idrepair2  3:odstrip1  4:idstrip1 10:idrepair1 or idrepair2
                         if(coatingRepair.getResult().equals("0")) {//修补不合格重修
                             p.setStatus("idrepair1");
                         }

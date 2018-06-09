@@ -521,7 +521,7 @@
                         <select id="ir" class="easyui-combobox" data-options="editable:false" name="inspection_result" style="width:185px;">
                             <option value="0">不合格</option>
                             <option value="1">合格</option>
-                            <option value="2">待定</option>
+                            <option value="10">待定</option>
                         </select>
                         <%--<input class="easyui-textbox"  type="text" name="inspection_result" value=""/>--%>
                     </td>
@@ -532,7 +532,7 @@
                         <option value="2">不合格,进入外防待扒皮工序</option>
                         <option value="4">不合格,进入外喷标工序</option>
                         <option value="1">合格,进入外防成品入库工序</option>
-                        <option value="3">待定</option>
+                        <option value="10">待定</option>
                         <option value="5">隔离,进入修磨或切割工序</option>
                     </select></td>
                     <td></td>

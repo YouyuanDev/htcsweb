@@ -145,7 +145,7 @@ public class OdCoatingProcessController {
                 if(pipelist.size()>0){
                     PipeBasicInfo p=pipelist.get(0);
                     if(p.getStatus().equals("od2")) {
-                        //验证钢管状态为光管  od2      外涂工序   0:bare1     1:od3    2:od2
+                        //验证钢管状态为光管  od2      外涂工序   0:bare1     1:od3    10:od2
                         if(odCoatingProcess.getResult().equals("1")) {//当合格时才更新钢管状态
                             p.setStatus("od3");
                             p.setLast_accepted_status(p.getStatus());

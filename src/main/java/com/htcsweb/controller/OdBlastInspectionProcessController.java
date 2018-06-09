@@ -214,7 +214,7 @@ public class OdBlastInspectionProcessController {
                 if(list.size()>0){
                     PipeBasicInfo p=list.get(0);
                     if(p.getStatus().equals("od1")) {
-                        //验证钢管状态为光管  od1      外喷砂检验工序   0:bare1     1:od2   2:od1  3： onhold
+                        //验证钢管状态为光管  od1      外喷砂检验工序   0:bare1     1:od2   10:od1  3： onhold
                         if(odblastinspectionprocess.getResult().equals("1")) {//当打砂检验合格时才更新钢管状态
                             p.setStatus("od2");
                             p.setLast_accepted_status(p.getStatus());
