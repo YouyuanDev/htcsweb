@@ -195,12 +195,12 @@ public class LoginController {
                 json.put("success",false);
                 json.put("millno", "");
                 json.put("employeeno", employeeno);
-                json.put("msg","不存在millno");
+                json.put("msg","不存在millno，请先登录");
             }else{
                 json.put("success",false);
                 json.put("millno", "");
                 json.put("employeeno", "");
-                json.put("msg","不存在session");
+                json.put("msg","不存在session，请先登录");
             }
 
             ResponseUtil.write(response,json);
