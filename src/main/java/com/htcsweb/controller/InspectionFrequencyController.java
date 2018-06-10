@@ -141,14 +141,21 @@ public class InspectionFrequencyController {
     //检测某检测项此刻是否需要检测
     @RequestMapping("/getAllInspectionTimeMapByPipeNoMillNo")
     @ResponseBody
-    public String getAllInspectionTimeMapByPipeNoMillNo(@RequestParam(value = "pipe_no",required = false)String pipe_no, @RequestParam(value = "mill_no",required = false)String mill_no, HttpServletRequest request){
+    public String getAllInspectionTimeMapByPipeNoMillNo( HttpServletRequest request){
 
         //InspectionFrequencyOperation/getAllInspectionTimeMapByPipeNoMillNo.action?pipe_no=1524540&mill_no=mill_1
+        String pipe_no=request.getParameter("pipe_no");
+        String mill_no=request.getParameter("mill_no");
+        System.out.println("11111111111pipenono"+pipe_no);
+        System.out.println("11111111111mill_no"+mill_no);
         List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByPipeNoMillNo(pipe_no,mill_no,null);
         List<HashMap<String,Object>> ltif= inspectionFrequencyDao.getFrequencyInfoByPipeNo(pipe_no);
         Map<String,HashMap<String,Object>> maps=new HashMap<String,HashMap<String,Object>>();
-        List <HashMap<String,Object>> resultlt =new ArrayList<HashMap<String,Object>>();
         Date now=new Date();
+
+        System.out.println("11111111111ltif.size()"+ltif.size());
+        System.out.println("222222lt.size()"+lt.size());//这里出错了 可能没记录
+
         if(ltif.size()>0){
             HashMap<String,Object> insmap=new HashMap<String,Object>();
             insmap=ltif.get(0);
@@ -179,7 +186,7 @@ public class InspectionFrequencyController {
 
 
         String mmp= JSONArray.toJSONString(maps);
-        System.out.println(mmp);
+        //System.out.println(mmp);
         return mmp;
     }
 

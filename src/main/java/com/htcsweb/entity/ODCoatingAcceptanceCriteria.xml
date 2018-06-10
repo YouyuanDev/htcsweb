@@ -48,7 +48,7 @@
          select o.* from contract_info c inner JOIN project_info p on c.project_no=p.project_no inner JOIN od_coating_acceptance_criteria o on p.od_coating_acceptance_criteria_no=o.coating_acceptance_criteria_no WHERE c.contract_no=#{contract_no}
     </select>
 
-    <select id="getODAcceptanceCriteriaByPipeNo" resultType="com.htcsweb.entity.ODCoatingAcceptanceCriteria">
+    <select id="getODAcceptanceCriteriaByPipeNo" resultType="map">
       select o.* from pipe_basic_info pb
       inner join contract_info c on c.contract_no=pb.contract_no
       inner JOIN project_info p on c.project_no=p.project_no

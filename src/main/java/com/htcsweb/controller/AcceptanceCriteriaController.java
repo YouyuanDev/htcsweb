@@ -241,9 +241,11 @@ public class AcceptanceCriteriaController {
     public String getODAcceptanceCriteriaByPipeNo(HttpServletRequest request){
         //AcceptanceCriteriaOperation/getODAcceptanceCriteriaByPipeNo.action?pipe_no=1524540
         String pipe_no=request.getParameter("pipe_no");
+        System.out.println("pipenono"+pipe_no);
         if(pipe_no!=null&&pipe_no!=""){
-            ODCoatingAcceptanceCriteria criteria=odcoatingacceptancecriteriaDao.getODAcceptanceCriteriaByPipeNo(pipe_no);
-            String map= JSONObject.toJSONString(criteria);
+
+            List<HashMap<String,Object>> lt=odcoatingacceptancecriteriaDao.getODAcceptanceCriteriaByPipeNo(pipe_no);
+            String map= JSONObject.toJSONString(lt);
             return map;
         }else{
             return  null;
