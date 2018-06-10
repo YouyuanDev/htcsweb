@@ -146,44 +146,56 @@ public class InspectionFrequencyController {
         //InspectionFrequencyOperation/getAllInspectionTimeMapByPipeNoMillNo.action?pipe_no=1524540&mill_no=mill_1
         String pipe_no=request.getParameter("pipe_no");
         String mill_no=request.getParameter("mill_no");
-        System.out.println("11111111111pipenono"+pipe_no);
-        System.out.println("11111111111mill_no"+mill_no);
+        //System.out.println("11111111111pipenono"+pipe_no);
+        //System.out.println("11111111111mill_no"+mill_no);
         List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByPipeNoMillNo(pipe_no,mill_no,null);
         List<HashMap<String,Object>> ltif= inspectionFrequencyDao.getFrequencyInfoByPipeNo(pipe_no);
         Map<String,HashMap<String,Object>> maps=new HashMap<String,HashMap<String,Object>>();
         Date now=new Date();
 
-        System.out.println("11111111111ltif.size()"+ltif.size());
-        System.out.println("222222lt.size()"+lt.size());//这里出错了 可能没记录
+        //System.out.println("11111111111ltif.size()"+ltif.size());
+        //System.out.println("222222lt.size()"+lt.size());//这里出错了 可能没记录
 
         if(ltif.size()>0){
             HashMap<String,Object> insmap=new HashMap<String,Object>();
             insmap=ltif.get(0);
 
-            for(int i=0;i<lt.size();i++){
-                InspectionTimeRecord timeRecord=lt.get(i);
-                float freq=(float)insmap.get(timeRecord.getInspection_item());
-                //检验频率 秒
-                float freqSec=freq*60*60;
-                //间隔秒
-                long interval = (now.getTime() - timeRecord.getInspction_time().getTime())/1000;
-
-                boolean needInspectNow=false;
-                if(interval>=freqSec){
-                    //间隔已大于检验频率，需要检验
-                    needInspectNow=true;
-                }
+            Iterator iter = insmap.entrySet().iterator();		//获取key和value的set
+            while (iter.hasNext()) {//迭代inspectionFreq
+                Map.Entry entry = (Map.Entry) iter.next();		//把hashmap转成Iterator再迭代到entry
+                String key = (String)entry.getKey();		//从entry获取key
+                if(key.equals("id")||key.equals("inspection_frequency_no"))
+                    continue;
+                //System.out.println("key="+key);
+                float freq = (float)entry.getValue();	//从entry获取value
                 HashMap<String,Object> m=new HashMap<String,Object>();
-                m.put("lastInspectionTime",timeRecord.getInspction_time());
+                boolean needInspectNow=true;
+                String lastInspectionTime="";
+                for(int i=0;i<lt.size();i++){
+                    InspectionTimeRecord timeRecord=lt.get(i);
+                    if(timeRecord.getInspection_item().equals(key)){
+                        //找到检验记录了
+                        //检验频率 秒
+                        float freqSec=freq*60*60;
+                        lastInspectionTime=timeRecord.getInspction_time().toString();
+                        //间隔秒
+                        long interval = (now.getTime() - timeRecord.getInspction_time().getTime())/1000;
+
+                        if(interval<freqSec){
+                            //间隔小于检验频率，不需要检验
+                            needInspectNow=false;
+                        }
+                        break;
+                    }
+                }
+
+                m.put("lastInspectionTime",lastInspectionTime);
                 m.put("needInspectNow",needInspectNow);
-                m.put("InspectionItem",timeRecord.getInspection_item());
-
-
-                maps.put(timeRecord.getInspection_item(),m);
+                m.put("InspectionItem",key);
+                maps.put(key,m);
             }
+
         }
-
-
 
         String mmp= JSONArray.toJSONString(maps);
         //System.out.println(mmp);
