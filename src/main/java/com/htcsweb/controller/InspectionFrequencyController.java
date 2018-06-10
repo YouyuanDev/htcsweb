@@ -171,14 +171,14 @@ public class InspectionFrequencyController {
                 m.put("needInspectNow",needInspectNow);
                 m.put("InspectionItem",timeRecord.getInspection_item());
 
-                resultlt.add(m);
-                //maps.put(timeRecord.getInspection_item(),m);
+
+                maps.put(timeRecord.getInspection_item(),m);
             }
         }
 
 
 
-        String mmp= JSONArray.toJSONString(resultlt);
+        String mmp= JSONArray.toJSONString(maps);
         System.out.println(mmp);
         return mmp;
     }
