@@ -14,10 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/APPRequestTransfer")
@@ -58,56 +55,56 @@ public class APPRequestTransferController {
                     urloptions.put("odblastprocess", "od/odblast");
                     urloptions.put("barepipemovement", "storage/barepipemovement");
                     urloptions.put("instoragetransfer", "storage/instoragetransfer");
-                    urloptions.put("productionstockout", "storage/productionstockout");
+                    urloptions.put("productStockout", "storage/productionstockout");
                 } else if (status.equals("od1")) {
-                    urloptions.put("odblastinspection", "od/odblastinspection");
+                    urloptions.put("odblastinspectionprocess", "od/odblastinspection");
                 } else if (status.equals("od2")) {
                     if (external_coating.equals("2FBE")) {
-                        urloptions.put("odcoating2FBE", "od/odcoating2FBE");
+                        urloptions.put("odcoatingprocess", "od/odcoating2FBE");
                     } else if (external_coating.equals("3LPE")) {
-                        urloptions.put("odcoating3LPE", "od/odcoating3LPE");
+                        urloptions.put("odcoating3lpeprocess", "od/odcoating3LPE");
                     }
                 } else if (status.equals("od3")) {
                     if (external_coating.equals("2FBE")) {
-                        urloptions.put("odcoatinginspection2FBE", "od/odcoatinginspection2FBE");
+                        urloptions.put("odcoatinginspectionprocess", "od/odcoatinginspection2FBE");
                     } else if (external_coating.equals("3LPE")) {
-                        urloptions.put("odcoatinginspection3LPE", "od/odcoatinginspection3LPE");
+                        urloptions.put("odcoating3lpeinspectionprocess", "od/odcoatinginspection3LPE");
                     }
                 } else if (status.equals("od4")) {
-                    urloptions.put("odstencil", "od/odstencil");
+                    urloptions.put("odstencilprocess", "od/odstencil");
                 } else if (status.equals("od5")) {
-                    urloptions.put("odfinalinspection", "od/odfinalinspection");
+                    urloptions.put("odfinalinspectionprocess", "od/odfinalinspection");
                 } else if (status.equals("od6")) {
                     urloptions.put("stockin", "storage/stockin");
                 } else if (status.equals("odstockin")) {
-                    urloptions.put("idblast", "id/idblast");
+                    urloptions.put("idblastprocess", "id/idblast");
                     urloptions.put("instoragetransfer", "storage/instoragetransfer");
                     //需倒棱
                     if (rebevel_mark != null && rebevel_mark.equals("1")) {
-                        urloptions.put("piperebevel", "addition/piperebevel");
+                        urloptions.put("pipeRebevelProcess", "addition/piperebevel");
                     }
                     //不需要倒棱
                     else if (rebevel_mark == null || !rebevel_mark.equals("1")) {
-                        urloptions.put("productionstockout", "storage/productionstockout");
+                        urloptions.put("productStockout", "storage/productionstockout");
                     }
 
                 }
                 //内防
                 else if (status.equals("bare2")) {
-                    urloptions.put("idblast", "id/idblast");
+                    urloptions.put("idblastprocess", "id/idblast");
                     urloptions.put("barepipemovement", "storage/barepipemovement");
                     urloptions.put("instoragetransfer", "storage/instoragetransfer");
-                    urloptions.put("productionstockout", "storage/productionstockout");
+                    urloptions.put("productStockout", "storage/productionstockout");
                 } else if (status.equals("id1")) {
-                    urloptions.put("idblastinspection", "id/idblastinspection");
+                    urloptions.put("idblastinspectionprocess", "id/idblastinspection");
                 } else if (status.equals("id2")) {
-                    urloptions.put("idcoating", "id/idcoating");
+                    urloptions.put("idcoatingprocess", "id/idcoating");
                 } else if (status.equals("id3")) {
-                    urloptions.put("idcoatinginspection", "id/idcoatinginspection");
+                    urloptions.put("idcoatinginspectionprocess", "id/idcoatinginspection");
                 } else if (status.equals("id4")) {
-                    urloptions.put("idstencil", "id/idstencil");
+                    urloptions.put("idstencilprocess", "id/idstencil");
                 } else if (status.equals("id5")) {
-                    urloptions.put("idfinalinspection", "id/idfinalinspection");
+                    urloptions.put("idfinalinspectionprocess", "id/idfinalinspection");
                 } else if (status.equals("id6")) {
                     urloptions.put("stockin", "storage/stockin");
                 } else if (status.equals("idstockin")) {
@@ -115,11 +112,11 @@ public class APPRequestTransferController {
 
                     //需倒棱
                     if (rebevel_mark != null && rebevel_mark.equals("1")) {
-                        urloptions.put("piperebevel", "addition/piperebevel");
+                        urloptions.put("pipeRebevelProcess", "addition/piperebevel");
                     }
                     //不需要倒棱
                     else if (rebevel_mark == null || !rebevel_mark.equals("1")) {
-                        urloptions.put("productionstockout", "storage/productionstockout");
+                        urloptions.put("productStockout", "storage/productionstockout");
                     }
                 }
 
@@ -135,9 +132,33 @@ public class APPRequestTransferController {
 
                 //修磨或切割
                 else if (status.equals("onhold")) {
-                    urloptions.put("barepipegrinding", "addition/barepipegrinding");
+                    urloptions.put("barepipegrindingProcess", "addition/barepipegrinding");
                 }
 
+                //权限过滤url
+                List<String> removeList=new ArrayList<>();
+                Iterator iter = urloptions.entrySet().iterator();
+                while (iter.hasNext()) {
+                Map.Entry entry = (Map.Entry) iter.next();
+                String key = (String)entry.getKey();
+                //Object val = entry.getValue();
+                    //判断是否有权限
+                    if(functionMap!=null&&!functionMap.containsKey(key)){
+                        //stockin包含 odstockin  idstockin  有其一权限即可
+                        if(key.equals("stockin")&&!functionMap.containsKey("odstockin")&&!functionMap.containsKey("idstockin")){
+                            System.out.println("APP 不存在存在页面"+key+"的权限");
+                            removeList.add(key);
+                            continue;
+                        }
+                        System.out.println("APP 不存在存在页面"+key+"的权限");
+                        removeList.add(key);
+                    }
+                }
+                //清楚没有的权限key
+                for(int i=0;i<removeList.size();i++){
+                    urloptions.remove(removeList.get(i));
+                }
+                removeList.clear();
 
             }
             maps.put("urloptions", urloptions);
