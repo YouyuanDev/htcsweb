@@ -2,8 +2,10 @@ package com.htcsweb.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.htcsweb.dao.MillInfoDao;
 import com.htcsweb.dao.PersonDao;
 import com.htcsweb.dao.RoleDao;
+import com.htcsweb.entity.MillInfo;
 import com.htcsweb.entity.Person;
 import com.htcsweb.entity.PipeBasicInfo;
 import com.htcsweb.util.ResponseUtil;
@@ -28,6 +30,9 @@ public class PersonController {
 
     @Autowired
     private RoleDao roleDao;
+
+    @Autowired
+    private MillInfoDao millInfoDao;
 
 
     //根据姓名模糊查询用户编号,小页面查询
@@ -56,6 +61,19 @@ public class PersonController {
         HttpSession session = request.getSession();
         //把用户数据保存在session域对象中
         String employee_no=(String)session.getAttribute("userSession");
+        String millno=(String)session.getAttribute("millno");
+        if(millno==null)
+            millno="";
+        String millname="";
+        //翻译mill的名字
+        List<MillInfo> milllist=millInfoDao.getAllMillInfo();
+        for(int j=0;j<milllist.size();j++){
+            MillInfo mill=milllist.get(j);
+            if(mill.getMill_no().equals(millno)){
+                millname=mill.getMill_name();
+                break;
+            }
+        }
         Map<String,Object> maps=new HashMap<String,Object>();
         if(employee_no==null){
 
@@ -81,6 +99,7 @@ public class PersonController {
             person.setRole_no_list(roles);
             maps.put("success",true);
             maps.put("msg","获取成功");
+            maps.put("millname",millname);
             maps.put("data",person);
             mmp= JSONArray.toJSONString(maps);
         }
