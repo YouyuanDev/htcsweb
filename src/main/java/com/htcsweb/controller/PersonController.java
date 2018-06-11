@@ -3,6 +3,7 @@ package com.htcsweb.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.PersonDao;
+import com.htcsweb.dao.RoleDao;
 import com.htcsweb.entity.Person;
 import com.htcsweb.entity.PipeBasicInfo;
 import com.htcsweb.util.ResponseUtil;
@@ -25,6 +26,9 @@ public class PersonController {
     @Autowired
     private PersonDao personDao;
 
+    @Autowired
+    private RoleDao roleDao;
+
 
     //根据姓名模糊查询用户编号,小页面查询
     @RequestMapping(value = "/getPersonNoByName",produces = "text/plain;charset=utf-8")
@@ -46,7 +50,7 @@ public class PersonController {
 
 
     //供app程序使用，无需权限，需验证登录情况
-    @RequestMapping("/getPersonByEmployeeNo")
+    @RequestMapping(value ="/getPersonByEmployeeNo",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String getPersonByEmployeeNo(HttpServletRequest request){
         HttpSession session = request.getSession();
@@ -64,9 +68,20 @@ public class PersonController {
         List<Person> personList=personDao.getPersonByEmployeeNo(employee_no);
         String mmp="";
         if(personList!=null&&personList.size()>0) {
+            //角色信息翻译
+            Person person=personList.get(0);
+            String roles=person.getRole_no_list();
+            List<HashMap<String,Object>> rolist=roleDao.getAllRoleByLike(null,null);
+            for(int i=0;i<rolist.size();i++){
+                HashMap<String,Object> rolemap=rolist.get(i);
+                String roleno=(String)rolemap.get("role_no");
+                String rolename=(String)rolemap.get("role_name");
+                roles=roles.replace(roleno,rolename);
+            }
+            person.setRole_no_list(roles);
             maps.put("success",true);
             maps.put("msg","获取成功");
-            maps.put("data",personList.get(0));
+            maps.put("data",person);
             mmp= JSONArray.toJSONString(maps);
         }
         return mmp;
