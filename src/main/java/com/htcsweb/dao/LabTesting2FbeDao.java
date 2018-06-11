@@ -16,4 +16,6 @@ public interface LabTesting2FbeDao {
     public List<HashMap<String,Object>> getNewAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no") String operator_no, @Param("begin_time") Date begin_time, @Param("end_time") Date end_time, @Param("skip") int skip, @Param("take") int take);
     public int getCountNewAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no") String operator_no, @Param("begin_time") Date begin_time, @Param("end_time") Date end_time);
     public List<HashMap<String,Object>>getCoverLabTestingInfo(@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
+
+    public LabTesting2Fbe getRecentRecordByPipeNo(@Param("pipe_no") String pipe_no);
 }

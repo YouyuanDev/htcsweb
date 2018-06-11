@@ -310,6 +310,24 @@ public class OdBlastProcessController {
         return  "odblastprocessedit";
     }
 
+    //得到可以钢管最新的待定的打砂记录  最后一条记录且result为待定 10
+    @RequestMapping(value = "/getPendingRecordByPipeNo")
+    @ResponseBody
+    public String getPendingRecordByPipeNo(@RequestParam(value = "pipe_no",required = false)String pipe_no, HttpServletRequest request) {
 
+        OdBlastProcess odb=odblastprocessDao.getRecentRecordByPipeNo(pipe_no);
+        Map<String,Object> maps=new HashMap<String,Object>();
+        if(odb.getResult().equals("10")){
+            //是待定状态
+            maps.put("success",true);
+            maps.put("record",odb);
+        }else{
+            maps.put("success",false);
+        }
+
+        String mmp= JSONArray.toJSONString(maps);
+        return mmp;
+
+    }
 
 }

@@ -18,4 +18,5 @@ public interface LabTestingEpoxyDao {
     public int getCountNewAllByLike(@Param("pipe_no") String pipe_no, @Param("operator_no") String operator_no, @Param("begin_time") Date begin_time, @Param("end_time") Date end_time);
     //获取内防封面试验信息
     public List<HashMap<String,Object>>getCoverLabTestingInfo(@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
+    public LabTestingEpoxy getRecentRecordByPipeNo(@Param("pipe_no")String pipe_no);
 }

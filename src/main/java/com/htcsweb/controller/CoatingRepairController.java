@@ -187,4 +187,28 @@ public class CoatingRepairController {
         ResponseUtil.write(response,json);
         return null;
     }
+
+    //得到可以钢管最新的待定的涂层修补记录  最后一条记录且result为待定 10
+    @RequestMapping(value = "/getPendingRecordByPipeNo")
+    @ResponseBody
+    public String getPendingRecordByPipeNo(@RequestParam(value = "pipe_no",required = false)String pipe_no, HttpServletRequest request) {
+
+        List<CoatingRepair> list=coatingRepairDao.getRecentRecordByPipeNo(pipe_no);
+        Map<String, Object> maps = new HashMap<String, Object>();
+        if(list.size()>0) {
+            CoatingRepair record=list.get(0);
+            if (record.getResult().equals("10")) {
+                //是待定状态
+                maps.put("success", true);
+                maps.put("record", record);
+            } else {
+                maps.put("success", false);
+            }
+        }
+        else {
+            maps.put("success", false);
+        }
+        String mmp= JSONArray.toJSONString(maps);
+        return mmp;
+    }
 }

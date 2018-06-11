@@ -94,7 +94,8 @@ public class SessionFilter extends OncePerRequestFilter{
             "getIDAcceptanceCriteriaByPipeNo",
             "getPipeBodyAcceptanceCriteriaByPipeNo",
             "getAcceptanceCriteria2FbeByPipeNo",
-            "getAcceptanceCriteria3LpeByPipeNo"
+            "getAcceptanceCriteria3LpeByPipeNo",
+            "getPendingRecordByPipeNo"
 
     }; // 不过滤的uri
 

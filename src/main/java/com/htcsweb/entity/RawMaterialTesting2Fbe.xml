@@ -63,4 +63,8 @@
         </where>
     </select>
 
+    <!--根据钢管编号查询最新一条记录-->
+    <select id="getRecentRecordByPipeNo" resultType="com.htcsweb.entity.RawMaterialTesting2Fbe">
+        SELECT  * from raw_material_testing_2fbe where pipe_no=#{pipe_no} order by operation_time desc LIMIT 1
+    </select>
 </mapper>

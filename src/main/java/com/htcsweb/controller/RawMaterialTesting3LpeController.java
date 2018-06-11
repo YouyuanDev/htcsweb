@@ -130,4 +130,25 @@ public class RawMaterialTesting3LpeController {
         return null;
     }
 
+    //得到可以钢管最新的待定的Raw material 3LPE记录  最后一条记录且result为待定 10
+    @RequestMapping(value = "/getPendingRecordByPipeNo")
+    @ResponseBody
+    public String getPendingRecordByPipeNo(@RequestParam(value = "pipe_no",required = false)String pipe_no, HttpServletRequest request) {
+
+        RawMaterialTesting3Lpe record=rawMaterialTesting3LpeDao.getRecentRecordByPipeNo(pipe_no);
+        Map<String, Object> maps = new HashMap<String, Object>();
+
+        if (record.getResult().equals("10")) {
+            //是待定状态
+            maps.put("success", true);
+            maps.put("record", record);
+        } else {
+            maps.put("success", false);
+        }
+
+        String mmp= JSONArray.toJSONString(maps);
+        return mmp;
+
+    }
+
 }

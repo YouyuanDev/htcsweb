@@ -6,6 +6,7 @@ import com.htcsweb.dao.IdBlastInspectionProcessDao;
 import com.htcsweb.dao.InspectionTimeRecordDao;
 import com.htcsweb.dao.PipeBasicInfoDao;
 import com.htcsweb.entity.IdBlastInspectionProcess;
+import com.htcsweb.entity.IdBlastProcess;
 import com.htcsweb.entity.InspectionTimeRecord;
 import com.htcsweb.entity.PipeBasicInfo;
 import com.htcsweb.util.ResponseUtil;
@@ -282,6 +283,24 @@ public class IdBlastInspectionProcessController {
     }
 
 
+    //得到可以钢管最新的待定的内防喷砂检验记录  最后一条记录且result为待定 10
+    @RequestMapping(value = "/getPendingRecordByPipeNo")
+    @ResponseBody
+    public String getPendingRecordByPipeNo(@RequestParam(value = "pipe_no",required = false)String pipe_no, HttpServletRequest request) {
 
+        IdBlastInspectionProcess record=idBlastInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
+        Map<String,Object> maps=new HashMap<String,Object>();
+        if(record.getResult().equals("10")){
+            //是待定状态
+            maps.put("success",true);
+            maps.put("record",record);
+        }else{
+            maps.put("success",false);
+        }
+
+        String mmp= JSONArray.toJSONString(maps);
+        return mmp;
+
+    }
 
 }
