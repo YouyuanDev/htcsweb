@@ -49,13 +49,13 @@
     </select>
 
     <select id="getODAcceptanceCriteriaByPipeNo" resultType="map">
-      select o.* from pipe_basic_info pb
-      inner join contract_info c on c.contract_no=pb.contract_no
-      inner JOIN project_info p on c.project_no=p.project_no
-      inner JOIN od_coating_acceptance_criteria o on p.od_coating_acceptance_criteria_no=o.coating_acceptance_criteria_no
+        select cri.* from od_coating_acceptance_criteria cri
+        inner join project_info pro on pro.od_coating_acceptance_criteria_no=cri.coating_acceptance_criteria_no
+        inner join contract_info c on c.project_no=pro.project_no
+        inner join pipe_basic_info p on p.contract_no=c.contract_no
         <where>
             <if test="pipe_no!=null and pipe_no!=''">
-                AND pb.pipe_no=#{pipe_no}
+                AND p.pipe_no=#{pipe_no}
             </if>
         </where>
     </select>

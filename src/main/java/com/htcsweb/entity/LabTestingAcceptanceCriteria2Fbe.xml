@@ -44,7 +44,27 @@
         ORDER BY id DESC
     </select>
     <select id="getLabTestCriteria2FbeByContractNo" resultType="com.htcsweb.entity.LabTestingAcceptanceCriteria2Fbe">
-        select o.* from contract_info c inner JOIN project_info p on c.project_no=p.project_no inner JOIN lab_testing_acceptance_criteria_2fbe o on p.lab_testing_acceptance_criteria_2fbe_no=o.lab_testing_acceptance_criteria_no WHERE c.contract_no=#{contract_no}
+        select cri.* from lab_testing_acceptance_criteria_2fbe cri
+        inner join project_info pro on pro.lab_testing_acceptance_criteria_2fbe_no=cri.lab_testing_acceptance_criteria_no
+        inner join contract_info c on c.project_no=pro.project_no
+        <where>
+            <if test="contract_no!=null and contract_no!=''">
+                AND c.contract_no=#{contract_no}
+            </if>
+        </where>
+    </select>
+
+
+    <select id="getLabTestCriteria2FbeByPipeNo" resultType="com.htcsweb.entity.LabTestingAcceptanceCriteria2Fbe">
+      select cri.* from lab_testing_acceptance_criteria_2fbe cri
+      inner join project_info pro on pro.lab_testing_acceptance_criteria_2fbe_no=cri.lab_testing_acceptance_criteria_no
+      inner join contract_info c on c.project_no=pro.project_no
+      inner join pipe_basic_info p on p.contract_no=c.contract_no
+        <where>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND pipe_no =#{pipe_no}
+            </if>
+        </where>
     </select>
 
 </mapper>

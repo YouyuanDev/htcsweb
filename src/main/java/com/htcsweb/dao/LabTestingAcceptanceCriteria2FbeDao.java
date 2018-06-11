@@ -14,6 +14,11 @@ public interface LabTestingAcceptanceCriteria2FbeDao {
     public List<LabTestingAcceptanceCriteria2Fbe> getAllLabTestingAcceptanceCriteria2Fbe();
     public int updateLabTestCriteria2Fbe(LabTestingAcceptanceCriteria2Fbe labTestingAcceptanceCriteria2Fbe);
     public LabTestingAcceptanceCriteria2Fbe getLabTestCriteria2FbeByContractNo(@Param("contract_no")String contract_no);
+
+    public LabTestingAcceptanceCriteria2Fbe getLabTestCriteria2FbeByPipeNo(@Param("pipe_no")String pipe_no);
+
+
+
     public List<HashMap<String,Object>> getNewAllByLike(@Param("lab_testing_acceptance_criteria_no") String lab_testing_acceptance_criteria_no, @Param("skip") int skip, @Param("take") int take);
     public int getCountNewAllByLike(@Param("lab_testing_acceptance_criteria_no") String lab_testing_acceptance_criteria_no);
 }

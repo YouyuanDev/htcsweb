@@ -413,4 +413,19 @@ public class AcceptanceCriteriaController {
         }
     }
 
+    //根据钢管编号查找钢管管体标准
+    @RequestMapping("/getPipeBodyAcceptanceCriteriaByPipeNo")
+    @ResponseBody
+    public String getPipeBodyAcceptanceCriteriaByPipeNo(HttpServletRequest request){
+        //AcceptanceCriteriaOperation/getPipeBodyAcceptanceCriteriaByPipeNo?pipe_no='1525310'
+        String pipe_no=request.getParameter("pipe_no");
+        if(pipe_no!=null&&pipe_no!=""){
+            PipeBodyAcceptanceCriteria criteria=pipeBodyAcceptanceCriteriaDao.getPipeBodyAcceptanceCriteriaByPipeNo(pipe_no);
+            String map= JSONObject.toJSONString(criteria);
+            return map;
+        }else{
+            return  null;
+        }
+    }
+
 }

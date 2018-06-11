@@ -14,6 +14,9 @@ public interface LabTestingAcceptanceCriteria3LpeDao {
     public List<LabTestingAcceptanceCriteria3Lpe> getAllLabTestingAcceptanceCriteria3Lpe();
     public int updateLabTestCriteria3Lpe(LabTestingAcceptanceCriteria3Lpe labTestingAcceptanceCriteria3Lpe);
     public LabTestingAcceptanceCriteria3Lpe getLabTestCriteria3LpeByContractNo(@Param("contract_no")String contract_no);
+
+    public LabTestingAcceptanceCriteria3Lpe getLabTestCriteria3LpeByPipeNo(@Param("pipe_no")String pipe_no);
+
     public List<HashMap<String,Object>> getNewAllByLike(@Param("lab_testing_acceptance_criteria_no") String lab_testing_acceptance_criteria_no, @Param("skip") int skip, @Param("take") int take);
     public int getCountNewAllByLike(@Param("lab_testing_acceptance_criteria_no") String lab_testing_acceptance_criteria_no);
 }

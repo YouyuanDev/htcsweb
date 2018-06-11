@@ -16,4 +16,6 @@ public interface PipeBodyAcceptanceCriteriaDao {
     public int getCount(@Param("pipe_body_acceptance_criteria_no") String pipe_body_acceptance_criteria_no);
     public PipeBodyAcceptanceCriteria getPipeBodyAcceptanceCriteriaByContractNo(@Param("contract_no")String contract_no);
 
+    public PipeBodyAcceptanceCriteria getPipeBodyAcceptanceCriteriaByPipeNo(@Param("pipe_no")String pipe_no);
+
 }

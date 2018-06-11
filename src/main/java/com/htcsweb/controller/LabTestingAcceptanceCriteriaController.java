@@ -228,6 +228,24 @@ public class LabTestingAcceptanceCriteriaController {
             return  null;
         }
     }
+
+    //根据钢管编号查找外防2fbe实验标准   APP用
+    @RequestMapping("/getAcceptanceCriteria2FbeByPipeNo")
+    @ResponseBody
+    public String getAcceptanceCriteria2FbeByPipeNo(HttpServletRequest request){
+        String pipe_no=request.getParameter("pipe_no");
+        if(pipe_no!=null&&pipe_no!=""){
+            LabTestingAcceptanceCriteria2Fbe criteria=labTestingAcceptanceCriteria2FbeDao.getLabTestCriteria2FbeByPipeNo(pipe_no);
+            String map= JSONObject.toJSONString(criteria);
+            return map;
+        }else{
+            return  null;
+        }
+    }
+
+
+
+
     //根据项目编号查找外防3lpe实验标准
     @RequestMapping("/getAcceptanceCriteria3LpeByContractNo")
     @ResponseBody
@@ -235,6 +253,21 @@ public class LabTestingAcceptanceCriteriaController {
         String contract_no=request.getParameter("contract_no");
         if(contract_no!=null&&contract_no!=""){
             LabTestingAcceptanceCriteria3Lpe criteria=labTestingAcceptanceCriteria3LpeDao.getLabTestCriteria3LpeByContractNo(contract_no);
+            String map= JSONObject.toJSONString(criteria);
+            System.out.println("查到标准＝"+map);
+            return map;
+        }else{
+            return  null;
+        }
+    }
+
+    //根据项目编号查找外防3lpe实验标准 APP用
+    @RequestMapping("/getAcceptanceCriteria3LpeByPipeNo")
+    @ResponseBody
+    public String getAcceptanceCriteria3LpeByPipeNo(HttpServletRequest request){
+        String pipe_no=request.getParameter("pipe_no");
+        if(pipe_no!=null&&pipe_no!=""){
+            LabTestingAcceptanceCriteria3Lpe criteria=labTestingAcceptanceCriteria3LpeDao.getLabTestCriteria3LpeByPipeNo(pipe_no);
             String map= JSONObject.toJSONString(criteria);
             System.out.println("查到标准＝"+map);
             return map;
