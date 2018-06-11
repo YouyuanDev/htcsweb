@@ -176,7 +176,7 @@ public class CoatingStripController {
         Map<String, Object> maps = new HashMap<String, Object>();
         if(list.size()>0) {
             CoatingStrip record=list.get(0);
-            if (record.getResult().equals("10")) {
+            if (record!=null&&record.getResult().equals("10")) {
                 //是待定状态
                 maps.put("success", true);
                 maps.put("record", record);

@@ -317,7 +317,7 @@ public class OdBlastProcessController {
 
         OdBlastProcess odb=odblastprocessDao.getRecentRecordByPipeNo(pipe_no);
         Map<String,Object> maps=new HashMap<String,Object>();
-        if(odb.getResult().equals("10")){
+        if(odb!=null&&odb.getResult().equals("10")){
             //是待定状态
             maps.put("success",true);
             maps.put("record",odb);

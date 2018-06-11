@@ -284,7 +284,7 @@ public class OdBlastInspectionProcessController {
 
         OdBlastInspectionProcess odbi=odBlastInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
         Map<String,Object> maps=new HashMap<String,Object>();
-        if(odbi.getResult().equals("10")){
+        if(odbi!=null&&odbi.getResult().equals("10")){
             //是待定状态
             maps.put("success",true);
             maps.put("record",odbi);

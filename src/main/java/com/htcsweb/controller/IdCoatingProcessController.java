@@ -197,7 +197,7 @@ public class IdCoatingProcessController {
 
         IdCoatingProcess record=idCoatingProcessDao.getRecentRecordByPipeNo(pipe_no);
         Map<String,Object> maps=new HashMap<String,Object>();
-        if(record.getResult().equals("10")){
+        if(record!=null&&record.getResult().equals("10")){
             //是待定状态
             maps.put("success",true);
             maps.put("record",record);
