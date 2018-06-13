@@ -3,7 +3,12 @@ package com.htcsweb.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.htcsweb.dao.PipeBasicInfoDao;
+import com.alibaba.fastjson.JSONObject;
+import com.htcsweb.dao.*;
+import com.htcsweb.entity.IDCoatingAcceptanceCriteria;
+import com.htcsweb.entity.InspectionTimeRecord;
+import com.htcsweb.entity.ODCoatingAcceptanceCriteria;
+import com.htcsweb.entity.PipeBodyAcceptanceCriteria;
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -21,9 +27,22 @@ import java.util.*;
 public class APPRequestTransferController {
 
 
+    @Autowired
+    private ODCoatingAcceptanceCriteriaDao odcoatingacceptancecriteriaDao;
+    @Autowired
+    private IDCoatingAcceptanceCriteriaDao idcoatingacceptancecriteriaDao;
 
     @Autowired
     private PipeBasicInfoDao pipeBasicInfoDao;
+
+    @Autowired
+    private InspectionTimeRecordDao inspectionTimeRecordDao;
+
+    @Autowired
+    private InspectionFrequencyDao inspectionFrequencyDao;
+
+    @Autowired
+    private PipeBodyAcceptanceCriteriaDao pipeBodyAcceptanceCriteriaDao;
 
     //用于APP请求重定向
     @RequestMapping(value = "/getCoatingInfoByPipeNo",produces = "text/plain;charset=utf-8")
@@ -187,11 +206,189 @@ public class APPRequestTransferController {
 
 
 
+    //根据钢管编号查找内外防腐标准、检验频率、钢管信息、光管检验频率、pending数据  APP使用  stencil_content 做完动态替换  并且把检验频率也一起返回
+    @RequestMapping("/getAllProcessInfoByPipeNo")
+    @ResponseBody
+    public String getAllProcessInfoByPipeNo(HttpServletRequest request){
+        //AcceptanceCriteriaOperation/getODAcceptanceCriteriaByPipeNo.action?pipe_no=1524540&&mill_no=mill_2
+        String pipe_no=request.getParameter("pipe_no");
+        Map<String,Object> resultMaps=new HashMap<String,Object>();//最终返回Map
+
+        //返回用户session数据
+        HttpSession session = request.getSession();
+        //把用户数据保存在session域对象中
+        String employeeno=(String)session.getAttribute("userSession");
+        String mill_no=(String)session.getAttribute("millno");
+
+        if(mill_no==null){
+            mill_no="mill_2";
+        }
+
+
+        if(employeeno!=null&&mill_no!=null) {
+
+            resultMaps.put("employeeno",employeeno);
+            resultMaps.put("millno",mill_no);
+        } else{
+            return "no session";
+        }
+
+
+        if(pipe_no!=null&&pipe_no!=""){
+            //钢管信息导出
+            List<HashMap<String,Object>> pipelist= pipeBasicInfoDao.getPipeInfoByNo(pipe_no);
+            if(pipelist.size()>0){
+                resultMaps.put("pipeinfo",pipelist.get(0));
+            }else{
+                resultMaps.put("pipeinfo","");
+            }
+
+            //外防标准导出
+            ODCoatingAcceptanceCriteria odcriteria=odcoatingacceptancecriteriaDao.getODAcceptanceCriteriaByPipeNo(pipe_no);
+            if(pipelist.size()>0&&odcriteria!=null){
+                float od=(float)pipelist.get(0).get("od");
+                float wt=(float)pipelist.get(0).get("wt");
+                String grade=(String)pipelist.get(0).get("grade");
+                String contract_no=(String)pipelist.get(0).get("contract_no");
+                String coating_standard=(String)pipelist.get(0).get("coating_standard");
+                String client_spec=(String)pipelist.get(0).get("client_spec");
+                String project_name=(String)pipelist.get(0).get("project_name");
+                float p_length=(float)pipelist.get(0).get("p_length");
+                float halflength=p_length*0.5f;
+                String heat_no=(String)pipelist.get(0).get("heat_no");
+                String pipe_making_lot_no=(String)pipelist.get(0).get("pipe_making_lot_no");
+                float kg=(float)pipelist.get(0).get("weight")*1000;
+                Date od_coating_date=(Date)pipelist.get(0).get("od_coating_date");
+                String od_coating_dateString="";
+                if(od_coating_date!=null) {
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                    od_coating_dateString = formatter.format(od_coating_date);
+                }
+
+                //替换
+                String stencil_content=(String)odcriteria.getStencil_content();
+                stencil_content = stencil_content.replace("[OD]", String.valueOf(od));
+                stencil_content = stencil_content.replace("[WT]", String.valueOf(wt));
+                stencil_content = stencil_content.replace("[GRADE]", grade);
+                stencil_content = stencil_content.replace("[CONTRACTNO]", contract_no);
+                stencil_content = stencil_content.replace("[COATINGSPEC]", coating_standard);
+                stencil_content = stencil_content.replace("[CLIENTSPEC]", client_spec);
+                stencil_content = stencil_content.replace("[PROJECTNAME]", project_name);
+                stencil_content = stencil_content.replace("[PIPENO]", pipe_no);
+                stencil_content = stencil_content.replace("[PIPELENGTH]", String.valueOf(p_length));
+                stencil_content = stencil_content.replace("[HALFLENGTH]", String.valueOf(halflength));
+                stencil_content = stencil_content.replace("[HEATNO]",heat_no);
+                stencil_content = stencil_content.replace("[BATCHNO]",pipe_making_lot_no);
+                stencil_content = stencil_content.replace("[WEIGHT]",String.valueOf(kg));
+                stencil_content = stencil_content.replace("[COATINGDATE]",od_coating_dateString);
+                odcriteria.setStencil_content(stencil_content);
+
+                resultMaps.put("odcriteria",odcriteria);
+            }else{
+                resultMaps.put("odcriteria","");
+            }
+
+            //检验频率导出
+            Map<String,HashMap<String,Object>> maps=getInspectionFrequency(pipe_no,mill_no);
+            resultMaps.put("inspectfreq",maps);
+
+            //内防标准导出
+            IDCoatingAcceptanceCriteria idcriteria=idcoatingacceptancecriteriaDao.getIDAcceptanceCriteriaByPipeNo(pipe_no);
+            if(pipelist.size()>0&&idcriteria!=null){
+                float od=(float)pipelist.get(0).get("od");
+                float wt=(float)pipelist.get(0).get("wt");
+                float p_length=(float)pipelist.get(0).get("p_length");
+                String pipe_making_lot_no=(String)pipelist.get(0).get("pipe_making_lot_no");
+                float kg=(float)pipelist.get(0).get("weight")*1000;
+                Date id_coating_date=(Date)pipelist.get(0).get("id_coating_date");
+                String id_coating_dateString="";
+                if(id_coating_date!=null) {
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                    id_coating_dateString = formatter.format(id_coating_date);
+                }
+
+                //替换
+                String stencil_content=(String)idcriteria.getStencil_content();
+                stencil_content = stencil_content.replace("[OD]", String.valueOf(od));
+                stencil_content = stencil_content.replace("[WT]", String.valueOf(wt));
+                stencil_content = stencil_content.replace("[PIPENO]", pipe_no);
+                stencil_content = stencil_content.replace("[PIPELENGTH]", String.valueOf(p_length));
+                stencil_content = stencil_content.replace("[BATCHNO]",pipe_making_lot_no);
+                stencil_content = stencil_content.replace("[WEIGHT]",String.valueOf(kg));
+                stencil_content = stencil_content.replace("[COATINGDATE]",id_coating_dateString);
+                idcriteria.setStencil_content(stencil_content);
+                resultMaps.put("idcriteria",idcriteria);
+            }else{
+                resultMaps.put("idcriteria","");
+            }
+
+            //光管接收标准
+                PipeBodyAcceptanceCriteria pbcriteria=pipeBodyAcceptanceCriteriaDao.getPipeBodyAcceptanceCriteriaByPipeNo(pipe_no);
+                 if(pbcriteria!=null){
+                     resultMaps.put("pbcriteria",pbcriteria);
+                 }else{
+                     resultMaps.put("pbcriteria","");
+                 }
+
+            String map= JSONObject.toJSONString(resultMaps);
+            return map;
+        }else{
+            return  null;
+        }
+    }
 
 
 
+    private Map<String,HashMap<String,Object>> getInspectionFrequency(String pipe_no,String mill_no){
+        ///////得到本次检验频率
 
+        List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByPipeNoMillNo(pipe_no,mill_no,null);
+        List<HashMap<String,Object>> ltif= inspectionFrequencyDao.getFrequencyInfoByPipeNo(pipe_no);
+        Map<String,HashMap<String,Object>> maps=new HashMap<String,HashMap<String,Object>>();
+        Date now=new Date();
 
+        if(ltif.size()>0){
+            HashMap<String,Object> insmap=new HashMap<String,Object>();
+            insmap=ltif.get(0);
+
+            Iterator iter = insmap.entrySet().iterator();		//获取key和value的set
+            while (iter.hasNext()) {//迭代inspectionFreq
+                Map.Entry entry = (Map.Entry) iter.next();		//把hashmap转成Iterator再迭代到entry
+                String key = (String)entry.getKey();		//从entry获取key
+                if(key.equals("id")||key.equals("inspection_frequency_no"))
+                    continue;
+                //System.out.println("key="+key);
+                float freq = (float)entry.getValue();	//从entry获取value
+                HashMap<String,Object> m=new HashMap<String,Object>();
+                boolean needInspectNow=true;
+                String lastInspectionTime="";
+                for(int i=0;i<lt.size();i++){
+                    InspectionTimeRecord timeRecord=lt.get(i);
+                    if(timeRecord.getInspection_item().equals(key)){
+                        //找到检验记录了
+                        //检验频率 秒
+                        float freqSec=freq*60*60;
+                        lastInspectionTime=timeRecord.getInspction_time().toString();
+                        //间隔秒
+                        long interval = (now.getTime() - timeRecord.getInspction_time().getTime())/1000;
+
+                        if(interval<freqSec){
+                            //间隔小于检验频率，不需要检验
+                            needInspectNow=false;
+                        }
+                        break;
+                    }
+                }
+
+                m.put("lastInspectionTime",lastInspectionTime);
+                m.put("needInspectNow",needInspectNow);
+                m.put("InspectionItem",key);
+                maps.put(key,m);
+            }
+
+        }
+        return maps;
+    }
 
 
 }

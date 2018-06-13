@@ -3,15 +3,9 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 
-import com.htcsweb.dao.InspectionFrequencyDao;
-import com.htcsweb.dao.PipeBodyAcceptanceCriteriaDao;
-import com.htcsweb.entity.InspectionFrequency;
-import com.htcsweb.entity.ODCoatingAcceptanceCriteria;
-import com.htcsweb.entity.IDCoatingAcceptanceCriteria;
-import com.htcsweb.entity.PipeBodyAcceptanceCriteria;
+import com.htcsweb.dao.*;
+import com.htcsweb.entity.*;
 import com.htcsweb.util.ComboxItem;
-import com.htcsweb.dao.ODCoatingAcceptanceCriteriaDao;
-import com.htcsweb.dao.IDCoatingAcceptanceCriteriaDao;
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,6 +29,13 @@ public class AcceptanceCriteriaController {
 
     @Autowired
     private PipeBodyAcceptanceCriteriaDao pipeBodyAcceptanceCriteriaDao;
+
+    @Autowired
+    private PipeBasicInfoDao pipeBasicInfoDao;
+
+
+
+
 
 
 
@@ -235,26 +236,12 @@ public class AcceptanceCriteriaController {
     }
 
 
-    //根据钢管编号查找外防腐标准  APP使用
-    @RequestMapping("/getODAcceptanceCriteriaByPipeNo")
-    @ResponseBody
-    public String getODAcceptanceCriteriaByPipeNo(HttpServletRequest request){
-        //AcceptanceCriteriaOperation/getODAcceptanceCriteriaByPipeNo.action?pipe_no=1524540
-        String pipe_no=request.getParameter("pipe_no");
-        //System.out.println("pipenono"+pipe_no);
-        if(pipe_no!=null&&pipe_no!=""){
-
-            List<HashMap<String,Object>> lt=odcoatingacceptancecriteriaDao.getODAcceptanceCriteriaByPipeNo(pipe_no);
-            String map= JSONObject.toJSONString(lt);
-            return map;
-        }else{
-            return  null;
-        }
-    }
 
 
 
-    //根据项目编号查找外防腐标准
+
+
+    //根据项目编号查找外防腐标准   stencil_content 不做动态替换
     @RequestMapping("/getODAcceptanceCriteriaByContractNo")
     @ResponseBody
     public String getODAcceptanceCriteriaByContractNo(HttpServletRequest request){
@@ -282,6 +269,61 @@ public class AcceptanceCriteriaController {
     }
 
     //根据钢管编号查找内防腐标准 APP使用
+    @RequestMapping("/getODAcceptanceCriteriaByPipeNo")
+    @ResponseBody
+    public String getODAcceptanceCriteriaByPipeNo(HttpServletRequest request){
+        //AcceptanceCriteriaOperation/getIDAcceptanceCriteriaByPipeNo.action?pipe_no=1524540
+        String pipe_no=request.getParameter("pipe_no");
+        if(pipe_no!=null&&pipe_no!=""){
+            ODCoatingAcceptanceCriteria criteria=odcoatingacceptancecriteriaDao.getODAcceptanceCriteriaByPipeNo(pipe_no);
+            List<HashMap<String,Object>> pipelist= pipeBasicInfoDao.getPipeInfoByNo(pipe_no);
+            if(pipelist.size()>0&&criteria!=null){
+                float od=(float)pipelist.get(0).get("od");
+                float wt=(float)pipelist.get(0).get("wt");
+                String grade=(String)pipelist.get(0).get("grade");
+                String contract_no=(String)pipelist.get(0).get("contract_no");
+                String coating_standard=(String)pipelist.get(0).get("coating_standard");
+                String client_spec=(String)pipelist.get(0).get("client_spec");
+                String project_name=(String)pipelist.get(0).get("project_name");
+                float p_length=(float)pipelist.get(0).get("p_length");
+                float halflength=p_length*0.5f;
+                String heat_no=(String)pipelist.get(0).get("heat_no");
+                String pipe_making_lot_no=(String)pipelist.get(0).get("pipe_making_lot_no");
+                float kg=(float)pipelist.get(0).get("weight")*1000;
+                Date od_coating_date=(Date)pipelist.get(0).get("od_coating_date");
+                String od_coating_dateString="";
+                if(od_coating_date!=null) {
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                    od_coating_dateString = formatter.format(od_coating_date);
+                }
+
+                //替换
+                String stencil_content=(String)criteria.getStencil_content();
+                stencil_content = stencil_content.replace("[OD]", String.valueOf(od));
+                stencil_content = stencil_content.replace("[WT]", String.valueOf(wt));
+                stencil_content = stencil_content.replace("[GRADE]", grade);
+                stencil_content = stencil_content.replace("[CONTRACTNO]", contract_no);
+                stencil_content = stencil_content.replace("[COATINGSPEC]", coating_standard);
+                stencil_content = stencil_content.replace("[CLIENTSPEC]", client_spec);
+                stencil_content = stencil_content.replace("[PROJECTNAME]", project_name);
+                stencil_content = stencil_content.replace("[PIPENO]", pipe_no);
+                stencil_content = stencil_content.replace("[PIPELENGTH]", String.valueOf(p_length));
+                stencil_content = stencil_content.replace("[HALFLENGTH]", String.valueOf(halflength));
+                stencil_content = stencil_content.replace("[HEATNO]",heat_no);
+                stencil_content = stencil_content.replace("[BATCHNO]",pipe_making_lot_no);
+                stencil_content = stencil_content.replace("[WEIGHT]",String.valueOf(kg));
+                stencil_content = stencil_content.replace("[COATINGDATE]",od_coating_dateString);
+                criteria.setStencil_content(stencil_content);
+            }
+
+            String map= JSONObject.toJSONString(criteria);
+            return map;
+        }else{
+            return  null;
+        }
+    }
+
+    //根据钢管编号查找内防腐标准 APP使用
     @RequestMapping("/getIDAcceptanceCriteriaByPipeNo")
     @ResponseBody
     public String getIDAcceptanceCriteriaByPipeNo(HttpServletRequest request){
@@ -289,6 +331,32 @@ public class AcceptanceCriteriaController {
         String pipe_no=request.getParameter("pipe_no");
         if(pipe_no!=null&&pipe_no!=""){
             IDCoatingAcceptanceCriteria criteria=idcoatingacceptancecriteriaDao.getIDAcceptanceCriteriaByPipeNo(pipe_no);
+            List<HashMap<String,Object>> pipelist= pipeBasicInfoDao.getPipeInfoByNo(pipe_no);
+            if(pipelist.size()>0&&criteria!=null){
+                float od=(float)pipelist.get(0).get("od");
+                float wt=(float)pipelist.get(0).get("wt");
+                float p_length=(float)pipelist.get(0).get("p_length");
+                String pipe_making_lot_no=(String)pipelist.get(0).get("pipe_making_lot_no");
+                float kg=(float)pipelist.get(0).get("weight")*1000;
+                Date id_coating_date=(Date)pipelist.get(0).get("id_coating_date");
+                String id_coating_dateString="";
+                if(id_coating_date!=null) {
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                    id_coating_dateString = formatter.format(id_coating_date);
+                }
+
+                //替换
+                String stencil_content=(String)criteria.getStencil_content();
+                stencil_content = stencil_content.replace("[OD]", String.valueOf(od));
+                stencil_content = stencil_content.replace("[WT]", String.valueOf(wt));
+                stencil_content = stencil_content.replace("[PIPENO]", pipe_no);
+                stencil_content = stencil_content.replace("[PIPELENGTH]", String.valueOf(p_length));
+                stencil_content = stencil_content.replace("[BATCHNO]",pipe_making_lot_no);
+                stencil_content = stencil_content.replace("[WEIGHT]",String.valueOf(kg));
+                stencil_content = stencil_content.replace("[COATINGDATE]",id_coating_dateString);
+                criteria.setStencil_content(stencil_content);
+            }
+
             String map= JSONObject.toJSONString(criteria);
             return map;
         }else{
