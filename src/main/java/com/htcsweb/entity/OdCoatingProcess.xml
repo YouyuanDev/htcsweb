@@ -156,7 +156,7 @@
         select * from od_coating_2fbe_process
         <![CDATA[ where id >= (select id from od_coating_2fbe_process where pipe_no = #{pipe_no} order by id desc limit 1) ]]>
         and   result ='10' and mill_no=#{mill_no}
-        order by id desc
+        order by id asc
         limit 10
     </select>
 
