@@ -247,18 +247,45 @@ public class OdBlastInspectionProcessController {
                                 if (external_coating != null && external_coating.equals("2FBE")) {
                                     OdCoatingProcess odCoatingProcess=new OdCoatingProcess();
                                     odCoatingProcess.setId(0);
+                                    odCoatingProcess.setPipe_no(pipeno);
+                                    odCoatingProcess.setMill_no(mill_no);
                                     odCoatingProcess.setOperation_time(new Date());
                                     odCoatingProcess.setOperator_no(odblastinspectionprocess.getOperator_no());
                                     odCoatingProcess.setResult("10");
                                     odCoatingProcess.setRemark("INIT");
+                                    odCoatingProcess.setBase_coat_gun_count(-99);
+                                    odCoatingProcess.setAir_pressure(-99);
+                                    odCoatingProcess.setApplication_temp(-99);
+                                    odCoatingProcess.setApplication_voltage(-99);
+                                    odCoatingProcess.setCoating_line_speed(-99);
+                                    odCoatingProcess.setCoating_voltage(-99);
+                                    odCoatingProcess.setGun_distance(-99);
+                                    odCoatingProcess.setSpray_speed(-99);
+                                    odCoatingProcess.setTo_first_touch_duration(-99);
+                                    odCoatingProcess.setTo_quench_duration(-99);
+                                    odCoatingProcess.setTop_coat_gun_count(-99);
+                                    odCoatingProcess.setUpload_files("");
                                     odCoatingProcessDao.addOdCoatingProcess(odCoatingProcess);
                                 } else if (external_coating != null && external_coating.equals("3LPE")) {
                                     OdCoating3LpeProcess odCoating3LpeProcess = new OdCoating3LpeProcess();
                                     odCoating3LpeProcess.setId(0);
+                                    odCoating3LpeProcess.setPipe_no(pipeno);
+                                    odCoating3LpeProcess.setMill_no(mill_no);
                                     odCoating3LpeProcess.setOperation_time(new Date());
                                     odCoating3LpeProcess.setOperator_no(odblastinspectionprocess.getOperator_no());
                                     odCoating3LpeProcess.setResult("10");
                                     odCoating3LpeProcess.setRemark("INIT");
+                                    odCoating3LpeProcess.setBase_coat_gun_count(-99);
+                                    odCoating3LpeProcess.setAir_pressure(-99);
+                                    odCoating3LpeProcess.setApplication_temp(-99);
+                                    odCoating3LpeProcess.setApplication_voltage(-99);
+                                    odCoating3LpeProcess.setCoating_line_speed(-99);
+                                    odCoating3LpeProcess.setCoating_voltage(-99);
+                                    odCoating3LpeProcess.setGun_distance(-99);
+                                    odCoating3LpeProcess.setSpray_speed(-99);
+                                    odCoating3LpeProcess.setTo_first_touch_duration(-99);
+                                    odCoating3LpeProcess.setTo_quench_duration(-99);
+                                    odCoating3LpeProcess.setUpload_files("");
                                     odCoating3LpeProcessDao.addOdCoating3LpeProcess(odCoating3LpeProcess);
                                 }
                             }
