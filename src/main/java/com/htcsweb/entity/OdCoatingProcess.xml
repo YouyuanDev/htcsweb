@@ -137,4 +137,29 @@
     <select id="getRecentRecordByPipeNo" resultType="com.htcsweb.entity.OdCoatingProcess">
         SELECT  * from od_coating_2fbe_process where pipe_no=#{pipe_no} order by operation_time desc LIMIT 1
     </select>
+
+
+    <!--根据钢管编号查询之前的最新一条合格记录-->
+    <select id="getLastAcceptedRecordBeforePipeNo" resultType="com.htcsweb.entity.OdCoating3LpeProcess">
+        select * from od_coating_2fbe_process
+        <![CDATA[ where id < (select id from od_coating_2fbe_process where pipe_no = #{pipe_no} order by id desc limit 1) ]]>
+        and   result ='1' and mill_no=#{mill_no}
+
+        order by id desc
+
+        limit 1
+    </select>
+
+
+    <!--根据钢管编号查询得到钢管后10根涂层记录管号，并且记录为待定状态 10-->
+    <select id="getNextTenPipesBeforePipeNo" resultType="map">
+        select * from od_coating_2fbe_process
+        <![CDATA[ where id >= (select id from od_coating_2fbe_process where pipe_no = #{pipe_no} order by id desc limit 1) ]]>
+        and   result ='10' and mill_no=#{mill_no}
+        order by id desc
+        limit 10
+    </select>
+
+
+
 </mapper>
