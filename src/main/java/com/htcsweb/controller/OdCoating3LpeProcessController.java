@@ -262,7 +262,7 @@ public class OdCoating3LpeProcessController {
         //OdCoatOperation/getLastAcceptedRecordBeforePipeNo.action?pipe_no=121212
         //把用户数据保存在session域对象中
         String mill_no = (String) session.getAttribute("millno");
-        mill_no="mill_2";
+        //mill_no="mill_2";
         Map<String,Object> maps=new HashMap<String,Object>();
         if(mill_no!=null){
             List<HashMap<String,Object>> list=odCoating3LpeProcessDao.getNextTenPipesBeforePipeNo(pipe_no,mill_no);
