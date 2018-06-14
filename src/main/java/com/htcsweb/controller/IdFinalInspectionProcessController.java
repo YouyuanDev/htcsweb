@@ -87,6 +87,7 @@ public class IdFinalInspectionProcessController {
                 idFinalInspectionProcess.setOperation_time(new Date());
             }
             String pipeno=idFinalInspectionProcess.getPipe_no();
+            String msg="";
             if(idFinalInspectionProcess.getId()==0){
                 //添加
                 List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoByNo(idFinalInspectionProcess.getPipe_no());
@@ -96,6 +97,7 @@ public class IdFinalInspectionProcessController {
                         IdFinalInspectionProcess oldrecord=idFinalInspectionProcessDao.getRecentRecordByPipeNo(idFinalInspectionProcess.getPipe_no());
                         if(oldrecord!=null&&oldrecord.getResult().equals("10")){
                             //存在一条pending数据，不给予insert处理
+                            msg="已存在待定记录,不能新增记录";
                         }else{
                             resTotal=idFinalInspectionProcessDao.addIdFinalInProcess(idFinalInspectionProcess);
                         }
@@ -230,7 +232,7 @@ public class IdFinalInspectionProcessController {
                 json.put("message","保存成功");
             }else{
                 json.put("success",false);
-                json.put("message","保存失败");
+                json.put("message","保存失败，"+msg);
             }
         }catch (Exception e){
             e.printStackTrace();

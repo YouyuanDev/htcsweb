@@ -51,6 +51,7 @@ public class IdBlastProcessController {
                 idBlastProcess.setOperation_time(new Date());
             }
             String pipeno=idBlastProcess.getPipe_no();
+            String msg="";
             if(idBlastProcess.getId()==0){
                 //添加
                 List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoByNo(idBlastProcess.getPipe_no());
@@ -60,6 +61,7 @@ public class IdBlastProcessController {
                         IdBlastProcess oldrecord=idBlastProcessDao.getRecentRecordByPipeNo(idBlastProcess.getPipe_no());
                         if(oldrecord!=null&&oldrecord.getResult().equals("10")){
                             //存在一条pending数据，不给予insert处理
+                            msg="已存在待定记录,不能新增记录";
                         }else{
                             resTotal=idBlastProcessDao.addIdBlastProcess(idBlastProcess);
                         }
@@ -132,7 +134,7 @@ public class IdBlastProcessController {
                 json.put("message","保存成功");
             }else{
                 json.put("success",false);
-                json.put("message","保存失败");
+                json.put("message","保存失败，"+msg);
             }
 
         }catch (Exception e){

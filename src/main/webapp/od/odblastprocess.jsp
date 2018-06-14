@@ -195,8 +195,9 @@
                 success: function(result){
                     clearFormLabel();
                     var result = eval('('+result+')');
-                    $('#hlOdBlastProDialog').dialog('close');
+
                     if (result.success){
+                        $('#hlOdBlastProDialog').dialog('close');
                         $('#odBlastProDatagrids').datagrid('reload');
                     }
                     hlAlertFour(result.message);

@@ -93,6 +93,7 @@ public class IdBlastInspectionProcessController {
                 idBlastInspectionProcess.setOperation_time(new Date());
             }
             String pipeno=idBlastInspectionProcess.getPipe_no();
+            String msg="";
             if(idBlastInspectionProcess.getId()==0){
                 //添加
                 List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoByNo(idBlastInspectionProcess.getPipe_no());
@@ -102,6 +103,7 @@ public class IdBlastInspectionProcessController {
                         IdBlastInspectionProcess oldrecord=idBlastInspectionProcessDao.getRecentRecordByPipeNo(idBlastInspectionProcess.getPipe_no());
                         if(oldrecord!=null&&oldrecord.getResult().equals("10")){
                             //存在一条pending数据，不给予insert处理
+                            msg="已存在待定记录,不能新增记录";
                         }else{
                             resTotal=idBlastInspectionProcessDao.addIdBlastInProcess(idBlastInspectionProcess);
                         }
@@ -252,7 +254,7 @@ public class IdBlastInspectionProcessController {
                 json.put("message","保存成功");
             }else{
                 json.put("success",false);
-                json.put("message","保存失败");
+                json.put("message","保存失败，"+msg);
             }
         }catch (Exception e){
             e.printStackTrace();

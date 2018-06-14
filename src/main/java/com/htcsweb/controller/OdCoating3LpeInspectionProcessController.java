@@ -85,6 +85,7 @@ public class OdCoating3LpeInspectionProcessController {
                 odCoating3LpeInspectionProcess.setOperation_time(new_odbptime);
             }
             String pipeno=odCoating3LpeInspectionProcess.getPipe_no();
+            String msg="";
             if(odCoating3LpeInspectionProcess.getId()==0){
                 //添加
 
@@ -95,6 +96,7 @@ public class OdCoating3LpeInspectionProcessController {
                         OdCoating3LpeInspectionProcess oldrecord=odCoating3LpeInspectionProcessDao.getRecentRecordByPipeNo(odCoating3LpeInspectionProcess.getPipe_no());
                         if(oldrecord!=null&&oldrecord.getResult().equals("10")){
                             //存在一条pending数据，不给予insert处理
+                            msg="已存在待定记录,不能新增记录";
                         }else{
                             resTotal=odCoating3LpeInspectionProcessDao.addOdCoating3LpeInProcess(odCoating3LpeInspectionProcess);
                         }
@@ -232,7 +234,7 @@ public class OdCoating3LpeInspectionProcessController {
 
             }else{
                 json.put("success",false);
-                json.put("message","保存失败");
+                json.put("message","保存失败，"+msg);
             }
 
         }catch (Exception e){

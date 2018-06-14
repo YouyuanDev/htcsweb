@@ -48,6 +48,7 @@ public class PipeRebevelProcessController {
                 pipeRebevelRecord.setOperation_time(new Date());
             }
             String pipeno=pipeRebevelRecord.getPipe_no();
+            String msg="";
             if(pipeRebevelRecord.getId()==0){
                 //添加
                 //System.out.println("11111111");
@@ -58,6 +59,7 @@ public class PipeRebevelProcessController {
                         List<PipeRebevelRecord> oldlist = pipeRebevelRecordDao.getRecentRecordByPipeNo(pipeRebevelRecord.getPipe_no());
                         if (oldlist != null && oldlist.size() > 0 && oldlist.get(0).getResult().equals("10")) {
                             //存在一条pending数据，不给予insert处理
+                            msg="已存在待定记录,不能新增记录";
                         } else {
                             resTotal=pipeRebevelRecordDao.addPipeRebevelRecord(pipeRebevelRecord);
                         }
@@ -84,7 +86,7 @@ public class PipeRebevelProcessController {
                 json.put("message","保存成功");
             }else{
                 json.put("success",false);
-                json.put("message","保存失败");
+                json.put("message","保存失败，"+msg);
             }
 
         }catch (Exception e){

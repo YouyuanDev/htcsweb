@@ -88,6 +88,7 @@ public class IdCoatingInspectionProcessController {
                 idCoatingInspectionProcess.setOperation_time(new Date());
             }
             String pipeno=idCoatingInspectionProcess.getPipe_no();
+            String msg="";
             if(idCoatingInspectionProcess.getId()==0){
                 //添加
                 List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoByNo(idCoatingInspectionProcess.getPipe_no());
@@ -97,6 +98,7 @@ public class IdCoatingInspectionProcessController {
                         IdCoatingInspectionProcess oldrecord=idCoatingInspectionProcessDao.getRecentRecordByPipeNo(idCoatingInspectionProcess.getPipe_no());
                         if(oldrecord!=null&&oldrecord.getResult().equals("10")){
                             //存在一条pending数据，不给予insert处理
+                            msg="已存在待定记录,不能新增记录";
                         }else{
                             resTotal=idCoatingInspectionProcessDao.addIdCoatingInProcess(idCoatingInspectionProcess);
                         }
@@ -158,7 +160,7 @@ public class IdCoatingInspectionProcessController {
                 json.put("message","保存成功");
             }else{
                 json.put("success",false);
-                json.put("message","保存失败");
+                json.put("message","保存失败，"+msg);
             }
 
         }catch (Exception e){

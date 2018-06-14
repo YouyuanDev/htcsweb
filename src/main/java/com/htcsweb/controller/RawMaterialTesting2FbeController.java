@@ -80,13 +80,14 @@ public class RawMaterialTesting2FbeController {
             }else{
                 rawMaterialTesting2Fbe.setOperation_time(new Date());
             }
-
+            String msg="";
             if(rawMaterialTesting2Fbe.getId()==0){
                 //添加
 
                 RawMaterialTesting2Fbe  oldrecord = rawMaterialTesting2FbeDao.getRecentRecordByPipeNo(rawMaterialTesting2Fbe.getSample_no());
                 if (oldrecord != null && oldrecord.getResult().equals("10")) {
                     //存在一条pending数据，不给予insert处理
+                    msg="已存在待定记录,不能新增记录";
                 } else {
                     resTotal=rawMaterialTesting2FbeDao.addRawMaterialTest2Fbe(rawMaterialTesting2Fbe);
                 }
@@ -101,7 +102,7 @@ public class RawMaterialTesting2FbeController {
                 json.put("message","保存成功");
             }else{
                 json.put("success",false);
-                json.put("message","保存失败");
+                json.put("message","保存失败，"+msg);
             }
 
         }catch (Exception e){

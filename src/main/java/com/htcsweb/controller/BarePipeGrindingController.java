@@ -57,7 +57,7 @@ public class BarePipeGrindingController {
             barePipeGrindingCutoffRecord.setPipe_length_after_cut(barePipeGrindingCutoffRecord.getOriginal_pipe_length()-barePipeGrindingCutoffRecord.getCut_off_length());
 
 
-
+            String msg="";
             if(barePipeGrindingCutoffRecord.getId()==0){
                 //添加
                 List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoByNo(barePipeGrindingCutoffRecord.getPipe_no());
@@ -67,6 +67,7 @@ public class BarePipeGrindingController {
                         List<BarePipeGrindingCutoffRecord> oldlist=barePipeGrindingCutoffRecordDao.getRecentRecordByPipeNo(barePipeGrindingCutoffRecord.getPipe_no());
                         if(oldlist!=null&&oldlist.size()>0&&oldlist.get(0).getResult().equals("10")){
                             //存在一条pending数据，不给予insert处理
+                            msg="已存在待定记录,不能新增记录";
                         }else{
                             resTotal=barePipeGrindingCutoffRecordDao.addBarePipeGrindingCutoffRecord(barePipeGrindingCutoffRecord);
                         }
@@ -106,7 +107,7 @@ public class BarePipeGrindingController {
                 json.put("message","保存成功");
             }else{
                 json.put("success",false);
-                json.put("message","保存失败");
+                json.put("message","保存失败，"+msg);
             }
 
         }catch (Exception e){

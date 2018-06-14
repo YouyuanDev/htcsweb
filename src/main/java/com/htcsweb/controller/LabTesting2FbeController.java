@@ -89,12 +89,14 @@ public class LabTesting2FbeController {
             }else{
                 labTesting2Fbe.setCoating_date(new Date());
             }
+            String msg="";
             if(labTesting2Fbe.getId()==0){
                 //添加
 
                 LabTesting2Fbe  oldrecord = labTesting2FbeDao.getRecentRecordByPipeNo(labTesting2Fbe.getPipe_no());
                 if (oldrecord != null && oldrecord.getResult().equals("10")) {
                     //存在一条pending数据，不给予insert处理
+                    msg="已存在待定记录,不能新增记录";
                 } else {
                     resTotal=labTesting2FbeDao.addLabTest2Fbe(labTesting2Fbe);
                 }
@@ -109,7 +111,7 @@ public class LabTesting2FbeController {
                 json.put("message","保存成功");
             }else{
                 json.put("success",false);
-                json.put("message","保存失败");
+                json.put("message","保存失败，"+msg);
             }
 
         }catch (Exception e){

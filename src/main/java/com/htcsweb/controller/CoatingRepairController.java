@@ -95,6 +95,7 @@ public class CoatingRepairController {
             }
 
             String pipeno=coatingRepair.getPipe_no();
+            String msg="";
             if(coatingRepair.getId()==0){
                 //添加
                 List<HashMap<String,Object>>list =pipeBasicInfoDao.getPipeInfoByNo(coatingRepair.getPipe_no());
@@ -104,6 +105,7 @@ public class CoatingRepairController {
                         List<CoatingRepair> oldlist = coatingRepairDao.getRecentRecordByPipeNo(coatingRepair.getPipe_no());
                         if (oldlist != null && oldlist.size() > 0 && oldlist.get(0).getResult().equals("10")) {
                             //存在一条pending数据，不给予insert处理
+                            msg="已存在待定记录,不能新增记录";
                         } else {
                             resTotal = coatingRepairDao.addCoatingRepair(coatingRepair);
                         }
@@ -161,7 +163,7 @@ public class CoatingRepairController {
                 json.put("message","保存成功");
             }else{
                 json.put("success",false);
-                json.put("message","保存失败");
+                json.put("message","保存失败，"+msg);
             }
         }catch (Exception e){
             e.printStackTrace();

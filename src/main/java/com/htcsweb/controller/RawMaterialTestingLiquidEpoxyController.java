@@ -80,12 +80,13 @@ public class RawMaterialTestingLiquidEpoxyController {
             }else{
                 rawMaterialTestingLiquidEpoxy.setOperation_time(new Date());
             }
-
+            String msg="";
             if(rawMaterialTestingLiquidEpoxy.getId()==0){
                 //添加
                 RawMaterialTestingLiquidEpoxy  oldrecord = rawMaterialTestingLiquidEpoxyDao.getRecentRecordByPipeNo(rawMaterialTestingLiquidEpoxy.getSample_no());
                 if (oldrecord != null && oldrecord.getResult().equals("10")) {
                     //存在一条pending数据，不给予insert处理
+                    msg="已存在待定记录,不能新增记录";
                 } else {
                     resTotal=rawMaterialTestingLiquidEpoxyDao.addRawMaterialTestEpoxy(rawMaterialTestingLiquidEpoxy);
                 }
@@ -100,7 +101,7 @@ public class RawMaterialTestingLiquidEpoxyController {
                 json.put("message","保存成功");
             }else{
                 json.put("success",false);
-                json.put("message","保存失败");
+                json.put("message","保存失败，"+msg);
             }
 
         }catch (Exception e){
