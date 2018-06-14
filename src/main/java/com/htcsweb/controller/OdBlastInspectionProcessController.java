@@ -2,12 +2,8 @@ package com.htcsweb.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.htcsweb.dao.InspectionTimeRecordDao;
-import com.htcsweb.dao.OdBlastInspectionProcessDao;
-import com.htcsweb.dao.PipeBasicInfoDao;
-import com.htcsweb.entity.InspectionTimeRecord;
-import com.htcsweb.entity.OdBlastInspectionProcess;
-import com.htcsweb.entity.PipeBasicInfo;
+import com.htcsweb.dao.*;
+import com.htcsweb.entity.*;
 
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.Date;
@@ -36,6 +33,12 @@ public class OdBlastInspectionProcessController {
 
     @Autowired
     private InspectionTimeRecordDao inspectionTimeRecordDao;
+
+    @Autowired
+    private OdCoatingProcessDao odCoatingProcessDao;
+
+    @Autowired
+    private OdCoating3LpeProcessDao odCoating3LpeProcessDao;
 
     @RequestMapping(value = "/getOdBlastInspectionByLike")
     @ResponseBody
@@ -213,6 +216,7 @@ public class OdBlastInspectionProcessController {
                 List<PipeBasicInfo> list=pipeBasicInfoDao.getPipeNumber(pipeno);
                 if(list.size()>0){
                     PipeBasicInfo p=list.get(0);
+                    int statusRes=0;
                     if(p.getStatus().equals("od1")) {
                         //验证钢管状态为光管  od1      外喷砂检验工序   0:bare1     1:od2   10:od1  3： onhold
                         if(odblastinspectionprocess.getResult().equals("1")) {//当打砂检验合格时才更新钢管状态
@@ -226,10 +230,43 @@ public class OdBlastInspectionProcessController {
                         else if(odblastinspectionprocess.getResult().equals("3")) {//当需要修磨或切除时，设置为onhold状态
                             p.setStatus("onhold");
                         }
-                        int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                     }
-
+                    //当数据合格后 且状态跳转后
+                    if(statusRes>0&&odblastinspectionprocess.getResult().equals("1")) {
+                        //APP使用，外喷砂检验合格后的管子，自动添加odcoating记录
+                        HttpSession session = request.getSession();
+                        //把用户数据保存在session域对象中
+                        String mill_no = (String) session.getAttribute("millno");
+                        System.out.println("112123");
+                        if (mill_no != null) {
+                            //此处为APP应用
+                            List<HashMap<String, Object>> lt = pipeBasicInfoDao.getPipeInfoByNo(pipeno);
+                            if (lt.size() > 0) {
+                                String external_coating = (String) lt.get(0).get("external_coating");
+                                if (external_coating != null && external_coating.equals("2FBE")) {
+                                    OdCoatingProcess odCoatingProcess=new OdCoatingProcess();
+                                    odCoatingProcess.setId(0);
+                                    odCoatingProcess.setOperation_time(new Date());
+                                    odCoatingProcess.setOperator_no(odblastinspectionprocess.getOperator_no());
+                                    odCoatingProcess.setResult("10");
+                                    odCoatingProcess.setRemark("INIT");
+                                    odCoatingProcessDao.addOdCoatingProcess(odCoatingProcess);
+                                } else if (external_coating != null && external_coating.equals("3LPE")) {
+                                    OdCoating3LpeProcess odCoating3LpeProcess = new OdCoating3LpeProcess();
+                                    odCoating3LpeProcess.setId(0);
+                                    odCoating3LpeProcess.setOperation_time(new Date());
+                                    odCoating3LpeProcess.setOperator_no(odblastinspectionprocess.getOperator_no());
+                                    odCoating3LpeProcess.setResult("10");
+                                    odCoating3LpeProcess.setRemark("INIT");
+                                    odCoating3LpeProcessDao.addOdCoating3LpeProcess(odCoating3LpeProcess);
+                                }
+                            }
+                        }
+                    }
                 }
+
+
                 json.put("success",true);
                 json.put("message","保存成功");
             }else{
