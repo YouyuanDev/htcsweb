@@ -84,7 +84,19 @@ public class IdStencilProcessController {
             String pipeno=idStencilProcess.getPipe_no();
             if(idStencilProcess.getId()==0){
                 //添加
-                resTotal=idStencilProcessDao.addIdStencilProcess(idStencilProcess);
+                List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoByNo(idStencilProcess.getPipe_no());
+                if(list.size()>0){
+                    String pipestatus=(String)list.get(0).get("status");
+                    if(pipestatus.equals("id4")){
+                        IdStencilProcess oldrecord=idStencilProcessDao.getRecentRecordByPipeNo(idStencilProcess.getPipe_no());
+                        if(oldrecord!=null&&oldrecord.getResult().equals("10")){
+                            //存在一条pending数据，不给予insert处理
+                        }else{
+                            resTotal=idStencilProcessDao.addIdStencilProcess(idStencilProcess);
+                        }
+                    }
+                }
+
             }else{
                 //修改！
                 resTotal=idStencilProcessDao.updateIdStencilProcess(idStencilProcess);

@@ -100,8 +100,20 @@ public class OdBlastInspectionProcessController {
             String pipeno=odblastinspectionprocess.getPipe_no();
             if(odblastinspectionprocess.getId()==0){
                 //添加
-                resTotal=odBlastInspectionProcessDao.addOdBlastInProcess(odblastinspectionprocess);
                 List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoByNo(odblastinspectionprocess.getPipe_no());
+                if(list.size()>0){
+                    String pipestatus=(String)list.get(0).get("status");
+                    if(pipestatus.equals("od1")){
+                        OdBlastInspectionProcess oldrecord=odBlastInspectionProcessDao.getRecentRecordByPipeNo(odblastinspectionprocess.getPipe_no());
+                        if(oldrecord!=null&&oldrecord.getResult().equals("10")){
+                            //存在一条pending数据，不给予insert处理
+                        }else{
+                            resTotal=odBlastInspectionProcessDao.addOdBlastInProcess(odblastinspectionprocess);
+                        }
+                    }
+                }
+
+
                 String project_no="";
                 String mill_no=odblastinspectionprocess.getMill_no();
                 if(list.size()>0){

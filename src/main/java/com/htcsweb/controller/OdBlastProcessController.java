@@ -59,10 +59,21 @@ public class OdBlastProcessController {
             String pipeno=odblastprocess.getPipe_no();
             if(odblastprocess.getId()==0){
                 //添加
-                resTotal=odblastprocessDao.addOdBlastProcess(odblastprocess);
+                List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoByNo(odblastprocess.getPipe_no());
+                if(list.size()>0){
+                    String pipestatus=(String)list.get(0).get("status");
+                    if(pipestatus.equals("bare1")){
+                        OdBlastProcess oldrecord=odblastprocessDao.getRecentRecordByPipeNo(odblastprocess.getPipe_no());
+                        if(oldrecord!=null&&oldrecord.getResult().equals("10")){
+                            //存在一条pending数据，不给予insert处理
+                        }else{
+                            resTotal=odblastprocessDao.addOdBlastProcess(odblastprocess);
+                        }
+                    }
+                }
                 if(resTotal>0){
                     //更新检验时间
-                    List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoByNo(odblastprocess.getPipe_no());
+
                     String project_no="";
                     String mill_no=odblastprocess.getMill_no();
                     if(list.size()>0){

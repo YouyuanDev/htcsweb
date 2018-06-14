@@ -104,7 +104,19 @@ public class IdCoatingProcessController {
             String pipeno=idCoatingProcess.getPipe_no();
             if(idCoatingProcess.getId()==0){
                 //添加
-                resTotal=idCoatingProcessDao.addIdCoatingProcess(idCoatingProcess);
+                List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoByNo(idCoatingProcess.getPipe_no());
+                if(list.size()>0){
+                    String pipestatus=(String)list.get(0).get("status");
+                    if(pipestatus.equals("id2")){
+                        IdCoatingProcess oldrecord=idCoatingProcessDao.getRecentRecordByPipeNo(idCoatingProcess.getPipe_no());
+                        if(oldrecord!=null&&oldrecord.getResult().equals("10")){
+                            //存在一条pending数据，不给予insert处理
+                        }else{
+                            resTotal=idCoatingProcessDao.addIdCoatingProcess(idCoatingProcess);
+                        }
+                    }
+                }
+
             }else{
                 //修改！
                 resTotal=idCoatingProcessDao.updateIdCoatingProcess(idCoatingProcess);

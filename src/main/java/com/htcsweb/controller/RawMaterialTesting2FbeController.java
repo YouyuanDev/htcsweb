@@ -83,7 +83,15 @@ public class RawMaterialTesting2FbeController {
 
             if(rawMaterialTesting2Fbe.getId()==0){
                 //添加
-                resTotal=rawMaterialTesting2FbeDao.addRawMaterialTest2Fbe(rawMaterialTesting2Fbe);
+
+                RawMaterialTesting2Fbe  oldrecord = rawMaterialTesting2FbeDao.getRecentRecordByPipeNo(rawMaterialTesting2Fbe.getSample_no());
+                if (oldrecord != null && oldrecord.getResult().equals("10")) {
+                    //存在一条pending数据，不给予insert处理
+                } else {
+                    resTotal=rawMaterialTesting2FbeDao.addRawMaterialTest2Fbe(rawMaterialTesting2Fbe);
+                }
+
+
             }else{
                 //修改！
                 resTotal=rawMaterialTesting2FbeDao.updateRawMaterialTest2Fbe(rawMaterialTesting2Fbe);

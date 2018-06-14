@@ -93,8 +93,19 @@ public class OdCoatingProcessController {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             if(odCoatingProcess.getId()==0){
                 //添加
-                 resTotal=odCoatingProcessDao.addOdCoatingProcess(odCoatingProcess);
                 List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoByNo(odCoatingProcess.getPipe_no());
+                if(list.size()>0){
+                    String pipestatus=(String)list.get(0).get("status");
+                    if(pipestatus.equals("od2")){
+                        OdCoatingProcess oldrecord=odCoatingProcessDao.getRecentRecordByPipeNo(odCoatingProcess.getPipe_no());
+                        if(oldrecord!=null&&oldrecord.getResult().equals("10")){
+                            //存在一条pending数据，不给予insert处理
+                        }else{
+                            resTotal=odCoatingProcessDao.addOdCoatingProcess(odCoatingProcess);
+                        }
+                    }
+                }
+
                 String project_no="";
                 String mill_no=odCoatingProcess.getMill_no();
                 if(list.size()>0){

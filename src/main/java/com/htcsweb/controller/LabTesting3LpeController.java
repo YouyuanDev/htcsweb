@@ -90,7 +90,15 @@ public class LabTesting3LpeController {
             }
             if(labTesting3Lpe.getId()==0){
                 //添加
-                resTotal=labTesting3LpeDao.addLabTest3Lpe(labTesting3Lpe);
+
+                LabTesting3Lpe  oldrecord = labTesting3LpeDao.getRecentRecordByPipeNo(labTesting3Lpe.getPipe_no());
+                if (oldrecord != null && oldrecord.getResult().equals("10")) {
+                    //存在一条pending数据，不给予insert处理
+                } else {
+                    resTotal=labTesting3LpeDao.addLabTest3Lpe(labTesting3Lpe);
+                }
+
+
             }else{
                 //修改！
                 resTotal=labTesting3LpeDao.updateLabTest3Lpe(labTesting3Lpe);

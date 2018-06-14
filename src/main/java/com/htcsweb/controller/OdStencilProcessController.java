@@ -86,7 +86,19 @@ public class OdStencilProcessController {
             String pipeno=odStencilProcess.getPipe_no();
             if(odStencilProcess.getId()==0){
                 //添加
-                resTotal=odStencilProcessDao.addOdStencilProcess(odStencilProcess);
+                List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoByNo(odStencilProcess.getPipe_no());
+                if(list.size()>0){
+                    String pipestatus=(String)list.get(0).get("status");
+                    if(pipestatus.equals("od4")){
+                        OdStencilProcess oldrecord=odStencilProcessDao.getRecentRecordByPipeNo(odStencilProcess.getPipe_no());
+                        if(oldrecord!=null&&oldrecord.getResult().equals("10")){
+                            //存在一条pending数据，不给予insert处理
+                        }else{
+                            resTotal=odStencilProcessDao.addOdStencilProcess(odStencilProcess);
+                        }
+                    }
+                }
+
             }else{
                 //修改！
                 resTotal=odStencilProcessDao.updateOdStencilProcess(odStencilProcess);

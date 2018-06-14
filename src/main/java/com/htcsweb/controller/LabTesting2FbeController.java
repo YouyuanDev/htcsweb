@@ -91,7 +91,15 @@ public class LabTesting2FbeController {
             }
             if(labTesting2Fbe.getId()==0){
                 //添加
-                resTotal=labTesting2FbeDao.addLabTest2Fbe(labTesting2Fbe);
+
+                LabTesting2Fbe  oldrecord = labTesting2FbeDao.getRecentRecordByPipeNo(labTesting2Fbe.getPipe_no());
+                if (oldrecord != null && oldrecord.getResult().equals("10")) {
+                    //存在一条pending数据，不给予insert处理
+                } else {
+                    resTotal=labTesting2FbeDao.addLabTest2Fbe(labTesting2Fbe);
+                }
+
+
             }else{
                 //修改！
                 resTotal=labTesting2FbeDao.updateLabTest2Fbe(labTesting2Fbe);

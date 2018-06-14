@@ -89,8 +89,18 @@ public class IdFinalInspectionProcessController {
             String pipeno=idFinalInspectionProcess.getPipe_no();
             if(idFinalInspectionProcess.getId()==0){
                 //添加
-                resTotal=idFinalInspectionProcessDao.addIdFinalInProcess(idFinalInspectionProcess);
                 List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoByNo(idFinalInspectionProcess.getPipe_no());
+                if(list.size()>0){
+                    String pipestatus=(String)list.get(0).get("status");
+                    if(pipestatus.equals("id5")){
+                        IdFinalInspectionProcess oldrecord=idFinalInspectionProcessDao.getRecentRecordByPipeNo(idFinalInspectionProcess.getPipe_no());
+                        if(oldrecord!=null&&oldrecord.getResult().equals("10")){
+                            //存在一条pending数据，不给予insert处理
+                        }else{
+                            resTotal=idFinalInspectionProcessDao.addIdFinalInProcess(idFinalInspectionProcess);
+                        }
+                    }
+                }
                 String project_no="";
                 String mill_no=idFinalInspectionProcess.getMill_no();
                 if(list.size()>0){

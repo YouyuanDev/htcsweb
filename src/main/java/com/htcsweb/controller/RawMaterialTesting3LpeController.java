@@ -82,7 +82,13 @@ public class RawMaterialTesting3LpeController {
             }
             if(rawMaterialTesting3Lpe.getId()==0){
                 //添加
-                resTotal=rawMaterialTesting3LpeDao.addRawMaterialTest3Lpe(rawMaterialTesting3Lpe);
+                RawMaterialTesting3Lpe  oldrecord = rawMaterialTesting3LpeDao.getRecentRecordByPipeNo(rawMaterialTesting3Lpe.getSample_no());
+                if (oldrecord != null && oldrecord.getResult().equals("10")) {
+                    //存在一条pending数据，不给予insert处理
+                } else {
+                    resTotal=rawMaterialTesting3LpeDao.addRawMaterialTest3Lpe(rawMaterialTesting3Lpe);
+                }
+
             }else{
                 //修改！
                 resTotal=rawMaterialTesting3LpeDao.updateRawMaterialTest3Lpe(rawMaterialTesting3Lpe);

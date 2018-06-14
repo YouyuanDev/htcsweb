@@ -92,9 +92,18 @@ public class OdCoating3LpeProcessController {
             String pipeno=odCoating3LpeProcess.getPipe_no();
             if(odCoating3LpeProcess.getId()==0){
                 //添加
-                resTotal=odCoating3LpeProcessDao.addOdCoating3LpeProcess(odCoating3LpeProcess);
-
                 List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoByNo(odCoating3LpeProcess.getPipe_no());
+                if(list.size()>0){
+                    String pipestatus=(String)list.get(0).get("status");
+                    if(pipestatus.equals("od2")){
+                        OdCoating3LpeProcess oldrecord=odCoating3LpeProcessDao.getRecentRecordByPipeNo(odCoating3LpeProcess.getPipe_no());
+                        if(oldrecord!=null&&oldrecord.getResult().equals("10")){
+                            //存在一条pending数据，不给予insert处理
+                        }else{
+                            resTotal=odCoating3LpeProcessDao.addOdCoating3LpeProcess(odCoating3LpeProcess);
+                        }
+                    }
+                }
                 String project_no="";
                 String mill_no=odCoating3LpeProcess.getMill_no();
                 if(list.size()>0){

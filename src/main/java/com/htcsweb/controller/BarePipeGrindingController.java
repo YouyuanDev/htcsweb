@@ -60,7 +60,19 @@ public class BarePipeGrindingController {
 
             if(barePipeGrindingCutoffRecord.getId()==0){
                 //添加
-                resTotal=barePipeGrindingCutoffRecordDao.addBarePipeGrindingCutoffRecord(barePipeGrindingCutoffRecord);
+                List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoByNo(barePipeGrindingCutoffRecord.getPipe_no());
+                if(list.size()>0){
+                    String pipestatus=(String)list.get(0).get("status");
+                    if(pipestatus.equals("onhold")){
+                        List<BarePipeGrindingCutoffRecord> oldlist=barePipeGrindingCutoffRecordDao.getRecentRecordByPipeNo(barePipeGrindingCutoffRecord.getPipe_no());
+                        if(oldlist!=null&&oldlist.size()>0&&oldlist.get(0).getResult().equals("10")){
+                            //存在一条pending数据，不给予insert处理
+                        }else{
+                            resTotal=barePipeGrindingCutoffRecordDao.addBarePipeGrindingCutoffRecord(barePipeGrindingCutoffRecord);
+                        }
+                    }
+                }
+
             }else{
                 //修改！
                 resTotal=barePipeGrindingCutoffRecordDao.updateBarePipeGrindingCutoffRecord(barePipeGrindingCutoffRecord);

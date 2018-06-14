@@ -90,7 +90,15 @@ public class LabTestingEpoxyController {
             }
             if(labTestingEpoxy.getId()==0){
                 //添加
-                resTotal=labTestingEpoxyDao.addLabTestEpoxy(labTestingEpoxy);
+
+                LabTestingEpoxy  oldrecord = labTestingEpoxyDao.getRecentRecordByPipeNo(labTestingEpoxy.getPipe_no());
+                if (oldrecord != null && oldrecord.getResult().equals("10")) {
+                    //存在一条pending数据，不给予insert处理
+                } else {
+                    resTotal=labTestingEpoxyDao.addLabTestEpoxy(labTestingEpoxy);
+                }
+
+
             }else{
                 //修改！
                 resTotal=labTestingEpoxyDao.updateLabTestEpoxy(labTestingEpoxy);

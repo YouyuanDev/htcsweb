@@ -51,7 +51,19 @@ public class PipeRebevelProcessController {
             if(pipeRebevelRecord.getId()==0){
                 //添加
                 //System.out.println("11111111");
-                resTotal=pipeRebevelRecordDao.addPipeRebevelRecord(pipeRebevelRecord);
+                List<HashMap<String,Object>>list =pipeBasicInfoDao.getPipeInfoByNo(pipeRebevelRecord.getPipe_no());
+                if(list.size()>0) {
+                    String rebevelmark = (String) list.get(0).get("rebevel_mark");
+                    if (rebevelmark!=null&&rebevelmark.equals("1")) {
+                        List<PipeRebevelRecord> oldlist = pipeRebevelRecordDao.getRecentRecordByPipeNo(pipeRebevelRecord.getPipe_no());
+                        if (oldlist != null && oldlist.size() > 0 && oldlist.get(0).getResult().equals("10")) {
+                            //存在一条pending数据，不给予insert处理
+                        } else {
+                            resTotal=pipeRebevelRecordDao.addPipeRebevelRecord(pipeRebevelRecord);
+                        }
+                    }
+                }
+
             }else{
                 //修改！
                 resTotal=pipeRebevelRecordDao.updatePipeRebevelRecord(pipeRebevelRecord);

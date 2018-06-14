@@ -87,7 +87,19 @@ public class CoatingStripController {
             String pipeno=coatingStrip.getPipe_no();
             if(coatingStrip.getId()==0){
                 //添加
-                resTotal=coatingStripDao.addCoatingStrip(coatingStrip);
+                List<HashMap<String,Object>>list =pipeBasicInfoDao.getPipeInfoByNo(coatingStrip.getPipe_no());
+                if(list.size()>0) {
+                    String pipestatus = (String) list.get(0).get("status");
+                    if (pipestatus.equals("odstrip1")||pipestatus.equals("idstrip1")) {
+                        List<CoatingStrip> oldlist = coatingStripDao.getRecentRecordByPipeNo(coatingStrip.getPipe_no());
+                        if (oldlist != null && oldlist.size() > 0 && oldlist.get(0).getResult().equals("10")) {
+                            //存在一条pending数据，不给予insert处理
+                        } else {
+                            resTotal=coatingStripDao.addCoatingStrip(coatingStrip);
+                        }
+                    }
+                }
+
             }else{
                 //修改！
                 resTotal=coatingStripDao.updateCoatingStrip(coatingStrip);

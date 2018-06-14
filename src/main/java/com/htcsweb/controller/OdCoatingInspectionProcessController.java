@@ -89,9 +89,18 @@ public class OdCoatingInspectionProcessController {
             String pipeno=odCoatingInspectionProcess.getPipe_no();
             if(odCoatingInspectionProcess.getId()==0){
                 //添加
-                resTotal=odCoatingInspectionProcessDao.addOdCoatingInProcess(odCoatingInspectionProcess);
-
                 List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoByNo(odCoatingInspectionProcess.getPipe_no());
+                if(list.size()>0){
+                    String pipestatus=(String)list.get(0).get("status");
+                    if(pipestatus.equals("od3")){
+                        OdCoatingInspectionProcess oldrecord=odCoatingInspectionProcessDao.getRecentRecordByPipeNo(odCoatingInspectionProcess.getPipe_no());
+                        if(oldrecord!=null&&oldrecord.getResult().equals("10")){
+                            //存在一条pending数据，不给予insert处理
+                        }else{
+                            resTotal=odCoatingInspectionProcessDao.addOdCoatingInProcess(odCoatingInspectionProcess);
+                        }
+                    }
+                }
                 String project_no="";
                 String mill_no=odCoatingInspectionProcess.getMill_no();
                 if(list.size()>0){

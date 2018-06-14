@@ -83,7 +83,14 @@ public class RawMaterialTestingLiquidEpoxyController {
 
             if(rawMaterialTestingLiquidEpoxy.getId()==0){
                 //添加
-                resTotal=rawMaterialTestingLiquidEpoxyDao.addRawMaterialTestEpoxy(rawMaterialTestingLiquidEpoxy);
+                RawMaterialTestingLiquidEpoxy  oldrecord = rawMaterialTestingLiquidEpoxyDao.getRecentRecordByPipeNo(rawMaterialTestingLiquidEpoxy.getSample_no());
+                if (oldrecord != null && oldrecord.getResult().equals("10")) {
+                    //存在一条pending数据，不给予insert处理
+                } else {
+                    resTotal=rawMaterialTestingLiquidEpoxyDao.addRawMaterialTestEpoxy(rawMaterialTestingLiquidEpoxy);
+                }
+
+
             }else{
                 //修改！
                 resTotal=rawMaterialTestingLiquidEpoxyDao.updateRawMaterialTestEpoxy(rawMaterialTestingLiquidEpoxy);

@@ -95,8 +95,18 @@ public class IdBlastInspectionProcessController {
             String pipeno=idBlastInspectionProcess.getPipe_no();
             if(idBlastInspectionProcess.getId()==0){
                 //添加
-                resTotal=idBlastInspectionProcessDao.addIdBlastInProcess(idBlastInspectionProcess);
                 List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoByNo(idBlastInspectionProcess.getPipe_no());
+                if(list.size()>0){
+                    String pipestatus=(String)list.get(0).get("status");
+                    if(pipestatus.equals("id1")){
+                        IdBlastInspectionProcess oldrecord=idBlastInspectionProcessDao.getRecentRecordByPipeNo(idBlastInspectionProcess.getPipe_no());
+                        if(oldrecord!=null&&oldrecord.getResult().equals("10")){
+                            //存在一条pending数据，不给予insert处理
+                        }else{
+                            resTotal=idBlastInspectionProcessDao.addIdBlastInProcess(idBlastInspectionProcess);
+                        }
+                    }
+                }
                 String project_no="";
                 String mill_no=idBlastInspectionProcess.getMill_no();
                 if(list.size()>0){
