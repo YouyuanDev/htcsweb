@@ -278,6 +278,10 @@ public class OdBlastInspectionProcessController {
                                     odCoatingProcess.setTo_first_touch_duration(-99);
                                     odCoatingProcess.setTo_quench_duration(-99);
                                     odCoatingProcess.setTop_coat_gun_count(-99);
+                                    odCoatingProcess.setBase_coat_lot_no("");
+                                    odCoatingProcess.setBase_coat_used("");
+                                    odCoatingProcess.setTop_coat_used("");
+                                    odCoatingProcess.setTop_coat_lot_no("");
                                     odCoatingProcess.setUpload_files("");
                                     odCoatingProcessDao.addOdCoatingProcess(odCoatingProcess);
                                 } else if (external_coating != null && external_coating.equals("3LPE")) {
@@ -299,6 +303,12 @@ public class OdBlastInspectionProcessController {
                                     odCoating3LpeProcess.setSpray_speed(-99);
                                     odCoating3LpeProcess.setTo_first_touch_duration(-99);
                                     odCoating3LpeProcess.setTo_quench_duration(-99);
+                                    odCoating3LpeProcess.setBase_coat_used("");
+                                    odCoating3LpeProcess.setBase_coat_lot_no("");
+                                    odCoating3LpeProcess.setMiddle_coat_lot_no("");
+                                    odCoating3LpeProcess.setMiddle_coat_used("");
+                                    odCoating3LpeProcess.setTop_coat_lot_no("");
+                                    odCoating3LpeProcess.setTop_coat_used("");
                                     odCoating3LpeProcess.setUpload_files("");
                                     odCoating3LpeProcessDao.addOdCoating3LpeProcess(odCoating3LpeProcess);
                                 }
