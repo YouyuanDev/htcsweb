@@ -3,9 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.htcsweb.dao.CoatingRepairDao">
+<mapper namespace="com.htcsweb.dao.CoatingPowderInfoDao">
 
-    <resultMap id="all" type="com.htcsweb.entity.CoatingPowderInfoDao">
+    <resultMap id="all" type="com.htcsweb.entity.CoatingPowderInfo">
         <id property="id" column="id"></id>
         <result property="coating_powder_name" column="coating_powder_name"></result>
     </resultMap>

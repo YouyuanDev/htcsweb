@@ -6,6 +6,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.*;
 import com.htcsweb.entity.*;
+import com.htcsweb.util.ComboxItem;
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -397,16 +398,17 @@ public class APPRequestTransferController {
     @RequestMapping("/getAllCoatingPowderInfo")
     @ResponseBody
     public String getAllCoatingPowderInfo(HttpServletRequest request) {
-        //AcceptanceCriteriaOperation/getAllCoatingPowderInfo.action
-        Map<String, Object> resultMaps = new HashMap<String, Object>();//最终返回Map
+        //APPRequestTransfer/getAllCoatingPowderInfo.action
         List<CoatingPowderInfo> list=coatingPowderInfoDao.getAllCoatingPowderInfo();
-        if(list.size()>0){
-            resultMaps.put("success",true);
-            resultMaps.put("data",list);
-        }else{
-            resultMaps.put("success",false);
+        List<ComboxItem> colist=new ArrayList<ComboxItem>();
+        for(int i=0;i<list.size();i++){
+            ComboxItem citem= new ComboxItem();
+            CoatingPowderInfo cp=((CoatingPowderInfo)list.get(i));
+            citem.id=String.valueOf(cp.getId());
+            citem.text= cp.getCoating_powder_name();
+            colist.add(citem);
         }
-        String map= JSONObject.toJSONString(resultMaps);
+        String map= JSONObject.toJSONString(colist);
         return map;
     }
 

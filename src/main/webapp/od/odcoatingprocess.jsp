@@ -389,7 +389,16 @@
 
                 <tr>
                     <td class="i18n1" name="basecoatused">底层粉末型号</td>
-                    <td><input class="easyui-textbox"  type="text" name="base_coat_used" value=""/></td>
+                    <%--<td><input class="easyui-textbox"  type="text" name="base_coat_used" value=""/></td>--%>
+                    <td><input id="base_coat_used" class="easyui-combobox" type="text" name="base_coat_used"  data-options=
+                            "url:'/AcceptanceCriteriaOperation/getAllCoatingPowderInfo.action',
+					        method:'get',
+					        valueField:'text',
+					        width: 185,
+					        editable:false,
+					        textField:'text',
+					        panelHeight:'auto'"/></td>
+
                     <td></td>
                     <td class="i18n1" name="basecoatlotno">底层粉末批号</td>
                     <td><input class="easyui-textbox"  type="text" name="base_coat_lot_no" value=""/></td>
