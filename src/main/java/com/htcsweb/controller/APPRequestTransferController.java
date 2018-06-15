@@ -165,15 +165,20 @@ public class APPRequestTransferController {
                 String key = (String)entry.getKey();
                 //Object val = entry.getValue();
                     //判断是否有权限
-                    if(functionMap!=null&&!functionMap.containsKey(key)){
+                    if(functionMap!=null){
+
+                        if(!functionMap.containsKey(key)&&!key.equals("stockin")) {
+                            System.out.println("APP 不存在存在页面"+key+"的权限");
+                            removeList.add(key);
+
+                        }
                         //stockin包含 odstockin  idstockin  有其一权限即可
-                        if(key.equals("stockin")&&!functionMap.containsKey("odstockin")&&!functionMap.containsKey("idstockin")){
+                        else if(key.equals("stockin")&&!functionMap.containsKey("odstockin")&&!functionMap.containsKey("idstockin")){
                             System.out.println("APP 不存在存在页面"+key+"的权限");
                             removeList.add(key);
                             continue;
                         }
-                        System.out.println("APP 不存在存在页面"+key+"的权限");
-                        removeList.add(key);
+
                     }
                 }
                 //清楚没有的权限key
