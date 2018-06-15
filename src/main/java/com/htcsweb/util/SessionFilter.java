@@ -98,7 +98,8 @@ public class SessionFilter extends OncePerRequestFilter{
             "getPendingRecordByPipeNo",
             "getAllProcessInfoByPipeNo",
             "getLastAcceptedRecordBeforePipeNo",
-            "getNextTenPipesBeforePipeNo"
+            "getNextTenPipesBeforePipeNo",
+            "getAllCoatingPowderInfo"
 
     }; // 不过滤的uri
 

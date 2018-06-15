@@ -5,10 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.*;
-import com.htcsweb.entity.IDCoatingAcceptanceCriteria;
-import com.htcsweb.entity.InspectionTimeRecord;
-import com.htcsweb.entity.ODCoatingAcceptanceCriteria;
-import com.htcsweb.entity.PipeBodyAcceptanceCriteria;
+import com.htcsweb.entity.*;
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,6 +40,11 @@ public class APPRequestTransferController {
 
     @Autowired
     private PipeBodyAcceptanceCriteriaDao pipeBodyAcceptanceCriteriaDao;
+
+    @Autowired
+    private CoatingPowderInfoDao coatingPowderInfoDao;
+
+
 
     //用于APP请求重定向
     @RequestMapping(value = "/getCoatingInfoByPipeNo",produces = "text/plain;charset=utf-8")
@@ -390,5 +392,22 @@ public class APPRequestTransferController {
         return maps;
     }
 
+
+    //获取所有涂层粉末型号名称
+    @RequestMapping("/getAllCoatingPowderInfo")
+    @ResponseBody
+    public String getAllCoatingPowderInfo(HttpServletRequest request) {
+        //AcceptanceCriteriaOperation/getAllCoatingPowderInfo.action
+        Map<String, Object> resultMaps = new HashMap<String, Object>();//最终返回Map
+        List<CoatingPowderInfo> list=coatingPowderInfoDao.getAllCoatingPowderInfo();
+        if(list.size()>0){
+            resultMaps.put("success",true);
+            resultMaps.put("data",list);
+        }else{
+            resultMaps.put("success",false);
+        }
+        String map= JSONObject.toJSONString(resultMaps);
+        return map;
+    }
 
 }
