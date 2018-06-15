@@ -46,6 +46,8 @@ public class LoginController {
     @Autowired
     private FunctionDao functionDao;
 
+    //存放登录用户的session
+    private Map<String,HttpSession> UserSessionMap=new HashMap<String,HttpSession>();
 
 //    public static String md5(String pass){
 //        String saltSource = "blog";
@@ -107,8 +109,8 @@ public class LoginController {
                                                 String uri=f.getUri();
                                                 functionMap.put(function_no,"1");
                                                 functionMap.put(uri,"1");
-//                                                System.out.println("functionMap put="+function_no);
-//                                                System.out.println("uri put="+uri);
+                                                System.out.println("functionMap put="+function_no);
+                                                System.out.println("uri put="+uri);
                                             }
 
 
@@ -122,13 +124,27 @@ public class LoginController {
 
                     }
                 }
-
-                //functionMap.put("index","1");
                 session.setAttribute("userfunctionMap", functionMap);
+                //functionMap.put("index","1");
+
+
+
+
+                //查找是否存在其他用户登录该session
+                HttpSession oldusersession=UserSessionMap.get(employee_no);
+                String msg="";
+                if(oldusersession!=null){
+                    msg="（已踢出其他客户端）";
+                    System.out.println(msg);
+                    oldusersession.invalidate();
+                }
+
+                // 保存新用户session到公用UserSessionMap
+                UserSessionMap.put(employee_no,session);
 
                 //跳转到用户主页
                 json.put("success",true);
-                json.put("msg","登录成功");
+                json.put("msg","登录成功！"+msg);
                 json.put("roles",role_no_list);
                 //System.out.println("登录验证 success");
 //                String basePath = request.getSession().getServletContext().getRealPath("/");
@@ -161,6 +177,7 @@ public class LoginController {
                 //把用户数据保存在session域对象中
                 //session.removeAttribute("userSession");
                 //session.removeAttribute("userfunctionMap");
+                UserSessionMap.remove(session.getAttribute("userSession"));
                 session.invalidate();
                 //跳转到登录页面
                 json.put("success",true);

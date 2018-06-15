@@ -98,6 +98,7 @@
                             getCookie("Password",p);
                             //alert("保存cookie完毕"+p);
                         }
+                        $.messager.alert("登录成功",data.msg);
                           window.location.href = "../index.jsp";
                     } else {
                         $.messager.alert("错误提示",data.msg);
