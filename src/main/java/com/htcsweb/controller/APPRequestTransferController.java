@@ -234,11 +234,14 @@ public class APPRequestTransferController {
 
 
         if(employeeno!=null&&mill_no!=null) {
-
             resultMaps.put("employeeno",employeeno);
             resultMaps.put("millno",mill_no);
         } else{
-            return "no session";
+
+            resultMaps.put("success",false);
+            resultMaps.put("message","session已过期，请重新登录");
+            String map= JSONObject.toJSONString(resultMaps);
+            return map;
         }
 
 
@@ -337,7 +340,8 @@ public class APPRequestTransferController {
                  }else{
                      resultMaps.put("pbcriteria","");
                  }
-
+            resultMaps.put("success",true);
+            resultMaps.put("message","成功");
             String map= JSONObject.toJSONString(resultMaps);
             return map;
         }else{
