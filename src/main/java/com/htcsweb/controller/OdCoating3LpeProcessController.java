@@ -84,7 +84,7 @@ public class OdCoating3LpeProcessController {
         try{
             String odcoatprotime= request.getParameter("odcoatprotime");
             int resTotal=0;
-            if(odCoating3LpeProcess.getOperation_time()==null){
+            if(odcoatprotime!=null&&!odcoatprotime.equals("")){
                 SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date new_odbptime = simFormat.parse(odcoatprotime);
                 odCoating3LpeProcess.setOperation_time(new_odbptime);
