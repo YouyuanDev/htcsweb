@@ -495,7 +495,9 @@
                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="total_3lpe_coat_thickness_min" value=""/></td>
                    <td></td>
                </tr>
-
+               <tr>
+                   <td class="i18n1" colspan="6" name="odcoatinggeneralcontrolparameter">外涂检验通用控制参数</td>
+               </tr>
                <tr>
                    <td class="i18n1" name="repairmax">允许修补量最大值</td>
                    <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="repair_max" value=""/></td>
