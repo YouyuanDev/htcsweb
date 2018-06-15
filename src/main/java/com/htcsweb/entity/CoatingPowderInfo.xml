@@ -32,7 +32,7 @@
 
         <where>
 
-            <if test="mill_no!=null and mill_no!=''">
+            <if test="coating_powder_name!=null and coating_powder_name!=''">
                 AND coating_powder_name LIKE CONCAT('%',#{coating_powder_name},'%')
             </if>
 
@@ -43,11 +43,11 @@
         select * from coating_powder_info
         <where>
 
-            <if test="mill_no!=null and mill_no!=''">
+            <if test="coating_powder_name!=null and coating_powder_name!=''">
                 AND coating_powder_name LIKE CONCAT('%',#{coating_powder_name},'%')
             </if>
         </where>
-        ORDER BY o.id DESC
+        ORDER BY id DESC
         limit #{skip},#{take}
     </select>
 

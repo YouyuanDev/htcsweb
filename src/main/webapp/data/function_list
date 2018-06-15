@@ -181,3 +181,10 @@
 185	检验频率标准管理	ifss	搜索	r	getAllInspectionFrequencyByLike
 186	检验频率标准管理	ifse	编辑	w	saveInspectionFrequency
 187	检验频率标准管理	ifsd	删除	d	delInspectionFrequency
+188	钢管信息管理	pimprr	查看	r	searchPipeRecord
+189	垛内转运	ists	搜索	r	instoragetransfer
+190	垛内转运	iste	编辑	w	doInStoageTransfer
+191	原材料信息管理	cpimr	查看	r	coatingpowderManagement
+192	原材料信息管理	cpims	搜索	r	getCoatingPowderInfoByLike
+193	原材料信息管理	cpime	编辑	w	saveCoatingPowder
+194	原材料信息管理	cpimd	删除	d	delCoatingPowder

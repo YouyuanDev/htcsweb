@@ -72,7 +72,7 @@
                 "odstockin","idstockin","barepipemovement","productStockout","instoragetransfer",
                 "coatingrepair","coatingstrip",
                 "barepipegrindingProcess","pipeSamplingProcess","pipeRebevelProcess",
-                "projectManagement","contractManagement","pipeManagement","uploadPipe","twodimensionalcode",
+                "projectManagement","contractManagement","pipeManagement","uploadPipe","twodimensionalcode","coatingpowderManagement",
                 "odstandard","idstandard","labtestingstandard2fbe","labtestingstandard3lpe","rawmaterialtestingstandard2fbe","rawmaterialtestingstandard3lpe","pipebodystandard","inspectionFrequencyStandard",
                 "labtesting2fbe","labtesting3lpe","labtestingepoxy","rawmaterialtesting2fbe","rawmaterialtesting3lpe","rawmaterialtestingliquidepoxy",
                 "person","role","function",
@@ -84,11 +84,11 @@
             var outinArr=uriArr.slice(14,19);
             var repairArr=uriArr.slice(19,21);
             var pipeArr=uriArr.slice(21,24);
-            var basicArr=uriArr.slice(24,29);
-            var standArr=uriArr.slice(29,37);
-            var labArr=uriArr.slice(37,43);
-            var accountArr=uriArr.slice(43,46);
-            var reportArr=uriArr.slice(46,48);
+            var basicArr=uriArr.slice(24,30);
+            var standArr=uriArr.slice(30,38);
+            var labArr=uriArr.slice(38,44);
+            var accountArr=uriArr.slice(44,47);
+            var reportArr=uriArr.slice(47,49);
 
 
             var hsMapList="<%=session.getAttribute("userfunctionMap")%>";
@@ -357,6 +357,14 @@
                             $('#hlTab').tabs('add',{
                                 title:node.text,
                                 content:"<iframe scrolling='auto' frameborder='0'  src='pipe/twodimensionalcode.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                            hlLanguage();
+
+                        }else if("原材料信息管理"==xy||"Coating Powder Management"==xy){
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='coatingpowder/coatingpowderManagement.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable:true
                             });
                             hlLanguage();
