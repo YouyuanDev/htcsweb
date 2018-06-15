@@ -79,10 +79,12 @@ public class OdCoating3LpeInspectionProcessController {
         try{
             String odcoatInprotime= request.getParameter("odcoat3LpeInprotime");
             int resTotal=0;
-            if(odCoating3LpeInspectionProcess.getOperation_time()==null){
+            if(odcoatInprotime!=null&&!odcoatInprotime.equals("")){
                 SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date new_odbptime = simFormat.parse(odcoatInprotime);
                 odCoating3LpeInspectionProcess.setOperation_time(new_odbptime);
+            }else{
+                odCoating3LpeInspectionProcess.setOperation_time(new Date());
             }
             String pipeno=odCoating3LpeInspectionProcess.getPipe_no();
             String msg="";

@@ -88,6 +88,8 @@ public class OdCoatingProcessController {
                 SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date new_odbptime = simFormat.parse(odcoatprotime);
                 odCoatingProcess.setOperation_time(new_odbptime);
+            }else{
+                odCoatingProcess.setOperation_time(new Date());
             }
             String pipeno=odCoatingProcess.getPipe_no();
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

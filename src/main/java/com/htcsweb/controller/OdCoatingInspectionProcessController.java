@@ -81,10 +81,12 @@ public class OdCoatingInspectionProcessController {
         try{
             String odcoatInprotime= request.getParameter("odcoatInprotime");
             int resTotal=0;
-            if(odCoatingInspectionProcess.getOperation_time()==null){
+            if(odcoatInprotime!=null&&!odcoatInprotime.equals("")){
                 SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date new_odbptime = simFormat.parse(odcoatInprotime);
                 odCoatingInspectionProcess.setOperation_time(new_odbptime);
+            }else {
+                odCoatingInspectionProcess.setOperation_time(new Date());
             }
             String pipeno=odCoatingInspectionProcess.getPipe_no();
             String msg="";

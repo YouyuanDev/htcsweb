@@ -88,13 +88,13 @@ public class IdCoatingProcessController {
             }else{
                 idCoatingProcess.setOperation_time(new Date());
             }
-            if(odcoatprotime!=null&&odcoatprotime!=""){
+            if(curing_starttime!=null&&curing_starttime!=""){
                 Date curing_start_time=simFormat.parse(curing_starttime);
                 idCoatingProcess.setCuring_start_time(curing_start_time);
             }else{
                 idCoatingProcess.setCuring_start_time(new Date());
             }
-            if(odcoatprotime!=null&&odcoatprotime!=""){
+            if(curing_finishtime!=null&&curing_finishtime!=""){
                 Date curing_finish_time=simFormat.parse(curing_finishtime);
                 idCoatingProcess.setCuring_finish_time(curing_finish_time);
             }else{
