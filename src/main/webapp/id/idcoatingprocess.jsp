@@ -89,10 +89,21 @@
                 // $('#p_length').text(row.p_length);$('#weight').text(row.weight);
                 // $('#grade').text(row.grade);$('#heat_no').text(row.heat_no);
                 loadPipeBaiscInfo(row);
-                $('#idCoatingProForm').form('load',row);
+                //$('#idCoatingProForm').form('load',row);
+                $('#idCoatingProForm').form('load', {
+                    'mill_no': row.mill_no,
+                    'coating_speed': row.coating_speed,
+                    'base_used': row.base_used,
+                    'base_batch': row.base_batch,
+                    'curing_agent_used': row.curing_agent_used,
+                    'curing_agent_batch': row.curing_agent_batch,
+                    'curing_temp': row.curing_temp
+                    // 'curing_start_time': getDate1(row.curing_start_time),
+                    // 'curing_finish_time':getDate1(row.curing_finish_time)
+                });
                 $('#idcoatprotime').datetimebox('setValue',getDate1(row.operation_time));
-                $('#curing_starttime').datetimebox('setValue',getDate1(row.curing_start_time));
-                $('#curing_finishtime').datetimebox('setValue',getDate1(row.curing_finish_time));
+                $('#curing_start_time').datetimebox('setValue',getDate1(row.curing_start_time));
+                $('#curing_finish_time').datetimebox('setValue',getDate1(row.curing_finish_time));
                  $("#idcoatproid").textbox("setValue", row.id);
                 look1.setText(row.pipe_no);
                 look1.setValue(row.pipe_no);
@@ -144,11 +155,11 @@
                         hlAlertFour("请输入操作时间");
                         return false;
                     }
-                    if($("input[name='curing_starttime']").val()==""){
+                    if($("input[name='curing_start_time']").val()==""){
                         hlAlertFour("请输入固化开始时间");
                         return false;
                     }
-                    if($("input[name='curing_finishtime']").val()==""){
+                    if($("input[name='curing_finish_time']").val()==""){
                         hlAlertFour("请输入固化结束时间");
                         return false;
                     }
@@ -390,11 +401,11 @@
                 <tr>
                     <td width="16%" class="i18n1" name="curingstarttime">固化开始时间</td>
                     <td>
-                        <input class="easyui-datetimebox" id="curing_starttime" type="text" name="curing_starttime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                        <input class="easyui-datetimebox" id="curing_start_time" type="text" name="curing_start_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
                     <td></td>
                     <td width="16%" class="i18n1" name="curingfinishtime">固化结束时间</td>
-                    <td><input class="easyui-datetimebox" id="curing_finishtime" type="text" name="curing_finishtime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                    <td><input class="easyui-datetimebox" id="curing_finish_time" type="text" name="curing_finish_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
                     <td></td>
 

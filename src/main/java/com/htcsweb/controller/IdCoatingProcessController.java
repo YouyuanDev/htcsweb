@@ -78,23 +78,26 @@ public class IdCoatingProcessController {
         JSONObject json=new JSONObject();
         try{
             String odcoatprotime= request.getParameter("idcoatprotime");
-            String curing_starttime= request.getParameter("curing_starttime");
-            String curing_finishtime= request.getParameter("curing_finishtime");
+            String curing_starttime= request.getParameter("curing_start_time");
+            String curing_finishtime= request.getParameter("curing_finish_time");
             SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             int resTotal=0;
             if(odcoatprotime!=null&&odcoatprotime!=""){
+                odcoatprotime=odcoatprotime.replace('/','-');
                 Date new_odbptime = simFormat.parse(odcoatprotime);
                 idCoatingProcess.setOperation_time(new_odbptime);
             }else{
                 idCoatingProcess.setOperation_time(new Date());
             }
             if(curing_starttime!=null&&curing_starttime!=""){
+                curing_starttime=curing_starttime.replace('/','-');
                 Date curing_start_time=simFormat.parse(curing_starttime);
                 idCoatingProcess.setCuring_start_time(curing_start_time);
             }else{
                 idCoatingProcess.setCuring_start_time(new Date());
             }
             if(curing_finishtime!=null&&curing_finishtime!=""){
+                curing_finishtime=curing_finishtime.replace('/','-');
                 Date curing_finish_time=simFormat.parse(curing_finishtime);
                 idCoatingProcess.setCuring_finish_time(curing_finish_time);
             }else{
