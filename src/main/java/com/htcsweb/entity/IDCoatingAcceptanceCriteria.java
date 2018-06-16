@@ -16,8 +16,8 @@ public class IDCoatingAcceptanceCriteria {
     private float relative_humidity_max;
     private float relative_humidity_min;
 
-    private float id_profile_max;
-    private float id_profile_min;
+    private float profile_max;
+    private float profile_min;
 
     private float dry_film_thickness_max;
     private float dry_film_thickness_min;
@@ -66,12 +66,10 @@ public class IDCoatingAcceptanceCriteria {
     private float abrasive_conductivity_min;
 
 
-
-
     public IDCoatingAcceptanceCriteria() {
     }
 
-    public IDCoatingAcceptanceCriteria(int id, String coating_acceptance_criteria_no, float temp_above_dew_point_max, float temp_above_dew_point_min, float blast_finish_sa25_max, float blast_finish_sa25_min, float relative_humidity_max, float relative_humidity_min, float id_profile_max, float id_profile_min, float dry_film_thickness_max, float dry_film_thickness_min, float cutback_max, float cutback_min, float residual_magnetism_max, float residual_magnetism_min, Date last_update_time, float wet_film_thickness_max, float wet_film_thickness_min, float salt_contamination_before_blast_max, float salt_contamination_before_blast_min, float salt_contamination_after_blasting_max, float salt_contamination_after_blasting_min, int surface_dust_rating_max, int surface_dust_rating_min, int holiday_max, int holiday_min, float roughness_max, float roughness_min, float pipe_temp_max, float pipe_temp_min, int repair_max, int repair_min, float holiday_tester_voltage_max, float holiday_tester_voltage_min, float strip_temp_max, float strip_temp_min, String stencil_content, float abrasive_conductivity_max, float abrasive_conductivity_min) {
+    public IDCoatingAcceptanceCriteria(int id, String coating_acceptance_criteria_no, float temp_above_dew_point_max, float temp_above_dew_point_min, float blast_finish_sa25_max, float blast_finish_sa25_min, float relative_humidity_max, float relative_humidity_min, float profile_max, float profile_min, float dry_film_thickness_max, float dry_film_thickness_min, float cutback_max, float cutback_min, float residual_magnetism_max, float residual_magnetism_min, Date last_update_time, float wet_film_thickness_max, float wet_film_thickness_min, float salt_contamination_before_blast_max, float salt_contamination_before_blast_min, float salt_contamination_after_blasting_max, float salt_contamination_after_blasting_min, int surface_dust_rating_max, int surface_dust_rating_min, int holiday_max, int holiday_min, float roughness_max, float roughness_min, float pipe_temp_max, float pipe_temp_min, int repair_max, int repair_min, float holiday_tester_voltage_max, float holiday_tester_voltage_min, float strip_temp_max, float strip_temp_min, String stencil_content, float abrasive_conductivity_max, float abrasive_conductivity_min) {
         this.id = id;
         this.coating_acceptance_criteria_no = coating_acceptance_criteria_no;
         this.temp_above_dew_point_max = temp_above_dew_point_max;
@@ -80,8 +78,8 @@ public class IDCoatingAcceptanceCriteria {
         this.blast_finish_sa25_min = blast_finish_sa25_min;
         this.relative_humidity_max = relative_humidity_max;
         this.relative_humidity_min = relative_humidity_min;
-        this.id_profile_max = id_profile_max;
-        this.id_profile_min = id_profile_min;
+        this.profile_max = profile_max;
+        this.profile_min = profile_min;
         this.dry_film_thickness_max = dry_film_thickness_max;
         this.dry_film_thickness_min = dry_film_thickness_min;
         this.cutback_max = cutback_max;
@@ -178,20 +176,20 @@ public class IDCoatingAcceptanceCriteria {
         this.relative_humidity_min = relative_humidity_min;
     }
 
-    public float getId_profile_max() {
-        return id_profile_max;
+    public float getProfile_max() {
+        return profile_max;
     }
 
-    public void setId_profile_max(float id_profile_max) {
-        this.id_profile_max = id_profile_max;
+    public void setProfile_max(float profile_max) {
+        this.profile_max = profile_max;
     }
 
-    public float getId_profile_min() {
-        return id_profile_min;
+    public float getProfile_min() {
+        return profile_min;
     }
 
-    public void setId_profile_min(float id_profile_min) {
-        this.id_profile_min = id_profile_min;
+    public void setProfile_min(float profile_min) {
+        this.profile_min = profile_min;
     }
 
     public float getDry_film_thickness_max() {

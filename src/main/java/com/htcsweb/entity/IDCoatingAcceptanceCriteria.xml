@@ -8,7 +8,7 @@
     <insert id="addIdCoatingCriterProcess" parameterType="com.htcsweb.entity.IDCoatingAcceptanceCriteria">
         INSERT INTO id_coating_acceptance_criteria(coating_acceptance_criteria_no,temp_above_dew_point_max,
         temp_above_dew_point_min,blast_finish_sa25_max,blast_finish_sa25_min,relative_humidity_max,relative_humidity_min,
-        id_profile_max,id_profile_min,dry_film_thickness_max,dry_film_thickness_min,cutback_max,cutback_min,
+        profile_max,profile_min,dry_film_thickness_max,dry_film_thickness_min,cutback_max,cutback_min,
         residual_magnetism_max,residual_magnetism_min,last_update_time,wet_film_thickness_max,wet_film_thickness_min,
         salt_contamination_before_blast_max,salt_contamination_before_blast_min,salt_contamination_after_blasting_max,
         salt_contamination_after_blasting_min,surface_dust_rating_max,surface_dust_rating_min,holiday_max,holiday_min,
@@ -16,7 +16,7 @@
         holiday_tester_voltage_min,strip_temp_max,strip_temp_min,stencil_content,abrasive_conductivity_max,abrasive_conductivity_min)
         VALUES (#{coating_acceptance_criteria_no},#{temp_above_dew_point_max},#{temp_above_dew_point_min},
         #{blast_finish_sa25_max},#{blast_finish_sa25_min},#{relative_humidity_max},#{relative_humidity_min},
-        #{id_profile_max},#{id_profile_min},#{dry_film_thickness_max},#{dry_film_thickness_min},#{cutback_max},
+        #{profile_max},#{profile_min},#{dry_film_thickness_max},#{dry_film_thickness_min},#{cutback_max},
         #{cutback_min},#{residual_magnetism_max},#{residual_magnetism_min},#{last_update_time},#{wet_film_thickness_max},
         #{wet_film_thickness_min},#{salt_contamination_before_blast_max},#{salt_contamination_before_blast_min},
         #{salt_contamination_after_blasting_max},#{salt_contamination_after_blasting_min},#{surface_dust_rating_max},
@@ -37,7 +37,7 @@
         temp_above_dew_point_max=#{temp_above_dew_point_max},temp_above_dew_point_min=#{temp_above_dew_point_min},
         blast_finish_sa25_max=#{blast_finish_sa25_max},blast_finish_sa25_min=#{blast_finish_sa25_min},
         relative_humidity_max=#{relative_humidity_max},relative_humidity_min=#{relative_humidity_min},
-        id_profile_max=#{id_profile_max},id_profile_min=#{id_profile_min},dry_film_thickness_max=#{dry_film_thickness_max},
+        profile_max=#{profile_max},profile_min=#{profile_min},dry_film_thickness_max=#{dry_film_thickness_max},
         dry_film_thickness_min=#{dry_film_thickness_min},cutback_max=#{cutback_max},cutback_min=#{cutback_min},
         residual_magnetism_max=#{residual_magnetism_max},residual_magnetism_min=#{residual_magnetism_min},
         last_update_time=#{last_update_time}, wet_film_thickness_max=#{wet_film_thickness_max},

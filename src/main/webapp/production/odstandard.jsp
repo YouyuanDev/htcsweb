@@ -140,8 +140,8 @@
             setParamsMin($("input[name='blast_finish_sa25_min']"));
             setParamsMax($("input[name='surface_dust_rating_max']"));
             setParamsMin($("input[name='surface_dust_rating_min']"));
-            setParamsMax($("input[name='od_profile_max']"));
-            setParamsMin($("input[name='od_profile_min']"));
+            setParamsMax($("input[name='profile_max']"));
+            setParamsMin($("input[name='profile_min']"));
             setParamsMax($("input[name='pipe_temp_after_blast_max']"));
             setParamsMin($("input[name='pipe_temp_after_blast_min']"));
             setParamsMax($("input[name='salt_contamination_after_blasting_max']"));
@@ -231,8 +231,8 @@
                    <th field="blast_finish_sa25_min" align="center" hidden="true" width="100" class="i18n1" name="blastfinishsa25min">打砂后清洁度Sa2.5最小值</th>
                    <th field="surface_dust_rating_max" align="center" hidden="true" width="100" class="i18n1" name="surfacedustratingmax">灰尘度最大值</th>
                    <th field="surface_dust_rating_min" align="center" hidden="true" width="120" class="i18n1" name="surfacedustratingmin">灰尘度最小值</th>
-                   <th field="od_profile_max" align="center" width="100" hidden="true" class="i18n1" name="odprofilemax">外锚纹深度最大值</th>
-                   <th field="od_profile_min" align="center" width="100" hidden="true" class="i18n1" name="odprofilemin">外锚纹深度最小值</th>
+                   <th field="profile_max" align="center" width="100" hidden="true" class="i18n1" name="odprofilemax">外锚纹深度最大值</th>
+                   <th field="profile_min" align="center" width="100" hidden="true" class="i18n1" name="odprofilemin">外锚纹深度最小值</th>
                    <th field="pipe_temp_after_blast_max" width="100" hidden="true" align="center"  class="i18n1" name="pipetempafterblastmax">打砂后钢管温度最大值</th>
                    <th field="pipe_temp_after_blast_min" width="100" hidden="true" align="center"  class="i18n1" name="pipetempafterblastmin">打砂后钢管温度最小值</th>
                    <th field="salt_contamination_after_blasting_max" hidden="true" width="100" align="center"  class="i18n1" name="saltcontaminationafterblastingmax">打砂后盐度最大值 </th>
@@ -401,10 +401,10 @@
                </tr>
                <tr>
                    <td class="i18n1" name="odprofilemax">外锚纹深度最大值</td>
-                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="od_profile_max" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="profile_max" value=""/></td>
                    <td></td>
                    <td class="i18n1" name="odprofilemin">外锚纹深度最小值</td>
-                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="od_profile_min" value=""/></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="profile_min" value=""/></td>
                    <td></td>
                </tr>
 

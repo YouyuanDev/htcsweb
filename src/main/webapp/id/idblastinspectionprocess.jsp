@@ -147,7 +147,7 @@
                                 $obj1.siblings().css("background-color","#F9A6A6");
                             if(!((res3>=data.blast_finish_sa25_min)&&(res3<=data.blast_finish_sa25_max)))
                                 $obj3.siblings().css("background-color","#F9A6A6");
-                            if(!((res4>=data.id_profile_min)&&(res4<=data.id_profile_max)))
+                            if(!((res4>=data.profile_min)&&(res4<=data.profile_max)))
                                 $obj4.siblings().css("background-color","#F9A6A6");
 
                             if(!((res5>=data.pipe_temp_min)&&(res5<=data.pipe_temp_max)))

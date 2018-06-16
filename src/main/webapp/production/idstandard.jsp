@@ -129,8 +129,8 @@
             setParamsMin($("input[name='blast_finish_sa25_min']"));
             setParamsMax($("input[name='relative_humidity_max']"));
             setParamsMin($("input[name='relative_humidity_min']"));
-            setParamsMax($("input[name='id_profile_max']"));
-            setParamsMin($("input[name='id_profile_min']"));
+            setParamsMax($("input[name='profile_max']"));
+            setParamsMin($("input[name='profile_min']"));
             setParamsMax($("input[name='dry_film_thickness_max']"));
             setParamsMin($("input[name='dry_film_thickness_min']"));
             setParamsMax($("input[name='cutback_max']"));
@@ -198,8 +198,8 @@
                 <th field="blast_finish_sa25_min" align="center" width="150" class="i18n1" name="blastfinishsa25min">清洁度sa2.5最小值</th>
                 <th field="relative_humidity_max" align="center" width="150" class="i18n1" name="relativehumiditymax">相对湿度最大值</th>
                 <th field="relative_humidity_min" align="center" width="150" class="i18n1" name="relativehumiditymin">相对湿度最小值</th>
-                <th field="id_profile_max" align="center" width="150" class="i18n1" name="idprofilemax">内锚纹深度最大值</th>
-                <th field="id_profile_min" align="center" width="150" class="i18n1" name="idprofilemin">内锚纹深度最小值</th>
+                <th field="profile_max" align="center" width="150" class="i18n1" name="idprofilemax">内锚纹深度最大值</th>
+                <th field="profile_min" align="center" width="150" class="i18n1" name="idprofilemin">内锚纹深度最小值</th>
                 <th field="dry_film_thickness_max" align="center" hidden="true" width="50" class="i18n1" name="dryfilmthicknessmax">干膜厚度最大值</th>
                 <th field="dry_film_thickness_min" align="center" hidden="true" width="100" class="i18n1" name="dryfilmthicknessmin">干膜厚度最小值</th>
                 <th field="cutback_max" align="center" hidden="true" width="100" class="i18n1" name="cutbackmax">预留段最大值</th>
@@ -337,10 +337,10 @@
                 </tr>
                 <tr>
                     <td class="i18n1" name="idprofilemax">内锚纹深度最大值</td>
-                    <td  ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="id_profile_max" value=""/></td>
+                    <td  ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="profile_max" value=""/></td>
                     <td></td>
                     <td class="i18n1" name="idprofilemin">内锚纹深度最小值</td>
-                    <td  ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="id_profile_min" value=""/></td>
+                    <td  ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="profile_min" value=""/></td>
                     <td></td>
                 </tr>
                 <tr>
