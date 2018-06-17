@@ -85,8 +85,21 @@
                 $('#hlOdFinalInProDialog').dialog('open').dialog('setTitle','修改');
 
                 loadPipeBaiscInfo(row);
-                $('#odFinalInProForm').form('load',row);
-                $('#odFinalInprotime').datetimebox('setValue',getDate1(row.operation_time));
+                //$('#odFinalInProForm').form('load',row);
+                $('#odFinalInProForm').form('load', {
+                    'mill_no': row.mill_no,
+                    'inspection_result': row.inspection_result,
+                    'cutback_length': row.cutback_length,
+                    'stencil_verification': row.stencil_verification,
+                    'cutback_surface': row.cutback_surface,
+                    'magnetism_list': row.magnetism_list,
+                    'coating_bevel_angle_list': row.coating_bevel_angle_list,
+                    'epoxy_cutback_list': row.epoxy_cutback_list,
+                    'operation_time':getDate1(row.operation_time),
+                    'result':row.result,
+                    'remark':row.remark
+                });
+                //$('#odFinalInprotime').datetimebox('setValue',getDate1(row.operation_time));
                  $("#odFinalInproid").textbox("setValue", row.id);
                 look1.setText(row.pipe_no);
                 look1.setValue(row.pipe_no);
@@ -186,7 +199,7 @@
                         hlAlertFour("请输入分厂信息");
                         return false;
                     }
-                    if($("input[name='odFinalInprotime']").val()==""){
+                    if($("input[name='operation_time']").val()==""){
                         hlAlertFour("请输入操作时间");
                         return false;
                     }
@@ -465,7 +478,7 @@
                     <td></td>
                     <td class="i18n1" name="operationtime" width="20%">操作时间</td>
                     <td colspan="1" width="30%">
-                        <input class="easyui-datetimebox" id="odFinalInprotime" type="text" name="odFinalInprotime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                        <input class="easyui-datetimebox" type="text" name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
                     <td></td>
                 </tr>

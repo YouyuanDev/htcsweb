@@ -133,8 +133,17 @@
             if(row){
                 $('#hlOdStencilProDialog').dialog('open').dialog('setTitle','修改');
                 loadPipeBaiscInfo(row);
-                $('#odStencilProForm').form('load',row);
-                $('#odStencilprotime').datetimebox('setValue',getDate1(row.operation_time));
+                //$('#odStencilProForm').form('load',row);
+                $('#odStencilProForm').form('load', {
+                    'mill_no': row.mill_no,
+                    'stencil_content': row.stencil_content,
+                    'center_line_color': row.center_line_color,
+                    'pipe_end_color': row.pipe_end_color,
+                    'operation_time':getDate1(row.operation_time),
+                    'result':row.result,
+                    'remark':row.remark
+                });
+                //$('#odStencilprotime').datetimebox('setValue',getDate1(row.operation_time));
                  $("#odStencilproid").textbox("setValue", row.id);
                 look1.setText(row.pipe_no);
                 look1.setValue(row.pipe_no);
@@ -180,7 +189,7 @@
                         hlAlertFour("请输入分厂信息");
                         return false;
                     }
-                    if($("input[name='odStencilprotime']").val()==""){
+                    if($("input[name='operation_time']").val()==""){
                         hlAlertFour("请输入操作时间");
                         return false;
                     }
@@ -417,7 +426,7 @@
                     </td>
                     <td class="i18n1" name="operationtime" width="20%">操作时间</td>
                     <td colspan="1" width="30%">
-                        <input class="easyui-datetimebox" id="odStencilprotime" type="text" name="odStencilprotime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                        <input class="easyui-datetimebox" type="text" name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
                 </tr>
             </table>

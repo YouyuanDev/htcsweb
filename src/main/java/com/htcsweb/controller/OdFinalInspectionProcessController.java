@@ -79,13 +79,8 @@ public class OdFinalInspectionProcessController {
     public String saveOdFinalInProcess(OdFinalInspectionProcess odFinalInspectionProcess, HttpServletRequest request, HttpServletResponse response){
         JSONObject json=new JSONObject();
         try{
-            String odFinalInprotime= request.getParameter("odFinalInprotime");
             int resTotal=0;
-            if(odFinalInprotime!=null&&odFinalInprotime!=""){
-                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date new_odbptime = simFormat.parse(odFinalInprotime);
-                odFinalInspectionProcess.setOperation_time(new_odbptime);
-            }else{
+            if(odFinalInspectionProcess.getOperation_time()==null){
                 odFinalInspectionProcess.setOperation_time(new Date());
             }
             String pipeno=odFinalInspectionProcess.getPipe_no();

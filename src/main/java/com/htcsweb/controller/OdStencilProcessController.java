@@ -74,13 +74,8 @@ public class OdStencilProcessController {
     public String saveOdStencilProcess(OdStencilProcess odStencilProcess, HttpServletRequest request, HttpServletResponse response){
         JSONObject json=new JSONObject();
         try{
-            String odstencilprotime= request.getParameter("odStencilprotime");
             int resTotal=0;
-            if(odstencilprotime!=null&&odstencilprotime!=""){
-                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date new_odbptime = simFormat.parse(odstencilprotime);
-                odStencilProcess.setOperation_time(new_odbptime);
-            }else{
+            if(odStencilProcess.getOperation_time()==null){
                 odStencilProcess.setOperation_time(new Date());
             }
             String pipeno=odStencilProcess.getPipe_no();
