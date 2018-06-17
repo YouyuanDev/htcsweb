@@ -126,8 +126,16 @@
                 // $('#p_length').text(row.p_length);$('#weight').text(row.weight);
                 // $('#grade').text(row.grade);$('#heat_no').text(row.heat_no);
                 loadPipeBaiscInfo(row);
-                $('#idStencilProForm').form('load',row);
-                $('#idStencilprotime').datetimebox('setValue',getDate1(row.operation_time));
+               // $('#idStencilProForm').form('load',row);
+                $('#idStencilProForm').form('load', {
+                    'mill_no': row.mill_no,
+                    'stencil_content': row.stencil_content,
+                    'operation_time':getDate1(row.operation_time),
+                    'result':row.result,
+                    'remark':row.remark
+                });
+
+                //$('#operation_time').datetimebox('setValue',getDate1(row.operation_time));
                  $("#idStencilproid").textbox("setValue", row.id);
                 look1.setText(row.pipe_no);
                 look1.setValue(row.pipe_no);
@@ -174,7 +182,7 @@
                         hlAlertFour("请输入分厂信息");
                         return false;
                     }
-                    if($("input[name='idStencilprotime']").val()==""){
+                    if($("input[name='operation_time']").val()==""){
                         hlAlertFour("请输入操作时间");
                         return false;
                     }
@@ -362,7 +370,7 @@
                     </td>
                     <td class="i18n1" name="operationtime" width="20%">操作时间</td>
                     <td colspan="1" width="30%">
-                        <input class="easyui-datetimebox" id="idStencilprotime" type="text" name="idStencilprotime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                        <input class="easyui-datetimebox" type="text" name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
                 </tr>
             </table>

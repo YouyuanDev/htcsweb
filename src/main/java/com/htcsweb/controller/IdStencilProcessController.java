@@ -72,13 +72,8 @@ public class IdStencilProcessController {
     public String saveIdStencilProcess(IdStencilProcess idStencilProcess, HttpServletRequest request, HttpServletResponse response){
         JSONObject json=new JSONObject();
         try{
-            String idstencilprotime= request.getParameter("idStencilprotime");
             int resTotal=0;
-            if(idstencilprotime!=null&&idstencilprotime!=""){
-                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date new_odbptime = simFormat.parse(idstencilprotime);
-                idStencilProcess.setOperation_time(new_odbptime);
-            }else{
+            if(idStencilProcess.getOperation_time()==null){
                 idStencilProcess.setOperation_time(new Date());
             }
             String pipeno=idStencilProcess.getPipe_no();

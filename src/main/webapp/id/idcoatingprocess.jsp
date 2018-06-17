@@ -356,7 +356,7 @@
                     </td>
                     <td class="i18n1" name="operationtime" width="20%">操作时间</td>
                     <td colspan="1" width="30%">
-                        <input class="easyui-datetimebox" id="operation_time" type="text" name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                        <input class="easyui-datetimebox" type="text" name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
 
                 </tr>
