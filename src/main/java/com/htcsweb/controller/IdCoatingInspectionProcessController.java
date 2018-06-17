@@ -78,13 +78,8 @@ public class IdCoatingInspectionProcessController {
     public String saveIdCoatingInProcess(IdCoatingInspectionProcess idCoatingInspectionProcess, HttpServletRequest request, HttpServletResponse response){
         JSONObject json=new JSONObject();
         try{
-            String idcoatInprotime= request.getParameter("idcoatInprotime");
             int resTotal=0;
-            if(idcoatInprotime!=null&&idcoatInprotime!=""){
-                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date new_odbptime = simFormat.parse(idcoatInprotime);
-                idCoatingInspectionProcess.setOperation_time(new_odbptime);
-            }else{
+            if(idCoatingInspectionProcess.getOperation_time()==null){
                 idCoatingInspectionProcess.setOperation_time(new Date());
             }
             String pipeno=idCoatingInspectionProcess.getPipe_no();

@@ -91,8 +91,20 @@
                 // $('#p_length').text(row.p_length);$('#weight').text(row.weight);
                 // $('#grade').text(row.grade);$('#heat_no').text(row.heat_no);
                 loadPipeBaiscInfo(row);
-                $('#idCoatingInProForm').form('load',row);
-                $('#idcoatInprotime').datetimebox('setValue',getDate1(row.operation_time));
+                //$('#idCoatingInProForm').form('load',row);
+                $('#idCoatingInProForm').form('load', {
+                    'mill_no': row.mill_no,
+                     'is_sample': row.is_sample,
+                     'is_glass_sample': row.is_glass_sample,
+                    'wet_film_thickness_list': row.wet_film_thickness_list,
+                    'operator_no':row.operator_no,
+                    'operation_time':getDate1(row.operation_time),
+                    'result':row.result,
+                    'remark':row.remark
+                });
+
+
+                //$('#idcoatInprotime').datetimebox('setValue',getDate1(row.operation_time));
                 $("#idcoatInproid").textbox("setValue", row.id);
                 var sample=row.is_sample;
                 if(sample=="1"){
@@ -168,8 +180,8 @@
                             }
 
                         }
-                    },error:function () {
-
+                    },error:function (data) {
+                            alert(data);
                     }
                 });
                 url="/IdCoatInOperation/saveIdCoatingInProcess.action?id="+row.id;
@@ -235,7 +247,7 @@
                     // setParams($("input[name='magnetism']"));
                     // setParams($("input[name='internal_repairs']"));
 
-                    if($("input[name='idcoatInprotime']").val()==""){
+                    if($("input[name='operation_time']").val()==""){
                         hlAlertFour("请输入操作时间");
                         return false;
                     }
@@ -429,7 +441,7 @@
                     </td>
                     <td class="i18n1" name="operationtime" width="20%">操作时间</td>
                     <td colspan="1" width="30%">
-                        <input class="easyui-datetimebox" id="idcoatInprotime" type="text" name="idcoatInprotime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                        <input class="easyui-datetimebox" type="text" name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
 
                 </tr>
