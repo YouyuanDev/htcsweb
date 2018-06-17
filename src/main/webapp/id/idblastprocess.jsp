@@ -94,9 +94,24 @@
                 //$('#grade').text(row.grade);$('#heat_no').text(row.heat_no);
                 loadPipeBaiscInfo(row);
                 $('#idbpid').text(row.id);
-                $('#idBlastProForm').form('load',row);
+                //$('#idBlastProForm').form('load',row);
+                $('#idBlastProForm').form('load', {
+                    'mill_no': row.mill_no,
+                    'coating_speed': row.coating_speed,
+                    'original_pipe_no':row.original_pipe_no,
+                    'new_pipe_no':row.new_pipe_no,
+                    'salt_contamination_before_blasting':row.salt_contamination_before_blasting,
+                    'abrasive_conductivity':row.abrasive_conductivity,
+                    'internal_surface_condition':row.internal_surface_condition,
+                    'external_coating_condition':row.external_coating_condition,
+                    'operator_no':row.operator_no,
+                    'operation_time':getDate1(row.operation_time),
+                    'marking':row.marking,
+                    'result':row.result,
+                    'remark':row.remark
 
-                $('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
+                });
+                //$('#operation_time').datetimebox('setValue',getDate1(row.operation_time));
 
                 look1.setText(row.pipe_no);
                 look1.setValue(row.pipe_no);
@@ -175,7 +190,7 @@
                         hlAlertFour("请输入分厂信息");
                         return false;
                     }
-                    if($("input[name='idbptime']").val()==""){
+                    if($("input[name='operation_time']").val()==""){
                         hlAlertFour("请输入操作时间");
                         return false;
                     }
@@ -373,7 +388,7 @@
                </td>
                <td class="i18n1" name="operationtime" width="20%">操作时间</td>
                <td colspan="1" width="30%">
-                   <input class="easyui-datetimebox" id="operation-time" type="text" name="idbptime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                   <input class="easyui-datetimebox" type="text" name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
 
                </td>
 

@@ -41,15 +41,15 @@ public class IdBlastProcessController {
     public String saveIdBlastProcess(IdBlastProcess idBlastProcess, HttpServletRequest request, HttpServletResponse response){
         JSONObject json=new JSONObject();
         try{
-            String odbptime= request.getParameter("idbptime");
+            //String odbptime= request.getParameter("idbptime");
             int resTotal=0;
-            if(odbptime!=null&&odbptime!=""){
-                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date new_odbptime = simFormat.parse(odbptime);
-                idBlastProcess.setOperation_time(new_odbptime);
-            }else{
+            if(idBlastProcess.getOperation_time()==null){
+//                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//                Date new_odbptime = simFormat.parse(odbptime);
+//                idBlastProcess.setOperation_time(new_odbptime);
                 idBlastProcess.setOperation_time(new Date());
             }
+
             String pipeno=idBlastProcess.getPipe_no();
             String msg="";
             if(idBlastProcess.getId()==0){
