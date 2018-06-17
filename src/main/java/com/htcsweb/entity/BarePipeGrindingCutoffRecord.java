@@ -8,6 +8,7 @@ public class BarePipeGrindingCutoffRecord {
 
     private int id;
     private String pipe_no;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date operation_time;
     private String operator_no;
     private String odid;

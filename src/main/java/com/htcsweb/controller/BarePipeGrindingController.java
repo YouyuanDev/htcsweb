@@ -40,13 +40,8 @@ public class BarePipeGrindingController {
         JSONObject json=new JSONObject();
         //System.out.println("saveBarePipeGrindingProcess");
         try{
-            String operationtime= request.getParameter("operation-time");
             int resTotal=0;
-            if(operationtime!=null&&operationtime!=""){
-                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date new_optime = simFormat.parse(operationtime);
-                barePipeGrindingCutoffRecord.setOperation_time(new_optime);
-            }else{
+            if(barePipeGrindingCutoffRecord.getOperation_time()==null){
                 barePipeGrindingCutoffRecord.setOperation_time(new Date());
             }
             String pipeno=barePipeGrindingCutoffRecord.getPipe_no();

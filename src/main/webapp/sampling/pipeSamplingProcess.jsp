@@ -103,8 +103,20 @@
                 // $('#grade').text(row.grade);
                 // $('#heat_no').text(row.heat_no);
                 loadPipeBaiscInfo(row);
-                $('#pipeSamplingProForm').form('load',row);
-                $("#operation-time").datetimebox('setValue',getDate1(row.operation_time));
+                //$('#pipeSamplingProForm').form('load',row);
+                $('#pipeSamplingProForm').form('load', {
+                    'mill_no': row.mill_no,
+                    'sample_no': row.sample_no,
+                    'cut_off_length': row.cut_off_length,
+                    'original_pipe_length': row.original_pipe_length,
+                    'pipe_length_after_cut': row.pipe_length_after_cut,
+                    'operator_no':row.operator_no,
+                    'operation_time':getDate1(row.operation_time),
+                    'result':row.result,
+                    'remark':row.remark
+                });
+
+                //$("#operation-time").datetimebox('setValue',getDate1(row.operation_time));
                 $("#idbinpid").textbox("setValue", row.id);
 
 
@@ -182,7 +194,7 @@
                         hlAlertFour("请输入分厂信息");
                         return false;
                     }
-                    if($("input[name='operation-time']").val()==""){
+                    if($("input[name='operation_time']").val()==""){
 
                         hlAlertFour("请输入操作时间");
                         return false;
@@ -380,7 +392,7 @@
                     </td>
                     <td class="i18n1" name="operationtime" width="20%">操作时间</td>
                     <td colspan="1" width="30%">
-                        <input class="easyui-datetimebox" type="text" id="operation-time" name="operation-time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                        <input class="easyui-datetimebox" type="text" name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
 
                 </tr>

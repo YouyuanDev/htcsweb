@@ -38,13 +38,8 @@ public class PipeRebevelProcessController {
         JSONObject json=new JSONObject();
         System.out.println("savePipeRebevelProcess");
         try{
-            String operationtime= request.getParameter("operation-time");
             int resTotal=0;
-            if(operationtime!=null&&operationtime!=""){
-                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date new_optime = simFormat.parse(operationtime);
-                pipeRebevelRecord.setOperation_time(new_optime);
-            }else{
+            if(pipeRebevelRecord.getOperation_time()==null){
                 pipeRebevelRecord.setOperation_time(new Date());
             }
             String pipeno=pipeRebevelRecord.getPipe_no();

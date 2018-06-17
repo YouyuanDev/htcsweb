@@ -40,13 +40,8 @@ public class PipeSamplingProcessController {
         JSONObject json=new JSONObject();
         //System.out.println("saveBarePipeGrindingProcess");
         try{
-            String operationtime= request.getParameter("operation-time");
             int resTotal=0;
-            if(operationtime!=null&&operationtime!=""){
-                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date new_optime = simFormat.parse(operationtime);
-                pipeSamplingRecord.setOperation_time(new_optime);
-            }else{
+            if(pipeSamplingRecord.getOperation_time()==null){
                 pipeSamplingRecord.setOperation_time(new Date());
             }
             String pipeno=pipeSamplingRecord.getPipe_no();
