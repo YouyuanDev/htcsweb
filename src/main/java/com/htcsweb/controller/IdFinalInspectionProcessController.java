@@ -77,13 +77,8 @@ public class IdFinalInspectionProcessController {
     public String saveIdFinalInProcess(IdFinalInspectionProcess idFinalInspectionProcess, HttpServletRequest request, HttpServletResponse response){
         JSONObject json=new JSONObject();
         try{
-            String odstencilprotime= request.getParameter("idFinalInprotime");
             int resTotal=0;
-            if(odstencilprotime!=null&&odstencilprotime!=""){
-                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date new_odbptime = simFormat.parse(odstencilprotime);
-                idFinalInspectionProcess.setOperation_time(new_odbptime);
-            }else{
+            if(idFinalInspectionProcess.getOperation_time()==null){
                 idFinalInspectionProcess.setOperation_time(new Date());
             }
             String pipeno=idFinalInspectionProcess.getPipe_no();

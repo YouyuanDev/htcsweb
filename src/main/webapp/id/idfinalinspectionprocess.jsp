@@ -90,8 +90,28 @@
                 // $('#od').text(row.od);$('#wt').text(row.wt);
                 // $('#p_length').text(row.p_length);$('#weight').text(row.weight);
                 // $('#grade').text(row.grade);$('#heat_no').text(row.heat_no);
-                $('#idFinalInProForm').form('load',row);
-                $('#idFinalInprotime').datetimebox('setValue',getDate1(row.operation_time));
+                //$('#idFinalInProForm').form('load',row);
+
+                $('#idFinalInProForm').form('load', {
+                    'mill_no': row.mill_no,
+                    'od_inspection_result': row.od_inspection_result,
+                    'final_inspection_result': row.final_inspection_result,
+                    'dry_film_thickness_list': row.dry_film_thickness_list,
+                    'cutback_length': row.cutback_length,
+                    'stencil_verification': row.stencil_verification,
+                    'roughness_list': row.roughness_list,
+                    'holiday_tester_volts': row.holiday_tester_volts,
+                    'holidays': row.holidays,
+                    'surface_condition': row.surface_condition,
+                    'bevel_check': row.bevel_check,
+                    'magnetism_list': row.magnetism_list,
+                    'internal_repairs': row.internal_repairs,
+                    'operation_time':getDate1(row.operation_time),
+                    'result':row.result,
+                    'remark':row.remark
+                });
+
+                //$('#idFinalInprotime').datetimebox('setValue',getDate1(row.operation_time));
                  $("#idFinalInproid").textbox("setValue", row.id);
                 look1.setText(row.pipe_no);
                 look1.setValue(row.pipe_no);
@@ -235,7 +255,7 @@
                         }
                     }
 
-                    if($("input[name='idFinalInprotime']").val()==""){
+                    if($("input[name='operation_time']").val()==""){
                         hlAlertFour("请输入操作时间");
                         return false;
                     }
@@ -447,7 +467,7 @@
                     <td></td>
                     <td class="i18n1" name="operationtime" width="20%">操作时间</td>
                     <td colspan="1" width="30%">
-                        <input class="easyui-datetimebox" id="idFinalInprotime" type="text" name="idFinalInprotime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                        <input class="easyui-datetimebox" type="text" name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
                     <td></td>
                 </tr>
