@@ -97,11 +97,14 @@
                     'base_batch': row.base_batch,
                     'curing_agent_used': row.curing_agent_used,
                     'curing_agent_batch': row.curing_agent_batch,
-                    'curing_temp': row.curing_temp
+                    'curing_temp': row.curing_temp,
+                    'result':row.result,
+                    'remark':row.remark
                     // 'curing_start_time': getDate1(row.curing_start_time),
                     // 'curing_finish_time':getDate1(row.curing_finish_time)
                 });
-                $('#idcoatprotime').datetimebox('setValue',getDate1(row.operation_time));
+                //$('#idcoatprotime').datetimebox('setValue',getDate1(row.operation_time));
+                $('#operation_time').datetimebox('setValue',getDate1(row.operation_time));
                 $('#curing_start_time').datetimebox('setValue',getDate1(row.curing_start_time));
                 $('#curing_finish_time').datetimebox('setValue',getDate1(row.curing_finish_time));
                  $("#idcoatproid").textbox("setValue", row.id);
@@ -151,7 +154,7 @@
                         hlAlertFour("请输入分厂信息");
                         return false;
                     }
-                    if($("input[name='idcoatprotime']").val()==""){
+                    if($("input[name='operation_time']").val()==""){
                         hlAlertFour("请输入操作时间");
                         return false;
                     }
@@ -353,7 +356,7 @@
                     </td>
                     <td class="i18n1" name="operationtime" width="20%">操作时间</td>
                     <td colspan="1" width="30%">
-                        <input class="easyui-datetimebox" id="idcoatprotime" type="text" name="idcoatprotime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                        <input class="easyui-datetimebox" id="operation_time" type="text" name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
 
                 </tr>

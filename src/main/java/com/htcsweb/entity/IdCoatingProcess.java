@@ -15,7 +15,9 @@ public class IdCoatingProcess {
     private String base_batch;
     private String curing_agent_used;
     private String curing_agent_batch;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date curing_start_time;
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date curing_finish_time;
     private float curing_temp;
     private String upload_files;
