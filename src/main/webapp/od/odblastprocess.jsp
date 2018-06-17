@@ -89,8 +89,26 @@
                 //$('#grade').text(row.grade);$('#heat_no').text(row.heat_no);
                 loadPipeBaiscInfo(row);
                 $('#odbpid').text(row.id);
-                $('#odBlastProForm').form('load',row);
-                $('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
+                //$('#odBlastProForm').form('load',row);
+                $('#odBlastProForm').form('load', {
+                    'mill_no': row.mill_no,
+                    'surface_condition': row.surface_condition,
+                    'salt_contamination_before_blasting': row.salt_contamination_before_blasting,
+                    'alkaline_dwell_time': row.alkaline_dwell_time,
+                    'alkaline_concentration': row.alkaline_concentration,
+                    'abrasive_conductivity': row.abrasive_conductivity,
+                    'acid_wash_time': row.acid_wash_time,
+                    'acid_concentration': row.acid_concentration,
+                    'blast_line_speed': row.blast_line_speed,
+                    'preheat_temp': row.preheat_temp,
+                    'marking': row.marking,
+                    'rinse_water_conductivity': row.rinse_water_conductivity,
+                    'operation_time':getDate1(row.operation_time),
+                    'result':row.result,
+                    'remark':row.remark
+                });
+
+                //$('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
                 look1.setText(row.pipe_no);
                 look1.setValue(row.pipe_no);
                 look2.setText(row.operator_no);
@@ -386,7 +404,7 @@
                </td>
                <td class="i18n1" name="operationtime" width="20%">操作时间</td>
                <td colspan="1" width="30%">
-                   <input class="easyui-datetimebox" id="operation-time" type="text" name="odbptime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                   <input class="easyui-datetimebox" type="text" name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
 
                </td>
 

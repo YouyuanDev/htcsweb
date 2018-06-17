@@ -47,13 +47,8 @@ public class OdBlastProcessController {
     public String saveOdBlastProcess(OdBlastProcess odblastprocess, HttpServletRequest request, HttpServletResponse response){
         JSONObject json=new JSONObject();
         try{
-            String odbptime= request.getParameter("odbptime");
             int resTotal=0;
-            if(odbptime!=null&&odbptime!=""){
-                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date new_odbptime = simFormat.parse(odbptime);
-                odblastprocess.setOperation_time(new_odbptime);
-            }else{
+            if(odblastprocess.getOperation_time()==null){
                 odblastprocess.setOperation_time(new Date());
             }
             String pipeno=odblastprocess.getPipe_no();
