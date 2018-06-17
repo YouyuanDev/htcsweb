@@ -75,23 +75,9 @@ public class CoatingRepairController {
     public String saveCoatingRepair(CoatingRepair coatingRepair, HttpServletRequest request, HttpServletResponse response){
         JSONObject json=new JSONObject();
         try{
-            String operationtime= request.getParameter("operation-time");
-            String inspectiontime=request.getParameter("inspection-time");
             int resTotal=0;
-            if(operationtime!=null&&operationtime!=""){
-                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date new_operationtime = simFormat.parse(operationtime);
-                coatingRepair.setOperation_time(new_operationtime);
-            }else{
+            if(coatingRepair.getOperation_time()==null){
                 coatingRepair.setOperation_time(new Date());
-            }
-
-            if(inspectiontime!=null&&inspectiontime!=""){
-                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date new_inspectiontime = simFormat.parse(inspectiontime);
-                coatingRepair.setInspection_time(new_inspectiontime);
-            }else{
-                coatingRepair.setInspection_time(new Date());
             }
 
             String pipeno=coatingRepair.getPipe_no();

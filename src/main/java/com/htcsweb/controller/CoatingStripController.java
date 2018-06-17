@@ -74,16 +74,10 @@ public class CoatingStripController {
     public String saveCoatingStrip(CoatingStrip coatingStrip, HttpServletRequest request, HttpServletResponse response){
         JSONObject json=new JSONObject();
         try{
-            String operationtime= request.getParameter("operation-time");
             int resTotal=0;
-            if(operationtime!=null&&operationtime!=""){
-                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date new_operationtime = simFormat.parse(operationtime);
-                coatingStrip.setOperation_time(new_operationtime);
-            }else{
+            if(coatingStrip.getOperation_time()==null){
                 coatingStrip.setOperation_time(new Date());
             }
-
             String pipeno=coatingStrip.getPipe_no();
             String msg="";
             if(coatingStrip.getId()==0){

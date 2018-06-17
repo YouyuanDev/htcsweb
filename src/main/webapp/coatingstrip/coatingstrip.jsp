@@ -76,9 +76,20 @@
             if(row){
                 $('#hlCoatingStripDialog').dialog('open').dialog('setTitle','修改');
                 loadPipeBaiscInfo(row);
-                $('#coatingStripForm').form('load',row);
                 $('#csid').text(row.id);
-                $('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
+                //$('#coatingStripForm').form('load',row);
+                $('#coatingStripForm').form('load', {
+                    'mill_no': row.mill_no,
+                    'odid': row.odid,
+                    'strip_temperature': row.strip_temperature,
+                    'operator_no':row.operator_no,
+                    'operation_time':getDate1(row.operation_time),
+                    'result':row.result,
+                    'remark':row.remark
+
+                });
+
+                //$('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
 
                 look1.setText(row.pipe_no);
                 look1.setValue(row.pipe_no);
@@ -178,7 +189,7 @@
                         hlAlertFour("请输入分厂信息");
                         return false;
                     }
-                    if($("input[name='operation-time']").val()==""){
+                    if($("input[name='operation_time']").val()==""){
 
                         hlAlertFour("请输入操作时间");
                         return false;
@@ -423,7 +434,7 @@
                     </td>
                     <td class="i18n1" name="operationtime" width="20%">操作时间</td>
                     <td  width="30%">
-                        <input class="easyui-datetimebox" id="operation-time" type="text" name="operation-time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                        <input class="easyui-datetimebox" type="text" name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
                 </tr>
             </table>

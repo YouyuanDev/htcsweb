@@ -76,10 +76,31 @@
             if(row){
                 $('#hlCoatingRepairDialog').dialog('open').dialog('setTitle','修改');
                 loadPipeBaiscInfo(row);
-                $('#coatingRepairForm').form('load',row);
                 $('#crid').text(row.id);
-                $('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
-                $('#inspection-time').datetimebox('setValue',getDate1(row.inspection_time));
+                //$('#coatingRepairForm').form('load',row);
+                $('#coatingRepairForm').form('load', {
+                    'mill_no': row.mill_no,
+                    'coating_type': row.coating_type,
+                    'odid': row.odid,
+                    'repair_size': row.repair_size,
+                    'repair_number': row.repair_number,
+                    'holiday_number': row.holiday_number,
+                    'repair_method': row.repair_method,
+                    'unqualified_reason': row.unqualified_reason,
+                    'inspection_time': getDate1(row.inspection_time),
+                    'surface_condition': row.surface_condition,
+                    'repair_thickness': row.repair_thickness,
+                    'holiday_testing': row.holiday_testing,
+                    'adhesion': row.adhesion,
+                    'operator_no':row.operator_no,
+                    'inspector_no':row.inspector_no,
+                    'operation_time':getDate1(row.operation_time),
+                    'result':row.result,
+                    'remark':row.remark
+
+                });
+                //$('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
+                //$('#inspection-time').datetimebox('setValue',getDate1(row.inspection_time));
 
                 look1.setText(row.pipe_no);
                 look1.setValue(row.pipe_no);
@@ -220,7 +241,7 @@
                         hlAlertFour("请输入分厂信息");
                         return false;
                     }
-                    if($("input[name='operation-time']").val()==""){
+                    if($("input[name='operation_time']").val()==""){
 
                         hlAlertFour("请输入操作时间");
                         return false;
@@ -476,7 +497,7 @@
                     </td>
                     <td class="i18n1" name="operationtime" width="20%">操作时间</td>
                     <td  width="30%">
-                        <input class="easyui-datetimebox" id="operation-time" type="text" name="operation-time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                        <input class="easyui-datetimebox" type="text" name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
                 </tr>
             </table>
@@ -557,7 +578,7 @@
                 <tr>
                     <td width="20%" class="i18n1" name="inspectiontime">检验时间</td>
                     <td width="30%">
-                        <input class="easyui-datetimebox" id="inspection-time" type="text" name="instime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                        <input class="easyui-datetimebox" type="text" name="inspection_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
 
                     </td>
                     <td width="20%"  class="i18n1" name="inspectorno">检验员编号</td>
