@@ -86,15 +86,9 @@ public class OdBlastInspectionProcessController {
     public String saveOdBlastInspectionProcess(OdBlastInspectionProcess odblastinspectionprocess, HttpServletRequest request, HttpServletResponse response){
         JSONObject json=new JSONObject();
         try{
-            String odbptime= request.getParameter("odbptime");
             int resTotal=0;
             //System.out.println("odbptime="+odbptime);
-
-            if(odbptime!=null&&odbptime!=""){
-                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date new_odbptime = simFormat.parse(odbptime);
-                odblastinspectionprocess.setOperation_time(new_odbptime);
-            }else{
+            if(odblastinspectionprocess.getOperation_time()==null){
                 odblastinspectionprocess.setOperation_time(new Date());
             }
             String pipeno=odblastinspectionprocess.getPipe_no();
