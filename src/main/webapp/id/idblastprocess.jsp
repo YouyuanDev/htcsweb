@@ -97,7 +97,6 @@
                 //$('#idBlastProForm').form('load',row);
                 $('#idBlastProForm').form('load', {
                     'mill_no': row.mill_no,
-                    'coating_speed': row.coating_speed,
                     'original_pipe_no':row.original_pipe_no,
                     'new_pipe_no':row.new_pipe_no,
                     'salt_contamination_before_blasting':row.salt_contamination_before_blasting,

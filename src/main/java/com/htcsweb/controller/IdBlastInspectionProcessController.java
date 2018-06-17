@@ -81,15 +81,11 @@ public class IdBlastInspectionProcessController {
     public String saveIdBlastInspectionProcess(IdBlastInspectionProcess idBlastInspectionProcess, HttpServletRequest request, HttpServletResponse response){
         JSONObject json=new JSONObject();
         try{
-            String odbptime= request.getParameter("idbptime");
+
             int resTotal=0;
             //System.out.println("odbptime="+odbptime);
 
-            if(odbptime!=null&&odbptime!=""){
-                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date new_odbptime = simFormat.parse(odbptime);
-                idBlastInspectionProcess.setOperation_time(new_odbptime);
-            }else{
+            if(idBlastInspectionProcess.getOperation_time()==null){
                 idBlastInspectionProcess.setOperation_time(new Date());
             }
             String pipeno=idBlastInspectionProcess.getPipe_no();

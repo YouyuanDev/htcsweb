@@ -133,7 +133,7 @@ public class LoginController {
                 //查找是否存在其他用户登录该session
                 HttpSession oldusersession=UserSessionMap.get(employee_no);
                 String msg="";
-                if(oldusersession!=null){
+                if(oldusersession!=null&&oldusersession.getId()!=session.getId()){
                     msg="（已踢出其他客户端）";
                     System.out.println(msg);
                     oldusersession.invalidate();

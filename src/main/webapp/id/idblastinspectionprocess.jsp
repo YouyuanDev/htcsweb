@@ -102,8 +102,28 @@
                 // $('#grade').text(row.grade);
                 // $('#heat_no').text(row.heat_no);
                 loadPipeBaiscInfo(row);
-                $('#idBlastInspectionProForm').form('load',row);
-                $("#idbptime").datetimebox('setValue',getDate1(row.operation_time));
+                //$('#idBlastInspectionProForm').form('load',row);
+                $('#idBlastInspectionProForm').form('load', {
+                    'mill_no': row.mill_no,
+                    'air_temp':row.air_temp,
+                    'relative_humidity':row.relative_humidity,
+                    'dew_point':row.dew_point,
+                    'pipe_temp':row.pipe_temp,
+                    'surface_condition':row.surface_condition,
+                    'blast_time':row.blast_time,
+                    'blast_finish_sa25':row.blast_finish_sa25,
+                    'profile':row.profile,
+                    'surface_dust_rating':row.surface_dust_rating,
+                    'salt_contamination_after_blasting':row.salt_contamination_after_blasting,
+                    'elapsed_time':row.elapsed_time,
+                    'operator_no':row.operator_no,
+                    'operation_time':getDate1(row.operation_time),
+                    'result':row.result,
+                    'remark':row.remark
+
+                });
+
+                //$("#idbptime").datetimebox('setValue',getDate1(row.operation_time));
                 $("#idbinpid").textbox("setValue", row.id);
                 look1.setText(row.pipe_no);
                 look1.setValue(row.pipe_no);
@@ -213,7 +233,7 @@
                         hlAlertFour("请输入分厂信息");
                         return false;
                     }
-                    if($("input[name='idbptime']").val()==""){
+                    if($("input[name='operation_time']").val()==""){
 
                         hlAlertFour("请输入操作时间");
                         return false;
@@ -420,7 +440,7 @@
                     </td>
                     <td class="i18n1" name="operationtime" width="20%">操作时间</td>
                     <td colspan="1" width="30%">
-                        <input class="easyui-datetimebox" type="text" id="idbptime" name="idbptime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                        <input class="easyui-datetimebox" type="text"  name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
 
                 </tr>
