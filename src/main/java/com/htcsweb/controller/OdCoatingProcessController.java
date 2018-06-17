@@ -82,13 +82,8 @@ public class OdCoatingProcessController {
     public String saveOdCoatingProcess(OdCoatingProcess odCoatingProcess, HttpServletRequest request, HttpServletResponse response){
         JSONObject json=new JSONObject();
         try{
-            String odcoatprotime= request.getParameter("odcoatprotime");
             int resTotal=0;
-            if(odcoatprotime!=null&&!odcoatprotime.equals("")){
-                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date new_odbptime = simFormat.parse(odcoatprotime);
-                odCoatingProcess.setOperation_time(new_odbptime);
-            }else{
+            if(odCoatingProcess.getOperation_time()==null){
                 odCoatingProcess.setOperation_time(new Date());
             }
             String pipeno=odCoatingProcess.getPipe_no();

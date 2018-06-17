@@ -84,8 +84,25 @@
             if(row){
                 $('#hlOdCoatingInProDialog').dialog('open').dialog('setTitle','修改');
                 loadPipeBaiscInfo(row);
-                $('#odCoatingInProForm').form('load',row);
-                $('#odcoatInprotime').datetimebox('setValue',getDate1(row.operation_time));
+                //$('#odCoatingInProForm').form('load',row);
+                $('#odCoatingInProForm').form('load', {
+                    'mill_no': row.mill_no,
+                    'base_coat_thickness_list': row.base_coat_thickness_list,
+                    'top_coat_thickness_list': row.top_coat_thickness_list,
+                    'total_coating_thickness_list': row.total_coating_thickness_list,
+                    'holidays': row.holidays,
+                    'holiday_tester_volts': row.holiday_tester_volts,
+                    'repairs': row.repairs,
+                    'bevel': row.bevel,
+                    'surface_condition': row.surface_condition,
+                    'adhesion_rating': row.adhesion_rating,
+                    'is_sample': row.is_sample,
+                    'is_dsc_sample': row.is_dsc_sample,
+                    'operation_time':getDate1(row.operation_time),
+                    'result':row.result,
+                    'remark':row.remark
+                });
+                //$('#odcoatInprotime').datetimebox('setValue',getDate1(row.operation_time));
                 $("#odcoatInproid").textbox("setValue", row.id);
                 var sample=row.is_sample;
                 if(sample=="1"){
@@ -226,7 +243,7 @@
                         hlAlertFour("请输入分厂信息");
                         return false;
                     }
-                    if($("input[name='odcoatInprotime']").val()==""){
+                    if($("input[name='operation_time']").val()==""){
                         hlAlertFour("请输入操作时间");
                         return false;
                     }
@@ -473,7 +490,7 @@
                     </td>
                     <td class="i18n1" name="operationtime">操作时间</td>
                     <td colspan="1">
-                        <input class="easyui-datetimebox" id="odcoatInprotime" type="text" name="odcoatInprotime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                        <input class="easyui-datetimebox" type="text" name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
 
                 </tr>

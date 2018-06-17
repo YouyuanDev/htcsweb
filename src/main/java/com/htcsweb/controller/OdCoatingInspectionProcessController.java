@@ -79,13 +79,8 @@ public class OdCoatingInspectionProcessController {
     public String saveOdCoatingInProcess(OdCoatingInspectionProcess odCoatingInspectionProcess, HttpServletRequest request, HttpServletResponse response){
         JSONObject json=new JSONObject();
         try{
-            String odcoatInprotime= request.getParameter("odcoatInprotime");
             int resTotal=0;
-            if(odcoatInprotime!=null&&!odcoatInprotime.equals("")){
-                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date new_odbptime = simFormat.parse(odcoatInprotime);
-                odCoatingInspectionProcess.setOperation_time(new_odbptime);
-            }else {
+            if(odCoatingInspectionProcess.getOperation_time()==null){
                 odCoatingInspectionProcess.setOperation_time(new Date());
             }
             String pipeno=odCoatingInspectionProcess.getPipe_no();

@@ -89,8 +89,28 @@
                 // $('#p_length').text(row.p_length);$('#weight').text(row.weight);
                 // $('#grade').text(row.grade);$('#heat_no').text(row.heat_no);
                 loadPipeBaiscInfo(row);
-                $('#odCoating3LpeInProForm').form('load',row);
-                $('#odcoat3LpeInprotime').datetimebox('setValue',getDate1(row.operation_time));
+                //$('#odCoating3LpeInProForm').form('load',row);
+                $('#odCoating3LpeInProForm').form('load', {
+                    'mill_no': row.mill_no,
+                    'base_coat_thickness_list': row.base_coat_thickness_list,
+                    'middle_coat_thickness_list': row.middle_coat_thickness_list,
+                    'top_coat_thickness_list': row.top_coat_thickness_list,
+                    'total_coating_thickness_list': row.total_coating_thickness_list,
+                    'holidays': row.holidays,
+                    'holiday_tester_volts': row.holiday_tester_volts,
+                    'repairs': row.repairs,
+                    'bevel': row.bevel,
+                    'surface_condition': row.surface_condition,
+                    'adhesion_rating': row.adhesion_rating,
+                    'is_sample': row.is_sample,
+                    'is_dsc_sample': row.is_dsc_sample,
+                    'is_pe_sample': row.is_pe_sample,
+                    'operation_time':getDate1(row.operation_time),
+                    'result':row.result,
+                    'remark':row.remark
+                });
+
+                //$('#odcoat3LpeInprotime').datetimebox('setValue',getDate1(row.operation_time));
                 $("#odcoat3LpeInproid").textbox("setValue", row.id);
                 var sample=row.is_sample;
                 if(sample=="1"){
@@ -253,7 +273,7 @@
                         hlAlertFour("请输入分厂信息");
                         return false;
                     }
-                    if($("input[name='odcoat3LpeInprotime']").val()==""){
+                    if($("input[name='operation_time']").val()==""){
                         hlAlertFour("请输入操作时间");
                         return false;
                     }
@@ -505,7 +525,7 @@
                     </td>
                     <td class="i18n1" name="operationtime">操作时间</td>
                     <td colspan="1">
-                        <input class="easyui-datetimebox" id="odcoat3LpeInprotime" type="text" name="odcoat3LpeInprotime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                        <input class="easyui-datetimebox" type="text" name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
 
                 </tr>

@@ -91,8 +91,30 @@
                 // $('#p_length').text(row.p_length);$('#weight').text(row.weight);
                 // $('#grade').text(row.grade);$('#heat_no').text(row.heat_no);
                 loadPipeBaiscInfo(row);
-                $('#odCoatingProForm').form('load',row);
-                $('#odcoatprotime').datetimebox('setValue',getDate1(row.operation_time));
+                //$('#odCoatingProForm').form('load',row);
+                $('#odCoatingProForm').form('load', {
+                    'mill_no': row.mill_no,
+                    'coating_line_speed': row.coating_line_speed,
+                    'base_coat_used': row.base_coat_used,
+                    'base_coat_lot_no': row.base_coat_lot_no,
+                    'top_coat_used': row.top_coat_used,
+                    'top_coat_lot_no': row.top_coat_lot_no,
+                    'base_coat_gun_count': row.base_coat_gun_count,
+                    'top_coat_gun_count': row.top_coat_gun_count,
+                    'application_temp': row.application_temp,
+                    'to_first_touch_duration': row.to_first_touch_duration,
+                    'to_quench_duration': row.to_quench_duration,
+                    'air_pressure': row.air_pressure,
+                    'coating_voltage': row.coating_voltage,
+                    'gun_distance': row.gun_distance,
+                    'spray_speed': row.spray_speed,
+                    'application_voltage': row.application_voltage,
+                    'operation_time':getDate1(row.operation_time),
+                    'result':row.result,
+                    'remark':row.remark
+                });
+
+                //$('#odcoatprotime').datetimebox('setValue',getDate1(row.operation_time));
                  $("#odcoatproid").textbox("setValue", row.id);
                 look1.setText(row.pipe_no);
                 look1.setValue(row.pipe_no);
@@ -155,7 +177,7 @@
                         hlAlertFour("请输入分厂信息");
                         return false;
                     }
-                    if($("input[name='odcoatprotime']").val()==""){
+                    if($("input[name='operatioin_time']").val()==""){
                         hlAlertFour("请输入操作时间");
                         return false;
                     }
@@ -371,7 +393,7 @@
                     </td>
                     <td class="i18n1" name="operationtime" width="20%">操作时间</td>
                     <td colspan="1" width="30%">
-                        <input class="easyui-datetimebox" id="odcoatprotime" type="text" name="odcoatprotime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                        <input class="easyui-datetimebox" type="text" name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
 
                 </tr>
