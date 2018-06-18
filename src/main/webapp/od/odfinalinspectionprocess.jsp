@@ -96,6 +96,7 @@
                     'coating_bevel_angle_list': row.coating_bevel_angle_list,
                     'epoxy_cutback_list': row.epoxy_cutback_list,
                     'operation_time':getDate1(row.operation_time),
+                    'upload_files':row.upload_files,
                     'result':row.result,
                     'remark':row.remark
                 });

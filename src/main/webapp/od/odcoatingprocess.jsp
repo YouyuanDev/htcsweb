@@ -110,6 +110,7 @@
                     'spray_speed': row.spray_speed,
                     'application_voltage': row.application_voltage,
                     'operation_time':getDate1(row.operation_time),
+                    'upload_files':row.upload_files,
                     'result':row.result,
                     'remark':row.remark
                 });

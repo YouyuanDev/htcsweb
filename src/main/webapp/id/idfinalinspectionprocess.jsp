@@ -107,6 +107,7 @@
                     'magnetism_list': row.magnetism_list,
                     'internal_repairs': row.internal_repairs,
                     'operation_time':getDate1(row.operation_time),
+                    'upload_files':row.upload_files,
                     'result':row.result,
                     'remark':row.remark
                 });
@@ -506,9 +507,8 @@
                     <td width="16%" class="i18n1" name="bevelcheck">坡口质量</td>
                     <td>
                         <select id="bev" class="easyui-combobox" data-options="editable:false" name="bevel_check" style="width:200px;">
-                            <option value="0" selected="selected">未检测</option>
-                            <option value="1">合格</option>
-                            <option value="2">不合格</option>
+                            <option value="1" selected="selected">合格</option>
+                            <option value="0">不合格</option>
                         </select>
                         <%--<input class="easyui-textbox"  type="text" name="bevel_check" value=""/>--%>
                     </td>
@@ -524,9 +524,8 @@
                     <td class="i18n1" width="20%" name="idstencilverification">内喷标检验</td>
                     <td colspan="1">
                         <select id="sv" class="easyui-combobox" data-options="editable:false" name="stencil_verification" style="width:200px;">
-                            <option value="0" selected="selected">未检测</option>
-                            <option value="1">合格</option>
-                            <option value="2">不合格</option>
+                            <option value="1" selected="selected">合格</option>
+                            <option value="0">不合格</option>
                         </select>
                     </td>
                     <td></td>
@@ -550,8 +549,7 @@
                         <%--<input class="easyui-textbox"  type="text" name="od_inspection_result" value=""/>--%>
                         <select id="aa" class="easyui-combobox" data-options="editable:false" name="od_inspection_result" style="width:200px;">
                             <option value="0">不合格</option>
-                            <option value="1">合格</option>
-                            <option value="10">待定</option>
+                            <option value="1" selected="selected">合格</option>
                         </select>
                     </td>
                     <td></td>

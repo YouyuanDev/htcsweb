@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -210,4 +211,34 @@ public class IdCoatingProcessController {
         return mmp;
 
     }
+
+
+    //得到钢管上一根最新的合格的内涂层记录  最后一条记录且result为合格 1
+    @RequestMapping(value = "/getLastAcceptedRecordBeforePipeNo")
+    @ResponseBody
+    public String getLastAcceptedRecordBeforePipeNo(@RequestParam(value = "pipe_no",required = false)String pipe_no, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        //OdCoatOperation/getLastAcceptedRecordBeforePipeNo.action?pipe_no=121212
+        //把用户数据保存在session域对象中
+        String mill_no = (String) session.getAttribute("millno");
+        Map<String,Object> maps=new HashMap<String,Object>();
+        if(mill_no!=null){
+            IdCoatingProcess record=idCoatingProcessDao.getLastAcceptedRecordBeforePipeNo(pipe_no,mill_no);
+            if(record!=null){
+                //是合格状态
+                maps.put("success",true);
+                maps.put("record",record);
+            }else{
+                maps.put("success",false);
+            }
+
+        }else{
+            maps.put("success",false);
+        }
+        String mmp= JSONArray.toJSONString(maps);
+        return mmp;
+
+    }
+
+
 }

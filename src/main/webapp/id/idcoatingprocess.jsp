@@ -98,15 +98,19 @@
                     'curing_agent_used': row.curing_agent_used,
                     'curing_agent_batch': row.curing_agent_batch,
                     'curing_temp': row.curing_temp,
+                    'operation_time':getDate1(row.operation_time),
+                    'curing_start_time':getDate1(row.curing_start_time),
+                    'curing_finish_time':getDate1(row.curing_finish_time),
+                    'upload_files':row.upload_files,
                     'result':row.result,
                     'remark':row.remark
                     // 'curing_start_time': getDate1(row.curing_start_time),
                     // 'curing_finish_time':getDate1(row.curing_finish_time)
                 });
                 //$('#idcoatprotime').datetimebox('setValue',getDate1(row.operation_time));
-                $('#operation_time').datetimebox('setValue',getDate1(row.operation_time));
-                $('#curing_start_time').datetimebox('setValue',getDate1(row.curing_start_time));
-                $('#curing_finish_time').datetimebox('setValue',getDate1(row.curing_finish_time));
+                // $('#operation_time').datetimebox('setValue',getDate1(row.operation_time));
+                // $('#curing_start_time').datetimebox('setValue',getDate1(row.curing_start_time));
+                // $('#curing_finish_time').datetimebox('setValue',getDate1(row.curing_finish_time));
                  $("#idcoatproid").textbox("setValue", row.id);
                 look1.setText(row.pipe_no);
                 look1.setValue(row.pipe_no);

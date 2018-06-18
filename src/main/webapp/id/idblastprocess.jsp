@@ -106,6 +106,7 @@
                     'operator_no':row.operator_no,
                     'operation_time':getDate1(row.operation_time),
                     'marking':row.marking,
+                    'upload_files':row.upload_files,
                     'result':row.result,
                     'remark':row.remark
 

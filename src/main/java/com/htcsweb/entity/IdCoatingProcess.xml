@@ -129,4 +129,20 @@
     <select id="getRecentRecordByPipeNo" resultType="com.htcsweb.entity.IdCoatingProcess">
         SELECT  * from id_coating_process where pipe_no=#{pipe_no} order by operation_time desc LIMIT 1
     </select>
+
+
+    <!--根据钢管编号查询之前的最新一条合格记录-->
+    <select id="getLastAcceptedRecordBeforePipeNo" resultType="com.htcsweb.entity.IdCoatingProcess">
+        select * from id_coating_process
+        <where>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND  <![CDATA[  id < (select id from id_coating_process where pipe_no = #{pipe_no} order by id desc limit 1) ]]>
+            </if>
+            AND result ='1' and mill_no=#{mill_no}
+        </where>
+        order by id desc
+        limit 1
+    </select>
+
+
 </mapper>

@@ -102,6 +102,7 @@
                     'resistance_to_cd_65_28d': row.resistance_to_cd_65_28d,
                     'operator_no':row.operator_no,
                     'operation_time':getDate1(row.operation_time),
+                    'upload_files':row.upload_files,
                     'result':row.result,
                     'remark':row.remark
 

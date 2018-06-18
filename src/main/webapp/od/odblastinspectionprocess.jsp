@@ -121,6 +121,7 @@
                     'oil_water_in_air_compressor': row.oil_water_in_air_compressor,
                     'elapsed_time': row.elapsed_time,
                     'operation_time':getDate1(row.operation_time),
+                    'upload_files':row.upload_files,
                     'result':row.result,
                     'remark':row.remark
                 });
