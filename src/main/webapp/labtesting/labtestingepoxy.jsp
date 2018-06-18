@@ -84,9 +84,27 @@
                 $('#hlLabtestEpoxyDialog').dialog('open').dialog('setTitle','修改');
                 loadPipeBaiscInfo(row);
                 $('#odbpid').text(row.id);
-                $('#LabtestEpoxyForm').form('load',row);
-                $('#coating-date').datetimebox('setValue',getDate1(row.coating_date));
-                $('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
+                //$('#LabtestEpoxyForm').form('load',row);
+
+                $('#LabtestEpoxyForm').form('load', {
+                    'mill_no': row.mill_no,
+                    'sample_no': row.sample_no,
+                    'coating_date': getDate1(row.coating_date),
+                    'porosity': row.porosity,
+                    'bend': row.bend,
+                    'adhesion': row.adhesion,
+                    'curing': row.curing,
+                    'water_immersion': row.water_immersion,
+                    'operator_no':row.operator_no,
+                    'operation_time':getDate1(row.operation_time),
+                    'result':row.result,
+                    'remark':row.remark
+
+                });
+
+
+                // $('#coating-date').datetimebox('setValue',getDate1(row.coating_date));
+                // $('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
                 look1.setText(row.pipe_no);
                 look1.setValue(row.pipe_no);
                 look2.setText(row.operator_no);
@@ -125,10 +143,10 @@
                         hlAlertFour("请选择操作工工号");
                         return false;
                     }
-                    if($("input[name='odbptime']").val()==""){
+                    if($("input[name='operation_time']").val()==""){
                         hlAlertFour("请输入操作时间");return false;
                     }
-                    if($("input[name='coatingdate']").val()==""){
+                    if($("input[name='coating_date']").val()==""){
                         hlAlertFour("请输入涂层时间");return false;
                     }
                 },
@@ -299,7 +317,7 @@
                     </td>
                     <td class="i18n1" name="operationtime">操作时间</td>
                     <td>
-                        <input class="easyui-datetimebox" id="operation-time" type="text" name="odbptime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                        <input class="easyui-datetimebox" type="text" name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
 
                     </td>
 
@@ -316,7 +334,7 @@
 
                     <td class="i18n1" name="coatingdate" width="20%">涂层时间</td>
                     <td colspan="1" width="30%">
-                        <input class="easyui-datetimebox" id="coating-date" type="text" name="coatingdate" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                        <input class="easyui-datetimebox" type="text" name="coating_date" value="" data-options="formatter:myformatter2,parser:myparser2"/>
 
                     </td>
                     <td></td>

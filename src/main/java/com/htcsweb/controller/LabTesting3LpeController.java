@@ -71,21 +71,11 @@ public class LabTesting3LpeController {
     public String saveLabTest3Lpe(LabTesting3Lpe labTesting3Lpe, HttpServletRequest request, HttpServletResponse response){
         JSONObject json=new JSONObject();
         try{
-            String odbptime= request.getParameter("odbptime");
-            String coatingdate= request.getParameter("coatingdate");
             int resTotal=0;
-            if(odbptime!=null&&odbptime!=""){
-                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date new_odbptime = simFormat.parse(odbptime);
-                labTesting3Lpe.setOperation_time(new_odbptime);
-            }else{
+            if(labTesting3Lpe.getOperation_time()==null){
                 labTesting3Lpe.setOperation_time(new Date());
             }
-            if(coatingdate!=null&&coatingdate!=""){
-                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date new_coatingdate = simFormat.parse(coatingdate);
-                labTesting3Lpe.setCoating_date(new_coatingdate);
-            }else{
+            if(labTesting3Lpe.getCoating_date()==null){
                 labTesting3Lpe.setCoating_date(new Date());
             }
             String msg="";

@@ -84,9 +84,30 @@
                 $('#hlLabtest2FbeDialog').dialog('open').dialog('setTitle','修改');
                 loadPipeBaiscInfo(row);
                 $('#odbpid').text(row.id);
-                $('#Labtest2FbeForm').form('load',row);
-                $('#coating-date').datetimebox('setValue',getDate1(row.coating_date));
-                $('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
+                //$('#Labtest2FbeForm').form('load',row);
+                $('#Labtest2FbeForm').form('load', {
+                    'mill_no': row.mill_no,
+                    'sample_no':row.sample_no,
+                    'coating_date': getDate1(row.coating_date),
+                    'dsc': row.dsc,
+                    'foaming_cross_sectional': row.foaming_cross_sectional,
+                    'foaming_interfacial': row.foaming_interfacial,
+                    'interfacial_contamination': row.interfacial_contamination,
+                    'flexibility': row.flexibility,
+                    'impact': row.impact,
+                    'resistance_to_hot_water_98_24h': row.resistance_to_hot_water_98_24h,
+                    'resistance_to_hot_water_98_28d': row.resistance_to_hot_water_98_28d,
+                    'resistance_to_cd_65_24h': row.resistance_to_cd_65_24h,
+                    'resistance_to_cd_22_28d': row.resistance_to_cd_22_28d,
+                    'resistance_to_cd_65_28d': row.resistance_to_cd_65_28d,
+                    'operator_no':row.operator_no,
+                    'operation_time':getDate1(row.operation_time),
+                    'result':row.result,
+                    'remark':row.remark
+
+                });
+                //$('#coating-date').datetimebox('setValue',getDate1(row.coating_date));
+                //$('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
                 look1.setText(row.pipe_no);
                 look1.setValue(row.pipe_no);
                 look2.setText(row.operator_no);
@@ -177,10 +198,10 @@
                         hlAlertFour("请选择操作工工号");
                         return false;
                     }
-                    if($("input[name='odbptime']").val()==""){
+                    if($("input[name='operation_time']").val()==""){
                         hlAlertFour("请输入操作时间");return false;
                     }
-                    if($("input[name='coatingdate']").val()==""){
+                    if($("input[name='coating_date']").val()==""){
                         hlAlertFour("请输入涂层时间");return false;
                     }
                     setParams($("input[name='foaming_cross_sectional']"));
@@ -372,7 +393,7 @@
 
                <td class="i18n1" name="operationtime">操作时间</td>
                <td>
-                   <input class="easyui-datetimebox" id="operation-time" type="text" name="odbptime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                   <input class="easyui-datetimebox" type="text" name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
 
                </td>
 
@@ -388,7 +409,7 @@
                <td></td>
                <td class="i18n1" name="coatingdate" width="20%">涂层时间</td>
                <td colspan="1" width="30%">
-                   <input class="easyui-datetimebox" id="coating-date" type="text" name="coatingdate" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                   <input class="easyui-datetimebox" type="text" name="coating_date" value="" data-options="formatter:myformatter2,parser:myparser2"/>
 
                </td>
                <td></td>

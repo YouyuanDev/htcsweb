@@ -84,8 +84,35 @@
                 $('#hlRawMaterialtest2FbeDialog').dialog('open').dialog('setTitle','修改');
                 $('#project_name').text(row.project_name);
                 $('#odbpid').text(row.id);
-                $('#RawMaterialtest2FbeForm').form('load',row);
-                $('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
+                //$('#RawMaterialtest2FbeForm').form('load',row);
+                $('#RawMaterialtest2FbeForm').form('load', {
+                    'project_no':row.project_no,
+                    'sample_no':row.sample_no,
+                    'raw_material':row.raw_material,
+                    'batch_no':row.batch_no,
+                    'density':row.density,
+                    'particle_size_32um':row.particle_size_32um,
+                    'particle_size_150um':row.particle_size_150um,
+                    'dsc_tgi':row.dsc_tgi,
+                    'dsc_tgf':row.dsc_tgf,
+                    'dsc_delta_h':row.dsc_delta_h,
+                    'gel_time_lt_20s':row.gel_time_lt_20s,
+                    'gel_time_gt_20s':row.gel_time_gt_20s,
+                    'powder_volatile':row.powder_volatile,
+                    'foaming_cross_sectional':row.foaming_cross_sectional,
+                    'foaming_interfacial':row.foaming_interfacial,
+                    'impact':row.impact,
+                    'flexibility':row.flexibility,
+                    'hot_water':row.hot_water,
+                    'cd_65_24h':row.cd_65_24h,
+                    'operator_no':row.operator_no,
+                    'operation_time':getDate1(row.operation_time),
+                    'result':row.result,
+                    'remark':row.remark
+
+                });
+
+                // $('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
                 look1.setText(row.project_no);
                 look1.setValue(row.project_no);
                 look2.setText(row.operator_no);
@@ -200,7 +227,7 @@
                         hlAlertFour("请选择操作工工号");
                         return false;
                     }
-                    if($("input[name='odbptime']").val()==""){
+                    if($("input[name='operation_time']").val()==""){
                         hlAlertFour("请输入操作时间");
                         return false;
                     }
@@ -367,7 +394,7 @@
                <td></td>
                <td class="i18n1" name="operationtime">操作时间</td>
                <td>
-                   <input class="easyui-datetimebox" id="operation-time" type="text" name="odbptime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                   <input class="easyui-datetimebox" type="text" name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
 
                </td>
                <td></td>

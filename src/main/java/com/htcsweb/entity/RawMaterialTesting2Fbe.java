@@ -10,7 +10,6 @@ public class RawMaterialTesting2Fbe {
     private int id; //流水号
     private String project_no;
     private String sample_no;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private String operator_no;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date operation_time;

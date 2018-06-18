@@ -72,21 +72,11 @@ public class LabTesting2FbeController {
     public String saveLabTest2Fbe(LabTesting2Fbe labTesting2Fbe, HttpServletRequest request, HttpServletResponse response){
         JSONObject json=new JSONObject();
         try{
-            String odbptime= request.getParameter("odbptime");
-            String coatingdate= request.getParameter("coatingdate");
             int resTotal=0;
-            if(odbptime!=null&&odbptime!=""){
-                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date new_odbptime = simFormat.parse(odbptime);
-                labTesting2Fbe.setOperation_time(new_odbptime);
-            }else{
+            if(labTesting2Fbe.getOperation_time()==null){
                 labTesting2Fbe.setOperation_time(new Date());
             }
-            if(coatingdate!=null&&coatingdate!=""){
-                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date new_coatingdate = simFormat.parse(coatingdate);
-                labTesting2Fbe.setCoating_date(new_coatingdate);
-            }else{
+            if(labTesting2Fbe.getCoating_date()==null){
                 labTesting2Fbe.setCoating_date(new Date());
             }
             String msg="";

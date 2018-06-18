@@ -84,9 +84,30 @@
                 $('#hlLabtest3LpeDialog').dialog('open').dialog('setTitle','修改');
                 loadPipeBaiscInfo(row);
                 $('#odbpid').text(row.id);
-                $('#Labtest3LpeForm').form('load',row);
-                $('#coating-date').datetimebox('setValue',getDate1(row.coating_date));
-                $('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
+                //$('#Labtest3LpeForm').form('load',row);
+                $('#Labtest3LpeForm').form('load', {
+                    'mill_no': row.mill_no,
+                    'sample_no': row.sample_no,
+                    'coating_date': getDate1(row.coating_date),
+                    'resistance_to_cd_20_28d': row.resistance_to_cd_20_28d,
+                    'resistance_to_cd_max_28d': row.resistance_to_cd_max_28d,
+                    'resistance_to_cd_65_24h': row.resistance_to_cd_65_24h,
+                    'impact_resistance_23': row.impact_resistance_23,
+                    'impact_resistance_m40': row.impact_resistance_m40,
+                    'indentation_hardness_23': row.indentation_hardness_23,
+                    'indentation_hardness_70': row.indentation_hardness_70,
+                    'elongation_at_break': row.elongation_at_break,
+                    'coating_resistivity': row.coating_resistivity,
+                    'thermal_degradation': row.thermal_degradation,
+                    'operator_no':row.operator_no,
+                    'operation_time':getDate1(row.operation_time),
+                    'result':row.result,
+                    'remark':row.remark
+
+                });
+
+                // $('#coating-date').datetimebox('setValue',getDate1(row.coating_date));
+                // $('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
                 look1.setText(row.pipe_no);
                 look1.setValue(row.pipe_no);
                 look2.setText(row.operator_no);
@@ -187,10 +208,10 @@
                         hlAlertFour("请选择操作工工号");
                         return false;
                     }
-                    if($("input[name='odbptime']").val()==""){
+                    if($("input[name='operation_time']").val()==""){
                         hlAlertFour("请输入操作时间");return false;
                     }
-                    if($("input[name='coatingdate']").val()==""){
+                    if($("input[name='coating_date']").val()==""){
                         hlAlertFour("请输入涂层时间");return false;
                     }
                     setParams($("input[name='resistance_to_cd_20_28d']"));
@@ -379,7 +400,7 @@
 
                     <td class="i18n1" name="operationtime">操作时间</td>
                     <td>
-                        <input class="easyui-datetimebox" id="operation-time" type="text" name="odbptime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                        <input class="easyui-datetimebox" type="text" name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
 
                     </td>
                 </tr>
@@ -394,7 +415,7 @@
                     <td></td>
                     <td class="i18n1" name="coatingdate" width="20%">涂层时间</td>
                     <td colspan="1" width="30%">
-                        <input class="easyui-datetimebox" id="coating-date" type="text" name="coatingdate" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                        <input class="easyui-datetimebox" type="text" name="coating_date" value="" data-options="formatter:myformatter2,parser:myparser2"/>
 
                     </td>
                     <td></td>

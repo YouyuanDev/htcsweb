@@ -71,13 +71,8 @@ public class RawMaterialTestingLiquidEpoxyController {
     public String saveRawMaterialTestEpoxy(RawMaterialTestingLiquidEpoxy rawMaterialTestingLiquidEpoxy, HttpServletRequest request, HttpServletResponse response){
         JSONObject json=new JSONObject();
         try{
-            String odbptime= request.getParameter("odbptime");
             int resTotal=0;
-            if(odbptime!=null&&odbptime!=""){
-                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date new_odbptime = simFormat.parse(odbptime);
-                rawMaterialTestingLiquidEpoxy.setOperation_time(new_odbptime);
-            }else{
+            if(rawMaterialTestingLiquidEpoxy.getOperation_time()==null){
                 rawMaterialTestingLiquidEpoxy.setOperation_time(new Date());
             }
             String msg="";

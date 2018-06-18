@@ -71,13 +71,8 @@ public class RawMaterialTesting3LpeController {
     public String saveRawMaterialTest3Lpe(RawMaterialTesting3Lpe rawMaterialTesting3Lpe, HttpServletRequest request, HttpServletResponse response){
         JSONObject json=new JSONObject();
         try{
-            String odbptime= request.getParameter("odbptime");
             int resTotal=0;
-            if(odbptime!=null&&odbptime!=""){
-                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date new_odbptime = simFormat.parse(odbptime);
-                rawMaterialTesting3Lpe.setOperation_time(new_odbptime);
-            }else{
+            if(rawMaterialTesting3Lpe.getOperation_time()==null){
                 rawMaterialTesting3Lpe.setOperation_time(new Date());
             }
             String msg="";

@@ -71,22 +71,14 @@ public class LabTestingEpoxyController {
     public String saveLabTestEpoxy(LabTestingEpoxy labTestingEpoxy, HttpServletRequest request, HttpServletResponse response){
         JSONObject json=new JSONObject();
         try{
-            String odbptime= request.getParameter("odbptime");
-            String coatingdate= request.getParameter("coatingdate");
             int resTotal=0;
-            if(odbptime!=null&&odbptime!=""){
-                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date new_odbptime = simFormat.parse(odbptime);
-                labTestingEpoxy.setOperation_time(new_odbptime);
-            }else{
+            if(labTestingEpoxy.getOperation_time()==null){
                 labTestingEpoxy.setOperation_time(new Date());
             }
-            if(coatingdate!=null&&coatingdate!=""){
-                SimpleDateFormat simFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date new_coatingdate = simFormat.parse(coatingdate);
-                labTestingEpoxy.setCoating_date(new_coatingdate);
-            }else{
+            if(labTestingEpoxy.getCoating_date()==null){
                 labTestingEpoxy.setCoating_date(new Date());
+            }else{
+
             }
             String msg="";
             if(labTestingEpoxy.getId()==0){

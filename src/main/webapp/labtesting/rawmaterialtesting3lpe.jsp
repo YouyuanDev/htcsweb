@@ -84,9 +84,35 @@
                 $('#hlRawMaterialtest3LpeDialog').dialog('open').dialog('setTitle','修改');
                 $('#odbpid').text(row.id);
                 $('#project_name').text(row.project_name);
-                $('#RawMaterialtest3LpeForm').form('load',row);
+                //$('#RawMaterialtest3LpeForm').form('load',row);
+                $('#RawMaterialtest3LpeForm').form('load', {
+                    'project_no':row.project_no,
+                    'sample_no':row.sample_no,
+                    'epoxy_raw_material':row.epoxy_raw_material,
+                    'epoxy_batch_no':row.epoxy_batch_no,
+                    'adhesion_raw_material':row.adhesion_raw_material,
+                    'adhesion_batch_no':row.adhesion_batch_no,
+                    'polyethylene_raw_material':row.polyethylene_raw_material,
+                    'polyethylene_batch_no':row.polyethylene_batch_no,
+                    'epoxy_cure_time':row.epoxy_cure_time,
+                    'epoxy_gel_time':row.epoxy_gel_time,
+                    'epoxy_moisture_content':row.epoxy_moisture_content,
+                    'epoxy_particle_size_150um':row.epoxy_particle_size_150um,
+                    'epoxy_particle_size_250um':row.epoxy_particle_size_250um,
+                    'epoxy_density':row.epoxy_density,
+                    'epoxy_thermal_characteristics':row.epoxy_thermal_characteristics,
+                    'adhesion_flow_rate':row.adhesion_flow_rate,
+                    'polyethylene_flow_rate':row.polyethylene_flow_rate,
+                    'operator_no':row.operator_no,
+                    'operation_time':getDate1(row.operation_time),
+                    'result':row.result,
+                    'remark':row.remark
+
+                });
+
+
                 // $('#coating-date').datetimebox('setValue',getDate1(row.coating_date));
-                $('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
+                //$('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
                 look1.setText(row.project_no);
                 look1.setValue(row.project_no);
                 look2.setText(row.operator_no);
@@ -171,7 +197,7 @@
                         hlAlertFour("请选择操作工工号");
                         return false;
                     }
-                    if($("input[name='odbptime']").val()==""){
+                    if($("input[name='operation_time']").val()==""){
                         hlAlertFour("请输入操作时间");
                         return false;
                     }
@@ -327,7 +353,7 @@
                     <td></td>
                     <td class="i18n1" name="operationtime">操作时间</td>
                     <td>
-                        <input class="easyui-datetimebox" id="operation-time" type="text" name="odbptime" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                        <input class="easyui-datetimebox" type="text" name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                     </td>
                     <td></td>
                 </tr>
