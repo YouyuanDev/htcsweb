@@ -420,7 +420,7 @@
 					        width: 185,
 					        editable:false,
 					        textField:'text',
-					        panelHeight:'auto'"/></td>
+					        panelHeight:'200'"/></td>
 
                     <td></td>
                     <td class="i18n1" name="basecoatlotno">底层粉末批号</td>
@@ -438,7 +438,7 @@
 					        width: 185,
 					        editable:false,
 					        textField:'text',
-					        panelHeight:'auto'"/></td>
+					        panelHeight:'200'"/></td>
                     <td></td>
                     <td width="16%" class="i18n1" name="topcoatlotno">面层粉末批号</td>
                     <td><input class="easyui-textbox"  type="text" name="top_coat_lot_no" value=""/></td>

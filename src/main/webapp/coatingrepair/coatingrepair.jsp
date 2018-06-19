@@ -576,7 +576,7 @@
 					        width: 185,
 					        editable:false,
 					        textField:'text',
-					        panelHeight:'auto'"/>
+					        panelHeight:'200'"/>
                         <%--<select id="repair_method" class="easyui-combobox" data-options="editable:false" name="repair_method"   style="width:185px;">--%>
                             <%--<option value="2POXY">2POXY</option>--%>
                             <%--<option value="XXXXX">XXXXX</option>--%>

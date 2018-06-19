@@ -382,7 +382,7 @@
 					        width: 185,
 					        editable:false,
 					        textField:'text',
-					        panelHeight:'auto'"/></td>
+					        panelHeight:'200'"/></td>
                     <td></td>
                     <td class="i18n1" name="basebatch">底层批号</td>
                     <td><input class="easyui-textbox"  type="text" name="base_batch" value=""/></td>
@@ -399,7 +399,7 @@
 					        width: 185,
 					        editable:false,
 					        textField:'text',
-					        panelHeight:'auto'"/></td>
+					        panelHeight:'200'"/></td>
                     <td></td>
                     <td width="16%" class="i18n1" name="curingagentbatch">固化剂批号</td>
                     <td><input class="easyui-textbox"  type="text" name="curing_agent_batch" value=""/></td>

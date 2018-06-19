@@ -101,12 +101,9 @@ public class APPRequestTransferController {
                 } else if (status.equals("odstockin")) {
                     urloptions.put("idblastprocess", "id/idblast");
                     urloptions.put("instoragetransfer", "storage/instoragetransfer");
-                    //需倒棱
-                    if (rebevel_mark != null && rebevel_mark.equals("1")) {
-                        urloptions.put("pipeRebevelProcess", "addition/piperebevel");
-                    }
+
                     //不需要倒棱
-                    else if (rebevel_mark == null || !rebevel_mark.equals("1")) {
+                    if (rebevel_mark == null || !rebevel_mark.equals("1")) {
                         urloptions.put("productStockout", "storage/productionstockout");
                     }
 
@@ -132,12 +129,8 @@ public class APPRequestTransferController {
                 } else if (status.equals("idstockin")) {
                     urloptions.put("instoragetransfer", "storage/instoragetransfer");
 
-                    //需倒棱
-                    if (rebevel_mark != null && rebevel_mark.equals("1")) {
-                        urloptions.put("pipeRebevelProcess", "addition/piperebevel");
-                    }
                     //不需要倒棱
-                    else if (rebevel_mark == null || !rebevel_mark.equals("1")) {
+                    if (rebevel_mark == null || !rebevel_mark.equals("1")) {
                         urloptions.put("productStockout", "storage/productionstockout");
                     }
                 }
@@ -156,6 +149,12 @@ public class APPRequestTransferController {
                 else if (status.equals("onhold")) {
                     urloptions.put("barepipegrindingProcess", "addition/barepipegrinding");
                 }
+
+                if (rebevel_mark != null && rebevel_mark.equals("1")){
+                    //需倒棱
+                    urloptions.put("pipeRebevelProcess", "addition/piperebevel");
+                }
+
 
                 //权限过滤url
                 List<String> removeList=new ArrayList<>();
