@@ -1171,11 +1171,21 @@
 
                     <td class="i18n1" name="rebevelmark" width="16%">倒棱标志</td>
                     <td colspan="1" width="33%">
-                        <input class="easyui-textbox" type="text" name="rebevel_mark" value=""/>   </td>
+                        <%--<input class="easyui-textbox" type="text" name="rebevel_mark" value=""/>  --%>
+                            <select class="easyui-combobox" data-options="editable:false" name="rebevel_mark" style="width:200px;">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+                    </td>
 
                     <td class="i18n1" name="odsamplingmark" width="16%">外防取样标志</td>
                     <td colspan="1" width="33%">
-                        <input class="easyui-textbox" type="text" name="odsampling_mark" value=""/>   </td>
+                        <%--<input class="easyui-textbox" type="text" name="odsampling_mark" value=""/> --%>
+                            <select class="easyui-combobox" data-options="editable:false" name="odsampling_mark" style="width:200px;">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+                    </td>
 
 
                 </tr>
@@ -1183,7 +1193,12 @@
 
                     <td class="i18n1" name="idsamplingmark" width="16%">内防取样标志</td>
                     <td colspan="1" width="33%">
-                        <input class="easyui-textbox" type="text" name="idsampling_mark" value=""/>   </td>
+                        <%--<input class="easyui-textbox" type="text" name="idsampling_mark" value=""/>--%>
+                            <select class="easyui-combobox" data-options="editable:false" name="idsampling_mark" style="width:200px;">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                            </select>
+                           </td>
 
 
                 </tr>
