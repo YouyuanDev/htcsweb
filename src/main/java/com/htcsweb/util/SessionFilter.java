@@ -106,7 +106,8 @@ public class SessionFilter extends OncePerRequestFilter{
             "getAllPPCoatingPowderInfo",
             "getAllEPOXYCoatingPowderInfo",
             "getAllREPAIRCoatingPowderInfo",
-            "getAllCURINGCoatingPowderInfo"
+            "getAllCURINGCoatingPowderInfo",
+            "getAllCoatingPowderInfo"
     }; // 不过滤的uri
 
     @Override

@@ -127,67 +127,105 @@ public class CoatingPowderController {
     @RequestMapping("/getAllFBECoatingPowderInfo")
     @ResponseBody
     public String getAllFBECoatingPowderInfo(HttpServletRequest request) {
-        //APPRequestTransfer/getAllCoatingPowderInfo.action
-        return getAllCoatingPowderInfoByType("FBE");
+        //CoatingPowderOperation/getAllCoatingPowderInfo.action
+        //return getAllCoatingPowderInfoByType("FBE");
+        String map= JSONObject.toJSONString(getAllCoatingPowderInfoByType("FBE"));
+        return map;
     }
 
     //获取所有PE涂层粉末型号名称
     @RequestMapping("/getAllPECoatingPowderInfo")
     @ResponseBody
     public String getAllPECoatingPowderInfo(HttpServletRequest request) {
-        //APPRequestTransfer/getAllCoatingPowderInfo.action
-        return getAllCoatingPowderInfoByType("PE");
+        //CoatingPowderOperation/getAllCoatingPowderInfo.action
+        //return getAllCoatingPowderInfoByType("PE");
+        String map= JSONObject.toJSONString(getAllCoatingPowderInfoByType("PE"));
+        return map;
+
     }
 
     //获取所有AD型号名称
     @RequestMapping("/getAllADCoatingPowderInfo")
     @ResponseBody
     public String getAllADCoatingPowderInfo(HttpServletRequest request) {
-        //APPRequestTransfer/getAllCoatingPowderInfo.action
-        return getAllCoatingPowderInfoByType("AD");
+        //CoatingPowderOperation/getAllCoatingPowderInfo.action
+        //return getAllCoatingPowderInfoByType("AD");
+        String map= JSONObject.toJSONString(getAllCoatingPowderInfoByType("AD"));
+        return map;
     }
     //获取所有PARTICLE型号名称
     @RequestMapping("/getAllPARTICLECoatingPowderInfo")
     @ResponseBody
     public String getAllPARTICLECoatingPowderInfo(HttpServletRequest request) {
-        //APPRequestTransfer/getAllCoatingPowderInfo.action
-        return getAllCoatingPowderInfoByType("PARTICLE");
+        //CoatingPowderOperation/getAllCoatingPowderInfo.action
+        //return getAllCoatingPowderInfoByType("PARTICLE");
+        String map= JSONObject.toJSONString(getAllCoatingPowderInfoByType("PARTICLE"));
+        return map;
     }
 
     //获取所有PP型号名称
     @RequestMapping("/getAllPPCoatingPowderInfo")
     @ResponseBody
     public String getAllPPCoatingPowderInfo(HttpServletRequest request) {
-        //APPRequestTransfer/getAllCoatingPowderInfo.action
-        return getAllCoatingPowderInfoByType("PP");
+        //CoatingPowderOperation/getAllCoatingPowderInfo.action
+        String map= JSONObject.toJSONString(getAllCoatingPowderInfoByType("PP"));
+        return map;
     }
     //获取所有EPOXY型号名称
     @RequestMapping("/getAllEPOXYCoatingPowderInfo")
     @ResponseBody
     public String getAllEPOXYCoatingPowderInfo(HttpServletRequest request) {
-        //APPRequestTransfer/getAllCoatingPowderInfo.action
-        return getAllCoatingPowderInfoByType("EPOXY");
+        //CoatingPowderOperation/getAllCoatingPowderInfo.action
+        String map= JSONObject.toJSONString(getAllCoatingPowderInfoByType("EPOXY"));
+        return map;
     }
 
     //获取所有REPAIR型号名称
     @RequestMapping("/getAllREPAIRCoatingPowderInfo")
     @ResponseBody
     public String getAllREPAIRCoatingPowderInfo(HttpServletRequest request) {
-        //APPRequestTransfer/getAllCoatingPowderInfo.action
-        return getAllCoatingPowderInfoByType("REPAIR");
+        //CoatingPowderOperation/getAllCoatingPowderInfo.action
+        String map= JSONObject.toJSONString(getAllCoatingPowderInfoByType("REPAIR"));
+        return map;
     }
 
     //获取所有CURING型号名称
     @RequestMapping("/getAllCURINGCoatingPowderInfo")
     @ResponseBody
     public String getAllCURINGCoatingPowderInfo(HttpServletRequest request) {
-        //APPRequestTransfer/getAllCoatingPowderInfo.action
-        return getAllCoatingPowderInfoByType("CURING");
+        //CoatingPowderOperation/getAllCoatingPowderInfo.action
+        String map= JSONObject.toJSONString(getAllCoatingPowderInfoByType("CURING"));
+        return map;
     }
 
 
+    //获取所有CURING型号名称
+    @RequestMapping(value = "/getAllCoatingPowderInfo",produces = "text/plain;charset=utf-8")
+    @ResponseBody
+    public String getAllCoatingPowderInfo(HttpServletRequest request) {
+        //CoatingPowderOperation/getAllCoatingPowderInfo.action
+        Map<String,Object> maps=new HashMap<String,Object>();
+        List<ComboxItem> FBE=getAllCoatingPowderInfoByType("FBE");
+        List<ComboxItem> PE=getAllCoatingPowderInfoByType("PE");
+        List<ComboxItem> PP=getAllCoatingPowderInfoByType("PP");
+        List<ComboxItem> AD=getAllCoatingPowderInfoByType("AD");
+        List<ComboxItem> EPOXY=getAllCoatingPowderInfoByType("EPOXY");
+        List<ComboxItem> CURING= getAllCoatingPowderInfoByType("CURING");
+        List<ComboxItem> REPAIR = getAllCoatingPowderInfoByType("REPAIR");
 
-    private String getAllCoatingPowderInfoByType(String coatingType) {
+        maps.put("FBE",FBE);
+        maps.put("PE",PE);
+        maps.put("PP",PP);
+        maps.put("AD",AD);
+        maps.put("EPOXY",EPOXY);
+        maps.put("CURING",CURING);
+        maps.put("REPAIR",REPAIR);
+
+        String map=JSONObject.toJSONString(maps);
+        return map;
+    }
+
+    private List<ComboxItem> getAllCoatingPowderInfoByType(String coatingType) {
         //APPRequestTransfer/getAllCoatingPowderInfo.action
         List<CoatingPowderInfo> list=coatingPowderInfoDao.getAllCoatingPowderInfoByType(coatingType);
         List<ComboxItem> colist=new ArrayList<ComboxItem>();
@@ -198,7 +236,7 @@ public class CoatingPowderController {
             citem.text= cp.getCoating_powder_name();
             colist.add(citem);
         }
-        String map= JSONObject.toJSONString(colist);
-        return map;
+
+        return colist;
     }
 }
