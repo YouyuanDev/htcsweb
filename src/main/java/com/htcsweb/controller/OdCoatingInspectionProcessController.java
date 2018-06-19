@@ -207,6 +207,10 @@ public class OdCoatingInspectionProcessController {
                         if(odCoatingInspectionProcess.getResult().equals("1")) {//当合格时才更新钢管状态
                             p.setStatus("od4");
                             p.setLast_accepted_status(p.getStatus());
+                            //设置odsampling mark
+                            if(odCoatingInspectionProcess.getIs_sample().equals("1")){
+                                p.setOdsampling_mark("1");
+                            }
                         }else if(odCoatingInspectionProcess.getResult().equals("0")){
                             p.setStatus("odrepair1");
                         }else if(odCoatingInspectionProcess.getResult().equals("2")){

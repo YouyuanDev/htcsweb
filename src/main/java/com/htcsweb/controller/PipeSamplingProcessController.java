@@ -51,10 +51,17 @@ public class PipeSamplingProcessController {
             //自动计算切割后剩余长度
             pipeSamplingRecord.setPipe_length_after_cut(pipeSamplingRecord.getOriginal_pipe_length()-pipeSamplingRecord.getCut_off_length());
 
-
+            String msg="";
             if(pipeSamplingRecord.getId()==0){
                 //添加
-                resTotal=pipeSamplingRecordDao.addPipeSamplingRecord(pipeSamplingRecord);
+                PipeSamplingRecord oldrecord=pipeSamplingRecordDao.getRecentRecordByPipeNo(pipeSamplingRecord.getPipe_no());
+                if(oldrecord!=null&&oldrecord.getResult().equals("10")){
+                    //存在一条pending数据，不给予insert处理
+                    msg="已存在待定记录,不能新增记录";
+                }else{
+                    resTotal=pipeSamplingRecordDao.addPipeSamplingRecord(pipeSamplingRecord);
+                }
+
             }else{
                 //修改！
                 resTotal=pipeSamplingRecordDao.updatePipeSamplingRecord(pipeSamplingRecord);
@@ -72,7 +79,7 @@ public class PipeSamplingProcessController {
                             p.setWeight(PipeActWeightUtil.getActWeight(p.getP_length(),p.getOd(),p.getWt()));
                         //}
                         p.setRebevel_mark("1");
-
+                        p.setOdsampling_mark("0");
                         int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                     }
 
@@ -177,6 +184,23 @@ public class PipeSamplingProcessController {
         return mmp;
     }
 
+    //得到可以钢管最新的待定的外防取样记录  最后一条记录且result为待定 10
+    @RequestMapping(value = "/getPendingRecordByPipeNo")
+    @ResponseBody
+    public String getPendingRecordByPipeNo(@RequestParam(value = "pipe_no",required = false)String pipe_no, HttpServletRequest request) {
 
+        PipeSamplingRecord record=pipeSamplingRecordDao.getRecentRecordByPipeNo(pipe_no);
+        Map<String, Object> maps = new HashMap<String, Object>();
+        if (record!=null&&record.getResult().equals("10")) {
+            //是待定状态
+            maps.put("success", true);
+            maps.put("record", record);
+        } else {
+            maps.put("success", false);
+        }
+
+        String mmp= JSONArray.toJSONString(maps);
+        return mmp;
+    }
 
 }

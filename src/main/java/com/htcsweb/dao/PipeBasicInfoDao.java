@@ -16,7 +16,10 @@ public interface PipeBasicInfoDao {
     public  List<PipeBasicInfo> getPipeNumber(@Param("pipe_no")String pipe_no);
     public List<PipeBasicInfo>getPipeNumbers(@Param("pipe_no")String pipe_no,@Param("external_coatingtype")String external_coatingtype,@Param("pipestatus")String[] pipestatus);
 
+    //获取外防待取样钢管信息 1000条
     public List<PipeBasicInfo> getODSamplePipeNumbers(@Param("pipe_no")String pipe_no);
+    //获取内防待取样钢管信息 1000条
+    public List<PipeBasicInfo> getIDSamplePipeNumbers(@Param("pipe_no")String pipe_no);
 
     public List<PipeBasicInfo> getNeedRebevelPipeNumbers(@Param("pipe_no")String pipe_no);
 

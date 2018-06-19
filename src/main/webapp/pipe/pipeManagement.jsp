@@ -955,6 +955,8 @@
                 <th field="p_length" align="center" width="100" class="i18n1" name="p_length">钢管长度</th>
                 <th field="weight" align="center" width="100" class="i18n1" name="weight">钢管米重</th>
                 <th field="rebevel_mark" align="center" width="100" class="i18n1" name="rebevelmark">倒棱标志</th>
+                <th field="odsampling_mark" align="center" width="100" class="i18n1" name="odsamplingmark">外防取样标志</th>
+                <th field="idsampling_mark" align="center" width="100" class="i18n1" name="idsamplingmark">内防取样标志</th>
                 <th field="status" align="center" width="100" class="i18n1" name="status">状态</th>
                 <th field="storage_stack" align="center" width="100" class="i18n1" name="storagestack">垛位号</th>
                 <th field="stack_level" align="center" width="100" class="i18n1" name="stacklevel">层数</th>
@@ -1170,7 +1172,19 @@
                     <td class="i18n1" name="rebevelmark" width="16%">倒棱标志</td>
                     <td colspan="1" width="33%">
                         <input class="easyui-textbox" type="text" name="rebevel_mark" value=""/>   </td>
-                    <td></td>
+
+                    <td class="i18n1" name="odsamplingmark" width="16%">外防取样标志</td>
+                    <td colspan="1" width="33%">
+                        <input class="easyui-textbox" type="text" name="odsampling_mark" value=""/>   </td>
+
+
+                </tr>
+                <tr>
+
+                    <td class="i18n1" name="idsamplingmark" width="16%">内防取样标志</td>
+                    <td colspan="1" width="33%">
+                        <input class="easyui-textbox" type="text" name="idsampling_mark" value=""/>   </td>
+
 
                 </tr>
             </table>

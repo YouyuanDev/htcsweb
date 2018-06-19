@@ -140,6 +140,10 @@ public class IdCoatingInspectionProcessController {
                         if(idCoatingInspectionProcess.getResult().equals("1")) {//当合格时才更新钢管状态
                             p.setStatus("id4");
                             p.setLast_accepted_status(p.getStatus());
+                            //设置idsampling mark
+                            if(idCoatingInspectionProcess.getIs_sample().equals("1")){
+                                p.setIdsampling_mark("1");
+                            }
                         }else if(idCoatingInspectionProcess.getResult().equals("0")){
                             p.setStatus("idrepair1");
                         }else if(idCoatingInspectionProcess.getResult().equals("2")){

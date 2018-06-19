@@ -215,6 +215,12 @@ public class OdCoating3LpeInspectionProcessController {
                         //验证钢管状态为外涂管   od3 外涂检验工序   0:odrepair1   1:od4   2:odstrip1 10:od3  4: onhold
                         if(odCoating3LpeInspectionProcess.getResult().equals("1")) {//当合格时才更新钢管状态
                             p.setStatus("od4");
+                            p.setLast_accepted_status(p.getStatus());
+                            //设置odsampling mark
+                            if(odCoating3LpeInspectionProcess.getIs_sample().equals("1")){
+                                p.setOdsampling_mark("1");
+                            }
+
                         }else if(odCoating3LpeInspectionProcess.getResult().equals("0")){
                             p.setStatus("odrepair1");
                         }else if(odCoating3LpeInspectionProcess.getResult().equals("2")){

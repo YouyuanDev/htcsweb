@@ -26,7 +26,8 @@
         <result property="shipment_date" column="shipment_date"></result>
         <result property="last_accepted_status" column="last_accepted_status"></result>
         <result property="rebevel_mark" column="rebevel_mark"></result>
-
+        <result property="odsampling_mark" column="odsampling_mark"></result>
+        <result property="idsampling_mark" column="idsampling_mark"></result>
 
     </resultMap>
 
@@ -154,19 +155,33 @@
 
 
     <select id="getODSamplePipeNumbers" resultType="com.htcsweb.entity.PipeBasicInfo">
-        select * from pipe_basic_info where  pipe_no in(
---         select pipe_no from id_coating_inspection_process ic where is_sample='1' UNION
-        select pipe_no from od_coating_2fbe_inspection_process ic where is_sample='1' UNION
-        select pipe_no from od_coating_3lpe_inspection_process ic where is_sample='1'
-        )
+--         select * from pipe_basic_info where  pipe_no in(
+-- --         select pipe_no from id_coating_inspection_process ic where is_sample='1' UNION
+--         select pipe_no from od_coating_2fbe_inspection_process ic where is_sample='1' UNION
+--         select pipe_no from od_coating_3lpe_inspection_process ic where is_sample='1'
+--         )
+        select * from pipe_basic_info where odsampling_mark='1'
         <where>
             <if test="pipe_no!=null and pipe_no!=''">
-                AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+                AND pipe_no =#{pipe_no}
             </if>
         </where>
         ORDER BY id DESC
         limit 1000
     </select>
+
+
+    <select id="getIDSamplePipeNumbers" resultType="com.htcsweb.entity.PipeBasicInfo">
+        select * from pipe_basic_info where idsampling_mark='1'
+        <where>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND pipe_no =#{pipe_no}
+            </if>
+        </where>
+        ORDER BY id DESC
+        limit 1000
+    </select>
+
 
 
     <select id="getNeedRebevelPipeNumbers" resultType="com.htcsweb.entity.PipeBasicInfo">
@@ -381,12 +396,12 @@
     </select>
 
     <update id="updatePipeBasicInfo" parameterType="com.htcsweb.entity.PipeBasicInfo">
-        UPDATE pipe_basic_info set contract_no=#{contract_no},pipe_no=#{pipe_no},grade=#{grade},od=#{od},wt=#{wt},p_length=#{p_length}, weight=#{weight},pipe_making_lot_no=#{pipe_making_lot_no},status=#{status}, heat_no=#{heat_no},storage_stack=#{storage_stack},stack_level=#{stack_level},od_coating_date=#{od_coating_date},id_coating_date=#{id_coating_date},level_direction=#{level_direction},level_sequence=#{level_sequence},shipment_date=#{shipment_date},last_accepted_status=#{last_accepted_status},rebevel_mark=#{rebevel_mark} WHERE id=#{id}
+        UPDATE pipe_basic_info set contract_no=#{contract_no},pipe_no=#{pipe_no},grade=#{grade},od=#{od},wt=#{wt},p_length=#{p_length}, weight=#{weight},pipe_making_lot_no=#{pipe_making_lot_no},status=#{status}, heat_no=#{heat_no},storage_stack=#{storage_stack},stack_level=#{stack_level},od_coating_date=#{od_coating_date},id_coating_date=#{id_coating_date},level_direction=#{level_direction},level_sequence=#{level_sequence},shipment_date=#{shipment_date},last_accepted_status=#{last_accepted_status},rebevel_mark=#{rebevel_mark},odsampling_mark=#{odsampling_mark},idsampling_mark=#{idsampling_mark} WHERE id=#{id}
     </update>
 
     <insert id="addPipeBasicInfo" parameterType="com.htcsweb.entity.PipeBasicInfo">
-        INSERT INTO pipe_basic_info(contract_no,pipe_no,grade,od,wt,p_length,weight,pipe_making_lot_no,status,heat_no,storage_stack,stack_level,od_coating_date,id_coating_date,level_direction,level_sequence,shipment_date,last_accepted_status,rebevel_mark)
-        VALUES (#{contract_no},#{pipe_no},#{grade},#{od},#{wt},#{p_length},#{weight},#{pipe_making_lot_no},#{status},#{heat_no},#{storage_stack},#{stack_level},#{od_coating_date},#{id_coating_date},#{level_direction},#{level_sequence},#{shipment_date},#{last_accepted_status},#{rebevel_mark})
+        INSERT INTO pipe_basic_info(contract_no,pipe_no,grade,od,wt,p_length,weight,pipe_making_lot_no,status,heat_no,storage_stack,stack_level,od_coating_date,id_coating_date,level_direction,level_sequence,shipment_date,last_accepted_status,rebevel_mark,odsampling_mark,idsampling_mark)
+        VALUES (#{contract_no},#{pipe_no},#{grade},#{od},#{wt},#{p_length},#{weight},#{pipe_making_lot_no},#{status},#{heat_no},#{storage_stack},#{stack_level},#{od_coating_date},#{id_coating_date},#{level_direction},#{level_sequence},#{shipment_date},#{last_accepted_status},#{rebevel_mark},#{odsampling_mark},#{idsampling_mark})
     </insert>
 
     <delete id="delPipeBasicInfo">

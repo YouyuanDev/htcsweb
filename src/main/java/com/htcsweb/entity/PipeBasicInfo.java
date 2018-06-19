@@ -26,12 +26,13 @@ public class PipeBasicInfo {
     private String last_accepted_status;
 
     private String rebevel_mark;
-
+    private String odsampling_mark;
+    private String idsampling_mark;
 
     public PipeBasicInfo() {
     }
 
-    public PipeBasicInfo(int id, String contract_no, String pipe_no, String grade, float od, float wt, float p_length, float weight, String pipe_making_lot_no, String status, String heat_no, String storage_stack, String stack_level, Date od_coating_date, Date id_coating_date, String level_direction, String level_sequence, Date shipment_date, String last_accepted_status, String rebevel_mark) {
+    public PipeBasicInfo(int id, String contract_no, String pipe_no, String grade, float od, float wt, float p_length, float weight, String pipe_making_lot_no, String status, String heat_no, String storage_stack, String stack_level, Date od_coating_date, Date id_coating_date, String level_direction, String level_sequence, Date shipment_date, String last_accepted_status, String rebevel_mark, String odsampling_mark, String idsampling_mark) {
         this.id = id;
         this.contract_no = contract_no;
         this.pipe_no = pipe_no;
@@ -52,8 +53,9 @@ public class PipeBasicInfo {
         this.shipment_date = shipment_date;
         this.last_accepted_status = last_accepted_status;
         this.rebevel_mark = rebevel_mark;
+        this.odsampling_mark = odsampling_mark;
+        this.idsampling_mark = idsampling_mark;
     }
-
 
     public int getId() {
         return id;
@@ -213,5 +215,21 @@ public class PipeBasicInfo {
 
     public void setRebevel_mark(String rebevel_mark) {
         this.rebevel_mark = rebevel_mark;
+    }
+
+    public String getOdsampling_mark() {
+        return odsampling_mark;
+    }
+
+    public void setOdsampling_mark(String odsampling_mark) {
+        this.odsampling_mark = odsampling_mark;
+    }
+
+    public String getIdsampling_mark() {
+        return idsampling_mark;
+    }
+
+    public void setIdsampling_mark(String idsampling_mark) {
+        this.idsampling_mark = idsampling_mark;
     }
 }
