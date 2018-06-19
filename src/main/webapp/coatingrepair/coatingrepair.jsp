@@ -569,10 +569,18 @@
                     </td>
                     <td width="20%" class="i18n1" name="repairmethod">修补方法</td>
                     <td width="30%">
-                        <select id="repair_method" class="easyui-combobox" data-options="editable:false" name="repair_method"   style="width:185px;">
-                            <option value="2POXY">2POXY</option>
-                            <option value="XXXXX">XXXXX</option>
-                        </select>
+                        <input id="repair_method" class="easyui-combobox" type="text" name="repair_method"  data-options=
+                                "url:'/CoatingPowderOperation/getAllREPAIRCoatingPowderInfo.action',
+					        method:'get',
+					        valueField:'text',
+					        width: 185,
+					        editable:false,
+					        textField:'text',
+					        panelHeight:'auto'"/>
+                        <%--<select id="repair_method" class="easyui-combobox" data-options="editable:false" name="repair_method"   style="width:185px;">--%>
+                            <%--<option value="2POXY">2POXY</option>--%>
+                            <%--<option value="XXXXX">XXXXX</option>--%>
+                        <%--</select>--%>
                     </td>
 
                 </tr>
