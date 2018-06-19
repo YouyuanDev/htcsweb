@@ -1165,7 +1165,14 @@
 					        panelHeight:'200'"/></td>
                     <%--<td></td>--%>
                 </tr>
+                <tr>
 
+                    <td class="i18n1" name="rebevelmark" width="16%">倒棱标志</td>
+                    <td colspan="1" width="33%">
+                        <input class="easyui-textbox" type="text" name="rebevel_mark" value=""/>   </td>
+                    <td></td>
+
+                </tr>
             </table>
 
         </fieldset>
