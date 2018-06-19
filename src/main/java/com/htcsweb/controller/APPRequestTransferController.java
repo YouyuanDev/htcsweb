@@ -65,6 +65,8 @@ public class APPRequestTransferController {
             String status=(String)list.get(0).get("status");
             String external_coating=(String)list.get(0).get("external_coating");
             String rebevel_mark=(String)list.get(0).get("rebevel_mark");
+            String odsampling_mark=(String)list.get(0).get("odsampling_mark");
+            String idsampling_mark=(String)list.get(0).get("idsampling_mark");
             maps.put("success",true);
             maps.put("pipeinfo",list.get(0));
             maps.put("message","存在钢管"+pipe_no+"的信息");
@@ -153,6 +155,10 @@ public class APPRequestTransferController {
                 if (rebevel_mark != null && rebevel_mark.equals("1")){
                     //需倒棱
                     urloptions.put("pipeRebevelProcess", "addition/piperebevel");
+                }
+                if(odsampling_mark!=null&&odsampling_mark.equals("1")){
+                    //需外防取样
+                    urloptions.put("pipeSamplingProcess", "addition/pipesampling");
                 }
 
 
