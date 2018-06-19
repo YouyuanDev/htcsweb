@@ -403,22 +403,6 @@ public class APPRequestTransferController {
     }
 
 
-    //获取所有涂层粉末型号名称
-    @RequestMapping("/getAllCoatingPowderInfo")
-    @ResponseBody
-    public String getAllCoatingPowderInfo(HttpServletRequest request) {
-        //APPRequestTransfer/getAllCoatingPowderInfo.action
-        List<CoatingPowderInfo> list=coatingPowderInfoDao.getAllCoatingPowderInfo();
-        List<ComboxItem> colist=new ArrayList<ComboxItem>();
-        for(int i=0;i<list.size();i++){
-            ComboxItem citem= new ComboxItem();
-            CoatingPowderInfo cp=((CoatingPowderInfo)list.get(i));
-            citem.id=String.valueOf(cp.getId());
-            citem.text= cp.getCoating_powder_name();
-            colist.add(citem);
-        }
-        String map= JSONObject.toJSONString(colist);
-        return map;
-    }
+
 
 }

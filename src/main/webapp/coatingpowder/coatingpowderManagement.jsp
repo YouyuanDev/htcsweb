@@ -128,7 +128,11 @@
                     }
 
 
+                    if($("#powder_type").val()==undefined||$("#powder_type").val()==""){
 
+                        hlAlertFour("请选择原材料类型");
+                        return false;
+                    }
 
                 },
                 success: function(result){
@@ -175,6 +179,7 @@
                 <th field="id" align="center" width="100" class="i18n1" name="id">流水号</th>
 
                 <th field="coating_powder_name" align="center" width="100" class="i18n1" name="coatingpowdername">原材料型号</th>
+                <th field="powder_type" align="center" width="100" class="i18n1" name="powdertype">原材料类型</th>
 
             </tr>
             </thead>
@@ -217,7 +222,24 @@
                     </td>
                     <td></td>
                 </tr>
+                <tr>
+                    <td class="i18n1" name="powdertype">原材料类型</td>
+                    <td colspan="1">
+                        <select id="powder_type" class="easyui-combobox" data-options="editable:false" name="powder_type"   style="width:185px;">
+                            <option value="FBE">FBE</option>
+                            <option value="PE">PE</option>
+                            <option value="AD">AD</option>
+                            <option value="PP">PP</option>
+                            <option value="EPOXY">EPOXY</option>
+                            <option value="PARTICLE">PARTICLE</option>
+                            <option value="CURING">CURING</option>
+                        </select>
 
+
+                    </td>
+                    <td></td>
+
+                </tr>
             </table>
 
 

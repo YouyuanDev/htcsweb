@@ -15,8 +15,9 @@ public interface CoatingPowderInfoDao {
     //搜索粉末型号信息
     public List<CoatingPowderInfo> getAllByLike(@Param("coating_powder_name") String coating_powder_name, @Param("skip") int skip, @Param("take") int take);;
 
-    //获取所有粉末信息
-    public List<CoatingPowderInfo> getAllCoatingPowderInfo();
+    //获取某类型的所有粉末信息
+    public List<CoatingPowderInfo> getAllCoatingPowderInfoByType(@Param("powder_type") String powder_type);
+
 
 
 

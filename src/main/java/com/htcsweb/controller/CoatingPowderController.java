@@ -123,4 +123,82 @@ public class CoatingPowderController {
         return null;
     }
 
+    //获取所有FBE涂层粉末型号名称
+    @RequestMapping("/getAllFBECoatingPowderInfo")
+    @ResponseBody
+    public String getAllFBECoatingPowderInfo(HttpServletRequest request) {
+        //APPRequestTransfer/getAllCoatingPowderInfo.action
+        return getAllCoatingPowderInfoByType("FBE");
+    }
+
+    //获取所有PE涂层粉末型号名称
+    @RequestMapping("/getAllPECoatingPowderInfo")
+    @ResponseBody
+    public String getAllPECoatingPowderInfo(HttpServletRequest request) {
+        //APPRequestTransfer/getAllCoatingPowderInfo.action
+        return getAllCoatingPowderInfoByType("PE");
+    }
+
+    //获取所有AD型号名称
+    @RequestMapping("/getAllADCoatingPowderInfo")
+    @ResponseBody
+    public String getAllADCoatingPowderInfo(HttpServletRequest request) {
+        //APPRequestTransfer/getAllCoatingPowderInfo.action
+        return getAllCoatingPowderInfoByType("AD");
+    }
+    //获取所有PARTICLE型号名称
+    @RequestMapping("/getAllPARTICLECoatingPowderInfo")
+    @ResponseBody
+    public String getAllPARTICLECoatingPowderInfo(HttpServletRequest request) {
+        //APPRequestTransfer/getAllCoatingPowderInfo.action
+        return getAllCoatingPowderInfoByType("PARTICLE");
+    }
+
+    //获取所有PP型号名称
+    @RequestMapping("/getAllPPCoatingPowderInfo")
+    @ResponseBody
+    public String getAllPPCoatingPowderInfo(HttpServletRequest request) {
+        //APPRequestTransfer/getAllCoatingPowderInfo.action
+        return getAllCoatingPowderInfoByType("PP");
+    }
+    //获取所有EPOXY型号名称
+    @RequestMapping("/getAllEPOXYCoatingPowderInfo")
+    @ResponseBody
+    public String getAllEPOXYCoatingPowderInfo(HttpServletRequest request) {
+        //APPRequestTransfer/getAllCoatingPowderInfo.action
+        return getAllCoatingPowderInfoByType("EPOXY");
+    }
+
+    //获取所有REPAIR型号名称
+    @RequestMapping("/getAllREPAIRCoatingPowderInfo")
+    @ResponseBody
+    public String getAllREPAIRCoatingPowderInfo(HttpServletRequest request) {
+        //APPRequestTransfer/getAllCoatingPowderInfo.action
+        return getAllCoatingPowderInfoByType("REPAIR");
+    }
+
+    //获取所有CURING型号名称
+    @RequestMapping("/getAllCURINGCoatingPowderInfo")
+    @ResponseBody
+    public String getAllCURINGCoatingPowderInfo(HttpServletRequest request) {
+        //APPRequestTransfer/getAllCoatingPowderInfo.action
+        return getAllCoatingPowderInfoByType("CURING");
+    }
+
+
+
+    private String getAllCoatingPowderInfoByType(String coatingType) {
+        //APPRequestTransfer/getAllCoatingPowderInfo.action
+        List<CoatingPowderInfo> list=coatingPowderInfoDao.getAllCoatingPowderInfoByType(coatingType);
+        List<ComboxItem> colist=new ArrayList<ComboxItem>();
+        for(int i=0;i<list.size();i++){
+            ComboxItem citem= new ComboxItem();
+            CoatingPowderInfo cp=((CoatingPowderInfo)list.get(i));
+            citem.id=String.valueOf(cp.getId());
+            citem.text= cp.getCoating_powder_name();
+            colist.add(citem);
+        }
+        String map= JSONObject.toJSONString(colist);
+        return map;
+    }
 }

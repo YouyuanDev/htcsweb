@@ -376,7 +376,7 @@
                     <td class="i18n1" name="baseused">底层涂料</td>
                     <%--<td><input class="easyui-textbox"  type="text" name="base_used" value=""/></td>--%>
                     <td><input id="base_used" class="easyui-combobox" type="text" name="base_used"  data-options=
-                            "url:'/APPRequestTransfer/getAllCoatingPowderInfo.action',
+                            "url:'/CoatingPowderOperation/getAllEPOXYCoatingPowderInfo.action',
 					        method:'get',
 					        valueField:'text',
 					        width: 185,
@@ -393,7 +393,7 @@
                     <td width="16%" class="i18n1" name="curingagentused">固化剂型号</td>
                     <%--<td><input class="easyui-textbox"  type="text" name="curing_agent_used" value=""/></td>--%>
                     <td><input id="curing_agent_used" class="easyui-combobox" type="text" name="curing_agent_used"  data-options=
-                            "url:'/APPRequestTransfer/getAllCoatingPowderInfo.action',
+                            "url:'/CoatingPowderOperation/getAllCURINGCoatingPowderInfo.action',
 					        method:'get',
 					        valueField:'text',
 					        width: 185,

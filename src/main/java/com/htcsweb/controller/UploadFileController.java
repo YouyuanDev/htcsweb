@@ -395,7 +395,7 @@ public class UploadFileController {
                 pipe.setWeight(Float.parseFloat(ob.get(ExcelUtil.WEIGHT_INDEX).toString()));
                 pipe.setP_length(Float.parseFloat(ob.get(ExcelUtil.P_LENGTH_INDEX).toString()));
                 pipe.setStatus("bare1");
-
+                pipe.setLast_accepted_status("bare1");
 
                 //批量插入
                 int res=0;
@@ -420,6 +420,7 @@ public class UploadFileController {
                     }else{
                         pipe.setStatus("bare2");
                     }
+                    pipe.setLast_accepted_status(pipe.getStatus());
                     pipe.setRebevel_mark("0");
 
                     res = pipeBasicInfoDao.addPipeBasicInfo(pipe);
@@ -431,6 +432,7 @@ public class UploadFileController {
                         PipeBasicInfo oldpipeinfo = pipelist.get(0);
                         pipe.setId(oldpipeinfo.getId());
                         pipe.setStatus(oldpipeinfo.getStatus());
+                        pipe.setLast_accepted_status(oldpipeinfo.getLast_accepted_status());
                         res = pipeBasicInfoDao.updatePipeBasicInfo(pipe);
                         System.out.println("Update res: " + res);
                     }

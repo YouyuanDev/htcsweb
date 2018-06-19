@@ -8,12 +8,13 @@
     <resultMap id="all" type="com.htcsweb.entity.CoatingPowderInfo">
         <id property="id" column="id"></id>
         <result property="coating_powder_name" column="coating_powder_name"></result>
+        <result property="powder_type" column="powder_type"></result>
     </resultMap>
 
 
 
     <insert id="addCoatingPowder" parameterType="com.htcsweb.entity.CoatingPowderInfo">
-        INSERT INTO coating_powder_info(coating_powder_name) VALUES (#{coating_powder_name})
+        INSERT INTO coating_powder_info(coating_powder_name,powder_type) VALUES (#{coating_powder_name},#{powder_type})
     </insert>
     <delete id="delCoatingPowder">
         delete from coating_powder_info WHERE
@@ -23,7 +24,7 @@
     </delete>
 
     <update id="updateCoatingPowder" parameterType="com.htcsweb.entity.CoatingPowderInfo">
-        UPDATE coating_powder_info set coating_powder_name=#{coating_powder_name} WHERE id=#{id}
+        UPDATE coating_powder_info set coating_powder_name=#{coating_powder_name}, powder_type=#{powder_type} WHERE id=#{id}
     </update>
 
 
@@ -55,6 +56,17 @@
     <select id="getAllCoatingPowderInfo" resultType="com.htcsweb.entity.CoatingPowderInfo">
         select * from coating_powder_info
          ORDER BY id DESC
+    </select>
+
+
+    <select id="getAllCoatingPowderInfoByType" resultType="com.htcsweb.entity.CoatingPowderInfo">
+        select * from coating_powder_info
+        <where>
+            <if test="powder_type!=null and powder_type!=''">
+                AND powder_type =#{powder_type}
+            </if>
+        </where>
+        ORDER BY id ASC
     </select>
 
 

@@ -414,7 +414,7 @@
                     <td class="i18n1" name="basecoatused">底层粉末型号</td>
                     <%--<td><input class="easyui-textbox"  type="text" name="base_coat_used" value=""/></td>--%>
                     <td><input id="base_coat_used" class="easyui-combobox" type="text" name="base_coat_used"  data-options=
-                            "url:'/APPRequestTransfer/getAllCoatingPowderInfo.action',
+                            "url:'/CoatingPowderOperation/getAllFBECoatingPowderInfo.action',
 					        method:'get',
 					        valueField:'text',
 					        width: 185,
@@ -431,7 +431,7 @@
                     <td class="i18n1" name="middlecoatused">中间层粉末型号</td>
                     <%--<td><input class="easyui-textbox"  type="text" name="middle_coat_used" value=""/></td>--%>
                     <td><input id="middle_coat_used" class="easyui-combobox" type="text" name="middle_coat_used"  data-options=
-                            "url:'/APPRequestTransfer/getAllCoatingPowderInfo.action',
+                            "url:'/CoatingPowderOperation/getAllADCoatingPowderInfo.action',
 					        method:'get',
 					        valueField:'text',
 					        width: 185,
@@ -447,7 +447,7 @@
                     <td width="16%" class="i18n1" name="topcoatused">面层粉末型号</td>
                     <%--<td><input class="easyui-textbox"  type="text" name="top_coat_used" value=""/></td>--%>
                     <td><input id="top_coat_used" class="easyui-combobox" type="text" name="top_coat_used"  data-options=
-                            "url:'/APPRequestTransfer/getAllCoatingPowderInfo.action',
+                            "url:'/CoatingPowderOperation/getAllPECoatingPowderInfo.action',
 					        method:'get',
 					        valueField:'text',
 					        width: 185,
