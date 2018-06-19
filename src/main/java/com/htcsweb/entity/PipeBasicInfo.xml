@@ -170,15 +170,10 @@
 
 
     <select id="getNeedRebevelPipeNumbers" resultType="com.htcsweb.entity.PipeBasicInfo">
-        select * from pipe_basic_info where  pipe_no in(
-        select pipe_no from pipe_sampling_record spl  UNION
-        select pipe_no from bare_pipe_grinding_cutoff_record gc where grinding_cutoff='C' or grinding_cutoff='GC'
-        ) and pipe_no not in(
-        select pipe_no from pipe_rebevel_record reb where result=1
-        )
+        select * from pipe_basic_info where rebevel_mark ='1'
         <where>
             <if test="pipe_no!=null and pipe_no!=''">
-                AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+                AND pipe_no =#{pipe_no}
             </if>
         </where>
         ORDER BY id DESC
