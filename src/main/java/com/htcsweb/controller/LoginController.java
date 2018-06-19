@@ -144,7 +144,7 @@ public class LoginController {
 
                 //跳转到用户主页
                 json.put("success",true);
-                json.put("msg","登录成功！"+msg);
+                json.put("msg","登录成功"+msg);
                 json.put("roles",role_no_list);
                 //System.out.println("登录验证 success");
 //                String basePath = request.getSession().getServletContext().getRealPath("/");
