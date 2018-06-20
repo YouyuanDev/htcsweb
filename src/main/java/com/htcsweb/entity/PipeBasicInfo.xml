@@ -120,6 +120,12 @@
             <if test="pipe_no!=null and pipe_no!=''">
                 AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
             </if>
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(od_coating_date,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(od_coating_date,'%Y-%m-%d %H:%T:%s')<DATE_FORMAT(DATE_ADD(#{end_time},INTERVAL 1 DAY),'%Y-%m-%d 00:00:00')]]>
+            </if>
         </where>
         ORDER BY id DESC
         limit 1000
@@ -140,6 +146,12 @@
             <if test="pipe_no!=null and pipe_no!=''">
                 AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
             </if>
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(od_coating_date,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(od_coating_date,'%Y-%m-%d %H:%T:%s')<DATE_FORMAT(DATE_ADD(#{end_time},INTERVAL 1 DAY),'%Y-%m-%d 00:00:00')]]>
+            </if>
         </where>
         ORDER BY id DESC
         limit 1000
@@ -159,6 +171,12 @@
             <if test="pipe_no!=null and pipe_no!=''">
                 AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
             </if>
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(od_coating_date,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(od_coating_date,'%Y-%m-%d %H:%T:%s')<DATE_FORMAT(DATE_ADD(#{end_time},INTERVAL 1 DAY),'%Y-%m-%d 00:00:00')]]>
+            </if>
         </where>
         ORDER BY id DESC
         limit 1000
@@ -176,6 +194,12 @@
 
             <if test="pipe_no!=null and pipe_no!=''">
                 AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(od_coating_date,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(od_coating_date,'%Y-%m-%d %H:%T:%s')<DATE_FORMAT(DATE_ADD(#{end_time},INTERVAL 1 DAY),'%Y-%m-%d 00:00:00')]]>
             </if>
         </where>
         ORDER BY id DESC
@@ -196,6 +220,13 @@
             <if test="pipe_no!=null and pipe_no!=''">
                 AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
             </if>
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(od_coating_date,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(od_coating_date,'%Y-%m-%d %H:%T:%s')<DATE_FORMAT(DATE_ADD(#{end_time},INTERVAL 1 DAY),'%Y-%m-%d 00:00:00')]]>
+            </if>
+
         </where>
         ORDER BY id DESC
         limit 1000
@@ -215,6 +246,13 @@
             <if test="pipe_no!=null and pipe_no!=''">
                 AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
             </if>
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(id_coating_date,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(id_coating_date,'%Y-%m-%d %H:%T:%s')<DATE_FORMAT(DATE_ADD(#{end_time},INTERVAL 1 DAY),'%Y-%m-%d 00:00:00')]]>
+            </if>
+
         </where>
         ORDER BY id DESC
         limit 1000
@@ -234,6 +272,15 @@
             <if test="pipe_no!=null and pipe_no!=''">
                 AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
             </if>
+
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(id_coating_date,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(id_coating_date,'%Y-%m-%d %H:%T:%s')<DATE_FORMAT(DATE_ADD(#{end_time},INTERVAL 1 DAY),'%Y-%m-%d 00:00:00')]]>
+            </if>
+
+
         </where>
         ORDER BY id DESC
         limit 1000
