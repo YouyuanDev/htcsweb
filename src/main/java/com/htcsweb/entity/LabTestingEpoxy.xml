@@ -93,7 +93,16 @@
 
     <!--根据钢管编号查询最新一条记录-->
     <select id="getRecentRecordByPipeNo" resultType="com.htcsweb.entity.LabTestingEpoxy">
-        SELECT  * from lab_testing_liquid_epoxy where pipe_no=#{pipe_no} order by operation_time desc LIMIT 1
+        SELECT  * from lab_testing_liquid_epoxy
+
+        <where>
+            <if test="pipe_no!=null and pipe_no!=''">
+                OR  pipe_no=#{pipe_no}
+                OR  glass_pipe_no=#{pipe_no}
+            </if>
+        </where>
+
+        order by operation_time desc LIMIT 1
     </select>
 
 
