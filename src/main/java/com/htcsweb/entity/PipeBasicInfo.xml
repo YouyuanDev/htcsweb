@@ -28,6 +28,9 @@
         <result property="rebevel_mark" column="rebevel_mark"></result>
         <result property="odsampling_mark" column="odsampling_mark"></result>
         <result property="idsampling_mark" column="idsampling_mark"></result>
+        <result property="od_dsc_sample_mark" column="od_dsc_sample_mark"></result>
+        <result property="od_pe_sample_mark" column="od_pe_sample_mark"></result>
+        <result property="id_glass_sample_mark" column="id_glass_sample_mark"></result>
 
     </resultMap>
 
@@ -396,12 +399,13 @@
     </select>
 
     <update id="updatePipeBasicInfo" parameterType="com.htcsweb.entity.PipeBasicInfo">
-        UPDATE pipe_basic_info set contract_no=#{contract_no},pipe_no=#{pipe_no},grade=#{grade},od=#{od},wt=#{wt},p_length=#{p_length}, weight=#{weight},pipe_making_lot_no=#{pipe_making_lot_no},status=#{status}, heat_no=#{heat_no},storage_stack=#{storage_stack},stack_level=#{stack_level},od_coating_date=#{od_coating_date},id_coating_date=#{id_coating_date},level_direction=#{level_direction},level_sequence=#{level_sequence},shipment_date=#{shipment_date},last_accepted_status=#{last_accepted_status},rebevel_mark=#{rebevel_mark},odsampling_mark=#{odsampling_mark},idsampling_mark=#{idsampling_mark} WHERE id=#{id}
+        UPDATE pipe_basic_info set contract_no=#{contract_no},pipe_no=#{pipe_no},grade=#{grade},od=#{od},wt=#{wt},p_length=#{p_length}, weight=#{weight},pipe_making_lot_no=#{pipe_making_lot_no},status=#{status}, heat_no=#{heat_no},storage_stack=#{storage_stack},stack_level=#{stack_level},od_coating_date=#{od_coating_date},id_coating_date=#{id_coating_date},level_direction=#{level_direction},level_sequence=#{level_sequence},shipment_date=#{shipment_date},last_accepted_status=#{last_accepted_status},rebevel_mark=#{rebevel_mark},
+        odsampling_mark=#{odsampling_mark},idsampling_mark=#{idsampling_mark},od_dsc_sample_mark=#{od_dsc_sample_mark},od_pe_sample_mark=#{od_pe_sample_mark},id_glass_sample_mark=#{id_glass_sample_mark} WHERE id=#{id}
     </update>
 
     <insert id="addPipeBasicInfo" parameterType="com.htcsweb.entity.PipeBasicInfo">
-        INSERT INTO pipe_basic_info(contract_no,pipe_no,grade,od,wt,p_length,weight,pipe_making_lot_no,status,heat_no,storage_stack,stack_level,od_coating_date,id_coating_date,level_direction,level_sequence,shipment_date,last_accepted_status,rebevel_mark,odsampling_mark,idsampling_mark)
-        VALUES (#{contract_no},#{pipe_no},#{grade},#{od},#{wt},#{p_length},#{weight},#{pipe_making_lot_no},#{status},#{heat_no},#{storage_stack},#{stack_level},#{od_coating_date},#{id_coating_date},#{level_direction},#{level_sequence},#{shipment_date},#{last_accepted_status},#{rebevel_mark},#{odsampling_mark},#{idsampling_mark})
+        INSERT INTO pipe_basic_info(contract_no,pipe_no,grade,od,wt,p_length,weight,pipe_making_lot_no,status,heat_no,storage_stack,stack_level,od_coating_date,id_coating_date,level_direction,level_sequence,shipment_date,last_accepted_status,rebevel_mark,odsampling_mark,idsampling_mark,od_dsc_sample_mark,od_pe_sample_mark,id_glass_sample_mark)
+        VALUES (#{contract_no},#{pipe_no},#{grade},#{od},#{wt},#{p_length},#{weight},#{pipe_making_lot_no},#{status},#{heat_no},#{storage_stack},#{stack_level},#{od_coating_date},#{id_coating_date},#{level_direction},#{level_sequence},#{shipment_date},#{last_accepted_status},#{rebevel_mark},#{odsampling_mark},#{idsampling_mark},#{od_dsc_sample_mark},#{od_pe_sample_mark},#{id_glass_sample_mark})
     </insert>
 
     <delete id="delPipeBasicInfo">

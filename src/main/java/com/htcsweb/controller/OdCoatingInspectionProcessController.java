@@ -211,6 +211,10 @@ public class OdCoatingInspectionProcessController {
                             if(odCoatingInspectionProcess.getIs_sample().equals("1")){
                                 p.setOdsampling_mark("1");
                             }
+                            if(odCoatingInspectionProcess.getIs_dsc_sample().equals("1")){
+                                p.setOd_dsc_sample_mark("1");
+                            }
+
                         }else if(odCoatingInspectionProcess.getResult().equals("0")){
                             p.setStatus("odrepair1");
                         }else if(odCoatingInspectionProcess.getResult().equals("2")){

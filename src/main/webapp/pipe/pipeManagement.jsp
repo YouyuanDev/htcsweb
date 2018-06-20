@@ -957,6 +957,13 @@
                 <th field="rebevel_mark" align="center" width="100" class="i18n1" name="rebevelmark">倒棱标志</th>
                 <th field="odsampling_mark" align="center" width="100" class="i18n1" name="odsamplingmark">外防取样标志</th>
                 <th field="idsampling_mark" align="center" width="100" class="i18n1" name="idsamplingmark">内防取样标志</th>
+
+                <th field="od_dsc_sample_mark" align="center" width="100" class="i18n1" name="oddscsamplemark">外防DSC取样标志</th>
+                <th field="od_pe_sample_mark" align="center" width="100" class="i18n1" name="odpesamplemark">外防PE取样标志</th>
+                <th field="id_glass_sample_mark" align="center" width="100" class="i18n1" name="idglasssamplemark">内防玻璃片取样标志</th>
+
+
+
                 <th field="status" align="center" width="100" class="i18n1" name="status">状态</th>
                 <th field="storage_stack" align="center" width="100" class="i18n1" name="storagestack">垛位号</th>
                 <th field="stack_level" align="center" width="100" class="i18n1" name="stacklevel">层数</th>
@@ -1191,14 +1198,41 @@
                 </tr>
                 <tr>
 
+                    <td class="i18n1" name="oddscsamplemark" width="16%">外防DSC取样标志</td>
+                    <td colspan="1" width="33%">
+
+                        <select class="easyui-combobox" data-options="editable:false" name="od_dsc_sample_mark" style="width:200px;">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                        </select>
+                    </td>
+                    <td class="i18n1" name="odpesamplemark" width="16%">外防PE取样标志</td>
+                    <td colspan="1" width="33%">
+                        <select class="easyui-combobox" data-options="editable:false" name="od_pe_sample_mark" style="width:200px;">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                        </select>
+                    </td>
+
+                </tr>
+                <tr>
+
                     <td class="i18n1" name="idsamplingmark" width="16%">内防取样标志</td>
                     <td colspan="1" width="33%">
-                        <%--<input class="easyui-textbox" type="text" name="idsampling_mark" value=""/>--%>
+
                             <select class="easyui-combobox" data-options="editable:false" name="idsampling_mark" style="width:200px;">
                                 <option value="0">0</option>
                                 <option value="1">1</option>
                             </select>
                            </td>
+                    <td class="i18n1" name="idglasssamplemark" width="16%">内防玻璃片取样标志</td>
+                    <td colspan="1" width="33%">
+
+                        <select class="easyui-combobox" data-options="editable:false" name="id_glass_sample_mark" style="width:200px;">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                        </select>
+                    </td>
 
 
                 </tr>

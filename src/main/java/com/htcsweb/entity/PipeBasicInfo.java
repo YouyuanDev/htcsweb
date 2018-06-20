@@ -29,10 +29,15 @@ public class PipeBasicInfo {
     private String odsampling_mark;
     private String idsampling_mark;
 
+    private String od_dsc_sample_mark;
+    private String od_pe_sample_mark;
+    private String id_glass_sample_mark;
+
+
     public PipeBasicInfo() {
     }
 
-    public PipeBasicInfo(int id, String contract_no, String pipe_no, String grade, float od, float wt, float p_length, float weight, String pipe_making_lot_no, String status, String heat_no, String storage_stack, String stack_level, Date od_coating_date, Date id_coating_date, String level_direction, String level_sequence, Date shipment_date, String last_accepted_status, String rebevel_mark, String odsampling_mark, String idsampling_mark) {
+    public PipeBasicInfo(int id, String contract_no, String pipe_no, String grade, float od, float wt, float p_length, float weight, String pipe_making_lot_no, String status, String heat_no, String storage_stack, String stack_level, Date od_coating_date, Date id_coating_date, String level_direction, String level_sequence, Date shipment_date, String last_accepted_status, String rebevel_mark, String odsampling_mark, String idsampling_mark, String od_dsc_sample_mark, String od_pe_sample_mark, String id_glass_sample_mark) {
         this.id = id;
         this.contract_no = contract_no;
         this.pipe_no = pipe_no;
@@ -55,6 +60,9 @@ public class PipeBasicInfo {
         this.rebevel_mark = rebevel_mark;
         this.odsampling_mark = odsampling_mark;
         this.idsampling_mark = idsampling_mark;
+        this.od_dsc_sample_mark = od_dsc_sample_mark;
+        this.od_pe_sample_mark = od_pe_sample_mark;
+        this.id_glass_sample_mark = id_glass_sample_mark;
     }
 
     public int getId() {
@@ -231,5 +239,29 @@ public class PipeBasicInfo {
 
     public void setIdsampling_mark(String idsampling_mark) {
         this.idsampling_mark = idsampling_mark;
+    }
+
+    public String getOd_dsc_sample_mark() {
+        return od_dsc_sample_mark;
+    }
+
+    public void setOd_dsc_sample_mark(String od_dsc_sample_mark) {
+        this.od_dsc_sample_mark = od_dsc_sample_mark;
+    }
+
+    public String getOd_pe_sample_mark() {
+        return od_pe_sample_mark;
+    }
+
+    public void setOd_pe_sample_mark(String od_pe_sample_mark) {
+        this.od_pe_sample_mark = od_pe_sample_mark;
+    }
+
+    public String getId_glass_sample_mark() {
+        return id_glass_sample_mark;
+    }
+
+    public void setId_glass_sample_mark(String id_glass_sample_mark) {
+        this.id_glass_sample_mark = id_glass_sample_mark;
     }
 }

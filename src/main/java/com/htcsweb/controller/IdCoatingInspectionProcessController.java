@@ -144,6 +144,10 @@ public class IdCoatingInspectionProcessController {
                             if(idCoatingInspectionProcess.getIs_sample().equals("1")){
                                 p.setIdsampling_mark("1");
                             }
+                            if(idCoatingInspectionProcess.getIs_glass_sample().equals("1")){
+                                p.setId_glass_sample_mark("1");
+                            }
+
                         }else if(idCoatingInspectionProcess.getResult().equals("0")){
                             p.setStatus("idrepair1");
                         }else if(idCoatingInspectionProcess.getResult().equals("2")){

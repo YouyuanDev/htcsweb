@@ -220,6 +220,12 @@ public class OdCoating3LpeInspectionProcessController {
                             if(odCoating3LpeInspectionProcess.getIs_sample().equals("1")){
                                 p.setOdsampling_mark("1");
                             }
+                            if(odCoating3LpeInspectionProcess.getIs_dsc_sample().equals("1")){
+                                p.setOd_dsc_sample_mark("1");
+                            }
+                            if(odCoating3LpeInspectionProcess.getIs_pe_sample().equals("1")){
+                                p.setOd_pe_sample_mark("1");
+                            }
 
                         }else if(odCoating3LpeInspectionProcess.getResult().equals("0")){
                             p.setStatus("odrepair1");
