@@ -374,7 +374,7 @@
                        <input class="easyui-datetimebox" type="text" name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
 
                    </td>
-                   <td class="i18n1" name="coatingdate" width="20%">涂层时间</td>
+                   <td class="i18n1" name="coatingdate">涂层时间</td>
                    <td >
                        <input id="coating_date"  class="easyui-datetimebox" type="text" name="coating_date" value="" data-options="formatter:myformatter2,parser:myparser2"/>
                    </td>

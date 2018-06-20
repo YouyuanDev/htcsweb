@@ -45,6 +45,7 @@
                 }
             });
             $('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
+            setCoatingTime();
             // hlLanguage("../i18n/");
         });
         function addLabtest3LpePro(){
@@ -274,6 +275,27 @@
                 $(this).siblings().css("background-color","#FFFFFF");
             });
         }
+        function setCoatingTime() {
+            $('#coating_date').datetimebox({
+                stopFirstChangeEvent: true,
+                onChange: function() {
+                    var options = $(this).datetimebox('options');
+                    if(options.stopFirstChangeEvent) {
+                        options.stopFirstChangeEvent = false;
+                        return;
+                    }
+                    //以下写onchange的逻辑
+                    //alert($("#coating_date").datetimebox('getValue'));
+                    onSearchClick(1);onSearchClick(3);onSearchClick(4);
+                }
+            });
+            var date=$("#coating_date").datetimebox('getValue');
+            if(date!=undefined){
+                $('#coating_date').datetimebox('setValue',date);
+            }else{
+                $("#coating_date").datetimebox('options').stopFirstChangeEvent = false;
+            }
+        }
     </script>
 
 
@@ -360,20 +382,26 @@
             <table class="ht-table">
                 <tr>
                     <td class="i18n1" name="id" width="20%">流水号</td>
-                    <td colspan="5" width="30%"><label class="hl-label" id="odbpid"></label></td>
-                </tr>
-                <tr>
+                    <td ><label class="hl-label" id="odbpid"></label></td>
                     <td class="i18n1" name="operatorno" width="20%">操作工编号</td>
-                    <td colspan="1" width="30%">
+                    <td >
                         <input id="lookup2" name="operator_no" class="mini-lookup" style="text-align:center;width:180px;"
                                textField="employee_no" valueField="id" popupWidth="auto"
                                popup="#gridPanel2" grid="#datagrid2" multiSelect="false"
                         />
                     </td>
+                </tr>
+                <tr>
+
 
                     <td class="i18n1" name="operationtime">操作时间</td>
                     <td>
                         <input class="easyui-datetimebox" type="text" name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+
+                    </td>
+                    <td class="i18n1" name="coatingdate">涂层时间</td>
+                    <td>
+                        <input id="coating_date" class="easyui-datetimebox" type="text" name="coating_date" value="" data-options="formatter:myformatter2,parser:myparser2"/>
 
                     </td>
                 </tr>
@@ -483,12 +511,7 @@
                         <input class="easyui-textbox"   type="text" name="sample_no" value=""/>
                     </td>
                     <td></td>
-                    <td class="i18n1" name="coatingdate" width="20%">涂层时间</td>
-                    <td colspan="1" width="30%">
-                        <input class="easyui-datetimebox" type="text" name="coating_date" value="" data-options="formatter:myformatter2,parser:myparser2"/>
 
-                    </td>
-                    <td></td>
                 </tr>
                 <tr>
                     <td class="i18n1" name="resistancetocd2028d">阴极剥离 20度 28天</td>
@@ -693,7 +716,8 @@
         if(type==1)
         {
             grid1.load({
-                pipe_no:keyText1.value
+                pipe_no:keyText1.value,
+                coating_date:$("#coating_date").datetimebox('getValue')
             });
         }else if(type==2){
             grid2.load({
@@ -702,11 +726,13 @@
             });
         }else if(type==3){
             grid3.load({
-                pipe_no:keyText5.value
+                pipe_no:keyText5.value,
+                coating_date:$("#coating_date").datetimebox('getValue')
             });
         }else if(type==4){
             grid4.load({
-                pipe_no:keyText6.value
+                pipe_no:keyText6.value,
+                coating_date:$("#coating_date").datetimebox('getValue')
             });
         }
 
@@ -737,7 +763,7 @@
         clearLabelPipeInfo();
         $.ajax({
             url:'../pipeinfo/get3LPESamplePipeNo.action',
-            data:{'pipe_no':rows.pipe_no},
+            data:{'pipe_no':rows.pipe_no,coating_date:$("#coating_date").datetimebox('getValue')},
             dataType:'json',
             success:function (data) {
                 if(data!=null&&data!=""){
@@ -795,7 +821,8 @@
         $('.mini-panel').css('z-index','100000');
         $('#searchBar1').css('display','block');
         grid1.load({
-            pipe_no:keyText1.value
+            pipe_no:keyText1.value,
+            coating_date:$("#coating_date").datetimebox('getValue')
         });
     });
     look2.on("showpopup",function(e){
@@ -814,7 +841,8 @@
         $('.mini-panel').css('z-index','100000');
         $('#searchBar3').css('display','block');
         grid3.load({
-            pipe_no:keyText5.value
+            pipe_no:keyText5.value,
+            coating_date:$("#coating_date").datetimebox('getValue')
         });
     });
     look4.on("showpopup",function(e){
@@ -823,7 +851,8 @@
         $('.mini-panel').css('z-index','100000');
         $('#searchBar4').css('display','block');
         grid4.load({
-            pipe_no:keyText6.value
+            pipe_no:keyText6.value,
+            coating_date:$("#coating_date").datetimebox('getValue')
         });
     });
     hlLanguage("../i18n/");
