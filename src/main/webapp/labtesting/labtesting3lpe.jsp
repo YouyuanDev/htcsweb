@@ -117,6 +117,10 @@
                 look1.setValue(row.pipe_no);
                 look2.setText(row.operator_no);
                 look2.setValue(row.operator_no);
+                look3.setText(row.dsc_pipe_no);
+                look3.setValue(row.dsc_pipe_no);
+                look4.setText(row.pe_pipe_no);
+                look4.setValue(row.pe_pipe_no);
                 var odpictures=row.upload_files;
                 if(odpictures!=null&&odpictures!=""){
                     var imgList=odpictures.split(';');
@@ -624,7 +628,7 @@
     </div>
     <div id="datagrid3" class="mini-datagrid" style="width:100%;height:100%;"
          borderStyle="border:0" showPageSize="false" showPageIndex="false"
-         url="/pipeinfo/get3LPESamplePipeNo.action">
+         url="/pipeinfo/get3LPEDSCSamplePipeNo.action">
         <div property="columns">
             <div type="checkcolumn" ></div>
             <div field="pipe_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="pipeno">钢管编号</div>
@@ -653,7 +657,7 @@
     </div>
     <div id="datagrid4" class="mini-datagrid" style="width:100%;height:100%;"
          borderStyle="border:0" showPageSize="false" showPageIndex="false"
-         url="/pipeinfo/get3LPESamplePipeNo.action">
+         url="/pipeinfo/get3LPEPESamplePipeNo.action">
         <div property="columns">
             <div type="checkcolumn" ></div>
             <div field="pipe_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="pipeno">钢管编号</div>
@@ -752,38 +756,38 @@
     look3.on('valuechanged',function () {
         var rows = grid3.getSelected();
         $("input[name='dsc_pipe_no']").val(rows.pipe_no);
-        clearLabelPipeInfo();
-        $.ajax({
-            url:'../pipeinfo/get3LPESamplePipeNo.action',
-            data:{'pipe_no':rows.pipe_no},
-            dataType:'json',
-            success:function (data) {
-                if(data!=null&&data!=""){
-                    addLabelPipeInfo(data);
-                }
-            },
-            error:function () {
-                hlAlertThree();
-            }
-        });
+        // clearLabelPipeInfo();
+        // $.ajax({
+        //     url:'../pipeinfo/get3LPEDSCSamplePipeNo.action',
+        //     data:{'pipe_no':rows.pipe_no},
+        //     dataType:'json',
+        //     success:function (data) {
+        //         if(data!=null&&data!=""){
+        //             addLabelPipeInfo(data);
+        //         }
+        //     },
+        //     error:function () {
+        //         hlAlertThree();
+        //     }
+        // });
     });
     look4.on('valuechanged',function () {
         var rows = grid4.getSelected();
         $("input[name='pe_pipe_no']").val(rows.pipe_no);
-        clearLabelPipeInfo();
-        $.ajax({
-            url:'../pipeinfo/get3LPESamplePipeNo.action',
-            data:{'pipe_no':rows.pipe_no},
-            dataType:'json',
-            success:function (data) {
-                if(data!=null&&data!=""){
-                    addLabelPipeInfo(data);
-                }
-            },
-            error:function () {
-                hlAlertThree();
-            }
-        });
+        // clearLabelPipeInfo();
+        // $.ajax({
+        //     url:'../pipeinfo/get3LPEPESamplePipeNo.action',
+        //     data:{'pipe_no':rows.pipe_no},
+        //     dataType:'json',
+        //     success:function (data) {
+        //         if(data!=null&&data!=""){
+        //             addLabelPipeInfo(data);
+        //         }
+        //     },
+        //     error:function () {
+        //         hlAlertThree();
+        //     }
+        // });
     });
     look1.on("showpopup",function(e){
         $('.mini-shadow').css('z-index','99999');
@@ -791,8 +795,7 @@
         $('.mini-panel').css('z-index','100000');
         $('#searchBar1').css('display','block');
         grid1.load({
-            pipe_no:keyText1.value,
-            pipestatus:'bare1,'
+            pipe_no:keyText1.value
         });
     });
     look2.on("showpopup",function(e){
@@ -811,8 +814,7 @@
         $('.mini-panel').css('z-index','100000');
         $('#searchBar3').css('display','block');
         grid3.load({
-            pipe_no:keyText5.value,
-            pipestatus:'bare1,'
+            pipe_no:keyText5.value
         });
     });
     look4.on("showpopup",function(e){
@@ -821,8 +823,7 @@
         $('.mini-panel').css('z-index','100000');
         $('#searchBar4').css('display','block');
         grid4.load({
-            pipe_no:keyText6.value,
-            pipestatus:'bare1,'
+            pipe_no:keyText6.value
         });
     });
     hlLanguage("../i18n/");
