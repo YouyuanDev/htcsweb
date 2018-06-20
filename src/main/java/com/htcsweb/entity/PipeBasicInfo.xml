@@ -127,7 +127,7 @@
                 <![CDATA[ AND DATE_FORMAT(od_coating_date,'%Y-%m-%d %H:%T:%s')<DATE_FORMAT(DATE_ADD(#{end_time},INTERVAL 1 DAY),'%Y-%m-%d 00:00:00')]]>
             </if>
         </where>
-        ORDER BY id DESC
+        ORDER BY pipe_no DESC
         limit 1000
     </select>
 
@@ -153,7 +153,7 @@
                 <![CDATA[ AND DATE_FORMAT(od_coating_date,'%Y-%m-%d %H:%T:%s')<DATE_FORMAT(DATE_ADD(#{end_time},INTERVAL 1 DAY),'%Y-%m-%d 00:00:00')]]>
             </if>
         </where>
-        ORDER BY id DESC
+        ORDER BY pipe_no DESC
         limit 1000
     </select>
 
@@ -178,7 +178,7 @@
                 <![CDATA[ AND DATE_FORMAT(od_coating_date,'%Y-%m-%d %H:%T:%s')<DATE_FORMAT(DATE_ADD(#{end_time},INTERVAL 1 DAY),'%Y-%m-%d 00:00:00')]]>
             </if>
         </where>
-        ORDER BY id DESC
+        ORDER BY pipe_no DESC
         limit 1000
     </select>
 
@@ -202,7 +202,7 @@
                 <![CDATA[ AND DATE_FORMAT(od_coating_date,'%Y-%m-%d %H:%T:%s')<DATE_FORMAT(DATE_ADD(#{end_time},INTERVAL 1 DAY),'%Y-%m-%d 00:00:00')]]>
             </if>
         </where>
-        ORDER BY id DESC
+        ORDER BY pipe_no DESC
         limit 1000
     </select>
 
@@ -228,7 +228,7 @@
             </if>
 
         </where>
-        ORDER BY id DESC
+        ORDER BY pipe_no DESC
         limit 1000
     </select>
 
@@ -254,7 +254,7 @@
             </if>
 
         </where>
-        ORDER BY id DESC
+        ORDER BY pipe_no DESC
         limit 1000
     </select>
 
@@ -282,7 +282,7 @@
 
 
         </where>
-        ORDER BY id DESC
+        ORDER BY pipe_no DESC
         limit 1000
     </select>
 
