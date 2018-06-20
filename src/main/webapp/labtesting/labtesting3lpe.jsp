@@ -397,7 +397,7 @@
                 </tr>
                 <tr>
                     <td class="i18n1" name="dsc">热特性实验</td>
-                    <td><input class="easyui-textbox"  onchange="ceshi()"  type="text" name="dsc" value=""/></td>
+                    <td><input class="easyui-textbox"   type="text" name="dsc" value=""/></td>
                     <td></td>
                 </tr>
             </table>
