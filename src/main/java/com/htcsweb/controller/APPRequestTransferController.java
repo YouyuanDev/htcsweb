@@ -64,9 +64,14 @@ public class APPRequestTransferController {
             HashMap<String,Object> urloptions=new HashMap<String,Object>();
             String status=(String)list.get(0).get("status");
             String external_coating=(String)list.get(0).get("external_coating");
+            String internal_coating=(String)list.get(0).get("internal_coating");
             String rebevel_mark=(String)list.get(0).get("rebevel_mark");
             String odsampling_mark=(String)list.get(0).get("odsampling_mark");
             String idsampling_mark=(String)list.get(0).get("idsampling_mark");
+            String oddscsampling_mark=(String)list.get(0).get("od_dsc_sample_mark");
+            String odpesample_mark=(String)list.get(0).get("od_pe_sample_mark");
+            String idglasssample_mark=(String)list.get(0).get("id_glass_sample_mark");
+
             maps.put("success",true);
             maps.put("pipeinfo",list.get(0));
             maps.put("message","存在钢管"+pipe_no+"的信息");
@@ -160,7 +165,25 @@ public class APPRequestTransferController {
                     //需外防取样
                     urloptions.put("pipeSamplingProcess", "addition/pipesampling");
                 }
+                if(odsampling_mark!=null&&odsampling_mark.equals("0")||oddscsampling_mark!=null&&oddscsampling_mark.equals("1")||odpesample_mark!=null&&odpesample_mark.equals("1")){
+                    //可以做外防实验  odsampling_mark为0时代表取样完毕，其他实验不需要切割取样
+                    if (external_coating.equals("2FBE")) {
+                        urloptions.put("labtesting2fbe", "labtesting/labtesting2fbe");
+                    } else if (external_coating.equals("3LPE")) {
+                        urloptions.put("labtesting3lpe", "labtesting/labtesting3lpe");
+                    }
+                }
+                if(idsampling_mark!=null&&idsampling_mark.equals("1")||idglasssample_mark!=null&&idglasssample_mark.equals("1")){
+                    //可以做内防实验
+                    if (internal_coating.equals("EPOXY")) {
+                        urloptions.put("labtestingepoxy", "labtesting/labtestingepoxy");
+                    }
+                }
 
+                //添加原材料实验链接
+                urloptions.put("rawmaterialtesting2fbe", "labtesting/rawmaterialtesting2fbe");
+                urloptions.put("rawmaterialtesting3lpe", "labtesting/rawmaterialtesting3lpe");
+                urloptions.put("rawmaterialtestingliquidepoxy", "labtesting/rawmaterialtestingliquidepoxy");
 
                 //权限过滤url
                 List<String> removeList=new ArrayList<>();
