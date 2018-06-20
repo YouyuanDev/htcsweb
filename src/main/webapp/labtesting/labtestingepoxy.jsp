@@ -99,8 +99,9 @@
                     'operation_time':getDate1(row.operation_time),
                     'upload_files':row.upload_files,
                     'result':row.result,
-                    'remark':row.remark
-
+                    'remark':row.remark,
+                    'glass_pipe_no':row.glass_pipe_no,
+                    'glass_sample_no':row.glass_sample_no
                 });
 
 
@@ -227,6 +228,8 @@
                 <th field="curing" width="100" align="center" hidden="true" class="i18n1" name="curing">固化度实验</th>
                 <th field="water_immersion" width="100" align="center" hidden="true" class="i18n1" name="waterimmersion">水浸泡实验</th>
 
+                <th field="glass_pipe_no" width="100" align="center"  class="i18n1" name="glasspipeno"></th>
+                <th field="glass_sample_no" width="100" align="center" class="i18n1" name="glasssampleno"></th>
 
                 <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                 <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
@@ -257,10 +260,59 @@
 </div>
 
 <!--添加、修改框-->
-<div id="hlLabtestEpoxyDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;height:auto;">
+<div id="hlLabtestEpoxyDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;max-height:600px;overflow-y:scroll;">
     <form id="LabtestEpoxyForm" method="post">
         <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
             <legend class="i18n1" name="pipebasicinfo">钢管信息</legend>
+            <table class="ht-table">
+                <tr>
+                    <td class="i18n1" name="id" width="20%">流水号</td>
+                    <td colspan="5" width="30%"><label class="hl-label" id="odbpid"></label></td>
+                </tr>
+                <tr>
+                    <td class="i18n1" name="operatorno" width="20%">操作工编号</td>
+                    <td colspan="1" width="30%">
+                        <input id="lookup2" name="operator_no" class="mini-lookup" style="text-align:center;width:180px;"
+                               textField="employee_no" valueField="id" popupWidth="auto"
+                               popup="#gridPanel2" grid="#datagrid2" multiSelect="false"
+                        />
+                    </td>
+                    <td class="i18n1" name="operationtime">操作时间</td>
+                    <td>
+                        <input class="easyui-datetimebox" type="text" name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+
+                    </td>
+
+                </tr>
+            </table>
+        </fieldset>
+        <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
+            <legend>内防实验信息(玻璃片样)</legend>
+            <table class="ht-table" width="100%" border="0">
+                <tr>
+                    <td class="i18n1" name="glasspipeno"></td>
+                    <td><input class="easyui-textbox" type="text" name="glass_pipe_no" value=""/></td>
+                    <td></td>
+                    <td class="i18n1" name="glasssampleno"></td>
+                    <td><input class="easyui-textbox" type="text" name="glass_sample_no" value=""/></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="i18n1" name="porosity">针孔实验</td>
+                    <td>
+                        <select id="porosity" class="easyui-combobox" data-options="editable:false" name="porosity" style="width:200px;">
+                            <option value="OK">合格（无针孔）</option>
+                            <option value="Not OK">不合格（有针孔）</option>
+                            <option value="Pending">待定</option>
+                        </select>
+
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+        </fieldset>
+        <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
+            <legend>内防实验信息(钢试片样)</legend>
             <table class="ht-table" width="100%" border="0">
                 <tr>
                     <td class="i18n1" name="projectname" width="16%">项目名称</td>
@@ -268,9 +320,7 @@
 
                     <td class="i18n1" name="contractno" width="16%">合同编号</td>
                     <td colspan="7" width="33%"><label class="hl-label" id="contract_no"></label></td>
-
                 </tr>
-
                 <tr>
                     <td class="i18n1" name="pipeno" width="16%">钢管编号</td>
                     <td colspan="2" width="33%">
@@ -299,32 +349,6 @@
                     <td align="center"><label class="hl-label" id="heat_no"></label></td>
                 </tr>
             </table>
-        </fieldset>
-        <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
-            <legend>外防实验(2FBE)信息</legend>
-
-            <table class="ht-table">
-                <tr>
-                    <td class="i18n1" name="id" width="20%">流水号</td>
-                    <td colspan="5" width="30%"><label class="hl-label" id="odbpid"></label></td>
-                </tr>
-                <tr>
-                    <td class="i18n1" name="operatorno" width="20%">操作工编号</td>
-                    <td colspan="1" width="30%">
-                        <input id="lookup2" name="operator_no" class="mini-lookup" style="text-align:center;width:180px;"
-                               textField="employee_no" valueField="id" popupWidth="auto"
-                               popup="#gridPanel2" grid="#datagrid2" multiSelect="false"
-                        />
-                    </td>
-                    <td class="i18n1" name="operationtime">操作时间</td>
-                    <td>
-                        <input class="easyui-datetimebox" type="text" name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
-
-                    </td>
-
-                </tr>
-            </table>
-
             <table class="ht-table">
                 <tr>
                     <td class="i18n1" name="sampleno">试样号</td>
@@ -341,16 +365,7 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td class="i18n1" name="porosity">针孔实验</td>
-                    <td>
-                        <select id="porosity" class="easyui-combobox" data-options="editable:false" name="porosity" style="width:200px;">
-                            <option value="OK">合格（无针孔）</option>
-                            <option value="Not OK">不合格（有针孔）</option>
-                            <option value="Pending">待定</option>
-                        </select>
 
-                    </td>
-                    <td></td>
                     <td class="i18n1" name="bend">内涂弯曲实验</td>
                     <td>
                         <select id="bend" class="easyui-combobox" data-options="editable:false" name="bend" style="width:200px;">
@@ -361,8 +376,6 @@
 
                     </td>
                     <td></td>
-                </tr>
-                <tr>
                     <td class="i18n1" name="adhesion">附着力实验</td>
                     <td>
                         <select id="adhesion" class="easyui-combobox" data-options="editable:false" name="adhesion" style="width:200px;">
@@ -372,6 +385,8 @@
                         </select>
                     </td>
                     <td></td>
+                </tr>
+                <tr>
                     <td class="i18n1" name="curing">固化度实验</td>
                     <td>
                         <select id="curing" class="easyui-combobox" data-options="editable:false" name="curing" style="width:200px;">
@@ -382,10 +397,7 @@
 
                     </td>
                     <td></td>
-                </tr>
-
-                <tr>
-                    <td width="16%" class="i18n1" name="waterimmersion">水浸泡实验</td>
+                    <td class="i18n1" name="waterimmersion">水浸泡实验</td>
                     <td>
                         <select id="water_immersion" class="easyui-combobox" data-options="editable:false" name="water_immersion" style="width:200px;">
                             <option value="OK">合格</option>
@@ -395,23 +407,18 @@
 
                     </td>
                     <td></td>
-
                 </tr>
 
                 <tr>
-                    <td width="16%" class="i18n1" name="remark">备注</td>
-                    <td colspan="5"><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
-                </tr>
-                <tr>
-                    <td width="16%" class="i18n1" name="result">结论</td>
+                    <td class="i18n1" name="remark">备注</td>
+                    <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
+                    <td></td>
+                    <td class="i18n1" name="result">结论</td>
                     <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
                         <option value="0">不合格,复验</option>
                         <option value="1">合格</option>
                         <option value="10">待定</option>
                     </select></td>
-                    <td></td>
-                    <td ></td>
-                    <td></td>
                     <td></td>
                 </tr>
             </table>
@@ -425,6 +432,7 @@
                  onuploaderror="onUploadError" onuploadsuccess="onUploadSuccess">
             </div>
         </fieldset>
+
     </form>
 
 

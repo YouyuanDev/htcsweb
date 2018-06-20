@@ -103,8 +103,12 @@
                     'operation_time':getDate1(row.operation_time),
                     'upload_files':row.upload_files,
                     'result':row.result,
-                    'remark':row.remark
-
+                    'remark':row.remark,
+                    'dsc':row.dsc,
+                    'dsc_pipe_no':row.dsc_pipe_no,
+                    'dsc_sample_no':row.dsc_sample_no,
+                    'pe_pipe_no':row.pe_pipe_no,
+                    'pe_sample_no':row.pe_sample_no
                 });
 
                 // $('#coating-date').datetimebox('setValue',getDate1(row.coating_date));
@@ -309,6 +313,12 @@
                 <th field="elongation_at_break" align="center" width="120" class="i18n1" name="elongationatbreak">延展率</th>
                 <th field="coating_resistivity" align="center" width="120" class="i18n1" name="coatingresistivity">涂层强度</th>
                 <th field="thermal_degradation" align="center" width="120" class="i18n1" name="thermaldegradation">热降解</th>
+                <th field="dsc" align="center" width="120" class="i18n1" name="dsc"></th>
+                <th field="dsc_pipe_no" align="center" width="120" class="i18n1" name="dscpipeno"></th>
+                <th field="dsc_sample_no" align="center" width="120" class="i18n1" name="dscsampleno"></th>
+                <th field="pe_pipe_no" align="center" width="120" class="i18n1" name="pepipeno"></th>
+                <th field="pe_sample_no" align="center" width="120" class="i18n1" name="pesampleno"></th>
+
 
                 <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                 <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
@@ -339,10 +349,83 @@
 </div>
 
 <!--添加、修改框-->
-<div id="hlLabtest3LpeDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;height:auto;">
+<div id="hlLabtest3LpeDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display:none;padding:5px;width:950px;max-height:600px;overflow-y: scroll;">
     <form id="Labtest3LpeForm" method="post">
         <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
             <legend class="i18n1" name="pipebasicinfo">钢管信息</legend>
+            <table class="ht-table">
+                <tr>
+                    <td class="i18n1" name="id" width="20%">流水号</td>
+                    <td colspan="5" width="30%"><label class="hl-label" id="odbpid"></label></td>
+                </tr>
+                <tr>
+                    <td class="i18n1" name="operatorno" width="20%">操作工编号</td>
+                    <td colspan="1" width="30%">
+                        <input id="lookup2" name="operator_no" class="mini-lookup" style="text-align:center;width:180px;"
+                               textField="employee_no" valueField="id" popupWidth="auto"
+                               popup="#gridPanel2" grid="#datagrid2" multiSelect="false"
+                        />
+                    </td>
+
+                    <td class="i18n1" name="operationtime">操作时间</td>
+                    <td>
+                        <input class="easyui-datetimebox" type="text" name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+
+                    </td>
+                </tr>
+            </table>
+
+        </fieldset>
+        <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
+            <legend>外防实验(3LPE)信息(Dsc取样)</legend>
+            <table class="ht-table" width="100%" border="0">
+                <tr>
+                    <td class="i18n1" name="dscpipeno"></td>
+                    <td><input class="easyui-textbox" type="text" name="dsc_pipe_no" value=""/></td>
+                    <td></td>
+                    <td class="i18n1" name="dscsampleno"></td>
+                    <td><input class="easyui-textbox" type="text" name="dsc_sample_no" value=""/></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="i18n1" name="dsc">热特性实验</td>
+                    <td><input class="easyui-textbox"  onchange="ceshi()"  type="text" name="dsc" value=""/></td>
+                    <td></td>
+                </tr>
+            </table>
+        </fieldset>
+        <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
+            <legend>外防实验(3LPE)信息(PE取样)</legend>
+            <table class="ht-table" width="100%" border="0">
+                <tr>
+                    <td class="i18n1" name="pepipeno"></td>
+                    <td><input class="easyui-textbox" type="text" name="pe_pipe_no" value=""/></td>
+                    <td></td>
+                    <td class="i18n1" name="pesampleno"></td>
+                    <td><input class="easyui-textbox" type="text" name="pe_sample_no" value=""/></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="i18n1" name="indentationhardness23">压痕硬度 23度</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="indentation_hardness_23" value=""/></td>
+                    <td></td>
+                    <td class="i18n1" name="indentationhardness70">压痕硬度 70度</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="indentation_hardness_70" value=""/></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="i18n1" name="elongationatbreak">延展率</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="elongation_at_break" value=""/></td>
+                    <td></td>
+                    <td class="i18n1" name="coatingresistivity">涂层强度</td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="coating_resistivity" value=""/></td>
+                    <td></td>
+                </tr>
+            </table>
+        </fieldset>
+        <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
+            <legend>外防实验(3LPE)信息(常规取样)</legend>
+
             <table class="ht-table" width="100%" border="0">
                 <tr>
                     <td class="i18n1" name="projectname" width="16%">项目名称</td>
@@ -381,32 +464,6 @@
                     <td align="center"><label class="hl-label" id="heat_no"></label></td>
                 </tr>
             </table>
-        </fieldset>
-        <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
-            <legend>外防实验(2FBE)信息</legend>
-
-            <table class="ht-table">
-                <tr>
-                    <td class="i18n1" name="id" width="20%">流水号</td>
-                    <td colspan="5" width="30%"><label class="hl-label" id="odbpid"></label></td>
-                </tr>
-                <tr>
-                    <td class="i18n1" name="operatorno" width="20%">操作工编号</td>
-                    <td colspan="1" width="30%">
-                        <input id="lookup2" name="operator_no" class="mini-lookup" style="text-align:center;width:180px;"
-                               textField="employee_no" valueField="id" popupWidth="auto"
-                               popup="#gridPanel2" grid="#datagrid2" multiSelect="false"
-                        />
-                    </td>
-
-                    <td class="i18n1" name="operationtime">操作时间</td>
-                    <td>
-                        <input class="easyui-datetimebox" type="text" name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
-
-                    </td>
-                </tr>
-            </table>
-
             <table class="ht-table">
                 <tr>
                     <td class="i18n1" name="sampleno">试样号</td>
@@ -451,22 +508,7 @@
                     </td>
                     <td></td>
                 </tr>
-                <tr>
-                    <td class="i18n1" name="indentationhardness23">压痕硬度 23度</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="indentation_hardness_23" value=""/></td>
-                    <td></td>
-                    <td class="i18n1" name="indentationhardness70">压痕硬度 70度</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="indentation_hardness_70" value=""/></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td class="i18n1" name="elongationatbreak">延展率</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="elongation_at_break" value=""/></td>
-                    <td></td>
-                    <td class="i18n1" name="coatingresistivity">涂层强度</td>
-                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="coating_resistivity" value=""/></td>
-                    <td></td>
-                </tr>
+
 
                 <tr>
                     <td width="16%" class="i18n1" name="remark">备注</td>

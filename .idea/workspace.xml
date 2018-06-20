@@ -8,7 +8,19 @@
   <component name="ChangeListManager">
     <list default="true" id="fa3f659b-6ccf-4ae8-84a0-55d0a3756f6f" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeBasicInfo.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeBasicInfo.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTesting2Fbe.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTesting2Fbe.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTesting2Fbe.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTesting2Fbe.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTesting3Lpe.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTesting3Lpe.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTesting3Lpe.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTesting3Lpe.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTestingEpoxy.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTestingEpoxy.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTestingEpoxy.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTestingEpoxy.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/i18n/strings.properties" afterPath="$PROJECT_DIR$/src/main/webapp/i18n/strings.properties" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/i18n/strings_en.properties" afterPath="$PROJECT_DIR$/src/main/webapp/i18n/strings_en.properties" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties" afterPath="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh.properties" afterPath="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh.properties" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/labtesting/labtesting2fbe.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/labtesting/labtesting2fbe.jsp" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/labtesting/labtesting3lpe.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/labtesting/labtesting3lpe.jsp" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/labtesting/labtestingepoxy.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/labtesting/labtestingepoxy.jsp" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -36,69 +48,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="odstockin.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/storage/odstockin.jsp">
+      <file leaf-file-name="labtesting2fbe.jsp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/labtesting/labtesting2fbe.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="11" column="35" lean-forward="true" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="instoragetransfer.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/storage/instoragetransfer.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="177" column="54" lean-forward="true" selection-start-line="177" selection-start-column="54" selection-end-line="177" selection-end-column="54" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PipeBasicInfo.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeBasicInfo.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="388" column="0" lean-forward="true" selection-start-line="388" selection-start-column="0" selection-end-line="388" selection-end-column="0" />
+            <state relative-caret-position="81">
+              <caret line="624" column="5" lean-forward="true" selection-start-line="624" selection-start-column="5" selection-end-line="624" selection-end-column="5" />
               <folding>
-                <marker date="1529460208000" expanded="true" signature="1903:2594" ph="SELECT p.* f... pipe_basic_info" />
-                <marker date="1529460208000" expanded="true" signature="2755:3466" ph="SELECT p.*,s... pipe_basic_info" />
-                <marker date="1529460208000" expanded="true" signature="2911:3006" ph="select pipe_... od_blast_process" />
-                <marker date="1529460208000" expanded="true" signature="3067:3162" ph="select pipe_... id_blast_process" />
-                <marker date="1529460208000" expanded="true" signature="3542:4176" ph="SELECT count... pipe_basic_info" />
-                <marker date="1529460208000" expanded="true" signature="3651:3746" ph="select pipe_... od_blast_process" />
-                <marker date="1529460208000" expanded="true" signature="3807:3902" ph="select pipe_... id_blast_process" />
-                <marker date="1529460208000" expanded="true" signature="4284:4510" ph="SELECT * fro... pipe_basic_info" />
-                <marker date="1529460208000" expanded="true" signature="4654:5028" ph="select * fro... pipe_basic_info" />
-                <marker date="1529460208000" expanded="true" signature="4711:4809" ph="select pipe_... od_coating_2fbe_inspection_process" />
-                <marker date="1529460208000" expanded="true" signature="5179:5574" ph="select * fro... pipe_basic_info" />
-                <marker date="1529460208000" expanded="true" signature="5236:5354" ph="select pipe_... od_coating_3lpe_inspection_process" />
-                <marker date="1529460208000" expanded="true" signature="5745:6116" ph="select * fro... pipe_basic_info" />
-                <marker date="1529460208000" expanded="true" signature="5802:5897" ph="select pipe_... id_coating_inspection_process" />
-                <marker date="1529460208000" expanded="true" signature="6580:6824" ph="select * fro... pipe_basic_info" />
-                <marker date="1529460208000" expanded="true" signature="6936:7180" ph="select * fro... pipe_basic_info" />
-                <marker date="1529460208000" expanded="true" signature="7296:7538" ph="select * fro... pipe_basic_info" />
-                <marker date="1529460208000" expanded="true" signature="8786:9713" ph="select co.pr... pipe_basic_info" />
-                <marker date="1529460208000" expanded="true" signature="9781:9817" ph="select count... pipe_basic_info" />
-                <marker date="1529460208000" expanded="true" signature="12234:13098" ph="select co.pr... pipe_basic_info" />
-                <marker date="1529460208000" expanded="true" signature="13188:13977" ph="select co.pr... pipe_basic_info" />
-                <marker date="1529460208000" expanded="true" signature="14066:14852" ph="select co.pr... pipe_basic_info" />
-                <marker date="1529460208000" expanded="true" signature="14927:15610" ph="Select p.id,... pipe_basic_info" />
-                <marker date="1529460208000" expanded="true" signature="15721:16329" ph="UPDATE pipe_basic_info... " />
-                <marker date="1529460208000" expanded="true" signature="16437:17047" ph="INSERT INTO pipe_basic_info... " />
-                <marker date="1529460208000" expanded="true" signature="18941:19971" ph="select co.pr... pipe_basic_info" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#fieldset#0;n#form#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#td#1;n#tr#1;n#table#0;n#fieldset#0;n#form#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PipeBasicInfoController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PipeBasicInfoController.java">
+      <file leaf-file-name="labtesting3lpe.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/labtesting/labtesting3lpe.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="749" column="37" lean-forward="false" selection-start-line="749" selection-start-column="37" selection-end-line="749" selection-end-column="37" />
-              <folding />
+            <state relative-caret-position="220">
+              <caret line="400" column="46" lean-forward="false" selection-start-line="400" selection-start-column="46" selection-end-line="400" selection-end-column="46" />
+              <folding>
+                <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="labtestingepoxy.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/labtesting/labtestingepoxy.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="292" column="49" lean-forward="false" selection-start-line="292" selection-start-column="49" selection-end-line="292" selection-end-column="49" />
+              <folding>
+                <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -121,12 +105,7 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>save</find>
-      <find>getPipeInfoByLike</find>
-      <find>level_sequence</find>
-      <find>odProductStockin</find>
       <find>idProductStockin</find>
-      <find>odproductstockin</find>
       <find>levelsequence</find>
       <find>adminMode</find>
       <find>update</find>
@@ -151,6 +130,11 @@
       <find>onSearchClick</find>
       <find>getCoatingInfoByPipeNo</find>
       <find>doInStoageTransfer</find>
+      <find>getPipeInfoByNo</find>
+      <find>odproductstockin</find>
+      <find>basicinfo</find>
+      <find>dscsampleno</find>
+      <find>ds</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src/main/webapp/WEB-INF/lib</dir>
@@ -177,15 +161,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdBlastInspectionProcessController.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/id/idcoatingprocess.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/id/idcoatinginspectionprocess.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/IdCoatingInspectionProcessController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/IdFinalInspectionProcessController.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/id/idfinalinspectionprocess.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/InspectionFrequencyDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/InspectionFrequency.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/InspectionFrequencyController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/productionRecordAndReport/dailyProductionReport.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeBasicInfo.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/storage/idstockin.jsp" />
@@ -198,10 +173,6 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PersonController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/UploadFileController.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties" />
-        <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh.properties" />
-        <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings_en.properties" />
-        <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/RoleController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PushEventRule.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PushEventRuleDao.java" />
@@ -228,6 +199,19 @@
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/CoatingRepairController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/pipe/pipeManagement.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeBasicInfo.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTesting2Fbe.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTesting2Fbe.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTesting3Lpe.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTesting3Lpe.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTestingEpoxy.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTestingEpoxy.xml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings.properties" />
+        <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings_en.properties" />
+        <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh.properties" />
+        <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties" />
+        <option value="$PROJECT_DIR$/src/main/webapp/labtesting/labtesting3lpe.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/labtesting/labtestingepoxy.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/labtesting/labtesting2fbe.jsp" />
       </list>
     </option>
   </component>
@@ -251,8 +235,7 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-24" />
-    <option name="y" value="27" />
+    <option name="y" value="23" />
     <option name="width" value="1920" />
     <option name="height" value="988" />
   </component>
@@ -314,22 +297,6 @@
               <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
-              <item name="entity" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
-              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
-              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -338,7 +305,7 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="storage" type="462c0819:PsiDirectoryNode" />
+              <item name="i18n" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -856,7 +823,7 @@
       <workItem from="1528957432034" duration="10106000" />
       <workItem from="1529026150257" duration="11919000" />
       <workItem from="1529372348560" duration="21788000" />
-      <workItem from="1529458095668" duration="2055000" />
+      <workItem from="1529458095668" duration="14028000" />
     </task>
     <servers />
   </component>
@@ -869,7 +836,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1219903000" />
+    <option name="totallyTimeSpent" value="1231876000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -881,7 +848,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-24" y="27" width="1920" height="988" extended-state="0" />
+    <frame x="0" y="23" width="1920" height="988" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -991,127 +958,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/id/idcoatinginspectionprocess.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="510" column="28" lean-forward="false" selection-start-line="510" selection-start-column="28" selection-end-line="510" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/id/idcoatingprocess.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="392" column="48" lean-forward="false" selection-start-line="392" selection-start-column="48" selection-end-line="392" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/id/idblastprocess.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="428" column="20" lean-forward="false" selection-start-line="428" selection-start-column="20" selection-end-line="428" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/UploadFileController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="172" column="29" lean-forward="false" selection-start-line="172" selection-start-column="29" selection-end-line="172" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/DefectInfoController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="34" column="34" lean-forward="false" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdBlastProcess.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="12" column="16" lean-forward="false" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/od/odstencilprocess.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="626">
-          <caret line="104" column="45" lean-forward="true" selection-start-line="104" selection-start-column="45" selection-end-line="104" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdBlastInspectionProcessController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1015">
-          <caret line="26" column="13" lean-forward="false" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdBlastProcessController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="58" column="20" lean-forward="true" selection-start-line="58" selection-start-column="20" selection-end-line="58" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoating3LpeProcessController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3656">
-          <caret line="268" column="0" lean-forward="false" selection-start-line="268" selection-start-column="0" selection-end-line="268" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/IdStencilProcessController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-759">
-          <caret line="27" column="13" lean-forward="false" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/InspectionFrequencyController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2055">
-          <caret line="147" column="25" lean-forward="false" selection-start-line="147" selection-start-column="25" selection-end-line="147" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/IdCoatingProcessController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="28" column="13" lean-forward="false" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/IdFinalInspectionProcessController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="28" column="13" lean-forward="false" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/InspectionRecordPDFController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="29" column="13" lean-forward="false" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoatingProcessController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="98" column="17" lean-forward="true" selection-start-line="98" selection-start-column="17" selection-end-line="98" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/AcceptanceCriteriaController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-957">
@@ -1140,6 +986,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-16">
           <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1207,6 +1054,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="265">
           <caret line="123" column="55" lean-forward="false" selection-start-line="123" selection-start-column="45" selection-end-line="123" selection-end-column="55" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1214,6 +1062,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="69">
           <caret line="153" column="55" lean-forward="false" selection-start-line="153" selection-start-column="55" selection-end-line="153" selection-end-column="55" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1236,6 +1085,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="243" column="21" lean-forward="false" selection-start-line="243" selection-start-column="21" selection-end-line="243" selection-end-column="21" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1243,6 +1093,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="348">
           <caret line="26" column="3" lean-forward="false" selection-start-line="26" selection-start-column="3" selection-end-line="26" selection-end-column="3" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1276,6 +1127,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="11" column="51" lean-forward="false" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="51" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1283,6 +1135,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="278">
           <caret line="485" column="10" lean-forward="false" selection-start-line="485" selection-start-column="10" selection-end-line="485" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1307,13 +1160,6 @@
         <state relative-caret-position="354">
           <caret line="94" column="42" lean-forward="true" selection-start-line="94" selection-start-column="42" selection-end-line="94" selection-end-column="42" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/labtesting/labtesting2fbe.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="135" column="26" lean-forward="false" selection-start-line="135" selection-start-column="26" selection-end-line="135" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -1354,20 +1200,20 @@
         <state relative-caret-position="19">
           <caret line="1182" column="20" lean-forward="false" selection-start-line="1182" selection-start-column="20" selection-end-line="1182" selection-end-column="20" />
           <folding>
-            <marker date="1529401240000" expanded="true" signature="38386:38409" ph="..." />
-            <marker date="1529401240000" expanded="true" signature="38723:38741" ph="..." />
-            <marker date="1529401240000" expanded="true" signature="41198:41221" ph="..." />
-            <marker date="1529401240000" expanded="true" signature="41538:41557" ph="..." />
-            <marker date="1529401240000" expanded="true" signature="45876:45899" ph="..." />
-            <marker date="1529401240000" expanded="true" signature="46223:46242" ph="..." />
-            <marker date="1529401240000" expanded="true" signature="49199:49222" ph="..." />
-            <marker date="1529401240000" expanded="true" signature="49538:49557" ph="..." />
-            <marker date="1529401240000" expanded="true" signature="51761:51784" ph="..." />
-            <marker date="1529401240000" expanded="true" signature="52420:52476" ph="..." />
-            <marker date="1529401240000" expanded="true" signature="52759:52827" ph="..." />
-            <marker date="1529401240000" expanded="true" signature="52945:52999" ph="..." />
-            <marker date="1529401240000" expanded="true" signature="53054:53122" ph="..." />
-            <marker date="1529401240000" expanded="true" signature="53436:53459" ph="..." />
+            <marker date="1529470392000" expanded="true" signature="38386:38409" ph="..." />
+            <marker date="1529470392000" expanded="true" signature="38723:38741" ph="..." />
+            <marker date="1529470392000" expanded="true" signature="41198:41221" ph="..." />
+            <marker date="1529470392000" expanded="true" signature="41538:41557" ph="..." />
+            <marker date="1529470392000" expanded="true" signature="45876:45899" ph="..." />
+            <marker date="1529470392000" expanded="true" signature="46223:46242" ph="..." />
+            <marker date="1529470392000" expanded="true" signature="49199:49222" ph="..." />
+            <marker date="1529470392000" expanded="true" signature="49538:49557" ph="..." />
+            <marker date="1529470392000" expanded="true" signature="51761:51784" ph="..." />
+            <marker date="1529470392000" expanded="true" signature="52420:52476" ph="..." />
+            <marker date="1529470392000" expanded="true" signature="52759:52827" ph="..." />
+            <marker date="1529470392000" expanded="true" signature="52945:52999" ph="..." />
+            <marker date="1529470392000" expanded="true" signature="53054:53122" ph="..." />
+            <marker date="1529470392000" expanded="true" signature="53436:53459" ph="..." />
           </folding>
         </state>
       </provider>
@@ -1380,18 +1226,53 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeBasicInfo.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="401" column="83" lean-forward="true" selection-start-line="401" selection-start-column="83" selection-end-line="401" selection-end-column="83" />
+          <folding>
+            <marker date="1529471131000" expanded="true" signature="1903:2594" ph="SELECT p.* f... pipe_basic_info" />
+            <marker date="1529471131000" expanded="true" signature="2755:3466" ph="SELECT p.*,s... pipe_basic_info" />
+            <marker date="1529471131000" expanded="true" signature="2911:3006" ph="select pipe_... od_blast_process" />
+            <marker date="1529471131000" expanded="true" signature="3067:3162" ph="select pipe_... id_blast_process" />
+            <marker date="1529471131000" expanded="true" signature="3542:4176" ph="SELECT count... pipe_basic_info" />
+            <marker date="1529471131000" expanded="true" signature="3651:3746" ph="select pipe_... od_blast_process" />
+            <marker date="1529471131000" expanded="true" signature="3807:3902" ph="select pipe_... id_blast_process" />
+            <marker date="1529471131000" expanded="true" signature="4284:4510" ph="SELECT * fro... pipe_basic_info" />
+            <marker date="1529471131000" expanded="true" signature="4654:5028" ph="select * fro... pipe_basic_info" />
+            <marker date="1529471131000" expanded="true" signature="4711:4809" ph="select pipe_... od_coating_2fbe_inspection_process" />
+            <marker date="1529471131000" expanded="true" signature="5179:5574" ph="select * fro... pipe_basic_info" />
+            <marker date="1529471131000" expanded="true" signature="5236:5354" ph="select pipe_... od_coating_3lpe_inspection_process" />
+            <marker date="1529471131000" expanded="true" signature="5745:6116" ph="select * fro... pipe_basic_info" />
+            <marker date="1529471131000" expanded="true" signature="5802:5897" ph="select pipe_... id_coating_inspection_process" />
+            <marker date="1529471131000" expanded="true" signature="6580:6824" ph="select * fro... pipe_basic_info" />
+            <marker date="1529471131000" expanded="true" signature="6936:7180" ph="select * fro... pipe_basic_info" />
+            <marker date="1529471131000" expanded="true" signature="7296:7538" ph="select * fro... pipe_basic_info" />
+            <marker date="1529471131000" expanded="true" signature="8786:9713" ph="select co.pr... pipe_basic_info" />
+            <marker date="1529471131000" expanded="true" signature="9781:9817" ph="select count... pipe_basic_info" />
+            <marker date="1529471131000" expanded="true" signature="12234:13098" ph="select co.pr... pipe_basic_info" />
+            <marker date="1529471131000" expanded="true" signature="13188:13977" ph="select co.pr... pipe_basic_info" />
+            <marker date="1529471131000" expanded="true" signature="14066:14852" ph="select co.pr... pipe_basic_info" />
+            <marker date="1529471131000" expanded="true" signature="14927:15610" ph="Select p.id,... pipe_basic_info" />
+            <marker date="1529471131000" expanded="true" signature="15721:16329" ph="UPDATE pipe_basic_info... " />
+            <marker date="1529471131000" expanded="true" signature="17953:17960" ph="INSERT INTO pipe_basic_info... " />
+            <marker date="1529471131000" expanded="true" signature="19854:20884" ph="select co.pr... pipe_basic_info" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/storage/odstockin.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" column="35" lean-forward="true" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
+        <state relative-caret-position="191">
+          <caret line="67" column="14" lean-forward="false" selection-start-line="67" selection-start-column="14" selection-end-line="67" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PipeBasicInfoController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/storage/productStockout.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="749" column="37" lean-forward="false" selection-start-line="749" selection-start-column="37" selection-end-line="749" selection-end-column="37" />
+        <state relative-caret-position="318">
+          <caret line="64" column="39" lean-forward="false" selection-start-line="64" selection-start-column="39" selection-end-line="64" selection-end-column="39" />
           <folding />
         </state>
       </provider>
@@ -1399,42 +1280,215 @@
     <entry file="file://$PROJECT_DIR$/src/main/webapp/storage/instoragetransfer.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
-          <caret line="177" column="54" lean-forward="true" selection-start-line="177" selection-start-column="54" selection-end-line="177" selection-end-column="54" />
+          <caret line="177" column="54" lean-forward="false" selection-start-line="177" selection-start-column="54" selection-end-line="177" selection-end-column="54" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeBasicInfo.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/storage/idstockin.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="388" column="0" lean-forward="true" selection-start-line="388" selection-start-column="0" selection-end-line="388" selection-end-column="0" />
+        <state relative-caret-position="-904">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PipeBasicInfoController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="61">
+          <caret line="455" column="38" lean-forward="false" selection-start-line="455" selection-start-column="22" selection-end-line="455" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/LabTesting2FbeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="69" column="39" lean-forward="true" selection-start-line="69" selection-start-column="39" selection-end-line="69" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTesting2Fbe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="716">
+          <caret line="223" column="0" lean-forward="true" selection-start-line="223" selection-start-column="0" selection-end-line="223" selection-end-column="0" />
           <folding>
-            <marker date="1529460208000" expanded="true" signature="1903:2594" ph="SELECT p.* f... pipe_basic_info" />
-            <marker date="1529460208000" expanded="true" signature="2755:3466" ph="SELECT p.*,s... pipe_basic_info" />
-            <marker date="1529460208000" expanded="true" signature="2911:3006" ph="select pipe_... od_blast_process" />
-            <marker date="1529460208000" expanded="true" signature="3067:3162" ph="select pipe_... id_blast_process" />
-            <marker date="1529460208000" expanded="true" signature="3542:4176" ph="SELECT count... pipe_basic_info" />
-            <marker date="1529460208000" expanded="true" signature="3651:3746" ph="select pipe_... od_blast_process" />
-            <marker date="1529460208000" expanded="true" signature="3807:3902" ph="select pipe_... id_blast_process" />
-            <marker date="1529460208000" expanded="true" signature="4284:4510" ph="SELECT * fro... pipe_basic_info" />
-            <marker date="1529460208000" expanded="true" signature="4654:5028" ph="select * fro... pipe_basic_info" />
-            <marker date="1529460208000" expanded="true" signature="4711:4809" ph="select pipe_... od_coating_2fbe_inspection_process" />
-            <marker date="1529460208000" expanded="true" signature="5179:5574" ph="select * fro... pipe_basic_info" />
-            <marker date="1529460208000" expanded="true" signature="5236:5354" ph="select pipe_... od_coating_3lpe_inspection_process" />
-            <marker date="1529460208000" expanded="true" signature="5745:6116" ph="select * fro... pipe_basic_info" />
-            <marker date="1529460208000" expanded="true" signature="5802:5897" ph="select pipe_... id_coating_inspection_process" />
-            <marker date="1529460208000" expanded="true" signature="6580:6824" ph="select * fro... pipe_basic_info" />
-            <marker date="1529460208000" expanded="true" signature="6936:7180" ph="select * fro... pipe_basic_info" />
-            <marker date="1529460208000" expanded="true" signature="7296:7538" ph="select * fro... pipe_basic_info" />
-            <marker date="1529460208000" expanded="true" signature="8786:9713" ph="select co.pr... pipe_basic_info" />
-            <marker date="1529460208000" expanded="true" signature="9781:9817" ph="select count... pipe_basic_info" />
-            <marker date="1529460208000" expanded="true" signature="12234:13098" ph="select co.pr... pipe_basic_info" />
-            <marker date="1529460208000" expanded="true" signature="13188:13977" ph="select co.pr... pipe_basic_info" />
-            <marker date="1529460208000" expanded="true" signature="14066:14852" ph="select co.pr... pipe_basic_info" />
-            <marker date="1529460208000" expanded="true" signature="14927:15610" ph="Select p.id,... pipe_basic_info" />
-            <marker date="1529460208000" expanded="true" signature="15721:16329" ph="UPDATE pipe_basic_info... " />
-            <marker date="1529460208000" expanded="true" signature="16437:17047" ph="INSERT INTO pipe_basic_info... " />
-            <marker date="1529460208000" expanded="true" signature="18941:19971" ph="select co.pr... pipe_basic_info" />
+            <element signature="e#6492#6493#0" expanded="false" />
+            <element signature="e#6526#6527#0" expanded="false" />
+            <element signature="e#6580#6581#0" expanded="false" />
+            <element signature="e#6626#6627#0" expanded="false" />
+            <element signature="e#6666#6667#0" expanded="false" />
+            <element signature="e#6702#6703#0" expanded="false" />
+            <element signature="e#6760#6761#0" expanded="false" />
+            <element signature="e#6810#6811#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTesting2Fbe.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="15" column="13" lean-forward="true" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding>
+            <marker date="1529470106000" expanded="true" signature="309:1086" ph="INSERT INTO lab_testing_2fbe... " />
+            <marker date="1529470106000" expanded="true" signature="1410:2191" ph="UPDATE lab_testing_2fbe... " />
+            <marker date="1529470106000" expanded="true" signature="2267:3424" ph="Select pro.p... lab_testing_2fbe" />
+            <marker date="1529470106000" expanded="true" signature="5738:5831" ph="SELECT * fro... lab_testing_2fbe" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/id/idcoatinginspectionprocess.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="497" column="72" lean-forward="true" selection-start-line="497" selection-start-column="72" selection-end-line="497" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTestingEpoxy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="17" column="28" lean-forward="true" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+          <folding>
+            <element signature="e#3909#3910#0" expanded="false" />
+            <element signature="e#3947#3948#0" expanded="false" />
+            <element signature="e#4009#4010#0" expanded="false" />
+            <element signature="e#4063#4064#0" expanded="false" />
+            <element signature="e#4103#4104#0" expanded="false" />
+            <element signature="e#4139#4140#0" expanded="false" />
+            <element signature="e#4197#4198#0" expanded="false" />
+            <element signature="e#4247#4248#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTestingEpoxy.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="92" column="0" lean-forward="true" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
+          <folding>
+            <marker date="1529470872000" expanded="true" signature="312:725" ph="INSERT INTO lab_testing_liquid_epoxy... " />
+            <marker date="1529470872000" expanded="true" signature="1060:1477" ph="UPDATE lab_testing_liquid_epoxy... " />
+            <marker date="1529470872000" expanded="true" signature="1553:2718" ph="Select pro.p... lab_testing_liquid_epoxy" />
+            <marker date="1529470872000" expanded="true" signature="5046:5147" ph="SELECT * fro... lab_testing_liquid_epoxy" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTesting3Lpe.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="235" column="30" lean-forward="false" selection-start-line="235" selection-start-column="30" selection-end-line="235" selection-end-column="30" />
+          <folding>
+            <element signature="e#6577#6578#0" expanded="false" />
+            <element signature="e#6603#6604#0" expanded="false" />
+            <element signature="e#6641#6642#0" expanded="false" />
+            <element signature="e#6671#6672#0" expanded="false" />
+            <element signature="e#6709#6710#0" expanded="false" />
+            <element signature="e#6743#6744#0" expanded="false" />
+            <element signature="e#6797#6798#0" expanded="false" />
+            <element signature="e#6843#6844#0" expanded="false" />
+            <element signature="e#6883#6884#0" expanded="false" />
+            <element signature="e#6919#6920#0" expanded="false" />
+            <element signature="e#6977#6978#0" expanded="false" />
+            <element signature="e#7027#7028#0" expanded="false" />
+            <element signature="e#7064#7065#0" expanded="false" />
+            <element signature="e#7097#7098#0" expanded="false" />
+            <element signature="e#7149#7150#0" expanded="false" />
+            <element signature="e#7193#7194#0" expanded="false" />
+            <element signature="e#7232#7233#0" expanded="false" />
+            <element signature="e#7267#7268#0" expanded="false" />
+            <element signature="e#7323#7324#0" expanded="false" />
+            <element signature="e#7371#7372#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTesting3Lpe.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="79" column="8" lean-forward="false" selection-start-line="79" selection-start-column="8" selection-end-line="79" selection-end-column="8" />
+          <folding>
+            <marker date="1529470599000" expanded="true" signature="310:1143" ph="INSERT INTO lab_testing_3lpe... " />
+            <marker date="1529470599000" expanded="true" signature="1468:2305" ph="UPDATE lab_testing_3lpe... " />
+            <marker date="1529470599000" expanded="true" signature="2380:3537" ph="Select pro.p... lab_testing_3lpe" />
+            <marker date="1529470599000" expanded="true" signature="5845:5938" ph="SELECT * fro... lab_testing_3lpe" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="500">
+          <caret line="676" column="18" lean-forward="false" selection-start-line="676" selection-start-column="18" selection-end-line="676" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/strings_zh.properties">
+      <provider editor-type-id="ResourceBundle">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="433">
+          <caret line="673" column="0" lean-forward="false" selection-start-line="673" selection-start-column="0" selection-end-line="675" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/strings_en.properties">
+      <provider editor-type-id="ResourceBundle">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="452">
+          <caret line="679" column="26" lean-forward="false" selection-start-line="679" selection-start-column="26" selection-end-line="679" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/strings.properties">
+      <provider editor-type-id="ResourceBundle">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="674" column="22" lean-forward="true" selection-start-line="674" selection-start-column="22" selection-end-line="674" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/labtesting/labtesting3lpe.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="400" column="46" lean-forward="false" selection-start-line="400" selection-start-column="46" selection-end-line="400" selection-end-column="46" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/labtesting/labtestingepoxy.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="292" column="49" lean-forward="false" selection-start-line="292" selection-start-column="49" selection-end-line="292" selection-end-column="49" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/labtesting/labtesting2fbe.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="624" column="5" lean-forward="true" selection-start-line="624" selection-start-column="5" selection-end-line="624" selection-end-column="5" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#fieldset#0;n#form#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#1;n#tr#1;n#table#0;n#fieldset#0;n#form#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

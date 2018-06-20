@@ -26,11 +26,15 @@ public class LabTesting3Lpe {
     private String upload_files;
     private  String remark;
     private  String result;
-
+    private String dsc;
+    private String dsc_pipe_no;
+    private String dsc_sample_no;
+    private String pe_pipe_no;
+    private String pe_sample_no;
     public LabTesting3Lpe() {
     }
 
-    public LabTesting3Lpe(int id, String sample_no, String pipe_no, String operator_no, Date coating_date, Date operation_time, float resistance_to_cd_20_28d, float resistance_to_cd_max_28d, float resistance_to_cd_65_24h, float impact_resistance_23, float impact_resistance_m40, float indentation_hardness_23, float indentation_hardness_70, float elongation_at_break, float coating_resistivity, float thermal_degradation, String upload_files, String remark, String result) {
+    public LabTesting3Lpe(int id, String sample_no, String pipe_no, String operator_no, Date coating_date, Date operation_time, float resistance_to_cd_20_28d, float resistance_to_cd_max_28d, float resistance_to_cd_65_24h, float impact_resistance_23, float impact_resistance_m40, float indentation_hardness_23, float indentation_hardness_70, float elongation_at_break, float coating_resistivity, float thermal_degradation, String upload_files, String remark, String result, String dsc, String dsc_pipe_no, String dsc_sample_no, String pe_pipe_no, String pe_sample_no) {
         this.id = id;
         this.sample_no = sample_no;
         this.pipe_no = pipe_no;
@@ -50,6 +54,11 @@ public class LabTesting3Lpe {
         this.upload_files = upload_files;
         this.remark = remark;
         this.result = result;
+        this.dsc = dsc;
+        this.dsc_pipe_no = dsc_pipe_no;
+        this.dsc_sample_no = dsc_sample_no;
+        this.pe_pipe_no = pe_pipe_no;
+        this.pe_sample_no = pe_sample_no;
     }
 
     public int getId() {
@@ -202,5 +211,45 @@ public class LabTesting3Lpe {
 
     public void setResult(String result) {
         this.result = result;
+    }
+
+    public String getDsc() {
+        return dsc;
+    }
+
+    public void setDsc(String dsc) {
+        this.dsc = dsc;
+    }
+
+    public String getDsc_pipe_no() {
+        return dsc_pipe_no;
+    }
+
+    public void setDsc_pipe_no(String dsc_pipe_no) {
+        this.dsc_pipe_no = dsc_pipe_no;
+    }
+
+    public String getDsc_sample_no() {
+        return dsc_sample_no;
+    }
+
+    public void setDsc_sample_no(String dsc_sample_no) {
+        this.dsc_sample_no = dsc_sample_no;
+    }
+
+    public String getPe_pipe_no() {
+        return pe_pipe_no;
+    }
+
+    public void setPe_pipe_no(String pe_pipe_no) {
+        this.pe_pipe_no = pe_pipe_no;
+    }
+
+    public String getPe_sample_no() {
+        return pe_sample_no;
+    }
+
+    public void setPe_sample_no(String pe_sample_no) {
+        this.pe_sample_no = pe_sample_no;
     }
 }

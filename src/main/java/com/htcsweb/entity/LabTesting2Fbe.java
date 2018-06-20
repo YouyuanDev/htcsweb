@@ -27,12 +27,13 @@ public class LabTesting2Fbe {
     private String upload_files;
     private  String remark;
     private  String result;
-
+    private String dsc_pipe_no;
+    private String dsc_sample_no;
 
     public LabTesting2Fbe() {
     }
 
-    public LabTesting2Fbe(int id, String sample_no, String pipe_no, Date coating_date, String operator_no, Date operation_time, String dsc, int foaming_cross_sectional, int foaming_interfacial, float interfacial_contamination, String flexibility, String impact, int resistance_to_hot_water_98_24h, int resistance_to_hot_water_98_28d, float resistance_to_cd_65_24h, float resistance_to_cd_22_28d, float resistance_to_cd_65_28d, String upload_files, String remark, String result) {
+    public LabTesting2Fbe(int id, String sample_no, String pipe_no, Date coating_date, String operator_no, Date operation_time, String dsc, int foaming_cross_sectional, int foaming_interfacial, float interfacial_contamination, String flexibility, String impact, int resistance_to_hot_water_98_24h, int resistance_to_hot_water_98_28d, float resistance_to_cd_65_24h, float resistance_to_cd_22_28d, float resistance_to_cd_65_28d, String upload_files, String remark, String result, String dsc_pipe_no, String dsc_sample_no) {
         this.id = id;
         this.sample_no = sample_no;
         this.pipe_no = pipe_no;
@@ -53,6 +54,8 @@ public class LabTesting2Fbe {
         this.upload_files = upload_files;
         this.remark = remark;
         this.result = result;
+        this.dsc_pipe_no = dsc_pipe_no;
+        this.dsc_sample_no = dsc_sample_no;
     }
 
     public int getId() {
@@ -213,5 +216,21 @@ public class LabTesting2Fbe {
 
     public void setResult(String result) {
         this.result = result;
+    }
+
+    public String getDsc_pipe_no() {
+        return dsc_pipe_no;
+    }
+
+    public void setDsc_pipe_no(String dsc_pipe_no) {
+        this.dsc_pipe_no = dsc_pipe_no;
+    }
+
+    public String getDsc_sample_no() {
+        return dsc_sample_no;
+    }
+
+    public void setDsc_sample_no(String dsc_sample_no) {
+        this.dsc_sample_no = dsc_sample_no;
     }
 }

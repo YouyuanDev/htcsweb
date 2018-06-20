@@ -104,8 +104,9 @@
                     'operation_time':getDate1(row.operation_time),
                     'upload_files':row.upload_files,
                     'result':row.result,
-                    'remark':row.remark
-
+                    'remark':row.remark,
+                    'dsc_pipe_no':row.dsc_pipe_no,
+                    'dsc_sample_no':row.dsc_sample_no
                 });
                 //$('#coating-date').datetimebox('setValue',getDate1(row.coating_date));
                 //$('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
@@ -301,6 +302,8 @@
                        <th field="resistance_to_cd_65_24h" align="center" width="120" class="i18n1" name="resistancetocd6524h">阴极剥离 65度 24小时</th>
                        <th field="resistance_to_cd_22_28d" align="center" width="120" class="i18n1" name="resistancetocd2228d">阴极剥离 22.5度 28天</th>
                        <th field="resistance_to_cd_65_28d" align="center" width="120" class="i18n1" name="resistancetocd6528d">阴极剥离 65度 28天</th>
+                       <th field="dsc_pipe_no" align="center" width="120" class="i18n1" name="dscpipeno"></th>
+                       <th field="dsc_sample_no" align="center" width="120" class="i18n1" name="dscsampleno"></th>
 
 
                        <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
@@ -332,75 +335,97 @@
 </div>
 
 <!--添加、修改框-->
-<div id="hlLabtest2FbeDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;height:auto;">
+<div id="hlLabtest2FbeDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;max-height:600px;overflow-y: scroll;">
    <form id="Labtest2FbeForm" method="post">
        <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
-           <legend class="i18n1" name="pipebasicinfo">钢管信息</legend>
-           <table class="ht-table" width="100%" border="0">
+           <legend class="i18n1" name="pipebasicinfo"></legend>
+           <table class="ht-table">
                <tr>
-                   <td class="i18n1" name="projectname" width="16%">项目名称</td>
-                   <td colspan="2" width="33%"><label class="hl-label" id="project_name"></label></td>
-
-                   <td class="i18n1" name="contractno" width="16%">合同编号</td>
-                   <td colspan="7" width="33%"><label class="hl-label" id="contract_no"></label></td>
-
+                   <td class="i18n1" name="id" width="20%">流水号</td>
+                   <td colspan="5" width="30%"><label class="hl-label" id="odbpid"></label></td>
                </tr>
-
                <tr>
-                   <td class="i18n1" name="pipeno" width="16%">钢管编号</td>
-                   <td colspan="2" width="33%">
-                       <input  id="lookup1" name="pipe_no" class="mini-lookup" style="text-align:center;width:180px;"
-                              textField="pipe_no" valueField="id" popupWidth="auto"
-                              popup="#gridPanel1" grid="#datagrid1" multiSelect="false"/>
+                   <td class="i18n1" name="operatorno" width="20%">操作工编号</td>
+                   <td colspan="1" width="30%">
+                       <input id="lookup2" name="operator_no" class="mini-lookup" style="text-align:center;width:180px;"
+                              textField="employee_no" valueField="id" popupWidth="auto"
+                              popup="#gridPanel2" grid="#datagrid2" multiSelect="false"
+                       />
                    </td>
-                   <td class="i18n1" name="statusname" width="16%">状态</td>
-                   <td colspan="7" width="33%"><label class="hl-label" id="status_name"></label></td>
-               </tr>
-           </table>
 
-           <table width="100%" border="0" align="center">
-               <tr>
-                   <td align="center" class="i18n1" name="grade">钢种</td>
-                   <td align="center"><label class="hl-label" id="grade"></label></td>
-                   <td align="center" class="i18n1" name="od">外径</td>
-                   <td align="center"><label class="hl-label" id="od"></label></td>
-                   <td align="center" class="i18n1" name="wt">壁厚</td>
-                   <td align="center"><label class="hl-label" id="wt"></label></td>
-                   <td align="center" class="i18n1" name="p_length">长度</td>
-                   <td align="center"><label class="hl-label" id="p_length"></label></td>
-                   <td align="center" class="i18n1" name="weight">重量</td>
-                   <td align="center"><label class="hl-label" id="weight"></label></td>
-                   <td align="center" class="i18n1" name="heatno">炉号</td>
-                   <td align="center"><label class="hl-label" id="heat_no"></label></td>
+                   <td class="i18n1" name="operationtime">操作时间</td>
+                   <td>
+                       <input class="easyui-datetimebox" type="text" name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+
+                   </td>
+
                </tr>
            </table>
        </fieldset>
        <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
-           <legend>外防实验(2FBE)信息</legend>
+           <legend>外防实验(2FBE)信息(Dsc取样)</legend>
+           <table class="ht-table" width="100%" border="0">
+               <tr>
+                   <td class="i18n1" name="dscpipeno"></td>
+                   <td>
+                       <%--<input class="easyui-textbox" type="text" name="dsc_pipe_no" value=""/>--%>
+                       <input  id="lookup1" name="dsc_pipe_no" class="mini-lookup" style="text-align:center;width:180px;"
+                               textField="pipe_no" valueField="id" popupWidth="auto"
+                               popup="#gridPanel1" grid="#datagrid1" multiSelect="false"/>
+                   </td>
+                   <td></td>
+                   <td class="i18n1" name="dscsampleno"></td>
+                   <td><input class="easyui-textbox" type="text" name="dsc_sample_no" value=""/></td>
+                   <td></td>
+               </tr>
 
-       <table class="ht-table">
-           <tr>
-               <td class="i18n1" name="id" width="20%">流水号</td>
-               <td colspan="5" width="30%"><label class="hl-label" id="odbpid"></label></td>
-           </tr>
-           <tr>
-               <td class="i18n1" name="operatorno" width="20%">操作工编号</td>
-               <td colspan="1" width="30%">
-                   <input id="lookup2" name="operator_no" class="mini-lookup" style="text-align:center;width:180px;"
-                          textField="employee_no" valueField="id" popupWidth="auto"
-                          popup="#gridPanel2" grid="#datagrid2" multiSelect="false"
-                   />
-               </td>
+               <tr>
+                   <td class="i18n1" name="dsc">热特性实验</td>
+                   <td><input class="easyui-textbox"  onchange="ceshi()"  type="text" name="dsc" value=""/></td>
+                   <td></td>
+               </tr>
+           </table>
+       </fieldset>
+       <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
+           <legend>外防实验(2FBE)信息(常规取样)</legend>
+               <table class="ht-table" width="100%" border="0">
+                   <tr>
+                       <td class="i18n1" name="projectname" width="16%">项目名称</td>
+                       <td colspan="2" width="33%"><label class="hl-label" id="project_name"></label></td>
 
-               <td class="i18n1" name="operationtime">操作时间</td>
-               <td>
-                   <input class="easyui-datetimebox" type="text" name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
+                       <td class="i18n1" name="contractno" width="16%">合同编号</td>
+                       <td colspan="7" width="33%"><label class="hl-label" id="contract_no"></label></td>
 
-               </td>
+                   </tr>
 
-           </tr>
-       </table>
+                   <tr>
+                       <td class="i18n1" name="pipeno" width="16%">钢管编号</td>
+                       <td colspan="2" width="33%">
+                           <input  id="lookup1" name="pipe_no" class="mini-lookup" style="text-align:center;width:180px;"
+                                   textField="pipe_no" valueField="id" popupWidth="auto"
+                                   popup="#gridPanel1" grid="#datagrid1" multiSelect="false"/>
+                       </td>
+                       <td class="i18n1" name="statusname" width="16%">状态</td>
+                       <td colspan="7" width="33%"><label class="hl-label" id="status_name"></label></td>
+                   </tr>
+               </table>
 
+               <table width="100%" border="0" align="center">
+                   <tr>
+                       <td align="center" class="i18n1" name="grade">钢种</td>
+                       <td align="center"><label class="hl-label" id="grade"></label></td>
+                       <td align="center" class="i18n1" name="od">外径</td>
+                       <td align="center"><label class="hl-label" id="od"></label></td>
+                       <td align="center" class="i18n1" name="wt">壁厚</td>
+                       <td align="center"><label class="hl-label" id="wt"></label></td>
+                       <td align="center" class="i18n1" name="p_length">长度</td>
+                       <td align="center"><label class="hl-label" id="p_length"></label></td>
+                       <td align="center" class="i18n1" name="weight">重量</td>
+                       <td align="center"><label class="hl-label" id="weight"></label></td>
+                       <td align="center" class="i18n1" name="heatno">炉号</td>
+                       <td align="center"><label class="hl-label" id="heat_no"></label></td>
+                   </tr>
+               </table>
        <table class="ht-table">
            <tr>
                <td class="i18n1" name="sampleno">试样号</td>
@@ -436,14 +461,11 @@
                    </select></td>
                <td></td>
            </tr>
-           <tr>
-               <td class="i18n1" name="interfacialcontamination">表面污染率%</td>
-               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="interfacial_contamination" value=""/></td>
-               <td></td>
-               <td class="i18n1" name="dsc">热特性实验</td>
-               <td><input class="easyui-textbox"  onchange="ceshi()"  type="text" name="dsc" value=""/></td>
-               <td></td>
-           </tr>
+           <%--<tr>--%>
+               <%--<td class="i18n1" name="dsc">热特性实验</td>--%>
+               <%--<td><input class="easyui-textbox"  onchange="ceshi()"  type="text" name="dsc" value=""/></td>--%>
+               <%--<td></td>--%>
+           <%--</tr>--%>
 
            <tr>
                <td width="16%" class="i18n1" name="flexibility">弯曲</td>
@@ -503,20 +525,21 @@
                <td class="i18n1" name="resistancetocd6528d">阴极剥离 65度 28天</td>
                <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="resistance_to_cd_65_28d" value=""/></td>
                <td></td>
-               <td width="16%" class="i18n1" name="remark">备注</td>
-               <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
+               <td class="i18n1" name="interfacialcontamination">表面污染率%</td>
+               <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="interfacial_contamination" value=""/></td>
                <td></td>
+
            </tr>
            <tr>
-               <td width="16%" class="i18n1" name="result">结论</td>
+               <td  class="i18n1" name="remark">备注</td>
+               <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
+               <td></td>
+               <td  class="i18n1" name="result">结论</td>
                <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
                    <option value="0">不合格,复验</option>
                    <option value="1">合格</option>
                    <option value="10">待定</option>
                </select></td>
-               <td></td>
-               <td ></td>
-               <td></td>
                <td></td>
            </tr>
        </table>
@@ -530,6 +553,7 @@
                 onuploaderror="onUploadError" onuploadsuccess="onUploadSuccess">
            </div>
        </fieldset>
+
    </form>
 
 
@@ -592,6 +616,35 @@
         </div>
     </div>
 </div>
+<div id="gridPanel3" class="mini-panel" title="header" iconCls="icon-add" style="width:450px;height:250px;"
+     showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0"
+>
+    <div property="toolbar" id="searchBar3" style="padding:5px;padding-left:8px;text-align:center;display: none">
+        <div style="float:left;padding-bottom:2px;">
+            <span class="i18n1" name="pipeno">钢管编号</span><span>:</span>
+            <input id="keyText5" class="mini-textbox" style="width:110px;" onenter="onSearchClick(3)"/>
+            <a class="mini-button" onclick="onSearchClick(3)">查找</a>
+            <a class="mini-button" onclick="onClearClick(3)" name="clear">清除</a>
+        </div>
+        <div style="float:right;padding-bottom:2px;">
+            <a class="mini-button" onclick="onCloseClick(3)" name="close">关闭</a>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <div id="datagrid3" class="mini-datagrid" style="width:100%;height:100%;"
+         borderStyle="border:0" showPageSize="false" showPageIndex="false"
+         url="/pipeinfo/get2FBESamplePipeNo.action">
+        <div property="columns">
+            <div type="checkcolumn" ></div>
+            <div field="pipe_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="pipeno">钢管编号</div>
+            <div field="contract_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="contractno">合同编号</div>
+            <div field="od" width="40" headerAlign="center" allowSort="true" class="i18n1" name="od">外径</div>
+            <div field="wt" width="40" headerAlign="center" allowSort="true" class="i18n1" name="wt">壁厚</div>
+            <div field="p_length" width="40" headerAlign="center" allowSort="true" class="i18n1" name="p_length">长度</div>
+            <div field="weight" width="40" headerAlign="center" allowSort="true" class="i18n1" name="weight">重量</div>
+        </div>
+    </div>
+</div>
 <script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
 </body>
 </html>
@@ -601,11 +654,13 @@
     var keyText1=mini.get('keyText1');
     var keyText4 = mini.get("keyText4");
     var keyText3=mini.get("keyText3");
+    var keyText5=mini.get("keyText5");
     var grid1=mini.get("datagrid1");
     var grid2=mini.get("datagrid2");
+    var grid3=mini.get("datagrid3");
     var look1=mini.get('lookup1');
     var look2= mini.get("lookup2");
-
+    var look3= mini.get("lookup3");
     function onSearchClick(type) {
         if(type==1)
         {
@@ -618,6 +673,11 @@
                 pname: keyText4.value,
                 employeeno:keyText3.value
             });
+        }else if(type==3){
+            grid3.load({
+                pipe_no:keyText5.value
+                //pipestatus:'bare1,'
+            });
         }
 
     }
@@ -626,12 +686,16 @@
            look1.hidePopup();
         else if(type==2)
             look2.hidePopup();
+        else if(type==3)
+            look3.hidePopup();
     }
     function onClearClick(type) {
         if(type==1)
             look1.deselectAll();
         else if(type==2)
             look2.deselectAll();
+        else if(type==3)
+            look3.deselectAll();
     }
     look1.on('valuechanged',function () {
         var rows = grid1.getSelected();
@@ -676,6 +740,16 @@
             employeeno:keyText3.value
         });
         //$('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
+    });
+    look3.on("showpopup",function(e){
+        $('.mini-shadow').css('z-index','99999');
+        $('.mini-popup').css('z-index','100000');
+        $('.mini-panel').css('z-index','100000');
+        $('#searchBar3').css('display','block');
+        grid1.load({
+            pipe_no:keyText5.value,
+            pipestatus:'bare1,'
+        });
     });
     hlLanguage("../i18n/");
 </script>

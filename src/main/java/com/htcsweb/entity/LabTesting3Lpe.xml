@@ -6,7 +6,7 @@
 <mapper namespace="com.htcsweb.dao.LabTesting3LpeDao">
 
     <insert id="addLabTest3Lpe" parameterType="com.htcsweb.entity.LabTesting3Lpe">
-      INSERT INTO lab_testing_3lpe(sample_no,pipe_no,coating_date,operator_no,operation_time,resistance_to_cd_20_28d,resistance_to_cd_max_28d,resistance_to_cd_65_24h,impact_resistance_23,impact_resistance_m40,indentation_hardness_23,indentation_hardness_70,elongation_at_break,coating_resistivity,thermal_degradation,upload_files,result,remark) VALUES (#{sample_no},#{pipe_no},#{coating_date},#{operator_no},#{operation_time},#{resistance_to_cd_20_28d},#{resistance_to_cd_max_28d},#{resistance_to_cd_65_24h},#{impact_resistance_23},#{impact_resistance_m40},#{indentation_hardness_23},#{indentation_hardness_70},#{elongation_at_break},#{coating_resistivity},#{thermal_degradation},#{upload_files},#{result},#{remark})
+      INSERT INTO lab_testing_3lpe(sample_no,pipe_no,coating_date,operator_no,operation_time,resistance_to_cd_20_28d,resistance_to_cd_max_28d,resistance_to_cd_65_24h,impact_resistance_23,impact_resistance_m40,indentation_hardness_23,indentation_hardness_70,elongation_at_break,coating_resistivity,thermal_degradation,upload_files,result,remark,dsc,dsc_pipe_no,dsc_sample_no,pe_pipe_no,pe_sample_no) VALUES (#{sample_no},#{pipe_no},#{coating_date},#{operator_no},#{operation_time},#{resistance_to_cd_20_28d},#{resistance_to_cd_max_28d},#{resistance_to_cd_65_24h},#{impact_resistance_23},#{impact_resistance_m40},#{indentation_hardness_23},#{indentation_hardness_70},#{elongation_at_break},#{coating_resistivity},#{thermal_degradation},#{upload_files},#{result},#{remark},#{dsc},#{dsc_pipe_no},#{dsc_sample_no},#{pe_pipe_no},#{pe_sample_no})
     </insert>
     <delete id="delLabTest3Lpe">
         delete from lab_testing_3lpe WHERE
@@ -16,7 +16,7 @@
     </delete>
 
     <update id="updateLabTest3Lpe" parameterType="com.htcsweb.entity.LabTesting3Lpe">
-       UPDATE lab_testing_3lpe set sample_no=#{sample_no},pipe_no=#{pipe_no},coating_date=#{coating_date},operator_no=#{operator_no},operation_time=#{operation_time},resistance_to_cd_20_28d=#{resistance_to_cd_20_28d},resistance_to_cd_max_28d=#{resistance_to_cd_max_28d},resistance_to_cd_65_24h=#{resistance_to_cd_65_24h},impact_resistance_23=#{impact_resistance_23},impact_resistance_m40=#{impact_resistance_m40},indentation_hardness_23=#{indentation_hardness_23},indentation_hardness_70=#{indentation_hardness_70},elongation_at_break=#{elongation_at_break},coating_resistivity=#{coating_resistivity},thermal_degradation=#{thermal_degradation},upload_files=#{upload_files},result=#{result},remark=#{remark} where id=#{id}
+       UPDATE lab_testing_3lpe set sample_no=#{sample_no},pipe_no=#{pipe_no},coating_date=#{coating_date},operator_no=#{operator_no},operation_time=#{operation_time},resistance_to_cd_20_28d=#{resistance_to_cd_20_28d},resistance_to_cd_max_28d=#{resistance_to_cd_max_28d},resistance_to_cd_65_24h=#{resistance_to_cd_65_24h},impact_resistance_23=#{impact_resistance_23},impact_resistance_m40=#{impact_resistance_m40},indentation_hardness_23=#{indentation_hardness_23},indentation_hardness_70=#{indentation_hardness_70},elongation_at_break=#{elongation_at_break},coating_resistivity=#{coating_resistivity},thermal_degradation=#{thermal_degradation},upload_files=#{upload_files},result=#{result},remark=#{remark},dsc=#{dsc},dsc_pipe_no=#{dsc_pipe_no},dsc_sample_no=#{dsc_sample_no},pe_pipe_no=#{pe_pipe_no},pe_sample_no=#{pe_sample_no} where id=#{id}
     </update>
 
     <select id="getNewAllByLike" resultType="map">

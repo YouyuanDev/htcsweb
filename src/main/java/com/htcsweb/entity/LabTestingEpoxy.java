@@ -21,12 +21,13 @@ public class LabTestingEpoxy {
     private String upload_files;
     private  String remark;
     private  String result;
-
+    private  String glass_sample_no;
+    private  String glass_pipe_no;
     public LabTestingEpoxy() {
 
     }
 
-    public LabTestingEpoxy(int id, String sample_no, String pipe_no, Date coating_date, String operator_no, Date operation_time, String porosity, String bend, String adhesion, String curing, String water_immersion, String upload_files, String remark, String result) {
+    public LabTestingEpoxy(int id, String sample_no, String pipe_no, Date coating_date, String operator_no, Date operation_time, String porosity, String bend, String adhesion, String curing, String water_immersion, String upload_files, String remark, String result, String glass_sample_no, String glass_pipe_no) {
         this.id = id;
         this.sample_no = sample_no;
         this.pipe_no = pipe_no;
@@ -41,6 +42,8 @@ public class LabTestingEpoxy {
         this.upload_files = upload_files;
         this.remark = remark;
         this.result = result;
+        this.glass_sample_no = glass_sample_no;
+        this.glass_pipe_no = glass_pipe_no;
     }
 
     public int getId() {
@@ -153,5 +156,21 @@ public class LabTestingEpoxy {
 
     public void setResult(String result) {
         this.result = result;
+    }
+
+    public String getGlass_sample_no() {
+        return glass_sample_no;
+    }
+
+    public void setGlass_sample_no(String glass_sample_no) {
+        this.glass_sample_no = glass_sample_no;
+    }
+
+    public String getGlass_pipe_no() {
+        return glass_pipe_no;
+    }
+
+    public void setGlass_pipe_no(String glass_pipe_no) {
+        this.glass_pipe_no = glass_pipe_no;
     }
 }
