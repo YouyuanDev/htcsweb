@@ -410,7 +410,15 @@
                </td>
                <td></td>
                <td class="i18n1" name="rawmaterial">原材料</td>
-               <td><input class="easyui-textbox hl-errorcolor"  type="text" name="raw_material" value=""/></td>
+               <%--<td><input class="easyui-textbox hl-errorcolor"  type="text" name="raw_material" value=""/></td>--%>
+               <td><input id="raw_material" class="easyui-combobox" type="text" name="raw_material"  data-options=
+                       "url:'/CoatingPowderOperation/getAllFBECoatingPowderInfo.action',
+					        method:'get',
+					        valueField:'text',
+					        width: 185,
+					        editable:false,
+					        textField:'text',
+					        panelHeight:'200'"/></td>
                <td></td>
            </tr>
            <tr>

@@ -369,7 +369,15 @@
                 </tr>
                 <tr>
                     <td class="i18n1" name="epoxyrawmaterial">环氧树脂Epoxy_原材料</td>
-                    <td><input class="easyui-textbox" type="text" name="epoxy_raw_material" value=""/></td>
+                    <%--<td><input class="easyui-textbox" type="text" name="epoxy_raw_material" value=""/></td>--%>
+                    <td><input id="epoxy_raw_material" class="easyui-combobox" type="text" name="epoxy_raw_material"  data-options=
+                            "url:'/CoatingPowderOperation/getAllFBECoatingPowderInfo.action',
+					        method:'get',
+					        valueField:'text',
+					        width: 185,
+					        editable:false,
+					        textField:'text',
+					        panelHeight:'200'"/></td>
                     <td></td>
                     <td class="i18n1" name="epoxybatchno">环氧树脂Epoxy_原材料批号</td>
                     <td><input class="easyui-textbox"  type="text" name="epoxy_batch_no" value=""/></td>
@@ -377,7 +385,15 @@
                 </tr>
                 <tr>
                     <td class="i18n1" name="adhesionrawmaterial">附着力原材料</td>
-                    <td><input class="easyui-textbox"   type="text" name="adhesion_raw_material" value=""/></td>
+                    <%--<td><input class="easyui-textbox"   type="text" name="adhesion_raw_material" value=""/></td>--%>
+                    <td><input id="adhesion_raw_material" class="easyui-combobox" type="text" name="adhesion_raw_material"  data-options=
+                            "url:'/CoatingPowderOperation/getAllADCoatingPowderInfo.action',
+					        method:'get',
+					        valueField:'text',
+					        width: 185,
+					        editable:false,
+					        textField:'text',
+					        panelHeight:'200'"/></td>
                     <td></td>
                     <td class="i18n1" name="adhesionbatchno">附着力原材料批号</td>
                     <td><input class="easyui-textbox"  type="text" name="adhesion_batch_no" value=""/></td>
@@ -386,7 +402,15 @@
 
                 <tr>
                     <td width="16%" class="i18n1" name="polyethylenerawmaterial">聚乙烯原材料</td>
-                    <td><input class="easyui-textbox"  type="text" name="polyethylene_raw_material" value=""/></td>
+                    <%--<td><input class="easyui-textbox"  type="text" name="polyethylene_raw_material" value=""/></td>--%>
+                    <td><input id="polyethylene_raw_material" class="easyui-combobox" type="text" name="polyethylene_raw_material"  data-options=
+                            "url:'/CoatingPowderOperation/getAllPECoatingPowderInfo.action',
+					        method:'get',
+					        valueField:'text',
+					        width: 185,
+					        editable:false,
+					        textField:'text',
+					        panelHeight:'200'"/></td>
                     <td></td>
                     <td width="16%" class="i18n1" name="polyethylenebatchno">聚乙烯原材料批号</td>
                     <td><input class="easyui-textbox"  type="text" name="polyethylene_batch_no" value=""/></td>

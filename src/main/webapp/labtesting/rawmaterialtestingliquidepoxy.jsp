@@ -291,7 +291,17 @@
                     </td>
                     <td></td>
                     <td class="i18n1" name="rawmaterial">原材料名称</td>
-                    <td><input class="easyui-textbox"  type="text" name="raw_material" value=""/></td>
+                    <td>
+                        <%--<input class="easyui-textbox"  type="text" name="raw_material" value=""/>--%>
+                            <input id="raw_material" class="easyui-combobox" type="text" name="raw_material"  data-options=
+                                    "url:'/CoatingPowderOperation/getAllEPOXYCoatingPowderInfo.action',
+					        method:'get',
+					        valueField:'text',
+					        width: 185,
+					        editable:false,
+					        textField:'text',
+					        panelHeight:'200'"/>
+                    </td>
                     <td></td>
                 </tr>
                 <tr>
