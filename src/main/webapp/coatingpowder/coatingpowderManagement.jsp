@@ -209,7 +209,7 @@
 
 
         <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
-            <legend>权限信息</legend>
+            <legend>原材料信息</legend>
 
             <table class="ht-table">
                 <tr>
