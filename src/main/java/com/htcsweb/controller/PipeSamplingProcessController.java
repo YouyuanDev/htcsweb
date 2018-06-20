@@ -89,7 +89,7 @@ public class PipeSamplingProcessController {
                 json.put("message","保存成功");
             }else{
                 json.put("success",false);
-                json.put("message","保存失败");
+                json.put("message","保存失败，"+msg);
             }
 
         }catch (Exception e){

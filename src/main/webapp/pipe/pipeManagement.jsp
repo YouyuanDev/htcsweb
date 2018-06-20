@@ -1189,6 +1189,7 @@
                     <td colspan="1" width="33%">
                         <%--<input class="easyui-textbox" type="text" name="odsampling_mark" value=""/> --%>
                             <select class="easyui-combobox" data-options="editable:false" name="odsampling_mark" style="width:200px;">
+                                <option value="">无</option>
                                 <option value="0">0</option>
                                 <option value="1">1</option>
                             </select>
