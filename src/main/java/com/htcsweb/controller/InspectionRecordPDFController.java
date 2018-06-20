@@ -1400,18 +1400,35 @@ public class InspectionRecordPDFController {
             List<HashMap<String,Object>>sampleList=pipeSamplingRecordDao.getCoverPipeSamplingInfo(project_no,mill_no,od,wt,begin_time,end_time);
             //固化度试验管管号
             List<HashMap<String,Object>>dscList=new ArrayList<>();
+            //PE实验管号
+            List<HashMap<String,Object>>peList=new ArrayList<>();
+
             if(external_coating.contains("2FBE"))
                 dscList=odCoatingInspectionProcessDao.getCover2FBEDscTestingInfo(project_no,mill_no,od,wt,begin_time,end_time);
-            else if(external_coating.contains("3LPE"))
-                dscList=odCoating3LpeInspectionProcessDao.getCover3LPEDscTestingInfo(project_no,mill_no,od,wt,begin_time,end_time);
+            else if(external_coating.contains("3LPE")) {
+                dscList = odCoating3LpeInspectionProcessDao.getCover3LPEDscTestingInfo(project_no, mill_no, od, wt, begin_time, end_time);
+                peList = odCoating3LpeInspectionProcessDao.getCover3LPEPETestingInfo(project_no, mill_no, od, wt, begin_time, end_time);
+            }
             List<HashMap<String,String>>labPipenoList=new ArrayList<>();
 
-            int samplePipeCount=0,dscPipeCount=0;
+
+
+            int samplePipeCount=0,dscPipeCount=0,pePipeCount=0;
             if(sampleList!=null)
                 samplePipeCount=sampleList.size();
             if(dscList!=null)
                 dscPipeCount=dscList.size();
-            int maxSize=samplePipeCount>dscPipeCount?samplePipeCount:dscPipeCount;
+            if(peList!=null)
+                pePipeCount=peList.size();
+
+            int maxSize=samplePipeCount;
+             if(maxSize<dscPipeCount){
+                 maxSize=dscPipeCount;
+             }
+            if(maxSize<pePipeCount){
+                maxSize=pePipeCount;
+            }
+
             List<CoverOneRecordOD>recordODList=new ArrayList<>();
             for (int i=0;i<maxSize;i++)
             {
@@ -1437,6 +1454,15 @@ public class InspectionRecordPDFController {
                 }else{
                     recordOD.setDscSampleNo(" ");
                 }
+                if(i<pePipeCount){
+                    if(peList.get(i).get("pipe_no")!=null&&!peList.get(i).get("pipe_no").toString().equals(""))
+                        recordOD.setPeSampleNo(peList.get(i).get("pipe_no").toString());
+                    else
+                        recordOD.setPeSampleNo(" ");
+                }else{
+                    recordOD.setPeSampleNo(" ");
+                }
+
                 recordODList.add(recordOD);
             }
             ArrayList<Label> datalist=new ArrayList<Label>();
@@ -1446,6 +1472,7 @@ public class InspectionRecordPDFController {
                     datalist.add(new Label(1,row+10,recordODList.get(i).getTestSampleNo() ,wcf));
                     datalist.add(new Label(4,row+10, recordODList.get(i).getCutLength(),wcf));
                     datalist.add(new Label(8,row+10,recordODList.get(i).getDscSampleNo() ,wcf));
+                    datalist.add(new Label(9,row+10,recordODList.get(i).getPeSampleNo() ,wcf));
                     index++;
                     if(index%9==0){
                         createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,external_coating,shift,title_time);

@@ -4,14 +4,16 @@ public class CoverOneRecordOD {
     private String testSampleNo;
     private String cutLength;
     private String dscSampleNo;
+    private String peSampleNo;
     public CoverOneRecordOD() {
 
     }
 
-    public CoverOneRecordOD(String testSampleNo, String cutLength, String dscSampleNo) {
+    public CoverOneRecordOD(String testSampleNo, String cutLength, String dscSampleNo, String peSampleNo) {
         this.testSampleNo = testSampleNo;
         this.cutLength = cutLength;
         this.dscSampleNo = dscSampleNo;
+        this.peSampleNo = peSampleNo;
     }
 
     public String getTestSampleNo() {
@@ -36,5 +38,13 @@ public class CoverOneRecordOD {
 
     public void setDscSampleNo(String dscSampleNo) {
         this.dscSampleNo = dscSampleNo;
+    }
+
+    public String getPeSampleNo() {
+        return peSampleNo;
+    }
+
+    public void setPeSampleNo(String peSampleNo) {
+        this.peSampleNo = peSampleNo;
     }
 }
