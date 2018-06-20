@@ -72,7 +72,11 @@ public class SessionFilter extends OncePerRequestFilter{
             "downloadPDF",
             "addDialyReportAndCreateExcel",
             "get2FBESamplePipeNo",
+            "get2FBEDSCSamplePipeNo",
             "get3LPESamplePipeNo",
+            "get3LPEDSCSamplePipeNo",
+            "get3LPEPESamplePipeNo",
+            "getLiquidEpoxyGlassSamplePipeNo",
             "getLiquidEpoxySamplePipeNo",
             "getPDFProgress",
             "getDailyRecordReportExcel",
@@ -108,6 +112,7 @@ public class SessionFilter extends OncePerRequestFilter{
             "getAllREPAIRCoatingPowderInfo",
             "getAllCURINGCoatingPowderInfo",
             "getAllCoatingPowderInfo"
+
     }; // 不过滤的uri
 
     @Override

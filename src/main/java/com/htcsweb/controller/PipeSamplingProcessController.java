@@ -72,14 +72,14 @@ public class PipeSamplingProcessController {
                 if(list.size()>0){
                     PipeBasicInfo p=list.get(0);
 
-                    if(p.getOdsampling_mark()!=null&&p.getOdsampling_mark().equals("1")&&pipeSamplingRecord.getResult()!=null&&pipeSamplingRecord.getResult().equals("1")) {//当合格时才更新钢管状态
+                    if(p.getOdsampling_mark()!=null&&p.getOdsampling_mark().equals("0")&&pipeSamplingRecord.getResult()!=null&&pipeSamplingRecord.getResult().equals("1")) {//当合格时才更新钢管状态
                         //判断管子是否计算过新长度
                         //if(p.getP_length()>pipeSamplingRecord.getPipe_length_after_cut()){
                             p.setP_length(pipeSamplingRecord.getPipe_length_after_cut());
                             p.setWeight(PipeActWeightUtil.getActWeight(p.getP_length(),p.getOd(),p.getWt()));
                         //}
                         p.setRebevel_mark("1");
-                        p.setOdsampling_mark("0");
+                        p.setOdsampling_mark("1");
                         int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                     }
 

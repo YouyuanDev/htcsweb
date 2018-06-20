@@ -127,7 +127,7 @@ public class PipeBasicInfoController {
     }
 
 
-    //查询2FBE实验样管信息 包括dsc实验
+    //查询2FBE实验样管信息 不包括DSC实验
     @RequestMapping("/get2FBESamplePipeNo")
     @ResponseBody
     public String get2FBESamplePipeNo(HttpServletRequest request){
@@ -142,8 +142,25 @@ public class PipeBasicInfoController {
     }
 
 
+    //查询2FBE dsc实验管号，未做实验的
+    @RequestMapping("/get2FBEDSCSamplePipeNo")
+    @ResponseBody
+    public String getDSCSamplePipeNo(HttpServletRequest request){
+        String map="";
+        try{
+            String pipe_no=request.getParameter("pipe_no");
+            List<PipeBasicInfo>list=pipeBasicInfoDao.get2FBEDSCSamplePipeNo(pipe_no);
+            map= JSONObject.toJSONString(list);
+        }catch (Exception e){
+        }
+        return map;
+    }
 
-    //查询3LPE实验样管信息 包括dsc实验，PE实验
+
+
+
+
+    //查询3LPE常规实验样管信息
     @RequestMapping("/get3LPESamplePipeNo")
     @ResponseBody
     public String get3LPESamplePipeNo(HttpServletRequest request){
@@ -157,7 +174,39 @@ public class PipeBasicInfoController {
         return map;
     }
 
-    //查询Liquid Epoxy内防实验样管信息 包括玻璃片实验，常规实验
+    //查询3LPE DSC实验样管信息
+    @RequestMapping("/")
+    @ResponseBody
+    public String get3LPEDSCSamplePipeNo(HttpServletRequest request){
+        String map="";
+        try{
+            String pipe_no=request.getParameter("pipe_no");
+            List<PipeBasicInfo>list=pipeBasicInfoDao.get3LPEDSCSamplePipeNo(pipe_no);
+            map= JSONObject.toJSONString(list);
+        }catch (Exception e){
+        }
+        return map;
+    }
+
+    //查询3LPE PE实验样管信息
+    @RequestMapping("/get3LPEPESamplePipeNo")
+    @ResponseBody
+    public String get3LPEPESamplePipeNo(HttpServletRequest request){
+        String map="";
+        try{
+            String pipe_no=request.getParameter("pipe_no");
+            List<PipeBasicInfo>list=pipeBasicInfoDao.get3LPEPESamplePipeNo(pipe_no);
+            map= JSONObject.toJSONString(list);
+        }catch (Exception e){
+        }
+        return map;
+    }
+
+
+
+
+
+    //查询Liquid Epoxy内防实验样管信息  常规实验
     @RequestMapping("/getLiquidEpoxySamplePipeNo")
     @ResponseBody
     public String getLiquidEpoxySamplePipeNo(HttpServletRequest request){
@@ -170,6 +219,21 @@ public class PipeBasicInfoController {
         }
         return map;
     }
+
+    //查询Liquid Epoxy内防实验样管信息  玻璃片实验
+    @RequestMapping("/getLiquidEpoxyGlassSamplePipeNo")
+    @ResponseBody
+    public String getLiquidEpoxyGlassSamplePipeNo(HttpServletRequest request){
+        String map="";
+        try{
+            String pipe_no=request.getParameter("pipe_no");
+            List<PipeBasicInfo>list=pipeBasicInfoDao.getLiquidEpoxyGlassSamplePipeNo(pipe_no);
+            map= JSONObject.toJSONString(list);
+        }catch (Exception e){
+        }
+        return map;
+    }
+
 
 
 

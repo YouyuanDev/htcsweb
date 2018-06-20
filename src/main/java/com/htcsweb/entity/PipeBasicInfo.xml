@@ -108,13 +108,54 @@
 
 
 <!--
-    得到2fbe实验管的管号，包括dsc实验
+    得到2fbe常规实验实验管的管号
 -->
     <select id="get2FBESamplePipeNo" resultType="com.htcsweb.entity.PipeBasicInfo">
-        select * from pipe_basic_info where  pipe_no in(
-        select pipe_no from od_coating_2fbe_inspection_process ic where is_sample='1' or is_dsc_sample='1'
-        )
+        select * from pipe_basic_info
         <where>
+            AND odsampling_mark='1'
+
+            AND  pipe_no not in ( select pipe_no from lab_testing_2fbe )
+
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+        </where>
+        ORDER BY id DESC
+        limit 1000
+    </select>
+
+
+
+    <!--
+    得到2fbe DSC实验实验管的管号
+-->
+    <select id="get2FBEDSCSamplePipeNo" resultType="com.htcsweb.entity.PipeBasicInfo">
+        select * from pipe_basic_info
+        <where>
+            AND od_dsc_sample_mark='1'
+
+            AND  pipe_no not in ( select pipe_no from lab_testing_2fbe )
+
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+        </where>
+        ORDER BY id DESC
+        limit 1000
+    </select>
+
+
+    <!--
+得到3LPE DSC实验实验管的管号
+-->
+    <select id="get3LPEDSCSamplePipeNo" resultType="com.htcsweb.entity.PipeBasicInfo">
+        select * from pipe_basic_info
+        <where>
+            AND od_dsc_sample_mark='1'
+
+            AND  pipe_no not in ( select pipe_no from lab_testing_3lpe )
+
             <if test="pipe_no!=null and pipe_no!=''">
                 AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
             </if>
@@ -124,13 +165,15 @@
     </select>
 
     <!--
-    得到3lpe实验管的管号，包括dsc实验,pe实验
+    得到3lpe常规实验管的管号
 -->
     <select id="get3LPESamplePipeNo" resultType="com.htcsweb.entity.PipeBasicInfo">
-        select * from pipe_basic_info where  pipe_no in(
-        select pipe_no from od_coating_3lpe_inspection_process ic where is_sample='1' or is_dsc_sample='1' or is_pe_sample='1'
-         )
+        select * from pipe_basic_info
         <where>
+            AND odsampling_mark='1'
+
+            AND  pipe_no not in ( select pipe_no from lab_testing_3lpe )
+
             <if test="pipe_no!=null and pipe_no!=''">
                 AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
             </if>
@@ -138,14 +181,56 @@
         ORDER BY id DESC
         limit 1000
     </select>
+
+
     <!--
-       得到Liquid Epoxy实验管的管号，包括玻璃片实验,常规实验
+得到3LPE PE实验实验管的管号
+-->
+    <select id="get3LPEPESamplePipeNo" resultType="com.htcsweb.entity.PipeBasicInfo">
+        select * from pipe_basic_info
+        <where>
+            AND od_pe_sample_mark='1'
+
+            AND  pipe_no not in ( select pipe_no from lab_testing_3lpe )
+
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+        </where>
+        ORDER BY id DESC
+        limit 1000
+    </select>
+
+
+    <!--
+       得到Liquid Epoxy常规实验管的管号（钢片）
    -->
     <select id="getLiquidEpoxySamplePipeNo" resultType="com.htcsweb.entity.PipeBasicInfo">
-        select * from pipe_basic_info where  pipe_no in(
-        select pipe_no from id_coating_inspection_process ic where is_sample='1' or is_glass_sample='1'
-        )
+        select * from pipe_basic_info
         <where>
+            AND idsampling_mark='1'
+
+            AND  pipe_no not in ( select pipe_no from lab_testing_liquid_epoxy )
+
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+        </where>
+        ORDER BY id DESC
+        limit 1000
+    </select>
+
+
+    <!--
+   得到Liquid Epoxy（玻璃片）实验管的管号
+-->
+    <select id="getLiquidEpoxyGlassSamplePipeNo" resultType="com.htcsweb.entity.PipeBasicInfo">
+        select * from pipe_basic_info
+        <where>
+            AND id_glass_sample_mark='1'
+
+            AND  pipe_no not in ( select pipe_no from lab_testing_liquid_epoxy )
+
             <if test="pipe_no!=null and pipe_no!=''">
                 AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
             </if>
@@ -163,7 +248,7 @@
 --         select pipe_no from od_coating_2fbe_inspection_process ic where is_sample='1' UNION
 --         select pipe_no from od_coating_3lpe_inspection_process ic where is_sample='1'
 --         )
-        select * from pipe_basic_info where odsampling_mark='1'
+        select * from pipe_basic_info where odsampling_mark='0'
         <where>
             <if test="pipe_no!=null and pipe_no!=''">
                 AND pipe_no =#{pipe_no}
@@ -175,7 +260,7 @@
 
 
     <select id="getIDSamplePipeNumbers" resultType="com.htcsweb.entity.PipeBasicInfo">
-        select * from pipe_basic_info where idsampling_mark='1'
+        select * from pipe_basic_info where idsampling_mark='0'
         <where>
             <if test="pipe_no!=null and pipe_no!=''">
                 AND pipe_no =#{pipe_no}

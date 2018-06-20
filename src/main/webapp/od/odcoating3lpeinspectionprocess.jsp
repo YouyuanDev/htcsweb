@@ -567,25 +567,26 @@
                     <%--<td><input class="easyui-textbox"  type="text" name="cutback_length" value=""/></td>--%>
                     <%--<td></td>--%>
                     <td width="16%" class="i18n1" name="issample">取样管</td>
-                    <td colspan="2">
+                    <td>
                         <input type="checkbox" id="is-sample" value="0" checked="false" onchange="selectIsSample()"/>
                         <input type="hidden" name="is_sample" value="0">
                     </td>
-
+                    <td></td>
                 </tr>
 
                 <tr>
                     <td width="16%" class="i18n1" name="isdscsample">DSC取样管</td>
-                    <td colspan="2">
+                    <td>
                         <input type="checkbox" id="is-dsc-sample" value="0" checked="false" onchange="selectIsDscSample()"/>
                         <input type="hidden" name="is_dsc_sample" value="0">
                     </td>
+                    <td></td>
                     <td width="16%" class="i18n1" name="ispesample">PE取样管</td>
-                    <td colspan="2">
+                    <td>
                         <input type="checkbox" id="is-pe-sample" value="0" checked="false" onchange="selectIsPESample()"/>
                         <input type="hidden" name="is_pe_sample" value="0">
                     </td>
-
+                    <td></td>
                 </tr>
 
                 <tr>

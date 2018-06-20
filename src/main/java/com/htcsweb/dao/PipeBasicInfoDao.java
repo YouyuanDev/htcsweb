@@ -21,6 +21,7 @@ public interface PipeBasicInfoDao {
     //获取内防待取样钢管信息 1000条
     public List<PipeBasicInfo> getIDSamplePipeNumbers(@Param("pipe_no")String pipe_no);
 
+
     public List<PipeBasicInfo> getNeedRebevelPipeNumbers(@Param("pipe_no")String pipe_no);
 
     public List<HashMap<String,Object>> getAllByLike(@Param("project_no") String project_no,  @Param("contract_no")String contract_no,@Param("pipe_no")String pipe_no, @Param("status")String status, @Param("skip")int skip, @Param("take")int take);
@@ -62,9 +63,17 @@ public interface PipeBasicInfoDao {
 
     public List<PipeBasicInfo> get2FBESamplePipeNo(@Param("pipe_no")String pipe_no);
 
+    public List<PipeBasicInfo> get2FBEDSCSamplePipeNo(@Param("pipe_no")String pipe_no);
+
     public List<PipeBasicInfo> get3LPESamplePipeNo(@Param("pipe_no")String pipe_no);
 
+    public List<PipeBasicInfo> get3LPEDSCSamplePipeNo(@Param("pipe_no")String pipe_no);
+
+    public List<PipeBasicInfo> get3LPEPESamplePipeNo(@Param("pipe_no")String pipe_no);
+
     public List<PipeBasicInfo> getLiquidEpoxySamplePipeNo(@Param("pipe_no")String pipe_no);
+
+    public List<PipeBasicInfo> getLiquidEpoxyGlassSamplePipeNo(@Param("pipe_no")String pipe_no);
 
     public int InStoageTransfer(@Param("array")String[]array,@Param("storage_stack")String storage_stack,@Param("stack_level")String stack_level,@Param("level_direction")String level_direction,@Param("level_sequence")String level_sequence);
 

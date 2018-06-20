@@ -161,12 +161,12 @@ public class APPRequestTransferController {
                     //需倒棱
                     urloptions.put("pipeRebevelProcess", "addition/piperebevel");
                 }
-                if(odsampling_mark!=null&&odsampling_mark.equals("1")){
+                if(odsampling_mark!=null&&odsampling_mark.equals("0")){
                     //需外防取样
                     urloptions.put("pipeSamplingProcess", "addition/pipesampling");
                 }
-                if(odsampling_mark!=null&&odsampling_mark.equals("0")||oddscsampling_mark!=null&&oddscsampling_mark.equals("1")||odpesample_mark!=null&&odpesample_mark.equals("1")){
-                    //可以做外防实验  odsampling_mark为0时代表取样完毕，其他实验不需要切割取样
+                if(odsampling_mark!=null&&odsampling_mark.equals("1")||oddscsampling_mark!=null&&oddscsampling_mark.equals("1")||odpesample_mark!=null&&odpesample_mark.equals("1")){
+                    //可以做外防实验  odsampling_mark为1时代表取样完毕，其他实验不需要切割取样
                     if (external_coating.equals("2FBE")) {
                         urloptions.put("labtesting2fbe", "labtesting/labtesting2fbe");
                     } else if (external_coating.equals("3LPE")) {
