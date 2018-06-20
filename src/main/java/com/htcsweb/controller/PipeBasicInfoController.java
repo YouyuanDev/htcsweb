@@ -175,7 +175,7 @@ public class PipeBasicInfoController {
     }
 
     //查询3LPE DSC实验样管信息
-    @RequestMapping("/")
+    @RequestMapping("/get3LPEDSCSamplePipeNo")
     @ResponseBody
     public String get3LPEDSCSamplePipeNo(HttpServletRequest request){
         String map="";
