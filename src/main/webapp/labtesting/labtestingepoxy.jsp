@@ -206,6 +206,7 @@
                     }
                     //以下写onchange的逻辑
                     onSearchClick(1);onSearchClick(3);
+                    onClearClick(1);onClearClick(3);
                 }
             });
             var date=$("#coating_date").datetimebox('getValue');

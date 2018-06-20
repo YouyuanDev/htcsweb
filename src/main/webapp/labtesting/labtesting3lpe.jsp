@@ -291,6 +291,7 @@
                     //以下写onchange的逻辑
                     //alert($("#coating_date").datetimebox('getValue'));
                     onSearchClick(1);onSearchClick(3);onSearchClick(4);
+                    onClearClick(1);onClearClick(3);onClearClick(4);
                 }
             });
             var date=$("#coating_date").datetimebox('getValue');
