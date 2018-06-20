@@ -115,7 +115,7 @@
         <where>
             AND odsampling_mark='1'
 
-            AND  pipe_no not in ( select pipe_no from lab_testing_2fbe )
+            <![CDATA[ AND  pipe_no not in ( select pipe_no from lab_testing_2fbe where id<>#{id}) ]]>
 
             <if test="pipe_no!=null and pipe_no!=''">
                 AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
@@ -141,8 +141,7 @@
         <where>
             AND od_dsc_sample_mark='1'
 
-            AND  pipe_no not in ( select dsc_pipe_no from lab_testing_2fbe )
-
+            <![CDATA[ AND  pipe_no not in ( select dsc_pipe_no from lab_testing_2fbe where id<>#{id}) ]]>
             <if test="pipe_no!=null and pipe_no!=''">
                 AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
             </if>
@@ -166,8 +165,7 @@
         <where>
             AND od_dsc_sample_mark='1'
 
-            AND  pipe_no not in ( select dsc_pipe_no from lab_testing_3lpe )
-
+            <![CDATA[ AND  pipe_no not in ( select dsc_pipe_no from lab_testing_3lpe where id<>#{id}) ]]>
             <if test="pipe_no!=null and pipe_no!=''">
                 AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
             </if>
@@ -190,8 +188,7 @@
         <where>
             AND odsampling_mark='1'
 
-            AND  pipe_no not in ( select pipe_no from lab_testing_3lpe )
-
+            <![CDATA[ AND  pipe_no not in ( select pipe_no from lab_testing_3lpe where id<>#{id}) ]]>
             <if test="pipe_no!=null and pipe_no!=''">
                 AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
             </if>
@@ -215,8 +212,7 @@
         <where>
             AND od_pe_sample_mark='1'
 
-            AND  pipe_no not in ( select pe_pipe_no from lab_testing_3lpe )
-
+            <![CDATA[ AND  pipe_no not in ( select pe_pipe_no from lab_testing_3lpe where id<>#{id}) ]]>
             <if test="pipe_no!=null and pipe_no!=''">
                 AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
             </if>
@@ -241,8 +237,7 @@
         <where>
             AND idsampling_mark='1'
 
-            AND  pipe_no not in ( select pipe_no from lab_testing_liquid_epoxy )
-
+            <![CDATA[ AND  pipe_no not in ( select pipe_no from lab_testing_liquid_epoxy where id<>#{id}) ]]>
             <if test="pipe_no!=null and pipe_no!=''">
                 AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
             </if>
@@ -267,8 +262,7 @@
         <where>
             AND id_glass_sample_mark='1'
 
-            AND  pipe_no not in ( select glass_pipe_no from lab_testing_liquid_epoxy )
-
+            <![CDATA[ AND  pipe_no not in ( select glass_pipe_no from lab_testing_liquid_epoxy where id<>#{id}) ]]>
             <if test="pipe_no!=null and pipe_no!=''">
                 AND pipe_no LIKE CONCAT('%',#{pipe_no},'%')
             </if>

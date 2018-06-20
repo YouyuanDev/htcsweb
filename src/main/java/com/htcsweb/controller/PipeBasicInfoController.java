@@ -135,6 +135,13 @@ public class PipeBasicInfoController {
         try{
             String pipe_no=request.getParameter("pipe_no");
             String coating_date=request.getParameter("coating_date");
+            String testing_id=request.getParameter("testing_id");
+
+            int id=-1;
+            if(testing_id!=null&&testing_id!="") {
+                id=Integer.parseInt(testing_id);
+            }
+
             Date beginTime=null;
             Date endTime=null;
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -146,7 +153,7 @@ public class PipeBasicInfoController {
                 endTime=sdf.parse(coating_date);
                 System.out.println(endTime.toString());
             }
-            List<PipeBasicInfo>list=pipeBasicInfoDao.get2FBESamplePipeNo(pipe_no,beginTime,endTime);
+            List<PipeBasicInfo>list=pipeBasicInfoDao.get2FBESamplePipeNo(pipe_no,beginTime,endTime,id);
             map= JSONObject.toJSONString(list);
         }catch (Exception e){
         }
@@ -162,6 +169,11 @@ public class PipeBasicInfoController {
         try{
             String pipe_no=request.getParameter("pipe_no");
             String coating_date=request.getParameter("coating_date");
+            String testing_id=request.getParameter("testing_id");
+            int id=-1;
+            if(testing_id!=null&&testing_id!="") {
+                id=Integer.parseInt(testing_id);
+            }
             Date beginTime=null;
             Date endTime=null;
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -173,7 +185,7 @@ public class PipeBasicInfoController {
                 endTime=sdf.parse(coating_date);
                 System.out.println(endTime.toString());
             }
-            List<PipeBasicInfo>list=pipeBasicInfoDao.get2FBEDSCSamplePipeNo(pipe_no,beginTime,endTime);
+            List<PipeBasicInfo>list=pipeBasicInfoDao.get2FBEDSCSamplePipeNo(pipe_no,beginTime,endTime,id);
             map= JSONObject.toJSONString(list);
         }catch (Exception e){
         }
@@ -192,6 +204,11 @@ public class PipeBasicInfoController {
         try{
             String pipe_no=request.getParameter("pipe_no");
             String coating_date=request.getParameter("coating_date");
+            String testing_id=request.getParameter("testing_id");
+            int id=-1;
+            if(testing_id!=null&&testing_id!="") {
+                id=Integer.parseInt(testing_id);
+            }
             Date beginTime=null;
             Date endTime=null;
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -203,7 +220,7 @@ public class PipeBasicInfoController {
                 endTime=sdf.parse(coating_date);
                 System.out.println(endTime.toString());
             }
-            List<PipeBasicInfo>list=pipeBasicInfoDao.get3LPESamplePipeNo(pipe_no,beginTime,endTime);
+            List<PipeBasicInfo>list=pipeBasicInfoDao.get3LPESamplePipeNo(pipe_no,beginTime,endTime,id);
             map= JSONObject.toJSONString(list);
         }catch (Exception e){
         }
@@ -218,6 +235,13 @@ public class PipeBasicInfoController {
         try{
             String pipe_no=request.getParameter("pipe_no");
             String coating_date=request.getParameter("coating_date");
+            String testing_id=request.getParameter("testing_id");
+            int id=-1;
+            if(testing_id!=null&&testing_id!="") {
+                id=Integer.parseInt(testing_id);
+            }
+
+            System.out.println("testing_id id="+testing_id);
             Date beginTime=null;
             Date endTime=null;
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -229,7 +253,7 @@ public class PipeBasicInfoController {
                 endTime=sdf.parse(coating_date);
                 System.out.println(endTime.toString());
             }
-            List<PipeBasicInfo>list=pipeBasicInfoDao.get3LPEDSCSamplePipeNo(pipe_no,beginTime,endTime);
+            List<PipeBasicInfo>list=pipeBasicInfoDao.get3LPEDSCSamplePipeNo(pipe_no,beginTime,endTime,id);
             map= JSONObject.toJSONString(list);
         }catch (Exception e){
         }
@@ -244,6 +268,11 @@ public class PipeBasicInfoController {
         try{
             String pipe_no=request.getParameter("pipe_no");
             String coating_date=request.getParameter("coating_date");
+            String testing_id=request.getParameter("testing_id");
+            int id=-1;
+            if(testing_id!=null&&testing_id!="") {
+                id=Integer.parseInt(testing_id);
+            }
             Date beginTime=null;
             Date endTime=null;
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -255,7 +284,7 @@ public class PipeBasicInfoController {
                 endTime=sdf.parse(coating_date);
                 System.out.println(endTime.toString());
             }
-            List<PipeBasicInfo>list=pipeBasicInfoDao.get3LPEPESamplePipeNo(pipe_no,beginTime,endTime);
+            List<PipeBasicInfo>list=pipeBasicInfoDao.get3LPEPESamplePipeNo(pipe_no,beginTime,endTime,id);
             map= JSONObject.toJSONString(list);
         }catch (Exception e){
         }
@@ -274,6 +303,11 @@ public class PipeBasicInfoController {
         try{
             String pipe_no=request.getParameter("pipe_no");
             String coating_date=request.getParameter("coating_date");
+            String testing_id=request.getParameter("testing_id");
+            int id=-1;
+            if(testing_id!=null&&testing_id!="") {
+                id=Integer.parseInt(testing_id);
+            }
             Date beginTime=null;
             Date endTime=null;
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -285,7 +319,7 @@ public class PipeBasicInfoController {
                 endTime=sdf.parse(coating_date);
                 System.out.println(endTime.toString());
             }
-            List<PipeBasicInfo>list=pipeBasicInfoDao.getLiquidEpoxySamplePipeNo(pipe_no,beginTime,endTime);
+            List<PipeBasicInfo>list=pipeBasicInfoDao.getLiquidEpoxySamplePipeNo(pipe_no,beginTime,endTime,id);
             map= JSONObject.toJSONString(list);
         }catch (Exception e){
         }
@@ -300,6 +334,11 @@ public class PipeBasicInfoController {
         try{
             String pipe_no=request.getParameter("pipe_no");
             String coating_date=request.getParameter("coating_date");
+            String testing_id=request.getParameter("testing_id");
+            int id=-1;
+            if(testing_id!=null&&testing_id!="") {
+                id=Integer.parseInt(testing_id);
+            }
             Date beginTime=null;
             Date endTime=null;
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -311,7 +350,7 @@ public class PipeBasicInfoController {
                 endTime=sdf.parse(coating_date);
                 System.out.println(endTime.toString());
             }
-            List<PipeBasicInfo>list=pipeBasicInfoDao.getLiquidEpoxyGlassSamplePipeNo(pipe_no,beginTime,endTime);
+            List<PipeBasicInfo>list=pipeBasicInfoDao.getLiquidEpoxyGlassSamplePipeNo(pipe_no,beginTime,endTime,id);
             map= JSONObject.toJSONString(list);
         }catch (Exception e){
         }

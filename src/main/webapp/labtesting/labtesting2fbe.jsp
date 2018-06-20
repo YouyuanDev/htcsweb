@@ -688,7 +688,8 @@
         {
             grid1.load({
                 pipe_no:keyText1.value,
-                coating_date:$("#coating_date").datetimebox('getValue')
+                coating_date:$("#coating_date").datetimebox('getValue'),
+                testing_id:$('#odbpid').text()
             });
         }else if(type==2){
             grid2.load({
@@ -698,7 +699,8 @@
         }else if(type==3){
             grid3.load({
                 pipe_no:keyText5.value,
-                coating_date:$("#coating_date").datetimebox('getValue')
+                coating_date:$("#coating_date").datetimebox('getValue'),
+                testing_id:$('#odbpid').text()
             });
         }
 
@@ -725,7 +727,10 @@
         clearLabelPipeInfo();
         $.ajax({
             url:'../pipeinfo/get2FBESamplePipeNo.action',
-            data:{'pipe_no':rows.pipe_no,'coating_date':$("#coating_date").datetimebox('getValue')},
+            data:{'pipe_no':rows.pipe_no,
+                'coating_date':$("#coating_date").datetimebox('getValue'),
+                'testing_id':$('#odbpid').text()
+            },
             dataType:'json',
             success:function (data) {
                 if(data!=null&&data!=""){
@@ -766,7 +771,8 @@
         $('#searchBar1').css('display','block');
         grid1.load({
             pipe_no:keyText1.value,
-            coating_date:$("#coating_date").datetimebox('getValue')
+            coating_date:$("#coating_date").datetimebox('getValue'),
+            testing_id:$('#odbpid').text()
         });
     });
     look2.on("showpopup",function(e){
@@ -786,7 +792,8 @@
         $('#searchBar3').css('display','block');
         grid3.load({
             pipe_no:keyText5.value,
-            coating_date:$("#coating_date").datetimebox('getValue')
+            coating_date:$("#coating_date").datetimebox('getValue'),
+            testing_id:$('#odbpid').text()
         });
     });
     hlLanguage("../i18n/");
