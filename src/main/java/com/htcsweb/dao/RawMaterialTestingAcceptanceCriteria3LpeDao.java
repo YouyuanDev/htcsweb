@@ -15,4 +15,6 @@ public interface RawMaterialTestingAcceptanceCriteria3LpeDao {
     public List<HashMap<String,Object>> getAllByLike(@Param("raw_material_testing_acceptance_criteria_no") String raw_material_testing_acceptance_criteria_no, @Param("skip") int skip, @Param("take") int take);
     public int getCountAllByLike(@Param("raw_material_testing_acceptance_criteria_no") String raw_material_testing_acceptance_criteria_no);
 
+    public RawMaterialTestingAcceptanceCriteria3Lpe getRawMaterialStandard3LpeByPipeNo(@Param("pipe_no")String pipe_no);
+
 }

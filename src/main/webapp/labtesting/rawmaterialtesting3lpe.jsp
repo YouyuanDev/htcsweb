@@ -125,7 +125,7 @@
                 }
                 //异步获取标准并匹配
                 $.ajax({
-                    url:'/rawMaterialACOperation/getRawMaterialStandard3LpeByProjectNo.action',
+                    url:'/rawMaterialACOperation/getRawMaterialTestingAcceptanceCriteria3LpeByProjectNo.action',
                     dataType:'json',
                     data:{'project_no':row.project_no},
                     success:function (data){

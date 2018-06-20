@@ -106,6 +106,7 @@ public class LabTesting3LpeController {
         }catch (Exception e){
             json.put("success",false);
             e.printStackTrace();
+            json.put("message","保存失败，"+e.getMessage());
         }finally {
             try{
                 ResponseUtil.write(response,json);

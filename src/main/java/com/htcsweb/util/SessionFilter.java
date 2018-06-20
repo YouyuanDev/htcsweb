@@ -111,7 +111,11 @@ public class SessionFilter extends OncePerRequestFilter{
             "getAllEPOXYCoatingPowderInfo",
             "getAllREPAIRCoatingPowderInfo",
             "getAllCURINGCoatingPowderInfo",
-            "getAllCoatingPowderInfo"
+            "getAllCoatingPowderInfo",
+            "getRawMaterialTestingAcceptanceCriteria2FbeByProjectNo",
+            "getRawMaterialTestingAcceptanceCriteria3LpeByProjectNo",
+            "getRawMaterialStandard2FbeByPipeNo",
+            "getRawMaterialStandard3LpeByPipeNo"
 
     }; // 不过滤的uri
 

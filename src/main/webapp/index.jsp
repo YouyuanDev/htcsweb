@@ -824,7 +824,7 @@
     </script>
 </head>
 <body class="easyui-layout">
-<div data-options="region:'south',split:true" style="height:50px;">
+<div data-options="region:'south',split:true" style="height:55px;">
     <div style="text-align: center"><h3>Dr.K Inspection &copy;2018 友元科技 版权所有</h3></div>
 </div>
 <div data-options="region:'north',split:true">

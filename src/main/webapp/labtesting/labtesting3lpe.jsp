@@ -208,11 +208,11 @@
                 url:url,
                 onSubmit:function () {
                     //表单验证
-                    if($("input[name='pipe_no']").val()==""){
-
-                        hlAlertFour("请选择钢管管号");
-                        return false;
-                    }
+                    // if($("input[name='pipe_no']").val()==""){
+                    //
+                    //     hlAlertFour("请选择钢管管号");
+                    //     return false;
+                    // }
                     if($("input[name='operator_no']").val()==""){
 
                         hlAlertFour("请选择操作工工号");
@@ -228,6 +228,9 @@
                         hlAlertFour("请输入结论!");
                         return false;
                     }
+
+
+
                     setParams($("input[name='resistance_to_cd_20_28d']"));
                     setParams($("input[name='resistance_to_cd_max_28d']"));
                     setParams($("input[name='resistance_to_cd_65_24h']"));
@@ -243,9 +246,10 @@
                 success: function(result){
                     clearFormLabel();
                     var result = eval('('+result+')');
-                    $('#hlLabtest3LpeDialog').dialog('close');
+
                     if (result.success){
                         $('#Labtest3LpeDatagrids').datagrid('reload');
+                        $('#hlLabtest3LpeDialog').dialog('close');
                     }
                     hlAlertFour(result.message);
                 },

@@ -226,26 +226,59 @@ public class RawMaterialTestingAcceptanceCriteriaController {
         ResponseUtil.write(response,json);
         return null;
     }
+
+
     //根据项目编号查找原材料(2FBE)标准
-    @RequestMapping("/getRawMaterialStandard2FbeByProjectNo")
+    @RequestMapping("/getRawMaterialTestingAcceptanceCriteria2FbeByProjectNo")
     @ResponseBody
-    public String getODAcceptanceCriteriaByContractNo(HttpServletRequest request){
-        String contract_no=request.getParameter("project_no");
-        if(contract_no!=null&&contract_no!=""){
-            RawMaterialTestingAcceptanceCriteria2Fbe criteria=rawMaterialTestingAcceptanceCriteria2FbeDao.getRawMaterialTestingAcceptanceCriteria2FbeByProjectNo(contract_no);
+    public String getRawMaterialTestingAcceptanceCriteria2FbeByProjectNo(HttpServletRequest request){
+        String project_no=request.getParameter("project_no");
+        if(project_no!=null&&project_no!=""){
+            RawMaterialTestingAcceptanceCriteria2Fbe criteria=rawMaterialTestingAcceptanceCriteria2FbeDao.getRawMaterialTestingAcceptanceCriteria2FbeByProjectNo(project_no);
             String map= JSONObject.toJSONString(criteria);
             return map;
         }else{
             return  null;
         }
     }
-    //根据项目编号查找原材料(3LPE)标准
-    @RequestMapping("/getRawMaterialStandard3LpeByProjectNo")
+
+
+    //根据钢管编号查找原材料(2FBE)标准
+    @RequestMapping("/getRawMaterialStandard2FbeByPipeNo")
     @ResponseBody
-    public String getIDAcceptanceCriteriaByContractNo(HttpServletRequest request){
-        String contract_no=request.getParameter("project_no");
-        if(contract_no!=null&&contract_no!=""){
-            RawMaterialTestingAcceptanceCriteria3Lpe criteria=rawMaterialTestingAcceptanceCriteria3LpeDao.getRawMaterialTestingAcceptanceCriteria3LpeByProjectNo(contract_no);
+    public String getRawMaterialStandard2FbeByPipeNo(HttpServletRequest request){
+        String pipe_no=request.getParameter("pipe_no");
+        if(pipe_no!=null&&pipe_no!=""){
+            RawMaterialTestingAcceptanceCriteria2Fbe criteria=rawMaterialTestingAcceptanceCriteria2FbeDao.getRawMaterialStandard2FbeByPipeNo(pipe_no);
+            String map= JSONObject.toJSONString(criteria);
+            return map;
+        }else{
+            return  null;
+        }
+    }
+
+
+    //根据项目编号查找原材料(3LPE)标准
+    @RequestMapping("/getRawMaterialTestingAcceptanceCriteria3LpeByProjectNo")
+    @ResponseBody
+    public String getRawMaterialTestingAcceptanceCriteria3LpeByProjectNo(HttpServletRequest request){
+        String project_no=request.getParameter("project_no");
+        if(project_no!=null&&project_no!=""){
+            RawMaterialTestingAcceptanceCriteria3Lpe criteria=rawMaterialTestingAcceptanceCriteria3LpeDao.getRawMaterialTestingAcceptanceCriteria3LpeByProjectNo(project_no);
+            String map= JSONObject.toJSONString(criteria);
+            return map;
+        }else{
+            return  null;
+        }
+    }
+
+    //根据钢管编号查找原材料(3LPE)标准
+    @RequestMapping("/getRawMaterialStandard3LpeByPipeNo")
+    @ResponseBody
+    public String getRawMaterialStandard3LpeByPipeNo(HttpServletRequest request){
+        String pipe_no=request.getParameter("pipe_no");
+        if(pipe_no!=null&&pipe_no!=""){
+            RawMaterialTestingAcceptanceCriteria3Lpe criteria=rawMaterialTestingAcceptanceCriteria3LpeDao.getRawMaterialStandard3LpeByPipeNo(pipe_no);
             String map= JSONObject.toJSONString(criteria);
             return map;
         }else{

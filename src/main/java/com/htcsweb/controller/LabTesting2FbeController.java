@@ -106,6 +106,7 @@ public class LabTesting2FbeController {
 
         }catch (Exception e){
             json.put("success",false);
+            json.put("message","保存失败，"+e.getMessage());
             e.printStackTrace();
         }finally {
             try{

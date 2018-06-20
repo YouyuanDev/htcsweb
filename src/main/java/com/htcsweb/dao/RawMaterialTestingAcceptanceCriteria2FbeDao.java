@@ -18,6 +18,10 @@ public interface RawMaterialTestingAcceptanceCriteria2FbeDao {
     public RawMaterialTestingAcceptanceCriteria2Fbe getRawMaterialTestingAcceptanceCriteria2FbeByProjectNo(@Param("project_no")String project_no);
     public List<HashMap<String,Object>> getAllByLike(@Param("raw_material_testing_acceptance_criteria_no") String raw_material_testing_acceptance_criteria_no, @Param("skip") int skip, @Param("take") int take);
     public int getCountAllByLike(@Param("raw_material_testing_acceptance_criteria_no") String raw_material_testing_acceptance_criteria_no);
+
+
+    public RawMaterialTestingAcceptanceCriteria2Fbe getRawMaterialStandard2FbeByPipeNo(@Param("pipe_no")String pipe_no);
+
 }
 
 

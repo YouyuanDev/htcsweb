@@ -45,6 +45,18 @@ public class APPRequestTransferController {
     @Autowired
     private CoatingPowderInfoDao coatingPowderInfoDao;
 
+    @Autowired
+    LabTestingAcceptanceCriteria2FbeDao labTestingAcceptanceCriteria2FbeDao;
+
+    @Autowired
+    LabTestingAcceptanceCriteria3LpeDao labTestingAcceptanceCriteria3LpeDao;
+
+    @Autowired
+    RawMaterialTestingAcceptanceCriteria2FbeDao rawMaterialTestingAcceptanceCriteria2FbeDao;
+
+    @Autowired
+    RawMaterialTestingAcceptanceCriteria3LpeDao rawMaterialTestingAcceptanceCriteria3LpeDao;
+
 
 
     //用于APP请求重定向
@@ -242,7 +254,7 @@ public class APPRequestTransferController {
 
 
 
-    //根据钢管编号查找内外防腐标准、检验频率、钢管信息、光管检验频率、pending数据  APP使用  stencil_content 做完动态替换  并且把检验频率也一起返回
+    //根据钢管编号查找内外防腐标准、检验频率、钢管信息、光管检验频率、pending数据、实验标准  APP使用  stencil_content 做完动态替换  并且把检验频率也一起返回
     @RequestMapping("/getAllProcessInfoByPipeNo")
     @ResponseBody
     public String getAllProcessInfoByPipeNo(HttpServletRequest request){
@@ -362,12 +374,49 @@ public class APPRequestTransferController {
             }
 
             //光管接收标准
-                PipeBodyAcceptanceCriteria pbcriteria=pipeBodyAcceptanceCriteriaDao.getPipeBodyAcceptanceCriteriaByPipeNo(pipe_no);
-                 if(pbcriteria!=null){
-                     resultMaps.put("pbcriteria",pbcriteria);
-                 }else{
-                     resultMaps.put("pbcriteria","");
-                 }
+            PipeBodyAcceptanceCriteria pbcriteria=pipeBodyAcceptanceCriteriaDao.getPipeBodyAcceptanceCriteriaByPipeNo(pipe_no);
+            if(pbcriteria!=null){
+                resultMaps.put("pbcriteria",pbcriteria);
+            }else{
+                resultMaps.put("pbcriteria","");
+            }
+
+            //2FBE实验标准
+            LabTestingAcceptanceCriteria2Fbe lab2fbecriteria=labTestingAcceptanceCriteria2FbeDao.getLabTestCriteria2FbeByPipeNo(pipe_no);
+            if(lab2fbecriteria!=null){
+                resultMaps.put("lab2fbecriteria",lab2fbecriteria);
+            }else{
+                resultMaps.put("lab2fbecriteria","");
+            }
+
+            //3LPE实验标准
+            LabTestingAcceptanceCriteria3Lpe lab3lpecriteria=labTestingAcceptanceCriteria3LpeDao.getLabTestCriteria3LpeByPipeNo(pipe_no);
+            if(lab3lpecriteria!=null){
+                resultMaps.put("lab3lpecriteria",lab3lpecriteria);
+            }else{
+                resultMaps.put("lab3lpecriteria","");
+            }
+
+            //2FBE 原材料实验标准
+            RawMaterialTestingAcceptanceCriteria2Fbe raw2fbecriteria=rawMaterialTestingAcceptanceCriteria2FbeDao.getRawMaterialStandard2FbeByPipeNo(pipe_no);
+            if(raw2fbecriteria!=null){
+                resultMaps.put("raw2fbecriteria",raw2fbecriteria);
+            }else{
+                resultMaps.put("raw2fbecriteria","");
+            }
+
+            //3LPE 原材料实验标准
+            RawMaterialTestingAcceptanceCriteria3Lpe raw3lpecriteria=rawMaterialTestingAcceptanceCriteria3LpeDao.getRawMaterialStandard3LpeByPipeNo(pipe_no);
+            if(raw3lpecriteria!=null){
+                resultMaps.put("raw3lpecriteria",raw3lpecriteria);
+            }else{
+                resultMaps.put("raw3lpecriteria","");
+            }
+
+
+
+
+
             resultMaps.put("success",true);
             resultMaps.put("message","成功");
             String map= JSONObject.toJSONString(resultMaps);

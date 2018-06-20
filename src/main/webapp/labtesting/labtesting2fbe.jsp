@@ -193,10 +193,10 @@
                 url:url,
                 onSubmit:function () {
                     //表单验证
-                    if($("input[name='pipe_no']").val()==""){
-                        hlAlertFour("请选择钢管管号");
-                        return false;
-                    }
+                    // if($("input[name='pipe_no']").val()==""){
+                    //     hlAlertFour("请选择钢管管号");
+                    //     return false;
+                    // }
                     if($("input[name='operator_no']").val()==""){
                         hlAlertFour("请选择操作工工号");
                         return false;
