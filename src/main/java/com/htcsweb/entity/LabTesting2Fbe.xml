@@ -6,7 +6,7 @@
 <mapper namespace="com.htcsweb.dao.LabTesting2FbeDao">
 
     <insert id="addLabTest2Fbe" parameterType="com.htcsweb.entity.LabTesting2Fbe">
-     INSERT INTO lab_testing_2fbe(sample_no,pipe_no,coating_date,operator_no,operation_time,dsc,foaming_cross_sectional,foaming_interfacial,interfacial_contamination,flexibility,impact,resistance_to_hot_water_98_24h,resistance_to_hot_water_98_28d,resistance_to_cd_65_24h,resistance_to_cd_22_28d,resistance_to_cd_65_28d,upload_files,result,remark) VALUES (#{sample_no},#{pipe_no},#{coating_date},#{operator_no},#{operation_time},#{dsc},#{foaming_cross_sectional},#{foaming_interfacial},#{interfacial_contamination},#{flexibility},#{impact},#{resistance_to_hot_water_98_24h},#{resistance_to_hot_water_98_28d},#{resistance_to_cd_65_24h},#{resistance_to_cd_22_28d},#{resistance_to_cd_65_28d},#{upload_files},#{result},#{remark})
+     INSERT INTO lab_testing_2fbe(sample_no,pipe_no,coating_date,operator_no,operation_time,dsc,foaming_cross_sectional,foaming_interfacial,interfacial_contamination,flexibility,impact,resistance_to_hot_water_98_24h,resistance_to_hot_water_98_28d,resistance_to_cd_65_24h,resistance_to_cd_22_28d,resistance_to_cd_65_28d,upload_files,result,remark,dsc_pipe_no,dsc_sample_no) VALUES (#{sample_no},#{pipe_no},#{coating_date},#{operator_no},#{operation_time},#{dsc},#{foaming_cross_sectional},#{foaming_interfacial},#{interfacial_contamination},#{flexibility},#{impact},#{resistance_to_hot_water_98_24h},#{resistance_to_hot_water_98_28d},#{resistance_to_cd_65_24h},#{resistance_to_cd_22_28d},#{resistance_to_cd_65_28d},#{upload_files},#{result},#{remark},#{dsc_pipe_no},#{dsc_sample_no})
     </insert>
     <delete id="delLabTest2Fbe">
         delete from lab_testing_2fbe WHERE
@@ -16,7 +16,7 @@
     </delete>
 
     <update id="updateLabTest2Fbe" parameterType="com.htcsweb.entity.LabTesting2Fbe">
-      UPDATE lab_testing_2fbe set sample_no=#{sample_no},pipe_no=#{pipe_no},coating_date=#{coating_date},operator_no=#{operator_no},operation_time=#{operation_time},dsc=#{dsc},foaming_cross_sectional=#{foaming_cross_sectional},foaming_interfacial=#{foaming_interfacial},interfacial_contamination=#{interfacial_contamination},flexibility=#{flexibility},impact=#{impact},resistance_to_hot_water_98_24h=#{resistance_to_hot_water_98_24h},resistance_to_hot_water_98_28d=#{resistance_to_hot_water_98_28d},resistance_to_cd_65_24h=#{resistance_to_cd_65_24h},resistance_to_cd_22_28d=#{resistance_to_cd_22_28d},resistance_to_cd_65_28d=#{resistance_to_cd_65_28d},upload_files=#{upload_files},result=#{result},remark=#{remark} where id=#{id}
+      UPDATE lab_testing_2fbe set sample_no=#{sample_no},pipe_no=#{pipe_no},coating_date=#{coating_date},operator_no=#{operator_no},operation_time=#{operation_time},dsc=#{dsc},foaming_cross_sectional=#{foaming_cross_sectional},foaming_interfacial=#{foaming_interfacial},interfacial_contamination=#{interfacial_contamination},flexibility=#{flexibility},impact=#{impact},resistance_to_hot_water_98_24h=#{resistance_to_hot_water_98_24h},resistance_to_hot_water_98_28d=#{resistance_to_hot_water_98_28d},resistance_to_cd_65_24h=#{resistance_to_cd_65_24h},resistance_to_cd_22_28d=#{resistance_to_cd_22_28d},resistance_to_cd_65_28d=#{resistance_to_cd_65_28d},upload_files=#{upload_files},result=#{result},remark=#{remark},dsc_pipe_no=#{dsc_pipe_no},dsc_sample_no=#{dsc_sample_no} where id=#{id}
     </update>
 
 

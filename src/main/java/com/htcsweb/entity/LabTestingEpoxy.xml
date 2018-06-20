@@ -6,7 +6,7 @@
 <mapper namespace="com.htcsweb.dao.LabTestingEpoxyDao">
 
     <insert id="addLabTestEpoxy" parameterType="com.htcsweb.entity.LabTestingEpoxy">
-     INSERT INTO lab_testing_liquid_epoxy(sample_no,pipe_no,coating_date,operator_no,operation_time,porosity,bend,adhesion,curing,water_immersion,upload_files,result,remark) VALUES (#{sample_no},#{pipe_no},#{coating_date},#{operator_no},#{operation_time},#{porosity},#{bend},#{adhesion},#{curing},#{water_immersion},#{upload_files},#{result},#{remark})
+     INSERT INTO lab_testing_liquid_epoxy(sample_no,pipe_no,coating_date,operator_no,operation_time,porosity,bend,adhesion,curing,water_immersion,upload_files,result,remark,glass_sample_no,glass_pipe_no) VALUES (#{sample_no},#{pipe_no},#{coating_date},#{operator_no},#{operation_time},#{porosity},#{bend},#{adhesion},#{curing},#{water_immersion},#{upload_files},#{result},#{remark},#{glass_sample_no},#{glass_pipe_no})
     </insert>
     <delete id="delLabTestEpoxy">
         delete from lab_testing_liquid_epoxy WHERE
@@ -15,7 +15,7 @@
         </foreach>
     </delete>
     <update id="updateLabTestEpoxy" parameterType="com.htcsweb.entity.LabTestingEpoxy">
-       UPDATE lab_testing_liquid_epoxy set sample_no=#{sample_no},pipe_no=#{pipe_no},coating_date=#{coating_date},operator_no=#{operator_no},operation_time=#{operation_time},porosity=#{porosity},bend=#{bend},adhesion=#{adhesion},curing=#{curing},water_immersion=#{water_immersion},upload_files=#{upload_files},result=#{result},remark=#{remark} where id=#{id}
+       UPDATE lab_testing_liquid_epoxy set sample_no=#{sample_no},pipe_no=#{pipe_no},coating_date=#{coating_date},operator_no=#{operator_no},operation_time=#{operation_time},porosity=#{porosity},bend=#{bend},adhesion=#{adhesion},curing=#{curing},water_immersion=#{water_immersion},upload_files=#{upload_files},result=#{result},remark=#{remark},glass_sample_no=#{glass_sample_no},glass_pipe_no=#{glass_pipe_no} where id=#{id}
     </update>
 
 
