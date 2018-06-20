@@ -369,9 +369,9 @@
                    <td class="i18n1" name="dscpipeno"></td>
                    <td>
                        <%--<input class="easyui-textbox" type="text" name="dsc_pipe_no" value=""/>--%>
-                       <input  id="lookup1" name="dsc_pipe_no" class="mini-lookup" style="text-align:center;width:180px;"
+                       <input  id="lookup3" name="dsc_pipe_no" class="mini-lookup" style="text-align:center;width:180px;"
                                textField="pipe_no" valueField="id" popupWidth="auto"
-                               popup="#gridPanel1" grid="#datagrid1" multiSelect="false"/>
+                               popup="#gridPanel3" grid="#datagrid3" multiSelect="false"/>
                    </td>
                    <td></td>
                    <td class="i18n1" name="dscsampleno"></td>
@@ -719,6 +719,24 @@
         var rows = grid2.getSelected();
         $("input[name='operator_no']").val(rows.employee_no);
     });
+    look3.on('valuechanged',function (){
+        var rows = grid3.getSelected();
+        $("input[name='dsc_pipe_no']").val(rows.pipe_no);
+        clearLabelPipeInfo();
+        $.ajax({
+            url:'../pipeinfo/get2FBESamplePipeNo.action',
+            data:{'pipe_no':rows.pipe_no},
+            dataType:'json',
+            success:function (data) {
+                if(data!=null&&data!=""){
+                    addLabelPipeInfo(data);
+                }
+            },
+            error:function () {
+                hlAlertThree();
+            }
+        });
+    });
     look1.on("showpopup",function(e){
         $('.mini-shadow').css('z-index','99999');
         $('.mini-popup').css('z-index','100000');
@@ -728,7 +746,6 @@
             pipe_no:keyText1.value,
             pipestatus:'bare1,'
         });
-        //$('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
     });
     look2.on("showpopup",function(e){
         $('.mini-shadow').css('z-index','99999');
@@ -739,7 +756,6 @@
             pname: keyText4.value,
             employeeno:keyText3.value
         });
-        //$('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
     });
     look3.on("showpopup",function(e){
         $('.mini-shadow').css('z-index','99999');

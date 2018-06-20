@@ -291,7 +291,12 @@
             <table class="ht-table" width="100%" border="0">
                 <tr>
                     <td class="i18n1" name="glasspipeno"></td>
-                    <td><input class="easyui-textbox" type="text" name="glass_pipe_no" value=""/></td>
+                    <td>
+                        <%--<input class="easyui-textbox" type="text" name="glass_pipe_no" value=""/>--%>
+                            <input  id="lookup3" name="glass_pipe_no" class="mini-lookup" style="text-align:center;width:180px;"
+                                    textField="pipe_no" valueField="id" popupWidth="auto"
+                                    popup="#gridPanel3" grid="#datagrid3" multiSelect="false"/>
+                    </td>
                     <td></td>
                     <td class="i18n1" name="glasssampleno"></td>
                     <td><input class="easyui-textbox" type="text" name="glass_sample_no" value=""/></td>
@@ -495,6 +500,35 @@
         </div>
     </div>
 </div>
+<div id="gridPanel3" class="mini-panel" title="header" iconCls="icon-add" style="width:450px;height:250px;"
+     showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0"
+>
+    <div property="toolbar" id="searchBar3" style="padding:5px;padding-left:8px;text-align:center;display: none">
+        <div style="float:left;padding-bottom:2px;">
+            <span class="i18n1" name="pipeno">钢管编号</span><span>:</span>
+            <input id="keyText5" class="mini-textbox" style="width:110px;" onenter="onSearchClick(3)"/>
+            <a class="mini-button" onclick="onSearchClick(3)">查找</a>
+            <a class="mini-button" onclick="onClearClick(3)" name="clear">清除</a>
+        </div>
+        <div style="float:right;padding-bottom:2px;">
+            <a class="mini-button" onclick="onCloseClick(3)" name="close">关闭</a>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <div id="datagrid3" class="mini-datagrid" style="width:100%;height:100%;"
+         borderStyle="border:0" showPageSize="false" showPageIndex="false"
+         url="/pipeinfo/getLiquidEpoxySamplePipeNo.action">
+        <div property="columns">
+            <div type="checkcolumn" ></div>
+            <div field="pipe_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="pipeno">钢管编号</div>
+            <div field="contract_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="contractno">合同编号</div>
+            <div field="od" width="40" headerAlign="center" allowSort="true" class="i18n1" name="od">外径</div>
+            <div field="wt" width="40" headerAlign="center" allowSort="true" class="i18n1" name="wt">壁厚</div>
+            <div field="p_length" width="40" headerAlign="center" allowSort="true" class="i18n1" name="p_length">长度</div>
+            <div field="weight" width="40" headerAlign="center" allowSort="true" class="i18n1" name="weight">重量</div>
+        </div>
+    </div>
+</div>
 <script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
 </body>
 </html>
@@ -504,10 +538,13 @@
     var keyText1=mini.get('keyText1');
     var keyText4 = mini.get("keyText4");
     var keyText3=mini.get("keyText3");
+    var keyText5=mini.get("keyText5");
     var grid1=mini.get("datagrid1");
     var grid2=mini.get("datagrid2");
+    var grid3=mini.get("datagrid3");
     var look1=mini.get('lookup1');
     var look2= mini.get("lookup2");
+    var look3= mini.get("lookup3");
 
     function onSearchClick(type) {
         if(type==1)
@@ -521,6 +558,11 @@
                 pname: keyText4.value,
                 employeeno:keyText3.value
             });
+        }else if(type==3){
+            grid3.load({
+                pipe_no:keyText5.value
+                //pipestatus:'bare1,'
+            });
         }
 
     }
@@ -529,12 +571,16 @@
             look1.hidePopup();
         else if(type==2)
             look2.hidePopup();
+        else if(type==3)
+            look3.hidePopup();
     }
     function onClearClick(type) {
         if(type==1)
             look1.deselectAll();
         else if(type==2)
             look2.deselectAll();
+        else if(type==3)
+            look3.deselectAll();
     }
     look1.on('valuechanged',function () {
         var rows = grid1.getSelected();
@@ -558,6 +604,24 @@
         var rows = grid2.getSelected();
         $("input[name='operator_no']").val(rows.employee_no);
     });
+    look3.on('valuechanged',function () {
+        var rows = grid3.getSelected();
+        $("input[name='glass_pipe_no']").val(rows.pipe_no);
+        clearLabelPipeInfo();
+        $.ajax({
+            url:'../pipeinfo/getLiquidEpoxySamplePipeNo.action',
+            data:{'pipe_no':rows.pipe_no},
+            dataType:'json',
+            success:function (data) {
+                if(data!=null&&data!=""){
+                    addLabelPipeInfo(data);
+                }
+            },
+            error:function () {
+                hlAlertThree();
+            }
+        });
+    });
     look1.on("showpopup",function(e){
         $('.mini-shadow').css('z-index','99999');
         $('.mini-popup').css('z-index','100000');
@@ -567,7 +631,6 @@
             pipe_no:keyText1.value,
             pipestatus:'bare1,'
         });
-        //$('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
     });
     look2.on("showpopup",function(e){
         $('.mini-shadow').css('z-index','99999');
@@ -578,7 +641,16 @@
             pname: keyText4.value,
             employeeno:keyText3.value
         });
-        //$('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
+    });
+    look3.on("showpopup",function(e){
+        $('.mini-shadow').css('z-index','99999');
+        $('.mini-popup').css('z-index','100000');
+        $('.mini-panel').css('z-index','100000');
+        $('#searchBar3').css('display','block');
+        grid3.load({
+            pipe_no:keyText5.value,
+            pipestatus:'bare1,'
+        });
     });
     hlLanguage("../i18n/");
 </script>
