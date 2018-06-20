@@ -224,6 +224,10 @@
                     if($("input[name='coating_date']").val()==""){
                         hlAlertFour("请输入涂层时间");return false;
                     }
+                    if($("input[name='result']").val()==""){
+                        hlAlertFour("请输入结论!");
+                        return false;
+                    }
                     setParams($("input[name='resistance_to_cd_20_28d']"));
                     setParams($("input[name='resistance_to_cd_max_28d']"));
                     setParams($("input[name='resistance_to_cd_65_24h']"));
@@ -381,10 +385,10 @@
             <legend class="i18n1" name="pipebasicinfo">钢管信息</legend>
             <table class="ht-table">
                 <tr>
-                    <td class="i18n1" name="id" width="20%">流水号</td>
-                    <td ><label class="hl-label" id="odbpid"></label></td>
-                    <td class="i18n1" name="operatorno" width="20%">操作工编号</td>
-                    <td >
+                    <td width="20%" class="i18n1" name="id">流水号</td>
+                    <td width="20%" ><label class="hl-label" id="odbpid"></label></td>
+                    <td width="20%" class="i18n1" name="operatorno">操作工编号</td>
+                    <td width="20%">
                         <input id="lookup2" name="operator_no" class="mini-lookup" style="text-align:center;width:180px;"
                                textField="employee_no" valueField="id" popupWidth="auto"
                                popup="#gridPanel2" grid="#datagrid2" multiSelect="false"

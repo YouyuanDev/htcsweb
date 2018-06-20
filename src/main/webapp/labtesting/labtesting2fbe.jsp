@@ -194,12 +194,10 @@
                 onSubmit:function () {
                     //表单验证
                     if($("input[name='pipe_no']").val()==""){
-
                         hlAlertFour("请选择钢管管号");
                         return false;
                     }
                     if($("input[name='operator_no']").val()==""){
-
                         hlAlertFour("请选择操作工工号");
                         return false;
                     }
@@ -208,6 +206,10 @@
                     }
                     if($("input[name='coating_date']").val()==""){
                         hlAlertFour("请输入涂层时间");return false;
+                    }
+                    if($("input[name='result']").val()==""){
+                        hlAlertFour("请输入结论!");
+                        return false;
                     }
                     setParams($("input[name='foaming_cross_sectional']"));
                     setParams($("input[name='foaming_interfacial']"));
@@ -358,9 +360,9 @@
            <table class="ht-table">
                <tr>
                    <td class="i18n1" name="id" width="20%">流水号</td>
-                   <td><label class="hl-label" id="odbpid"></label></td>
-                   <td class="i18n1" name="operatorno" width="20%">操作工编号</td>
-                   <td>
+                   <td width="20%"><label class="hl-label" id="odbpid"></label></td>
+                   <td width="20%" class="i18n1" name="operatorno">操作工编号</td>
+                   <td width="20%">
                        <input id="lookup2" name="operator_no" class="mini-lookup" style="text-align:center;width:180px;"
                               textField="employee_no" valueField="id" popupWidth="auto"
                               popup="#gridPanel2" grid="#datagrid2" multiSelect="false"
