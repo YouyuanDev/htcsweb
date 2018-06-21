@@ -160,4 +160,21 @@ public class LabTesting2FbeController {
         return mmp;
 
     }
+    //APP根据项目编号获取试验信息
+    @RequestMapping(value = "/getLabTestingInfoByProjectNo")
+    @ResponseBody
+    public String getLabTestingInfoByProjectNo(HttpServletRequest request) {
+        String project_no=request.getParameter("project_no");
+        List<HashMap<String,Object>> list=labTesting2FbeDao.getLabTestingInfoByProjectNo(project_no);
+        Map<String, Object> maps = new HashMap<String, Object>();
+        if (list!=null&&list.size()>0) {
+            //是待定状态
+            maps.put("success",true);
+            maps.put("record",list);
+        } else {
+            maps.put("success", false);
+        }
+        String mmp= JSONArray.toJSONString(maps);
+        return mmp;
+    }
 }
