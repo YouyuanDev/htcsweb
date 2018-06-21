@@ -27,12 +27,15 @@ public class RawMaterialTestingAcceptanceCriteria3Lpe {
     private float polyethylene_flow_rate_min;
 
     private Date last_update_time;
-
+    private float epoxy_dsc_delta_h_max;
+    private float epoxy_dsc_delta_h_min;
+    private float epoxy_dsc_tg2_max;
+    private float epoxy_dsc_tg2_min;
 
     public RawMaterialTestingAcceptanceCriteria3Lpe() {
     }
 
-    public RawMaterialTestingAcceptanceCriteria3Lpe(int id, String raw_material_testing_acceptance_criteria_no, float epoxy_cure_time_max, float epoxy_cure_time_min, float epoxy_gel_time_max, float epoxy_gel_time_min, float epoxy_moisture_content_max, float epoxy_moisture_content_min, float epoxy_particle_size_150um_max, float epoxy_particle_size_150um_min, float epoxy_particle_size_250um_max, float epoxy_particle_size_250um_min, float adhesion_flow_rate_max, float adhesion_flow_rate_min, float polyethylene_flow_rate_max, float polyethylene_flow_rate_min, Date last_update_time) {
+    public RawMaterialTestingAcceptanceCriteria3Lpe(int id, String raw_material_testing_acceptance_criteria_no, float epoxy_cure_time_max, float epoxy_cure_time_min, float epoxy_gel_time_max, float epoxy_gel_time_min, float epoxy_moisture_content_max, float epoxy_moisture_content_min, float epoxy_particle_size_150um_max, float epoxy_particle_size_150um_min, float epoxy_particle_size_250um_max, float epoxy_particle_size_250um_min, float adhesion_flow_rate_max, float adhesion_flow_rate_min, float polyethylene_flow_rate_max, float polyethylene_flow_rate_min, Date last_update_time, float epoxy_dsc_delta_h_max, float epoxy_dsc_delta_h_min, float epoxy_dsc_tg2_max, float epoxy_dsc_tg2_min) {
         this.id = id;
         this.raw_material_testing_acceptance_criteria_no = raw_material_testing_acceptance_criteria_no;
         this.epoxy_cure_time_max = epoxy_cure_time_max;
@@ -50,6 +53,10 @@ public class RawMaterialTestingAcceptanceCriteria3Lpe {
         this.polyethylene_flow_rate_max = polyethylene_flow_rate_max;
         this.polyethylene_flow_rate_min = polyethylene_flow_rate_min;
         this.last_update_time = last_update_time;
+        this.epoxy_dsc_delta_h_max = epoxy_dsc_delta_h_max;
+        this.epoxy_dsc_delta_h_min = epoxy_dsc_delta_h_min;
+        this.epoxy_dsc_tg2_max = epoxy_dsc_tg2_max;
+        this.epoxy_dsc_tg2_min = epoxy_dsc_tg2_min;
     }
 
     public float getEpoxy_particle_size_150um_max() {
@@ -188,5 +195,37 @@ public class RawMaterialTestingAcceptanceCriteria3Lpe {
 
     public void setLast_update_time(Date last_update_time) {
         this.last_update_time = last_update_time;
+    }
+
+    public float getEpoxy_dsc_delta_h_max() {
+        return epoxy_dsc_delta_h_max;
+    }
+
+    public void setEpoxy_dsc_delta_h_max(float epoxy_dsc_delta_h_max) {
+        this.epoxy_dsc_delta_h_max = epoxy_dsc_delta_h_max;
+    }
+
+    public float getEpoxy_dsc_delta_h_min() {
+        return epoxy_dsc_delta_h_min;
+    }
+
+    public void setEpoxy_dsc_delta_h_min(float epoxy_dsc_delta_h_min) {
+        this.epoxy_dsc_delta_h_min = epoxy_dsc_delta_h_min;
+    }
+
+    public float getEpoxy_dsc_tg2_max() {
+        return epoxy_dsc_tg2_max;
+    }
+
+    public void setEpoxy_dsc_tg2_max(float epoxy_dsc_tg2_max) {
+        this.epoxy_dsc_tg2_max = epoxy_dsc_tg2_max;
+    }
+
+    public float getEpoxy_dsc_tg2_min() {
+        return epoxy_dsc_tg2_min;
+    }
+
+    public void setEpoxy_dsc_tg2_min(float epoxy_dsc_tg2_min) {
+        this.epoxy_dsc_tg2_min = epoxy_dsc_tg2_min;
     }
 }

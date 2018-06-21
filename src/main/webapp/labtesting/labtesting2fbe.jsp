@@ -90,7 +90,8 @@
                     'mill_no': row.mill_no,
                     'sample_no':row.sample_no,
                     'coating_date': getDate1(row.coating_date),
-                    'dsc': row.dsc,
+                    'dsc_delta_tg': row.dsc_delta_tg,
+                    'dsc_c': row.dsc_c,
                     'foaming_cross_sectional': row.foaming_cross_sectional,
                     'foaming_interfacial': row.foaming_interfacial,
                     'interfacial_contamination': row.interfacial_contamination,
@@ -136,6 +137,8 @@
                         var $obj6=$("input[name='resistance_to_cd_65_24h']");
                         var $obj7=$("input[name='resistance_to_cd_22_28d']");
                         var $obj8=$("input[name='resistance_to_cd_65_28d']");
+                        var $obj9=$("input[name='dsc_delta_tg']");
+                        var $obj10=$("input[name='dsc_c']");
                         $obj1.siblings().css("background-color","#FFFFFF");
                         $obj2.siblings().css("background-color","#FFFFFF");
                         $obj3.siblings().css("background-color","#FFFFFF");
@@ -144,6 +147,8 @@
                         $obj6.siblings().css("background-color","#FFFFFF");
                         $obj7.siblings().css("background-color","#FFFFFF");
                         $obj8.siblings().css("background-color","#FFFFFF");
+                        $obj9.siblings().css("background-color","#FFFFFF");
+                        $obj10.siblings().css("background-color","#FFFFFF");
                         if(data!=null){
                             var res1=$obj1.val();
                             var res2=$obj2.val();
@@ -153,6 +158,8 @@
                             var res6=$obj6.val();
                             var res7=$obj7.val();
                             var res8=$obj8.val();
+                            var res9=$obj9.val();
+                            var res10=$obj10.val();
                             if(!((res1>=data.foaming_cross_sectional_min)&&(res1<=data.foaming_cross_sectional_max)))
                                 $obj1.siblings().css("background-color","#F9A6A6");
                             if(!((res2>=data.foaming_interfacial_min)&&(res2<=data.foaming_interfacial_max)))
@@ -169,6 +176,10 @@
                                 $obj7.siblings().css("background-color","#F9A6A6");
                             if(!((res8>=data.resistance_to_cd_65_28d_min)&&(res8<=data.resistance_to_cd_65_28d_max)))
                                 $obj8.siblings().css("background-color","#F9A6A6");
+                            if(!((res9>=data.dsc_delta_tg_min)&&(res9<=data.dsc_delta_tg_max)))
+                                $obj9.siblings().css("background-color","#F9A6A6");
+                            if(!((res10>=data.dsc_c_min)&&(res10<=data.dsc_c_max)))
+                                $obj10.siblings().css("background-color","#F9A6A6");
                         }
                     },error:function () {
 
@@ -219,7 +230,8 @@
                     setParams($("input[name='resistance_to_cd_65_24h']"));
                     setParams($("input[name='resistance_to_cd_22_28d']"));
                     setParams($("input[name='resistance_to_cd_65_28d']"));
-
+                    setParams($("input[name='dsc_delta_tg']"));
+                    setParams($("input[name='dsc_c']"));
                 },
                 success: function(result){
                     clearFormLabel();
@@ -310,7 +322,8 @@
 
                        <th field="sample_no" align="center" width="120" class="i18n1" name="sampleno">试样号</th>
                        <th field="coating_date" align="center" width="120" class="i18n1" name="coatingdate" data-options="formatter:formatterdate">涂层时间</th>
-                       <th field="dsc" align="center" width="100" hidden="true" class="i18n1" name="dsc">热特性实验</th>
+                       <th field="dsc_delta_tg" align="center" width="100" hidden="true" class="i18n1" name="dscdeltatg"></th>
+                       <th field="dsc_c" align="center" width="100" hidden="true" class="i18n1" name="dscc"></th>
                        <th field="foaming_cross_sectional" align="center" width="100" hidden="true" class="i18n1" name="foamingcrosssectional">孔隙率实验截面</th>
                        <th field="foaming_interfacial" width="100" align="center" hidden="true" class="i18n1" name="foaminginterfacial">孔隙率实验表面</th>
                        <th field="interfacial_contamination" width="100" align="center" hidden="true" class="i18n1" name="interfacialcontamination">表面污染率</th>
@@ -402,8 +415,11 @@
                </tr>
 
                <tr>
-                   <td class="i18n1" name="dsc">热特性实验</td>
-                   <td><input class="easyui-textbox"  type="text" name="dsc" value=""/></td>
+                   <td class="i18n1" name="dscdeltatg"></td>
+                   <td><input class="easyui-numberbox" data-options="min:0,precision:2"  type="text" name="dsc_delta_tg" value=""/></td>
+                   <td></td>
+                   <td class="i18n1" name="dscc"></td>
+                   <td><input class="easyui-numberbox" data-options="min:0,precision:2"  type="text" name="dsc_c" value=""/></td>
                    <td></td>
                </tr>
            </table>

@@ -128,6 +128,10 @@
             setParamsMin($("input[name='adhesion_flow_rate_min']"));
             setParamsMax($("input[name='polyethylene_flow_rate_max']"));
             setParamsMin($("input[name='polyethylene_flow_rate_min']"));
+            setParamsMax($("input[name='epoxy_dsc_delta_h_max']"));
+            setParamsMin($("input[name='epoxy_dsc_delta_h_min']"));
+            setParamsMax($("input[name='epoxy_dsc_tg2_max']"));
+            setParamsMin($("input[name='epoxy_dsc_tg2_min']"));
         }
         function  setParamsMax($obj) {
             if($obj.val()==null||$obj.val()=="")
@@ -173,6 +177,10 @@
                 <th field="adhesion_flow_rate_min" align="center" hidden="true" width="100" class="i18n1" name="adhesionflowratemin">附着层流速最小值</th>
                 <th field="polyethylene_flow_rate_max" align="center" hidden="true" width="100" class="i18n1" name="polyethyleneflowratemax">聚乙烯流速最大值</th>
                 <th field="polyethylene_flow_rate_min" align="center" hidden="true" width="120" class="i18n1" name="polyethyleneflowratemin">聚乙烯流速最小值</th>
+                <th field="epoxy_dsc_delta_h_max" align="center" hidden="true" width="50" class="i18n1" name="epoxydscdeltahmin"></th>
+                <th field="epoxy_dsc_delta_h_min" align="center" hidden="true" width="100" class="i18n1" name="epoxydscdeltahmin"></th>
+                <th field="epoxy_dsc_tg2_max" align="center" hidden="true" width="100" class="i18n1" name="epoxydsctg2max"></th>
+                <th field="epoxy_dsc_tg2_min" align="center" hidden="true" width="120" class="i18n1" name="epoxydsctg2min"></th>
 
             </tr>
             </thead>
@@ -261,6 +269,22 @@
                     <td></td>
                     <td class="i18n1" name="polyethyleneflowratemin">聚乙烯流速最大值</td>
                     <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="polyethylene_flow_rate_min" value=""/></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="i18n1" name="epoxydscdeltahmax"></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="epoxy_dsc_delta_h_max" value=""/></td>
+                    <td></td>
+                    <td class="i18n1" name="epoxydscdeltahmin"></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="epoxy_dsc_delta_h_min" value=""/></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="i18n1" name="epoxydsctg2max"></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="epoxy_dsc_tg2_max" value=""/></td>
+                    <td></td>
+                    <td class="i18n1" name="epoxydsctg2min"></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="epoxy_dsc_tg2_min" value=""/></td>
                     <td></td>
                 </tr>
                 <tr>

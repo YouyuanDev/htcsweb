@@ -105,7 +105,8 @@
                     'upload_files':row.upload_files,
                     'result':row.result,
                     'remark':row.remark,
-                    'dsc':row.dsc,
+                    'dsc_delta_tg': row.dsc_delta_tg,
+                    'dsc_c': row.dsc_c,
                     'dsc_pipe_no':row.dsc_pipe_no,
                     'dsc_sample_no':row.dsc_sample_no,
                     'pe_pipe_no':row.pe_pipe_no,
@@ -143,6 +144,8 @@
                         var $obj8=$("input[name='elongation_at_break']");
                         var $obj9=$("input[name='coating_resistivity']");
                         var $obj10=$("input[name='thermal_degradation']");
+                        var $obj11=$("input[name='dsc_delta_tg']");
+                        var $obj12=$("input[name='dsc_c']");
                         $obj1.siblings().css("background-color","#FFFFFF");
                         $obj2.siblings().css("background-color","#FFFFFF");
                         $obj3.siblings().css("background-color","#FFFFFF");
@@ -153,6 +156,8 @@
                         $obj8.siblings().css("background-color","#FFFFFF");
                         $obj9.siblings().css("background-color","#FFFFFF");
                         $obj10.siblings().css("background-color","#FFFFFF");
+                        $obj11.siblings().css("background-color","#FFFFFF");
+                        $obj12.siblings().css("background-color","#FFFFFF");
                         if(data!=null){
                             var res1=$obj1.val();
                             var res2=$obj2.val();
@@ -164,6 +169,8 @@
                             var res8=$obj8.val();
                             var res9=$obj9.val();
                             var res10=$obj10.val();
+                            var res11=$obj11.val();
+                            var res12=$obj12.val();
                             if(!((res1>=data.resistance_to_cd_20_28d_min)&&(res1<=data.resistance_to_cd_20_28d_max)))
                                 $obj1.siblings().css("background-color","#F9A6A6");
                             if(!((res2>=data.resistance_to_cd_max_28d_min)&&(res2<=data.resistance_to_cd_max_28d_max)))
@@ -184,6 +191,10 @@
                                 $obj9.siblings().css("background-color","#F9A6A6");
                             if(!((res10>=data.thermal_degradation_min)&&(res10<=data.thermal_degradation_max)))
                                 $obj10.siblings().css("background-color","#F9A6A6");
+                            if(!((res11>=data.dsc_delta_tg_min)&&(res11<=data.dsc_delta_tg_max)))
+                                $obj11.siblings().css("background-color","#F9A6A6");
+                            if(!((res12>=data.dsc_c_min)&&(res12<=data.dsc_c_max)))
+                                $obj12.siblings().css("background-color","#F9A6A6");
                         }
                     },error:function () {
 
@@ -228,9 +239,6 @@
                         hlAlertFour("请输入结论!");
                         return false;
                     }
-
-
-
                     setParams($("input[name='resistance_to_cd_20_28d']"));
                     setParams($("input[name='resistance_to_cd_max_28d']"));
                     setParams($("input[name='resistance_to_cd_65_24h']"));
@@ -241,7 +249,8 @@
                     setParams($("input[name='elongation_at_break']"));
                     setParams($("input[name='coating_resistivity']"));
                     setParams($("input[name='thermal_degradation']"));
-
+                    setParams($("input[name='dsc_delta_tg']"));
+                    setParams($("input[name='dsc_c']"));
                 },
                 success: function(result){
                     clearFormLabel();
@@ -348,7 +357,8 @@
                 <th field="elongation_at_break" align="center" width="120" class="i18n1" name="elongationatbreak">延展率</th>
                 <th field="coating_resistivity" align="center" width="120" class="i18n1" name="coatingresistivity">涂层强度</th>
                 <th field="thermal_degradation" align="center" width="120" class="i18n1" name="thermaldegradation">热降解</th>
-                <th field="dsc" align="center" width="120" class="i18n1" name="dsc"></th>
+                <th field="dsc_delta_tg" align="center" width="100" hidden="true" class="i18n1" name="dscdeltatg"></th>
+                <th field="dsc_c" align="center" width="100" hidden="true" class="i18n1" name="dscc"></th>
                 <th field="dsc_pipe_no" align="center" width="120" class="i18n1" name="dscpipeno"></th>
                 <th field="dsc_sample_no" align="center" width="120" class="i18n1" name="dscsampleno"></th>
                 <th field="pe_pipe_no" align="center" width="120" class="i18n1" name="pepipeno"></th>
@@ -433,8 +443,11 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td class="i18n1" name="dsc">热特性实验</td>
-                    <td><input class="easyui-textbox"   type="text" name="dsc" value=""/></td>
+                    <td class="i18n1" name="dscdeltatg"></td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2"  type="text" name="dsc_delta_tg" value=""/></td>
+                    <td></td>
+                    <td class="i18n1" name="dscc"></td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2"  type="text" name="dsc_c" value=""/></td>
                     <td></td>
                 </tr>
             </table>
@@ -556,18 +569,14 @@
 
                 <tr>
                     <td width="16%" class="i18n1" name="remark">备注</td>
-                    <td colspan="5"><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
-                </tr>
-                <tr>
+                    <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
+                    <td ></td>
                     <td width="16%" class="i18n1" name="result">结论</td>
                     <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
                         <option value="0">不合格,复验</option>
                         <option value="1">合格</option>
                         <option value="10">待定</option>
                     </select></td>
-                    <td></td>
-                    <td ></td>
-                    <td></td>
                     <td></td>
                 </tr>
             </table>

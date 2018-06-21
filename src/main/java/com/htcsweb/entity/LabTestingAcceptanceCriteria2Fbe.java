@@ -25,11 +25,14 @@ public class LabTestingAcceptanceCriteria2Fbe {
     private float resistance_to_cd_65_28d_min;
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date last_update_time;
-
+    private float dsc_delta_tg_max;
+    private float dsc_delta_tg_min;
+    private float dsc_c_max;
+    private float dsc_c_min;
     public LabTestingAcceptanceCriteria2Fbe() {
     }
 
-    public LabTestingAcceptanceCriteria2Fbe(int id, String lab_testing_acceptance_criteria_no, float interfacial_contamination_max, float interfacial_contamination_min, int foaming_cross_sectional_max, int foaming_cross_sectional_min, int foaming_interfacial_max, int foaming_interfacial_min, int resistance_to_hot_water_98_24h_max, int resistance_to_hot_water_98_24h_min, int resistance_to_hot_water_98_28d_max, int resistance_to_hot_water_98_28d_min, float resistance_to_cd_65_24h_max, float resistance_to_cd_65_24h_min, float resistance_to_cd_22_28d_max, float resistance_to_cd_22_28d_min, float resistance_to_cd_65_28d_max, float resistance_to_cd_65_28d_min, Date last_update_time) {
+    public LabTestingAcceptanceCriteria2Fbe(int id, String lab_testing_acceptance_criteria_no, float interfacial_contamination_max, float interfacial_contamination_min, int foaming_cross_sectional_max, int foaming_cross_sectional_min, int foaming_interfacial_max, int foaming_interfacial_min, int resistance_to_hot_water_98_24h_max, int resistance_to_hot_water_98_24h_min, int resistance_to_hot_water_98_28d_max, int resistance_to_hot_water_98_28d_min, float resistance_to_cd_65_24h_max, float resistance_to_cd_65_24h_min, float resistance_to_cd_22_28d_max, float resistance_to_cd_22_28d_min, float resistance_to_cd_65_28d_max, float resistance_to_cd_65_28d_min, Date last_update_time, float dsc_delta_tg_max, float dsc_delta_tg_min, float dsc_c_max, float dsc_c_min) {
         this.id = id;
         this.lab_testing_acceptance_criteria_no = lab_testing_acceptance_criteria_no;
         this.interfacial_contamination_max = interfacial_contamination_max;
@@ -49,6 +52,10 @@ public class LabTestingAcceptanceCriteria2Fbe {
         this.resistance_to_cd_65_28d_max = resistance_to_cd_65_28d_max;
         this.resistance_to_cd_65_28d_min = resistance_to_cd_65_28d_min;
         this.last_update_time = last_update_time;
+        this.dsc_delta_tg_max = dsc_delta_tg_max;
+        this.dsc_delta_tg_min = dsc_delta_tg_min;
+        this.dsc_c_max = dsc_c_max;
+        this.dsc_c_min = dsc_c_min;
     }
 
     public int getId() {
@@ -201,5 +208,37 @@ public class LabTestingAcceptanceCriteria2Fbe {
 
     public void setLast_update_time(Date last_update_time) {
         this.last_update_time = last_update_time;
+    }
+
+    public float getDsc_delta_tg_max() {
+        return dsc_delta_tg_max;
+    }
+
+    public void setDsc_delta_tg_max(float dsc_delta_tg_max) {
+        this.dsc_delta_tg_max = dsc_delta_tg_max;
+    }
+
+    public float getDsc_delta_tg_min() {
+        return dsc_delta_tg_min;
+    }
+
+    public void setDsc_delta_tg_min(float dsc_delta_tg_min) {
+        this.dsc_delta_tg_min = dsc_delta_tg_min;
+    }
+
+    public float getDsc_c_max() {
+        return dsc_c_max;
+    }
+
+    public void setDsc_c_max(float dsc_c_max) {
+        this.dsc_c_max = dsc_c_max;
+    }
+
+    public float getDsc_c_min() {
+        return dsc_c_min;
+    }
+
+    public void setDsc_c_min(float dsc_c_min) {
+        this.dsc_c_min = dsc_c_min;
     }
 }

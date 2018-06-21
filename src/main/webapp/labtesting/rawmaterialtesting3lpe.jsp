@@ -100,7 +100,8 @@
                     'epoxy_particle_size_150um':row.epoxy_particle_size_150um,
                     'epoxy_particle_size_250um':row.epoxy_particle_size_250um,
                     'epoxy_density':row.epoxy_density,
-                    'epoxy_thermal_characteristics':row.epoxy_thermal_characteristics,
+                    'epoxy_dsc_delta_h':row.epoxy_dsc_delta_h,
+                    'epoxy_dsc_tg2':row.epoxy_dsc_tg2,
                     'adhesion_flow_rate':row.adhesion_flow_rate,
                     'polyethylene_flow_rate':row.polyethylene_flow_rate,
                     'operator_no':row.operator_no,
@@ -136,6 +137,8 @@
                         var $obj5=$("input[name='adhesion_flow_rate']");
                         var $obj6=$("input[name='polyethylene_flow_rate']");
                         var $obj7=$("input[name='epoxy_particle_size_250um']");
+                        var $obj8=$("input[name='epoxy_dsc_delta_h']");
+                        var $obj9=$("input[name='epoxy_dsc_tg2']");
                         $obj1.siblings().css("background-color","#FFFFFF");
                         $obj2.siblings().css("background-color","#FFFFFF");
                         $obj3.siblings().css("background-color","#FFFFFF");
@@ -143,6 +146,8 @@
                         $obj5.siblings().css("background-color","#FFFFFF");
                         $obj6.siblings().css("background-color","#FFFFFF");
                         $obj7.siblings().css("background-color","#FFFFFF");
+                        $obj8.siblings().css("background-color","#FFFFFF");
+                        $obj9.siblings().css("background-color","#FFFFFF");
                         if(data!=null){
                             var res1=$obj1.val();
                             var res2=$obj2.val();
@@ -151,6 +156,8 @@
                             var res5=$obj5.val();
                             var res6=$obj6.val();
                             var res7=$obj7.val();
+                            var res8=$obj8.val();
+                            var res9=$obj9.val();
                             if(!((res1>=data.epoxy_cure_time_min)&&(res1<=data.epoxy_cure_time_max)))
                                 $obj1.siblings().css("background-color","#F9A6A6");
                             if(!((res2>=data.epoxy_gel_time_min)&&(res2<=data.epoxy_gel_time_max)))
@@ -165,6 +172,10 @@
                                 $obj6.siblings().css("background-color","#F9A6A6");
                             if(!((res7>=data.epoxy_particle_size_250um_min)&&(res7<=data.epoxy_particle_size_250um_max)))
                                 $obj7.siblings().css("background-color","#F9A6A6");
+                            if(!((res8>=data.epoxy_dsc_delta_h_min)&&(res8<=data.epoxy_dsc_delta_h_max)))
+                                $obj8.siblings().css("background-color","#F9A6A6");
+                            if(!((res9>=data.epoxy_dsc_tg2_min)&&(res9<=data.epoxy_dsc_tg2_max)))
+                                $obj9.siblings().css("background-color","#F9A6A6");
                         }
                     },error:function () {
 
@@ -211,6 +222,9 @@
                     setParams($("input[name='adhesion_flow_rate']"));
                     setParams($("input[name='indentation_hardness_70']"));
                     setParams($("input[name='polyethylene_flow_rate']"));
+                    setParams($("input[name='epoxy_density']"));
+                    setParams($("input[name='epoxy_dsc_delta_h']"));
+                    setParams($("input[name='epoxy_dsc_tg2']"));
 
                 },
                 success: function(result){
@@ -284,7 +298,9 @@
                 <th field="epoxy_particle_size_250um" align="center" width="120" class="i18n1" name="epoxyparticlesize250um">环氧树脂颗粒度大小250um</th>
 
                 <th field="epoxy_density" align="center" width="120" class="i18n1" name="epoxydensity">环氧树脂密度</th>
-                <th field="epoxy_thermal_characteristics" align="center" width="120" class="i18n1" name="epoxythermalcharacteristics">环氧树脂热特性</th>
+                <th field="epoxy_dsc_delta_h" align="center" width="120" class="i18n1" name="epoxydscdeltah"></th>
+                <th field="epoxy_dsc_tg2" align="center" width="120" class="i18n1" name="epoxydsctg2"></th>
+
                 <th field="adhesion_flow_rate" align="center" width="120" class="i18n1" name="adhesionflowrate">附着层流速</th>
                 <th field="polyethylene_flow_rate" align="center" width="120" class="i18n1" name="polyethyleneflowrate">聚乙烯流速</th>
 
@@ -438,37 +454,37 @@
                     <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="epoxy_particle_size_250um" value=""/></td>
                     <td></td>
                     <td class="i18n1" name="epoxydensity">环氧树脂密度</td>
-                    <td><input class="easyui-textbox"  type="text" name="epoxy_density" value=""/></td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2"  type="text" name="epoxy_density" value=""/></td>
                     <td></td>
 
                 </tr>
                 <tr>
-                    <td class="i18n1" name="epoxythermalcharacteristics">环氧树脂热特性</td>
-                    <td><input class="easyui-textbox"  type="text" name="epoxy_thermal_characteristics" value=""/></td>
+                    <td class="i18n1" name="epoxydscdeltah"></td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2"  type="text" name="epoxy_dsc_delta_h" value=""/></td>
                     <td></td>
+                    <td class="i18n1" name="epoxydsctg2"></td>
+                    <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="epoxy_dsc_tg2" value=""/></td>
+                    <td></td>
+
+                </tr>
+                <tr>
                     <td class="i18n1" name="adhesionflowrate">附着层流速</td>
                     <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="adhesion_flow_rate" value=""/></td>
                     <td></td>
-
-                </tr>
-                <tr>
                     <td class="i18n1" name="polyethyleneflowrate">聚乙烯流速</td>
                     <td><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="polyethylene_flow_rate" value=""/></td>
                     <td></td>
-                    <td width="16%" class="i18n1" name="remark">备注</td>
-                    <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
-                    <td></td>
                 </tr>
                 <tr>
-                    <td width="16%" class="i18n1" name="result">结论</td>
+                    <td class="i18n1" name="remark">备注</td>
+                    <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
+                    <td></td>
+                    <td class="i18n1" name="result">结论</td>
                     <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
                         <option value="0">不合格,复验</option>
                         <option value="1">合格</option>
                         <option value="10">待定</option>
                     </select></td>
-                    <td></td>
-                    <td ></td>
-                    <td></td>
                     <td></td>
                 </tr>
             </table>

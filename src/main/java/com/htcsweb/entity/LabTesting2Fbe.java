@@ -13,7 +13,8 @@ public class LabTesting2Fbe {
     private  String operator_no;
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date operation_time;
-    private String dsc;
+    private float dsc_delta_tg;
+    private float dsc_c;
     private int foaming_cross_sectional;
     private int foaming_interfacial;
     private float interfacial_contamination;
@@ -33,14 +34,15 @@ public class LabTesting2Fbe {
     public LabTesting2Fbe() {
     }
 
-    public LabTesting2Fbe(int id, String sample_no, String pipe_no, Date coating_date, String operator_no, Date operation_time, String dsc, int foaming_cross_sectional, int foaming_interfacial, float interfacial_contamination, String flexibility, String impact, int resistance_to_hot_water_98_24h, int resistance_to_hot_water_98_28d, float resistance_to_cd_65_24h, float resistance_to_cd_22_28d, float resistance_to_cd_65_28d, String upload_files, String remark, String result, String dsc_pipe_no, String dsc_sample_no) {
+    public LabTesting2Fbe(int id, String sample_no, String pipe_no, Date coating_date, String operator_no, Date operation_time, float dsc_delta_tg, float dsc_c, int foaming_cross_sectional, int foaming_interfacial, float interfacial_contamination, String flexibility, String impact, int resistance_to_hot_water_98_24h, int resistance_to_hot_water_98_28d, float resistance_to_cd_65_24h, float resistance_to_cd_22_28d, float resistance_to_cd_65_28d, String upload_files, String remark, String result, String dsc_pipe_no, String dsc_sample_no) {
         this.id = id;
         this.sample_no = sample_no;
         this.pipe_no = pipe_no;
         this.coating_date = coating_date;
         this.operator_no = operator_no;
         this.operation_time = operation_time;
-        this.dsc = dsc;
+        this.dsc_delta_tg = dsc_delta_tg;
+        this.dsc_c = dsc_c;
         this.foaming_cross_sectional = foaming_cross_sectional;
         this.foaming_interfacial = foaming_interfacial;
         this.interfacial_contamination = interfacial_contamination;
@@ -106,12 +108,20 @@ public class LabTesting2Fbe {
         this.operation_time = operation_time;
     }
 
-    public String getDsc() {
-        return dsc;
+    public float getDsc_delta_tg() {
+        return dsc_delta_tg;
     }
 
-    public void setDsc(String dsc) {
-        this.dsc = dsc;
+    public void setDsc_delta_tg(float dsc_delta_tg) {
+        this.dsc_delta_tg = dsc_delta_tg;
+    }
+
+    public float getDsc_c() {
+        return dsc_c;
+    }
+
+    public void setDsc_c(float dsc_c) {
+        this.dsc_c = dsc_c;
     }
 
     public int getFoaming_cross_sectional() {

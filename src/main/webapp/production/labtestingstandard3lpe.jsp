@@ -131,6 +131,10 @@
             setParamsMin($("input[name='coating_resistivity_min']"));
             setParamsMax($("input[name='thermal_degradation_max']"));
             setParamsMin($("input[name='thermal_degradation_min']"));
+            setParamsMax($("input[name='dsc_delta_tg_max']"));
+            setParamsMin($("input[name='dsc_delta_tg_min']"));
+            setParamsMax($("input[name='dsc_c_max']"));
+            setParamsMin($("input[name='dsc_c_min']"));
         }
         function  setParamsMax($obj) {
             if($obj.val()==null||$obj.val()=="")
@@ -182,8 +186,11 @@
                 <th field="coating_resistivity_min" align="center" width="100" hidden="true" class="i18n1" name="coatingresistivitymin">涂层强度 最大值</th>
                 <th field="thermal_degradation_max" align="center" width="100" hidden="true" class="i18n1" name="thermaldegradationmax">热特性最大值</th>
                 <th field="thermal_degradation_min" align="center" width="100" hidden="true" class="i18n1" name="thermaldegradationmin">热特性最小值</th>
+                <th field="dsc_delta_tg_max" align="center" width="100" hidden="true" class="i18n1" name="dscdeltatgmax"></th>
+                <th field="dsc_delta_tg_min" align="center" width="100" hidden="true" class="i18n1" name="dscdeltatgmin"></th>
+                <th field="dsc_c_max" align="center" width="100" hidden="true" class="i18n1" name="dsccmax"></th>
+                <th field="dsc_c_min" align="center" width="100" hidden="true" class="i18n1" name="dsccmin"></th>
                 <th field="last_update_time" align="center" width="150" class="i18n1" name="lastupdatetime" data-options="formatter:formatterdate">最后更新时间</th>
-
             </tr>
             </thead>
         </table>
@@ -298,7 +305,22 @@
                     <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="thermal_degradation_min" value=""/></td>
                     <td></td>
                 </tr>
-
+                <tr>
+                    <td class="i18n1" name="dscdeltatgmax"></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="dsc_delta_tg_max" value=""/></td>
+                    <td></td>
+                    <td class="i18n1" name="dscdeltatgmin"></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="dsc_delta_tg_min" value=""/></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="i18n1" name="dsccmax"></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="dsc_c_max" value=""/></td>
+                    <td></td>
+                    <td class="i18n1" name="dsccmin"></td>
+                    <td ><input class="easyui-numberbox" data-options="precision:2"  type="text" name="dsc_c_min" value=""/></td>
+                    <td></td>
+                </tr>
                 <tr>
                     <td class="i18n1" name="lastupdatetime">最后更新时间</td>
                     <td>
