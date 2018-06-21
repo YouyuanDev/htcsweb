@@ -19,5 +19,5 @@ public interface LabTesting2FbeDao {
 
     public LabTesting2Fbe getRecentRecordByPipeNo(@Param("pipe_no") String pipe_no);
     //APP根据项目编号获取试验信息
-    public List<HashMap<String,Object>>getLabTestingInfoByProjectNo(@Param("project_no") String project_no);
+    public List<HashMap<String,Object>>getLabTestingInfoByProjectNo(@Param("project_no") String project_no, @Param("skip") int skip, @Param("take") int take);
 }
