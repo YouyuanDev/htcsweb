@@ -92,10 +92,21 @@ public class ShipmentController {
             JSONObject json=new JSONObject();
             try{
                 int resTotal=0;
+                List<PipeBasicInfo> pipelist=pipeBasicInfoDao.getPipeNumber(shipmentInfo.getPipe_no());
+                String msg="";
                 if(shipmentInfo.getId()==0){
                     //添加
-                    resTotal=shipmentInfoDao.addShipmentInfo(shipmentInfo);
 
+                    if(pipelist.size()>0){
+                        if(pipelist.get(0).getStatus().equals("out")){
+                                //已经出厂
+                            msg="，该钢管已出厂！";
+                        }
+                        else{
+                            resTotal=shipmentInfoDao.addShipmentInfo(shipmentInfo);
+                        }
+
+                    }
                 }else{
                     //修改！
 
@@ -104,7 +115,7 @@ public class ShipmentController {
                 if(resTotal>0){
 
                     //更新管子的状态
-                    List<PipeBasicInfo> pipelist=pipeBasicInfoDao.getPipeNumber(shipmentInfo.getPipe_no());
+
                     if(pipelist.size()>0){
                         PipeBasicInfo p=pipelist.get(0);
                         if(p.getStatus().equals("bare1")||p.getStatus().equals("bare2")||p.getStatus().equals("odstockin")||p.getStatus().equals("idstockin")) {
@@ -121,7 +132,7 @@ public class ShipmentController {
                     json.put("message","保存成功");
                 }else{
                     json.put("success",false);
-                    json.put("message","保存失败");
+                    json.put("message","保存失败"+msg);
                 }
 
             }catch (Exception e){
