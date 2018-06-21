@@ -136,11 +136,11 @@ public class RawMaterialTesting2FbeController {
     }
 
     //得到可以钢管最新的待定的Raw material 2FBE记录  最后一条记录且result为待定 10
-    @RequestMapping(value = "/getRecentRecordBySampleNo")
+    @RequestMapping(value = "/getPendingRecordBySampleNo")
     @ResponseBody
-    public String getRecentRecordBySampleNo(@RequestParam(value = "pipe_no",required = false)String pipe_no, HttpServletRequest request) {
+    public String getPendingRecordBySampleNo(@RequestParam(value = "sample_no",required = false)String sample_no, HttpServletRequest request) {
 
-        RawMaterialTesting2Fbe record=rawMaterialTesting2FbeDao.getRecentRecordBySampleNo(pipe_no);
+        RawMaterialTesting2Fbe record=rawMaterialTesting2FbeDao.getRecentRecordBySampleNo(sample_no);
         Map<String, Object> maps = new HashMap<String, Object>();
 
         if (record!=null&&record.getResult().equals("10")) {

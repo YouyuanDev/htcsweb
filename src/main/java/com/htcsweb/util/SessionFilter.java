@@ -116,7 +116,7 @@ public class SessionFilter extends OncePerRequestFilter{
             "getRawMaterialTestingAcceptanceCriteria3LpeByProjectNo",
             "getRawMaterialStandard2FbeByPipeNo",
             "getRawMaterialStandard3LpeByPipeNo",
-            "getRecentRecordBySampleNo",
+            "getPendingRecordBySampleNo",
             "getProjectInfoByNoOrName",
             "getLabTestingInfoByProjectNo"
 
