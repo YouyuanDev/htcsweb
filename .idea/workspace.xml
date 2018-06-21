@@ -37,42 +37,43 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="LabTesting3LpeController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/LabTesting3LpeController.java">
+      <file leaf-file-name="rawmaterialtesting2fbe.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/labtesting/rawmaterialtesting2fbe.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="94">
-              <caret line="54" column="19" lean-forward="false" selection-start-line="54" selection-start-column="19" selection-end-line="54" selection-end-column="19" />
+            <state relative-caret-position="241">
+              <caret line="574" column="56" lean-forward="false" selection-start-line="574" selection-start-column="32" selection-end-line="574" selection-end-column="56" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="labtesting2fbe.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/labtesting/labtesting2fbe.jsp">
+      <file leaf-file-name="ProjectController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/ProjectController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="418" column="0" lean-forward="true" selection-start-line="418" selection-start-column="0" selection-end-line="418" selection-end-column="0" />
+            <state relative-caret-position="86">
+              <caret line="201" column="53" lean-forward="false" selection-start-line="201" selection-start-column="29" selection-end-line="201" selection-end-column="53" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="labtesting3lpe.jsp" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/labtesting/labtesting3lpe.jsp">
+      <file leaf-file-name="ProjectInfo.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ProjectInfo.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="44" column="17" lean-forward="false" selection-start-line="44" selection-start-column="17" selection-end-line="44" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="labtestingepoxy.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/labtesting/labtestingepoxy.jsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="44">
-              <caret line="29" column="5" lean-forward="false" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
-              <folding />
+            <state relative-caret-position="162">
+              <caret line="136" column="40" lean-forward="false" selection-start-line="136" selection-start-column="16" selection-end-line="136" selection-end-column="40" />
+              <folding>
+                <marker date="1527073573000" expanded="true" signature="1954:1987" ph="select count... project_info" />
+                <marker date="1527073573000" expanded="true" signature="3039:3103" ph="select count... project_info" />
+                <marker date="1527073573000" expanded="true" signature="3176:4128" ph="Select * fro... project_info" />
+                <marker date="1527073573000" expanded="true" signature="4235:5206" ph="UPDATE project_info... " />
+                <marker date="1527073573000" expanded="true" signature="5310:6176" ph="INSERT INTO project_info... " />
+                <marker date="1527073573000" expanded="true" signature="6784:6852" ph="SELECT proje... project_info" />
+                <marker date="1527073573000" expanded="true" signature="6967:7089" ph="SELECT p.* f... project_info" />
+                <marker date="1527073573000" expanded="true" signature="7198:7239" ph="SELECT * fro... project_info" />
+                <marker date="1527073573000" expanded="true" signature="7792:7847" ph="SELECT p.pro... project_info" />
+                <marker date="1527073573000" expanded="true" signature="7982:8039" ph="SELECT * FRO... project_info" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -247,7 +248,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="AndroidView" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
@@ -283,33 +283,11 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
-              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
-              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="labtesting" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
-              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="od" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -835,7 +813,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1233738000" />
+    <option name="totallyTimeSpent" value="1233742000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -847,7 +825,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-13" y="86" width="1920" height="988" extended-state="0" />
+    <frame x="0" y="23" width="1920" height="988" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -867,8 +845,8 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3661814" sideWeight="0.49307775" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896462" sideWeight="0.49444443" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3661814" sideWeight="0.49307775" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891247" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947975" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28645834" sideWeight="0.56437767" order="0" side_tool="false" content_ui="combo" />
@@ -1085,7 +1063,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="243" column="21" lean-forward="false" selection-start-line="243" selection-start-column="21" selection-end-line="243" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1184,7 +1161,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
           <caret line="1182" column="20" lean-forward="false" selection-start-line="1182" selection-start-column="20" selection-end-line="1182" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1249,12 +1225,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="15" column="13" lean-forward="true" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-          <folding>
-            <marker date="1529470106000" expanded="true" signature="309:1086" ph="INSERT INTO lab_testing_2fbe... " />
-            <marker date="1529470106000" expanded="true" signature="1410:2191" ph="UPDATE lab_testing_2fbe... " />
-            <marker date="1529470106000" expanded="true" signature="2267:3424" ph="Select pro.p... lab_testing_2fbe" />
-            <marker date="1529470106000" expanded="true" signature="5738:5831" ph="SELECT * fro... lab_testing_2fbe" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1276,12 +1247,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="269">
           <caret line="92" column="0" lean-forward="true" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
-          <folding>
-            <marker date="1529470872000" expanded="true" signature="312:725" ph="INSERT INTO lab_testing_liquid_epoxy... " />
-            <marker date="1529470872000" expanded="true" signature="1060:1477" ph="UPDATE lab_testing_liquid_epoxy... " />
-            <marker date="1529470872000" expanded="true" signature="1553:2718" ph="Select pro.p... lab_testing_liquid_epoxy" />
-            <marker date="1529470872000" expanded="true" signature="5046:5147" ph="SELECT * fro... lab_testing_liquid_epoxy" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1296,12 +1262,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
           <caret line="79" column="8" lean-forward="false" selection-start-line="79" selection-start-column="8" selection-end-line="79" selection-end-column="8" />
-          <folding>
-            <marker date="1529470599000" expanded="true" signature="310:1143" ph="INSERT INTO lab_testing_3lpe... " />
-            <marker date="1529470599000" expanded="true" signature="1468:2305" ph="UPDATE lab_testing_3lpe... " />
-            <marker date="1529470599000" expanded="true" signature="2380:3537" ph="Select pro.p... lab_testing_3lpe" />
-            <marker date="1529470599000" expanded="true" signature="5845:5938" ph="SELECT * fro... lab_testing_3lpe" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
