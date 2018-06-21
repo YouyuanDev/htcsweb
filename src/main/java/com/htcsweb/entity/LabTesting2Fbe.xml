@@ -109,7 +109,7 @@
 
     <!--APP根据项目编号获取试验信息-->
     <select id="getLabTestingInfoByProjectNo" resultType="map">
-        (SELECT 'LAB2FBE' as testing_type,o.id,o.result, 'REGULAR' as sample_type,o.operation_time from lab_testing_2fbe o
+        (SELECT 'LAB2FBE' as testing_type,o.id,o.result, 'REGULAR' as sample_type,o.operation_time,o.pipe_no as pipe_no from lab_testing_2fbe o
         LEFT join pipe_basic_info p on p.pipe_no=o.pipe_no
         LEFT join contract_info c on p.contract_no=c.contract_no
         LEFT join project_info pro on c.project_no=pro.project_no
@@ -121,7 +121,7 @@
         )
 
         UNION
-        (SELECT  'LAB2FBE' as testing_type,o.id,o.result, 'DSC' as sample_type,o.operation_time   from lab_testing_2fbe o
+        (SELECT  'LAB2FBE' as testing_type,o.id,o.result, 'DSC' as sample_type,o.operation_time,o.dsc_pipe_no as pipe_no   from lab_testing_2fbe o
         LEFT join pipe_basic_info p on p.pipe_no=o.dsc_pipe_no
         LEFT join contract_info c on p.contract_no=c.contract_no
         LEFT join project_info pro on c.project_no=pro.project_no
@@ -132,7 +132,7 @@
         </where>
         )
         UNION
-        (SELECT  'LAB3LPE' as testing_type,o.id,o.result, 'REGULAR' as sample_type,o.operation_time   from lab_testing_3lpe o
+        (SELECT  'LAB3LPE' as testing_type,o.id,o.result, 'REGULAR' as sample_type,o.operation_time,o.pipe_no as pipe_no   from lab_testing_3lpe o
         LEFT join pipe_basic_info p on p.pipe_no=o.pipe_no
         LEFT join contract_info c on p.contract_no=c.contract_no
         LEFT join project_info pro on c.project_no=pro.project_no
@@ -143,7 +143,7 @@
         </where>
         )
         UNION
-        (SELECT  'LAB3LPE' as testing_type,o.id,o.result, 'DSC' as sample_type,o.operation_time   from lab_testing_3lpe o
+        (SELECT  'LAB3LPE' as testing_type,o.id,o.result, 'DSC' as sample_type,o.operation_time,o.dsc_pipe_no as pipe_no   from lab_testing_3lpe o
         LEFT join pipe_basic_info p on p.pipe_no=o.dsc_pipe_no
         LEFT join contract_info c on p.contract_no=c.contract_no
         LEFT join project_info pro on c.project_no=pro.project_no
@@ -154,7 +154,7 @@
         </where>
         )
         UNION
-        (SELECT  'LAB3LPE' as testing_type,o.id,o.result, 'PE' as sample_type,o.operation_time   from lab_testing_3lpe o
+        (SELECT  'LAB3LPE' as testing_type,o.id,o.result, 'PE' as sample_type,o.operation_time,o.pe_pipe_no as pipe_no   from lab_testing_3lpe o
         LEFT join pipe_basic_info p on p.pipe_no=o.pe_pipe_no
         LEFT join contract_info c on p.contract_no=c.contract_no
         LEFT join project_info pro on c.project_no=pro.project_no
@@ -165,7 +165,7 @@
         </where>
         )
         UNION
-        (SELECT  'LABEPOXY' as testing_type,o.id,o.result, 'REGULAR' as sample_type,o.operation_time   from lab_testing_liquid_epoxy o
+        (SELECT  'LABEPOXY' as testing_type,o.id,o.result, 'REGULAR' as sample_type,o.operation_time,o.pipe_no as pipe_no   from lab_testing_liquid_epoxy o
         LEFT join pipe_basic_info p on p.pipe_no=o.pipe_no
         LEFT join contract_info c on p.contract_no=c.contract_no
         LEFT join project_info pro on c.project_no=pro.project_no
@@ -176,7 +176,7 @@
         </where>
         )
         UNION
-        (SELECT  'LABEPOXY' as testing_type,o.id,o.result, 'GLASS' as sample_type,o.operation_time   from lab_testing_liquid_epoxy o
+        (SELECT  'LABEPOXY' as testing_type,o.id,o.result, 'GLASS' as sample_type,o.operation_time,o.glass_pipe_no as pipe_no    from lab_testing_liquid_epoxy o
         LEFT join pipe_basic_info p on p.pipe_no=o.glass_pipe_no
         LEFT join contract_info c on p.contract_no=c.contract_no
         LEFT join project_info pro on c.project_no=pro.project_no
@@ -187,7 +187,7 @@
         </where>
         )
         UNION
-        (SELECT  'RAW2FBE' as testing_type,o.id,o.result, 'REGULAR' as sample_type,o.operation_time   from raw_material_testing_2fbe o
+        (SELECT  'RAW2FBE' as testing_type,o.id,o.result, 'REGULAR' as sample_type,o.operation_time,'' as pipe_no   from raw_material_testing_2fbe o
         <where>
             <if test="project_no!=null and project_no!=''">
                 AND project_no=#{project_no}
@@ -195,7 +195,7 @@
         </where>
         )
         UNION
-        (SELECT  'RAW3LPE' as testing_type,o.id,o.result, 'REGULAR' as sample_type,o.operation_time   from raw_material_testing_3lpe o
+        (SELECT  'RAW3LPE' as testing_type,o.id,o.result, 'REGULAR' as sample_type,o.operation_time,'' as pipe_no   from raw_material_testing_3lpe o
         <where>
             <if test="project_no!=null and project_no!=''">
                 AND project_no=#{project_no}
@@ -203,7 +203,7 @@
         </where>
         )
         UNION
-        (SELECT  'RAWEPOXY' as testing_type,o.id,o.result, 'REGULAR' as sample_type,o.operation_time   from raw_material_testing_liquid_epoxy o
+        (SELECT  'RAWEPOXY' as testing_type,o.id,o.result, 'REGULAR' as sample_type,o.operation_time,'' as pipe_no   from raw_material_testing_liquid_epoxy o
         <where>
             <if test="project_no!=null and project_no!=''">
                 AND project_no=#{project_no}
