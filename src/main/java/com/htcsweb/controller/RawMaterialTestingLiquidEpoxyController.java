@@ -78,7 +78,7 @@ public class RawMaterialTestingLiquidEpoxyController {
             String msg="";
             if(rawMaterialTestingLiquidEpoxy.getId()==0){
                 //添加
-                RawMaterialTestingLiquidEpoxy  oldrecord = rawMaterialTestingLiquidEpoxyDao.getRecentRecordByPipeNo(rawMaterialTestingLiquidEpoxy.getSample_no());
+                RawMaterialTestingLiquidEpoxy  oldrecord = rawMaterialTestingLiquidEpoxyDao.getRecentRecordBySampleNo(rawMaterialTestingLiquidEpoxy.getSample_no());
                 if (oldrecord != null && oldrecord.getResult().equals("10")) {
                     //存在一条pending数据，不给予insert处理
                     msg="已存在待定记录,不能新增记录";
@@ -135,11 +135,11 @@ public class RawMaterialTestingLiquidEpoxyController {
     }
 
     //得到可以钢管最新的待定的Raw material Epoxy记录  最后一条记录且result为待定 10
-    @RequestMapping(value = "/getPendingRecordByPipeNo")
+    @RequestMapping(value = "/getRecentRecordBySampleNo")
     @ResponseBody
-    public String getPendingRecordByPipeNo(@RequestParam(value = "pipe_no",required = false)String pipe_no, HttpServletRequest request) {
+    public String getRecentRecordBySampleNo(@RequestParam(value = "sample_no",required = false)String sample_no, HttpServletRequest request) {
 
-        RawMaterialTestingLiquidEpoxy record=rawMaterialTestingLiquidEpoxyDao.getRecentRecordByPipeNo(pipe_no);
+        RawMaterialTestingLiquidEpoxy record=rawMaterialTestingLiquidEpoxyDao.getRecentRecordBySampleNo(sample_no);
         Map<String, Object> maps = new HashMap<String, Object>();
 
         if (record!=null&&record.getResult().equals("10")) {

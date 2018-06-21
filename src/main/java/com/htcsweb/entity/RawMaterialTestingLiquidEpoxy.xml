@@ -61,9 +61,9 @@
         </where>
     </select>
 
-    <!--根据钢管编号查询最新一条记录-->
-    <select id="getRecentRecordByPipeNo" resultType="com.htcsweb.entity.RawMaterialTestingLiquidEpoxy">
-        SELECT  * from raw_material_testing_liquid_epoxy where pipe_no=#{pipe_no} order by operation_time desc LIMIT 1
+    <!--根据试样编号查询最新一条记录-->
+    <select id="getRecentRecordBySampleNo" resultType="com.htcsweb.entity.RawMaterialTestingLiquidEpoxy">
+        SELECT  * from raw_material_testing_liquid_epoxy where sample_no=#{sample_no} order by operation_time desc LIMIT 1
     </select>
 
 </mapper>

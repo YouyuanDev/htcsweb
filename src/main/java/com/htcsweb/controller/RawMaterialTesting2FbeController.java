@@ -79,7 +79,7 @@ public class RawMaterialTesting2FbeController {
             if(rawMaterialTesting2Fbe.getId()==0){
                 //添加
 
-                RawMaterialTesting2Fbe  oldrecord = rawMaterialTesting2FbeDao.getRecentRecordByPipeNo(rawMaterialTesting2Fbe.getSample_no());
+                RawMaterialTesting2Fbe  oldrecord = rawMaterialTesting2FbeDao.getRecentRecordBySampleNo(rawMaterialTesting2Fbe.getSample_no());
                 if (oldrecord != null && oldrecord.getResult().equals("10")) {
                     //存在一条pending数据，不给予insert处理
                     msg="已存在待定记录,不能新增记录";
@@ -136,11 +136,11 @@ public class RawMaterialTesting2FbeController {
     }
 
     //得到可以钢管最新的待定的Raw material 2FBE记录  最后一条记录且result为待定 10
-    @RequestMapping(value = "/getPendingRecordByPipeNo")
+    @RequestMapping(value = "/getRecentRecordBySampleNo")
     @ResponseBody
-    public String getPendingRecordByPipeNo(@RequestParam(value = "pipe_no",required = false)String pipe_no, HttpServletRequest request) {
+    public String getRecentRecordBySampleNo(@RequestParam(value = "pipe_no",required = false)String pipe_no, HttpServletRequest request) {
 
-        RawMaterialTesting2Fbe record=rawMaterialTesting2FbeDao.getRecentRecordByPipeNo(pipe_no);
+        RawMaterialTesting2Fbe record=rawMaterialTesting2FbeDao.getRecentRecordBySampleNo(pipe_no);
         Map<String, Object> maps = new HashMap<String, Object>();
 
         if (record!=null&&record.getResult().equals("10")) {

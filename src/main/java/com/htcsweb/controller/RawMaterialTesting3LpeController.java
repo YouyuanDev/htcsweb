@@ -78,7 +78,7 @@ public class RawMaterialTesting3LpeController {
             String msg="";
             if(rawMaterialTesting3Lpe.getId()==0){
                 //添加
-                RawMaterialTesting3Lpe  oldrecord = rawMaterialTesting3LpeDao.getRecentRecordByPipeNo(rawMaterialTesting3Lpe.getSample_no());
+                RawMaterialTesting3Lpe  oldrecord = rawMaterialTesting3LpeDao.getRecentRecordBySampleNo(rawMaterialTesting3Lpe.getSample_no());
                 if (oldrecord != null && oldrecord.getResult().equals("10")) {
                     //存在一条pending数据，不给予insert处理
                     msg="已存在待定记录,不能新增记录";
@@ -133,12 +133,12 @@ public class RawMaterialTesting3LpeController {
         return null;
     }
 
-    //得到可以钢管最新的待定的Raw material 3LPE记录  最后一条记录且result为待定 10
-    @RequestMapping(value = "/getPendingRecordByPipeNo")
+    //最新的待定的Raw material 3LPE记录  最后一条记录且result为待定 10
+    @RequestMapping(value = "/getPendingRecordBySampleNo")
     @ResponseBody
-    public String getPendingRecordByPipeNo(@RequestParam(value = "pipe_no",required = false)String pipe_no, HttpServletRequest request) {
+    public String getPendingRecordBySampleNo(@RequestParam(value = "sample_no",required = false)String sample_no, HttpServletRequest request) {
 
-        RawMaterialTesting3Lpe record=rawMaterialTesting3LpeDao.getRecentRecordByPipeNo(pipe_no);
+        RawMaterialTesting3Lpe record=rawMaterialTesting3LpeDao.getRecentRecordBySampleNo(sample_no);
         Map<String, Object> maps = new HashMap<String, Object>();
 
         if (record!=null&&record.getResult().equals("10")) {

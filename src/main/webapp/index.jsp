@@ -539,15 +539,17 @@
                             });
                             hlLanguage();
                         }
-                        else if("成品出厂"==nodeTxt||"Coating Product Stock Out"==nodeTxt){
+                        // else if("成品出厂"==nodeTxt||"Coating Product Stock Out"==nodeTxt){
+                        //
+                        //     $('#hlTab').tabs('add',{
+                        //         title:node.text,
+                        //         content:"<iframe scrolling='auto' frameborder='0'  src='storage/productStockout.jsp' style='width:100%;height:100%;'></iframe>",
+                        //         closable:true
+                        //     });
+                        //     hlLanguage();
+                        // }
 
-                            $('#hlTab').tabs('add',{
-                                title:node.text,
-                                content:"<iframe scrolling='auto' frameborder='0'  src='storage/productStockout.jsp' style='width:100%;height:100%;'></iframe>",
-                                closable:true
-                            });
-                            hlLanguage();
-                        }else if("垛内转运"==nodeTxt||"In Storage Transfer"==nodeTxt){
+                        else if("垛内转运"==nodeTxt||"In Storage Transfer"==nodeTxt){
 
                             $('#hlTab').tabs('add',{
                                 title:node.text,

@@ -96,7 +96,7 @@ public class APPRequestTransferController {
                     urloptions.put("odblastprocess", "od/odblast");
                     urloptions.put("barepipemovement", "storage/barepipemovement");
                     urloptions.put("instoragetransfer", "storage/instoragetransfer");
-                    urloptions.put("productStockout", "storage/productionstockout");
+                    //urloptions.put("productStockout", "storage/productionstockout");
                 } else if (status.equals("od1")) {
                     urloptions.put("odblastinspectionprocess", "od/odblastinspection");
                 } else if (status.equals("od2")) {
@@ -123,7 +123,7 @@ public class APPRequestTransferController {
 
                     //不需要倒棱
                     if (rebevel_mark == null || !rebevel_mark.equals("1")) {
-                        urloptions.put("productStockout", "storage/productionstockout");
+                        //urloptions.put("productStockout", "storage/productionstockout");
                     }
 
                 }
@@ -132,7 +132,7 @@ public class APPRequestTransferController {
                     urloptions.put("idblastprocess", "id/idblast");
                     urloptions.put("barepipemovement", "storage/barepipemovement");
                     urloptions.put("instoragetransfer", "storage/instoragetransfer");
-                    urloptions.put("productStockout", "storage/productionstockout");
+                    //urloptions.put("productStockout", "storage/productionstockout");
                 } else if (status.equals("id1")) {
                     urloptions.put("idblastinspectionprocess", "id/idblastinspection");
                 } else if (status.equals("id2")) {
@@ -150,7 +150,7 @@ public class APPRequestTransferController {
 
                     //不需要倒棱
                     if (rebevel_mark == null || !rebevel_mark.equals("1")) {
-                        urloptions.put("productStockout", "storage/productionstockout");
+                        //urloptions.put("productStockout", "storage/productionstockout");
                     }
                 }
 
@@ -193,9 +193,9 @@ public class APPRequestTransferController {
                 }
 
                 //添加原材料实验链接
-                urloptions.put("rawmaterialtesting2fbe", "labtesting/rawmaterialtesting2fbe");
-                urloptions.put("rawmaterialtesting3lpe", "labtesting/rawmaterialtesting3lpe");
-                urloptions.put("rawmaterialtestingliquidepoxy", "labtesting/rawmaterialtestingliquidepoxy");
+//                urloptions.put("rawmaterialtesting2fbe", "labtesting/rawmaterialtesting2fbe");
+//                urloptions.put("rawmaterialtesting3lpe", "labtesting/rawmaterialtesting3lpe");
+//                urloptions.put("rawmaterialtestingliquidepoxy", "labtesting/rawmaterialtestingliquidepoxy");
 
                 //权限过滤url
                 List<String> removeList=new ArrayList<>();
