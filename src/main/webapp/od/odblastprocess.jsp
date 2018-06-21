@@ -198,7 +198,7 @@
                         hlAlertFour("请输入分厂信息");
                         return false;
                     }
-                    if($("input[name='odbptime']").val()==""){
+                    if($("input[name='opeartion_time']").val()==""){
 
                         hlAlertFour("请输入操作时间");
                         return false;

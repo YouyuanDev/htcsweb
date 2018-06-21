@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.htcsweb.dao.ShipmentInfoDao">
+
+
+    <select id="getCountAllByLike" resultType="int">
+        select count(*) from shipment_info s inner join pipe_basic_info p on p.pipe_no=s.pipe_no
+        inner join contract_info c on c.contract_no=p.contract_no
+        inner join project_info pro on pro.project_no= c.project_no
+        <where>
+
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no =#{project_no}
+            </if>
+            <if test="shipment_no!=null and shipment_no!=''">
+                AND s.shipment_no LIKE CONCAT('%',#{shipment_no},'%')
+            </if>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND s.pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+            <if test="vehicle_plate_no!=null and vehicle_plate_no!=''">
+                AND s.vehicle_plate_no LIKE CONCAT('%',#{vehicle_plate_no},'%')
+            </if>
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(s.shipment_date,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(s.shipment_date,'%Y-%m-%d %H:%T:%s')<DATE_FORMAT(DATE_ADD(#{end_time},INTERVAL 1 DAY),'%Y-%m-%d 00:00:00')]]>
+            </if>
+        </where>
+    </select>
+
+
+
+    <select id="getAllByLike" resultType="map">
+        select s.*,pro.project_no,pro.project_name,p.contract_no,p.od,p.wt,p.p_length,p.weight,p.status from shipment_info s inner join pipe_basic_info p on p.pipe_no=s.pipe_no
+        inner join contract_info c on c.contract_no=p.contract_no
+        inner join project_info pro on pro.project_no= c.project_no
+        <where>
+
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no =#{project_no}
+            </if>
+            <if test="shipment_no!=null and shipment_no!=''">
+                AND s.shipment_no LIKE CONCAT('%',#{shipment_no},'%')
+            </if>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND s.pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+            <if test="vehicle_plate_no!=null and vehicle_plate_no!=''">
+                AND s.vehicle_plate_no LIKE CONCAT('%',#{vehicle_plate_no},'%')
+            </if>
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(s.shipment_date,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(s.shipment_date,'%Y-%m-%d %H:%T:%s')<DATE_FORMAT(DATE_ADD(#{end_time},INTERVAL 1 DAY),'%Y-%m-%d 00:00:00')]]>
+            </if>
+        </where>
+        ORDER BY id DESC
+        limit #{skip},#{take}
+    </select>
+
+
+
+
+    <select id="getShipmentInfoByShipmentNo" resultType="com.htcsweb.entity.ShipmentInfo">
+        select * from  shipment_info s
+        <where>
+            <if test="shipment_no!=null and shipment_no!=''">
+                AND s.shipment_no=#{shipment_no}
+            </if>
+        </where>
+    </select>
+
+
+    <insert id="addShipmentInfo" parameterType="com.htcsweb.entity.ShipmentInfo">
+        INSERT INTO shipment_info(shipment_no,pipe_no,shipment_date,vehicle_plate_no,operator_no,upload_files,remark) VALUES (#{shipment_no},#{pipe_no},#{shipment_date},#{vehicle_plate_no},#{operator_no},#{upload_files},#{remark})
+    </insert>
+
+    <update id="updateShipmentInfo" parameterType="com.htcsweb.entity.ShipmentInfo">
+        UPDATE shipment_info set shipment_no=#{shipment_no},pipe_no=#{pipe_no},shipment_date=#{shipment_date},vehicle_plate_no=#{vehicle_plate_no},operator_no=#{operator_no},upload_files=#{upload_files},remark=#{remark} where id=#{id}
+    </update>
+
+
+    <delete id="delShipmentInfo">
+        delete from shipment_info WHERE
+        <foreach collection="array" item="item" open="id in (" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+</mapper>

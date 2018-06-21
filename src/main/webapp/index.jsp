@@ -69,7 +69,7 @@
             var uriArr=["odblastprocess","odblastinspectionprocess","odcoatingprocess","odcoatinginspectionprocess",
                 "odcoating3lpeprocess","odcoating3lpeinspectionprocess","odstencilprocess","odfinalinspectionprocess",
                 "idblastprocess","idblastinspectionprocess","idcoatingprocess","idcoatinginspectionprocess","idstencilprocess","idfinalinspectionprocess",
-                "odstockin","idstockin","barepipemovement","productStockout","instoragetransfer",
+                "odstockin","idstockin","barepipemovement","productStockout","instoragetransfer","shipmentManagement",
                 "coatingrepair","coatingstrip",
                 "barepipegrindingProcess","pipeSamplingProcess","pipeRebevelProcess",
                 "projectManagement","contractManagement","pipeManagement","uploadPipe","twodimensionalcode","coatingpowderManagement",
@@ -81,14 +81,14 @@
         ];
             var odArr=uriArr.slice(0,8);
             var idArr=uriArr.slice(8,14);
-            var outinArr=uriArr.slice(14,19);
-            var repairArr=uriArr.slice(19,21);
-            var pipeArr=uriArr.slice(21,24);
-            var basicArr=uriArr.slice(24,30);
-            var standArr=uriArr.slice(30,38);
-            var labArr=uriArr.slice(38,44);
-            var accountArr=uriArr.slice(44,47);
-            var reportArr=uriArr.slice(47,49);
+            var outinArr=uriArr.slice(14,20);
+            var repairArr=uriArr.slice(20,22);
+            var pipeArr=uriArr.slice(22,25);
+            var basicArr=uriArr.slice(25,31);
+            var standArr=uriArr.slice(31,39);
+            var labArr=uriArr.slice(39,45);
+            var accountArr=uriArr.slice(45,48);
+            var reportArr=uriArr.slice(48,50);
 
 
             var hsMapList="<%=session.getAttribute("userfunctionMap")%>";
@@ -552,6 +552,14 @@
                             $('#hlTab').tabs('add',{
                                 title:node.text,
                                 content:"<iframe scrolling='auto' frameborder='0'  src='storage/instoragetransfer.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                            hlLanguage();
+                        }else if("发运管理"==nodeTxt||"Shipment Management"==nodeTxt){
+
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='storage/shipmentManagement.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable:true
                             });
                             hlLanguage();
