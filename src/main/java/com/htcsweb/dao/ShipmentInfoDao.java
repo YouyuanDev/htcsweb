@@ -12,6 +12,8 @@ public interface ShipmentInfoDao {
     public List<HashMap<String,Object>>getAllByLike(@Param("project_no")String project_no, @Param("shipment_no")String shipment_no, @Param("pipe_no")String pipe_no, @Param("vehicle_plate_no")String vehicle_plate_no, @Param("begin_time") Date begin_time, @Param("end_time") Date end_time,@Param("skip") int skip, @Param("take") int take);
 
 
+    public List<HashMap<String,Object>>getShipmentByProjectNo(@Param("project_no")String project_no,  @Param("begin_time") Date begin_time, @Param("end_time") Date end_time);
+
     //模糊搜索总数
     public int getCountAllByLike(@Param("project_no")String project_no, @Param("shipment_no")String shipment_no, @Param("pipe_no")String pipe_no, @Param("vehicle_plate_no")String vehicle_plate_no, @Param("begin_time") Date begin_time, @Param("end_time") Date end_time);
 

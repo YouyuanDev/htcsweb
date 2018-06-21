@@ -65,6 +65,24 @@
     </select>
 
 
+    <select id="getShipmentByProjectNo" resultType="map">
+        select s.*,pro.project_no,pro.project_name,p.contract_no,p.od,p.wt,p.p_length,p.weight,p.status,p.heat_no,p.pipe_making_lot_no,c.external_coating,c.internal_coating from shipment_info s inner join pipe_basic_info p on p.pipe_no=s.pipe_no
+        inner join contract_info c on c.contract_no=p.contract_no
+        inner join project_info pro on pro.project_no= c.project_no
+        <where>
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no =#{project_no}
+            </if>
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(s.shipment_date,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(s.shipment_date,'%Y-%m-%d %H:%T:%s')<DATE_FORMAT(DATE_ADD(#{end_time},INTERVAL 1 DAY),'%Y-%m-%d 00:00:00')]]>
+            </if>
+        </where>
+        group by shipment_no
+        ORDER BY s.shipment_date DESC
+    </select>
 
 
     <select id="getShipmentInfoByShipmentNo" resultType="com.htcsweb.entity.ShipmentInfo">
