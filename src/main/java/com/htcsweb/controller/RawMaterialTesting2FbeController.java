@@ -155,5 +155,26 @@ public class RawMaterialTesting2FbeController {
         return mmp;
 
     }
-
+    //根据id取出数据
+    @RequestMapping(value = "/getRawMaterialTesting2FbeById")
+    @ResponseBody
+    public String getRawMaterialTesting2FbeById(HttpServletRequest request) {
+        String idStr=request.getParameter("id");
+        Map<String, Object> maps = new HashMap<String, Object>();
+        if(idStr!=null&&!idStr.equals("")){
+            RawMaterialTesting2Fbe record=rawMaterialTesting2FbeDao.getRawMaterialTesting2FbeById(Integer.parseInt(idStr));
+            if (record!=null) {
+                //是待定状态
+                maps.put("success", true);
+                maps.put("record", record);
+            } else {
+                maps.put("success", false);
+            }
+        }
+        else {
+            maps.put("success", false);
+        }
+        String mmp= JSONArray.toJSONString(maps);
+        return mmp;
+    }
 }

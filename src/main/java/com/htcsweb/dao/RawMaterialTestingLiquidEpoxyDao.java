@@ -17,4 +17,5 @@ public interface RawMaterialTestingLiquidEpoxyDao {
     public int getCountNewAllByLike(@Param("project_no") String project_no, @Param("operator_no") String operator_no, @Param("begin_time") Date begin_time, @Param("end_time") Date end_time);
 
     public RawMaterialTestingLiquidEpoxy getRecentRecordBySampleNo(@Param("sample_no")String sample_no);
+    public RawMaterialTestingLiquidEpoxy getRawMaterialTestingLiquidEpoxyById(@Param("id")int id);
 }

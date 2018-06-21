@@ -16,4 +16,5 @@ public interface RawMaterialTesting3LpeDao {
     public List<HashMap<String,Object>> getNewAllByLike(@Param("project_no") String project_no, @Param("operator_no") String operator_no, @Param("begin_time") Date begin_time, @Param("end_time") Date end_time, @Param("skip") int skip, @Param("take") int take);
     public int getCountNewAllByLike(@Param("project_no") String project_no, @Param("operator_no") String operator_no, @Param("begin_time") Date begin_time, @Param("end_time") Date end_time);
     public RawMaterialTesting3Lpe getRecentRecordBySampleNo(@Param("sample_no")String sample_no);
+    public RawMaterialTesting3Lpe getRawMaterialTesting3LpeById(@Param("id")int id);
 }

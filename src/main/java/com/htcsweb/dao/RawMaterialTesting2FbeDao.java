@@ -16,4 +16,5 @@ public interface RawMaterialTesting2FbeDao {
     public List<HashMap<String,Object>> getNewAllByLike(@Param("project_no") String project_no, @Param("operator_no") String operator_no, @Param("begin_time") Date begin_time, @Param("end_time") Date end_time, @Param("skip") int skip, @Param("take") int take);
     public int getCountNewAllByLike(@Param("project_no") String project_no, @Param("operator_no") String operator_no, @Param("begin_time") Date begin_time, @Param("end_time") Date end_time);
     public RawMaterialTesting2Fbe getRecentRecordBySampleNo(@Param("sample_no")String sample_no);
+    public  RawMaterialTesting2Fbe getRawMaterialTesting2FbeById(@Param("id")int id);
 }

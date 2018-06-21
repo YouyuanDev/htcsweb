@@ -67,4 +67,8 @@
     <select id="getRecentRecordBySampleNo" resultType="com.htcsweb.entity.RawMaterialTesting2Fbe">
         SELECT  * from raw_material_testing_2fbe where sample_no=#{sample_no} order by operation_time desc LIMIT 1
     </select>
+    <!--根据id取出数据-->
+    <select id="getRawMaterialTesting2FbeById" resultType="com.htcsweb.entity.RawMaterialTesting2Fbe">
+        SELECT  * from raw_material_testing_2fbe where  id=#{id}
+    </select>
 </mapper>

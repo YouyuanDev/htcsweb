@@ -203,7 +203,7 @@
         </where>
         )
         UNION
-        (SELECT  'RAWEPOXY' as testing_type,o.id,o.result, 'REGULAR' as sample_type,o.operation_time,'' as pipe_no   from raw_material_testing_liquid_epoxy o
+        (SELECT  'RAWEPOXY' as testing_type,o.id,o.result, 'REGULAR' as sample_type,o.operation_time,'' as pipe_no  from raw_material_testing_liquid_epoxy o
         <where>
             <if test="project_no!=null and project_no!=''">
                 AND project_no=#{project_no}

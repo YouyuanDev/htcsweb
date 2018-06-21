@@ -153,5 +153,26 @@ public class RawMaterialTesting3LpeController {
         return mmp;
 
     }
-
+    //根据id取出数据
+    @RequestMapping(value = "/getRawMaterialTesting3LpeById")
+    @ResponseBody
+    public String getRawMaterialTesting3LpeById(HttpServletRequest request) {
+        String idStr=request.getParameter("id");
+        Map<String, Object> maps = new HashMap<String, Object>();
+        if(idStr!=null&&!idStr.equals("")){
+            RawMaterialTesting3Lpe record=rawMaterialTesting3LpeDao.getRawMaterialTesting3LpeById(Integer.parseInt(idStr));
+            if (record!=null) {
+                //是待定状态
+                maps.put("success", true);
+                maps.put("record", record);
+            } else {
+                maps.put("success", false);
+            }
+        }
+        else {
+            maps.put("success", false);
+        }
+        String mmp= JSONArray.toJSONString(maps);
+        return mmp;
+    }
 }

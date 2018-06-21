@@ -65,5 +65,8 @@
     <select id="getRecentRecordBySampleNo" resultType="com.htcsweb.entity.RawMaterialTestingLiquidEpoxy">
         SELECT  * from raw_material_testing_liquid_epoxy where sample_no=#{sample_no} order by operation_time desc LIMIT 1
     </select>
-
+    <!--根据id取出数据-->
+    <select id="getRawMaterialTestingLiquidEpoxyById" resultType="com.htcsweb.entity.RawMaterialTestingLiquidEpoxy">
+        SELECT  * from raw_material_testing_liquid_epoxy where  id=#{id}
+    </select>
 </mapper>
