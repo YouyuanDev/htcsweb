@@ -121,7 +121,8 @@ public class SessionFilter extends OncePerRequestFilter{
             "getLabTestingInfoByProjectNo",
             "getRawMaterialTesting2FbeById",
             "getRawMaterialTesting3LpeById",
-            "getRawMaterialTestingLiquidEpoxyById"
+            "getRawMaterialTestingLiquidEpoxyById",
+            "getRawMaterialCriteriaByProjecteNo"
 
     }; // 不过滤的uri
 

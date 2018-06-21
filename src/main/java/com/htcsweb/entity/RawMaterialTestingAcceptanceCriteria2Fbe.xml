@@ -67,6 +67,15 @@
         </where>
     </select>
 
-
+    <select id="getRawMaterialStandard2FbeByProjectNo" resultType="com.htcsweb.entity.RawMaterialTestingAcceptanceCriteria2Fbe">
+        select o.* from project_info pro
+        inner JOIN raw_material_testing_acceptance_criteria_2fbe o on
+        pro.raw_material_acceptance_criteria_2fbe_no=o.raw_material_testing_acceptance_criteria_no
+        <where>
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no=#{project_no}
+            </if>
+        </where>
+    </select>
 
 </mapper>

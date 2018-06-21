@@ -22,6 +22,8 @@ public interface RawMaterialTestingAcceptanceCriteria2FbeDao {
 
     public RawMaterialTestingAcceptanceCriteria2Fbe getRawMaterialStandard2FbeByPipeNo(@Param("pipe_no")String pipe_no);
 
+    public RawMaterialTestingAcceptanceCriteria2Fbe getRawMaterialStandard2FbeByProjectNo(@Param("project_no")String project_no);
+
 }
 
 

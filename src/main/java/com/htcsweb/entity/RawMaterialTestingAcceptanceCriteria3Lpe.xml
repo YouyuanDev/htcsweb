@@ -67,7 +67,16 @@
     </select>
 
 
-
+    <select id="getRawMaterialStandard3LpeByProjectNo" resultType="com.htcsweb.entity.RawMaterialTestingAcceptanceCriteria3Lpe">
+        select o.* from project_info pro
+        inner JOIN raw_material_testing_acceptance_criteria_3lpe o on
+        pro.raw_material_acceptance_criteria_3lpe_no=o.raw_material_testing_acceptance_criteria_no
+        <where>
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no=#{project_no}
+            </if>
+        </where>
+    </select>
 
 
 </mapper>

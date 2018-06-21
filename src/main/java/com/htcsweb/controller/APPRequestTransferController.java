@@ -479,7 +479,47 @@ public class APPRequestTransferController {
         return maps;
     }
 
-
+    //根据项目编号获取原材料实验标准
+    @RequestMapping("/getRawMaterialCriteriaByProjecteNo")
+    @ResponseBody
+    public String getRawMaterialCriteriaByProjecteNo(HttpServletRequest request){
+        String project_no=request.getParameter("project_no");
+        Map<String,Object> resultMaps=new HashMap<String,Object>();//最终返回Map
+        //返回用户session数据
+        HttpSession session = request.getSession();
+        //把用户数据保存在session域对象中
+        String employeeno=(String)session.getAttribute("userSession");
+        if(employeeno!=null) {
+            resultMaps.put("employeeno",employeeno);
+        } else{
+            resultMaps.put("success",false);
+            resultMaps.put("message","session已过期，请重新登录");
+            String map= JSONObject.toJSONString(resultMaps);
+            return map;
+        }
+        if(project_no!=null&&project_no!=""){
+            //2FBE 原材料实验标准
+            RawMaterialTestingAcceptanceCriteria2Fbe raw2fbecriteria=rawMaterialTestingAcceptanceCriteria2FbeDao.getRawMaterialStandard2FbeByProjectNo(project_no);
+            if(raw2fbecriteria!=null){
+                resultMaps.put("raw2fbecriteria",raw2fbecriteria);
+            }else{
+                resultMaps.put("raw2fbecriteria","");
+            }
+            //3LPE 原材料实验标准
+            RawMaterialTestingAcceptanceCriteria3Lpe raw3lpecriteria=rawMaterialTestingAcceptanceCriteria3LpeDao.getRawMaterialStandard3LpeByProjectNo(project_no);
+            if(raw3lpecriteria!=null){
+                resultMaps.put("raw3lpecriteria",raw3lpecriteria);
+            }else{
+                resultMaps.put("raw3lpecriteria","");
+            }
+            resultMaps.put("success",true);
+            resultMaps.put("message","成功");
+            String map= JSONObject.toJSONString(resultMaps);
+            return map;
+        }else{
+            return  null;
+        }
+    }
 
 
 }
