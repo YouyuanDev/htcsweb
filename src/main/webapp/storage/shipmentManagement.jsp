@@ -36,7 +36,7 @@
 
             $('#shipmentDatagrids').datagrid('load',{
                 'project_no': $('#projectno').val(),
-                'pipe_no': $('#contractno').val(),
+                'pipe_no': $('#pipeno').val(),
                 'vehicle_plate_no':$('#vehicleplateno').val(),
                 'begin_time': $('#begintime').val(),
                 'end_time': $('#endtime').val(),
@@ -201,6 +201,7 @@
                 <th field="p_length" align="center" width="100" class="i18n1" name="p_length">钢管长度</th>
                 <th field="weight" align="center" width="100" class="i18n1" name="weight">钢管米重</th>
                 <th field="status" align="center" width="100" class="i18n1" name="status">状态</th>
+                <th field="shipment_date" align="center" width="150" class="i18n1" name="shipmentdate" data-options="formatter:formatterdate">发运日期</th>
                 <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
 
             </tr>
@@ -227,7 +228,7 @@
     <input id="endtime" name="endtime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
 
 
-    <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchPipe()">Search</a>
+    <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchShipment()">Search</a>
     <div style="float:right">
         <a href="#" id="addObpLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addShipment()">添加</a>
         <a href="#" id="editObpLinkBtn" class="easyui-linkbutton i18n1" name="edit" data-options="iconCls:'icon-edit',plain:true" onclick="editShipment()">修改</a>

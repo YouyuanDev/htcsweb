@@ -2,9 +2,11 @@ package com.htcsweb.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.htcsweb.dao.PipeBasicInfoDao;
 import com.htcsweb.dao.PushEventRuleDao;
 import com.htcsweb.dao.RoleDao;
 import com.htcsweb.dao.ShipmentInfoDao;
+import com.htcsweb.entity.PipeBasicInfo;
 import com.htcsweb.entity.PushEventRule;
 import com.htcsweb.entity.Role;
 import com.htcsweb.entity.ShipmentInfo;
@@ -30,9 +32,11 @@ import java.util.Map;
 public class ShipmentController {
 
 
-        @Autowired
-        private ShipmentInfoDao shipmentInfoDao;
+    @Autowired
+    private ShipmentInfoDao shipmentInfoDao;
 
+    @Autowired
+    private PipeBasicInfoDao pipeBasicInfoDao;
 
 
         //获取所有Shipment列表
@@ -98,6 +102,21 @@ public class ShipmentController {
                     resTotal=shipmentInfoDao.updateShipmentInfo(shipmentInfo);
                 }
                 if(resTotal>0){
+
+                    //更新管子的状态
+                    List<PipeBasicInfo> pipelist=pipeBasicInfoDao.getPipeNumber(shipmentInfo.getPipe_no());
+                    if(pipelist.size()>0){
+                        PipeBasicInfo p=pipelist.get(0);
+                        if(p.getStatus().equals("bare1")||p.getStatus().equals("bare2")||p.getStatus().equals("odstockin")||p.getStatus().equals("idstockin")) {
+                            //验证钢管状态为光管  bare1 bare2 odstockin idstockin
+                            p.setStatus("out");
+                            p.setLast_accepted_status(p.getStatus());
+                                //同时更新钢管基础信息的shipment日期
+                            p.setShipment_date(shipmentInfo.getShipment_date());
+                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        }
+                    }
+
                     json.put("success",true);
                     json.put("message","保存成功");
                 }else{

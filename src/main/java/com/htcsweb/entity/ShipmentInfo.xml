@@ -13,7 +13,7 @@
         <where>
 
             <if test="project_no!=null and project_no!=''">
-                AND pro.project_no =#{project_no}
+                AND pro.project_no LIKE CONCAT('%',#{project_no},'%')
             </if>
             <if test="shipment_no!=null and shipment_no!=''">
                 AND s.shipment_no LIKE CONCAT('%',#{shipment_no},'%')
@@ -42,7 +42,7 @@
         <where>
 
             <if test="project_no!=null and project_no!=''">
-                AND pro.project_no =#{project_no}
+                AND pro.project_no LIKE CONCAT('%',#{project_no},'%')
             </if>
             <if test="shipment_no!=null and shipment_no!=''">
                 AND s.shipment_no LIKE CONCAT('%',#{shipment_no},'%')
