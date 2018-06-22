@@ -140,7 +140,7 @@ public class LabTesting2FbeController {
         return null;
     }
 
-    //得到可以钢管最新的待定的Lab 2fbe记录  最后一条记录且result为待定 10
+    //得到可以钢管最新的Lab 2fbe记录  最后一条记录,是否待定，前台app判断
     @RequestMapping(value = "/getPendingRecordByPipeNo")
     @ResponseBody
     public String getPendingRecordByPipeNo(@RequestParam(value = "pipe_no",required = false)String pipe_no, HttpServletRequest request) {
@@ -148,7 +148,7 @@ public class LabTesting2FbeController {
         LabTesting2Fbe record=labTesting2FbeDao.getRecentRecordByPipeNo(pipe_no);
         Map<String, Object> maps = new HashMap<String, Object>();
 
-        if (record!=null&&record.getResult().equals("10")) {
+        if (record!=null) {//&&record.getResult().equals("10")
             //是待定状态
             maps.put("success", true);
             maps.put("record", record);
