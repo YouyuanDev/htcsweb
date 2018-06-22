@@ -136,25 +136,25 @@ public class RawMaterialTesting2FbeController {
     }
 
     //得到可以钢管最新的待定的Raw material 2FBE记录  最后一条记录且result为待定 10
-    @RequestMapping(value = "/getPendingRecordBySampleNo")
-    @ResponseBody
-    public String getPendingRecordBySampleNo(@RequestParam(value = "sample_no",required = false)String sample_no, HttpServletRequest request) {
-
-        RawMaterialTesting2Fbe record=rawMaterialTesting2FbeDao.getRecentRecordBySampleNo(sample_no);
-        Map<String, Object> maps = new HashMap<String, Object>();
-
-        if (record!=null&&record.getResult().equals("10")) {
-            //是待定状态
-            maps.put("success", true);
-            maps.put("record", record);
-        } else {
-            maps.put("success", false);
-        }
-
-        String mmp= JSONArray.toJSONString(maps);
-        return mmp;
-
-    }
+//    @RequestMapping(value = "/getPendingRecordBySampleNo")
+//    @ResponseBody
+//    public String getPendingRecordBySampleNo(@RequestParam(value = "sample_no",required = false)String sample_no, HttpServletRequest request) {
+//
+//        RawMaterialTesting2Fbe record=rawMaterialTesting2FbeDao.getRecentRecordBySampleNo(sample_no);
+//        Map<String, Object> maps = new HashMap<String, Object>();
+//
+//        if (record!=null&&record.getResult().equals("10")) {
+//            //是待定状态
+//            maps.put("success", true);
+//            maps.put("record", record);
+//        } else {
+//            maps.put("success", false);
+//        }
+//
+//        String mmp= JSONArray.toJSONString(maps);
+//        return mmp;
+//
+//    }
     //根据id取出数据
     @RequestMapping(value = "/getRawMaterialTesting2FbeById")
     @ResponseBody
