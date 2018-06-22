@@ -111,7 +111,7 @@
         得到项目2fbe 实验实验管的管号
     -->
     <select id="getAll2FBESamplePipe" resultType="com.htcsweb.entity.PipeBasicInfo">
-        select * from pipe_basic_info
+        select * from pipe_basic_info p inner join contract_info c on c.contract_no=p.contract_no
         <where>
             ( odsampling_mark='1' or od_dsc_sample_mark='1' )
             <if test="project_no!=null and project_no!=''">
@@ -125,7 +125,8 @@
        得到项目3lpe 实验实验管的管号
    -->
     <select id="getAll3LPESamplePipe" resultType="com.htcsweb.entity.PipeBasicInfo">
-        select * from pipe_basic_info
+        select * from pipe_basic_info p inner join contract_info c on c.contract_no=p.contract_no
+
         <where>
             ( odsampling_mark='1' or od_dsc_sample_mark='1' or od_pe_sample_mark='1' )
             <if test="project_no!=null and project_no!=''">
@@ -140,7 +141,7 @@
       得到项目Epoxy 实验实验管的管号
   -->
     <select id="getAllEpoxySamplePipe" resultType="com.htcsweb.entity.PipeBasicInfo">
-        select * from pipe_basic_info
+        select * from pipe_basic_info p inner join contract_info c on c.contract_no=p.contract_no
         <where>
             ( idsampling_mark='1' or id_glass_sample_mark='1' )
             <if test="project_no!=null and project_no!=''">
