@@ -1,10 +1,11 @@
 <%--
   Created by IntelliJ IDEA.
   User: kurt
-  Date: 3/26/18
-  Time: 1:49 PM
+  Date: 6/22/18
+  Time: 1:16 PM
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
@@ -13,7 +14,7 @@
 %>
 <html>
 <head>
-    <title>岗位记录</title>
+    <title>发运记录</title>
     <link rel="stylesheet" type="text/css" href="../easyui/themes/bootstrap/easyui.css">
     <link rel="stylesheet" type="text/css" href="../easyui/themes/icon.css">
     <link href="../miniui/multiupload/multiupload.css" rel="stylesheet" type="text/css" />
@@ -98,7 +99,7 @@
                 form.attr("style", "display:none");
                 form.attr("target", "");
                 form.attr("method", "post");//请求类型
-                form.attr("action","/InspectionRecordPDFOperation/getRecordReportPDF.action");//请求地址
+                form.attr("action","/ShipmentOperation/getShipmentRecordPDF.action");//请求地址
                 $("body").append(form);//将表单放置在web中
                 var input1 = $("<input type='hidden' name='project_no' value='" + selectValue + "'/>");
                 form.append(input1);
@@ -111,7 +112,7 @@
                 // form.submit();
                 var options={
                     type:'POST',
-                    url:'/InspectionRecordPDFOperation/getRecordReportPDF.action',
+                    url:'/ShipmentOperation/getShipmentRecordPDF.action',
                     dataType:'json',
                     beforeSubmit:function () {
                         ajaxLoading();
@@ -131,37 +132,37 @@
                 };
                 //form.submit(function (e) {
                 form.ajaxSubmit(options);
-                   return false;
-                });
+                return false;
+            });
 
-                //表单提交
-                // $.ajax({
-                //     url:"/InspectionRecordPDFOperation/getRecordReportPDF.action",
-                //     data:{selectValue:selectValue,beginTime:begin_time,endTime:end_time},
-                //     dataType:'json',
-                //     async:false,
-                //     beforeSend:function(){
-                //         ajaxLoading();
-                //     },
-                //     success:function(data){
-                //         if(data!=null){
-                //              if(data=="success"){
-                //                  $.messager.alert('Warning','生成成功!');
-                //              }else{
-                //                  $.messager.alert('Warning','生成失败!');
-                //              }
-                //         }else{
-                //             $.messager.alert('Warning','生成失败!');
-                //         }
-                //         ajaxLoadEnd();
-                //     },
-                //     error:function(){
-                //         ajaxLoadEnd();
-                //         $.messager.alert('Warning','生成失败!');
-                //     },
-                //     complete:function(){
-                //         ajaxLoadEnd();
-                //     }
+            //表单提交
+            // $.ajax({
+            //     url:"/ShipmentOperation/getRecordReportPDF.action",
+            //     data:{selectValue:selectValue,beginTime:begin_time,endTime:end_time},
+            //     dataType:'json',
+            //     async:false,
+            //     beforeSend:function(){
+            //         ajaxLoading();
+            //     },
+            //     success:function(data){
+            //         if(data!=null){
+            //              if(data=="success"){
+            //                  $.messager.alert('Warning','生成成功!');
+            //              }else{
+            //                  $.messager.alert('Warning','生成失败!');
+            //              }
+            //         }else{
+            //             $.messager.alert('Warning','生成失败!');
+            //         }
+            //         ajaxLoadEnd();
+            //     },
+            //     error:function(){
+            //         ajaxLoadEnd();
+            //         $.messager.alert('Warning','生成失败!');
+            //     },
+            //     complete:function(){
+            //         ajaxLoadEnd();
+            //     }
             //});
         });
         function ajaxLoading() {
@@ -188,20 +189,7 @@
             $(".datagrid-mask").remove();
             $(".datagrid-mask-msg").remove();
         }
-        // function downloadPdf(pathList) {
-        //     var form=$("<form>");//定义一个form表单
-        //     form.attr("style","display:none");
-        //     form.attr("target","");
-        //     form.attr("method","post");//请求类型
-        //     form.attr("action","/InspectionRecordPDFOperation/downloadPDF.action");//请求地址
-        //     $("body").append(form);//将表单放置在web中
-        //     var input1=$("<input>");
-        //     input1.attr("type","hidden");
-        //     input1.attr("name","pathList");
-        //     input1.attr("value",pathList);
-        //     form.append(input1);
-        //     form.submit();//表单提交
-        // }
+
 
 
 
@@ -219,14 +207,14 @@
             //     },  */
             // });
             $('#p').progressbar('setValue',0);
-            timerId = window.setInterval(getCheckProgress,400);
+            timerId = window.setInterval(getCheckProgress,500);
         }
 
 
         //通过session得到进度
         //通过post请求得到进度
         function getCheckProgress(){
-            var progressUrl = '/InspectionRecordPDFOperation/getPDFProgress.action';
+            var progressUrl = '/ShipmentOperation/getShipmentpdfProgress.action';
             //使用JQuery从后台获取JSON格式的数据
             $.ajax({
                 type:"post",//请求方式
@@ -235,7 +223,7 @@
                 dataType:"json",//设置返回数据的格式
                 //请求成功后的回调函数 data为json格式
                 success:function(data){
-                    if(data.pdfProgress>=100){
+                    if(data.shipmentpdfProgress>=100){
                         $('#p').progressbar('setValue',100);
                         window.clearInterval(timerId);
                         $('#dg').datagrid('load');
@@ -243,7 +231,7 @@
                         $('#showProgress').css('display','none');
 
                     }
-                    $('#p').progressbar('setValue',data.pdfProgress);
+                    $('#p').progressbar('setValue',data.shipmentpdfProgress);
                 },
                 //请求出错的处理
                 error:function(){
@@ -260,28 +248,14 @@
 <body>
 <div style="padding:10px">
     <select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
-        <%--<option value="-1" selected="selected">所有工序</option>--%>
-        <%--<option value="0">外喷砂工序</option>--%>
-        <%--<option value="1">外喷砂检验工序</option>--%>
-        <%--<option value="2">外涂工序(2FBE)</option>--%>
-        <%--<option value="3">外涂检验工序(2FBE)</option>--%>
-        <%--<option value="4">外涂工序(3LPE)</option>--%>
-        <%--<option value="5">外涂检验工序(3LPE)</option>--%>
-        <%--<option value="6">外喷标工序</option>--%>
-        <%--<option value="7">外涂层终检工序</option>--%>
-        <%--<option value="8">内喷砂工序</option>--%>
-        <%--<option value="9">内喷砂检验工序</option>--%>
-        <%--<option value="10">内涂工序</option>--%>
-        <%--<option value="11">内涂检验工序</option>--%>
-        <%--<option value="12">内喷标工序</option>--%>
-        <%--<option value="13">内涂层终检工序</option>--%>
+
     </select>
     <span class="i18n1" name="begintime">开始时间</span>:
     <input id="begintime" name="begintime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
     <span class="i18n1" name="endtime">结束时间</span>:
     <input id="endtime" name="endtime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
     <button class="btnReport">开始生成</button>
-<br><br>
+    <br><br>
     <div id="p" class="easyui-progressbar" data-options="value:0" style="width:600px;display:none"></div>
 </div>
 

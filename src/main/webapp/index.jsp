@@ -76,7 +76,7 @@
                 "odstandard","idstandard","labtestingstandard2fbe","labtestingstandard3lpe","rawmaterialtestingstandard2fbe","rawmaterialtestingstandard3lpe","pipebodystandard","inspectionFrequencyStandard",
                 "labtesting2fbe","labtesting3lpe","labtestingepoxy","rawmaterialtesting2fbe","rawmaterialtesting3lpe","rawmaterialtestingliquidepoxy",
                 "person","role","function",
-                "productionProcessRecord","dailyProductionReport"
+                "productionProcessRecord","dailyProductionReport","shipmentRecord"
 
         ];
             var odArr=uriArr.slice(0,8);
@@ -88,7 +88,7 @@
             var standArr=uriArr.slice(30,38);
             var labArr=uriArr.slice(38,44);
             var accountArr=uriArr.slice(44,47);
-            var reportArr=uriArr.slice(47,49);
+            var reportArr=uriArr.slice(47,50);
 
 
             var hsMapList="<%=session.getAttribute("userfunctionMap")%>";
@@ -719,8 +719,17 @@
                                 closable: true
                             });
                             hlLanguage();
+                        }else if ("发运记录管理" == nodeTxt || "Shipment Report Management" == nodeTxt) {
+
+                            $('#hlTab').tabs('add', {
+                                title: node.text,
+                                content: "<iframe scrolling='auto' frameborder='0'  src='productionRecordAndReport/shipmentRecord.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable: true
+                            });
+                            hlLanguage();
                         }
                     }
+
                 }
             });
 

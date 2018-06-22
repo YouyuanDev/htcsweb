@@ -192,3 +192,4 @@
 196	发运信息管理	shipms	搜索	r	getAllShipmentInfoByLike
 197	发运信息管理	shipme	编辑	w	saveShipmentInfo
 198	发运信息管理	shipmd	删除	d	delShipmentInfo
+199	发运记录管理	shiprdr	查看	r	shipmentRecord

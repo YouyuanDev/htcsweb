@@ -1,6 +1,7 @@
 package com.htcsweb.controller;
 
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.*;
 import com.htcsweb.entity.*;
@@ -174,6 +175,8 @@ public class InspectionRecordPDFController {
         Date day_begin_time=null,day_end_time=null,night_begin_time=null,night_end_time=null;//定义每天班次的开始结束时间
         //是否成功标识
         String flag="success",zipName="";
+        boolean success=false;
+        String message="";
         //HashMap<String,Object>map=new HashMap<>();
         //先获取选择的日期区间之间的所有日期
         String project_no=request.getParameter("project_no");
@@ -301,6 +304,16 @@ public class InspectionRecordPDFController {
                 }
                 //-------结束生成笛卡尔集pdf
                 //Collections.sort(dayNightPdf);
+
+                if(dayNightPdf.size()==0){
+                    success=false;
+                    message="没有岗位记录";
+                }else{
+                    success=true;
+                    message="存在岗位记录"+String.valueOf(dayNightPdf.size())+"份";
+                }
+
+
                 zipName="/upload/pdf/"+ResponseUtil.downLoadPdf(dayNightPdf,request,response);
                 dayNightPdf.clear();
                 //定时删除临时文件
@@ -316,7 +329,15 @@ public class InspectionRecordPDFController {
                 e.printStackTrace();
             }
         }
-        return JSONObject.toJSONString(zipName);
+
+        Map<String,Object> maps=new HashMap<String,Object>();
+        maps.put("success",success);
+        maps.put("zipName",zipName);
+        maps.put("message",message);
+        String mmp= JSONArray.toJSONString(maps);
+
+
+        return mmp;
     }
 
     @RequestMapping(value="downloadPDF",produces="application/json;charset=UTF-8")

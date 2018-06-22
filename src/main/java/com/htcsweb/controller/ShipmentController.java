@@ -180,8 +180,6 @@ public class ShipmentController {
     public  String getShipmentRecordPDF(HttpServletRequest request, HttpServletResponse response){
         String basePath=request.getSession().getServletContext().getRealPath("/");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat timeformat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        //定义根据项目编号获取的合同集合
 
         List<String>delSetPath=new ArrayList<String>();//定义删除pdf集合，用于生成zip后删除所有的临时文件
         if(UploadFileController.isServerTomcat) {
@@ -190,7 +188,9 @@ public class ShipmentController {
         }
 
         //是否成功标识
-        String flag="success",zipName="";
+        boolean success=false;
+        String zipName="";
+        String message="";
         String project_no=request.getParameter("project_no");
         String begin_time=request.getParameter("beginTime");
         String end_time=request.getParameter("endTime");
@@ -256,6 +256,7 @@ public class ShipmentController {
                 float total_length=0;
                 float total_weight=0;
                 int   total_count=0;
+                session.setAttribute("shipmentpdfProgress", String.valueOf("0"));
                 for(int i=0;i<list.size();i++){
                     System.out.println("pipe_no"+list.get(i).get("pipe_no"));
                     String shipment_no=String.valueOf(list.get(i).get("shipment_no"));
@@ -325,7 +326,7 @@ public class ShipmentController {
                     //把用户数据保存在session域对象中
                     float percent=0;
                     if(totalCount!=0)
-                        percent=i*100/totalCount;
+                        percent=(i+1)*100/totalCount;
                     session.setAttribute("shipmentpdfProgress", String.valueOf(percent));
                     System.out.println("shipmentpdfProgress：" + percent);
                     System.out.println("i：" + i);
@@ -341,6 +342,8 @@ public class ShipmentController {
                     }
                 }
 
+                session.setAttribute("shipmentpdfProgress", String.valueOf("100"));
+
 
                 List<String>finalpdfList=new ArrayList<>();
                 if(pdfList.size()>0){
@@ -349,7 +352,13 @@ public class ShipmentController {
                     finalpdfList.add(pdfFullName);
                     delSetPath.add(pdfFullName);
                 }
-
+                if(finalpdfList.size()==0){
+                    success=false;
+                    message="没有发运记录";
+                }else{
+                    success=true;
+                    message="存在成品发运记录"+String.valueOf(list.size())+"条";
+                }
 
                 zipName="/upload/pdf/"+ResponseUtil.downLoadPdf(finalpdfList,request,response);
                 //定时删除临时文件
@@ -365,6 +374,36 @@ public class ShipmentController {
                 e.printStackTrace();
             }
         }
-        return JSONObject.toJSONString(zipName);
+
+
+        Map<String,Object> maps=new HashMap<String,Object>();
+        maps.put("success",success);
+        maps.put("zipName",zipName);
+        maps.put("message",message);
+        String mmp= JSONArray.toJSONString(maps);
+
+        return mmp;
+    }
+
+    //获取PDF生成进度
+    @RequestMapping(value="getShipmentpdfProgress",produces="application/json;charset=UTF-8")
+    @ResponseBody
+    public  String getShipmentpdfProgress(HttpServletRequest request, HttpServletResponse response) {
+        JSONObject json=new JSONObject();
+        try{
+
+            HttpSession session = request.getSession();
+            String shipmentpdfProgress=(String)session.getAttribute("shipmentpdfProgress");
+            if(shipmentpdfProgress==null||shipmentpdfProgress.equals(""))
+                shipmentpdfProgress="0";
+            //跳转到用户主页
+            json.put("success",true);
+            //System.out.println("ggggggete getAttribute pdfProgress：" + pdfProgress);    //输出程序运行时间
+            json.put("shipmentpdfProgress",shipmentpdfProgress);
+            ResponseUtil.write(response,json);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }
