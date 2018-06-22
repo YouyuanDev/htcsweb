@@ -192,7 +192,6 @@ public class ShipmentController {
         //是否成功标识
         String flag="success",zipName="";
         String project_no=request.getParameter("project_no");
-        String project_name=request.getParameter("project_name");
         String begin_time=request.getParameter("beginTime");
         String end_time=request.getParameter("endTime");
         Date beginTime=null;
@@ -233,7 +232,7 @@ public class ShipmentController {
                 //获取项目的所有shipment信息
                 List<HashMap<String,Object>> list=shipmentInfoDao.getShipmentByProjectNo(project_no,beginTime,endTime);
 
-                int PAGESIZE=30;
+                int PAGESIZE=28;
 
                 int totalCount=list.size();
                 List<String>pdfList=new ArrayList<>();
@@ -254,38 +253,21 @@ public class ShipmentController {
                     e.printStackTrace();
                 }
                 String last_shipment_no="";
+                float total_length=0;
+                float total_weight=0;
+                int   total_count=0;
                 for(int i=0;i<list.size();i++){
                     System.out.println("pipe_no"+list.get(i).get("pipe_no"));
                     String shipment_no=String.valueOf(list.get(i).get("shipment_no"));
-                    if(index==1){
-                        datalist.add(new Label(1, 1, String.valueOf(list.get(i).get("project_no")), wcf));
-                        StringBuilder odwtstr = new StringBuilder();
-                        odwtstr.append(String.valueOf(list.get(i).get("od")));
-                        odwtstr.append("*");
-                        odwtstr.append(String.valueOf(list.get(i).get("wt")));
-                        odwtstr.append("mm");
-                        datalist.add(new Label(1, 2, odwtstr.toString(), wcf));
-                        datalist.add(new Label(1, 3, String.valueOf(list.get(i).get("shipment_date")), wcf));
-                        StringBuilder coating = new StringBuilder();
-                        coating.append(String.valueOf(list.get(i).get("external_coating")));
-                        coating.append(" ");
-                        coating.append(String.valueOf(list.get(i).get("internal_coating")));
-                        datalist.add(new Label(5, 1, coating.toString(), wcf));
-                        datalist.add(new Label(5, 2, shipment_no, wcf));
-                        datalist.add(new Label(5, 3, String.valueOf(list.get(i).get("vehicle_plate_no")), wcf));
+                    if(!shipment_no.equals(last_shipment_no)&&last_shipment_no!=("")){
+                        total_count=0;
+                        total_length=0;
+                        total_weight=0;
                     }
-                    datalist.add(new Label(0, row+6, String.valueOf(index), wcf));
-                    datalist.add(new Label(1, row+6, String.valueOf(list.get(i).get("pipe_no")), wcf));
-                    datalist.add(new Label(2, row+6, String.valueOf(list.get(i).get("p_length")), wcf));
-                    datalist.add(new Label(3, row+6, String.valueOf(list.get(i).get("weight")), wcf));
-                    datalist.add(new Label(4, row+6, String.valueOf(list.get(i).get("heat_no")), wcf));
-                    datalist.add(new Label(5, row+6, String.valueOf(list.get(i).get("pipe_making_lot_no")), wcf));
-                    datalist.add(new Label(6, row+6,String.valueOf(list.get(i).get("remark")), wcf));
-                    index+=1;
-                    row+=1;
-                    if(index%PAGESIZE==0||!shipment_no.equals(last_shipment_no)){
+                    //判断是否需要换页
+                    if(index%PAGESIZE==0||!shipment_no.equals(last_shipment_no)&&last_shipment_no!=("")){
                         index=1;
-                        //System.out.println("另起一页" );
+                        System.out.println("另起一页 last_shipment_no="+last_shipment_no+"shipment_no=+"+shipment_no+"pipe_No="+String.valueOf(list.get(i).get("pipe_no")) );
                         row=0;//另起一页，初始化参数
                         String newPdfName= GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
                         datalist.clear();
@@ -295,6 +277,49 @@ public class ShipmentController {
                         }
                     }
                     last_shipment_no=shipment_no;
+
+                    if(index==1){
+                        datalist.add(new Label(3, 4, String.valueOf(list.get(i).get("project_name")), wcf));
+                        StringBuilder odwtstr = new StringBuilder();
+                        odwtstr.append("Φ");
+                        odwtstr.append(String.valueOf(list.get(i).get("od")));
+                        odwtstr.append("*");
+                        odwtstr.append(String.valueOf(list.get(i).get("wt")));
+                        odwtstr.append("mm");
+                        datalist.add(new Label(8, 4, odwtstr.toString(), wcf));
+                        datalist.add(new Label(12, 4, String.valueOf(list.get(i).get("shipment_date")), wcf));
+                        StringBuilder coating = new StringBuilder();
+                        coating.append(String.valueOf(list.get(i).get("external_coating")));
+                        coating.append(" ");
+                        coating.append(String.valueOf(list.get(i).get("internal_coating")));
+                        datalist.add(new Label(8, 5, coating.toString(), wcf));
+                        datalist.add(new Label(3, 5, shipment_no, wcf));
+                        datalist.add(new Label(12, 5, String.valueOf(list.get(i).get("vehicle_plate_no")), wcf));
+                    }
+
+                    int side=0;
+                    if(index>PAGESIZE/2){
+                        side=1;
+                    }
+                    datalist.add(new Label(0+7*side, row+7, String.valueOf(index), wcf));
+                    datalist.add(new Label(1+7*side, row+7, String.valueOf(list.get(i).get("pipe_no")), wcf));
+                    datalist.add(new Label(2+7*side, row+7, String.valueOf(list.get(i).get("p_length")), wcf));
+                    datalist.add(new Label(3+7*side, row+7, String.valueOf(list.get(i).get("weight")), wcf));
+                    datalist.add(new Label(4+7*side, row+7, String.valueOf(list.get(i).get("heat_no")), wcf));
+                    datalist.add(new Label(5+7*side, row+7, String.valueOf(list.get(i).get("pipe_making_lot_no")), wcf));
+                    datalist.add(new Label(6+7*side, row+7,String.valueOf(list.get(i).get("remark")), wcf));
+                    total_count+=1;
+                    total_length+=(float)list.get(i).get("p_length");
+                    total_weight+=(float)list.get(i).get("weight");
+
+                    datalist.add(new Label(4, 21,String.valueOf(total_count), wcf));
+                    datalist.add(new Label(8, 21,String.valueOf(total_length), wcf));
+                    datalist.add(new Label(12, 21,String.valueOf(total_weight), wcf));
+
+
+                    index+=1;
+                    row+=1;
+
 
 
                     //把用户数据保存在session域对象中
