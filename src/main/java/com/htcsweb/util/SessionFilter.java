@@ -125,6 +125,9 @@ public class SessionFilter extends OncePerRequestFilter{
             "getRawMaterialCriteriaByProjecteNo",
             "getShipmentRecordPDF",
             "getShipmentpdfProgress",
+            "getAll2FBESamplePipe",
+            "getAll3LPESamplePipe",
+            "getAllEpoxySamplePipe"
 
     }; // 不过滤的uri
 

@@ -127,6 +127,53 @@ public class PipeBasicInfoController {
     }
 
 
+    //查询2FBE未做实验的样管信息 包括DSC实验
+    @RequestMapping("/getAll2FBESamplePipe")
+    @ResponseBody
+    public String getAll2FBESamplePipe(HttpServletRequest request){
+        String map="";
+        try{
+            String project_no=request.getParameter("project_no");
+            List<PipeBasicInfo>list=pipeBasicInfoDao.getAll2FBESamplePipe(project_no);
+            map= JSONObject.toJSONString(list);
+        }catch (Exception e){
+        }
+        return map;
+    }
+
+    //查询3LPE实验的样管信息 包括DSC实验、PE实验
+    @RequestMapping("/getAll3LPESamplePipe")
+    @ResponseBody
+    public String getAll3LPESamplePipe(HttpServletRequest request){
+        String map="";
+        try{
+            String project_no=request.getParameter("project_no");
+            List<PipeBasicInfo>list=pipeBasicInfoDao.getAll3LPESamplePipe(project_no);
+            map= JSONObject.toJSONString(list);
+        }catch (Exception e){
+        }
+        return map;
+    }
+
+    //查询3LPE未做实验的样管信息 包括玻璃片实验、常规实验
+    @RequestMapping("/getAllEpoxySamplePipe")
+    @ResponseBody
+    public String getAllEpoxySamplePipe(HttpServletRequest request){
+        String map="";
+        try{
+            String project_no=request.getParameter("project_no");
+            List<PipeBasicInfo>list=pipeBasicInfoDao.getAllEpoxySamplePipe(project_no);
+            map= JSONObject.toJSONString(list);
+        }catch (Exception e){
+        }
+        return map;
+    }
+
+
+
+
+
+
     //查询2FBE实验样管信息 不包括DSC实验
     @RequestMapping("/get2FBESamplePipeNo")
     @ResponseBody

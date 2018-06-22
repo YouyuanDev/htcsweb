@@ -79,4 +79,11 @@ public interface PipeBasicInfoDao {
     public int InStoageTransfer(@Param("array")String[]array,@Param("storage_stack")String storage_stack,@Param("stack_level")String stack_level,@Param("level_direction")String level_direction,@Param("level_sequence")String level_sequence);
 
 
+    public List<PipeBasicInfo> getAll2FBESamplePipe(@Param("project_no")String project_no);
+
+    public List<PipeBasicInfo> getAll3LPESamplePipe(@Param("project_no")String project_no);
+
+    public List<PipeBasicInfo> getAllEpoxySamplePipe(@Param("project_no")String project_no);
+
+
 }
