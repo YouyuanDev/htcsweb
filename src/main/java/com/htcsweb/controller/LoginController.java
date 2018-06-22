@@ -136,7 +136,13 @@ public class LoginController {
                 if(oldusersession!=null&&oldusersession.getId()!=session.getId()){
                     msg="（已踢出其他客户端）";
                     System.out.println(msg);
-                    oldusersession.invalidate();
+                    UserSessionMap.remove(employee_no);
+                    try{
+                        oldusersession.invalidate();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
                 }
 
                 // 保存新用户session到公用UserSessionMap
