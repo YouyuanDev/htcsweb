@@ -26,4 +26,10 @@ public interface ShipmentInfoDao {
 
     //根据Shipment No 得到ShipmentInfo
     public List<ShipmentInfo> getShipmentInfoByShipmentNo(@Param("shipment_no")String shipment_no);
+
+
+    public List<HashMap<String,Object>> getAllShipmentInfoByProjectNo(@Param("project_no")String project_no,@Param("skip") int skip, @Param("take") int take );
+
+
+
 }

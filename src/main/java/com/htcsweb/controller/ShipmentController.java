@@ -406,4 +406,35 @@ public class ShipmentController {
         }
         return null;
     }
+
+
+
+    //根据项目编号获得发运信息
+    @RequestMapping(value="getAllShipmentInfoByProjectNo",produces="application/json;charset=UTF-8")
+    @ResponseBody
+    public String getAllShipmentInfoByProjectNo(HttpServletRequest request) {
+        String project_no=request.getParameter("project_no");
+        String page= request.getParameter("page");
+        String rows= request.getParameter("rows");
+        if(page==null){
+            page="1";
+        }
+        if(rows==null){
+            rows="20";
+        }
+        int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
+        List<HashMap<String,Object>>list=shipmentInfoDao.getAllShipmentInfoByProjectNo(project_no,start,Integer.parseInt(rows));
+        Map<String, Object> maps = new HashMap<String, Object>();
+        if (list!=null&&list.size()>0) {
+            //是待定状态
+            maps.put("success",true);
+            maps.put("record",list);
+        } else {
+            maps.put("success", false);
+        }
+        String mmp= JSONArray.toJSONString(maps);
+        return mmp;
+    }
+
+
 }
