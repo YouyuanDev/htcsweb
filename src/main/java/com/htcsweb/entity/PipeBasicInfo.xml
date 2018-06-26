@@ -109,6 +109,21 @@
      </select>
 
 
+
+    <select id="checkPipeForShipment" resultType="map">
+        SELECT  p.*,c.project_no,c.external_coating,c.internal_coating,pro.project_name from pipe_basic_info p INNER JOIN contract_info c ON
+        p.contract_no=c.contract_no
+        inner join project_info pro on pro.project_no=c.project_no
+        <where>
+            AND status in ('odstockin','idstockin','bare1','bare2')
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND p.pipe_no =#{pipe_no}
+            </if>
+        </where>
+    </select>
+
+
+
     <!--
         得到项目2fbe 实验实验管的管号
     -->

@@ -992,4 +992,30 @@ public class PipeBasicInfoController {
         return null;
     }
 
+    //根据管号判断该钢管是否可以出库
+    @RequestMapping(value="checkPipeForShipment",produces="application/json;charset=UTF-8")
+    @ResponseBody
+    public String checkPipeForShipment(HttpServletRequest request) {
+        String pipe_no=request.getParameter("pipe_no");
+        System.out.println("pipe_no"+pipe_no);
+
+        List<HashMap<String,Object>>list=pipeBasicInfoDao.checkPipeForShipment(pipe_no);
+        Map<String, Object> maps = new HashMap<String, Object>();
+        if (list!=null&&list.size()>0) {
+            //是待定状态
+            maps.put("success",true);
+            maps.put("record",list);
+            maps.put("message","");
+        } else {
+            maps.put("success", false);
+            StringBuilder sbmessage = new StringBuilder();
+            sbmessage.append("钢管");
+            sbmessage.append(pipe_no);
+            sbmessage.append("不能出库");
+            maps.put("message",sbmessage.toString());
+        }
+        String mmp= JSONArray.toJSONString(maps);
+        return mmp;
+    }
+
 }

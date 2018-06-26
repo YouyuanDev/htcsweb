@@ -128,7 +128,8 @@ public class SessionFilter extends OncePerRequestFilter{
             "getAll2FBESamplePipe",
             "getAll3LPESamplePipe",
             "getAllEpoxySamplePipe",
-            "getAllShipmentInfoByProjectNo"
+            "getAllShipmentInfoByProjectNo",
+            "checkPipeForShipment"
 
     }; // 不过滤的uri
 

@@ -86,4 +86,8 @@ public interface PipeBasicInfoDao {
     public List<PipeBasicInfo> getAllEpoxySamplePipe(@Param("project_no")String project_no);
 
 
+    public List<HashMap<String,Object>> checkPipeForShipment(@Param("pipe_no")String pipe_no);
+
+
+
 }
