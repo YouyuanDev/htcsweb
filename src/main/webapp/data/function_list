@@ -189,7 +189,7 @@
 193	原材料信息管理	cpime	编辑	w	saveCoatingPowder
 194	原材料信息管理	cpimd	删除	d	delCoatingPowder
 195	发运信息管理	shipmr	查看	r	shipmentManagement
-196	发运信息管理	shipms	搜索	r	getAllShipmentInfoByLike
+196	发运信息管理	shipms	搜索	r	getAllShipmentInfoByLike;getShipmentInfoByShipmentNo
 197	发运信息管理	shipme	编辑	w	saveShipmentInfo;APPAddShipmentInfo
 198	发运信息管理	shipmd	删除	d	delShipmentInfo
 199	发运记录管理	shiprdr	查看	r	shipmentRecord

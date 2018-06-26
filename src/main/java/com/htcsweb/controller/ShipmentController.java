@@ -537,6 +537,27 @@ public class ShipmentController {
 
 
 
+    //根据发运单编号获得发运信息
+    @RequestMapping(value="getShipmentInfoByShipmentNo",produces="application/json;charset=UTF-8")
+    @ResponseBody
+    public String getShipmentInfoByShipmentNo(HttpServletRequest request) {
+        String shipment_no=request.getParameter("shipment_no");
+
+        List<HashMap<String,Object>>list=shipmentInfoDao.getShipmentInfoByShipmentNo(shipment_no);
+        Map<String, Object> maps = new HashMap<String, Object>();
+        if (list!=null&&list.size()>0) {
+            maps.put("success",true);
+            maps.put("record",list);
+        } else {
+            maps.put("success", false);
+        }
+        String mmp= JSONArray.toJSONString(maps);
+        return mmp;
+    }
+
+
+
+
 
 
 }

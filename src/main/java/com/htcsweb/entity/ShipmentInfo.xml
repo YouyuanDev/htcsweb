@@ -84,13 +84,16 @@
     </select>
 
 
-    <select id="getShipmentInfoByShipmentNo" resultType="com.htcsweb.entity.ShipmentInfo">
-        select * from  shipment_info s
+    <select id="getShipmentInfoByShipmentNo" resultType="map">
+        select s.*,pro.project_no,pro.project_name,p.contract_no,p.od,p.wt,p.p_length,p.weight,p.status,p.heat_no,p.pipe_making_lot_no,c.external_coating,c.internal_coating from shipment_info s inner join pipe_basic_info p on p.pipe_no=s.pipe_no
+        inner join contract_info c on c.contract_no=p.contract_no
+        inner join project_info pro on pro.project_no= c.project_no
         <where>
             <if test="shipment_no!=null and shipment_no!=''">
                 AND s.shipment_no=#{shipment_no}
             </if>
         </where>
+        order by p.pipe_no desc
     </select>
 
 
