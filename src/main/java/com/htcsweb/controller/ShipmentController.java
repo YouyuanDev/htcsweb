@@ -548,8 +548,10 @@ public class ShipmentController {
         if (list!=null&&list.size()>0) {
             maps.put("success",true);
             maps.put("record",list);
+            maps.put("message","");
         } else {
             maps.put("success", false);
+            maps.put("message","不存在发运单编号"+shipment_no);
         }
         String mmp= JSONArray.toJSONString(maps);
         return mmp;
