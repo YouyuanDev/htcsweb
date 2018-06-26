@@ -128,6 +128,10 @@ public class PipeQrCodePrintRecordController {
         ResponseUtil.writeQRCodeZipFile(hlparam,request,response);
         List<PipeQrCodePrintRecord>list1=new ArrayList<PipeQrCodePrintRecord>();
         String[]arr=hlparam.split(",");
+        String remark=request.getParameter("remark");
+        if(remark==null)
+            remark="钢管信息管理页面下载";
+
         for (int i=0;i<arr.length;i++){
             PipeQrCodePrintRecord record=new PipeQrCodePrintRecord();
             record.setPipe_no(arr[i]);
@@ -141,7 +145,7 @@ public class PipeQrCodePrintRecordController {
                 record.setOperator_no("0000000");
             }
             record.setOperation_time(new Date());
-            record.setRemark("钢管信息管理页面下载");
+            record.setRemark(remark);
             list1.add(record);
         }
         if(list1.size()>0)
