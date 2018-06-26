@@ -151,6 +151,104 @@ public class ShipmentController {
         }
 
 
+
+    //添加ShipmentInfo APP使用
+    @RequestMapping(value = "/APPAddShipmentInfo")
+    @ResponseBody
+    public String APPAddShipmentInfo(HttpServletRequest request,HttpServletResponse response){
+        System.out.print("APPAddShipmentInfo");
+        String shipment_no=request.getParameter("shipment_no");
+        String vehicle_plate_no=request.getParameter("vehicle_plate_no");
+        String pipeno_arr=request.getParameter("pipeno_arr");
+        String operator_no=null;
+        if(request.getSession().getAttribute("userSession")!=null) {
+            operator_no=(String) request.getSession().getAttribute("userSession");
+        }
+
+
+        JSONObject json=new JSONObject();
+
+
+        try{
+            int SuccessCount=0,failCount=0;
+            int resTotal=0;
+            if(pipeno_arr==null||pipeno_arr.equals("")||shipment_no==null){
+                //
+                json.put("success",false);
+                json.put("message","出库失败，无管号");
+                ResponseUtil.write(response, json);
+                return "";
+            }
+
+            String[]pipenoArr=pipeno_arr.split(",");
+            String msg="";
+            for(int i=0;i<pipenoArr.length;i++){
+                List<PipeBasicInfo> pipelist=pipeBasicInfoDao.getPipeNumber(pipenoArr[i]);
+
+
+                //添加
+                ShipmentInfo shipmentInfo=new ShipmentInfo();
+                if(pipelist.size()>0){
+                    if(pipelist.get(0).getStatus().equals("out")){
+                        //已经出厂
+                        msg+="，钢管"+pipenoArr[i]+"已出厂！";
+                    }
+                    else{
+
+                        shipmentInfo.setId(0);
+                        shipmentInfo.setPipe_no(pipenoArr[i]);
+                        shipmentInfo.setOperator_no(operator_no);
+                        shipmentInfo.setRemark("APP 出库");
+                        shipmentInfo.setVehicle_plate_no(vehicle_plate_no);
+                        shipmentInfo.setShipment_no(shipment_no);
+                        shipmentInfo.setShipment_date(new Date());
+                        resTotal=shipmentInfoDao.addShipmentInfo(shipmentInfo);
+                        SuccessCount+=resTotal;
+                    }
+
+                }
+                if(resTotal>0){
+
+                    //更新管子的状态
+                    if(pipelist.size()>0){
+                        PipeBasicInfo p=pipelist.get(0);
+                        if(p.getStatus().equals("bare1")||p.getStatus().equals("bare2")||p.getStatus().equals("odstockin")||p.getStatus().equals("idstockin")) {
+                            //验证钢管状态为光管  bare1 bare2 odstockin idstockin
+                            p.setStatus("out");
+                            p.setLast_accepted_status(p.getStatus());
+                            //同时更新钢管基础信息的shipment日期
+                            p.setShipment_date(shipmentInfo.getShipment_date());
+                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        }
+                    }
+
+                }else{
+                    //没有出库成功
+                    msg+="，钢管"+pipenoArr[i]+"出库失败！";
+                    failCount+=1;
+                }
+            }
+
+            json.put("success",true);
+            json.put("message","总共出库"+SuccessCount+"根钢管,出库失败"+failCount+"根钢管"+msg);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            json.put("success",false);
+            json.put("message",e.getMessage());
+
+        }finally {
+            try {
+                ResponseUtil.write(response, json);
+            }catch  (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+
+
         //删除ShipmentInfo信息
         @RequestMapping("/delShipmentInfo")
         public String delRole(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{

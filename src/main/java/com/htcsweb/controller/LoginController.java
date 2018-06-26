@@ -106,11 +106,15 @@ public class LoginController {
                                                 //得到function
                                                 Function f=funlst.get(0);
                                                 String function_no=f.getFunction_no();
-                                                String uri=f.getUri();
+                                                String uris=f.getUri();
                                                 functionMap.put(function_no,"1");
-                                                functionMap.put(uri,"1");
-                                                System.out.println("functionMap put="+function_no);
-                                                System.out.println("uri put="+uri);
+                                                String[] uriArray=uris.split(";");
+                                                for(int n=0;n<uriArray.length;n++){
+                                                    functionMap.put(uriArray[n],"1");
+                                                    System.out.println("functionMap put="+function_no);
+                                                    System.out.println("uri put="+uriArray[n]);
+                                                }
+
                                             }
 
 
