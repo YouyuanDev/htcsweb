@@ -127,6 +127,7 @@
             </if>
         </where>
         group by shipment_no
+        order by shipment_date desc
         limit #{skip},#{take}
     </select>
 
