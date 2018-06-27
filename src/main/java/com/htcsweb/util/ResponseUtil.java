@@ -43,7 +43,7 @@ public class ResponseUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(logoDirectory);
         sb.append("/");
-        sb.append("logo1.jpg");
+        sb.append("logo2.jpg");
         //System.out.println("logoDirectory="+sb.toString());
         String logofullname=sb.toString();
         //下载文件列表初始化
