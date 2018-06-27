@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.htcsweb.dao.ProcessInfoDao">
+
+    <select id="getAllProcessInfo" resultType="com.htcsweb.entity.ProcessInfo">
+        select * from  process_info
+        order by process_code desc
+    </select>
+
+
+    <select id="getProcessInfoByProcessCode" resultType="com.htcsweb.entity.ProcessInfo">
+        select * from  process_info
+        where process_code=#{process_code}
+    </select>
+
+</mapper>
