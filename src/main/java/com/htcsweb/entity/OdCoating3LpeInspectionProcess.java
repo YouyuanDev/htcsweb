@@ -27,11 +27,12 @@ public class OdCoating3LpeInspectionProcess {
     private String is_sample;
     private String is_dsc_sample;
     private String is_pe_sample;
-
+    private float peel_strength_20;
+    private float peel_strength_65;
     public OdCoating3LpeInspectionProcess() {
     }
 
-    public OdCoating3LpeInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, String base_coat_thickness_list, String middle_coat_thickness_list, String top_coat_thickness_list, String total_coating_thickness_list, int holidays, float holiday_tester_volts, int repairs, String bevel, String surface_condition, int adhesion_rating, String upload_files, String remark, String result, String mill_no, String is_sample, String is_dsc_sample, String is_pe_sample) {
+    public OdCoating3LpeInspectionProcess(int id, String pipe_no, Date operation_time, String operator_no, String base_coat_thickness_list, String middle_coat_thickness_list, String top_coat_thickness_list, String total_coating_thickness_list, int holidays, float holiday_tester_volts, int repairs, String bevel, String surface_condition, int adhesion_rating, String upload_files, String remark, String result, String mill_no, String is_sample, String is_dsc_sample, String is_pe_sample, float peel_strength_20, float peel_strength_65) {
         this.id = id;
         this.pipe_no = pipe_no;
         this.operation_time = operation_time;
@@ -53,6 +54,8 @@ public class OdCoating3LpeInspectionProcess {
         this.is_sample = is_sample;
         this.is_dsc_sample = is_dsc_sample;
         this.is_pe_sample = is_pe_sample;
+        this.peel_strength_20 = peel_strength_20;
+        this.peel_strength_65 = peel_strength_65;
     }
 
     public int getId() {
@@ -221,5 +224,21 @@ public class OdCoating3LpeInspectionProcess {
 
     public void setIs_pe_sample(String is_pe_sample) {
         this.is_pe_sample = is_pe_sample;
+    }
+
+    public float getPeel_strength_20() {
+        return peel_strength_20;
+    }
+
+    public void setPeel_strength_20(float peel_strength_20) {
+        this.peel_strength_20 = peel_strength_20;
+    }
+
+    public float getPeel_strength_65() {
+        return peel_strength_65;
+    }
+
+    public void setPeel_strength_65(float peel_strength_65) {
+        this.peel_strength_65 = peel_strength_65;
     }
 }

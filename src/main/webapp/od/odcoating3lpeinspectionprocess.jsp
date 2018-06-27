@@ -165,6 +165,8 @@
                         //var $obj7=$("input[name='cutback_length']");
                         var $obj8=$("input[name='middle_coat_thickness_list']");
                         var $obj9=$("input[name='adhesion_rating']");
+                        var $obj10=$("input[name='peel_strength_20']");
+                        var $obj11=$("input[name='peel_strength_65']");
 
                         $obj1.siblings().css("background-color","#FFFFFF");
                         $obj2.siblings().css("background-color","#FFFFFF");
@@ -175,7 +177,8 @@
                         //$obj7.siblings().css("background-color","#FFFFFF");
                         $obj8.siblings().css("background-color","#FFFFFF");
                         $obj9.siblings().css("background-color","#FFFFFF");
-
+                        $obj10.siblings().css("background-color","#FFFFFF");
+                        $obj11.siblings().css("background-color","#FFFFFF");
                         if(data!=null){
                             var res1=changeComma($obj1.val());
                             var res2=changeComma($obj2.val());
@@ -191,7 +194,8 @@
                             //var res7_1=res7.split(',');
                             var res8_1=res8.split(',');
                             var res9=$obj9.val();
-
+                            var res10=$obj10.val();
+                            var res11=$obj11.val();
                             for(var i=0;i<res1_1.length;i++){
                                 if(res1_1[i]!=""&&res1_1.length>0){
                                     if(!((res1_1[i]>=data.base_3lpe_coat_thickness_min)&&(res1_1[i]<=data.base_3lpe_coat_thickness_max)))
@@ -233,6 +237,10 @@
 
                             if(!((res9>=data.adhesion_rating_min)&&(res9<=data.adhesion_rating_max)))
                                 $obj9.siblings().css("background-color","#F9A6A6");
+                            if(!((res10>=data.peel_strength_20_min)&&(res10<=data.peel_strength_20_max)))
+                                $obj10.siblings().css("background-color","#F9A6A6");
+                            if(!((res11>=data.peel_strength_65_min)&&(res11<=data.peel_strength_65_max)))
+                                $obj11.siblings().css("background-color","#F9A6A6");
 
                         }
                     },error:function () {
@@ -333,6 +341,8 @@
                     setParams($("input[name='holiday_tester_volts']"));
                     setParams($("input[name='repairs']"));
                     setParams($("input[name='adhesion_rating']"));
+                    setParams($("input[name='peel_strength_20']"));
+                    setParams($("input[name='peel_strength_65']"));
                 },
                 success: function(result){
                     var result = eval('('+result+')');
@@ -413,6 +423,8 @@
                 <%--<th field="stencil_verification" align="center" width="120" class="i18n1" name="stencilverification">外喷标检验</th>--%>
                 <th field="surface_condition" align="center" width="150" class="i18n1" name="surfacecondition1">表面质量</th>
                 <th field="adhesion_rating" align="center" width="150" class="i18n1" name="adhesionrating">附着力等级</th>
+                <th field="peel_strength_20" align="center" width="150" class="i18n1" name="peelstrength20"></th>
+                <th field="peel_strength_65" align="center" width="150" class="i18n1" name="peelstrength65"></th>
                 <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                 <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
                 <th field="operation_time" align="center" width="150" class="i18n1" name="operationtime" data-options="formatter:formatterdate">操作时间</th>
@@ -560,6 +572,14 @@
                     <td></td>
                 </tr>
                 <tr>
+                    <td class="i18n1" name="peelstrength20"></td>
+                    <td><input class="easyui-numberbox" data-options="precision:2" type="text" name="peel_strength_20" value=""/></td>
+                    <td></td>
+                    <td width="16%" class="i18n1" name="peelstrength65"></td>
+                    <td><input class="easyui-numberbox" data-options="precision:2" type="text" name="peel_strength_65" value=""/></td>
+                    <td></td>
+                </tr>
+                <tr>
                     <td width="16%" class="i18n1" name="repairs">修补点数</td>
                     <td><input class="easyui-numberbox" data-options="min:0,precision:0"  type="text" name="repairs" value=""/></td>
                     <td></td>
@@ -635,11 +655,6 @@
                         <%--<input class="easyui-textbox"  type="text" name="surface_condition" value=""/>--%>
                     </td>
                     <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
                     <td width="16%" class="i18n1" name="result">结论</td>
                     <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
                         <option value="1">合格,进入外喷标工序</option>
@@ -649,6 +664,8 @@
                         <option value="4">隔离，进入修磨或切割工序</option>
                     </select></td>
                     <td></td>
+                </tr>
+                <tr>
                     <td width="16%" class="i18n1" name="remark">备注</td>
                     <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
                     <td></td>

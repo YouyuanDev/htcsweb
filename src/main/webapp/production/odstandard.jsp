@@ -89,7 +89,7 @@
         function odAcceptanceFormSubmit() {
             $('#odAcceptanceForm').form('submit',{
                 url:url,
-                onSubmit:function () {
+                onSubmit:function (){
                     if($("input[name='coating_acceptance_criteria_no']").val()==""){
 
                         hlAlertFour("请输入外防接收标准编号");
@@ -183,11 +183,12 @@
             setParamsMin($("input[name='abrasive_conductivity_min']"));
             setParamsMax($("input[name='rinse_water_conductivity_max']"));
             setParamsMin($("input[name='rinse_water_conductivity_min']"));
-
             setParamsMax($("input[name='adhesion_rating_max']"));
             setParamsMin($("input[name='adhesion_rating_min']"));
-
-
+            setParamsMax($("input[name='peel_strength_20_max']"));
+            setParamsMin($("input[name='peel_strength_20_min']"));
+            setParamsMax($("input[name='peel_strength_65_max']"));
+            setParamsMin($("input[name='peel_strength_65_min']"));
         }
         function  setParamsMax($obj) {
             if($obj.val()==null||$obj.val()=="")
@@ -281,6 +282,10 @@
                    <th field="adhesion_rating_max" align="center" width="150" hidden="true" class="i18n1" name="adhesionratingmax">附着力等级最大值 </th>
                    <th field="adhesion_rating_min" align="center" width="150" hidden="true" class="i18n1" name="adhesionratingmin">附着力等级最小值 </th>
 
+                   <th field="peel_strength_20_max" align="center" width="150" hidden="true" class="i18n1" name="peelstrength20max"> </th>
+                   <th field="peel_strength_20_min" align="center" width="150" hidden="true" class="i18n1" name="peelstrength20min"> </th>
+                   <th field="peel_strength_65_max" align="center" width="150" hidden="true" class="i18n1" name="peelstrength65max"> </th>
+                   <th field="peel_strength_65_min" align="center" width="150" hidden="true" class="i18n1" name="peelstrength65min"> </th>
 
                    <th field="last_update_time" align="center" width="150" class="i18n1" name="lastupdatetime" data-options="formatter:formatterdate">最后更新时间</th>
 
@@ -573,6 +578,22 @@
                    <td></td>
                    <td class="i18n1" name="striptempmin">扒皮温度最小值(℃)</td>
                    <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="strip_temp_min" value=""/></td>
+                   <td></td>
+               </tr>
+               <tr>
+                   <td class="i18n1" name="peelstrength20max"></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="peel_strength_20_max" value=""/></td>
+                   <td></td>
+                   <td class="i18n1" name="peelstrength20max"></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="peel_strength_20_min" value=""/></td>
+                   <td></td>
+               </tr>
+               <tr>
+                   <td class="i18n1" name="peelstrength65max"></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="peel_strength_65_max" value=""/></td>
+                   <td></td>
+                   <td class="i18n1" name="peelstrength65max"></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="peel_strength_65_min" value=""/></td>
                    <td></td>
                </tr>
 
