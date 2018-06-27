@@ -105,6 +105,8 @@
                     'is_sample': row.is_sample,
                     'is_dsc_sample': row.is_dsc_sample,
                     'is_pe_sample': row.is_pe_sample,
+                    'peel_strength_20': row.peel_strength_20,
+                    'peel_strength_65': row.peel_strength_65,
                     'operation_time':getDate1(row.operation_time),
                     'upload_files':row.upload_files,
                     'result':row.result,

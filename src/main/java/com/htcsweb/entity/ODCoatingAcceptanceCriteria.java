@@ -21,8 +21,8 @@ public class ODCoatingAcceptanceCriteria {
     private float blast_finish_sa25_min;
     private int surface_dust_rating_max;
     private int surface_dust_rating_min;
-    private float profile_max;
-    private float profile_min;
+    private float od_profile_max;
+    private float od_profile_min;
     private float pipe_temp_after_blast_max;
     private float pipe_temp_after_blast_min;
     private float salt_contamination_after_blasting_max;
@@ -85,7 +85,7 @@ public class ODCoatingAcceptanceCriteria {
     public ODCoatingAcceptanceCriteria() {
     }
 
-    public ODCoatingAcceptanceCriteria(int id, String coating_acceptance_criteria_no, float salt_contamination_before_blast_max, float salt_contamination_before_blast_min, float preheat_temp_max, float preheat_temp_min, float relative_humidity_max, float relative_humidity_min, float temp_above_dew_point_max, float temp_above_dew_point_min, float blast_finish_sa25_max, float blast_finish_sa25_min, int surface_dust_rating_max, int surface_dust_rating_min, float profile_max, float profile_min, float pipe_temp_after_blast_max, float pipe_temp_after_blast_min, float salt_contamination_after_blasting_max, float salt_contamination_after_blasting_min, float application_temp_max, float application_temp_min, float base_2fbe_coat_thickness_max, float base_2fbe_coat_thickness_min, float top_2fbe_coat_thickness_max, float top_2fbe_coat_thickness_min, float total_2fbe_coat_thickness_max, float total_2fbe_coat_thickness_min, float top_3lpe_coat_thickness_max, float top_3lpe_coat_thickness_min, float middle_3lpe_coat_thickness_max, float middle_3lpe_coat_thickness_min, float base_3lpe_coat_thickness_max, float base_3lpe_coat_thickness_min, float total_3lpe_coat_thickness_max, float total_3lpe_coat_thickness_min, int repair_max, int repair_min, float holiday_tester_voltage_max, float holiday_tester_voltage_min, float cutback_max, float cutback_min, Date last_update_time, float epoxy_cutback_max, float epoxy_cutback_min, float magnetism_max, float magnetism_min, float coating_bevel_angle_max, float coating_bevel_angle_min, int holiday_max, int holiday_min, float strip_temp_max, float strip_temp_min, String stencil_content, float abrasive_conductivity_max, float abrasive_conductivity_min, float rinse_water_conductivity_max, float rinse_water_conductivity_min, int adhesion_rating_max, int adhesion_rating_min, float peel_strength_20_max, float peel_strength_20_min, float peel_strength_65_max, float peel_strength_65_min) {
+    public ODCoatingAcceptanceCriteria(int id, String coating_acceptance_criteria_no, float salt_contamination_before_blast_max, float salt_contamination_before_blast_min, float preheat_temp_max, float preheat_temp_min, float relative_humidity_max, float relative_humidity_min, float temp_above_dew_point_max, float temp_above_dew_point_min, float blast_finish_sa25_max, float blast_finish_sa25_min, int surface_dust_rating_max, int surface_dust_rating_min, float od_profile_max, float od_profile_min, float pipe_temp_after_blast_max, float pipe_temp_after_blast_min, float salt_contamination_after_blasting_max, float salt_contamination_after_blasting_min, float application_temp_max, float application_temp_min, float base_2fbe_coat_thickness_max, float base_2fbe_coat_thickness_min, float top_2fbe_coat_thickness_max, float top_2fbe_coat_thickness_min, float total_2fbe_coat_thickness_max, float total_2fbe_coat_thickness_min, float top_3lpe_coat_thickness_max, float top_3lpe_coat_thickness_min, float middle_3lpe_coat_thickness_max, float middle_3lpe_coat_thickness_min, float base_3lpe_coat_thickness_max, float base_3lpe_coat_thickness_min, float total_3lpe_coat_thickness_max, float total_3lpe_coat_thickness_min, int repair_max, int repair_min, float holiday_tester_voltage_max, float holiday_tester_voltage_min, float cutback_max, float cutback_min, Date last_update_time, float epoxy_cutback_max, float epoxy_cutback_min, float magnetism_max, float magnetism_min, float coating_bevel_angle_max, float coating_bevel_angle_min, int holiday_max, int holiday_min, float strip_temp_max, float strip_temp_min, String stencil_content, float abrasive_conductivity_max, float abrasive_conductivity_min, float rinse_water_conductivity_max, float rinse_water_conductivity_min, int adhesion_rating_max, int adhesion_rating_min, float peel_strength_20_max, float peel_strength_20_min, float peel_strength_65_max, float peel_strength_65_min) {
         this.id = id;
         this.coating_acceptance_criteria_no = coating_acceptance_criteria_no;
         this.salt_contamination_before_blast_max = salt_contamination_before_blast_max;
@@ -100,8 +100,8 @@ public class ODCoatingAcceptanceCriteria {
         this.blast_finish_sa25_min = blast_finish_sa25_min;
         this.surface_dust_rating_max = surface_dust_rating_max;
         this.surface_dust_rating_min = surface_dust_rating_min;
-        this.profile_max = profile_max;
-        this.profile_min = profile_min;
+        this.od_profile_max = od_profile_max;
+        this.od_profile_min = od_profile_min;
         this.pipe_temp_after_blast_max = pipe_temp_after_blast_max;
         this.pipe_temp_after_blast_min = pipe_temp_after_blast_min;
         this.salt_contamination_after_blasting_max = salt_contamination_after_blasting_max;
@@ -264,20 +264,20 @@ public class ODCoatingAcceptanceCriteria {
         this.surface_dust_rating_min = surface_dust_rating_min;
     }
 
-    public float getProfile_max() {
-        return profile_max;
+    public float getOd_profile_max() {
+        return od_profile_max;
     }
 
-    public void setProfile_max(float profile_max) {
-        this.profile_max = profile_max;
+    public void setOd_profile_max(float od_profile_max) {
+        this.od_profile_max = od_profile_max;
     }
 
-    public float getProfile_min() {
-        return profile_min;
+    public float getOd_profile_min() {
+        return od_profile_min;
     }
 
-    public void setProfile_min(float profile_min) {
-        this.profile_min = profile_min;
+    public void setOd_profile_min(float od_profile_min) {
+        this.od_profile_min = od_profile_min;
     }
 
     public float getPipe_temp_after_blast_max() {
