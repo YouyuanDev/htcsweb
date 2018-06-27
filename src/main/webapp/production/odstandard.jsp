@@ -501,6 +501,22 @@
                    <td></td>
                </tr>
                <tr>
+                   <td class="i18n1" name="peelstrength20max"></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="peel_strength_20_max" value=""/></td>
+                   <td></td>
+                   <td class="i18n1" name="peelstrength20min"></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="peel_strength_20_min" value=""/></td>
+                   <td></td>
+               </tr>
+               <tr>
+                   <td class="i18n1" name="peelstrength65max"></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="peel_strength_65_max" value=""/></td>
+                   <td></td>
+                   <td class="i18n1" name="peelstrength65min"></td>
+                   <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="peel_strength_65_min" value=""/></td>
+                   <td></td>
+               </tr>
+               <tr>
                    <td class="i18n1" colspan="6" name="odcoatinggeneralcontrolparameter">外涂检验通用控制参数</td>
                </tr>
                <tr>
@@ -580,22 +596,7 @@
                    <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="strip_temp_min" value=""/></td>
                    <td></td>
                </tr>
-               <tr>
-                   <td class="i18n1" name="peelstrength20max"></td>
-                   <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="peel_strength_20_max" value=""/></td>
-                   <td></td>
-                   <td class="i18n1" name="peelstrength20max"></td>
-                   <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="peel_strength_20_min" value=""/></td>
-                   <td></td>
-               </tr>
-               <tr>
-                   <td class="i18n1" name="peelstrength65max"></td>
-                   <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="peel_strength_65_max" value=""/></td>
-                   <td></td>
-                   <td class="i18n1" name="peelstrength65max"></td>
-                   <td ><input class="easyui-numberbox" data-options="precision:0"  type="text" name="peel_strength_65_min" value=""/></td>
-                   <td></td>
-               </tr>
+
 
                <tr>
                    <td class="i18n1" name="stencilcontent">喷标内容</td>
