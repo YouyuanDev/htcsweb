@@ -1557,7 +1557,7 @@ public class InspectionRecordPDFController {
         try{
             if(type==0){
                 //获取外防修补涂层管管号和原因  ?修补前还是修补后
-                repairList=coatingRepairDao.getCoatingRepairInfo(project_no,mill_no,null,null,"od",0,0,begin_time,end_time);
+                repairList=coatingRepairDao.getCoatingRepairInfo(project_no,mill_no,null,null,"od",od,wt,begin_time,end_time);
                 //获取外防涂层管废管管号和原因  OK
                 stripList=coatingStripDao.getODCoatingRejectedPipeInfo(project_no,mill_no,external_coating,null,od,wt,begin_time,end_time);
                 //获取外防隔离光管管号和原因  OK
@@ -1929,5 +1929,260 @@ public class InspectionRecordPDFController {
             System.out.println("根据项目编号获取合同对应的标准和涂层集合集合出错!");
         }
         return contractInfoList;
+    }
+
+    //(APP获取数据)根据项目编号、分厂号、日期获取当班统计信息
+    @RequestMapping("/RequireShiftInfoForAPP")
+    @ResponseBody
+    public String RequireShiftInfoForAPP(HttpServletRequest request)throws Exception{
+        try{
+            String project_no=request.getParameter("project_no");
+            String mill_no=request.getParameter("mill_no");
+            String operation_time=request.getParameter("operation_time");
+            float od=0,wt=0;
+            SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Map<String,Object> resultMaps=new HashMap<String,Object>();//最终返回Map
+            if((project_no!=null&&project_no!="")&&(mill_no!=null&&mill_no!="")&&(operation_time!=null&&operation_time!="")){
+                Date day_begin_time=format.parse(operation_time+" 08:00:00");
+                Date day_end_time=format.parse(operation_time+" 20:00:00");
+                Date night_begin_time=format.parse(DateTimeUtil.getNextDay(operation_time)+" 20:00:00");
+                Date night_end_time=format.parse(DateTimeUtil.getNextDay(operation_time)+" 08:00:00");
+                List<ContractInfo>contractInfoList=getStandardAndCoatingTypeList(project_no);
+                int odCoatingCountOfDay=0,odAcceptedPipeCountOfDay=0,odRepairPipeCountOfDay=0,odRejectedPipeCountOfDay=0,odOnholdPipeCountOfDay=0,
+                        odCoatingCountOfNight=0,odAcceptedPipeCountOfNight=0,odRepairPipeCountOfNight=0,odRejectedPipeCountOfNight=0,odOnholdPipeCountOfNight=0;
+                //coatingCount代表防腐数，acceptedPipeCount代表防腐合格数，repairPipeCount代表修补数，rejectedPipeCount代表废管数，onholdPipeCount代表隔离数
+                int idCoatingCountOfDay=0,idAcceptedPipeCountOfDay=0,idRepairPipeCountOfDay=0,idRejectedPipeCountOfDay=0,idOnholdPipeCountOfDay=0,
+                        idCoatingCountOfNight=0,idAcceptedPipeCountOfNight=0,idRepairPipeCountOfNight=0,idRejectedPipeCountOfNight=0,idOnholdPipeCountOfNight=0;
+                //coatingCount代表防腐数，acceptedPipeCount代表防腐合格数，repairPipeCount代表修补数，rejectedPipeCount代表废管数，onholdPipeCount代表隔离数
+                List<HashMap<String,Object>>OdSampleListOfDay=new ArrayList<>();
+                List<HashMap<String,Object>>OdDscList2FBEOfDay=new ArrayList<>();
+                List<HashMap<String,Object>>OdDscList3LPEOfDay=new ArrayList<>();
+                List<HashMap<String,Object>>OdPEListOfDay=new ArrayList<>();
+                List<HashMap<String,Object>>IDSampleInfoListOfDay=new ArrayList<>();
+                List<HashMap<String,Object>>IDGlassSampleInfoListOfDay=new ArrayList<>();
+                List<HashMap<String,Object>>OdSampleListOfNight=new ArrayList<>();
+                List<HashMap<String,Object>>OdDscList2FBEOfNight=new ArrayList<>();
+                List<HashMap<String,Object>>OdDscList3LPEOfNight=new ArrayList<>();
+                List<HashMap<String,Object>>OdPEListOfNight=new ArrayList<>();
+                List<HashMap<String,Object>>IDSampleInfoListOfNight=new ArrayList<>();
+                List<HashMap<String,Object>>IDGlassSampleInfoListOfNight=new ArrayList<>();
+                List<CoatingRepair>ODRepairListOfNight=new ArrayList<>();
+                List<HashMap<String,Object>>ODStripListOfNight=new ArrayList<>();
+                List<HashMap<String,Object>>ODOnholdListOfNight=new ArrayList<>();
+                List<CoatingRepair>ODRepairListOfDay=new ArrayList<>();
+                List<HashMap<String,Object>>ODStripListOfDay=new ArrayList<>();
+                List<HashMap<String,Object>>ODOnholdListOfDay=new ArrayList<>();
+                List<CoatingRepair>IDRepairListOfNight=new ArrayList<>();
+                List<HashMap<String,Object>>IDStripListOfNight=new ArrayList<>();
+                List<HashMap<String,Object>>IDOnholdListOfNight=new ArrayList<>();
+                List<CoatingRepair>IDRepairListOfDay=new ArrayList<>();
+                List<HashMap<String,Object>>IDStripListOfDay=new ArrayList<>();
+                List<HashMap<String,Object>>IDOnholdListOfDay=new ArrayList<>();
+                for (ContractInfo contractInfo:contractInfoList){
+                    od=contractInfo.getOd();wt=contractInfo.getWt();
+                    //-----------获取白班外防信息(dayshiftodinfo)
+                    odCoatingCountOfDay+=odFinalInspectionProcessDao.getODCoatingCount(project_no,mill_no,null,null,od,wt,day_begin_time,day_end_time);
+                    List<HashMap<String,Object>>list1=odFinalInspectionProcessDao.getODCoatingAcceptedInfo(project_no,null,null,od,wt,day_begin_time,day_end_time,"1");
+                    if(list1!=null&&list1.size()>0){
+                        HashMap<String,Object>hs=list1.get(0);
+                        if(hs!=null){
+                            odAcceptedPipeCountOfDay+=((Long) hs.get("odtotalcount")).intValue();
+                        }
+                    }
+                    odRepairPipeCountOfDay+=coatingRepairDao.getCoatingRepairCount(project_no,mill_no,null,null,"od",od,wt,day_begin_time,day_end_time);
+                    odRejectedPipeCountOfDay+=coatingStripDao.getODCoatingRejectedPipeCount(project_no,mill_no,null,null,od,wt,day_begin_time,day_end_time);
+                    odOnholdPipeCountOfDay+=barePipeGrindingCutoffRecordDao.getODBarePipeOnholdCount(project_no,mill_no,null,null,od,wt,day_begin_time,day_end_time);
+                    //获取试验管管号和切样长度
+                    List<HashMap<String,Object>>tempList0=pipeSamplingRecordDao.getCoverPipeSamplingInfo(project_no,mill_no,od,wt,day_begin_time,day_end_time);
+                    if(tempList0!=null&&tempList0.size()>0){}
+                      OdSampleListOfDay.addAll(tempList0);//列表合并
+                    //固化度试验管管号
+                    List<HashMap<String,Object>>tempList1=odCoatingInspectionProcessDao.getCover2FBEDscTestingInfo(project_no,mill_no,od,wt,day_begin_time,day_end_time);
+                    if(tempList1!=null&&tempList1.size()>0)
+                        OdDscList2FBEOfDay.addAll(tempList1);
+                    List<HashMap<String,Object>>tempList2 = odCoating3LpeInspectionProcessDao.getCover3LPEDscTestingInfo(project_no, mill_no, od, wt, day_begin_time, day_end_time);
+                    if(tempList2!=null&&tempList2.size()>0)
+                        OdDscList3LPEOfDay.addAll(tempList2);
+                    //PE实验管号
+                    List<HashMap<String,Object>>tempList3 = odCoating3LpeInspectionProcessDao.getCover3LPEPETestingInfo(project_no, mill_no, od, wt, day_begin_time, day_end_time);
+                    if(tempList3!=null&&tempList3.size()>0)
+                        OdPEListOfDay.addAll(tempList3);
+                    //获取外防修补涂层管管号和原因  ?修补前还是修补后
+                    List<CoatingRepair> tempList12=coatingRepairDao.getCoatingRepairInfo(project_no,mill_no,null,null,"od",od,wt,day_begin_time, day_end_time);
+                    if(tempList12!=null&&tempList12.size()>0)
+                        ODRepairListOfDay.addAll(tempList12);
+                    //获取外防涂层管废管管号和原因  OK
+                    List<HashMap<String,Object>>tempList13=coatingStripDao.getODCoatingRejectedPipeInfo(project_no,mill_no,null,null,od,wt,day_begin_time, day_end_time);
+                    if(tempList13!=null&&tempList13.size()>0)
+                        ODStripListOfDay.addAll(tempList13);
+                    //获取外防隔离光管管号和原因  OK
+                    List<HashMap<String,Object>>tempList14=barePipeGrindingCutoffRecordDao.getODBarePipeOnholdInfo(project_no,mill_no,null,null,od,wt,day_begin_time, day_end_time);
+                    if(tempList14!=null&&tempList14.size()>0)
+                        ODOnholdListOfDay.addAll(tempList14);
+
+
+
+                    //-----------获取白班内防信息(dayshiftidinfo)
+                    idCoatingCountOfDay+=idFinalInspectionProcessDao.getIDCoatingCount(project_no,mill_no,null,null,od,wt,day_begin_time, day_end_time);
+                    List<HashMap<String,Object>>list2=idFinalInspectionProcessDao.getIDCoatingAcceptedInfo(project_no,null,null,od,wt,day_begin_time, day_end_time,"1");
+                    if(list2!=null&&list2.size()>0){
+                        HashMap<String,Object>hs=list2.get(0);
+                        if(hs!=null){
+                            idAcceptedPipeCountOfDay+=((Long)hs.get("idtotalcount")).intValue();
+                        }
+                    }
+                    idRepairPipeCountOfDay+=coatingRepairDao.getCoatingRepairCount(project_no,mill_no,null,null,"id",od,wt,day_begin_time, day_end_time);
+                    idRejectedPipeCountOfDay+=coatingStripDao.getIDCoatingRejectedPipeCount(project_no,mill_no,null,null,od,wt,day_begin_time, day_end_time);
+                    idOnholdPipeCountOfDay+=barePipeGrindingCutoffRecordDao.getODBarePipeOnholdCount(project_no,mill_no,null,null,od,wt,day_begin_time, day_end_time);
+                    //获取钢试片管号和玻璃试片管号
+                    List<HashMap<String,Object>>tempList4=idCoatingInspectionProcessDao.getCoverIdSampleInfo(project_no,mill_no,od,wt,day_begin_time, day_end_time);
+                    if(tempList4!=null&&tempList4.size()>0)
+                        IDSampleInfoListOfDay.addAll(tempList4);
+                    List<HashMap<String,Object>>tempList5=idCoatingInspectionProcessDao.getCoverIdGlassSampleInfo(project_no,mill_no,od,wt,day_begin_time, day_end_time);
+                    if(tempList5!=null&&tempList5.size()>0)
+                        IDGlassSampleInfoListOfDay.addAll(tempList5);
+                    //获取内防修补涂层管管号和原因  ?修补前还是修补后
+                    List<CoatingRepair>tempList15=coatingRepairDao.getCoatingRepairInfo(project_no,mill_no,null,null,"id",od,wt,day_begin_time, day_end_time);
+                    if(tempList15!=null&&tempList15.size()>0)
+                        IDRepairListOfDay.addAll(tempList15);
+                    //获取内防涂层管废管管号和原因  OK
+                    List<HashMap<String,Object>>tempList16=coatingStripDao.getIDCoatingRejectedPipeInfo(project_no,mill_no,null,null,od,wt,day_begin_time, day_end_time);
+                    if(tempList16!=null&&tempList16.size()>0)
+                        IDStripListOfDay.addAll(tempList16);
+                    //获取内防隔离光管管号和原因  OK
+                    List<HashMap<String,Object>>tempList17=barePipeGrindingCutoffRecordDao.getIDBarePipeOnholdInfo(project_no,mill_no,null,null,od,wt,day_begin_time, day_end_time);
+                    if(tempList17!=null&&tempList17.size()>0)
+                        IDOnholdListOfDay.addAll(tempList17);
+
+                    //-----------获取夜班外防信息(nightshiftodinfo)
+                    odCoatingCountOfNight+=odFinalInspectionProcessDao.getODCoatingCount(project_no,mill_no,null,null,od,wt,night_begin_time,day_end_time);
+                    List<HashMap<String,Object>>list3=odFinalInspectionProcessDao.getODCoatingAcceptedInfo(project_no,null,null,od,wt,night_begin_time,day_end_time,"1");
+                    if(list3!=null&&list3.size()>0){
+                        HashMap<String,Object>hs=list3.get(0);
+                        if(hs!=null){
+                            odAcceptedPipeCountOfNight+=((Long) hs.get("odtotalcount")).intValue();
+                        }
+                    }
+                    odRepairPipeCountOfNight+=coatingRepairDao.getCoatingRepairCount(project_no,mill_no,null,null,"od",od,wt,night_begin_time,night_end_time);
+                    odRejectedPipeCountOfNight+=coatingStripDao.getODCoatingRejectedPipeCount(project_no,mill_no,null,null,od,wt,night_begin_time,night_end_time);
+                    odOnholdPipeCountOfNight+=barePipeGrindingCutoffRecordDao.getODBarePipeOnholdCount(project_no,mill_no,null,null,od,wt,night_begin_time,night_end_time);
+                    //获取试验管管号和切样长度
+                    List<HashMap<String,Object>>tempList6=pipeSamplingRecordDao.getCoverPipeSamplingInfo(project_no,mill_no,od,wt,night_begin_time,night_end_time);
+                    if(tempList6!=null&&tempList6.size()>0){}
+                    OdSampleListOfNight.addAll(tempList6);//列表合并
+                    //固化度试验管管号
+                    List<HashMap<String,Object>>tempList7=odCoatingInspectionProcessDao.getCover2FBEDscTestingInfo(project_no,mill_no,od,wt,night_begin_time,night_end_time);
+                    if(tempList7!=null&&tempList7.size()>0)
+                        OdDscList2FBEOfNight.addAll(tempList7);
+                    List<HashMap<String,Object>>tempList8 = odCoating3LpeInspectionProcessDao.getCover3LPEDscTestingInfo(project_no, mill_no, od, wt, night_begin_time, night_end_time);
+                    if(tempList8!=null&&tempList8.size()>0)
+                        OdDscList3LPEOfNight.addAll(tempList8);
+                    //PE实验管号
+                    List<HashMap<String,Object>>tempList9 = odCoating3LpeInspectionProcessDao.getCover3LPEPETestingInfo(project_no, mill_no, od, wt, night_begin_time, night_end_time);
+                    if(tempList9!=null&&tempList9.size()>0)
+                        OdPEListOfNight.addAll(tempList9);
+                    //获取外防修补涂层管管号和原因  ?修补前还是修补后
+                    List<CoatingRepair>tempList18=coatingRepairDao.getCoatingRepairInfo(project_no,mill_no,null,null,"od",od,wt, night_begin_time, night_end_time);
+                    if(tempList18!=null&&tempList18.size()>0)
+                        ODRepairListOfNight.addAll(tempList18);
+                    //获取外防涂层管废管管号和原因  OK
+                    List<HashMap<String,Object>>tempList19=coatingStripDao.getODCoatingRejectedPipeInfo(project_no,mill_no,null,null,od,wt, night_begin_time, night_end_time);
+                    if(tempList19!=null&&tempList19.size()>0)
+                        ODStripListOfNight.addAll(tempList19);
+                    //获取外防隔离光管管号和原因  OK
+                    List<HashMap<String,Object>>tempList20=barePipeGrindingCutoffRecordDao.getODBarePipeOnholdInfo(project_no,mill_no,null,null,od,wt, night_begin_time, night_end_time);
+                    if(tempList20!=null&&tempList20.size()>0)
+                        ODOnholdListOfNight.addAll(tempList20);
+
+                    //-----------获取夜班内防信息(nightshiftidinfo)
+                    idCoatingCountOfNight+=idFinalInspectionProcessDao.getIDCoatingCount(project_no,mill_no,null,null,od,wt,night_begin_time, night_end_time);
+                    List<HashMap<String,Object>>list4=idFinalInspectionProcessDao.getIDCoatingAcceptedInfo(project_no,null,null,od,wt,night_begin_time, night_end_time,"1");
+                    if(list4!=null&&list4.size()>0){
+                        HashMap<String,Object>hs=list4.get(0);
+                        if(hs!=null){
+                            idAcceptedPipeCountOfNight+=((Long)hs.get("idtotalcount")).intValue();
+                        }
+                    }
+                    idRepairPipeCountOfNight+=coatingRepairDao.getCoatingRepairCount(project_no,mill_no,null,null,"id",od,wt,night_begin_time, night_end_time);
+                    idRejectedPipeCountOfNight+=coatingStripDao.getIDCoatingRejectedPipeCount(project_no,mill_no,null,null,od,wt,night_begin_time, night_end_time);
+                    idOnholdPipeCountOfNight+=barePipeGrindingCutoffRecordDao.getODBarePipeOnholdCount(project_no,mill_no,null,null,od,wt,night_begin_time, night_end_time);
+                    //获取钢试片管号和玻璃试片管号
+                    List<HashMap<String,Object>>tempList10=idCoatingInspectionProcessDao.getCoverIdSampleInfo(project_no,mill_no,od,wt,night_begin_time, night_end_time);
+                    if(tempList10!=null&&tempList10.size()>0)
+                        IDSampleInfoListOfNight.addAll(tempList10);
+                    List<HashMap<String,Object>>tempList11=idCoatingInspectionProcessDao.getCoverIdGlassSampleInfo(project_no,mill_no,od,wt,night_begin_time, night_end_time);
+                    if(tempList11!=null&&tempList11.size()>0)
+                        IDGlassSampleInfoListOfNight.addAll(tempList11);
+                    //获取内防修补涂层管管号和原因  ?修补前还是修补后
+                    List<CoatingRepair>tempList21=coatingRepairDao.getCoatingRepairInfo(project_no,mill_no,null,null,"id",od,wt,night_begin_time, night_end_time);
+                    if(tempList21!=null&&tempList21.size()>0)
+                        IDRepairListOfNight.addAll(tempList21);
+                    //获取内防涂层管废管管号和原因  OK
+                    List<HashMap<String,Object>>tempList22=coatingStripDao.getIDCoatingRejectedPipeInfo(project_no,mill_no,null,null,od,wt,night_begin_time, night_end_time);
+                    if(tempList22!=null&&tempList22.size()>0)
+                        IDStripListOfNight.addAll(tempList22);
+                    //获取内防隔离光管管号和原因  OK
+                    List<HashMap<String,Object>>tempList23=barePipeGrindingCutoffRecordDao.getIDBarePipeOnholdInfo(project_no,mill_no,null,null,od,wt,night_begin_time, night_end_time);
+                    if(tempList23!=null&&tempList23.size()>0)
+                        IDOnholdListOfNight.addAll(tempList23);
+                }
+                //将获取到的信息添加到map中
+                //白班外防
+                resultMaps.put("odCoatingCountOfDay",odCoatingCountOfDay);
+                resultMaps.put("odAcceptedPipeCountOfDay",odAcceptedPipeCountOfDay);
+                resultMaps.put("odRepairPipeCountOfDay",odRepairPipeCountOfDay);
+                resultMaps.put("odRejectedPipeCountOfDay",odRejectedPipeCountOfDay);
+                resultMaps.put("odOnholdPipeCountOfDay",odOnholdPipeCountOfDay);
+                resultMaps.put("OdSampleListOfDay",OdSampleListOfDay);
+                resultMaps.put("OdDscList2FBEOfDay",OdDscList2FBEOfDay);
+                resultMaps.put("OdDscList3LPEOfDay",OdDscList3LPEOfDay);
+                resultMaps.put("OdPEListOfDay",OdPEListOfDay);
+                resultMaps.put("ODRepairListOfDay",ODRepairListOfDay);
+                resultMaps.put("ODStripListOfDay",ODStripListOfDay);
+                resultMaps.put("ODOnholdListOfDay",ODOnholdListOfDay);
+                //白班内防
+                resultMaps.put("idCoatingCountOfDay",idCoatingCountOfDay);
+                resultMaps.put("idAcceptedPipeCountOfDay",idAcceptedPipeCountOfDay);
+                resultMaps.put("idRepairPipeCountOfDay",idRepairPipeCountOfDay);
+                resultMaps.put("idRejectedPipeCountOfDay",idRejectedPipeCountOfDay);
+                resultMaps.put("idOnholdPipeCountOfDay",idOnholdPipeCountOfDay);
+                resultMaps.put("IDSampleInfoListOfDay",IDSampleInfoListOfDay);
+                resultMaps.put("IDGlassSampleInfoListOfDay",IDGlassSampleInfoListOfDay);
+                resultMaps.put("IDRepairListOfDay",IDRepairListOfDay);
+                resultMaps.put("IDStripListOfDay",IDStripListOfDay);
+                resultMaps.put("IDOnholdListOfDay",IDOnholdListOfDay);
+                //夜班外防
+                resultMaps.put("odCoatingCountOfNight",odCoatingCountOfNight);
+                resultMaps.put("odAcceptedPipeCountOfNight",odAcceptedPipeCountOfNight);
+                resultMaps.put("odRepairPipeCountOfNight",odRepairPipeCountOfNight);
+                resultMaps.put("odRejectedPipeCountOfNight",odRejectedPipeCountOfNight);
+                resultMaps.put("odOnholdPipeCountOfNight",odOnholdPipeCountOfNight);
+                resultMaps.put("OdSampleListOfNight",OdSampleListOfNight);
+                resultMaps.put("OdDscList2FBEOfNight",OdDscList2FBEOfNight);
+                resultMaps.put("OdDscList3LPEOfNight",OdDscList3LPEOfNight);
+                resultMaps.put("OdPEListOfNight",OdPEListOfNight);
+                resultMaps.put("ODRepairListOfNight",ODRepairListOfNight);
+                resultMaps.put("ODStripListOfNight",ODStripListOfNight);
+                resultMaps.put("ODOnholdListOfNight",ODOnholdListOfNight);
+                //夜班内防
+                resultMaps.put("idCoatingCountOfNight",idCoatingCountOfNight);
+                resultMaps.put("idAcceptedPipeCountOfNight",idAcceptedPipeCountOfNight);
+                resultMaps.put("idRepairPipeCountOfNight",idRepairPipeCountOfNight);
+                resultMaps.put("idRejectedPipeCountOfNight",idRejectedPipeCountOfNight);
+                resultMaps.put("idOnholdPipeCountOfNight",idOnholdPipeCountOfNight);
+                resultMaps.put("IDSampleInfoListOfNight",IDSampleInfoListOfNight);
+                resultMaps.put("IDGlassSampleInfoListOfNight",IDGlassSampleInfoListOfNight);
+                resultMaps.put("IDRepairListOfNight",IDRepairListOfNight);
+                resultMaps.put("IDStripListOfNight",IDStripListOfNight);
+                resultMaps.put("IDOnholdListOfNight",IDOnholdListOfNight);
+                String map= JSONObject.toJSONString(resultMaps);
+                return map;
+            }else{
+                return  null;
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+            return  null;
+        }
     }
 }
