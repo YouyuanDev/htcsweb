@@ -2175,6 +2175,7 @@ public class InspectionRecordPDFController {
                 resultMaps.put("IDRepairListOfNight",IDRepairListOfNight);
                 resultMaps.put("IDStripListOfNight",IDStripListOfNight);
                 resultMaps.put("IDOnholdListOfNight",IDOnholdListOfNight);
+                resultMaps.put("success",true);
                 String map= JSONObject.toJSONString(resultMaps);
                 return map;
             }else{
