@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.htcsweb.dao.InspectionProcessRecordItemDao">
+
+
+    <insert id="addInspectionProcessRecordItem" parameterType="com.htcsweb.entity.InspectionProcessRecordItem">
+        INSERT INTO inspection_process_record_item(inspection_process_record_header_code,item_code,item_value)
+        VALUES (#{inspection_process_record_header_code},#{item_code},#{item_value})
+    </insert>
+
+    <update id="updateInspectionProcessRecordItem" parameterType="com.htcsweb.entity.InspectionProcessRecordItem">
+        UPDATE inspection_process_record_item set inspection_process_record_header_code=#{inspection_process_record_header_code},
+        item_code=#{item_code},
+        item_value=#{item_value}
+         where id=#{id}
+    </update>
+
+    <delete id="delInspectionProcessRecordItem">
+        delete from inspection_process_record_item WHERE
+        <foreach collection="array" item="item" open="id in (" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <select id="getInspectionProcessRecordItemByInspectionProcessRecordHeaderCode"  resultType="com.htcsweb.entity.InspectionProcessRecordItem">
+        select * from inspection_process_record_item where inspection_process_record_header_code=#{inspection_process_record_header_code}
+    </select>
+
+</mapper>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.htcsweb.dao.DynamicMeasurementItemDao">
+
+
+
+
+
+    <insert id="addDynamicMeasurementItem" parameterType="com.htcsweb.entity.DynamicMeasurementItem">
+        INSERT INTO dynamic_measurement_item(acceptance_criteria_no,item_code,item_name,item_name_en,
+        unit_name,unit_name_en,item_frequency,process_code,decimal_num,need_verify,
+        multi_value,control_type,options,max_value,min_value,default_value) VALUES
+        (#{acceptance_criteria_no},#{item_code},#{item_name},#{item_name_en},
+        #{unit_name},#{unit_name_en},#{item_frequency},#{process_code},#{decimal_num},#{need_verify},
+        #{multi_value},#{control_type},#{options},#{max_value},#{min_value},#{default_value})
+
+    </insert>
+
+    <update id="updateDynamicMeasurementItem" parameterType="com.htcsweb.entity.DynamicMeasurementItem">
+        UPDATE dynamic_measurement_item set
+        acceptance_criteria_no=#{acceptance_criteria_no}, item_code=#{item_code},item_name=#{item_name},item_name_en=#{item_name_en},
+        unit_name=#{unit_name},unit_name_en=#{unit_name_en},item_frequency=#{item_frequency},process_code=#{process_code},decimal_num=#{decimal_num},need_verify=#{need_verify},
+        multi_value=#{multi_value},control_type=#{control_type},options=#{options},max_value=#{max_value},min_value=#{min_value},default_value=#{default_value})
+
+       where id=#{id}
+    </update>
+
+    <delete id="delDynamicMeasurementItem">
+        delete from dynamic_measurement_item WHERE
+        <foreach collection="array" item="item" open="id in (" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <select id="getDynamicMeasurementItemByAcceptanceCriteriaNo" resultType="com.htcsweb.entity.DynamicMeasurementItem">
+        select * from  dynamic_measurement_item
+        where acceptance_criteria_no=#{acceptance_criteria_no}
+        order by id desc
+    </select>
+
+</mapper>
