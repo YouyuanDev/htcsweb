@@ -117,6 +117,10 @@
             });
         }
         function CancelSubmit() {
+            if(editIndex!=undefined){
+                hlAlertFour("请先保存测量项!");
+                return false;
+            }
             $('#addEditDialog').dialog('close');
         }
 
