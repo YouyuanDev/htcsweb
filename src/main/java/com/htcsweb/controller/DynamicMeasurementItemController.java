@@ -1,9 +1,11 @@
 package com.htcsweb.controller;
 
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.DynamicMeasurementItemDao;
 import com.htcsweb.entity.AcceptanceCriteria;
+import com.htcsweb.entity.CoatingRepair;
 import com.htcsweb.entity.DynamicMeasurementItem;
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/DynamicItemOperation")
@@ -22,6 +27,30 @@ public class DynamicMeasurementItemController {
 
     @Autowired
     DynamicMeasurementItemDao dynamicMeasurementItemDao;
+
+
+    //获得动态检测项列表，根据ACNo
+    @RequestMapping("/getDynamicItemByACNo")
+    @ResponseBody
+    public String getDynamicItemByACNo(HttpServletRequest request){
+        JSONObject json=new JSONObject();
+
+        String acceptance_criteria_no=request.getParameter("acceptance_criteria_no");
+        List<DynamicMeasurementItem> list=dynamicMeasurementItemDao.getDynamicMeasurementItemByAcceptanceCriteriaNo(acceptance_criteria_no);
+
+        if(list.size()>0) {
+            json.put("success", true);
+            json.put("record", list);
+            json.put("message", "ok");
+        }
+        else {
+            json.put("success", false);
+            json.put("message", "没有数据");
+        }
+        String mmp= JSONArray.toJSONString(json);
+        return mmp;
+    }
+
 
 
     //添加、修改
