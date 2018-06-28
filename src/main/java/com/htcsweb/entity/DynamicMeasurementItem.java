@@ -14,7 +14,6 @@ public class DynamicMeasurementItem {
 
     private String decimal_num;
     private String need_verify;
-    private String multi_value;
     private String control_type;
     private String options;
     private String max_value;
@@ -25,7 +24,7 @@ public class DynamicMeasurementItem {
     public DynamicMeasurementItem() {
     }
 
-    public DynamicMeasurementItem(int id, String acceptance_criteria_no, String item_code, String item_name, String item_name_en, String unit_name, String unit_name_en, String item_frequency, String process_code, String decimal_num, String need_verify, String multi_value, String control_type, String options, String max_value, String min_value, String default_value) {
+    public DynamicMeasurementItem(int id, String acceptance_criteria_no, String item_code, String item_name, String item_name_en, String unit_name, String unit_name_en, String item_frequency, String process_code, String decimal_num, String need_verify, String control_type, String options, String max_value, String min_value, String default_value) {
         this.id = id;
         this.acceptance_criteria_no = acceptance_criteria_no;
         this.item_code = item_code;
@@ -37,7 +36,6 @@ public class DynamicMeasurementItem {
         this.process_code = process_code;
         this.decimal_num = decimal_num;
         this.need_verify = need_verify;
-        this.multi_value = multi_value;
         this.control_type = control_type;
         this.options = options;
         this.max_value = max_value;
@@ -131,14 +129,6 @@ public class DynamicMeasurementItem {
 
     public void setNeed_verify(String need_verify) {
         this.need_verify = need_verify;
-    }
-
-    public String getMulti_value() {
-        return multi_value;
-    }
-
-    public void setMulti_value(String multi_value) {
-        this.multi_value = multi_value;
     }
 
     public String getControl_type() {
