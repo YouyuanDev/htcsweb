@@ -1,19 +1,24 @@
 package com.htcsweb.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
+
 public class AcceptanceCriteria {
 
     private  int id; //流水号
     private String acceptance_criteria_no;     //标准编号
     private String external_coating_type;   //外防类型
     private String internal_coating_type;   //内防类型
-    private String last_update_time;   //更新日期
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private Date last_update_time;   //更新日期
     private String remark;//备注
 
 
     public AcceptanceCriteria() {
     }
 
-    public AcceptanceCriteria(int id, String acceptance_criteria_no, String external_coating_type, String internal_coating_type, String last_update_time, String remark) {
+    public AcceptanceCriteria(int id, String acceptance_criteria_no, String external_coating_type, String internal_coating_type, Date last_update_time, String remark) {
         this.id = id;
         this.acceptance_criteria_no = acceptance_criteria_no;
         this.external_coating_type = external_coating_type;
@@ -54,11 +59,11 @@ public class AcceptanceCriteria {
         this.internal_coating_type = internal_coating_type;
     }
 
-    public String getLast_update_time() {
+    public Date getLast_update_time() {
         return last_update_time;
     }
 
-    public void setLast_update_time(String last_update_time) {
+    public void setLast_update_time(Date last_update_time) {
         this.last_update_time = last_update_time;
     }
 

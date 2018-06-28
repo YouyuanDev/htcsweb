@@ -68,6 +68,7 @@ public class ACController {
         JSONObject json=new JSONObject();
         try{
             int resTotal=0;
+            acceptanceCriteria.setLast_update_time(new Date());
             if(acceptanceCriteria.getId()==0){
                 //添加
                 resTotal=acceptanceCriteriaDao.addAcceptanceCriteria(acceptanceCriteria);
