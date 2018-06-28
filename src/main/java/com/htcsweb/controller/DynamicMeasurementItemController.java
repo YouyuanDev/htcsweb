@@ -37,7 +37,7 @@ public class DynamicMeasurementItemController {
 
         String acceptance_criteria_no=request.getParameter("acceptance_criteria_no");
         List<DynamicMeasurementItem> list=dynamicMeasurementItemDao.getDynamicMeasurementItemByAcceptanceCriteriaNo(acceptance_criteria_no);
-        
+
         String mmp= JSONArray.toJSONString(list);
         return mmp;
     }
