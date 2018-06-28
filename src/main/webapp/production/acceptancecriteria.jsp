@@ -369,7 +369,7 @@
     </div>
 </div>
 <!--添加、修改框-->
-<div id="addEditDialog" class="easyui-dialog" data-options="title:'添加',modal:true" closed="true" buttons="#dlg-buttons" style="display: none;padding:5px 0px;width:1250px;max-height:500px;overflow-y:auto;">
+<div id="addEditDialog" class="easyui-dialog" data-options="title:'添加',modal:true" closed="true" buttons="#dlg-buttons" style="display: none;padding:5px 0px;width:1200px;max-height:500px;overflow-y:auto;">
     <form id="addEditForm" method="post" style="width:95%;margin:0 auto;">
         <fieldset style="width:99%;border:solid 1px #aaa;position:relative;">
             <legend>标准信息</legend>
@@ -529,7 +529,7 @@
     </div>
     <div id="datagrid1" class="mini-datagrid" style="width:100%;height:100%;"
          borderStyle="border:0" showPageSize="false" showPageIndex="false"
-         url="/ACOpreation/getACs.action">
+         url="/ACOperation/getACs.action">
         <div property="columns">
             <div type="checkcolumn" ></div>
             <div field="acceptance_criteria_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="acceptancecriteriano"></div>
