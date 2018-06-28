@@ -322,13 +322,13 @@
                     <th class="i18n1" name="decimalnum" data-options="field:'decimal_num',editor:{type:'numberbox'}"></th>
                     <th class="i18n1" name="needverify" data-options="field:'need_verify',editor:{type:'checkbox',options:{on:'1',off:'0'}}"></th>
                     <th class="i18n1" name="controltype" data-options="field:'control_type',width:100,formatter:function(value,row){
-							return row.text;
+							return row.control_type_name;
 						},
 						editor:{
 							type:'combobox',
 							options:{
 								valueField:'control_type',
-								textField:'text',
+								textField:'control_type_name',
 								method:'get',
 								url:'../data/control.json',
 								required:true
