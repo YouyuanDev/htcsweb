@@ -164,7 +164,7 @@
          var g_textarea_field=undefined;
         function append(){
             if (endEditing()){
-                $('#dg').datagrid('appendRow',{item_code:"IT"+new Date().getTime(),decimal_num:'0',max_value:'0',min_value:'0',default_value:'0',status:'P'});
+                $('#dg').datagrid('appendRow',{id:0,item_code:"IT"+new Date().getTime(),decimal_num:'0',max_value:'0',min_value:'0',default_value:'0',status:'P'});
                 editIndex = $('#dg').datagrid('getRows').length-1;
                 $('#dg').datagrid('selectRow', editIndex)
                     .datagrid('beginEdit', editIndex);
@@ -212,6 +212,7 @@
                     url:'/DynamicItemOperation/saveDynamicItem.action',
                     dataType:'json',
                     data:{
+                         id:row.id,
                          acceptance_criteria_no:acceptance_criteria_no,
                          item_code:row.item_code,
                          item_name:row.item_name,
@@ -365,7 +366,8 @@
                 <thead>
                 <tr>
                     <%--<th class="i18n1" name="acceptancecriteriano" data-options="field:'acceptance_criteria_no',width:80"></th>--%>
-                    <th class="i18n1" name="itemcode" data-options="field:'item_code'"></th>
+                    <th class="i18n1" name="id" hidden="true" data-options="field:'id'"></th>
+                        <th class="i18n1" name="itemcode" data-options="field:'item_code'"></th>
                     <th class="i18n1" name="itemname" data-options="field:'item_name',editor:{type:'textbox',options:{required:true}}"></th>
                     <th class="i18n1" name="itemnameen" data-options="field:'item_name_en',editor:{type:'textbox',options:{required:true}}"></th>
                     <th class="i18n1" name="unitname" data-options="field:'unit_name',editor:'textbox'"></th>
