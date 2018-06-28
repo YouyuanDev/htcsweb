@@ -178,6 +178,7 @@
             $('#dg').datagrid('rejectChanges');
             editIndex = undefined;
         }
+
     </script>
 </head>
 
@@ -292,56 +293,44 @@
                     <th class="i18n1" name="unitname" data-options="field:'unit_name',editor:'textbox'"></th>
                     <th class="i18n1" name="unitnameen" data-options="field:'unit_name_en',editor:'textbox'"></th>
                     <th class="i18n1" name="itemfrequency" data-options="field:'item_frequency',width:150,formatter:function(value,row){
-							return row.id;
+							return row.text;
 						},
 						editor:{
 							type:'combobox',
 							options:{
-								valueField:'id',
+								valueField:'item_frequency',
 								textField:'text',
 								method:'get',
 								url:'../data/freq.json',
-								onLoadSuccess: function () {
-	                          			var data = $(this).combobox('getData');
-	                          			$(this).combobox('select',data[0].id);
-	                            },
 								required:true
 							}
 						}"></th>
                     <th class="i18n1" name="processcode" data-options="field:'process_code',width:150,formatter:function(value,row){
-							return row.id;
+							return row.process_name;
 						},
 						editor:{
 							type:'combobox',
 							width:150,
 							options:{
-								valueField:'id',
-								textField:'text',
+								valueField:'process_code',
+								textField:'process_name',
 								method:'get',
 								url:'/ProcessOperation/getAllProcess.action',
-								onLoadSuccess: function () {
-	                          			var data = $(this).combobox('getData');
-	                          			$(this).combobox('select',data[0].id);
-	                            },
 								required:true
 							}
 						}"></th>
                     <th class="i18n1" name="decimalnum" data-options="field:'decimal_num',editor:{type:'numberbox'}"></th>
                     <th class="i18n1" name="needverify" data-options="field:'need_verify',editor:{type:'checkbox',options:{on:'1',off:'0'}}"></th>
                     <th class="i18n1" name="controltype" data-options="field:'control_type',width:100,formatter:function(value,row){
-							return row.id;
+							return row.text;
 						},
 						editor:{
 							type:'combobox',
 							options:{
-								valueField:'id',
+								valueField:'control_type',
 								textField:'text',
 								method:'get',
 								url:'../data/control.json',
-								onLoadSuccess: function () {
-	                          			var data = $(this).combobox('getData');
-	                          			$(this).combobox('select',data[0].id);
-	                                 },
 								required:true
 							}
 						}"></th>
