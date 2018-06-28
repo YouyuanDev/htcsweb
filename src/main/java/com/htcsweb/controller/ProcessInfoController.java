@@ -28,17 +28,8 @@ public class ProcessInfoController {
     @ResponseBody
     public String getAllProcess(HttpServletRequest request){
         List<ProcessInfo> list=processInfoDao.getAllProcessInfo();
-        List<ComboxItem> colist=new ArrayList<ComboxItem>();
-
-        for(int i=0;i<list.size();i++){
-            ComboxItem citem= new ComboxItem();
-            ProcessInfo process=((ProcessInfo)list.get(i));
-            citem.id=process.getProcess_code();
-            citem.text=process.getProcess_name();
-            colist.add(citem);
-        }
-
-        String map= JSONObject.toJSONString(colist);
+        
+        String map= JSONObject.toJSONString(list);
         System.out.println("="+map);
         return map;
     }
