@@ -292,7 +292,7 @@
             $('#dg').datagrid({
                 url:"/DynamicItemOperation/getDynamicItemByACNo.action?acceptance_criteria_no="+acceptance_criteria_no
             });
-            $("#dg").datagrid('load');
+            $("#dg").datagrid('reload');
         }
         //导入事件
         function importItem(){
