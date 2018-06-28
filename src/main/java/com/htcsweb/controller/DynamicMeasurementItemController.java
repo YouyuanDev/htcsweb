@@ -43,8 +43,43 @@ public class DynamicMeasurementItemController {
     }
 
 
+    @RequestMapping("/importDynamicItem")
+    @ResponseBody
+    public String importDynamicItem(HttpServletRequest request) {
+        JSONObject json = new JSONObject();
+        String src_acceptance_criteria_no=request.getParameter("src_acceptance_criteria_no");
+        String des_acceptance_criteria_no=request.getParameter("des_acceptance_criteria_no");
+        List<DynamicMeasurementItem> list=dynamicMeasurementItemDao.getDynamicMeasurementItemByAcceptanceCriteriaNo(src_acceptance_criteria_no);
 
-    //添加、修改
+        int totalcount=0;
+        for(int i=0;i<list.size();i++) {
+            DynamicMeasurementItem item=list.get(i);
+            //初始化自己的参数
+            item.setId(0);
+            item.setAcceptance_criteria_no(des_acceptance_criteria_no);
+            item.setItem_code("IT"+System.currentTimeMillis());
+            int count=dynamicMeasurementItemDao.addDynamicMeasurementItem(item);
+            totalcount+=count;
+        }
+        if(totalcount>0) {
+            json.put("success", true);
+            json.put("message", "成功导入检测项"+String.valueOf(totalcount)+"项");
+        }
+        else{
+            json.put("success", false);
+            json.put("message", "没有检测项可导入");
+        }
+
+        String mmp= JSONArray.toJSONString(json);
+        return mmp;
+
+    }
+
+
+
+
+
+            //添加、修改
     @RequestMapping("/saveDynamicItem")
     @ResponseBody
     public String saveDynamicItem(DynamicMeasurementItem dynamicMeasurementItem, HttpServletRequest request, HttpServletResponse response){
