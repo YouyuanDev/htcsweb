@@ -382,7 +382,7 @@
 <div id="addEditDialog" class="easyui-dialog" data-options="title:'添加',modal:true" closed="true" buttons="#dlg-buttons" style="display: none;padding:5px 0px;width:1200px;max-height:600px;overflow-y:auto;">
     <form id="addEditForm" method="post" style="width:95%;margin:0 auto;">
         <fieldset style="width:99%;border:solid 1px #aaa;position:relative;">
-            <legend>标准信息</legend>
+            <legend><span class="i18n1" name="ACinfo">标准信息</span></legend>
             <div style="width:100%;padding-bottom:5px;">
                 <table class="ht-table"  width="100%" border="0">
                     <tr>
@@ -439,7 +439,7 @@
             </div>
         </fieldset>
         <fieldset id="dynamicItem" style="width:99%;border:solid 1px #aaa;position:relative;">
-            <legend>测量项信息</legend>
+            <legend><span class="i18n1" name="inspectioniteminfo">测量项信息</span></legend>
             <table id="dg" class="easyui-datagrid" title="" style="width:100%;height:300px;overflow-y: scroll;" data-options="
 				iconCls: '',
 				singleSelect: true,
