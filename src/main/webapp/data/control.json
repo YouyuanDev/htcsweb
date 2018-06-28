@@ -1,11 +1,11 @@
 [
-    { "control_type": "singlenumber", "text": "单值数字"},
-    { "control_type": "multinumber", "text": "多值数字" },
-    { "control_type": "singletext", "text": "单值文本" },
-    { "control_type": "multitext", "text": "多值文本" },
-    { "control_type": "date", "text": "日期输入框" },
-    { "control_type": "singleselect", "text": "单选" },
-    { "control_type": "multiselect", "text": "多选" },
-    { "control_type": "checkbox", "text": "复选框" },
-    { "control_type": "textarea", "text": "多行文本" }
+    { "control_type": "singlenumber", "control_type_name": "单值数字"},
+    { "control_type": "multinumber", "control_type_name": "多值数字" },
+    { "control_type": "singletext", "control_type_name": "单值文本" },
+    { "control_type": "multitext", "control_type_name": "多值文本" },
+    { "control_type": "date", "control_type_name": "日期输入框" },
+    { "control_type": "singleselect", "control_type_name": "单选" },
+    { "control_type": "multiselect", "control_type_name": "多选" },
+    { "control_type": "checkbox", "control_type_name": "复选框" },
+    { "control_type": "textarea", "control_type_name": "多行文本" }
 ]
