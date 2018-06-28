@@ -22,6 +22,7 @@
         var staticItem=[];
         var addOrEdit=true;
         $(function () {
+
             $('#addEditDialog').css('top','30px');
             $('#addEditDialog').dialog({
                 onClose:function () {
@@ -151,25 +152,26 @@
                     $('#dg').datagrid('selectRow', index)
                         .datagrid('beginEdit', index);
                     editIndex = index;
+
+
                 } else {
                     $('#dg').datagrid('selectRow', editIndex);
                 }
             }
         }
-        function onClickCell(index,field) {
-            alert(field);
-            var ed = $('#dg').datagrid('getEditor', {index:editIndex,field:field});
-            if(ed){
-                var text = $(ed.target).textbox('getText');
-                alert(text);
-            }
-        }
+
         function append(){
             if (endEditing()){
                 $('#dg').datagrid('appendRow',{item_code:"IT"+new Date().getTime(),decimal_num:'0',max_value:'0',min_value:'0',default_value:'0',status:'P'});
                 editIndex = $('#dg').datagrid('getRows').length-1;
                 $('#dg').datagrid('selectRow', editIndex)
                     .datagrid('beginEdit', editIndex);
+                var ed = $('#dg').datagrid('getEditor', {index:editIndex,field:'options'});
+                $(ed.target).textbox('textbox').bind('click', function() {
+                    $(ed.target).textbox('getText');
+                    $('#w').window('open');
+                });
+
             }
         }
         function removeit(){
@@ -194,6 +196,11 @@
         function submitItemInfo() {
 
         }
+
+        function openOptionsWindow(value) {
+            alert(value);
+        }
+
     </script>
 </head>
 
@@ -297,8 +304,7 @@
 				iconCls: '',
 				singleSelect: true,
 				toolbar: '#tb',
-				onClickRow: onClickRow,
-				onClickCell:onClickCell
+				onClickRow: onClickRow
 			">
                 <thead>
                 <tr>
@@ -354,12 +360,7 @@
 								required:true
 							}
 						}"></th>
-                    <th class="i18n1" name="options" data-options="field:'options',editor:'textbox',onLoadSuccess:function(row,data){
-                        var ed = $('#dg').datagrid('getEditor', {index:editIndex,field:'options'});
-                        var text = $(ed.target).bind('click',function(){
-                           alert(123);
-                        });
-                    }"></th>
+                    <th class="i18n1" name="options" data-options="field:'options',editor:'textbox'"></th>
                     <th class="i18n1" name="status" data-options="field:'status',align:'center',editor:{type:'checkbox',options:{on:'P',off:''}}">Status</th>
                 </tr>
                 </thead>
@@ -373,10 +374,12 @@
         </fieldset>
     </form>
 </div>
+<div id="w" class="easyui-window" title="Modal Window" data-options="modal:true,closed:true" style="width:500px;height:200px;padding:10px;">
+    The window content.
+</div>
 <script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
 </body>
 </html>
 <script type="text/javascript">
-    mini.parse();
     hlLanguage("../i18n/");
 </script>
