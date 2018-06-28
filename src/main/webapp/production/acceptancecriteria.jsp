@@ -168,7 +168,9 @@
                     .datagrid('beginEdit', editIndex);
                 var ed = $('#dg').datagrid('getEditor', {index:editIndex,field:'options'});
                 $(ed.target).textbox('textbox').bind('click', function() {
-                    $(ed.target).textbox('getText');
+                    var text=$(this).textbox('getText');
+                    if(text!=undefined)
+                      $('#tempTextarea').val(text);
                     $('#w').window('open');
                 });
 
@@ -202,6 +204,8 @@
         function saveTextArea() {
              var val=$('#tempTextarea').val();
              alert(val);
+            $('#w').window('close');
+
         }
     </script>
 </head>
