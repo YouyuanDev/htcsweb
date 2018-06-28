@@ -120,10 +120,11 @@
         function endEditing(){
             if (editIndex == undefined){return true}
             if ($('#dg').datagrid('validateRow', editIndex)){
-                var ed = $('#dg').datagrid('getEditor', {index:editIndex,field:'productid'});
-                var productname = $(ed.target).combobox('getText');
-                $('#dg').datagrid('getRows')[editIndex]['productname'] = productname;
-                $('#dg').datagrid('endEdit', editIndex);
+                // var ed = $('#dg').datagrid('getEditor', {index:editIndex,field:'productid'});
+                // var productname = $(ed.target).combobox('getText');
+                // $('#dg').datagrid('getRows')[editIndex]['productname'] = productname;
+                // $('#dg').datagrid('endEdit', editIndex);
+                alert("开始判断");
                 editIndex = undefined;
                 return true;
             } else {
@@ -194,11 +195,13 @@
     <input id="acceptancecriteriano" style="line-height:22px;border:1px solid #ccc">
     <span class="i18n1" name="externalcoatingtype">外防类型</span>:
     <select id="externalSelect" class="easyui-combobox" data-options="editable:false" name="external_coating_type"   style="width:200px;">
+        <option value="" selected="selected">ALL</option>
         <option value="2FBE">2FBE</option>
         <option value="3LPE">3LPE</option>
     </select>
     <span class="i18n1" name="internalcoatingtype">内防类型</span>:
     <select id="internalSelect" class="easyui-combobox" data-options="editable:false" name="internal_coating_type"   style="width:200px;">
+        <option value="" selected="selected">ALL</option>
         <option value="EPOXY">EPOXY</option>
     </select>
     <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="Search()">Search</a>
@@ -271,21 +274,33 @@
                 <thead>
                 <tr>
                     <%--<th class="i18n1" name="acceptancecriteriano" data-options="field:'acceptance_criteria_no',width:80"></th>--%>
-                    <th class="i18n1" name="itemcode" data-options="field:'item_code',width:50">Product</th>
-                    <th class="i18n1" name="itemname" data-options="field:'item_name',width:50,editor:'textbox'">List Price</th>
-                    <th class="i18n1" name="itemnameen" data-options="field:'item_name_en',width:50,editor:'textbox'">Unit Cost</th>
-                    <th class="i18n1" name="unitname" data-options="field:'unit_name',width:50,editor:'textbox'">Attribute</th>
-                    <th class="i18n1" name="unitnameen" data-options="field:'unit_name_en',width:50,editor:'textbox'">Attribute</th>
-                    <th class="i18n1" name="itemfrequency" data-options="field:'item_frequency',width:50,editor:'textbox'">Attribute</th>
-                    <th class="i18n1" name="processcode" data-options="field:'process_code',width:50,editor:'textbox'">Attribute</th>
-                    <th class="i18n1" name="decimalnum" data-options="field:'decimal_num',width:50,editor:'textbox'">Attribute</th>
-                    <th class="i18n1" name="needverify" data-options="field:'need_verify',width:50,editor:'textbox'">Attribute</th>
-                    <th class="i18n1" name="controltype" data-options="field:'control_type',width:50,editor:'textbox'">Attribute</th>
-                    <th class="i18n1" name="options" data-options="field:'options',width:50,editor:'textbox'">Attribute</th>
-                    <th class="i18n1" name="maxvalue" data-options="field:'max_value',width:50,editor:'textbox'">Attribute</th>
-                    <th class="i18n1" name="minvalue" data-options="field:'min_value',width:50,editor:'textbox'">Attribute</th>
-                    <th class="i18n1" name="defaultvalue" data-options="field:'default_value',width:50,editor:'textbox'">Attribute</th>
-                    <th class="i18n1" name="status" data-options="field:'status',width:60,align:'center',editor:{type:'checkbox',options:{on:'P',off:''}}">Status</th>
+                    <th class="i18n1" name="itemcode" data-options="field:'item_code'"></th>
+                    <th class="i18n1" name="itemname" data-options="field:'item_name',editor:'textbox'"></th>
+                    <th class="i18n1" name="itemnameen" data-options="field:'item_name_en',editor:'textbox'"></th>
+                    <th class="i18n1" name="unitname" data-options="field:'unit_name',editor:'textbox'"></th>
+                    <th class="i18n1" name="unitnameen" data-options="field:'unit_name_en',editor:'textbox'"></th>
+                    <th class="i18n1" name="itemfrequency" data-options="field:'item_frequency',editor:'textbox'"></th>
+                    <th class="i18n1" name="processcode" data-options="field:'process_code',editor:'textbox'"></th>
+                    <th class="i18n1" name="decimalnum" data-options="field:'decimal_num',editor:{type:'numberbox'}"></th>
+                    <th class="i18n1" name="needverify" data-options="field:'need_verify',editor:{type:'checkbox',options:{on:'1',off:'0'}}"></th>
+                    <th class="i18n1" name="controltype" data-options="field:'control_type',formatter:function(value,row){
+							return row.productname;
+						},
+						editor:{
+							type:'combobox',
+							options:{
+								valueField:'id',
+								textField:'text',
+								method:'get',
+								url:'control.json',
+								required:true
+							}
+						}"></th>
+                    <th class="i18n1" name="options" data-options="field:'options',editor:'textbox'"></th>
+                    <th class="i18n1" name="maxvalue" data-options="field:'max_value',editor:{type:'numberbox',options:{precision:2}}"></th>
+                    <th class="i18n1" name="minvalue" data-options="field:'min_value',editor:{type:'numberbox',options:{precision:2}}"></th>
+                    <th class="i18n1" name="defaultvalue" data-options="field:'default_value',editor:{type:'numberbox',options:{precision:2}}"></th>
+                    <th class="i18n1" name="status" data-options="field:'status',align:'center',editor:{type:'checkbox',options:{on:'P',off:''}}">Status</th>
                 </tr>
                 </thead>
             </table>
