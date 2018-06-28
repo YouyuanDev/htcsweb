@@ -260,7 +260,7 @@
             var row = $('#dg').datagrid('getSelected');
             if(row){
                 var idArrs=row.id+",";
-                $.messager.confirm('系统提示',"您确定要删除这<font color=red>"+idArr.length+ "</font>条数据吗？",function (r) {
+                $.messager.confirm('系统提示',"您确定要删除这条数据吗？",function (r) {
                     if(r){
                         $.post("/DynamicItemOperation/delDynamicItem.action",{hlparam:idArrs},function (data) {
                             var result = eval('('+data+')');
@@ -313,6 +313,7 @@
                     des_acceptance_criteria_no:des_acceptance_criteria_no
                 },
                 success:function (data) {
+                    alert(data);
                     var result = eval('('+data+')');
                     if (result.success){
                         loadDynamicItemInfo(src_acceptance_criteria_no);
