@@ -91,7 +91,8 @@
         //     });
         // }
         function addEditFormSubmit() {
-            if(editIndex!=undefined){
+            var temp=$('#hlcancelBtn').attr('operationtype');
+            if(editIndex!=undefined&&temp=="edit"){
                 hlAlertFour("请先保存测量项!");
                 return false;
             }
@@ -117,7 +118,7 @@
             });
         }
         function CancelSubmit() {
-            if(editIndex!=undefined){
+            if(editIndex!=undefined&&temp=="edit"){
                 hlAlertFour("请先保存测量项!");
                 return false;
             }
@@ -197,6 +198,7 @@
             delItem();
 
         }
+        //接收事件
         function accept(){
             if (endEditing()){
                 var row = $('#dg').datagrid('getSelected');
@@ -208,10 +210,12 @@
                 }
             }
         }
+        //撤销事件
         function reject(){
             $('#dg').datagrid('rejectChanges');
             editIndex = undefined;
         }
+        //保存测量项事件
         function submitItemInfo(row) {
             var acceptance_criteria_no=$('#acceptance_criteria_no').val();
             if(row&&acceptance_criteria_no!=undefined&&acceptance_criteria_no!=""){
@@ -251,6 +255,7 @@
             }
 
         }
+        //删除测量项事件
         function delItem() {
             var row = $('#dg').datagrid('getSelected');
             if(row){
@@ -273,6 +278,7 @@
                 hlAlertFour("请选中要修改的项!");
             }
         }
+        //保存TextArea事件
         function saveTextArea() {
              if(g_textarea_field!=undefined){
                  var val=$('#tempTextarea').val();
@@ -281,11 +287,41 @@
              }
              $('#w').window('close');
         }
+        //根据接收编号加载事件
         function loadDynamicItemInfo(acceptance_criteria_no) {
             $('#dg').datagrid({
                 url:"/DynamicItemOperation/getDynamicItemByACNo.action?acceptance_criteria_no="+acceptance_criteria_no
             });
             $("#dg").datagrid('load');
+        }
+        //导入事件
+        function importItem(){
+            var src_acceptance_criteria_no=$('#acceptance_criteria_no').val();
+            var des_acceptance_criteria_no=$("input[name='acceptance_criteria_no_search']").val();
+            if(src_acceptance_criteria_no!=undefined&&src_acceptance_criteria_no!=""){
+                hlAlertFour("导入失败,没有找到源接收标准编号!");return false;
+            }
+            if(des_acceptance_criteria_no!=undefined&&des_acceptance_criteria_no!=""){
+                hlAlertFour("导入失败,请选择要导入的目标接收标准编号!");return false;
+            }
+            alert(src_acceptance_criteria_no,des_acceptance_criteria_no);
+            $.ajax({
+                url:'/DynamicItemOperation/importDynamicItem.action',
+                dataType:'json',
+                data:{
+                    src_acceptance_criteria_no:src_acceptance_criteria_no,
+                    des_acceptance_criteria_no:des_acceptance_criteria_no
+                },
+                success:function (data) {
+                    var result = eval('('+data+')');
+                    if (result.success){
+                        loadDynamicItemInfo(src_acceptance_criteria_no);
+                    }
+                    hlAlertFour(result.message);
+                },error:function () {
+
+                }
+            });
         }
     </script>
 </head>
@@ -453,17 +489,21 @@
                 </thead>
             </table>
             <div id="tb" style="height:auto">
-                <a href="javascript:void(0)" class="easyui-linkbutton i18n2" name="add" data-options="iconCls:'icon-add',plain:true" onclick="append()">Append</a>
-                <a href="javascript:void(0)" class="easyui-linkbutton i18n2" name="delete" data-options="iconCls:'icon-remove',plain:true" onclick="removeit()">Remove</a>
-                <a href="javascript:void(0)" class="easyui-linkbutton i18n2" name="save" data-options="iconCls:'icon-save',plain:true" onclick="accept()">Accept</a>
-                <a href="javascript:void(0)" class="easyui-linkbutton i18n2" name="undo" data-options="iconCls:'icon-undo',plain:true" onclick="reject()">Reject</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="append()">Append</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton i18n1" name="delete" data-options="iconCls:'icon-remove',plain:true" onclick="removeit()">Remove</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton i18n1" name="save" data-options="iconCls:'icon-save',plain:true" onclick="accept()">Accept</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton i18n1" name="undo" data-options="iconCls:'icon-undo',plain:true" onclick="reject()">Reject</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton i18n1" name="import" data-options="iconCls:'icon-undo',plain:true" onclick="importItem()">Import</a>
+                <input  id="lookup1" name="acceptance_criteria_no_search" class="mini-lookup" style="text-align:center;width:180px;"
+                        textField="acceptance_criteria_no_search" valueField="id" popupWidth="auto"
+                        popup="#gridPanel1" grid="#datagrid1" multiSelect="false"/>
             </div>
         </fieldset>
     </form>
 </div>
-<div id="w" class="easyui-window" title="修改" data-options="modal:true,collapsible:false,minimizable:false,maximizable:false,closed:true" style="width:500px;height:300px;padding:10px;text-align: center">
+<div id="w" class="easyui-window" title="修改" data-options="modal:true,collapsible:false,minimizable:false,maximizable:false,closed:true" style="width:500px;height:300px;padding:10px;text-align: center;display:none;">
     <div style="width:100%;height:auto;text-align:left">
-      <span id="winTitle" class="i18n2" name=""></span>
+      <span id="winTitle"  name=""></span>
     </div>
     <div style="width:100%;height:auto;">
         <textarea id="tempTextarea" rows="" cols="" style="width:95%;height:170px;margin:0 auto;"></textarea>
@@ -472,9 +512,75 @@
          <a  href="#" class="easyui-linkbutton"  iconCls="icon-save" onclick="saveTextArea()">Save</a>
      </div>
 </div>
+<div id="gridPanel1" class="mini-panel" title="header" iconCls="icon-add" style="width:450px;height:250px;"
+     showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0"
+>
+    <div property="toolbar" id="searchBar1" style="padding:5px;padding-left:8px;text-align:center;display: none">
+        <div style="float:left;padding-bottom:2px;">
+            <span class="i18n1" name="acceptancecriteriano"></span><span>:</span>
+            <input id="keyText1" class="mini-textbox" style="width:110px;" onenter="onSearchClick(1)"/>
+            <a class="mini-button" onclick="onSearchClick(1)">查找</a>
+            <a class="mini-button" onclick="onClearClick(1)" name="clear">清除</a>
+        </div>
+        <div style="float:right;padding-bottom:2px;">
+            <a class="mini-button" onclick="onCloseClick(1)" name="close">关闭</a>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <div id="datagrid1" class="mini-datagrid" style="width:100%;height:100%;"
+         borderStyle="border:0" showPageSize="false" showPageIndex="false"
+         url="/ACOpreation/getACs.action">
+        <div property="columns">
+            <div type="checkcolumn" ></div>
+            <div field="acceptance_criteria_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="acceptancecriteriano"></div>
+            <div field="external_coating_type" width="80" headerAlign="center" allowSort="true" class="i18n1" name="externalcoatingtype"></div>
+            <div field="internal_coating_type" width="40" headerAlign="center" allowSort="true" class="i18n1" name="internalcoatingtype"></div>
+            <div field="remark" width="40" headerAlign="center" allowSort="true" class="i18n1" name="remark"></div>
+        </div>
+    </div>
+</div>
 <script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
 </body>
 </html>
 <script type="text/javascript">
+    mini.parse();
+    var keyText1=mini.get('keyText1');
+    var grid1=mini.get("datagrid1");
+    var look1=mini.get('lookup1');
+    var combox1=mini.get("combobox1");
+    function onSearchClick(type) {
+        if(type==1)
+        {
+            grid1.load({
+                acceptance_criteria_no:keyText1.value,
+            });
+        }
+    }
+    function onCloseClick(type) {
+        if(type==1)
+            look1.hidePopup();
+    }
+    function onClearClick(type) {
+        if(type==1)
+            look1.deselectAll();
+    }
+    look1.on('valuechanged',function () {
+        var rows = grid1.getSelected();
+        $("input[name='acceptance_criteria_no_search']").val(rows.acceptance_criteria_no);
+    });
+    look1.on("showpopup",function(e){
+        $('.mini-shadow').css('z-index','99999');
+        $('.mini-popup').css('z-index','100000');
+        $('.mini-panel').css('z-index','100000');
+        $('#searchBar1').css('display','block');
+        grid1.load({
+            acceptance_criteria_no:keyText1.value
+        });
+    });
+    combox1.on("showpopup",function () {
+        $('.mini-shadow').css('z-index','99999');
+        $('.mini-popup').css('z-index','100000');
+        $('.mini-panel').css('z-index','100000');
+    });
     hlLanguage("../i18n/");
 </script>
