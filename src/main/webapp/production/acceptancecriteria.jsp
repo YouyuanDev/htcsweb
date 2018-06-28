@@ -163,6 +163,7 @@
                 alert("保存");
                 $('#dg').datagrid('acceptChanges');
                 var row = $('#dg').datagrid('getSelected');
+                row.item_code="IT"+new Date().getTime();
                 alert(row.item_code+":"+row.item_name+":"+row.item_name_en+":"+row.unit_name+":"+row.unit_name_en+":"+row.item_frequency+":"+row.process_code);
             }
         }
@@ -216,9 +217,9 @@
     </div>
 </div>
 <!--添加、修改框-->
-<div id="addEditDialog" class="easyui-dialog" data-options="title:'添加',modal:true" closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:1150px;max-height:500px;overflow-y:auto;">
+<div id="addEditDialog" class="easyui-dialog" data-options="title:'添加',modal:true" closed="true" buttons="#dlg-buttons" style="display: none;padding:5px 0px;width:1150px;max-height:500px;overflow-y:auto;">
     <form id="addEditForm" method="post">
-        <fieldset style="width:100%;border:solid 1px #aaa;position:relative;">
+        <fieldset style="width:99%;border:solid 1px #aaa;position:relative;">
             <legend>标准信息</legend>
             <div style="width:100%;padding-bottom:5px;">
                 <table class="ht-table"  width="100%" border="0">
@@ -267,9 +268,9 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset style="width:100%;border:solid 1px #aaa;position:relative;">
+        <fieldset style="width:99%;border:solid 1px #aaa;position:relative;">
             <legend>测量项信息</legend>
-            <table id="dg" class="easyui-datagrid" title="测量项信息" style="width:100%;height:auto" data-options="
+            <table id="dg" class="easyui-datagrid" title="" style="width:100%;height:auto" data-options="
 				iconCls: '',
 				singleSelect: true,
 				toolbar: '#tb',
@@ -283,7 +284,7 @@
                     <th class="i18n1" name="itemnameen" data-options="field:'item_name_en',editor:'textbox'"></th>
                     <th class="i18n1" name="unitname" data-options="field:'unit_name',editor:'textbox'"></th>
                     <th class="i18n1" name="unitnameen" data-options="field:'unit_name_en',editor:'textbox'"></th>
-                    <th class="i18n1" name="itemfrequency" data-options="field:'item_frequency',formatter:function(value,row){
+                    <th class="i18n1" name="itemfrequency" data-options="field:'item_frequency',width:150,formatter:function(value,row){
 							return row.id;
 						},
 						editor:{
@@ -293,10 +294,30 @@
 								textField:'text',
 								method:'get',
 								url:'../data/freq.json',
+								onLoadSuccess: function () {
+	                          			var data = $(this).combobox('getData');
+	                          			$(this).combobox('select',data[0].id);
+	                            },
 								required:true
 							}
 						}"></th>
-                    <th class="i18n1" name="processcode" data-options="field:'process_code',editor:'textbox'"></th>
+                    <th class="i18n1" name="processcode" data-options="field:'process_code',formatter:function(value,row){
+							return row.id;
+						},
+						editor:{
+							type:'combobox',
+							options:{
+								valueField:'id',
+								textField:'text',
+								method:'get',
+								url:'/ProcessOperation/getAllProcess.action',
+								onLoadSuccess: function () {
+	                          			var data = $(this).combobox('getData');
+	                          			$(this).combobox('select',data[0].id);
+	                            },
+								required:true
+							}
+						}"></th>
                     <th class="i18n1" name="decimalnum" data-options="field:'decimal_num',editor:{type:'numberbox'}"></th>
                     <th class="i18n1" name="needverify" data-options="field:'need_verify',editor:{type:'checkbox',options:{on:'1',off:'0'}}"></th>
                     <th class="i18n1" name="controltype" data-options="field:'control_type',width:100,formatter:function(value,row){
@@ -309,6 +330,10 @@
 								textField:'text',
 								method:'get',
 								url:'../data/control.json',
+								onLoadSuccess: function () {
+	                          			var data = $(this).combobox('getData');
+	                          			$(this).combobox('select',data[0].id);
+	                                 },
 								required:true
 							}
 						}"></th>
