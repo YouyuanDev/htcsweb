@@ -385,7 +385,7 @@
     </form>
 </div>
 <div id="w" class="easyui-window" title="" data-options="modal:true,collapsible:false,minimizable:false,maximizable:false,closed:true" style="width:500px;height:250px;padding:10px;text-align: center">
-     <textarea id="tempTextarea" rows="" cols="" style="width:400px;height:210px;margin:0 auto;"></textarea>
+     <textarea id="tempTextarea" rows="" cols="" style="width:400px;height:180px;margin:0 auto;"></textarea>
      <a href="#" class="easyui-linkbutton i18n1" name="save" iconCls="icon-save" onclick="saveTextArea()">Save</a>
 </div>
 <script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
