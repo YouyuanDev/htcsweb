@@ -191,7 +191,9 @@
             $('#dg').datagrid('rejectChanges');
             editIndex = undefined;
         }
+        function submitItemInfo() {
 
+        }
     </script>
 </head>
 
@@ -352,7 +354,12 @@
 								required:true
 							}
 						}"></th>
-                    <th class="i18n1" name="options" data-options="field:'options',editor:'textbox'"></th>
+                    <th class="i18n1" name="options" data-options="field:'options',editor:'textbox',onLoadSuccess:function(row,data){
+                        var ed = $('#dg').datagrid('getEditor', {index:editIndex,field:'options'});
+                        var text = $(ed.target).bind('click',function(){
+                           alert(123);
+                        });
+                    }"></th>
                     <th class="i18n1" name="status" data-options="field:'status',align:'center',editor:{type:'checkbox',options:{on:'P',off:''}}">Status</th>
                 </tr>
                 </thead>
