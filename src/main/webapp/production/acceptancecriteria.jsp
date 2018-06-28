@@ -304,7 +304,7 @@
             if(des_acceptance_criteria_no==undefined||des_acceptance_criteria_no==""){
                 hlAlertFour("导入失败,请选择要导入的目标接收标准编号!");return false;
             }
-            alert(src_acceptance_criteria_no+":"+des_acceptance_criteria_no);
+            //alert(src_acceptance_criteria_no+":"+des_acceptance_criteria_no);
             $.ajax({
                 url:'/DynamicItemOperation/importDynamicItem.action',
                 dataType:'json',
@@ -313,7 +313,7 @@
                     des_acceptance_criteria_no:des_acceptance_criteria_no
                 },
                 success:function (data) {
-                    alert(data.success);
+                    //alert(data.success);
                     //var result = eval('('+data+')');
                     if (data.success){
                         loadDynamicItemInfo(src_acceptance_criteria_no);
@@ -433,7 +433,7 @@
                 <tr>
                     <%--<th class="i18n1" name="acceptancecriteriano" data-options="field:'acceptance_criteria_no',width:80"></th>--%>
                     <th class="i18n1" name="id" hidden="true" data-options="field:'id'"></th>
-                        <th class="i18n1" name="processcode" data-options="field:'process_code',width:150,formatter:function(value,row){
+                        <th class="i18n1" name="processcode" data-options="field:'process_code',width:130,formatter:function(value,row){
 							return row.process_code;
 						},
 						editor:{
@@ -452,7 +452,7 @@
                     <th class="i18n1" name="itemnameen" data-options="field:'item_name_en',editor:{type:'textbox',options:{required:true}}"></th>
                     <th class="i18n1" name="unitname" data-options="field:'unit_name',editor:'textbox'"></th>
                     <th class="i18n1" name="unitnameen" data-options="field:'unit_name_en',editor:'textbox'"></th>
-                    <th class="i18n1" name="itemfrequency" data-options="field:'item_frequency',width:150,formatter:function(value,row){
+                    <th class="i18n1" name="itemfrequency" data-options="field:'item_frequency',width:120,formatter:function(value,row){
 							return row.item_frequency;
 						},
 						editor:{
