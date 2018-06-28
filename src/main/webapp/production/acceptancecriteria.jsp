@@ -133,6 +133,7 @@
                 $('#dg').datagrid('getRows')[editIndex]['control_type_name'] = text2;
 
                 $('#dg').datagrid('endEdit', editIndex);
+
                 //alert("开始验证");
                 editIndex = undefined;
                 return true;
@@ -141,6 +142,9 @@
             }
         }
         function onClickRow(index){
+            if(editIndex==undefined){
+                return;
+            }
             if (editIndex != index){
                 if (endEditing()){
                     $('#dg').datagrid('selectRow', index)
