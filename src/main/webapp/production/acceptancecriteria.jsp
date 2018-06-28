@@ -177,7 +177,7 @@
                 if(text!=undefined)
                     $('#tempTextarea').val(text);
                 $('#w').window('open');
-                $('#winTitle').text(field.replace(/_/g,''));
+                $('#winTitle').attr('name',field.replace(/_/g,''));
                 hlLanguage("../i18n/");
                 g_textarea_field=field;
             });
