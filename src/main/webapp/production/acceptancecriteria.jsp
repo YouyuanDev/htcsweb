@@ -186,9 +186,8 @@
         }
         function removeit(){
             if (editIndex == undefined){return}
-            $('#dg').datagrid('cancelEdit', editIndex)
-                .datagrid('deleteRow', editIndex);
-            editIndex = undefined;
+            delItem();
+
         }
         function accept(){
             if (endEditing()){
@@ -243,6 +242,28 @@
                 hlAlertFour("保存失败!");
             }
 
+        }
+        function delItem() {
+            var row = $('#dg').datagrid('getSelected');
+            if(row){
+                var idArrs=row.id+",";
+                $.messager.confirm('系统提示',"您确定要删除这<font color=red>"+idArr.length+ "</font>条数据吗？",function (r) {
+                    if(r){
+                        $.post("/DynamicItemOperation/delDynamicItem.action",{hlparam:idArrs},function (data) {
+                            var result = eval('('+data+')');
+                            if(result.success){
+                                $('#dg').datagrid('cancelEdit', editIndex)
+                                    .datagrid('deleteRow', editIndex);
+                                editIndex = undefined;
+                            }
+                            hlAlertFour(result.message);
+                        },"json");
+                    }
+                });
+            }
+            else{
+                hlAlertFour("请选中要修改的项!");
+            }
         }
         function saveTextArea() {
              if(g_textarea_field!=undefined){
