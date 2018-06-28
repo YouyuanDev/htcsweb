@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>螺纹检验标准</title>
+    <title>检验标准</title>
     <link rel="stylesheet" type="text/css" href="../easyui/themes/bootstrap/easyui.css">
     <link rel="stylesheet" type="text/css" href="../easyui/themes/icon.css">
     <link href="../miniui/multiupload/multiupload.css" rel="stylesheet" type="text/css" />
@@ -14,6 +14,8 @@
     <script src="../easyui/jquery.min.js" type="text/javascript"></script>
     <script src="../js/common.js" type="text/javascript"></script>
     <script src="../miniui/boot.js" type="text/javascript"></script>
+    <script src="../miniui/fileupload/swfupload/swfupload.js" type="text/javascript"></script>
+    <script src="../miniui/multiupload/multiupload.js" type="text/javascript"></script>
     <script  src="../js/lrscroll.js" type="text/javascript"></script>
     <script src="../js/jquery.i18n.properties-1.0.9.js" type="text/javascript"></script>
     <script src="../js/language.js" type="text/javascript"></script>
@@ -80,6 +82,7 @@
         function Search() {
             $('#contentDatagrids').datagrid('load',{
                 'acceptance_criteria_no': $('#acceptancecriteriano').val(),
+                'acceptance_criteria_name': $('#acceptancecriterianame').val(),
                 'external_coating_type': $('#externalSelect').val(),
                 'internal_coating_type': $('#internalSelect').val()
             });
@@ -118,6 +121,7 @@
             });
         }
         function CancelSubmit() {
+            var temp=$('#hlcancelBtn').attr('operationtype');
             if(editIndex!=undefined&&temp=="edit"){
                 hlAlertFour("请先保存测量项!");
                 return false;
@@ -299,10 +303,10 @@
             var src_acceptance_criteria_no=$('#acceptance_criteria_no').val();
             var des_acceptance_criteria_no=$("input[name='acceptance_criteria_no_search']").val();
             if(src_acceptance_criteria_no==undefined||src_acceptance_criteria_no==""){
-                hlAlertFour("导入失败,没有找到源接收标准编号!");return false;
+                hlAlertFour("没有找到源接收标准编号!");return false;
             }
             if(des_acceptance_criteria_no==undefined||des_acceptance_criteria_no==""){
-                hlAlertFour("导入失败,请选择要导入的目标接收标准编号!");return false;
+                hlAlertFour("请选择要导入的目标接收标准编号!");return false;
             }
             //alert(src_acceptance_criteria_no+":"+des_acceptance_criteria_no);
             $.ajax({
@@ -337,6 +341,7 @@
                 <th data-options="field:'ck',checkbox:true"></th>
                 <th field="id" align="center" width="100" class="i18n1" name="id"></th>
                 <th field="acceptance_criteria_no" align="center" width="100" class="i18n1" name="acceptancecriteriano"></th>
+                <th field="acceptance_criteria_name" align="center" width="100" class="i18n1" name="acceptancecriterianame"></th>
                 <th field="external_coating_type" align="center" width="100" class="i18n1" name="externalcoatingtype"></th>
                 <th field="internal_coating_type" align="center" width="100" class="i18n1" name="internalcoatingtype"></th>
                 <th field="remark" align="center" width="100" class="i18n1" name="remark"></th>
@@ -351,6 +356,10 @@
 <div id="toolsTab" style="padding:10px;">
     <span class="i18n1" name="acceptancecriteriano">接收标准编号</span>:
     <input id="acceptancecriteriano" style="line-height:22px;border:1px solid #ccc">
+
+    <span class="i18n1" name="acceptancecriterianame">接收标准名称</span>:
+    <input id="acceptancecriterianame" style="line-height:22px;border:1px solid #ccc">
+
     <span class="i18n1" name="externalcoatingtype">外防类型</span>:
     <select id="externalSelect" class="easyui-combobox" data-options="editable:false" name="external_coating_type"   style="width:200px;">
         <option value="" selected="selected">ALL</option>
@@ -382,11 +391,19 @@
                             <label id="serialNumber" class="hl-label"></label>
                         </td>
                         <td></td>
+
+
+                    </tr>
+                    <tr>
                         <td class="i18n1" name="acceptancecriteriano"></td>
                         <td><input class="easyui-textbox" id="acceptance_criteria_no"   type="text" name="acceptance_criteria_no" readonly="true" value=""/></td>
                         <td></td>
-
+                        <td class="i18n1" name="acceptancecriterianame"></td>
+                        <td><input class="easyui-textbox" id="acceptance_criteria_name"   type="text" name="acceptance_criteria_name" value=""/></td>
+                        <td></td>
                     </tr>
+
+
                     <tr>
                         <td class="i18n1" name="externalcoatingtype"></td>
                         <td>
@@ -521,13 +538,16 @@
         <div style="float:left;padding-bottom:2px;">
             <span class="i18n1" name="acceptancecriteriano"></span><span>:</span>
             <input id="keyText1" class="mini-textbox" style="width:110px;" onenter="onSearchClick(1)"/>
+            <span class="i18n1" name="acceptancecriterianame"></span><span>:</span>
+            <input id="keyText2" class="mini-textbox" style="width:110px;" onenter="onSearchClick(1)"/>
             <a class="mini-button" onclick="onSearchClick(1)">查找</a>
-            <a class="mini-button" onclick="onClearClick(1)" name="clear">清除</a>
         </div>
         <div style="float:right;padding-bottom:2px;">
+            <a class="mini-button" onclick="onClearClick(1)" name="clear">清除</a>
             <a class="mini-button" onclick="onCloseClick(1)" name="close">关闭</a>
         </div>
-        <div style="clear:both;"></div>
+
+        <%--<div style="clear:both;"></div>--%>
     </div>
     <div id="datagrid1" class="mini-datagrid" style="width:100%;height:100%;"
          borderStyle="border:0" showPageSize="false" showPageIndex="false"
@@ -535,6 +555,7 @@
         <div property="columns">
             <div type="checkcolumn" ></div>
             <div field="acceptance_criteria_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="acceptancecriteriano"></div>
+            <div field="acceptance_criteria_name" width="80" headerAlign="center" allowSort="true" class="i18n1" name="acceptancecriterianame"></div>
             <div field="external_coating_type" width="80" headerAlign="center" allowSort="true" class="i18n1" name="externalcoatingtype"></div>
             <div field="internal_coating_type" width="40" headerAlign="center" allowSort="true" class="i18n1" name="internalcoatingtype"></div>
             <div field="remark" width="40" headerAlign="center" allowSort="true" class="i18n1" name="remark"></div>
@@ -547,6 +568,7 @@
 <script type="text/javascript">
     mini.parse();
     var keyText1=mini.get('keyText1');
+    var keyText2=mini.get('keyText2');
     var grid1=mini.get("datagrid1");
     var look1=mini.get('lookup1');
     function onSearchClick(type) {
@@ -554,6 +576,7 @@
         {
             grid1.load({
                 acceptance_criteria_no:keyText1.value,
+                acceptance_criteria_name:keyText2.value
             });
         }
     }
@@ -575,7 +598,8 @@
         $('.mini-panel').css('z-index','100000');
         $('#searchBar1').css('display','block');
         grid1.load({
-            acceptance_criteria_no:keyText1.value
+            acceptance_criteria_no:keyText1.value,
+            acceptance_criteria_name:keyText2.value
         });
     });
     hlLanguage("../i18n/");

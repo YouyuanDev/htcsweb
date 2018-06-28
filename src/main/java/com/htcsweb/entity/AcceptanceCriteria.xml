@@ -7,16 +7,16 @@
 
 
     <insert id="addAcceptanceCriteria" parameterType="com.htcsweb.entity.AcceptanceCriteria">
-        INSERT INTO acceptance_criteria(acceptance_criteria_no,external_coating_type,internal_coating_type,last_update_time,
+        INSERT INTO acceptance_criteria(acceptance_criteria_no,acceptance_criteria_name,external_coating_type,internal_coating_type,last_update_time,
         remark) VALUES
-        (#{acceptance_criteria_no},#{external_coating_type},#{internal_coating_type},#{last_update_time},
+        (#{acceptance_criteria_no},#{acceptance_criteria_name},#{external_coating_type},#{internal_coating_type},#{last_update_time},
         #{remark})
 
     </insert>
 
     <update id="updateAcceptanceCriteria" parameterType="com.htcsweb.entity.AcceptanceCriteria">
         UPDATE acceptance_criteria set
-        acceptance_criteria_no=#{acceptance_criteria_no}, external_coating_type=#{external_coating_type},internal_coating_type=#{internal_coating_type},
+        acceptance_criteria_no=#{acceptance_criteria_no}, acceptance_criteria_name=#{acceptance_criteria_name},external_coating_type=#{external_coating_type},internal_coating_type=#{internal_coating_type},
         last_update_time=#{last_update_time},remark=#{remark}
         where id=#{id}
     </update>
@@ -49,6 +49,9 @@
             <if test="acceptance_criteria_no!=null and acceptance_criteria_no!=''">
                 AND acceptance_criteria_no LIKE CONCAT('%',#{acceptance_criteria_no},'%')
             </if>
+            <if test="acceptance_criteria_name!=null and acceptance_criteria_name!=''">
+                AND acceptance_criteria_name LIKE CONCAT('%',#{acceptance_criteria_name},'%')
+            </if>
             <if test="external_coating_type!=null and external_coating_type!=''">
                 AND external_coating_type =#{external_coating_type}
             </if>
@@ -65,6 +68,9 @@
         <where>
             <if test="acceptance_criteria_no!=null and acceptance_criteria_no!=''">
                 AND acceptance_criteria_no LIKE CONCAT('%',#{acceptance_criteria_no},'%')
+            </if>
+            <if test="acceptance_criteria_name!=null and acceptance_criteria_name!=''">
+                AND acceptance_criteria_name LIKE CONCAT('%',#{acceptance_criteria_name},'%')
             </if>
             <if test="external_coating_type!=null and external_coating_type!=''">
                 AND external_coating_type =#{external_coating_type}
@@ -83,6 +89,9 @@
         <where>
             <if test="acceptance_criteria_no!=null and acceptance_criteria_no!=''">
                 AND acceptance_criteria_no LIKE CONCAT('%',#{acceptance_criteria_no},'%')
+            </if>
+            <if test="acceptance_criteria_name!=null and acceptance_criteria_name!=''">
+                AND acceptance_criteria_name LIKE CONCAT('%',#{acceptance_criteria_name},'%')
             </if>
 
         </where>

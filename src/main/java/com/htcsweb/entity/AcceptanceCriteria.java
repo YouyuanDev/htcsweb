@@ -8,6 +8,7 @@ public class AcceptanceCriteria {
 
     private  int id; //流水号
     private String acceptance_criteria_no;     //标准编号
+    private String acceptance_criteria_name;   //标准名称
     private String external_coating_type;   //外防类型
     private String internal_coating_type;   //内防类型
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
@@ -18,9 +19,11 @@ public class AcceptanceCriteria {
     public AcceptanceCriteria() {
     }
 
-    public AcceptanceCriteria(int id, String acceptance_criteria_no, String external_coating_type, String internal_coating_type, Date last_update_time, String remark) {
+
+    public AcceptanceCriteria(int id, String acceptance_criteria_no, String acceptance_criteria_name, String external_coating_type, String internal_coating_type, Date last_update_time, String remark) {
         this.id = id;
         this.acceptance_criteria_no = acceptance_criteria_no;
+        this.acceptance_criteria_name = acceptance_criteria_name;
         this.external_coating_type = external_coating_type;
         this.internal_coating_type = internal_coating_type;
         this.last_update_time = last_update_time;
@@ -41,6 +44,14 @@ public class AcceptanceCriteria {
 
     public void setAcceptance_criteria_no(String acceptance_criteria_no) {
         this.acceptance_criteria_no = acceptance_criteria_no;
+    }
+
+    public String getAcceptance_criteria_name() {
+        return acceptance_criteria_name;
+    }
+
+    public void setAcceptance_criteria_name(String acceptance_criteria_name) {
+        this.acceptance_criteria_name = acceptance_criteria_name;
     }
 
     public String getExternal_coating_type() {

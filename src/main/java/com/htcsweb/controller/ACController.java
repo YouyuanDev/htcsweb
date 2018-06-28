@@ -33,7 +33,7 @@ public class ACController {
 
     @RequestMapping(value = "/getACByLike")
     @ResponseBody
-    public String getACByLike(@RequestParam(value = "acceptance_criteria_no",required = false)String acceptance_criteria_no, @RequestParam(value = "external_coating_type",required = false)String external_coating_type, @RequestParam(value = "internal_coating_type",required = false)String internal_coating_type, HttpServletRequest request){
+    public String getACByLike(@RequestParam(value = "acceptance_criteria_no",required = false)String acceptance_criteria_no,@RequestParam(value = "acceptance_criteria_name",required = false)String acceptance_criteria_name, @RequestParam(value = "external_coating_type",required = false)String external_coating_type, @RequestParam(value = "internal_coating_type",required = false)String internal_coating_type, HttpServletRequest request){
         String page= request.getParameter("page");
         String rows= request.getParameter("rows");
         if(page==null){
@@ -49,8 +49,8 @@ public class ACController {
             e.printStackTrace();
         }
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
-        List<HashMap<String,Object>> list=acceptanceCriteriaDao.getAllByLike(acceptance_criteria_no,external_coating_type,internal_coating_type,start,Integer.parseInt(rows));
-        int count=acceptanceCriteriaDao.getCountAllByLike(acceptance_criteria_no,external_coating_type,internal_coating_type);
+        List<HashMap<String,Object>> list=acceptanceCriteriaDao.getAllByLike(acceptance_criteria_no,acceptance_criteria_name,external_coating_type,internal_coating_type,start,Integer.parseInt(rows));
+        int count=acceptanceCriteriaDao.getCountAllByLike(acceptance_criteria_no,acceptance_criteria_name,external_coating_type,internal_coating_type);
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
         maps.put("rows",list);
@@ -66,7 +66,8 @@ public class ACController {
         String map="";
         try{
             String acceptance_criteria_no=request.getParameter("acceptance_criteria_no");
-            List<AcceptanceCriteria>list=acceptanceCriteriaDao.getACs(acceptance_criteria_no);
+            String acceptance_criteria_name=request.getParameter("acceptance_criteria_name");
+            List<AcceptanceCriteria>list=acceptanceCriteriaDao.getACs(acceptance_criteria_no,acceptance_criteria_name);
             map= JSONObject.toJSONString(list);
         }catch (Exception e){
             e.printStackTrace();
