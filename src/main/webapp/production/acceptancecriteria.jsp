@@ -177,7 +177,7 @@
                 if(text!=undefined)
                     $('#tempTextarea').val(text);
                 $('#w').window('open');
-                $('#winTitle').text(g_textarea_field.replace(/_/g,''));
+                $('#winTitle').text(field.replace(/_/g,''));
                 hlLanguage("../i18n/");
                 g_textarea_field=field;
             });
@@ -190,7 +190,6 @@
         }
         function accept(){
             if (endEditing()){
-                alert("保存");
                 $('#dg').datagrid('acceptChanges');
                 var row = $('#dg').datagrid('getSelected');
 
@@ -386,7 +385,7 @@
         </fieldset>
     </form>
 </div>
-<div id="w" class="easyui-window" title="修改" data-options="modal:true,collapsible:false,minimizable:false,maximizable:false,closed:true" style="width:500px;height:250px;padding:10px;text-align: center">
+<div id="w" class="easyui-window" title="修改" data-options="modal:true,collapsible:false,minimizable:false,maximizable:false,closed:true" style="width:500px;height:300px;padding:10px;text-align: center">
     <div style="width:100%;height:auto;text-align:left">
       <span id="winTitle" class="i18n1" name=""></span>
     </div>
