@@ -159,7 +159,7 @@
                 }
             }
         }
-
+         var g_textarea_field=undefined;
         function append(){
             if (endEditing()){
                 $('#dg').datagrid('appendRow',{item_code:"IT"+new Date().getTime(),decimal_num:'0',max_value:'0',min_value:'0',default_value:'0',status:'P'});
@@ -168,10 +168,12 @@
                     .datagrid('beginEdit', editIndex);
                 var ed = $('#dg').datagrid('getEditor', {index:editIndex,field:'options'});
                 $(ed.target).textbox('textbox').bind('click', function() {
-                    var text=$(this).textbox('getText');
+                    var text=$(ed.target).textbox('getValue');
                     if(text!=undefined)
-                      $('#tempTextarea').val(text);
+                        $('#tempTextarea').val(text);
                     $('#w').window('open');
+                    $('#w').attr('title','options');
+                    g_textarea_field=options;
                 });
 
             }
@@ -202,10 +204,12 @@
             alert(value);
         }
         function saveTextArea() {
-             var val=$('#tempTextarea').val();
-             alert(val);
-            $('#w').window('close');
-
+             if(g_textarea_field!=undefined){
+                 var val=$('#tempTextarea').val();
+                 var ed = $('#dg').datagrid('getEditor', {index:editIndex,field:g_textarea_field});
+                 $(ed.target).textbox('setValue',val)
+             }
+             $('#w').window('close');
         }
     </script>
 </head>
