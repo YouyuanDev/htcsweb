@@ -263,13 +263,13 @@
                 $.messager.confirm('系统提示',"您确定要删除这条数据吗？",function (r) {
                     if(r){
                         $.post("/DynamicItemOperation/delDynamicItem.action",{hlparam:idArrs},function (data) {
-                            var result = eval('('+data+')');
-                            if(result.success){
+                            //var result = eval('('+data+')');
+                            if(data.success){
                                 $('#dg').datagrid('cancelEdit', editIndex)
                                     .datagrid('deleteRow', editIndex);
                                 editIndex = undefined;
                             }
-                            hlAlertFour(result.message);
+                            hlAlertFour(data.message);
                         },"json");
                     }
                 });
@@ -313,12 +313,12 @@
                     des_acceptance_criteria_no:des_acceptance_criteria_no
                 },
                 success:function (data) {
-                    alert(data);
-                    var result = eval('('+data+')');
-                    if (result.success){
+                    alert(data.success);
+                    //var result = eval('('+data+')');
+                    if (data.success){
                         loadDynamicItemInfo(src_acceptance_criteria_no);
                     }
-                    hlAlertFour(result.message);
+                    hlAlertFour(data.message);
                 },error:function () {
 
                 }
