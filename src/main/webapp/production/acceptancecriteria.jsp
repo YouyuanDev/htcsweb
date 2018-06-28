@@ -72,7 +72,7 @@
                 $('#addEditForm').form('load',row);
                 $("#serialNumber").text(row.id);
                 url="/ACOperation/saveAC.action?id="+row.id;
-                loadDynamicByAcceptanceNo(row.acceptance_criteria_no);
+                loadDynamicItemInfo(row.acceptance_criteria_no);
             }else{
                 hlAlertTwo();
             }
@@ -84,12 +84,12 @@
                 'internal_coating_type': $('#internalSelect').val()
             });
         }
-        function  loadDynamicByAcceptanceNo(acceptance_criteria_no) {
-            //dg加载测量项数据
-            $('#dg').datagrid('load',{
-                'acceptance_criteria_no':acceptance_criteria_no,
-            });
-        }
+        // function  loadDynamicByAcceptanceNo(acceptance_criteria_no) {
+        //     //dg加载测量项数据
+        //     $('#dg').datagrid('load',{
+        //         'acceptance_criteria_no':acceptance_criteria_no,
+        //     });
+        // }
         function addEditFormSubmit() {
             $('#addEditForm').form('submit',{
                 url:url,
@@ -192,10 +192,8 @@
         }
         function accept(){
             if (endEditing()){
-
                 var row = $('#dg').datagrid('getSelected');
                 submitItemInfo(row)
-                //alert(row.item_code+":"+row.item_name+":"+row.item_name_en+":"+row.unit_name+":"+row.unit_name_en+":"+row.item_frequency+":"+row.process_code);
             }
         }
         function reject(){
@@ -240,7 +238,6 @@
             }
 
         }
-
         function saveTextArea() {
              if(g_textarea_field!=undefined){
                  var val=$('#tempTextarea').val();
@@ -248,6 +245,12 @@
                  $(ed.target).textbox('setValue',val)
              }
              $('#w').window('close');
+        }
+        function loadDynamicItemInfo(acceptance_criteria_no) {
+            $('#dg').datagrid({
+                url:"/DynamicItemOperation/getDynamicItemByACNo.action?acceptance_criteria_no="+acceptance_criteria_no
+            });
+            $("#dg").datagrid('reload');
         }
     </script>
 </head>
@@ -296,7 +299,7 @@
 </div>
 <!--添加、修改框-->
 <div id="addEditDialog" class="easyui-dialog" data-options="title:'添加',modal:true" closed="true" buttons="#dlg-buttons" style="display: none;padding:5px 0px;width:1150px;max-height:500px;overflow-y:auto;">
-    <form id="addEditForm" method="post">
+    <form id="addEditForm" method="post" style="width:95%;margin:0 auto;">
         <fieldset style="width:99%;border:solid 1px #aaa;position:relative;">
             <legend>标准信息</legend>
             <div style="width:100%;padding-bottom:5px;">
