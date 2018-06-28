@@ -63,7 +63,6 @@
             }
         }
         function editFunction(){
-            $('#dg').datagrid('loadData', { total: 0, rows: [] });
             $('#dynamicItem').show();
             $('#hlcancelBtn').attr('operationtype','edit');
             var row = $('#contentDatagrids').datagrid('getSelected');
@@ -92,6 +91,10 @@
         //     });
         // }
         function addEditFormSubmit() {
+            if(editIndex!=undefined){
+                hlAlertFour("请先保存测量项!");
+                return false;
+            }
             $('#addEditForm').form('submit',{
                 url:url,
                 onSubmit:function () {
