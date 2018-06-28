@@ -83,14 +83,16 @@
         }
         function  loadDynamicByAcceptanceNo(acceptance_criteria_no) {
             //dg加载测量项数据
-
+            $('#dg').datagrid('load',{
+                'acceptance_criteria_no':acceptance_criteria_no,
+            });
         }
         function addEditFormSubmit() {
             $('#addEditForm').form('submit',{
                 url:url,
                 onSubmit:function () {
                     if($("#acceptance_criteria_no").val()==undefined||$("#acceptance_criteria_no").val()==""){
-                        hlAlertFour("未找到接收标准编号");
+                        hlAlertFour("未生成接收标准编号");
                         return false;
                     }
                 },
@@ -124,7 +126,7 @@
                 // var productname = $(ed.target).combobox('getText');
                 // $('#dg').datagrid('getRows')[editIndex]['productname'] = productname;
                 // $('#dg').datagrid('endEdit', editIndex);
-                alert("开始判断");
+                alert("开始验证");
                 editIndex = undefined;
                 return true;
             } else {
@@ -160,6 +162,8 @@
             if (endEditing()){
                 alert("保存");
                 $('#dg').datagrid('acceptChanges');
+                var row = $('#dg').datagrid('getSelected');
+                alert(row.item_code+":"+row.item_name+":"+row.item_name_en+":"+row.unit_name+":"+row.unit_name_en+":"+row.item_frequency+":"+row.process_code);
             }
         }
         function reject(){
@@ -279,12 +283,8 @@
                     <th class="i18n1" name="itemnameen" data-options="field:'item_name_en',editor:'textbox'"></th>
                     <th class="i18n1" name="unitname" data-options="field:'unit_name',editor:'textbox'"></th>
                     <th class="i18n1" name="unitnameen" data-options="field:'unit_name_en',editor:'textbox'"></th>
-                    <th class="i18n1" name="itemfrequency" data-options="field:'item_frequency',editor:'textbox'"></th>
-                    <th class="i18n1" name="processcode" data-options="field:'process_code',editor:'textbox'"></th>
-                    <th class="i18n1" name="decimalnum" data-options="field:'decimal_num',editor:{type:'numberbox'}"></th>
-                    <th class="i18n1" name="needverify" data-options="field:'need_verify',editor:{type:'checkbox',options:{on:'1',off:'0'}}"></th>
-                    <th class="i18n1" name="controltype" data-options="field:'control_type',formatter:function(value,row){
-							return row.productname;
+                    <th class="i18n1" name="itemfrequency" data-options="field:'item_frequency',formatter:function(value,row){
+							return row.id;
 						},
 						editor:{
 							type:'combobox',
@@ -292,14 +292,30 @@
 								valueField:'id',
 								textField:'text',
 								method:'get',
-								url:'control.json',
+								url:'../data/freq.json',
+								required:true
+							}
+						}"></th>
+                    <th class="i18n1" name="processcode" data-options="field:'process_code',editor:'textbox'"></th>
+                    <th class="i18n1" name="decimalnum" data-options="field:'decimal_num',editor:{type:'numberbox'}"></th>
+                    <th class="i18n1" name="needverify" data-options="field:'need_verify',editor:{type:'checkbox',options:{on:'1',off:'0'}}"></th>
+                    <th class="i18n1" name="controltype" data-options="field:'control_type',width:100,formatter:function(value,row){
+							return row.id;
+						},
+						editor:{
+							type:'combobox',
+							options:{
+								valueField:'id',
+								textField:'text',
+								method:'get',
+								url:'../data/control.json',
 								required:true
 							}
 						}"></th>
                     <th class="i18n1" name="options" data-options="field:'options',editor:'textbox'"></th>
                     <th class="i18n1" name="maxvalue" data-options="field:'max_value',editor:{type:'numberbox',options:{precision:2}}"></th>
                     <th class="i18n1" name="minvalue" data-options="field:'min_value',editor:{type:'numberbox',options:{precision:2}}"></th>
-                    <th class="i18n1" name="defaultvalue" data-options="field:'default_value',editor:{type:'numberbox',options:{precision:2}}"></th>
+                    <th class="i18n1" name="defaultvalue" data-options="field:'default_value',width:150,editor:{type:'numberbox',options:{precision:2}}"></th>
                     <th class="i18n1" name="status" data-options="field:'status',align:'center',editor:{type:'checkbox',options:{on:'P',off:''}}">Status</th>
                 </tr>
                 </thead>
