@@ -32,6 +32,7 @@
             $('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
         });
         function addFunction(){
+            $('#dynamicItem').hide();
             $('#hlcancelBtn').attr('operationtype','add');
             $('#addEditDialog').dialog('open').dialog('setTitle','新增');
             $('#serialNumber').text('');
@@ -62,6 +63,7 @@
             }
         }
         function editFunction(){
+            $('#dynamicItem').show();
             $('#hlcancelBtn').attr('operationtype','edit');
             var row = $('#contentDatagrids').datagrid('getSelected');
             if(row){
@@ -190,17 +192,52 @@
         }
         function accept(){
             if (endEditing()){
-                $('#dg').datagrid('acceptChanges');
-                var row = $('#dg').datagrid('getSelected');
 
-                alert(row.item_code+":"+row.item_name+":"+row.item_name_en+":"+row.unit_name+":"+row.unit_name_en+":"+row.item_frequency+":"+row.process_code);
+                var row = $('#dg').datagrid('getSelected');
+                submitItemInfo(row)
+                //alert(row.item_code+":"+row.item_name+":"+row.item_name_en+":"+row.unit_name+":"+row.unit_name_en+":"+row.item_frequency+":"+row.process_code);
             }
         }
         function reject(){
             $('#dg').datagrid('rejectChanges');
             editIndex = undefined;
         }
-        function submitItemInfo() {
+        function submitItemInfo(row) {
+            var acceptance_criteria_no=$('#acceptance_criteria_no').val();
+            if(row&&acceptance_criteria_no!=undefined&&acceptance_criteria_no!=""){
+                $.ajax({
+                    url:'/DynamicItemOperation/saveDynamicItem.action',
+                    dataType:'json',
+                    data:{
+                        acceptance_criteria_no:acceptance_criteria_no,
+                        item_code:row.item_code,
+                        item_name:row.item_name,
+                        item_name_en:row.item_name_en,
+                        unit_name:row.unit_name,
+                        unit_name_en:row.unit_name_en,
+                        item_frequency:row.item_frequency,
+                        process_code:row.process_code,
+                         decimal_num:row.decimal_num,
+                         need_verify:row.need_verify,
+                         control_type:row.control_type,
+                         options:row.options,
+                         max_value:row.max_value,
+                         min_value:row.min_value,
+                         default_value:row.default_value
+                    },
+                    success:function (data) {
+                        var result = eval('('+data+')');
+                        if (result.success){
+                            $('#dg').datagrid('acceptChanges');
+                        }
+                        hlAlertFour(result.message);
+                    },error:function () {
+
+                    }
+                });
+            }else{
+                hlAlertFour("保存失败!");
+            }
 
         }
 
@@ -309,7 +346,7 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset style="width:99%;border:solid 1px #aaa;position:relative;">
+        <fieldset id="dynamicItem" style="width:99%;border:solid 1px #aaa;position:relative;">
             <legend>测量项信息</legend>
             <table id="dg" class="easyui-datagrid" title="" style="width:100%;height:auto" data-options="
 				iconCls: '',
@@ -390,10 +427,10 @@
       <span id="winTitle" class="i18n1" name=""></span>
     </div>
     <div style="width:100%;height:auto;">
-        <textarea id="tempTextarea" rows="" cols="" style="width:400px;height:150px;margin:0 auto;"></textarea>
+        <textarea id="tempTextarea" rows="" cols="" style="width:95%;height:170px;margin:0 auto;"></textarea>
     </div>
-     <div style="width:100%;height:auto;padding-top:10px;">
-         <a href="#" class="easyui-linkbutton i18n1" name="save" iconCls="icon-save" onclick="saveTextArea()">Save</a>
+     <div style="width:100%;padding-top:10px;">
+         <a  href="#" class="easyui-linkbutton"  iconCls="icon-save" onclick="saveTextArea()">Save</a>
      </div>
 </div>
 <script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
