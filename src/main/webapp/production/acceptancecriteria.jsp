@@ -35,9 +35,7 @@
             $('#addEditDialog').dialog('open').dialog('setTitle','新增');
             $('#serialNumber').text('');
             clearFormLabel();
-            //$("#acceptance_criteria_no").val(new Date().getTime());
-            $("#acceptance_criteria_no").textbox('setValue',new Date().getTime());
-            //$("#acceptance_criteria_no").textbox('setText',new Date().getTime());
+            $("#acceptance_criteria_no").textbox('setValue',"AC"+new Date().getTime());
             url="/ACOperation/saveAC.action";
         }
         function delFunction() {
@@ -80,8 +78,8 @@
         function Search() {
             $('#contentDatagrids').datagrid('load',{
                 'acceptance_criteria_no': $('#acceptancecriteriano').val(),
-                'external_coating_type': $('#externalcoatingtype').val(),
-                'internal_coating_type': $('#internalcoatingtype').val()
+                'external_coating_type': $('#externalSelect').val(),
+                'internal_coating_type': $('#internalSelect').val()
             });
         }
         function  loadDynamicByAcceptanceNo(acceptance_criteria_no) {
@@ -160,6 +158,7 @@
         }
         function accept(){
             if (endEditing()){
+                alert("保存");
                 $('#dg').datagrid('acceptChanges');
             }
         }
@@ -195,9 +194,14 @@
     <span class="i18n1" name="acceptancecriteriano">接收标准编号</span>:
     <input id="acceptancecriteriano" style="line-height:22px;border:1px solid #ccc">
     <span class="i18n1" name="externalcoatingtype">外防类型</span>:
-    <input id="externalcoatingtype" style="line-height:22px;border:1px solid #ccc">
+    <select id="externalSelect" class="easyui-combobox" data-options="editable:false" name="external_coating_type"   style="width:200px;">
+        <option value="2FBE">2FBE</option>
+        <option value="3LPE">3LPE</option>
+    </select>
     <span class="i18n1" name="internalcoatingtype">内防类型</span>:
-    <input id="internalcoatingtype" style="line-height:22px;border:1px solid #ccc">
+    <select id="internalSelect" class="easyui-combobox" data-options="editable:false" name="internal_coating_type"   style="width:200px;">
+        <option value="EPOXY">EPOXY</option>
+    </select>
     <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="Search()">Search</a>
     <div style="float:right">
         <a href="#" id="addObpLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addFunction()">添加</a>
@@ -206,9 +210,9 @@
     </div>
 </div>
 <!--添加、修改框-->
-<div id="addEditDialog" class="easyui-dialog" data-options="title:'添加',modal:true" closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;max-height:500px;overflow-y:auto;">
+<div id="addEditDialog" class="easyui-dialog" data-options="title:'添加',modal:true" closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:1150px;max-height:500px;overflow-y:auto;">
     <form id="addEditForm" method="post">
-        <fieldset style="width:900px;border:solid 1px #aaa;position:relative;">
+        <fieldset style="width:100%;border:solid 1px #aaa;position:relative;">
             <legend>标准信息</legend>
             <div style="width:100%;padding-bottom:5px;">
                 <table class="ht-table"  width="100%" border="0">
@@ -257,7 +261,7 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset style="width:900px;border:solid 1px #aaa;position:relative;">
+        <fieldset style="width:100%;border:solid 1px #aaa;position:relative;">
             <legend>测量项信息</legend>
             <table id="dg" class="easyui-datagrid" title="测量项信息" style="width:100%;height:auto" data-options="
 				iconCls: '',
@@ -267,10 +271,10 @@
 			">
                 <thead>
                 <tr>
-                    <th class="i18n1" name="acceptancecriteriano" data-options="field:'acceptance_criteria_no',width:80"></th>
+                    <%--<th class="i18n1" name="acceptancecriteriano" data-options="field:'acceptance_criteria_no',width:80"></th>--%>
                     <th class="i18n1" name="itemcode" data-options="field:'item_code',width:50">Product</th>
-                    <th class="i18n1" name="itemname" data-options="field:'item_name',width:50,align:'right'">List Price</th>
-                    <th class="i18n1" name="itemnameen" data-options="field:'item_name_en',width:50,align:'right'">Unit Cost</th>
+                    <th class="i18n1" name="itemname" data-options="field:'item_name',width:50,editor:'textbox'">List Price</th>
+                    <th class="i18n1" name="itemnameen" data-options="field:'item_name_en',width:50,editor:'textbox'">Unit Cost</th>
                     <th class="i18n1" name="unitname" data-options="field:'unit_name',width:50,editor:'textbox'">Attribute</th>
                     <th class="i18n1" name="unitnameen" data-options="field:'unit_name_en',width:50,editor:'textbox'">Attribute</th>
                     <th class="i18n1" name="itemfrequency" data-options="field:'item_frequency',width:50,editor:'textbox'">Attribute</th>
