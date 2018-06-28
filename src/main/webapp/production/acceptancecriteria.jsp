@@ -415,7 +415,7 @@
 							}
 						}"></th>
                     <th class="i18n1" name="processcode" data-options="field:'process_code',width:150,formatter:function(value,row){
-							return row.process_name;
+							return row.process_code;
 						},
 						editor:{
 							type:'combobox',
@@ -435,7 +435,7 @@
                         <th class="i18n1" name="defaultvalue" data-options="field:'default_value',width:150,editor:{type:'textbox'}"></th>
 
                         <th class="i18n1" name="controltype" data-options="field:'control_type',width:100,formatter:function(value,row){
-							return row.control_type_name;
+							return row.control_type;
 						},
 						editor:{
 							type:'combobox',
