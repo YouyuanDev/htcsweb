@@ -298,10 +298,10 @@
         function importItem(){
             var src_acceptance_criteria_no=$('#acceptance_criteria_no').val();
             var des_acceptance_criteria_no=$("input[name='acceptance_criteria_no_search']").val();
-            if(src_acceptance_criteria_no==undefined&&src_acceptance_criteria_no==""){
+            if(src_acceptance_criteria_no==undefined||src_acceptance_criteria_no==""){
                 hlAlertFour("导入失败,没有找到源接收标准编号!");return false;
             }
-            if(des_acceptance_criteria_no==undefined&&des_acceptance_criteria_no==""){
+            if(des_acceptance_criteria_no==undefined||des_acceptance_criteria_no==""){
                 hlAlertFour("导入失败,请选择要导入的目标接收标准编号!");return false;
             }
             alert(src_acceptance_criteria_no+":"+des_acceptance_criteria_no);
