@@ -321,8 +321,8 @@
                 <tr>
                     <%--<th class="i18n1" name="acceptancecriteriano" data-options="field:'acceptance_criteria_no',width:80"></th>--%>
                     <th class="i18n1" name="itemcode" data-options="field:'item_code'"></th>
-                    <th class="i18n1" name="itemname" data-options="field:'item_name',editor:'textbox',required:true"></th>
-                    <th class="i18n1" name="itemnameen" data-options="field:'item_name_en',editor:'textbox',required:true"></th>
+                    <th class="i18n1" name="itemname" data-options="field:'item_name',editor:{type:'textbox',options:{required:true}}"></th>
+                    <th class="i18n1" name="itemnameen" data-options="field:'item_name_en',editor:{type:'textbox',options:{required:true}}"></th>
                     <th class="i18n1" name="unitname" data-options="field:'unit_name',editor:'textbox'"></th>
                     <th class="i18n1" name="unitnameen" data-options="field:'unit_name_en',editor:'textbox'"></th>
                     <th class="i18n1" name="itemfrequency" data-options="field:'item_frequency',width:150,formatter:function(value,row){
