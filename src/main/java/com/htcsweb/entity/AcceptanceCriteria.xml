@@ -41,4 +41,44 @@
         order by id desc
     </select>
 
+
+
+    <select id="getCountAllByLike" resultType="int">
+        select count(*) from acceptance_criteria
+
+        <where>
+            <if test="acceptance_criteria_no!=null and acceptance_criteria_no!=''">
+                AND acceptance_criteria_no LIKE CONCAT('%',#{acceptance_criteria_no},'%')
+            </if>
+            <if test="external_coating_type!=null and external_coating_type!=''">
+                AND external_coating_type =#{external_coating_type}
+            </if>
+            <if test="internal_coating_type!=null and internal_coating_type!=''">
+                AND internal_coating_type =#{internal_coating_type}
+            </if>
+
+        </where>
+    </select>
+
+
+    <select id="getAllByLike" resultType="map">
+        select * from acceptance_criteria
+        <where>
+            <if test="acceptance_criteria_no!=null and acceptance_criteria_no!=''">
+                AND acceptance_criteria_no LIKE CONCAT('%',#{acceptance_criteria_no},'%')
+            </if>
+            <if test="external_coating_type!=null and external_coating_type!=''">
+                AND external_coating_type =#{external_coating_type}
+            </if>
+            <if test="internal_coating_type!=null and internal_coating_type!=''">
+                AND internal_coating_type =#{internal_coating_type}
+            </if>
+        </where>
+        ORDER BY id DESC
+        limit #{skip},#{take}
+    </select>
+
+
+
+
 </mapper>
