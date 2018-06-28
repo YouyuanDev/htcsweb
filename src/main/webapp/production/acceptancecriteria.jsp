@@ -193,7 +193,12 @@
         function accept(){
             if (endEditing()){
                 var row = $('#dg').datagrid('getSelected');
-                submitItemInfo(row)
+                if(row){
+                    submitItemInfo(row);
+                }
+                else{
+                    hlAlertFour("请选中要修改的项!");
+                }
             }
         }
         function reject(){
@@ -207,14 +212,14 @@
                     url:'/DynamicItemOperation/saveDynamicItem.action',
                     dataType:'json',
                     data:{
-                        acceptance_criteria_no:acceptance_criteria_no,
-                        item_code:row.item_code,
-                        item_name:row.item_name,
-                        item_name_en:row.item_name_en,
-                        unit_name:row.unit_name,
-                        unit_name_en:row.unit_name_en,
-                        item_frequency:row.item_frequency,
-                        process_code:row.process_code,
+                         acceptance_criteria_no:acceptance_criteria_no,
+                         item_code:row.item_code,
+                         item_name:row.item_name,
+                         item_name_en:row.item_name_en,
+                         unit_name:row.unit_name,
+                         unit_name_en:row.unit_name_en,
+                         item_frequency:row.item_frequency,
+                         process_code:row.process_code,
                          decimal_num:row.decimal_num,
                          need_verify:row.need_verify,
                          control_type:row.control_type,
@@ -250,7 +255,7 @@
             $('#dg').datagrid({
                 url:"/DynamicItemOperation/getDynamicItemByACNo.action?acceptance_criteria_no="+acceptance_criteria_no
             });
-            $("#dg").datagrid('reload');
+            $("#dg").datagrid('load');
         }
     </script>
 </head>
@@ -298,7 +303,7 @@
     </div>
 </div>
 <!--添加、修改框-->
-<div id="addEditDialog" class="easyui-dialog" data-options="title:'添加',modal:true" closed="true" buttons="#dlg-buttons" style="display: none;padding:5px 0px;width:1150px;max-height:500px;overflow-y:auto;">
+<div id="addEditDialog" class="easyui-dialog" data-options="title:'添加',modal:true" closed="true" buttons="#dlg-buttons" style="display: none;padding:5px 0px;width:1250px;max-height:500px;overflow-y:auto;">
     <form id="addEditForm" method="post" style="width:95%;margin:0 auto;">
         <fieldset style="width:99%;border:solid 1px #aaa;position:relative;">
             <legend>标准信息</legend>
