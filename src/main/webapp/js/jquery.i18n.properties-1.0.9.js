@@ -71,7 +71,7 @@ $.i18n.properties = function(settings) {
             loadAndParseFile(settings.path + files[i] + '_' + settings.language+'.properties', settings);
         }
         else{
-            loadAndParseFile(settings.path + files[i] + '_zh.properties', settings);
+            loadAndParseFile(settings.path + files[i] + '_zh-CN.properties', settings);
         }
 
         // 1. load base (eg, Messages.properties)
