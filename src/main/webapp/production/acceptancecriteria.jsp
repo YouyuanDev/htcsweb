@@ -433,6 +433,20 @@
                 <tr>
                     <%--<th class="i18n1" name="acceptancecriteriano" data-options="field:'acceptance_criteria_no',width:80"></th>--%>
                     <th class="i18n1" name="id" hidden="true" data-options="field:'id'"></th>
+                        <th class="i18n1" name="processcode" data-options="field:'process_code',width:150,formatter:function(value,row){
+							return row.process_code;
+						},
+						editor:{
+							type:'combobox',
+							width:150,
+							options:{
+								valueField:'process_code',
+								textField:'process_name',
+								method:'get',
+								url:'/ProcessOperation/getAllProcess.action',
+								required:true
+							}
+						}"></th>
                         <th class="i18n1" name="itemcode" data-options="field:'item_code'"></th>
                     <th class="i18n1" name="itemname" data-options="field:'item_name',editor:{type:'textbox',options:{required:true}}"></th>
                     <th class="i18n1" name="itemnameen" data-options="field:'item_name_en',editor:{type:'textbox',options:{required:true}}"></th>
@@ -451,20 +465,7 @@
 								required:true
 							}
 						}"></th>
-                    <th class="i18n1" name="processcode" data-options="field:'process_code',width:150,formatter:function(value,row){
-							return row.process_code;
-						},
-						editor:{
-							type:'combobox',
-							width:150,
-							options:{
-								valueField:'process_code',
-								textField:'process_name',
-								method:'get',
-								url:'/ProcessOperation/getAllProcess.action',
-								required:true
-							}
-						}"></th>
+
                     <th class="i18n1" name="decimalnum" data-options="field:'decimal_num',editor:{type:'numberbox'}"></th>
                     <th class="i18n1" name="needverify" data-options="field:'need_verify',editor:{type:'checkbox',options:{on:'1',off:'0'}}"></th>
                         <th class="i18n1" name="maxvalue" data-options="field:'max_value',editor:{type:'numberbox',options:{precision:2}}"></th>
