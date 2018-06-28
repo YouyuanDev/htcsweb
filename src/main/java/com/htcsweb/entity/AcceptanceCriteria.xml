@@ -17,8 +17,7 @@
     <update id="updateAcceptanceCriteria" parameterType="com.htcsweb.entity.AcceptanceCriteria">
         UPDATE acceptance_criteria set
         acceptance_criteria_no=#{acceptance_criteria_no}, external_coating_type=#{external_coating_type},internal_coating_type=#{internal_coating_type},
-        last_update_time=#{last_update_time},remark=#{remark})
-
+        last_update_time=#{last_update_time},remark=#{remark}
         where id=#{id}
     </update>
 
