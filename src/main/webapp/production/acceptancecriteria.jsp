@@ -124,13 +124,13 @@
             if ($('#dg').datagrid('validateRow', editIndex)){
                 var ed = $('#dg').datagrid('getEditor', {index:editIndex,field:'item_frequency'});
                 var text = $(ed.target).combobox('getText');
-                $('#dg').datagrid('getRows')[editIndex]['item_frequency'] = text;
+                $('#dg').datagrid('getRows')[editIndex]['item_frequency_name'] = text;
                 var ed1 = $('#dg').datagrid('getEditor', {index:editIndex,field:'process_code'});
                 var text1 = $(ed1.target).combobox('getText');
-                $('#dg').datagrid('getRows')[editIndex]['process_code'] = text1;
+                $('#dg').datagrid('getRows')[editIndex]['process_code_name'] = text1;
                 var ed2 = $('#dg').datagrid('getEditor', {index:editIndex,field:'control_type'});
                 var text2 = $(ed2.target).combobox('getText');
-                $('#dg').datagrid('getRows')[editIndex]['control_type'] = text2;
+                $('#dg').datagrid('getRows')[editIndex]['control_type_name'] = text2;
 
                 $('#dg').datagrid('endEdit', editIndex);
                 //alert("开始验证");
@@ -293,13 +293,13 @@
                     <th class="i18n1" name="unitname" data-options="field:'unit_name',editor:'textbox'"></th>
                     <th class="i18n1" name="unitnameen" data-options="field:'unit_name_en',editor:'textbox'"></th>
                     <th class="i18n1" name="itemfrequency" data-options="field:'item_frequency',width:150,formatter:function(value,row){
-							return row.text;
+							return row.item_frequency_name;
 						},
 						editor:{
 							type:'combobox',
 							options:{
 								valueField:'item_frequency',
-								textField:'text',
+								textField:'item_frequency_name',
 								method:'get',
 								url:'../data/freq.json',
 								required:true

@@ -28,7 +28,7 @@ public class ProcessInfoController {
     @ResponseBody
     public String getAllProcess(HttpServletRequest request){
         List<ProcessInfo> list=processInfoDao.getAllProcessInfo();
-        
+
         String map= JSONObject.toJSONString(list);
         System.out.println("="+map);
         return map;
