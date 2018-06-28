@@ -1,5 +1,11 @@
 [
-    { "id": "母材缺陷", "text": "母材缺陷"},
-    { "id": "油污", "text": "油污" },
-    { "id": "其他见备注", "text": "其他见备注" }
+    { "id": "singlenumber", "text": "单值数字"},
+    { "id": "multinumber", "text": "多值数字" },
+    { "id": "singletext", "text": "单值文本" },
+    { "id": "multitext", "text": "多值文本" },
+    { "id": "date", "text": "日期输入框" },
+    { "id": "singleselect", "text": "单选" },
+    { "id": "multiselect", "text": "多选" },
+    { "id": "checkbox", "text": "复选框" },
+    { "id": "textarea", "text": "多行文本" }
 ]
