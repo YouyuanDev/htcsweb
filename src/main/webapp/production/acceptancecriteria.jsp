@@ -554,11 +554,11 @@
          url="/ACOperation/getACs.action">
         <div property="columns">
             <div type="checkcolumn" ></div>
-            <div field="acceptance_criteria_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="acceptancecriteriano"></div>
-            <div field="acceptance_criteria_name" width="80" headerAlign="center" allowSort="true" class="i18n1" name="acceptancecriterianame"></div>
-            <div field="external_coating_type" width="80" headerAlign="center" allowSort="true" class="i18n1" name="externalcoatingtype"></div>
-            <div field="internal_coating_type" width="40" headerAlign="center" allowSort="true" class="i18n1" name="internalcoatingtype"></div>
-            <div field="remark" width="40" headerAlign="center" allowSort="true" class="i18n1" name="remark"></div>
+            <div field="acceptance_criteria_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="acceptancecriteriano">接收标准编号</div>
+            <div field="acceptance_criteria_name" width="80" headerAlign="center" allowSort="true" class="i18n1" name="acceptancecriterianame">标准名称</div>
+            <div field="external_coating_type" width="40" headerAlign="center" allowSort="true" class="i18n1" name="externalcoatingtype">外涂类型</div>
+            <div field="internal_coating_type" width="40" headerAlign="center" allowSort="true" class="i18n1" name="internalcoatingtype">内涂类型</div>
+            <div field="remark" width="40" headerAlign="center" allowSort="true" class="i18n1" name="remark">备注</div>
         </div>
     </div>
 </div>
