@@ -73,7 +73,7 @@
                 "coatingrepair","coatingstrip",
                 "barepipegrindingProcess","pipeSamplingProcess","pipeRebevelProcess",
                 "projectManagement","contractManagement","pipeManagement","uploadPipe","twodimensionalcode","coatingpowderManagement",
-                "odstandard","idstandard","labtestingstandard2fbe","labtestingstandard3lpe","rawmaterialtestingstandard2fbe","rawmaterialtestingstandard3lpe","pipebodystandard","inspectionFrequencyStandard",
+                "acceptancecriteria","odstandard","idstandard","labtestingstandard2fbe","labtestingstandard3lpe","rawmaterialtestingstandard2fbe","rawmaterialtestingstandard3lpe","pipebodystandard","inspectionFrequencyStandard",
                 "labtesting2fbe","labtesting3lpe","labtestingepoxy","rawmaterialtesting2fbe","rawmaterialtesting3lpe","rawmaterialtestingliquidepoxy",
                 "person","role","function",
                 "productionProcessRecord","dailyProductionReport","shipmentRecord"
@@ -85,10 +85,10 @@
             var repairArr=uriArr.slice(19,21);
             var pipeArr=uriArr.slice(21,24);
             var basicArr=uriArr.slice(24,30);
-            var standArr=uriArr.slice(30,38);
-            var labArr=uriArr.slice(38,44);
-            var accountArr=uriArr.slice(44,47);
-            var reportArr=uriArr.slice(47,50);
+            var standArr=uriArr.slice(30,39);
+            var labArr=uriArr.slice(39,45);
+            var accountArr=uriArr.slice(45,48);
+            var reportArr=uriArr.slice(48,51);
 
 
             var hsMapList="<%=session.getAttribute("userfunctionMap")%>";
@@ -578,14 +578,27 @@
                     if(tab){
                         $('#hlTab').tabs('select',node.text);
                     }else{
-                        if("外防腐生产标准"==nodeTxt||"Od Standard"==nodeTxt){
+                        if("接收标准"==nodeTxt||"Acceptance Criteria"==nodeTxt){
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='production/acceptancecriteria.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                            hlLanguage();
+                        }
+
+                        else if("外防腐生产标准"==nodeTxt||"Od Standard"==nodeTxt){
                             $('#hlTab').tabs('add',{
                                 title:node.text,
                                 content:"<iframe scrolling='auto' frameborder='0'  src='production/odstandard.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable:true
                             });
                             hlLanguage();
-                        }else if("内防腐生产标准"==nodeTxt||"Id Standard"==nodeTxt){
+                        }
+
+
+
+                        else if("内防腐生产标准"==nodeTxt||"Id Standard"==nodeTxt){
                             $('#hlTab').tabs('add',{
                                 title:node.text,
                                 content:"<iframe scrolling='auto' frameborder='0'  src='production/idstandard.jsp' style='width:100%;height:100%;'></iframe>",
