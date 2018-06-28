@@ -63,6 +63,7 @@
             }
         }
         function editFunction(){
+            $('#dg').datagrid('loadData', { total: 0, rows: [] });
             $('#dynamicItem').show();
             $('#hlcancelBtn').attr('operationtype','edit');
             var row = $('#contentDatagrids').datagrid('getSelected');
