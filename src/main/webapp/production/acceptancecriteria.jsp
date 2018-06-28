@@ -298,13 +298,13 @@
         function importItem(){
             var src_acceptance_criteria_no=$('#acceptance_criteria_no').val();
             var des_acceptance_criteria_no=$("input[name='acceptance_criteria_no_search']").val();
-            if(src_acceptance_criteria_no!=undefined&&src_acceptance_criteria_no!=""){
+            if(src_acceptance_criteria_no==undefined&&src_acceptance_criteria_no==""){
                 hlAlertFour("导入失败,没有找到源接收标准编号!");return false;
             }
-            if(des_acceptance_criteria_no!=undefined&&des_acceptance_criteria_no!=""){
+            if(des_acceptance_criteria_no==undefined&&des_acceptance_criteria_no==""){
                 hlAlertFour("导入失败,请选择要导入的目标接收标准编号!");return false;
             }
-            alert(src_acceptance_criteria_no,des_acceptance_criteria_no);
+            alert(src_acceptance_criteria_no+":"+des_acceptance_criteria_no);
             $.ajax({
                 url:'/DynamicItemOperation/importDynamicItem.action',
                 dataType:'json',
@@ -495,7 +495,7 @@
                 <a href="javascript:void(0)" class="easyui-linkbutton i18n1" name="undo" data-options="iconCls:'icon-undo',plain:true" onclick="reject()">Reject</a>
                 <a href="javascript:void(0)" class="easyui-linkbutton i18n1" name="import" data-options="iconCls:'icon-undo',plain:true" onclick="importItem()">Import</a>
                 <input  id="lookup1" name="acceptance_criteria_no_search" class="mini-lookup" style="text-align:center;width:180px;"
-                        textField="acceptance_criteria_no_search" valueField="id" popupWidth="auto"
+                        textField="acceptance_criteria_no" valueField="acceptance_criteria_no" popupWidth="auto"
                         popup="#gridPanel1" grid="#datagrid1" multiSelect="false"/>
             </div>
         </fieldset>
@@ -547,7 +547,6 @@
     var keyText1=mini.get('keyText1');
     var grid1=mini.get("datagrid1");
     var look1=mini.get('lookup1');
-    var combox1=mini.get("combobox1");
     function onSearchClick(type) {
         if(type==1)
         {
@@ -576,11 +575,6 @@
         grid1.load({
             acceptance_criteria_no:keyText1.value
         });
-    });
-    combox1.on("showpopup",function () {
-        $('.mini-shadow').css('z-index','99999');
-        $('.mini-popup').css('z-index','100000');
-        $('.mini-panel').css('z-index','100000');
     });
     hlLanguage("../i18n/");
 </script>
