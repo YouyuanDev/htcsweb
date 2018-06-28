@@ -27,7 +27,7 @@ import java.util.Map;
 @RequestMapping("/ACOperation")
 public class ACController {
 
-    
+
     @Autowired
     private AcceptanceCriteriaDao acceptanceCriteriaDao;
 
