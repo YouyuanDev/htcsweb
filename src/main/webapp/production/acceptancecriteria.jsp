@@ -127,7 +127,7 @@
                 $('#dg').datagrid('getRows')[editIndex]['item_frequency_name'] = text;
                 var ed1 = $('#dg').datagrid('getEditor', {index:editIndex,field:'process_code'});
                 var text1 = $(ed1.target).combobox('getText');
-                $('#dg').datagrid('getRows')[editIndex]['process_code_name'] = text1;
+                $('#dg').datagrid('getRows')[editIndex]['process_name'] = text1;
                 var ed2 = $('#dg').datagrid('getEditor', {index:editIndex,field:'control_type'});
                 var text2 = $(ed2.target).combobox('getText');
                 $('#dg').datagrid('getRows')[editIndex]['control_type_name'] = text2;
