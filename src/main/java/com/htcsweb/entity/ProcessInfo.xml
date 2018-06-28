@@ -7,7 +7,7 @@
 
     <select id="getAllProcessInfo" resultType="com.htcsweb.entity.ProcessInfo">
         select * from  process_info
-        order by process_code desc
+        order by id asc
     </select>
 
 
