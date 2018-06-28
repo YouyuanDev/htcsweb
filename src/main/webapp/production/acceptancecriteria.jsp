@@ -398,7 +398,7 @@
                     <th class="i18n1" name="unitname" data-options="field:'unit_name',editor:'textbox'"></th>
                     <th class="i18n1" name="unitnameen" data-options="field:'unit_name_en',editor:'textbox'"></th>
                     <th class="i18n1" name="itemfrequency" data-options="field:'item_frequency',width:150,formatter:function(value,row){
-							return row.item_frequency_name;
+							return row.item_frequency;
 						},
 						editor:{
 							type:'combobox',
@@ -449,17 +449,17 @@
                 </thead>
             </table>
             <div id="tb" style="height:auto">
-                <a href="javascript:void(0)" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="append()">Append</a>
-                <a href="javascript:void(0)" class="easyui-linkbutton i18n1" name="delete" data-options="iconCls:'icon-remove',plain:true" onclick="removeit()">Remove</a>
-                <a href="javascript:void(0)" class="easyui-linkbutton i18n1" name="save" data-options="iconCls:'icon-save',plain:true" onclick="accept()">Accept</a>
-                <a href="javascript:void(0)" class="easyui-linkbutton i18n1" name="undo" data-options="iconCls:'icon-undo',plain:true" onclick="reject()">Reject</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton i18n2" name="add" data-options="iconCls:'icon-add',plain:true" onclick="append()">Append</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton i18n2" name="delete" data-options="iconCls:'icon-remove',plain:true" onclick="removeit()">Remove</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton i18n2" name="save" data-options="iconCls:'icon-save',plain:true" onclick="accept()">Accept</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton i18n2" name="undo" data-options="iconCls:'icon-undo',plain:true" onclick="reject()">Reject</a>
             </div>
         </fieldset>
     </form>
 </div>
 <div id="w" class="easyui-window" title="修改" data-options="modal:true,collapsible:false,minimizable:false,maximizable:false,closed:true" style="width:500px;height:300px;padding:10px;text-align: center">
     <div style="width:100%;height:auto;text-align:left">
-      <span id="winTitle" class="i18n1" name=""></span>
+      <span id="winTitle" class="i18n2" name=""></span>
     </div>
     <div style="width:100%;height:auto;">
         <textarea id="tempTextarea" rows="" cols="" style="width:95%;height:170px;margin:0 auto;"></textarea>
