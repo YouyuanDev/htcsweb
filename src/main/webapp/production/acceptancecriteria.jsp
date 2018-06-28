@@ -91,7 +91,8 @@
         //     });
         // }
         function addEditFormSubmit() {
-            if(editIndex!=undefined){
+            var temp=$('#hlcancelBtn').attr('operationtype');
+            if(editIndex!=undefined&&temp=="edit"){
                 hlAlertFour("请先保存测量项!");
                 return false;
             }
@@ -117,7 +118,7 @@
             });
         }
         function CancelSubmit() {
-            if(editIndex!=undefined){
+            if(editIndex!=undefined&&temp=="edit"){
                 hlAlertFour("请先保存测量项!");
                 return false;
             }
@@ -294,8 +295,33 @@
             $("#dg").datagrid('load');
         }
         //导入事件
-        function importItem() {
+        function importItem(){
+            var src_acceptance_criteria_no=$('#acceptance_criteria_no').val();
+            var des_acceptance_criteria_no=$("input[name='acceptance_criteria_no_search']").val();
+            if(src_acceptance_criteria_no!=undefined&&src_acceptance_criteria_no!=""){
+                hlAlertFour("导入失败,没有找到源接收标准编号!");return false;
+            }
+            if(des_acceptance_criteria_no!=undefined&&des_acceptance_criteria_no!=""){
+                hlAlertFour("导入失败,请选择要导入的目标接收标准编号!");return false;
+            }
+            alert(src_acceptance_criteria_no,des_acceptance_criteria_no);
+            $.ajax({
+                url:'/DynamicItemOperation/importDynamicItem.action',
+                dataType:'json',
+                data:{
+                    src_acceptance_criteria_no:src_acceptance_criteria_no,
+                    des_acceptance_criteria_no:des_acceptance_criteria_no
+                },
+                success:function (data) {
+                    var result = eval('('+data+')');
+                    if (result.success){
+                        loadDynamicItemInfo(src_acceptance_criteria_no);
+                    }
+                    hlAlertFour(result.message);
+                },error:function () {
 
+                }
+            });
         }
     </script>
 </head>
