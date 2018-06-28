@@ -62,13 +62,12 @@
         }
         function editFunction(){
             $('#hlcancelBtn').attr('operationtype','edit');
-            addOrEdit=false;
             var row = $('#contentDatagrids').datagrid('getSelected');
             if(row){
                 $('#addEditDialog').dialog('open').dialog('setTitle','修改');
+                row.last_update_time=getDate1(row.last_update_time);
                 $('#addEditForm').form('load',row);
                 $("#serialNumber").text(row.id);
-                //$('#createNoBtn').css('display','none');
                 url="/ACOperation/saveAC.action?id="+row.id;
                 loadDynamicByAcceptanceNo(row.acceptance_criteria_no);
             }else{
