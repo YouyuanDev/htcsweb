@@ -195,6 +195,7 @@
 199	发运记录管理	shiprdr	查看	r	shipmentRecord
 
 200	检验标准管理	acmr	查看	r	acceptancecriteria
-201	检验标准管理	acms	搜索	r	getACByLike
-202	检验标准管理	acme	编辑	w	saveAC
-203	检验标准管理	acmd	删除	d	delAC
+201	检验标准管理	acms	搜索	r	getACByLike;getDynamicItemByACNo
+202	检验标准管理	acme	编辑	w	saveAC;saveDynamicItem
+203	检验标准管理	acmd	删除	d	delAC;delDynamicItem
+
