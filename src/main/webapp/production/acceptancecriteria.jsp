@@ -156,6 +156,14 @@
                 }
             }
         }
+        function onClickCell(index,field) {
+            alert(field);
+            var ed = $('#dg').datagrid('getEditor', {index:editIndex,field:field});
+            if(ed){
+                var text = $(ed.target).textbox('getText');
+                alert(text);
+            }
+        }
         function append(){
             if (endEditing()){
                 $('#dg').datagrid('appendRow',{item_code:"IT"+new Date().getTime(),decimal_num:'0',max_value:'0',min_value:'0',default_value:'0',status:'P'});
@@ -287,7 +295,8 @@
 				iconCls: '',
 				singleSelect: true,
 				toolbar: '#tb',
-				onClickRow: onClickRow
+				onClickRow: onClickRow,
+				onClickCell:onClickCell
 			">
                 <thead>
                 <tr>
@@ -328,7 +337,7 @@
                     <th class="i18n1" name="needverify" data-options="field:'need_verify',editor:{type:'checkbox',options:{on:'1',off:'0'}}"></th>
                         <th class="i18n1" name="maxvalue" data-options="field:'max_value',editor:{type:'numberbox',options:{precision:2}}"></th>
                         <th class="i18n1" name="minvalue" data-options="field:'min_value',editor:{type:'numberbox',options:{precision:2}}"></th>
-                        <th class="i18n1" name="defaultvalue" data-options="field:'default_value',width:150,editor:{type:'numberbox',options:{precision:2}}"></th>
+                        <th class="i18n1" name="defaultvalue" data-options="field:'default_value',width:150,editor:{type:'textbox'}"></th>
 
                         <th class="i18n1" name="controltype" data-options="field:'control_type',width:100,formatter:function(value,row){
 							return row.control_type_name;
