@@ -158,8 +158,8 @@
                     $('#dg').datagrid('selectRow', index)
                         .datagrid('beginEdit', index);
                     editIndex = index;
-
-
+                    setTextAreaEvent("options");
+                    setTextAreaEvent("default_value");
                 } else {
                     $('#dg').datagrid('selectRow', editIndex);
                 }
