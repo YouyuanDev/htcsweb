@@ -78,6 +78,16 @@
     </select>
 
 
+    <select id="getACs" resultType="map">
+        select * from acceptance_criteria
+        <where>
+            <if test="acceptance_criteria_no!=null and acceptance_criteria_no!=''">
+                AND acceptance_criteria_no LIKE CONCAT('%',#{acceptance_criteria_no},'%')
+            </if>
 
+        </where>
+        ORDER BY id DESC
+        limit 1000
+    </select>
 
 </mapper>

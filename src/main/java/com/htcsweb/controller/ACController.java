@@ -60,6 +60,20 @@ public class ACController {
     }
 
 
+    @RequestMapping("/getACs")
+    @ResponseBody
+    public String getACs(HttpServletRequest request){
+        String map="";
+        try{
+            String acceptance_criteria_no=request.getParameter("acceptance_criteria_no");
+            List<AcceptanceCriteria>list=acceptanceCriteriaDao.getACs(acceptance_criteria_no);
+            map= JSONObject.toJSONString(list);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return map;
+    }
+
 
     //添加、修改
     @RequestMapping("/saveAC")

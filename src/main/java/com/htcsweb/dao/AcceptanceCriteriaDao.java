@@ -23,6 +23,8 @@ public interface AcceptanceCriteriaDao {
 
     public int getCountAllByLike (@Param("acceptance_criteria_no") String acceptance_criteria_no, @Param("external_coating_type") String external_coating_type, @Param("internal_coating_type") String internal_coating_type);
 
+    //模糊查找
+    public List<AcceptanceCriteria> getACs(@Param("acceptance_criteria_no") String acceptance_criteria_no);
 
 
 }
