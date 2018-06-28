@@ -166,17 +166,20 @@
                 editIndex = $('#dg').datagrid('getRows').length-1;
                 $('#dg').datagrid('selectRow', editIndex)
                     .datagrid('beginEdit', editIndex);
-                var ed = $('#dg').datagrid('getEditor', {index:editIndex,field:'options'});
-                $(ed.target).textbox('textbox').bind('click', function() {
-                    var text=$(ed.target).textbox('getValue');
-                    if(text!=undefined)
-                        $('#tempTextarea').val(text);
-                    $('#w').window('open');
-                    $('#w').attr('title','options');
-                    g_textarea_field=options;
-                });
-
+                setTextAreaEvent("options");
+                setTextAreaEvent("default_value");
             }
+        }
+        function setTextAreaEvent(field) {
+            var ed = $('#dg').datagrid('getEditor', {index:editIndex,field:field});
+            $(ed.target).textbox('textbox').bind('click', function() {
+                var text=$(ed.target).textbox('getValue');
+                if(text!=undefined)
+                    $('#tempTextarea').val(text);
+                $('#w').window('open');
+                $('#w').attr('title',field);
+                g_textarea_field=field;
+            });
         }
         function removeit(){
             if (editIndex == undefined){return}
