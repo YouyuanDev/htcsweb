@@ -122,11 +122,18 @@
         function endEditing(){
             if (editIndex == undefined){return true}
             if ($('#dg').datagrid('validateRow', editIndex)){
-                // var ed = $('#dg').datagrid('getEditor', {index:editIndex,field:'productid'});
-                // var productname = $(ed.target).combobox('getText');
-                // $('#dg').datagrid('getRows')[editIndex]['productname'] = productname;
-                // $('#dg').datagrid('endEdit', editIndex);
-                alert("开始验证");
+                var ed = $('#dg').datagrid('getEditor', {index:editIndex,field:'item_frequency'});
+                var text = $(ed.target).combobox('getText');
+                $('#dg').datagrid('getRows')[editIndex]['item_frequency'] = text;
+                var ed1 = $('#dg').datagrid('getEditor', {index:editIndex,field:'process_code'});
+                var text1 = $(ed1.target).combobox('getText');
+                $('#dg').datagrid('getRows')[editIndex]['process_code'] = text1;
+                var ed2 = $('#dg').datagrid('getEditor', {index:editIndex,field:'control_type'});
+                var text2 = $(ed2.target).combobox('getText');
+                $('#dg').datagrid('getRows')[editIndex]['control_type'] = text2;
+
+                $('#dg').datagrid('endEdit', editIndex);
+                //alert("开始验证");
                 editIndex = undefined;
                 return true;
             } else {
@@ -146,7 +153,7 @@
         }
         function append(){
             if (endEditing()){
-                $('#dg').datagrid('appendRow',{status:'P'});
+                $('#dg').datagrid('appendRow',{item_code:"IT"+new Date().getTime(),status:'P'});
                 editIndex = $('#dg').datagrid('getRows').length-1;
                 $('#dg').datagrid('selectRow', editIndex)
                     .datagrid('beginEdit', editIndex);
@@ -163,7 +170,7 @@
                 alert("保存");
                 $('#dg').datagrid('acceptChanges');
                 var row = $('#dg').datagrid('getSelected');
-                row.item_code="IT"+new Date().getTime();
+
                 alert(row.item_code+":"+row.item_name+":"+row.item_name_en+":"+row.unit_name+":"+row.unit_name_en+":"+row.item_frequency+":"+row.process_code);
             }
         }
@@ -301,11 +308,12 @@
 								required:true
 							}
 						}"></th>
-                    <th class="i18n1" name="processcode" data-options="field:'process_code',formatter:function(value,row){
+                    <th class="i18n1" name="processcode" data-options="field:'process_code',width:150,formatter:function(value,row){
 							return row.id;
 						},
 						editor:{
 							type:'combobox',
+							width:150,
 							options:{
 								valueField:'id',
 								textField:'text',
