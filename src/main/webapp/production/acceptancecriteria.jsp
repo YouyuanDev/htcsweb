@@ -186,7 +186,7 @@
                 //     .datagrid('beginEdit', editIndex);
                 setTextAreaEvent("options");
                 setTextAreaEvent("default_value");
-                $("#dg").animate({scrollTop:0},100);
+                $("#dg").siblings('div').find('.datagrid-body').animate({scrollTop:0},100);
             }
         }
         function setTextAreaEvent(field) {
