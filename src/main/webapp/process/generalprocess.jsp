@@ -314,9 +314,17 @@
             var minvalue=item.min_value; //最小值
             var defaultvalue=item.default_value; //默认值
 
-            var div="<tr>\n" +
-                "<td width=\"16%\" class=\"i18n1\">"+itemname+" "+itemnameen+"</td>" +
-                "<td>";
+            var div="";
+            var language=getCookie("userLanguage")
+            if(language&&language=="zh-CN"){
+                div="<tr>\n" +
+                    "<td width=\"16%\" class=\"\">"+itemname+"("+unitname+")</td>" +
+                    "<td>";
+            }else{
+                div="<tr>\n" +
+                    "<td width=\"16%\" class=\"\">"+itemnameen+"("+unitnameen+")</td>" +
+                    "<td>";
+            }
 
             var controldiv="";
 
