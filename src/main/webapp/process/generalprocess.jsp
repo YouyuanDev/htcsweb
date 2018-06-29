@@ -269,8 +269,9 @@
                        div+=getTemplate(data[i]);
                    }
                     alert(div);
-
-
+                  $('#dynamicTable').append(div);
+                  $.parser.parse("#dynamicTable");
+                    //
                 },error:function () {
 
                 }
@@ -306,7 +307,7 @@
             var controldiv="";
 
             if(controltype=="singleselect"){//单选
-                controldiv="<select id=\""+itemcode+"\" class=\"easyui-combobox\" data-options=\"editable:false\" name=\""+itemcode+"\" style=\"width:200px;\">";
+                controldiv="<select id=\""+itemcode+"\" class=\"easyui-combobox\" data-options=\"editable:false\" name=\""+itemcode+"\" style=\"width:180px;\">";
                 var optionArr=[];
                 optionArr=options.split(';');
                 var optiondiv="";
@@ -320,7 +321,23 @@
                 controldiv+=optiondiv;
                 controldiv+="</select>";
             }else if(controltype=="singlenumber"){//单值数字
-
+                controldiv='<input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="'+itemcode+'" value=""/>';
+            }else if(controltype=="multinumber"){//多值数字
+                controldiv='<input class="easyui-numberbox"  type="text" name="'+itemcode+'" value=""/>';
+            }else if(controltype=="singletext"){//单值文本
+                controldiv='<input class="easyui-numberbox"  type="text" name="'+itemcode+'" value=""/>';
+            }else if(controltype=="multitext"){//多值文本
+                controldiv='<input class="easyui-numberbox"  type="text" name="'+itemcode+'" value=""/>';
+            }else if(controltype=="date"){//日期
+                controldiv='<input class="easyui-numberbox"  type="text" name="'+itemcode+'" value=""/>';
+            }else if(controltype=="date"){//日期
+                controldiv='<input class="easyui-numberbox"  type="text" name="'+itemcode+'" value=""/>';
+            }else if(controltype=="multiselect"){//多选
+                controldiv='<input class="easyui-numberbox"  type="text" name="'+itemcode+'" value=""/>';
+            }else if(controltype=="checkbox"){//复选框
+                controldiv='<input class="easyui-numberbox"  type="text" name="'+itemcode+'" value=""/>';
+            }else if(controltype=="textarea"){//多行文本
+                controldiv='<input class="easyui-numberbox"  type="text" name="'+itemcode+'" value=""/>';
             }
 
 
@@ -508,7 +525,7 @@
            </tr>
        </table>
 
-       <table class="ht-table">
+       <table class="ht-table" id="dynamicTable">
 
            <%--以下检测项自动生成--%>
            <tr>
@@ -578,10 +595,10 @@
                <td></td>
                <td></td>
            </tr>
-
                <%--以上检测项自动生成--%>
+       </table>
 
-
+       <table class="ht-table">
            <tr>
                <td width="16%" class="i18n1" name="result">结论</td>
                <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
@@ -596,6 +613,8 @@
                <td></td>
            </tr>
        </table>
+
+
            <input type="hidden" id="fileslist" name="upload_files" value=""/>
            <div id="hl-gallery-con" style="width:100%;">
 
