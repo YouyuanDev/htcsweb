@@ -167,6 +167,7 @@
                     $('#dg').datagrid('selectRow', index)
                         .datagrid('beginEdit', index);
                     editIndex = index;
+                    //设置options和default_value的点击事件
                     setTextAreaEvent("options");
                     setTextAreaEvent("default_value");
                 } else {
@@ -189,6 +190,8 @@
                 $("#dg").siblings('div').find('.datagrid-body').animate({scrollTop:0},100);
             }
         }
+
+        //设置Editor的点击事件
         function setTextAreaEvent(field) {
             var ed = $('#dg').datagrid('getEditor', {index:editIndex,field:field});
             $(ed.target).textbox('textbox').bind('click', function() {
@@ -197,7 +200,8 @@
                     $('#tempTextarea').val(text);
                 $('#w').window('open');
                 $('#winTitle').attr('name',field.replace(/_/g,''));
-                hlLanguage("../i18n/");
+                //hlLanguage("../i18n/");
+
                 g_textarea_field=field;
             });
         }
@@ -291,6 +295,8 @@
         function saveTextArea() {
              if(g_textarea_field!=undefined){
                  var val=$('#tempTextarea').val();
+                 //转换全角分号
+                 val=changeSemicolon(val);
                  var ed = $('#dg').datagrid('getEditor', {index:editIndex,field:g_textarea_field});
                  $(ed.target).textbox('setValue',val)
              }

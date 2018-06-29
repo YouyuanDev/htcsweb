@@ -297,6 +297,15 @@ function  changeComma(str) {
     return newstr;
 }
 
+//字符串转换，全角；分号转;半角
+function  changeSemicolon(str) {
+    var reg=new RegExp("；","g");
+    var newstr=str.replace(reg,";");
+    return newstr;
+}
+
+
+
 //判断字符串厚度列表是否合法
 function thicknessIsAllow(str){
     var flag=true;

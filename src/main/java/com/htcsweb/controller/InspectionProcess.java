@@ -43,11 +43,21 @@ public class InspectionProcess {
     @ResponseBody
     public String saveProcess(InspectionProcessRecordHeader inspectionProcessRecordHeader, HttpServletRequest request, HttpServletResponse response){
         JSONObject json=new JSONObject();
+
+        String dynamicJson=request.getParameter("dynamicJson");
+
+        System.out.println("dynamicJson="+dynamicJson);
+
+
+
         try{
             int resTotal=0;
             if(inspectionProcessRecordHeader.getOperation_time()==null){
                 inspectionProcessRecordHeader.setOperation_time(new Date());
             }
+
+
+
             String pipeno=inspectionProcessRecordHeader.getPipe_no();
             String mill_no=inspectionProcessRecordHeader.getMill_no();
             String msg="";
@@ -63,6 +73,7 @@ public class InspectionProcess {
                             //存在一条pending数据，不给予insert处理
                             msg="已存在待定记录,不能新增记录";
                         }else{
+                            inspectionProcessRecordHeader.setInspection_process_record_header_code("IPRH"+System.currentTimeMillis());
                             resTotal=inspectionProcessRecordHeaderDao.addInspectionProcessRecordHeader(inspectionProcessRecordHeader);
 
                         }

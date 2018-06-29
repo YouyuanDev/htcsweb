@@ -48,10 +48,17 @@
                // hlLanguage("../i18n/");
         });
         function addPro(){
+            var pcode=$('#processcode').val();
+            if(pcode==undefined||pcode=="")return;
             $('#hlcancelBtn').attr('operationtype','add');
             $('#hlProDialog').dialog('open').dialog('setTitle','新增');
+
             clearFormLabel();
             clearMultiUpload(grid);
+
+            $('#process_code').val(pcode);
+            $('#legend-title').text($('#processcode').combobox('getText'));
+            $('#process_name').val($('#processcode').combobox('getText'));
             url="/InspectionProcessOperation/saveProcess.action";
             //$("input[name='alkaline_dwell_time']").siblings().css("background-color","#F9A6A6");
         }
@@ -65,7 +72,7 @@
                 var idArrs=idArr.join(',');
                 $.messager.confirm('系统提示',"您确定要删除这<font color=red>"+idArr.length+ "</font>条数据吗？",function (r) {
                     if(r){
-                        $.post("/InspectionProcessOperation/delProcess.action",{"hlparam":idArrs},function (data) {
+                        $.post("/InspectionProcessOperation/delProcess.action",{hlparam:idArrs},function (data) {
                             if(data.success){
                                 $("#proDatagrids").datagrid("reload");
                             }
@@ -78,32 +85,18 @@
             }
         }
         function editPro(){
+
             $('#hlcancelBtn').attr('operationtype','edit');
             var row = $('#proDatagrids').datagrid('getSelected');
             if(row){
                 $('#hlProDialog').dialog('open').dialog('setTitle','修改');
+                //$('#process_code').val(row.process_code);
+                $('#legend-title').text(row.process_name);
                 loadPipeBaiscInfo(row);
                 $('#odbpid').text(row.id);
                 row.operation_time=getDate1(row.operation_time),
                 $('#proForm').form('load',row);
-                // $('#proForm').form('load', {
-                //     'mill_no': row.mill_no,
-                //     'surface_condition': row.surface_condition,
-                //     'salt_contamination_before_blasting': row.salt_contamination_before_blasting,
-                //     'alkaline_dwell_time': row.alkaline_dwell_time,
-                //     'alkaline_concentration': row.alkaline_concentration,
-                //     'abrasive_conductivity': row.abrasive_conductivity,
-                //     'acid_wash_time': row.acid_wash_time,
-                //     'acid_concentration': row.acid_concentration,
-                //     'blast_line_speed': row.blast_line_speed,
-                //     'preheat_temp': row.preheat_temp,
-                //     'marking': row.marking,
-                //     'rinse_water_conductivity': row.rinse_water_conductivity,
-                //     'operation_time':getDate1(row.operation_time),
-                //     'upload_files':row.upload_files,
-                //     'result':row.result,
-                //     'remark':row.remark
-                // });
+
 
                 //$('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
                 look1.setText(row.pipe_no);
@@ -118,41 +111,10 @@
                      var imgList=odpictures.split(';');
                      createPictureModel(basePath,imgList);
                 }
-                //异步获取标准并匹配
-                // $.ajax({
-                //     url:'/AcceptanceCriteriaOperation/getODAcceptanceCriteriaByContractNo.action',
-                //     dataType:'json',
-                //     data:{'contract_no':row.contract_no},
-                //     success:function (data) {
-                //         var $obj=$("input[name='salt_contamination_before_blasting']");
-                //         $obj.siblings().css("background-color","#FFFFFF");
-                //         var $obj1=$("input[name='preheat_temp']");
-                //         $obj1.siblings().css("background-color","#FFFFFF");
-                //         var $obj2=$("input[name='abrasive_conductivity']");
-                //         $obj2.siblings().css("background-color","#FFFFFF");
-                //         var $obj3=$("input[name='rinse_water_conductivity']");
-                //         $obj3.siblings().css("background-color","#FFFFFF");
-                //
-                //
-                //         if(data!=null){
-                //             var salt=$obj.val();
-                //             var res1=$obj1.val();
-                //             var res2=$obj2.val();
-                //             var res3=$obj3.val();
-                //             if(!((salt>=data.salt_contamination_before_blast_min)&&(salt<=data.salt_contamination_before_blast_max)))
-                //                 $obj.siblings().css("background-color","#F9A6A6");
-                //             if(!((res1>=data.preheat_temp_min)&&(res1<=data.preheat_temp_max)))
-                //                 $obj1.siblings().css("background-color","#F9A6A6");
-                //             if(!((res2>=data.abrasive_conductivity_min)&&(res2<=data.abrasive_conductivity_max)))
-                //                 $obj2.siblings().css("background-color","#F9A6A6");
-                //             if(!((res3>=data.rinse_water_conductivity_min)&&(res3<=data.rinse_water_conductivity_max)))
-                //                 $obj3.siblings().css("background-color","#F9A6A6");
-                //
-                //         }
-                //     },error:function () {
-                //
-                //     }
-                // });
+
+                GenerateInspectionItem();
+
+
                 url="/InspectionProcessOperation/saveProcess.action?id="+row.id;
             }else{
                 hlAlertTwo();
@@ -170,26 +132,48 @@
         }
         function proFormSubmit() {
             var arr={};
-            $('#dynamicTable').find('input,select').each(function () {
-                var item_code="",item_value="";
-                var input=$(this).siblings('input');
-                if(input!=undefined){
-                    item_code=input.attr('name');
-                    item_value=$(this).val();
-                    if(item_code!=undefined){
-                        arr[item_code]=item_value;
+
+            $("#dynamicTable :input[dynamic='dynamic'],select[dynamic='dynamic']").each(function(i){
+                var dy=$(this).attr("dynamic");
+                if(dy!=undefined&&dy=="dynamic"){
+                    var item_code=$(this).attr("myname");
+                    if(item_code!=undefined) {
+                        arr[item_code]=this.value;
                     }
                 }
             });
-            alert(arr);
 
-            return;
+            alert(JSON.stringify( arr ));
+
+            $('#dynamicJson').val(JSON.stringify( arr ));
+
+
+
+            // $('#dynamicTable').find('input,select').each(function () {
+            //     var item_code="",item_value="";
+            //     var input=$(this).siblings('input');
+            //     if(input!=undefined){
+            //         alert(input);
+            //         var dy=input.attr('dynamic');
+            //         if(dy!=undefined&&dy=="dynamic"){
+            //             //得到动态测量编号及值的配对
+            //             item_code=input.attr('name');
+            //             item_value=$(this).val();
+            //             alert(item_code);
+            //             alert(item_value);
+            //             if(item_code!=undefined){
+            //                 arr[item_code]=item_value;
+            //             }
+            //         }
+            //     }
+            // });
+            // alert(JSON.stringify( arr ));
+
+
             $('#proForm').form('submit',{
                 url:url,
                 onSubmit:function () {
                     //表单验证
-
-
                     if($("input[name='pipe_no']").val()==""){
 
                         hlAlertFour("请选择钢管管号");
@@ -255,6 +239,7 @@
             $('#proForm').form('clear');
             $('.hl-label').text('');
             $('#hl-gallery-con').empty();
+            $('#dynamicTable').empty();
             $(":input").each(function () {
                 $(this).siblings().css("background-color","#FFFFFF");
             });
@@ -266,7 +251,7 @@
             var pipe_no=look1.getValue();
             if(pipe_no==undefined)return;
 
-            var process_code=$('#processcode').val();
+            var process_code=$('#process_code').val();
             if(process_code==undefined||process_code=="")return;
             //根据管号和工序编号得到检验项表单项目
             $.ajax({
@@ -375,7 +360,7 @@
             var controldiv="";
 
             if(controltype=="singleselect"){//单选
-                controldiv="<select id=\""+itemcode+"\"  defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\" class=\"easyui-combobox\" data-options=\"editable:false\" name=\""+itemcode+"\" style=\"width:200px;\" >";
+                controldiv="<select dynamic=\"dynamic\" id=\""+itemcode+"\"  defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\" class=\"easyui-combobox\" data-options=\"editable:false\" myname=\""+itemcode+"\" name=\""+itemcode+"\" style=\"width:200px;\" >";
                 var optionArr=[];
                 optionArr=options.split(';');
                 var optiondiv="";
@@ -389,22 +374,23 @@
                 controldiv+=optiondiv;
                 controldiv+="</select>";
             }else if(controltype=="singlenumber"){//单值数字
-                controldiv="<input onchange=\"JudgeMaxAndMIn(this)\" class=\"easyui-numberbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+"data-options=\"min:-99,precision:"+decimalnum+"\" type=\"text\" name=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
+                controldiv="<input dynamic=\"dynamic\" onchange=\"JudgeMaxAndMIn(this)\" class=\"easyui-numberbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+"data-options=\"min:-99,precision:"+decimalnum+"\" type=\"text\" myname=\""+itemcode+"\" name=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
             }else if(controltype=="singletext"){//单值文本
-                controldiv="<input class=\"easyui-textbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+" type=\"text\" name=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
+                controldiv="<input dynamic=\"dynamic\" class=\"easyui-textbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+" type=\"text\" name=\"" + itemcode +"\" myname=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
             }
             else if(controltype=="multinumber"){//多值数字
-                controldiv="<input class=\"easyui-textbox\"  "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+" type=\"text\" name=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
+                controldiv="<input dynamic=\"dynamic\" class=\"easyui-textbox\"  "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+" type=\"text\" name=\"" + itemcode +"\" myname=\"" + itemcode +"\"  value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
             }
             else if(controltype=="multitext"){//多值文本
 
-                controldiv="<input class=\"easyui-textbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+" type=\"text\" name=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
+                controldiv="<input dynamic=\"dynamic\" class=\"easyui-textbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+" type=\"text\" name=\"" + itemcode +"\" myname=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
             }
             else if(controltype=="multiselect"){//多选
-                controldiv="<select id=\""+itemcode+"\" class=\"easyui-combobox\" data-options=\"editable:false,multiple:true,multiline:false\" name=\""+itemcode+"\" style=\"width:200px;\">";
+                controldiv="<select dynamic=\"dynamic\" id=\""+itemcode+"\" class=\"easyui-combobox\" data-options=\"editable:false,multiple:true,multiline:false\" name=\""+itemcode+"\" myname=\"" + itemcode +"\" value=\"\" style=\"width:200px;\">";
                 var optionArr=[];
                 optionArr=options.split(';');
-                var optiondiv="<option value=\"\" ></option>";
+                var optiondiv="<option value=\"\" >无</option>";
+                //var optiondiv="";
                 for (var i=0;i<optionArr.length;i++){
                     optiondiv+="<option value=\""+optionArr[i]+"\" >"+optionArr[i]+"</option>";
                 }
@@ -412,11 +398,11 @@
                 controldiv+="</select>";
 
             }else if(controltype=="checkbox"){//复选框
-                controldiv="<input type=\"checkbox\" id=\""+itemcode+"\" value=\"0\" checked=\"false\" onchange=\"checkboxChecked(this)\"/>\n" +
-                    "<input type=\"hidden\" name=\""+itemcode+"\" value=\"0\">";
+                controldiv="<input type=\"checkbox\" id=\""+itemcode+"\" myname=\"" + itemcode +"\" value=\"1\" checked=\"false\" onchange=\"checkboxChecked(this)\"/>\n" +
+                    "<input dynamic=\"dynamic\" type=\"hidden\" myname=\"" + itemcode +"\" name=\""+itemcode+"\" value=\"0\">";
 
             }else if(controltype=="textarea"){//多行文本
-                controldiv="<input class=\"easyui-textbox\" type=\"text\" value=\""+defaultvalue+"\" name=\""+itemcode+"\" data-options=\"multiline:true\" style=\"width:300px;height:80px\" />";
+                controldiv="<input dynamic=\"dynamic\" class=\"easyui-textbox\" type=\"text\" value=\""+defaultvalue+"\" myname=\"" + itemcode +"\" name=\""+itemcode+"\" data-options=\"multiline:true\" style=\"width:300px;height:80px\" />";
             }
             div+=controldiv;
             var taildiv ="</td>";
@@ -497,6 +483,8 @@
                        <%--<th field="blast_line_speed" align="center" width="120" hidden="true" class="i18n1" name="blastlinespeed">打砂传送速度</th>--%>
                        <%--<th field="preheat_temp" align="center" width="120" hidden="true" class="i18n1" name="preheattemp">预热温度</th>--%>
                        <%--<th field="marking" align="center" width="120" hidden="true" class="i18n1" name="marking">管体标识是否清晰</th>--%>
+
+                   <th field="inspection_process_record_header_code" align="center" width="150" class="i18n1" name="inspectionprocessrecordheadercode">检验表单编号</th>
                    <th field="process_name" align="center" width="150" class="i18n1" name="processname">工序名称</th>
                    <th field="process_name_en" align="center" width="150" class="i18n1" name="processnameen">工序英文</th>
                    <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
@@ -592,7 +580,7 @@
            </table>
        </fieldset>
        <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
-           <legend class="i18n1" name="odproductioninfo">外喷砂生产信息</legend>
+           <legend id="legend-title" class="" name="legend-title"></legend>
 
        <table class="ht-table">
            <tr>
@@ -622,6 +610,17 @@
                <td colspan="1" width="30%">
                    <input class="easyui-datetimebox" type="text" name="operation_time" value="" data-options="formatter:myformatter2,parser:myparser2"/>
 
+               </td>
+
+           </tr>
+           <tr>
+               <td class="i18n1" name="processname" width="20%">工序名称</td>
+               <td colspan="1" width="30%">
+                   <input id="process_name" class="easyui-textbox" readonly="true" type="text" name="process_name" value=""/>
+               </td>
+               <td class="i18n1" name="inspectionprocessrecordheadercode" width="20%"></td>
+               <td colspan="1" width="30%">
+                   <input class="easyui-textbox" readonly="true" type="text" name="inspection_process_record_header_code" value=""/>
                </td>
 
            </tr>
@@ -700,20 +699,24 @@
                <%--以上检测项自动生成--%>
        </table>
 
-       <table class="dynamic-table">
+       <table class="ht-table">
            <tr>
-               <td class="i18n1" name="result">结论</td>
-               <td><select style="width:100%;" id="cc" class="easyui-combobox" data-options="editable:false" name="result">
+               <td class="i18n1" name="result" width="20%">结论</td>
+               <td colspan="3"><select style="width:200px;" class="easyui-combobox" data-options="editable:false" name="result" >
                    <option value="0">不合格,重新打砂处理</option>
                    <option value="1">合格,进入外喷砂检验工序</option>
                    <option value="10">待定</option>
                    <option value="3">隔离，进入修磨或切割工序</option>
                </select></td>
-               <td class="i18n1" name="remark">备注</td>
-               <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px;width:100%;"/></td>
+           </tr>
+           <tr>
+               <td class="i18n1" name="remark" width="20%">备注</td>
+               <td colspan="3"><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px;width:100%;"/></td>
            </tr>
        </table>
            <input type="hidden" id="fileslist" name="upload_files" value=""/>
+           <input type="text" id="process_code" name="process_code" value=""/>
+           <input type="hidden" id="dynamicJson" name="dynamicJson" value=""/>
            <div id="hl-gallery-con" style="width:100%;">
 
            </div>
