@@ -347,21 +347,16 @@
                 controldiv="<input class=\"easyui-textbox\"  type=\"text\" name=\"" + itemcode +"\" value=\"\"/>";
             }
             else if(controltype=="multiselect"){//多选
-
+                controldiv="<select id=\""+itemcode+"\" class=\"easyui-combobox\" data-options=\"editable:false,multiple:true,multiline:true\" name=\""+itemcode+"\" style=\"width:200px;\">";
                 var optionArr=[];
                 optionArr=options.split(';');
                 var optiondiv="";
                 for (var i=0;i<optionArr.length;i++){
-
-                    optiondiv+="<option value=\""+optionArr[i]+"\" "+select+">"+optionArr[i]+"</option>";
+                    optiondiv+="<option value=\""+optionArr[i]+"\" >"+optionArr[i]+"</option>";
                 }
+                controldiv+=optiondiv;
+                controldiv+="</select>";
 
-                controldiv=" <div class=\"mini-combobox\" style=\"width:185px;\"  popupWidth=\"185\" textField=\""+itemcode+"\" valueField=\""+itemcode+"\"" +
-                    "                        url=\"/DefectOperation/getAllSteelDefectInfo.action\" name=\""+itemcode+"\" multiSelect=\"true\"  showClose=\"true\" oncloseclick=\"onComboxCloseClick\" >" +
-                    "                       <div property=\"columns\">" +
-                    "                           <div header=\""+itemname+"\" field=\""+itemcode+"\"></div>\n" +
-                    "                       </div>\n" +
-                    "                   </div>";
             }else if(controltype=="checkbox"){//复选框
                 controldiv="<input type=\"checkbox\" id=\""+itemcode+"\" value=\"0\" checked=\"false\" onchange=\"checkboxChecked(this)\"/>\n" +
                     "<input type=\"hidden\" name=\""+itemcode+"\" value=\"0\">";
@@ -560,73 +555,73 @@
        <table class="ht-table" id="dynamicTable">
 
            <%--以下检测项自动生成--%>
-           <tr>
-               <td width="16%" class="i18n1" name="marking">管体标识是否清晰</td>
-               <td>
-                   <select id="mk" class="easyui-combobox" data-options="editable:false" name="marking" style="width:200px;">
-                       <option value="0" selected="selected">清晰</option>
-                       <option value="1">不清晰</option>
-                   </select>
+           <%--<tr>--%>
+               <%--<td width="16%" class="i18n1" name="marking">管体标识是否清晰</td>--%>
+               <%--<td>--%>
+                   <%--<select id="mk" class="easyui-combobox" data-options="editable:false" name="marking" style="width:200px;">--%>
+                       <%--<option value="0" selected="selected">清晰</option>--%>
+                       <%--<option value="1">不清晰</option>--%>
+                   <%--</select>--%>
                    <%--<input class="easyui-numberbox" data-options="min:-99,precision:1" type="text" name="preheat_temp" value=""/>--%>
-               </td>
-               <td></td>
-               <td width="16%"  class="i18n1" name="surfacecondition">外观缺陷</td>
-               <td>
+               <%--</td>--%>
+               <%--<td></td>--%>
+               <%--<td width="16%"  class="i18n1" name="surfacecondition">外观缺陷</td>--%>
+               <%--<td>--%>
 
-                   <%--<input class="easyui-validatebox" type="text" name="surface_condition" value=""/>--%>
-                   <div id="combobox1" class="mini-combobox" style="width:185px;"  popupWidth="185" textField="defect_name" valueField="defect_name"
-                        url="/DefectOperation/getAllSteelDefectInfo.action" name="surface_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick" >
-                       <div property="columns">
-                           <div header="缺陷类型" field="defect_name"></div>
-                       </div>
-                   </div>
+                   <%--&lt;%&ndash;<input class="easyui-validatebox" type="text" name="surface_condition" value=""/>&ndash;%&gt;--%>
+                   <%--<div id="combobox1" class="mini-combobox" style="width:185px;"  popupWidth="185" textField="defect_name" valueField="defect_name"--%>
+                        <%--url="/DefectOperation/getAllSteelDefectInfo.action" name="surface_condition" multiSelect="true"  showClose="true" oncloseclick="onComboxCloseClick" >--%>
+                       <%--<div property="columns">--%>
+                           <%--<div header="缺陷类型" field="defect_name"></div>--%>
+                       <%--</div>--%>
+                   <%--</div>--%>
 
-               </td>
-               <td></td>
-           </tr>
-           <tr>
-               <td width="16%" class="i18n1" name="preheattemp">预热温度</td>
-               <td><input class="easyui-numberbox" data-options="min:-99,precision:1" type="text" name="preheat_temp" value=""/></td>
-               <td></td>
-               <td width="16%" class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</td>
-               <td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="salt_contamination_before_blasting" value=""/></td>
-               <td></td>
-           </tr>
-           <tr>
-               <td class="i18n1" name="alkalinedwelltime">碱洗时间</td>
-               <td><input class="easyui-numberbox hl-errorcolor" data-options="min:-99,precision:0" type="text" name="alkaline_dwell_time" value=""/></td>
-               <td></td>
-               <td class="i18n1" name="alkalineconcentration">碱浓度</td>
-               <td><input class="easyui-numberbox"  data-options="min:-99,precision:2" type="text" name="alkaline_concentration" value=""/></td>
-               <td></td>
-           </tr>
+               <%--</td>--%>
+               <%--<td></td>--%>
+           <%--</tr>--%>
+           <%--<tr>--%>
+               <%--<td width="16%" class="i18n1" name="preheattemp">预热温度</td>--%>
+               <%--<td><input class="easyui-numberbox" data-options="min:-99,precision:1" type="text" name="preheat_temp" value=""/></td>--%>
+               <%--<td></td>--%>
+               <%--<td width="16%" class="i18n1" name="saltcontaminationbeforeblasting">打砂前盐度</td>--%>
+               <%--<td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="salt_contamination_before_blasting" value=""/></td>--%>
+               <%--<td></td>--%>
+           <%--</tr>--%>
+           <%--<tr>--%>
+               <%--<td class="i18n1" name="alkalinedwelltime">碱洗时间</td>--%>
+               <%--<td><input class="easyui-numberbox hl-errorcolor" data-options="min:-99,precision:0" type="text" name="alkaline_dwell_time" value=""/></td>--%>
+               <%--<td></td>--%>
+               <%--<td class="i18n1" name="alkalineconcentration">碱浓度</td>--%>
+               <%--<td><input class="easyui-numberbox"  data-options="min:-99,precision:2" type="text" name="alkaline_concentration" value=""/></td>--%>
+               <%--<td></td>--%>
+           <%--</tr>--%>
 
-           <tr>
-               <td class="i18n1" name="acidwashtime">酸洗时间</td>
-               <td><input class="easyui-numberbox" data-options="min:-99,precision:0" type="text" name="acid_wash_time" value=""/></td>
-               <td></td>
-               <td class="i18n1" name="acidconcentration">酸浓度</td>
-               <td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="acid_concentration" value=""/></td>
-               <td></td>
-           </tr>
+           <%--<tr>--%>
+               <%--<td class="i18n1" name="acidwashtime">酸洗时间</td>--%>
+               <%--<td><input class="easyui-numberbox" data-options="min:-99,precision:0" type="text" name="acid_wash_time" value=""/></td>--%>
+               <%--<td></td>--%>
+               <%--<td class="i18n1" name="acidconcentration">酸浓度</td>--%>
+               <%--<td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="acid_concentration" value=""/></td>--%>
+               <%--<td></td>--%>
+           <%--</tr>--%>
 
 
-           <tr>
-               <td width="16%" class="i18n1" name="rinsewaterconductivity">冲洗水电导率</td>
-               <td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="rinse_water_conductivity" value=""/></td>
-               <td></td>
-               <td width="16%" class="i18n1" name="abrasiveconductivity">磨料电导率</td>
-               <td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="abrasive_conductivity" value=""/></td>
-               <td></td>
-           </tr>
-           <tr>
-               <td width="16%" class="i18n1" name="blastlinespeed">打砂传送速度</td>
-               <td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="blast_line_speed" value=""/></td>
-               <td></td>
-               <td></td>
-               <td></td>
-               <td></td>
-           </tr>
+           <%--<tr>--%>
+               <%--<td width="16%" class="i18n1" name="rinsewaterconductivity">冲洗水电导率</td>--%>
+               <%--<td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="rinse_water_conductivity" value=""/></td>--%>
+               <%--<td></td>--%>
+               <%--<td width="16%" class="i18n1" name="abrasiveconductivity">磨料电导率</td>--%>
+               <%--<td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="abrasive_conductivity" value=""/></td>--%>
+               <%--<td></td>--%>
+           <%--</tr>--%>
+           <%--<tr>--%>
+               <%--<td width="16%" class="i18n1" name="blastlinespeed">打砂传送速度</td>--%>
+               <%--<td><input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="blast_line_speed" value=""/></td>--%>
+               <%--<td></td>--%>
+               <%--<td></td>--%>
+               <%--<td></td>--%>
+               <%--<td></td>--%>
+           <%--</tr>--%>
                <%--以上检测项自动生成--%>
        </table>
 
