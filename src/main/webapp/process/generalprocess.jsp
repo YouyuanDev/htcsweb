@@ -268,7 +268,7 @@
                    for(var i=0;i<data.length;i++){
                        div+=getTemplate(data[i]);
                    }
-                    alert(div);
+                    //alert(div);
                   $('#dynamicTable').append(div);
                   $.parser.parse("#dynamicTable");
                     //
@@ -315,14 +315,21 @@
             var defaultvalue=item.default_value; //默认值
 
             var div="";
-            var language=getCookie("userLanguage")
-            if(language&&language=="zh-CN"){
+            var language=getCookie("userLanguage");
+            if(language&&language=="en"){
+                if(unitnameen!=undefined||unitnameen!=""){
+                    unitnameen="("+unitnameen+")";
+                }
                 div="<tr>\n" +
-                    "<td width=\"16%\" class=\"\">"+itemname+"("+unitname+")</td>" +
+                    "<td width=\"16%\" class=\"\">"+itemnameen+unitnameen+"</td>" +
                     "<td>";
             }else{
+                if(unitname!=undefined||unitname!=""){
+                    unitname="("+unitname+")";
+                }
+
                 div="<tr>\n" +
-                    "<td width=\"16%\" class=\"\">"+itemnameen+"("+unitnameen+")</td>" +
+                    "<td width=\"16%\" class=\"\">"+itemname+unitname+"</td>" +
                     "<td>";
             }
 
