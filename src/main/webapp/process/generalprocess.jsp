@@ -658,7 +658,7 @@
                <%--以上检测项自动生成--%>
        </table>
 
-       <table class="ht-table">
+       <table class="dynamic-table">
            <tr>
                <td width="16%" class="i18n1" name="result">结论</td>
                <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
