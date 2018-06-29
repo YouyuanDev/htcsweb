@@ -240,7 +240,6 @@
             $('#proForm').form('clear');
             $('.hl-label').text('');
             $('#hl-gallery-con').empty();
-            combox1.setValue("");
             $(":input").each(function () {
                 $(this).siblings().css("background-color","#FFFFFF");
             });
@@ -300,7 +299,7 @@
 
         //验证
         function verification(obj){
-
+            alert("verification");
             obj.siblings().css("background-color","#FF0000");
         }
 
@@ -374,10 +373,10 @@
                 controldiv="<input class=\"easyui-textbox\"  type=\"text\" name=\"" + itemcode +"\" value=\"\" "+verficationdiv+"/>";
             }
             else if(controltype=="multiselect"){//多选
-                controldiv="<select id=\""+itemcode+"\" class=\"easyui-combobox\" data-options=\"editable:false,multiple:true,multiline:true\" name=\""+itemcode+"\" style=\"width:200px;\">";
+                controldiv="<select id=\""+itemcode+"\" class=\"easyui-combobox\" data-options=\"editable:false,multiple:true,multiline:false\" name=\""+itemcode+"\" style=\"width:200px;\">";
                 var optionArr=[];
                 optionArr=options.split(';');
-                var optiondiv="";
+                var optiondiv="<option value=\"\" ></option>";
                 for (var i=0;i<optionArr.length;i++){
                     optiondiv+="<option value=\""+optionArr[i]+"\" >"+optionArr[i]+"</option>";
                 }
@@ -755,7 +754,7 @@
     var grid2=mini.get("datagrid2");
     var look1=mini.get('lookup1');
     var look2= mini.get("lookup2");
-    var combox1=mini.get("combobox1");
+
 
 
     function onSearchClick(type) {
@@ -830,11 +829,11 @@
         });
         //$('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
     });
-    combox1.on("showpopup",function () {
-        $('.mini-shadow').css('z-index','99999');
-        $('.mini-popup').css('z-index','100000');
-        $('.mini-panel').css('z-index','100000');
-    });
+    // combox1.on("showpopup",function () {
+    //     $('.mini-shadow').css('z-index','99999');
+    //     $('.mini-popup').css('z-index','100000');
+    //     $('.mini-panel').css('z-index','100000');
+    // });
     function onComboxCloseClick(e) {
         var obj = e.sender;
         obj.setText("");
