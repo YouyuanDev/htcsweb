@@ -177,10 +177,13 @@
          var g_textarea_field=undefined;
         function append(){
             if (endEditing()){
-                $('#dg').datagrid('appendRow',{id:0,item_code:"IT"+new Date().getTime(),decimal_num:'0',max_value:'0',min_value:'0',default_value:'0',status:'P'});
-                editIndex = $('#dg').datagrid('getRows').length-1;
+                $('#dg').datagrid('insertRow',{index:1,row:{id:0,item_code:"IT"+new Date().getTime(),decimal_num:'0',max_value:'0',min_value:'0',default_value:'0',status:'P'}});
+                editIndex = 1;
                 $('#dg').datagrid('selectRow', editIndex)
                     .datagrid('beginEdit', editIndex);
+                // editIndex = $('#dg').datagrid('getRows').length-1;
+                // $('#dg').datagrid('selectRow', editIndex)
+                //     .datagrid('beginEdit', editIndex);
                 setTextAreaEvent("options");
                 setTextAreaEvent("default_value");
             }
@@ -248,6 +251,7 @@
                         var result = eval('('+data+')');
                         if (result.success){
                             $('#dg').datagrid('acceptChanges');
+                            loadDynamicItemInfo(acceptance_criteria_no);
                         }
                         hlAlertFour(result.message);
                     },error:function () {
