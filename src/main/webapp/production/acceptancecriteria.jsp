@@ -487,13 +487,6 @@
 								required:true
 							}
 						}"></th>
-
-                    <th class="i18n1" name="decimalnum" data-options="field:'decimal_num',editor:{type:'numberbox'}"></th>
-                    <th class="i18n1" name="needverify" data-options="field:'need_verify',editor:{type:'checkbox',options:{on:'1',off:'0'}}"></th>
-                        <th class="i18n1" name="maxvalue" data-options="field:'max_value',editor:{type:'numberbox',options:{precision:2}}"></th>
-                        <th class="i18n1" name="minvalue" data-options="field:'min_value',editor:{type:'numberbox',options:{precision:2}}"></th>
-                        <th class="i18n1" name="defaultvalue" data-options="field:'default_value',width:50,editor:{type:'textbox'}"></th>
-
                         <th class="i18n1" name="controltype" data-options="field:'control_type',width:100,formatter:function(value,row){
 							return row.control_type;
 						},
@@ -507,6 +500,13 @@
 								required:true
 							}
 						}"></th>
+                    <th class="i18n1" name="decimalnum" data-options="field:'decimal_num',editor:{type:'numberbox'}"></th>
+                    <th class="i18n1" name="needverify" data-options="field:'need_verify',editor:{type:'checkbox',options:{on:'1',off:'0'}}"></th>
+                        <th class="i18n1" name="maxvalue" data-options="field:'max_value',editor:{type:'numberbox',options:{precision:2}}"></th>
+                        <th class="i18n1" name="minvalue" data-options="field:'min_value',editor:{type:'numberbox',options:{precision:2}}"></th>
+                        <th class="i18n1" name="defaultvalue" data-options="field:'default_value',width:50,editor:{type:'textbox'}"></th>
+
+
                     <th class="i18n1" name="options" data-options="field:'options',editor:'textbox'"></th>
                     <th class="i18n1" name="status" data-options="field:'status',align:'center',editor:{type:'checkbox',options:{on:'P',off:''}}">Status</th>
                 </tr>
