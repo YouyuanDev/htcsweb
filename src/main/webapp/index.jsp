@@ -66,7 +66,9 @@
         var url;
         $(function(){
 
-            var uriArr=["odblastprocess","odblastinspectionprocess","odcoatingprocess","odcoatinginspectionprocess",
+            var uriArr=[
+                "generalprocess",
+                "odblastprocess","odblastinspectionprocess","odcoatingprocess","odcoatinginspectionprocess",
                 "odcoating3lpeprocess","odcoating3lpeinspectionprocess","odstencilprocess","odfinalinspectionprocess",
                 "idblastprocess","idblastinspectionprocess","idcoatingprocess","idcoatinginspectionprocess","idstencilprocess","idfinalinspectionprocess",
                 "odstockin","idstockin","barepipemovement","instoragetransfer","shipmentManagement",//"productStockout",
@@ -79,16 +81,17 @@
                 "productionProcessRecord","dailyProductionReport","shipmentRecord"
 
         ];
-            var odArr=uriArr.slice(0,8);
-            var idArr=uriArr.slice(8,14);
-            var outinArr=uriArr.slice(14,19);
-            var repairArr=uriArr.slice(19,21);
-            var pipeArr=uriArr.slice(21,24);
-            var basicArr=uriArr.slice(24,30);
-            var standArr=uriArr.slice(30,39);
-            var labArr=uriArr.slice(39,45);
-            var accountArr=uriArr.slice(45,48);
-            var reportArr=uriArr.slice(48,51);
+            var processArr=uriArr.slice(0,1);
+            var odArr=uriArr.slice(1,9);
+            var idArr=uriArr.slice(9,15);
+            var outinArr=uriArr.slice(15,20);
+            var repairArr=uriArr.slice(20,22);
+            var pipeArr=uriArr.slice(22,25);
+            var basicArr=uriArr.slice(25,31);
+            var standArr=uriArr.slice(31,40);
+            var labArr=uriArr.slice(40,46);
+            var accountArr=uriArr.slice(46,49);
+            var reportArr=uriArr.slice(49,52);
 
 
             var hsMapList="<%=session.getAttribute("userfunctionMap")%>";
@@ -113,6 +116,9 @@
             });
 
             if(finalNameArr.length>0){
+                var processDiv='<div title=\"工序\" class=\"i18n\" name=\"process\"  style=\"padding:10px;\"><ul id=\"hlprocessinspection\">';
+                var processDivSon="";
+
                 var odDiv='<div title=\"外防腐\" class=\"i18n\" name=\"externalcoating\"  style=\"padding:10px;\"><ul id=\"od\">';
                 var odDivSon="";
                 var idDiv='<div title=\"内防腐\" class=\"i18n\" name=\"intenalcoating\"  style=\"padding:10px;\"><ul id=\"id\">';
@@ -138,6 +144,12 @@
                 //外喷砂
 
                 $.each(finalNameArr,function (index,element) {
+
+                    if($.inArray(element,processArr)!=-1){
+                        processDivSon+=MakeMenus(element);
+                        return true;
+                    }
+
                     if($.inArray(element,odArr)!=-1){
                         odDivSon+=MakeMenus(element);
                         return true;
@@ -179,6 +191,13 @@
                         return true;
                     }
                 });
+
+                if(processDivSon!=""&&processDivSon.length>0){
+                    processDiv+=processDivSon;
+                    processDiv+=endDiv;
+                    $('#aa').append(processDiv);
+                }
+
                 if(odDivSon!=""&&odDivSon.length>0){
                     odDiv+=odDivSon;
                     odDiv+=endDiv;
@@ -242,6 +261,37 @@
             //     odDiv="";
             //}
             hlLanguage("i18n/");
+
+
+            //工序管理
+            $("#hlprocessinspection").tree({
+                onClick:function (node) {
+                    var tab=$('#hlTab').tabs('getTab',node.text);
+                    var nodeTxt=node.text;
+                    if(tab){
+                        $('#hlTab').tabs('select',node.text);
+                    }else{
+                        if("工序检验管理"==nodeTxt||"Process Inspection Management"==nodeTxt){
+
+                            $('#hlTab').tabs('add',{
+                                title:node.text,
+                                content:"<iframe scrolling='auto' frameborder='0'  src='process/generalprocess.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable:true
+                            });
+                            hlLanguage();
+                        }
+
+
+
+                    }
+                }
+            });
+
+
+
+
+
+
             $('#od').tree({
                 onClick:function(node){
                     var tab=$('#hlTab').tabs('getTab',node.text);
