@@ -283,6 +283,20 @@
 
         }
 
+
+        //checkbox 点击事件
+        function checkboxChecked(obj){
+            var name=obj.prop("name");
+            alert(obj.prop("name"));
+            if(obj.is(":checked")){
+                obj.prop('checked', true);
+                $("input[name='"+name+"']").val(1);
+            }else{
+                obj.prop('checked', false);
+                $("input[name='"+name+"']").val(0);
+            }
+        }
+
         //根据字段的属性动态生成控件
         function getTemplate(item){
             var controltype=item.control_type;//控件类型
@@ -307,7 +321,7 @@
             var controldiv="";
 
             if(controltype=="singleselect"){//单选
-                controldiv="<select id=\""+itemcode+"\" class=\"easyui-combobox\" data-options=\"editable:false\" name=\""+itemcode+"\" style=\"width:180px;\">";
+                controldiv="<select id=\""+itemcode+"\" class=\"easyui-combobox\" data-options=\"editable:false\" name=\""+itemcode+"\" style=\"width:200px;\">";
                 var optionArr=[];
                 optionArr=options.split(';');
                 var optiondiv="";
@@ -321,24 +335,41 @@
                 controldiv+=optiondiv;
                 controldiv+="</select>";
             }else if(controltype=="singlenumber"){//单值数字
-                controldiv='<input class="easyui-numberbox" data-options="min:-99,precision:2" type="text" name="'+itemcode+'" value=""/>';
-            }else if(controltype=="multinumber"){//多值数字
-                controldiv='<input class="easyui-numberbox"  type="text" name="'+itemcode+'" value=""/>';
+
+                controldiv="<input class=\"easyui-numberbox\" data-options=\"min:-99,precision:"+decimalnum+"\" type=\"text\" name=\"" + itemcode +"\" value=\"\"/>";
             }else if(controltype=="singletext"){//单值文本
-                controldiv='<input class="easyui-numberbox"  type="text" name="'+itemcode+'" value=""/>';
-            }else if(controltype=="multitext"){//多值文本
-                controldiv='<input class="easyui-numberbox"  type="text" name="'+itemcode+'" value=""/>';
-            }else if(controltype=="date"){//日期
-                controldiv='<input class="easyui-numberbox"  type="text" name="'+itemcode+'" value=""/>';
-            }else if(controltype=="date"){//日期
-                controldiv='<input class="easyui-numberbox"  type="text" name="'+itemcode+'" value=""/>';
-            }else if(controltype=="multiselect"){//多选
-                controldiv='<input class="easyui-numberbox"  type="text" name="'+itemcode+'" value=""/>';
-            }else if(controltype=="checkbox"){//复选框
-                controldiv='<input class="easyui-numberbox"  type="text" name="'+itemcode+'" value=""/>';
-            }else if(controltype=="textarea"){//多行文本
-                controldiv='<input class="easyui-numberbox"  type="text" name="'+itemcode+'" value=""/>';
+                controldiv="<input class=\"easyui-textbox\"  type=\"text\" name=\"" + itemcode +"\" value=\"\"/>";
             }
+            else if(controltype=="multinumber"){//多值数字
+                controldiv="<input class=\"easyui-textbox\"  type=\"text\" name=\"" + itemcode +"\" value=\"\"/>";
+            }
+            else if(controltype=="multitext"){//多值文本
+                controldiv="<input class=\"easyui-textbox\"  type=\"text\" name=\"" + itemcode +"\" value=\"\"/>";
+            }
+            else if(controltype=="multiselect"){//多选
+
+                var optionArr=[];
+                optionArr=options.split(';');
+                var optiondiv="";
+                for (var i=0;i<optionArr.length;i++){
+
+                    optiondiv+="<option value=\""+optionArr[i]+"\" "+select+">"+optionArr[i]+"</option>";
+                }
+
+                controldiv=" <div class=\"mini-combobox\" style=\"width:185px;\"  popupWidth=\"185\" textField=\""+itemcode+"\" valueField=\""+itemcode+"\"" +
+                    "                        url=\"/DefectOperation/getAllSteelDefectInfo.action\" name=\""+itemcode+"\" multiSelect=\"true\"  showClose=\"true\" oncloseclick=\"onComboxCloseClick\" >" +
+                    "                       <div property=\"columns\">" +
+                    "                           <div header=\""+itemname+"\" field=\""+itemcode+"\"></div>\n" +
+                    "                       </div>\n" +
+                    "                   </div>";
+            }else if(controltype=="checkbox"){//复选框
+                controldiv="<input type=\"checkbox\" id=\""+itemcode+"\" value=\"0\" checked=\"false\" onchange=\"checkboxChecked(this)\"/>\n" +
+                    "<input type=\"hidden\" name=\""+itemcode+"\" value=\"0\">";
+
+            }else if(controltype=="textarea"){//多行文本
+                controldiv="<input class=\"easyui-textbox\" type=\"text\" value=\"\" name=\""+itemcode+"\" data-options=\"multiline:true\" style=\"width:300px;height:80px\"/>";
+            }
+
 
 
             div+=controldiv;
@@ -349,6 +380,7 @@
 
             return div;
         }
+
 
 
 
