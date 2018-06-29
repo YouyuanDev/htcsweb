@@ -337,19 +337,19 @@
 
 
             if(language&&language=="en"){
-                if(unitnameen!=undefined||unitnameen!=""){
+                if(unitnameen!=undefined&&unitnameen!=""){
                     unitnameen="("+unitnameen+")";
                 }
                 div="<tr>\n" +
-                    "<td width=\"16%\" class=\"\">"+itemnameen+unitnameen+" "+minmax+frequencydiv+"</td>" +
+                    "<td width=\"16%\" class=\"\">"+itemnameen+unitnameen+" "+minmax+frequencydiven+"</td>" +
                     "<td>";
             }else{
-                if(unitname!=undefined||unitname!=""){
+                if(unitname!=undefined&&unitname!=""){
                     unitname="("+unitname+")";
                 }
 
                 div="<tr>\n" +
-                    "<td width=\"16%\" class=\"\">"+itemname+unitname+" "+minmax+frequencydiven+"</td>" +
+                    "<td width=\"16%\" class=\"\">"+itemname+unitname+" "+minmax+frequencydiv+"</td>" +
                     "<td>";
             }
 
