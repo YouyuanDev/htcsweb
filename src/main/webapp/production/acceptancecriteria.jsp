@@ -250,13 +250,13 @@
                     },
                     success:function (data) {
                         //var result = eval('('+data+')');
-                        if (result.success){
+                        if (data.success){
                             $('#dg').datagrid('acceptChanges');
                             loadDynamicItemInfo(acceptance_criteria_no);
                         }
-                        hlAlertFour(result.message);
+                        hlAlertFour(data.message);
                     },error:function () {
-
+                        hlAlertFour("保存失败!");
                     }
                 });
             }else{
