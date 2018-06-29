@@ -374,16 +374,16 @@
                 controldiv+=optiondiv;
                 controldiv+="</select>";
             }else if(controltype=="singlenumber"){//单值数字
-                controldiv="<input class=\"easyui-numberbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+"data-options=\"min:-99,precision:"+decimalnum+"\" type=\"text\" name=\"" + itemcode +"\" value=\""+defaultvalue+"\" />";
+                controldiv="<input class=\"easyui-numberbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+"data-options=\"min:-99,precision:"+decimalnum+"\" type=\"text\" name=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
             }else if(controltype=="singletext"){//单值文本
-                controldiv="<input class=\"easyui-textbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+" type=\"text\" name=\"" + itemcode +"\" value=\""+defaultvalue+"\" />";
+                controldiv="<input class=\"easyui-textbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+" type=\"text\" name=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
             }
             else if(controltype=="multinumber"){//多值数字
-                controldiv="<input class=\"easyui-textbox\"  "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+" type=\"text\" name=\"" + itemcode +"\" value=\""+defaultvalue+"\" />";
+                controldiv="<input class=\"easyui-textbox\"  "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+" type=\"text\" name=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
             }
             else if(controltype=="multitext"){//多值文本
 
-                controldiv="<input class=\"easyui-textbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+" type=\"text\" name=\"" + itemcode +"\" value=\""+defaultvalue+"\" />";
+                controldiv="<input class=\"easyui-textbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+" type=\"text\" name=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
             }
             else if(controltype=="multiselect"){//多选
                 controldiv="<select id=\""+itemcode+"\" class=\"easyui-combobox\" data-options=\"editable:false,multiple:true,multiline:false\" name=\""+itemcode+"\" style=\"width:200px;\">";
