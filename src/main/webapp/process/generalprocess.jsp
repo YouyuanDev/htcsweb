@@ -297,6 +297,14 @@
             }
         }
 
+
+        //验证
+        function verification(obj){
+
+            obj.siblings().css("background-color","#FF0000");
+        }
+
+
         //根据字段的属性动态生成控件
         function getTemplate(item){
             var controltype=item.control_type;//控件类型
@@ -334,9 +342,13 @@
             }
 
             var controldiv="";
+            var verficationdiv="";
+            if(needverify!=undefined&&needverify=="1"){
+                verficationdiv=" onchange=\"verification(this)\" ";
+            }
 
             if(controltype=="singleselect"){//单选
-                controldiv="<select id=\""+itemcode+"\" class=\"easyui-combobox\" data-options=\"editable:false\" name=\""+itemcode+"\" style=\"width:200px;\">";
+                controldiv="<select id=\""+itemcode+"\" class=\"easyui-combobox\" data-options=\"editable:false\" name=\""+itemcode+"\" style=\"width:200px;\" "+verficationdiv+">";
                 var optionArr=[];
                 optionArr=options.split(';');
                 var optiondiv="";
@@ -350,16 +362,16 @@
                 controldiv+=optiondiv;
                 controldiv+="</select>";
             }else if(controltype=="singlenumber"){//单值数字
-
-                controldiv="<input class=\"easyui-numberbox\" data-options=\"min:-99,precision:"+decimalnum+"\" type=\"text\" name=\"" + itemcode +"\" value=\"\"/>";
+                controldiv="<input class=\"easyui-numberbox\" data-options=\"min:-99,precision:"+decimalnum+"\" type=\"text\" name=\"" + itemcode +"\" value=\"\" "+verficationdiv+"/>";
             }else if(controltype=="singletext"){//单值文本
-                controldiv="<input class=\"easyui-textbox\"  type=\"text\" name=\"" + itemcode +"\" value=\"\"/>";
+                controldiv="<input class=\"easyui-textbox\"  type=\"text\" name=\"" + itemcode +"\" value=\"\" "+verficationdiv+"/>";
             }
             else if(controltype=="multinumber"){//多值数字
-                controldiv="<input class=\"easyui-textbox\"  type=\"text\" name=\"" + itemcode +"\" value=\"\"/>";
+                controldiv="<input class=\"easyui-textbox\"  type=\"text\" name=\"" + itemcode +"\" value=\"\" "+verficationdiv+"/>";
             }
             else if(controltype=="multitext"){//多值文本
-                controldiv="<input class=\"easyui-textbox\"  type=\"text\" name=\"" + itemcode +"\" value=\"\"/>";
+
+                controldiv="<input class=\"easyui-textbox\"  type=\"text\" name=\"" + itemcode +"\" value=\"\" "+verficationdiv+"/>";
             }
             else if(controltype=="multiselect"){//多选
                 controldiv="<select id=\""+itemcode+"\" class=\"easyui-combobox\" data-options=\"editable:false,multiple:true,multiline:true\" name=\""+itemcode+"\" style=\"width:200px;\">";
