@@ -263,9 +263,13 @@
                     process_code:process_code
                 },
                 success:function (data) {
-                    alert(data);
-                    var result = eval('('+data+')');
-                    alert(result);
+
+                    var div="";
+                   for(var i=0;i<data.length;i++){
+                       div+=getTemplate(data[i]);
+                   }
+                    alert(div);
+
 
                 },error:function () {
 
@@ -278,18 +282,55 @@
 
         }
 
+        //根据字段的属性动态生成控件
         function getTemplate(item){
+            var controltype=item.control_type;//控件类型
+            var itemcode=item.item_code;//控件编号
+            var itemname=item.item_name; //中文名
+            var itemnameen=item.item_name_en;//英文名
+            var unitname=item.unit_name; //单位名称
+            var unitnameen=item.unit_name_en; //单位名称英文名
+            var itemfrequency=item.item_frequency; //检测频率
+            var processcode=item.process_code; //工序编号
+            var decimalnum=item.decimal_num; //小树位数
+            var needverify=item.need_verify; //是否验证
+            var options=item.options; //选项
+            var maxvalue=item.max_value; //最大值
+            var minvalue=item.min_value; //最小值
+            var defaultvalue=item.default_value; //默认值
 
             var div="<tr>\n" +
-                "<td width=\"16%\" class=\"i18n1\">"+item.item_name+" "+item.item_name_en+"</td>" +
-                "<td>" +
-                "<select id=\"mk\" class=\"easyui-combobox\" data-options=\"editable:false\" name=\"marking\" style=\"width:200px;\">" +
-                "<option value=\"0\" selected=\"selected\">清晰</option>" +
-                "<option value=\"1\">不清晰</option>" +
-                "</select>" +
-                "</td>" +
+                "<td width=\"16%\" class=\"i18n1\">"+itemname+" "+itemnameen+"</td>" +
+                "<td>";
+
+            var controldiv="";
+
+            if(controltype=="singleselect"){//单选
+                controldiv="<select id=\""+itemcode+"\" class=\"easyui-combobox\" data-options=\"editable:false\" name=\""+itemcode+"\" style=\"width:200px;\">";
+                var optionArr=[];
+                optionArr=options.split(';');
+                var optiondiv="";
+                for (var i=0;i<optionArr.length;i++){
+                    var select="";
+                    if(i==0){
+                        select="selected=\"selected\"";
+                    }
+                    optiondiv+="<option value=\""+optionArr[i]+"\" "+select+">"+optionArr[i]+"</option>";
+                }
+                controldiv+=optiondiv;
+                controldiv+="</select>";
+            }else if(controltype=="singlenumber"){//单值数字
+
+            }
+
+
+            div+=controldiv;
+            var taildiv ="</td>" +
                 "<td></td>"+
                 "</tr>";
+            div+=taildiv;
+
+            return div;
         }
 
 
