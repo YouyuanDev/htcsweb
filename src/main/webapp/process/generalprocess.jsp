@@ -585,7 +585,7 @@
            </tr>
        </table>
 
-       <table class="ht-table" id="dynamicTable">
+       <table class="dynamic-table" id="dynamicTable">
 
            <%--以下检测项自动生成--%>
            <%--<tr>--%>
