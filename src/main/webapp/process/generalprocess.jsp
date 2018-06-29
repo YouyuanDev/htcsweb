@@ -169,6 +169,21 @@
             });
         }
         function proFormSubmit() {
+            var arr={};
+            $('#dynamicTable').find('input,select').each(function () {
+                var item_code="",item_value="";
+                var input=$(this).siblings('input');
+                if(input!=undefined){
+                    item_code=input.attr('name');
+                    item_value=$(this).val();
+                    if(item_code!=undefined){
+                        arr[item_code]=item_value;
+                    }
+                }
+            });
+            alert(arr);
+
+            return;
             $('#proForm').form('submit',{
                 url:url,
                 onSubmit:function () {
@@ -274,7 +289,7 @@
                     $('#dynamicTable').empty();
                   $('#dynamicTable').append(div);
                   $.parser.parse("#dynamicTable");
-                    //
+                    JudgeMaxAndMIn();
                 },error:function () {
 
                 }
@@ -374,7 +389,7 @@
                 controldiv+=optiondiv;
                 controldiv+="</select>";
             }else if(controltype=="singlenumber"){//单值数字
-                controldiv="<input class=\"easyui-numberbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+"data-options=\"min:-99,precision:"+decimalnum+"\" type=\"text\" name=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
+                controldiv="<input onchange=\"JudgeMaxAndMIn(this)\" class=\"easyui-numberbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+"data-options=\"min:-99,precision:"+decimalnum+"\" type=\"text\" name=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
             }else if(controltype=="singletext"){//单值文本
                 controldiv="<input class=\"easyui-textbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+" type=\"text\" name=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
             }
@@ -410,6 +425,33 @@
         }
 
 
+        function JudgeMaxAndMIn(){
+            //alert($(obj).attr('maxvalue')+":"+$(obj).val());
+            $("input[type=text]").each(function(i){
+                $(this).bind('input propertychange', function() {
+                    var max=$(this).parent().siblings('input').attr('maxvalue');
+                    var min=$(this).parent().siblings('input').attr('minvalue');
+                    var value=$(this).val();
+                    if(value!=undefined){
+                        if(max!=undefined&&max!=""&&!isNaN(max)){
+                            if(parseFloat(max)<parseFloat(value)){
+                                $(this).css("background-color","#F9A6A6");
+                            }else{
+                                $(this).css("background-color","#FFFFFF");
+                            }
+                        }
+                        if(min!=undefined&&min!=""&&!isNaN(min)){
+                            if(parseFloat(min)>parseFloat(value)){
+                                $(this).css("background-color","#F9A6A6");
+                            }else{
+                                $(this).css("background-color","#FFFFFF");
+                            }
+                        }
+                    }
+                });
+            });
+
+        }
 
 
 
@@ -660,21 +702,17 @@
 
        <table class="dynamic-table">
            <tr>
-               <td width="16%" class="i18n1" name="result">结论</td>
-               <td><select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
+               <td class="i18n1" name="result">结论</td>
+               <td><select style="width:100%;" id="cc" class="easyui-combobox" data-options="editable:false" name="result">
                    <option value="0">不合格,重新打砂处理</option>
                    <option value="1">合格,进入外喷砂检验工序</option>
                    <option value="10">待定</option>
                    <option value="3">隔离，进入修磨或切割工序</option>
                </select></td>
-               <td></td>
-               <td width="16%" class="i18n1" name="remark">备注</td>
-               <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px"/></td>
-               <td></td>
+               <td class="i18n1" name="remark">备注</td>
+               <td><input class="easyui-textbox" type="text" value="" name="remark" data-options="multiline:true" style="height:60px;width:100%;"/></td>
            </tr>
        </table>
-
-
            <input type="hidden" id="fileslist" name="upload_files" value=""/>
            <div id="hl-gallery-con" style="width:100%;">
 

@@ -12,16 +12,18 @@
 }
 .ht-table-std tr td label{display: block;}
 .ht-table-std tr td input,.ht-table-std tr td label{width:150px;height:20px;}
-
-
+.dynamic-table{margin-top:5px;}
+.dynamic-table,.dynamic-table tr{width:100%;}
+.dynamic-table tr td{width:25%;}
+.dynamic-table tr td input,.dynamic-table tr td textarea,.dynamic-table tr td select{width:95%;margin:0 auto;}
 .dynamic-table tr td:nth-child(1),.dynamic-table tr td:nth-child(3){
   text-align:center;
-  padding:1px 2px;background-color:#F5F5F5;
+  padding:3px 2px;background-color:#F5F5F5;
 }
 .dynamic-table,.dynamic-table td{border-collapse:collapse;border:1px solid #F0F0F0;}
 
 .ht-table,.ht-table td{border-collapse:collapse;border:1px solid #F0F0F0;}
-.ht-table{width:100%;margin-bottom:10px;}
+.ht-table{width:100%;}
 .ht-table tr td:nth-child(1),.ht-table tr td:nth-child(4){
   width:140px;
   text-align:center;
