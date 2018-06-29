@@ -265,9 +265,13 @@
 
                     var div="";
                    for(var i=0;i<data.length;i++){
+                       if((i==0)||(i%2==0)){
+                           div+="<tr>"
+                       }
                        div+=getTemplate(data[i]);
                    }
-                    //alert(div);
+                    div+="</tr>";
+                    $('#dynamicTable').empty();
                   $('#dynamicTable').append(div);
                   $.parser.parse("#dynamicTable");
                     //
@@ -340,16 +344,16 @@
                 if(unitnameen!=undefined&&unitnameen!=""){
                     unitnameen="("+unitnameen+")";
                 }
-                div="<tr>\n" +
-                    "<td width=\"16%\" class=\"\">"+itemnameen+unitnameen+" "+minmax+frequencydiven+"</td>" +
+                div=
+                    "<td width=\"25%\" class=\"\">"+itemnameen+unitnameen+" "+minmax+frequencydiven+"</td>" +
                     "<td>";
             }else{
                 if(unitname!=undefined&&unitname!=""){
                     unitname="("+unitname+")";
                 }
 
-                div="<tr>\n" +
-                    "<td width=\"16%\" class=\"\">"+itemname+unitname+" "+minmax+frequencydiv+"</td>" +
+                div=
+                    "<td width=\"25%\" class=\"\">"+itemname+unitname+" "+minmax+frequencydiv+"</td>" +
                     "<td>";
             }
 
@@ -399,15 +403,9 @@
             }else if(controltype=="textarea"){//多行文本
                 controldiv="<input class=\"easyui-textbox\" type=\"text\" value=\""+defaultvalue+"\" name=\""+itemcode+"\" data-options=\"multiline:true\" style=\"width:300px;height:80px\" />";
             }
-
-
-
             div+=controldiv;
-            var taildiv ="</td>" +
-                "<td></td>"+
-                "</tr>";
+            var taildiv ="</td>";
             div+=taildiv;
-
             return div;
         }
 
