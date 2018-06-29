@@ -60,7 +60,7 @@ public class ACController {
     }
 
 
-    @RequestMapping("/getACs")
+    @RequestMapping(value = "/getACs",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String getACs(HttpServletRequest request){
         String map="";
