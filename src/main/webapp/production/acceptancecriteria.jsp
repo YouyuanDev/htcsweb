@@ -454,7 +454,9 @@
                 <thead>
                 <tr>
                     <%--<th class="i18n1" name="acceptancecriteriano" data-options="field:'acceptance_criteria_no',width:80"></th>--%>
-                    <th class="i18n1" name="id" hidden="true" data-options="field:'id'"></th>
+
+                        <th class="i18n1" name="id" hidden="true" data-options="field:'id'"></th>
+                        <th class="i18n1" name="processname" data-options="field:'process_name'"></th>
                         <th class="i18n1" name="processcode" data-options="field:'process_code',width:130,formatter:function(value,row){
 							return row.process_code;
 						},
