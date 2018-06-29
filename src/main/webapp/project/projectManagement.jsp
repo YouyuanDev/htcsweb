@@ -154,7 +154,8 @@
                     'lab_testing_acceptance_criteria_2fbe_no':row.lab_testing_acceptance_criteria_2fbe_no,
                     'lab_testing_acceptance_criteria_3lpe_no':row.lab_testing_acceptance_criteria_3lpe_no,
                     'raw_material_acceptance_criteria_2fbe_no':row.raw_material_acceptance_criteria_2fbe_no,
-                    'raw_material_acceptance_criteria_3lpe_no':row.raw_material_acceptance_criteria_3lpe_no
+                    'raw_material_acceptance_criteria_3lpe_no':row.raw_material_acceptance_criteria_3lpe_no,
+                    'acceptance_criteria_no':row.acceptance_criteria_no
                 });
 
                 $("#project_time").datetimebox('setValue',getDate1(row.project_time));
@@ -631,6 +632,24 @@
 					        panelHeight:'auto'"/>
 
                     </td>
+
+                </tr>
+
+                <tr>
+                    <td class="i18n1" name="acceptancecriteriano" width="16%">acceptancecriteriano</td>
+                    <td   width="33%">
+
+                        <input class="easyui-combobox" type="text" name="acceptance_criteria_no"  data-options=
+                                "url:'/ACOperation/getACs.action',
+					        method:'get',
+					        valueField:'acceptance_criteria_no',
+					        editable:false,
+					        textField:'acceptance_criteria_name',
+					        panelHeight:'auto'"/>
+
+
+                    </td>
+
 
                 </tr>
 

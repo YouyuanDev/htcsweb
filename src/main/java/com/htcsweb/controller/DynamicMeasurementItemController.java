@@ -43,6 +43,26 @@ public class DynamicMeasurementItemController {
     }
 
 
+    //获得动态检测项列表，根据管号，工序号
+    @RequestMapping("/getDynamicItemByPipeNoProcessCode")
+    @ResponseBody
+    public String getDynamicItemByPipeNoProcessCode(HttpServletRequest request){
+        JSONObject json=new JSONObject();
+
+        String pipe_no=request.getParameter("pipe_no");
+        String process_code=request.getParameter("process_code");
+
+        System.out.println("pipe_no="+pipe_no);
+        System.out.println("process_code="+process_code);
+
+        List<DynamicMeasurementItem> list=dynamicMeasurementItemDao.getDynamicItemByPipeNoProcessCode(pipe_no,process_code);
+
+        String mmp= JSONArray.toJSONString(list);
+        System.out.println(mmp);
+        return mmp;
+    }
+
+
     @RequestMapping("/importDynamicItem")
     @ResponseBody
     public String importDynamicItem(HttpServletRequest request) {
@@ -140,6 +160,7 @@ public class DynamicMeasurementItemController {
         ResponseUtil.write(response,json);
         return null;
     }
+
 
 
 }

@@ -27,6 +27,7 @@
 
     <select id="getCountAllByLike" resultType="int">
         select count(*) from inspection_process_record_header o
+        inner join process_info pc on pc.process_code=o.process_code
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no
         left join project_info pro on c.project_no=pro.project_no
@@ -55,8 +56,9 @@
 
 
     <select id="getAllByLike" resultType="map">
-        Select pro.project_name,s.status_name,p.contract_no,p.grade,p.od,p.wt,p.p_length,p.weight,p.heat_no,o.*
+        Select pc.process_name,pc.process_name_en,pro.project_name,s.status_name,p.contract_no,p.grade,p.od,p.wt,p.p_length,p.weight,p.heat_no,o.*
         from inspection_process_record_header o
+        inner join process_info pc on pc.process_code=o.process_code
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no
         left join project_info pro on c.project_no=pro.project_no

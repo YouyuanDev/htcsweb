@@ -41,4 +41,24 @@
         order by id desc
     </select>
 
+
+    <select id="getDynamicItemByPipeNoProcessCode" resultType="com.htcsweb.entity.DynamicMeasurementItem">
+        select item.* from dynamic_measurement_item item
+        inner join acceptance_criteria ac on item.acceptance_criteria_no=ac.acceptance_criteria_no
+        inner join project_info pro on pro.acceptance_criteria_no=ac.acceptance_criteria_no
+        inner join contract_info c on c.project_no=pro.project_no
+        inner join pipe_basic_info p on p.contract_no=c.contract_no
+        <where>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND p.pipe_no =#{pipe_no}
+            </if>
+            <if test="process_code!=null and process_code!=''">
+                AND item.process_code =#{process_code}
+            </if>
+        </where>
+        order by id asc
+    </select>
+
+
+
 </mapper>

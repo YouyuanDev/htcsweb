@@ -52,7 +52,7 @@
             $('#hlProDialog').dialog('open').dialog('setTitle','新增');
             clearFormLabel();
             clearMultiUpload(grid);
-            url="/ProcessOperation/saveProcess.action";
+            url="/InspectionProcessOperation/saveProcess.action";
             //$("input[name='alkaline_dwell_time']").siblings().css("background-color","#F9A6A6");
         }
         function delPro() {
@@ -65,7 +65,7 @@
                 var idArrs=idArr.join(',');
                 $.messager.confirm('系统提示',"您确定要删除这<font color=red>"+idArr.length+ "</font>条数据吗？",function (r) {
                     if(r){
-                        $.post("/ProcessOperation/delProcess.action",{"hlparam":idArrs},function (data) {
+                        $.post("/InspectionProcessOperation/delProcess.action",{"hlparam":idArrs},function (data) {
                             if(data.success){
                                 $("#proDatagrids").datagrid("reload");
                             }
@@ -153,7 +153,7 @@
                 //
                 //     }
                 // });
-                url="/ProcessOperation/saveProcess.action?id="+row.id;
+                url="/InspectionProcessOperation/saveProcess.action?id="+row.id;
             }else{
                 hlAlertTwo();
             }
@@ -161,6 +161,7 @@
         function searchPro() {
             $('#proDatagrids').datagrid('load',{
                 'pipe_no': $('#pipeno').val(),
+                'process_code': $('#processcode').val(),
                 'operator_no': $('#operatorno').val(),
                 'begin_time': $('#begintime').val(),
                 'end_time': $('#endtime').val(),
@@ -244,6 +245,56 @@
                 $(this).siblings().css("background-color","#FFFFFF");
             });
         }
+
+        //生成检验项表单
+        function GenerateInspectionItem(){
+            if(look1==undefined)return;
+            var pipe_no=look1.getValue();
+            if(pipe_no==undefined)return;
+
+            var process_code=$('#processcode').val();
+            if(process_code==undefined||process_code=="")return;
+            //根据管号和工序编号得到检验项表单项目
+            $.ajax({
+                url:"/DynamicItemOperation/getDynamicItemByPipeNoProcessCode.action",
+                dataType:'json',
+                data:{
+                    pipe_no:pipe_no,
+                    process_code:process_code
+                },
+                success:function (data) {
+                    alert(data);
+                    var result = eval('('+data+')');
+                    alert(result);
+
+                },error:function () {
+
+                }
+            });
+
+
+
+
+
+        }
+
+        function getTemplate(item){
+
+            var div="<tr>\n" +
+                "<td width=\"16%\" class=\"i18n1\">"+item.item_name+" "+item.item_name_en+"</td>" +
+                "<td>" +
+                "<select id=\"mk\" class=\"easyui-combobox\" data-options=\"editable:false\" name=\"marking\" style=\"width:200px;\">" +
+                "<option value=\"0\" selected=\"selected\">清晰</option>" +
+                "<option value=\"1\">不清晰</option>" +
+                "</select>" +
+                "</td>" +
+                "<td></td>"+
+                "</tr>";
+        }
+
+
+
+
     </script>
 
 
@@ -256,7 +307,7 @@
 <fieldset class="b3" style="padding:10px;margin:10px;">
     <legend> <h3><b style="color: orange" >|&nbsp;</b><span class="i18n1" name="datadisplay">数据展示</span></h3></legend>
     <div  style="margin-top:5px;">
-         <table class="easyui-datagrid" id="proDatagrids" url="/PorcessOperation/getProcessByLike.action" striped="true" loadMsg="正在加载中。。。" textField="text" pageSize="20" fitColumns="true" pagination="true" toolbar="#hlProTb">
+         <table class="easyui-datagrid" id="proDatagrids" url="/InspectionProcessOperation/getProcessByLike.action" striped="true" loadMsg="正在加载中。。。" textField="text" pageSize="20" fitColumns="true" pagination="true" toolbar="#hlProTb">
              <thead>
                <tr>
                        <th data-options="field:'ck',checkbox:true"></th>
@@ -286,7 +337,9 @@
                        <%--<th field="blast_line_speed" align="center" width="120" hidden="true" class="i18n1" name="blastlinespeed">打砂传送速度</th>--%>
                        <%--<th field="preheat_temp" align="center" width="120" hidden="true" class="i18n1" name="preheattemp">预热温度</th>--%>
                        <%--<th field="marking" align="center" width="120" hidden="true" class="i18n1" name="marking">管体标识是否清晰</th>--%>
-                       <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
+                   <th field="process_name" align="center" width="150" class="i18n1" name="processname">工序名称</th>
+                   <th field="process_name_en" align="center" width="150" class="i18n1" name="processnameen">工序英文</th>
+                   <th field="remark" align="center" width="150" class="i18n1" name="remark">备注</th>
                        <th field="result" align="center" width="150" class="i18n1" name="result">结论</th>
                        <th field="operation_time" align="center" width="150" class="i18n1" name="operationtime" data-options="formatter:formatterdate">操作时间</th>
                </tr>
@@ -301,23 +354,23 @@
 
     <span class="i18n1" name="process">工序</span>:
     <input id="processcode" class="easyui-combobox" type="text" name="processcode"  data-options=
-            "url:'/ProcessOperation/getAllProcess.action',
+            "url:'/ProcessOperation/getAllProcessWithAllOption.action',
 					        method:'post',
 					        valueField:'process_code',
-					        width: 150,
+					        width: 140,
 					        editable:false,
 					        textField:'process_name',
-					        panelHeight:'auto'"/>
+					        panelHeight:'200'"/>
 
     <span class="i18n1" name="millno">分厂编号</span>:
     <input id="millno" class="easyui-combobox" type="text" name="millno"  data-options=
             "url:'/millInfo/getAllMillsWithComboboxSelectAll.action',
 					        method:'post',
 					        valueField:'id',
-					        width: 150,
+					        width: 140,
 					        editable:false,
 					        textField:'text',
-					        panelHeight:'auto'"/>
+					        panelHeight:'200'"/>
     <span class="i18n1" name="pipeno">钢管编号</span>:
     <input id="pipeno" name="pipeno" style="line-height:22px;border:1px solid #ccc">
     <span class="i18n1" name="operatorno">操作工编号</span>:
@@ -353,7 +406,7 @@
                    <td class="i18n1" name="pipeno" width="16%">钢管编号</td>
                    <td colspan="2" width="33%">
                        <input  id="lookup1" name="pipe_no" class="mini-lookup" style="text-align:center;width:180px;"
-                              textField="pipe_no" valueField="id" popupWidth="auto"
+                              textField="pipe_no" valueField="pipe_no" popupWidth="auto"
                               popup="#gridPanel1" grid="#datagrid1" multiSelect="false"/>
                    </td>
                    <td class="i18n1" name="statusname" width="16%">状态</td>
@@ -540,13 +593,13 @@
          url="/pipeinfo/getPipeNumbers.action">
         <div property="columns">
             <div type="checkcolumn" ></div>
-            <div field="pipe_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="pipeno">钢管编号</div>
-            <div field="contract_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="contractno">合同编号</div>
-            <div field="status" width="40" headerAlign="center" allowSort="true" class="i18n1" name="status">状态</div>
-            <div field="od" width="40" headerAlign="center" allowSort="true" class="i18n1" name="od">外径</div>
-            <div field="wt" width="40" headerAlign="center" allowSort="true" class="i18n1" name="wt">壁厚</div>
-            <div field="p_length" width="40" headerAlign="center" allowSort="true" class="i18n1" name="p_length">长度</div>
-            <div field="weight" width="40" headerAlign="center" allowSort="true" class="i18n1" name="weight">重量</div>
+            <div field="pipe_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="pipeno">钢管编号Pipe No.</div>
+            <div field="contract_no" width="80" headerAlign="center" allowSort="true" class="i18n1" name="contractno">合同编号Contract No.</div>
+            <div field="status" width="40" headerAlign="center" allowSort="true" class="i18n1" name="status">状态 Status</div>
+            <div field="od" width="40" headerAlign="center" allowSort="true" class="i18n1" name="od">外径 OD</div>
+            <div field="wt" width="40" headerAlign="center" allowSort="true" class="i18n1" name="wt">壁厚 WT</div>
+            <div field="p_length" width="40" headerAlign="center" allowSort="true" class="i18n1" name="p_length">长度 Length</div>
+            <div field="weight" width="40" headerAlign="center" allowSort="true" class="i18n1" name="weight">重量 Weight</div>
         </div>
     </div>
 </div>
@@ -555,9 +608,9 @@
 >
     <div property="toolbar" id="searchBar2" style="padding:5px;text-align:center;display:none;">
         <div style="float:left;padding-bottom:2px;">
-            <span class="i18n1" name="operatorno">操作工编号</span><span>:</span>
+            <span class="i18n1" name="operatorno">操作工编号 Operator No.</span><span>:</span>
             <input id="keyText3" class="mini-textbox" style="width:110px;" onenter="onSearchClick(2)"/>
-            <span class="i18n1" name="operatorname">姓名</span><span>:</span>
+            <span class="i18n1" name="operatorname">姓名 Name</span><span>:</span>
             <input id="keyText4" class="mini-textbox" style="width:110px;" onenter="onSearchClick(2)"/>
             <a class="mini-button" onclick="onSearchClick(2)" name="search">查找</a>
             <a class="mini-button" onclick="onClearClick(2)" name="clear">清除</a>
@@ -629,6 +682,7 @@
             success:function (data) {
                 if(data!=null&&data!=""){
                     addLabelPipeInfo(data);
+                    GenerateInspectionItem();
                 }
             },
             error:function () {

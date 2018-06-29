@@ -25,8 +25,7 @@
         <result property="raw_material_acceptance_criteria_3lpe_no" column="raw_material_acceptance_criteria_3lpe_no"></result>
         <result property="pipe_body_acceptance_criteria_no" column="pipe_body_acceptance_criteria_no"></result>
         <result property="inspection_frequency_no" column="inspection_frequency_no"></result>
-
-
+        <result property="acceptance_criteria_no" column="acceptance_criteria_no"></result>
 
     </resultMap>
 
@@ -98,13 +97,14 @@
         raw_material_acceptance_criteria_2fbe_no=#{raw_material_acceptance_criteria_2fbe_no},
         raw_material_acceptance_criteria_3lpe_no=#{raw_material_acceptance_criteria_3lpe_no},
         pipe_body_acceptance_criteria_no=#{pipe_body_acceptance_criteria_no},
-        inspection_frequency_no=#{inspection_frequency_no}
+        inspection_frequency_no=#{inspection_frequency_no},
+        acceptance_criteria_no=#{acceptance_criteria_no}
          WHERE id=#{id}
     </update>
 
     <insert id="addProjectInfo" parameterType="com.htcsweb.entity.ProjectInfo">
-        INSERT INTO project_info(project_no,project_name,client_name,client_spec,coating_standard,mps,itp,project_time,upload_files,od_coating_acceptance_criteria_no,id_coating_acceptance_criteria_no,lab_testing_acceptance_criteria_2fbe_no,lab_testing_acceptance_criteria_3lpe_no,raw_material_acceptance_criteria_2fbe_no,raw_material_acceptance_criteria_3lpe_no,pipe_body_acceptance_criteria_no,inspection_frequency_no)
-         VALUES (#{project_no},#{project_name},#{client_name},#{client_spec},#{coating_standard},#{mps},#{itp},#{project_time},#{upload_files},#{od_coating_acceptance_criteria_no},#{id_coating_acceptance_criteria_no},#{lab_testing_acceptance_criteria_2fbe_no},#{lab_testing_acceptance_criteria_3lpe_no},#{raw_material_acceptance_criteria_2fbe_no},#{raw_material_acceptance_criteria_3lpe_no},#{pipe_body_acceptance_criteria_no},#{inspection_frequency_no})
+        INSERT INTO project_info(project_no,project_name,client_name,client_spec,coating_standard,mps,itp,project_time,upload_files,od_coating_acceptance_criteria_no,id_coating_acceptance_criteria_no,lab_testing_acceptance_criteria_2fbe_no,lab_testing_acceptance_criteria_3lpe_no,raw_material_acceptance_criteria_2fbe_no,raw_material_acceptance_criteria_3lpe_no,pipe_body_acceptance_criteria_no,inspection_frequency_no,acceptance_criteria_no)
+         VALUES (#{project_no},#{project_name},#{client_name},#{client_spec},#{coating_standard},#{mps},#{itp},#{project_time},#{upload_files},#{od_coating_acceptance_criteria_no},#{id_coating_acceptance_criteria_no},#{lab_testing_acceptance_criteria_2fbe_no},#{lab_testing_acceptance_criteria_3lpe_no},#{raw_material_acceptance_criteria_2fbe_no},#{raw_material_acceptance_criteria_3lpe_no},#{pipe_body_acceptance_criteria_no},#{inspection_frequency_no},#{acceptance_criteria_no})
     </insert>
 
     <delete id="delProjectInfo">

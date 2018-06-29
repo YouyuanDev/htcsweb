@@ -33,6 +33,25 @@ public class ProcessInfoController {
     }
 
 
+    //用于搜索的分厂信息下拉框 有All选项
+    @RequestMapping("/getAllProcessWithAllOption")
+    @ResponseBody
+    public String getAllProcessWithAllOption(HttpServletRequest request){
+        List<ProcessInfo> list=processInfoDao.getAllProcessInfo();
+
+        ProcessInfo p=new ProcessInfo();
+        p.setId(0);
+        p.setProcess_code("");
+        p.setProcess_name("All");
+        p.setProcess_name_en("All");
+        list.add(0,p);
+
+        String map= JSONObject.toJSONString(list);
+        System.out.println("="+map);
+        return map;
+    }
+
+
 
 
 }

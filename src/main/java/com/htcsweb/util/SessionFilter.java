@@ -132,8 +132,9 @@ public class SessionFilter extends OncePerRequestFilter{
             "checkPipeForShipment",
             "RequireShiftInfoForAPP",
             "getAllProcess",
-            "getProcessByLike"
-
+            "getAllProcessWithAllOption",
+            "getACs",
+            "getDynamicItemByPipeNoProcessCode"
     }; // 不过滤的uri
 
     @Override
