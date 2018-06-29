@@ -323,12 +323,25 @@
 
             var div="";
             var language=getCookie("userLanguage");
+
+            var minmax=minvalue+"~"+maxvalue;
+            var frequencydiv="";
+            var frequencydiven="";
+            if(itemfrequency!=undefined&&itemfrequency==0){
+                frequencydiv="每根检测";
+                frequencydiven=" Inspect Every Pipe";
+            }else if(itemfrequency!=undefined&&itemfrequency!=0){
+                frequencydiv=" 每"+itemfrequency+"小时检测一次";
+                frequencydiven=" Inspect Every"+itemfrequency+"hour(s)";
+            }
+
+
             if(language&&language=="en"){
                 if(unitnameen!=undefined||unitnameen!=""){
                     unitnameen="("+unitnameen+")";
                 }
                 div="<tr>\n" +
-                    "<td width=\"16%\" class=\"\">"+itemnameen+unitnameen+"</td>" +
+                    "<td width=\"16%\" class=\"\">"+itemnameen+unitnameen+" "+minmax+frequencydiv+"</td>" +
                     "<td>";
             }else{
                 if(unitname!=undefined||unitname!=""){
@@ -336,7 +349,7 @@
                 }
 
                 div="<tr>\n" +
-                    "<td width=\"16%\" class=\"\">"+itemname+unitname+"</td>" +
+                    "<td width=\"16%\" class=\"\">"+itemname+unitname+" "+minmax+frequencydiven+"</td>" +
                     "<td>";
             }
 
