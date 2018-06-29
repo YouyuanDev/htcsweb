@@ -177,8 +177,8 @@
          var g_textarea_field=undefined;
         function append(){
             if (endEditing()){
-                $('#dg').datagrid('insertRow',{index:1,row:{id:0,item_code:"IT"+new Date().getTime(),decimal_num:'0',max_value:'0',min_value:'0',default_value:'0',status:'P'}});
-                editIndex = 1;
+                $('#dg').datagrid('insertRow',{index:0,row:{id:0,item_code:"IT"+new Date().getTime(),decimal_num:'0',max_value:'0',min_value:'0',default_value:'0',status:'P'}});
+                editIndex = 0;
                 $('#dg').datagrid('selectRow', editIndex)
                     .datagrid('beginEdit', editIndex);
                 // editIndex = $('#dg').datagrid('getRows').length-1;
@@ -186,6 +186,7 @@
                 //     .datagrid('beginEdit', editIndex);
                 setTextAreaEvent("options");
                 setTextAreaEvent("default_value");
+                $("#dg").animate({scrollTop:0},100);
             }
         }
         function setTextAreaEvent(field) {
@@ -248,7 +249,7 @@
                          default_value:row.default_value
                     },
                     success:function (data) {
-                        var result = eval('('+data+')');
+                        //var result = eval('('+data+')');
                         if (result.success){
                             $('#dg').datagrid('acceptChanges');
                             loadDynamicItemInfo(acceptance_criteria_no);
