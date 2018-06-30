@@ -67,20 +67,15 @@
             var row = $('#proDatagrids').datagrid('getSelections');
             if(row.length>0){
                 var idArr=[];
-                var headerCodeArr=[];
                 for (var i=0;i<row.length;i++){
                     idArr.push(row[i].id);
                 }
-                for (var i=0;i<row.length;i++){
-                    headerCodeArr.push(row[i].inspection_process_record_header_code);
-                }
 
                 var idArrs=idArr.join(',');
-                var headerCodeArr=headerCodeArr.join(',');
                 $.messager.confirm('系统提示',"您确定要删除这<font color=red>"+idArr.length+ "</font>条数据吗？",function (r) {
                     if(r){
                         $.post("/InspectionProcessOperation/delProcess.action",
-                            {hlparam:idArrs,headerCodes:headerCodeArr},function (data) {
+                            {hlparam:idArrs},function (data) {
                             if(data.success){
                                 $("#proDatagrids").datagrid("reload");
                             }

@@ -175,22 +175,11 @@ public class InspectionProcess {
     public String delProcess(HttpServletRequest request, HttpServletResponse response)throws Exception{
 
         String hlparam=request.getParameter("hlparam");
-        String headerCodes=request.getParameter("headerCodes");
         System.out.println("hlparam"+hlparam);
         String[] idArr={};
-        String[] headCodeArr={};
         if(hlparam!=null) {
             idArr = hlparam.split(",");
         }
-        if(headerCodes!=null) {
-            headCodeArr = headerCodes.split(",");
-        }
-
-        //需要先删除所有动态检测项
-        for(int j=0;j<headCodeArr.length;j++) {
-            int resCount = inspectionProcessRecordItemDao.delInspectionProcessRecordItemByHeaderCode(headCodeArr[j]);
-        }
-
 
         //删除表单
         int resTotal=0;
