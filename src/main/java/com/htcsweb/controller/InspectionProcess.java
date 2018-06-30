@@ -3,10 +3,7 @@ package com.htcsweb.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.htcsweb.dao.InspectionProcessRecordHeaderDao;
-import com.htcsweb.dao.InspectionProcessRecordItemDao;
-import com.htcsweb.dao.PipeBasicInfoDao;
-import com.htcsweb.dao.ProcessInfoDao;
+import com.htcsweb.dao.*;
 import com.htcsweb.entity.*;
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +37,11 @@ public class InspectionProcess {
     private InspectionProcessRecordItemDao inspectionProcessRecordItemDao;
 
 
+    @Autowired
+    private InspectionTimeRecordDao inspectionTimeRecordDao;
+
+
+
 
     @RequestMapping("/saveProcess")
     @ResponseBody
@@ -54,34 +56,7 @@ public class InspectionProcess {
         if(inspectionProcessRecordHeader.getInspection_process_record_header_code()==null||inspectionProcessRecordHeader.getInspection_process_record_header_code()==""){
             inspectionProcessRecordHeader.setInspection_process_record_header_code("IPRH"+System.currentTimeMillis());
         }
-        System.out.println("id="+inspectionProcessRecordHeader.getId());
-        for (String key:dynamicMap.keySet()) {
-            if(inspectionProcessRecordHeader.getId()==0) {
-                //新增动态检测项
-                System.out.println("新增动态检测项="+inspectionProcessRecordHeader.getInspection_process_record_header_code());
-                InspectionProcessRecordItem recorditem=new InspectionProcessRecordItem();
-                recorditem.setId(0);
-                recorditem.setInspection_process_record_header_code(inspectionProcessRecordHeader.getInspection_process_record_header_code());
-                recorditem.setItem_code(key);
-                recorditem.setItem_value((String)dynamicMap.get(key));
-                inspectionProcessRecordItemDao.addInspectionProcessRecordItem(recorditem);
-            }else{
-                //更新原有动态检测项
-                InspectionProcessRecordItem recorditem=inspectionProcessRecordItemDao.getInspectionProcessRecordItemByHeaderCodeAndItemCode(inspectionProcessRecordHeader.getInspection_process_record_header_code(),key);
-                if(recorditem!=null) {
-                    recorditem.setItem_value((String) dynamicMap.get(key));
-                    inspectionProcessRecordItemDao.updateInspectionProcessRecordItem(recorditem);
-                }else{
-                    InspectionProcessRecordItem item=new InspectionProcessRecordItem();
-                    item.setId(0);
-                    item.setInspection_process_record_header_code(inspectionProcessRecordHeader.getInspection_process_record_header_code());
-                    item.setItem_code(key);
-                    item.setItem_value((String)dynamicMap.get(key));
-                    inspectionProcessRecordItemDao.addInspectionProcessRecordItem(item);
-                }
-
-            }
-        }
+        //System.out.println("id="+inspectionProcessRecordHeader.getId());
 
         try{
             int resTotal=0;
@@ -89,14 +64,11 @@ public class InspectionProcess {
                 inspectionProcessRecordHeader.setOperation_time(new Date());
             }
 
-
-
             String pipeno=inspectionProcessRecordHeader.getPipe_no();
             String mill_no=inspectionProcessRecordHeader.getMill_no();
-
+            String project_no="";
             if(inspectionProcessRecordHeader.getId()==0){
                 //添加
-                String project_no="";
                 List<HashMap<String,Object>> list=pipeBasicInfoDao.getPipeInfoByNo(pipeno);
                 if(list.size()>0){
                     String pipestatus=(String)list.get(0).get("status");
@@ -114,28 +86,6 @@ public class InspectionProcess {
                     project_no=(String)list.get(0).get("project_no");
                     System.out.println("project_no="+project_no);
                 }
-                if(resTotal>0){
-                    //更新检验时间
-                    //更新增量 inspectionTimeMap
-//                    if (odblastprocess.getRinse_water_conductivity() != -99) {
-////
-////                        List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,"od_rinse_water_conductivity_freq");
-////                        if(lt.size()>0) {
-////                            InspectionTimeRecord itr=lt.get(0);
-////                            itr.setInspction_time(odblastprocess.getOperation_time());
-////                            inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
-////                        }else{
-////                            InspectionTimeRecord itr=new InspectionTimeRecord();
-////                            itr.setProject_no(project_no);
-////                            itr.setMill_no(mill_no);
-////                            itr.setInspection_item("od_rinse_water_conductivity_freq");
-////                            itr.setInspction_time(odblastprocess.getOperation_time());
-////                            inspectionTimeRecordDao.addInspectionTimeRecord(itr);
-////                        }
-////
-////                    }
-
-                }
 
             }else{
                 //修改！
@@ -143,6 +93,46 @@ public class InspectionProcess {
 
             }
             if(resTotal>0){
+
+                //增加或者更新动态检测项
+                for (String key:dynamicMap.keySet()) {
+                        //更新原有动态检测项
+                        InspectionProcessRecordItem recorditem=inspectionProcessRecordItemDao.getInspectionProcessRecordItemByHeaderCodeAndItemCode(inspectionProcessRecordHeader.getInspection_process_record_header_code(),key);
+                        if(recorditem!=null) {
+                            recorditem.setItem_value((String) dynamicMap.get(key));
+                            inspectionProcessRecordItemDao.updateInspectionProcessRecordItem(recorditem);
+                        }else{
+                            InspectionProcessRecordItem item=new InspectionProcessRecordItem();
+                            item.setId(0);
+                            item.setInspection_process_record_header_code(inspectionProcessRecordHeader.getInspection_process_record_header_code());
+                            item.setItem_code(key);
+                            item.setItem_value((String)dynamicMap.get(key));
+                            int addtotal=inspectionProcessRecordItemDao.addInspectionProcessRecordItem(item);
+
+                            //更新检验时间
+                            //更新增量 inspectionTimeMap
+                            if(addtotal>0){
+                                List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByProjectNoMillNo(project_no,mill_no,key);
+                                if(lt.size()>0) {
+                                    InspectionTimeRecord itr=lt.get(0);
+                                    itr.setInspction_time(inspectionProcessRecordHeader.getOperation_time());
+                                    inspectionTimeRecordDao.updateInspectionTimeRecord(itr);
+                                }else{
+                                    InspectionTimeRecord itr=new InspectionTimeRecord();
+                                    itr.setProject_no(project_no);
+                                    itr.setMill_no(mill_no);
+                                    itr.setInspection_item(key);
+                                    itr.setInspction_time(inspectionProcessRecordHeader.getOperation_time());
+                                    inspectionTimeRecordDao.addInspectionTimeRecord(itr);
+                                }
+                            }
+
+
+                        }
+                        
+                }
+
+
                 //更新管子的状态
                 List<PipeBasicInfo> list=pipeBasicInfoDao.getPipeNumber(pipeno);
                 if(list.size()>0){
