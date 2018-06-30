@@ -295,8 +295,15 @@
         function saveTextArea() {
              if(g_textarea_field!=undefined){
                  var val=$('#tempTextarea').val();
-                 //转换全角分号
-                 val=changeSemicolon(val);
+                 if(g_textarea_field=="options"){
+                     //转换全角分号
+                     val=changeSemicolon(val);
+                     //去除逗号
+                     val=changeComma(val);
+                     val=removeComma(val);
+                     val=removeEnter(val);
+                 }
+
                  var ed = $('#dg').datagrid('getEditor', {index:editIndex,field:g_textarea_field});
                  $(ed.target).textbox('setValue',val)
              }

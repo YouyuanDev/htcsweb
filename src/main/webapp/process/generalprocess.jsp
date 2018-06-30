@@ -67,13 +67,20 @@
             var row = $('#proDatagrids').datagrid('getSelections');
             if(row.length>0){
                 var idArr=[];
+                var headerCodeArr=[];
                 for (var i=0;i<row.length;i++){
                     idArr.push(row[i].id);
                 }
+                for (var i=0;i<row.length;i++){
+                    headerCodeArr.push(row[i].inspection_process_record_header_code);
+                }
+
                 var idArrs=idArr.join(',');
+                var headerCodeArr=headerCodeArr.join(',');
                 $.messager.confirm('系统提示',"您确定要删除这<font color=red>"+idArr.length+ "</font>条数据吗？",function (r) {
                     if(r){
-                        $.post("/InspectionProcessOperation/delProcess.action",{hlparam:idArrs},function (data) {
+                        $.post("/InspectionProcessOperation/delProcess.action",
+                            {hlparam:idArrs,headerCodes:headerCodeArr},function (data) {
                             if(data.success){
                                 $("#proDatagrids").datagrid("reload");
                             }
@@ -139,7 +146,13 @@
                 if(dy!=undefined&&dy=="dynamic"){
                     var item_code=$(this).attr("myname");
                     if(item_code!=undefined) {
-                        arr[item_code]=this.value;
+                        var controltype = $(this).attr("controltype");
+                        if(controltype!=undefined&&controltype=="multiselect"){
+                            arr[item_code]=$(this).combobox('getText');
+                        }else{
+                            arr[item_code]=this.value;
+                        }
+
                     }
                 }
             });
@@ -368,49 +381,65 @@
             }
 
             if(controltype=="singleselect"){//单选
-                controldiv="<select dynamic=\"dynamic\" id=\""+itemcode+"\"  defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\" class=\"easyui-combobox\" data-options=\"editable:false\" value=\""+defaultvalue+"\" myname=\""+itemcode+"\" name=\""+itemcode+"\" style=\"width:200px;\" >";
+                controldiv="<select controltype=\""+controltype+"\" dynamic=\"dynamic\" id=\""+itemcode+"\"  defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\" class=\"easyui-combobox\" data-options=\"editable:false,panelHeight:'200'\" value=\""+defaultvalue+"\" myname=\""+itemcode+"\" name=\""+itemcode+"\" style=\"width:200px;\" >";
                 var optionArr=[];
                 optionArr=options.split(';');
                 var optiondiv="";
+                optiondiv+="<option value=\"\">请选择</option>";
                 for (var i=0;i<optionArr.length;i++){
                     var select="";
-                    if(i==0){
+                    if(itemvalue!=undefined&&itemvalue==optionArr[i]){
                         select="selected=\"selected\"";
                     }
+                    // else if(itemvalue==undefined&&i==0){
+                    //     select="selected=\"selected\"";
+                    // }
                     optiondiv+="<option value=\""+optionArr[i]+"\" "+select+">"+optionArr[i]+"</option>";
                 }
                 controldiv+=optiondiv;
                 controldiv+="</select>";
             }else if(controltype=="singlenumber"){//单值数字
-                controldiv="<input dynamic=\"dynamic\" onchange=\"JudgeMaxAndMIn(this)\" class=\"easyui-numberbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+"data-options=\"min:-99,precision:"+decimalnum+"\" type=\"text\" myname=\""+itemcode+"\" name=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
+                controldiv="<input controltype=\""+controltype+"\" dynamic=\"dynamic\" onchange=\"JudgeMaxAndMIn(this)\" class=\"easyui-numberbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+"data-options=\"min:-99,precision:"+decimalnum+"\" type=\"text\" myname=\""+itemcode+"\" name=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
             }else if(controltype=="singletext"){//单值文本
-                controldiv="<input dynamic=\"dynamic\" class=\"easyui-textbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+" type=\"text\" name=\"" + itemcode +"\" myname=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
+                controldiv="<input controltype=\""+controltype+"\"  dynamic=\"dynamic\" class=\"easyui-textbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+" type=\"text\" name=\"" + itemcode +"\" myname=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
             }
             else if(controltype=="multinumber"){//多值数字
-                controldiv="<input dynamic=\"dynamic\" class=\"easyui-textbox\"  "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+" type=\"text\" name=\"" + itemcode +"\" myname=\"" + itemcode +"\"  value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
+                controldiv="<input controltype=\""+controltype+"\" dynamic=\"dynamic\" class=\"easyui-textbox\"  "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+" type=\"text\" name=\"" + itemcode +"\" myname=\"" + itemcode +"\"  value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
             }
             else if(controltype=="multitext"){//多值文本
 
-                controldiv="<input dynamic=\"dynamic\" class=\"easyui-textbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+" type=\"text\" name=\"" + itemcode +"\" myname=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
+                controldiv="<input controltype=\""+controltype+"\"  dynamic=\"dynamic\" class=\"easyui-textbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+" type=\"text\" name=\"" + itemcode +"\" myname=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
             }
             else if(controltype=="multiselect"){//多选
-                controldiv="<select dynamic=\"dynamic\" id=\""+itemcode+"\" class=\"easyui-combobox\" data-options=\"editable:false,multiple:true,multiline:false\" name=\""+itemcode+"\" myname=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\">";
+                controldiv="<select controltype=\""+controltype+"\" dynamic=\"dynamic\" id=\""+itemcode+"\" class=\"easyui-combobox\" data-options=\"editable:false,multiple:true,multiline:false,panelHeight:'200'\" name=\""+itemcode+"\" myname=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\">";
                 var optionArr=[];
                 optionArr=options.split(';');
                 var optiondiv="<option value=\"\" >无</option>";
                 //var optiondiv="";
+
                 for (var i=0;i<optionArr.length;i++){
-                    optiondiv+="<option value=\""+optionArr[i]+"\" >"+optionArr[i]+"</option>";
+                    if(itemvalue!=undefined){
+                        var valueArr=[];
+                        valueArr=itemvalue.split(',');
+                        var select="";
+                        for(var j=0;j<valueArr.length;j++){
+                            if(valueArr[j]!=undefined&&valueArr[j]==optionArr[i]){
+                                alert(valueArr[j]);
+                                select="selected=\"selected\"";
+                            }
+                        }
+                    }
+                    optiondiv+="<option value=\""+optionArr[i]+"\" "+select+" >"+optionArr[i]+"</option>";
                 }
                 controldiv+=optiondiv;
                 controldiv+="</select>";
 
             }else if(controltype=="checkbox"){//复选框
-                controldiv="<input type=\"checkbox\" id=\""+itemcode+"\" myname=\"" + itemcode +"\" value=\"1\" checked=\"false\" onchange=\"checkboxChecked(this)\"/>\n" +
+                controldiv="<input controltype=\""+controltype+"\"  type=\"checkbox\" id=\""+itemcode+"\" myname=\"" + itemcode +"\" value=\"1\" checked=\"false\" onchange=\"checkboxChecked(this)\"/>\n" +
                     "<input dynamic=\"dynamic\" type=\"hidden\" myname=\"" + itemcode +"\" name=\""+itemcode+"\" value=\"0\">";
 
             }else if(controltype=="textarea"){//多行文本
-                controldiv="<input dynamic=\"dynamic\" class=\"easyui-textbox\" type=\"text\" value=\""+defaultvalue+"\" myname=\"" + itemcode +"\" name=\""+itemcode+"\" data-options=\"multiline:true\" style=\"width:300px;height:80px\" />";
+                controldiv="<input controltype=\""+controltype+"\"  dynamic=\"dynamic\" class=\"easyui-textbox\" type=\"text\" value=\""+defaultvalue+"\" myname=\"" + itemcode +"\" name=\""+itemcode+"\" data-options=\"multiline:true\" style=\"width:300px;height:80px\" />";
             }
             div+=controldiv;
             var taildiv ="</td>";

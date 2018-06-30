@@ -16,4 +16,7 @@ public interface InspectionProcessRecordItemDao {
     public InspectionProcessRecordItem getInspectionProcessRecordItemByHeaderCodeAndItemCode(@Param("inspection_process_record_header_code") String inspection_process_record_header_code,@Param("item_code") String item_code);
 
     public List<InspectionProcessRecordItem> getInspectionProcessRecordItemByInspectionProcessRecordHeaderCode(@Param("inspection_process_record_header_code") String inspection_process_record_header_code);
+
+    public int delInspectionProcessRecordItemByHeaderCode(@Param("inspection_process_record_header_code") String inspection_process_record_header_code);
+
 }

@@ -304,7 +304,20 @@ function  changeSemicolon(str) {
     return newstr;
 }
 
+//去除所有逗号, 逗号
+function removeComma(str){
+    var reg=new RegExp(",","g");
+    var newstr=str.replace(reg,"");
+    return newstr;
+}
 
+
+//去除所有回车
+function removeEnter(str){
+    var reg=new RegExp("\n","g");
+    var newstr=str.replace(reg,"");
+    return newstr;
+}
 
 //判断字符串厚度列表是否合法
 function thicknessIsAllow(str){
