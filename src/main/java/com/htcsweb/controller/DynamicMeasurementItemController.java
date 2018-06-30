@@ -63,6 +63,39 @@ public class DynamicMeasurementItemController {
     }
 
 
+    //获得动态检测项列表及检测值，根据管号，工序号，表单编号
+    @RequestMapping("/getDynamicItemByPipeNoProcessCodeHeaderCode")
+    @ResponseBody
+    public String getDynamicItemByPipeNoProcessCodeHeaderCode(HttpServletRequest request){
+        JSONObject json=new JSONObject();
+
+        String pipe_no=request.getParameter("pipe_no");
+        String process_code=request.getParameter("process_code");
+        String inspection_process_record_header_code=request.getParameter("inspection_process_record_header_code");
+
+        System.out.println("pipe_no="+pipe_no);
+        System.out.println("process_code="+process_code);
+        System.out.println("inspection_process_record_header_code="+inspection_process_record_header_code);
+
+        String mmp= "";
+        if(inspection_process_record_header_code==null||inspection_process_record_header_code.equals("")){
+            List<DynamicMeasurementItem> list=dynamicMeasurementItemDao.getDynamicItemByPipeNoProcessCode(pipe_no,process_code);
+            mmp= JSONArray.toJSONString(list);
+        }
+        else{
+            List<HashMap<String,Object>> list=dynamicMeasurementItemDao.getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,process_code,inspection_process_record_header_code);
+            mmp= JSONArray.toJSONString(list);
+        }
+
+        System.out.println(mmp);
+        return mmp;
+    }
+
+
+
+
+
+
     @RequestMapping("/importDynamicItem")
     @ResponseBody
     public String importDynamicItem(HttpServletRequest request) {

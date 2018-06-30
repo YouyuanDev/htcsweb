@@ -256,11 +256,12 @@
             if(process_code==undefined||process_code=="")return;
             //根据管号和工序编号得到检验项表单项目
             $.ajax({
-                url:"/DynamicItemOperation/getDynamicItemByPipeNoProcessCode.action",
+                url:"/DynamicItemOperation/getDynamicItemByPipeNoProcessCodeHeaderCode.action",
                 dataType:'json',
                 data:{
                     pipe_no:pipe_no,
-                    process_code:process_code
+                    process_code:process_code,
+                    inspection_process_record_header_code:$('#inspection_process_record_header_code').val()
                 },
                 success:function (data) {
 
@@ -275,6 +276,7 @@
                     $('#dynamicTable').empty();
                   $('#dynamicTable').append(div);
                   $.parser.parse("#dynamicTable");
+
                     JudgeMaxAndMIn();
                 },error:function () {
 
@@ -325,6 +327,7 @@
             var maxvalue=item.max_value; //最大值
             var minvalue=item.min_value; //最小值
             var defaultvalue=item.default_value; //默认值
+            var itemvalue=item.item_value; // 若存在表单，则有该值，否则为undefined
 
             var div="";
             var language=getCookie("userLanguage");
@@ -360,8 +363,12 @@
 
             var controldiv="";
 
+            if(itemvalue!=undefined){
+                defaultvalue=itemvalue;
+            }
+
             if(controltype=="singleselect"){//单选
-                controldiv="<select dynamic=\"dynamic\" id=\""+itemcode+"\"  defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\" class=\"easyui-combobox\" data-options=\"editable:false\" myname=\""+itemcode+"\" name=\""+itemcode+"\" style=\"width:200px;\" >";
+                controldiv="<select dynamic=\"dynamic\" id=\""+itemcode+"\"  defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\" class=\"easyui-combobox\" data-options=\"editable:false\" value=\""+defaultvalue+"\" myname=\""+itemcode+"\" name=\""+itemcode+"\" style=\"width:200px;\" >";
                 var optionArr=[];
                 optionArr=options.split(';');
                 var optiondiv="";
@@ -387,7 +394,7 @@
                 controldiv="<input dynamic=\"dynamic\" class=\"easyui-textbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+" type=\"text\" name=\"" + itemcode +"\" myname=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
             }
             else if(controltype=="multiselect"){//多选
-                controldiv="<select dynamic=\"dynamic\" id=\""+itemcode+"\" class=\"easyui-combobox\" data-options=\"editable:false,multiple:true,multiline:false\" name=\""+itemcode+"\" myname=\"" + itemcode +"\" value=\"\" style=\"width:200px;\">";
+                controldiv="<select dynamic=\"dynamic\" id=\""+itemcode+"\" class=\"easyui-combobox\" data-options=\"editable:false,multiple:true,multiline:false\" name=\""+itemcode+"\" myname=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\">";
                 var optionArr=[];
                 optionArr=options.split(';');
                 var optiondiv="<option value=\"\" >无</option>";
@@ -621,7 +628,7 @@
                </td>
                <td class="i18n1" name="inspectionprocessrecordheadercode" width="20%"></td>
                <td colspan="1" width="30%">
-                   <input class="easyui-textbox" readonly="true" type="text" name="inspection_process_record_header_code" value=""/>
+                   <input id="inspection_process_record_header_code" class="easyui-textbox" readonly="true" type="text" name="inspection_process_record_header_code" value=""/>
                </td>
 
            </tr>

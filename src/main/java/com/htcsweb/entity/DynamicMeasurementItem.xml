@@ -60,5 +60,27 @@
     </select>
 
 
+    <select id="getDynamicItemByPipeNoProcessCodeHeaderCode" resultType="map">
+        select item.*, rditem.item_value from dynamic_measurement_item item
+        inner join acceptance_criteria ac on item.acceptance_criteria_no=ac.acceptance_criteria_no
+        inner join project_info pro on pro.acceptance_criteria_no=ac.acceptance_criteria_no
+        inner join contract_info c on c.project_no=pro.project_no
+        inner join pipe_basic_info p on p.contract_no=c.contract_no
+        left join inspection_process_record_item rditem on rditem.item_code= item.item_code
+        <where>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND p.pipe_no =#{pipe_no}
+            </if>
+            <if test="process_code!=null and process_code!=''">
+                AND item.process_code =#{process_code}
+            </if>
+            <if test="inspection_process_record_header_code!=null and inspection_process_record_header_code!=''">
+                AND rditem.inspection_process_record_header_code =#{inspection_process_record_header_code}
+            </if>
+        </where>
+        order by id asc
+    </select>
+
+
 
 </mapper>

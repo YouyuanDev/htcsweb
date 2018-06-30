@@ -134,7 +134,8 @@ public class SessionFilter extends OncePerRequestFilter{
             "getAllProcess",
             "getAllProcessWithAllOption",
             "getACs",
-            "getDynamicItemByPipeNoProcessCode"
+            "getDynamicItemByPipeNoProcessCode",
+            "getDynamicItemByPipeNoProcessCodeHeaderCode"
     }; // 不过滤的uri
 
     @Override
