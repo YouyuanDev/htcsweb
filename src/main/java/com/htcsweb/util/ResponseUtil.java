@@ -9,10 +9,7 @@ import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.zip.ZipOutputStream;
 
 public class ResponseUtil {
@@ -176,7 +173,7 @@ public class ResponseUtil {
             sbzip.append("items_");
             sbzip.append(timenow);
             sbzip.append("_");
-            sbzip.append(String.valueOf(System.currentTimeMillis()));
+            sbzip.append(UUID.randomUUID().toString());
             sbzip.append(".zip");
             zipName = sbzip.toString();
 

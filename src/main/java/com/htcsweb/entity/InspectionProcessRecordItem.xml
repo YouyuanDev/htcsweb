@@ -38,8 +38,4 @@
     </select>
 
 
-    <!--<delete id="delInspectionProcessRecordItemByHeaderCode">-->
-        <!--delete from inspection_process_record_item WHERE-->
-        <!--inspection_process_record_header_code=#{inspection_process_record_header_code}-->
-    <!--</delete>-->
 </mapper>

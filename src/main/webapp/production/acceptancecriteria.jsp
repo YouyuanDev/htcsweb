@@ -178,7 +178,7 @@
          var g_textarea_field=undefined;
         function append(){
             if (endEditing()){
-                $('#dg').datagrid('insertRow',{index:0,row:{id:0,item_code:"IT"+new Date().getTime(),decimal_num:'0',max_value:'0',min_value:'0',default_value:'0',status:'P'}});
+                $('#dg').datagrid('insertRow',{index:0,row:{id:0,item_code:"IT-XXXX",decimal_num:'0',max_value:'0',min_value:'0',default_value:'0',status:'P'}});
                 editIndex = 0;
                 $('#dg').datagrid('selectRow', editIndex)
                     .datagrid('beginEdit', editIndex);
@@ -256,7 +256,7 @@
                         //var result = eval('('+data+')');
                         if (data.success){
                             $('#dg').datagrid('acceptChanges');
-                            loadDynamicItemInfo(acceptance_criteria_no);
+                            loadDynamicItemInfo(data.acceptance_criteria_no);
                         }
                         hlAlertFour(data.message);
                     },error:function () {
@@ -318,8 +318,10 @@
         }
         //导入事件
         function importItem(){
-            var src_acceptance_criteria_no=$('#acceptance_criteria_no').val();
-            var des_acceptance_criteria_no=$("input[name='acceptance_criteria_no_search']").val();
+            //测量项导入来源
+            var src_acceptance_criteria_no=$("input[name='acceptance_criteria_no_search']").val();
+            //测量项导入去处
+            var des_acceptance_criteria_no=$('#acceptance_criteria_no').val();
             if(src_acceptance_criteria_no==undefined||src_acceptance_criteria_no==""){
                 hlAlertFour("没有找到源接收标准编号!");return false;
             }
@@ -338,7 +340,7 @@
                     //alert(data.success);
                     //var result = eval('('+data+')');
                     if (data.success){
-                        loadDynamicItemInfo(src_acceptance_criteria_no);
+                        loadDynamicItemInfo(data.des_acceptance_criteria_no);
                     }
                     hlAlertFour(data.message);
                 },error:function () {

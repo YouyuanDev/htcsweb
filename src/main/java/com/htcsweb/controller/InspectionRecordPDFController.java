@@ -235,7 +235,7 @@ public class InspectionRecordPDFController {
                                     finish_time=timeformat.parse(DateTimeUtil.getNextDay(recordTime)+" 08:00:00");
                                 }
                                 //外防
-                                pdfOdPath=basePath+"/upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+"_"+recordTime+"_外防_"+shift0+"(Day)_"+pipe_size+"_"+contractInfo.getExternal_coating()+"_"+System.currentTimeMillis()+".pdf");
+                                pdfOdPath=basePath+"/upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+"_"+recordTime+"_外防_"+shift0+"(Day)_"+pipe_size+"_"+contractInfo.getExternal_coating()+"_"+UUID.randomUUID().toString()+".pdf");
                                 System.out.println(pdfOdPath+"------------------------");
                                 File file0=new File(pdfOdPath);
                                 if(!file0.exists()){
@@ -269,7 +269,7 @@ public class InspectionRecordPDFController {
                                     dayNightPdf.add(pdfOdPath);
                                 }
                                 //内防
-                                pdfIdPath=basePath+"/upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+"_"+recordTime+"_内防_"+shift0+"(Day)_"+pipe_size+"_"+contractInfo.getInternal_coating()+"_"+System.currentTimeMillis()+".pdf");
+                                pdfIdPath=basePath+"/upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+"_"+recordTime+"_内防_"+shift0+"(Day)_"+pipe_size+"_"+contractInfo.getInternal_coating()+"_"+UUID.randomUUID().toString()+".pdf");
                                 File file1=new File(pdfIdPath);
                                 //开始填充pdf
                                 //6.2.1---------内防生成封面PDF

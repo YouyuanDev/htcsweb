@@ -318,7 +318,7 @@ public class ShipmentController {
                 HttpSession session = request.getSession();
                 session.setAttribute("shipmentpdfProgress", String.valueOf(0));
 
-                String pdfFullName=basePath+"/upload/pdf/"+(project_no+"_shipment_"+System.currentTimeMillis()+".pdf");
+                String pdfFullName=basePath+"/upload/pdf/"+(project_no+"_shipment_"+UUID.randomUUID().toString()+".pdf");
 //                File file0=new File(pdfFullName);
 //                if(!file0.exists()){
 //                    file0.createNewFile();

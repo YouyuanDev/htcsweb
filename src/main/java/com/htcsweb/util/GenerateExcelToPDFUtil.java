@@ -20,6 +20,7 @@ import java.io.*;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 public class GenerateExcelToPDFUtil {
@@ -158,7 +159,7 @@ public class GenerateExcelToPDFUtil {
     public static String FillExcelTemplate(String excelTemplateFullName,String newExcelFileName,ArrayList<Label> dataList,String tabName,String imgPath) {
 
         if(newExcelFileName==null) {//循环写入
-            newExcelFileName = excelTemplateFullName.substring(0, excelTemplateFullName.lastIndexOf('.')) + String.valueOf(System.currentTimeMillis()) + ".xls";
+            newExcelFileName = excelTemplateFullName.substring(0, excelTemplateFullName.lastIndexOf('.')) + UUID.randomUUID().toString() + ".xls";
             fileChannelCopy(excelTemplateFullName,newExcelFileName);
         }
         try {
@@ -212,7 +213,7 @@ public class GenerateExcelToPDFUtil {
         //String newExcelFileName=excelTemplateFullName.substring(0,excelTemplateFullName.lastIndexOf('.'))+ String.valueOf(System.currentTimeMillis()+".xls");
         long startTime = System.currentTimeMillis();    //获取开始时间
         String newExcelFileName=null;
-        newExcelFileName=excelTemplateFullName.substring(0,excelTemplateFullName.lastIndexOf('.'))+ String.valueOf(System.currentTimeMillis())+".xls";
+        newExcelFileName=excelTemplateFullName.substring(0,excelTemplateFullName.lastIndexOf('.'))+ UUID.randomUUID().toString()+".xls";
         fileChannelCopy(excelTemplateFullName,newExcelFileName);
 
         long endTime1= System.currentTimeMillis();
@@ -309,7 +310,7 @@ public class GenerateExcelToPDFUtil {
 
 
         //输出pdf文件名增加时间戳
-        pdfFullName=pdfFullName.substring(0,pdfFullName.lastIndexOf('.'))+ String.valueOf(System.currentTimeMillis()+".pdf");
+        pdfFullName=pdfFullName.substring(0,pdfFullName.lastIndexOf('.'))+ UUID.randomUUID().toString()+".pdf";
 
         //写入pdf
         //File pdffile = new File(pdfFullName);

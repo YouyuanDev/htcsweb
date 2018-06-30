@@ -54,8 +54,10 @@ public class InspectionProcess {
 
         String msg="";
         if(inspectionProcessRecordHeader.getInspection_process_record_header_code()==null||inspectionProcessRecordHeader.getInspection_process_record_header_code()==""){
-            inspectionProcessRecordHeader.setInspection_process_record_header_code("IPRH"+System.currentTimeMillis());
+            String uuid = UUID.randomUUID().toString();
+            inspectionProcessRecordHeader.setInspection_process_record_header_code("IPRH"+uuid);
         }
+
         //System.out.println("id="+inspectionProcessRecordHeader.getId());
 
         try{

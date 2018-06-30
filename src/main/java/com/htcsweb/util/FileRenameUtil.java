@@ -11,13 +11,14 @@ import java.nio.file.attribute.BasicFileAttributeView;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.UUID;
 
 public class FileRenameUtil implements FileRenamePolicy{
 
     public File rename(File file) {
          String fileName=file.getName();
          String extName=fileName.substring(fileName.lastIndexOf('.'));
-         fileName=System.currentTimeMillis()+extName;
+         fileName= UUID.randomUUID().toString()+extName;
          file=new File(file.getParent(),fileName);
          return file;
     }

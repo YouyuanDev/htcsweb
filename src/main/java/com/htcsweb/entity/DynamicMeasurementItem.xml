@@ -75,7 +75,7 @@
                 AND item.process_code =#{process_code}
             </if>
             <if test="inspection_process_record_header_code!=null and inspection_process_record_header_code!=''">
-                AND rditem.inspection_process_record_header_code =#{inspection_process_record_header_code}
+                AND (rditem.inspection_process_record_header_code =#{inspection_process_record_header_code} or rditem.inspection_process_record_header_code is null  )
             </if>
         </where>
         order by id asc

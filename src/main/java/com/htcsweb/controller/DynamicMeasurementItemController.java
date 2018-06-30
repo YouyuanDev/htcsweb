@@ -16,10 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/DynamicItemOperation")
@@ -110,13 +107,15 @@ public class DynamicMeasurementItemController {
             //初始化自己的参数
             item.setId(0);
             item.setAcceptance_criteria_no(des_acceptance_criteria_no);
-            item.setItem_code("IT"+System.currentTimeMillis());
+            String uuid = UUID.randomUUID().toString();
+            item.setItem_code("IT"+uuid);
             int count=dynamicMeasurementItemDao.addDynamicMeasurementItem(item);
             totalcount+=count;
         }
         if(totalcount>0) {
             json.put("success", true);
             json.put("message", "成功导入检测项"+String.valueOf(totalcount)+"项");
+            json.put("des_acceptance_criteria_no", des_acceptance_criteria_no);
         }
         else{
             json.put("success", false);
@@ -141,6 +140,8 @@ public class DynamicMeasurementItemController {
             int resTotal=0;
             if(dynamicMeasurementItem.getId()==0){
                 //添加
+                String uuid = UUID.randomUUID().toString();
+                dynamicMeasurementItem.setItem_code("IT"+uuid);
                 resTotal=dynamicMeasurementItemDao.addDynamicMeasurementItem(dynamicMeasurementItem);
             }else{
                 //修改！
@@ -150,6 +151,8 @@ public class DynamicMeasurementItemController {
             if(resTotal>0){
                 json.put("success",true);
                 json.put("message","保存成功");
+                json.put("acceptance_criteria_no",dynamicMeasurementItem.getAcceptance_criteria_no());
+
             }else{
                 json.put("success",false);
                 json.put("message","保存失败");
