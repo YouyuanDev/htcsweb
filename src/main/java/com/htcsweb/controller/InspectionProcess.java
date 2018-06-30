@@ -4,6 +4,7 @@ package com.htcsweb.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.InspectionProcessRecordHeaderDao;
+import com.htcsweb.dao.InspectionProcessRecordItemDao;
 import com.htcsweb.dao.PipeBasicInfoDao;
 import com.htcsweb.dao.ProcessInfoDao;
 import com.htcsweb.entity.*;
@@ -17,10 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/InspectionProcessOperation")
@@ -38,6 +36,10 @@ public class InspectionProcess {
     @Autowired
     private ProcessInfoDao processInfoDao;
 
+    @Autowired
+    private InspectionProcessRecordItemDao inspectionProcessRecordItemDao;
+
+
 
     @RequestMapping("/saveProcess")
     @ResponseBody
@@ -45,10 +47,41 @@ public class InspectionProcess {
         JSONObject json=new JSONObject();
 
         String dynamicJson=request.getParameter("dynamicJson");
-
         System.out.println("dynamicJson="+dynamicJson);
+        JSONObject dynamicMap = JSONObject.parseObject(dynamicJson);
 
+        String msg="";
+        if(inspectionProcessRecordHeader.getInspection_process_record_header_code()==null||inspectionProcessRecordHeader.getInspection_process_record_header_code()==""){
+            inspectionProcessRecordHeader.setInspection_process_record_header_code("IPRH"+System.currentTimeMillis());
+        }
+        System.out.println("id="+inspectionProcessRecordHeader.getId());
+        for (String key:dynamicMap.keySet()) {
+            if(inspectionProcessRecordHeader.getId()==0) {
+                //新增动态检测项
+                System.out.println("新增动态检测项="+inspectionProcessRecordHeader.getInspection_process_record_header_code());
+                InspectionProcessRecordItem recorditem=new InspectionProcessRecordItem();
+                recorditem.setId(0);
+                recorditem.setInspection_process_record_header_code(inspectionProcessRecordHeader.getInspection_process_record_header_code());
+                recorditem.setItem_code(key);
+                recorditem.setItem_value((String)dynamicMap.get(key));
+                inspectionProcessRecordItemDao.addInspectionProcessRecordItem(recorditem);
+            }else{
+                //更新原有动态检测项
+                InspectionProcessRecordItem recorditem=inspectionProcessRecordItemDao.getInspectionProcessRecordItemByHeaderCodeAndItemCode(inspectionProcessRecordHeader.getInspection_process_record_header_code(),key);
+                if(recorditem!=null) {
+                    recorditem.setItem_value((String) dynamicMap.get(key));
+                    inspectionProcessRecordItemDao.updateInspectionProcessRecordItem(recorditem);
+                }else{
+                    InspectionProcessRecordItem item=new InspectionProcessRecordItem();
+                    item.setId(0);
+                    item.setInspection_process_record_header_code(inspectionProcessRecordHeader.getInspection_process_record_header_code());
+                    item.setItem_code(key);
+                    item.setItem_value((String)dynamicMap.get(key));
+                    inspectionProcessRecordItemDao.addInspectionProcessRecordItem(item);
+                }
 
+            }
+        }
 
         try{
             int resTotal=0;
@@ -60,7 +93,7 @@ public class InspectionProcess {
 
             String pipeno=inspectionProcessRecordHeader.getPipe_no();
             String mill_no=inspectionProcessRecordHeader.getMill_no();
-            String msg="";
+
             if(inspectionProcessRecordHeader.getId()==0){
                 //添加
                 String project_no="";
@@ -73,7 +106,7 @@ public class InspectionProcess {
                             //存在一条pending数据，不给予insert处理
                             msg="已存在待定记录,不能新增记录";
                         }else{
-                            inspectionProcessRecordHeader.setInspection_process_record_header_code("IPRH"+System.currentTimeMillis());
+                            inspectionProcessRecordHeader.setInspection_process_record_header_code(inspectionProcessRecordHeader.getInspection_process_record_header_code());
                             resTotal=inspectionProcessRecordHeaderDao.addInspectionProcessRecordHeader(inspectionProcessRecordHeader);
 
                         }

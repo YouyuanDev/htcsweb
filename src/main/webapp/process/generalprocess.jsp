@@ -59,6 +59,7 @@
             $('#process_code').val(pcode);
             $('#legend-title').text($('#processcode').combobox('getText'));
             $('#process_name').val($('#processcode').combobox('getText'));
+
             url="/InspectionProcessOperation/saveProcess.action";
             //$("input[name='alkaline_dwell_time']").siblings().css("background-color","#F9A6A6");
         }

@@ -29,4 +29,14 @@
         select * from inspection_process_record_item where inspection_process_record_header_code=#{inspection_process_record_header_code}
     </select>
 
+
+    <select id="getInspectionProcessRecordItemByHeaderCodeAndItemCode"  resultType="com.htcsweb.entity.InspectionProcessRecordItem">
+        select * from inspection_process_record_item
+         where inspection_process_record_header_code=#{inspection_process_record_header_code}
+         AND
+         item_code=#{item_code}
+    </select>
+
+
+
 </mapper>
