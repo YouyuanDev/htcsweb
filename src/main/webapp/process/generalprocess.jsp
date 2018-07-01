@@ -28,6 +28,11 @@
     <script type="text/javascript">
         var url;
         var basePath ="<%=basePath%>"+"/upload/pictures/";
+
+        var g_statuslist=undefined;// input status
+
+
+
         $(function () {
                     //删除上传的图片
                 $(document).on('click','.content-del',function () {
@@ -57,6 +62,7 @@
             clearMultiUpload(grid);
 
             $('#process_code').val(pcode);
+            LoadProcess_input_output();
             $('#legend-title').text($('#processcode').combobox('getText'));
             $('#process_name').val($('#processcode').combobox('getText'));
 
@@ -99,7 +105,7 @@
                 $('#odbpid').text(row.id);
                 row.operation_time=getDate1(row.operation_time),
                 $('#proForm').form('load',row);
-
+                LoadProcess_input_output();
 
                 //$('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
                 look1.setText(row.pipe_no);
@@ -734,11 +740,8 @@
        <table class="ht-table">
            <tr>
                <td class="i18n1" name="result" width="20%">结论</td>
-               <td colspan="3"><select style="width:200px;" class="easyui-combobox" data-options="editable:false" name="result" >
-                   <option value="0">不合格,重新打砂处理</option>
-                   <option value="1">合格,进入外喷砂检验工序</option>
-                   <option value="10">待定</option>
-                   <option value="3">隔离，进入修磨或切割工序</option>
+               <td colspan="3"><select id="result" style="width:200px;" class="easyui-combobox" data-options="editable:false" name="result" >
+
                </select></td>
            </tr>
            <tr>
@@ -836,14 +839,57 @@
     var look2= mini.get("lookup2");
 
 
+    //初始化工序的input和output
+    function LoadProcess_input_output(){
+        //获得本工序的input status
+        $.ajax({
+            url:'../data/process_input_output.json',
+            data:{},
+            dataType:'json',
+            success:function (data) {
+                if(data!=null&&data!=""){
+                    for(var i=0;i<data.length;i++){
+                        if($('#process_code').val()!=undefined&&data[i].process_code==$('#process_code').val()){
+                            //初始化input statuslist
+                            g_statuslist=data[i].input;
+                            //初始化result list
+                            var options = [];
+                            var language=getCookie("userLanguage");
+                            $.each(data[i].output, function(i,val){
+                                //这里的"text","id"和html中对应
+                                //alert(val);
+                                if(language&&language=="en"){
+                                    options.push({ "text": val.result_name_en, "value": val.result });
+                                }else{
+                                    options.push({ "text": val.result_name, "value": val.result });
+                                }
+                            })
+                            $("#result").combobox("loadData", options);
+                            break;
+                        }
+                    }
+                    //alert(statuslist);
+                }
+            },
+            error:function () {
+                hlAlertThree();
+            }
+        });
+
+
+    }
 
     function onSearchClick(type) {
         if(type==1)
         {
-            grid1.load({
-                pipe_no:keyText1.value,
-                pipestatus:'bare1,'
-            });
+            if(g_statuslist!=undefined){
+                grid1.load({
+                    pipe_no:keyText1.value,
+                    pipestatus:g_statuslist
+                });
+            }else{
+                LoadProcess_input_output();
+            }
         }else if(type==2){
             grid2.load({
                 pname: keyText4.value,
@@ -892,10 +938,16 @@
         $('.mini-popup').css('z-index','100000');
         $('.mini-panel').css('z-index','100000');
         $('#searchBar1').css('display','block');
-        grid1.load({
-            pipe_no:keyText1.value,
-            pipestatus:'bare1,'
-        });
+
+        if(g_statuslist!=undefined){
+            grid1.load({
+                pipe_no:keyText1.value,
+                pipestatus:g_statuslist
+            });
+        }else{
+            LoadProcess_input_output();
+        }
+
         //$('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
     });
     look2.on("showpopup",function(e){
