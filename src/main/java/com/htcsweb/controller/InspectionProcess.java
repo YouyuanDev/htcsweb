@@ -182,14 +182,18 @@ public class InspectionProcess {
                     for(int i=0;additionParamArray!=null&&i<additionParamArray.size();i++) {
                         JSONObject additionParammap = (JSONObject) additionParamArray.get(i);
                         if (additionParammap != null) {
-                            String addition_item_name = (String) additionParammap.get("addition_item_name");
+                            String addition_item_code = (String) additionParammap.get("addition_item_code");
                             String des_pipe_property_name = (String) additionParammap.get("des_pipe_property_name");
                             String set_value = (String) additionParammap.get("set_value");
 
-                            if(key.equals(addition_item_name)||true){
+                            if(key.equals(addition_item_code)){
                                 String v=(String)dynamicMap.get(key);
+                                if(set_value==null){
+                                    //若没有给定的set_value值，则设置为表单输入项的值
+                                    set_value=v;
+                                }
                                 //这里做各种个性化处理
-                                if(des_pipe_property_name!=null&&set_value!=null){
+                                if(des_pipe_property_name!=null){
                                     Class c = Class.forName("com.htcsweb.entity.PipeBasicInfo");
                                     Constructor con = c.getConstructor();
                                     Object obj = con.newInstance();

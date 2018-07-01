@@ -1,6 +1,23 @@
 [
   { "process_code": "od_blast",
     "input": "bare1",
+    "additionParams":[
+      {
+        "addition_item_code":"is_sample",
+        "des_pipe_property_name":"odsampling_mark",
+        "set_value":"0"
+      },
+      {
+        "addition_item_code":"is_dsc_sample",
+        "des_pipe_property_name":"od_dsc_sample_mark",
+        "set_value":"1"
+      },
+      {
+        "addition_item_code":"is_pe_sample",
+        "des_pipe_property_name":"od_pe_sample_mark",
+        "set_value":"1"
+      }
+    ],
     "output":
       [
         {
@@ -96,17 +113,17 @@
     "input": "od3",
     "additionParams":[
       {
-        "addition_item_name":"is_sample",
+        "addition_item_code":"is_sample",
         "des_pipe_property_name":"odsampling_mark",
         "set_value":"0"
       },
       {
-        "addition_item_name":"is_dsc_sample",
+        "addition_item_code":"is_dsc_sample",
         "des_pipe_property_name":"od_dsc_sample_mark",
         "set_value":"1"
       },
       {
-        "addition_item_name":"is_pe_sample",
+        "addition_item_code":"is_pe_sample",
         "des_pipe_property_name":"od_pe_sample_mark",
         "set_value":"1"
       }
@@ -441,12 +458,12 @@
     "input": "id3",
     "additionParams":[
       {
-        "addition_item_name":"is_sample",
+        "addition_item_code":"is_sample",
         "des_pipe_property_name":"idsampling_mark",
         "set_value":"1"
       },
       {
-        "addition_item_name":"is_glass_sample",
+        "addition_item_code":"is_glass_sample",
         "des_pipe_property_name":"id_glass_sample_mark",
         "set_value":"1"
       }
