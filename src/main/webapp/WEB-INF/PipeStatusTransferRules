@@ -1,17 +1,16 @@
-
 Current_Status                     Result:NextStatus
 
-光管入库             bare1     外喷砂工序   0:bare1     1:od1   10:bare1 3： onhold
+光管入库             bare1     外喷砂工序   0:bare1     1:od1   10:bare1 20： onhold
 
-外喷砂完成            od1      外喷砂检验工序   0:bare1     1:od2   10:od1  3： onhold
+外喷砂完成            od1      外喷砂检验工序   0:bare1     1:od2   10:od1  20： onhold
 
 外喷砂检验完成         od2      外涂工序   0:bare1     1:od3    10:od2
 
-外涂完成              od3      外涂检验工序   0:odrepair1   1:od4   2:odstrip1 10:od3  4: onhold
+外涂完成              od3      外涂检验工序   0:coatingrepair1   1:od4   2:coatingstrip1 10:od3  20: onhold
 
 外涂检验完成           od4      外喷标工序  0:od4      1:od5     10:od4
 
-外喷标完成            od5       外防终检工序  0:odrepair1       1:od6     2:odstrip1   10:od5   4: od4 5:onhold
+外喷标完成            od5       外防终检工序  0:coatingrepair1       1:od6     2:coatingstrip1   10:od5   4: od4 20:onhold
 
 外防终检完成          od6       成品入库工序    odstockin
 
@@ -19,23 +18,23 @@ Current_Status                     Result:NextStatus
 
 外防成品入库          odstockin    外防成品出厂     out
 
-外防工位涂层待修补           odrepair1  涂层修补工序 0:odrepair1 1：上一个工序状态 od3 或者 od5  2:odrepair2  3:odstrip1  4:idstrip1  10:odrepair1
+外防工位涂层待修补           coatingrepair1 涂层修补工序 0:coatingrepair1 1：上一个工序状态    2:coatingrepair2  3:coatingstrip1  10: coatingrepair1
 （可能包含内防修补或外防修补）
-外防工位涂层修补完成待检验    odrepair2  涂层修补检验工序 0:odrepair1 1：上一个工序状态 od3 或者 od5  2:odrepair2  3:odstrip1  4:idstrip1 10:odrepair2
+外防工位涂层修补完成待检验    coatingrepair2  涂层修补检验工序 0:coatingrepair1 1：上一个工序状态    2:coatingrepair2  3:coatingstrip1    10:coatingrepair2
 
-外防待扒皮        odstrip1     外防涂层扒皮工序  0:odstrip1  1:bare1 10:odstrip1
+外防待扒皮        coatingstrip1     外防涂层扒皮工序  0:coatingstrip1  1:bare1 or bare2 10:coatingstrip1
 
-光管入库             bare2,odstockin      内喷砂工序    0:bare2     1:id1   10:bare2 or odstockin  3： onhold
+光管入库             bare2,odstockin      内喷砂工序    0:bare2     1:id1   10:bare2 or odstockin  20： onhold
 
-内喷砂完成           id1        内喷砂检验工序 0:bare2     1:id2   10:id1  3： onhold
+内喷砂完成           id1        内喷砂检验工序 0:bare2     1:id2   10:id1  20： onhold
 
 内喷砂检验完成        id2       内防喷涂工序       0:bare2     1:id3   10:id2
 
-内防喷涂完成             id3       内涂检验工序       0:idrepair1    1:id4   2:idstrip1  10:id3  4: onhold
+内防喷涂完成             id3       内涂检验工序       0:coatingrepair1    1:id4   2:coatingstrip1  10:id3  20: onhold
 
 内防检验完成          id4       内喷标工序       0:id4     1:id5  10:id4
 
-内喷标完成           id5        内防终检工序     0:idrepair1   1:id6   2:odstrip1   3:idstrip1  4: id4   10:id5   6:  onhold
+内喷标完成           id5        内防终检工序     0:coatingrepair1   1:id6   2:coatingstrip1   3:coatingstrip1  4: id4   10:id5   20:  onhold
 
 内防终检完成         id6        内防入库工序      idstockin
 
@@ -43,12 +42,7 @@ Current_Status                     Result:NextStatus
 
 
 
-内防待扒皮        idstrip1    内防涂层扒皮工序    0:idstrip1  1:bare2  10:idstrip1
 
-内防工位涂层待修补        idrepair1     0:idrepair1 1：上一个工序状态 id3 或者 id5  2:idrepair2  3:odstrip1  4:idstrip1 10:idrepair1
-（可能包含内防修补或外防修补）
-内防工位涂层修补完成待检验    idrepair2  0:idrepair1 1：上一个工序状态 id3 或者 id5  2:idrepair2  3:odstrip1  4:idstrip1 10:idrepair2
-（可能包含内防修补或外防修补）
 已出厂             out
 
 隔离             onhold    根据被隔离时上一次的状态制定下一个状态

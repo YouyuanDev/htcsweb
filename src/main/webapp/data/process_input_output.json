@@ -13,7 +13,7 @@
         {
           "result":"1",
           "result_name":"合格,进入外喷砂检验工序",
-          "result_name_en":"Accept, go Next Process",
+          "result_name_en":"Accept, go OD Blast Insp. Process",
           "next_status":"od1",
           "last_status":"od1"
         },
@@ -25,17 +25,490 @@
           "last_status":"bare1"
         },
         {
-          "result":"3",
+          "result":"20",
           "result_name":"隔离，进入修磨或切割工序",
           "result_name_en":"On hold, go Grinding/Cut-off process",
           "next_status":"onhold"
         }
       ]
+  },
+  { "process_code": "od_blast_inspection",
+    "input": "od1",
+    "output":
+    [
+      {
+        "result":"0",
+        "result_name":"不合格,重新打砂处理",
+        "result_name_en":"Reject, Re-blast",
+        "next_status":"bare1",
+        "last_status":"bare1"
+      },
+      {
+        "result":"1",
+        "result_name":"合格,进入外涂敷工序",
+        "result_name_en":"Accept, go Coating Process",
+        "next_status":"od2",
+        "last_status":"od2"
+      },
+      {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending",
+        "next_status":"od1",
+        "last_status":"od1"
+      },
+      {
+        "result":"20",
+        "result_name":"隔离，进入修磨或切割工序",
+        "result_name_en":"On hold, go Grinding/Cut-off process",
+        "next_status":"onhold"
+      }
+    ]
+  },
+  { "process_code": "od_coating",
+    "input": "od2",
+    "output":
+    [
+      {
+        "result":"0",
+        "result_name":"不合格,重新打砂处理",
+        "result_name_en":"Reject, Re-blast",
+        "next_status":"bare1",
+        "last_status":"bare1"
+      },
+      {
+        "result":"1",
+        "result_name":"合格,进入外涂敷检验工序",
+        "result_name_en":"Accept, go Coating Insp. Process",
+        "next_status":"od3",
+        "last_status":"od3"
+      },
+      {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending",
+        "next_status":"od2",
+        "last_status":"od2"
+      }
+    ]
+  },
+  { "process_code": "od_coating_inspection",
+    "input": "od3",
+    "output":
+    [
+      {
+        "result":"0",
+        "result_name":"不合格,进入待修补工序",
+        "result_name_en":"Reject, go coating repair",
+        "next_status":"coatingrepair1"
+      },
+      {
+        "result":"1",
+        "result_name":"合格,进入外喷标工序",
+        "result_name_en":"Accept, go OD Stencil Process",
+        "next_status":"od4",
+        "last_status":"od4"
+      },
+      {
+        "result":"2",
+        "result_name":"不合格,进入待扒皮工序",
+        "result_name_en":"Accept, go Strip",
+        "next_status":"coatingstrip1"
+      },
+      {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending",
+        "next_status":"od3",
+        "last_status":"od3"
+      },
+      {
+        "result":"20",
+        "result_name":"隔离，进入修磨或切割工序",
+        "result_name_en":"On hold, go Grinding/Cut-off process",
+        "next_status":"onhold"
+      }
+    ]
+  },
+  { "process_code": "od_stencil",
+    "input": "od4",
+    "output":
+    [
+      {
+        "result":"0",
+        "result_name":"不合格,重新喷标",
+        "result_name_en":"Reject, re-stencil",
+        "next_status":"od4",
+        "last_status":"od4"
+      },
+      {
+        "result":"1",
+        "result_name":"合格,进入外防终检工序",
+        "result_name_en":"Accept, go OD Stencil Process",
+        "next_status":"od5",
+        "last_status":"od5"
+      },
+      {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending",
+        "next_status":"od4",
+        "last_status":"od4"
+      }
+    ]
+  },
+  { "process_code": "od_final_inspection",
+    "input": "od5",
+    "output":
+    [
+      {
+        "result":"0",
+        "result_name":"不合格,进入外防待修补工序",
+        "result_name_en":"Reject, go coating repair process",
+        "next_status":"coatingrepair1"
+      },
+      {
+        "result":"1",
+        "result_name":"进入外防成品入库工序",
+        "result_name_en":"Accept, go OD stockin process",
+        "next_status":"od6",
+        "last_status":"od6"
+      },
+      {
+        "result":"2",
+        "result_name":"不合格,进入外防待扒皮工序",
+        "result_name_en":"Reject, go coating strip",
+        "next_status":"coatingstrip1"
+      },
+      {
+        "result":"4",
+        "result_name":"不合格,进入外喷标工序",
+        "result_name_en":"Reject, go OD Stencil Process",
+        "next_status":"od4",
+        "last_status":"od4"
+      },
+      {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending",
+        "next_status":"od5",
+        "last_status":"od5"
+      },
+      {
+        "result":"20",
+        "result_name":"隔离，进入修磨或切割工序",
+        "result_name_en":"On hold, go Grinding/Cut-off process",
+        "next_status":"onhold"
+      }
+    ]
+  },
+  { "process_code": "coating_repair",
+    "input": "coatingrepair1,coatingrepair2",
+    "output":
+    [
+      {
+        "result":"0",
+        "result_name":"不合格,重新修补",
+        "result_name_en":"Reject, re-repair",
+        "next_status":"coatingrepair1"
+      },
+      {
+        "result":"1",
+        "result_name":"修补完成,检验合格",
+        "result_name_en":"Accept, go OD Stencil Process",
+        "next_status":"last_status"
+      },
+      {
+        "result":"2",
+        "result_name":"修补完成,待检验",
+        "result_name_en":"Accept, go OD Stencil Process",
+        "next_status":"coatingrepair2"
+      },
+      {
+        "result":"3",
+        "result_name":"不合格,外防扒皮处理",
+        "result_name_en":"Accept, go OD Stencil Process",
+        "next_status":"coatingstrip1"
+      },
+      {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending"
+      }
+    ]
+  },
+  { "process_code": "grinding_cutoff",
+    "input": "onhold",
+    "output":
+    [
+      {
+        "result":"0",
+        "result_name":"不合格,重新修磨或切割处理",
+        "result_name_en":"Reject, go re-grind or re-cut process",
+        "next_status":"onhold"
+      },
+      {
+        "result":"1",
+        "result_name":"合格，返回上一工序",
+        "result_name_en":"Accept, go OD stockin process",
+        "next_status":"last_status"
+      },
+      {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending",
+        "next_status":"onhold"
+      }
+    ]
+  },
+  { "process_code": "coating_strip",
+    "input": "coatingstrip1",
+    "output":
+    [
+      {
+        "result":"0",
+        "result_name":"不合格,重新扒皮",
+        "result_name_en":"Reject, go re-strip process",
+        "next_status":"coatingstrip1"
+      },
+      {
+        "result":"1",
+        "result_name":"合格，转为光管",
+        "result_name_en":"Accept, go OD stockin process",
+        "next_status":"bare1"
+      },
+      {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending",
+        "next_status":"coatingstrip1"
+      }
+    ]
+  },
+  { "process_code": "coating_sampling",
+    "input": "",
+    "output":
+    [
+      {
+        "result":"0",
+        "result_name":"不合格,重新取样处理",
+        "result_name_en":"Reject, go re-sampling process"
+      },
+      {
+        "result":"1",
+        "result_name":"合格",
+        "result_name_en":"Accept"
+      },
+      {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending"
+      }
+    ]
+  },
+  { "process_code": "coating_rebevel",
+    "input": "",
+    "output":
+    [
+      {
+        "result":"0",
+        "result_name":"不合格,重新倒棱处理",
+        "result_name_en":"Reject, go re-beveling process"
+      },
+      {
+        "result":"1",
+        "result_name":"合格",
+        "result_name_en":"Accept"
+      },
+      {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending"
+      }
+    ]
+  },
+  { "process_code": "id_blast",
+    "input": "bare2,odstockin",
+    "output":
+    [
+      {
+        "result":"0",
+        "result_name":"不合格,重新喷砂处理",
+        "result_name_en":"Reject, Re-blast",
+        "next_status":"bare2",
+        "last_status":"bare2"
+      },
+      {
+        "result":"1",
+        "result_name":"合格,进入内喷砂检验工序",
+        "result_name_en":"Accept, go OD Blast Insp. Process",
+        "next_status":"id1",
+        "last_status":"id1"
+      },
+      {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending",
+        "next_status":"bare2",
+        "last_status":"bare2"
+      },
+      {
+        "result":"20",
+        "result_name":"隔离，进入修磨或切割工序",
+        "result_name_en":"On hold, go Grinding/Cut-off process",
+        "next_status":"onhold"
+      }
+    ]
+  },
+  { "process_code": "id_blast_inspection",
+    "input": "id1",
+    "output":
+    [
+      {
+        "result":"0",
+        "result_name":"不合格,重新打砂处理",
+        "result_name_en":"Reject, Re-blast",
+        "next_status":"bare2",
+        "last_status":"bare2"
+      },
+      {
+        "result":"1",
+        "result_name":"合格,进入外涂敷工序",
+        "result_name_en":"Accept, go Coating Process",
+        "next_status":"id2",
+        "last_status":"id2"
+      },
+      {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending",
+        "next_status":"id1",
+        "last_status":"id1"
+      },
+      {
+        "result":"20",
+        "result_name":"隔离，进入修磨或切割工序",
+        "result_name_en":"On hold, go Grinding/Cut-off process",
+        "next_status":"onhold"
+      }
+    ]
+  },
+  { "process_code": "id_coating",
+    "input": "id2",
+    "output":
+    [
+      {
+        "result":"0",
+        "result_name":"不合格,重新打砂处理",
+        "result_name_en":"Reject, Re-blast",
+        "next_status":"bare2",
+        "last_status":"bare2"
+      },
+      {
+        "result":"1",
+        "result_name":"合格,进入内涂敷检验工序",
+        "result_name_en":"Accept, go Coating insp. Process",
+        "next_status":"id3",
+        "last_status":"id3"
+      },
+      {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending",
+        "next_status":"id2",
+        "last_status":"id2"
+      }
+    ]
+  },
+  { "process_code": "id_coating_inspection",
+    "input": "id3",
+    "output":
+    [
+      {
+        "result":"0",
+        "result_name":"不合格,进入待修补工序",
+        "result_name_en":"Reject, go coating repair",
+        "next_status":"coatingrepair1"
+      },
+      {
+        "result":"1",
+        "result_name":"合格,进入内喷标工序",
+        "result_name_en":"Accept, go OD Stencil Process",
+        "next_status":"id4",
+        "last_status":"id4"
+      },
+      {
+        "result":"2",
+        "result_name":"不合格,进入待扒皮工序",
+        "result_name_en":"Accept, go Strip",
+        "next_status":"coatingstrip1"
+      },
+      {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending",
+        "next_status":"id3",
+        "last_status":"id3"
+      },
+      {
+        "result":"20",
+        "result_name":"隔离，进入修磨或切割工序",
+        "result_name_en":"On hold, go Grinding/Cut-off process",
+        "next_status":"onhold"
+      }
+    ]
   }
-
-
-
-
 ]
 
 
+
+
+
+//Current_Status                     Result:NextStatus
+//
+//光管入库             bare1     外喷砂工序   0:bare1     1:od1   10:bare1 20： onhold
+//
+//外喷砂完成            od1      外喷砂检验工序   0:bare1     1:od2   10:od1  20： onhold
+//
+//外喷砂检验完成         od2      外涂工序   0:bare1     1:od3    10:od2
+//
+//外涂完成              od3      外涂检验工序   0:coatingrepair1   1:od4   2:coatingstrip1 10:od3  20: onhold
+//
+//外涂检验完成           od4      外喷标工序  0:od4      1:od5     10:od4
+//
+//外喷标完成            od5       外防终检工序  0:coatingrepair1       1:od6     2:coatingstrip1   10:od5   4: od4 20:onhold
+//
+//外防终检完成          od6       成品入库工序    odstockin
+//
+//外防成品入库          odstockin    光管调拨工序 (内喷砂工序)  0:odstockin  1:id1
+//
+//外防成品入库          odstockin    外防成品出厂     out
+//
+//外防工位涂层待修补           coatingrepair1 涂层修补工序 0:coatingrepair1 1：上一个工序状态    2:coatingrepair2  3:coatingstrip1  10: coatingrepair1
+//（可能包含内防修补或外防修补）
+//外防工位涂层修补完成待检验    coatingrepair2  涂层修补检验工序 0:coatingrepair1 1：上一个工序状态    2:coatingrepair2  3:coatingstrip1    10:coatingrepair2
+//
+//外防待扒皮        coatingstrip1     外防涂层扒皮工序  0:coatingstrip1  1:bare1 or bare2 10:coatingstrip1
+//
+//光管入库             bare2,odstockin      内喷砂工序    0:bare2     1:id1   10:bare2 20： onhold
+//
+//内喷砂完成           id1        内喷砂检验工序 0:bare2     1:id2   10:id1  20： onhold
+//
+//内喷砂检验完成        id2       内防喷涂工序       0:bare2     1:id3   10:id2
+//
+//内防喷涂完成             id3       内涂检验工序       0:coatingrepair1    1:id4   2:coatingstrip1  10:id3  20: onhold
+//
+//内防检验完成          id4       内喷标工序       0:id4     1:id5  10:id4
+//
+//内喷标完成           id5        内防终检工序     0:coatingrepair1   1:id6   2:coatingstrip1   3:coatingstrip1  4: id4   10:id5   20:  onhold
+//
+//内防终检完成         id6        内防入库工序      idstockin
+//
+//内防成品入库       idstockin    内防成品出厂     out
+//
+//
+//
+//
+//已出厂             out
+//
+//隔离             onhold    根据被隔离时上一次的状态制定下一个状态

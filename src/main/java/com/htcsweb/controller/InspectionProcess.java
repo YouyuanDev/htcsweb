@@ -174,7 +174,13 @@ public class InspectionProcess {
                                 String tmp_last_status=(String)rmap.get("last_status");
                                 //找到对应关系
                                 if(inspectionProcessRecordHeader.getResult().equals(tmp_result)){
-                                    p.setStatus(tmp_next_status);
+
+                                    if(tmp_next_status!=null&&!tmp_next_status.equals("last_status")){
+                                        p.setStatus(tmp_next_status);
+                                    }
+                                    else if(tmp_next_status.equals("last_status")){
+                                        p.setStatus(p.getLast_accepted_status());
+                                    }
                                     if(tmp_last_status!=null)
                                         p.setLast_accepted_status(p.getStatus());
                                     int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
