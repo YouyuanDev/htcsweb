@@ -868,6 +868,7 @@
 
                             var arr={};
                             arr["output"]=data[i].output;
+                            arr["additionParams"]=data[i].additionParams;
                             $('#outputJson').val(JSON.stringify(arr));
 
                             $.each(data[i].output, function(i,val){

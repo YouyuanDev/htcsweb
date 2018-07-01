@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -56,10 +58,22 @@ public class InspectionProcess {
         System.out.println("outputJson="+outputJson);
         System.out.println("inputStatusList="+inputStatusList);
 
-        JSONObject dynamicMap = JSONObject.parseObject(dynamicJson);
-        JSONObject outputMap = JSONObject.parseObject(outputJson);
+        JSONObject dynamicMap=null;
+        JSONObject outputMap =null;
+        JSONArray resultArray=null;
+        //用于特殊的检验项 ，比如 是否是is_sample is_dsc_sample is_pe_sample is_glass_sample
+        JSONArray additionParamArray=null;
 
-        JSONArray resultArray=(JSONArray)outputMap.get("output");
+        if(dynamicJson!=null) {
+            dynamicMap = JSONObject.parseObject(dynamicJson);
+        }
+        if(outputJson!=null) {
+            outputMap = JSONObject.parseObject(outputJson);
+        }
+        if(outputMap!=null) {
+            resultArray = (JSONArray) outputMap.get("output");
+            additionParamArray = (JSONArray) outputMap.get("additionParams");
+        }
 
 
         String msg="";
@@ -122,6 +136,12 @@ public class InspectionProcess {
             }
             if(resTotal>0){
 
+                List<PipeBasicInfo> list1=pipeBasicInfoDao.getPipeNumber(pipeno);
+                PipeBasicInfo p=null;
+                if(list1.size()>0) {
+                    p = list1.get(0);
+                }
+
                 //增加或者更新动态检测项
                 for (String key:dynamicMap.keySet()) {
                         //更新原有动态检测项
@@ -158,13 +178,40 @@ public class InspectionProcess {
 
                         }
 
+                        //特殊检验项的处理
+                    for(int i=0;additionParamArray!=null&&i<additionParamArray.size();i++) {
+                        JSONObject additionParammap = (JSONObject) additionParamArray.get(i);
+                        if (additionParammap != null) {
+                            String addition_item_name = (String) additionParammap.get("addition_item_name");
+                            String des_pipe_property_name = (String) additionParammap.get("des_pipe_property_name");
+                            String set_value = (String) additionParammap.get("set_value");
+
+                            if(key.equals(addition_item_name)||true){
+                                String v=(String)dynamicMap.get(key);
+                                //这里做各种个性化处理
+                                if(des_pipe_property_name!=null&&set_value!=null){
+                                    Class c = Class.forName("com.htcsweb.entity.PipeBasicInfo");
+                                    Constructor con = c.getConstructor();
+                                    Object obj = con.newInstance();
+                                    obj=p;
+                                    Field newname = c.getDeclaredField(des_pipe_property_name);
+                                    newname.setAccessible(true);
+                                    newname.set(obj, set_value);
+                                    p=(PipeBasicInfo)obj;
+                                    int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                                    System.out.println("设置属性"+des_pipe_property_name+"="+set_value);
+                                }
+                            }
+                        }
+                    }
+
+
                 }
 
 
                 //更新管子的状态
-                List<PipeBasicInfo> list1=pipeBasicInfoDao.getPipeNumber(pipeno);
-                if(list1.size()>0){
-                    PipeBasicInfo p=list1.get(0);
+
+                if(p!=null){
                     if(inputStatusVerified) {
                         for(int i=0;i<resultArray.size();i++){
                             JSONObject  rmap=(JSONObject)resultArray.get(i);

@@ -24,7 +24,7 @@ Current_Status                     Result:NextStatus
 
 外防待扒皮        coatingstrip1     外防涂层扒皮工序  0:coatingstrip1  1:bare1 or bare2 10:coatingstrip1
 
-光管入库             bare2,odstockin      内喷砂工序    0:bare2     1:id1   10:bare2 or odstockin  20： onhold
+光管入库             bare2,odstockin      内喷砂工序    0:bare2     1:id1   10:bare2 20： onhold
 
 内喷砂完成           id1        内喷砂检验工序 0:bare2     1:id2   10:id1  20： onhold
 
