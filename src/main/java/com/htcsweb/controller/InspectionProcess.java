@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.*;
 import com.htcsweb.entity.*;
+import com.htcsweb.util.APICloudPushService;
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,6 +43,9 @@ public class InspectionProcess {
     @Autowired
     private InspectionTimeRecordDao inspectionTimeRecordDao;
 
+    @Autowired
+    private RoleDao roleDao;
+
 
 
 
@@ -77,6 +81,9 @@ public class InspectionProcess {
 
 
         String msg="";
+        String result_name="";
+        String result_name_en="";
+
         if(inspectionProcessRecordHeader.getInspection_process_record_header_code()==null||inspectionProcessRecordHeader.getInspection_process_record_header_code()==""){
             String uuid = UUID.randomUUID().toString();
             inspectionProcessRecordHeader.setInspection_process_record_header_code("IPRH"+uuid);
@@ -221,11 +228,12 @@ public class InspectionProcess {
                             JSONObject  rmap=(JSONObject)resultArray.get(i);
                             if(rmap!=null){
                                 String tmp_result=(String)rmap.get("result");
+                                result_name=(String)rmap.get("result_name");
+                                result_name_en=(String)rmap.get("result_name_en");
                                 String tmp_next_status=(String)rmap.get("next_status");
                                 String tmp_last_status=(String)rmap.get("last_status");
                                 //找到对应关系
                                 if(inspectionProcessRecordHeader.getResult().equals(tmp_result)){
-
                                     if(tmp_next_status!=null&&!tmp_next_status.equals("last_status")){
                                         p.setStatus(tmp_next_status);
                                     }
@@ -245,6 +253,21 @@ public class InspectionProcess {
                     }
 
                 }
+
+
+                //发送事件推送
+
+                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                 Date nowtime=new Date();
+                 String str_title=sdf.format(nowtime.getTime());
+                 String str_content="工序："+inspectionProcessRecordHeader.getProcess_code()+",管号："+p.getPipe_no()+", "+result_name+"("+result_name_en+")";
+
+                 SendEvent(inspectionProcessRecordHeader.getProcess_code(),str_title,str_content);
+
+                System.out.println("推送title="+str_title);
+                System.out.println("推送str_content="+str_content);
+
+
                 json.put("success",true);
                 json.put("message","保存成功");
             }else{
@@ -266,6 +289,22 @@ public class InspectionProcess {
         }
         return null;
     }
+
+    //发送推送消息
+    public void SendEvent(String event, String title,String content){
+        List<HashMap<String,Object>>  lt=roleDao.getRolesByEvent(event);
+
+        for(int i=0;i<lt.size();i++){
+            String role=(String)lt.get(i).get("role_no");
+            //发消息
+            APICloudPushService.SendPushNotification("",title,content,"1","0",role,"");
+        }
+
+
+    }
+
+
+
     @RequestMapping("/delProcess")
     public String delProcess(HttpServletRequest request, HttpServletResponse response)throws Exception{
 
