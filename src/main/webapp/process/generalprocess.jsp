@@ -29,7 +29,7 @@
         var url;
         var basePath ="<%=basePath%>"+"/upload/pictures/";
 
-        var g_statuslist=undefined;// input status
+        //var g_statuslist=undefined;// input status
 
 
 
@@ -54,7 +54,10 @@
         });
         function addPro(){
             var pcode=$('#processcode').val();
-            if(pcode==undefined||pcode=="")return;
+            if(pcode==undefined||pcode==""){
+                hlAlertFour("请先选择工序");
+                return;
+            }
             $('#hlcancelBtn').attr('operationtype','add');
             $('#hlProDialog').dialog('open').dialog('setTitle','新增');
 
@@ -752,6 +755,8 @@
            <input type="hidden" id="fileslist" name="upload_files" value=""/>
            <input type="text" id="process_code" name="process_code" value=""/>
            <input type="hidden" id="dynamicJson" name="dynamicJson" value=""/>
+           <input type="text" id="outputJson" name="outputJson" value=""/>
+           <input type="text" id="inputStatusList" name="inputStatusList" value=""/>
            <div id="hl-gallery-con" style="width:100%;">
 
            </div>
@@ -851,10 +856,20 @@
                     for(var i=0;i<data.length;i++){
                         if($('#process_code').val()!=undefined&&data[i].process_code==$('#process_code').val()){
                             //初始化input statuslist
-                            g_statuslist=data[i].input;
+                            //g_statuslist=data[i].input;
+
+                            $('#inputStatusList').val(data[i].input);
+
                             //初始化result list
                             var options = [];
                             var language=getCookie("userLanguage");
+
+                            //用于后台的pipe status 设置规则
+
+                            var arr={};
+                            arr["output"]=data[i].output;
+                            $('#outputJson').val(JSON.stringify(arr));
+
                             $.each(data[i].output, function(i,val){
                                 //这里的"text","id"和html中对应
                                 //alert(val);
@@ -882,10 +897,10 @@
     function onSearchClick(type) {
         if(type==1)
         {
-            if(g_statuslist!=undefined){
+            if($('#inputStatusList').val()!=undefined){
                 grid1.load({
                     pipe_no:keyText1.value,
-                    pipestatus:g_statuslist
+                    pipestatus:$('#inputStatusList').val()
                 });
             }else{
                 LoadProcess_input_output();
@@ -939,10 +954,10 @@
         $('.mini-panel').css('z-index','100000');
         $('#searchBar1').css('display','block');
 
-        if(g_statuslist!=undefined){
+        if($('#inputStatusList').val()!=undefined){
             grid1.load({
                 pipe_no:keyText1.value,
-                pipestatus:g_statuslist
+                pipestatus:$('#inputStatusList').val()
             });
         }else{
             LoadProcess_input_output();

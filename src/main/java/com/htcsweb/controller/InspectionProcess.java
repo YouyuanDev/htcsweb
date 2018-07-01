@@ -47,10 +47,20 @@ public class InspectionProcess {
     @ResponseBody
     public String saveProcess(InspectionProcessRecordHeader inspectionProcessRecordHeader, HttpServletRequest request, HttpServletResponse response){
         JSONObject json=new JSONObject();
-
+        System.out.println("process_code="+inspectionProcessRecordHeader.getProcess_code());
         String dynamicJson=request.getParameter("dynamicJson");
+        String outputJson=request.getParameter("outputJson");
+        String inputStatusList=request.getParameter("inputStatusList");
+
         System.out.println("dynamicJson="+dynamicJson);
+        System.out.println("outputJson="+outputJson);
+        System.out.println("inputStatusList="+inputStatusList);
+
         JSONObject dynamicMap = JSONObject.parseObject(dynamicJson);
+        JSONObject outputMap = JSONObject.parseObject(outputJson);
+
+        JSONArray resultArray=(JSONArray)outputMap.get("output");
+
 
         String msg="";
         if(inspectionProcessRecordHeader.getInspection_process_record_header_code()==null||inspectionProcessRecordHeader.getInspection_process_record_header_code()==""){
@@ -69,25 +79,41 @@ public class InspectionProcess {
             String pipeno=inspectionProcessRecordHeader.getPipe_no();
             String mill_no=inspectionProcessRecordHeader.getMill_no();
             String project_no="";
+
+
+            List<HashMap<String,Object>> list=pipeBasicInfoDao.getPipeInfoByNo(pipeno);
+            String p_status="";
+            if(list.size()>0) {
+                p_status = (String) list.get(0).get("status");
+            }
+
+            boolean inputStatusVerified=false;
+            if(inputStatusList!=null){
+                String [] statusArr=inputStatusList.split(",");
+                for(int i=0; i<statusArr.length;i++){
+                    inputStatusVerified=statusArr[i].equals(p_status);
+                    if(inputStatusVerified)break;
+                }
+            }
+
+
             if(inspectionProcessRecordHeader.getId()==0){
                 //添加
-                List<HashMap<String,Object>> list=pipeBasicInfoDao.getPipeInfoByNo(pipeno);
-                if(list.size()>0){
-                    String pipestatus=(String)list.get(0).get("status");
-                    if(pipestatus.equals("bare1")){
-                        InspectionProcessRecordHeader oldrecord=inspectionProcessRecordHeaderDao.getRecentRecordByPipeNo("",pipeno);
-                        if(oldrecord!=null&&oldrecord.getResult().equals("10")){
-                            //存在一条pending数据，不给予insert处理
-                            msg="已存在待定记录,不能新增记录";
-                        }else{
-                            inspectionProcessRecordHeader.setInspection_process_record_header_code(inspectionProcessRecordHeader.getInspection_process_record_header_code());
-                            resTotal=inspectionProcessRecordHeaderDao.addInspectionProcessRecordHeader(inspectionProcessRecordHeader);
 
-                        }
+                if(inputStatusVerified){
+                    InspectionProcessRecordHeader oldrecord=inspectionProcessRecordHeaderDao.getRecentRecordByPipeNo(inspectionProcessRecordHeader.getProcess_code(),pipeno);
+                    if(oldrecord!=null&&oldrecord.getResult().equals("10")){
+                        //存在一条pending数据，不给予insert处理
+                        msg="已存在待定记录,不能新增记录";
+                    }else{
+                        inspectionProcessRecordHeader.setInspection_process_record_header_code(inspectionProcessRecordHeader.getInspection_process_record_header_code());
+                        resTotal=inspectionProcessRecordHeaderDao.addInspectionProcessRecordHeader(inspectionProcessRecordHeader);
+
                     }
-                    project_no=(String)list.get(0).get("project_no");
-                    System.out.println("project_no="+project_no);
                 }
+                project_no=(String)list.get(0).get("project_no");
+                System.out.println("project_no="+project_no);
+
 
             }else{
                 //修改！
@@ -136,19 +162,29 @@ public class InspectionProcess {
 
 
                 //更新管子的状态
-                List<PipeBasicInfo> list=pipeBasicInfoDao.getPipeNumber(pipeno);
-                if(list.size()>0){
-                    PipeBasicInfo p=list.get(0);
-                    if(p.getStatus().equals("bare1")) {
-                        //验证钢管状态为光管  bare1     外喷砂工序   0:bare1     1:od1   10:bare1 3： onhold
-                        if(inspectionProcessRecordHeader.getResult().equals("1")) {//当合格时才更新钢管状态
-                            p.setStatus("od1");
-                            p.setLast_accepted_status(p.getStatus());
+                List<PipeBasicInfo> list1=pipeBasicInfoDao.getPipeNumber(pipeno);
+                if(list1.size()>0){
+                    PipeBasicInfo p=list1.get(0);
+                    if(inputStatusVerified) {
+                        for(int i=0;i<resultArray.size();i++){
+                            JSONObject  rmap=(JSONObject)resultArray.get(i);
+                            if(rmap!=null){
+                                String tmp_result=(String)rmap.get("result");
+                                String tmp_next_status=(String)rmap.get("next_status");
+                                String tmp_last_status=(String)rmap.get("last_status");
+                                //找到对应关系
+                                if(inspectionProcessRecordHeader.getResult().equals(tmp_result)){
+                                    p.setStatus(tmp_next_status);
+                                    if(tmp_last_status!=null)
+                                        p.setLast_accepted_status(p.getStatus());
+                                    int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                                    break;
+                                }
+
+                            }
+
                         }
-                        else if(inspectionProcessRecordHeader.getResult().equals("3")) {//当需要修磨或切除时，设置为onhold状态
-                            p.setStatus("onhold");
-                        }
-                        int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+
                     }
 
                 }

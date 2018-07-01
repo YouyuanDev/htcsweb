@@ -290,6 +290,14 @@ function selectIsGlassSample(){
     }
 }
 
+//字符串转换"转'
+function  changeDbQuotation(str) {
+    var reg=new RegExp("\"","g");
+    var newstr=str.replace(reg,"\'");
+    return newstr;
+}
+
+
 //字符串转换，全角转,半角
 function  changeComma(str) {
     var reg=new RegExp("，","g");
