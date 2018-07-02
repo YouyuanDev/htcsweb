@@ -167,11 +167,7 @@
                 return;
             }
             if (editIndex != index){
-                var row = $('#dg').datagrid('getSelected');
-                if(row&&row.is_special_item=='1'){
-                    //hlAlertFour("特殊项不能编辑!");
-                    return;
-                }
+
                 if (endEditing()){
                     $('#dg').datagrid('selectRow', index)
                         .datagrid('beginEdit', index);
@@ -179,15 +175,40 @@
                     //设置options和default_value的点击事件
                     setTextAreaEvent("options");
                     setTextAreaEvent("default_value");
+                    var row = $('#dg').datagrid('getSelected');
+                    if(row&&row.is_special_item=='1'){
+                        disableEditor('process_code',editIndex);
+                        disableEditor('control_type',editIndex);
+                        disableEditor('item_name',editIndex);
+                        disableEditor('item_name_en',editIndex);
+                        disableEditor('unit_name',editIndex);
+                        disableEditor('unit_name_en',editIndex);
+                        disableEditor('item_frequency',editIndex);
+                        disableEditor('need_verify',editIndex);
+                        disableEditor('max_value',editIndex);
+                        disableEditor('min_value',editIndex);
+                        disableEditor('decimal_num',editIndex);
+                    }
+
                 } else {
                     $('#dg').datagrid('selectRow', editIndex);
                 }
             }
         }
          var g_textarea_field=undefined;
+
+        function disableEditor(field,editIndex) {
+            var cellEdit = $('#dg').datagrid('getEditor', {index:editIndex,field:field});
+            var $input = cellEdit.target;
+            $input.prop('readonly',true);
+        }
+
+
+
+
         function append(){
             if (endEditing()){
-                $('#dg').datagrid('insertRow',{index:0,row:{id:0,item_code:"IT-XXXX",decimal_num:'0',max_value:'0',min_value:'0',default_value:'0',status:'P'}});
+                $('#dg').datagrid('insertRow',{index:0,row:{id:0,item_code:"IT-XXXX",decimal_num:'0',max_value:'0',min_value:'0',default_value:'0',status:'P',is_special_item:'0'}});
                 editIndex = 0;
                 $('#dg').datagrid('selectRow', editIndex)
                     .datagrid('beginEdit', editIndex);
@@ -232,10 +253,6 @@
             if (endEditing()){
                 var row = $('#dg').datagrid('getSelected');
                 if(row){
-                    if(row.is_special_item=='1'){
-                        hlAlertFour("特殊项不能编辑!");
-                        return;
-                    }
                     submitItemInfo(row);
                 }
                 else{
