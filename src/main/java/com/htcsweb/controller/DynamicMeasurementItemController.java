@@ -110,7 +110,7 @@ public class DynamicMeasurementItemController {
         }
 
         //获取检测频率记录
-        if(mill_no!=null) {
+        if(mill_no!=null&&!mill_no.equals("")) {
             List<InspectionTimeRecord> recordlist = inspectionTimeRecordDao.getRecordByPipeNoMillNo(pipe_no, mill_no, null);
 
             List<DynamicMeasurementItem> dynamiclist = dynamicMeasurementItemDao.getDynamicItemByPipeNoProcessCode(pipe_no, process_code);
