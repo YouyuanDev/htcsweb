@@ -25,7 +25,7 @@
         unit_name=#{unit_name},unit_name_en=#{unit_name_en},item_frequency=#{item_frequency},process_code=#{process_code},decimal_num=#{decimal_num},need_verify=#{need_verify},
         control_type=#{control_type},options=#{options},max_value=#{max_value},min_value=#{min_value},default_value=#{default_value}
 
-       where id=#{id} and is_special_item ='0'
+       where id=#{id} and acceptance_criteria_no is not null
     </update>
 
     <delete id="delDynamicMeasurementItem">
