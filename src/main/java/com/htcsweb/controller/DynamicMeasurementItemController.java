@@ -281,43 +281,47 @@ public class DynamicMeasurementItemController {
         String mill_no=request.getParameter("mill_no");
         String process_code=request.getParameter("process_code");
 
-        List<InspectionTimeRecord> recordlist=inspectionTimeRecordDao.getRecordByPipeNoMillNo(pipe_no,mill_no,null);
-        //List<HashMap<String,Object>> ltif= inspectionFrequencyDao.getFrequencyInfoByPipeNo(pipe_no);
-
-        List<DynamicMeasurementItem> dynamiclist=dynamicMeasurementItemDao.getDynamicItemByPipeNoProcessCode(pipe_no,process_code);
-
         List<HashMap<String,Object>> list=new ArrayList<HashMap<String,Object>>();
-        Date now=new Date();
 
-        //System.out.println("11111111111ltif.size()"+ltif.size());
-        //System.out.println("222222lt.size()"+lt.size());//这里出错了 可能没记录
+        if(pipe_no!=null&&!pipe_no.equals("")&&mill_no!=null&&!mill_no.equals("")) {
+            List<InspectionTimeRecord> recordlist = inspectionTimeRecordDao.getRecordByPipeNoMillNo(pipe_no, mill_no, null);
+            //List<HashMap<String,Object>> ltif= inspectionFrequencyDao.getFrequencyInfoByPipeNo(pipe_no);
 
-        for(int i=0;i<dynamiclist.size();i++){
-            DynamicMeasurementItem item=dynamiclist.get(i);
-            boolean needInspectNow=true;
-            String lastInspectionTime="";
-            HashMap<String,Object> m=new HashMap<String,Object>();
-            for(int j=0;j<recordlist.size();j++){
-                InspectionTimeRecord timeRecord=recordlist.get(j);
-                if(item.getItem_code().equals(timeRecord.getInspection_item())){
-                    //找到检验记录了
-                    //检验频率 秒
-                    float freq = Float.parseFloat(item.getItem_frequency());
-                    float freqSec=freq*60*60;
-                    lastInspectionTime=timeRecord.getInspction_time().toString();
-                    //间隔秒
-                    long interval = (now.getTime() - timeRecord.getInspction_time().getTime())/1000;
-                    if(interval<freqSec){
-                        //间隔小于检验频率，不需要检验
-                        needInspectNow=false;
+            List<DynamicMeasurementItem> dynamiclist = dynamicMeasurementItemDao.getDynamicItemByPipeNoProcessCode(pipe_no, process_code);
+
+
+            Date now = new Date();
+
+            //System.out.println("11111111111ltif.size()"+ltif.size());
+            //System.out.println("222222lt.size()"+lt.size());//这里出错了 可能没记录
+
+            for (int i = 0; i < dynamiclist.size(); i++) {
+                DynamicMeasurementItem item = dynamiclist.get(i);
+                boolean needInspectNow = true;
+                String lastInspectionTime = "";
+                HashMap<String, Object> m = new HashMap<String, Object>();
+                for (int j = 0; j < recordlist.size(); j++) {
+                    InspectionTimeRecord timeRecord = recordlist.get(j);
+                    if (item.getItem_code().equals(timeRecord.getInspection_item())) {
+                        //找到检验记录了
+                        //检验频率 秒
+                        float freq = Float.parseFloat(item.getItem_frequency());
+                        float freqSec = freq * 60 * 60;
+                        lastInspectionTime = timeRecord.getInspction_time().toString();
+                        //间隔秒
+                        long interval = (now.getTime() - timeRecord.getInspction_time().getTime()) / 1000;
+                        if (interval < freqSec) {
+                            //间隔小于检验频率，不需要检验
+                            needInspectNow = false;
+                        }
+                        break;
                     }
-                    break;
                 }
+                m.put("lastInspectionTime", lastInspectionTime);
+                m.put("needInspectNow", needInspectNow);
+                m.put("InspectionItem", item.getItem_code());
+                list.add(m);
             }
-            m.put("lastInspectionTime",lastInspectionTime);
-            m.put("needInspectNow",needInspectNow);
-            m.put("InspectionItem",item.getItem_code());
-            list.add(m);
         }
         String mmp= JSONArray.toJSONString(list);
         //System.out.println(mmp);
