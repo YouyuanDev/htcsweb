@@ -177,17 +177,17 @@
                     setTextAreaEvent("default_value");
                     var row = $('#dg').datagrid('getSelected');
                     if(row&&row.is_special_item=='1'){
-                        disableEditor('process_code',editIndex);
-                        disableEditor('control_type',editIndex);
-                        disableEditor('item_name',editIndex);
-                        disableEditor('item_name_en',editIndex);
-                        disableEditor('unit_name',editIndex);
-                        disableEditor('unit_name_en',editIndex);
-                        disableEditor('item_frequency',editIndex);
-                        disableEditor('need_verify',editIndex);
-                        disableEditor('max_value',editIndex);
-                        disableEditor('min_value',editIndex);
-                        disableEditor('decimal_num',editIndex);
+                        disableEditor('process_code',editIndex,"combobox");
+                        disableEditor('control_type',editIndex,"combobox");
+                        disableEditor('item_name',editIndex,"");
+                        disableEditor('item_name_en',editIndex,"");
+                        disableEditor('unit_name',editIndex,"");
+                        disableEditor('unit_name_en',editIndex,"");
+                        disableEditor('item_frequency',editIndex,"combobox");
+                        disableEditor('need_verify',editIndex,"");
+                        disableEditor('max_value',editIndex,"");
+                        disableEditor('min_value',editIndex,"");
+                        disableEditor('decimal_num',editIndex,"");
                     }
 
                 } else {
@@ -197,10 +197,14 @@
         }
          var g_textarea_field=undefined;
 
-        function disableEditor(field,editIndex) {
+        function disableEditor(field,editIndex,type) {
             var cellEdit = $('#dg').datagrid('getEditor', {index:editIndex,field:field});
             var $input = cellEdit.target;
-            $input.attr('disabled','disabled');
+            if(type=="combobox"){
+                $input.combobox('disable');
+            }else{
+                $input.attr('disabled','disabled');
+            }
         }
 
 
