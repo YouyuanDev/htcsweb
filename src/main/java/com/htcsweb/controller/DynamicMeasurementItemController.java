@@ -114,7 +114,7 @@ public class DynamicMeasurementItemController {
             List<InspectionTimeRecord> recordlist = inspectionTimeRecordDao.getRecordByPipeNoMillNo(pipe_no, mill_no, null);
 
             List<DynamicMeasurementItem> dynamiclist = dynamicMeasurementItemDao.getDynamicItemByPipeNoProcessCode(pipe_no, process_code);
-            Map<String,Object> maps=new HashMap<String,Object>();
+            List<HashMap<String,Object>> list=new ArrayList<HashMap<String,Object>>();
             Date now = new Date();
             for (int i = 0; i < dynamiclist.size(); i++) {
                 DynamicMeasurementItem item = dynamiclist.get(i);
@@ -141,9 +141,9 @@ public class DynamicMeasurementItemController {
                 m.put("lastInspectionTime", lastInspectionTime);
                 m.put("needInspectNow", needInspectNow);
                 m.put("InspectionItem", item.getItem_code());
-                maps.put(item.getItem_code(), m);
+                list.add(m);
             }
-            resultmaps.put("needInspectionInfo",maps);
+            resultmaps.put("needInspectionInfo",list);
         }
 
 
@@ -285,7 +285,7 @@ public class DynamicMeasurementItemController {
 
         List<DynamicMeasurementItem> dynamiclist=dynamicMeasurementItemDao.getDynamicItemByPipeNoProcessCode(pipe_no,process_code);
 
-        Map<String,HashMap<String,Object>> maps=new HashMap<String,HashMap<String,Object>>();
+        List<HashMap<String,Object>> list=new ArrayList<HashMap<String,Object>>();
         Date now=new Date();
 
         //System.out.println("11111111111ltif.size()"+ltif.size());
@@ -316,9 +316,9 @@ public class DynamicMeasurementItemController {
             m.put("lastInspectionTime",lastInspectionTime);
             m.put("needInspectNow",needInspectNow);
             m.put("InspectionItem",item.getItem_code());
-            maps.put(item.getItem_code(),m);
+            list.add(m);
         }
-        String mmp= JSONArray.toJSONString(maps);
+        String mmp= JSONArray.toJSONString(list);
         //System.out.println(mmp);
         return mmp;
     }
