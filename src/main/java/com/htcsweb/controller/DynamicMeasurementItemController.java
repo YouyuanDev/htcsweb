@@ -117,12 +117,14 @@ public class DynamicMeasurementItemController {
         String src_acceptance_criteria_no=request.getParameter("src_acceptance_criteria_no");
         String des_acceptance_criteria_no=request.getParameter("des_acceptance_criteria_no");
         List<DynamicMeasurementItem> list=dynamicMeasurementItemDao.getDynamicMeasurementItemByAcceptanceCriteriaNo(src_acceptance_criteria_no);
-
+        System.out.println("importDynamicItem src_acceptance_criteria_no="+src_acceptance_criteria_no);
+        System.out.println("importDynamicItem des_acceptance_criteria_no="+des_acceptance_criteria_no);
         int totalcount=0;
         for(int i=0;i<list.size();i++) {
             DynamicMeasurementItem item=list.get(i);
             //过滤掉特殊检测项
-            if(item.getIs_special_item().equals("1"))
+            System.out.println("getIs_special_item="+item.getIs_special_item());
+            if(item.getIs_special_item()!=null&&item.getIs_special_item().equals("1"))
                 continue;
 
             //初始化自己的参数
