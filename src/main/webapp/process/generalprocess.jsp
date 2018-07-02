@@ -49,6 +49,22 @@
                         clearFormLabel();
                     }
                 });
+
+                $('#mill_no').combobox({
+                    onLoadSuccess:function(){
+                        var data = $('#mill_no').combobox('getData');
+                        $('#mill_no').combobox('select',data[0].value);
+                    },
+                    onChange: function (newValue, oldValue) {
+                        //alert(newValue);
+                        if(newValue!=undefined){
+                            GenerateInspectionItem();
+                        }
+
+                    }
+                });
+
+
                $('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
                // hlLanguage("../i18n/");
         });
@@ -67,8 +83,8 @@
             $('#process_code').val(pcode);
             LoadProcess_input_output();
             $('#legend-title').text($('#processcode').combobox('getText'));
-            $('#process_name').val($('#processcode').combobox('getText'));
-            $("#mill_no option:first").prop("selected", 'selected');
+            $("#process_name").textbox("setValue", $('#processcode').combobox('getText'));
+
             url="/InspectionProcessOperation/saveProcess.action";
             //$("input[name='alkaline_dwell_time']").siblings().css("background-color","#F9A6A6");
         }
@@ -272,9 +288,14 @@
         function GenerateInspectionItem(){
             multipleElectionArr.length=0;
             checkboxArr.length=0;
-            if(look1==undefined)return;
-            var pipe_no=look1.getValue();
-            if(pipe_no==undefined)return;
+
+            var pipe_no=$("input[name='pipe_no']").val();
+            //alert(pipe_no);
+            if(pipe_no==undefined||pipe_no=="")return;
+            if($('#mill_no').val()==undefined||$('#mill_no').val()==""){
+                alert("请选择mill");
+                return;
+            }
 
             var process_code=$('#process_code').val();
             if(process_code==undefined||process_code=="")return;
@@ -694,7 +715,7 @@
 					        width: 185,
 					        editable:false,
 					        textField:'text',
-					        panelHeight:'auto'" onchange="onChangeMillNo()"/>
+					        panelHeight:'200'"/>
                </td>
            </tr>
            <tr>
@@ -1046,8 +1067,6 @@
         obj.setText("");
         obj.setValue("");
     }
-    function onChangeMillNo() {
-        GenerateInspectionItem();
-    }
+
     hlLanguage("../i18n/");
 </script>
