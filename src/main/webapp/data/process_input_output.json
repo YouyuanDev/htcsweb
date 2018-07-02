@@ -1,23 +1,6 @@
 [
   { "process_code": "od_blast",
     "input": "bare1",
-    "additionParams":[
-      {
-        "addition_item_code":"is_sample",
-        "des_pipe_property_name":"odsampling_mark",
-        "set_value":"0"
-      },
-      {
-        "addition_item_code":"is_dsc_sample",
-        "des_pipe_property_name":"od_dsc_sample_mark",
-        "set_value":"1"
-      },
-      {
-        "addition_item_code":"is_pe_sample",
-        "des_pipe_property_name":"od_pe_sample_mark",
-        "set_value":"1"
-      }
-    ],
     "output":
       [
         {
