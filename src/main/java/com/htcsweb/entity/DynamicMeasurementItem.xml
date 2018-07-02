@@ -29,9 +29,9 @@
     </update>
 
     <delete id="delDynamicMeasurementItem">
-        delete from dynamic_measurement_item WHERE
+        delete from dynamic_measurement_item WHERE acceptance_criteria_no is not null and
         <foreach collection="array" item="item" open="id in (" separator="," close=")">
-            #{item} and acceptance_criteria_no is not null
+            #{item} 
         </foreach>
     </delete>
 
