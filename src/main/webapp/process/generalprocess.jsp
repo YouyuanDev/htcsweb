@@ -284,17 +284,18 @@
                 dataType:'json',
                 data:{
                     pipe_no:pipe_no,
+                    mill_no:$('#mill_no').val(),
                     process_code:process_code,
                     inspection_process_record_header_code:$('#inspection_process_record_header_code').val()
                 },
                 success:function (data) {
 
                     var div="";
-                   for(var i=0;i<data.length;i++){
+                   for(var i=0;i<data.record.length;i++){
                        if((i==0)||(i%2==0)){
                            div+="<tr>"
                        }
-                       div+=getTemplate(data[i]);
+                       div+=getTemplate(data.record[i]);
                    }
                     div+="</tr>";
                     $('#dynamicTable').empty();
@@ -342,11 +343,6 @@
                 $(obj).prop('checked', false);
                 $("input[name='"+name+"']").val(0);
             }
-        }
-        //验证
-        function verification(obj){
-            alert("verification");
-            obj.siblings().css("background-color","#FF0000");
         }
         //根据字段的属性动态生成控件
         function getTemplate(item){
@@ -399,13 +395,18 @@
             }
 
             var controldiv="";
-
+            var backgroundColor="#FFFFFF";
             if(itemvalue!=undefined){
                 defaultvalue=itemvalue;
+                if(needverify=="1"){
+                    if(parseFloat(maxvalue)<itemvalue||parseFloat(minvalue)>itemvalue){
+                        backgroundColor="#F9A6A6";
+                    }
+                }
             }
 
             if(controltype=="singleselect"){//单选
-                controldiv="<select controltype=\""+controltype+"\" dynamic=\"dynamic\" id=\""+itemcode+"\"  defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\" class=\"easyui-combobox\" data-options=\"editable:false,panelHeight:'200'\" value=\""+defaultvalue+"\" myname=\""+itemcode+"\" name=\""+itemcode+"\" style=\"width:200px;\" >";
+                controldiv="<select controltype=\""+controltype+"\" dynamic=\"dynamic\" id=\""+itemcode+"\"  defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\" class=\"easyui-combobox\" data-options=\"editable:false,panelHeight:'200'\" value=\""+defaultvalue+"\" myname=\""+itemcode+"\" name=\""+itemcode+"\" style=\"width:200px;background-color:"+backgroundColor+"\" >";
                 var optionArr=[];
                 optionArr=options.split(';');
                 var optiondiv="";
@@ -423,12 +424,12 @@
                 controldiv+=optiondiv;
                 controldiv+="</select>";
             }else if(controltype=="singlenumber"){//单值数字
-                controldiv="<input controltype=\""+controltype+"\" dynamic=\"dynamic\" onchange=\"JudgeMaxAndMIn(this)\" class=\"easyui-numberbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+"data-options=\"min:-99,precision:"+decimalnum+"\" type=\"text\" myname=\""+itemcode+"\" name=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
+                controldiv="<input controltype=\""+controltype+"\" dynamic=\"dynamic\" onchange=\"JudgeMaxAndMIn(this)\" class=\"easyui-numberbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+"data-options=\"min:-99,precision:"+decimalnum+"\" type=\"text\" myname=\""+itemcode+"\" name=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;background-color:"+backgroundColor+"\"/>";
             }else if(controltype=="singletext"){//单值文本
                 controldiv="<input controltype=\""+controltype+"\"  dynamic=\"dynamic\" class=\"easyui-textbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+" type=\"text\" name=\"" + itemcode +"\" myname=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
             }
             else if(controltype=="multinumber"){//多值数字
-                controldiv="<input controltype=\""+controltype+"\" dynamic=\"dynamic\" class=\"easyui-textbox\"  "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+" type=\"text\" name=\"" + itemcode +"\" myname=\"" + itemcode +"\"  value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
+                controldiv="<input controltype=\""+controltype+"\" dynamic=\"dynamic\" class=\"easyui-textbox\"  "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+" type=\"text\" name=\"" + itemcode +"\" myname=\"" + itemcode +"\"  value=\""+defaultvalue+"\" style=\"width:200px;background-color:"+backgroundColor+"\"/>";
             }
             else if(controltype=="multitext"){//多值文本
 
@@ -471,30 +472,40 @@
 
         function JudgeMaxAndMIn(){
             //alert($(obj).attr('maxvalue')+":"+$(obj).val());
-            $("input[type=text]").each(function(i){
-                $(this).bind('input propertychange', function() {
-                    var max=$(this).parent().siblings('input').attr('maxvalue');
-                    var min=$(this).parent().siblings('input').attr('minvalue');
+            $("#dynamicTable :input[dynamic='dynamic'],select[dynamic='dynamic']").each(function(i){
+                var $obj=$(this);
+                var controltype = $obj.attr("controltype");
+                $obj.siblings('span').find('input').css("background-color","#FFFFFF");
+                $obj.siblings('span').find('input[type=text]').bind('input propertychange', function() {
+                    $(this).css("background-color","#FFFFFF");
+                    var maxValue="",minValue="";
+                    if(controltype=="singleselect"){
+                        maxValue=$(this).parent().siblings('select').attr('maxvalue');
+                        minValue$(this).parent().siblings('select').attr('minvalue');
+                    }else{
+                        maxValue=$(this).parent().siblings('input').attr('maxvalue');
+                        minValue=$(this).parent().siblings('input').attr('minvalue');
+                    }
                     var value=$(this).val();
-                    if(value!=undefined){
-                        if(max!=undefined&&max!=""&&!isNaN(max)){
-                            if(parseFloat(max)<parseFloat(value)){
-                                $(this).css("background-color","#F9A6A6");
-                            }else{
-                                $(this).css("background-color","#FFFFFF");
+                    var numArr=value.split(',');
+                    for(var i=0;i<numArr.length;i++){
+                        if(numArr!=undefined&&numArr[i]!=""&&!isNaN(numArr[i])){
+                            if(maxValue!=undefined&&maxValue!=""&&!isNaN(maxValue)){
+                                if(parseFloat(maxValue)<numArr[i]){
+                                    $(this).css("background-color","#F9A6A6");
+                                }
                             }
-                        }
-                        if(min!=undefined&&min!=""&&!isNaN(min)){
-                            if(parseFloat(min)>parseFloat(value)){
-                                $(this).css("background-color","#F9A6A6");
-                            }else{
-                                $(this).css("background-color","#FFFFFF");
+                            if(minValue!=undefined&&minValue!=""&&!isNaN(minValue)){
+                                if(parseFloat(minValue)>parseFloat(numArr[i])){
+                                    $(this).css("background-color","#F9A6A6");
+                                }
                             }
                         }
                     }
+
                 });
             });
-
+            
         }
 
 

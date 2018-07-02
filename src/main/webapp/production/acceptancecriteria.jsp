@@ -293,7 +293,8 @@
                          options:row.options,
                          max_value:row.max_value,
                          min_value:row.min_value,
-                         default_value:row.default_value
+                         default_value:row.default_value,
+                        is_special_item:row.is_special_item
                     },
                     success:function (data) {
                         //var result = eval('('+data+')');
