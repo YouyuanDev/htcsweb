@@ -309,7 +309,6 @@
                     if(checkboxArr.length>0){
                         $.each(checkboxArr, function (n, value) {
                             var idName="#"+value.itemcode;
-                            alert(value.itemvalue);
                             if(value.itemvalue=='1'){
                                 var idName="#"+value.itemcode;
                                 $(idName).prop('checked', true);
