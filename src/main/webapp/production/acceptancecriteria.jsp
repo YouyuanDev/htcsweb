@@ -28,6 +28,10 @@
             $('#addEditDialog').css('top','30px');
             $('#addEditDialog').dialog({
                 onClose:function () {
+                    if(editIndex!=undefined){
+                        hlAlertFour("请先保存测量项!");
+                        return false;
+                    }
                     clearFormLabel();
                 }
             });
