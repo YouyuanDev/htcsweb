@@ -179,15 +179,15 @@
                     if(row&&row.is_special_item=='1'){
                         disableEditor('process_code',editIndex,"combobox");
                         disableEditor('control_type',editIndex,"combobox");
-                        disableEditor('item_name',editIndex,"");
-                        disableEditor('item_name_en',editIndex,"");
-                        disableEditor('unit_name',editIndex,"");
-                        disableEditor('unit_name_en',editIndex,"");
+                        disableEditor('item_name',editIndex,"textbox");
+                        disableEditor('item_name_en',editIndex,"textbox");
+                        disableEditor('unit_name',editIndex,"textbox");
+                        disableEditor('unit_name_en',editIndex,"textbox");
                         disableEditor('item_frequency',editIndex,"combobox");
-                        disableEditor('need_verify',editIndex,"");
-                        disableEditor('max_value',editIndex,"");
-                        disableEditor('min_value',editIndex,"");
-                        disableEditor('decimal_num',editIndex,"");
+                        disableEditor('need_verify',editIndex,"checkbox");
+                        disableEditor('max_value',editIndex,"numberbox");
+                        disableEditor('min_value',editIndex,"numberbox");
+                        disableEditor('decimal_num',editIndex,"numberbox");
                     }
 
                 } else {
@@ -199,13 +199,16 @@
 
         function disableEditor(field,editIndex,type) {
             var cellEdit = $('#dg').datagrid('getEditor', {index:editIndex,field:field});
-            cellEdit.disabled();
-            // var $input = cellEdit.target;
-            // if(type=="combobox"){
-            //     $input.combobox('disable');
-            // }else{
-            //     $input.textbox('disable');
-            // }
+            var $input = cellEdit.target;
+            if(type=="combobox"){
+                $input.combobox('disable');
+            }else if(type=="numberbox"){
+                $input.numberbox('disable');
+            }else if(type=="textbox"){
+                $input.textbox('disable');
+            }else if(type=="checkbox"){
+                $input.textbox('disable');
+            }
         }
 
 
