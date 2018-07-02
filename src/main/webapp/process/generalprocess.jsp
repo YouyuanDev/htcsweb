@@ -379,8 +379,8 @@
                 var InspectionItem=frequencyList[i].InspectionItem;
                 var needInspectNow=frequencyList[i].needInspectNow;
                 if(InspectionItem!=undefined&&needInspectNow!=undefined&&InspectionItem==itemcode){
-                    frequencydiv+="<span style='color:red;'>*<span>";
-                    frequencydiven+="<span style='color:red;'>*<span>";
+                    frequencydiv+="<span style=\"color:red;\">*<span>";
+                    frequencydiven+="<span style=\"color:red;\">*<span>";
                 }
             }
 
