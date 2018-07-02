@@ -200,7 +200,7 @@
         function disableEditor(field,editIndex) {
             var cellEdit = $('#dg').datagrid('getEditor', {index:editIndex,field:field});
             var $input = cellEdit.target;
-            $input.prop('readonly',true);
+            $input.attr('disabled','disabled');
         }
 
 
