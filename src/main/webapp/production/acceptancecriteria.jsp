@@ -184,10 +184,10 @@
                         disableEditor('unit_name',editIndex,"textbox");
                         disableEditor('unit_name_en',editIndex,"textbox");
                         disableEditor('item_frequency',editIndex,"combobox");
-                        disableEditor('need_verify',editIndex,"checkbox");
                         disableEditor('max_value',editIndex,"numberbox");
                         disableEditor('min_value',editIndex,"numberbox");
                         disableEditor('decimal_num',editIndex,"numberbox");
+                        disableEditor('need_verify',editIndex,"checkbox");
                     }
 
                 } else {
@@ -207,7 +207,7 @@
             }else if(type=="textbox"){
                 $input.textbox('disable');
             }else if(type=="checkbox"){
-                $input.textbox('disable');
+                $input[0].disabled=true;
             }
         }
 
@@ -247,7 +247,7 @@
             var row = $('#dg').datagrid('getSelected');
             if(row){
                 if(row.is_special_item=='1'){
-                    hlAlertFour("特殊项不能编辑!");
+                    hlAlertFour("特殊项不能删除!");
                     return;
                 }
             }
