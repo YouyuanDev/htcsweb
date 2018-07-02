@@ -121,6 +121,10 @@ public class DynamicMeasurementItemController {
         int totalcount=0;
         for(int i=0;i<list.size();i++) {
             DynamicMeasurementItem item=list.get(i);
+            //过滤掉特殊检测项
+            if(item.getIs_special_item().equals("1"))
+                continue;
+
             //初始化自己的参数
             item.setId(0);
             item.setAcceptance_criteria_no(des_acceptance_criteria_no);

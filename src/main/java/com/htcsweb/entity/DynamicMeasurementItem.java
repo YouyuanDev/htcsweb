@@ -19,12 +19,14 @@ public class DynamicMeasurementItem {
     private String max_value;
     private String min_value;
     private String default_value;
+    private String is_special_item;
 
 
     public DynamicMeasurementItem() {
     }
 
-    public DynamicMeasurementItem(int id, String acceptance_criteria_no, String item_code, String item_name, String item_name_en, String unit_name, String unit_name_en, String item_frequency, String process_code, String decimal_num, String need_verify, String control_type, String options, String max_value, String min_value, String default_value) {
+
+    public DynamicMeasurementItem(int id, String acceptance_criteria_no, String item_code, String item_name, String item_name_en, String unit_name, String unit_name_en, String item_frequency, String process_code, String decimal_num, String need_verify, String control_type, String options, String max_value, String min_value, String default_value, String is_special_item) {
         this.id = id;
         this.acceptance_criteria_no = acceptance_criteria_no;
         this.item_code = item_code;
@@ -41,6 +43,7 @@ public class DynamicMeasurementItem {
         this.max_value = max_value;
         this.min_value = min_value;
         this.default_value = default_value;
+        this.is_special_item = is_special_item;
     }
 
     public int getId() {
@@ -169,5 +172,13 @@ public class DynamicMeasurementItem {
 
     public void setDefault_value(String default_value) {
         this.default_value = default_value;
+    }
+
+    public String getIs_special_item() {
+        return is_special_item;
+    }
+
+    public void setIs_special_item(String is_special_item) {
+        this.is_special_item = is_special_item;
     }
 }

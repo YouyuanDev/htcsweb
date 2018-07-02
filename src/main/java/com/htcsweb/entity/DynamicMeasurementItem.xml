@@ -12,10 +12,10 @@
     <insert id="addDynamicMeasurementItem" parameterType="com.htcsweb.entity.DynamicMeasurementItem">
         INSERT INTO dynamic_measurement_item(acceptance_criteria_no,item_code,item_name,item_name_en,
         unit_name,unit_name_en,item_frequency,process_code,decimal_num,need_verify,
-        control_type,options,max_value,min_value,default_value) VALUES
+        control_type,options,max_value,min_value,default_value,is_special_item) VALUES
         (#{acceptance_criteria_no},#{item_code},#{item_name},#{item_name_en},
         #{unit_name},#{unit_name_en},#{item_frequency},#{process_code},#{decimal_num},#{need_verify},
-        #{control_type},#{options},#{max_value},#{min_value},#{default_value})
+        #{control_type},#{options},#{max_value},#{min_value},#{default_value},'0')
 
     </insert>
 
@@ -25,13 +25,13 @@
         unit_name=#{unit_name},unit_name_en=#{unit_name_en},item_frequency=#{item_frequency},process_code=#{process_code},decimal_num=#{decimal_num},need_verify=#{need_verify},
         control_type=#{control_type},options=#{options},max_value=#{max_value},min_value=#{min_value},default_value=#{default_value}
 
-       where id=#{id}
+       where id=#{id} and is_special_item ='0'
     </update>
 
     <delete id="delDynamicMeasurementItem">
         delete from dynamic_measurement_item WHERE
         <foreach collection="array" item="item" open="id in (" separator="," close=")">
-            #{item}
+            #{item} and is_special_item ='0'
         </foreach>
     </delete>
 
@@ -49,6 +49,11 @@
         order by id desc
     </select>
 
+    <select id="getSpecialDynamicItem" resultType="com.htcsweb.entity.DynamicMeasurementItem">
+        select * from  dynamic_measurement_item
+        where is_special_item ='1' and acceptance_criteria_no is null
+        order by id desc
+    </select>
 
 
     <select id="getDynamicItemByPipeNoProcessCode" resultType="com.htcsweb.entity.DynamicMeasurementItem">

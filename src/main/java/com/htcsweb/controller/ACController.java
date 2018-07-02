@@ -4,10 +4,8 @@ package com.htcsweb.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.AcceptanceCriteriaDao;
-import com.htcsweb.entity.AcceptanceCriteria;
-import com.htcsweb.entity.InspectionTimeRecord;
-import com.htcsweb.entity.OdCoating3LpeProcess;
-import com.htcsweb.entity.PipeBasicInfo;
+import com.htcsweb.dao.DynamicMeasurementItemDao;
+import com.htcsweb.entity.*;
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +28,10 @@ public class ACController {
 
     @Autowired
     private AcceptanceCriteriaDao acceptanceCriteriaDao;
+
+    @Autowired
+    DynamicMeasurementItemDao dynamicMeasurementItemDao;
+
 
     @RequestMapping(value = "/getACByLike")
     @ResponseBody
@@ -87,6 +89,16 @@ public class ACController {
             if(acceptanceCriteria.getId()==0){
                 //添加
                 resTotal=acceptanceCriteriaDao.addAcceptanceCriteria(acceptanceCriteria);
+                if(resTotal>0){
+                    //初始化特殊测量项
+                    List<DynamicMeasurementItem> list=dynamicMeasurementItemDao.getSpecialDynamicItem();
+                    for(int i=0;i<list.size();i++){
+                        DynamicMeasurementItem item =list.get(i);
+                        item.setId(0);
+                        item.setAcceptance_criteria_no(acceptanceCriteria.getAcceptance_criteria_no());
+                        dynamicMeasurementItemDao.addDynamicMeasurementItem(item);
+                    }
+                }
             }else{
                 //修改！
                 resTotal=acceptanceCriteriaDao.updateAcceptanceCriteria(acceptanceCriteria);
