@@ -35,12 +35,20 @@
         </foreach>
     </delete>
 
-    <select id="getDynamicMeasurementItemByAcceptanceCriteriaNo" resultType="com.htcsweb.entity.DynamicMeasurementItem">
+    <select id="getDynamicMeasurementItemWithProcessInfoByAcceptanceCriteriaNo" resultType="map">
           select item.*,pro.process_name,pro.process_name_en from  dynamic_measurement_item item
           inner join process_info pro on pro.process_code=item.process_code
           where acceptance_criteria_no=#{acceptance_criteria_no}
           order by pro.id asc
     </select>
+
+
+    <select id="getDynamicMeasurementItemByAcceptanceCriteriaNo" resultType="com.htcsweb.entity.DynamicMeasurementItem">
+        select * from  dynamic_measurement_item
+        where acceptance_criteria_no=#{acceptance_criteria_no}
+        order by id desc
+    </select>
+
 
 
     <select id="getDynamicItemByPipeNoProcessCode" resultType="com.htcsweb.entity.DynamicMeasurementItem">
