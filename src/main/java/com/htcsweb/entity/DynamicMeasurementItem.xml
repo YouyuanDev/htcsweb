@@ -15,7 +15,7 @@
         control_type,options,max_value,min_value,default_value,is_special_item) VALUES
         (#{acceptance_criteria_no},#{item_code},#{item_name},#{item_name_en},
         #{unit_name},#{unit_name_en},#{item_frequency},#{process_code},#{decimal_num},#{need_verify},
-        #{control_type},#{options},#{max_value},#{min_value},#{default_value},'0')
+        #{control_type},#{options},#{max_value},#{min_value},#{default_value},#{is_special_item})
 
     </insert>
 
@@ -31,7 +31,7 @@
     <delete id="delDynamicMeasurementItem">
         delete from dynamic_measurement_item WHERE
         <foreach collection="array" item="item" open="id in (" separator="," close=")">
-            #{item} and is_special_item ='0'
+            #{item} and acceptance_criteria_no is not null
         </foreach>
     </delete>
 
