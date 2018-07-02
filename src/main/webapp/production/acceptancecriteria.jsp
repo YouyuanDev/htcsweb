@@ -163,7 +163,7 @@
                 return;
             }
             if (editIndex != index){
-                var row = $('#contentDatagrids').datagrid('getSelected');
+                var row = $('#dg').datagrid('getSelected');
                 if(row&&row.is_special_item=='1'){
                     hlAlertFour("特殊项不能编辑!");return;
                 }
