@@ -40,6 +40,23 @@ public class DynamicMeasurementItemController {
     }
 
 
+
+    //获得动态检测项列表，根据ACNo
+    @RequestMapping("/getDynamicItemWithProcessInfoByACNo")
+    @ResponseBody
+    public String getDynamicItemWithProcessInfoByACNo(HttpServletRequest request){
+        JSONObject json=new JSONObject();
+
+        String acceptance_criteria_no=request.getParameter("acceptance_criteria_no");
+        List<HashMap<String,Object>> list=dynamicMeasurementItemDao.getDynamicMeasurementItemWithProcessInfoByAcceptanceCriteriaNo(acceptance_criteria_no);
+
+        String mmp= JSONArray.toJSONString(list);
+        return mmp;
+    }
+
+
+
+
     //获得动态检测项列表，根据管号，工序号
     @RequestMapping("/getDynamicItemByPipeNoProcessCode")
     @ResponseBody
