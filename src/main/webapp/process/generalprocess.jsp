@@ -295,7 +295,7 @@
                        if((i==0)||(i%2==0)){
                            div+="<tr>"
                        }
-                       div+=getTemplate(data.record[i]);
+                       div+=getTemplate(data.record[i],data.needInspectionInfo);
                    }
                     div+="</tr>";
                     $('#dynamicTable').empty();
@@ -345,7 +345,7 @@
             }
         }
         //根据字段的属性动态生成控件
-        function getTemplate(item){
+        function getTemplate(item,frequencyList){
             var controltype=item.control_type;//控件类型
             var itemcode=item.item_code;//控件编号
             var itemname=item.item_name; //中文名
@@ -375,7 +375,14 @@
                 frequencydiv=" 每"+itemfrequency+"小时检测一次";
                 frequencydiven=" Inspect Every"+itemfrequency+"hour(s)";
             }
-
+            for(var i=0;i<frequencyList.length;i++){
+                var InspectionItem=frequencyList[i].InspectionItem;
+                var needInspectNow=frequencyList[i].needInspectNow;
+                if(InspectionItem!=undefined&&needInspectNow!=undefined&&InspectionItem==itemcode){
+                    frequencydiv+="<span style='color:red;'>*<span>";
+                    frequencydiven+="<span style='color:red;'>*<span>";
+                }
+            }
 
             if(language&&language=="en"){
                 if(unitnameen!=undefined&&unitnameen!=""){
@@ -423,6 +430,7 @@
                 }
                 controldiv+=optiondiv;
                 controldiv+="</select>";
+                $()
             }else if(controltype=="singlenumber"){//单值数字
                 controldiv="<input controltype=\""+controltype+"\" dynamic=\"dynamic\" onchange=\"JudgeMaxAndMIn(this)\" class=\"easyui-numberbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+"data-options=\"min:-99,precision:"+decimalnum+"\" type=\"text\" myname=\""+itemcode+"\" name=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;background-color:"+backgroundColor+"\"/>";
             }else if(controltype=="singletext"){//单值文本
@@ -476,12 +484,13 @@
                 var $obj=$(this);
                 var controltype = $obj.attr("controltype");
                 $obj.siblings('span').find('input').css("background-color","#FFFFFF");
+                maxMin($obj,controltype);
                 $obj.siblings('span').find('input[type=text]').bind('input propertychange', function() {
                     $(this).css("background-color","#FFFFFF");
                     var maxValue="",minValue="";
                     if(controltype=="singleselect"){
                         maxValue=$(this).parent().siblings('select').attr('maxvalue');
-                        minValue$(this).parent().siblings('select').attr('minvalue');
+                        minValue=$(this).parent().siblings('select').attr('minvalue');
                     }else{
                         maxValue=$(this).parent().siblings('input').attr('maxvalue');
                         minValue=$(this).parent().siblings('input').attr('minvalue');
@@ -507,7 +516,28 @@
             });
             
         }
-
+        function maxMin(obj,controltype) {
+            //obj.siblings('input').css("background-color","#FFFFFF");
+            var maxValue="",minValue="";
+            maxValue=obj.attr('maxvalue');
+            minValue=obj.attr('minvalue');
+            var value=obj.siblings('span').find('input[type=text]').val();
+            var numArr=value.split(',');
+            for(var i=0;i<numArr.length;i++){
+                if(numArr!=undefined&&numArr[i]!=""&&!isNaN(numArr[i])){
+                    if(maxValue!=undefined&&maxValue!=""&&!isNaN(maxValue)){
+                        if(parseFloat(maxValue)<numArr[i]){
+                            obj.siblings('span').find('input').css("background-color","#F9A6A6");
+                        }
+                    }
+                    if(minValue!=undefined&&minValue!=""&&!isNaN(minValue)){
+                        if(parseFloat(minValue)>parseFloat(numArr[i])){
+                            obj.siblings('span').find('input').css("background-color","#F9A6A6");
+                        }
+                    }
+                }
+            }
+        }
 
 
     </script>
