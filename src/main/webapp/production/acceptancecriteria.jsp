@@ -203,7 +203,7 @@
             if(type=="combobox"){
                 $input.combobox('disable');
             }else{
-                $input.attr('disabled','disabled');
+                $input.textbox('disable');
             }
         }
 
