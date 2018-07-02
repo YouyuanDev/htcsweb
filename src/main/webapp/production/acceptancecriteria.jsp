@@ -165,7 +165,8 @@
             if (editIndex != index){
                 var row = $('#dg').datagrid('getSelected');
                 if(row&&row.is_special_item=='1'){
-                    hlAlertFour("特殊项不能编辑!");return;
+                    //hlAlertFour("特殊项不能编辑!");
+                    return;
                 }
                 if (endEditing()){
                     $('#dg').datagrid('selectRow', index)
@@ -210,15 +211,20 @@
             });
         }
         function removeit(){
-            if (editIndex == undefined){return}
+            if (editIndex == undefined){return;}
             delItem();
 
         }
         //接收事件
         function accept(){
+
             if (endEditing()){
                 var row = $('#dg').datagrid('getSelected');
                 if(row){
+                    if(row.is_special_item=='1'){
+                        hlAlertFour("特殊项不能编辑!");
+                        return;
+                    }
                     submitItemInfo(row);
                 }
                 else{
@@ -276,6 +282,10 @@
         function delItem() {
             var row = $('#dg').datagrid('getSelected');
             if(row){
+                if(row.is_special_item=='1'){
+                    hlAlertFour("特殊项不能编辑!");
+                    return;
+                }
                 var idArrs=row.id+",";
                 $.messager.confirm('系统提示',"您确定要删除这条数据吗？",function (r) {
                     if(r){
