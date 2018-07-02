@@ -4,9 +4,11 @@ package com.htcsweb.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.DynamicMeasurementItemDao;
+import com.htcsweb.dao.InspectionTimeRecordDao;
 import com.htcsweb.entity.AcceptanceCriteria;
 import com.htcsweb.entity.CoatingRepair;
 import com.htcsweb.entity.DynamicMeasurementItem;
+import com.htcsweb.entity.InspectionTimeRecord;
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,9 @@ public class DynamicMeasurementItemController {
 
     @Autowired
     DynamicMeasurementItemDao dynamicMeasurementItemDao;
+
+    @Autowired
+    InspectionTimeRecordDao inspectionTimeRecordDao;
 
 
     //获得动态检测项列表，根据ACNo
@@ -220,6 +225,60 @@ public class DynamicMeasurementItemController {
         return null;
     }
 
+
+
+    //检测某检测项此刻是否需要检测
+    @RequestMapping("/getAllInspectionTimeMapByPipeNoMillNo")
+    @ResponseBody
+    public String getAllInspectionTimeMapByPipeNoMillNo( HttpServletRequest request){
+
+        //DynamicItemOperation/getAllInspectionTimeMapByPipeNoMillNo.action?pipe_no=1524540&mill_no=mill_1
+        String pipe_no=request.getParameter("pipe_no");
+        String mill_no=request.getParameter("mill_no");
+        String process_code=request.getParameter("process_code");
+
+        List<InspectionTimeRecord> recordlist=inspectionTimeRecordDao.getRecordByPipeNoMillNo(pipe_no,mill_no,null);
+        //List<HashMap<String,Object>> ltif= inspectionFrequencyDao.getFrequencyInfoByPipeNo(pipe_no);
+
+        List<DynamicMeasurementItem> dynamiclist=dynamicMeasurementItemDao.getDynamicItemByPipeNoProcessCode(pipe_no,process_code);
+
+        Map<String,HashMap<String,Object>> maps=new HashMap<String,HashMap<String,Object>>();
+        Date now=new Date();
+
+        //System.out.println("11111111111ltif.size()"+ltif.size());
+        //System.out.println("222222lt.size()"+lt.size());//这里出错了 可能没记录
+
+        for(int i=0;i<dynamiclist.size();i++){
+            DynamicMeasurementItem item=dynamiclist.get(i);
+            boolean needInspectNow=true;
+            String lastInspectionTime="";
+            HashMap<String,Object> m=new HashMap<String,Object>();
+            for(int j=0;j<recordlist.size();j++){
+                InspectionTimeRecord timeRecord=recordlist.get(j);
+                if(item.getItem_code().equals(timeRecord.getInspection_item())){
+                    //找到检验记录了
+                    //检验频率 秒
+                    float freq = Float.parseFloat(item.getItem_frequency());
+                    float freqSec=freq*60*60;
+                    lastInspectionTime=timeRecord.getInspction_time().toString();
+                    //间隔秒
+                    long interval = (now.getTime() - timeRecord.getInspction_time().getTime())/1000;
+                    if(interval<freqSec){
+                        //间隔小于检验频率，不需要检验
+                        needInspectNow=false;
+                    }
+                    break;
+                }
+            }
+            m.put("lastInspectionTime",lastInspectionTime);
+            m.put("needInspectNow",needInspectNow);
+            m.put("InspectionItem",item.getItem_code());
+            maps.put(item.getItem_code(),m);
+        }
+        String mmp= JSONArray.toJSONString(maps);
+        //System.out.println(mmp);
+        return mmp;
+    }
 
 
 }
