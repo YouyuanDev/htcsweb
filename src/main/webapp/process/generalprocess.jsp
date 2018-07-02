@@ -96,6 +96,7 @@
                 hlAlertOne();
             }
         }
+
         function editPro(){
 
             $('#hlcancelBtn').attr('operationtype','edit');
@@ -108,8 +109,10 @@
                 $('#odbpid').text(row.id);
                 row.operation_time=getDate1(row.operation_time),
                 $('#proForm').form('load',row);
+                //设置多选框值
                 LoadProcess_input_output();
 
+                //$multiselectObj.combobox('setValues',valueArr);
                 //$('#operation-time').datetimebox('setValue',getDate1(row.operation_time));
                 look1.setText(row.pipe_no);
                 look1.setValue(row.pipe_no);
@@ -125,6 +128,7 @@
                 }
 
                 GenerateInspectionItem();
+
 
 
                 url="/InspectionProcessOperation/saveProcess.action?id="+row.id;
@@ -262,9 +266,12 @@
                 $(this).siblings().css("background-color","#FFFFFF");
             });
         }
-
+        var multipleElectionArr=[];
+        var checkboxArr=[];
         //生成检验项表单
         function GenerateInspectionItem(){
+            multipleElectionArr.length=0;
+            checkboxArr.length=0;
             if(look1==undefined)return;
             var pipe_no=look1.getValue();
             if(pipe_no==undefined)return;
@@ -293,7 +300,26 @@
                     $('#dynamicTable').empty();
                   $('#dynamicTable').append(div);
                   $.parser.parse("#dynamicTable");
-
+                    if(multipleElectionArr.length>0){
+                        $.each(multipleElectionArr, function (n, value) {
+                            var idName="#"+value.itemcode;
+                            $(idName).combobox('setValues',value.itemvalue);
+                        });
+                    }
+                    if(checkboxArr.length>0){
+                        $.each(checkboxArr, function (n, value) {
+                            var idName="#"+value.itemcode;
+                            alert(value.itemvalue);
+                            if(value.itemvalue=='1'){
+                                var idName="#"+value.itemcode;
+                                $(idName).prop('checked', true);
+                                $("input[name='"+value.itemcode+"']").val(1);
+                            }else{
+                                $(idName).prop('checked', false);
+                                $("input[name='"+value.itemcode+"']").val(0);
+                            }
+                        });
+                    }
                     JudgeMaxAndMIn();
                 },error:function () {
 
@@ -309,25 +335,20 @@
 
         //checkbox 点击事件
         function checkboxChecked(obj){
-            var name=obj.prop("name");
-            alert(obj.prop("name"));
-            if(obj.is(":checked")){
-                obj.prop('checked', true);
+            var name=$(obj).attr("myname");
+            if($(obj).is(":checked")){
+                $(obj).prop('checked', true);
                 $("input[name='"+name+"']").val(1);
             }else{
-                obj.prop('checked', false);
+                $(obj).prop('checked', false);
                 $("input[name='"+name+"']").val(0);
             }
         }
-
-
         //验证
         function verification(obj){
             alert("verification");
             obj.siblings().css("background-color","#FF0000");
         }
-
-
         //根据字段的属性动态生成控件
         function getTemplate(item){
             var controltype=item.control_type;//控件类型
@@ -415,25 +436,20 @@
                 controldiv="<input controltype=\""+controltype+"\"  dynamic=\"dynamic\" class=\"easyui-textbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+" type=\"text\" name=\"" + itemcode +"\" myname=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
             }
             else if(controltype=="multiselect"){//多选
-                controldiv="<select controltype=\""+controltype+"\" dynamic=\"dynamic\" id=\""+itemcode+"\" class=\"easyui-combobox\" data-options=\"editable:false,multiple:true,multiline:false,panelHeight:'200'\" name=\""+itemcode+"\" myname=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\">";
+                controldiv="<select id=\""+itemcode+"\" controltype=\""+controltype+"\" dynamic=\"dynamic\"  class=\"easyui-combobox\" data-options=\"editable:false,multiple:true,panelHeight:'200'\" name=\""+itemcode+"\" myname=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\">";
                 var optionArr=[];
                 optionArr=options.split(';');
                 var optiondiv="<option value=\"\" >无</option>";
                 //var optiondiv="";
-
+                var valueArr=[];
                 for (var i=0;i<optionArr.length;i++){
                     if(itemvalue!=undefined){
-                        var valueArr=[];
                         valueArr=itemvalue.split(',');
-                        var select="";
-                        for(var j=0;j<valueArr.length;j++){
-                            if(valueArr[j]!=undefined&&valueArr[j]==optionArr[i]){
-                                alert(valueArr[j]);
-                                select="selected=\"selected\"";
-                            }
+                        if(valueArr.length>0){
+                            multipleElectionArr.push({'itemcode':itemcode,'itemvalue':valueArr});
                         }
                     }
-                    optiondiv+="<option value=\""+optionArr[i]+"\" "+select+" >"+optionArr[i]+"</option>";
+                    optiondiv+='<option value='+optionArr[i]+'>'+optionArr[i]+'</option>';
                 }
                 controldiv+=optiondiv;
                 controldiv+="</select>";
@@ -441,7 +457,9 @@
             }else if(controltype=="checkbox"){//复选框
                 controldiv="<input controltype=\""+controltype+"\"  type=\"checkbox\" id=\""+itemcode+"\" myname=\"" + itemcode +"\" value=\"1\" checked=\"false\" onchange=\"checkboxChecked(this)\"/>\n" +
                     "<input dynamic=\"dynamic\" type=\"hidden\" myname=\"" + itemcode +"\" name=\""+itemcode+"\" value=\"0\">";
-
+                if(itemvalue!=undefined&&itemvalue!=""){
+                    checkboxArr.push({'itemcode':itemcode,'itemvalue':itemvalue});
+                }
             }else if(controltype=="textarea"){//多行文本
                 controldiv="<input controltype=\""+controltype+"\"  dynamic=\"dynamic\" class=\"easyui-textbox\" type=\"text\" value=\""+defaultvalue+"\" myname=\"" + itemcode +"\" name=\""+itemcode+"\" data-options=\"multiline:true\" style=\"width:300px;height:80px\" />";
             }
@@ -770,6 +788,7 @@
 
 
 </div>
+
 <div id="dlg-buttons" align="center" style="width:900px;">
     <a href="#" class="easyui-linkbutton" iconCls="icon-save" onclick="proFormSubmit()">Save</a>
     <a href="#" class="easyui-linkbutton" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="proCancelSubmit()">Cancel</a>
