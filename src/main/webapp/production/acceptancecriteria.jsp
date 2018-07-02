@@ -163,6 +163,10 @@
                 return;
             }
             if (editIndex != index){
+                var row = $('#contentDatagrids').datagrid('getSelected');
+                if(row&&row.is_special_item=='1'){
+                    hlAlertFour("特殊项不能编辑!");return;
+                }
                 if (endEditing()){
                     $('#dg').datagrid('selectRow', index)
                         .datagrid('beginEdit', index);
@@ -312,7 +316,7 @@
         //根据接收编号加载事件
         function loadDynamicItemInfo(acceptance_criteria_no) {
             $('#dg').datagrid({
-                url:"/DynamicItemOperation/getDynamicItemByACNo.action?acceptance_criteria_no="+acceptance_criteria_no
+                url:"/DynamicItemOperation/getDynamicItemWithProcessInfoByACNo.action?acceptance_criteria_no="+acceptance_criteria_no
             });
             $("#dg").datagrid('reload');
         }
@@ -525,6 +529,7 @@
 
 
                     <th class="i18n1" name="options" data-options="field:'options',editor:'textbox'"></th>
+                        <th class="i18n1" name="isspecialitem" data-options="field:'is_special_item'"></th>
                     <th class="i18n1" name="status" data-options="field:'status',align:'center',editor:{type:'checkbox',options:{on:'P',off:''}}">Status</th>
                 </tr>
                 </thead>
