@@ -848,8 +848,8 @@
 </div>
 
 <div id="dlg-buttons" align="center" style="width:900px;">
-    <a href="#" class="easyui-linkbutton" iconCls="icon-save" onclick="proFormSubmit()">Save</a>
-    <a href="#" class="easyui-linkbutton" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="proCancelSubmit()">Cancel</a>
+    <a href="#" class="easyui-linkbutton i18n1" name="submit" iconCls="icon-save" onclick="proFormSubmit()">Submit</a>
+    <a href="#" class="easyui-linkbutton i18n1" name="cancel" id="hlcancelBtn" operationtype="add" iconCls="icon-cancel" onclick="proCancelSubmit()">Cancel</a>
 </div>
 <div id="gridPanel1" class="mini-panel" title="header" iconCls="icon-add" style="width:450px;height:250px;"
      showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0"
