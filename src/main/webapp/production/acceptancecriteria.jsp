@@ -28,10 +28,6 @@
             $('#addEditDialog').css('top','30px');
             $('#addEditDialog').dialog({
                 onClose:function () {
-                    if(editIndex!=undefined){
-                        hlAlertFour("请先保存测量项!");
-                        return false;
-                    }
                     clearFormLabel();
                 }
             });
@@ -447,7 +443,7 @@
     </div>
 </div>
 <!--添加、修改框-->
-<div id="addEditDialog" class="easyui-dialog" data-options="title:'添加',modal:true" closed="true" buttons="#dlg-buttons" style="display: none;padding:5px 0px;width:1200px;max-height:600px;overflow-y:auto;">
+<div id="addEditDialog" class="easyui-dialog" data-options="closable:false,title:'添加',modal:true" closed="true" buttons="#dlg-buttons" style="display: none;padding:5px 0px;width:1200px;max-height:600px;overflow-y:auto;">
     <form id="addEditForm" method="post" style="width:95%;margin:0 auto;">
         <fieldset style="width:99%;border:solid 1px #aaa;position:relative;">
             <legend><span class="i18n1" name="ACinfo">标准信息</span></legend>
