@@ -259,7 +259,8 @@ public class InspectionProcess {
 
                  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                  Date nowtime=new Date();
-                 String str_title=sdf.format(nowtime.getTime());
+                 String str_title=sdf.format(nowtime.getTime())+" 工序："+inspectionProcessRecordHeader.getProcess_code()+",管号："+p.getPipe_no()+", "+result_name+"("+result_name_en+")";
+
                  String str_content="工序："+inspectionProcessRecordHeader.getProcess_code()+",管号："+p.getPipe_no()+", "+result_name+"("+result_name_en+")";
 
                  SendEvent(inspectionProcessRecordHeader.getProcess_code(),str_title,str_content);

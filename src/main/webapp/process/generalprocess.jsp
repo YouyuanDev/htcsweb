@@ -311,7 +311,9 @@
                 },
                 success:function (data) {
 
-                    var div="";
+                   if(data==undefined||data.record==undefined)return;
+
+                   var div="";
                    for(var i=0;i<data.record.length;i++){
                        if((i==0)||(i%2==0)){
                            div+="<tr>"
@@ -400,8 +402,8 @@
                 var InspectionItem=frequencyList[i].InspectionItem;
                 var needInspectNow=frequencyList[i].needInspectNow;
                 if(InspectionItem!=undefined&&needInspectNow!=undefined&&InspectionItem==itemcode){
-                    frequencydiv+="<span style=\"color:red;\">*<span>";
-                    frequencydiven+="<span style=\"color:red;\">*<span>";
+                    frequencydiv+="<span style=\"color:red;\">*</span>";
+                    frequencydiven+="<span style=\"color:red;\">*</span>";
                 }
             }
 
@@ -423,18 +425,12 @@
             }
 
             var controldiv="";
-            var backgroundColor="#FFFFFF";
             if(itemvalue!=undefined){
                 defaultvalue=itemvalue;
-                if(needverify=="1"){
-                    if(parseFloat(maxvalue)<itemvalue||parseFloat(minvalue)>itemvalue){
-                        backgroundColor="#F9A6A6";
-                    }
-                }
             }
 
             if(controltype=="singleselect"){//单选
-                controldiv="<select controltype=\""+controltype+"\" dynamic=\"dynamic\" id=\""+itemcode+"\"  defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\" class=\"easyui-combobox\" data-options=\"editable:false,panelHeight:'200'\" value=\""+defaultvalue+"\" myname=\""+itemcode+"\" name=\""+itemcode+"\" style=\"width:200px;background-color:"+backgroundColor+"\" >";
+                controldiv="<select controltype=\""+controltype+"\" dynamic=\"dynamic\" id=\""+itemcode+"\"  defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\" class=\"easyui-combobox\" data-options=\"editable:false,panelHeight:'200'\" value=\""+defaultvalue+"\" myname=\""+itemcode+"\" name=\""+itemcode+"\" style=\"width:200px;\" >";
                 var optionArr=[];
                 optionArr=options.split(';');
                 var optiondiv="";
@@ -453,12 +449,12 @@
                 controldiv+="</select>";
                 $()
             }else if(controltype=="singlenumber"){//单值数字
-                controldiv="<input controltype=\""+controltype+"\" dynamic=\"dynamic\" onchange=\"JudgeMaxAndMIn(this)\" class=\"easyui-numberbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+"data-options=\"min:-99,precision:"+decimalnum+"\" type=\"text\" myname=\""+itemcode+"\" name=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;background-color:"+backgroundColor+"\"/>";
+                controldiv="<input controltype=\""+controltype+"\" dynamic=\"dynamic\" onchange=\"JudgeMaxAndMIn(this)\" class=\"easyui-numberbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+"data-options=\"min:-99,precision:"+decimalnum+"\" type=\"text\" myname=\""+itemcode+"\" name=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
             }else if(controltype=="singletext"){//单值文本
                 controldiv="<input controltype=\""+controltype+"\"  dynamic=\"dynamic\" class=\"easyui-textbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+" type=\"text\" name=\"" + itemcode +"\" myname=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
             }
             else if(controltype=="multinumber"){//多值数字
-                controldiv="<input controltype=\""+controltype+"\" dynamic=\"dynamic\" class=\"easyui-textbox\"  "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+" type=\"text\" name=\"" + itemcode +"\" myname=\"" + itemcode +"\"  value=\""+defaultvalue+"\" style=\"width:200px;background-color:"+backgroundColor+"\"/>";
+                controldiv="<input controltype=\""+controltype+"\" dynamic=\"dynamic\" class=\"easyui-textbox\"  "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\""+" type=\"text\" name=\"" + itemcode +"\" myname=\"" + itemcode +"\"  value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
             }
             else if(controltype=="multitext"){//多值文本
 
@@ -505,7 +501,7 @@
                 var $obj=$(this);
                 var controltype = $obj.attr("controltype");
                 $obj.siblings('span').find('input').css("background-color","#FFFFFF");
-                maxMin($obj,controltype);
+                setOutofBound($obj,controltype);
                 $obj.siblings('span').find('input[type=text]').bind('input propertychange', function() {
                     $(this).css("background-color","#FFFFFF");
                     var maxValue="",minValue="";
@@ -537,7 +533,7 @@
             });
             
         }
-        function maxMin(obj,controltype) {
+        function setOutofBound(obj,controltype) {
             //obj.siblings('input').css("background-color","#FFFFFF");
             var maxValue="",minValue="";
             maxValue=obj.attr('maxvalue');
@@ -824,7 +820,8 @@
                <td class="i18n1" name="result" width="20%">结论</td>
                <td colspan="3"><select id="result" style="width:200px;" class="easyui-combobox" data-options="editable:false" name="result" >
 
-               </select></td>
+               </select><span style="color:red;">*：本次必填</span>
+               </td>
            </tr>
            <tr>
                <td class="i18n1" name="remark" width="20%">备注</td>
