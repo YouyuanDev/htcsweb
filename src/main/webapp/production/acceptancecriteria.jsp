@@ -183,6 +183,7 @@
                         disableEditor('item_name_en',editIndex,"textbox");
                         disableEditor('unit_name',editIndex,"textbox");
                         disableEditor('unit_name_en',editIndex,"textbox");
+                        disableEditor('options',editIndex,"textbox");
                         disableEditor('item_frequency',editIndex,"combobox");
                         disableEditor('max_value',editIndex,"numberbox");
                         disableEditor('min_value',editIndex,"numberbox");
