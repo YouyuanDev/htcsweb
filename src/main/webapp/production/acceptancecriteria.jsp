@@ -199,12 +199,13 @@
 
         function disableEditor(field,editIndex,type) {
             var cellEdit = $('#dg').datagrid('getEditor', {index:editIndex,field:field});
-            var $input = cellEdit.target;
-            if(type=="combobox"){
-                $input.combobox('disable');
-            }else{
-                $input.textbox('disable');
-            }
+            cellEdit.disabled();
+            // var $input = cellEdit.target;
+            // if(type=="combobox"){
+            //     $input.combobox('disable');
+            // }else{
+            //     $input.textbox('disable');
+            // }
         }
 
 
