@@ -60,7 +60,7 @@
             }
             $('#hlcancelBtn').attr('operationtype','add');
             $('#hlProDialog').dialog('open').dialog('setTitle','新增');
-
+            //$('#legend-title').text(row.process_name);
             clearFormLabel();
             clearMultiUpload(grid);
 
@@ -68,7 +68,7 @@
             LoadProcess_input_output();
             $('#legend-title').text($('#processcode').combobox('getText'));
             $('#process_name').val($('#processcode').combobox('getText'));
-
+            $("#mill_no option:first").prop("selected", 'selected');
             url="/InspectionProcessOperation/saveProcess.action";
             //$("input[name='alkaline_dwell_time']").siblings().css("background-color","#F9A6A6");
         }
@@ -375,7 +375,7 @@
                 frequencydiv=" 每"+itemfrequency+"小时检测一次";
                 frequencydiven=" Inspect Every"+itemfrequency+"hour(s)";
             }
-            for(var i=0;i<frequencyList.length;i++){
+            for(var i=0;frequencyList!=undefined&&i<frequencyList.length;i++){
                 var InspectionItem=frequencyList[i].InspectionItem;
                 var needInspectNow=frequencyList[i].needInspectNow;
                 if(InspectionItem!=undefined&&needInspectNow!=undefined&&InspectionItem==itemcode){
@@ -694,7 +694,7 @@
 					        width: 185,
 					        editable:false,
 					        textField:'text',
-					        panelHeight:'auto'"/>
+					        panelHeight:'auto'" onchange="onChangeMillNo()"/>
                </td>
            </tr>
            <tr>
@@ -1045,6 +1045,9 @@
         var obj = e.sender;
         obj.setText("");
         obj.setValue("");
+    }
+    function onChangeMillNo() {
+        GenerateInspectionItem();
     }
     hlLanguage("../i18n/");
 </script>
