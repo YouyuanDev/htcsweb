@@ -327,6 +327,20 @@ public class DynamicMeasurementItemController {
         //System.out.println(mmp);
         return mmp;
     }
-
-
+    //获取内外喷标内容模板
+    @RequestMapping("/getOdIdStencilContentModel")
+    @ResponseBody
+    public String getOdIdStencilContentModel(HttpServletRequest request){
+        String contract_no=request.getParameter("contract_no");
+        if(contract_no!=null&&contract_no!=""){
+            List<HashMap<String,Object>> stencilContentModel=dynamicMeasurementItemDao.getOdIdStencilContentModel(contract_no);
+            String map= JSONObject.toJSONString(stencilContentModel);
+            System.out.println("----------------");
+            System.out.println(map);
+            System.out.println("----------------");
+            return map;
+        }else{
+            return  null;
+        }
+    }
 }

@@ -94,4 +94,10 @@
         </where>
         order by id asc
     </select>
+    <!--获取内外喷标内容模板-->
+    <select id="getOdIdStencilContentModel" resultType="map">
+       select d.default_value from contract_info c inner JOIN project_info p on c.project_no=p.project_no inner JOIN acceptance_criteria o on p.acceptance_criteria_no=o.acceptance_criteria_no INNER JOIN dynamic_measurement_item d on o.acceptance_criteria_no=d.acceptance_criteria_no WHERE c.contract_no=#{contract_no} and d.item_code='od_stencil_content'
+       UNION
+       select d.default_value from contract_info c inner JOIN project_info p on c.project_no=p.project_no inner JOIN acceptance_criteria o on p.acceptance_criteria_no=o.acceptance_criteria_no INNER JOIN dynamic_measurement_item d on o.acceptance_criteria_no=d.acceptance_criteria_no WHERE c.contract_no=#{contract_no} and d.item_code='id_stencil_content'
+    </select>
 </mapper>

@@ -32,5 +32,6 @@ public interface DynamicMeasurementItemDao {
     //得到特殊检验项目
     public List<DynamicMeasurementItem> getSpecialDynamicItem();
 
-
+   //获取内外喷标内容模板
+    public List<HashMap<String,Object>> getOdIdStencilContentModel(@Param("contract_no") String contract_no);
 }
