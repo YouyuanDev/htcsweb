@@ -36,6 +36,10 @@
          AND
          item_code=#{item_code}
     </select>
-
+    <update id="updateElapsedTime">
+        UPDATE inspection_process_record_item set
+        item_value=#{item_value}
+        where item_code=#{item_code} and inspection_process_record_header_code=#{inspection_process_record_header_code}
+    </update>
 
 </mapper>

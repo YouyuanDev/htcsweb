@@ -6,7 +6,7 @@
 <mapper namespace="com.htcsweb.dao.InspectionProcessRecordHeaderDao">
 
 
-    <insert id="addInspectionProcessRecordHeader" parameterType="com.htcsweb.entity.InspectionProcessRecordHeader">
+    <insert id="addInspectionProcessRecordHeader" useGeneratedKeys="true" keyProperty="id" parameterType="com.htcsweb.entity.InspectionProcessRecordHeader">
         INSERT INTO inspection_process_record_header(inspection_process_record_header_code,process_code,pipe_no,operation_time,operator_no,upload_files,remark,result,mill_no) VALUES (#{inspection_process_record_header_code},#{process_code},#{pipe_no},#{operation_time},#{operator_no},#{upload_files},#{remark},#{result},#{mill_no})
     </insert>
 
@@ -136,5 +136,12 @@
         limit 1
     </select>
 
-
+    <!--根据涂敷时间得到对应的打砂检验时间-->
+    <select id="getBlastInfoByCoatingInfo" resultType="map">
+        select ib.id,ib.inspection_process_record_header_code,ic.operation_time as coatingtime, ib.operation_time as blasttime from inspection_process_record_header ib inner join inspection_process_record_header ic on ib.pipe_no=ic.pipe_no
+        where   ic.operation_time >=ib.operation_time
+        AND ib.pipe_no=#{pipe_no} and ib.process_code=#{process_code} and ic.id=#{id}
+        order by ib.operation_time desc
+        limit 1
+    </select>
 </mapper>

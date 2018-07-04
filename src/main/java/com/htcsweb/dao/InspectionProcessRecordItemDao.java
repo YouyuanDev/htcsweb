@@ -16,5 +16,6 @@ public interface InspectionProcessRecordItemDao {
     public InspectionProcessRecordItem getInspectionProcessRecordItemByHeaderCodeAndItemCode(@Param("inspection_process_record_header_code") String inspection_process_record_header_code,@Param("item_code") String item_code);
 
     public List<InspectionProcessRecordItem> getInspectionProcessRecordItemByInspectionProcessRecordHeaderCode(@Param("inspection_process_record_header_code") String inspection_process_record_header_code);
-
+    //更新涂敷等待时间
+    public int updateElapsedTime(@Param("inspection_process_record_header_code") String inspection_process_record_header_code,@Param("item_code") String item_code,@Param("item_value") String item_value);
 }

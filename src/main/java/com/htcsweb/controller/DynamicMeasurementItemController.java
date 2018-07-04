@@ -335,9 +335,6 @@ public class DynamicMeasurementItemController {
         if(contract_no!=null&&contract_no!=""){
             List<HashMap<String,Object>> stencilContentModel=dynamicMeasurementItemDao.getOdIdStencilContentModel(contract_no);
             String map= JSONObject.toJSONString(stencilContentModel);
-            System.out.println("----------------");
-            System.out.println(map);
-            System.out.println("----------------");
             return map;
         }else{
             return  null;

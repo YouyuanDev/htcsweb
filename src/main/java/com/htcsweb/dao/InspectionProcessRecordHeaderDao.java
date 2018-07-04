@@ -24,4 +24,7 @@ public interface InspectionProcessRecordHeaderDao {
 
     //根据钢管编号查询最新一条记录
     public InspectionProcessRecordHeader getRecentRecordByPipeNo(@Param("process_code") String process_code,@Param("pipe_no")String pipe_no);
+
+    //根据涂敷时间得到对应的打砂检验时间
+    public List<HashMap<String,Object>>getBlastInfoByCoatingInfo(@Param("pipe_no") String pipe_no,@Param("id") int id,@Param("process_code")String process_code);
 }
