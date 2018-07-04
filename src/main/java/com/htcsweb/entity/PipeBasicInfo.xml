@@ -49,6 +49,21 @@
             <if test="external_coatingtype!=null and external_coatingtype!=''">
                 AND c.external_coating=#{external_coatingtype}
             </if>
+            <if test="odsampling_mark!=null and odsampling_mark!=''">
+                AND p.odsampling_mark=#{odsampling_mark}
+            </if>
+            <if test="od_dsc_sample_mark!=null and od_dsc_sample_mark!=''">
+                AND p.od_dsc_sample_mark=#{od_dsc_sample_mark}
+            </if>
+            <if test="od_pe_sample_mark!=null and od_pe_sample_mark!=''">
+                AND p.od_pe_sample_mark=#{od_pe_sample_mark}
+            </if>
+            <if test="idsampling_mark!=null and idsampling_mark!=''">
+                AND p.idsampling_mark=#{idsampling_mark}
+            </if>
+            <if test="id_glass_sample_mark!=null and id_glass_sample_mark!=''">
+                AND p.id_glass_sample_mark=#{id_glass_sample_mark}
+            </if>
         </where>
 
         ORDER BY id DESC

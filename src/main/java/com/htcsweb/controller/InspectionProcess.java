@@ -252,39 +252,40 @@ public class InspectionProcess {
 
                 }
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                //特殊项，更新涂敷前等待时间(当process_code为od_coating，id_coating时执行)
+
                 String process_code=inspectionProcessRecordHeader.getProcess_code();
-                if(inspectionProcessRecordHeader!=null&&process_code!=null&&!process_code.equals("")&&(process_code.equals("od_coating")||process_code.equals("id_coating"))){
-                    //获取inspection_process_record_header_code
-                    String header_code=inspectionProcessRecordHeader.getInspection_process_record_header_code();
-                    String coating_type="",blast_type="";
-                    if(process_code.equals("od_coating")){
-                        coating_type="od_elapsed_time";
-                        blast_type="od_blast_inspection";
-                    }
-                    else{
-                        coating_type="id_elapsed_time";
-                        blast_type="id_blast_inspection";
-                    }
-                    int headerId=inspectionProcessRecordHeader.getId();
-                    List<HashMap<String,Object>>blastlist=inspectionProcessRecordHeaderDao.getBlastInfoByCoatingInfo(pipeno,headerId,blast_type);
-                    System.out.println("blastlistSize="+blastlist.size());
-                    if(blastlist!=null&&blastlist.size()>0){
-                        HashMap<String,Object>hs=blastlist.get(0);
-                        int odBlastId=Integer.parseInt(String.valueOf(hs.get("id")));
-                        long begin_time=sdf.parse(String.valueOf(hs.get("coatingtime"))).getTime();
-                        long end_time=sdf.parse(String.valueOf(hs.get("blasttime"))).getTime();
-                        float minute=((begin_time-end_time)/(1000));
-                        minute=minute/60;
-                        minute=(float)(Math.round(minute*100))/100;
-                        System.out.println(String.valueOf(hs.get("coatingtime")));
-                        System.out.println(String.valueOf(hs.get("blasttime")));
-                        //开始更新涂敷等待时间
-                        String inspection_process_record_header_code=String.valueOf(hs.get("inspection_process_record_header_code"));
-                        inspectionProcessRecordItemDao.updateElapsedTime(inspection_process_record_header_code,coating_type,String.valueOf(minute));
+                if(inspectionProcessRecordHeader!=null&&process_code!=null&&!process_code.equals("")){
+                    //特殊项，更新涂敷前等待时间(当process_code为od_coating，id_coating时执行)
+                    if((process_code.equals("od_coating")||process_code.equals("id_coating"))){
+                        String header_code=inspectionProcessRecordHeader.getInspection_process_record_header_code();
+                        String coating_type="",blast_type="";
+                        if(process_code.equals("od_coating")){
+                            coating_type="od_elapsed_time";
+                            blast_type="od_blast_inspection";
+                        }
+                        else{
+                            coating_type="id_elapsed_time";
+                            blast_type="id_blast_inspection";
+                        }
+                        int headerId=inspectionProcessRecordHeader.getId();
+                        List<HashMap<String,Object>>blastlist=inspectionProcessRecordHeaderDao.getBlastInfoByCoatingInfo(pipeno,headerId,blast_type);
+                        System.out.println("blastlistSize="+blastlist.size());
+                        if(blastlist!=null&&blastlist.size()>0){
+                            HashMap<String,Object>hs=blastlist.get(0);
+                            int odBlastId=Integer.parseInt(String.valueOf(hs.get("id")));
+                            long begin_time=sdf.parse(String.valueOf(hs.get("coatingtime"))).getTime();
+                            long end_time=sdf.parse(String.valueOf(hs.get("blasttime"))).getTime();
+                            float minute=((begin_time-end_time)/(1000));
+                            minute=minute/60;
+                            minute=(float)(Math.round(minute*100))/100;
+                            System.out.println(String.valueOf(hs.get("coatingtime")));
+                            System.out.println(String.valueOf(hs.get("blasttime")));
+                            //开始更新涂敷等待时间
+                            String inspection_process_record_header_code=String.valueOf(hs.get("inspection_process_record_header_code"));
+                            inspectionProcessRecordItemDao.updateElapsedTime(inspection_process_record_header_code,coating_type,String.valueOf(minute));
+                        }
                     }
                 }
-
 
                 //发送事件推送
 

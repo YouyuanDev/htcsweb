@@ -98,7 +98,7 @@
       {
         "addition_item_code":"is_sample",
         "des_pipe_property_name":"odsampling_mark",
-        "set_value":"0"
+        "set_value":"1"
       },
       {
         "addition_item_code":"is_dsc_sample",

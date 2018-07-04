@@ -113,12 +113,28 @@ public class PipeBasicInfoController {
         try{
             String pipe_no=request.getParameter("pipe_no");
             String external_coatingtype=request.getParameter("external_coatingtype");
+            String process_code=request.getParameter("processcode");
             String pipestatus=request.getParameter("pipestatus");
-            String[]idArr={};
-            if(pipestatus!=null){
+            String[]idArr=null;
+            if(pipestatus!=null&&!pipestatus.equals("")){
                 idArr=pipestatus.split(",");
             }
-            List<PipeBasicInfo>list=pipeBasicInfoDao.getPipeNumbers(pipe_no,external_coatingtype,idArr);
+            //判断是否是实验界面
+            String odsampling_mark="",od_dsc_sample_mark="",od_pe_sample_mark="",idsampling_mark="",id_glass_sample_mark="";
+            if(process_code!=null&&!process_code.equals("")){
+                if(process_code.equals("lab_testing_od_regular")){
+                    odsampling_mark="1";
+                }else if(process_code.equals("lab_testing_dsc")){
+                    od_dsc_sample_mark="1";
+                }else if(process_code.equals("lab_testing_pe")){
+                    od_pe_sample_mark="1";
+                }else if(process_code.equals("lab_testing_id_regular")){
+                    idsampling_mark="1";
+                }else if(process_code.equals("lab_testing_glass")){
+                    id_glass_sample_mark="1";
+                }
+            }
+            List<PipeBasicInfo>list=pipeBasicInfoDao.getPipeNumbers(pipe_no,external_coatingtype,idArr,odsampling_mark,od_dsc_sample_mark,od_pe_sample_mark,idsampling_mark,id_glass_sample_mark);
             map= JSONObject.toJSONString(list);
         }catch (Exception e){
             e.printStackTrace();

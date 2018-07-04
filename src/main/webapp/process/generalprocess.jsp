@@ -343,7 +343,8 @@
                         });
                     }
                     JudgeMaxAndMIn();
-                    replaceStencilcontent(row);
+                    if(process_code=="od_stencil"||process_code=="id_stencil")
+                      replaceStencilcontent(row);
                 },error:function () {
 
                 }
@@ -1057,6 +1058,7 @@
             if($('#inputStatusList').val()!=undefined){
                 grid1.load({
                     pipe_no:keyText1.value,
+                    processcode:$('#processcode').val(),
                     pipestatus:$('#inputStatusList').val()
                 });
             }else{
@@ -1116,6 +1118,7 @@
         if($('#inputStatusList').val()!=undefined){
             grid1.load({
                 pipe_no:keyText1.value,
+                processcode:$('#processcode').val(),
                 pipestatus:$('#inputStatusList').val()
             });
         }else{
