@@ -28,7 +28,7 @@
     <script type="text/javascript">
         var url;
         var basePath ="<%=basePath%>"+"/upload/pictures/";
-
+        var temprow;
         //var g_statuslist=undefined;// input status
 
 
@@ -58,7 +58,7 @@
                     onChange: function (newValue, oldValue) {
                         //alert(newValue);
                         if(newValue!=undefined){
-                            GenerateInspectionItem();
+                            GenerateInspectionItem(temprow);
                         }
 
                     }
@@ -463,6 +463,7 @@
             else if(controltype=="multitext"){//多值文本
 
                 controldiv="<input controltype=\""+controltype+"\"  dynamic=\"dynamic\" class=\"easyui-textbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\" type=\"text\" name=\"" + itemcode +"\" myname=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
+
             }
             else if(controltype=="multiselect"){//多选
                 controldiv="<select id=\""+itemcode+"\" controltype=\""+controltype+"\" dynamic=\"dynamic\"  class=\"easyui-combobox\" data-options=\"editable:false,multiple:true,panelHeight:'200'\" name=\""+itemcode+"\" myname=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\">";
@@ -492,7 +493,7 @@
                     checkboxArr.push({'itemcode':itemcode,'itemvalue':defaultvalue});
                 }
             }else if(controltype=="textarea"){//多行文本
-                controldiv="<input controltype=\""+controltype+"\"  dynamic=\"dynamic\" class=\"easyui-textbox\" type=\"text\" value=\""+defaultvalue+"\" myname=\"" + itemcode +"\" name=\""+itemcode+"\" data-options=\"multiline:true\" style=\"width:300px;height:80px\" />";
+                controldiv="<input controltype=\""+controltype+"\" id=\""+itemcode+"\" dynamic=\"dynamic\" class=\"easyui-textbox\" type=\"text\" value=\""+defaultvalue+"\" myname=\"" + itemcode +"\" name=\""+itemcode+"\" data-options=\"multiline:true\" style=\"width:300px;height:80px\" />";
             }else if(controltype=="date"){//时间
                 if(defaultvalue!=undefined)
                     controldiv="<input class=\"easyui-datetimebox\" dynamic=\"dynamic\" controltype=\""+controltype+"\"   myname=\""+itemcode +"\" name=\""+itemcode+"\" value=\""+defaultvalue+"\" defaultvalue=\""+defaultvalue+"\" editable=\"false\" data-options=\"formatter:myformatter2,parser:myparser2\" style=\"width:200px;\"/>";
@@ -580,7 +581,6 @@
         function replaceStencilcontent(row){
             if(row==undefined)
                 return;
-            alert(row.contract_no);
             //异步获取标准并匹配
             $.ajax({
                 url:'/DynamicItemOperation/getOdIdStencilContentModel.action',
@@ -612,34 +612,22 @@
                             str=str.replace(/\[WEIGHT\]/, kg);
                             var coatingdate=getDateWithoutTime(row.od_coating_date)
                             str=str.replace(/\[COATINGDATE\]/, coatingdate);
-                            alert(str);
                             if($("input[name='od_stencil_content']")!=undefined){
-                                alert(1);
-                                $("input[name='od_stencil_content']").textbox("setValue", str);
+                                $("#od_stencil_content").textbox("setValue", str);
                             }
 
                         }
                         if(id_stencil_content!=undefined&&id_stencil_content!=""){
-                            var str=data.stencil_content;
-                            str=str.replace(/\[OD\]/g, row.od);
-                            str=str.replace(/\[WT\]/g, row.wt);
-                            str=str.replace(/\[GRADE\]/g, row.grade);
-                            str=str.replace(/\[CONTRACTNO\]/g, row.contract_no);
-                            str=str.replace(/\[COATINGSPEC\]/, row.coating_standard);
-                            str=str.replace(/\[CLIENTSPEC\]/, row.client_spec);
-                            str=str.replace(/\[PROJECTNAME\]/g, row.project_name);
-                            str=str.replace(/\[PIPENO\]/g, row.pipe_no);
+                            var str=id_stencil_content;
+                            str=str.replace(/\[OD\]/, row.od);
+                            str=str.replace(/\[WT\]/, row.wt);
+                            str=str.replace(/\[PIPENO\]/, row.pipe_no);
                             str=str.replace(/\[PIPELENGTH\]/, row.p_length);
-                            var halflength=row.p_length*0.5;
-                            str=str.replace(/\[HALFLENGTH\]/, halflength);
-                            str=str.replace(/\[HEATNO\]/, row.heat_no);
-                            str=str.replace(/\[BATCHNO\]/, row.pipe_making_lot_no);
-                            var kg=row.weight*1000;
-                            str=str.replace(/\[WEIGHT\]/, kg);
-                            var coatingdate=getDateWithoutTime(row.od_coating_date)
+                            str=str.replace(/\[WEIGHT\]/, row.weight);
+                            var coatingdate=getDateWithoutTime(row.id_coating_date)
                             str=str.replace(/\[COATINGDATE\]/, coatingdate);
-                            if($("input[name='id_stencil_content']")!=undefined)
-                                $("input[name='id_stencil_content']").textbox("setValue", str);
+                            if($("#id_stencil_content")!=undefined)
+                                $("#id_stencil_content").textbox("setValue", str);
                         }
                     }
                 },error:function () {
@@ -1106,6 +1094,7 @@
                 if(data!=null&&data!=""){
                     addLabelPipeInfo(data);
                     GenerateInspectionItem(data[0]);
+                    temprow=data[0];
                     //replaceStencilcontent();
                 }
             },
