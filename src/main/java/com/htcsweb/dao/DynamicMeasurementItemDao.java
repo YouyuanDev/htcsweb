@@ -27,7 +27,8 @@ public interface DynamicMeasurementItemDao {
     //根据管号编号工序编号,表单编号得到检验项目及值
     public List<HashMap<String,Object>> getDynamicItemByPipeNoProcessCodeHeaderCode(@Param("pipe_no") String pipe_no , @Param("process_code") String process_code,@Param("inspection_process_record_header_code") String inspection_process_record_header_code);
 
-
+    //根据管号编号工序编号得到检验项目
+    public List<HashMap<String,Object>> getDynamicItemByPipeNoProcessCodeReturnMap(@Param("pipe_no") String pipe_no ,@Param("process_code") String process_code);
 
     //得到特殊检验项目
     public List<DynamicMeasurementItem> getSpecialDynamicItem();

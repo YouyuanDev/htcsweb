@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.DynamicMeasurementItemDao;
 import com.htcsweb.dao.InspectionTimeRecordDao;
+import com.htcsweb.dao.PipeBasicInfoDao;
 import com.htcsweb.entity.AcceptanceCriteria;
 import com.htcsweb.entity.CoatingRepair;
 import com.htcsweb.entity.DynamicMeasurementItem;
@@ -18,6 +19,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
@@ -29,6 +34,9 @@ public class DynamicMeasurementItemController {
 
     @Autowired
     InspectionTimeRecordDao inspectionTimeRecordDao;
+
+    @Autowired
+    PipeBasicInfoDao pipeBasicInfoDao;
 
 
     //获得动态检测项列表，根据ACNo
@@ -82,10 +90,67 @@ public class DynamicMeasurementItemController {
     }
 
 
+    private String InitStencil_content(String processCode,String pipeNo,String stencilContent){
+
+        //设置外防或内防喷标
+        if(processCode!=null&&(processCode.equals("od_stencil")||processCode.equals("id_stencil"))){
+            List<HashMap<String,Object>> pipelist= pipeBasicInfoDao.getPipeInfoByNo(pipeNo);
+            if(pipelist.size()>0){
+                float od=(float)pipelist.get(0).get("od");
+                float wt=(float)pipelist.get(0).get("wt");
+                String grade=(String)pipelist.get(0).get("grade");
+                String contract_no=(String)pipelist.get(0).get("contract_no");
+                String coating_standard=(String)pipelist.get(0).get("coating_standard");
+                String client_spec=(String)pipelist.get(0).get("client_spec");
+                String project_name=(String)pipelist.get(0).get("project_name");
+                float p_length=(float)pipelist.get(0).get("p_length");
+                float halflength=p_length*0.5f;
+                String heat_no=(String)pipelist.get(0).get("heat_no");
+                String pipe_making_lot_no=(String)pipelist.get(0).get("pipe_making_lot_no");
+                float kg=(float)pipelist.get(0).get("weight")*1000;
+                Date od_coating_date=(Date)pipelist.get(0).get("od_coating_date");
+                String od_coating_dateString="";
+                if(od_coating_date!=null) {
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                    od_coating_dateString = formatter.format(od_coating_date);
+                }
+                Date id_coating_date=(Date)pipelist.get(0).get("id_coating_date");
+                String id_coating_dateString="";
+                if(id_coating_date!=null) {
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                    id_coating_dateString = formatter.format(id_coating_date);
+                }
+
+            //替换
+            stencilContent = stencilContent.replace("[OD]", String.valueOf(od));
+            stencilContent = stencilContent.replace("[WT]", String.valueOf(wt));
+            stencilContent = stencilContent.replace("[GRADE]", grade);
+            stencilContent = stencilContent.replace("[CONTRACTNO]", contract_no);
+            stencilContent = stencilContent.replace("[COATINGSPEC]", coating_standard);
+            stencilContent = stencilContent.replace("[CLIENTSPEC]", client_spec);
+            stencilContent = stencilContent.replace("[PROJECTNAME]", project_name);
+            stencilContent = stencilContent.replace("[PIPENO]", pipeNo);
+            stencilContent = stencilContent.replace("[PIPELENGTH]", String.valueOf(p_length));
+            stencilContent = stencilContent.replace("[HALFLENGTH]", String.valueOf(halflength));
+            stencilContent = stencilContent.replace("[HEATNO]",heat_no);
+            stencilContent = stencilContent.replace("[BATCHNO]",pipe_making_lot_no);
+            stencilContent = stencilContent.replace("[WEIGHT]",String.valueOf(kg));
+            if(processCode.equals("od_stencil"))
+                stencilContent = stencilContent.replace("[COATINGDATE]",od_coating_dateString);
+            if(processCode.equals("id_stencil"))
+                stencilContent = stencilContent.replace("[COATINGDATE]",id_coating_dateString);
+
+
+            }
+
+        }
+        return stencilContent;
+    }
+
     //获得动态检测项列表及检测值，根据管号，工序号，表单编号
     @RequestMapping("/getDynamicItemByPipeNoProcessCodeHeaderCode")
     @ResponseBody
-    public String getDynamicItemByPipeNoProcessCodeHeaderCode(HttpServletRequest request){
+    public String getDynamicItemByPipeNoProcessCodeHeaderCode(HttpServletRequest request) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         JSONObject json=new JSONObject();
         Map<String,Object> resultmaps=new HashMap<String,Object>();
         String pipe_no=request.getParameter("pipe_no");
@@ -97,16 +162,84 @@ public class DynamicMeasurementItemController {
         System.out.println("process_code="+process_code);
         System.out.println("inspection_process_record_header_code="+inspection_process_record_header_code);
 
+        List<HashMap<String, Object>> itemlist=new ArrayList<>();
+
         if(pipe_no!=null&&!pipe_no.equals("")&&process_code!=null&&!process_code.equals("")) {
             if (inspection_process_record_header_code == null || inspection_process_record_header_code.equals("")) {
-                List<DynamicMeasurementItem> list = dynamicMeasurementItemDao.getDynamicItemByPipeNoProcessCode(pipe_no, process_code);
-                //mmp= JSONArray.toJSONString(list);
-                resultmaps.put("record", list);
+
+                itemlist=dynamicMeasurementItemDao.getDynamicItemByPipeNoProcessCodeReturnMap(pipe_no, process_code);
+
+//                List<DynamicMeasurementItem> tmplist = dynamicMeasurementItemDao.getDynamicItemByPipeNoProcessCode(pipe_no, process_code);
+//                //mmp= JSONArray.toJSONString(list);
+//
+//                    for(int i=0;i<tmplist.size();i++){
+//                        DynamicMeasurementItem item=tmplist.get(i);
+//                            Field[] field = item.getClass().getDeclaredFields();
+//                            HashMap <String,Object> map=new HashMap <String,Object>();
+//                            for (int j = 0; j < field.length; j++) {     //遍历所有属性
+//                                String name = field[j].getName();
+//                                name = name.substring(0, 1).toUpperCase() + name.substring(1); //将属性的首字符大写，方便构造get，set方法
+//                                Method m = null;
+//                                m = item.getClass().getMethod("get" + name);
+//
+//                                String type = field[j].getGenericType().toString();    //获取属性的类型
+//
+//                                if (type.equals("class java.lang.String")) {
+//                                    String value = (String) m.invoke(item);    //调用getter方法获取属性值
+//                                    if (value != null) {
+//                                        System.out.println("attribute value:" + value);
+//                                    }
+//
+//                                    //替换喷标内容
+//                                    String newStencilvalue="";
+//                                    if(name!=null&&value!=null&&name.equals("item_code")&&(value.equals("od_stencil_content")||value.equals("id_stencil_content"))) {
+//                                        newStencilvalue = InitStencil_content(process_code, pipe_no, item.getDefault_value());
+//                                        System.out.println("stencil_content="+newStencilvalue);
+//                                    }
+//
+//                                    if(!newStencilvalue.equals("")) {
+//                                        map.put("item_value",newStencilvalue);
+//                                    }
+//                                    map.put(name,value);
+//                                }
+//                                else if(type.equals("class java.lang.Integer")) {
+//                                    Integer value = (Integer) m.invoke(item);
+//                                    if (value != null)
+//                                    {
+//                                        System.out.println("attribute value:" + value);
+//                                    }
+//                                    map.put(name,value);
+//                                }
+//                            }
+//                        list.add(map);
+//
+//                        }
+
+
+
             } else {
-                List<HashMap<String, Object>> list = dynamicMeasurementItemDao.getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no, process_code, inspection_process_record_header_code);
+                itemlist = dynamicMeasurementItemDao.getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no, process_code, inspection_process_record_header_code);
                 //mmp= JSONArray.toJSONString(list);
-                resultmaps.put("record", list);
+
             }
+
+
+            //初始化喷标模版
+            //替换喷标内容
+            if(process_code.equals("od_stencil")||process_code.equals("id_stencil")) {
+                String newStencilvalue = "";
+                for(int i=0;i<itemlist.size();i++) {
+                    HashMap<String, Object> mp=itemlist.get(i);
+                    if (mp != null && mp.get("item_code") != null &&(mp.get("item_code").equals("od_stencil_content")  || mp.get("item_code").equals("id_stencil_content"))) {
+                        newStencilvalue = InitStencil_content(process_code, pipe_no, mp.get("default_value").toString());
+                        System.out.println("stencil_content=" + newStencilvalue);
+                        mp.put("item_value",newStencilvalue);
+                        itemlist.set(i,mp);
+                    }
+                }
+
+            }
+            resultmaps.put("record", itemlist);
 
             //获取检测频率记录
             if(mill_no!=null&&!mill_no.equals("")) {
