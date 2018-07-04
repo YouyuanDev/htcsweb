@@ -508,6 +508,7 @@
             <table id="dg" class="easyui-datagrid" title="" style="width:100%;height:300px;overflow-y: scroll;" data-options="
 				iconCls: '',
 				singleSelect: true,
+				striped:true,
 				toolbar: '#tb',
 				onClickRow: onClickRow
 			">

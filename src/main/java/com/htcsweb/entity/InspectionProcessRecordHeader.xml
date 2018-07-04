@@ -42,7 +42,7 @@
             <if test="mill_no!=null and mill_no!=''">
                 AND o.mill_no =#{mill_no}
             </if>
-            <if test="process_code!=null">
+            <if test="process_code!=null and process_code!=''">
                 AND o.process_code=#{process_code}
             </if>
             <if test="begin_time!=null">
@@ -70,7 +70,7 @@
             <if test="operator_no!=null and operator_no!=''">
                 AND o.operator_no LIKE CONCAT('%',#{operator_no},'%')
             </if>
-            <if test="process_code!=null">
+            <if test="process_code!=null and process_code!=''">
                 AND o.process_code=#{process_code}
             </if>
             <if test="mill_no!=null and mill_no!=''">
