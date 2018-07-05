@@ -263,7 +263,7 @@ public class InspectionProcess {
                                         p.setLast_accepted_status(p.getStatus());
                                     int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
 
-                                    if(statusRes>0&&inspectionProcessRecordHeader.getResult().equals("1")){
+                                    if(inspectionProcessRecordHeader.getProcess_code().equals("od_blast_inspection")&&statusRes>0&&inspectionProcessRecordHeader.getResult().equals("1")){
                                         //APP使用，外喷砂检验合格后的管子，自动添加odcoating记录
                                         HttpSession session = request.getSession();
                                         //把用户数据保存在session域对象中
