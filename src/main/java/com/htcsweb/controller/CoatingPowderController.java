@@ -33,7 +33,7 @@ public class CoatingPowderController {
     //模糊查询CoatingPowder信息列表
     @RequestMapping(value = "/getCoatingPowderInfoByLike")
     @ResponseBody
-    public String getCoatingPowderInfoByLike(@RequestParam(value = "coating_powder_name",required = false)String coating_powder_name, HttpServletRequest request){
+    public String getCoatingPowderInfoByLike(@RequestParam(value = "coating_powder_name",required = false)String coating_powder_name,@RequestParam(value = "powder_type",required = false)String powder_type, HttpServletRequest request){
         String page= request.getParameter("page");
         String rows= request.getParameter("rows");
         if(page==null){
@@ -44,8 +44,8 @@ public class CoatingPowderController {
         }
 
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
-        List<CoatingPowderInfo>list=coatingPowderInfoDao.getAllByLike(coating_powder_name,start,Integer.parseInt(rows));
-        int count=coatingPowderInfoDao.getCountAllByLike(coating_powder_name);
+        List<CoatingPowderInfo>list=coatingPowderInfoDao.getAllByLike(coating_powder_name,powder_type,start,Integer.parseInt(rows));
+        int count=coatingPowderInfoDao.getCountAllByLike(coating_powder_name,powder_type);
 
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
@@ -121,6 +121,19 @@ public class CoatingPowderController {
         json.put("message",sbmessage.toString());
         ResponseUtil.write(response,json);
         return null;
+    }
+
+
+
+    //获取所有原材料类型
+    @RequestMapping("/getAllCoatingPowderType")
+    @ResponseBody
+    public String getAllCoatingPowderType(HttpServletRequest request) {
+
+        List<CoatingPowderInfo> list=coatingPowderInfoDao.getAllCoatingPowderType();
+
+        String map= JSONObject.toJSONString(list);
+        return map;
     }
 
     //获取所有FBE涂层粉末型号名称

@@ -36,7 +36,9 @@
             <if test="coating_powder_name!=null and coating_powder_name!=''">
                 AND coating_powder_name LIKE CONCAT('%',#{coating_powder_name},'%')
             </if>
-
+            <if test="powder_type!=null and powder_type!=''">
+                AND powder_type =#{powder_type}
+            </if>
         </where>
     </select>
 
@@ -46,6 +48,10 @@
 
             <if test="coating_powder_name!=null and coating_powder_name!=''">
                 AND coating_powder_name LIKE CONCAT('%',#{coating_powder_name},'%')
+            </if>
+
+            <if test="powder_type!=null and powder_type!=''">
+                AND powder_type =#{powder_type}
             </if>
         </where>
         ORDER BY id DESC
@@ -67,6 +73,12 @@
             </if>
         </where>
         ORDER BY id ASC
+    </select>
+
+
+    <select id="getAllCoatingPowderType" resultType="com.htcsweb.entity.CoatingPowderInfo">
+        select powder_type from coating_powder_info
+        group by powder_type
     </select>
 
 
