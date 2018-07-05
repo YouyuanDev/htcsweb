@@ -84,7 +84,7 @@ public class InspectionProcess {
         String msg="";
         String result_name="";
         String result_name_en="";
-
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         if(inspectionProcessRecordHeader.getInspection_process_record_header_code()==null||inspectionProcessRecordHeader.getInspection_process_record_header_code()==""){
             String uuid = UUID.randomUUID().toString();
             inspectionProcessRecordHeader.setInspection_process_record_header_code("IPRH"+uuid);
@@ -237,6 +237,90 @@ public class InspectionProcess {
 
 
                 }
+
+
+                //各类工序合格后的处理逻辑
+                if(inspectionProcessRecordHeader.getResult().equals("1")){
+
+                    if(inspectionProcessRecordHeader.getProcess_code().equals("od_blast_inspection")){
+                        //APP使用，外喷砂检验合格后的管子，自动添加odcoating记录
+                        HttpSession session = request.getSession();
+                        //把用户数据保存在session域对象中
+                        String app_mill_no=(String) session.getAttribute("millno");
+                        //app_mill_no="mill_2";
+                        if (app_mill_no != null) {
+                            //此处为APP应用
+                            List<HashMap<String, Object>> lt = pipeBasicInfoDao.getPipeInfoByNo(pipeno);
+                            if (lt.size() > 0) {
+                                InspectionProcessRecordHeader header=new InspectionProcessRecordHeader();
+                                header.setId(0);
+                                header.setPipe_no(pipeno);
+                                header.setMill_no(mill_no);
+                                header.setOperation_time(new Date());
+                                header.setOperator_no(inspectionProcessRecordHeader.getOperator_no());
+                                header.setResult("10");
+                                header.setRemark("INIT");
+                                header.setUpload_files("");
+                                header.setProcess_code("od_coating");
+                                header.setInspection_process_record_header_code("IPRH"+UUID.randomUUID().toString());
+                                inspectionProcessRecordHeaderDao.addInspectionProcessRecordHeader(header);
+                            }
+                        }
+                    }
+                    else  if((inspectionProcessRecordHeader.getProcess_code().equals("od_coating")||inspectionProcessRecordHeader.getProcess_code().equals("id_coating"))){
+
+                            //更新涂敷前等待时间(当process_code为od_coating，id_coating时执行)
+                            //更新钢管涂层时间
+
+
+
+
+                            //String header_code=inspectionProcessRecordHeader.getInspection_process_record_header_code();
+                            String coating_type="",blast_type="";
+                            if(inspectionProcessRecordHeader.getProcess_code().equals("od_coating")){
+                                coating_type="od_elapsed_time";
+                                blast_type="od_blast_inspection";
+                                p.setOd_coating_date(new Date());
+                            }
+                            else{
+                                coating_type="id_elapsed_time";
+                                blast_type="id_blast_inspection";
+                                p.setId_coating_date(new Date());
+                            }
+                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+
+
+                            int headerId=inspectionProcessRecordHeader.getId();
+                            List<HashMap<String,Object>>blastlist=inspectionProcessRecordHeaderDao.getBlastInfoByCoatingInfo(pipeno,headerId,blast_type);
+                            if(blastlist!=null&&blastlist.size()>0){
+                                HashMap<String,Object>hs=blastlist.get(0);
+                                int odBlastId=Integer.parseInt(String.valueOf(hs.get("id")));
+                                long begin_time=sdf.parse(String.valueOf(hs.get("coatingtime"))).getTime();
+                                long end_time=sdf.parse(String.valueOf(hs.get("blasttime"))).getTime();
+                                float minute=((begin_time-end_time)/(1000));
+                                minute=minute/60;
+                                minute=(float)(Math.round(minute*100))/100;
+                                //开始更新涂敷等待时间
+                                String inspection_process_record_header_code=String.valueOf(hs.get("inspection_process_record_header_code"));
+                                inspectionProcessRecordItemDao.updateElapsedTime(inspection_process_record_header_code,coating_type,String.valueOf(minute));
+                            }
+                        }
+
+
+                    else if(inspectionProcessRecordHeader.getProcess_code().equals("coating_sampling")){
+                        //设置外防取样标志
+                        if(pipeno!=null){
+                            pipeBasicInfoDao.updateSamplingMark(pipeno);
+                        }
+                    }
+                    else if(inspectionProcessRecordHeader.getProcess_code().equals("coating_strip")){
+                        //清空外涂层涂层日期
+                        if(pipeno!=null){
+                            //pipeBasicInfoDao.updateSamplingMark(pipeno);
+                        }
+                    }
+                }
+
                 //for循环结束
                 //更新管子的状态
                 if(p!=null){
@@ -263,37 +347,6 @@ public class InspectionProcess {
                                         p.setLast_accepted_status(p.getStatus());
                                     int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
 
-                                    if(inspectionProcessRecordHeader.getProcess_code().equals("od_blast_inspection")&&statusRes>0&&inspectionProcessRecordHeader.getResult().equals("1")){
-                                        //APP使用，外喷砂检验合格后的管子，自动添加odcoating记录
-                                        HttpSession session = request.getSession();
-                                        //把用户数据保存在session域对象中
-                                        String app_mill_no=(String) session.getAttribute("millno");
-                                        //app_mill_no="mill_2";
-                                        if (app_mill_no != null) {
-                                            //此处为APP应用
-                                            List<HashMap<String, Object>> lt = pipeBasicInfoDao.getPipeInfoByNo(pipeno);
-                                            if (lt.size() > 0) {
-                                                    InspectionProcessRecordHeader header=new InspectionProcessRecordHeader();
-                                                    header.setId(0);
-                                                    header.setPipe_no(pipeno);
-                                                    header.setMill_no(mill_no);
-                                                    header.setOperation_time(new Date());
-                                                    header.setOperator_no(inspectionProcessRecordHeader.getOperator_no());
-                                                    header.setResult("10");
-                                                    header.setRemark("INIT");
-                                                    header.setUpload_files("");
-                                                    header.setProcess_code("od_coating");
-                                                    header.setInspection_process_record_header_code("IPRH"+UUID.randomUUID().toString());
-                                                    inspectionProcessRecordHeaderDao.addInspectionProcessRecordHeader(header);
-                                            }
-                                        }
-                                    }
-
-
-
-
-
-
                                     break;
                                 }
 
@@ -304,53 +357,9 @@ public class InspectionProcess {
                     }
 
                 }
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-                String process_code=inspectionProcessRecordHeader.getProcess_code();
-                if(inspectionProcessRecordHeader!=null&&process_code!=null&&!process_code.equals("")){
-                    //特殊项，更新涂敷前等待时间(当process_code为od_coating，id_coating时执行)
-                    if((process_code.equals("od_coating")||process_code.equals("id_coating"))){
-                        //更新钢管涂层时间
-                        if(inspectionProcessRecordHeader.getResult().equals("1")){
-                            p.setOd_coating_date(new Date());
-                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
-                        }
-                        String header_code=inspectionProcessRecordHeader.getInspection_process_record_header_code();
-                        String coating_type="",blast_type="";
-                        if(process_code.equals("od_coating")){
-                            coating_type="od_elapsed_time";
-                            blast_type="od_blast_inspection";
-                        }
-                        else{
-                            coating_type="id_elapsed_time";
-                            blast_type="id_blast_inspection";
-                        }
-                        int headerId=inspectionProcessRecordHeader.getId();
-                        List<HashMap<String,Object>>blastlist=inspectionProcessRecordHeaderDao.getBlastInfoByCoatingInfo(pipeno,headerId,blast_type);
-                        if(blastlist!=null&&blastlist.size()>0){
-                            HashMap<String,Object>hs=blastlist.get(0);
-                            int odBlastId=Integer.parseInt(String.valueOf(hs.get("id")));
-                            long begin_time=sdf.parse(String.valueOf(hs.get("coatingtime"))).getTime();
-                            long end_time=sdf.parse(String.valueOf(hs.get("blasttime"))).getTime();
-                            float minute=((begin_time-end_time)/(1000));
-                            minute=minute/60;
-                            minute=(float)(Math.round(minute*100))/100;
-                            //开始更新涂敷等待时间
-                            String inspection_process_record_header_code=String.valueOf(hs.get("inspection_process_record_header_code"));
-                            inspectionProcessRecordItemDao.updateElapsedTime(inspection_process_record_header_code,coating_type,String.valueOf(minute));
-                        }
-                    }
-                    //设置外防取样标志
-                    else if(process_code.equals("coating_sampling")){
-                        if(pipeno!=null){
-                             pipeBasicInfoDao.updateSamplingMark(pipeno);
-                        }
-                    }
-                }
 
                 //发送事件推送
-
-
                  Date nowtime=new Date();
                  String str_title=sdf.format(nowtime.getTime())+" 工序："+inspectionProcessRecordHeader.getProcess_code()+",管号："+p.getPipe_no()+", "+result_name+"("+result_name_en+")";
 
