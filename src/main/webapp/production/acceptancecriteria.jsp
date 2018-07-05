@@ -212,6 +212,11 @@
 
 
         function append(){
+            if(editIndex!=undefined){
+                hlAlertFour("请先保存当前修改项!");
+                return;
+            }
+
             if (endEditing()){
                 $('#dg').datagrid('insertRow',{index:0,row:{id:0,item_code:"IT-XXXX",decimal_num:'0',max_value:'0',min_value:'0',default_value:'0',status:'P',is_special_item:'0'}});
                 editIndex = 0;
