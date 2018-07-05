@@ -324,7 +324,7 @@
     ]
   },
   { "process_code": "coating_rebevel",
-    "input": "",
+    "input": "coating_rebevel",
     "output":
     [
       {

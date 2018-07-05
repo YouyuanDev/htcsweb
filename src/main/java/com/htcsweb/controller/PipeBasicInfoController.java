@@ -117,14 +117,14 @@ public class PipeBasicInfoController {
             String pipestatus=request.getParameter("pipestatus");
             String[]statusArr=null;
             if(pipestatus!=null&&!pipestatus.equals("")){
-                if(pipestatus.equals("lab_testing_od_regular")||pipestatus.equals("lab_testing_dsc")||pipestatus.equals("lab_testing_pe")||pipestatus.equals("lab_testing_glass")||pipestatus.equals("lab_testing_id_regular")||pipestatus.equals("coating_sampling")){
+                if(pipestatus.equals("lab_testing_od_regular")||pipestatus.equals("lab_testing_dsc")||pipestatus.equals("lab_testing_pe")||pipestatus.equals("lab_testing_glass")||pipestatus.equals("lab_testing_id_regular")||pipestatus.equals("coating_sampling")||pipestatus.equals("coating_rebevel")){
                     pipestatus="";
                 }else{
                     statusArr=pipestatus.split(",");
                 }
             }
             //判断是否是实验界面
-            String odsampling_mark="",od_dsc_sample_mark="",od_pe_sample_mark="",idsampling_mark="",id_glass_sample_mark="";
+            String odsampling_mark="",od_dsc_sample_mark="",od_pe_sample_mark="",idsampling_mark="",id_glass_sample_mark="",rebevel_mark="";
             if(process_code!=null&&!process_code.equals("")){
                 if(process_code.equals("lab_testing_od_regular")){
                     odsampling_mark="1";
@@ -138,9 +138,11 @@ public class PipeBasicInfoController {
                     id_glass_sample_mark="1";
                 }else if(process_code.equals("coating_sampling")){
                     odsampling_mark="0";
+                }else if(process_code.equals("coating_rebevel")){
+                    rebevel_mark="1";
                 }
             }
-            List<PipeBasicInfo>list=pipeBasicInfoDao.getPipeNumbers(pipe_no,external_coatingtype,statusArr,odsampling_mark,od_dsc_sample_mark,od_pe_sample_mark,idsampling_mark,id_glass_sample_mark);
+            List<PipeBasicInfo>list=pipeBasicInfoDao.getPipeNumbers(pipe_no,external_coatingtype,statusArr,odsampling_mark,od_dsc_sample_mark,od_pe_sample_mark,idsampling_mark,id_glass_sample_mark,rebevel_mark);
             map= JSONObject.toJSONString(list);
         }catch (Exception e){
             e.printStackTrace();

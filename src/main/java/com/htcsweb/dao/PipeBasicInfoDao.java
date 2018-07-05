@@ -15,7 +15,7 @@ public interface PipeBasicInfoDao {
     public int searchPipeCount(@Param("pipe_no")String pipe_no);
 
     public  List<PipeBasicInfo> getPipeNumber(@Param("pipe_no")String pipe_no);
-    public List<PipeBasicInfo>getPipeNumbers(@Param("pipe_no")String pipe_no,@Param("external_coatingtype")String external_coatingtype,@Param("pipestatus")String[] pipestatus,@Param("odsampling_mark")String odsampling_mark,@Param("od_dsc_sample_mark")String od_dsc_sample_mark,@Param("od_pe_sample_mark")String od_pe_sample_mark,@Param("idsampling_mark")String idsampling_mark,@Param("id_glass_sample_mark")String id_glass_sample_mark);
+    public List<PipeBasicInfo>getPipeNumbers(@Param("pipe_no")String pipe_no,@Param("external_coatingtype")String external_coatingtype,@Param("pipestatus")String[] pipestatus,@Param("odsampling_mark")String odsampling_mark,@Param("od_dsc_sample_mark")String od_dsc_sample_mark,@Param("od_pe_sample_mark")String od_pe_sample_mark,@Param("idsampling_mark")String idsampling_mark,@Param("id_glass_sample_mark")String id_glass_sample_mark,@Param("rebevel_mark")String rebevel_mark);
 
     //获取外防待取样钢管信息 1000条
     public List<PipeBasicInfo> getODSamplePipeNumbers(@Param("pipe_no")String pipe_no);

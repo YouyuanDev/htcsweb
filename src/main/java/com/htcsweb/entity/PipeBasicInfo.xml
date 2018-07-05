@@ -64,6 +64,9 @@
             <if test="id_glass_sample_mark!=null and id_glass_sample_mark!=''">
                 AND p.id_glass_sample_mark=#{id_glass_sample_mark}
             </if>
+            <if test="rebevel_mark!=null and rebevel_mark!=''">
+                AND p.rebevel_mark=#{rebevel_mark}
+            </if>
         </where>
 
         ORDER BY id DESC
