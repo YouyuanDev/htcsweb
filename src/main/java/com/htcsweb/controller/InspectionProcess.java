@@ -271,10 +271,6 @@ public class InspectionProcess {
 
                             //更新涂敷前等待时间(当process_code为od_coating，id_coating时执行)
                             //更新钢管涂层时间
-
-
-
-
                             //String header_code=inspectionProcessRecordHeader.getInspection_process_record_header_code();
                             String coating_type="",blast_type="";
                             if(inspectionProcessRecordHeader.getProcess_code().equals("od_coating")){
@@ -309,15 +305,22 @@ public class InspectionProcess {
 
                     else if(inspectionProcessRecordHeader.getProcess_code().equals("coating_sampling")){
                         //设置外防取样标志
-                        if(pipeno!=null){
-                            pipeBasicInfoDao.updateSamplingMark(pipeno);
-                        }
+
+                        p.setOdsampling_mark("1");
+                        pipeBasicInfoDao.updatePipeBasicInfo(p);
+
+                    }
+                    else if(inspectionProcessRecordHeader.getProcess_code().equals("coating_rebevel")){
+                        //清空置外防取样标志
+                        p.setOdsampling_mark("0");
+                        pipeBasicInfoDao.updatePipeBasicInfo(p);
                     }
                     else if(inspectionProcessRecordHeader.getProcess_code().equals("coating_strip")){
                         //清空外涂层涂层日期
-                        if(pipeno!=null){
-                            //pipeBasicInfoDao.updateSamplingMark(pipeno);
-                        }
+                        //判断外防扒皮还是内防扒皮
+
+
+
                     }
                 }
 
