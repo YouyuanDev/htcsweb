@@ -711,26 +711,22 @@
 
 
     <select id="isPipeODProcessed"  resultType="int">
-        select count(p.id) from od_blast_process o
-        inner join pipe_basic_info p on p.pipe_no=o.pipe_no
-        inner join pipe_status s on s.status_code=p.status
+        select count(*) from pipe_basic_info
         <where>
             <if test="id!=null and id!=''">
-                AND p.id = #{id}
+                AND id = #{id}
             </if>
-                AND p.status <![CDATA[ <> ]]>  'odstrip2'
+                AND od_coating_date is not null
         </where>
     </select>
 
     <select id="isPipeIDProcessed"  resultType="int">
-        select count(p.id) from id_blast_process o
-        inner join pipe_basic_info p on p.pipe_no=o.pipe_no
-        inner join pipe_status s on s.status_code=p.status
+        select count(*) from pipe_basic_info
         <where>
             <if test="id!=null and id!=''">
-                AND p.id = #{id}
+                AND id = #{id}
             </if>
-                AND p.status <![CDATA[ <> ]]>  'idstrip2'
+            AND id_coating_date is not null
         </where>
     </select>
     <select id="getPipeNoByContractNo" resultType="java.lang.String">
