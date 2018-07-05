@@ -119,8 +119,9 @@ public class PipeBasicInfoController {
             if(pipestatus!=null&&!pipestatus.equals("")){
                 if(pipestatus.equals("lab_testing_od_regular")||pipestatus.equals("lab_testing_dsc")||pipestatus.equals("lab_testing_pe")||pipestatus.equals("lab_testing_glass")||pipestatus.equals("lab_testing_id_regular")){
                     pipestatus="";
+                }else{
+                    statusArr=pipestatus.split(",");
                 }
-                statusArr=pipestatus.split(",");
             }
             //判断是否是实验界面
             String odsampling_mark="",od_dsc_sample_mark="",od_pe_sample_mark="",idsampling_mark="",id_glass_sample_mark="";
