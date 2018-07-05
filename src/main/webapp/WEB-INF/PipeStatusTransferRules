@@ -6,11 +6,11 @@ Current_Status                     Result:NextStatus
 
 外喷砂检验完成         od2      外涂工序   0:bare1     1:od3    10:od2
 
-外涂完成              od3      外涂检验工序   0:coatingrepair1   1:od4   2:coatingstrip1 10:od3  20: onhold
+外涂完成              od3      外涂检验工序   0:coatingrepair1   1:od4   30:coatingstrip1 10:od3  20: onhold
 
 外涂检验完成           od4      外喷标工序  0:od4      1:od5     10:od4
 
-外喷标完成            od5       外防终检工序  0:coatingrepair1       1:od6     2:coatingstrip1   10:od5   4: od4 20:onhold
+外喷标完成            od5       外防终检工序  0:coatingrepair1       1:od6     30:coatingstrip1   10:od5   4: od4 20:onhold
 
 外防终检完成          od6       成品入库工序    odstockin
 
@@ -18,9 +18,9 @@ Current_Status                     Result:NextStatus
 
 外防成品入库          odstockin    外防成品出厂     out
 
-外防工位涂层待修补           coatingrepair1 涂层修补工序 0:coatingrepair1 1：上一个工序状态    2:coatingrepair2  3:coatingstrip1  10: coatingrepair1
+外防工位涂层待修补           coatingrepair1 涂层修补工序 0:coatingrepair1 1：上一个工序状态    2:coatingrepair2  30:coatingstrip1  10: coatingrepair1
 （可能包含内防修补或外防修补）
-外防工位涂层修补完成待检验    coatingrepair2  涂层修补检验工序 0:coatingrepair1 1：上一个工序状态    2:coatingrepair2  3:coatingstrip1    10:coatingrepair2
+外防工位涂层修补完成待检验    coatingrepair2  涂层修补检验工序 0:coatingrepair1 1：上一个工序状态    2:coatingrepair2  30:coatingstrip1    10:coatingrepair2
 
 外防待扒皮        coatingstrip1     外防涂层扒皮工序  0:coatingstrip1  1:bare1 or bare2 10:coatingstrip1
 
@@ -30,11 +30,11 @@ Current_Status                     Result:NextStatus
 
 内喷砂检验完成        id2       内防喷涂工序       0:bare2     1:id3   10:id2
 
-内防喷涂完成             id3       内涂检验工序       0:coatingrepair1    1:id4   2:coatingstrip1  10:id3  20: onhold
+内防喷涂完成             id3       内涂检验工序       0:coatingrepair1    1:id4   30:coatingstrip1  10:id3  20: onhold
 
 内防检验完成          id4       内喷标工序       0:id4     1:id5  10:id4
 
-内喷标完成           id5        内防终检工序     0:coatingrepair1   1:id6   2:coatingstrip1   3:coatingstrip1  4: id4   10:id5   20:  onhold
+内喷标完成           id5        内防终检工序     0:coatingrepair1   1:id6   30:coatingstrip1   3: id4   10:id5   20:  onhold
 
 内防终检完成         id6        内防入库工序      idstockin
 

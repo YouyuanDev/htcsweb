@@ -127,7 +127,7 @@
         "last_status":"od4"
       },
       {
-        "result":"2",
+        "result":"30",
         "result_name":"不合格,进入待扒皮工序",
         "result_name_en":"Accept, go Coating Strip",
         "next_status":"coatingstrip1"
@@ -192,7 +192,7 @@
         "last_status":"od6"
       },
       {
-        "result":"2",
+        "result":"30",
         "result_name":"不合格,进入外防待扒皮工序",
         "result_name_en":"Reject, go coating strip",
         "next_status":"coatingstrip1"
@@ -242,7 +242,7 @@
         "next_status":"coatingrepair2"
       },
       {
-        "result":"3",
+        "result":"30",
         "result_name":"不合格,外防扒皮处理",
         "result_name_en":"Accept, go OD Stencil Process",
         "next_status":"coatingstrip1"
@@ -479,7 +479,7 @@
         "last_status":"id4"
       },
       {
-        "result":"2",
+        "result":"30",
         "result_name":"不合格,进入待扒皮工序",
         "result_name_en":"Accept, go Coating Strip",
         "next_status":"coatingstrip1"
@@ -544,7 +544,7 @@
         "last_status":"id6"
       },
       {
-        "result":"2",
+        "result":"30",
         "result_name":"不合格,进入待扒皮工序",
         "result_name_en":"Reject, go coating strip",
         "next_status":"coatingstrip1"

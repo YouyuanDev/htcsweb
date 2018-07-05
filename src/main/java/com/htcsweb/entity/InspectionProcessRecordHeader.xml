@@ -148,11 +148,12 @@
 
     <!--获取当天外防腐总数-->
     <select id="getODCoatingCount" resultType="java.lang.Integer">
-        SELECT count(*) from inspection_process_record_header o
+        SELECT count(DISTINCT(o.pipe_no)) from inspection_process_record_header o
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no
         left join project_info pro on c.project_no=pro.project_no
         <where>
+            AND o.process_code='od_final_inspection'
             <if test="project_no!=null and project_no!=''">
                 AND pro.project_no=#{project_no}
             </if>
@@ -173,16 +174,17 @@
             <if test="end_time!=null">
                 <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
             </if>
-            AND o.process_code='od_final_inspection'
+
         </where>
     </select>
     <!--获取外防腐合格总数和合格长度-->
     <select id="getODCoatingAcceptedInfo" resultType="map">
-        SELECT count(*) as odtotalcount,SUM(p.p_length) as odtotallength from inspection_process_record_header o
+        SELECT count(DISTINCT(o.pipe_no)) as odtotalcount,SUM(p.p_length) as odtotallength from inspection_process_record_header o
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no
         left join project_info pro on c.project_no=pro.project_no
         <where>
+            AND o.process_code='od_final_inspection'
             c.external_coating=#{external_coating}
             AND c.internal_coating=#{internal_coating}
             AND pro.project_no=#{project_no}
@@ -195,26 +197,30 @@
             <if test="end_time!=null">
                 <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
             </if>
-            AND o.process_code='od_final_inspection'
+
         </where>
     </select>
     <!--获取修补数-->
     <select id="getCoatingRepairCount" resultType="java.lang.Integer">
         SELECT count(DISTINCT(o.pipe_no)) from inspection_process_record_header o
+        inner join inspection_process_record_item rditem on rditem.inspection_process_record_header_code= o.inspection_process_record_header_code
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no
         left join project_info pro on c.project_no=pro.project_no
         <where>
 
+            AND o.process_code='coating_repair'
+            <if test="odid!=null and odid!=''">
+                AND  rditem.item_code='repair_odid'
+                AND  rditem.item_value#{odid}
+            </if>
             <if test="project_no!=null and project_no!=''">
                 AND  pro.project_no=#{project_no}
             </if>
             <if test="mill_no!=null and mill_no!=''">
                 AND o.mill_no=#{mill_no}
             </if>
-            <if test="odid!=null and odid!=''">
-                AND o.odid=#{odid}
-            </if>
+
             <if test="external_coating!=null">
                 AND c.external_coating=#{external_coating}
             </if>
@@ -231,4 +237,350 @@
             </if>
         </where>
     </select>
+
+    <!--获取外防光管隔离数量-->
+    <select id="getODBarePipeOnholdCount" resultType="java.lang.Integer">
+
+        SELECT count(DISTINCT(o.pipe_no))  from inspection_process_record_header o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+
+            AND (o.process_code='od_blast' OR o.process_code='od_blast_inspection'
+            OR o.process_code='od_coating_inspection' OR o.process_code='od_final_inspection'  )
+
+            AND o.result='20'
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no=#{project_no}
+            </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no=#{mill_no}
+            </if>
+            <if test="external_coating!=null">
+                AND c.external_coating=#{external_coating}
+            </if>
+            <if test="internal_coating!=null">
+                AND c.internal_coating=#{internal_coating}
+            </if>
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+
+
+    </select>
+
+
+
+    <!--获取内防光管隔离数量-->
+    <select id="getIDBarePipeOnholdCount" resultType="java.lang.Integer">
+
+        SELECT count(DISTINCT(o.pipe_no))  from inspection_process_record_header o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+            AND (o.process_code='id_blast' OR o.process_code='id_blast_inspection'
+            OR o.process_code='id_coating_inspection' OR o.process_code='id_final_inspection'  )
+
+            AND o.result='20'
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no=#{project_no}
+            </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no=#{mill_no}
+            </if>
+            <if test="external_coating!=null">
+                AND c.external_coating=#{external_coating}
+            </if>
+            <if test="internal_coating!=null">
+                AND c.internal_coating=#{internal_coating}
+            </if>
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+    </select>
+
+
+    <!--获取光管隔离修磨数量-->
+    <select id="getBarePipeGrindingCount" resultType="java.lang.Integer">
+        SELECT count(DISTINCT(o.pipe_no)) from inspection_process_record_header o
+        inner join inspection_process_record_item rditem on rditem.inspection_process_record_header_code= o.inspection_process_record_header_code
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+            AND o.result='1'
+            AND o.process_code='grinding_cutoff'
+            AND  rditem.item_code='grinding_cutoff'
+            AND  rditem.item_value LIKE CONCAT('%Grinding%')
+            <if test="project_no!=null and project_no!=''">
+                AND  pro.project_no=#{project_no}
+            </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND  o.mill_no=#{mill_no}
+            </if>
+
+            <if test="external_coating!=null">
+                AND  c.external_coating=#{external_coating}
+            </if>
+            <if test="internal_coating!=null">
+                AND  c.internal_coating=#{internal_coating}
+            </if>
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+    </select>
+
+    <!--获取光管隔离切割数量-->
+    <select id="getBarePipeCutoffCount" resultType="java.lang.Integer">
+        SELECT count(DISTINCT(o.pipe_no)) from inspection_process_record_header o
+        inner join inspection_process_record_item rditem on rditem.inspection_process_record_header_code= o.inspection_process_record_header_code
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+            AND o.process_code='grinding_cutoff'
+            AND  rditem.item_code='grinding_cutoff'
+            AND  rditem.item_value LIKE CONCAT('%CutOff%')
+
+            <if test="project_no!=null and project_no!=''">
+                AND  pro.project_no=#{project_no}
+            </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND  o.mill_no=#{mill_no}
+            </if>
+
+            <if test="external_coating!=null">
+                AND  c.external_coating=#{external_coating}
+            </if>
+            <if test="internal_coating!=null">
+                AND  c.internal_coating=#{internal_coating}
+            </if>
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+    </select>
+
+
+    <!--获取外防废管数量(外涂和外涂终检进入扒皮处理的数量)-->
+    <select id="getODCoatingRejectedPipeCount" resultType="java.lang.Integer">
+
+        SELECT  count(DISTINCT(o.pipe_no)) from inspection_process_record_header o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+            AND o.result='30'
+
+            AND (o.process_code='od_coating_inspection' OR o.process_code='od_final_inspection'  )
+
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no=#{project_no}
+            </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no=#{mill_no}
+            </if>
+
+            <if test="external_coating!=null">
+                AND c.external_coating=#{external_coating}
+            </if>
+            <if test="internal_coating!=null">
+                AND c.internal_coating=#{internal_coating}
+            </if>
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+
+    </select>
+
+    <!--获取内防废管数量(内涂和内涂终检进入扒皮处理的数量)-->
+    <select id="getIDCoatingRejectedPipeCount" resultType="java.lang.Integer">
+
+        SELECT  count(DISTINCT(o.pipe_no)) from inspection_process_record_header o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+            AND o.result='30'
+
+            AND (o.process_code='id_coating_inspection' OR o.process_code='id_final_inspection'  )
+
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no=#{project_no}
+            </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no=#{mill_no}
+            </if>
+
+            <if test="external_coating!=null">
+                AND c.external_coating=#{external_coating}
+            </if>
+            <if test="internal_coating!=null">
+                AND c.internal_coating=#{internal_coating}
+            </if>
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+
+    </select>
+
+
+    <!--获取扒皮后合格的数-->
+    <select id="getStripPipeAcceptedCount" resultType="java.lang.Integer">
+        SELECT count(DISTINCT(o.pipe_no)) from inspection_process_record_header o
+        inner join inspection_process_record_item rditem on rditem.inspection_process_record_header_code= o.inspection_process_record_header_code
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+
+        <where>
+            AND o.result='1'
+            AND o.process_code='coating_strip'
+            <if test="odid!=null and odid!=''">
+                AND rditem.item_code='strip_odid'
+                AND rditem.item_value=#{odid}
+            </if>
+            <if test="project_no!=null and project_no!=''">
+                AND  pro.project_no=#{project_no}
+            </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no=#{mill_no}
+            </if>
+
+            <if test="external_coating!=null">
+                AND c.external_coating=#{external_coating}
+            </if>
+            <if test="internal_coating!=null">
+                AND c.internal_coating=#{internal_coating}
+            </if>
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+    </select>
+
+    <!--获取封面上的内防腐总数-->
+    <select id="getIDCoatingCount" resultType="java.lang.Integer">
+        SELECT count(DISTINCT(o.pipe_no)) from inspection_process_record_header o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+
+            AND o.process_code='id_final_inspection'
+            <if test="project_no!=null and project_no!=''">
+                AND  pro.project_no=#{project_no}
+            </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND  o.mill_no=#{mill_no}
+            </if>
+            <if test="external_coating!=null">
+                AND  c.external_coating=#{external_coating}
+            </if>
+            <if test="internal_coating!=null">
+                AND   c.internal_coating=#{internal_coating}
+            </if>
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+    </select>
+
+    <!--获取内防腐合格总数和合格长度-->
+    <select id="getIDCoatingAcceptedInfo" resultType="map">
+        SELECT count(DISTINCT(o.pipe_no)) as idtotalcount,SUM(p.p_length) as idtotallength from inspection_process_record_header o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+            AND o.process_code='id_final_inspection'
+            c.external_coating=#{external_coating}
+            AND c.internal_coating=#{internal_coating}
+            AND pro.project_no=#{project_no}
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
+            AND o.result=#{result}
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+    </select>
+
+    <!--白班、夜班样管信息-->
+    <select id="getPipeSamplingInfo" resultType="map">
+        SELECT o.*,rditem.* from inspection_process_record_header o
+        inner join inspection_process_record_item rditem on rditem.inspection_process_record_header_code= o.inspection_process_record_header_code
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+            AND o.result='1'
+            AND o.process_code='coating_sampling'
+            AND rditem.item_code='sample_pipe_cutoff_length'
+            c.external_coating=#{external_coating}
+            AND c.internal_coating=#{internal_coating}
+            AND pro.project_no=#{project_no}
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+    </select>
+
+
+
 </mapper>

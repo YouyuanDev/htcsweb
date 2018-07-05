@@ -561,17 +561,17 @@ public class DailyProductionReportController {
                             //外防目标合格长度
                             float odTargetAcceptedLength=0;
                             //外防修补数
-                            int odCoatingRepairCount=getDailyCoatingRepairCount(item,project_no,external_coating,internal_coating,"od",od,wt,timeformat);
+                            int odCoatingRepairCount=getDailyCoatingRepairCount(item,project_no,external_coating,internal_coating,"OD",od,wt,timeformat);
                             //外防光管隔离数
-                            int odPipeOnholdCount=getBarePipeOnholdCount(item,project_no,external_coating,internal_coating,"od",od,wt,timeformat);
+                            int odPipeOnholdCount=getBarePipeOnholdCount(item,project_no,external_coating,internal_coating,"OD",od,wt,timeformat);
                             //外防光管隔离管修磨
-                            int odBarePipeGrindingCount=getBarePipeGrindingCount(item,project_no,external_coating,internal_coating,"od",od,wt,timeformat);
+                            int odBarePipeGrindingCount=getBarePipeGrindingCount(item,project_no,external_coating,internal_coating,"OD",od,wt,timeformat);
                             //外防光管隔离管切管
-                            int odBareCutoffCount=getBarePipeCutoffCount(item,project_no,external_coating,internal_coating,"od",od,wt,timeformat);
+                            int odBareCutoffCount=getBarePipeCutoffCount(item,project_no,external_coating,internal_coating,"OD",od,wt,timeformat);
                             //外防涂层管废管数
-                            int odCoatingRejectedPipe=getCoatingRejectedPipe(item,project_no,external_coating,internal_coating,"od",od,wt,timeformat);
+                            int odCoatingRejectedPipe=getCoatingRejectedPipe(item,project_no,external_coating,internal_coating,"OD",od,wt,timeformat);
                             //外防涂层管废管扒皮处理合格数量
-                            int odCoatingStripAcceptedCount=getStripPipeAcceptedCount(item,project_no,external_coating,internal_coating,"od",od,wt,timeformat);
+                            int odCoatingStripAcceptedCount=getStripPipeAcceptedCount(item,project_no,external_coating,internal_coating,"OD",od,wt,timeformat);
                             //获取内防腐总数
                             int idCoatingCount=getIdCoatingCount(item,project_no,external_coating,internal_coating,od,wt,timeformat);
                             CountSum countSum1= getIdCoatingAcceptedCount(item,project_no,external_coating,internal_coating,od,wt,timeformat);
@@ -586,50 +586,54 @@ public class DailyProductionReportController {
                             //内防目标合格长度
                             float idTargetAcceptedLength=0f;
                             //内防修补数
-                            int idCoatingRepairCount=getDailyCoatingRepairCount(item,project_no,external_coating,internal_coating,"id",od,wt,timeformat);
+                            int idCoatingRepairCount=getDailyCoatingRepairCount(item,project_no,external_coating,internal_coating,"ID",od,wt,timeformat);
                             //内防光管隔离数
-                            int idPipeOnholdCount=getBarePipeOnholdCount(item,project_no,external_coating,internal_coating,"id",od,wt,timeformat);
+                            int idPipeOnholdCount=getBarePipeOnholdCount(item,project_no,external_coating,internal_coating,"ID",od,wt,timeformat);
                             //内防光管隔离管修磨
-                            int idBarePipeGrindingCount=getBarePipeGrindingCount(item,project_no,external_coating,internal_coating,"id",od,wt,timeformat);
+                            int idBarePipeGrindingCount=getBarePipeGrindingCount(item,project_no,external_coating,internal_coating,"ID",od,wt,timeformat);
                             //内防光管隔离管切管
-                            int idBareCutoffCount=getBarePipeCutoffCount(item,project_no,external_coating,internal_coating,"id",od,wt,timeformat);
+                            int idBareCutoffCount=getBarePipeCutoffCount(item,project_no,external_coating,internal_coating,"ID",od,wt,timeformat);
                             //内防涂层管废管数
-                            int idCoatingRejectCount=getCoatingRejectedPipe(item,project_no,external_coating,internal_coating,"id",od,wt,timeformat);
+                            int idCoatingRejectCount=getCoatingRejectedPipe(item,project_no,external_coating,internal_coating,"ID",od,wt,timeformat);
                             //内防涂层管废管扒皮处理数量
-                            int idCoatingStripAcceptedCount=getStripPipeAcceptedCount(item,project_no,external_coating,internal_coating,"id",od,wt,timeformat);
+                            int idCoatingStripAcceptedCount=getStripPipeAcceptedCount(item,project_no,external_coating,internal_coating,"ID",od,wt,timeformat);
 
                             //试验管白班
-                            List<PipeSamplingRecord>sampleDayList=getPipeSamplingInfo(item,0,project_no,external_coating,internal_coating,od,wt,timeformat);
+                            List<HashMap<String,Object>>sampleDayList=getPipeSamplingInfo(item,0,project_no,external_coating,internal_coating,od,wt,timeformat);
                             //白班试验管编号、原始长度、切样长度
                             String samplePipeNoDayShift=" ";
                             float samplePipeOriginalLengthDayShift=0f,samplePipeCutLengthDayShift=0f;
                             //试验管数量
                             int samplePipeCount=0;
                             if(sampleDayList!=null&&sampleDayList.size()>0){
-                                    PipeSamplingRecord record=sampleDayList.get(0);
-                                    samplePipeNoDayShift=record.getPipe_no();
-                                    samplePipeOriginalLengthDayShift=record.getOriginal_pipe_length();
-                                    BigDecimal b2=new  BigDecimal(samplePipeOriginalLengthDayShift);
-                                    samplePipeOriginalLengthDayShift=b2.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
-                                    samplePipeCutLengthDayShift=record.getCut_off_length();
+                                HashMap<String,Object> record=sampleDayList.get(0);
+
+                                    samplePipeNoDayShift=(String)record.get("pipe_no");
+                                    //samplePipeOriginalLengthDayShift=record.getOriginal_pipe_length();
+                                    //BigDecimal b2=new  BigDecimal(samplePipeOriginalLengthDayShift);
+                                    //samplePipeOriginalLengthDayShift=b2.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
+                                    samplePipeCutLengthDayShift=Float.parseFloat((String)record.get("sample_pipe_cutoff_length"));
                                     BigDecimal b3=new  BigDecimal(samplePipeCutLengthDayShift);
                                     samplePipeCutLengthDayShift=b3.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
                                     samplePipeCount++;
                             }
-                            List<PipeSamplingRecord>sampleNightList=getPipeSamplingInfo(item,1,project_no,external_coating,internal_coating,od,wt,timeformat);
+                            List<HashMap<String,Object>>sampleNightList=getPipeSamplingInfo(item,1,project_no,external_coating,internal_coating,od,wt,timeformat);
                             //夜班试验管编号、原始长度、切样长度
                             String samplePipeNoNightShift=" ";float  samplePipeOriginalLengthNightShift=0f,samplePipeCutLengthNightShift=0f;
                             if(sampleNightList!=null&&sampleNightList.size()>0){
-                                PipeSamplingRecord record=sampleNightList.get(0);
-                                samplePipeNoNightShift=record.getPipe_no();
-                                samplePipeOriginalLengthNightShift=record.getOriginal_pipe_length();
-                                BigDecimal b4=new  BigDecimal(samplePipeOriginalLengthNightShift);
-                                samplePipeOriginalLengthNightShift=b4.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
-                                samplePipeCutLengthNightShift=record.getCut_off_length();
+                                HashMap<String,Object> record=sampleNightList.get(0);
+                                samplePipeNoNightShift=(String)record.get("pipe_no");
+//                                samplePipeOriginalLengthNightShift=record.getOriginal_pipe_length();
+//                                BigDecimal b4=new  BigDecimal(samplePipeOriginalLengthNightShift);
+//                                samplePipeOriginalLengthNightShift=b4.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
+                                samplePipeCutLengthNightShift=Float.parseFloat((String)record.get("sample_pipe_cutoff_length"));
                                 BigDecimal b5=new  BigDecimal(samplePipeCutLengthNightShift);
                                 samplePipeCutLengthNightShift=b5.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
                                 samplePipeCount++;
                             }
+                            //以上已改完
+
+
 
                             //需重新倒棱管数量(切长处理管+样管切样)
                             int onholdCutOffCount=getBarePipeCutoffCount(item,project_no,external_coating,internal_coating,od,wt,timeformat);
@@ -1063,24 +1067,28 @@ public class DailyProductionReportController {
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            count=coatingRepairDao.getCoatingRepairCount(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
+            count=inspectionProcessRecordHeaderDao.getCoatingRepairCount(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
         }
         return count;
     }
-    //4.获取当天的防腐光管隔离数（外打砂和外打砂检验数量和）
+    //4.获取当天的防腐光管隔离数（外防4工序和内防4工序数量和）
     private int getBarePipeOnholdCount(String now,String project_no,String external_coating,String internal_coating,String odid,float od,float wt,SimpleDateFormat timeformat){
         String nextday=DateTimeUtil.getNextDay(now);
         int count=0;
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            if(odid!=null&&odid.equals("od")){
-                count=barePipeGrindingCutoffRecordDao.getODBarePipeOnholdCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
+            if(odid!=null&&odid.equals("OD")){
+                count=inspectionProcessRecordHeaderDao.getODBarePipeOnholdCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
+
+                //count=barePipeGrindingCutoffRecordDao.getODBarePipeOnholdCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
             }
-            else if(odid!=null&&odid.equals("id")){
-                count=barePipeGrindingCutoffRecordDao.getIDBarePipeOnholdCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
+            else if(odid!=null&&odid.equals("ID")){
+                count=inspectionProcessRecordHeaderDao.getIDBarePipeOnholdCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
+
+                //count=barePipeGrindingCutoffRecordDao.getIDBarePipeOnholdCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -1094,7 +1102,9 @@ public class DailyProductionReportController {
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            count=barePipeGrindingCutoffRecordDao.getBarePipeGrindingCount(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
+            count=inspectionProcessRecordHeaderDao.getBarePipeGrindingCount(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
+
+            //count=barePipeGrindingCutoffRecordDao.getBarePipeGrindingCount(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -1107,7 +1117,9 @@ public class DailyProductionReportController {
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            count=barePipeGrindingCutoffRecordDao.getBarePipeCutoffCount(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
+            count=inspectionProcessRecordHeaderDao.getBarePipeCutoffCount(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
+
+            //count=barePipeGrindingCutoffRecordDao.getBarePipeCutoffCount(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -1120,11 +1132,13 @@ public class DailyProductionReportController {
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            if(odid!=null&&odid.equals("od")){
-                count=coatingStripDao.getODCoatingRejectedPipeCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
+            if(odid!=null&&odid.equals("OD")){
+                count=inspectionProcessRecordHeaderDao.getODCoatingRejectedPipeCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
+                //count=coatingStripDao.getODCoatingRejectedPipeCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
             }
-            else if(odid!=null&&odid.equals("id")){
-                count=coatingStripDao.getIDCoatingRejectedPipeCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
+            else if(odid!=null&&odid.equals("ID")){
+                count=inspectionProcessRecordHeaderDao.getIDCoatingRejectedPipeCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
+                //count=coatingStripDao.getIDCoatingRejectedPipeCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -1140,7 +1154,10 @@ public class DailyProductionReportController {
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            count=coatingStripDao.getStripPipeAcceptedCount(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
+
+            count=inspectionProcessRecordHeaderDao.getStripPipeAcceptedCount(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
+
+            //count=coatingStripDao.getStripPipeAcceptedCount(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
         }finally {
@@ -1157,7 +1174,8 @@ public class DailyProductionReportController {
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            count=idFinalInspectionProcessDao.getIDCoatingCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
+            count=inspectionProcessRecordHeaderDao.getIDCoatingCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
+            //count=idFinalInspectionProcessDao.getIDCoatingCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -1170,7 +1188,9 @@ public class DailyProductionReportController {
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            List<HashMap<String,Object>>list1=idFinalInspectionProcessDao.getIDCoatingAcceptedInfo(project_no,external_coating,internal_coating,od,wt,beginTime,endTime,"1");
+            List<HashMap<String,Object>>list1=inspectionProcessRecordHeaderDao.getIDCoatingAcceptedInfo(project_no,external_coating,internal_coating,od,wt,beginTime,endTime,"1");
+
+            //List<HashMap<String,Object>>list1=idFinalInspectionProcessDao.getIDCoatingAcceptedInfo(project_no,external_coating,internal_coating,od,wt,beginTime,endTime,"1");
             if(list1!=null&&list1.size()>0){
                 HashMap<String,Object>hs=list1.get(0);
                 if(hs!=null){
@@ -1186,8 +1206,8 @@ public class DailyProductionReportController {
         return countSum;
     }
     //12.白班、夜班样管信息
-    private List<PipeSamplingRecord>getPipeSamplingInfo(String now,int type,String project_no,String external_coating,String internal_coating,float od,float wt,SimpleDateFormat timeformat){
-        List<PipeSamplingRecord>list=new ArrayList<>();
+    private List<HashMap<String,Object>>getPipeSamplingInfo(String now,int type,String project_no,String external_coating,String internal_coating,float od,float wt,SimpleDateFormat timeformat){
+        List<HashMap<String,Object>>list=new ArrayList<>();
         Date begin_time=null,end_time=null;
         try{
             //白班
@@ -1203,7 +1223,9 @@ public class DailyProductionReportController {
                 begin_time=timeformat.parse(beginTime);
                 end_time=timeformat.parse(endTime);
             }
-            list=pipeSamplingRecordDao.getPipeSamplingInfo(project_no,external_coating,internal_coating,od,wt,begin_time,end_time);
+            list=inspectionProcessRecordHeaderDao.getPipeSamplingInfo(project_no,external_coating,internal_coating,od,wt,begin_time,end_time);
+
+            //list=pipeSamplingRecordDao.getPipeSamplingInfo(project_no,external_coating,internal_coating,od,wt,begin_time,end_time);
         }catch (Exception e){
             e.printStackTrace();
         }
