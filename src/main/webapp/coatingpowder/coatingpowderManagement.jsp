@@ -108,7 +108,8 @@
         function searchCoatingPowder() {
             $('#CoatingPowderDatagrids').datagrid('load',{
 
-                'coating_powder_name': $('#coatingpowdername').val()
+                'coating_powder_name': $('#coatingpowdername').val(),
+                'powder_type': $('#powdertype').val()
             });
         }
 
@@ -192,6 +193,15 @@
 <div id="hlCoatingPowderTb" style="padding:10px;">
     <span class="i18n1" name="coatingpowdername">原材料型号</span>:
     <input id="coatingpowdername" style="line-height:22px;border:1px solid #ccc">
+    <span class="i18n1" name="powdertype">原材料类型</span>:
+    <input id="powdertype" class="easyui-combobox" type="text" name="powdertype"  data-options=
+            "url:'/CoatingPowderOperation/getAllCoatingPowderType.action',
+					        method:'post',
+					        valueField:'powder_type',
+					        width: 140,
+					        editable:false,
+					        textField:'powder_type',
+					        panelHeight:'200'"/>
 
 
     <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="searchCoatingPowder()">Search</a>
