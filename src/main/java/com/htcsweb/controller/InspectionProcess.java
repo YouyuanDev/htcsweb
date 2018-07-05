@@ -146,9 +146,7 @@ public class InspectionProcess {
                     if(oldrecord!=null&&oldrecord.getResult().equals("10")){
                         //存在一条pending数据，不给予insert处理
                         msg="已存在待定记录,不能新增记录";
-                        System.out.println("------1");
                     }else{
-                        System.out.println("------2");
                         inspectionProcessRecordHeader.setInspection_process_record_header_code(inspectionProcessRecordHeader.getInspection_process_record_header_code());
                         resTotal=inspectionProcessRecordHeaderDao.addInspectionProcessRecordHeader(inspectionProcessRecordHeader);
                         System.out.println("resTotal="+resTotal);
@@ -156,12 +154,9 @@ public class InspectionProcess {
                 }
                 project_no=(String)list.get(0).get("project_no");
                 System.out.println("project_no="+project_no);
-
-
             }else{
                 //修改！
                 resTotal=inspectionProcessRecordHeaderDao.updateInspectionProcessRecordHeader(inspectionProcessRecordHeader);
-                System.out.println("------3");
             }
             if(resTotal>0){
 
@@ -304,11 +299,10 @@ public class InspectionProcess {
                                 inspectionProcessRecordItemDao.updateElapsedTime(inspection_process_record_header_code,coating_type,String.valueOf(minute));
                             }
                         }
-
-
                     else if(inspectionProcessRecordHeader.getProcess_code().equals("coating_sampling")){
                         //设置外防取样标志
                         p.setOdsampling_mark("1");
+                        p.setRebevel_mark("1");
                         pipeBasicInfoDao.updatePipeBasicInfo(p);
                     }
                     else if(inspectionProcessRecordHeader.getProcess_code().equals("coating_rebevel")){
@@ -320,13 +314,20 @@ public class InspectionProcess {
                         //清空外涂层涂层日期
                         //判断外防扒皮还是内防扒皮
                         InspectionProcessRecordItem recorditem=inspectionProcessRecordItemDao.getInspectionProcessRecordItemByHeaderCodeAndItemCode(inspectionProcessRecordHeader.getInspection_process_record_header_code(),"strip_odid");
-                        if(recorditem.getItem_value().equals("OD")){
+                        if(recorditem!=null&&recorditem.getItem_value().equals("OD")){
                              p.setOd_coating_date(null);
                              p.setId_coating_date(null);
-                        }else if(recorditem.getItem_value().equals("ID")){
+                        }else if(recorditem!=null&&recorditem.getItem_value().equals("ID")){
                             p.setId_coating_date(null);
                         }
                         pipeBasicInfoDao.updatePipeBasicInfo(p);
+                    }else if(inspectionProcessRecordHeader.getProcess_code().equals("grinding_cutoff")){
+                        //钢管切割设置倒棱标识位
+                        InspectionProcessRecordItem recorditem=inspectionProcessRecordItemDao.getInspectionProcessRecordItemByHeaderCodeAndItemCode(inspectionProcessRecordHeader.getInspection_process_record_header_code(),"grinding_cutoff");
+                        if(recorditem!=null&&recorditem.getItem_value().contains("CutOff")){
+                            p.setRebevel_mark("1");
+                            pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        }
                     }
                 }
 
