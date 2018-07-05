@@ -663,5 +663,26 @@
         "result_name_en":"Pending"
       }
     ]
+  },
+  { "process_code": "lab_testing_raw_material",
+    "input": "lab_testing_raw_material",
+    "output":
+    [
+      {
+        "result":"0",
+        "result_name":"不合格,复验",
+        "result_name_en":"Reject, re-test"
+      },
+      {
+        "result":"1",
+        "result_name":"合格",
+        "result_name_en":"Accept"
+      },
+      {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending"
+      }
+    ]
   }
 ]
