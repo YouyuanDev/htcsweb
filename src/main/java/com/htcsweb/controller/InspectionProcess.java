@@ -334,10 +334,11 @@ public class InspectionProcess {
                 //for循环结束
                 //更新管子的状态
                 if(p!=null){
-                    if(inputStatusVerified) {
+
                         for(int i=0;i<resultArray.size();i++){
                             JSONObject  rmap=(JSONObject)resultArray.get(i);
                             if(rmap!=null){
+                                //需要更新result_name，用于推送信息内容组成
                                 String tmp_result=(String)rmap.get("result");
                                 result_name=(String)rmap.get("result_name");
                                 result_name_en=(String)rmap.get("result_name_en");
@@ -345,17 +346,18 @@ public class InspectionProcess {
                                 String tmp_last_status=(String)rmap.get("last_status");
                                 //找到对应关系
                                 if(inspectionProcessRecordHeader.getResult().equals(tmp_result)){
-                                    if(tmp_next_status!=null){
-                                        if(!tmp_next_status.equals("last_status")){
-                                            p.setStatus(tmp_next_status);
+                                    if(inputStatusVerified) {
+                                        if (tmp_next_status != null) {
+                                            if (!tmp_next_status.equals("last_status")) {
+                                                p.setStatus(tmp_next_status);
+                                            } else if (tmp_next_status.equals("last_status")) {
+                                                p.setStatus(p.getLast_accepted_status());
+                                            }
                                         }
-                                        else if(tmp_next_status.equals("last_status")){
-                                            p.setStatus(p.getLast_accepted_status());
-                                        }
+                                        if (tmp_last_status != null)
+                                            p.setLast_accepted_status(p.getStatus());
+                                        int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                                     }
-                                    if(tmp_last_status!=null)
-                                        p.setLast_accepted_status(p.getStatus());
-                                    int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
 
                                     break;
                                 }
@@ -364,7 +366,7 @@ public class InspectionProcess {
 
                         }
 
-                    }
+
 
                 }
 
@@ -374,8 +376,8 @@ public class InspectionProcess {
                  String str_title=sdf.format(nowtime.getTime())+" 工序："+inspectionProcessRecordHeader.getProcess_code()+",管号："+p.getPipe_no()+", "+result_name+"("+result_name_en+")";
 
                  String str_content="工序："+inspectionProcessRecordHeader.getProcess_code()+",管号："+p.getPipe_no()+", "+result_name+"("+result_name_en+")";
-
-                 SendEvent(inspectionProcessRecordHeader.getProcess_code(),str_title,str_content);
+                String basePath = request.getSession().getServletContext().getRealPath("/");
+                 SendEvent(basePath,inspectionProcessRecordHeader.getProcess_code(),str_title,str_content);
 
                 System.out.println("推送title="+str_title);
                 System.out.println("推送str_content="+str_content);
@@ -404,13 +406,13 @@ public class InspectionProcess {
     }
 
     //发送推送消息
-    public void SendEvent(String event, String title,String content){
+    public void SendEvent(String basePath,String event, String title,String content){
         List<HashMap<String,Object>>  lt=roleDao.getRolesByEvent(event);
 
         for(int i=0;i<lt.size();i++){
             String role=(String)lt.get(i).get("role_no");
             //发消息
-            APICloudPushService.SendPushNotification("",title,content,"1","0",role,"");
+            APICloudPushService.SendPushNotification(basePath,title,content,"1","0",role,"");
         }
 
 
