@@ -202,51 +202,54 @@ public class InspectionProcess {
 
                         }
 
-                        //特殊检验项的处理
-                    for(int i=0;additionParamArray!=null&&i<additionParamArray.size();i++) {
-                        JSONObject additionParammap = (JSONObject) additionParamArray.get(i);
-                        if (additionParammap != null) {
-                            String addition_item_code = (String) additionParammap.get("addition_item_code");
-                            String des_pipe_property_name = (String) additionParammap.get("des_pipe_property_name");
-                            String set_value = (String) additionParammap.get("set_value");
 
-                            if(key.equals(addition_item_code)){
-                                String v=(String)dynamicMap.get(key);
-                                if(set_value==null){
-                                    //若没有给定的set_value值，则设置为表单输入项的值
-                                    set_value=v;
-                                }
-                                //这里做各种个性化处理
-                                if(des_pipe_property_name!=null){
-                                    Class c = Class.forName("com.htcsweb.entity.PipeBasicInfo");
-                                    Constructor con = c.getConstructor();
-                                    Object obj = con.newInstance();
-                                    obj=p;
-                                    Field newname = c.getDeclaredField(des_pipe_property_name);
-                                    String type = newname.getGenericType().toString();    //获取属性的类型
-                                    newname.setAccessible(true);
-                                    if (type.equals("class java.lang.String")) {
-                                        newname.set(obj, set_value);
-                                    }
-                                    else if(type.equals("class java.lang.Integer")) {
-                                        if(set_value!=null){
-                                            newname.set(obj, Integer.valueOf(set_value));
-                                        }
+                        if(inspectionProcessRecordHeader.getResult().equals("!")){
+                            //特殊检验项的处理
+                            for(int i=0;additionParamArray!=null&&i<additionParamArray.size();i++) {
+                                JSONObject additionParammap = (JSONObject) additionParamArray.get(i);
+                                if (additionParammap != null) {
+                                    String addition_item_code = (String) additionParammap.get("addition_item_code");
+                                    String des_pipe_property_name = (String) additionParammap.get("des_pipe_property_name");
+                                    String set_value = (String) additionParammap.get("set_value");
 
-                                    }
-                                    else if(type.equals("class java.lang.Float")) {
-                                        if(set_value!=null){
-                                            newname.set(obj, Float.valueOf(set_value));
+                                    if(key.equals(addition_item_code)){
+                                        String v=(String)dynamicMap.get(key);
+                                        if(set_value==null){
+                                            //若没有给定的set_value值，则设置为表单输入项的值
+                                            set_value=v;
+                                        }
+                                        //这里做各种个性化处理
+                                        if(des_pipe_property_name!=null){
+                                            Class c = Class.forName("com.htcsweb.entity.PipeBasicInfo");
+                                            Constructor con = c.getConstructor();
+                                            Object obj = con.newInstance();
+                                            obj=p;
+                                            Field newname = c.getDeclaredField(des_pipe_property_name);
+                                            String type = newname.getGenericType().toString();    //获取属性的类型
+                                            //System.out.println("字段类型="+type+"=");
+                                            newname.setAccessible(true);
+                                            if (type.contains("String")) {
+                                                newname.set(obj, set_value);
+                                            }
+                                            else if(type.contains("int")) {
+                                                if(set_value!=null){
+                                                    newname.set(obj, Integer.parseInt(set_value));
+                                                }
+
+                                            }
+                                            else if(type.contains("float")) {
+                                                if(set_value!=null){
+                                                    newname.set(obj, Float.parseFloat(set_value));
+                                                }
+                                            }
+                                            p=(PipeBasicInfo)obj;
+                                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                                            System.out.println("设置属性"+des_pipe_property_name+"="+set_value);
                                         }
                                     }
-                                    p=(PipeBasicInfo)obj;
-                                    int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
-                                    System.out.println("设置属性"+des_pipe_property_name+"="+set_value);
                                 }
                             }
                         }
-                    }
-
 
                 }
 
