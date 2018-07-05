@@ -267,8 +267,8 @@ public class InspectionProcess {
                                         //APP使用，外喷砂检验合格后的管子，自动添加odcoating记录
                                         HttpSession session = request.getSession();
                                         //把用户数据保存在session域对象中
-                                        String app_mill_no = (String) session.getAttribute("millno");
-                                        app_mill_no="mill_2";
+                                        String app_mill_no=(String) session.getAttribute("millno");
+                                        //app_mill_no="mill_2";
                                         if (app_mill_no != null) {
                                             //此处为APP应用
                                             List<HashMap<String, Object>> lt = pipeBasicInfoDao.getPipeInfoByNo(pipeno);
@@ -282,6 +282,7 @@ public class InspectionProcess {
                                                     header.setResult("10");
                                                     header.setRemark("INIT");
                                                     header.setUpload_files("");
+                                                    header.setProcess_code("od_coating");
                                                     header.setInspection_process_record_header_code("IPRH"+UUID.randomUUID().toString());
                                                     inspectionProcessRecordHeaderDao.addInspectionProcessRecordHeader(header);
                                             }
