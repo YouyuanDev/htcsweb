@@ -126,6 +126,9 @@ public class InspectionProcess {
                     }else if(inputStatusList.equals("coating_sampling")){
                         if( list.get(0).get("odsampling_mark").equals("0"))
                             inputStatusVerified=true;
+                    }else if(inputStatusList.equals("coating_rebevel")){
+                        if( list.get(0).get("rebevel_mark").equals("1"))
+                            inputStatusVerified=true;
                     }
                     else{
                         String [] statusArr=inputStatusList.split(",");
@@ -310,7 +313,7 @@ public class InspectionProcess {
                     }
                     else if(inspectionProcessRecordHeader.getProcess_code().equals("coating_rebevel")){
                         //清空置外防取样标志
-                        p.setOdsampling_mark("0");
+                        p.setRebevel_mark("0");
                         pipeBasicInfoDao.updatePipeBasicInfo(p);
                     }
                     else if(inspectionProcessRecordHeader.getProcess_code().equals("coating_strip")){
