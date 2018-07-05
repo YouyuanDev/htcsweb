@@ -136,6 +136,8 @@ public class PipeBasicInfoController {
                     idsampling_mark="1";
                 }else if(process_code.equals("lab_testing_glass")){
                     id_glass_sample_mark="1";
+                }else if(process_code.equals("coating_sampling")){
+                    odsampling_mark="0";
                 }
             }
             List<PipeBasicInfo>list=pipeBasicInfoDao.getPipeNumbers(pipe_no,external_coatingtype,statusArr,odsampling_mark,od_dsc_sample_mark,od_pe_sample_mark,idsampling_mark,id_glass_sample_mark);
