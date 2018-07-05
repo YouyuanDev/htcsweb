@@ -310,6 +310,11 @@ public class InspectionProcess {
                 if(inspectionProcessRecordHeader!=null&&process_code!=null&&!process_code.equals("")){
                     //特殊项，更新涂敷前等待时间(当process_code为od_coating，id_coating时执行)
                     if((process_code.equals("od_coating")||process_code.equals("id_coating"))){
+                        //更新钢管涂层时间
+                        if(inspectionProcessRecordHeader.getResult().equals("1")){
+                            p.setOd_coating_date(new Date());
+                            int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        }
                         String header_code=inspectionProcessRecordHeader.getInspection_process_record_header_code();
                         String coating_type="",blast_type="";
                         if(process_code.equals("od_coating")){
