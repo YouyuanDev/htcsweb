@@ -399,7 +399,12 @@
             var div="";
             var language=getCookie("userLanguage");
 
-            var minmax=minvalue+"~"+maxvalue;
+            var minmax="";
+            if(needverify!=undefined&&needverify=="1"){
+                minmax=minvalue+"~"+maxvalue;
+            }
+
+
             var frequencydiv="";
             var frequencydiven="";
             if(itemfrequency!=undefined&&itemfrequency==0){
