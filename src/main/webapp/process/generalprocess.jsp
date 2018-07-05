@@ -311,13 +311,16 @@
                 success:function (data) {
 
                    if(data==undefined||data.record==undefined)return;
-
+                   var stencilcontent="";
                    var div="";
                    for(var i=0;i<data.record.length;i++){
                        if((i==0)||(i%2==0)){
                            div+="<tr>"
                        }
                        div+=getTemplate(data.record[i],data.needInspectionInfo);
+                       if(data.record[i].item_code=="od_stencil_content"||data.record[i].item_code=="id_stencil_content"){
+                           stencilcontent=data.record[i].item_value;
+                       }
                    }
                     div+="</tr>";
                     $('#dynamicTable').empty();
@@ -343,8 +346,15 @@
                         });
                     }
                     JudgeMaxAndMIn();
-                    if(process_code=="od_stencil"||process_code=="id_stencil")
-                      replaceStencilcontent(row);
+                    if(process_code=="od_stencil"||process_code=="id_stencil"){
+                        if($("input[name='od_stencil_content']")!=undefined){
+                            $("#od_stencil_content").textbox("setValue", stencilcontent);
+                        }
+                        if($("input[name='id_stencil_content']")!=undefined){
+                            $("#id_stencil_content").textbox("setValue", stencilcontent);
+                        }
+                        stencilcontent="";
+                    }
                 },error:function () {
 
                 }
@@ -579,63 +589,63 @@
             }
         }
         //获取喷标内容
-        function replaceStencilcontent(row){
-            if(row==undefined)
-                return;
-            //异步获取标准并匹配
-            $.ajax({
-                url:'/DynamicItemOperation/getOdIdStencilContentModel.action',
-                dataType:'json',
-                data:{'contract_no':row.contract_no},
-                success:function (data) {
-                    var od_stencil_content="",id_stencil_content="";
-                    if(data!=null) {
-                        if(data[0].default_value!=undefined)
-                            od_stencil_content=data[0].default_value;
-                        if(data[1].default_value!=undefined)
-                            id_stencil_content=data[1].default_value;
-                        if(od_stencil_content!=undefined&&od_stencil_content!=""){
-                            var str=od_stencil_content;
-                            str=str.replace(/\[OD\]/g, row.od);
-                            str=str.replace(/\[WT\]/g, row.wt);
-                            str=str.replace(/\[GRADE\]/g, row.grade);
-                            str=str.replace(/\[CONTRACTNO\]/g, row.contract_no);
-                            str=str.replace(/\[COATINGSPEC\]/, row.coating_standard);
-                            str=str.replace(/\[CLIENTSPEC\]/, row.client_spec);
-                            str=str.replace(/\[PROJECTNAME\]/g, row.project_name);
-                            str=str.replace(/\[PIPENO\]/g, row.pipe_no);
-                            str=str.replace(/\[PIPELENGTH\]/, row.p_length);
-                            var halflength=row.p_length*0.5;
-                            str=str.replace(/\[HALFLENGTH\]/, halflength);
-                            str=str.replace(/\[HEATNO\]/, row.heat_no);
-                            str=str.replace(/\[BATCHNO\]/, row.pipe_making_lot_no);
-                            var kg=row.weight*1000;
-                            str=str.replace(/\[WEIGHT\]/, kg);
-                            var coatingdate=getDateWithoutTime(row.od_coating_date)
-                            str=str.replace(/\[COATINGDATE\]/, coatingdate);
-                            if($("input[name='od_stencil_content']")!=undefined){
-                                $("#od_stencil_content").textbox("setValue", str);
-                            }
-
-                        }
-                        if(id_stencil_content!=undefined&&id_stencil_content!=""){
-                            var str=id_stencil_content;
-                            str=str.replace(/\[OD\]/, row.od);
-                            str=str.replace(/\[WT\]/, row.wt);
-                            str=str.replace(/\[PIPENO\]/, row.pipe_no);
-                            str=str.replace(/\[PIPELENGTH\]/, row.p_length);
-                            str=str.replace(/\[WEIGHT\]/, row.weight);
-                            var coatingdate=getDateWithoutTime(row.id_coating_date)
-                            str=str.replace(/\[COATINGDATE\]/, coatingdate);
-                            if($("#id_stencil_content")!=undefined)
-                                $("#id_stencil_content").textbox("setValue", str);
-                        }
-                    }
-                },error:function () {
-                    alert("Could not getODAcceptanceCriteriaByContractNo");
-                }
-            });
-        }
+        // function replaceStencilcontent(row){
+        //     if(row==undefined)
+        //         return;
+        //     //异步获取标准并匹配
+        //     $.ajax({
+        //         url:'/DynamicItemOperation/getOdIdStencilContentModel.action',
+        //         dataType:'json',
+        //         data:{'contract_no':row.contract_no},
+        //         success:function (data) {
+        //             var od_stencil_content="",id_stencil_content="";
+        //             if(data!=null) {
+        //                 if(data[0].default_value!=undefined)
+        //                     od_stencil_content=data[0].default_value;
+        //                 if(data[1].default_value!=undefined)
+        //                     id_stencil_content=data[1].default_value;
+        //                 if(od_stencil_content!=undefined&&od_stencil_content!=""){
+        //                     var str=od_stencil_content;
+        //                     str=str.replace(/\[OD\]/g, row.od);
+        //                     str=str.replace(/\[WT\]/g, row.wt);
+        //                     str=str.replace(/\[GRADE\]/g, row.grade);
+        //                     str=str.replace(/\[CONTRACTNO\]/g, row.contract_no);
+        //                     str=str.replace(/\[COATINGSPEC\]/, row.coating_standard);
+        //                     str=str.replace(/\[CLIENTSPEC\]/, row.client_spec);
+        //                     str=str.replace(/\[PROJECTNAME\]/g, row.project_name);
+        //                     str=str.replace(/\[PIPENO\]/g, row.pipe_no);
+        //                     str=str.replace(/\[PIPELENGTH\]/, row.p_length);
+        //                     var halflength=row.p_length*0.5;
+        //                     str=str.replace(/\[HALFLENGTH\]/, halflength);
+        //                     str=str.replace(/\[HEATNO\]/, row.heat_no);
+        //                     str=str.replace(/\[BATCHNO\]/, row.pipe_making_lot_no);
+        //                     var kg=row.weight*1000;
+        //                     str=str.replace(/\[WEIGHT\]/, kg);
+        //                     var coatingdate=getDateWithoutTime(row.od_coating_date)
+        //                     str=str.replace(/\[COATINGDATE\]/, coatingdate);
+        //                     if($("input[name='od_stencil_content']")!=undefined){
+        //                         $("#od_stencil_content").textbox("setValue", str);
+        //                     }
+        //
+        //                 }
+        //                 if(id_stencil_content!=undefined&&id_stencil_content!=""){
+        //                     var str=id_stencil_content;
+        //                     str=str.replace(/\[OD\]/, row.od);
+        //                     str=str.replace(/\[WT\]/, row.wt);
+        //                     str=str.replace(/\[PIPENO\]/, row.pipe_no);
+        //                     str=str.replace(/\[PIPELENGTH\]/, row.p_length);
+        //                     str=str.replace(/\[WEIGHT\]/, row.weight);
+        //                     var coatingdate=getDateWithoutTime(row.id_coating_date)
+        //                     str=str.replace(/\[COATINGDATE\]/, coatingdate);
+        //                     if($("#id_stencil_content")!=undefined)
+        //                         $("#id_stencil_content").textbox("setValue", str);
+        //                 }
+        //             }
+        //         },error:function () {
+        //             alert("Could not getODAcceptanceCriteriaByContractNo");
+        //         }
+        //     });
+        // }
 
     </script>
 
