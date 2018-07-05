@@ -38,7 +38,7 @@
         SELECT  p.*  from pipe_basic_info p INNER JOIN contract_info c ON
         p.contract_no=c.contract_no
         <where>
-            <if test="pipestatus!=null">
+            <if test="pipestatus!=null and pipestatus!='' ">
                 <foreach collection="pipestatus" item="item" open="status in (" separator="," close=")">
                     #{item}
                 </foreach>
