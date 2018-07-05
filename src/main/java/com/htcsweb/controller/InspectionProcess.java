@@ -305,10 +305,8 @@ public class InspectionProcess {
 
                     else if(inspectionProcessRecordHeader.getProcess_code().equals("coating_sampling")){
                         //设置外防取样标志
-
                         p.setOdsampling_mark("1");
                         pipeBasicInfoDao.updatePipeBasicInfo(p);
-
                     }
                     else if(inspectionProcessRecordHeader.getProcess_code().equals("coating_rebevel")){
                         //清空置外防取样标志
@@ -318,9 +316,14 @@ public class InspectionProcess {
                     else if(inspectionProcessRecordHeader.getProcess_code().equals("coating_strip")){
                         //清空外涂层涂层日期
                         //判断外防扒皮还是内防扒皮
-
-
-
+                        InspectionProcessRecordItem recorditem=inspectionProcessRecordItemDao.getInspectionProcessRecordItemByHeaderCodeAndItemCode(inspectionProcessRecordHeader.getInspection_process_record_header_code(),"strip_odid");
+                        if(recorditem.getItem_value().equals("OD")){
+                             p.setOd_coating_date(null);
+                             p.setId_coating_date(null);
+                        }else if(recorditem.getItem_value().equals("ID")){
+                            p.setId_coating_date(null);
+                        }
+                        pipeBasicInfoDao.updatePipeBasicInfo(p);
                     }
                 }
 
