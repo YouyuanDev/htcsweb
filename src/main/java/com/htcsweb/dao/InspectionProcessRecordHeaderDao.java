@@ -27,4 +27,11 @@ public interface InspectionProcessRecordHeaderDao {
 
     //根据涂敷时间得到对应的打砂检验时间
     public List<HashMap<String,Object>>getBlastInfoByCoatingInfo(@Param("pipe_no") String pipe_no,@Param("id") int id,@Param("process_code")String process_code);
+
+
+    //-----------日报
+    //获取当天外防腐总数
+    public int getODCoatingCount(@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("external_coating")String external_coating,@Param("internal_coating")String internal_coating,@Param("od")float od,@Param("wt")float wt,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
+    //获取当天外防腐合格总数与合格长度
+    public List<HashMap<String,Object>> getODCoatingAcceptedInfo(@Param("project_no")String project_no,@Param("external_coating")String external_coating,@Param("internal_coating")String internal_coating,@Param("od")float od,@Param("wt")float wt,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time,@Param("result")String result);
 }

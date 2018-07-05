@@ -65,6 +65,8 @@ public class DailyProductionReportController {
     private PipeRebevelRecordDao pipeRebevelRecordDao;
     @Autowired
     private ProjectInfoDao projectInfoDao;
+    @Autowired
+    private InspectionProcessRecordHeaderDao inspectionProcessRecordHeaderDao;
     //统计数量和长度
     private class CountSum{
         public int count=0;
@@ -743,6 +745,281 @@ public class DailyProductionReportController {
     }
 
     //------------获取各个数据-------
+//    //1.获取当天外防腐总数(获取外防终检表中数)
+//    private int getOdCoatingCount(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
+//        SimpleDateFormat timeformat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        String nextday=DateTimeUtil.getNextDay(now);
+//        int count=0;
+//        try{
+//            Date beginTime=timeformat.parse(now+" 08:00:00");
+//            Date endTime=timeformat.parse(nextday+" 08:00:00");
+//            count=odFinalInspectionProcessDao.getODCoatingCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        return count;
+//    }
+//    //2.获取当天外防腐合格支数与合格长度
+//    private CountSum getOdCoatingAcceptedCount(String now,String project_no,String external_coating,String internal_coating,float od,float wt,SimpleDateFormat timeformat){
+//        String nextday=DateTimeUtil.getNextDay(now);
+//        CountSum countSum=new CountSum();
+//        try{
+//            Date beginTime=timeformat.parse(now+" 08:00:00");
+//            Date endTime=timeformat.parse(nextday+" 08:00:00");
+//            List<HashMap<String,Object>>list1=odFinalInspectionProcessDao.getODCoatingAcceptedInfo(project_no,external_coating,internal_coating,od,wt,beginTime,endTime,"1");
+//            if(list1!=null&&list1.size()>0){
+//                HashMap<String,Object>hs=list1.get(0);
+//                if(hs!=null){
+//                    countSum.count=((Long) hs.get("odtotalcount")).intValue();
+//                    if(hs.get("odtotallength")!=null){
+//                        countSum.sum=((Double) (hs.get("odtotallength"))).floatValue();
+//                    }
+//                }
+//            }
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        return countSum;
+//    }
+//    //3.获取当天的修补支数(根据od或者id划分)
+//    private int getDailyCoatingRepairCount(String now,String project_no,String external_coating,String internal_coating,String odid,float od,float wt,SimpleDateFormat timeformat){
+//        String nextday=DateTimeUtil.getNextDay(now);
+//        int count=0;
+//        try{
+//            Date beginTime=timeformat.parse(now+" 08:00:00");
+//            Date endTime=timeformat.parse(nextday+" 08:00:00");
+//            count=coatingRepairDao.getCoatingRepairCount(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        return count;
+//    }
+//    //4.获取当天的防腐光管隔离数（外打砂和外打砂检验数量和）
+//    private int getBarePipeOnholdCount(String now,String project_no,String external_coating,String internal_coating,String odid,float od,float wt,SimpleDateFormat timeformat){
+//        String nextday=DateTimeUtil.getNextDay(now);
+//        int count=0;
+//        try{
+//            Date beginTime=timeformat.parse(now+" 08:00:00");
+//            Date endTime=timeformat.parse(nextday+" 08:00:00");
+//            if(odid!=null&&odid.equals("od")){
+//                count=barePipeGrindingCutoffRecordDao.getODBarePipeOnholdCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
+//            }
+//            else if(odid!=null&&odid.equals("id")){
+//                count=barePipeGrindingCutoffRecordDao.getIDBarePipeOnholdCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
+//            }
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        return count;
+//    }
+//    //5.光管隔离修磨数量
+//    private int getBarePipeGrindingCount(String now,String project_no,String external_coating,String internal_coating,String odid,float od,float wt,SimpleDateFormat timeformat){
+//        String nextday=DateTimeUtil.getNextDay(now);
+//        int count=0;
+//        try{
+//            Date beginTime=timeformat.parse(now+" 08:00:00");
+//            Date endTime=timeformat.parse(nextday+" 08:00:00");
+//            count=barePipeGrindingCutoffRecordDao.getBarePipeGrindingCount(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        return count;
+//    }
+//    //6.光管隔离切管数量
+//    private int getBarePipeCutoffCount(String now,String project_no,String external_coating,String internal_coating,String odid,float od,float wt,SimpleDateFormat timeformat){
+//        String nextday=DateTimeUtil.getNextDay(now);
+//        int count=0;
+//        try{
+//            Date beginTime=timeformat.parse(now+" 08:00:00");
+//            Date endTime=timeformat.parse(nextday+" 08:00:00");
+//            count=barePipeGrindingCutoffRecordDao.getBarePipeCutoffCount(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        return count;
+//    }
+//    //7.获取涂层废管数量
+//    private int getCoatingRejectedPipe(String now,String project_no,String external_coating,String internal_coating,String odid,float od,float wt,SimpleDateFormat timeformat){
+//        String nextday=DateTimeUtil.getNextDay(now);
+//        int count=0;
+//        try{
+//            Date beginTime=timeformat.parse(now+" 08:00:00");
+//            Date endTime=timeformat.parse(nextday+" 08:00:00");
+//            if(odid!=null&&odid.equals("od")){
+//                count=coatingStripDao.getODCoatingRejectedPipeCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
+//            }
+//            else if(odid!=null&&odid.equals("id")){
+//                count=coatingStripDao.getIDCoatingRejectedPipeCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
+//            }
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        System.out.println(project_no+"-"+external_coating+"-"+internal_coating+"-"+odid+"-"+od+"-"+wt+"-"+"+++++++"+count);
+//        return count;
+//    }
+//    //8.涂层废管扒皮处理合格数量
+//    private int getStripPipeAcceptedCount(String now,String project_no,String external_coating,String internal_coating,String odid,float od,float wt,SimpleDateFormat timeformat){
+//        String nextday=DateTimeUtil.getNextDay(now);
+//        //System.out.println(now+":"+nextday+":"+project_no+":"+external_coating+":"+internal_coating+":"+od+":"+wt+":"+odid);
+//        int count=0;
+//        try{
+//            Date beginTime=timeformat.parse(now+" 08:00:00");
+//            Date endTime=timeformat.parse(nextday+" 08:00:00");
+//            count=coatingStripDao.getStripPipeAcceptedCount(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }finally {
+//
+//        }
+//        return count;
+//    }
+//
+//    //---------------内防腐------------
+//    //9.获取当天内防腐总数
+//    private int getIdCoatingCount(String now,String project_no,String external_coating,String internal_coating,float od,float wt,SimpleDateFormat timeformat){
+//        String nextday=DateTimeUtil.getNextDay(now);
+//        int count=0;
+//        try{
+//            Date beginTime=timeformat.parse(now+" 08:00:00");
+//            Date endTime=timeformat.parse(nextday+" 08:00:00");
+//            count=idFinalInspectionProcessDao.getIDCoatingCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        return count;
+//    }
+//    //10.获取当天的内防腐合格数和长度
+//    private CountSum getIdCoatingAcceptedCount(String now,String project_no,String external_coating,String internal_coating,float od,float wt,SimpleDateFormat timeformat){
+//        String nextday=DateTimeUtil.getNextDay(now);
+//        CountSum countSum=new CountSum();
+//        try{
+//            Date beginTime=timeformat.parse(now+" 08:00:00");
+//            Date endTime=timeformat.parse(nextday+" 08:00:00");
+//            List<HashMap<String,Object>>list1=idFinalInspectionProcessDao.getIDCoatingAcceptedInfo(project_no,external_coating,internal_coating,od,wt,beginTime,endTime,"1");
+//            if(list1!=null&&list1.size()>0){
+//                HashMap<String,Object>hs=list1.get(0);
+//                if(hs!=null){
+//                    countSum.count=((Long)hs.get("idtotalcount")).intValue();
+//                    if(hs.get("idtotallength")!=null){
+//                        countSum.sum=((Double) hs.get("idtotallength")).floatValue();
+//                    }
+//                }
+//            }
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        return countSum;
+//    }
+//    //12.白班、夜班样管信息
+//    private List<PipeSamplingRecord>getPipeSamplingInfo(String now,int type,String project_no,String external_coating,String internal_coating,float od,float wt,SimpleDateFormat timeformat){
+//        List<PipeSamplingRecord>list=new ArrayList<>();
+//        Date begin_time=null,end_time=null;
+//        try{
+//            //白班
+//            if(type==0){
+//                String beginTime=now+" 08:00:00";
+//                String endTime=now+" 20:00:00";
+//                begin_time=timeformat.parse(beginTime);
+//                end_time=timeformat.parse(endTime);
+//            }else if(type==1){//夜班
+//                String beginTime=now+" 20:00:00";
+//                String nextday=DateTimeUtil.getNextDay(now);
+//                String endTime=nextday+" 08:00:00";
+//                begin_time=timeformat.parse(beginTime);
+//                end_time=timeformat.parse(endTime);
+//            }
+//            list=pipeSamplingRecordDao.getPipeSamplingInfo(project_no,external_coating,internal_coating,od,wt,begin_time,end_time);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        return list;
+//    }
+//    //13.管段切斜信息(切割分为两种，一种是样管切割，一种是瑕疵切割)
+//    //13.1获取样管切割个数
+//    private int getSampleCutoffCount(String now,String project_no,String external_coating,String internal_coating,float od,float wt,SimpleDateFormat timeformat){
+//        String nextday=DateTimeUtil.getNextDay(now);
+//        int count=0;
+//        try{
+//            Date beginTime=timeformat.parse(now+" 08:00:00");
+//            Date endTime=timeformat.parse(nextday+" 08:00:00");
+//            count=pipeSamplingRecordDao.getSampleCutoffCount(project_no,null,external_coating,internal_coating,null,od,wt,beginTime,endTime);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        return count;
+//    }
+//    //13.2获取隔离管切割管数量
+//    private int getBarePipeCutoffCount(String now,String project_no,String external_coating,String internal_coating,float od,float wt,SimpleDateFormat timeformat){
+//        String nextday=DateTimeUtil.getNextDay(now);
+//        int count=0;
+//        try{
+//            Date beginTime=timeformat.parse(now+" 08:00:00");
+//            Date endTime=timeformat.parse(nextday+" 08:00:00");
+//            count=barePipeGrindingCutoffRecordDao.getBarePipeCutoffCount(project_no,null,external_coating,internal_coating,null,od,wt,beginTime,endTime);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        return count;
+//    }
+//    //13.3获取重倒棱合格管数量
+//    private int getAcceptedRebevelCount(String now,String project_no,String external_coating,String internal_coating,float od,float wt,SimpleDateFormat timeformat){
+//        String nextday=DateTimeUtil.getNextDay(now);
+//        int count=0;
+//        try{
+//            Date beginTime=timeformat.parse(now+" 08:00:00");
+//            Date endTime=timeformat.parse(nextday+" 08:00:00");
+//            count=pipeRebevelRecordDao.getAcceptedRebevelCount(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        return count;
+//    }
+
+    public  String getFormatString(String param){
+        if(param!=null&&!param.equals("")){
+            return  param;
+        }else{
+            return  " ";
+        }
+    }
+    private WritableCellFormat cellFormat_ProjectName(){
+        WritableCellFormat cellFormat=null;
+        try{
+            WritableFont font=new WritableFont(WritableFont.ARIAL,28,WritableFont.BOLD,false, UnderlineStyle.NO_UNDERLINE);
+            cellFormat=new WritableCellFormat(font);
+            cellFormat.setVerticalAlignment(VerticalAlignment.CENTRE);
+            cellFormat.setAlignment(Alignment.CENTRE);
+            cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
+        }catch (Exception e){
+
+        }
+        return cellFormat;
+    }
+    private WritableCellFormat cellFormat_CoatingType(){
+        WritableCellFormat cellFormat=null;
+        try{
+            WritableFont font=new WritableFont(WritableFont.ARIAL,9,WritableFont.BOLD,false, UnderlineStyle.NO_UNDERLINE);
+            cellFormat=new WritableCellFormat(font);
+            cellFormat.setVerticalAlignment(VerticalAlignment.CENTRE);
+            cellFormat.setAlignment(Alignment.CENTRE);
+            cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
+        }catch (Exception e){
+        }
+        return cellFormat;
+    }
+    private WritableCellFormat cellFormat3(){
+        WritableCellFormat wcf=null;
+        try{
+            wcf=new WritableCellFormat();
+            wcf.setBorder(Border.ALL, BorderLineStyle.THIN);
+            wcf.setAlignment(Alignment.CENTRE);
+        }catch (Exception e){
+        }
+        return wcf;
+    }
+
+
+    //------------获取各个数据-------
     //1.获取当天外防腐总数(获取外防终检表中数)
     private int getOdCoatingCount(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
         SimpleDateFormat timeformat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -751,7 +1028,7 @@ public class DailyProductionReportController {
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            count=odFinalInspectionProcessDao.getODCoatingCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
+            count=inspectionProcessRecordHeaderDao.getODCoatingCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -971,48 +1248,5 @@ public class DailyProductionReportController {
             e.printStackTrace();
         }
         return count;
-    }
-
-    public  String getFormatString(String param){
-        if(param!=null&&!param.equals("")){
-            return  param;
-        }else{
-            return  " ";
-        }
-    }
-    private WritableCellFormat cellFormat_ProjectName(){
-        WritableCellFormat cellFormat=null;
-        try{
-            WritableFont font=new WritableFont(WritableFont.ARIAL,28,WritableFont.BOLD,false, UnderlineStyle.NO_UNDERLINE);
-            cellFormat=new WritableCellFormat(font);
-            cellFormat.setVerticalAlignment(VerticalAlignment.CENTRE);
-            cellFormat.setAlignment(Alignment.CENTRE);
-            cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
-        }catch (Exception e){
-
-        }
-        return cellFormat;
-    }
-    private WritableCellFormat cellFormat_CoatingType(){
-        WritableCellFormat cellFormat=null;
-        try{
-            WritableFont font=new WritableFont(WritableFont.ARIAL,9,WritableFont.BOLD,false, UnderlineStyle.NO_UNDERLINE);
-            cellFormat=new WritableCellFormat(font);
-            cellFormat.setVerticalAlignment(VerticalAlignment.CENTRE);
-            cellFormat.setAlignment(Alignment.CENTRE);
-            cellFormat.setBorder(Border.ALL, BorderLineStyle.THIN);
-        }catch (Exception e){
-        }
-        return cellFormat;
-    }
-    private WritableCellFormat cellFormat3(){
-        WritableCellFormat wcf=null;
-        try{
-            wcf=new WritableCellFormat();
-            wcf.setBorder(Border.ALL, BorderLineStyle.THIN);
-            wcf.setAlignment(Alignment.CENTRE);
-        }catch (Exception e){
-        }
-        return wcf;
     }
 }

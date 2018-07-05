@@ -303,7 +303,7 @@
     ]
   },
   { "process_code": "coating_sampling",
-    "input": "",
+    "input": "coating_sampling",
     "output":
     [
       {
@@ -560,7 +560,7 @@
     ]
   },
   { "process_code": "lab_testing_od_regular",
-    "input": "",
+    "input": "lab_testing_od_regular",
     "output":
     [
       {
@@ -581,7 +581,7 @@
     ]
   },
   { "process_code": "lab_testing_dsc",
-    "input": "",
+    "input": "lab_testing_dsc",
     "output":
     [
       {
@@ -602,7 +602,7 @@
     ]
   },
   { "process_code": "lab_testing_pe",
-    "input": "",
+    "input": "lab_testing_pe",
     "output":
     [
       {
@@ -623,7 +623,7 @@
     ]
   },
   { "process_code": "lab_testing_glass",
-    "input": "",
+    "input": "lab_testing_glass",
     "output":
     [
       {
@@ -644,7 +644,7 @@
     ]
   },
   { "process_code": "lab_testing_id_regular",
-    "input": "",
+    "input": "lab_testing_id_regular",
     "output":
     [
       {

@@ -144,4 +144,38 @@
         order by ib.operation_time desc
         limit 1
     </select>
+
+
+
+    <select id="getODCoatingCount" resultType="java.lang.Integer">
+        SELECT count(*) from inspection_process_record_header o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no=#{project_no}
+            </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no=#{mill_no}
+            </if>
+            <if test="external_coating!=null">
+                AND c.external_coating=#{external_coating}
+            </if>
+            <if test="internal_coating!=null">
+                AND c.internal_coating=#{internal_coating}
+            </if>
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            AND o.process_code='od_final_inspection'
+        </where>
+    </select>
+
+
 </mapper>

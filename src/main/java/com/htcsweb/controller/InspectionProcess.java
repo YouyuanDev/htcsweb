@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
@@ -101,26 +102,42 @@ public class InspectionProcess {
             String mill_no=inspectionProcessRecordHeader.getMill_no();
             String project_no="";
 
-
+            boolean inputStatusVerified=false;
             List<HashMap<String,Object>> list=pipeBasicInfoDao.getPipeInfoByNo(pipeno);
             String p_status="";
             if(list.size()>0) {
                 p_status = (String) list.get(0).get("status");
-            }
-
-            boolean inputStatusVerified=false;
-            if(inputStatusList!=null){
-                String [] statusArr=inputStatusList.split(",");
-                for(int i=0; i<statusArr.length;i++){
-                    inputStatusVerified=statusArr[i].equals(p_status);
-                    if(inputStatusVerified)break;
+                if(inputStatusList!=null){
+                    if(inputStatusList.equals("lab_testing_od_regular")){
+                        if( list.get(0).get("odsampling_mark").equals("1"))
+                            inputStatusVerified=true;
+                    }else if(inputStatusList.equals("lab_testing_dsc")){
+                        if( list.get(0).get("od_dsc_sample_mark").equals("1"))
+                            inputStatusVerified=true;
+                    }else if(inputStatusList.equals("lab_testing_pe")){
+                        if( list.get(0).get("od_pe_sample_mark").equals("1"))
+                            inputStatusVerified=true;
+                    }else if(inputStatusList.equals("lab_testing_glass")){
+                        if( list.get(0).get("id_glass_sample_mark").equals("1"))
+                            inputStatusVerified=true;
+                    }else if(inputStatusList.equals("lab_testing_id_regular")){
+                        if( list.get(0).get("idsampling_mark").equals("1"))
+                            inputStatusVerified=true;
+                    }else if(inputStatusList.equals("coating_sampling")){
+                        if( list.get(0).get("odsampling_mark").equals("0"))
+                            inputStatusVerified=true;
+                    }
+                    else{
+                        String [] statusArr=inputStatusList.split(",");
+                        for(int i=0; i<statusArr.length;i++){
+                            inputStatusVerified=statusArr[i].equals(p_status);
+                            if(inputStatusVerified)break;
+                        }
+                    }
                 }
             }
-
-
             if(inspectionProcessRecordHeader.getId()==0){
                 //添加
-
                 if(inputStatusVerified){
                     InspectionProcessRecordHeader oldrecord=inspectionProcessRecordHeaderDao.getRecentRecordByPipeNo(inspectionProcessRecordHeader.getProcess_code(),pipeno);
                     if(oldrecord!=null&&oldrecord.getResult().equals("10")){
@@ -245,6 +262,37 @@ public class InspectionProcess {
                                     if(tmp_last_status!=null)
                                         p.setLast_accepted_status(p.getStatus());
                                     int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
+
+                                    if(statusRes>0&&inspectionProcessRecordHeader.getResult().equals("1")){
+                                        //APP使用，外喷砂检验合格后的管子，自动添加odcoating记录
+                                        HttpSession session = request.getSession();
+                                        //把用户数据保存在session域对象中
+                                        String app_mill_no = (String) session.getAttribute("millno");
+                                        app_mill_no="mill_2";
+                                        if (app_mill_no != null) {
+                                            //此处为APP应用
+                                            List<HashMap<String, Object>> lt = pipeBasicInfoDao.getPipeInfoByNo(pipeno);
+                                            if (lt.size() > 0) {
+                                                    InspectionProcessRecordHeader header=new InspectionProcessRecordHeader();
+                                                    header.setId(0);
+                                                    header.setPipe_no(pipeno);
+                                                    header.setMill_no(mill_no);
+                                                    header.setOperation_time(new Date());
+                                                    header.setOperator_no(inspectionProcessRecordHeader.getOperator_no());
+                                                    header.setResult("10");
+                                                    header.setRemark("INIT");
+                                                    header.setUpload_files("");
+                                                    header.setInspection_process_record_header_code("IPRH"+UUID.randomUUID().toString());
+                                                    inspectionProcessRecordHeaderDao.addInspectionProcessRecordHeader(header);
+                                            }
+                                        }
+                                    }
+
+
+
+
+
+
                                     break;
                                 }
 
