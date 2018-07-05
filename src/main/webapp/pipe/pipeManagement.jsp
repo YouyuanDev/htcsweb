@@ -283,6 +283,17 @@
                              $.messager.alert('Warning', data.message);
                              return;
                          }
+                         alert(data.od_blast);
+                         // if(data.odBlastProcessRecord!=undefined&&data.odBlastProcessRecord!=null){
+                         //     getTemplate(data.record[i]);
+                             // for(var i=0;i<data.record.length;i++){
+                             //     if((i==0)||(i%2==0)){
+                             //         div+="<tr>"
+                             //     }
+                             //     div+=getTemplate(data.record[i]);
+                             // }
+                         //}
+                         return;
                          //外打砂
                          if(data.odBlastProcessRecord!=undefined&&data.odBlastProcessRecord!=null){
                               var obj=data.odBlastProcessRecord;
@@ -930,6 +941,25 @@
         }
         function closePipeRecordDialog() {
             $('#pipeRecordDialog').dialog('close');
+        }
+        function getTemplate(process_name,item,dict){
+            template += '<table  title="" class="dataintable" style="width:100%;height:auto;"><thead><tr><th class="i18n1" name="'+process_name+'" colspan="6">' + process_name + '</th></tr></thead><tbody>';
+            template += '<tr>';
+            for(var key in dict) {
+                if(i > 3) {
+                    template += '</tr><tr>';
+                    i = 1;
+                }
+                if(key.trim().length>0){
+                    template += ' <td class="i18n1" name='+key+' style="width:120px;vertical-align: middle;text-align: center;">' + key + '</td>';
+                    template += ' <td style="width:280px;color:#878787;vertical-align: middle;text-align: center;">' + dict[key] + '</td>';
+                }else{
+                    template += ' <td style="width:120px;vertical-align: middle;text-align: center;"></td>';
+                    template += ' <td style="width:280px;color:#878787;vertical-align: middle;text-align: center;"></td>';
+                }
+                i++;
+            }
+            template+='</tr></tbody></table>';
         }
     </script>
 
