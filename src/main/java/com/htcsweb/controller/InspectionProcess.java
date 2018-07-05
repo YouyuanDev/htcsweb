@@ -223,8 +223,22 @@ public class InspectionProcess {
                                     Object obj = con.newInstance();
                                     obj=p;
                                     Field newname = c.getDeclaredField(des_pipe_property_name);
+                                    String type = newname.getGenericType().toString();    //获取属性的类型
                                     newname.setAccessible(true);
-                                    newname.set(obj, set_value);
+                                    if (type.equals("class java.lang.String")) {
+                                        newname.set(obj, set_value);
+                                    }
+                                    else if(type.equals("class java.lang.Integer")) {
+                                        if(set_value!=null){
+                                            newname.set(obj, Integer.valueOf(set_value));
+                                        }
+
+                                    }
+                                    else if(type.equals("class java.lang.Float")) {
+                                        if(set_value!=null){
+                                            newname.set(obj, Float.valueOf(set_value));
+                                        }
+                                    }
                                     p=(PipeBasicInfo)obj;
                                     int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                                     System.out.println("设置属性"+des_pipe_property_name+"="+set_value);
