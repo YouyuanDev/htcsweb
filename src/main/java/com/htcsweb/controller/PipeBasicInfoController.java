@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.htcsweb.util.ResponseUtil;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -66,6 +67,12 @@ public class PipeBasicInfoController {
     private BarePipeGrindingCutoffRecordDao barePipeGrindingCutoffRecordDao;
     @Autowired
     private PipeRebevelRecordDao pipeRebevelRecordDao;
+    @Autowired
+    DynamicMeasurementItemDao dynamicMeasurementItemDao;
+    @Autowired
+    private InspectionProcessRecordHeaderDao headerDao;
+    @Autowired
+    InspectionTimeRecordDao inspectionTimeRecordDao;
     //给app搜索使用，无需登录
 //    @RequestMapping("/getPipeNumber")
 //    @ResponseBody
@@ -906,88 +913,272 @@ public class PipeBasicInfoController {
         String mmp="";
         try{
             Map<String,Object> maps=new HashMap<String,Object>();
+
             String pipe_no=request.getParameter("pipe_no");
+
             if(pipe_no!=null&&!pipe_no.equals("")){
                 //根据钢管编号查询钢管的所有记录
                 //1.查询外打砂记录
-                OdBlastProcess odBlastProcessRecord=odBlastProcessDao.getRecentRecordByPipeNo(pipe_no);
+                InspectionProcessRecordHeader header=headerDao.getRecentRecordByPipeNo("od_blast",pipe_no);
+                if(header!=null){
+                    System.out.println("header_code()"+header.getInspection_process_record_header_code());
+                    List<HashMap<String, Object>>od_blast_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"od_blast",header.getInspection_process_record_header_code());
+                    maps.put("od_blast",od_blast_map);
+                }
                 //2.查询外打砂检验记录
-                OdBlastInspectionProcess odBlastInspectionProcessRecord=odBlastInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
+                header=headerDao.getRecentRecordByPipeNo("od_blast_inspection",pipe_no);
+                if(header!=null){
+                    List<HashMap<String, Object>>od_blast_inspection_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"od_blast_inspection",header.getInspection_process_record_header_code());
+                    maps.put("od_blast_inspection",od_blast_inspection_map);
+                }
                 //3.查询外涂记录
-                OdCoatingProcess odCoatingProcessRecord=odCoatingProcessDao.getRecentRecordByPipeNo(pipe_no);
-                OdCoating3LpeProcess odCoating3LpeProcessRecord=odCoating3LpeProcessDao.getRecentRecordByPipeNo(pipe_no);
+                header=headerDao.getRecentRecordByPipeNo("od_coating",pipe_no);
+                if(header!=null){
+                    List<HashMap<String, Object>>od_coating_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"od_coating",header.getInspection_process_record_header_code());
+                    maps.put("od_coating",od_coating_map);
+                }
                 //4.查询外涂检验记录
-                OdCoatingInspectionProcess odCoatingInspectionProcessRecord=odCoatingInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
-                OdCoating3LpeInspectionProcess odCoating3LpeInspectionProcessRecord=odCoating3LpeInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
+                header=headerDao.getRecentRecordByPipeNo("od_coating_inspection",pipe_no);
+                if(header!=null){
+                    List<HashMap<String, Object>>od_coating_inspection_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"od_coating_inspection",header.getInspection_process_record_header_code());
+                    maps.put("od_coating_inspection",od_coating_inspection_map);
+                }
                 //5.查询外喷标记录
-                OdStencilProcess odStencilProcessRecord=odStencilProcessDao.getRecentRecordByPipeNo(pipe_no);
+                header=headerDao.getRecentRecordByPipeNo("od_stencil",pipe_no);
+                if(header!=null){
+                    List<HashMap<String, Object>>od_stencil_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"od_stencil",header.getInspection_process_record_header_code());
+                    maps.put("od_stencil",od_stencil_map);
+                }
                 //6.查询外涂终检记录
-                OdFinalInspectionProcess odFinalInspectionProcessRecord=odFinalInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
+                header=headerDao.getRecentRecordByPipeNo("od_final_inspection",pipe_no);
+                if(header!=null){
+                    List<HashMap<String, Object>>od_final_inspection_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"od_final_inspection",header.getInspection_process_record_header_code());
+                    maps.put("od_final_inspection",od_final_inspection_map);
+                }
                 //7.查询内打砂记录
-                IdBlastProcess idBlastProcessRecord=idBlastProcessDao.getRecentRecordByPipeNo(pipe_no);
+                header=headerDao.getRecentRecordByPipeNo("id_blast",pipe_no);
+                if(header!=null){
+                    List<HashMap<String, Object>>id_blast_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"id_blast",header.getInspection_process_record_header_code());
+                    maps.put("id_blast",id_blast_map);
+                }
                 //8.查询内打砂检验记录
-                IdBlastInspectionProcess idBlastInspectionProcessRecord=idBlastInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
+                header=headerDao.getRecentRecordByPipeNo("id_blast_inspection",pipe_no);
+                if(header!=null){
+                    List<HashMap<String, Object>>id_blast_inspection_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"id_blast_inspection",header.getInspection_process_record_header_code());
+                    maps.put("id_blast",id_blast_inspection_map);
+                }
                 //9.查询内涂记录
-                IdCoatingProcess idCoatingProcessRecord=idCoatingProcessDao.getRecentRecordByPipeNo(pipe_no);
+                header=headerDao.getRecentRecordByPipeNo("id_coating",pipe_no);
+                if(header!=null){
+                    List<HashMap<String, Object>>id_coating_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"id_coating",header.getInspection_process_record_header_code());
+                    maps.put("id_coating",id_coating_map);
+                }
                 //10.查询内涂检验记录
-                IdCoatingInspectionProcess idCoatingInspectionProcessRecord=idCoatingInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
+                header=headerDao.getRecentRecordByPipeNo("id_coating_inspection",pipe_no);
+                if(header!=null){
+                    List<HashMap<String, Object>>id_coating_inspection_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"id_coating_inspection",header.getInspection_process_record_header_code());
+                    maps.put("id_coating_inspection",id_coating_inspection_map);
+                }
                 //11.查询内喷标记录
-                IdStencilProcess idStencilProcessRecord=idStencilProcessDao.getRecentRecordByPipeNo(pipe_no);
+                header=headerDao.getRecentRecordByPipeNo("id_stencil",pipe_no);
+                if(header!=null){
+                    List<HashMap<String, Object>>id_stencil_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"id_stencil",header.getInspection_process_record_header_code());
+                    maps.put("id_stencil",id_stencil_map);
+                }
                 //12.查询内涂终检记录
-                IdFinalInspectionProcess idFinalInspectionProcess=idFinalInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
+                header=headerDao.getRecentRecordByPipeNo("id_final_inspection",pipe_no);
+                if(header!=null){
+                    List<HashMap<String, Object>>id_final_inspection_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"id_final_inspection",header.getInspection_process_record_header_code());
+                    maps.put("id_final_inspection",id_final_inspection_map);
+                }
                 //13.扒皮记录
-                List<CoatingStrip>coatingStrips=coatingStripDao.getRecentRecordByPipeNo(pipe_no);
+                header=headerDao.getRecentRecordByPipeNo("coating_strip",pipe_no);
+                if(header!=null){
+                    List<HashMap<String, Object>>coating_strip_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"coating_strip",header.getInspection_process_record_header_code());
+                    maps.put("coating_strip",coating_strip_map);
+                }
                 //14.修补
-                List<CoatingRepair>coatingRepairs=coatingRepairDao.getRecentRecordByPipeNo(pipe_no);
+                header=headerDao.getRecentRecordByPipeNo("coating_repair",pipe_no);
+                if(header!=null){
+                    List<HashMap<String, Object>>coating_repair_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"coating_repair",header.getInspection_process_record_header_code());
+                    maps.put("coating_repair",coating_repair_map);
+                }
                 //15.修磨切割
-                List<BarePipeGrindingCutoffRecord>barePipeGrindingCutoffRecords=barePipeGrindingCutoffRecordDao.getRecentRecordByPipeNo(pipe_no);
+                header=headerDao.getRecentRecordByPipeNo("grinding_cutoff",pipe_no);
+                if(header!=null){
+                    List<HashMap<String, Object>>grinding_cutoff_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"grinding_cutoff",header.getInspection_process_record_header_code());
+                    maps.put("grinding_cutoff",grinding_cutoff_map);
+                }
                 //16.倒棱
-                List<PipeRebevelRecord>pipeRebevelRecords=pipeRebevelRecordDao.getRecentRecordByPipeNo(pipe_no);
-                if(odBlastProcessRecord!=null)
-                   maps.put("odBlastProcessRecord",odBlastProcessRecord);
-                if(odBlastInspectionProcessRecord!=null)
-                    maps.put("odBlastInspectionProcessRecord",odBlastInspectionProcessRecord);
-                if(odCoatingProcessRecord!=null)
-                    maps.put("odCoatingProcessRecord",odCoatingProcessRecord);
-                if(odCoatingInspectionProcessRecord!=null)
-                    maps.put("odCoatingInspectionProcessRecord",odCoatingInspectionProcessRecord);
-                if(odCoating3LpeProcessRecord!=null)
-                    maps.put("odCoating3LpeProcessRecord",odCoating3LpeProcessRecord);
-                if(odCoating3LpeInspectionProcessRecord!=null)
-                    maps.put("odCoating3LpeInspectionProcessRecord",odCoating3LpeInspectionProcessRecord);
-                if(odStencilProcessRecord!=null)
-                    maps.put("odStencilProcessRecord",odStencilProcessRecord);
-                if(odFinalInspectionProcessRecord!=null)
-                    maps.put("odFinalInspectionProcessRecord",odFinalInspectionProcessRecord);
-                if(idBlastProcessRecord!=null)
-                    maps.put("idBlastProcessRecord",idBlastProcessRecord);
-                if(idBlastInspectionProcessRecord!=null)
-                    maps.put("idBlastInspectionProcessRecord",idBlastInspectionProcessRecord);
-                if(idCoatingProcessRecord!=null)
-                    maps.put("idCoatingProcessRecord",idCoatingProcessRecord);
-                if(idCoatingInspectionProcessRecord!=null)
-                    maps.put("idCoatingInspectionProcessRecord",idCoatingInspectionProcessRecord);
-                if(idStencilProcessRecord!=null)
-                    maps.put("idStencilProcessRecord",idStencilProcessRecord);
-                if(idFinalInspectionProcess!=null)
-                    maps.put("idFinalInspectionProcess",idFinalInspectionProcess);
-                if(coatingStrips!=null&&coatingStrips.size()>0)
-                    maps.put("coatingStrips",coatingStrips);
-                if(coatingRepairs!=null&&coatingRepairs.size()>0)
-                    maps.put("coatingRepairs",coatingRepairs);
-                if(barePipeGrindingCutoffRecords!=null&&barePipeGrindingCutoffRecords.size()>0)
-                    maps.put("barePipeGrindingCutoffRecords",barePipeGrindingCutoffRecords);
-                if(pipeRebevelRecords!=null&&pipeRebevelRecords.size()>0)
-                    maps.put("pipeRebevelRecords",pipeRebevelRecords);
+                header=headerDao.getRecentRecordByPipeNo("coating_rebevel",pipe_no);
+                if(header!=null){
+                    List<HashMap<String, Object>>coating_rebevel_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"coating_rebevel",header.getInspection_process_record_header_code());
+                    maps.put("coating_rebevel",coating_rebevel_map);
+                }
                 maps.put("success",true);
+                System.out.println("-----------------------------------");
                 mmp= JSONArray.toJSONString(maps);
+                System.out.println("-----------------------------------");
             }
         }catch (Exception ex){
             ex.printStackTrace();
         }
-
         return mmp;
     }
+    public List<HashMap<String, Object>> getDynamicItemByPipeNoProcessCodeHeaderCode(String pipe_no,String process_code,String inspection_process_record_header_code) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+        JSONObject json=new JSONObject();
+        List<HashMap<String, Object>> itemlist=new ArrayList<>();
+        if(pipe_no!=null&&!pipe_no.equals("")&&process_code!=null&&!process_code.equals("")) {
+            itemlist = dynamicMeasurementItemDao.getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no, process_code, inspection_process_record_header_code);
+        }
+        System.out.println(JSONObject.toJSONString(itemlist));
+        return  itemlist;
+    }
+    private String InitStencil_content(String processCode,String pipeNo,String stencilContent){
+
+        //设置外防或内防喷标
+        if(processCode!=null&&(processCode.equals("od_stencil")||processCode.equals("id_stencil"))){
+            List<HashMap<String,Object>> pipelist= pipeBasicInfoDao.getPipeInfoByNo(pipeNo);
+            if(pipelist.size()>0){
+                float od=(float)pipelist.get(0).get("od");
+                float wt=(float)pipelist.get(0).get("wt");
+                String grade=(String)pipelist.get(0).get("grade");
+                String contract_no=(String)pipelist.get(0).get("contract_no");
+                String coating_standard=(String)pipelist.get(0).get("coating_standard");
+                String client_spec=(String)pipelist.get(0).get("client_spec");
+                String project_name=(String)pipelist.get(0).get("project_name");
+                float p_length=(float)pipelist.get(0).get("p_length");
+                float halflength=p_length*0.5f;
+                String heat_no=(String)pipelist.get(0).get("heat_no");
+                String pipe_making_lot_no=(String)pipelist.get(0).get("pipe_making_lot_no");
+                float kg=(float)pipelist.get(0).get("weight")*1000;
+                Date od_coating_date=(Date)pipelist.get(0).get("od_coating_date");
+                String od_coating_dateString="";
+                if(od_coating_date!=null) {
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                    od_coating_dateString = formatter.format(od_coating_date);
+                }
+                Date id_coating_date=(Date)pipelist.get(0).get("id_coating_date");
+                String id_coating_dateString="";
+                if(id_coating_date!=null) {
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                    id_coating_dateString = formatter.format(id_coating_date);
+                }
+
+                //替换
+                stencilContent = stencilContent.replace("[OD]", String.valueOf(od));
+                stencilContent = stencilContent.replace("[WT]", String.valueOf(wt));
+                stencilContent = stencilContent.replace("[GRADE]", grade);
+                stencilContent = stencilContent.replace("[CONTRACTNO]", contract_no);
+                stencilContent = stencilContent.replace("[COATINGSPEC]", coating_standard);
+                stencilContent = stencilContent.replace("[CLIENTSPEC]", client_spec);
+                stencilContent = stencilContent.replace("[PROJECTNAME]", project_name);
+                stencilContent = stencilContent.replace("[PIPENO]", pipeNo);
+                stencilContent = stencilContent.replace("[PIPELENGTH]", String.valueOf(p_length));
+                stencilContent = stencilContent.replace("[HALFLENGTH]", String.valueOf(halflength));
+                stencilContent = stencilContent.replace("[HEATNO]",heat_no);
+                stencilContent = stencilContent.replace("[BATCHNO]",pipe_making_lot_no);
+                stencilContent = stencilContent.replace("[WEIGHT]",String.valueOf(kg));
+                if(processCode.equals("od_stencil"))
+                    stencilContent = stencilContent.replace("[COATINGDATE]",od_coating_dateString);
+                if(processCode.equals("id_stencil"))
+                    stencilContent = stencilContent.replace("[COATINGDATE]",id_coating_dateString);
+            }
+
+        }
+        return stencilContent;
+    }
+
+
+//    @RequestMapping("/searchPipeRecord")
+//    @ResponseBody
+//    public String searchPipeRecord(HttpServletRequest request){
+//        String mmp="";
+//        try{
+//            Map<String,Object> maps=new HashMap<String,Object>();
+//            String pipe_no=request.getParameter("pipe_no");
+//            if(pipe_no!=null&&!pipe_no.equals("")){
+//                //根据钢管编号查询钢管的所有记录
+//                //1.查询外打砂记录
+//                OdBlastProcess odBlastProcessRecord=odBlastProcessDao.getRecentRecordByPipeNo(pipe_no);
+//                //2.查询外打砂检验记录
+//                OdBlastInspectionProcess odBlastInspectionProcessRecord=odBlastInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
+//                //3.查询外涂记录
+//                OdCoatingProcess odCoatingProcessRecord=odCoatingProcessDao.getRecentRecordByPipeNo(pipe_no);
+//                OdCoating3LpeProcess odCoating3LpeProcessRecord=odCoating3LpeProcessDao.getRecentRecordByPipeNo(pipe_no);
+//                //4.查询外涂检验记录
+//                OdCoatingInspectionProcess odCoatingInspectionProcessRecord=odCoatingInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
+//                OdCoating3LpeInspectionProcess odCoating3LpeInspectionProcessRecord=odCoating3LpeInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
+//                //5.查询外喷标记录
+//                OdStencilProcess odStencilProcessRecord=odStencilProcessDao.getRecentRecordByPipeNo(pipe_no);
+//                //6.查询外涂终检记录
+//                OdFinalInspectionProcess odFinalInspectionProcessRecord=odFinalInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
+//                //7.查询内打砂记录
+//                IdBlastProcess idBlastProcessRecord=idBlastProcessDao.getRecentRecordByPipeNo(pipe_no);
+//                //8.查询内打砂检验记录
+//                IdBlastInspectionProcess idBlastInspectionProcessRecord=idBlastInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
+//                //9.查询内涂记录
+//                IdCoatingProcess idCoatingProcessRecord=idCoatingProcessDao.getRecentRecordByPipeNo(pipe_no);
+//                //10.查询内涂检验记录
+//                IdCoatingInspectionProcess idCoatingInspectionProcessRecord=idCoatingInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
+//                //11.查询内喷标记录
+//                IdStencilProcess idStencilProcessRecord=idStencilProcessDao.getRecentRecordByPipeNo(pipe_no);
+//                //12.查询内涂终检记录
+//                IdFinalInspectionProcess idFinalInspectionProcess=idFinalInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
+//                //13.扒皮记录
+//                List<CoatingStrip>coatingStrips=coatingStripDao.getRecentRecordByPipeNo(pipe_no);
+//                //14.修补
+//                List<CoatingRepair>coatingRepairs=coatingRepairDao.getRecentRecordByPipeNo(pipe_no);
+//                //15.修磨切割
+//                List<BarePipeGrindingCutoffRecord>barePipeGrindingCutoffRecords=barePipeGrindingCutoffRecordDao.getRecentRecordByPipeNo(pipe_no);
+//                //16.倒棱
+//                List<PipeRebevelRecord>pipeRebevelRecords=pipeRebevelRecordDao.getRecentRecordByPipeNo(pipe_no);
+//                if(odBlastProcessRecord!=null)
+//                   maps.put("odBlastProcessRecord",odBlastProcessRecord);
+//                if(odBlastInspectionProcessRecord!=null)
+//                    maps.put("odBlastInspectionProcessRecord",odBlastInspectionProcessRecord);
+//                if(odCoatingProcessRecord!=null)
+//                    maps.put("odCoatingProcessRecord",odCoatingProcessRecord);
+//                if(odCoatingInspectionProcessRecord!=null)
+//                    maps.put("odCoatingInspectionProcessRecord",odCoatingInspectionProcessRecord);
+//                if(odCoating3LpeProcessRecord!=null)
+//                    maps.put("odCoating3LpeProcessRecord",odCoating3LpeProcessRecord);
+//                if(odCoating3LpeInspectionProcessRecord!=null)
+//                    maps.put("odCoating3LpeInspectionProcessRecord",odCoating3LpeInspectionProcessRecord);
+//                if(odStencilProcessRecord!=null)
+//                    maps.put("odStencilProcessRecord",odStencilProcessRecord);
+//                if(odFinalInspectionProcessRecord!=null)
+//                    maps.put("odFinalInspectionProcessRecord",odFinalInspectionProcessRecord);
+//                if(idBlastProcessRecord!=null)
+//                    maps.put("idBlastProcessRecord",idBlastProcessRecord);
+//                if(idBlastInspectionProcessRecord!=null)
+//                    maps.put("idBlastInspectionProcessRecord",idBlastInspectionProcessRecord);
+//                if(idCoatingProcessRecord!=null)
+//                    maps.put("idCoatingProcessRecord",idCoatingProcessRecord);
+//                if(idCoatingInspectionProcessRecord!=null)
+//                    maps.put("idCoatingInspectionProcessRecord",idCoatingInspectionProcessRecord);
+//                if(idStencilProcessRecord!=null)
+//                    maps.put("idStencilProcessRecord",idStencilProcessRecord);
+//                if(idFinalInspectionProcess!=null)
+//                    maps.put("idFinalInspectionProcess",idFinalInspectionProcess);
+//                if(coatingStrips!=null&&coatingStrips.size()>0)
+//                    maps.put("coatingStrips",coatingStrips);
+//                if(coatingRepairs!=null&&coatingRepairs.size()>0)
+//                    maps.put("coatingRepairs",coatingRepairs);
+//                if(barePipeGrindingCutoffRecords!=null&&barePipeGrindingCutoffRecords.size()>0)
+//                    maps.put("barePipeGrindingCutoffRecords",barePipeGrindingCutoffRecords);
+//                if(pipeRebevelRecords!=null&&pipeRebevelRecords.size()>0)
+//                    maps.put("pipeRebevelRecords",pipeRebevelRecords);
+//                maps.put("success",true);
+//                mmp= JSONArray.toJSONString(maps);
+//            }
+//        }catch (Exception ex){
+//            ex.printStackTrace();
+//        }
+//
+//        return mmp;
+//    }
+
     @RequestMapping("/doInStoageTransfer")
     public String doInStoageTransfer(HttpServletRequest request,HttpServletResponse response)throws Exception{
 
