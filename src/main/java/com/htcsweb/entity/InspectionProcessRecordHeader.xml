@@ -185,7 +185,7 @@
         left join project_info pro on c.project_no=pro.project_no
         <where>
             AND o.process_code='od_final_inspection'
-            c.external_coating=#{external_coating}
+            AND c.external_coating=#{external_coating}
             AND c.internal_coating=#{internal_coating}
             AND pro.project_no=#{project_no}
             AND format(c.od,3)=format(#{od},3)
@@ -212,7 +212,7 @@
             AND o.process_code='coating_repair'
             <if test="odid!=null and odid!=''">
                 AND  rditem.item_code='repair_odid'
-                AND  rditem.item_value#{odid}
+                AND  rditem.item_value=#{odid}
             </if>
             <if test="project_no!=null and project_no!=''">
                 AND  pro.project_no=#{project_no}
@@ -324,8 +324,16 @@
         <where>
             AND o.result='1'
             AND o.process_code='grinding_cutoff'
-            AND  rditem.item_code='grinding_cutoff'
-            AND  rditem.item_value LIKE CONCAT('%Grinding%')
+
+            AND o.inspection_process_record_header_code in
+            (select inspection_process_record_header_code from inspection_process_record_item where item_code='grinding_cutoff' and item_value LIKE  '%Grinding%')
+
+            <if test="odid!=null and odid!=''">
+                AND o.inspection_process_record_header_code in
+                (select inspection_process_record_header_code from inspection_process_record_item
+                where item_code='grinding_cutoff_odid' and item_value =#{odid} )
+            </if>
+
             <if test="project_no!=null and project_no!=''">
                 AND  pro.project_no=#{project_no}
             </if>
@@ -350,7 +358,7 @@
         </where>
     </select>
 
-    <!--获取光管隔离切割数量-->
+    <!--获取光管隔离切割数量 包括外防取样-->
     <select id="getBarePipeCutoffCount" resultType="java.lang.Integer">
         SELECT count(DISTINCT(o.pipe_no)) from inspection_process_record_header o
         inner join inspection_process_record_item rditem on rditem.inspection_process_record_header_code= o.inspection_process_record_header_code
@@ -359,8 +367,15 @@
         left join project_info pro on c.project_no=pro.project_no
         <where>
             AND o.process_code='grinding_cutoff'
-            AND  rditem.item_code='grinding_cutoff'
-            AND  rditem.item_value LIKE CONCAT('%CutOff%')
+
+            AND o.inspection_process_record_header_code in
+            (select inspection_process_record_header_code from inspection_process_record_item where item_code='grinding_cutoff' and item_value LIKE  '%CutOff%')
+
+            <if test="odid!=null and odid!=''">
+                AND o.inspection_process_record_header_code in
+                (select inspection_process_record_header_code from inspection_process_record_item
+                where item_code='grinding_cutoff_odid' and item_value =#{odid} )
+            </if>
 
             <if test="project_no!=null and project_no!=''">
                 AND  pro.project_no=#{project_no}
@@ -541,7 +556,7 @@
         left join project_info pro on c.project_no=pro.project_no
         <where>
             AND o.process_code='id_final_inspection'
-            c.external_coating=#{external_coating}
+            AND c.external_coating=#{external_coating}
             AND c.internal_coating=#{internal_coating}
             AND pro.project_no=#{project_no}
             AND format(c.od,3)=format(#{od},3)
@@ -558,7 +573,10 @@
 
     <!--白班、夜班样管信息-->
     <select id="getPipeSamplingInfo" resultType="map">
-        SELECT o.*,rditem.* from inspection_process_record_header o
+        SELECT o.*,rditem.*,
+        SUM(CASE item_code WHEN 'sample_cutoff_length' THEN item_value END) AS 'sample_cutoff_length',
+        SUM(CASE item_code WHEN 'sample_pipe_cutoff_length' THEN item_value END) AS 'sample_pipe_cutoff_length'
+        from inspection_process_record_header o
         inner join inspection_process_record_item rditem on rditem.inspection_process_record_header_code= o.inspection_process_record_header_code
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no
@@ -566,8 +584,8 @@
         <where>
             AND o.result='1'
             AND o.process_code='coating_sampling'
-            AND rditem.item_code='sample_pipe_cutoff_length'
-            c.external_coating=#{external_coating}
+            AND ( rditem.item_code='sample_cutoff_length' or rditem.item_code='sample_pipe_cutoff_length' )
+            AND c.external_coating=#{external_coating}
             AND c.internal_coating=#{internal_coating}
             AND pro.project_no=#{project_no}
             AND format(c.od,3)=format(#{od},3)
@@ -581,6 +599,68 @@
         </where>
     </select>
 
+    <!--获取样管切割的个数-->
+    <select id="getSampleCutoffCount" resultType="java.lang.Integer">
+        SELECT COUNT(DISTINCT(o.pipe_no)) from inspection_process_record_header o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+            AND o.result='1'
+            AND o.process_code='coating_sampling'
+            <if test="project_no!=null and project_no!=''">
+                AND  pro.project_no=#{project_no}
+            </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no=#{mill_no}
+            </if>
+
+            <if test="external_coating!=null">
+                AND c.external_coating=#{external_coating}
+            </if>
+            <if test="internal_coating!=null">
+                AND c.internal_coating=#{internal_coating}
+            </if>
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+    </select>
+
+
+    <!--重倒棱合格管数量-->
+    <select id="getAcceptedRebevelCount" resultType="int">
+        SELECT count(DISTINCT(o.pipe_no)) from inspection_process_record_header o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+            AND o.result='1'
+            AND o.process_code='coating_rebevel'
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no=#{project_no}
+            </if>
+            <if test="external_coating!=null">
+                AND c.external_coating=#{external_coating}
+            </if>
+            <if test="internal_coating!=null">
+                AND c.internal_coating=#{internal_coating}
+            </if>
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+    </select>
 
 
 </mapper>

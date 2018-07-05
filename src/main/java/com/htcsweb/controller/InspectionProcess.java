@@ -203,7 +203,7 @@ public class InspectionProcess {
                         }
 
 
-                        if(inspectionProcessRecordHeader.getResult().equals("!")){
+                        if(inspectionProcessRecordHeader.getResult().equals("1")){
                             //特殊检验项的处理
                             for(int i=0;additionParamArray!=null&&i<additionParamArray.size();i++) {
                                 JSONObject additionParammap = (JSONObject) additionParamArray.get(i);
@@ -226,8 +226,11 @@ public class InspectionProcess {
                                             obj=p;
                                             Field newname = c.getDeclaredField(des_pipe_property_name);
                                             String type = newname.getGenericType().toString();    //获取属性的类型
-                                            //System.out.println("字段类型="+type+"=");
+                                            System.out.println("字段="+des_pipe_property_name+"=");
+                                            System.out.println("字段类型="+type+"=");
+                                            System.out.println("value="+set_value+"=");
                                             newname.setAccessible(true);
+
                                             if (type.contains("String")) {
                                                 newname.set(obj, set_value);
                                             }

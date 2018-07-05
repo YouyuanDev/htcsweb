@@ -607,33 +607,49 @@ public class DailyProductionReportController {
                             int samplePipeCount=0;
                             if(sampleDayList!=null&&sampleDayList.size()>0){
                                 HashMap<String,Object> record=sampleDayList.get(0);
-
-                                    samplePipeNoDayShift=(String)record.get("pipe_no");
+                                if(record!=null){
+                                    if(record.get("pipe_no")!=null) {
+                                        samplePipeNoDayShift = (String) record.get("pipe_no");
+                                    }
                                     //samplePipeOriginalLengthDayShift=record.getOriginal_pipe_length();
                                     //BigDecimal b2=new  BigDecimal(samplePipeOriginalLengthDayShift);
                                     //samplePipeOriginalLengthDayShift=b2.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
-                                    samplePipeCutLengthDayShift=Float.parseFloat((String)record.get("sample_pipe_cutoff_length"));
+
+
+                                    Double cutofflength=(Double)record.get("sample_cutoff_length");
+                                    if(cutofflength!=null&&!cutofflength.equals(""))
+                                        samplePipeCutLengthDayShift=cutofflength.floatValue();
+
                                     BigDecimal b3=new  BigDecimal(samplePipeCutLengthDayShift);
                                     samplePipeCutLengthDayShift=b3.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
                                     samplePipeCount++;
+                                }
+
                             }
                             List<HashMap<String,Object>>sampleNightList=getPipeSamplingInfo(item,1,project_no,external_coating,internal_coating,od,wt,timeformat);
                             //夜班试验管编号、原始长度、切样长度
                             String samplePipeNoNightShift=" ";float  samplePipeOriginalLengthNightShift=0f,samplePipeCutLengthNightShift=0f;
                             if(sampleNightList!=null&&sampleNightList.size()>0){
                                 HashMap<String,Object> record=sampleNightList.get(0);
-                                samplePipeNoNightShift=(String)record.get("pipe_no");
+                                if(record!=null){
+                                    if(record.get("pipe_no")!=null) {
+                                        samplePipeNoNightShift = (String) record.get("pipe_no");
+                                    }
 //                                samplePipeOriginalLengthNightShift=record.getOriginal_pipe_length();
 //                                BigDecimal b4=new  BigDecimal(samplePipeOriginalLengthNightShift);
 //                                samplePipeOriginalLengthNightShift=b4.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
-                                samplePipeCutLengthNightShift=Float.parseFloat((String)record.get("sample_pipe_cutoff_length"));
-                                BigDecimal b5=new  BigDecimal(samplePipeCutLengthNightShift);
-                                samplePipeCutLengthNightShift=b5.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
-                                samplePipeCount++;
+
+                                    Double cutofflength=(Double)record.get("sample_cutoff_length");
+                                    if(cutofflength!=null&&!cutofflength.equals(""))
+                                        samplePipeCutLengthNightShift=cutofflength.floatValue();
+
+
+                                    BigDecimal b5=new  BigDecimal(samplePipeCutLengthNightShift);
+                                    samplePipeCutLengthNightShift=b5.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
+                                    samplePipeCount++;
+                                }
+
                             }
-                            //以上已改完
-
-
 
                             //需重新倒棱管数量(切长处理管+样管切样)
                             int onholdCutOffCount=getBarePipeCutoffCount(item,project_no,external_coating,internal_coating,od,wt,timeformat);
@@ -1239,7 +1255,11 @@ public class DailyProductionReportController {
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            count=pipeSamplingRecordDao.getSampleCutoffCount(project_no,null,external_coating,internal_coating,null,od,wt,beginTime,endTime);
+
+            count=inspectionProcessRecordHeaderDao.getSampleCutoffCount(project_no,null,external_coating,internal_coating,null,od,wt,beginTime,endTime);
+
+
+            //count=pipeSamplingRecordDao.getSampleCutoffCount(project_no,null,external_coating,internal_coating,null,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -1252,7 +1272,10 @@ public class DailyProductionReportController {
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            count=barePipeGrindingCutoffRecordDao.getBarePipeCutoffCount(project_no,null,external_coating,internal_coating,null,od,wt,beginTime,endTime);
+
+            count=inspectionProcessRecordHeaderDao.getBarePipeCutoffCount(project_no,null,external_coating,internal_coating,null,od,wt,beginTime,endTime);
+
+            //count=barePipeGrindingCutoffRecordDao.getBarePipeCutoffCount(project_no,null,external_coating,internal_coating,null,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -1265,6 +1288,8 @@ public class DailyProductionReportController {
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
+            count=inspectionProcessRecordHeaderDao.getAcceptedRebevelCount(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);
+
             count=pipeRebevelRecordDao.getAcceptedRebevelCount(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
