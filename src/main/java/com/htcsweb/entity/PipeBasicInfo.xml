@@ -745,4 +745,7 @@
             #{item}
         </foreach>
     </update>
+    <update id="updateSamplingMark">
+        UPDATE pipe_basic_info set odsampling_mark='1' where pipe_no=#{pipe_no}
+    </update>
 </mapper>

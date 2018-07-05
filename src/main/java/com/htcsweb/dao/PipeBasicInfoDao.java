@@ -88,6 +88,6 @@ public interface PipeBasicInfoDao {
 
     public List<HashMap<String,Object>> checkPipeForShipment(@Param("pipe_no")String pipe_no);
 
-
+    public int updateSamplingMark(@Param("pipe_no")String pipe_no);
 
 }

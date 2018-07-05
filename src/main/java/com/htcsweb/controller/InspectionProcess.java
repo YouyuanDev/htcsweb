@@ -58,9 +58,9 @@ public class InspectionProcess {
         String outputJson=request.getParameter("outputJson");
         String inputStatusList=request.getParameter("inputStatusList");
 
-        System.out.println("dynamicJson="+dynamicJson);
-        System.out.println("outputJson="+outputJson);
-        System.out.println("inputStatusList="+inputStatusList);
+//        System.out.println("dynamicJson="+dynamicJson);
+//        System.out.println("outputJson="+outputJson);
+//        System.out.println("inputStatusList="+inputStatusList);
 
         JSONObject dynamicMap=null;
         JSONObject outputMap =null;
@@ -126,10 +126,12 @@ public class InspectionProcess {
                     if(oldrecord!=null&&oldrecord.getResult().equals("10")){
                         //存在一条pending数据，不给予insert处理
                         msg="已存在待定记录,不能新增记录";
+                        System.out.println("------1");
                     }else{
+                        System.out.println("------2");
                         inspectionProcessRecordHeader.setInspection_process_record_header_code(inspectionProcessRecordHeader.getInspection_process_record_header_code());
                         resTotal=inspectionProcessRecordHeaderDao.addInspectionProcessRecordHeader(inspectionProcessRecordHeader);
-
+                        System.out.println("resTotal="+resTotal);
                     }
                 }
                 project_no=(String)list.get(0).get("project_no");
@@ -139,7 +141,7 @@ public class InspectionProcess {
             }else{
                 //修改！
                 resTotal=inspectionProcessRecordHeaderDao.updateInspectionProcessRecordHeader(inspectionProcessRecordHeader);
-
+                System.out.println("------3");
             }
             if(resTotal>0){
 
@@ -232,11 +234,13 @@ public class InspectionProcess {
                                 String tmp_last_status=(String)rmap.get("last_status");
                                 //找到对应关系
                                 if(inspectionProcessRecordHeader.getResult().equals(tmp_result)){
-                                    if(tmp_next_status!=null&&!tmp_next_status.equals("last_status")){
-                                        p.setStatus(tmp_next_status);
-                                    }
-                                    else if(tmp_next_status.equals("last_status")){
-                                        p.setStatus(p.getLast_accepted_status());
+                                    if(tmp_next_status!=null){
+                                        if(!tmp_next_status.equals("last_status")){
+                                            p.setStatus(tmp_next_status);
+                                        }
+                                        else if(tmp_next_status.equals("last_status")){
+                                            p.setStatus(p.getLast_accepted_status());
+                                        }
                                     }
                                     if(tmp_last_status!=null)
                                         p.setLast_accepted_status(p.getStatus());
@@ -269,7 +273,6 @@ public class InspectionProcess {
                         }
                         int headerId=inspectionProcessRecordHeader.getId();
                         List<HashMap<String,Object>>blastlist=inspectionProcessRecordHeaderDao.getBlastInfoByCoatingInfo(pipeno,headerId,blast_type);
-                        System.out.println("blastlistSize="+blastlist.size());
                         if(blastlist!=null&&blastlist.size()>0){
                             HashMap<String,Object>hs=blastlist.get(0);
                             int odBlastId=Integer.parseInt(String.valueOf(hs.get("id")));
@@ -278,11 +281,15 @@ public class InspectionProcess {
                             float minute=((begin_time-end_time)/(1000));
                             minute=minute/60;
                             minute=(float)(Math.round(minute*100))/100;
-                            System.out.println(String.valueOf(hs.get("coatingtime")));
-                            System.out.println(String.valueOf(hs.get("blasttime")));
                             //开始更新涂敷等待时间
                             String inspection_process_record_header_code=String.valueOf(hs.get("inspection_process_record_header_code"));
                             inspectionProcessRecordItemDao.updateElapsedTime(inspection_process_record_header_code,coating_type,String.valueOf(minute));
+                        }
+                    }
+                    //设置外防取样标志
+                    else if(process_code.equals("coating_sampling")){
+                        if(pipeno!=null){
+                             pipeBasicInfoDao.updateSamplingMark(pipeno);
                         }
                     }
                 }
