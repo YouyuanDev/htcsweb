@@ -117,7 +117,7 @@ public class PipeBasicInfoController {
             String pipestatus=request.getParameter("pipestatus");
             String[]statusArr=null;
             if(pipestatus!=null&&!pipestatus.equals("")){
-                if(pipestatus.equals("lab_testing_od_regular")||pipestatus.equals("lab_testing_dsc")||pipestatus.equals("lab_testing_pe")||pipestatus.equals("lab_testing_glass")||pipestatus.equals("lab_testing_id_regular")){
+                if(pipestatus.equals("lab_testing_od_regular")||pipestatus.equals("lab_testing_dsc")||pipestatus.equals("lab_testing_pe")||pipestatus.equals("lab_testing_glass")||pipestatus.equals("lab_testing_id_regular")||pipestatus.equals("coating_sampling")){
                     pipestatus="";
                 }else{
                     statusArr=pipestatus.split(",");
