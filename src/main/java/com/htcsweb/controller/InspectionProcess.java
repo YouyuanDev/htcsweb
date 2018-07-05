@@ -305,6 +305,14 @@ public class InspectionProcess {
                         p.setRebevel_mark("1");
                         pipeBasicInfoDao.updatePipeBasicInfo(p);
                     }
+                    else if(inspectionProcessRecordHeader.getProcess_code().equals("grinding_cutoff")){
+                        //钢管切割设置倒棱标识位
+                        InspectionProcessRecordItem recorditem=inspectionProcessRecordItemDao.getInspectionProcessRecordItemByHeaderCodeAndItemCode(inspectionProcessRecordHeader.getInspection_process_record_header_code(),"grinding_cutoff");
+                        if(recorditem!=null&&recorditem.getItem_value().contains("CutOff")){
+                            p.setRebevel_mark("1");
+                            pipeBasicInfoDao.updatePipeBasicInfo(p);
+                        }
+                    }
                     else if(inspectionProcessRecordHeader.getProcess_code().equals("coating_rebevel")){
                         //清空置外防取样标志
                         p.setRebevel_mark("0");
@@ -321,13 +329,6 @@ public class InspectionProcess {
                             p.setId_coating_date(null);
                         }
                         pipeBasicInfoDao.updatePipeBasicInfo(p);
-                    }else if(inspectionProcessRecordHeader.getProcess_code().equals("grinding_cutoff")){
-                        //钢管切割设置倒棱标识位
-                        InspectionProcessRecordItem recorditem=inspectionProcessRecordItemDao.getInspectionProcessRecordItemByHeaderCodeAndItemCode(inspectionProcessRecordHeader.getInspection_process_record_header_code(),"grinding_cutoff");
-                        if(recorditem!=null&&recorditem.getItem_value().contains("CutOff")){
-                            p.setRebevel_mark("1");
-                            pipeBasicInfoDao.updatePipeBasicInfo(p);
-                        }
                     }
                 }
 

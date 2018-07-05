@@ -256,6 +256,12 @@
   },
   { "process_code": "grinding_cutoff",
     "input": "onhold",
+    "additionParams":[
+      {
+        "addition_item_code":"defect_pipe_remaining_length",
+        "des_pipe_property_name":"p_length"
+      }
+    ],
     "output":
     [
       {
@@ -304,6 +310,12 @@
   },
   { "process_code": "coating_sampling",
     "input": "coating_sampling",
+    "additionParams":[
+      {
+        "addition_item_code":"sample_pipe_cutoff_length",
+        "des_pipe_property_name":"p_length"
+      }
+    ],
     "output":
     [
       {

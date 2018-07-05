@@ -742,7 +742,7 @@
 </div>
 
 <!--添加、修改框-->
-<div id="hlProDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;height:auto;">
+<div id="hlProDialog" class="easyui-dialog" data-options="title:'添加',modal:true"  closed="true" buttons="#dlg-buttons" style="display: none;padding:5px;width:950px;max-height:700px;overflow-y:scroll;">
    <form id="proForm" method="post">
        <fieldset style="width:900px;border:solid 1px #aaa;margin-top:8px;position:relative;">
            <legend class="i18n1" name="pipebasicinfo">钢管信息</legend>
