@@ -286,7 +286,6 @@
                          var language=getCookie("userLanguage");
 
                          if(data.od_blast!=undefined){
-                             alert(toString.call(data.od_blast));
                              getTemplate("odblastprocess",data.od_blast,language);
                          }
                          if(data.od_blast_inspection!=undefined){
@@ -346,7 +345,6 @@
                              //     div+=getTemplate(data.record[i]);
                              // }
                          //}
-                         return;
                          //外打砂
                          // if(data.odBlastProcessRecord!=undefined&&data.odBlastProcessRecord!=null){
                          //      var obj=data.odBlastProcessRecord;
@@ -999,31 +997,55 @@
             template += '<table  title="" class="dataintable" style="width:100%;height:auto;"><thead><tr><th class="i18n1" name="'+process_name+'" colspan="6">' + process_name + '</th></tr></thead><tbody>';
             template += '<tr>';
             var j=1;
-            var remark="";
+            var remark="",result="";
             for(var i=0;i<dict.length;i++){
                 if(j > 3) {
                     template+= '</tr><tr>';
                     j = 1;
                 }
                 if(dict[i].result!=undefined||dict[i].remark!=undefined) {
-                    template +=' <td class="i18n1" name="result" style="width:120px;vertical-align: middle;text-align: center;">结果</td>';
-                    template +=' <td  style="width:120px;vertical-align: middle;text-align: center;">' +dict[i].result+ '</td>';
                     remark=dict[i].remark;
+                    result=dict[i].result;
                 }else{
-                    if(language&&language=="en"){
-                        template+= ' <td  style="width:120px;vertical-align: middle;text-align: center;">' +dict[i].item_name_en+ '</td>';
-                    }else{
-                        template +=' <td  style="width:120px;vertical-align: middle;text-align: center;">' +dict[i].item_name+ '</td>';
-                    }
+                    var max_value=dict[i].max_value;
+                    var min_value=dict[i].min_value;
                     var item_value=dict[i].item_value==undefined?"":dict[i].item_value;
-                    template += '<td style="width:280px;color:#878787;vertical-align: middle;text-align: center;">'+item_value+'</td>';
+                    var range="";var flag=false;
+                    if(max_value!=undefined&&min_value!=undefined){
+                        if(dict[i].need_verify!=undefined&&dict[i].need_verify=="1"){
+                            range="("+min_value+"~"+max_value+")";
+                            if(item_value!=undefined&&!isNaN(item_value)){
+                                if(parseFloat(max_value)<parseFloat(item_value))
+                                    flag=true;
+                                if(parseFloat(min_value)>parseFloat(item_value))
+                                    flag=true;
+                            }
+                        }
+                    }
+                    if(language&&language=="en"){
+                        var unit=(dict[i].unit_name_en==undefined||dict[i].unit_name_en=="")?"":' ('+dict[i].unit_name_en+') ';
+                        template+= ' <td  style="width:120px;vertical-align: middle;text-align: center;">' +dict[i].item_name_en+unit+range+'</td>';
+                    }else{
+                        var unit=(dict[i].unit_name==undefined||dict[i].unit_name_en=="")?"":' ('+dict[i].unit_name+') ';
+                        template +=' <td  style="width:120px;vertical-align: middle;text-align: center;">' +dict[i].item_name+unit+range+'</td>';
+                    }
+                    if(flag){
+                        template += '<td style="width:280px;color:red;vertical-align: middle;text-align: center;">'+item_value+'</td>';
+                    }else{
+                        template += '<td style="width:280px;color:#878787;vertical-align: middle;text-align: center;">'+item_value+'</td>';
+                    }
+
                 }
                 j++;
             }
             template+='</tr>';
             template+='<tr>';
+            template +=' <td class="i18n1" name="result" style="width:120px;vertical-align: middle;text-align: center;">结果</td>';
+            template +=' <td colspan="5" style="width:120px;vertical-align: middle;text-align: center;">' +result+ '</td>';
+            template+='</tr>';
+            template+='<tr>';
             template += ' <td class="i18n1" name="remark" style="width:120px;vertical-align: middle;text-align: center;">备注</td>';
-            template += ' <td colspan="5" style="color:#878787;vertical-align: middle;text-align: center;">' + remark + '</td>';
+            template += ' <td colspan="5" style="color:#878787;vertical-align: middle;text-align: left;">' + remark + '</td>';
             template+='</tr></tbody></table>';
             $('#pipeRecord-container').append(template);
         }
