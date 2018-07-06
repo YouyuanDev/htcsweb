@@ -908,8 +908,8 @@
         $('#searchBar1').css('display','block');
         //$('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
     });
-    $(function () {
-        hlLanguage("../i18n/");
-    });
-    //hlLanguage("../i18n/");
+    // $(function () {
+    //     hlLanguage("../i18n/");
+    // });
+    hlLanguage("../i18n/");
 </script>
