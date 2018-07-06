@@ -468,60 +468,60 @@ public class APPRequestTransferController {
 
 
 
-    private Map<String,HashMap<String,Object>> getInspectionFrequency(String pipe_no,String mill_no,String process_code){
-        ///////得到本次检验频率
-
-        List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByPipeNoMillNo(pipe_no,mill_no,null);
-        //List<HashMap<String,Object>> ltif= inspectionFrequencyDao.getFrequencyInfoByPipeNo(pipe_no);
-
-        List<HashMap<String,Object>> ltif= inspectionFrequencyDao.getFrequencyInfoByPipeNo(pipe_no);
-
-
-        Map<String,HashMap<String,Object>> maps=new HashMap<String,HashMap<String,Object>>();
-        Date now=new Date();
-
-        if(ltif.size()>0){
-            HashMap<String,Object> insmap=new HashMap<String,Object>();
-            insmap=ltif.get(0);
-
-            Iterator iter = insmap.entrySet().iterator();		//获取key和value的set
-            while (iter.hasNext()) {//迭代inspectionFreq
-                Map.Entry entry = (Map.Entry) iter.next();		//把hashmap转成Iterator再迭代到entry
-                String key = (String)entry.getKey();		//从entry获取key
-                if(key.equals("id")||key.equals("inspection_frequency_no"))
-                    continue;
-                //System.out.println("key="+key);
-                float freq = (float)entry.getValue();	//从entry获取value
-                HashMap<String,Object> m=new HashMap<String,Object>();
-                boolean needInspectNow=true;
-                String lastInspectionTime="";
-                for(int i=0;i<lt.size();i++){
-                    InspectionTimeRecord timeRecord=lt.get(i);
-                    if(timeRecord.getInspection_item().equals(key)){
-                        //找到检验记录了
-                        //检验频率 秒
-                        float freqSec=freq*60*60;
-                        lastInspectionTime=timeRecord.getInspction_time().toString();
-                        //间隔秒
-                        long interval = (now.getTime() - timeRecord.getInspction_time().getTime())/1000;
-
-                        if(interval<freqSec){
-                            //间隔小于检验频率，不需要检验
-                            needInspectNow=false;
-                        }
-                        break;
-                    }
-                }
-
-                m.put("lastInspectionTime",lastInspectionTime);
-                m.put("needInspectNow",needInspectNow);
-                m.put("InspectionItem",key);
-                maps.put(key,m);
-            }
-
-        }
-        return maps;
-    }
+//    private Map<String,HashMap<String,Object>> getInspectionFrequency(String pipe_no,String mill_no,String process_code){
+//        ///////得到本次检验频率
+//
+//        List<InspectionTimeRecord> lt=inspectionTimeRecordDao.getRecordByPipeNoMillNo(pipe_no,mill_no,null);
+//        //List<HashMap<String,Object>> ltif= inspectionFrequencyDao.getFrequencyInfoByPipeNo(pipe_no);
+//
+//        List<HashMap<String,Object>> ltif= inspectionFrequencyDao.getFrequencyInfoByPipeNo(pipe_no);
+//
+//
+//        Map<String,HashMap<String,Object>> maps=new HashMap<String,HashMap<String,Object>>();
+//        Date now=new Date();
+//
+//        if(ltif.size()>0){
+//            HashMap<String,Object> insmap=new HashMap<String,Object>();
+//            insmap=ltif.get(0);
+//
+//            Iterator iter = insmap.entrySet().iterator();		//获取key和value的set
+//            while (iter.hasNext()) {//迭代inspectionFreq
+//                Map.Entry entry = (Map.Entry) iter.next();		//把hashmap转成Iterator再迭代到entry
+//                String key = (String)entry.getKey();		//从entry获取key
+//                if(key.equals("id")||key.equals("inspection_frequency_no"))
+//                    continue;
+//                //System.out.println("key="+key);
+//                float freq = (float)entry.getValue();	//从entry获取value
+//                HashMap<String,Object> m=new HashMap<String,Object>();
+//                boolean needInspectNow=true;
+//                String lastInspectionTime="";
+//                for(int i=0;i<lt.size();i++){
+//                    InspectionTimeRecord timeRecord=lt.get(i);
+//                    if(timeRecord.getInspection_item().equals(key)){
+//                        //找到检验记录了
+//                        //检验频率 秒
+//                        float freqSec=freq*60*60;
+//                        lastInspectionTime=timeRecord.getInspction_time().toString();
+//                        //间隔秒
+//                        long interval = (now.getTime() - timeRecord.getInspction_time().getTime())/1000;
+//
+//                        if(interval<freqSec){
+//                            //间隔小于检验频率，不需要检验
+//                            needInspectNow=false;
+//                        }
+//                        break;
+//                    }
+//                }
+//
+//                m.put("lastInspectionTime",lastInspectionTime);
+//                m.put("needInspectNow",needInspectNow);
+//                m.put("InspectionItem",key);
+//                maps.put(key,m);
+//            }
+//
+//        }
+//        return maps;
+//    }
 
     //根据项目编号获取原材料实验标准
 //    @RequestMapping("/getRawMaterialCriteriaByProjecteNo")
