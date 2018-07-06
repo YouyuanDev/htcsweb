@@ -186,7 +186,7 @@
       },
       {
         "result":"1",
-        "result_name":"进入外防成品入库工序",
+        "result_name":"合格,进入外防成品入库工序",
         "result_name_en":"Accept, go OD stockin process",
         "next_status":"od6",
         "last_status":"od6"
