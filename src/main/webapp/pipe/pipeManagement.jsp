@@ -288,9 +288,12 @@
                              return;
                          }
                          var language=getCookie("userLanguage");
-                         for(var key in data){
-                             if(key.indexOf('header')==-1){
-                                 getTemplate(key,data[key],language);
+                         for(var i=0;i<data.length;i++){
+                             for(var key in data[i]){
+                                 alert(key);
+                                 if(key.indexOf('header')==-1){
+                                     getTemplate(key,data[i][key],language,data[i][key+"_header"]);
+                                 }
                              }
                          }
                          // if(data.od_blast!=undefined){
@@ -409,7 +412,8 @@
         function closePipeRecordDialog() {
             $('#pipeRecordDialog').dialog('close');
         }
-        function getTemplate(process_code,array,language){
+        function getTemplate(process_code,array,language,header_dict){
+
             var template="";
             template += '<table  title="" class="dataintable" style="width:100%;height:auto;"><thead><tr><th class="i18n1" name="'+process_code+'" colspan="6">' + process_code + '</th></tr></thead><tbody>';
             template += '<tr>';
@@ -421,7 +425,7 @@
                     template+= '</tr><tr>';
                     j = 1;
                 }
-                var dict=array[i][process_code+"_header"];
+                var dict=header_dict;
                 if(dict.result!=undefined||dict.remark!=undefined) {
                     remark=dict.remark;
                     result=dict.result;
