@@ -24,12 +24,6 @@ import java.util.*;
 @RequestMapping("/APPRequestTransfer")
 public class APPRequestTransferController {
 
-
-//    @Autowired
-//    private ODCoatingAcceptanceCriteriaDao odcoatingacceptancecriteriaDao;
-//    @Autowired
-//    private IDCoatingAcceptanceCriteriaDao idcoatingacceptancecriteriaDao;
-
     @Autowired
     private AcceptanceCriteriaDao acceptanceCriteriaDao;
 
@@ -40,27 +34,12 @@ public class APPRequestTransferController {
     private InspectionTimeRecordDao inspectionTimeRecordDao;
 
     @Autowired
-    private InspectionFrequencyDao inspectionFrequencyDao;
-
-//    @Autowired
-//    private PipeBodyAcceptanceCriteriaDao pipeBodyAcceptanceCriteriaDao;
-
-    @Autowired
     private CoatingPowderInfoDao coatingPowderInfoDao;
 
-//    @Autowired
-//    LabTestingAcceptanceCriteria2FbeDao labTestingAcceptanceCriteria2FbeDao;
-//
-//    @Autowired
-//    LabTestingAcceptanceCriteria3LpeDao labTestingAcceptanceCriteria3LpeDao;
-//
-//    @Autowired
-//    RawMaterialTestingAcceptanceCriteria2FbeDao rawMaterialTestingAcceptanceCriteria2FbeDao;
-//
-//    @Autowired
-//    RawMaterialTestingAcceptanceCriteria3LpeDao rawMaterialTestingAcceptanceCriteria3LpeDao;
 
 
+    @Autowired
+    private InspectionProcessRecordHeaderDao inspectionProcessRecordHeaderDao;
 
     //用于APP请求重定向
     @RequestMapping(value = "/getCoatingInfoByPipeNo",produces = "text/plain;charset=utf-8")
@@ -466,7 +445,32 @@ public class APPRequestTransferController {
         }
     }
 
-
+    //APP根据项目编号获取试验信息
+    @RequestMapping(value = "/getLabTestingInfoByProjectNo")
+    @ResponseBody
+    public String getLabTestingInfoByProjectNo(HttpServletRequest request) {
+        String project_no=request.getParameter("project_no");
+        String page= request.getParameter("page");
+        String rows= request.getParameter("rows");
+        if(page==null){
+            page="1";
+        }
+        if(rows==null){
+            rows="20";
+        }
+        int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
+        List<HashMap<String,Object>>list=inspectionProcessRecordHeaderDao.getLabTestingInfoByProjectNo(project_no,start,Integer.parseInt(rows));
+        Map<String, Object> maps = new HashMap<String, Object>();
+        if (list!=null&&list.size()>0) {
+            //是待定状态
+            maps.put("success",true);
+            maps.put("record",list);
+        } else {
+            maps.put("success", false);
+        }
+        String mmp= JSONArray.toJSONString(maps);
+        return mmp;
+    }
 
 //    private Map<String,HashMap<String,Object>> getInspectionFrequency(String pipe_no,String mill_no,String process_code){
 //        ///////得到本次检验频率

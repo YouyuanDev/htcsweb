@@ -691,4 +691,27 @@
         </where>
     </select>
 
+
+
+
+    <!--APP根据项目编号获取试验信息-->
+    <select id="getLabTestingInfoByProjectNo" resultType="map">
+        SELECT process_code as testing_type,o.id,o.result,o.operation_time,o.pipe_no as pipe_no from inspection_process_record_header o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no=#{project_no}
+            </if>
+            AND (o.process_code='lab_testing_od_regular' OR o.process_code='lab_testing_dsc' OR o.process_code='lab_testing_pe'
+                OR o.process_code='lab_testing_glass' OR o.process_code='lab_testing_id_regular' OR o.process_code='lab_testing_raw_material_3LPE'
+                OR o.process_code='lab_testing_raw_material_2FBE' OR o.process_code='lab_testing_raw_material_EPOXY' )
+        </where>
+
+        order by operation_time desc
+        limit #{skip},#{take}
+    </select>
+
+
 </mapper>

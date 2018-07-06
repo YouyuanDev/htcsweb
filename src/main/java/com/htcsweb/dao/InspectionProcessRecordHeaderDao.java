@@ -75,4 +75,8 @@ public interface InspectionProcessRecordHeaderDao {
     //获取发运的数量和长度
     public List<HashMap<String,Object>> getShippingCountAndLength(@Param("project_no")String project_no,@Param("external_coating")String external_coating,@Param("internal_coating")String internal_coating,@Param("od")float od,@Param("wt")float wt,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
 
+    //APP根据项目编号获取试验信息
+    public List<HashMap<String,Object>>getLabTestingInfoByProjectNo(@Param("project_no") String project_no, @Param("skip") int skip, @Param("take") int take);
+
+
 }
