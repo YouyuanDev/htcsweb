@@ -181,7 +181,7 @@
                 }
             });
 
-            alert(JSON.stringify( arr ));
+            //alert(JSON.stringify( arr ));
 
             $('#dynamicJson').val(JSON.stringify( arr ));
 
@@ -924,10 +924,10 @@
            </tr>
        </table>
            <input type="hidden" id="fileslist" name="upload_files" value=""/>
-           <input type="text" id="process_code" name="process_code" value=""/>
+           <input type="hidden" id="process_code" name="process_code" value=""/>
            <input type="hidden" id="dynamicJson" name="dynamicJson" value=""/>
-           <input type="text" id="outputJson" name="outputJson" value=""/>
-           <input type="text" id="inputStatusList" name="inputStatusList" value=""/>
+           <input type="hidden" id="outputJson" name="outputJson" value=""/>
+           <input type="hidden" id="inputStatusList" name="inputStatusList" value=""/>
            <div id="hl-gallery-con" style="width:100%;">
 
            </div>

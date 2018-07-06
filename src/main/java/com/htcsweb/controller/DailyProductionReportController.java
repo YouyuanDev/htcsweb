@@ -663,6 +663,22 @@ public class DailyProductionReportController {
                             int shippedPipeCount=0;
                             //发运成品管长度
                             float shippedPipeLength=0f;
+
+                            List<HashMap<String,Object>> shipmentList=getShipingCountAndLength(item,project_no,external_coating,internal_coating,od,wt,timeformat);
+                            if(shipmentList.size()>0){
+                                Long ct=(Long)shipmentList.get(0).get("totalcount");
+                                if(ct!=null){
+                                    shippedPipeCount=ct.intValue();
+                                }
+                                Double tl=(Double)shipmentList.get(0).get("totallength");
+                                if(tl!=null){
+                                    shippedPipeLength=tl.floatValue();
+                                }
+                            }
+
+
+
+
                             //向日报中填充数据
                             //首先判断日报表中是否有此数据，如果没有则添加，否则进行更新,参数(time,project_no,od_wt,外防类型)
                             List<DailyProductionReport>list1=dailyProductionReportDao.getDailyReportByParams(project_no,external_coating,internal_coating,od_wt,sdf.parse(item));
@@ -1290,10 +1306,27 @@ public class DailyProductionReportController {
             Date endTime=timeformat.parse(nextday+" 08:00:00");
             count=inspectionProcessRecordHeaderDao.getAcceptedRebevelCount(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);
 
-            count=pipeRebevelRecordDao.getAcceptedRebevelCount(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);
+            //count=pipeRebevelRecordDao.getAcceptedRebevelCount(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
         }
         return count;
     }
+
+    //14.获取发运数量和长度
+
+    private List<HashMap<String,Object>> getShipingCountAndLength(String now,String project_no,String external_coating,String internal_coating,float od,float wt,SimpleDateFormat timeformat){
+        String nextday=DateTimeUtil.getNextDay(now);
+        List<HashMap<String,Object>> list=new ArrayList<>();
+        try{
+            Date beginTime=timeformat.parse(now+" 08:00:00");
+            Date endTime=timeformat.parse(nextday+" 08:00:00");
+            list=inspectionProcessRecordHeaderDao.getShippingCountAndLength(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return list;
+    }
+
 }
