@@ -332,16 +332,16 @@ public class APPRequestTransferController {
         }
 
 
-//        if(employeeno!=null&&mill_no!=null) {
-//            resultMaps.put("employeeno",employeeno);
-//            resultMaps.put("millno",mill_no);
-//        } else{
-//
-//            resultMaps.put("success",false);
-//            resultMaps.put("message","session已过期，请重新登录");
-//            String map= JSONObject.toJSONString(resultMaps);
-//            return map;
-//        }
+        if(employeeno!=null&&mill_no!=null) {
+            resultMaps.put("employeeno",employeeno);
+            resultMaps.put("millno",mill_no);
+        } else{
+
+            resultMaps.put("success",false);
+            resultMaps.put("message","session已过期，请重新登录");
+            String map= JSONObject.toJSONString(resultMaps);
+            return map;
+        }
 
 
         if(pipe_no!=null&&!pipe_no.equals("")&&process_code!=null&&!process_code.equals("")){
