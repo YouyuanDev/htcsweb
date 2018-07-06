@@ -907,7 +907,7 @@ public class PipeBasicInfoController {
         return null;
     }
     //根据钢管编号查询钢管的防腐记录
-    @RequestMapping("/searchPipeRecord")
+    @RequestMapping(value = "/searchPipeRecord",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String searchPipeRecord(HttpServletRequest request){
         String mmp="";
