@@ -283,67 +283,17 @@
                      data:{pipe_no:pipe_no},
                      success:function (data) {
                          //alert(toString.call(data.success)+":"+data.success);
-                         if(!data.success){
-                             $.messager.alert('Warning', data.message);
-                             return;
-                         }
+                         
                          var language=getCookie("userLanguage");
                          for(var i=0;i<data.length;i++){
-                             for(var key in data[i]){
-                                 alert(key);
+                             var map=data[i];
+                             for(var key in map){
                                  if(key.indexOf('header')==-1){
-                                     getTemplate(key,data[i][key],language,data[i][key+"_header"]);
+                                     getTemplate(key,map[key],language,map[key+"_header"]);
                                  }
                              }
                          }
-                         // if(data.od_blast!=undefined){
-                         //     getTemplate("od_blast",data.od_blast,language);
-                         // }
-                         // if(data.od_blast_inspection!=undefined){
-                         //     getTemplate("odblastinspectionprocess",data.od_blast_inspection,language);
-                         // }
-                         // if(data.od_coating!=undefined){
-                         //     getTemplate("odcoatingprocess",data.od_coating,language);
-                         // }
-                         // if(data.od_coating_inspection!=undefined){
-                         //     getTemplate("odcoatinginspectionprocess",data.od_coating_inspection,language);
-                         // }
-                         // if(data.od_stencil!=undefined){
-                         //     getTemplate("odstencilprocess",data.od_stencil,language);
-                         // }
-                         // if(data.od_final_inspection!=undefined){
-                         //     getTemplate("odfinalinspectionprocess",data.od_final_inspection,language);
-                         // }
-                         // if(data.id_blast!=undefined){
-                         //     getTemplate("idblastprocess",data.id_blast,language);
-                         // }
-                         // if(data.id_blast_inspection!=undefined){
-                         //     getTemplate("idblastinspectionprocess",data.id_blast_inspection,language);
-                         // }
-                         // if(data.id_coating!=undefined){
-                         //     getTemplate("idcoatingprocess",data.id_coating,language);
-                         // }
-                         // if(data.id_coating_inspection!=undefined){
-                         //     getTemplate("idcoatinginspectionprocess",data.id_coating_inspection,language);
-                         // }
-                         // if(data.id_stencil!=undefined){
-                         //     getTemplate("idstencilprocess",data.id_stencil,language);
-                         // }
-                         // if(data.id_final_inspection!=undefined){
-                         //     getTemplate("idfinalinspectionprocess",data.id_final_inspection,language);
-                         // }
-                         // if(data.coating_strip!=undefined){
-                         //     getTemplate("coatingstrip",data.coating_strip,language);
-                         // }
-                         // if(data.coating_repair!=undefined){
-                         //     getTemplate("coatingrepair",data.coating_repair,language);
-                         // }
-                         // if(data.grinding_cutoff!=undefined){
-                         //     getTemplate("barepipegrindingProcess",data.grinding_cutoff,language);
-                         // }
-                         // if(data.coating_rebevel!=undefined){
-                         //     getTemplate("pipeRebevelProcess",data.coating_rebevel,language);
-                         // }
+
                          hlLanguage("../i18n/");
                          $('#pipeRecordDialog').dialog('open');
 
@@ -426,53 +376,51 @@
                     j = 1;
                 }
                 var dict=header_dict;
-                if(dict.result!=undefined||dict.remark!=undefined) {
-                    remark=dict.remark;
-                    result=dict.result;
-                    for(var i=0;i<g_result_output.length;i++){
-                        if(g_result_output[i].process_code==process_code){
-                            for(var j=0;j<g_result_output[i].output.length;j++){
-                                if(g_result_output[i].output[j].result==result){
-                                    if(language=="en"){
-                                        result_name=g_result_output[i].output[j].result_name_en;
-                                    }else{
-                                        result_name=g_result_output[i].output[j].result_name;
-                                    }
+                remark=dict.remark;
+                result=dict.result;
+                for(var t=0;t<g_result_output.length;t++){
+                    if(g_result_output[t].process_code==process_code){
+                        for(var w=0;w<g_result_output[t].output.length;w++){
+                            if(g_result_output[t].output[w].result==result){
+                                if(language=="en"){
+                                    result_name=g_result_output[t].output[w].result_name_en;
+                                }else{
+                                    result_name=g_result_output[t].output[w].result_name;
                                 }
                             }
                         }
                     }
+                }
 
-                }else{
-                    var max_value=array[i].max_value;
-                    var min_value=array[i].min_value;
-                    var item_value=array[i].item_value==undefined?"":array[i].item_value;
-                    var range="";var flag=false;
-                    if(max_value!=undefined&&min_value!=undefined){
-                        if(array[i].need_verify!=undefined&&array[i].need_verify=="1"){
-                            range="("+min_value+"~"+max_value+")";
-                            if(item_value!=undefined&&!isNaN(item_value)){
-                                if(parseFloat(max_value)<parseFloat(item_value))
-                                    flag=true;
-                                if(parseFloat(min_value)>parseFloat(item_value))
-                                    flag=true;
-                            }
+                var max_value=array[i].max_value;
+                var min_value=array[i].min_value;
+                var item_value=array[i].item_value==undefined?"":array[i].item_value;
+                var range="";var flag=false;
+                if(max_value!=undefined&&min_value!=undefined){
+                    if(array[i].need_verify!=undefined&&array[i].need_verify=="1"){
+                        range="("+min_value+"~"+max_value+")";
+                        if(item_value!=undefined&&!isNaN(item_value)){
+                            if(parseFloat(max_value)<parseFloat(item_value))
+                                flag=true;
+                            if(parseFloat(min_value)>parseFloat(item_value))
+                                flag=true;
                         }
                     }
-                    if(language&&language=="en"){
-                        var unit=(array[i].unit_name_en==undefined||array[i].unit_name_en=="")?"":' ('+array[i].unit_name_en+') ';
-                        template+= ' <td  style="width:120px;vertical-align: middle;text-align: center;">' +array[i].item_name_en+unit+range+'</td>';
-                    }else{
-                        var unit=(array[i].unit_name==undefined||array[i].unit_name_en=="")?"":' ('+array[i].unit_name+') ';
-                        template +=' <td  style="width:120px;vertical-align: middle;text-align: center;">' +array[i].item_name+unit+range+'</td>';
-                    }
-                    if(flag){
-                        template += '<td style="width:280px;color:red;vertical-align: middle;text-align: center;">'+item_value+'</td>';
-                    }else{
-                        template += '<td style="width:280px;color:#878787;vertical-align: middle;text-align: center;">'+item_value+'</td>';
-                    }
-
                 }
+                if(language&&language=="en"){
+                    var unit=(array[i].unit_name_en==undefined||array[i].unit_name_en=="")?"":' ('+array[i].unit_name_en+') ';
+                    template+= ' <td  style="width:120px;vertical-align: middle;text-align: center;">' +array[i].item_name_en+unit+range+'</td>';
+                }else{
+                    var unit=(array[i].unit_name==undefined||array[i].unit_name_en=="")?"":' ('+array[i].unit_name+') ';
+                    template +=' <td  style="width:120px;vertical-align: middle;text-align: center;">' +array[i].item_name+unit+range+'</td>';
+                }
+                if(flag){
+                    template += '<td style="width:280px;color:red;vertical-align: middle;text-align: center;">'+item_value+'</td>';
+                }else{
+                    template += '<td style="width:280px;color:#878787;vertical-align: middle;text-align: center;">'+item_value+'</td>';
+                }
+
+
                 j++;
             }
             template+='</tr>';
