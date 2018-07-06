@@ -575,7 +575,8 @@
     <select id="getPipeSamplingInfo" resultType="map">
         SELECT o.*,rditem.*,
         SUM(CASE item_code WHEN 'sample_cutoff_length' THEN item_value END) AS 'sample_cutoff_length',
-        SUM(CASE item_code WHEN 'sample_pipe_cutoff_length' THEN item_value END) AS 'sample_pipe_cutoff_length'
+        SUM(CASE item_code WHEN 'sample_pipe_cutoff_length' THEN item_value END) AS 'sample_pipe_cutoff_length',
+        SUM(CASE item_code WHEN 'pipe_length_before_cut' THEN item_value END) AS 'pipe_length_before_cut'
         from inspection_process_record_header o
         inner join inspection_process_record_item rditem on rditem.inspection_process_record_header_code= o.inspection_process_record_header_code
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
@@ -584,7 +585,7 @@
         <where>
             AND o.result='1'
             AND o.process_code='coating_sampling'
-            AND ( rditem.item_code='sample_cutoff_length' or rditem.item_code='sample_pipe_cutoff_length' )
+            AND ( rditem.item_code='sample_cutoff_length' or rditem.item_code='sample_pipe_cutoff_length' or  rditem.item_code='pipe_length_before_cut')
             AND c.external_coating=#{external_coating}
             AND c.internal_coating=#{internal_coating}
             AND pro.project_no=#{project_no}

@@ -8,6 +8,7 @@ public class Function {
     private String uri;             //访问uri名称
     private String module_name;     //模块名称
 
+
     public Function() {
     }
 

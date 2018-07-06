@@ -15,6 +15,7 @@
             <if test="function_name!=null and function_name!=''">
                 AND f.function_name LIKE CONCAT('%',#{function_name},'%')
             </if>
+            AND valid='1'
         </where>
     </select>
 
@@ -27,6 +28,7 @@
             <if test="function_name!=null and function_name!=''">
                 OR f.function_name LIKE CONCAT('%',#{function_name},'%')
             </if>
+            AND valid='1'
         </where>
     </select>
 
@@ -41,6 +43,7 @@
             <if test="function_name!=null and function_name!=''">
                 AND f.function_name LIKE CONCAT('%',#{function_name},'%')
             </if>
+            AND valid='1'
         </where>
         ORDER BY id DESC
         limit #{skip},#{take}
@@ -54,7 +57,7 @@
             <if test="function_no!=null and function_no!=''">
                 AND f.function_no =#{function_no}
             </if>
-
+            AND valid='1'
         </where>
 
     </select>

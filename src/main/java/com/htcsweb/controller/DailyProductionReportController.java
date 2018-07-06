@@ -611,13 +611,17 @@ public class DailyProductionReportController {
                                     if(record.get("pipe_no")!=null) {
                                         samplePipeNoDayShift = (String) record.get("pipe_no");
                                     }
-                                    //samplePipeOriginalLengthDayShift=record.getOriginal_pipe_length();
-                                    //BigDecimal b2=new  BigDecimal(samplePipeOriginalLengthDayShift);
-                                    //samplePipeOriginalLengthDayShift=b2.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
+
+                                    Double pipe_length_before_cut=(Double)record.get("pipe_length_before_cut");
+                                    if(pipe_length_before_cut!=null){
+                                        samplePipeOriginalLengthDayShift=pipe_length_before_cut.floatValue();
+                                    }
+                                    BigDecimal b4=new  BigDecimal(samplePipeOriginalLengthDayShift);
+                                    samplePipeOriginalLengthDayShift=b4.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
 
 
                                     Double cutofflength=(Double)record.get("sample_cutoff_length");
-                                    if(cutofflength!=null&&!cutofflength.equals(""))
+                                    if(cutofflength!=null)
                                         samplePipeCutLengthDayShift=cutofflength.floatValue();
 
                                     BigDecimal b3=new  BigDecimal(samplePipeCutLengthDayShift);
@@ -635,14 +639,17 @@ public class DailyProductionReportController {
                                     if(record.get("pipe_no")!=null) {
                                         samplePipeNoNightShift = (String) record.get("pipe_no");
                                     }
-//                                samplePipeOriginalLengthNightShift=record.getOriginal_pipe_length();
-//                                BigDecimal b4=new  BigDecimal(samplePipeOriginalLengthNightShift);
-//                                samplePipeOriginalLengthNightShift=b4.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
+
+                                    Double pipe_length_before_cut=(Double)record.get("pipe_length_before_cut");
+                                    if(pipe_length_before_cut!=null){
+                                        samplePipeOriginalLengthNightShift=pipe_length_before_cut.floatValue();
+                                    }
+                                    BigDecimal b4=new  BigDecimal(samplePipeOriginalLengthNightShift);
+                                    samplePipeOriginalLengthNightShift=b4.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
 
                                     Double cutofflength=(Double)record.get("sample_cutoff_length");
-                                    if(cutofflength!=null&&!cutofflength.equals(""))
+                                    if(cutofflength!=null)
                                         samplePipeCutLengthNightShift=cutofflength.floatValue();
-
 
                                     BigDecimal b5=new  BigDecimal(samplePipeCutLengthNightShift);
                                     samplePipeCutLengthNightShift=b5.setScale(2,  BigDecimal.ROUND_HALF_UP).floatValue();
