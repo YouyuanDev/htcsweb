@@ -9,6 +9,9 @@
 
     <select id="getAllPipeStatus" resultType="com.htcsweb.entity.PipeStatus">
         SELECT  *  from pipe_status
+
+        where valid = '1'
+
         ORDER BY id ASC
     </select>
 

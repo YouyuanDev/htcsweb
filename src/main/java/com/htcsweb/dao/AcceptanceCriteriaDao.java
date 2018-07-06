@@ -26,5 +26,7 @@ public interface AcceptanceCriteriaDao {
     //模糊查找
     public List<AcceptanceCriteria> getACs(@Param("acceptance_criteria_no") String acceptance_criteria_no,@Param("acceptance_criteria_name") String acceptance_criteria_name);
 
+    //根据管号，工序编号获得检验标准和检验频率状态
+    public List<HashMap<String,Object>> getAcceptanceCriteriaByPipeNoProcessCode(@Param("pipe_no")String pipe_no,@Param("process_code")String process_code);
 
 }
