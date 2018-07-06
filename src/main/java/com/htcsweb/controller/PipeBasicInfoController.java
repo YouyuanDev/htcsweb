@@ -921,173 +921,383 @@ public class PipeBasicInfoController {
                 //1.查询外打砂记录
                 InspectionProcessRecordHeader header=headerDao.getRecentRecordByPipeNo("od_blast",pipe_no);
                 if(header!=null){
-                    System.out.println("header_code()"+header.getInspection_process_record_header_code());
-                    List<HashMap<String, Object>>od_blast_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"od_blast",header.getInspection_process_record_header_code());
-                    maps.put("od_blast",od_blast_map);
+                    String result="";
+                    if(header.getResult().equals("0")){
+                        result="不合格,重新打砂处理";
+                    }else if(header.getResult().equals("1")){
+                        result="合格,进入外喷砂检验工序";
+                    }else if(header.getResult().equals("10")){
+                        result="待定";
+                    }else if(header.getResult().equals("20")){
+                        result="隔离,进入修磨或切割工序";
+                    }
+                    List<HashMap<String, Object>>od_blast_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"od_blast",header.getInspection_process_record_header_code(),result,header.getRemark());
+                    if(od_blast_map!=null&&od_blast_map.size()>0){
+                        maps.put("od_blast",od_blast_map);
+                        maps.put("od_blast_header",header);
+                    }
                 }
                 //2.查询外打砂检验记录
                 header=headerDao.getRecentRecordByPipeNo("od_blast_inspection",pipe_no);
                 if(header!=null){
-                    List<HashMap<String, Object>>od_blast_inspection_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"od_blast_inspection",header.getInspection_process_record_header_code());
-                    maps.put("od_blast_inspection",od_blast_inspection_map);
+                    String result="";
+                    if(header.getResult().equals("0")){
+                        result="不合格,重新打砂处理";
+                    }else if(header.getResult().equals("1")){
+                        result="合格,进入外涂敷工序";
+                    }else if(header.getResult().equals("10")){
+                        result="待定";
+                    }else if(header.getResult().equals("20")){
+                        result="隔离，进入修磨或切割工序";
+                    }
+                    List<HashMap<String, Object>>od_blast_inspection_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"od_blast_inspection",header.getInspection_process_record_header_code(),result,header.getRemark());
+                    if(od_blast_inspection_map!=null&&od_blast_inspection_map.size()>0){
+                        maps.put("od_blast_inspection",od_blast_inspection_map);
+                        maps.put("od_blast_inspection_header",header);
+                    }
                 }
                 //3.查询外涂记录
                 header=headerDao.getRecentRecordByPipeNo("od_coating",pipe_no);
                 if(header!=null){
-                    List<HashMap<String, Object>>od_coating_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"od_coating",header.getInspection_process_record_header_code());
-                    maps.put("od_coating",od_coating_map);
+                    String result="";
+                    if(header.getResult().equals("0")){
+                        result="不合格,重新打砂处理";
+                    }else if(header.getResult().equals("1")){
+                        result="合格,进入外涂敷检验工序";
+                    }else if(header.getResult().equals("10")){
+                        result="待定";
+                    }
+                    List<HashMap<String, Object>>od_coating_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"od_coating",header.getInspection_process_record_header_code(),result,header.getRemark());
+                    if(od_coating_map!=null&&od_coating_map.size()>0){
+                        maps.put("od_coating",od_coating_map);
+                        maps.put("od_coating_header",header);
+                    }
                 }
                 //4.查询外涂检验记录
                 header=headerDao.getRecentRecordByPipeNo("od_coating_inspection",pipe_no);
                 if(header!=null){
-                    List<HashMap<String, Object>>od_coating_inspection_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"od_coating_inspection",header.getInspection_process_record_header_code());
-                    maps.put("od_coating_inspection",od_coating_inspection_map);
+                    String result="";
+                    if(header.getResult().equals("0")){
+                        result="不合格,进入待修补工序";
+                    }else if(header.getResult().equals("1")){
+                        result="合格,进入外喷标工序";
+                    }else if(header.getResult().equals("10")){
+                        result="待定";
+                    }else if(header.getResult().equals("20")){
+                        result="隔离，进入修磨或切割工序";
+                    }else if(header.getResult().equals("30")){
+                        result="不合格,进入待扒皮工序";
+                    }
+                    List<HashMap<String, Object>>od_coating_inspection_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"od_coating_inspection",header.getInspection_process_record_header_code(),result,header.getRemark());
+                    if(od_coating_inspection_map!=null&&od_coating_inspection_map.size()>0){
+                        maps.put("od_coating_inspection",od_coating_inspection_map);
+                        maps.put("od_coating_inspection_header",header);
+                    }
                 }
                 //5.查询外喷标记录
                 header=headerDao.getRecentRecordByPipeNo("od_stencil",pipe_no);
                 if(header!=null){
-                    List<HashMap<String, Object>>od_stencil_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"od_stencil",header.getInspection_process_record_header_code());
-                    maps.put("od_stencil",od_stencil_map);
+                    String result="";
+                    if(header.getResult().equals("0")){
+                        result="不合格,重新喷标";
+                    }else if(header.getResult().equals("1")){
+                        result="合格,进入外防终检工序";
+                    }else if(header.getResult().equals("10")){
+                        result="待定";
+                    }
+                    List<HashMap<String, Object>>od_stencil_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"od_stencil",header.getInspection_process_record_header_code(),result,header.getRemark());
+                    if(od_stencil_map!=null&&od_stencil_map.size()>0){
+                        maps.put("od_stencil",od_stencil_map);
+                        maps.put("od_stencil_header",header);
+                    }
                 }
                 //6.查询外涂终检记录
                 header=headerDao.getRecentRecordByPipeNo("od_final_inspection",pipe_no);
                 if(header!=null){
-                    List<HashMap<String, Object>>od_final_inspection_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"od_final_inspection",header.getInspection_process_record_header_code());
-                    maps.put("od_final_inspection",od_final_inspection_map);
+                    String result="";
+                    if(header.getResult().equals("0")){
+                        result="不合格,进入外防待修补工序";
+                    }else if(header.getResult().equals("1")){
+                        result="进入外防成品入库工序";
+                    }else if(header.getResult().equals("10")){
+                        result="待定";
+                    }else if(header.getResult().equals("20")){
+                        result="隔离，进入修磨或切割工序";
+                    }else if(header.getResult().equals("30")){
+                        result="不合格,进入外防待扒皮工序";
+                    }else if(header.getResult().equals("4")){
+                        result="不合格,进入外喷标工序";
+                    }
+                    List<HashMap<String, Object>>od_final_inspection_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"od_final_inspection",header.getInspection_process_record_header_code(),result,header.getRemark());
+                    if(od_final_inspection_map!=null&&od_final_inspection_map.size()>0){
+                        maps.put("od_final_inspection",od_final_inspection_map);
+                        maps.put("od_final_inspection_header",header);
+                    }
                 }
                 //7.查询内打砂记录
                 header=headerDao.getRecentRecordByPipeNo("id_blast",pipe_no);
                 if(header!=null){
-                    List<HashMap<String, Object>>id_blast_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"id_blast",header.getInspection_process_record_header_code());
-                    maps.put("id_blast",id_blast_map);
+                    String result="";
+                    if(header.getResult().equals("0")){
+                        result="不合格,重新喷砂处理";
+                    }else if(header.getResult().equals("1")){
+                        result="合格,进入内喷砂检验工序";
+                    }else if(header.getResult().equals("10")){
+                        result="待定";
+                    }else if(header.getResult().equals("20")){
+                        result="隔离，进入修磨或切割工序";
+                    }
+                    List<HashMap<String, Object>>id_blast_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"id_blast",header.getInspection_process_record_header_code(),result,header.getRemark());
+                    if(id_blast_map!=null&&id_blast_map.size()>0){
+                        maps.put("id_blast",id_blast_map);
+                        maps.put("id_blast_header",header);
+                    }
                 }
                 //8.查询内打砂检验记录
                 header=headerDao.getRecentRecordByPipeNo("id_blast_inspection",pipe_no);
                 if(header!=null){
-                    List<HashMap<String, Object>>id_blast_inspection_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"id_blast_inspection",header.getInspection_process_record_header_code());
-                    maps.put("id_blast",id_blast_inspection_map);
+                    String result="";
+                    if(header.getResult().equals("0")){
+                        result="不合格,重新打砂处理";
+                    }else if(header.getResult().equals("1")){
+                        result="合格,进入外涂敷工序";
+                    }else if(header.getResult().equals("10")){
+                        result="待定";
+                    }else if(header.getResult().equals("20")){
+                        result="隔离，进入修磨或切割工序";
+                    }
+                    List<HashMap<String, Object>>id_blast_inspection_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"id_blast_inspection",header.getInspection_process_record_header_code(),result,header.getRemark());
+                    if(id_blast_inspection_map!=null&&id_blast_inspection_map.size()>0){
+                        maps.put("id_blast_inspection",id_blast_inspection_map);
+                        maps.put("id_blast_inspection_header",header);
+                    }
                 }
                 //9.查询内涂记录
                 header=headerDao.getRecentRecordByPipeNo("id_coating",pipe_no);
                 if(header!=null){
-                    List<HashMap<String, Object>>id_coating_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"id_coating",header.getInspection_process_record_header_code());
-                    maps.put("id_coating",id_coating_map);
+                    String result="";
+                    if(header.getResult().equals("0")){
+                        result="不合格,重新打砂处理";
+                    }else if(header.getResult().equals("1")){
+                        result="合格,进入内涂敷检验工序";
+                    }else if(header.getResult().equals("10")){
+                        result="待定";
+                    }
+                    List<HashMap<String, Object>>id_coating_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"id_coating",header.getInspection_process_record_header_code(),result,header.getRemark());
+                    if(id_coating_map!=null&&id_coating_map.size()>0){
+                        maps.put("id_coating",id_coating_map);
+                        maps.put("id_coating_header",header);
+                    }
                 }
                 //10.查询内涂检验记录
                 header=headerDao.getRecentRecordByPipeNo("id_coating_inspection",pipe_no);
                 if(header!=null){
-                    List<HashMap<String, Object>>id_coating_inspection_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"id_coating_inspection",header.getInspection_process_record_header_code());
-                    maps.put("id_coating_inspection",id_coating_inspection_map);
+                    String result="";
+                    if(header.getResult().equals("0")){
+                        result="不合格,进入待修补工序";
+                    }else if(header.getResult().equals("1")){
+                        result="合格,进入内喷标工序";
+                    }else if(header.getResult().equals("30")){
+                        result="不合格,进入待扒皮工序";
+                    }else if(header.getResult().equals("10")){
+                        result="待定";
+                    }else if(header.getResult().equals("20")){
+                        result="隔离，进入修磨或切割工序";
+                    }
+                    List<HashMap<String, Object>>id_coating_inspection_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"id_coating_inspection",header.getInspection_process_record_header_code(),result,header.getRemark());
+                    if(id_coating_inspection_map!=null&&id_coating_inspection_map.size()>0){
+                        maps.put("id_coating_inspection",id_coating_inspection_map);
+                        maps.put("id_coating_inspection_header",header);
+                    }
                 }
                 //11.查询内喷标记录
                 header=headerDao.getRecentRecordByPipeNo("id_stencil",pipe_no);
                 if(header!=null){
-                    List<HashMap<String, Object>>id_stencil_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"id_stencil",header.getInspection_process_record_header_code());
-                    maps.put("id_stencil",id_stencil_map);
+                    String result="";
+                    if(header.getResult().equals("0")){
+                        result="不合格,重新喷标";
+                    }else if(header.getResult().equals("1")){
+                        result="合格,进入内防终检工序";
+                    }else if(header.getResult().equals("10")){
+                        result="待定";
+                    }
+                    List<HashMap<String, Object>>id_stencil_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"id_stencil",header.getInspection_process_record_header_code(),result,header.getRemark());
+                    if(id_stencil_map!=null&&id_stencil_map.size()>0){
+                        maps.put("id_stencil",id_stencil_map);
+                        maps.put("id_stencil_header",header);
+                    }
                 }
                 //12.查询内涂终检记录
                 header=headerDao.getRecentRecordByPipeNo("id_final_inspection",pipe_no);
                 if(header!=null){
-                    List<HashMap<String, Object>>id_final_inspection_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"id_final_inspection",header.getInspection_process_record_header_code());
-                    maps.put("id_final_inspection",id_final_inspection_map);
+                    String result="";
+                    if(header.getResult().equals("0")){
+                        result="不合格,进入涂层待修补工序";
+                    }else if(header.getResult().equals("1")){
+                        result="进入内防成品入库工序";
+                    }else if(header.getResult().equals("10")){
+                        result="待定";
+                    }else if(header.getResult().equals("30")){
+                        result="不合格,进入待扒皮工序";
+                    }else if(header.getResult().equals("3")){
+                        result="不合格,进入内喷标工序";
+                    }
+                    List<HashMap<String, Object>>id_final_inspection_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"id_final_inspection",header.getInspection_process_record_header_code(),result,header.getRemark());
+                    if(id_final_inspection_map!=null&&id_final_inspection_map.size()>0){
+                        maps.put("id_final_inspection",id_final_inspection_map);
+                        maps.put("id_final_inspection_header",header);
+                    }
                 }
                 //13.扒皮记录
                 header=headerDao.getRecentRecordByPipeNo("coating_strip",pipe_no);
                 if(header!=null){
-                    List<HashMap<String, Object>>coating_strip_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"coating_strip",header.getInspection_process_record_header_code());
-                    maps.put("coating_strip",coating_strip_map);
+                    String result="";
+                    if(header.getResult().equals("0")){
+                        result="不合格,重新扒皮";
+                    }else if(header.getResult().equals("1")){
+                        result="合格，转为光管";
+                    }else if(header.getResult().equals("10")){
+                        result="待定";
+                    }
+                    List<HashMap<String, Object>>coating_strip_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"coating_strip",header.getInspection_process_record_header_code(),result,header.getRemark());
+                    if(coating_strip_map!=null&&coating_strip_map.size()>0){
+                        maps.put("coating_strip",coating_strip_map);
+                        maps.put("coating_strip_header",header);
+                    }
                 }
                 //14.修补
                 header=headerDao.getRecentRecordByPipeNo("coating_repair",pipe_no);
                 if(header!=null){
-                    List<HashMap<String, Object>>coating_repair_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"coating_repair",header.getInspection_process_record_header_code());
-                    maps.put("coating_repair",coating_repair_map);
+                    String result="";
+                    if(header.getResult().equals("0")){
+                        result="不合格,重新修补";
+                    }else if(header.getResult().equals("1")){
+                        result="修补完成,检验合格";
+                    }else if(header.getResult().equals("2")){
+                        result="修补完成,待检验";
+                    }else if(header.getResult().equals("30")){
+                        result="不合格,外防扒皮处理";
+                    }else if(header.getResult().equals("10")){
+                        result="待定";
+                    }
+                    List<HashMap<String, Object>>coating_repair_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"coating_repair",header.getInspection_process_record_header_code(),result,header.getRemark());
+                    if(coating_repair_map!=null&&coating_repair_map.size()>0){
+                        maps.put("coating_repair",coating_repair_map);
+                        maps.put("coating_repair_header",header);
+                    }
                 }
                 //15.修磨切割
                 header=headerDao.getRecentRecordByPipeNo("grinding_cutoff",pipe_no);
                 if(header!=null){
-                    List<HashMap<String, Object>>grinding_cutoff_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"grinding_cutoff",header.getInspection_process_record_header_code());
-                    maps.put("grinding_cutoff",grinding_cutoff_map);
+                    String result="";
+                    if(header.getResult().equals("0")){
+                        result="不合格,重新修磨或切割处理";
+                    }else if(header.getResult().equals("1")){
+                        result="合格，返回上一工序";
+                    }else if(header.getResult().equals("10")){
+                        result="待定";
+                    }
+                    List<HashMap<String, Object>>grinding_cutoff_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"grinding_cutoff",header.getInspection_process_record_header_code(),result,header.getRemark());
+                    if(grinding_cutoff_map!=null&&grinding_cutoff_map.size()>0){
+                        maps.put("grinding_cutoff",grinding_cutoff_map);
+                        maps.put("grinding_cutoff_header",header);
+                    }
                 }
                 //16.倒棱
                 header=headerDao.getRecentRecordByPipeNo("coating_rebevel",pipe_no);
                 if(header!=null){
-                    List<HashMap<String, Object>>coating_rebevel_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"coating_rebevel",header.getInspection_process_record_header_code());
-                    maps.put("coating_rebevel",coating_rebevel_map);
+                    String result="";
+                    if(header.getResult().equals("0")){
+                        result="不合格,重新倒棱处理";
+                    }else if(header.getResult().equals("")){
+                        result="合格";
+                    }else if(header.getResult().equals("")){
+                        result="待定";
+                    }
+                    List<HashMap<String, Object>>coating_rebevel_map=getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no,"coating_rebevel",header.getInspection_process_record_header_code(),result,header.getRemark());
+                    if(coating_rebevel_map!=null&&coating_rebevel_map.size()>0){
+                        maps.put("coating_rebevel",coating_rebevel_map);
+                        maps.put("coating_rebevel_header",header);
+                    }
                 }
                 maps.put("success",true);
-                System.out.println("-----------------------------------");
+
                 mmp= JSONArray.toJSONString(maps);
-                System.out.println("-----------------------------------");
+
             }
         }catch (Exception ex){
             ex.printStackTrace();
         }
         return mmp;
     }
-    public List<HashMap<String, Object>> getDynamicItemByPipeNoProcessCodeHeaderCode(String pipe_no,String process_code,String inspection_process_record_header_code) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
-        JSONObject json=new JSONObject();
+    public List<HashMap<String, Object>> getDynamicItemByPipeNoProcessCodeHeaderCode(String pipe_no,String process_code,String inspection_process_record_header_code,String result,String remark) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
         List<HashMap<String, Object>> itemlist=new ArrayList<>();
         if(pipe_no!=null&&!pipe_no.equals("")&&process_code!=null&&!process_code.equals("")) {
             itemlist = dynamicMeasurementItemDao.getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no, process_code, inspection_process_record_header_code);
         }
+        HashMap<String,Object>hs=new HashMap<>();
+        hs.put("remark",remark);
+        hs.put("result",result);
+        itemlist.add(hs);
+        System.out.println("------------------------");
         System.out.println(JSONObject.toJSONString(itemlist));
+        System.out.println("------------------------");
         return  itemlist;
     }
-    private String InitStencil_content(String processCode,String pipeNo,String stencilContent){
-
-        //设置外防或内防喷标
-        if(processCode!=null&&(processCode.equals("od_stencil")||processCode.equals("id_stencil"))){
-            List<HashMap<String,Object>> pipelist= pipeBasicInfoDao.getPipeInfoByNo(pipeNo);
-            if(pipelist.size()>0){
-                float od=(float)pipelist.get(0).get("od");
-                float wt=(float)pipelist.get(0).get("wt");
-                String grade=(String)pipelist.get(0).get("grade");
-                String contract_no=(String)pipelist.get(0).get("contract_no");
-                String coating_standard=(String)pipelist.get(0).get("coating_standard");
-                String client_spec=(String)pipelist.get(0).get("client_spec");
-                String project_name=(String)pipelist.get(0).get("project_name");
-                float p_length=(float)pipelist.get(0).get("p_length");
-                float halflength=p_length*0.5f;
-                String heat_no=(String)pipelist.get(0).get("heat_no");
-                String pipe_making_lot_no=(String)pipelist.get(0).get("pipe_making_lot_no");
-                float kg=(float)pipelist.get(0).get("weight")*1000;
-                Date od_coating_date=(Date)pipelist.get(0).get("od_coating_date");
-                String od_coating_dateString="";
-                if(od_coating_date!=null) {
-                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                    od_coating_dateString = formatter.format(od_coating_date);
-                }
-                Date id_coating_date=(Date)pipelist.get(0).get("id_coating_date");
-                String id_coating_dateString="";
-                if(id_coating_date!=null) {
-                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                    id_coating_dateString = formatter.format(id_coating_date);
-                }
-
-                //替换
-                stencilContent = stencilContent.replace("[OD]", String.valueOf(od));
-                stencilContent = stencilContent.replace("[WT]", String.valueOf(wt));
-                stencilContent = stencilContent.replace("[GRADE]", grade);
-                stencilContent = stencilContent.replace("[CONTRACTNO]", contract_no);
-                stencilContent = stencilContent.replace("[COATINGSPEC]", coating_standard);
-                stencilContent = stencilContent.replace("[CLIENTSPEC]", client_spec);
-                stencilContent = stencilContent.replace("[PROJECTNAME]", project_name);
-                stencilContent = stencilContent.replace("[PIPENO]", pipeNo);
-                stencilContent = stencilContent.replace("[PIPELENGTH]", String.valueOf(p_length));
-                stencilContent = stencilContent.replace("[HALFLENGTH]", String.valueOf(halflength));
-                stencilContent = stencilContent.replace("[HEATNO]",heat_no);
-                stencilContent = stencilContent.replace("[BATCHNO]",pipe_making_lot_no);
-                stencilContent = stencilContent.replace("[WEIGHT]",String.valueOf(kg));
-                if(processCode.equals("od_stencil"))
-                    stencilContent = stencilContent.replace("[COATINGDATE]",od_coating_dateString);
-                if(processCode.equals("id_stencil"))
-                    stencilContent = stencilContent.replace("[COATINGDATE]",id_coating_dateString);
-            }
-
-        }
-        return stencilContent;
-    }
+//    private String InitStencil_content(String processCode,String pipeNo,String stencilContent){
+//
+//        //设置外防或内防喷标
+//        if(processCode!=null&&(processCode.equals("od_stencil")||processCode.equals("id_stencil"))){
+//            List<HashMap<String,Object>> pipelist= pipeBasicInfoDao.getPipeInfoByNo(pipeNo);
+//            if(pipelist.size()>0){
+//                float od=(float)pipelist.get(0).get("od");
+//                float wt=(float)pipelist.get(0).get("wt");
+//                String grade=(String)pipelist.get(0).get("grade");
+//                String contract_no=(String)pipelist.get(0).get("contract_no");
+//                String coating_standard=(String)pipelist.get(0).get("coating_standard");
+//                String client_spec=(String)pipelist.get(0).get("client_spec");
+//                String project_name=(String)pipelist.get(0).get("project_name");
+//                float p_length=(float)pipelist.get(0).get("p_length");
+//                float halflength=p_length*0.5f;
+//                String heat_no=(String)pipelist.get(0).get("heat_no");
+//                String pipe_making_lot_no=(String)pipelist.get(0).get("pipe_making_lot_no");
+//                float kg=(float)pipelist.get(0).get("weight")*1000;
+//                Date od_coating_date=(Date)pipelist.get(0).get("od_coating_date");
+//                String od_coating_dateString="";
+//                if(od_coating_date!=null) {
+//                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//                    od_coating_dateString = formatter.format(od_coating_date);
+//                }
+//                Date id_coating_date=(Date)pipelist.get(0).get("id_coating_date");
+//                String id_coating_dateString="";
+//                if(id_coating_date!=null) {
+//                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//                    id_coating_dateString = formatter.format(id_coating_date);
+//                }
+//
+//                //替换
+//                stencilContent = stencilContent.replace("[OD]", String.valueOf(od));
+//                stencilContent = stencilContent.replace("[WT]", String.valueOf(wt));
+//                stencilContent = stencilContent.replace("[GRADE]", grade);
+//                stencilContent = stencilContent.replace("[CONTRACTNO]", contract_no);
+//                stencilContent = stencilContent.replace("[COATINGSPEC]", coating_standard);
+//                stencilContent = stencilContent.replace("[CLIENTSPEC]", client_spec);
+//                stencilContent = stencilContent.replace("[PROJECTNAME]", project_name);
+//                stencilContent = stencilContent.replace("[PIPENO]", pipeNo);
+//                stencilContent = stencilContent.replace("[PIPELENGTH]", String.valueOf(p_length));
+//                stencilContent = stencilContent.replace("[HALFLENGTH]", String.valueOf(halflength));
+//                stencilContent = stencilContent.replace("[HEATNO]",heat_no);
+//                stencilContent = stencilContent.replace("[BATCHNO]",pipe_making_lot_no);
+//                stencilContent = stencilContent.replace("[WEIGHT]",String.valueOf(kg));
+//                if(processCode.equals("od_stencil"))
+//                    stencilContent = stencilContent.replace("[COATINGDATE]",od_coating_dateString);
+//                if(processCode.equals("id_stencil"))
+//                    stencilContent = stencilContent.replace("[COATINGDATE]",id_coating_dateString);
+//            }
+//
+//        }
+//        return stencilContent;
+//    }
 
 
 //    @RequestMapping("/searchPipeRecord")
