@@ -283,7 +283,7 @@
                      data:{pipe_no:pipe_no},
                      success:function (data) {
                          //alert(toString.call(data.success)+":"+data.success);
-                         
+
                          var language=getCookie("userLanguage");
                          for(var i=0;i<data.length;i++){
                              var map=data[i];
