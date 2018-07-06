@@ -96,7 +96,7 @@
 
 
     <select id="searchPipeCount" resultType="int">
-        SELECT  pro.project_name,c.external_coating,c.internal_coating, p.*,s.status_name,prc.operation_time
+        SELECT  count(p.pipe_no)
         from pipe_basic_info p inner join pipe_status s on p.status=s.status_code
         inner join contract_info c on c.contract_no=p.contract_no
         inner join project_info pro on pro.project_no=c.project_no
