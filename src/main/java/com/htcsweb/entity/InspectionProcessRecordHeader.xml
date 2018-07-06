@@ -663,4 +663,31 @@
     </select>
 
 
+    <!--获取发运数量和长度-->
+    <select id="getShippingCountAndLength" resultType="map">
+        SELECT count(DISTINCT(sh.pipe_no)) as totalcount, sum(p.p_length) as totallength from shipment_info sh
+        inner join pipe_basic_info p on p.pipe_no=sh.pipe_no
+        inner join contract_info c on c.contract_no=p.contract_no
+        <where>
+
+            <if test="project_no!=null and project_no!=''">
+                AND c.project_no=#{project_no}
+            </if>
+            <if test="external_coating!=null">
+                AND c.external_coating=#{external_coating}
+            </if>
+            <if test="internal_coating!=null">
+                AND c.internal_coating=#{internal_coating}
+            </if>
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(sh.shipment_date,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(sh.shipment_date,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+    </select>
+
 </mapper>
