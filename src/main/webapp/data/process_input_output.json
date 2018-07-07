@@ -4,6 +4,13 @@
     "output":
       [
         {
+          "result":"10",
+          "result_name":"待定",
+          "result_name_en":"Pending",
+          "next_status":"bare1",
+          "last_status":"bare1"
+        },
+        {
           "result":"0",
           "result_name":"不合格,重新打砂处理",
           "result_name_en":"Reject, Re-blast",
@@ -18,13 +25,6 @@
           "last_status":"od1"
         },
         {
-          "result":"10",
-          "result_name":"待定",
-          "result_name_en":"Pending",
-          "next_status":"bare1",
-          "last_status":"bare1"
-        },
-        {
           "result":"20",
           "result_name":"隔离，进入修磨或切割工序",
           "result_name_en":"On hold, go Grinding/Cut-off process",
@@ -36,6 +36,13 @@
     "input": "od1",
     "output":
     [
+      {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending",
+        "next_status":"od1",
+        "last_status":"od1"
+      },
       {
         "result":"0",
         "result_name":"不合格,重新打砂处理",
@@ -51,13 +58,6 @@
         "last_status":"od2"
       },
       {
-        "result":"10",
-        "result_name":"待定",
-        "result_name_en":"Pending",
-        "next_status":"od1",
-        "last_status":"od1"
-      },
-      {
         "result":"20",
         "result_name":"隔离，进入修磨或切割工序",
         "result_name_en":"On hold, go Grinding/Cut-off process",
@@ -69,6 +69,13 @@
     "input": "od2",
     "output":
     [
+      {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending",
+        "next_status":"od2",
+        "last_status":"od2"
+      },
       {
         "result":"0",
         "result_name":"不合格,重新打砂处理",
@@ -82,14 +89,8 @@
         "result_name_en":"Accept, go Coating Insp. Process",
         "next_status":"od3",
         "last_status":"od3"
-      },
-      {
-        "result":"10",
-        "result_name":"待定",
-        "result_name_en":"Pending",
-        "next_status":"od2",
-        "last_status":"od2"
       }
+
     ]
   },
   { "process_code": "od_coating_inspection",
@@ -114,6 +115,13 @@
     "output":
     [
       {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending",
+        "next_status":"od3",
+        "last_status":"od3"
+      },
+      {
         "result":"0",
         "result_name":"不合格,进入待修补工序",
         "result_name_en":"Reject, go coating repair",
@@ -133,13 +141,6 @@
         "next_status":"coatingstrip1"
       },
       {
-        "result":"10",
-        "result_name":"待定",
-        "result_name_en":"Pending",
-        "next_status":"od3",
-        "last_status":"od3"
-      },
-      {
         "result":"20",
         "result_name":"隔离，进入修磨或切割工序",
         "result_name_en":"On hold, go Grinding/Cut-off process",
@@ -151,6 +152,13 @@
     "input": "od4",
     "output":
     [
+      {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending",
+        "next_status":"od4",
+        "last_status":"od4"
+      },
       {
         "result":"0",
         "result_name":"不合格,重新喷标",
@@ -164,13 +172,6 @@
         "result_name_en":"Accept, go OD Stencil Process",
         "next_status":"od5",
         "last_status":"od5"
-      },
-      {
-        "result":"10",
-        "result_name":"待定",
-        "result_name_en":"Pending",
-        "next_status":"od4",
-        "last_status":"od4"
       }
     ]
   },
@@ -178,6 +179,13 @@
     "input": "od5",
     "output":
     [
+      {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending",
+        "next_status":"od5",
+        "last_status":"od5"
+      },
       {
         "result":"0",
         "result_name":"不合格,进入外防待修补工序",
@@ -205,13 +213,6 @@
         "last_status":"od4"
       },
       {
-        "result":"10",
-        "result_name":"待定",
-        "result_name_en":"Pending",
-        "next_status":"od5",
-        "last_status":"od5"
-      },
-      {
         "result":"20",
         "result_name":"隔离，进入修磨或切割工序",
         "result_name_en":"On hold, go Grinding/Cut-off process",
@@ -223,6 +224,11 @@
     "input": "coatingrepair1,coatingrepair2",
     "output":
     [
+      {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending"
+      },
       {
         "result":"0",
         "result_name":"不合格,重新修补",
@@ -246,11 +252,6 @@
         "result_name":"不合格,外防扒皮处理",
         "result_name_en":"Accept, go OD Stencil Process",
         "next_status":"coatingstrip1"
-      },
-      {
-        "result":"10",
-        "result_name":"待定",
-        "result_name_en":"Pending"
       }
     ]
   },
@@ -265,6 +266,12 @@
     "output":
     [
       {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending",
+        "next_status":"onhold"
+      },
+      {
         "result":"0",
         "result_name":"不合格,重新修磨或切割处理",
         "result_name_en":"Reject, go re-grind or re-cut process",
@@ -275,12 +282,6 @@
         "result_name":"合格，返回上一工序",
         "result_name_en":"Accept, go OD stockin process",
         "next_status":"last_status"
-      },
-      {
-        "result":"10",
-        "result_name":"待定",
-        "result_name_en":"Pending",
-        "next_status":"onhold"
       }
     ]
   },
@@ -288,6 +289,12 @@
     "input": "coatingstrip1",
     "output":
     [
+      {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending",
+        "next_status":"coatingstrip1"
+      },
       {
         "result":"0",
         "result_name":"不合格,重新扒皮",
@@ -299,12 +306,6 @@
         "result_name":"合格，转为光管",
         "result_name_en":"Accept, go OD stockin process",
         "next_status":"bare1"
-      },
-      {
-        "result":"10",
-        "result_name":"待定",
-        "result_name_en":"Pending",
-        "next_status":"coatingstrip1"
       }
     ]
   },
@@ -319,6 +320,11 @@
     "output":
     [
       {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending"
+      },
+      {
         "result":"0",
         "result_name":"不合格,重新取样处理",
         "result_name_en":"Reject, go re-sampling process"
@@ -327,11 +333,6 @@
         "result":"1",
         "result_name":"合格",
         "result_name_en":"Accept"
-      },
-      {
-        "result":"10",
-        "result_name":"待定",
-        "result_name_en":"Pending"
       }
     ]
   },
@@ -339,6 +340,11 @@
     "input": "coating_rebevel",
     "output":
     [
+      {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending"
+      },
       {
         "result":"0",
         "result_name":"不合格,重新倒棱处理",
@@ -348,11 +354,6 @@
         "result":"1",
         "result_name":"合格",
         "result_name_en":"Accept"
-      },
-      {
-        "result":"10",
-        "result_name":"待定",
-        "result_name_en":"Pending"
       }
     ]
   },
@@ -360,6 +361,13 @@
     "input": "bare2,odstockin",
     "output":
     [
+      {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending",
+        "next_status":"bare2",
+        "last_status":"bare2"
+      },
       {
         "result":"0",
         "result_name":"不合格,重新喷砂处理",
@@ -375,13 +383,6 @@
         "last_status":"id1"
       },
       {
-        "result":"10",
-        "result_name":"待定",
-        "result_name_en":"Pending",
-        "next_status":"bare2",
-        "last_status":"bare2"
-      },
-      {
         "result":"20",
         "result_name":"隔离，进入修磨或切割工序",
         "result_name_en":"On hold, go Grinding/Cut-off process",
@@ -393,6 +394,13 @@
     "input": "id1",
     "output":
     [
+      {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending",
+        "next_status":"id1",
+        "last_status":"id1"
+      },
       {
         "result":"0",
         "result_name":"不合格,重新打砂处理",
@@ -408,13 +416,6 @@
         "last_status":"id2"
       },
       {
-        "result":"10",
-        "result_name":"待定",
-        "result_name_en":"Pending",
-        "next_status":"id1",
-        "last_status":"id1"
-      },
-      {
         "result":"20",
         "result_name":"隔离，进入修磨或切割工序",
         "result_name_en":"On hold, go Grinding/Cut-off process",
@@ -426,6 +427,13 @@
     "input": "id2",
     "output":
     [
+      {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending",
+        "next_status":"id2",
+        "last_status":"id2"
+      },
       {
         "result":"0",
         "result_name":"不合格,重新打砂处理",
@@ -439,13 +447,6 @@
         "result_name_en":"Accept, go Coating insp. Process",
         "next_status":"id3",
         "last_status":"id3"
-      },
-      {
-        "result":"10",
-        "result_name":"待定",
-        "result_name_en":"Pending",
-        "next_status":"id2",
-        "last_status":"id2"
       }
     ]
   },
@@ -466,6 +467,13 @@
     "output":
     [
       {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending",
+        "next_status":"id3",
+        "last_status":"id3"
+      },
+      {
         "result":"0",
         "result_name":"不合格,进入待修补工序",
         "result_name_en":"Reject, go coating repair",
@@ -485,13 +493,6 @@
         "next_status":"coatingstrip1"
       },
       {
-        "result":"10",
-        "result_name":"待定",
-        "result_name_en":"Pending",
-        "next_status":"id3",
-        "last_status":"id3"
-      },
-      {
         "result":"20",
         "result_name":"隔离，进入修磨或切割工序",
         "result_name_en":"On hold, go Grinding/Cut-off process",
@@ -503,6 +504,13 @@
     "input": "id4",
     "output":
     [
+      {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending",
+        "next_status":"id4",
+        "last_status":"id4"
+      },
       {
         "result":"0",
         "result_name":"不合格,重新喷标",
@@ -516,13 +524,6 @@
         "result_name_en":"Accept, go OD Stencil Process",
         "next_status":"id5",
         "last_status":"id5"
-      },
-      {
-        "result":"10",
-        "result_name":"待定",
-        "result_name_en":"Pending",
-        "next_status":"id4",
-        "last_status":"id4"
       }
     ]
   },
@@ -530,6 +531,13 @@
     "input": "id5",
     "output":
     [
+      {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending",
+        "next_status":"id5",
+        "last_status":"id5"
+      },
       {
         "result":"0",
         "result_name":"不合格,进入涂层待修补工序",
@@ -557,13 +565,6 @@
         "last_status":"id4"
       },
       {
-        "result":"10",
-        "result_name":"待定",
-        "result_name_en":"Pending",
-        "next_status":"id5",
-        "last_status":"id5"
-      },
-      {
         "result":"20",
         "result_name":"隔离，进入修磨或切割工序",
         "result_name_en":"On hold, go Grinding/Cut-off process",
@@ -576,6 +577,11 @@
     "output":
     [
       {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending"
+      },
+      {
         "result":"0",
         "result_name":"不合格,复验",
         "result_name_en":"Reject, re-test"
@@ -584,11 +590,6 @@
         "result":"1",
         "result_name":"合格",
         "result_name_en":"Accept"
-      },
-      {
-        "result":"10",
-        "result_name":"待定",
-        "result_name_en":"Pending"
       }
     ]
   },
@@ -597,6 +598,11 @@
     "output":
     [
       {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending"
+      },
+      {
         "result":"0",
         "result_name":"不合格,复验",
         "result_name_en":"Reject, re-test"
@@ -605,11 +611,6 @@
         "result":"1",
         "result_name":"合格",
         "result_name_en":"Accept"
-      },
-      {
-        "result":"10",
-        "result_name":"待定",
-        "result_name_en":"Pending"
       }
     ]
   },
@@ -618,6 +619,11 @@
     "output":
     [
       {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending"
+      },
+      {
         "result":"0",
         "result_name":"不合格,复验",
         "result_name_en":"Reject, re-test"
@@ -626,11 +632,6 @@
         "result":"1",
         "result_name":"合格",
         "result_name_en":"Accept"
-      },
-      {
-        "result":"10",
-        "result_name":"待定",
-        "result_name_en":"Pending"
       }
     ]
   },
@@ -639,6 +640,11 @@
     "output":
     [
       {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending"
+      },
+      {
         "result":"0",
         "result_name":"不合格,复验",
         "result_name_en":"Reject, re-test"
@@ -647,11 +653,6 @@
         "result":"1",
         "result_name":"合格",
         "result_name_en":"Accept"
-      },
-      {
-        "result":"10",
-        "result_name":"待定",
-        "result_name_en":"Pending"
       }
     ]
   },
@@ -660,6 +661,11 @@
     "output":
     [
       {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending"
+      },
+      {
         "result":"0",
         "result_name":"不合格,复验",
         "result_name_en":"Reject, re-test"
@@ -668,11 +674,6 @@
         "result":"1",
         "result_name":"合格",
         "result_name_en":"Accept"
-      },
-      {
-        "result":"10",
-        "result_name":"待定",
-        "result_name_en":"Pending"
       }
     ]
   },
@@ -681,6 +682,11 @@
     "output":
     [
       {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending"
+      },
+      {
         "result":"0",
         "result_name":"不合格,复验",
         "result_name_en":"Reject, re-test"
@@ -689,11 +695,6 @@
         "result":"1",
         "result_name":"合格",
         "result_name_en":"Accept"
-      },
-      {
-        "result":"10",
-        "result_name":"待定",
-        "result_name_en":"Pending"
       }
     ]
   },
@@ -702,6 +703,11 @@
     "output":
     [
       {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending"
+      },
+      {
         "result":"0",
         "result_name":"不合格,复验",
         "result_name_en":"Reject, re-test"
@@ -710,11 +716,6 @@
         "result":"1",
         "result_name":"合格",
         "result_name_en":"Accept"
-      },
-      {
-        "result":"10",
-        "result_name":"待定",
-        "result_name_en":"Pending"
       }
     ]
   },
@@ -723,6 +724,11 @@
     "output":
     [
       {
+        "result":"10",
+        "result_name":"待定",
+        "result_name_en":"Pending"
+      },
+      {
         "result":"0",
         "result_name":"不合格,复验",
         "result_name_en":"Reject, re-test"
@@ -731,11 +737,6 @@
         "result":"1",
         "result_name":"合格",
         "result_name_en":"Accept"
-      },
-      {
-        "result":"10",
-        "result_name":"待定",
-        "result_name_en":"Pending"
       }
     ]
   }
