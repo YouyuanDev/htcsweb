@@ -311,16 +311,13 @@
                 success:function (data) {
 
                    if(data==undefined||data.record==undefined)return;
-                   var stencilcontent="";
+
                    var div="";
                    for(var i=0;i<data.record.length;i++){
                        if((i==0)||(i%2==0)){
                            div+="<tr>"
                        }
                        div+=getTemplate(data.record[i],data.needInspectionInfo);
-                       if(data.record[i].item_code=="od_stencil_content"||data.record[i].item_code=="id_stencil_content"){
-                           stencilcontent=data.record[i].item_value;
-                       }
                    }
                     div+="</tr>";
                     $('#dynamicTable').empty();
@@ -346,15 +343,7 @@
                         });
                     }
                     JudgeMaxAndMIn();
-                    if(process_code=="od_stencil"||process_code=="id_stencil"){
-                        if($("input[name='od_stencil_content']")!=undefined){
-                            $("#od_stencil_content").textbox("setValue", stencilcontent);
-                        }
-                        if($("input[name='id_stencil_content']")!=undefined){
-                            $("#id_stencil_content").textbox("setValue", stencilcontent);
-                        }
-                        stencilcontent="";
-                    }
+
                 },error:function () {
 
                 }

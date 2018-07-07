@@ -41,6 +41,10 @@ public class APPRequestTransferController {
     @Autowired
     private InspectionProcessRecordHeaderDao inspectionProcessRecordHeaderDao;
 
+    @Autowired
+    private InspectionProcessRecordItemDao inspectionProcessRecordItemDao;
+
+
     //用于APP请求重定向
     @RequestMapping(value = "/getCoatingInfoByPipeNo",produces = "text/plain;charset=utf-8")
     @ResponseBody
@@ -323,7 +327,7 @@ public class APPRequestTransferController {
         }
 
 
-        if(pipe_no!=null&&!pipe_no.equals("")&&process_code!=null&&!process_code.equals("")){
+        if(pipe_no!=null&&!pipe_no.equals("")){
             //钢管信息导出
             List<HashMap<String,Object>> pipelist= pipeBasicInfoDao.getPipeInfoByNo(pipe_no);
             if(pipelist.size()>0){
@@ -331,117 +335,130 @@ public class APPRequestTransferController {
             }else{
                 resultMaps.put("pipeinfo","");
             }
+            if(process_code!=null&&!process_code.equals("")){
+                //标准导出
+                //ODCoatingAcceptanceCriteria odcriteria=odcoatingacceptancecriteriaDao.getODAcceptanceCriteriaByPipeNo(pipe_no);
+                List<HashMap<String,Object>> aclist=acceptanceCriteriaDao.getAcceptanceCriteriaByPipeNoProcessCode(pipe_no,process_code);
+                List<InspectionTimeRecord> inspTimeRecordList=inspectionTimeRecordDao.getRecordByPipeNoMillNo(pipe_no,mill_no,null);
 
-            //标准导出
-            //ODCoatingAcceptanceCriteria odcriteria=odcoatingacceptancecriteriaDao.getODAcceptanceCriteriaByPipeNo(pipe_no);
-            List<HashMap<String,Object>> aclist=acceptanceCriteriaDao.getAcceptanceCriteriaByPipeNoProcessCode(pipe_no,process_code);
-            List<InspectionTimeRecord> inspTimeRecordList=inspectionTimeRecordDao.getRecordByPipeNoMillNo(pipe_no,mill_no,null);
-
-
-            if(pipelist.size()>0&&aclist!=null){
-                float od=(float)pipelist.get(0).get("od");
-                float wt=(float)pipelist.get(0).get("wt");
-                String grade=(String)pipelist.get(0).get("grade");
-                String contract_no=(String)pipelist.get(0).get("contract_no");
-                String coating_standard=(String)pipelist.get(0).get("coating_standard");
-                String client_spec=(String)pipelist.get(0).get("client_spec");
-                String project_name=(String)pipelist.get(0).get("project_name");
-                float p_length=(float)pipelist.get(0).get("p_length");
-                float halflength=p_length*0.5f;
-                String heat_no=(String)pipelist.get(0).get("heat_no");
-                String pipe_making_lot_no=(String)pipelist.get(0).get("pipe_making_lot_no");
-                float kg=(float)pipelist.get(0).get("weight")*1000;
-                Date od_coating_date=(Date)pipelist.get(0).get("od_coating_date");
-                String od_coating_dateString="";
-                if(od_coating_date!=null) {
-                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                    od_coating_dateString = formatter.format(od_coating_date);
-                }
-                Date id_coating_date=(Date)pipelist.get(0).get("id_coating_date");
-                String id_coating_dateString="";
-                if(id_coating_date!=null) {
-                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                    id_coating_dateString = formatter.format(id_coating_date);
+                //数据导出
+                InspectionProcessRecordHeader header= inspectionProcessRecordHeaderDao.getRecentRecordByPipeNo(process_code,pipe_no);
+                if(header!=null){
+                    if(header.getResult().equals("10")){
+                        //是待定状态
+                        resultMaps.put("record_header",header);
+                        List<InspectionProcessRecordItem> itemList=inspectionProcessRecordItemDao.getInspectionProcessRecordItemByInspectionProcessRecordHeaderCode(header.getInspection_process_record_header_code());
+                        resultMaps.put("record_items",itemList);
+                    }
                 }
 
+                if(pipelist.size()>0&&aclist!=null){
+                    float od=(float)pipelist.get(0).get("od");
+                    float wt=(float)pipelist.get(0).get("wt");
+                    String grade=(String)pipelist.get(0).get("grade");
+                    String contract_no=(String)pipelist.get(0).get("contract_no");
+                    String coating_standard=(String)pipelist.get(0).get("coating_standard");
+                    String client_spec=(String)pipelist.get(0).get("client_spec");
+                    String project_name=(String)pipelist.get(0).get("project_name");
+                    float p_length=(float)pipelist.get(0).get("p_length");
+                    float halflength=p_length*0.5f;
+                    String heat_no=(String)pipelist.get(0).get("heat_no");
+                    String pipe_making_lot_no=(String)pipelist.get(0).get("pipe_making_lot_no");
+                    float kg=(float)pipelist.get(0).get("weight")*1000;
+                    Date od_coating_date=(Date)pipelist.get(0).get("od_coating_date");
+                    String od_coating_dateString="";
+                    if(od_coating_date!=null) {
+                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                        od_coating_dateString = formatter.format(od_coating_date);
+                    }
+                    Date id_coating_date=(Date)pipelist.get(0).get("id_coating_date");
+                    String id_coating_dateString="";
+                    if(id_coating_date!=null) {
+                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                        id_coating_dateString = formatter.format(id_coating_date);
+                    }
 
 
-                String stencil_content_name="";
-                String coatint_date="";
-                if(process_code.equals("od_stencil")){
-                    stencil_content_name="od_stencil_content";
-                    coatint_date=od_coating_dateString;
-                }
-                else if(process_code.equals("id_stencil")){
-                    stencil_content_name="id_stencil_content";
-                    coatint_date=id_coating_dateString;
-                }
-                for(int i=0;i<aclist.size();i++){
-                    //根据频率设置是否必填
-                    String need_inspection_mark="1";
-                    HashMap<String,Object> map=aclist.get(i);
-                    float freq = Float.parseFloat((String)aclist.get(i).get("item_frequency"));
-                    for(int j=0;j<inspTimeRecordList.size();j++){
-                        InspectionTimeRecord timeRecord=inspTimeRecordList.get(i);
 
-                        if(timeRecord.getInspection_item().equals(aclist.get(i).get("item_code"))){
-                            //找到检验记录了
-                            //检验频率 秒
-                            float freqSec=freq*60*60;
-                            //lastInspectionTime=timeRecord.getInspction_time().toString();
-                            //间隔秒
-                            Date now=new Date();
-                            long interval = (now.getTime() - timeRecord.getInspction_time().getTime())/1000;
+                    String stencil_content_name="";
+                    String coatint_date="";
+                    if(process_code.equals("od_stencil")){
+                        stencil_content_name="od_stencil_content";
+                        coatint_date=od_coating_dateString;
+                    }
+                    else if(process_code.equals("id_stencil")){
+                        stencil_content_name="id_stencil_content";
+                        coatint_date=id_coating_dateString;
+                    }
+                    for(int i=0;i<aclist.size();i++){
+                        //根据频率设置是否必填
+                        String need_inspection_mark="1";
+                        HashMap<String,Object> map=aclist.get(i);
+                        float freq = Float.parseFloat((String)aclist.get(i).get("item_frequency"));
+                        for(int j=0;j<inspTimeRecordList.size();j++){
+                            InspectionTimeRecord timeRecord=inspTimeRecordList.get(i);
 
-                            if(interval<freqSec){
-                                //间隔小于检验频率，不需要检验
-                                //检验频率导出到动态检测项
-                                need_inspection_mark="0";
+                            if(timeRecord.getInspection_item().equals(aclist.get(i).get("item_code"))){
+                                //找到检验记录了
+                                //检验频率 秒
+                                float freqSec=freq*60*60;
+                                //lastInspectionTime=timeRecord.getInspction_time().toString();
+                                //间隔秒
+                                Date now=new Date();
+                                long interval = (now.getTime() - timeRecord.getInspction_time().getTime())/1000;
+
+                                if(interval<freqSec){
+                                    //间隔小于检验频率，不需要检验
+                                    //检验频率导出到动态检测项
+                                    need_inspection_mark="0";
+                                }
+
+                                break;
                             }
 
-                            break;
+                        }
+
+                        map.put("need_inspection_mark",need_inspection_mark);
+                        aclist.set(i,map);
+
+
+                        if(aclist.get(i).get("item_code").equals(stencil_content_name)){
+                            String stencil_content=(String)aclist.get(i).get("default_value");
+                            if(stencil_content!=null){
+                                stencil_content = stencil_content.replace("[OD]", String.valueOf(od));
+                                stencil_content = stencil_content.replace("[WT]", String.valueOf(wt));
+                                stencil_content = stencil_content.replace("[GRADE]", grade);
+                                stencil_content = stencil_content.replace("[CONTRACTNO]", contract_no);
+                                stencil_content = stencil_content.replace("[COATINGSPEC]", coating_standard);
+                                stencil_content = stencil_content.replace("[CLIENTSPEC]", client_spec);
+                                stencil_content = stencil_content.replace("[PROJECTNAME]", project_name);
+                                stencil_content = stencil_content.replace("[PIPENO]", pipe_no);
+                                stencil_content = stencil_content.replace("[PIPELENGTH]", String.valueOf(p_length));
+                                stencil_content = stencil_content.replace("[HALFLENGTH]", String.valueOf(halflength));
+                                stencil_content = stencil_content.replace("[HEATNO]",heat_no);
+                                stencil_content = stencil_content.replace("[BATCHNO]",pipe_making_lot_no);
+                                stencil_content = stencil_content.replace("[WEIGHT]",String.valueOf(kg));
+                                stencil_content = stencil_content.replace("[COATINGDATE]",coatint_date);
+                                aclist.get(i).put("default_value",stencil_content);
+                            }
                         }
 
                     }
 
-                    map.put("need_inspection_mark",need_inspection_mark);
-                    aclist.set(i,map);
-
-
-                    if(aclist.get(i).get("item_code").equals(stencil_content_name)){
-                        String stencil_content=(String)aclist.get(i).get("default_value");
-                        if(stencil_content!=null){
-                            stencil_content = stencil_content.replace("[OD]", String.valueOf(od));
-                            stencil_content = stencil_content.replace("[WT]", String.valueOf(wt));
-                            stencil_content = stencil_content.replace("[GRADE]", grade);
-                            stencil_content = stencil_content.replace("[CONTRACTNO]", contract_no);
-                            stencil_content = stencil_content.replace("[COATINGSPEC]", coating_standard);
-                            stencil_content = stencil_content.replace("[CLIENTSPEC]", client_spec);
-                            stencil_content = stencil_content.replace("[PROJECTNAME]", project_name);
-                            stencil_content = stencil_content.replace("[PIPENO]", pipe_no);
-                            stencil_content = stencil_content.replace("[PIPELENGTH]", String.valueOf(p_length));
-                            stencil_content = stencil_content.replace("[HALFLENGTH]", String.valueOf(halflength));
-                            stencil_content = stencil_content.replace("[HEATNO]",heat_no);
-                            stencil_content = stencil_content.replace("[BATCHNO]",pipe_making_lot_no);
-                            stencil_content = stencil_content.replace("[WEIGHT]",String.valueOf(kg));
-                            stencil_content = stencil_content.replace("[COATINGDATE]",coatint_date);
-                            aclist.get(i).put("default_value",stencil_content);
-                        }
-                    }
-
+                    //替换
+                    resultMaps.put("criteria",aclist);
                 }
-
-                //替换
-                resultMaps.put("criteria",aclist);
             }
-
 
             resultMaps.put("success",true);
             resultMaps.put("message","成功");
             String map= JSONObject.toJSONString(resultMaps);
             return map;
         }else{
-            return  null;
+            resultMaps.put("success",false);
+            resultMaps.put("message","失败");
+            String map= JSONObject.toJSONString(resultMaps);
+            return map;
         }
     }
 
