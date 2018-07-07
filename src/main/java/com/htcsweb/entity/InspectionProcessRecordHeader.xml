@@ -696,7 +696,7 @@
 
     <!--APP根据项目编号获取试验信息-->
     <select id="getLabTestingInfoByProjectNo" resultType="map">
-        SELECT process_code as testing_type,o.id,o.result,o.operation_time,o.pipe_no as pipe_no from inspection_process_record_header o
+        SELECT process_code as testing_type,o.id,o.result,o.operation_time,o.pipe_no as pipe_no, c.external_coating,c.internal_coating from inspection_process_record_header o
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no
         left join project_info pro on c.project_no=pro.project_no
