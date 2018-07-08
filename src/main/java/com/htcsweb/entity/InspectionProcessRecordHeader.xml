@@ -185,9 +185,15 @@
         left join project_info pro on c.project_no=pro.project_no
         <where>
             AND o.process_code='od_final_inspection'
-            AND c.external_coating=#{external_coating}
-            AND c.internal_coating=#{internal_coating}
-            AND pro.project_no=#{project_no}
+            <if test="external_coating!=null">
+                AND c.external_coating=#{external_coating}
+            </if>
+            <if test="internal_coating!=null">
+                AND  c.internal_coating=#{internal_coating}
+            </if>
+            <if test="project_no!=null and project_no!=''">
+                AND  pro.project_no=#{project_no}
+            </if>
             AND format(c.od,3)=format(#{od},3)
             AND format(c.wt,3)=format(#{wt},3)
             AND o.result=#{result}
@@ -556,9 +562,15 @@
         left join project_info pro on c.project_no=pro.project_no
         <where>
             AND o.process_code='id_final_inspection'
-            AND c.external_coating=#{external_coating}
-            AND c.internal_coating=#{internal_coating}
-            AND pro.project_no=#{project_no}
+            <if test="external_coating!=null">
+                AND c.external_coating=#{external_coating}
+            </if>
+            <if test="internal_coating!=null">
+                AND  c.internal_coating=#{internal_coating}
+            </if>
+            <if test="project_no!=null and project_no!=''">
+                AND  pro.project_no=#{project_no}
+            </if>
             AND format(c.od,3)=format(#{od},3)
             AND format(c.wt,3)=format(#{wt},3)
             AND o.result=#{result}
@@ -586,9 +598,15 @@
             AND o.result='1'
             AND o.process_code='coating_sampling'
             AND ( rditem.item_code='sample_cutoff_length' or rditem.item_code='sample_pipe_cutoff_length' or  rditem.item_code='pipe_length_before_cut')
-            AND c.external_coating=#{external_coating}
-            AND c.internal_coating=#{internal_coating}
-            AND pro.project_no=#{project_no}
+            <if test="external_coating!=null">
+                AND c.external_coating=#{external_coating}
+            </if>
+            <if test="internal_coating!=null">
+                AND  c.internal_coating=#{internal_coating}
+            </if>
+            <if test="project_no!=null and project_no!=''">
+                AND  pro.project_no=#{project_no}
+            </if>
             AND format(c.od,3)=format(#{od},3)
             AND format(c.wt,3)=format(#{wt},3)
             <if test="begin_time!=null">
@@ -712,6 +730,326 @@
         order by operation_time desc
         limit #{skip},#{take}
     </select>
+
+    <!--获取封面上样管信息-->
+    <select id="getCoverPipeSamplingInfo" resultType="map">
+        SELECT o.pipe_no,rditem.item_value as cut_off_length from inspection_process_record_header o
+        inner join inspection_process_record_item rditem on rditem.inspection_process_record_header_code= o.inspection_process_record_header_code
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+
+            AND o.process_code='coating_sampling'
+            AND rditem.item_code='sample_cutoff_length'
+
+            <if test="mill_no!=null and mill_no!=''">
+                AND  o.mill_no=#{mill_no}
+            </if>
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no=#{project_no}
+            </if>
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+    </select>
+
+    <!--获取外防2fbe固化度试验管号-->
+    <select id="getCover2FBEDscTestingInfo" resultType="map">
+        SELECT o.pipe_no from inspection_process_record_header o
+        inner join inspection_process_record_item rditem on rditem.inspection_process_record_header_code= o.inspection_process_record_header_code
+
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+
+            AND o.process_code='od_coating_inspection'
+            AND rditem.item_code='is_dsc_sample'
+            AND rditem.item_value='1'
+
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no=#{mill_no}
+            </if>
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no=#{project_no}
+            </if>
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+    </select>
+
+    <!--获取外防3lpe PE试验管号-->
+    <select id="getCover3LPEPETestingInfo" resultType="map">
+        SELECT o.pipe_no from inspection_process_record_header o
+        inner join inspection_process_record_item rditem on rditem.inspection_process_record_header_code= o.inspection_process_record_header_code
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+            AND o.process_code='od_coating_inspection'
+            AND rditem.item_code='is_pe_sample'
+            AND rditem.item_value='1'
+
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no=#{mill_no}
+            </if>
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no=#{project_no}
+            </if>
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+    </select>
+
+    <select id="getCoatingRepairInfo" resultType="map">
+        SELECT o.* from inspection_process_record_header o
+        inner join inspection_process_record_item rditem on rditem.inspection_process_record_header_code= o.inspection_process_record_header_code
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+            AND o.process_code='coating_repair'
+            <if test="odid!=null and odid!=''">
+                AND  rditem.item_code='repair_odid'
+                AND  rditem.item_value=#{odid}
+            </if>
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no=#{project_no}
+            </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no=#{mill_no}
+            </if>
+
+            <if test="external_coating!=null">
+                AND c.external_coating=#{external_coating}
+            </if>
+            <if test="internal_coating!=null">
+                AND c.internal_coating=#{internal_coating}
+            </if>
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+    </select>
+
+
+    <!--封面获取外防涂层管废管管号和原因-->
+    <select id="getODCoatingRejectedPipeInfo" resultType="map">
+        SELECT  o.pipe_no,o.remark from inspection_process_record_header o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+            AND o.result='30'
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no=#{project_no}
+            </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no=#{mill_no}
+            </if>
+
+            <if test="external_coating!=null">
+                AND c.external_coating=#{external_coating}
+            </if>
+            <if test="internal_coating!=null">
+                AND c.internal_coating=#{internal_coating}
+            </if>
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+
+    </select>
+
+
+
+    <!--封面获取外防光管隔离管编号和原因-->
+    <select id="getODBarePipeOnholdInfo" resultType="map">
+        SELECT o.pipe_no,o.remark from inspection_process_record_header o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+            AND o.result='20'
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no=#{project_no}
+            </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no=#{mill_no}
+            </if>
+            <if test="external_coating!=null">
+                AND c.external_coating=#{external_coating}
+            </if>
+            <if test="internal_coating!=null">
+                AND c.internal_coating=#{internal_coating}
+            </if>
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+
+    </select>
+
+
+    <!--获取内防钢试片样管管子编号-->
+    <select id="getCoverIdSampleInfo" resultType="map">
+        SELECT o.pipe_no from inspection_process_record_header o
+        inner join inspection_process_record_item rditem on rditem.inspection_process_record_header_code= o.inspection_process_record_header_code
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+
+            AND o.process_code='id_coating_inspection'
+            AND rditem.item_code='is_steel_sample'
+            AND rditem.item_value='1'
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no=#{mill_no}
+            </if>
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no=#{project_no}
+            </if>
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+    </select>
+    <!--获取内防玻璃片样管管子编号-->
+    <select id="getCoverIdGlassSampleInfo" resultType="map">
+        SELECT o.pipe_no from inspection_process_record_header o
+        inner join inspection_process_record_item rditem on rditem.inspection_process_record_header_code= o.inspection_process_record_header_code
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+            AND o.process_code='id_coating_inspection'
+            AND rditem.item_code='is_glass_sample'
+            AND rditem.item_value='1'
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no=#{mill_no}
+            </if>
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no=#{project_no}
+            </if>
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+    </select>
+
+
+    <!--封面获取内防涂层管废管管号和原因-->
+    <select id="getIDCoatingRejectedPipeInfo" resultType="map">
+
+        SELECT  o.pipe_no,o.remark from inspection_process_record_header o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+            AND o.result='30'
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no=#{project_no}
+            </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no=#{mill_no}
+            </if>
+
+            <if test="external_coating!=null">
+                AND c.external_coating=#{external_coating}
+            </if>
+            <if test="internal_coating!=null">
+                AND c.internal_coating=#{internal_coating}
+            </if>
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+
+    </select>
+
+
+    <!--封面获取内防光管隔离管管号和原因-->
+    <select id="getIDBarePipeOnholdInfo" resultType="map">
+        SELECT o.pipe_no,o.remark from inspection_process_record_header o
+        left join pipe_basic_info p on p.pipe_no=o.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pro on c.project_no=pro.project_no
+        <where>
+            AND o.result='20'
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no=#{project_no}
+            </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no=#{mill_no}
+            </if>
+            <if test="external_coating!=null">
+                AND c.external_coating=#{external_coating}
+            </if>
+            <if test="internal_coating!=null">
+                AND c.internal_coating=#{internal_coating}
+            </if>
+            AND format(c.od,3)=format(#{od},3)
+            AND format(c.wt,3)=format(#{wt},3)
+            <if test="begin_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+            <if test="end_time!=null">
+                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
+            </if>
+        </where>
+
+
+    </select>
+
 
 
 </mapper>

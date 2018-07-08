@@ -79,4 +79,34 @@ public interface InspectionProcessRecordHeaderDao {
     public List<HashMap<String,Object>>getLabTestingInfoByProjectNo(@Param("project_no") String project_no, @Param("skip") int skip, @Param("take") int take);
 
 
+    //获取封面上的试验管信息
+    public List<HashMap<String,Object>>getCoverPipeSamplingInfo(@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("od")float od,@Param("wt")float wt,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
+
+    //获取DSC固化度试验管号
+    public List<HashMap<String,Object>>getCover2FBEDscTestingInfo(@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("od")float od,@Param("wt")float wt,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
+
+    //获取PE试验管号
+    public List<HashMap<String,Object>>getCover3LPEPETestingInfo(@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("od")float od,@Param("wt")float wt,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
+
+    //获取修补管信息（4.11）
+    public List<HashMap<String,Object>>getCoatingRepairInfo(@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("external_coating")String external_coating,@Param("internal_coating")String internal_coating,@Param("odid")String odid,@Param("od")float od,@Param("wt")float wt,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
+
+    //获取外防涂层管废管管号和原因
+    public List<HashMap<String,Object>>getODCoatingRejectedPipeInfo(@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("external_coating")String external_coating,@Param("internal_coating")String internal_coating,@Param("od")float od,@Param("wt")float wt,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
+
+    //封面获取外防光管隔离管编号和原因
+    public List<HashMap<String,Object>> getODBarePipeOnholdInfo(@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("external_coating")String external_coating,@Param("internal_coating")String internal_coating,@Param("od")float od,@Param("wt")float wt,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
+
+    //获取内防钢试片样管管子编号
+    public List<HashMap<String,Object>>getCoverIdSampleInfo(@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("od")float od,@Param("wt")float wt,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
+
+    //获取内防玻璃片样管管子编号
+    public List<HashMap<String,Object>>getCoverIdGlassSampleInfo(@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("od")float od,@Param("wt")float wt,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
+
+    //获取内防涂层管废管管号和原因
+    public List<HashMap<String,Object>>getIDCoatingRejectedPipeInfo(@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("external_coating")String external_coating,@Param("internal_coating")String internal_coating,@Param("od")float od,@Param("wt")float wt,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
+
+    //封面获取内防光管隔离管编号和原因
+    public List<HashMap<String,Object>> getIDBarePipeOnholdInfo(@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("external_coating")String external_coating,@Param("internal_coating")String internal_coating,@Param("od")float od,@Param("wt")float wt,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
+
 }
