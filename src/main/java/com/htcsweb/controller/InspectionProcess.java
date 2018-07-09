@@ -108,7 +108,10 @@ public class InspectionProcess {
             if(list.size()>0) {
                 p_status = (String) list.get(0).get("status");
                 if(inputStatusList!=null){
-                    if(inputStatusList.equals("lab_testing_od_regular")){
+                    if(inputStatusList.equals("")){
+                        inputStatusVerified=true;
+                    }
+                    else if(inputStatusList.equals("lab_testing_od_regular")){
                         if( list.get(0).get("odsampling_mark").equals("1"))
                             inputStatusVerified=true;
                     }else if(inputStatusList.equals("lab_testing_dsc")){

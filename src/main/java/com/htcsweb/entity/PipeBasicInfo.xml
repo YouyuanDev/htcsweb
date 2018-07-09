@@ -747,4 +747,28 @@
     <update id="updateSamplingMark">
         UPDATE pipe_basic_info set odsampling_mark='1' where pipe_no=#{pipe_no}
     </update>
+
+
+
+
+    <select id="getFirstPipeNoByProjectNo" resultType="com.htcsweb.entity.PipeBasicInfo">
+        select p.* from pipe_basic_info p
+        inner join contract_info c on p.contract_no=c.contract_no
+        inner join  project_info pr on c.project_no=pr.project_no
+        <where>
+            <if test="project_no!=null and project_no!=''">
+                AND c.project_no =#{project_no}
+            </if>
+            <if test="external_coating!=null and external_coating!=''">
+                AND c.external_coating=#{external_coating}
+            </if>
+            <if test="internal_coating!=null and internal_coating!=''">
+                AND c.internal_coating=#{internal_coating}
+            </if>
+        </where>
+        order by p.id asc
+        limit 1
+    </select>
+
+
 </mapper>

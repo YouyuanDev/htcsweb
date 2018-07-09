@@ -538,6 +538,38 @@ public class APPRequestTransferController {
         return mmp;
     }
 
+    //APP根据项目编号获取第一个根管子的信息
+    @RequestMapping(value = "/getFirstPipeNoByProjectNo")
+    @ResponseBody
+    public String getFirstPipeNoByProjectNo(HttpServletRequest request) {
+        String project_no=request.getParameter("project_no");
+        String external_coating= request.getParameter("external_coating");
+        String internal_coating= request.getParameter("internal_coating");
+        System.out.println("project_no="+project_no);
+        System.out.println("external_coating="+external_coating);
+        System.out.println("internal_coating="+internal_coating);
+
+        PipeBasicInfo p=pipeBasicInfoDao.getFirstPipeNoByProjectNo(project_no,external_coating,internal_coating);
+        Map<String, Object> maps = new HashMap<String, Object>();
+        if(p!=null)
+        {
+            System.out.println("p="+p.getPipe_no());
+            maps.put("success",true);
+            maps.put("record",p);
+        }
+        else{
+            maps.put("success",false);
+            maps.put("message","无符合的管号");
+        }
+
+
+        String mmp= JSONArray.toJSONString(maps);
+        return mmp;
+    }
+
+
+
+
 //    private Map<String,HashMap<String,Object>> getInspectionFrequency(String pipe_no,String mill_no,String process_code){
 //        ///////得到本次检验频率
 //

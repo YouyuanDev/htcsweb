@@ -90,4 +90,8 @@ public interface PipeBasicInfoDao {
 
     public int updateSamplingMark(@Param("pipe_no")String pipe_no);
 
+    //获得该项目 的第一根管子
+    public PipeBasicInfo getFirstPipeNoByProjectNo(@Param("project_no")String project_no,@Param("external_coating")String external_coating,@Param("internal_coating")String internal_coating);
+
+
 }

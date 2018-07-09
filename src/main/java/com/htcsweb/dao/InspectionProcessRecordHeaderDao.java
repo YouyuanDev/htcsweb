@@ -1,6 +1,7 @@
 package com.htcsweb.dao;
 
 import com.htcsweb.entity.InspectionProcessRecordHeader;
+import com.htcsweb.entity.PipeBasicInfo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
@@ -108,5 +109,6 @@ public interface InspectionProcessRecordHeaderDao {
 
     //封面获取内防光管隔离管编号和原因
     public List<HashMap<String,Object>> getIDBarePipeOnholdInfo(@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("external_coating")String external_coating,@Param("internal_coating")String internal_coating,@Param("od")float od,@Param("wt")float wt,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
+
 
 }
