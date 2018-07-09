@@ -918,6 +918,7 @@
             </if>
             AND format(c.od,3)=format(#{od},3)
             AND format(c.wt,3)=format(#{wt},3)
+            AND (o.process_code='od_blast' or o.process_code='od_blast_inspection' or o.process_code='od_coating_inspection' or o.process_code='od_final_inspection')
             <if test="begin_time!=null">
                 <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
             </if>
@@ -1043,6 +1044,7 @@
             </if>
             AND format(c.od,3)=format(#{od},3)
             AND format(c.wt,3)=format(#{wt},3)
+            AND (o.process_code='id_blast' or o.process_code='id_blast_inspection' or o.process_code='id_coating_inspection' or o.process_code='id_final_inspection')
             <if test="begin_time!=null">
                 <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d %H:%i:%s')]]>
             </if>
