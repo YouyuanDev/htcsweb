@@ -2075,7 +2075,7 @@ public class InspectionRecordPDFController {
                     idRejectedPipeCountOfDay+=inspectionProcessRecordHeaderDao.getIDCoatingRejectedPipeCount(project_no,mill_no,null,null,od,wt,day_begin_time, day_end_time);
 
                     //idOnholdPipeCountOfDay+=barePipeGrindingCutoffRecordDao.getODBarePipeOnholdCount(project_no,mill_no,null,null,od,wt,day_begin_time, day_end_time);
-                    idOnholdPipeCountOfDay+=inspectionProcessRecordHeaderDao.getODBarePipeOnholdCount(project_no,mill_no,null,null,od,wt,day_begin_time, day_end_time);
+                    idOnholdPipeCountOfDay+=inspectionProcessRecordHeaderDao.getIDBarePipeOnholdCount(project_no,mill_no,null,null,od,wt,day_begin_time, day_end_time);
 
 
                     //获取钢试片管号和玻璃试片管号
@@ -2112,9 +2112,9 @@ public class InspectionRecordPDFController {
                     //-----------获取夜班外防信息(nightshiftodinfo)
                     //odCoatingCountOfNight+=odFinalInspectionProcessDao.getODCoatingCount(project_no,mill_no,null,null,od,wt,night_begin_time,day_end_time);
                     odCoatingCountOfNight+=inspectionProcessRecordHeaderDao.getODCoatingCount(project_no,mill_no,null,null,od,wt,night_begin_time,night_end_time);
-                    System.out.println("yyyyyyy="+odCoatingCountOfNight);
-                    System.out.println("night_begin_time="+night_begin_time);
-                    System.out.println("night_end_time="+night_end_time);
+//                    System.out.println("yyyyyyy="+odCoatingCountOfNight);
+//                    System.out.println("night_begin_time="+night_begin_time);
+//                    System.out.println("night_end_time="+night_end_time);
 
 
                     //List<HashMap<String,Object>>list3=odFinalInspectionProcessDao.getODCoatingAcceptedInfo(project_no,null,null,od,wt,night_begin_time,day_end_time,"1");
@@ -2191,7 +2191,7 @@ public class InspectionRecordPDFController {
                     //idOnholdPipeCountOfNight+=barePipeGrindingCutoffRecordDao.getODBarePipeOnholdCount(project_no,mill_no,null,null,od,wt,night_begin_time, night_end_time);
                     idRepairPipeCountOfNight+=inspectionProcessRecordHeaderDao.getCoatingRepairCount(project_no,mill_no,null,null,"id",od,wt,night_begin_time, night_end_time);
                     idRejectedPipeCountOfNight+=inspectionProcessRecordHeaderDao.getIDCoatingRejectedPipeCount(project_no,mill_no,null,null,od,wt,night_begin_time, night_end_time);
-                    idOnholdPipeCountOfNight+=inspectionProcessRecordHeaderDao.getODBarePipeOnholdCount(project_no,mill_no,null,null,od,wt,night_begin_time, night_end_time);
+                    idOnholdPipeCountOfNight+=inspectionProcessRecordHeaderDao.getIDBarePipeOnholdCount(project_no,mill_no,null,null,od,wt,night_begin_time, night_end_time);
 
                     //获取钢试片管号和玻璃试片管号
                     //List<HashMap<String,Object>>tempList10=idCoatingInspectionProcessDao.getCoverIdSampleInfo(project_no,mill_no,od,wt,night_begin_time, night_end_time);
