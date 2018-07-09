@@ -715,7 +715,7 @@
     <!--APP根据项目编号获取试验信息-->
     <select id="getLabTestingInfoByProjectNo" resultType="map">
 
-        select  rditem.item_code as testing_type,h.id,h.result,h.operation_time,h.pipe_no  as pipe_no, c.external_coating,c.internal_coating  from  inspection_process_record_header h
+        select p.odsampling_mark, rditem.item_code as testing_type,h.id,h.result,h.operation_time,h.pipe_no  as pipe_no, c.external_coating,c.internal_coating  from  inspection_process_record_header h
         inner join inspection_process_record_item rditem on rditem.inspection_process_record_header_code= h.inspection_process_record_header_code
         inner join pipe_basic_info p on p.pipe_no=h.pipe_no
         inner join contract_info c on p.contract_no=c.contract_no
