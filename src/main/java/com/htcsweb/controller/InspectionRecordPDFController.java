@@ -1964,14 +1964,14 @@ public class InspectionRecordPDFController {
                         idCoatingCountOfNight=0,idAcceptedPipeCountOfNight=0,idRepairPipeCountOfNight=0,idRejectedPipeCountOfNight=0,idOnholdPipeCountOfNight=0;
                 //coatingCount代表防腐数，acceptedPipeCount代表防腐合格数，repairPipeCount代表修补数，rejectedPipeCount代表废管数，onholdPipeCount代表隔离数
                 List<HashMap<String,Object>>OdSampleListOfDay=new ArrayList<>();
-                List<HashMap<String,Object>>OdDscList2FBEOfDay=new ArrayList<>();
-                List<HashMap<String,Object>>OdDscList3LPEOfDay=new ArrayList<>();
+                List<HashMap<String,Object>>OdDscListOfDay=new ArrayList<>();
+                //List<HashMap<String,Object>>OdDscList3LPEOfDay=new ArrayList<>();
                 List<HashMap<String,Object>>OdPEListOfDay=new ArrayList<>();
                 List<HashMap<String,Object>>IDSampleInfoListOfDay=new ArrayList<>();
                 List<HashMap<String,Object>>IDGlassSampleInfoListOfDay=new ArrayList<>();
                 List<HashMap<String,Object>>OdSampleListOfNight=new ArrayList<>();
-                List<HashMap<String,Object>>OdDscList2FBEOfNight=new ArrayList<>();
-                List<HashMap<String,Object>>OdDscList3LPEOfNight=new ArrayList<>();
+                List<HashMap<String,Object>>OdDscListOfNight=new ArrayList<>();
+                //List<HashMap<String,Object>>OdDscList3LPEOfNight=new ArrayList<>();
                 List<HashMap<String,Object>>OdPEListOfNight=new ArrayList<>();
                 List<HashMap<String,Object>>IDSampleInfoListOfNight=new ArrayList<>();
                 List<HashMap<String,Object>>IDGlassSampleInfoListOfNight=new ArrayList<>();
@@ -2022,7 +2022,7 @@ public class InspectionRecordPDFController {
 
 
                     if(tempList1!=null&&tempList1.size()>0)
-                        OdDscList2FBEOfDay.addAll(tempList1);
+                        OdDscListOfDay.addAll(tempList1);
                     //List<HashMap<String,Object>>tempList2 = odCoating3LpeInspectionProcessDao.getCover3LPEDscTestingInfo(project_no, mill_no, od, wt, day_begin_time, day_end_time);
 
 
@@ -2143,7 +2143,7 @@ public class InspectionRecordPDFController {
                     List<HashMap<String,Object>>tempList7=inspectionProcessRecordHeaderDao.getCover2FBEDscTestingInfo(project_no,mill_no,od,wt,night_begin_time,night_end_time);
 
                     if(tempList7!=null&&tempList7.size()>0)
-                        OdDscList2FBEOfNight.addAll(tempList7);
+                        OdDscListOfNight.addAll(tempList7);
                     //List<HashMap<String,Object>>tempList8 = odCoating3LpeInspectionProcessDao.getCover3LPEDscTestingInfo(project_no, mill_no, od, wt, night_begin_time, night_end_time);
 
 //                    if(tempList8!=null&&tempList8.size()>0)
@@ -2232,8 +2232,8 @@ public class InspectionRecordPDFController {
                 resultMaps.put("odRejectedPipeCountOfDay",odRejectedPipeCountOfDay);
                 resultMaps.put("odOnholdPipeCountOfDay",odOnholdPipeCountOfDay);
                 resultMaps.put("OdSampleListOfDay",OdSampleListOfDay);
-                resultMaps.put("OdDscList2FBEOfDay",OdDscList2FBEOfDay);
-                resultMaps.put("OdDscList3LPEOfDay",OdDscList3LPEOfDay);
+                resultMaps.put("OdDscListOfDay",OdDscListOfDay);
+                //resultMaps.put("OdDscList3LPEOfDay",OdDscList3LPEOfDay);
                 resultMaps.put("OdPEListOfDay",OdPEListOfDay);
                 resultMaps.put("ODRepairListOfDay",ODRepairListOfDay);
                 resultMaps.put("ODStripListOfDay",ODStripListOfDay);
@@ -2256,8 +2256,8 @@ public class InspectionRecordPDFController {
                 resultMaps.put("odRejectedPipeCountOfNight",odRejectedPipeCountOfNight);
                 resultMaps.put("odOnholdPipeCountOfNight",odOnholdPipeCountOfNight);
                 resultMaps.put("OdSampleListOfNight",OdSampleListOfNight);
-                resultMaps.put("OdDscList2FBEOfNight",OdDscList2FBEOfNight);
-                resultMaps.put("OdDscList3LPEOfNight",OdDscList3LPEOfNight);
+                resultMaps.put("OdDscListOfNight",OdDscListOfNight);
+                //resultMaps.put("OdDscList3LPEOfNight",OdDscList3LPEOfNight);
                 resultMaps.put("OdPEListOfNight",OdPEListOfNight);
                 resultMaps.put("ODRepairListOfNight",ODRepairListOfNight);
                 resultMaps.put("ODStripListOfNight",ODStripListOfNight);
