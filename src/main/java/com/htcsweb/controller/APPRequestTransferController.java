@@ -477,6 +477,50 @@ public class APPRequestTransferController {
         }
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
         List<HashMap<String,Object>>list=inspectionProcessRecordHeaderDao.getLabTestingInfoByProjectNo(project_no,start,Integer.parseInt(rows));
+
+        for(int i=0; list!=null&&i<list.size();i++){
+            String testing_type=(String)list.get(i).get("testing_type");
+            if(testing_type!=null){
+                String pipeno=(String)list.get(i).get("pipe_no");
+                System.out.println("pipeno="+pipeno);
+                System.out.println("testing_type="+testing_type);
+                    if(testing_type.equals("is_sample")){
+                        InspectionProcessRecordHeader header =inspectionProcessRecordHeaderDao.getRecentRecordByPipeNo("lab_testing_od_regular",pipeno);
+                        if(header!=null){
+                            System.out.println("pipeno="+pipeno+"is_sample");
+                            list.get(i).put("testing_result",header.getResult());
+                        }
+                    }
+                    else if(testing_type.equals("is_dsc_sample")){
+                        InspectionProcessRecordHeader header =inspectionProcessRecordHeaderDao.getRecentRecordByPipeNo("lab_testing_dsc",pipeno);
+                        if(header!=null){
+                            System.out.println("pipeno="+pipeno+"is_dsc_sample");
+                            list.get(i).put("testing_result",header.getResult());
+                        }
+                    }
+                    else if(testing_type.equals("is_pe_sample")){
+                        InspectionProcessRecordHeader header =inspectionProcessRecordHeaderDao.getRecentRecordByPipeNo("lab_testing_pe",pipeno);
+                        if(header!=null){
+                            System.out.println("pipeno="+pipeno+"is_pe_sample");
+                            list.get(i).put("testing_result",header.getResult());
+                        }
+                    }
+                    else if(testing_type.equals("is_steel_sample")){
+                        InspectionProcessRecordHeader header =inspectionProcessRecordHeaderDao.getRecentRecordByPipeNo("lab_testing_id_regular",pipeno);
+                        if(header!=null){
+                            list.get(i).put("testing_result",header.getResult());
+                        }
+                    }
+                    else if(testing_type.equals("is_glass_sample")){
+                        InspectionProcessRecordHeader header =inspectionProcessRecordHeaderDao.getRecentRecordByPipeNo("lab_testing_glass",pipeno);
+                        if(header!=null){
+                            list.get(i).put("testing_result",header.getResult());
+                        }
+                    }
+
+            }
+        }
+
         Map<String, Object> maps = new HashMap<String, Object>();
         if (list!=null&&list.size()>0) {
             //是待定状态
