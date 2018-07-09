@@ -482,26 +482,29 @@ public class APPRequestTransferController {
             String testing_type=(String)list.get(i).get("testing_type");
             if(testing_type!=null){
                 String pipeno=(String)list.get(i).get("pipe_no");
-                System.out.println("pipeno="+pipeno);
-                System.out.println("testing_type="+testing_type);
+                //System.out.println("pipeno="+pipeno);
+                //System.out.println("testing_type="+testing_type);
                     if(testing_type.equals("is_sample")){
                         InspectionProcessRecordHeader header =inspectionProcessRecordHeaderDao.getRecentRecordByPipeNo("lab_testing_od_regular",pipeno);
                         if(header!=null){
-                            System.out.println("pipeno="+pipeno+"is_sample");
+                            list.get(i).put("operation_time",header.getOperation_time());
+                            //System.out.println("pipeno="+pipeno+"is_sample");
                             list.get(i).put("testing_result",header.getResult());
                         }
                     }
                     else if(testing_type.equals("is_dsc_sample")){
                         InspectionProcessRecordHeader header =inspectionProcessRecordHeaderDao.getRecentRecordByPipeNo("lab_testing_dsc",pipeno);
                         if(header!=null){
-                            System.out.println("pipeno="+pipeno+"is_dsc_sample");
+                            //System.out.println("pipeno="+pipeno+"is_dsc_sample");
+                            list.get(i).put("operation_time",header.getOperation_time());
                             list.get(i).put("testing_result",header.getResult());
                         }
                     }
                     else if(testing_type.equals("is_pe_sample")){
                         InspectionProcessRecordHeader header =inspectionProcessRecordHeaderDao.getRecentRecordByPipeNo("lab_testing_pe",pipeno);
                         if(header!=null){
-                            System.out.println("pipeno="+pipeno+"is_pe_sample");
+                            //System.out.println("pipeno="+pipeno+"is_pe_sample");
+                            list.get(i).put("operation_time",header.getOperation_time());
                             list.get(i).put("testing_result",header.getResult());
                         }
                     }
@@ -509,12 +512,14 @@ public class APPRequestTransferController {
                         InspectionProcessRecordHeader header =inspectionProcessRecordHeaderDao.getRecentRecordByPipeNo("lab_testing_id_regular",pipeno);
                         if(header!=null){
                             list.get(i).put("testing_result",header.getResult());
+                            list.get(i).put("operation_time",header.getOperation_time());
                         }
                     }
                     else if(testing_type.equals("is_glass_sample")){
                         InspectionProcessRecordHeader header =inspectionProcessRecordHeaderDao.getRecentRecordByPipeNo("lab_testing_glass",pipeno);
                         if(header!=null){
                             list.get(i).put("testing_result",header.getResult());
+                            list.get(i).put("operation_time",header.getOperation_time());
                         }
                     }
 
