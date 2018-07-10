@@ -81,6 +81,9 @@ public class DailyProductionReportController {
         SimpleDateFormat timeformat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         String basePath = request.getSession().getServletContext().getRealPath("/");
+        if(basePath.lastIndexOf('/')==-1){
+            basePath=basePath.replace('\\','/');
+        }
         if(UploadFileController.isServerTomcat) {//若果是tomcat需要重新定义upload的入口
             basePath = basePath.substring(0, basePath.lastIndexOf('/'));
             basePath = basePath.substring(0, basePath.lastIndexOf('/'));
@@ -101,6 +104,9 @@ public class DailyProductionReportController {
             WritableCellFormat wcf=cellFormat3();
             String excelTemplateFullName=request.getSession().getServletContext().getRealPath("/")
                     +"template/daliy_production_report_template.xls";
+            if(excelTemplateFullName.lastIndexOf('/')==-1){
+                excelTemplateFullName=excelTemplateFullName.replace('\\','/');
+            }
             String newExcelFileName=null;
              //获取数据库中的数据
              if(project_no!=null&&!project_no.equals("")&&beginTimeStr!=null&&!beginTimeStr.equals("")&&endTimeStr!=null&&!endTimeStr.equals("")){

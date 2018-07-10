@@ -277,6 +277,9 @@ public class ShipmentController {
     @ResponseBody
     public  String getShipmentRecordPDF(HttpServletRequest request, HttpServletResponse response){
         String basePath=request.getSession().getServletContext().getRealPath("/");
+        if(basePath.lastIndexOf('/')==-1){
+            basePath=basePath.replace('\\','/');
+        }
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         List<String>delSetPath=new ArrayList<String>();//定义删除pdf集合，用于生成zip后删除所有的临时文件
@@ -326,6 +329,9 @@ public class ShipmentController {
                 System.out.println("pdfFullName"+pdfFullName);
                 String templateFullName=request.getSession().getServletContext().getRealPath("/")
                         +"template/shipment_template.xls";
+                if(templateFullName.lastIndexOf('/')==-1){
+                    templateFullName=templateFullName.replace('\\','/');
+                }
 
                 //获取项目的所有shipment信息
                 List<HashMap<String,Object>> list=shipmentInfoDao.getShipmentByProjectNo(project_no,beginTime,endTime);

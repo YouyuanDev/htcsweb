@@ -401,6 +401,9 @@ public class InspectionProcess {
 
                  String str_content="工序："+inspectionProcessRecordHeader.getProcess_code()+",管号："+p.getPipe_no()+", "+result_name+"("+result_name_en+")";
                 String basePath = request.getSession().getServletContext().getRealPath("/");
+                if(basePath.lastIndexOf('/')==-1){
+                    basePath=basePath.replace('\\','/');
+                }
                  SendEvent(basePath,inspectionProcessRecordHeader.getProcess_code(),str_title,str_content);
 
                 System.out.println("推送title="+str_title);

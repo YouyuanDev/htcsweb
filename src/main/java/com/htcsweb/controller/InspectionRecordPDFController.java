@@ -157,6 +157,9 @@ public class InspectionRecordPDFController {
     @ResponseBody
     public  String getRecordReportPDF(HttpServletRequest request, HttpServletResponse response){
         String basePath=request.getSession().getServletContext().getRealPath("/");
+        if(basePath.lastIndexOf('/')==-1){
+            basePath=basePath.replace('\\','/');
+        }
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat timeformat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         //定义根据项目编号获取的合同集合
@@ -358,6 +361,9 @@ public class InspectionRecordPDFController {
     private void OdBlastRecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList,List<String>delSetPath){
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/od_blast_record_template.xls";
+        if(templateFullName.lastIndexOf('/')==-1){
+            templateFullName=templateFullName.replace('\\','/');
+        }
         String newPdfName=null;
         try{
             List<HashMap<String,Object>>list=odblastprocessDao.getOdBlastRecord(project_no,mill_no,coatingType ,od,wt,begin_time,end_time);
@@ -437,6 +443,9 @@ public class InspectionRecordPDFController {
     public  void OdBlastInspectionRecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList,List<String>delSetPath){
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/od_blast_inspection_record_template.xls";
+        if(templateFullName.lastIndexOf('/')==-1){
+            templateFullName=templateFullName.replace('\\','/');
+        }
         String newPdfName=null;
         try{
             List<HashMap<String,Object>>list=odBlastInspectionProcessDao.getOdBlastInspectionRecord(project_no,mill_no,coatingType,od,wt,begin_time,end_time);
@@ -513,6 +522,9 @@ public class InspectionRecordPDFController {
     public  void OdCoat2FBERecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList,List<String>delSetPath,SimpleDateFormat timeformat){
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/od_coating_2fbe_record_template.xls";
+        if(templateFullName.lastIndexOf('/')==-1){
+            templateFullName=templateFullName.replace('\\','/');
+        }
         String newPdfName=null;
         try{
             List<HashMap<String,Object>>list=odCoatingProcessDao.getOd2FBECoatRecord(project_no,mill_no,od,wt,begin_time,end_time);
@@ -585,6 +597,9 @@ public class InspectionRecordPDFController {
     public  void OdCoat2FBEInspectionRecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList,List<String>delSetPath){
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/od_coating_2fbe_inspection_record_template.xls";
+        if(templateFullName.lastIndexOf('/')==-1){
+            templateFullName=templateFullName.replace('\\','/');
+        }
         String newPdfName=null;
         try{
             List<HashMap<String,Object>>list=odCoatingInspectionProcessDao.getOd2FBECoatInspectionRecord(project_no,mill_no,od,wt,begin_time,end_time);
@@ -680,6 +695,9 @@ public class InspectionRecordPDFController {
     public  void OdCoat3LPERecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList,List<String>delSetPath,SimpleDateFormat timeformat){
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/od_coating_3lpe_record_template.xls";
+        if(templateFullName.lastIndexOf('/')==-1){
+            templateFullName=templateFullName.replace('\\','/');
+        }
         //SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String newPdfName=null;
         try{
@@ -758,6 +776,9 @@ public class InspectionRecordPDFController {
     public  void OdCoat3LPEInspectionRecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList,List<String>delSetPath){
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/od_coating_3lpe_inspection_record_template.xls";
+        if(templateFullName.lastIndexOf('/')==-1){
+            templateFullName=templateFullName.replace('\\','/');
+        }
         String newPdfName=null;
         try{
             List<HashMap<String,Object>>list=odCoating3LpeInspectionProcessDao.getOd3LPECoatInspectionRecord(project_no,mill_no,od,wt,begin_time,end_time);
@@ -868,6 +889,9 @@ public class InspectionRecordPDFController {
     public  void OdCoatFinalInspectionRecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList,List<String>delSetPath,SimpleDateFormat sdf){
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/od_final_inspection_record_template.xls";
+        if(templateFullName.lastIndexOf('/')==-1){
+            templateFullName=templateFullName.replace('\\','/');
+        }
         String newPdfName=null;
         List<String>splitList=new ArrayList<>();
         try{
@@ -978,6 +1002,9 @@ public class InspectionRecordPDFController {
     public void  IdBlastInspectionRecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList,List<String>delSetPath){
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/id_blast_inspection_record_template.xls";
+        if(templateFullName.lastIndexOf('/')==-1){
+            templateFullName=templateFullName.replace('\\','/');
+        }
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String newPdfName=null;
         try{
@@ -1047,6 +1074,9 @@ public class InspectionRecordPDFController {
     public void  IdCoatRecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList,List<String>delSetPath,SimpleDateFormat timeformat){
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/id_coating_epoxy_record_template.xls";
+        if(templateFullName.lastIndexOf('/')==-1){
+            templateFullName=templateFullName.replace('\\','/');
+        }
         //SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String newPdfName=null;
         try{
@@ -1114,6 +1144,9 @@ public class InspectionRecordPDFController {
     public void  IdCoatInspectionRecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList,List<String>delSetPath){
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/id_coating_epoxy_inspection_record_template.xls";
+        if(templateFullName.lastIndexOf('/')==-1){
+            templateFullName=templateFullName.replace('\\','/');
+        }
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String newPdfName=null;
         try{
@@ -1186,6 +1219,9 @@ public class InspectionRecordPDFController {
     public void  IdFinalInspectionRecord(HttpServletRequest request,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String coatingType,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList,List<String>delSetPath){
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/id_coating_final_inspection_record_template.xls";
+        if(templateFullName.lastIndexOf('/')==-1){
+            templateFullName=templateFullName.replace('\\','/');
+        }
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String newPdfName=null;
         try{
@@ -1285,6 +1321,9 @@ public class InspectionRecordPDFController {
         //获取试验管
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/online_production_inspection_record_list_cover_1_id.xls";
+        if(templateFullName.lastIndexOf('/')==-1){
+            templateFullName=templateFullName.replace('\\','/');
+        }
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String newPdfName=null;
         //String title_project_name=" ",title_pipe_size=" ",title_standard=" ",title_coating_type=" ";
@@ -1403,6 +1442,9 @@ public class InspectionRecordPDFController {
         //获取试验管
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/online_production_inspection_record_list_cover_1_od.xls";
+        if(templateFullName.lastIndexOf('/')==-1){
+            templateFullName=templateFullName.replace('\\','/');
+        }
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String newPdfName=null;
         //String title_project_name=" ",title_pipe_size=" ",title_standard=" ",title_coating_type=" ";
@@ -1551,6 +1593,9 @@ public class InspectionRecordPDFController {
     public void  createCoverTwo(HttpServletRequest request,int type,String project_no,String project_name,String mill_no,String mill_name,String pipe_size,String standard,String external_coating,String internal_coating,float od,float wt,String shift,String title_time,Date begin_time,Date end_time,List<String>stringList,List<String>delSetPath){
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/online_production_inspection_record_list_cover_2.xls";
+        if(templateFullName.lastIndexOf('/')==-1){
+            templateFullName=templateFullName.replace('\\','/');
+        }
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String newPdfName=null,coatingType=" ";
         List<CoatingRepair>repairList=null;
@@ -1695,6 +1740,9 @@ public class InspectionRecordPDFController {
         }
         String templateFullName=request.getSession().getServletContext().getRealPath("/")
                 +"template/od_blast_record_template.xls";
+        if(templateFullName.lastIndexOf('/')==-1){
+            templateFullName=templateFullName.replace('\\','/');
+        }
         //String pdfFullName=request.getSession().getServletContext().getRealPath("/") + "upload/pdf/BlastRecord.pdf";
         // String logoImageFullName=request.getSession().getServletContext().getRealPath("/") + "template/img/image002.jpg";
 

@@ -82,6 +82,12 @@ public class UploadFileController {
 
         try{
             String basePath = request.getSession().getServletContext().getRealPath("/");
+
+
+            if(basePath.lastIndexOf('/')==-1){
+                basePath=basePath.replace('\\','/');
+            }
+
             if(isServerTomcat) {//若果是tomcat需要重新定义upload的入口
                 basePath = basePath.substring(0, basePath.lastIndexOf('/'));
                 basePath = basePath.substring(0, basePath.lastIndexOf('/'));
@@ -131,6 +137,9 @@ public class UploadFileController {
     public String uploadPicture(HttpServletRequest request, HttpServletResponse response) {
         try {
             String saveDirectory=request.getSession().getServletContext().getRealPath("/");
+            if(saveDirectory.lastIndexOf('/')==-1){
+                saveDirectory=saveDirectory.replace('\\','/');
+            }
             //照片放在web目录以外，需要tomcat conf/server.xml增加 <Context path="/upload" docBase="XXXXX/apache-tomcat-8.5.27/webapps/upload" reloadable="false"/>
             //conf/server.xml   <Context path="/upload" docBase="/Users/kurt/Documents/apache-tomcat-8.5.27/webapps/upload" reloadable="false"/>
             saveDirectory = saveDirectory.substring(0, saveDirectory.lastIndexOf('/'));
@@ -179,6 +188,9 @@ public class UploadFileController {
             if(imgList!=null&&imgList!=""){
                 String []listArr=imgList.split(";");
                 String saveDirectory =request.getSession().getServletContext().getRealPath("/");
+                if(saveDirectory.lastIndexOf('/')==-1){
+                    saveDirectory=saveDirectory.replace('\\','/');
+                }
                 if(isServerTomcat) {
                     saveDirectory = saveDirectory.substring(0, saveDirectory.lastIndexOf('/'));
                     saveDirectory = saveDirectory.substring(0, saveDirectory.lastIndexOf('/'));
@@ -214,6 +226,9 @@ public class UploadFileController {
             if(fileList!=null&&fileList!=""){
                 String []listArr=fileList.split(";");
                 String saveDirectory=request.getSession().getServletContext().getRealPath("/");
+                if(saveDirectory.lastIndexOf('/')==-1){
+                    saveDirectory=saveDirectory.replace('\\','/');
+                }
                 if(isServerTomcat) {
                     saveDirectory = saveDirectory.substring(0, saveDirectory.lastIndexOf('/'));
                     saveDirectory = saveDirectory.substring(0, saveDirectory.lastIndexOf('/'));
@@ -243,6 +258,9 @@ public class UploadFileController {
         try {
             //String saveDirectory = request.getSession().getServletContext().getRealPath("/upload/files");
             String saveDirectory=request.getSession().getServletContext().getRealPath("/");
+            if(saveDirectory.lastIndexOf('/')==-1){
+                saveDirectory=saveDirectory.replace('\\','/');
+            }
             if(isServerTomcat) {
                 saveDirectory = saveDirectory.substring(0, saveDirectory.lastIndexOf('/'));
                 saveDirectory = saveDirectory.substring(0, saveDirectory.lastIndexOf('/'));
@@ -291,6 +309,9 @@ public class UploadFileController {
             }
             //String saveDirectory = request.getSession().getServletContext().getRealPath("/upload/pipes");
             String saveDirectory=request.getSession().getServletContext().getRealPath("/");
+            if(saveDirectory.lastIndexOf('/')==-1){
+                saveDirectory=saveDirectory.replace('\\','/');
+            }
             if(isServerTomcat) {
                 saveDirectory = saveDirectory.substring(0, saveDirectory.lastIndexOf('/'));
                 saveDirectory = saveDirectory.substring(0, saveDirectory.lastIndexOf('/'));

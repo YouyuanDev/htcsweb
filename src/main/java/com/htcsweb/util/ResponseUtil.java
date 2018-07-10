@@ -36,7 +36,13 @@ public class ResponseUtil {
     public static void writeQRCodeZipFile(String[] pipeNoArr, HttpServletRequest request, HttpServletResponse response)throws Exception{
 
         String tmpfolderPath=request.getSession().getServletContext().getRealPath("/tmp");
+        if(tmpfolderPath.lastIndexOf('/')==-1){
+            tmpfolderPath=tmpfolderPath.replace('\\','/');
+        }
         String logoDirectory = request.getSession().getServletContext().getRealPath("/images");
+        if(logoDirectory.lastIndexOf('/')==-1){
+            logoDirectory=logoDirectory.replace('\\','/');
+        }
         StringBuilder sb = new StringBuilder();
         sb.append(logoDirectory);
         sb.append("/");
@@ -179,6 +185,9 @@ public class ResponseUtil {
 
 
             String basePath=request.getSession().getServletContext().getRealPath("/");
+            if(basePath.lastIndexOf('/')==-1){
+                basePath=basePath.replace('\\','/');
+            }
             if(UploadFileController.isServerTomcat) {
                 basePath = basePath.substring(0, basePath.lastIndexOf('/'));
                 basePath = basePath.substring(0, basePath.lastIndexOf('/'));

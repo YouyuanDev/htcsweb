@@ -30,7 +30,13 @@ public class CommonController {
     public String htmlToPDF(HttpServletRequest request){
 
          String basePath=request.getSession().getServletContext().getRealPath("/");
+        if(basePath.lastIndexOf('/')==-1){
+            basePath=basePath.replace('\\','/');
+        }
          String tmppdfPath = request.getSession().getServletContext().getRealPath("/")+"upload/pdf";
+        if(tmppdfPath.lastIndexOf('/')==-1){
+            tmppdfPath=tmppdfPath.replace('\\','/');
+        }
           //String LOGO_PATH = "file://"+PathUtil.getCurrentPath()+"/logo.png
          File pdfDir=new File(tmppdfPath);
          if(!pdfDir.exists()){
