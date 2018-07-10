@@ -500,7 +500,7 @@
             }else if(controltype=="textarea"){//多行文本
                 controldiv="<input controltype=\""+controltype+"\" id=\""+itemcode+"\" dynamic=\"dynamic\" class=\"easyui-textbox\" type=\"text\" value=\""+defaultvalue+"\" myname=\"" + itemcode +"\" name=\""+itemcode+"\" data-options=\"multiline:true\" style=\"width:300px;height:80px\" />";
             }else if(controltype=="date"){//时间
-                if(defaultvalue!=undefined)
+                if(defaultvalue!=undefined&&defaultvalue!=0)
                     controldiv="<input class=\"easyui-datetimebox\" dynamic=\"dynamic\" controltype=\""+controltype+"\"   myname=\""+itemcode +"\" name=\""+itemcode+"\" value=\""+defaultvalue+"\" defaultvalue=\""+defaultvalue+"\" editable=\"false\" data-options=\"formatter:myformatter2,parser:myparser2\" style=\"width:200px;\"/>";
                 else
                     controldiv="<input class=\"easyui-datetimebox\" dynamic=\"dynamic\" controltype=\""+controltype+"\"   myname=\""+itemcode +"\" name=\""+itemcode+"\"  defaultvalue=\""+defaultvalue+"\" editable=\"false\" data-options=\"formatter:myformatter2,parser:myparser2\" style=\"width:200px;\"/>";
