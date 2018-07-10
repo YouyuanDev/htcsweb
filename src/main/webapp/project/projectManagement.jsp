@@ -147,14 +147,14 @@
                     'itp':row.itp,
                     //'project_time':str,
                     'upload_files':row.upload_files,
-                    'pipe_body_acceptance_criteria_no':row.pipe_body_acceptance_criteria_no,
-                    'inspection_frequency_no':row.inspection_frequency_no,
-                    'od_coating_acceptance_criteria_no':row.od_coating_acceptance_criteria_no,
-                    'id_coating_acceptance_criteria_no':row.id_coating_acceptance_criteria_no,
-                    'lab_testing_acceptance_criteria_2fbe_no':row.lab_testing_acceptance_criteria_2fbe_no,
-                    'lab_testing_acceptance_criteria_3lpe_no':row.lab_testing_acceptance_criteria_3lpe_no,
-                    'raw_material_acceptance_criteria_2fbe_no':row.raw_material_acceptance_criteria_2fbe_no,
-                    'raw_material_acceptance_criteria_3lpe_no':row.raw_material_acceptance_criteria_3lpe_no,
+                    // 'pipe_body_acceptance_criteria_no':row.pipe_body_acceptance_criteria_no,
+                    // 'inspection_frequency_no':row.inspection_frequency_no,
+                    // 'od_coating_acceptance_criteria_no':row.od_coating_acceptance_criteria_no,
+                    // 'id_coating_acceptance_criteria_no':row.id_coating_acceptance_criteria_no,
+                    // 'lab_testing_acceptance_criteria_2fbe_no':row.lab_testing_acceptance_criteria_2fbe_no,
+                    // 'lab_testing_acceptance_criteria_3lpe_no':row.lab_testing_acceptance_criteria_3lpe_no,
+                    // 'raw_material_acceptance_criteria_2fbe_no':row.raw_material_acceptance_criteria_2fbe_no,
+                    // 'raw_material_acceptance_criteria_3lpe_no':row.raw_material_acceptance_criteria_3lpe_no,
                     'acceptance_criteria_no':row.acceptance_criteria_no
                 });
 
@@ -435,14 +435,16 @@
                 <th field="itp" align="center" width="100" class="i18n1" name="itp">ITP</th>
                 <th field="project_time" align="center" width="100" class="i18n1" name="projecttime" data-options="formatter:formatterdate">项目开始时间</th>
 
-                <th field="pipe_body_acceptance_criteria_no" align="center" width="100" class="i18n1" name="pipebodyacceptancecriteriano">Pipe Body acceptance_criteria</th>
+                <%--<th field="pipe_body_acceptance_criteria_no" align="center" width="100" class="i18n1" name="pipebodyacceptancecriteriano">Pipe Body acceptance_criteria</th>--%>
 
-                <th field="od_coating_acceptance_criteria_no" align="center" width="100" class="i18n1" name="odcoatingacceptancecriteriano">OD acceptance_criteria</th>
-                <th field="id_coating_acceptance_criteria_no" align="center" width="100" class="i18n1" name="idcoatingacceptancecriteriano">ID acceptance_criteria</th>
-                <th field="lab_testing_acceptance_criteria_2fbe_no" align="center" width="100" class="i18n1" name="labtestingacceptancecriteria2fbeno">Lab testing acceptance criteria 2fbe</th>
-                <th field="lab_testing_acceptance_criteria_3lpe_no" align="center" width="100" class="i18n1" name="labtestingacceptancecriteria3lpeno">Lab testing acceptance criteria 3lpe</th>
-                <th field="raw_material_acceptance_criteria_2fbe_no" align="center" width="100" class="i18n1" name="rawmaterialtestingacceptancecriteria2fbeno">Raw Material Testing acceptance criteria 2fbe</th>
-                <th field="raw_material_acceptance_criteria_3lpe_no" align="center" width="100" class="i18n1" name="rawmaterialtestingacceptancecriteria3lpeno">>Raw Material Testing acceptance criteria 3lpe</th>
+                <%--<th field="od_coating_acceptance_criteria_no" align="center" width="100" class="i18n1" name="odcoatingacceptancecriteriano">OD acceptance_criteria</th>--%>
+                <%--<th field="id_coating_acceptance_criteria_no" align="center" width="100" class="i18n1" name="idcoatingacceptancecriteriano">ID acceptance_criteria</th>--%>
+                <%--<th field="lab_testing_acceptance_criteria_2fbe_no" align="center" width="100" class="i18n1" name="labtestingacceptancecriteria2fbeno">Lab testing acceptance criteria 2fbe</th>--%>
+                <%--<th field="lab_testing_acceptance_criteria_3lpe_no" align="center" width="100" class="i18n1" name="labtestingacceptancecriteria3lpeno">Lab testing acceptance criteria 3lpe</th>--%>
+                <%--<th field="raw_material_acceptance_criteria_2fbe_no" align="center" width="100" class="i18n1" name="rawmaterialtestingacceptancecriteria2fbeno">Raw Material Testing acceptance criteria 2fbe</th>--%>
+                <%--<th field="raw_material_acceptance_criteria_3lpe_no" align="center" width="100" class="i18n1" name="rawmaterialtestingacceptancecriteria3lpeno">Raw Material Testing acceptance criteria 3lpe</th>--%>
+
+                <th field="acceptance_criteria_no" align="center" width="100" class="i18n1" name="acceptancecriteriano"></th>
 
             </tr>
             </thead>
@@ -516,124 +518,124 @@
                     <td   width="33%"><input class="easyui-textbox" type="text" name="itp" value=""/></td>
 
                 </tr>
-                <tr>
-                    <td class="i18n1" name="pipebodyacceptancecriteriano" width="16%">钢管管体接收标准</td>
-                    <td   width="33%">
+                <%--<tr>--%>
+                    <%--<td class="i18n1" name="pipebodyacceptancecriteriano" width="16%">钢管管体接收标准</td>--%>
+                    <%--<td   width="33%">--%>
 
-                        <input class="easyui-combobox" type="text" name="pipe_body_acceptance_criteria_no"  data-options=
-                                "url:'/AcceptanceCriteriaOperation/getAllPipeBodyAcceptanceCriteria.action',
-					        method:'get',
-					        valueField:'id',
-					        editable:false,
-					        textField:'text',
-					        panelHeight:'auto'"/>
+                        <%--<input class="easyui-combobox" type="text" name="pipe_body_acceptance_criteria_no"  data-options=--%>
+                                <%--"url:'/AcceptanceCriteriaOperation/getAllPipeBodyAcceptanceCriteria.action',--%>
+					        <%--method:'get',--%>
+					        <%--valueField:'id',--%>
+					        <%--editable:false,--%>
+					        <%--textField:'text',--%>
+					        <%--panelHeight:'auto'"/>--%>
 
-                    </td>
-                    <td class="i18n1" name="inspectionfrequencyno" width="16%">检验频率标准</td>
-                    <td   width="33%">
-                        <input class="easyui-combobox" type="text" name="inspection_frequency_no"  data-options=
-                                "url:'/InspectionFrequencyOperation/getAllInspectionFrequency.action',
-					        method:'get',
-					        valueField:'id',
-					        editable:false,
-					        textField:'text',
-					        panelHeight:'auto'"/>
-
-
-
-                    </td>
-
-                </tr>
+                    <%--</td>--%>
+                    <%--<td class="i18n1" name="inspectionfrequencyno" width="16%">检验频率标准</td>--%>
+                    <%--<td   width="33%">--%>
+                        <%--<input class="easyui-combobox" type="text" name="inspection_frequency_no"  data-options=--%>
+                                <%--"url:'/InspectionFrequencyOperation/getAllInspectionFrequency.action',--%>
+					        <%--method:'get',--%>
+					        <%--valueField:'id',--%>
+					        <%--editable:false,--%>
+					        <%--textField:'text',--%>
+					        <%--panelHeight:'auto'"/>--%>
 
 
-                <tr>
-                    <td class="i18n1" name="odcoatingacceptancecriteriano" width="16%">OD Acceptance Criteria No.</td>
-                    <td   width="33%">
-                        <%--<input class="easyui-textbox" type="text" name="coating_acceptance_criteria_no" value=""/>--%>
 
-                            <input class="easyui-combobox" type="text" name="od_coating_acceptance_criteria_no"  data-options=
-                             "url:'/AcceptanceCriteriaOperation/getAllODAcceptanceCriteria.action',
-					        method:'get',
-					        valueField:'id',
-					        editable:false,
-					        textField:'text',
-					        panelHeight:'auto'"/>
+                    <%--</td>--%>
+
+                <%--</tr>--%>
 
 
-                    </td>
-                    <td class="i18n1" name="idcoatingacceptancecriteriano" width="16%">ID Acceptance Criteria No.</td>
-                    <td   width="33%">
+                <%--<tr>--%>
+                    <%--<td class="i18n1" name="odcoatingacceptancecriteriano" width="16%">OD Acceptance Criteria No.</td>--%>
+                    <%--<td   width="33%">--%>
+                        <%--&lt;%&ndash;<input class="easyui-textbox" type="text" name="coating_acceptance_criteria_no" value=""/>&ndash;%&gt;--%>
 
-                        <input class="easyui-combobox" type="text" name="id_coating_acceptance_criteria_no"   data-options=
-                                "url:'/AcceptanceCriteriaOperation/getAllIDAcceptanceCriteria.action',
-					        method:'get',
-					        editable:false,
-					        valueField:'id',
-					        textField:'text',
-					        panelHeight:'auto'"/>
-
-
-                    </td>
-
-                </tr>
-
-                <tr>
-                    <td class="i18n1" name="labtestingacceptancecriteria2fbeno" width="16%">Lab Testing Acceptance Criteria No.(2FBE)</td>
-                    <td   width="33%">
-
-                        <input class="easyui-combobox" type="text" name="lab_testing_acceptance_criteria_2fbe_no"  data-options=
-                                "url:'/LabTestingAcceptanceCriteriaOperation/getAllLabTestingAcceptanceCriteria2fbe.action',
-					        method:'get',
-					        valueField:'id',
-					        editable:false,
-					        textField:'text',
-					        panelHeight:'auto'"/>
+                            <%--<input class="easyui-combobox" type="text" name="od_coating_acceptance_criteria_no"  data-options=--%>
+                             <%--"url:'/AcceptanceCriteriaOperation/getAllODAcceptanceCriteria.action',--%>
+					        <%--method:'get',--%>
+					        <%--valueField:'id',--%>
+					        <%--editable:false,--%>
+					        <%--textField:'text',--%>
+					        <%--panelHeight:'auto'"/>--%>
 
 
-                    </td>
-                    <td class="i18n1" name="labtestingacceptancecriteria3lpeno" width="16%">Lab Testing Acceptance Criteria No.(3LPE)</td>
-                    <td   width="33%">
+                    <%--</td>--%>
+                    <%--<td class="i18n1" name="idcoatingacceptancecriteriano" width="16%">ID Acceptance Criteria No.</td>--%>
+                    <%--<td   width="33%">--%>
 
-                        <input class="easyui-combobox" type="text" name="lab_testing_acceptance_criteria_3lpe_no"   data-options=
-                                "url:'/LabTestingAcceptanceCriteriaOperation/getAllLabTestingAcceptanceCriteria3lpe.action',
-					        method:'get',
-					        editable:false,
-					        valueField:'id',
-					        textField:'text',
-					        panelHeight:'auto'"/>
-
-                    </td>
-
-                </tr>
-
-                <tr>
-                    <td class="i18n1" name="rawmaterialtestingacceptancecriteria2fbeno" width="16%">Raw Material Testing Acceptance Criteria No.(2FBE)</td>
-                    <td   width="33%">
-
-                        <input class="easyui-combobox" type="text" name="raw_material_acceptance_criteria_2fbe_no"  data-options=
-                                "url:'/rawMaterialACOperation/getAllRawMaterialTestingAcceptanceCriteria2fbe.action',
-					        method:'get',
-					        valueField:'id',
-					        editable:false,
-					        textField:'text',
-					        panelHeight:'auto'"/>
+                        <%--<input class="easyui-combobox" type="text" name="id_coating_acceptance_criteria_no"   data-options=--%>
+                                <%--"url:'/AcceptanceCriteriaOperation/getAllIDAcceptanceCriteria.action',--%>
+					        <%--method:'get',--%>
+					        <%--editable:false,--%>
+					        <%--valueField:'id',--%>
+					        <%--textField:'text',--%>
+					        <%--panelHeight:'auto'"/>--%>
 
 
-                    </td>
-                    <td class="i18n1" name="rawmaterialtestingacceptancecriteria3lpeno" width="16%">Raw Material Testing Acceptance Criteria No.(3LPE)</td>
-                    <td   width="33%">
+                    <%--</td>--%>
 
-                        <input class="easyui-combobox" type="text" name="raw_material_acceptance_criteria_3lpe_no"   data-options=
-                                "url:'/rawMaterialACOperation/getAllRawMaterialTestingAcceptanceCriteria3lpe.action',
-					        method:'get',
-					        editable:false,
-					        valueField:'id',
-					        textField:'text',
-					        panelHeight:'auto'"/>
+                <%--</tr>--%>
 
-                    </td>
+                <%--<tr>--%>
+                    <%--<td class="i18n1" name="labtestingacceptancecriteria2fbeno" width="16%">Lab Testing Acceptance Criteria No.(2FBE)</td>--%>
+                    <%--<td   width="33%">--%>
 
-                </tr>
+                        <%--<input class="easyui-combobox" type="text" name="lab_testing_acceptance_criteria_2fbe_no"  data-options=--%>
+                                <%--"url:'/LabTestingAcceptanceCriteriaOperation/getAllLabTestingAcceptanceCriteria2fbe.action',--%>
+					        <%--method:'get',--%>
+					        <%--valueField:'id',--%>
+					        <%--editable:false,--%>
+					        <%--textField:'text',--%>
+					        <%--panelHeight:'auto'"/>--%>
+
+
+                    <%--</td>--%>
+                    <%--<td class="i18n1" name="labtestingacceptancecriteria3lpeno" width="16%">Lab Testing Acceptance Criteria No.(3LPE)</td>--%>
+                    <%--<td   width="33%">--%>
+
+                        <%--<input class="easyui-combobox" type="text" name="lab_testing_acceptance_criteria_3lpe_no"   data-options=--%>
+                                <%--"url:'/LabTestingAcceptanceCriteriaOperation/getAllLabTestingAcceptanceCriteria3lpe.action',--%>
+					        <%--method:'get',--%>
+					        <%--editable:false,--%>
+					        <%--valueField:'id',--%>
+					        <%--textField:'text',--%>
+					        <%--panelHeight:'auto'"/>--%>
+
+                    <%--</td>--%>
+
+                <%--</tr>--%>
+
+                <%--<tr>--%>
+                    <%--<td class="i18n1" name="rawmaterialtestingacceptancecriteria2fbeno" width="16%">Raw Material Testing Acceptance Criteria No.(2FBE)</td>--%>
+                    <%--<td   width="33%">--%>
+
+                        <%--<input class="easyui-combobox" type="text" name="raw_material_acceptance_criteria_2fbe_no"  data-options=--%>
+                                <%--"url:'/rawMaterialACOperation/getAllRawMaterialTestingAcceptanceCriteria2fbe.action',--%>
+					        <%--method:'get',--%>
+					        <%--valueField:'id',--%>
+					        <%--editable:false,--%>
+					        <%--textField:'text',--%>
+					        <%--panelHeight:'auto'"/>--%>
+
+
+                    <%--</td>--%>
+                    <%--<td class="i18n1" name="rawmaterialtestingacceptancecriteria3lpeno" width="16%">Raw Material Testing Acceptance Criteria No.(3LPE)</td>--%>
+                    <%--<td   width="33%">--%>
+
+                        <%--<input class="easyui-combobox" type="text" name="raw_material_acceptance_criteria_3lpe_no"   data-options=--%>
+                                <%--"url:'/rawMaterialACOperation/getAllRawMaterialTestingAcceptanceCriteria3lpe.action',--%>
+					        <%--method:'get',--%>
+					        <%--editable:false,--%>
+					        <%--valueField:'id',--%>
+					        <%--textField:'text',--%>
+					        <%--panelHeight:'auto'"/>--%>
+
+                    <%--</td>--%>
+
+                <%--</tr>--%>
 
                 <tr>
                     <td class="i18n1" name="acceptancecriteriano" width="16%">acceptancecriteriano</td>
