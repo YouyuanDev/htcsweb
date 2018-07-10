@@ -25,7 +25,7 @@
         var addOrEdit=true;
         $(function () {
 
-            $('#addEditDialog').css('top','30px');
+            $('#addEditDialog').css('top','5px');
             $('#addEditDialog').dialog({
                 onClose:function () {
                     clearFormLabel();
@@ -163,7 +163,6 @@
                 return;
             }
             if (editIndex != index){
-
                 if (endEditing()){
                     $('#dg').datagrid('selectRow', index)
                         .datagrid('beginEdit', index);
@@ -448,8 +447,8 @@
         <a href="#" id="deltObpLinkBtn" class="easyui-linkbutton i18n1" name="delete" data-options="iconCls:'icon-remove',plain:true" onclick="delFunction()">删除</a>
     </div>
 </div>
-<!--添加、修改框-->
-<div id="addEditDialog" class="easyui-dialog" data-options="closable:false,title:'添加',modal:true" closed="true" buttons="#dlg-buttons" style="display: none;padding:5px 0px;width:1200px;max-height:600px;overflow-y:auto;">
+<!--添加、修改框  max-height:600px;overflow-y:auto;-->
+<div id="addEditDialog" class="easyui-dialog" data-options="closable:false,title:'添加',modal:true" closed="true" buttons="#dlg-buttons" style="display: none;padding:5px 0px;width:1200px; height:560px;">
     <form id="addEditForm" method="post" style="width:95%;margin:0 auto;">
         <fieldset style="width:99%;border:solid 1px #aaa;position:relative;">
             <legend><span class="i18n1" name="ACinfo">标准信息</span></legend>
@@ -510,7 +509,7 @@
         </fieldset>
         <fieldset id="dynamicItem" style="width:99%;border:solid 1px #aaa;position:relative;">
             <legend><span class="i18n1" name="inspectioniteminfo">测量项信息</span></legend>
-            <table id="dg" class="easyui-datagrid" title="" style="width:100%;height:300px;overflow-y: scroll;" data-options="
+            <table id="dg" class="easyui-datagrid" title="" style="width:100%;height:280px;overflow-y:scroll;" data-options="
 				iconCls: '',
 				singleSelect: true,
 				striped:true,
@@ -578,6 +577,7 @@
                     <th class="i18n1" name="options" data-options="field:'options',editor:'textbox'"></th>
                         <th class="i18n1" name="isspecialitem" data-options="field:'is_special_item'"></th>
                     <th class="i18n1" name="status" data-options="field:'status',align:'center',editor:{type:'checkbox',options:{on:'P',off:''}}">Status</th>
+
                 </tr>
                 </thead>
             </table>
