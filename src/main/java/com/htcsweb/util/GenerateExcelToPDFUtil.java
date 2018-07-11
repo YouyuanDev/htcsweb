@@ -457,6 +457,10 @@ public class GenerateExcelToPDFUtil {
                         }
                         if(flag){
                             int horizontalAlign=Element.ALIGN_CENTER;
+                            //用于general_process_template的动态项左对齐
+                            if(i>=tableTopIndex+3&&i<=tableBottomIndex&&j==2){
+                                horizontalAlign=Element.ALIGN_LEFT;
+                            }
                             if(i<tableTopIndex) {//头部两行文字
                                 horizontalAlign=Element.ALIGN_RIGHT;
                                 cell1 = getPDFCell(str, headfont1, horizontalAlign);
