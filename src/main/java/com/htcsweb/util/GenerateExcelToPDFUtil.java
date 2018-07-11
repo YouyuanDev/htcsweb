@@ -74,11 +74,6 @@ public class GenerateExcelToPDFUtil {
         //创建单元格对象，将内容及字体传入
         PdfPCell cell=new PdfPCell(new Paragraph(str,font));
         //设置单元格内容居中
-
-        if(i>10){
-            //用于general_process_template的动态项左对齐
-            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
-        }
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
         //将该单元格所在列包括该单元格在内的i行单元格合并为一个单元格
         cell.setRowspan(i);
@@ -92,6 +87,10 @@ public class GenerateExcelToPDFUtil {
         PdfPCell cell=new PdfPCell(new Paragraph(str,font));
         cell.setMinimumHeight(25);
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+        if(i>10){
+            //用于general_process_template的动态项左对齐
+            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+        }
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
         //将该单元格所在行包括该单元格在内的i列单元格合并为一个单元格
         cell.setColspan(i);
