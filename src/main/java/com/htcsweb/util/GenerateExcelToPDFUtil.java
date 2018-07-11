@@ -90,6 +90,8 @@ public class GenerateExcelToPDFUtil {
         if(i>10){
             //用于general_process_template的动态项左对齐
             cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            //自动换行
+            cell.setNoWrap(false);
         }
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
         //将该单元格所在行包括该单元格在内的i列单元格合并为一个单元格
