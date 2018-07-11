@@ -440,8 +440,8 @@ public class GenerateExcelToPDFUtil {
                                         cell1 = mergeCol(str, headfont2, colNum);
                                     else//设置表格其他单元
                                         cell1 = mergeCol(str, font, colNum);
-                                    if(i==tableTopIndex+2&&j==2){
-                                        cell1.setHorizontalAlignment(Element.ALIGN_LEFT);
+                                    if((i==tableTopIndex+2)&&j==2){
+                                        cell1.setHorizontalAlignment(Element.ALIGN_CENTER);
                                     }
 
                                     cell1.setRowspan(rowNum);
