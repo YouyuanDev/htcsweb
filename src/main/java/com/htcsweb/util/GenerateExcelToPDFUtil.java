@@ -74,6 +74,7 @@ public class GenerateExcelToPDFUtil {
         //创建单元格对象，将内容及字体传入
         PdfPCell cell=new PdfPCell(new Paragraph(str,font));
         //设置单元格内容居中
+        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
         //将该单元格所在列包括该单元格在内的i行单元格合并为一个单元格
         cell.setRowspan(i);
@@ -439,6 +440,10 @@ public class GenerateExcelToPDFUtil {
                                         cell1 = mergeCol(str, headfont2, colNum);
                                     else//设置表格其他单元
                                         cell1 = mergeCol(str, font, colNum);
+                                    if(i==tableTopIndex+2&&j==2){
+                                        cell1.setHorizontalAlignment(Element.ALIGN_LEFT);
+                                    }
+
                                     cell1.setRowspan(rowNum);
                                 }
 
