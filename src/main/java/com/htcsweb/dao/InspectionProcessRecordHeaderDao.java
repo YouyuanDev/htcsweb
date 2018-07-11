@@ -110,5 +110,7 @@ public interface InspectionProcessRecordHeaderDao {
     //封面获取内防光管隔离管编号和原因
     public List<HashMap<String,Object>> getIDBarePipeOnholdInfo(@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("external_coating")String external_coating,@Param("internal_coating")String internal_coating,@Param("od")float od,@Param("wt")float wt,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
 
+    //获取岗位记录信息
+    public List<HashMap<String,Object>>getPostRecord(@Param("process_code")String process_code,@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("external_coating")String external_coating ,@Param("od")float od,@Param("wt")float wt,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
 
 }
