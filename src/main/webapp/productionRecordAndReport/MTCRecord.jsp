@@ -84,7 +84,7 @@
                 form.attr("style", "display:none");
                 form.attr("target", "");
                 form.attr("method", "post");//请求类型
-                form.attr("action","/ShipmentOperation/getMTCRecord.action");//请求地址
+                form.attr("action","/MTCOperation/getMTCRecord.action");//请求地址
                 $("body").append(form);//将表单放置在web中
                 var input1 = $("<input type='hidden' name='project_no' value='" + selectValue + "'/>");
                 form.append(input1);

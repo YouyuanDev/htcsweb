@@ -19,7 +19,7 @@
     <script  src="../js/lrscroll.js" type="text/javascript"></script>
     <script src="../js/jquery.i18n.properties-1.0.9.js" type="text/javascript"></script>
     <script src="../js/language.js" type="text/javascript"></script>
-    <script src="../js/datagrid-scrollview.js" type="text/javascript"></script>
+
     <script type="text/javascript">
         var url;
         var staticItem=[];
@@ -191,7 +191,8 @@
                     $('#dg').datagrid('selectRow', editIndex);
                 }
             }
-            $('#dg').datagrid('scrollTo',editIndex);
+            alert(editIndex);
+            $('#dg').datagrid('scrollTo',editIndex+2);
         }
          var g_textarea_field=undefined;
 
@@ -399,6 +400,7 @@
                 }
             });
         }
+
     </script>
 </head>
 
@@ -511,10 +513,12 @@
         </fieldset>
         <fieldset id="dynamicItem" style="width:99%;border:solid 1px #aaa;position:relative;">
             <legend><span class="i18n1" name="inspectioniteminfo">测量项信息</span></legend>
-            <table id="dg" class="easyui-datagrid" title="" style="width:100%;height:280px;overflow-y:scroll;" data-options="
+            <table id="dg" class="easyui-datagrid" title="" style="width:100%;height:280px;" data-options="
 				iconCls: '',
 				singleSelect: true,
-				rownumbers:true,
+				view:scrollview,
+				pageSize:1000,
+				autoRowHeight:false,
 				striped:true,
 				toolbar: '#tb',
 				onClickRow: onClickRow
@@ -640,6 +644,7 @@
     </div>
 </div>
 <script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
+<script src="../js/datagrid-scrollview.js" type="text/javascript"></script>
 </body>
 </html>
 <script type="text/javascript">

@@ -3,6 +3,7 @@ package com.htcsweb.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.htcsweb.dao.ProjectInfoDao;
 import com.htcsweb.util.FileRenameUtil;
 import com.htcsweb.util.GenerateExcelToPDFUtil;
 import com.htcsweb.util.MergePDF;
@@ -11,6 +12,7 @@ import jxl.Cell;
 import jxl.Workbook;
 import jxl.format.Alignment;
 import jxl.write.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,7 +28,8 @@ import java.util.*;
 @RequestMapping("/MTCOperation")
 public class MTCController {
 
-
+     @Autowired
+     private ProjectInfoDao projectInfoDao;
 
     @RequestMapping(value="getMTCRecord",produces="application/json;charset=UTF-8")
     @ResponseBody
@@ -91,35 +94,77 @@ public class MTCController {
                     int step2=0;
                     int step3=0;
                     int step4=0;
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    List<HashMap<String,Object>>MTCBasicInfo=projectInfoDao.getMTCBasicInfo(project_no);
+                    List<HashMap<String,Object>>getMTCCoatinDurationInfo=projectInfoDao.getMTCCoatinDurationInfo(project_no);
+                    List<HashMap<String,Object>>MTCOnlineInspectionInfo=projectInfoDao.getMTCOnlineInspectionInfo(project_no);
+                    List<HashMap<String,Object>>MTCLabInfo=projectInfoDao.getMTCLabInfo(project_no);
+                    String project_name=" ",product_name=" ",standard=" ",coating_duration=" ";
+                    if(MTCBasicInfo!=null&&MTCBasicInfo.size()>0){
+                         project_name=String.valueOf(MTCBasicInfo.get(0).get("project_name"));
+                         standard=String.valueOf(MTCBasicInfo.get(0).get("client_spec"));
+                         for (int i=0;i<MTCBasicInfo.size();i++){
+                             String external_coating=(MTCBasicInfo.get(i).get("external_coating")==null?"":String.valueOf(MTCBasicInfo.get(i).get("external_coating")));
+                             String internal_coating=(MTCBasicInfo.get(i).get("internal_coating")==null?"":String.valueOf(MTCBasicInfo.get(i).get("internal_coating")));
+                             product_name+=(external_coating+":"+internal_coating+" ");
+                         }
+                    }
+                    if(getMTCCoatinDurationInfo!=null&&getMTCCoatinDurationInfo.size()>0){
+                         String cotaing_begin_time=null,cotaing_end_time=null;
+                         Object begin_time=getMTCCoatinDurationInfo.get(0).get("min_time");
+                         Object end_time=getMTCCoatinDurationInfo.get(0).get("max_time");
+                         if(begin_time!=null){
+                             cotaing_begin_time=sdf.format(begin_time);
+                         }
+                         if(end_time!=null){
+                             cotaing_end_time=sdf.format(end_time);
+                         }
+                        coating_duration=cotaing_begin_time+" ~ "+cotaing_end_time;
+                    }
                     //写表头数据
-
-
-                    Label label_projectname = new Label(5, 4, "projectname here");
+                    Label label_projectname = new Label(5, 4, project_name);
                     label_projectname.setCellFormat(wsheet.getCell(5,4).getCellFormat());
                     wsheet.addCell(label_projectname);
-                    Label label_productname = new Label(5, 5, "productname here");
+                    Label label_productname = new Label(5, 5, product_name);
                     label_productname.setCellFormat(wsheet.getCell(5,5).getCellFormat());
                     wsheet.addCell(label_productname);
-                    Label label_standard = new Label(11, 4, "standard here");
+                    Label label_standard = new Label(11, 4, standard);
                     label_standard.setCellFormat(wsheet.getCell(11,4).getCellFormat());
                     wsheet.addCell(label_standard);
-                    Label label_coatingtime = new Label(11, 5, "coating duration here");
+                    Label label_coatingtime = new Label(11, 5, coating_duration);
                     label_coatingtime.setCellFormat(wsheet.getCell(11,5).getCellFormat());
                     wsheet.addCell(label_coatingtime);
 
 
-                    for(int j=0;j<wsheet.getColumns();j++) {
-                        for (int i = 0; i < wsheet.getRows(); i++) {
-                            Cell cell=wsheet.getCell(j, i);
 
-
-                        }
-                    }
 
 
                     //写钢管型号数据
-
-
+                    int start1=0;
+                    for (int i = 0; i < wsheet.getRows(); i++) {
+                        Cell cell=wsheet.getCell(16, i);
+                        if(cell.getContents().equals("#START1")){
+                            start1=i;
+                            break;
+                        }
+                    }
+                    WritableCellFormat wcf= new WritableCellFormat(wsheet.getCell(2,start1).getCellFormat());
+                    wcf.setBorder(jxl.format.Border.ALL, jxl.format.BorderLineStyle.THIN);
+                    for (int b=0;b<MTCBasicInfo.size();b++){
+                        String total_length=MTCBasicInfo.get(b).get("total_length")==null?" ":String.valueOf(MTCBasicInfo.get(b).get("total_length"));
+                        String total_weight=MTCBasicInfo.get(b).get("total_weight")==null?" ":String.valueOf(MTCBasicInfo.get(b).get("total_weight"));
+                        String [] content={String.valueOf(MTCBasicInfo.get(b).get("od_wt")),
+                                String.valueOf(MTCBasicInfo.get(b).get("total_count"))+"pcs",
+                                total_length,
+                                total_weight};
+                        for(int ii=0;ii<4;ii++){
+                            Label label_A = new Label(ii*3+2, start1, content[ii],wcf);
+                            wsheet.addCell(label_A);
+                            wsheet.mergeCells(ii*3+2,start1,ii*3+4,start1);
+                        }
+                        if(b<(MTCBasicInfo.size()-1))
+                          wsheet.insertRow(start1);
+                    }
                     //写原材料数据
 
 
@@ -130,11 +175,6 @@ public class MTCController {
 
 
 
-                    wsheet.insertRow(7);
-                    Label label_2 = new Label(2, 7, "p232323");
-                    label_2.setCellFormat(wsheet.getCell(2,8).getCellFormat());
-
-                    wsheet.addCell(label_2);
 
                     wwb.write();
                     wwb.close();//关闭

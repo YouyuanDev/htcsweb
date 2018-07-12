@@ -154,4 +154,38 @@
     <select id="getProjectInfoByProjectNo" resultType="com.htcsweb.entity.ProjectInfo">
         SELECT * FROM project_info WHERE project_no=#{project_no}
     </select>
+    <!--获取产品质量保证书的基础信息-->
+    <select id="getMTCBasicInfo" resultType="map">
+        select p.project_name,p.client_spec,c.contract_no,c.external_coating,c.internal_coating,CONCAT('Φ',c.od,'x',c.wt,'mm') as od_wt,count(pipe_no) as total_count,sum(p_length) as total_length,sum(weight) as total_weight from pipe_basic_info pb
+right join contract_info c on pb.contract_no=c.contract_no
+right join project_info p on c.project_no=p.project_no
+where p.project_no=#{project_no}
+GROUP BY c.external_coating,c.internal_coating
+    </select>
+    <!--获取产品质量保证书的基础信息-->
+    <select id="getMTCCoatinDurationInfo" resultType="map">
+        select max(operation_time) as max_time,min(operation_time) as min_time from inspection_process_record_header h
+        LEFT join pipe_basic_info p on h.pipe_no=p.pipe_no
+        left join contract_info c on p.contract_no=c.contract_no
+        left join project_info pi on c.project_no=pi.project_no
+         where  pi.project_no=#{project_no}
+    </select>
+    <!--获取产品质量保证书的在线检测信息-->
+    <select id="getMTCOnlineInspectionInfo" resultType="map">
+        SELECT d.max_value,d.min_value,d.item_name, max(item.item_value),min(item.item_value)  from  project_info p
+        left join acceptance_criteria a on p.acceptance_criteria_no=a.acceptance_criteria_no
+        left join dynamic_measurement_item d on a.acceptance_criteria_no=d.acceptance_criteria_no
+        left join inspection_process_record_item item on item.item_code=d.item_code
+        where p.project_no=#{project_no} and d.process_code not like '%lab%'
+        GROUP BY d.process_code,d.item_code
+    </select>
+    <!--获取产品质量保证书的实验室项目信息-->
+    <select id="getMTCLabInfo" resultType="map">
+        SELECT d.max_value,d.min_value,d.item_name, max(item.item_value),min(item.item_value)  from  project_info p
+        left join acceptance_criteria a on p.acceptance_criteria_no=a.acceptance_criteria_no
+        left join dynamic_measurement_item d on a.acceptance_criteria_no=d.acceptance_criteria_no
+        left join inspection_process_record_item item on item.item_code=d.item_code
+        where p.project_no=#{project_no} and d.process_code like '%lab%'
+        GROUP BY d.process_code,d.item_code
+    </select>
 </mapper>

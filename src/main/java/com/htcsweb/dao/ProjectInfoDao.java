@@ -27,4 +27,13 @@ public interface ProjectInfoDao {
     public  List<HashMap<String,Object>>getProjectNoAndName();
     //根据项目编号获取项目信息
     public List<ProjectInfo>getProjectInfoByProjectNo(@Param("project_no")String project_no);
+
+    //获取产品质量保证书的基础信息
+    public List<HashMap<String,Object>>getMTCBasicInfo(@Param("project_no")String project_no);
+    //获取产品质量保证书的涂敷时间信息
+    public List<HashMap<String,Object>>getMTCCoatinDurationInfo(@Param("project_no")String project_no);
+    //获取产品质量保证书的在线检测信息
+    public List<HashMap<String,Object>>getMTCOnlineInspectionInfo(@Param("project_no")String project_no);
+    //获取产品质量保证书的实验室项目信息
+    public List<HashMap<String,Object>>getMTCLabInfo(@Param("project_no")String project_no);
 }
