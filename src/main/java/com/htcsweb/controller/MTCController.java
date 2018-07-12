@@ -72,6 +72,28 @@ public class MTCController {
                 if(templateFullName.lastIndexOf('/')==-1){
                     templateFullName=templateFullName.replace('\\','/');
                 }
+                String logoImageFullName=basePath + "/template/img/image002.jpg";
+                String fontPath=basePath+"/font/simhei.ttf";
+                String copyrightPath=basePath+"/font/simsun.ttc,0";
+                //String newPdfName= GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,null,pdfFullName,logoImageFullName,fontPath,copyrightPath);
+
+                String newexcelName= GenerateExcelToPDFUtil.FillExcelTemplate(templateFullName,null);
+
+                List<String>finalpdfList=new ArrayList<>();
+
+                finalpdfList.add(newexcelName);
+
+
+                if(finalpdfList.size()==0){
+                    success=false;
+                    message="没有发运记录";
+                }else{
+                    success=true;
+                    message="存在MTC记录";
+                }
+
+                zipName="/upload/pdf/"+ResponseUtil.downLoadPdf(finalpdfList,request,response);
+
 
                 //获取项目的所有生产信息
 

@@ -203,3 +203,5 @@
 205	检验信息管理	pcms	搜索	r	getProcessByLike
 206	检验信息管理	pcme	编辑	w	saveProcess
 207	检验信息管理	pcmd	删除	d	delProcess
+208	质保书管理	mtcr	查看	r	MTCRecord;	1
+209	质保书管理	mtce	编辑	w	getMTCRecord;getMTCProgress	1
