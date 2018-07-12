@@ -44,7 +44,7 @@ public class InspectionRecordPDFController {
     String basePath="";
     String logoImageFullName="";
     String pdfDirPath="";
-    String fontPath="";
+    String fontPath="",copyrightFontPath="";
     String pdfFullName="";
     WritableFont wf=null;
     WritableCellFormat wcf=null;
@@ -62,14 +62,14 @@ public class InspectionRecordPDFController {
         basePath= this.getClass().getClassLoader().getResource("../../").getPath();
         basePath = basePath.substring(0, basePath.lastIndexOf('/'));
 
-        System.out.println("basePaththis.getClass().getClassLoader()getPath()="+basePath);
+        //System.out.println("basePaththis.getClass().getClassLoader()getPath()="+basePath);
         if(UploadFileController.isServerTomcat) {//若果是tomcat需要重新定义upload的入口
             basePath = basePath.substring(0, basePath.lastIndexOf('/'));
         }
 
         logoImageFullName=path + "template/img/image002.jpg";
         fontPath=path+"font/simhei.ttf";
-
+        copyrightFontPath=path+"font/simsun.ttc,1";
         pdfDirPath=basePath+"/upload/pdf/";
         pdfFullName=basePath + "/upload/pdf/DailyProductionRecord.pdf";
 
@@ -455,9 +455,9 @@ public class InspectionRecordPDFController {
                     temp_item_value=list.get(i).get("item_value").toString();
                     if(temp_item_value==null||temp_item_value.equals(""))
                         temp_item_value=" ";
-                    item_result=list.get(i).get("result").toString();
-                    item_remark=list.get(i).get("remark").toString();
-                    unit_name=list.get(i).get("unit_name_en").toString();
+                    item_result=(list.get(i).get("result")==null)?" ":list.get(i).get("result").toString();
+                    item_remark=(list.get(i).get("remark")==null)?" ":list.get(i).get("remark").toString();
+                    unit_name=(list.get(i).get("unit_name_en")==null)?" ":list.get(i).get("unit_name_en").toString();
                     if(!header_code.equals(last_header_code)&&!last_header_code.equals("")){
                         HashMap<String,Object>hs=new HashMap<>();
                         hs.put("header_code",last_header_code);
@@ -643,7 +643,7 @@ public class InspectionRecordPDFController {
                         datalist.add(new Label(7,6,String.valueOf(odRepairPipeCount),wcf));
                         datalist.add(new Label(9,6,String.valueOf(odRejectedPipeCount),wcf));
                         datalist.add(new Label(12,6,String.valueOf(odOnholdPipeCount),wcf));
-                        newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+                        newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightFontPath);
                         index=1;row=0;
                         datalist.clear();
                         stringList.add(newPdfName);
@@ -658,7 +658,7 @@ public class InspectionRecordPDFController {
                     datalist.add(new Label(7,6,String.valueOf(odRepairPipeCount),wcf));
                     datalist.add(new Label(9,6,String.valueOf(odRejectedPipeCount),wcf));
                     datalist.add(new Label(12,6,String.valueOf(odOnholdPipeCount),wcf));
-                    newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+                    newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightFontPath);
                     index=1;row=0;
                     datalist.clear();
                     stringList.add(newPdfName);
@@ -673,7 +673,7 @@ public class InspectionRecordPDFController {
                 datalist.add(new Label(9,6,String.valueOf(odRejectedPipeCount),wcf));
                 datalist.add(new Label(12,6,String.valueOf(odOnholdPipeCount),wcf));
                 datalist.add(new Label(1,10,"今天暂无记录!",wcf));
-                newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+                newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightFontPath);
                 if(newPdfName!=null){
                     stringList.add(newPdfName);
                     delSetPath.add(newPdfName);
@@ -761,7 +761,7 @@ public class InspectionRecordPDFController {
                         datalist.add(new Label(7,6,String.valueOf(idRepairPipeCount),wcf));
                         datalist.add(new Label(9,6,String.valueOf(idRejectedPipeCount),wcf));
                         datalist.add(new Label(12,6,String.valueOf(idOnholdPipeCount),wcf));
-                        newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+                        newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightFontPath);
                         index=1;row=0;
                         datalist.clear();
                         stringList.add(newPdfName);
@@ -776,7 +776,7 @@ public class InspectionRecordPDFController {
                     datalist.add(new Label(7,6,String.valueOf(idRepairPipeCount),wcf));
                     datalist.add(new Label(9,6,String.valueOf(idRejectedPipeCount),wcf));
                     datalist.add(new Label(12,6,String.valueOf(idOnholdPipeCount),wcf));
-                    newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+                    newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightFontPath);
                     index=1;row=0;
                     datalist.clear();
                     stringList.add(newPdfName);
@@ -791,7 +791,7 @@ public class InspectionRecordPDFController {
                 datalist.add(new Label(9,6,String.valueOf(idRejectedPipeCount),wcf));
                 datalist.add(new Label(12,6,String.valueOf(idOnholdPipeCount),wcf));
                 datalist.add(new Label(1,10,"今天暂无记录!",wcf));
-                newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+                newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightFontPath);
                 if(newPdfName!=null){
                     stringList.add(newPdfName);
                     delSetPath.add(newPdfName);
@@ -910,7 +910,7 @@ public class InspectionRecordPDFController {
                     if(index%23==0){
                         createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
                         datalist.add(new Label(12,20,mill_name,wcf));
-                        newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+                        newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightFontPath);
                         index=1;row=0;
                         datalist.clear();
                         stringList.add(newPdfName);
@@ -920,7 +920,7 @@ public class InspectionRecordPDFController {
                 if(datalist.size()>0){
                     createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
                     datalist.add(new Label(12,20,mill_name,wcf));
-                    newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+                    newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightFontPath);
                     index=1;row=0;
                     datalist.clear();
                     stringList.add(newPdfName);
@@ -1971,7 +1971,7 @@ public class InspectionRecordPDFController {
                         datalist.add(new Label(7,6,String.valueOf(idRepairPipeCount),wcf));
                         datalist.add(new Label(9,6,String.valueOf(idRejectedPipeCount),wcf));
                         datalist.add(new Label(12,6,String.valueOf(idOnholdPipeCount),wcf));
-                        newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+                        newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightFontPath);
                         index=1;row=0;
                         datalist.clear();
                         stringList.add(newPdfName);
@@ -1986,7 +1986,7 @@ public class InspectionRecordPDFController {
                     datalist.add(new Label(7,6,String.valueOf(idRepairPipeCount),wcf));
                     datalist.add(new Label(9,6,String.valueOf(idRejectedPipeCount),wcf));
                     datalist.add(new Label(12,6,String.valueOf(idOnholdPipeCount),wcf));
-                    newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+                    newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightFontPath);
                     index=1;row=0;
                     datalist.clear();
                     stringList.add(newPdfName);
@@ -2001,7 +2001,7 @@ public class InspectionRecordPDFController {
                 datalist.add(new Label(9,6,String.valueOf(idRejectedPipeCount),wcf));
                 datalist.add(new Label(12,6,String.valueOf(idOnholdPipeCount),wcf));
                 datalist.add(new Label(1,10,"今天暂无记录!",wcf));
-                newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+                newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightFontPath);
                 if(newPdfName!=null){
                     stringList.add(newPdfName);
                     delSetPath.add(newPdfName);
@@ -2125,7 +2125,7 @@ public class InspectionRecordPDFController {
                         datalist.add(new Label(7,6,String.valueOf(odRepairPipeCount),wcf));
                         datalist.add(new Label(9,6,String.valueOf(odRejectedPipeCount),wcf));
                         datalist.add(new Label(12,6,String.valueOf(odOnholdPipeCount),wcf));
-                        newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+                        newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightFontPath);
                         index=1;row=0;
                         datalist.clear();
                         stringList.add(newPdfName);
@@ -2140,7 +2140,7 @@ public class InspectionRecordPDFController {
                     datalist.add(new Label(7,6,String.valueOf(odRepairPipeCount),wcf));
                     datalist.add(new Label(9,6,String.valueOf(odRejectedPipeCount),wcf));
                     datalist.add(new Label(12,6,String.valueOf(odOnholdPipeCount),wcf));
-                    newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+                    newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightFontPath);
                     index=1;row=0;
                     datalist.clear();
                     stringList.add(newPdfName);
@@ -2155,7 +2155,7 @@ public class InspectionRecordPDFController {
                 datalist.add(new Label(9,6,String.valueOf(odRejectedPipeCount),wcf));
                 datalist.add(new Label(12,6,String.valueOf(odOnholdPipeCount),wcf));
                 datalist.add(new Label(1,10,"今天暂无记录!",wcf));
-                newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+                newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightFontPath);
                 if(newPdfName!=null){
                     stringList.add(newPdfName);
                     delSetPath.add(newPdfName);
@@ -2273,7 +2273,7 @@ public class InspectionRecordPDFController {
                     if(index%23==0){
                         createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
                         datalist.add(new Label(12,20,mill_name,wcf));
-                        newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+                        newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightFontPath);
                         index=1;row=0;
                         datalist.clear();
                         stringList.add(newPdfName);
@@ -2283,7 +2283,7 @@ public class InspectionRecordPDFController {
                 if(datalist.size()>0){
                     createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
                     datalist.add(new Label(12,20,mill_name,wcf));
-                    newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+                    newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightFontPath);
                     index=1;row=0;
                     datalist.clear();
                     stringList.add(newPdfName);
@@ -2378,8 +2378,8 @@ public class InspectionRecordPDFController {
         datalist.add(new Label(1,8,"今天暂无记录!",wcf));
         datalist.add(new Label(2, 20," ", wcf));
         datalist.add(new Label(13,20," ",wcf));
-
-        PdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+        datalist.add(new Label(12, 21,"©2018 TopInspector", wcf));
+        PdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightFontPath);
         if(PdfName!=null){
             stringList.add(PdfName);
             delSetPath.add(PdfName);
@@ -2394,7 +2394,8 @@ public class InspectionRecordPDFController {
         datalist.add(new Label(column3, row2,title_coating_type, wcf));
         datalist.add(new Label(column4, row2,title_shift, wcf));
         datalist.add(new Label(column1,row3,"今天暂无记录!",wcf));
-        PdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+        datalist.add(new Label(11, 21,"©2018 TopInspector", wcf));
+        PdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightFontPath);
         System.out.println("外防封面名------------------"+PdfName);
         if(PdfName!=null){
             stringList.add(PdfName);
@@ -2423,7 +2424,7 @@ public class InspectionRecordPDFController {
         datalist.add(new Label(column2, row2,title_coating_type, wcf));
         datalist.add(new Label(column3, row2,title_shift, wcf));
         datalist.add(new Label(column3, row1,title_time, wcf));
-
+        datalist.add(new Label(11, 21,"©2018 TopInspector", wcf));
     }
     private void newCreateRecordPdfTitle(ArrayList<Label> datalist,String process_name,String measure_name,String title_project_name,String title_pipe_size,String title_standard,String title_coating_type,String title_shift,String title_time){
         datalist.add(new Label(3, 4,title_project_name, wcf));
@@ -2433,7 +2434,8 @@ public class InspectionRecordPDFController {
         datalist.add(new Label(9, 5,title_coating_type, wcf));
         datalist.add(new Label(13, 5,title_shift, wcf));
         datalist.add(new Label(0, 3,process_name, wcf));
-        datalist.add(new Label(2, 7,measure_name, wcf));
+        datalist.add(new Label(2, 7,measure_name, wcf));//"\\u00a9"
+        datalist.add(new Label(12, 21,"©2018 TopInspector", wcf));
     }
     private void newCreateRecordPdf(ArrayList<Label> datalist,String newPdfName,String templateFullName,int qualifiedTotal,int index,int row,String remark,List<String>stringList,List<String>delSetPath){
         if(remark.equals(""))
@@ -2441,7 +2443,7 @@ public class InspectionRecordPDFController {
         datalist.add(new Label(2,20,remark,wcf));
         //添加合格数
         datalist.add(new Label(13,20,String.valueOf(qualifiedTotal),wcf));
-        newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+        newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightFontPath);
         datalist.clear();
         qualifiedTotal=0;
         index=1;
@@ -2476,7 +2478,7 @@ public class InspectionRecordPDFController {
         datalist.add(new Label(x1,y1,String.valueOf(sb.toString()),wcf));
         //添加合格数
         datalist.add(new Label(x2,y2,String.valueOf(qualifiedTotal),wcf));
-        newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+        newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightFontPath);
         datalist.clear();
         qualifiedTotal=0;
         index=1;

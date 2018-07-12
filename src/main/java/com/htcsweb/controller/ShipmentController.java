@@ -348,6 +348,7 @@ public class ShipmentController {
                 String path=this.getClass().getClassLoader().getResource("../../").getPath();
                 String logoImageFullName=path + "template/img/image002.jpg";
                 String fontPath=path+"font/simhei.ttf";
+                String copyrightPath=path+"font/simsun.ttc,0";
                 try{
                     wf = new WritableFont(WritableFont.createFont("Arial"), 9);
                     wcf= new WritableCellFormat(wf);
@@ -374,7 +375,7 @@ public class ShipmentController {
                         index=1;
                         System.out.println("另起一页 last_shipment_no="+last_shipment_no+"shipment_no=+"+shipment_no+"pipe_No="+String.valueOf(list.get(i).get("pipe_no")) );
                         row=0;//另起一页，初始化参数
-                        String newPdfName= GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+                        String newPdfName= GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightPath);
                         datalist.clear();
                         if(newPdfName!=null){
                             pdfList.add(newPdfName);
@@ -438,7 +439,7 @@ public class ShipmentController {
                 }
                 if(datalist.size()>0){
 
-                    String newPdfName= GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath);
+                    String newPdfName= GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightPath);
                     datalist.clear();
                     if(newPdfName!=null){
                         pdfList.add(newPdfName);

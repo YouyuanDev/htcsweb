@@ -2,14 +2,12 @@ package com.htcsweb.util;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import jxl.Cell;
-import jxl.Range;
-import jxl.Sheet;
-import jxl.Workbook;
+import jxl.*;
 import jxl.format.CellFormat;
 import jxl.format.UnderlineStyle;
 import jxl.read.biff.BiffException;
@@ -45,12 +43,12 @@ public class GenerateExcelToPDFUtil {
     }
 
     //PDF生成方法入口
-    public static String PDFAutoMation(String excelTemplateFullName,ArrayList<Label> dataList,String pdfFullName,String imagePath,String fontPath) {
+    public static String PDFAutoMation(String excelTemplateFullName,ArrayList<Label> dataList,String pdfFullName,String imagePath,String fontPath,String copyrightFontPath) {
         long startTime = System.currentTimeMillis();    //获取开始时间
 
         String newexcelfile=GenerateExcelToPDFUtil.FillExcelTemplate(excelTemplateFullName,dataList);
         long endTime1 = System.currentTimeMillis();
-        String newpdfName=GenerateExcelToPDFUtil.ExcelToPDFRecord(newexcelfile,pdfFullName,imagePath,fontPath);
+        String newpdfName=GenerateExcelToPDFUtil.ExcelToPDFRecord(newexcelfile,pdfFullName,imagePath,fontPath,copyrightFontPath);
         long endTime2= System.currentTimeMillis();
 
         System.out.println("程序PDFAutoMation运行时间1：" + (endTime1 - startTime) + "ms");    //输出程序运行时间
@@ -300,7 +298,7 @@ public class GenerateExcelToPDFUtil {
     }
 
     //根据excel名称，转成PDF
-    private static String ExcelToPDFRecord(String excelFullName,String pdfFullName,String imagePath,String fontPath){
+    private static String ExcelToPDFRecord(String excelFullName,String pdfFullName,String imagePath,String fontPath,String copyrightFontPath){
 //        File pdf=new File(pdfFullName);
 //        try{
 //            if(!pdf.exists()){
@@ -337,15 +335,17 @@ public class GenerateExcelToPDFUtil {
          * 找到文件后，打开属性，将文件名及所在路径作为字体名即可。
          */
         //创建BaseFont对象，指明字体，编码方式,是否嵌入
-            BaseFont bf=BaseFont.createFont(fontPath, BaseFont.IDENTITY_H, false);
+            BaseFont bf=BaseFont.createFont(fontPath, BaseFont.IDENTITY_H,false);
+            BaseFont copyrightBf=BaseFont.createFont(copyrightFontPath, BaseFont.IDENTITY_H,BaseFont.EMBEDDED);
         //BaseFont bf=BaseFont.createFont("/Users/kurt/Documents/simhei.ttf", BaseFont.IDENTITY_H, false);
+
         //创建Font对象，将基础字体对象，字体大小，字体风格
         Font font=new Font(bf,10,Font.NORMAL);
+        Font copyrightFont=new Font(copyrightBf,10,Font.NORMAL);
         Font headfont1=new Font(bf,14,Font.BOLD);
         Font headfont2=new Font(bf,10,Font.BOLD);
         int rowNum = 0;
         int colNum = 0;
-
             Workbook book = Workbook.getWorkbook(excelfile);
 
             try{
@@ -410,11 +410,9 @@ public class GenerateExcelToPDFUtil {
                             table.getRow(0).getCells()[0].setColspan(3);
                             setNoBorder(table.getRow(0).getCells()[0]);
                         }
-
-
-
                         boolean flag = true;
                         Cell cell=sheet.getCell(j, i);
+
                         String str = cell.getContents();
                         for(Range range : ranges){    //合并的单元格判断和处理
                             if(j >= range.getTopLeft().getColumn() && j <= range.getBottomRight().getColumn()
@@ -431,13 +429,15 @@ public class GenerateExcelToPDFUtil {
                                     else if(i==2)//设置公司英文名称
                                         cell1 = mergeRow(str, headfont2, rowNum);
                                     else//设置表格其他单元
-                                        cell1 = mergeRow(str, font, rowNum);
+                                            cell1 = mergeRow(str, font, rowNum);
                                     cell1.setColspan(colNum);
                                 }else {
                                     if(i==1||i==tableTopIndex-1&&j!=10)//设置公司中文名称字体及报告名称
                                         cell1 = mergeCol(str, headfont1, colNum);
                                     else if(i==2)//设置公司英文名称
                                         cell1 = mergeCol(str, headfont2, colNum);
+                                    else if(i==21)//设置公司英文名称
+                                        cell1 = mergeCol(str, copyrightFont, colNum);
                                     else//设置表格其他单元
                                         cell1 = mergeCol(str, font, colNum);
                                     if((i==tableTopIndex+2)&&j==2){
