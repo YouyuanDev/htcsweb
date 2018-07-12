@@ -7,10 +7,10 @@ import com.htcsweb.util.FileRenameUtil;
 import com.htcsweb.util.GenerateExcelToPDFUtil;
 import com.htcsweb.util.MergePDF;
 import com.htcsweb.util.ResponseUtil;
+import jxl.Cell;
+import jxl.Workbook;
 import jxl.format.Alignment;
-import jxl.write.Label;
-import jxl.write.WritableCellFormat;
-import jxl.write.WritableFont;
+import jxl.write.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -77,7 +77,78 @@ public class MTCController {
                 String copyrightPath=basePath+"/font/simsun.ttc,0";
                 //String newPdfName= GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,null,pdfFullName,logoImageFullName,fontPath,copyrightPath);
 
+
+
                 String newexcelName= GenerateExcelToPDFUtil.FillExcelTemplate(templateFullName,null);
+
+                try {
+                    File newxlsfile = new File(newexcelName);
+                    Workbook wb = Workbook.getWorkbook(newxlsfile);
+                    WritableWorkbook wwb = Workbook.createWorkbook(newxlsfile, wb);
+                    WritableSheet wsheet = wwb.getSheet(0);
+
+                    int step1=0;
+                    int step2=0;
+                    int step3=0;
+                    int step4=0;
+                    //写表头数据
+
+
+                    Label label_projectname = new Label(5, 4, "projectname here");
+                    label_projectname.setCellFormat(wsheet.getCell(5,4).getCellFormat());
+                    wsheet.addCell(label_projectname);
+                    Label label_productname = new Label(5, 5, "productname here");
+                    label_productname.setCellFormat(wsheet.getCell(5,5).getCellFormat());
+                    wsheet.addCell(label_productname);
+                    Label label_standard = new Label(11, 4, "standard here");
+                    label_standard.setCellFormat(wsheet.getCell(11,4).getCellFormat());
+                    wsheet.addCell(label_standard);
+                    Label label_coatingtime = new Label(11, 5, "coating duration here");
+                    label_coatingtime.setCellFormat(wsheet.getCell(11,5).getCellFormat());
+                    wsheet.addCell(label_coatingtime);
+
+
+                    for(int j=0;j<wsheet.getColumns();j++) {
+                        for (int i = 0; i < wsheet.getRows(); i++) {
+                            Cell cell=wsheet.getCell(j, i);
+
+
+                        }
+                    }
+
+
+                    //写钢管型号数据
+
+
+                    //写原材料数据
+
+
+                    //写在线检测项数据
+
+
+                    //写实验室数据
+
+
+
+                    wsheet.insertRow(7);
+                    Label label_2 = new Label(2, 7, "p232323");
+                    label_2.setCellFormat(wsheet.getCell(2,8).getCellFormat());
+
+                    wsheet.addCell(label_2);
+
+                    wwb.write();
+                    wwb.close();//关闭
+                    wb.close();
+
+
+                }catch (Exception e){
+
+                }finally {
+
+                }
+
+
+
 
                 List<String>finalpdfList=new ArrayList<>();
 
