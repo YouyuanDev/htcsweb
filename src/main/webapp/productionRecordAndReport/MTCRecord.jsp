@@ -93,7 +93,7 @@
                 // form.submit();
                 var options={
                     type:'POST',
-                    url:'/MTCOperation/geMTCRecord.action',
+                    url:'/MTCOperation/getMTCRecord.action',
                     dataType:'json',
                     beforeSubmit:function () {
                         ajaxLoading();
@@ -104,6 +104,7 @@
                         if(data.success){
                             window.location.href="<%=bPath%>"+data.zipName;
                         }
+                        window.clearInterval(timerId);
                         hlAlertFour(data.message);
 
                     },error:function () {
