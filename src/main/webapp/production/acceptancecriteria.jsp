@@ -190,6 +190,8 @@
                     $('#dg').datagrid('selectRow', editIndex);
                 }
             }
+            alert(editIndex);
+            $('#dg').datagrid('scrollTo',editIndex);
         }
          var g_textarea_field=undefined;
 
