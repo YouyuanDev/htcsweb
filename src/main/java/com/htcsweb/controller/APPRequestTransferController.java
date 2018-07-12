@@ -344,12 +344,13 @@ public class APPRequestTransferController {
                 //数据导出
                 InspectionProcessRecordHeader header= inspectionProcessRecordHeaderDao.getRecentRecordByPipeNo(process_code,pipe_no);
                 if(header!=null){
-                    //if(header.getResult().equals("10")){
+                    //除了实验工序，其他的工序只调出pending状态的表单
+                    if(header.getResult().equals("10")&&!header.getProcess_code().contains("lab")||header.getProcess_code().contains("lab")){
                         //是待定状态
                         resultMaps.put("record_header",header);
                         List<InspectionProcessRecordItem> itemList=inspectionProcessRecordItemDao.getInspectionProcessRecordItemByInspectionProcessRecordHeaderCode(header.getInspection_process_record_header_code());
                         resultMaps.put("record_items",itemList);
-                    //}
+                    }
                 }
 
                 if(pipelist.size()>0&&aclist!=null){
