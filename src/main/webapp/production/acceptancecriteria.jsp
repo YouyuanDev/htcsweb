@@ -191,8 +191,6 @@
                     $('#dg').datagrid('selectRow', editIndex);
                 }
             }
-            alert(editIndex);
-            $('#dg').datagrid('scrollTo',editIndex+2);
         }
          var g_textarea_field=undefined;
 
@@ -400,7 +398,6 @@
                 }
             });
         }
-
     </script>
 </head>
 
@@ -511,14 +508,11 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset id="dynamicItem" style="width:99%;border:solid 1px #aaa;position:relative;">
+        <fieldset id="dynamicItem" style="width:99%;height:300px;border:solid 1px #aaa;position:relative;">
             <legend><span class="i18n1" name="inspectioniteminfo">测量项信息</span></legend>
             <table id="dg" class="easyui-datagrid" title="" style="width:100%;height:280px;" data-options="
 				iconCls: '',
 				singleSelect: true,
-				view:scrollview,
-				pageSize:1000,
-				autoRowHeight:false,
 				striped:true,
 				toolbar: '#tb',
 				onClickRow: onClickRow
@@ -643,6 +637,7 @@
         </div>
     </div>
 </div>
+
 <script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
 <script src="../js/datagrid-scrollview.js" type="text/javascript"></script>
 </body>
