@@ -80,15 +80,16 @@ public class MTCController {
                 String copyrightPath=basePath+"/font/simsun.ttc,0";
                 //String newPdfName= GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,null,pdfFullName,logoImageFullName,fontPath,copyrightPath);
 
-
-
+                Workbook wb=null;
+                WritableWorkbook wwb=null;
+                WritableSheet wsheet=null;
                 String newexcelName= GenerateExcelToPDFUtil.FillExcelTemplate(templateFullName,null);
 
                 try {
                     File newxlsfile = new File(newexcelName);
-                    Workbook wb = Workbook.getWorkbook(newxlsfile);
-                    WritableWorkbook wwb = Workbook.createWorkbook(newxlsfile, wb);
-                    WritableSheet wsheet = wwb.getSheet(0);
+                    wb = Workbook.getWorkbook(newxlsfile);
+                    wwb = Workbook.createWorkbook(newxlsfile, wb);
+                    wsheet = wwb.getSheet(0);
 
 
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -245,9 +246,11 @@ public class MTCController {
 
 
                 }catch (Exception e){
-
+                    e.printStackTrace();
                 }finally {
-
+                    wwb.write();
+                    wwb.close();//关闭
+                    wb.close();
                 }
 
 
