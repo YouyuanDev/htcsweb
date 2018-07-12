@@ -90,10 +90,7 @@ public class MTCController {
                     WritableWorkbook wwb = Workbook.createWorkbook(newxlsfile, wb);
                     WritableSheet wsheet = wwb.getSheet(0);
 
-                    int step1=0;
-                    int step2=0;
-                    int step3=0;
-                    int step4=0;
+
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
                     List<HashMap<String,Object>>getMTCCoatinDurationInfo=projectInfoDao.getMTCCoatinDurationInfo(project_no);
@@ -147,19 +144,19 @@ public class MTCController {
 
 
 
-                    //写钢管型号数据
+
                     for(int item_i=1;item_i<=data.size();item_i++){
                         int start=findStart(wsheet,"#START"+item_i);
-                        List<HashMap<String,Object>> list=(List<HashMap<String,Object>>)data.get(item_i);
+                        List<HashMap<String,Object>> list=(List<HashMap<String,Object>>)data.get(item_i-1);
                         if(list==null)continue;
 
 
                         WritableCellFormat wcf= new WritableCellFormat(wsheet.getCell(2,start).getCellFormat());
                         wcf.setBorder(jxl.format.Border.ALL, jxl.format.BorderLineStyle.THIN);
 
-
-                        if(item_i==1){
-                            for (int b=0;b<list.size();b++){
+                        //写钢管型号数据
+                        if(item_i==1&&list.size()>0){
+                            for (int b=list.size()-1;b>=0;b--){
                                 String total_length=list.get(b).get("total_length")==null?" ":String.valueOf(list.get(b).get("total_length"));
                                 String total_weight=list.get(b).get("total_weight")==null?" ":String.valueOf(list.get(b).get("total_weight"));
                                 String [] content={String.valueOf(list.get(b).get("od_wt")),
@@ -174,7 +171,8 @@ public class MTCController {
                                 if(b<(list.size()-1))
                                     wsheet.insertRow(start);
                             }
-                        }else if(item_i==2){
+                        }else if(item_i==2&&list.size()>0){
+                            //写原材料数据
 //                            for (int b=0;b<list.size();b++){
 //                                String total_length=list.get(b).get("total_length")==null?" ":String.valueOf(list.get(b).get("total_length"));
 //                                String total_weight=list.get(b).get("total_weight")==null?" ":String.valueOf(list.get(b).get("total_weight"));
@@ -190,8 +188,10 @@ public class MTCController {
 //                                if(b<(list.size()-1))
 //                                    wsheet.insertRow(start);
 //                            }
-                        }else if(item_i==3||item_i==4) {
-                            for (int b=0;b<list.size();b++){
+                        }else if((item_i==3||item_i==4)&&list.size()>0) {
+                            //写在线检测项数据
+                            //写实验室数据
+                            for (int b=list.size()-1;b>=0;b--){
 
                                 String item_name=list.get(b).get("item_name")==null?" ":String.valueOf(list.get(b).get("item_name"));
                                 String unit_name_en=list.get(b).get("unit_name_en")==null?" ":String.valueOf(list.get(b).get("unit_name_en"));
@@ -224,15 +224,6 @@ public class MTCController {
                         }
 
                     }
-
-                    //写原材料数据
-
-
-                    //写在线检测项数据
-
-
-                    //写实验室数据
-
 
 
 
