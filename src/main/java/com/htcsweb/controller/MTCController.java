@@ -211,10 +211,16 @@ public class MTCController {
                                 String item_standard=" ",item_record=" ";
                                 String item_standard_max=list.get(b).get("max_value")==null?" ":String.valueOf(list.get(b).get("max_value"));
                                 String item_standard_min=list.get(b).get("min_value")==null?" ":String.valueOf(list.get(b).get("min_value"));
-                                item_standard=(item_standard_min+" - "+item_standard_max);
+                                if(item_standard_max.equals(item_standard_min))
+                                    item_standard=item_standard_max;
+                                else
+                                  item_standard=(item_standard_min+" - "+item_standard_max);
                                 String item_record_max=list.get(b).get("max_record_value")==null?" ":String.valueOf(list.get(b).get("max_record_value"));
                                 String item_record_min=list.get(b).get("min_record_value")==null?" ":String.valueOf(list.get(b).get("min_record_value"));
-                                item_record=(item_record_min+" - "+item_record_max);
+                                if(item_record_max.equals(item_record_min))
+                                    item_record=item_record_max;
+                                else
+                                    item_record=(item_record_min+" - "+item_record_max);
                                 String [] content={String.valueOf(b+1),item_name,
                                         item_standard,
                                         item_record,
