@@ -312,7 +312,7 @@ public class InspectionRecordPDFController {
                                         "id_coating_inspection:钢管内喷涂检验记录 Pipe ID Coating Inspection Record",
                                         "id_final_inspection:钢管内防终检记录 Pipe ID Final Inspection Record"};
                                 for (int i=0;i<id_process_code.length;i++){
-                                    String []str=od_process_code[i].split(":");
+                                    String []str=id_process_code[i].split(":");
                                     PostRecordPdf(request,str[0],str[1],project_no,project_name,millInfo.getMill_no(),millInfo.getMill_name(), pipe_size,client_standard,contractInfo.getInternal_coating(),contractInfo.getOd(),contractInfo.getWt(),shift0,recordTime,start_time,finish_time,stationIdList,delSetPath);
                                 }
 //                                //新报表生成结束
