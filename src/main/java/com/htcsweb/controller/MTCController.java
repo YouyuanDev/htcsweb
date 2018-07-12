@@ -192,12 +192,23 @@ public class MTCController {
 //                            }
                         }else if(item_i==3||item_i==4) {
                             for (int b=0;b<list.size();b++){
-                                String total_length=list.get(b).get("total_length")==null?" ":String.valueOf(list.get(b).get("total_length"));
-                                String total_weight=list.get(b).get("total_weight")==null?" ":String.valueOf(list.get(b).get("total_weight"));
-                                String [] content={String.valueOf(b+1),String.valueOf(list.get(b).get("od_wt")),
-                                        String.valueOf(list.get(b).get("total_count"))+"pcs",
-                                        total_length,
-                                        total_weight};
+
+                                String item_name=list.get(b).get("item_name")==null?" ":String.valueOf(list.get(b).get("item_name"));
+                                String unit_name_en=list.get(b).get("unit_name_en")==null?" ":String.valueOf(list.get(b).get("unit_name_en"));
+                                if(!unit_name_en.equals("")){
+                                    item_name=(item_name+"("+unit_name_en+")");
+                                }
+                                String item_standard=" ",item_record=" ";
+                                String item_standard_max=list.get(b).get("max_value")==null?" ":String.valueOf(list.get(b).get("max_value"));
+                                String item_standard_min=list.get(b).get("min_value")==null?" ":String.valueOf(list.get(b).get("min_value"));
+                                item_standard=(item_standard_min+" - "+item_standard_max);
+                                String item_record_max=list.get(b).get("max_record_value")==null?" ":String.valueOf(list.get(b).get("max_record_value"));
+                                String item_record_min=list.get(b).get("min_record_value")==null?" ":String.valueOf(list.get(b).get("min_record_value"));
+                                item_record=(item_record_min+" - "+item_record_max);
+                                String [] content={String.valueOf(b+1),item_name,
+                                        item_standard,
+                                        item_record,
+                                        "合格 Acceptable"};
                                 int []rowi={2,3,5,8,12};
                                 for(int ii=0;ii<5;ii++){
                                     Label label_A = new Label(rowi[ii], start, content[ii],wcf);
