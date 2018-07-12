@@ -95,10 +95,18 @@ public class MTCController {
                     int step3=0;
                     int step4=0;
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    List<HashMap<String,Object>>MTCBasicInfo=projectInfoDao.getMTCBasicInfo(project_no);
+
                     List<HashMap<String,Object>>getMTCCoatinDurationInfo=projectInfoDao.getMTCCoatinDurationInfo(project_no);
+                    List<HashMap<String,Object>>MTCBasicInfo=projectInfoDao.getMTCBasicInfo(project_no);
                     List<HashMap<String,Object>>MTCOnlineInspectionInfo=projectInfoDao.getMTCOnlineInspectionInfo(project_no);
                     List<HashMap<String,Object>>MTCLabInfo=projectInfoDao.getMTCLabInfo(project_no);
+
+                    List<Object> data=new ArrayList<>();
+                    data.add(MTCBasicInfo);
+                    data.add(MTCOnlineInspectionInfo);
+                    data.add(MTCOnlineInspectionInfo);
+                    data.add(MTCLabInfo);
+
                     String project_name=" ",product_name=" ",standard=" ",coating_duration=" ";
                     if(MTCBasicInfo!=null&&MTCBasicInfo.size()>0){
                          project_name=String.valueOf(MTCBasicInfo.get(0).get("project_name"));
@@ -140,31 +148,72 @@ public class MTCController {
 
 
                     //写钢管型号数据
-                    int start1=0;
-                    for (int i = 0; i < wsheet.getRows(); i++) {
-                        Cell cell=wsheet.getCell(16, i);
-                        if(cell.getContents().equals("#START1")){
-                            start1=i;
-                            break;
+                    for(int item_i=1;item_i<=data.size();item_i++){
+                        int start=findStart(wsheet,"#START"+item_i);
+                        List<HashMap<String,Object>> list=(List<HashMap<String,Object>>)data.get(item_i);
+                        if(list==null)continue;
+
+
+                        WritableCellFormat wcf= new WritableCellFormat(wsheet.getCell(2,start).getCellFormat());
+                        wcf.setBorder(jxl.format.Border.ALL, jxl.format.BorderLineStyle.THIN);
+
+
+                        if(item_i==1){
+                            for (int b=0;b<list.size();b++){
+                                String total_length=list.get(b).get("total_length")==null?" ":String.valueOf(list.get(b).get("total_length"));
+                                String total_weight=list.get(b).get("total_weight")==null?" ":String.valueOf(list.get(b).get("total_weight"));
+                                String [] content={String.valueOf(list.get(b).get("od_wt")),
+                                        String.valueOf(list.get(b).get("total_count"))+"pcs",
+                                        total_length,
+                                        total_weight};
+                                for(int ii=0;ii<4;ii++){
+                                    Label label_A = new Label(ii*3+2, start, content[ii],wcf);
+                                    wsheet.addCell(label_A);
+                                    wsheet.mergeCells(ii*3+2,start,ii*3+4,start);
+                                }
+                                if(b<(list.size()-1))
+                                    wsheet.insertRow(start);
+                            }
+                        }else if(item_i==2){
+//                            for (int b=0;b<list.size();b++){
+//                                String total_length=list.get(b).get("total_length")==null?" ":String.valueOf(list.get(b).get("total_length"));
+//                                String total_weight=list.get(b).get("total_weight")==null?" ":String.valueOf(list.get(b).get("total_weight"));
+//                                String [] content={String.valueOf(list.get(b).get("od_wt")),
+//                                        String.valueOf(list.get(b).get("total_count"))+"pcs",
+//                                        total_length,
+//                                        total_weight};
+//                                for(int ii=0;ii<4;ii++){
+//                                    Label label_A = new Label(ii*3+2, start, content[ii],wcf);
+//                                    wsheet.addCell(label_A);
+//                                    wsheet.mergeCells(ii*3+2,start,ii*3+4,start);
+//                                }
+//                                if(b<(list.size()-1))
+//                                    wsheet.insertRow(start);
+//                            }
+                        }else if(item_i==3||item_i==4) {
+                            for (int b=0;b<list.size();b++){
+                                String total_length=list.get(b).get("total_length")==null?" ":String.valueOf(list.get(b).get("total_length"));
+                                String total_weight=list.get(b).get("total_weight")==null?" ":String.valueOf(list.get(b).get("total_weight"));
+                                String [] content={String.valueOf(b+1),String.valueOf(list.get(b).get("od_wt")),
+                                        String.valueOf(list.get(b).get("total_count"))+"pcs",
+                                        total_length,
+                                        total_weight};
+                                int []rowi={2,3,5,8,12};
+                                for(int ii=0;ii<5;ii++){
+                                    Label label_A = new Label(rowi[ii], start, content[ii],wcf);
+                                    wsheet.addCell(label_A);
+                                    if(rowi[ii]!=12)
+                                        wsheet.mergeCells(rowi[ii],start,rowi[ii]+ii,start);
+                                    else
+                                        wsheet.mergeCells(rowi[ii],start,rowi[ii]+1,start);
+                                }
+                                if(b<(list.size()-1))
+                                    wsheet.insertRow(start);
+                            }
                         }
+
                     }
-                    WritableCellFormat wcf= new WritableCellFormat(wsheet.getCell(2,start1).getCellFormat());
-                    wcf.setBorder(jxl.format.Border.ALL, jxl.format.BorderLineStyle.THIN);
-                    for (int b=0;b<MTCBasicInfo.size();b++){
-                        String total_length=MTCBasicInfo.get(b).get("total_length")==null?" ":String.valueOf(MTCBasicInfo.get(b).get("total_length"));
-                        String total_weight=MTCBasicInfo.get(b).get("total_weight")==null?" ":String.valueOf(MTCBasicInfo.get(b).get("total_weight"));
-                        String [] content={String.valueOf(MTCBasicInfo.get(b).get("od_wt")),
-                                String.valueOf(MTCBasicInfo.get(b).get("total_count"))+"pcs",
-                                total_length,
-                                total_weight};
-                        for(int ii=0;ii<4;ii++){
-                            Label label_A = new Label(ii*3+2, start1, content[ii],wcf);
-                            wsheet.addCell(label_A);
-                            wsheet.mergeCells(ii*3+2,start1,ii*3+4,start1);
-                        }
-                        if(b<(MTCBasicInfo.size()-1))
-                          wsheet.insertRow(start1);
-                    }
+
                     //写原材料数据
 
 
@@ -365,7 +414,16 @@ public class MTCController {
     }
 
 
+private int findStart(WritableSheet wsheet,String symbol){
+    for (int i = 0; i < wsheet.getRows(); i++) {
+        Cell cell=wsheet.getCell(16, i);
+        if(cell.getContents().equals(symbol)){
+            return i;
+        }
+    }
 
+    return 0;
+}
 
 
 
