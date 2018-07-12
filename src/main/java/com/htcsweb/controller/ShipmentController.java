@@ -345,10 +345,11 @@ public class ShipmentController {
                 int index=1,row=0;
                 WritableCellFormat wcf=null;
                 WritableFont wf=null;
-                String path=this.getClass().getClassLoader().getResource("../../").getPath();
-                String logoImageFullName=path + "template/img/image002.jpg";
-                String fontPath=path+"font/simhei.ttf";
-                String copyrightPath=path+"font/simsun.ttc,0";
+               // String path=this.getClass().getClassLoader().getResource("../../").getPath();
+
+                String logoImageFullName=basePath + "/template/img/image002.jpg";
+                String fontPath=basePath+"/font/simhei.ttf";
+                String copyrightPath=basePath+"/font/simsun.ttc,0";
                 try{
                     wf = new WritableFont(WritableFont.createFont("Arial"), 9);
                     wcf= new WritableCellFormat(wf);

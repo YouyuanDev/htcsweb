@@ -58,8 +58,14 @@ public class InspectionRecordPDFController {
     //String fontPath=this.getClass().getClassLoader().getResource("").getPath()+"font/simhei.ttf";
     //String pdfFullName=this.getClass().getClassLoader().getResource("").getPath() + "upload/pdf/BlastRecord.pdf";
     public InspectionRecordPDFController(){
-        String path=this.getClass().getClassLoader().getResource("../../").getPath();
+        //String path=this.getClass().getClassLoader().getResource("../../").getPath();
         basePath= this.getClass().getClassLoader().getResource("../../").getPath();
+
+
+        if(basePath.lastIndexOf('/')==-1){
+            basePath=basePath.replace('\\','/');
+        }
+
         basePath = basePath.substring(0, basePath.lastIndexOf('/'));
 
         //System.out.println("basePaththis.getClass().getClassLoader()getPath()="+basePath);
@@ -67,9 +73,9 @@ public class InspectionRecordPDFController {
             basePath = basePath.substring(0, basePath.lastIndexOf('/'));
         }
 
-        logoImageFullName=path + "template/img/image002.jpg";
-        fontPath=path+"font/simhei.ttf";
-        copyrightFontPath=path+"font/simsun.ttc,1";
+        logoImageFullName=basePath + "/template/img/image002.jpg";
+        fontPath=basePath+"/font/simhei.ttf";
+        copyrightFontPath=basePath+"/font/simsun.ttc,1";
         pdfDirPath=basePath+"/upload/pdf/";
         pdfFullName=basePath + "/upload/pdf/DailyProductionRecord.pdf";
 
