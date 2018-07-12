@@ -179,6 +179,7 @@ GROUP BY c.external_coating,c.internal_coating
         INNER join inspection_process_record_header header on item.inspection_process_record_header_code=header.inspection_process_record_header_code
         where p.project_no=#{project_no} and d.process_code not like '%lab%'  and item.item_value is not null and header.result='1'
         <![CDATA[ and item.item_value<>'' ]]>
+        and (d.control_type='singlenumber' or d.control_type='singleselect' or  d.control_type='multinumber' or d.control_type='multitext')
         GROUP BY d.process_code,d.item_code
     </select>
     <!--获取产品质量保证书的实验室项目信息-->
@@ -190,6 +191,7 @@ GROUP BY c.external_coating,c.internal_coating
         INNER join inspection_process_record_header header on item.inspection_process_record_header_code=header.inspection_process_record_header_code
         where p.project_no=#{project_no} and d.process_code like '%lab%' and item.item_value is not null and header.result='1'
         <![CDATA[  and item.item_value<>'' ]]>
+        and (d.control_type='singlenumber' or d.control_type='singleselect' or  d.control_type='multinumber' or d.control_type='multitext')
         GROUP BY d.process_code,d.item_code
     </select>
 </mapper>
