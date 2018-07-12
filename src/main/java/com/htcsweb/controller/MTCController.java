@@ -11,6 +11,7 @@ import com.htcsweb.util.ResponseUtil;
 import jxl.Cell;
 import jxl.Workbook;
 import jxl.format.Alignment;
+import jxl.format.Border;
 import jxl.format.BorderLineStyle;
 import jxl.write.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,8 +121,9 @@ public class MTCController {
                          for (int i=0;i<MTCBasicInfo.size();i++){
                              String external_coating=(MTCBasicInfo.get(i).get("external_coating")==null?"":String.valueOf(MTCBasicInfo.get(i).get("external_coating")));
                              String internal_coating=(MTCBasicInfo.get(i).get("internal_coating")==null?"":String.valueOf(MTCBasicInfo.get(i).get("internal_coating")));
-                             product_name+=(external_coating+":"+internal_coating+" ");
+                             product_name+=(external_coating+" "+internal_coating+" ");
                          }
+                        product_name+="coating pipe";
                     }
                     if(getMTCCoatinDurationInfo!=null&&getMTCCoatinDurationInfo.size()>0){
                          String cotaing_begin_time=null,cotaing_end_time=null;
@@ -162,6 +164,16 @@ public class MTCController {
 
                         WritableCellFormat wcf= new WritableCellFormat(wsheet.getCell(2,start).getCellFormat());
                         wcf.setBorder(jxl.format.Border.ALL, jxl.format.BorderLineStyle.THIN);
+                        WritableCellFormat wcf_right= new WritableCellFormat(wsheet.getCell(2,start).getCellFormat());
+                        wcf_right.setBorder(jxl.format.Border.ALL, jxl.format.BorderLineStyle.THIN);
+                        wcf_right.setBorder(Border.RIGHT, BorderLineStyle.MEDIUM);
+                        WritableCellFormat wcf_botom= new WritableCellFormat(wsheet.getCell(2,start).getCellFormat());
+                        wcf_botom.setBorder(jxl.format.Border.ALL, jxl.format.BorderLineStyle.THIN);
+                        wcf_botom.setBorder(Border.BOTTOM, BorderLineStyle.MEDIUM);
+                        WritableCellFormat wcf_botom_right= new WritableCellFormat(wsheet.getCell(2,start).getCellFormat());
+                        wcf_botom_right.setBorder(jxl.format.Border.ALL, jxl.format.BorderLineStyle.THIN);
+                        wcf_botom_right.setBorder(Border.BOTTOM, BorderLineStyle.MEDIUM);
+                        wcf_botom_right.setBorder(Border.RIGHT, BorderLineStyle.MEDIUM);
 
                         //写钢管型号数据
                         if(item_i==1&&list.size()>0){
@@ -169,13 +181,30 @@ public class MTCController {
                                 String total_length=list.get(b).get("total_length")==null?" ":String.valueOf(list.get(b).get("total_length"));
                                 String total_weight=list.get(b).get("total_weight")==null?" ":String.valueOf(list.get(b).get("total_weight"));
                                 String [] content={String.valueOf(list.get(b).get("od_wt")),
-                                        String.valueOf(list.get(b).get("total_count"))+"pcs",
+                                        String.valueOf(list.get(b).get("total_count"))+" pcs",
                                         total_length,
                                         total_weight};
                                 for(int ii=0;ii<4;ii++){
-                                    Label label_A = new Label(ii*3+2, start, content[ii],wcf);
+                                    Label label_A=null;
+                                    if(b==list.size()-1){
+                                        if(ii==3){
+                                            label_A = new Label(ii*3+2, start, content[ii],wcf_botom_right);
+                                        }else{
+                                            label_A = new Label(ii*3+2, start, content[ii],wcf_botom);
+                                        }
+                                    }else{
+                                        if(ii==3){
+                                            label_A = new Label(ii*3+2, start, content[ii],wcf_right);
+                                        }else{
+                                            label_A = new Label(ii*3+2, start, content[ii],wcf);
+                                        }
+                                    }
+
                                     wsheet.addCell(label_A);
-                                    wsheet.mergeCells(ii*3+2,start,ii*3+4,start);
+                                    if(b<list.size()-1){
+                                        wsheet.mergeCells(ii*3+2,start,ii*3+4,start);
+                                    }
+
                                 }
                                 if(b>0)
                                     wsheet.insertRow(start);
@@ -185,21 +214,8 @@ public class MTCController {
 
                         }else if(item_i==2&&list.size()>0){
                             //写原材料数据
-//                            for (int b=0;b<list.size();b++){
-//                                String total_length=list.get(b).get("total_length")==null?" ":String.valueOf(list.get(b).get("total_length"));
-//                                String total_weight=list.get(b).get("total_weight")==null?" ":String.valueOf(list.get(b).get("total_weight"));
-//                                String [] content={String.valueOf(list.get(b).get("od_wt")),
-//                                        String.valueOf(list.get(b).get("total_count"))+"pcs",
-//                                        total_length,
-//                                        total_weight};
-//                                for(int ii=0;ii<4;ii++){
-//                                    Label label_A = new Label(ii*3+2, start, content[ii],wcf);
-//                                    wsheet.addCell(label_A);
-//                                    wsheet.mergeCells(ii*3+2,start,ii*3+4,start);
-//                                }
-//                                if(b>0)
-//                                    wsheet.insertRow(start);
-//                            }
+
+
                         }else if((item_i==3||item_i==4)&&list.size()>0) {
                             //写在线检测项数据
                             //写实验室数据
@@ -229,13 +245,27 @@ public class MTCController {
                                         "合格 Acceptable"};
                                 int []rowi={2,3,5,8,12};
                                 for(int ii=0;ii<5;ii++){
-                                    Label label_A = new Label(rowi[ii], start, content[ii],wcf);
+                                    Label label_A=null;
+                                    if(b==list.size()-1){
+                                        if(ii==4){//最后一行最右边的cell
+                                            label_A = new Label(rowi[ii], start, content[ii],wcf_botom_right);
+                                        }else{//最后一行的cell
+                                            label_A = new Label(rowi[ii], start, content[ii],wcf_botom);
+                                        }
+                                    }else{
+                                        if(ii==4){ //中间行行最右边的cell
+                                            label_A = new Label(rowi[ii], start, content[ii],wcf_right);
+                                        }else{//中间行行中间的
+                                            label_A = new Label(rowi[ii], start, content[ii],wcf);
+                                        }
+                                    }
                                     wsheet.addCell(label_A);
-                                    if(rowi[ii]!=12)
-                                        wsheet.mergeCells(rowi[ii],start,rowi[ii]+ii,start);
-                                    else
-                                        wsheet.mergeCells(rowi[ii],start,rowi[ii]+1,start);
-
+                                    if(b<list.size()-1){
+                                        if(rowi[ii]!=12)
+                                            wsheet.mergeCells(rowi[ii],start,rowi[ii]+ii,start);
+                                        else
+                                            wsheet.mergeCells(rowi[ii],start,rowi[ii]+1,start);
+                                    }
                                 }
                                 if(b>0)
                                     wsheet.insertRow(start);
@@ -244,9 +274,13 @@ public class MTCController {
                             }
                         }
 
-                        //修复border
-                        WritableCellFormat wcf_end= new WritableCellFormat(wsheet.getCell(0,start-1).getCellFormat());
-                        wcf_end.setBorder(jxl.format.Border.ALL, BorderLineStyle.THICK);
+
+                    }
+                    //修复border
+                    for(int jj=0;jj<wsheet.getRows();jj++){
+                        WritableCellFormat wcf_end= new WritableCellFormat();
+                        wcf_end.setBorder(Border.LEFT, BorderLineStyle.THICK);
+                        wsheet.getWritableCell(14,jj).setCellFormat(wcf_end);
                     }
 
 

@@ -116,7 +116,7 @@
 
 
     <select id="getAllShipmentInfoByProjectNo" resultType="map">
-        select count(s.pipe_no) as total_count,cast(sum(p.p_length) as decimal(10,2)) as total_length,cast(sum(p.weight)as decimal(10,2)) as total_weight,
+        select count(s.pipe_no) as total_count,cast(sum(p.p_length) as decimal(10,2)) as total_length,cast(sum(p.weight)as decimal(10,3)) as total_weight,
                s.*,c.*,pro.* from  shipment_info s
         inner join pipe_basic_info p on p.pipe_no= s.pipe_no
         inner join contract_info c on c.contract_no = p.contract_no
