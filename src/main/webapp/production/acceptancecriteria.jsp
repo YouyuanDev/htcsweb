@@ -158,8 +158,10 @@
             }
         }
         function onClickRow(index){
+            alert(index)
             if(editIndex!=undefined){
                 $('#dg').datagrid('selectRow', editIndex);
+                $('#dg').datagrid('scrollTo',editIndex);
                 return;
             }
             if (editIndex != index){
@@ -167,6 +169,7 @@
                     $('#dg').datagrid('selectRow', index)
                         .datagrid('beginEdit', index);
                     editIndex = index;
+                    $('#dg').datagrid('scrollTo',editIndex);
                     //设置options和default_value的点击事件
                     setTextAreaEvent("options");
                     setTextAreaEvent("default_value");
@@ -188,10 +191,10 @@
 
                 } else {
                     $('#dg').datagrid('selectRow', editIndex);
+                    $('#dg').datagrid('scrollTo',editIndex);
                 }
             }
-            alert(editIndex);
-            $('#dg').datagrid('scrollTo',editIndex);
+
         }
          var g_textarea_field=undefined;
 

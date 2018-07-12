@@ -2378,7 +2378,7 @@ public class InspectionRecordPDFController {
         datalist.add(new Label(1,8,"今天暂无记录!",wcf));
         datalist.add(new Label(2, 20," ", wcf));
         datalist.add(new Label(13,20," ",wcf));
-
+        datalist.add(new Label(12, 21,"©2018 TopInspector", wcf));
         PdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightFontPath);
         if(PdfName!=null){
             stringList.add(PdfName);
@@ -2394,6 +2394,7 @@ public class InspectionRecordPDFController {
         datalist.add(new Label(column3, row2,title_coating_type, wcf));
         datalist.add(new Label(column4, row2,title_shift, wcf));
         datalist.add(new Label(column1,row3,"今天暂无记录!",wcf));
+        datalist.add(new Label(11, 21,"©2018 TopInspector", wcf));
         PdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightFontPath);
         System.out.println("外防封面名------------------"+PdfName);
         if(PdfName!=null){
@@ -2423,7 +2424,7 @@ public class InspectionRecordPDFController {
         datalist.add(new Label(column2, row2,title_coating_type, wcf));
         datalist.add(new Label(column3, row2,title_shift, wcf));
         datalist.add(new Label(column3, row1,title_time, wcf));
-        datalist.add(new Label(12, 21,"©2018 TopInspector", wcf));
+        datalist.add(new Label(11, 21,"©2018 TopInspector", wcf));
     }
     private void newCreateRecordPdfTitle(ArrayList<Label> datalist,String process_name,String measure_name,String title_project_name,String title_pipe_size,String title_standard,String title_coating_type,String title_shift,String title_time){
         datalist.add(new Label(3, 4,title_project_name, wcf));
