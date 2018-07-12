@@ -175,11 +175,11 @@ public class MTCController {
                                     Label label_A = new Label(ii*3+2, start, content[ii],wcf);
                                     wsheet.addCell(label_A);
                                     wsheet.mergeCells(ii*3+2,start,ii*3+4,start);
-                                    porcessedCount+=1;
-                                    SetProgress(totalCount,porcessedCount,session);
                                 }
                                 if(b>0)
                                     wsheet.insertRow(start);
+                                porcessedCount+=1;
+                                SetProgress(totalCount,porcessedCount,session);
                             }
                         }else if(item_i==2&&list.size()>0){
                             //写原材料数据
@@ -233,11 +233,12 @@ public class MTCController {
                                         wsheet.mergeCells(rowi[ii],start,rowi[ii]+ii,start);
                                     else
                                         wsheet.mergeCells(rowi[ii],start,rowi[ii]+1,start);
-                                    porcessedCount+=1;
-                                    SetProgress(totalCount,porcessedCount,session);
+
                                 }
                                 if(b>0)
                                     wsheet.insertRow(start);
+                                porcessedCount+=1;
+                                SetProgress(totalCount,porcessedCount,session);
                             }
                         }
 
