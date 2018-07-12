@@ -11,6 +11,7 @@ import com.htcsweb.util.ResponseUtil;
 import jxl.Cell;
 import jxl.Workbook;
 import jxl.format.Alignment;
+import jxl.format.BorderLineStyle;
 import jxl.write.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -181,6 +182,7 @@ public class MTCController {
                                 porcessedCount+=1;
                                 SetProgress(totalCount,porcessedCount,session);
                             }
+
                         }else if(item_i==2&&list.size()>0){
                             //写原材料数据
 //                            for (int b=0;b<list.size();b++){
@@ -242,7 +244,9 @@ public class MTCController {
                             }
                         }
 
-
+                        //修复border
+                        WritableCellFormat wcf_end= new WritableCellFormat(wsheet.getCell(0,start-1).getCellFormat());
+                        wcf_end.setBorder(jxl.format.Border.ALL, BorderLineStyle.THICK);
                     }
 
 
