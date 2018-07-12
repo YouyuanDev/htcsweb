@@ -98,6 +98,13 @@ public class MTCController {
                     List<HashMap<String,Object>>MTCOnlineInspectionInfo=projectInfoDao.getMTCOnlineInspectionInfo(project_no);
                     List<HashMap<String,Object>>MTCLabInfo=projectInfoDao.getMTCLabInfo(project_no);
 
+                    //总的记录条数
+
+                    int totalCount=0,porcessedCount=0;
+                    totalCount+=MTCBasicInfo.size();
+                    totalCount+=MTCOnlineInspectionInfo.size();
+                    totalCount+=MTCLabInfo.size();
+
                     List<Object> data=new ArrayList<>();
                     data.add(MTCBasicInfo);
                     data.add(MTCOnlineInspectionInfo);
@@ -167,8 +174,10 @@ public class MTCController {
                                     Label label_A = new Label(ii*3+2, start, content[ii],wcf);
                                     wsheet.addCell(label_A);
                                     wsheet.mergeCells(ii*3+2,start,ii*3+4,start);
+                                    porcessedCount+=1;
+                                    SetProgress(totalCount,porcessedCount,session);
                                 }
-                                if(b<(list.size()-1))
+                                if(b>0)
                                     wsheet.insertRow(start);
                             }
                         }else if(item_i==2&&list.size()>0){
@@ -185,7 +194,7 @@ public class MTCController {
 //                                    wsheet.addCell(label_A);
 //                                    wsheet.mergeCells(ii*3+2,start,ii*3+4,start);
 //                                }
-//                                if(b<(list.size()-1))
+//                                if(b>0)
 //                                    wsheet.insertRow(start);
 //                            }
                         }else if((item_i==3||item_i==4)&&list.size()>0) {
@@ -217,15 +226,18 @@ public class MTCController {
                                         wsheet.mergeCells(rowi[ii],start,rowi[ii]+ii,start);
                                     else
                                         wsheet.mergeCells(rowi[ii],start,rowi[ii]+1,start);
+                                    porcessedCount+=1;
+                                    SetProgress(totalCount,porcessedCount,session);
                                 }
-                                if(b<(list.size()-1))
+                                if(b>0)
                                     wsheet.insertRow(start);
                             }
                         }
 
+
                     }
 
-
+                    session.setAttribute("mtcProgress", String.valueOf("100"));
 
                     wwb.write();
                     wwb.close();//关闭
@@ -427,7 +439,13 @@ private int findStart(WritableSheet wsheet,String symbol){
     return 0;
 }
 
-
+private void SetProgress(int totalCount,int processed,HttpSession session ){
+    //把用户数据保存在session域对象中
+    float percent=0;
+    if(totalCount!=0)
+        percent=processed*100/totalCount;
+    session.setAttribute("mtcProgress", String.valueOf(percent));
+}
 
     //获取质保书excel生成进度
     @RequestMapping(value="getMTCProgress",produces="application/json;charset=UTF-8")
