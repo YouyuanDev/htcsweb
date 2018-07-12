@@ -276,14 +276,11 @@ public class MTCController {
 
 
                     }
-                    //修复border
-                    for(int jj=0;jj<wsheet.getRows();jj++){
-                        WritableCellFormat wcf_end= new WritableCellFormat();
-                        wcf_end.setBorder(Border.LEFT, BorderLineStyle.THICK);
-                        wsheet.getWritableCell(14,jj).setCellFormat(wcf_end);
-                    }
 
-
+                    int end_row=findEnd(wsheet,"#END");
+                    WritableCellFormat wcf_copyright= new WritableCellFormat(wsheet.getCell(12,end_row).getCellFormat());
+                    Label label_copyright = new Label(12, end_row, "©2018 TopInspector",wcf_copyright);
+                    wsheet.addCell(label_copyright);
 
                     wsheet.removeColumn(14);
                     wsheet.removeColumn(15);
@@ -347,6 +344,17 @@ private int findStart(WritableSheet wsheet,String symbol){
 
     return 0;
 }
+
+    private int findEnd(WritableSheet wsheet,String symbol){
+        for (int i = 0; i < wsheet.getRows(); i++) {
+            Cell cell=wsheet.getCell(16, i);
+            if(cell.getContents().equals(symbol)){
+                return i;
+            }
+        }
+
+        return 0;
+    }
 
 private void SetProgress(int totalCount,int processed,HttpSession session ){
     //把用户数据保存在session域对象中

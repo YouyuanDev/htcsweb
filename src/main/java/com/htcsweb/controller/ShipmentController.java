@@ -402,6 +402,7 @@ public class ShipmentController {
                         datalist.add(new Label(8, 5, coating.toString(), wcf));
                         datalist.add(new Label(3, 5, shipment_no, wcf));
                         datalist.add(new Label(12, 5, String.valueOf(list.get(i).get("vehicle_plate_no")), wcf));
+                        datalist.add(new Label(12, 22,"©2018 TopInspector", wcf));
                     }
 
                     int side=0;
@@ -447,6 +448,7 @@ public class ShipmentController {
                         delSetPath.add(newPdfName);
                     }
                 }
+
 
                 session.setAttribute("shipmentpdfProgress", String.valueOf("100"));
 
