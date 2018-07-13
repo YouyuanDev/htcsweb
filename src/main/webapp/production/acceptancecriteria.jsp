@@ -161,6 +161,12 @@
         }
         function onClickRow(index){
 
+            //alert(dgTop);
+            // var $obj0=$('#dynamicItem').find('.datagrid-view');
+            // alert("scrollTop="+$obj0.scrollTop()+",top="+$obj0.top+",offsetTop="+$obj0.offset().top);
+            // var $obj=$('#dynamicItem').find('.datagrid-view').find('.datagrid-body');
+            // alert("scrollTop="+$obj.scrollTop()+",top="+$obj.top+",offsetTop="+$obj.offset().top);
+            //var clickScrollTop=0;
             if(editIndex!=undefined){
                 $('#dg').datagrid('selectRow', editIndex);
                 return;
@@ -190,8 +196,10 @@
                         disableEditor('need_verify',editIndex,"checkbox");
                     }
                     var $obj=$('#dynamicItem').find('.datagrid-view').find('.datagrid-body');
-                    var scrollTop=editIndex*25-50;
-                    $obj.animate({"scrollTop":scrollTop},1);
+                    var dgTop=editIndex*25-(editIndex%8)*25;
+                    $obj.scrollTop(dgTop);
+
+                    //$obj.animate({"scrollTop":dgTop},1);
                 } else {
                     $('#dg').datagrid('selectRow', editIndex);
                 }
