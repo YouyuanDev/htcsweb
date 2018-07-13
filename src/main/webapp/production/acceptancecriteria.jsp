@@ -166,10 +166,10 @@
             }
             if (editIndex != index){
                 if (endEditing()){
-                    //$('#dg').datagrid('selectRow', index);
-                    $('#dg').datagrid('beginEdit', index);
+                    $('#dg').datagrid('scrollTo',index);
+                    $('#dg').datagrid('selectRow', index).datagrid('beginEdit', index);
                     editIndex = index;
-                    $('#dg').datagrid('scrollTo',editIndex);
+
                     //设置options和default_value的点击事件
                     setTextAreaEvent("options");
                     setTextAreaEvent("default_value");
@@ -436,6 +436,14 @@
                 }
             });
         }
+        function beginScroll() {
+            alert(editIndex);
+            if(editIndex!=undefined){
+                $('#dg').datagrid('scrollTo',editIndex);
+            }else{
+                $('#dg').datagrid('scrollTo',20);
+            }
+        }
     </script>
 </head>
 
@@ -488,6 +496,7 @@
 </div>
 <!--添加、修改框  max-height:600px;overflow-y:auto;-->
 <div id="addEditDialog" class="easyui-dialog" data-options="closable:false,title:'添加',modal:true" closed="true" buttons="#dlg-buttons" style="display: none;padding:5px 0px;width:1200px; height:560px;">
+    <label style="width:200px;height:50px;" onclick="beginScroll()">开始滚动</label>
     <form id="addEditForm" method="post" style="width:95%;margin:0 auto;">
         <fieldset style="width:99%;border:solid 1px #aaa;position:relative;">
             <legend><span class="i18n1" name="ACinfo">标准信息</span></legend>
@@ -553,7 +562,7 @@
 				singleSelect: true,
 				striped:true,
 				toolbar: '#tb',
-				fitColumns:true,
+				rownumbers:true,
 				onClickRow: onClickRow
 			">
                 <thead>
@@ -616,7 +625,7 @@
 
                     <th class="i18n1" name="options" data-options="field:'options',editor:'textbox'"></th>
                         <th class="i18n1" name="isspecialitem" data-options="field:'is_special_item'"></th>
-                    <th class="i18n1" name="status" data-options="field:'status',align:'center',editor:{type:'checkbox',options:{on:'P',off:''}}">Status</th>
+                    <%--<th class="i18n1" name="status" data-options="field:'status',align:'center',editor:{type:'checkbox',options:{on:'P',off:''}}">Status</th>--%>
 
                 </tr>
                 </thead>
@@ -639,8 +648,9 @@
       <span id="winTitle"  name=""></span>
     </div>
     <div style="width:100%;height:auto;padding:5px 0px;">
-        <select style="width:70%;margin-left:2%;" id="rawMaterialType" onchange="getAllCoatingPowderInfoByPowderType()">
-
+        <label class="i18n1" name="exportrawmaterial">导出原材料</label>
+        <select style="width:70%;margin-left:4px;" id="rawMaterialType" onchange="getAllCoatingPowderInfoByPowderType()">
+            <option value="" selected="selected">请选择</option>
         </select>
     </div>
     <div style="width:100%;height:auto;">
