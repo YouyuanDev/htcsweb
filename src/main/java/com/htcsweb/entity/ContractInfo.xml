@@ -30,11 +30,11 @@
 
     <select id="getCountAllByLike" resultType="int">
         select count(*) from (
-        select *, cast(sum(total_length) as decimal(10,2)) as act_total_length,
+        select *, count(pipe_no) as act_total_count, cast(sum(total_length) as decimal(10,2)) as act_total_length,
         cast(sum(total_weight) as decimal(10,3)) as act_total_weight
         from
         (
-        select co.*,project_name, ifnull(p_length,0) as total_length,ifnull(weight,0) as total_weight
+        select co.*,project_name, p.pipe_no , ifnull(p_length,0) as total_length,ifnull(weight,0) as total_weight
 
         from contract_info co left join project_info pr on co.project_no=pr.project_no
 
@@ -59,11 +59,11 @@
 
     <select id="getAllByLike" resultType="map">
 --         select co.*,project_name from contract_info co left join project_info pr on co.project_no=pr.project_no
-        select *, cast(sum(total_length) as decimal(10,2)) as act_total_length,
+        select *, count(pipe_no) as act_total_count, cast(sum(total_length) as decimal(10,2)) as act_total_length,
         cast(sum(total_weight) as decimal(10,3)) as act_total_weight
         from
         (
-        select co.*,project_name, ifnull(p_length,0) as total_length,ifnull(weight,0) as total_weight
+        select co.*,project_name,  p.pipe_no,ifnull(p_length,0) as total_length,ifnull(weight,0) as total_weight
 
         from contract_info co left join project_info pr on co.project_no=pr.project_no
 

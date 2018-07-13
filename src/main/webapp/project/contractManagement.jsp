@@ -275,6 +275,10 @@
                 <th field="grade" align="center" width="100" class="i18n1" name="grade">钢种</th>
                 <th field="total_order_length" align="center" width="100" class="i18n1" name="totalorderlength">合同总长度</th>
                 <th field="total_order_weight" align="center" width="100" class="i18n1" name="totalorderweight">合同总重量</th>
+
+
+
+                <th field="act_total_count" align="center" width="100" class="i18n1" name="acttotalcount">实际总支数</th>
                 <th field="act_total_length" align="center" width="100" class="i18n1" name="acttotallength">实际总长度</th>
                 <th field="act_total_weight" align="center" width="100" class="i18n1" name="acttotalweight">实际总重量</th>
                 <th field="weight_per_meter" align="center" width="100" class="i18n1" name="weightpermeter">钢管米重</th>
@@ -426,6 +430,9 @@
                 </tr>
 
                 <tr>
+                    <td class="i18n1" name="acttotalcount" width="16%">实际总支数</td>
+                    <td   width="33%"><input class="easyui-numberbox" data-options="min:0,precision:0" readonly="true" type="text" name="act_total_count" value=""/></td>
+
                     <td class="i18n1" name="remark" width="16%">Remark</td>
                     <td   width="33%"><input class="easyui-textbox" type="text" name="remark" value=""/></td>
 

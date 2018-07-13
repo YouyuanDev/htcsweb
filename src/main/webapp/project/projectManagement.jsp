@@ -124,6 +124,7 @@
             createFilesModel(fiList);
             $('#projectForm').form('clear');
             clearMultiUpload(grid);
+            $("input[name='id']").val('0');
             url="/ProjectOperation/saveProject.action";
         }
         function editProject() {
@@ -434,6 +435,8 @@
                 <th field="coating_standard" align="center" width="100" class="i18n1" name="coatingstandard">涂层标准</th>
                 <th field="mps" align="center" width="100" class="i18n1" name="mps">MPS</th>
                 <th field="itp" align="center" width="100" class="i18n1" name="itp">ITP</th>
+
+                <th field="act_total_count" align="center" width="100" class="i18n1" name="acttotalcount">实际总支数</th>
                 <th field="act_total_length" align="center" width="100" class="i18n1" name="acttotallength">实际总长度</th>
                 <th field="act_total_weight" align="center" width="100" class="i18n1" name="acttotalweight">实际总重量</th>
                 <th field="project_time" align="center" width="100" class="i18n1" name="projecttime" data-options="formatter:formatterdate">项目开始时间</th>
@@ -639,6 +642,9 @@
                     <%--</td>--%>
 
                 <%--</tr>--%>
+
+
+
                 <tr>
                     <td class="i18n1" name="acttotallength" width="16%">实际总长度</td>
                     <td   width="33%"><input class="easyui-numberbox" data-options="min:0,precision:2" readonly="true" type="text" name="act_total_length" value=""/></td>
@@ -648,6 +654,11 @@
 
                 </tr>
                 <tr>
+
+                    <td class="i18n1" name="acttotalcount" width="16%">实际总支数</td>
+                    <td   width="33%"><input class="easyui-numberbox" data-options="min:0,precision:0" readonly="true" type="text" name="act_total_count" value=""/></td>
+
+
                     <td class="i18n1" name="acceptancecriteriano" width="16%">acceptancecriteriano</td>
                     <td   width="33%">
 
