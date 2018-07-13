@@ -191,7 +191,7 @@
                     }
                     var $obj=$('#dynamicItem').find('.datagrid-view').find('.datagrid-body');
                     var scrollTop=editIndex*25-50;
-                    $obj.animate({"scrollTop":scrollTop},"fast");
+                    $obj.animate({"scrollTop":scrollTop},10);
                 } else {
                     $('#dg').datagrid('selectRow', editIndex);
                 }
