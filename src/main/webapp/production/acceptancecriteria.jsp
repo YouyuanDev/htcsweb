@@ -25,7 +25,7 @@
         var staticItem=[];
         var addOrEdit=true;
         $(function () {
-
+            getRawMaterialType();
             $('#addEditDialog').css('top','5px');
             $('#addEditDialog').dialog({
                 onClose:function () {
@@ -137,7 +137,7 @@
         //测量项
         var editIndex = undefined;
         function endEditing(){
-            if (editIndex == undefined){return true}
+            if (editIndex == undefined){return true;}
             if ($('#dg').datagrid('validateRow', editIndex)){
                 alert(1);
                 var ed = $('#dg').datagrid('getEditor', {index:editIndex,field:'item_frequency'});
@@ -166,10 +166,10 @@
             }
             if (editIndex != index){
                 if (endEditing()){
-                    alert(2);
-                    $('#dg').datagrid('selectRow', index)
-                        .datagrid('beginEdit', index);
+                    //$('#dg').datagrid('selectRow', index);
+                    $('#dg').datagrid('beginEdit', index);
                     editIndex = index;
+                    $('#dg').datagrid('scrollTo',editIndex);
                     //设置options和default_value的点击事件
                     setTextAreaEvent("options");
                     setTextAreaEvent("default_value");
@@ -191,7 +191,6 @@
 
                 } else {
                     $('#dg').datagrid('selectRow', editIndex);
-                    alert(3);
                 }
             }
         }
@@ -401,6 +400,42 @@
                 }
             });
         }
+        //获取原材料的类型
+        function getRawMaterialType() {
+            $.ajax({
+                url:'/CoatingPowderOperation/getAllCoatingPowderType.action',
+                dataType:'json',
+                success:function (data) {
+                    if (data){
+                       for(var i=0;i<data.length;i++){
+                           $('#rawMaterialType').append('<option value="'+data[i].powder_type+'">'+data[i].powder_type+'</option>');
+                       }
+                    }
+                },error:function () {
+
+                }
+            });
+        }
+        //根据原材料类型获取原材料型号
+        function getAllCoatingPowderInfoByPowderType() {
+            var powderType=$('#rawMaterialType').val();
+            $.ajax({
+                url:'/CoatingPowderOperation/getAllCoatingPowderInfoByPowderType.action',
+                dataType:'json',
+                data:{powderType:powderType},
+                success:function (data) {
+                    var str="";
+                    if (data){
+                        for(var i=0;i<data.length;i++){
+                              str+=(data[i].coating_powder_name)+";";
+                        }
+                        $('#tempTextarea').val(str);
+                    }
+                },error:function () {
+
+                }
+            });
+        }
     </script>
 </head>
 
@@ -518,6 +553,7 @@
 				singleSelect: true,
 				striped:true,
 				toolbar: '#tb',
+				fitColumns:true,
 				onClickRow: onClickRow
 			">
                 <thead>
@@ -601,6 +637,11 @@
 <div id="w" class="easyui-window" title="修改" data-options="modal:true,collapsible:false,minimizable:false,maximizable:false,closed:true" style="width:500px;height:300px;padding:10px;text-align: center;display:none;">
     <div style="width:100%;height:auto;text-align:left">
       <span id="winTitle"  name=""></span>
+    </div>
+    <div style="width:100%;height:auto;padding:5px 0px;">
+        <select style="width:70%;margin-left:2%;" id="rawMaterialType" onchange="getAllCoatingPowderInfoByPowderType()">
+
+        </select>
     </div>
     <div style="width:100%;height:auto;">
         <textarea id="tempTextarea" rows="" cols="" style="width:95%;height:170px;margin:0 auto;"></textarea>

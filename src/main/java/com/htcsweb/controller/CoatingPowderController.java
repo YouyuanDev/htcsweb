@@ -7,6 +7,7 @@ import com.htcsweb.dao.CoatingPowderInfoDao;
 import com.htcsweb.entity.CoatingPowderInfo;
 import com.htcsweb.util.ComboxItem;
 import com.htcsweb.util.ResponseUtil;
+import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -237,6 +238,18 @@ public class CoatingPowderController {
         String map=JSONObject.toJSONString(maps);
         return map;
     }
+    //根据原材料类型获取原材料型号
+    @RequestMapping(value = "/getAllCoatingPowderInfoByPowderType")
+    @ResponseBody
+    private String getAllCoatingPowderInfoByPowderType(HttpServletRequest request){
+        String powderType=request.getParameter("powderType");
+        List<CoatingPowderInfo>list=new ArrayList<>();
+        if(powderType!=null&&!powderType.equals(""))
+          list=coatingPowderInfoDao.getAllCoatingPowderInfoByType(powderType);
+        String map= JSONObject.toJSONString(list);
+        return map;
+    }
+
 
     private List<ComboxItem> getAllCoatingPowderInfoByType(String coatingType) {
         //APPRequestTransfer/getAllCoatingPowderInfo.action

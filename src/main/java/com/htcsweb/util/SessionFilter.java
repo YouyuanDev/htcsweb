@@ -138,7 +138,8 @@ public class SessionFilter extends OncePerRequestFilter{
             "getDynamicItemByPipeNoProcessCodeHeaderCode",
             "getOdIdStencilContentModel",
             "getAllCoatingPowderType",
-            "getFirstPipeNoByProjectNo"
+            "getFirstPipeNoByProjectNo",
+            "getAllCoatingPowderInfoByPowderType"
     }; // 不过滤的uri
 
     @Override
