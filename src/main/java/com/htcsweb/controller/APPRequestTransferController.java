@@ -37,6 +37,8 @@ public class APPRequestTransferController {
     private CoatingPowderInfoDao coatingPowderInfoDao;
 
 
+    @Autowired
+    ContractInfoDao contractInfoDao;
 
     @Autowired
     private InspectionProcessRecordHeaderDao inspectionProcessRecordHeaderDao;
@@ -340,6 +342,29 @@ public class APPRequestTransferController {
                 //ODCoatingAcceptanceCriteria odcriteria=odcoatingacceptancecriteriaDao.getODAcceptanceCriteriaByPipeNo(pipe_no);
                 List<HashMap<String,Object>> aclist=acceptanceCriteriaDao.getAcceptanceCriteriaByPipeNoProcessCode(pipe_no,process_code);
                 List<InspectionTimeRecord> inspTimeRecordList=inspectionTimeRecordDao.getRecordByPipeNoMillNo(pipe_no,mill_no,null);
+
+                if(process_code.equals("od_stencil")) {//色环颜色初始化一下
+                    for(int i=0;i<aclist.size();i++) {
+                        HashMap<String, Object> mp=aclist.get(i);
+                        if (mp != null && mp.get("item_code") != null &&mp.get("item_code").equals("center_line_color") ) {
+                            ContractInfo contract=contractInfoDao.getContractInfoByPipeNo(pipe_no);
+                            if(contract!=null){
+                                mp.put("default_value",contract.getCenter_line_color());
+                                aclist.set(i,mp);
+                            }
+                        }else if(mp != null && mp.get("item_code") != null && mp.get("item_code").equals("pipe_end_color")){
+                            ContractInfo contract=contractInfoDao.getContractInfoByPipeNo(pipe_no);
+                            if(contract!=null){
+                                mp.put("default_value",contract.getPipe_end_color());
+                                aclist.set(i,mp);
+                            }
+                        }
+                    }
+
+                }
+
+
+
 
                 //数据导出
                 InspectionProcessRecordHeader header= inspectionProcessRecordHeaderDao.getRecentRecordByPipeNo(process_code,pipe_no);
