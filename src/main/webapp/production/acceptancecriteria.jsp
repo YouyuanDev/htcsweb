@@ -160,6 +160,7 @@
             }
         }
         function onClickRow(index){
+
             if(editIndex!=undefined){
                 $('#dg').datagrid('selectRow', editIndex);
                 return;
@@ -188,7 +189,9 @@
                         disableEditor('decimal_num',editIndex,"numberbox");
                         disableEditor('need_verify',editIndex,"checkbox");
                     }
-
+                    var $obj=$('#dynamicItem').find('.datagrid-view').find('.datagrid-body');
+                    var scrollTop=editIndex*25-50;
+                    $obj.animate({"scrollTop":scrollTop},"fast");
                 } else {
                     $('#dg').datagrid('selectRow', editIndex);
                 }
@@ -563,6 +566,9 @@
 				striped:true,
 				toolbar: '#tb',
 				rownumbers:true,
+				pagination: true,
+                pageSize: 30,
+                pageList: [30, 50, 100],
 				onClickRow: onClickRow
 			">
                 <thead>
@@ -643,6 +649,7 @@
         </fieldset>
     </form>
 </div>
+
 <div id="w" class="easyui-window" title="修改" data-options="modal:true,collapsible:false,minimizable:false,maximizable:false,closed:true" style="width:500px;height:300px;padding:10px;text-align: center;display:none;">
     <div style="width:100%;height:auto;text-align:left">
       <span id="winTitle"  name=""></span>

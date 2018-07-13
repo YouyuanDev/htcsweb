@@ -139,7 +139,8 @@ public class SessionFilter extends OncePerRequestFilter{
             "getOdIdStencilContentModel",
             "getAllCoatingPowderType",
             "getFirstPipeNoByProjectNo",
-            "getAllCoatingPowderInfoByPowderType"
+            "getAllCoatingPowderInfoByPowderType",
+            "acceptancecriteria1"
     }; // 不过滤的uri
 
     @Override
