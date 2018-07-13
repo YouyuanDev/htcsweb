@@ -564,6 +564,7 @@
 				singleSelect: true,
 				striped:true,
 				toolbar: '#tb',
+				rownumbers:true,
 				onClickRow: onClickRow
 			">
                 <thead>
