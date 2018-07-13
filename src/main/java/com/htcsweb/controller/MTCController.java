@@ -13,6 +13,7 @@ import jxl.Workbook;
 import jxl.format.Alignment;
 import jxl.format.Border;
 import jxl.format.BorderLineStyle;
+import jxl.format.VerticalAlignment;
 import jxl.write.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -348,6 +349,8 @@ public class MTCController {
 
                     int end_row=findEnd(wsheet,"#END");
                     WritableCellFormat wcf_copyright= new WritableCellFormat(wsheet.getCell(12,end_row).getCellFormat());
+                    wcf_copyright.setAlignment((Alignment.CENTRE));
+                    wcf_copyright.setVerticalAlignment((VerticalAlignment.CENTRE));
                     Label label_copyright = new Label(12, end_row, "©2018 TopInspector",wcf_copyright);
                     wsheet.addCell(label_copyright);
 

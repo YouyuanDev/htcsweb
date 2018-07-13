@@ -314,6 +314,15 @@ public class DailyProductionReportController {
                      datalist.add(new Label(33,row,String.valueOf(total_acceptedRebevelCount), wcf));
                      datalist.add(new Label(34,row,String.valueOf(total_shippedPipeCount), wcf));
                      datalist.add(new Label(35,row,String.valueOf(total_shippedPipeLength), wcf));
+
+
+
+                     WritableCellFormat wcf_copyright= new WritableCellFormat(wcf);
+                     wcf_copyright.setBorder(Border.ALL,BorderLineStyle.NONE);
+                     wcf_copyright.setAlignment((Alignment.LEFT));
+                     wcf_copyright.setVerticalAlignment((VerticalAlignment.CENTRE));
+                     Label label_copyright = new Label(0, 2, "©2018 TopInspector",wcf_copyright);
+                     datalist.add(label_copyright);
                      row++;
 
                      if(datalist.size()>=0){
