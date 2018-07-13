@@ -436,6 +436,8 @@
             var controldiv="";
             if(itemvalue!=undefined){
                 defaultvalue=itemvalue;
+            }else{
+                itemvalue=defaultvalue;
             }
 
             if(controltype=="singleselect"){//单选

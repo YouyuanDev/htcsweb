@@ -275,6 +275,10 @@
                 <th field="grade" align="center" width="100" class="i18n1" name="grade">钢种</th>
                 <th field="total_order_length" align="center" width="100" class="i18n1" name="totalorderlength">合同总长度</th>
                 <th field="total_order_weight" align="center" width="100" class="i18n1" name="totalorderweight">合同总重量</th>
+
+
+
+                <th field="act_total_count" align="center" width="100" class="i18n1" name="acttotalcount">实际总支数</th>
                 <th field="act_total_length" align="center" width="100" class="i18n1" name="acttotallength">实际总长度</th>
                 <th field="act_total_weight" align="center" width="100" class="i18n1" name="acttotalweight">实际总重量</th>
                 <th field="weight_per_meter" align="center" width="100" class="i18n1" name="weightpermeter">钢管米重</th>
@@ -383,25 +387,25 @@
                     <td class="i18n1" name="centerlinecolor" width="16%">中心色环</td>
                     <td   width="33%">
                         <select id="center_line_color" class="easyui-combobox" data-options="editable:false" name="center_line_color"   style="width:185px;">
-                            <option value="NONE">无</option>
-                            <option value="RED">红色</option>
-                            <option value="YELLOW">黄色</option>
-                            <option value="WHITE">白色</option>
-                            <option value="GREEN">绿色</option>
-                            <option value="BLUE">蓝色</option>
-                            <option value="BLACK">黑色</option>
+                            <option value="无NONE">无NONE</option>
+                            <option value="红色RED">红色RED</option>
+                            <option value="黄色YELLOW">黄色YELLOW</option>
+                            <option value="白色WHITE">白色WHITE</option>
+                            <option value="绿色GREEN">绿色GREEN</option>
+                            <option value="蓝色BLUE">蓝色BLUE</option>
+                            <option value="黑色BLACK">黑色BLACK</option>
                         </select>
 
                     </td>
                     <td class="i18n1" name="pipeendcolor" width="16%">管端色环</td>
                     <td width="33%"><select id="pipe_end_color" class="easyui-combobox" data-options="editable:false" name="pipe_end_color"   style="width:185px;">
-                        <option value="NONE">无</option>
-                        <option value="RED">红色</option>
-                        <option value="YELLOW">黄色</option>
-                        <option value="WHITE">白色</option>
-                        <option value="GREEN">绿色</option>
-                        <option value="BLUE">蓝色</option>
-                        <option value="BLACK">黑色</option>
+                        <option value="无NONE">无NONE</option>
+                        <option value="红色RED">红色RED</option>
+                        <option value="黄色YELLOW">黄色YELLOW</option>
+                        <option value="白色WHITE">白色WHITE</option>
+                        <option value="绿色GREEN">绿色GREEN</option>
+                        <option value="蓝色BLUE">蓝色BLUE</option>
+                        <option value="黑色BLACK">黑色BLACK</option>
                     </select>
                     </td>
                 </tr>
@@ -426,6 +430,9 @@
                 </tr>
 
                 <tr>
+                    <td class="i18n1" name="acttotalcount" width="16%">实际总支数</td>
+                    <td   width="33%"><input class="easyui-numberbox" data-options="min:0,precision:0" readonly="true" type="text" name="act_total_count" value=""/></td>
+
                     <td class="i18n1" name="remark" width="16%">Remark</td>
                     <td   width="33%"><input class="easyui-textbox" type="text" name="remark" value=""/></td>
 

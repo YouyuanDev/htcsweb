@@ -3,13 +3,11 @@ package com.htcsweb.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.htcsweb.dao.ContractInfoDao;
 import com.htcsweb.dao.DynamicMeasurementItemDao;
 import com.htcsweb.dao.InspectionTimeRecordDao;
 import com.htcsweb.dao.PipeBasicInfoDao;
-import com.htcsweb.entity.AcceptanceCriteria;
-import com.htcsweb.entity.CoatingRepair;
-import com.htcsweb.entity.DynamicMeasurementItem;
-import com.htcsweb.entity.InspectionTimeRecord;
+import com.htcsweb.entity.*;
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,6 +35,9 @@ public class DynamicMeasurementItemController {
 
     @Autowired
     PipeBasicInfoDao pipeBasicInfoDao;
+
+    @Autowired
+    ContractInfoDao contractInfoDao;
 
 
     //获得动态检测项列表，根据ACNo
@@ -168,6 +169,30 @@ public class DynamicMeasurementItemController {
             if (inspection_process_record_header_code == null || inspection_process_record_header_code.equals("")) {
 
                 itemlist=dynamicMeasurementItemDao.getDynamicItemByPipeNoProcessCodeReturnMap(pipe_no, process_code);
+
+                if(process_code.equals("od_stencil")) {//色环颜色初始化一下
+                    String newStencilvalue = "";
+                    for(int i=0;i<itemlist.size();i++) {
+                        HashMap<String, Object> mp=itemlist.get(i);
+                        if (mp != null && mp.get("item_code") != null &&mp.get("item_code").equals("center_line_color") ) {
+                            ContractInfo contract=contractInfoDao.getContractInfoByPipeNo(pipe_no);
+                            if(contract!=null){
+                                mp.put("default_value",contract.getCenter_line_color());
+                                itemlist.set(i,mp);
+                            }
+
+                        }else if(mp != null && mp.get("item_code") != null && mp.get("item_code").equals("pipe_end_color")){
+                            ContractInfo contract=contractInfoDao.getContractInfoByPipeNo(pipe_no);
+                            if(contract!=null){
+                                mp.put("default_value",contract.getPipe_end_color());
+                                itemlist.set(i,mp);
+                            }
+                        }
+                    }
+
+                }
+
+
 
 //                List<DynamicMeasurementItem> tmplist = dynamicMeasurementItemDao.getDynamicItemByPipeNoProcessCode(pipe_no, process_code);
 //                //mmp= JSONArray.toJSONString(list);
