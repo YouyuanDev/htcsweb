@@ -98,6 +98,7 @@ public class MTCController {
 
                     List<HashMap<String,Object>>getMTCCoatinDurationInfo=projectInfoDao.getMTCCoatinDurationInfo(project_no);
                     List<HashMap<String,Object>>MTCBasicInfo=projectInfoDao.getMTCBasicInfo(project_no);
+                    List<HashMap<String,Object>>RawMaterialInfo =projectInfoDao.getRawMaterialInfo(project_no);
                     List<HashMap<String,Object>>MTCOnlineInspectionInfo=projectInfoDao.getMTCOnlineInspectionInfo(project_no);
                     List<HashMap<String,Object>>MTCLabInfo=projectInfoDao.getMTCLabInfo(project_no);
 
@@ -105,12 +106,13 @@ public class MTCController {
 
                     int totalCount=0,porcessedCount=0;
                     totalCount+=MTCBasicInfo.size();
+                    totalCount+=RawMaterialInfo.size();
                     totalCount+=MTCOnlineInspectionInfo.size();
                     totalCount+=MTCLabInfo.size();
 
                     List<Object> data=new ArrayList<>();
                     data.add(MTCBasicInfo);
-                    data.add(MTCOnlineInspectionInfo);
+                    data.add(RawMaterialInfo);
                     data.add(MTCOnlineInspectionInfo);
                     data.add(MTCLabInfo);
 
@@ -150,10 +152,6 @@ public class MTCController {
                     Label label_coatingtime = new Label(11, 5, coating_duration);
                     label_coatingtime.setCellFormat(wsheet.getCell(11,5).getCellFormat());
                     wsheet.addCell(label_coatingtime);
-
-
-
-
 
 
                     for(int item_i=1;item_i<=data.size();item_i++){
@@ -228,6 +226,53 @@ public class MTCController {
                             //写原材料数据
 
                             WritableCell top_left_cell=wsheet.getWritableCell(0,start-1);
+                            WritableCellFormat wcf_top_left= new WritableCellFormat(top_left_cell.getCellFormat());
+                            wcf_top_left.setBorder(Border.LEFT, jxl.format.BorderLineStyle.MEDIUM);
+                            wcf_top_left.setBorder(Border.TOP, jxl.format.BorderLineStyle.MEDIUM);
+                            wcf_top_left.setBorder(Border.BOTTOM, jxl.format.BorderLineStyle.MEDIUM);
+                            for (int b=list.size()-1;b>=0;b--){
+                                String material_name=list.get(b).get("material_name")==null?" ":String.valueOf(list.get(b).get("material_name"));
+                                String coating_powder_name=list.get(b).get("coating_powder_name")==null?" ":String.valueOf(list.get(b).get("coating_powder_name"));
+                                String powder_type=list.get(b).get("powder_type")==null?" ":String.valueOf(list.get(b).get("powder_type"));
+                                String manufacturer_name=list.get(b).get("manufacturer_name")==null?" ":String.valueOf(list.get(b).get("manufacturer_name"));
+                                String manufacturer_name_en=list.get(b).get("manufacturer_name_en")==null?" ":String.valueOf(list.get(b).get("manufacturer_name_en"));
+                                String [] content={material_name,
+                                        coating_powder_name,
+                                        powder_type,
+                                        manufacturer_name+" "+manufacturer_name_en};
+                                for(int ii=0;ii<4;ii++){
+                                    Label label_A=null;
+                                    if(b==list.size()-1){
+                                        if(ii==3){
+                                            label_A = new Label(ii*3+2, start, content[ii],wcf_botom_right);
+                                        }else{
+                                            label_A = new Label(ii*3+2, start, content[ii],wcf_botom);
+                                        }
+                                    }else{
+                                        if(ii==3){
+                                            label_A = new Label(ii*3+2, start, content[ii],wcf_right);
+                                        }else{
+                                            label_A = new Label(ii*3+2, start, content[ii],wcf);
+                                        }
+                                    }
+
+                                    wsheet.addCell(label_A);
+                                    if(b<list.size()-1){
+                                        wsheet.mergeCells(ii*3+2,start,ii*3+4,start);
+                                    }
+
+                                }
+                                if(b>0) {
+                                    wsheet.insertRow(start);
+                                    //修复左边框
+                                    top_left_cell.setCellFormat(wcf_top_left);
+                                }
+                                porcessedCount+=1;
+                                SetProgress(totalCount,porcessedCount,session);
+                            }
+
+
+
                         }else if((item_i==3||item_i==4)&&list.size()>0) {
                             //写在线检测项数据
                             //写实验室数据
@@ -239,6 +284,10 @@ public class MTCController {
                             for (int b=list.size()-1;b>=0;b--){
 
                                 String item_name=list.get(b).get("item_name")==null?" ":String.valueOf(list.get(b).get("item_name"));
+                                String item_name_en=list.get(b).get("item_name_en")==null?" ":String.valueOf(list.get(b).get("item_name_en"));
+                                item_name=item_name+ "\n"+item_name_en;
+                                item_name=shortenString(item_name);
+
                                 String unit_name_en=list.get(b).get("unit_name_en")==null?" ":String.valueOf(list.get(b).get("unit_name_en"));
                                 if(!unit_name_en.equals("")){
                                     item_name=(item_name+"("+unit_name_en+")");
@@ -256,32 +305,31 @@ public class MTCController {
                                     item_record=item_record_max;
                                 else
                                     item_record=(item_record_min+" - "+item_record_max);
-                                String [] content={String.valueOf(b+1),item_name,
+                                String [] content={item_name,
                                         item_standard,
                                         item_record,
                                         "合格 Acceptable"};
-                                int []rowi={2,3,5,8,12};
-                                for(int ii=0;ii<5;ii++){
+                                int []rowi={2,5,8,12};
+                                int []merge={2,2,3,1};
+                                for(int ii=0;ii<4;ii++){
                                     Label label_A=null;
                                     if(b==list.size()-1){
-                                        if(ii==4){//最后一行最右边的cell
+                                        if(ii==3){//最后一行最右边的cell
                                             label_A = new Label(rowi[ii], start, content[ii],wcf_botom_right);
                                         }else{//最后一行的cell
                                             label_A = new Label(rowi[ii], start, content[ii],wcf_botom);
                                         }
                                     }else{
-                                        if(ii==4){ //中间行行最右边的cell
+                                        if(ii==3){ //中间行行最右边的cell
                                             label_A = new Label(rowi[ii], start, content[ii],wcf_right);
                                         }else{//中间行行中间的
                                             label_A = new Label(rowi[ii], start, content[ii],wcf);
                                         }
                                     }
+
                                     wsheet.addCell(label_A);
                                     if(b<list.size()-1){
-                                        if(rowi[ii]!=12)
-                                            wsheet.mergeCells(rowi[ii],start,rowi[ii]+ii,start);
-                                        else
-                                            wsheet.mergeCells(rowi[ii],start,rowi[ii]+1,start);
+                                        wsheet.mergeCells(rowi[ii],start,rowi[ii]+merge[ii],start);
                                     }
                                 }
                                 if(b>0){
@@ -306,7 +354,7 @@ public class MTCController {
                     wsheet.removeColumn(14);
                     wsheet.removeColumn(15);
                     wsheet.removeColumn(16);
-
+                    setCellHeight(wsheet,500);
                     session.setAttribute("mtcProgress", String.valueOf("100"));
 
 
@@ -355,16 +403,47 @@ public class MTCController {
     }
 
 
-private int findStart(WritableSheet wsheet,String symbol){
-    for (int i = 0; i < wsheet.getRows(); i++) {
-        Cell cell=wsheet.getCell(16, i);
-        if(cell.getContents().equals(symbol)){
-            return i;
+    private int findStart(WritableSheet wsheet,String symbol){
+        for (int i = 0; i < wsheet.getRows(); i++) {
+            Cell cell=wsheet.getCell(16, i);
+            if(cell.getContents().equals(symbol)){
+                return i;
+            }
         }
+
+        return 0;
     }
 
-    return 0;
-}
+
+    //缩减文字长度 去除一些多余的字符
+    private String shortenString(String item_name) {
+        item_name = item_name.replace("分割", "");
+        item_name = item_name.replace("列表", "");
+        item_name = item_name.replace("Separated by a comma", "");
+        item_name = item_name.replace("separated by", "");
+        item_name = item_name.replace("Contamination", "Con.");
+        item_name = item_name.replace("List", "");
+        item_name = item_name.replace("（", "");
+        item_name = item_name.replace("）", "");
+        item_name = item_name.replace("(", "");
+        item_name = item_name.replace(")", "");
+        item_name = item_name.replace(",", "");
+        item_name = item_name.replace("，", "");
+
+        return item_name;
+    }
+
+    //设置行高
+    private void setCellHeight(WritableSheet wsheet,int height){
+        try {
+            for (int i = 4; i < wsheet.getRows(); i++) {
+                wsheet.setRowView(i, height);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
 
     private int findEnd(WritableSheet wsheet,String symbol){
         for (int i = 0; i < wsheet.getRows(); i++) {
