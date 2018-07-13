@@ -418,10 +418,10 @@
 
                 <tr>
                     <td class="i18n1" name="acttotallength" width="16%">实际总长度</td>
-                    <td   width="33%"><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="act_total_length" value=""/></td>
+                    <td   width="33%"><input class="easyui-numberbox" data-options="min:0,precision:2" readonly="true" type="text" name="act_total_length" value=""/></td>
 
                     <td class="i18n1" name="acttotalweight" width="16%">实际总重量</td>
-                    <td   width="33%"><input class="easyui-numberbox" data-options="min:0,precision:3" type="text" name="act_total_weight" value=""/></td>
+                    <td   width="33%"><input class="easyui-numberbox" data-options="min:0,precision:3" readonly="true" type="text" name="act_total_weight" value=""/></td>
 
                 </tr>
 

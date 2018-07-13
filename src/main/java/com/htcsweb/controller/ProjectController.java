@@ -69,10 +69,17 @@ public class ProjectController {
             e.printStackTrace();
         }
 
+//        System.out.print("project_no:"+project_no);
+//        System.out.print("project_name:"+project_name);
+//        System.out.print("client_name:"+client_name);
+//        System.out.print("beginTime:"+beginTime);
+//        System.out.print("endTime:"+endTime);
+
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
         List<HashMap<String,Object>>list=projectInfoDao.getAllByLike(project_no,project_name,client_name,beginTime,endTime,start,Integer.parseInt(rows));
+        //System.out.print("list:"+list.size());
         int count=projectInfoDao.getCountAllByLike(project_no,project_name,client_name,beginTime,endTime);
-
+        //System.out.print("count:"+count);
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
         maps.put("rows",list);

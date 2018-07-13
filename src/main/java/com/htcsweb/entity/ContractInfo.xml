@@ -29,8 +29,16 @@
     </select>
 
     <select id="getCountAllByLike" resultType="int">
-        select count(*) from contract_info co
-        left join project_info pr on co.project_no=pr.project_no
+        select count(*) from (
+        select *, cast(sum(total_length) as decimal(10,2)) as act_total_length,
+        cast(sum(total_weight) as decimal(10,3)) as act_total_weight
+        from
+        (
+        select co.*,project_name, ifnull(p_length,0) as total_length,ifnull(weight,0) as total_weight
+
+        from contract_info co left join project_info pr on co.project_no=pr.project_no
+
+        left join pipe_basic_info p on p.contract_no=co.contract_no
         <where>
             <if test="project_no!=null and project_no!=''">
                 AND co.project_no LIKE CONCAT('%',#{project_no},'%')
@@ -39,10 +47,14 @@
                 AND project_name LIKE CONCAT('%',#{project_name},'%')
             </if>
             <if test="contract_no!=null and contract_no!=''">
-                AND contract_no LIKE CONCAT('%',#{contract_no},'%')
+                AND co.contract_no LIKE CONCAT('%',#{contract_no},'%')
             </if>
 
         </where>
+        ORDER BY co.id DESC
+        )as temp
+        group by contract_no
+        ) as tt
     </select>
 
     <select id="getAllByLike" resultType="map">

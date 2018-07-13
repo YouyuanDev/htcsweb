@@ -35,10 +35,22 @@
     </select>
 
     <select id="getCountAllByLike" resultType="int">
-        select count(*) from project_info
+         select count(*) from (
+        select  *,  cast(sum(total_length) as decimal(10,2)) as act_total_length,
+        cast(sum(total_weight) as decimal(10,3)) as act_total_weight
+        from
+        (
+        select pro.*, ifnull(p_length,0) as total_length,ifnull(weight,0) as total_weight
+
+        from project_info pro
+
+        left join contract_info co on co.project_no=pro.project_no
+
+        left join pipe_basic_info p on p.contract_no=co.contract_no
+
         <where>
             <if test="project_no!=null and project_no!=''">
-                project_no LIKE CONCAT('%',#{project_no},'%')
+                AND pro.project_no LIKE CONCAT('%',#{project_no},'%')
             </if>
             <if test="project_name!=null and project_name!=''">
                 AND project_name LIKE CONCAT('%',#{project_name},'%')
@@ -50,9 +62,15 @@
                 <![CDATA[ AND DATE_FORMAT(project_time,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
             </if>
             <if test="end_time!=null">
-                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')<DATE_FORMAT(DATE_ADD(#{end_time},INTERVAL 1 DAY),'%Y-%m-%d 00:00:00')]]>
+                <![CDATA[ AND DATE_FORMAT(project_time,'%Y-%m-%d %H:%T:%s')<DATE_FORMAT(DATE_ADD(#{end_time},INTERVAL 1 DAY),'%Y-%m-%d 00:00:00')]]>
             </if>
+
         </where>
+
+        ORDER BY pro.id DESC
+        )as temp
+        group by project_no
+         ) as tt
     </select>
 
 
@@ -62,10 +80,21 @@
 
 
     <select id="getAllByLike" resultType="map">
-        Select * from project_info
+        select  *,  cast(sum(total_length) as decimal(10,2)) as act_total_length,
+        cast(sum(total_weight) as decimal(10,3)) as act_total_weight
+        from
+        (
+        select pro.*, ifnull(p_length,0) as total_length,ifnull(weight,0) as total_weight
+
+        from project_info pro
+
+        left join contract_info co on co.project_no=pro.project_no
+
+        left join pipe_basic_info p on p.contract_no=co.contract_no
+
         <where>
             <if test="project_no!=null and project_no!=''">
-                 project_no LIKE CONCAT('%',#{project_no},'%')
+                AND pro.project_no LIKE CONCAT('%',#{project_no},'%')
             </if>
             <if test="project_name!=null and project_name!=''">
                 AND project_name LIKE CONCAT('%',#{project_name},'%')
@@ -77,11 +106,15 @@
                 <![CDATA[ AND DATE_FORMAT(project_time,'%Y-%m-%d %H:%T:%s')>=DATE_FORMAT(#{begin_time},'%Y-%m-%d 00:00:00')]]>
             </if>
             <if test="end_time!=null">
-                <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%T:%s')<DATE_FORMAT(DATE_ADD(#{end_time},INTERVAL 1 DAY),'%Y-%m-%d 00:00:00')]]>
+                <![CDATA[ AND DATE_FORMAT(project_time,'%Y-%m-%d %H:%T:%s')<DATE_FORMAT(DATE_ADD(#{end_time},INTERVAL 1 DAY),'%Y-%m-%d 00:00:00')]]>
             </if>
 
         </where>
-        ORDER BY id DESC
+
+        ORDER BY pro.id DESC
+        )as temp
+        group by project_no
+
         limit #{skip},#{take}
     </select>
 

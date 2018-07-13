@@ -135,30 +135,31 @@
                 //date = getDate1(row.project_time)
                 //str=myformatter2(date)
                 //alert(str)
+                row.project_time=getDate1(row.project_time),
+                $('#projectForm').form('load',row);
+                // $('#projectForm').form('load',{
+                //     'projectid':row.id,
+                //     'project_no':row.project_no,
+                //     'project_name':row.project_name,
+                //     'client_name':row.client_name,
+                //     'client_spec':row.client_spec,
+                //     'coating_standard':row.coating_standard,
+                //     'mps':row.mps,
+                //     'itp':row.itp,
+                //     //'project_time':str,
+                //     'upload_files':row.upload_files,
+                //     // 'pipe_body_acceptance_criteria_no':row.pipe_body_acceptance_criteria_no,
+                //     // 'inspection_frequency_no':row.inspection_frequency_no,
+                //     // 'od_coating_acceptance_criteria_no':row.od_coating_acceptance_criteria_no,
+                //     // 'id_coating_acceptance_criteria_no':row.id_coating_acceptance_criteria_no,
+                //     // 'lab_testing_acceptance_criteria_2fbe_no':row.lab_testing_acceptance_criteria_2fbe_no,
+                //     // 'lab_testing_acceptance_criteria_3lpe_no':row.lab_testing_acceptance_criteria_3lpe_no,
+                //     // 'raw_material_acceptance_criteria_2fbe_no':row.raw_material_acceptance_criteria_2fbe_no,
+                //     // 'raw_material_acceptance_criteria_3lpe_no':row.raw_material_acceptance_criteria_3lpe_no,
+                //     'acceptance_criteria_no':row.acceptance_criteria_no
+                // });
 
-                $('#projectForm').form('load',{
-                    'projectid':row.id,
-                    'project_no':row.project_no,
-                    'project_name':row.project_name,
-                    'client_name':row.client_name,
-                    'client_spec':row.client_spec,
-                    'coating_standard':row.coating_standard,
-                    'mps':row.mps,
-                    'itp':row.itp,
-                    //'project_time':str,
-                    'upload_files':row.upload_files,
-                    // 'pipe_body_acceptance_criteria_no':row.pipe_body_acceptance_criteria_no,
-                    // 'inspection_frequency_no':row.inspection_frequency_no,
-                    // 'od_coating_acceptance_criteria_no':row.od_coating_acceptance_criteria_no,
-                    // 'id_coating_acceptance_criteria_no':row.id_coating_acceptance_criteria_no,
-                    // 'lab_testing_acceptance_criteria_2fbe_no':row.lab_testing_acceptance_criteria_2fbe_no,
-                    // 'lab_testing_acceptance_criteria_3lpe_no':row.lab_testing_acceptance_criteria_3lpe_no,
-                    // 'raw_material_acceptance_criteria_2fbe_no':row.raw_material_acceptance_criteria_2fbe_no,
-                    // 'raw_material_acceptance_criteria_3lpe_no':row.raw_material_acceptance_criteria_3lpe_no,
-                    'acceptance_criteria_no':row.acceptance_criteria_no
-                });
-
-                $("#project_time").datetimebox('setValue',getDate1(row.project_time));
+                //$("#project_time").datetimebox('setValue',getDate1(row.project_time));
 
                 var files=row.upload_files;
                 if(files!=null&&files!=""){
@@ -433,6 +434,8 @@
                 <th field="coating_standard" align="center" width="100" class="i18n1" name="coatingstandard">涂层标准</th>
                 <th field="mps" align="center" width="100" class="i18n1" name="mps">MPS</th>
                 <th field="itp" align="center" width="100" class="i18n1" name="itp">ITP</th>
+                <th field="act_total_length" align="center" width="100" class="i18n1" name="acttotallength">实际总长度</th>
+                <th field="act_total_weight" align="center" width="100" class="i18n1" name="acttotalweight">实际总重量</th>
                 <th field="project_time" align="center" width="100" class="i18n1" name="projecttime" data-options="formatter:formatterdate">项目开始时间</th>
 
                 <%--<th field="pipe_body_acceptance_criteria_no" align="center" width="100" class="i18n1" name="pipebodyacceptancecriteriano">Pipe Body acceptance_criteria</th>--%>
@@ -483,7 +486,7 @@
             <table class="ht-table" width="100%" border="0">
                 <tr>
                     <td class="i18n1" name="id">流水号</td>
-                    <td colspan="5"><input class="easyui-textbox" type="text" name="projectid" readonly="true" value="0"/></td>
+                    <td colspan="5"><input class="easyui-textbox" type="text" name="id" readonly="true" value="0"/></td>
 
                 </tr>
                 <tr>
@@ -636,7 +639,14 @@
                     <%--</td>--%>
 
                 <%--</tr>--%>
+                <tr>
+                    <td class="i18n1" name="acttotallength" width="16%">实际总长度</td>
+                    <td   width="33%"><input class="easyui-numberbox" data-options="min:0,precision:2" readonly="true" type="text" name="act_total_length" value=""/></td>
 
+                    <td class="i18n1" name="acttotalweight" width="16%">实际总重量</td>
+                    <td   width="33%"><input class="easyui-numberbox" data-options="min:0,precision:3" readonly="true" type="text" name="act_total_weight" value=""/></td>
+
+                </tr>
                 <tr>
                     <td class="i18n1" name="acceptancecriteriano" width="16%">acceptancecriteriano</td>
                     <td   width="33%">
