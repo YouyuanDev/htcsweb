@@ -129,9 +129,16 @@ public class MTCController {
                         product_name+="coating pipe";
                     }
                     if(getMTCCoatinDurationInfo!=null&&getMTCCoatinDurationInfo.size()>0){
-                         String cotaing_begin_time=null,cotaing_end_time=null;
-                         Object begin_time=getMTCCoatinDurationInfo.get(0).get("min_time");
-                         Object end_time=getMTCCoatinDurationInfo.get(0).get("max_time");
+                         String cotaing_begin_time="",cotaing_end_time="";
+                         Date begin_time=null;
+                         Date end_time=null;
+
+                         if(getMTCCoatinDurationInfo.get(0)!=null&&getMTCCoatinDurationInfo.get(0).get("min_time")!=null){
+                             begin_time=(Date)getMTCCoatinDurationInfo.get(0).get("min_time");
+                         }
+                        if(getMTCCoatinDurationInfo.get(0)!=null&&getMTCCoatinDurationInfo.get(0).get("max_time")!=null){
+                            end_time=(Date)getMTCCoatinDurationInfo.get(0).get("max_time");
+                        }
                          if(begin_time!=null){
                              cotaing_begin_time=sdf.format(begin_time);
                          }
@@ -188,7 +195,8 @@ public class MTCController {
                             for (int b=list.size()-1;b>=0;b--){
                                 String total_length=list.get(b).get("total_length")==null?" ":String.valueOf(list.get(b).get("total_length"));
                                 String total_weight=list.get(b).get("total_weight")==null?" ":String.valueOf(list.get(b).get("total_weight"));
-                                String [] content={String.valueOf(list.get(b).get("od_wt")),
+                                String od_wt=list.get(b).get("od_wt")==null?" ":String.valueOf(list.get(b).get("od_wt"));
+                                String [] content={od_wt,
                                         String.valueOf(list.get(b).get("total_count"))+" pcs",
                                         total_length,
                                         total_weight};
