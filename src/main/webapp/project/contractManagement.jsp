@@ -275,6 +275,8 @@
                 <th field="grade" align="center" width="100" class="i18n1" name="grade">钢种</th>
                 <th field="total_order_length" align="center" width="100" class="i18n1" name="totalorderlength">合同总长度</th>
                 <th field="total_order_weight" align="center" width="100" class="i18n1" name="totalorderweight">合同总重量</th>
+                <th field="act_total_length" align="center" width="100" class="i18n1" name="acttotallength">实际总长度</th>
+                <th field="act_total_weight" align="center" width="100" class="i18n1" name="acttotalweight">实际总重量</th>
                 <th field="weight_per_meter" align="center" width="100" class="i18n1" name="weightpermeter">钢管米重</th>
                 <th field="pipe_length" align="center" width="100" class="i18n1" name="pipelength">钢管长度</th>
 
@@ -406,10 +408,20 @@
 
                 <tr>
                     <td class="i18n1" name="totalorderlength" width="16%">合同总长度</td>
-                    <td   width="33%"><input class="easyui-numberbox" data-options="min:0,precision:3" type="text" name="total_order_length" value=""/></td>
+                    <td   width="33%"><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="total_order_length" value=""/></td>
 
                     <td class="i18n1" name="totalorderweight" width="16%">合同总重量</td>
                     <td   width="33%"><input class="easyui-numberbox" data-options="min:0,precision:3" type="text" name="total_order_weight" value=""/></td>
+
+                </tr>
+
+
+                <tr>
+                    <td class="i18n1" name="acttotallength" width="16%">实际总长度</td>
+                    <td   width="33%"><input class="easyui-numberbox" data-options="min:0,precision:2" type="text" name="act_total_length" value=""/></td>
+
+                    <td class="i18n1" name="acttotalweight" width="16%">实际总重量</td>
+                    <td   width="33%"><input class="easyui-numberbox" data-options="min:0,precision:3" type="text" name="act_total_weight" value=""/></td>
 
                 </tr>
 

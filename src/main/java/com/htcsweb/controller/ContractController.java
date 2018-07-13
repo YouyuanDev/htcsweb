@@ -47,6 +47,10 @@ public class ContractController {
             rows="20";
         }
 
+//        System.out.println("contractNo="+contract_no);
+//        System.out.println("project_no="+project_no);
+//        System.out.println("project_name="+project_name);
+
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
         List<HashMap<String,Object>>list=contractInfoDao.getAllByLike(project_no,project_name,contract_no,start,Integer.parseInt(rows));
         int count=contractInfoDao.getCountAllByLike(project_no,project_name,contract_no);
