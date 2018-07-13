@@ -565,10 +565,6 @@
 				singleSelect: true,
 				striped:true,
 				toolbar: '#tb',
-				rownumbers:true,
-				pagination: true,
-                pageSize: 30,
-                pageList: [30, 50, 100],
 				onClickRow: onClickRow
 			">
                 <thead>
