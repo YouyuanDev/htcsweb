@@ -179,6 +179,7 @@
                 <th data-options="field:'ck',checkbox:true"></th>
                 <th field="id" align="center" width="100" class="i18n1" name="id">流水号</th>
 
+                <th field="material_name" align="center" width="100" class="i18n1" name="materialname">原材料名称</th>
                 <th field="coating_powder_name" align="center" width="100" class="i18n1" name="coatingpowdername">原材料型号</th>
                 <th field="powder_type" align="center" width="100" class="i18n1" name="powdertype">原材料类型</th>
                 <th field="manufacturer_name" align="center" width="100" class="i18n1" name="manufacturername"></th>
@@ -250,16 +251,22 @@
 
                     </td>
                     <td></td>
+
+                    <td class="i18n1" name="materialname"></td>
+                    <td >
+                        <input class="easyui-textbox" type="text" name="material_name" value=""/>
+                    </td>
+                    <td></td>
+
+                </tr>
+                <tr>
                     <td class="i18n1" name="manufacturername"></td>
                     <td><input class="easyui-textbox" type="text" name="manufacturer_name" value=""/></td>
                     <td></td>
-                </tr>
-                <tr>
                     <td class="i18n1" name="manufacturernameen"></td>
                     <td >
                        <input class="easyui-textbox" type="text" name="manufacturer_name_en" value=""/>
                     </td>
-                    <td></td>
                 </tr>
             </table>
 

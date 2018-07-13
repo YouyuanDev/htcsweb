@@ -208,7 +208,7 @@
     </select>
     <!--获取产品质量保证书的在线检测信息-->
     <select id="getMTCOnlineInspectionInfo" resultType="map">
-        SELECT d.max_value,d.min_value,d.item_name,d.unit_name_en, max(item.item_value) as max_record_value,min(item.item_value) as min_record_value  from  project_info p
+        SELECT d.max_value,d.min_value,d.item_name,d.item_name_en,d.unit_name_en, max(item.item_value) as max_record_value,min(item.item_value) as min_record_value  from  project_info p
         left join acceptance_criteria a on p.acceptance_criteria_no=a.acceptance_criteria_no
         left join dynamic_measurement_item d on a.acceptance_criteria_no=d.acceptance_criteria_no
         left join inspection_process_record_item item on item.item_code=d.item_code
@@ -220,7 +220,7 @@
     </select>
     <!--获取产品质量保证书的实验室项目信息-->
     <select id="getMTCLabInfo" resultType="map">
-        SELECT d.max_value,d.min_value,d.item_name,d.unit_name_en, max(item.item_value) as max_record_value,min(item.item_value) as min_record_value  from  project_info p
+        SELECT d.max_value,d.min_value,d.item_name,d.item_name_en,d.unit_name_en, max(item.item_value) as max_record_value,min(item.item_value) as min_record_value  from  project_info p
         left join acceptance_criteria a on p.acceptance_criteria_no=a.acceptance_criteria_no
         left join dynamic_measurement_item d on a.acceptance_criteria_no=d.acceptance_criteria_no
         left join inspection_process_record_item item on item.item_code=d.item_code
@@ -230,4 +230,22 @@
         <![CDATA[  and item.item_value<>'' ]]>
         GROUP BY d.process_code,d.item_code
     </select>
+
+
+
+    <!--获取产品质量保证书的原材料信息-->
+    <select id="getRawMaterialInfo" resultType="map">
+        SELECT  coating.* from coating_powder_info coating
+        inner join inspection_process_record_item item on item.item_value=coating.coating_powder_name
+        inner join inspection_process_record_header header on header.inspection_process_record_header_code=item.inspection_process_record_header_code
+        inner join pipe_basic_info p on p.pipe_no=header.pipe_no
+        inner join contract_info c on c.contract_no=p.contract_no
+        where c.project_no=#{project_no}
+        and header.result='1'
+        and (header.process_code = 'od_coating' or header.process_code = 'id_coating' )
+        and item.item_value is not null
+        <![CDATA[  and item.item_value<>'' ]]>
+
+    </select>
+
 </mapper>

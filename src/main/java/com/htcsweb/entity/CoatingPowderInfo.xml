@@ -14,7 +14,7 @@
 
 
     <insert id="addCoatingPowder" parameterType="com.htcsweb.entity.CoatingPowderInfo">
-        INSERT INTO coating_powder_info(coating_powder_name,powder_type,manufacturer_name,manufacturer_name_en) VALUES (#{coating_powder_name},#{powder_type},#{manufacturer_name},#{manufacturer_name_en})
+        INSERT INTO coating_powder_info(coating_powder_name,powder_type,manufacturer_name,manufacturer_name_en,material_name) VALUES (#{coating_powder_name},#{powder_type},#{manufacturer_name},#{manufacturer_name_en},#{material_name})
     </insert>
     <delete id="delCoatingPowder">
         delete from coating_powder_info WHERE
@@ -24,7 +24,7 @@
     </delete>
 
     <update id="updateCoatingPowder" parameterType="com.htcsweb.entity.CoatingPowderInfo">
-        UPDATE coating_powder_info set coating_powder_name=#{coating_powder_name}, powder_type=#{powder_type},manufacturer_name=#{manufacturer_name},manufacturer_name_en=#{manufacturer_name_en} WHERE id=#{id}
+        UPDATE coating_powder_info set coating_powder_name=#{coating_powder_name}, powder_type=#{powder_type},manufacturer_name=#{manufacturer_name},manufacturer_name_en=#{manufacturer_name_en},material_name=#{material_name} WHERE id=#{id}
     </update>
 
 

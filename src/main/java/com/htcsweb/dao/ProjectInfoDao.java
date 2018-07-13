@@ -22,18 +22,21 @@ public interface ProjectInfoDao {
     public List<ProjectInfo> getProjectInfoByID(@Param("id")String id);
     public String getProjectNameByNo(@Param("project_no")String project_no);
     public List<ProjectInfo> getProjectInfoByContract(@Param("contract_no")String contract_no);
-    public List<HashMap<String,Object>>getProjectInfoByNoOrName(@Param("project_no")String project_no,@Param("project_name")String project_name);
+    public List<HashMap<String,Object>> getProjectInfoByNoOrName(@Param("project_no")String project_no,@Param("project_name")String project_name);
     //获取项目编号和名字
-    public  List<HashMap<String,Object>>getProjectNoAndName();
+    public  List<HashMap<String,Object>> getProjectNoAndName();
     //根据项目编号获取项目信息
-    public List<ProjectInfo>getProjectInfoByProjectNo(@Param("project_no")String project_no);
+    public List<ProjectInfo> getProjectInfoByProjectNo(@Param("project_no")String project_no);
 
     //获取产品质量保证书的基础信息
-    public List<HashMap<String,Object>>getMTCBasicInfo(@Param("project_no")String project_no);
+    public List<HashMap<String,Object>> getMTCBasicInfo(@Param("project_no")String project_no);
     //获取产品质量保证书的涂敷时间信息
-    public List<HashMap<String,Object>>getMTCCoatinDurationInfo(@Param("project_no")String project_no);
+    public List<HashMap<String,Object>> getMTCCoatinDurationInfo(@Param("project_no")String project_no);
     //获取产品质量保证书的在线检测信息
-    public List<HashMap<String,Object>>getMTCOnlineInspectionInfo(@Param("project_no")String project_no);
+    public List<HashMap<String,Object>> getMTCOnlineInspectionInfo(@Param("project_no")String project_no);
     //获取产品质量保证书的实验室项目信息
-    public List<HashMap<String,Object>>getMTCLabInfo(@Param("project_no")String project_no);
+    public List<HashMap<String,Object>> getMTCLabInfo(@Param("project_no")String project_no);
+    //获取产品质量保证书的原材料信息
+    public List<HashMap<String,Object>> getRawMaterialInfo(@Param("project_no")String project_no);
+
 }
