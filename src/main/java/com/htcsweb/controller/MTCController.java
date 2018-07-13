@@ -175,8 +175,17 @@ public class MTCController {
                         wcf_botom_right.setBorder(Border.BOTTOM, BorderLineStyle.MEDIUM);
                         wcf_botom_right.setBorder(Border.RIGHT, BorderLineStyle.MEDIUM);
 
+
+
                         //写钢管型号数据
                         if(item_i==1&&list.size()>0){
+
+                            WritableCell top_left_cell=wsheet.getWritableCell(0,start-3);
+                            WritableCellFormat wcf_top_left= new WritableCellFormat(top_left_cell.getCellFormat());
+                            wcf_top_left.setBorder(Border.LEFT, jxl.format.BorderLineStyle.MEDIUM);
+                            wcf_top_left.setBorder(Border.TOP, jxl.format.BorderLineStyle.MEDIUM);
+                            wcf_top_left.setBorder(Border.BOTTOM, jxl.format.BorderLineStyle.MEDIUM);
+
                             for (int b=list.size()-1;b>=0;b--){
                                 String total_length=list.get(b).get("total_length")==null?" ":String.valueOf(list.get(b).get("total_length"));
                                 String total_weight=list.get(b).get("total_weight")==null?" ":String.valueOf(list.get(b).get("total_weight"));
@@ -206,8 +215,11 @@ public class MTCController {
                                     }
 
                                 }
-                                if(b>0)
+                                if(b>0) {
                                     wsheet.insertRow(start);
+                                    //修复左边框
+                                    top_left_cell.setCellFormat(wcf_top_left);
+                                }
                                 porcessedCount+=1;
                                 SetProgress(totalCount,porcessedCount,session);
                             }
@@ -215,10 +227,15 @@ public class MTCController {
                         }else if(item_i==2&&list.size()>0){
                             //写原材料数据
 
-
+                            WritableCell top_left_cell=wsheet.getWritableCell(0,start-1);
                         }else if((item_i==3||item_i==4)&&list.size()>0) {
                             //写在线检测项数据
                             //写实验室数据
+                            WritableCell top_left_cell=wsheet.getWritableCell(0,start-1);
+                            WritableCellFormat wcf_top_left= new WritableCellFormat(top_left_cell.getCellFormat());
+                            wcf_top_left.setBorder(Border.LEFT, jxl.format.BorderLineStyle.MEDIUM);
+                            wcf_top_left.setBorder(Border.TOP, jxl.format.BorderLineStyle.MEDIUM);
+                            wcf_top_left.setBorder(Border.BOTTOM, jxl.format.BorderLineStyle.MEDIUM);
                             for (int b=list.size()-1;b>=0;b--){
 
                                 String item_name=list.get(b).get("item_name")==null?" ":String.valueOf(list.get(b).get("item_name"));
@@ -267,8 +284,12 @@ public class MTCController {
                                             wsheet.mergeCells(rowi[ii],start,rowi[ii]+1,start);
                                     }
                                 }
-                                if(b>0)
+                                if(b>0){
                                     wsheet.insertRow(start);
+                                    //修复左边框
+                                    top_left_cell.setCellFormat(wcf_top_left);
+                                }
+
                                 porcessedCount+=1;
                                 SetProgress(totalCount,porcessedCount,session);
                             }
