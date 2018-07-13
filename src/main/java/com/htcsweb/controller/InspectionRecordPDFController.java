@@ -238,6 +238,9 @@ public class InspectionRecordPDFController {
                 //getStandardAndCoatingTypeList(project_no);
 
                 int totalPDFCount=listDate.size()*millList.size()*contractInfoList.size()*shiftList.size();
+//                System.out.println("*************************************************************");
+//                System.out.println("totalPDFCount"+totalPDFCount);
+//                System.out.println("*************************************************************");
                 int n=0;
                 HttpSession session = request.getSession();
                 session.setAttribute("pdfProgress", String.valueOf(0));
@@ -372,6 +375,7 @@ public class InspectionRecordPDFController {
                         }
                     }
                 }
+                session.setAttribute("pdfProgress",100);
             }catch (Exception e){
                 e.printStackTrace();
             }

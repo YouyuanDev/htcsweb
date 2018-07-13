@@ -139,6 +139,7 @@
         function endEditing(){
             if (editIndex == undefined){return true}
             if ($('#dg').datagrid('validateRow', editIndex)){
+                alert(1);
                 var ed = $('#dg').datagrid('getEditor', {index:editIndex,field:'item_frequency'});
                 var text = $(ed.target).combobox('getText');
                 $('#dg').datagrid('getRows')[editIndex]['item_frequency_name'] = text;
@@ -165,6 +166,7 @@
             }
             if (editIndex != index){
                 if (endEditing()){
+                    alert(2);
                     $('#dg').datagrid('selectRow', index)
                         .datagrid('beginEdit', index);
                     editIndex = index;
@@ -189,6 +191,7 @@
 
                 } else {
                     $('#dg').datagrid('selectRow', editIndex);
+                    alert(3);
                 }
             }
         }

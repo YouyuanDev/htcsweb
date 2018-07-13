@@ -436,7 +436,7 @@ public class GenerateExcelToPDFUtil {
                                         cell1 = mergeCol(str, headfont1, colNum);
                                     else if(i==2)//设置公司英文名称
                                         cell1 = mergeCol(str, headfont2, colNum);
-                                    else if(i==21)//设置公司英文名称
+                                    else if(i==21||(i==22&&j==12))//设置公司英文名称
                                         cell1 = mergeCol(str, copyrightFont, colNum);
                                     else//设置表格其他单元
                                         cell1 = mergeCol(str, font, colNum);
