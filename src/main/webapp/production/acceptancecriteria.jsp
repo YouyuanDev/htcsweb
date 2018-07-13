@@ -191,7 +191,7 @@
                     }
                     var $obj=$('#dynamicItem').find('.datagrid-view').find('.datagrid-body');
                     var scrollTop=editIndex*25-50;
-                    $obj.animate({"scrollTop":scrollTop},10);
+                    $obj.animate({"scrollTop":scrollTop},1);
                 } else {
                     $('#dg').datagrid('selectRow', editIndex);
                 }
@@ -439,14 +439,7 @@
                 }
             });
         }
-        function beginScroll() {
-            alert(editIndex);
-            if(editIndex!=undefined){
-                $('#dg').datagrid('scrollTo',editIndex);
-            }else{
-                $('#dg').datagrid('scrollTo',20);
-            }
-        }
+
     </script>
 </head>
 
@@ -499,7 +492,6 @@
 </div>
 <!--添加、修改框  max-height:600px;overflow-y:auto;-->
 <div id="addEditDialog" class="easyui-dialog" data-options="closable:false,title:'添加',modal:true" closed="true" buttons="#dlg-buttons" style="display: none;padding:5px 0px;width:1200px; height:560px;">
-    <label style="width:200px;height:50px;" onclick="beginScroll()">开始滚动</label>
     <form id="addEditForm" method="post" style="width:95%;margin:0 auto;">
         <fieldset style="width:99%;border:solid 1px #aaa;position:relative;">
             <legend><span class="i18n1" name="ACinfo">标准信息</span></legend>
