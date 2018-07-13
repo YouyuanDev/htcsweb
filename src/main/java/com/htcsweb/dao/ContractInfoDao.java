@@ -21,4 +21,7 @@ public interface ContractInfoDao {
 
     //根据项目编号获取所属的所有合同信息
     public List<ContractInfo>getAllContractInfoByProjectNo(@Param("project_no")String project_no);
+
+    //根据管号获得合同信息
+    public ContractInfo getContractInfoByPipeNo(@Param("pipe_no")String pipe_no);
 }

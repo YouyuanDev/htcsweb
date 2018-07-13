@@ -120,4 +120,14 @@
        SELECT * from contract_info WHERE project_no=#{project_no}
    </select>
 
+
+
+    <!--根据管号获得合同信息-->
+    <select id="getContractInfoByPipeNo" resultType="com.htcsweb.entity.ContractInfo">
+        SELECT * from contract_info c
+        inner join pipe_basic_info p on p.contract_no=c.contract_no
+        WHERE p.pipe_no=#{pipe_no}
+    </select>
+
+
 </mapper>
