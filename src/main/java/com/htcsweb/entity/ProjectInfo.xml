@@ -189,11 +189,14 @@
     </select>
     <!--获取产品质量保证书的基础信息-->
     <select id="getMTCBasicInfo" resultType="map">
-        select p.project_name,p.client_spec,c.contract_no,c.external_coating,c.internal_coating,CONCAT('Φ',c.od,'x',c.wt,'mm') as od_wt,count(pipe_no) as total_count,cast(sum(p_length) as decimal(10,2)) as total_length, cast(sum(weight) as decimal(10,3)) as total_weight from pipe_basic_info pb
-right join contract_info c on pb.contract_no=c.contract_no
-right join project_info p on c.project_no=p.project_no
-where p.project_no=#{project_no}
-GROUP BY c.external_coating,c.internal_coating
+        select p.project_name,p.client_spec,c.contract_no,c.external_coating,c.internal_coating,
+        CONCAT('Φ',c.od,'x',c.wt,'mm') as od_wt,count(pipe_no) as total_count,
+        cast(sum(ifnull(p_length,0)) as decimal(10,2)) as total_length, cast(sum(ifnull(weight,0)) as decimal(10,3)) as total_weight
+         from pipe_basic_info pb
+        right join contract_info c on pb.contract_no=c.contract_no
+        right join project_info p on c.project_no=p.project_no
+        where p.project_no=#{project_no}
+        GROUP BY c.external_coating,c.internal_coating
     </select>
     <!--获取产品质量保证书的基础信息-->
     <select id="getMTCCoatinDurationInfo" resultType="map">
