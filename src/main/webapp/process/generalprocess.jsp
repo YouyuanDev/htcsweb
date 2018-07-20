@@ -123,7 +123,7 @@
                 $('#legend-title').text(row.process_name);
                 loadPipeBaiscInfo(row);
                 $('#odbpid').text(row.id);
-                row.operation_time=getDate1(row.operation_time),
+                row.operation_time=getDate1(row.operation_time);
                 $('#proForm').form('load',row);
                 //设置多选框值
                 LoadProcess_input_output();
