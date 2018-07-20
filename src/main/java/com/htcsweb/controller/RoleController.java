@@ -117,7 +117,7 @@ public class RoleController {
     }
 
 
-    //删除person信息
+    //删除Role信息
     @RequestMapping("/delRole")
     public String delRole(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
         String[]idArr=hlparam.split(",");
