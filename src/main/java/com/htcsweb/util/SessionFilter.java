@@ -140,7 +140,9 @@ public class SessionFilter extends OncePerRequestFilter{
             "getAllCoatingPowderType",
             "getFirstPipeNoByProjectNo",
             "getAllCoatingPowderInfoByPowderType",
-            "acceptancecriteria1"
+            "acceptancecriteria1",
+            "APPPrintQRCode",
+            "APPGetQRCodePrintTimes"
     }; // 不过滤的uri
 
     @Override

@@ -157,4 +157,65 @@ public class PipeQrCodePrintRecordController {
         return pipeBasicInfoDao.getPipeNoByContractNo(contractno);
     }
 
+    //APP生成QRCode并打印
+    @RequestMapping("/APPPrintQRCode")
+    public String genQRCode(HttpServletRequest request){
+        String pipe_no= request.getParameter("pipe_no");
+        HttpSession session = request.getSession();
+        String employee_no=(String)session.getAttribute("userSession");
+        JSONObject json=new JSONObject();
+        if(pipe_no!=null&&employee_no!=null){
+            List<PipeQrCodePrintRecord>list=new ArrayList<PipeQrCodePrintRecord>();
+            PipeQrCodePrintRecord record=new PipeQrCodePrintRecord();
+            record.setPipe_no(pipe_no);
+            //session 读取用户id
+
+            //把用户数据保存在session域对象中
+
+            if(employee_no!=null) {
+                record.setOperator_no(employee_no);
+            }else{
+                record.setOperator_no("0000000");
+            }
+            record.setOperation_time(new Date());
+            record.setRemark("APP手机打印");
+            list.add(record);
+            int total=pipeQrCodePrintRecordDao.addQrCode(list);
+            if(total>0){
+                json.put("success",true);
+                json.put("message","打印记录保存成功");
+
+            }else{
+                json.put("success",false);
+                json.put("message","APPPrintQRCode打印记录保存失败");
+            }
+        }else{
+            json.put("success",false);
+            json.put("message","管号或session不存在打印记录保存失败");
+        }
+
+        String mmp= JSONArray.toJSONString(json);
+        return mmp;
+    }
+
+    //APP查询打印次数
+    @RequestMapping("/APPGetQRCodePrintTimes")
+    public String APPGetQRCodePrintTimes(HttpServletRequest request){
+        String pipe_no= request.getParameter("pipe_no");
+        HttpSession session = request.getSession();
+        String employee_no=(String)session.getAttribute("userSession");
+        JSONObject json=new JSONObject();
+        if(pipe_no!=null&&employee_no!=null){
+            int count=pipeQrCodePrintRecordDao.getQRCodePrintCountByPipeNo(pipe_no);
+            json.put("success",true);
+            json.put("count",count);
+            json.put("message",pipe_no+" QRCode总共打印次数："+count);
+        }else{
+            json.put("success",false);
+            json.put("message","管号或session不存在打印记录保存失败");
+        }
+        String mmp= JSONArray.toJSONString(json);
+        return mmp;
+    }
+
 }

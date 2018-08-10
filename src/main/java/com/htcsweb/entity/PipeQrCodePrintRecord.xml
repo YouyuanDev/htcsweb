@@ -59,4 +59,15 @@
             (#{item.pipe_no}, #{item.operator_no}, #{item.operation_time}, #{item.remark})
         </foreach>
     </insert>
+
+    <select id="getQRCodePrintCountByPipeNo" resultType="int">
+        select count(*) from pipe_qr_code_print_record p
+        <where>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND p.pipe_no =#{pipe_no}
+            </if>
+        </where>
+    </select>
+
+
 </mapper>

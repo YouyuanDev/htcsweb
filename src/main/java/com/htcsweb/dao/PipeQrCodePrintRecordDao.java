@@ -13,4 +13,7 @@ public interface PipeQrCodePrintRecordDao {
     public int getCountQrCodeInfoByLike(@Param("pipe_no") String pipe_no, @Param("operator_no") String operator_no,@Param("begin_time") Date begin_time, @Param("end_time") Date end_time);
     public int delQrCode(String[] arrId);
     public int addQrCode(@Param("list") List<PipeQrCodePrintRecord> list);
+
+    //获取钢管qr码打印次数
+    public int getQRCodePrintCountByPipeNo(@Param("pipe_no") String pipe_no);
 }
