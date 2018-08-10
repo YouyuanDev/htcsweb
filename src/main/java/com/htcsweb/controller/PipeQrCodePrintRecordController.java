@@ -159,6 +159,7 @@ public class PipeQrCodePrintRecordController {
 
     //APP生成QRCode并打印
     @RequestMapping("/APPPrintQRCode")
+    @ResponseBody
     public String genQRCode(HttpServletRequest request){
         String pipe_no= request.getParameter("pipe_no");
         HttpSession session = request.getSession();
@@ -200,6 +201,7 @@ public class PipeQrCodePrintRecordController {
 
     //APP查询打印次数
     @RequestMapping("/APPGetQRCodePrintTimes")
+    @ResponseBody
     public String APPGetQRCodePrintTimes(HttpServletRequest request){
         String pipe_no= request.getParameter("pipe_no");
         HttpSession session = request.getSession();
