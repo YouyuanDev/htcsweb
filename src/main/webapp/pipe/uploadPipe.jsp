@@ -57,7 +57,7 @@
 <div class="description">
     <h3><span class="i18n1" name="description">描述</span></h3>
     <p><span class="i18n1" name="uploadpipetext">上传钢管入库清单</span></p>
-    <p><a href="../upload/upload_pipe_template.xls" >点击下载：钢管清单模版.xls</a></p>
+    <p><a href="../template/upload_pipe_template.xls" >点击下载：钢管清单模版.xls</a></p>
 
     <p>序号&#9;管捆号&#9;合同号&#9;原合同号&#9;外径&#9;壁厚&#9;炉号&#9;试批号&#9;实际重量&#9;理论重量&#9;总长度&#9;库位</p><br>
     <p>1&#9;1523580&#9;RL36800012&#9;RL36800012&#9;219.1&#9;5.6&#9;17131593&#9;72456&#9;0.546&#9;0.536&#9;18.17&#9;1A02</p><br>
