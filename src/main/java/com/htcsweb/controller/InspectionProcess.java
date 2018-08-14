@@ -395,19 +395,26 @@ public class InspectionProcess {
                 }
 
 
-                //发送事件推送
-                 Date nowtime=new Date();
-                 String str_title=sdf.format(nowtime.getTime())+" 工序："+inspectionProcessRecordHeader.getProcess_code()+",管号："+p.getPipe_no()+", "+result_name+"("+result_name_en+")";
+                //发送事件推送,仅非合格且非待定时发送
+                if(!inspectionProcessRecordHeader.getResult().equals("1")&&!inspectionProcessRecordHeader.getResult().equals("10")){
+                    Date nowtime=new Date();
+                    //String str_title=sdf.format(nowtime.getTime())+" "+inspectionProcessRecordHeader.getProcess_code()+" "+p.getPipe_no()+" "+result_name;//+"("+result_name_en+")";
+                    String str_title=inspectionProcessRecordHeader.getProcess_code()+" "+p.getPipe_no()+" "+result_name;//+"("+result_name_en+")";
 
-                 String str_content="工序："+inspectionProcessRecordHeader.getProcess_code()+",管号："+p.getPipe_no()+", "+result_name+"("+result_name_en+")";
-                String basePath = request.getSession().getServletContext().getRealPath("/");
-                if(basePath.lastIndexOf('/')==-1){
-                    basePath=basePath.replace('\\','/');
+                    String str_content="工序："+inspectionProcessRecordHeader.getProcess_code()+",管号："+p.getPipe_no()+", "+result_name+"("+result_name_en+")";
+                    String basePath = request.getSession().getServletContext().getRealPath("/");
+                    if(basePath.lastIndexOf('/')==-1){
+                        basePath=basePath.replace('\\','/');
+                    }
+
+                    PushServiceThread threadDemo01 = new PushServiceThread(basePath,inspectionProcessRecordHeader.getProcess_code(),str_title,str_content);
+                    threadDemo01.setName("PushServiceThread1");
+                    threadDemo01.start();
+                    System.out.println(Thread.currentThread().toString());
+                    System.out.println("推送title="+str_title);
+                    System.out.println("推送str_content="+str_content);
                 }
-                 SendEvent(basePath,inspectionProcessRecordHeader.getProcess_code(),str_title,str_content);
 
-                System.out.println("推送title="+str_title);
-                System.out.println("推送str_content="+str_content);
 
 
                 json.put("success",true);
@@ -432,18 +439,37 @@ public class InspectionProcess {
         return null;
     }
 
-    //发送推送消息
-    public void SendEvent(String basePath,String event, String title,String content){
-        List<HashMap<String,Object>>  lt=roleDao.getRolesByEvent(event);
 
-        for(int i=0;i<lt.size();i++){
-            String role=(String)lt.get(i).get("role_no");
-            //发消息
-            APICloudPushService.SendPushNotification(basePath,title,content,"1","0",role,"");
+    public class PushServiceThread extends Thread{
+        private String basePath="";
+        private String event="";
+        private String title="";
+        private String content="";
+
+        public PushServiceThread(String _basePath,String _event, String _title,String _content){
+            //编写子类的构造方法，可缺省
+            basePath=_basePath;
+            event=_event;
+            title=_title;
+            content=_content;
+        }
+        public void run(){
+            //编写自己的线程代码
+            System.out.println(Thread.currentThread().getName());
+            List<HashMap<String,Object>>  lt=roleDao.getRolesByEvent(event);
+
+            for(int i=0;i<lt.size();i++){
+                String role=(String)lt.get(i).get("role_no");
+                //发消息
+                APICloudPushService.SendPushNotification(basePath,title,content,"1","0",role,"");
+            }
+            System.out.println(Thread.currentThread().getName()+" finished");
         }
 
-
     }
+
+
+
 
 
 
