@@ -40,9 +40,9 @@
     <filter-name>sessionFilter</filter-name>
     <url-pattern>*.jsp</url-pattern>
   </filter-mapping>
-  <!-- session  过期时间  分钟     0为永久不过期-->
+  <!-- session  过期时间 720 分钟     0为永久不过期-->
   <session-config>
-    <session-timeout>0</session-timeout>
+    <session-timeout>720</session-timeout>
   </session-config>
 
   <listener>
