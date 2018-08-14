@@ -277,9 +277,11 @@ public class ShipmentController {
     @ResponseBody
     public  String getShipmentRecordPDF(HttpServletRequest request, HttpServletResponse response){
         String basePath=request.getSession().getServletContext().getRealPath("/");
+
         if(basePath.lastIndexOf('/')==-1){
             basePath=basePath.replace('\\','/');
         }
+        String webPath=basePath;//web路径
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         List<String>delSetPath=new ArrayList<String>();//定义删除pdf集合，用于生成zip后删除所有的临时文件
@@ -347,9 +349,9 @@ public class ShipmentController {
                 WritableFont wf=null;
                // String path=this.getClass().getClassLoader().getResource("../../").getPath();
 
-                String logoImageFullName=basePath + "/template/img/image002.jpg";
-                String fontPath=basePath+"/font/simhei.ttf";
-                String copyrightPath=basePath+"/font/simsun.ttc,0";
+                String logoImageFullName=webPath + "/template/img/image002.jpg";
+                String fontPath=webPath+"/font/simhei.ttf";
+                String copyrightPath=webPath+"/font/simsun.ttc,0";
                 try{
                     wf = new WritableFont(WritableFont.createFont("Arial"), 9);
                     wcf= new WritableCellFormat(wf);
