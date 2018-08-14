@@ -1104,5 +1104,12 @@
         ORDER BY o.id DESC
     </select>
 
+    <!--获取钢管的上一工位记录头部-->
 
+    <select id="getLastInspectionRecord" resultType="com.htcsweb.entity.InspectionProcessRecordHeader">
+    select * from inspection_process_record_header
+      where pipe_no=#{pipe_no}
+     order by operation_time DESC
+     limit 1
+    </select>
 </mapper>

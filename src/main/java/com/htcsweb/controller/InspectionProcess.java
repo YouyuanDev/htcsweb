@@ -142,25 +142,35 @@ public class InspectionProcess {
                     }
                 }
             }
-            if(inspectionProcessRecordHeader.getId()==0){
-                //添加
-                if(inputStatusVerified){
-                    InspectionProcessRecordHeader oldrecord=inspectionProcessRecordHeaderDao.getRecentRecordByPipeNo(inspectionProcessRecordHeader.getProcess_code(),pipeno);
-                    if(oldrecord!=null&&oldrecord.getResult().equals("10")){
-                        //存在一条pending数据，不给予insert处理
-                        msg="已存在待定记录,不能新增记录";
-                    }else{
-                        inspectionProcessRecordHeader.setInspection_process_record_header_code(inspectionProcessRecordHeader.getInspection_process_record_header_code());
-                        resTotal=inspectionProcessRecordHeaderDao.addInspectionProcessRecordHeader(inspectionProcessRecordHeader);
-                        System.out.println("resTotal="+resTotal);
-                    }
-                }
-                project_no=(String)list.get(0).get("project_no");
-                System.out.println("project_no="+project_no);
+            //判断mill_no 是否正确，保证管子所有工序只能在一个工厂内完成
+
+            InspectionProcessRecordHeader lastrecord=inspectionProcessRecordHeaderDao.getLastInspectionRecord(pipeno);
+            if(lastrecord!=null&&!lastrecord.getMill_no().equals(inspectionProcessRecordHeader.getMill_no())){
+                //mill_no不同，不可以保存数据
+                msg="该管号上一工序所处分厂为"+lastrecord.getMill_no()+"，本次检验分厂为"+inspectionProcessRecordHeader.getMill_no()+"，请保持同一分厂";
             }else{
-                //修改！
-                resTotal=inspectionProcessRecordHeaderDao.updateInspectionProcessRecordHeader(inspectionProcessRecordHeader);
+                //可以保存
+                if(inspectionProcessRecordHeader.getId()==0){
+                    //添加
+                    if(inputStatusVerified){
+                        InspectionProcessRecordHeader oldrecord=inspectionProcessRecordHeaderDao.getRecentRecordByPipeNo(inspectionProcessRecordHeader.getProcess_code(),pipeno);
+                        if(oldrecord!=null&&oldrecord.getResult().equals("10")){
+                            //存在一条pending数据，不给予insert处理
+                            msg="已存在待定记录,不能新增记录";
+                        }else{
+                            inspectionProcessRecordHeader.setInspection_process_record_header_code(inspectionProcessRecordHeader.getInspection_process_record_header_code());
+                            resTotal=inspectionProcessRecordHeaderDao.addInspectionProcessRecordHeader(inspectionProcessRecordHeader);
+                            System.out.println("resTotal="+resTotal);
+                        }
+                    }
+                    project_no=(String)list.get(0).get("project_no");
+                    System.out.println("project_no="+project_no);
+                }else{
+                    //修改！
+                    resTotal=inspectionProcessRecordHeaderDao.updateInspectionProcessRecordHeader(inspectionProcessRecordHeader);
+                }
             }
+
             if(resTotal>0){
 
                 List<PipeBasicInfo> list1=pipeBasicInfoDao.getPipeNumber(pipeno);
