@@ -720,47 +720,72 @@ public class PipeBasicInfoController {
     //外访成品管入库
     @RequestMapping("/odproductstockin")
     public String odproductstockin(@RequestParam(value = "hlparam")String hlparam,@RequestParam(value = "storage_stack")String storage_stack,@RequestParam(value = "stack_level")String stack_level,@RequestParam(value = "level_direction")String level_direction,@RequestParam(value = "level_sequence")String level_sequence,HttpServletResponse response)throws Exception{
-        //System.out.println("-----------"+hlparam);
         String[]idArr=hlparam.split(",");
-        int resTotal=0;
-        resTotal=pipeBasicInfoDao.odProductStockin(idArr,storage_stack,stack_level,level_direction,level_sequence);
         JSONObject json=new JSONObject();
-        StringBuilder sbmessage = new StringBuilder();
-        sbmessage.append("总共");
-        sbmessage.append(Integer.toString(resTotal));
-        sbmessage.append("根钢管外防入库成功\n");
-        if(resTotal>0){
-            System.out.print("外防入库成功");
-            json.put("success",true);
+        int resTotal=0;
+        if(level_sequence!=null&&!"".equals(level_sequence)){
+            int start_level_sequence=Integer.parseInt(level_sequence);
+            int count=0;
+            for(int i=0;i<idArr.length;i++){
+                if(idArr[i]!=null&&!"".equals(idArr[i])){
+                    int id=Integer.parseInt(idArr[i]);
+                    resTotal=pipeBasicInfoDao.odProductStockin(id,storage_stack,stack_level,level_direction,String.valueOf(start_level_sequence));
+                    if(resTotal>0){
+                        start_level_sequence++;
+                        count++;
+                    }
+                }
+            }
+            StringBuilder sbmessage = new StringBuilder();
+            sbmessage.append("总共");
+            sbmessage.append(String.valueOf(count));
+            sbmessage.append("根钢管外防入库成功\n");
+            if(count>0){
+                json.put("success",true);
+            }else{
+                json.put("success",false);
+            }
+            json.put("message",sbmessage.toString());
         }else{
-            System.out.print("外防入库失败");
             json.put("success",false);
+            json.put("message","入库失败!");
         }
-        json.put("message",sbmessage.toString());
         ResponseUtil.write(response,json);
         return null;
     }
-
-
     //内访成品管入库
     @RequestMapping("/idproductstockin")
     public String idproductstockin(@RequestParam(value = "hlparam")String hlparam,@RequestParam(value = "storage_stack")String storage_stack,@RequestParam(value = "stack_level")String stack_level,@RequestParam(value = "level_direction")String level_direction,@RequestParam(value = "level_sequence")String level_sequence,HttpServletResponse response)throws Exception{
         String[]idArr=hlparam.split(",");
         int resTotal=0;
-        resTotal=pipeBasicInfoDao.idProductStockin(idArr,storage_stack,stack_level,level_direction,level_sequence);
         JSONObject json=new JSONObject();
-        StringBuilder sbmessage = new StringBuilder();
-        sbmessage.append("总共");
-        sbmessage.append(Integer.toString(resTotal));
-        sbmessage.append("根钢管内防入库成功\n");
-        if(resTotal>0){
-           // System.out.print("内防入库成功");
-            json.put("success",true);
+        if(level_sequence!=null&&!"".equals(level_sequence)){
+            int start_level_sequence=Integer.parseInt(level_sequence);
+            int count=0;
+            for(int i=0;i<idArr.length;i++){
+                if(idArr[i]!=null&&!"".equals(idArr[i])){
+                    int id=Integer.parseInt(idArr[i]);
+                    resTotal=pipeBasicInfoDao.idProductStockin(id,storage_stack,stack_level,level_direction,String.valueOf(start_level_sequence));
+                    if(resTotal>0){
+                        start_level_sequence++;
+                        count++;
+                    }
+                }
+            }
+            StringBuilder sbmessage = new StringBuilder();
+            sbmessage.append("总共");
+            sbmessage.append(String.valueOf(count));
+            sbmessage.append("根钢管内防入库成功\n");
+            if(count>0){
+                json.put("success",true);
+            }else{
+                json.put("success",false);
+            }
+            json.put("message",sbmessage.toString());
         }else{
-           // System.out.print("内防入库成功");
             json.put("success",false);
+            json.put("message","入库失败!");
         }
-        json.put("message",sbmessage.toString());
         ResponseUtil.write(response,json);
         return null;
     }
