@@ -241,24 +241,34 @@ public class APPRequestTransferController {
                 String key = (String)entry.getKey();
                 String value=(String)entry.getValue();
 
-                String pageName=value.substring(value.lastIndexOf('/')+1);
-                System.out.println("pageName="+pageName);
+//                String pageName=value.substring(value.lastIndexOf('/')+1);
+//                System.out.println("pageName="+pageName);
 
                 //Object val = entry.getValue();
                     //判断是否有权限
                     if(functionMap!=null){
-
-                        if(!functionMap.containsKey(pageName)&&!pageName.equals("stockin")) {
-                            System.out.println("APP 不存在存在页面"+pageName+"的权限");
-                            removeList.add(pageName);
+                        if(!functionMap.containsKey(key)&&!key.equals("stockin")) {
+                            System.out.println("APP 不存在存在页面"+key+"的权限");
+                            removeList.add(key);
 
                         }
                         //stockin包含 odstockin  idstockin  有其一权限即可
-                        else if(pageName.equals("stockin")&&!functionMap.containsKey("odstockin")&&!functionMap.containsKey("idstockin")){
-                            System.out.println("APP 不存在存在页面"+pageName+"的权限");
-                            removeList.add(pageName);
+                        else if(key.equals("stockin")&&!functionMap.containsKey("odstockin")&&!functionMap.containsKey("idstockin")){
+                            System.out.println("APP 不存在存在页面"+key+"的权限");
+                            removeList.add(key);
                             continue;
                         }
+//                        if(!functionMap.containsKey(pageName)&&!pageName.equals("stockin")) {
+//                            System.out.println("APP 不存在存在页面"+pageName+"的权限");
+//                            removeList.add(pageName);
+//
+//                        }
+//                        //stockin包含 odstockin  idstockin  有其一权限即可
+//                        else if(pageName.equals("stockin")&&!functionMap.containsKey("odstockin")&&!functionMap.containsKey("idstockin")){
+//                            System.out.println("APP 不存在存在页面"+pageName+"的权限");
+//                            removeList.add(pageName);
+//                            continue;
+//                        }
 
                     }
                 }
