@@ -118,7 +118,7 @@
             </if>
         </where>
 
-        order by item.id asc
+        order by item.item_code asc
 
     </select>
 

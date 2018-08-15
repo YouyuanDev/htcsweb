@@ -53,7 +53,7 @@
 
     <select id="getSpecialDynamicItem" resultType="com.htcsweb.entity.DynamicMeasurementItem">
         select * from  dynamic_measurement_item
-        where is_special_item ='1' and acceptance_criteria_no is null
+        where (is_special_item ='1' or is_special_item='2') and acceptance_criteria_no is null
         order by id desc
     </select>
 

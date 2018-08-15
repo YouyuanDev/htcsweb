@@ -180,7 +180,7 @@
                     setTextAreaEvent("options");
                     setTextAreaEvent("default_value");
                     var row = $('#dg').datagrid('getSelected');
-                    if(row&&row.is_special_item=='1'){
+                    if(row&&row.is_special_item!='0'){
                         disableEditor('process_code',editIndex,"combobox");
                         disableEditor('control_type',editIndex,"combobox");
                         disableEditor('item_name',editIndex,"textbox");
