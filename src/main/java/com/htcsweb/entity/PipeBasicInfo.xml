@@ -609,6 +609,17 @@
         WHERE p.pipe_no=#{pipe_no}
     </select>
 
+    <select id="getPipeInfoById" resultType="map">
+        --         Select p.id,p.odsampling_mark,p.idsampling_mark,p.shipment_date,p.rebevel_mark, c.center_line_color,c.pipe_end_color, c.external_coating,c.internal_coating,p.od_coating_date, p.id_coating_date, p.pipe_making_lot_no,client_spec, coating_standard,p.pipe_no,pro.project_no,pro.project_name,s.status_name,p.status,p.contract_no,p.grade,p.od,p.wt,p.p_length,p.weight,p.heat_no,p.storage_stack,p.stack_level,p.level_direction,p.level_sequence from pipe_basic_info p
+        --         LEFT join contract_info c on p.contract_no=c.contract_no
+        --         LEFT join project_info pro on c.project_no=pro.project_no
+        --         LEFT join pipe_status s on s.status_code=p.status
+        Select  p.*, c.center_line_color,c.pipe_end_color, c.external_coating,c.internal_coating ,client_spec, coating_standard,pro.project_no,pro.project_name,s.status_name   from pipe_basic_info p
+        LEFT join contract_info c on p.contract_no=c.contract_no
+        LEFT join project_info pro on c.project_no=pro.project_no
+        LEFT join pipe_status s on s.status_code=p.status
+        WHERE p.id=#{id}
+    </select>
     <update id="updatePipeBasicInfo" parameterType="com.htcsweb.entity.PipeBasicInfo">
         UPDATE pipe_basic_info set contract_no=#{contract_no},pipe_no=#{pipe_no},grade=#{grade},od=#{od},wt=#{wt},p_length=#{p_length}, weight=#{weight},pipe_making_lot_no=#{pipe_making_lot_no},status=#{status}, heat_no=#{heat_no},storage_stack=#{storage_stack},stack_level=#{stack_level},od_coating_date=#{od_coating_date},id_coating_date=#{id_coating_date},level_direction=#{level_direction},level_sequence=#{level_sequence},shipment_date=#{shipment_date},last_accepted_status=#{last_accepted_status},rebevel_mark=#{rebevel_mark},
         odsampling_mark=#{odsampling_mark},idsampling_mark=#{idsampling_mark},od_dsc_sample_mark=#{od_dsc_sample_mark},od_pe_sample_mark=#{od_pe_sample_mark},id_glass_sample_mark=#{id_glass_sample_mark} WHERE id=#{id}

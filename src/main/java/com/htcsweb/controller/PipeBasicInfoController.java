@@ -547,7 +547,33 @@ public class PipeBasicInfoController {
         }
         return null;
     }
-    
+    //判断钢管是否能入成品库
+    @RequestMapping(value ="/checkForProductStockIn")
+    @ResponseBody
+    public String checkForProductStockIn(HttpServletResponse response,HttpServletRequest request){
+        String pipeno=request.getParameter("pipe_no");
+        List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoByNo(pipeno);
+        JSONObject jsonObject=new JSONObject();
+        if(list!=null&&list.size()>0){
+            HashMap<String,Object>hs=list.get(0);
+            String status=String.valueOf(hs.get("status"));
+            String id=String.valueOf(hs.get("id"));
+            if(status.equals("od6")||status.equals("id6")){
+                jsonObject.put("success",true);
+                jsonObject.put("pipeno",pipeno);
+                jsonObject.put("id",id);
+                jsonObject.put("message","可以入库!");
+            }else{
+                jsonObject.put("success",false);
+                jsonObject.put("message","当前状态"+status+",不能入库!");
+            }
+        }else{
+            jsonObject.put("success",false);
+            jsonObject.put("message","未查到钢管信息!");
+        }
+        String mmp= JSON.toJSONString(jsonObject);
+        return mmp;
+    }
 //
 
     //模糊查询OD ID 光管的Pipe信息列表
@@ -715,7 +741,58 @@ public class PipeBasicInfoController {
         ResponseUtil.write(response,json);
         return null;
     }
+    //成品管入库
+    @RequestMapping("/productstockin")
+    public String productstockin(@RequestParam(value = "hlparam")String hlparam,@RequestParam(value = "storage_stack")String storage_stack,@RequestParam(value = "stack_level")String stack_level,@RequestParam(value = "level_direction")String level_direction,@RequestParam(value = "level_sequence")String level_sequence,HttpServletResponse response)throws Exception{
+        String[]idArr=hlparam.split(",");
+        JSONObject json=new JSONObject();
+        int resTotal=0;
+        if(level_sequence!=null&&!"".equals(level_sequence)){
+            int start_level_sequence=Integer.parseInt(level_sequence);
+            int count=0;
+            for(int i=0;i<idArr.length;i++){
+                if(idArr[i]!=null&&!"".equals(idArr[i])){
+                    int id=Integer.parseInt(idArr[i]);
+                    List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoById(id);
+                    if(list!=null&&list.size()>0){
+                        HashMap<String,Object>hs=list.get(0);
+                        String status=String.valueOf(hs.get("status"));
+                        if(status!=null){
+                            if(status.equals("od6")){
+                                resTotal=pipeBasicInfoDao.odProductStockin(id,storage_stack,stack_level,level_direction,String.valueOf(start_level_sequence));
+                                if(resTotal>0){
+                                    start_level_sequence++;
+                                    count++;
+                                }
+                            }else if(status.equals("id6")){
+                                resTotal=pipeBasicInfoDao.idProductStockin(id,storage_stack,stack_level,level_direction,String.valueOf(start_level_sequence));
+                                if(resTotal>0){
+                                    start_level_sequence++;
+                                    count++;
+                                }
+                            }
+                        }
+                    }
 
+                }
+            }
+            StringBuilder sbmessage = new StringBuilder();
+            sbmessage.append("总共");
+            sbmessage.append(String.valueOf(count));
+            sbmessage.append("根钢管入库成功\n");
+            if(count>0){
+                json.put("success",true);
+            }else{
+                json.put("success",false);
+            }
+            json.put("message",sbmessage.toString());
+        }else{
+            json.put("success",false);
+            json.put("message","入库失败!");
+        }
+        ResponseUtil.write(response,json);
+        return null;
+    }
 
     //外访成品管入库
     @RequestMapping("/odproductstockin")

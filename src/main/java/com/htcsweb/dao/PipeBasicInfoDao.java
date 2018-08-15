@@ -34,6 +34,9 @@ public interface PipeBasicInfoDao {
     public int getCountODIDBarePipeInfoByLike(@Param("project_no") String project_no,  @Param("contract_no")String contract_no,@Param("pipe_no")String pipe_no, @Param("status")String status);
 
     public List<HashMap<String,Object>>getPipeInfoByNo(@Param("pipe_no")String pipe_no);
+
+    public List<HashMap<String,Object>>getPipeInfoById(@Param("id")int id);
+
     public int updatePipeBasicInfo(PipeBasicInfo pipeBasicInfo);
     public int addPipeBasicInfo(PipeBasicInfo pipeBasicInfo);
     public int delPipeBasicInfo(String[]arrId);
