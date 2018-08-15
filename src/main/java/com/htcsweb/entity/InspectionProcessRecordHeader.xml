@@ -1131,6 +1131,9 @@
             <if test="process_code!=null and process_code!=''">
                 AND hdr.process_code=#{process_code}
             </if>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND hdr.pipe_no=#{pipe_no}
+            </if>
         </where>
         ORDER BY hdr.operation_time DESC
 
@@ -1154,6 +1157,9 @@
             </if>
             <if test="process_code!=null and process_code!=''">
                 AND hdr.process_code=#{process_code}
+            </if>
+            <if test="pipe_no!=null and pipe_no!=''">
+                AND hdr.pipe_no=#{pipe_no}
             </if>
         </where>
         ORDER BY hdr.operation_time DESC

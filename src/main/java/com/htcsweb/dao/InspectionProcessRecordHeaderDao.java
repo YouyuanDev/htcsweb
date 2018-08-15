@@ -117,10 +117,10 @@ public interface InspectionProcessRecordHeaderDao {
     public InspectionProcessRecordHeader getLastInspectionRecord(@Param("pipe_no")String pipe_no);
 
     //根据project_no mill_no process_code获取检验记录
-    public List<HashMap<String,Object>> getInspectionRecordByProjectNoMillNoProcessCode(@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("process_code")String process_code,@Param("skip") int skip, @Param("take") int take);
+    public List<HashMap<String,Object>> getInspectionRecordByProjectNoMillNoProcessCode(@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("process_code")String process_code,@Param("pipe_no")String pipe_no,@Param("skip") int skip, @Param("take") int take);
 
     //根据project_no mill_no process_code获取检验记录总数
-    public int getCountInspectionRecordByProjectNoMillNoProcessCode(@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("process_code")String process_code);
+    public int getCountInspectionRecordByProjectNoMillNoProcessCode(@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("process_code")String process_code,@Param("pipe_no")String pipe_no);
 
 
 
