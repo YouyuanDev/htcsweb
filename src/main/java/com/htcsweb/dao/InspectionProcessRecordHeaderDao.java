@@ -111,10 +111,17 @@ public interface InspectionProcessRecordHeaderDao {
     public List<HashMap<String,Object>> getIDBarePipeOnholdInfo(@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("external_coating")String external_coating,@Param("internal_coating")String internal_coating,@Param("od")float od,@Param("wt")float wt,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
 
     //获取岗位记录信息
-    public List<HashMap<String,Object>>getPostRecord(@Param("process_code")String process_code,@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("external_coating")String external_coating ,@Param("od")float od,@Param("wt")float wt,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
+    public List<HashMap<String,Object>> getPostRecord(@Param("process_code")String process_code,@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("external_coating")String external_coating ,@Param("od")float od,@Param("wt")float wt,@Param("begin_time")Date begin_time, @Param("end_time")Date end_time);
 
     //获取钢管的上一工位记录头部
     public InspectionProcessRecordHeader getLastInspectionRecord(@Param("pipe_no")String pipe_no);
+
+    //根据project_no mill_no process_code获取检验记录
+    public List<HashMap<String,Object>> getInspectionRecordByProjectNoMillNoProcessCode(@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("process_code")String process_code,@Param("skip") int skip, @Param("take") int take);
+
+    //根据project_no mill_no process_code获取检验记录总数
+    public int getCountInspectionRecordByProjectNoMillNoProcessCode(@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("process_code")String process_code);
+
 
 
 }

@@ -143,7 +143,8 @@ public class SessionFilter extends OncePerRequestFilter{
             "acceptancecriteria1",
             "APPPrintQRCode",
             "APPGetQRCodePrintTimes",
-            "checkForProductStockIn"
+            "checkForProductStockIn",
+            "getInspectionRecordByProjectNoMillNoProcessCode"
     }; // 不过滤的uri
 
     @Override

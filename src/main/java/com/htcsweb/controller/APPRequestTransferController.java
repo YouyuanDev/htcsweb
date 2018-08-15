@@ -599,6 +599,40 @@ public class APPRequestTransferController {
     }
 
 
+    //APP 根据project_no mill_no process_code获取检验记录
+    @RequestMapping(value = "/getInspectionRecordByProjectNoMillNoProcessCode")
+    @ResponseBody
+    public String getInspectionRecordByProjectNoMillNoProcessCode(HttpServletRequest request) {
+        String project_no=request.getParameter("project_no");
+        String mill_no= request.getParameter("mill_no");
+        String process_code= request.getParameter("process_code");
+        String page= request.getParameter("page");
+        String rows= request.getParameter("rows");
+        System.out.println("project_no="+project_no);
+        System.out.println("mill_no="+mill_no);
+        System.out.println("process_code="+process_code);
+
+        if(page==null){
+            page="1";
+        }
+        if(rows==null){
+            rows="20";
+        }
+
+        int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
+        List<HashMap<String,Object>>list=inspectionProcessRecordHeaderDao.getInspectionRecordByProjectNoMillNoProcessCode(project_no,mill_no,process_code,start,Integer.parseInt(rows));
+        int count=inspectionProcessRecordHeaderDao.getCountInspectionRecordByProjectNoMillNoProcessCode(project_no,mill_no,process_code);
+
+        Map<String,Object> maps=new HashMap<String,Object>();
+        maps.put("total",count);
+        maps.put("rows",list);
+        String mmp= JSONArray.toJSONString(maps);
+        return mmp;
+    }
+
+
+
+
 
 
 //    private Map<String,HashMap<String,Object>> getInspectionFrequency(String pipe_no,String mill_no,String process_code){

@@ -1112,4 +1112,53 @@
      order by operation_time DESC
      limit 1
     </select>
+
+    <!--根据project_no mill_no process_code获取检验记录-->
+    <select id="getInspectionRecordByProjectNoMillNoProcessCode" resultType="map">
+
+        select  pro.project_name,c.external_coating,c.internal_coating, p.*,s.status_name,hdr.operation_time from inspection_process_record_header hdr
+        inner join pipe_basic_info p on p.pipe_no=hdr.pipe_no
+        inner join pipe_status s on p.status=s.status_code
+        inner join contract_info c on p.contract_no=c.contract_no
+        inner join project_info pro on c.project_no=pro.project_no
+        <where>
+            <if test="mill_no!=null and mill_no!=''">
+                AND hdr.mill_no=#{mill_no}
+            </if>
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no=#{project_no}
+            </if>
+            <if test="process_code!=null and process_code!=''">
+                AND hdr.process_code=#{process_code}
+            </if>
+        </where>
+        ORDER BY hdr.operation_time DESC
+
+        limit #{skip},#{take}
+    </select>
+
+    <!--根据project_no mill_no process_code获取检验记录总数-->
+    <select id="getInspectionRecordByProjectNoMillNoProcessCode" resultType="int">
+
+        select  count(*) from inspection_process_record_header hdr
+        inner join pipe_basic_info p on p.pipe_no=hdr.pipe_no
+        inner join pipe_status s on p.status=s.status_code
+        inner join contract_info c on p.contract_no=c.contract_no
+        inner join project_info pro on c.project_no=pro.project_no
+        <where>
+            <if test="mill_no!=null and mill_no!=''">
+                AND hdr.mill_no=#{mill_no}
+            </if>
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no=#{project_no}
+            </if>
+            <if test="process_code!=null and process_code!=''">
+                AND hdr.process_code=#{process_code}
+            </if>
+        </where>
+        ORDER BY hdr.operation_time DESC
+
+    </select>
+
+
 </mapper>

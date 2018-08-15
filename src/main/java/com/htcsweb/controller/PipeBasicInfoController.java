@@ -89,9 +89,9 @@ public class PipeBasicInfoController {
     @ResponseBody
     public String searchPipe(HttpServletRequest request){
         String pipe_no=request.getParameter("pipe_no");
-        String project_no=request.getParameter("project_no");
-        String mill_no=request.getParameter("mill_no");
-        String process_code=request.getParameter("process_code");
+//        String project_no=request.getParameter("project_no");
+//        String mill_no=request.getParameter("mill_no");
+//        String process_code=request.getParameter("process_code");
         String page= request.getParameter("page");
         String rows= request.getParameter("rows");
         if(page==null){
@@ -102,8 +102,8 @@ public class PipeBasicInfoController {
         }
 
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
-        List<HashMap<String,Object>>list=pipeBasicInfoDao.searchPipe(pipe_no,project_no,mill_no,process_code,start,Integer.parseInt(rows));
-        int count=pipeBasicInfoDao.searchPipeCount(pipe_no,project_no,mill_no,process_code);
+        List<HashMap<String,Object>>list=pipeBasicInfoDao.searchPipe(pipe_no,start,Integer.parseInt(rows));
+        int count=pipeBasicInfoDao.searchPipeCount(pipe_no);
 
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
