@@ -82,12 +82,26 @@
         from pipe_basic_info p inner join pipe_status s on p.status=s.status_code
         inner join contract_info c on c.contract_no=p.contract_no
         inner join project_info pro on pro.project_no=c.project_no
-        left join (select  pipe_no, max(operation_time) as operation_time from inspection_process_record_header   group by pipe_no) as prc
+        left join (select  pipe_no, max(operation_time) as operation_time from inspection_process_record_header hdr
+
+        <where>
+            <if test="process_code!=null and process_code!=''">
+                AND hdr.process_code=#{process_code}
+            </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND hdr.mill_no=#{mill_no}
+            </if>
+        </where>
+
+        group by pipe_no) as prc
         on prc.pipe_no=p.pipe_no
 
         <where>
             <if test="pipe_no!=null and pipe_no!=''">
                 AND p.pipe_no LIKE CONCAT('%',#{pipe_no},'%')
+            </if>
+            <if test="project_no!=null and project_no!=''">
+                AND pro.project_no=#{project_no}
             </if>
         </where>
         ORDER BY prc.operation_time DESC
