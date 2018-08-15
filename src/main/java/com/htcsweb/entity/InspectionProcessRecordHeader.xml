@@ -1116,7 +1116,7 @@
     <!--根据project_no mill_no process_code获取检验记录-->
     <select id="getInspectionRecordByProjectNoMillNoProcessCode" resultType="map">
 
-        select  pro.project_name,c.external_coating,c.internal_coating, p.*,s.status_name,hdr.operation_time from inspection_process_record_header hdr
+        select  pro.project_name,c.external_coating,c.internal_coating, p.*,s.status_name,hdr.operation_time,hdr.result,hdr.process_code from inspection_process_record_header hdr
         inner join pipe_basic_info p on p.pipe_no=hdr.pipe_no
         inner join pipe_status s on p.status=s.status_code
         inner join contract_info c on p.contract_no=c.contract_no
@@ -1132,7 +1132,7 @@
                 AND hdr.process_code=#{process_code}
             </if>
             <if test="pipe_no!=null and pipe_no!=''">
-                AND hdr.pipe_no=#{pipe_no}
+                AND hdr.pipe_no LIKE CONCAT('%',#{pipe_no},'%')
             </if>
         </where>
         ORDER BY hdr.operation_time DESC
@@ -1159,7 +1159,7 @@
                 AND hdr.process_code=#{process_code}
             </if>
             <if test="pipe_no!=null and pipe_no!=''">
-                AND hdr.pipe_no=#{pipe_no}
+                AND hdr.pipe_no LIKE CONCAT('%',#{pipe_no},'%')
             </if>
         </where>
         ORDER BY hdr.operation_time DESC
