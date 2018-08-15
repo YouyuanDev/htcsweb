@@ -557,11 +557,11 @@ public class PipeBasicInfoController {
         if(list!=null&&list.size()>0){
             HashMap<String,Object>hs=list.get(0);
             String status=String.valueOf(hs.get("status"));
-            String id=String.valueOf(hs.get("id"));
+            //String id=String.valueOf(hs.get("id"));
             if(status.equals("od6")||status.equals("id6")){
                 jsonObject.put("success",true);
-                jsonObject.put("pipeno",pipeno);
-                jsonObject.put("id",id);
+                jsonObject.put("record",hs);
+                //jsonObject.put("id",id);
                 jsonObject.put("message","可以入库!");
             }else{
                 jsonObject.put("success",false);
