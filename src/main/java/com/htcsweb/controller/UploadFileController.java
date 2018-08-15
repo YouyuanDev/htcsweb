@@ -365,109 +365,112 @@ public class UploadFileController {
 
 
 
-    public HashMap importExcelInfo( String fullfilename,boolean overwrite, boolean inODBareStorage) throws Exception{
+    public HashMap importExcelInfo( String fullfilename,boolean overwrite, boolean inODBareStorage){
 
             HashMap retMap = new HashMap();//返回值
             int TotalUploaded=0;//成功插入数据库的钢管数量
             int TotalSkipped=0; //无合同号存在跳过的钢管数量
 
+            try{
+                List<List<Object>> listob =ExcelUtil.readFromFiletoList(fullfilename);
+                //遍历listob数据，把数据放到List中
 
-            List<List<Object>> listob =ExcelUtil.readFromFiletoList(fullfilename);
-            //遍历listob数据，把数据放到List中
-
-            for (int i = 0; i < listob.size(); i++) {
-                List<Object> ob = listob.get(i);
-                PipeBasicInfo pipe = new PipeBasicInfo();
-                //设置编号
-                System.out.println(String.valueOf(ob.get(ExcelUtil.PIPE_NO_INDEX)));
-                //通过遍历实现把每一列封装成一个model中，再把所有的model用List集合装载
-                System.out.println("row:"+String.valueOf(i));
-                System.out.println("listob.size():"+String.valueOf(listob.size()));
+                for (int i = 0; i < listob.size(); i++) {
+                    List<Object> ob = listob.get(i);
+                    PipeBasicInfo pipe = new PipeBasicInfo();
+                    //设置编号
+                    System.out.println(String.valueOf(ob.get(ExcelUtil.PIPE_NO_INDEX)));
+                    //通过遍历实现把每一列封装成一个model中，再把所有的model用List集合装载
+                    System.out.println("row:"+String.valueOf(i));
+                    System.out.println("listob.size():"+String.valueOf(listob.size()));
 
 
 //                if(!ExcelUtil.isNumeric00(String.valueOf(ob.get(ExcelUtil.PIPE_NO_INDEX)))){
 //                    //若管号为空或不为数字，则跳过
 //                    continue;
 //                }
-                if(!ExcelUtil.isNumeric00(String.valueOf(ob.get(ExcelUtil.OD_INDEX)))){
-                    //若od为空或不为数字，则跳过
-                    continue;
-                }
-                if(!ExcelUtil.isNumeric00(String.valueOf(ob.get(ExcelUtil.WT_INDEX)))){
-                    //若wt为空或不为数字，则跳过
-                    continue;
-                }
-                if(!ExcelUtil.isNumeric00(String.valueOf(ob.get(ExcelUtil.WEIGHT_INDEX)))){
-                    //若weight为空或不为数字，则跳过
-                    continue;
-                }
-                if(!ExcelUtil.isNumeric00(String.valueOf(ob.get(ExcelUtil.P_LENGTH_INDEX)))){
-                    //若length为空或不为数字，则跳过
-                    continue;
-                }
+                    if(!ExcelUtil.isNumeric00(String.valueOf(ob.get(ExcelUtil.OD_INDEX)))){
+                        //若od为空或不为数字，则跳过
+                        continue;
+                    }
+                    if(!ExcelUtil.isNumeric00(String.valueOf(ob.get(ExcelUtil.WT_INDEX)))){
+                        //若wt为空或不为数字，则跳过
+                        continue;
+                    }
+                    if(!ExcelUtil.isNumeric00(String.valueOf(ob.get(ExcelUtil.WEIGHT_INDEX)))){
+                        //若weight为空或不为数字，则跳过
+                        continue;
+                    }
+                    if(!ExcelUtil.isNumeric00(String.valueOf(ob.get(ExcelUtil.P_LENGTH_INDEX)))){
+                        //若length为空或不为数字，则跳过
+                        continue;
+                    }
 
-                pipe.setId(0);
-                pipe.setPipe_no(String.valueOf(ob.get(ExcelUtil.PIPE_NO_INDEX)));
-                pipe.setContract_no(String.valueOf(ob.get(ExcelUtil.CONTRACT_NO_INDEX)));
-                pipe.setOd(Float.parseFloat(ob.get(ExcelUtil.OD_INDEX).toString()));
-                pipe.setWt(Float.parseFloat(ob.get(ExcelUtil.WT_INDEX).toString()));
-                pipe.setHeat_no(String.valueOf(ob.get(ExcelUtil.HEAT_NO_INDEX)));
-                pipe.setPipe_making_lot_no(String.valueOf(ob.get(ExcelUtil.PIPE_MAKING_LOT_NO_INDEX)));
-                pipe.setWeight(Float.parseFloat(ob.get(ExcelUtil.WEIGHT_INDEX).toString()));
-                pipe.setP_length(Float.parseFloat(ob.get(ExcelUtil.P_LENGTH_INDEX).toString()));
-                pipe.setStatus("bare1");
-                pipe.setLast_accepted_status("bare1");
+                    pipe.setId(0);
+                    pipe.setPipe_no(String.valueOf(ob.get(ExcelUtil.PIPE_NO_INDEX)));
+                    pipe.setContract_no(String.valueOf(ob.get(ExcelUtil.CONTRACT_NO_INDEX)));
+                    pipe.setOd(Float.parseFloat(ob.get(ExcelUtil.OD_INDEX).toString()));
+                    pipe.setWt(Float.parseFloat(ob.get(ExcelUtil.WT_INDEX).toString()));
+                    pipe.setHeat_no(String.valueOf(ob.get(ExcelUtil.HEAT_NO_INDEX)));
+                    pipe.setPipe_making_lot_no(String.valueOf(ob.get(ExcelUtil.PIPE_MAKING_LOT_NO_INDEX)));
+                    pipe.setWeight(Float.parseFloat(ob.get(ExcelUtil.WEIGHT_INDEX).toString()));
+                    pipe.setP_length(Float.parseFloat(ob.get(ExcelUtil.P_LENGTH_INDEX).toString()));
+                    pipe.setStatus("bare1");
+                    pipe.setLast_accepted_status("bare1");
 
-                //批量插入
-                int res=0;
+                    //批量插入
+                    int res=0;
 
-                //查找该contract是否存在
-                List<ContractInfo>conlist=contractInfoDao.getContractInfoByContractNo(pipe.getContract_no());
-                if(conlist.size()==0){
-                    TotalSkipped=TotalSkipped+1;
-                    continue;//不存在则此钢管不予以录入系统
-                }
-                //检查pipe的钢种信息是否为空,如果是从contract里得到钢种信息并赋值
-                if(pipe.getGrade()==null||pipe.getGrade().equals("")){
-                    pipe.setGrade(((ContractInfo)conlist.get(0)).getGrade());
-                }
+                    //查找该contract是否存在
+                    List<ContractInfo>conlist=contractInfoDao.getContractInfoByContractNo(pipe.getContract_no());
+                    if(conlist.size()==0){
+                        TotalSkipped=TotalSkipped+1;
+                        continue;//不存在则此钢管不予以录入系统
+                    }
+                    //检查pipe的钢种信息是否为空,如果是从contract里得到钢种信息并赋值
+                    if(pipe.getGrade()==null||pipe.getGrade().equals("")){
+                        pipe.setGrade(((ContractInfo)conlist.get(0)).getGrade());
+                    }
 
-                //查找该pipebasicinfo是否存在
-                List<PipeBasicInfo>pipelist=pipeBasicInfoDao.getPipeNumber(pipe.getPipe_no());
-                if(pipelist.size()==0){
-                    //新钢管入库,如od库或id库
-                    if(inODBareStorage) {
-                        pipe.setStatus("bare1");
+                    //查找该pipebasicinfo是否存在
+                    List<PipeBasicInfo>pipelist=pipeBasicInfoDao.getPipeNumber(pipe.getPipe_no());
+                    if(pipelist.size()==0){
+                        //新钢管入库,如od库或id库
+                        if(inODBareStorage) {
+                            pipe.setStatus("bare1");
+                        }else{
+                            pipe.setStatus("bare2");
+                        }
+                        pipe.setLast_accepted_status(pipe.getStatus());
+                        pipe.setRebevel_mark("0");
+
+                        res = pipeBasicInfoDao.addPipeBasicInfo(pipe);
+                        System.out.println("Insert res: " + res);
                     }else{
-                        pipe.setStatus("bare2");
-                    }
-                    pipe.setLast_accepted_status(pipe.getStatus());
-                    pipe.setRebevel_mark("0");
 
-                    res = pipeBasicInfoDao.addPipeBasicInfo(pipe);
-                    System.out.println("Insert res: " + res);
-                }else{
+                        if(overwrite) {
+                            //更新数据库旧记录
+                            PipeBasicInfo oldpipeinfo = pipelist.get(0);
+                            pipe.setId(oldpipeinfo.getId());
+                            pipe.setStatus(oldpipeinfo.getStatus());
+                            pipe.setLast_accepted_status(oldpipeinfo.getLast_accepted_status());
+                            res = pipeBasicInfoDao.updatePipeBasicInfo(pipe);
+                            System.out.println("Update res: " + res);
+                        }
 
-                    if(overwrite) {
-                        //更新数据库旧记录
-                        PipeBasicInfo oldpipeinfo = pipelist.get(0);
-                        pipe.setId(oldpipeinfo.getId());
-                        pipe.setStatus(oldpipeinfo.getStatus());
-                        pipe.setLast_accepted_status(oldpipeinfo.getLast_accepted_status());
-                        res = pipeBasicInfoDao.updatePipeBasicInfo(pipe);
-                        System.out.println("Update res: " + res);
                     }
 
+
+                    TotalUploaded=TotalUploaded+res;
                 }
-
-
-                TotalUploaded=TotalUploaded+res;
+                System.out.println("Total pipes: "+TotalUploaded);
+            }catch (Exception e){
+                e.printStackTrace();
+            }finally {
+                retMap.put("uploaded",TotalUploaded);
+                retMap.put("skipped",TotalSkipped);
+                return retMap;
             }
-            System.out.println("Total pipes: "+TotalUploaded);
-        retMap.put("uploaded",TotalUploaded);
-        retMap.put("skipped",TotalSkipped);
-
-        return retMap;
     }
 
 
