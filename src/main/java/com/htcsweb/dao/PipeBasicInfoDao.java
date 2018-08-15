@@ -10,9 +10,9 @@ import java.util.List;
 
 public interface PipeBasicInfoDao {
 
-    public  List<HashMap<String,Object>> searchPipe(@Param("pipe_no")String pipe_no,@Param("skip")int skip, @Param("take")int take);
+    public  List<HashMap<String,Object>> searchPipe(@Param("pipe_no")String pipe_no,@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("process_code")String process_code,@Param("skip")int skip, @Param("take")int take);
 
-    public int searchPipeCount(@Param("pipe_no")String pipe_no);
+    public int searchPipeCount(@Param("pipe_no")String pipe_no,@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("process_code")String process_code);
 
     public  List<PipeBasicInfo> getPipeNumber(@Param("pipe_no")String pipe_no);
     public List<PipeBasicInfo>getPipeNumbers(@Param("pipe_no")String pipe_no,@Param("external_coatingtype")String external_coatingtype,@Param("pipestatus")String[] pipestatus,@Param("odsampling_mark")String odsampling_mark,@Param("od_dsc_sample_mark")String od_dsc_sample_mark,@Param("od_pe_sample_mark")String od_pe_sample_mark,@Param("idsampling_mark")String idsampling_mark,@Param("id_glass_sample_mark")String id_glass_sample_mark,@Param("rebevel_mark")String rebevel_mark);
