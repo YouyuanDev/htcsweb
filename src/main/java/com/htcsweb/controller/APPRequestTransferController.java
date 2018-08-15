@@ -115,7 +115,7 @@ public class APPRequestTransferController {
                     //urloptions.put("odfinalinspectionprocess", "od/odfinalinspection");
                 }
                 else if (status.equals("od6")) {
-                    urloptions.put("stockin", "storage/stockin");
+                    urloptions.put("productstockin", "storage/stockin");
                 } else if (status.equals("odstockin")) {
                     urloptions.put("id_blast", "process/generalprocess");
                     //urloptions.put("idblastprocess", "id/idblast");
@@ -156,7 +156,7 @@ public class APPRequestTransferController {
                     urloptions.put("id_final_inspection", "process/generalprocess");
                 }
                 else if (status.equals("id6")) {
-                    urloptions.put("stockin", "storage/stockin");
+                    urloptions.put("productstockin", "storage/stockin");
                 } else if (status.equals("idstockin")) {
                     urloptions.put("instoragetransfer", "storage/instoragetransfer");
 
@@ -247,17 +247,12 @@ public class APPRequestTransferController {
                 //Object val = entry.getValue();
                     //判断是否有权限
                     if(functionMap!=null){
-                        if(!functionMap.containsKey(key)&&!key.equals("stockin")) {
+                        if(!functionMap.containsKey(key)) {
                             System.out.println("APP 不存在存在页面"+key+"的权限");
                             removeList.add(key);
+                        }
 
-                        }
-                        //stockin包含 odstockin  idstockin  有其一权限即可
-                        else if(key.equals("stockin")&&!functionMap.containsKey("odstockin")&&!functionMap.containsKey("idstockin")){
-                            System.out.println("APP 不存在存在页面"+key+"的权限");
-                            removeList.add(key);
-                            continue;
-                        }
+
 //                        if(!functionMap.containsKey(pageName)&&!pageName.equals("stockin")) {
 //                            System.out.println("APP 不存在存在页面"+pageName+"的权限");
 //                            removeList.add(pageName);

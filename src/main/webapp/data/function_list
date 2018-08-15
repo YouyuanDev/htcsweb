@@ -205,3 +205,29 @@
 207	检验信息管理	pcmd	删除	d	delProcess
 208	质保书管理	mtcr	查看	r	MTCRecord;	1
 209	质保书管理	mtce	编辑	w	getMTCRecord;getMTCProgress	1
+
+210	APP外防喷砂工位	odbst	编辑	w	od_blast	1
+211	APP外防喷砂检验工序	odbstin	编辑	w	od_blast_inspection	1
+212	APP外防喷涂工序	odc	编辑	w	od_coating	1
+213	APP外涂检验工序	odcin	编辑	w	od_coating_inspection	1
+214	APP外喷标工序	odst	编辑	w	od_stencil	1
+215	APP外防终检工序	odfin	编辑	w	od_final_inspection	1
+216	APP涂层修补工序	cr	编辑	w	coating_repair	1
+217	APP钢管修磨切割工序	gdct	编辑	w	grinding_cutoff	1
+218	APP涂层扒皮工序	cst	编辑	w	coating_strip	1
+219	APP外防实验管取样工序	csam	编辑	w	coating_sampling	1
+220	APP钢管倒棱工序	creb	编辑	w	coating_rebevel	1
+221	APP内防喷砂工序	idb	编辑	w	id_blast	1
+222	APP内防喷砂检验工序	idbin	编辑	w	id_blast_inspection	1
+223	APP内防喷涂工序	idc	编辑	w	id_coating	1
+224	APP内涂检验工序	idcin	编辑	w	id_coating_inspection	1
+225	APP内喷标工序	idst	编辑	w	id_stencil	1
+226	APP内防终检工序	idfin	编辑	w	id_final_inspection	1
+227	APP外防成品常规实验	labodreg	编辑	w	lab_testing_od_regular	1
+228	APP外防成品DSC实验	labdsc	编辑	w	lab_testing_dsc	1
+229	APP外防成品PE实验	labpe	编辑	w	lab_testing_pe	1
+230	APP内防成品玻璃片实验	labgla	编辑	w	lab_testing_glass	1
+231	APP内防成品常规实验	labidreg	编辑	w	lab_testing_id_regular	1
+232	APP原材料实验(3LPE)	rawm3LPE	编辑	w	lab_testing_raw_material_3LPE	1
+233	APP原材料实验(2FBE)	rawm2FBE	编辑	w	lab_testing_raw_material_2FBE	1
+234	APP原材料实验(Epoxy)	rawmEP	编辑	w	lab_testing_raw_material_EPOXY	1
