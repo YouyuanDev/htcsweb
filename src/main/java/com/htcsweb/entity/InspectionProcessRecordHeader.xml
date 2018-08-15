@@ -1138,7 +1138,7 @@
     </select>
 
     <!--根据project_no mill_no process_code获取检验记录总数-->
-    <select id="getInspectionRecordByProjectNoMillNoProcessCode" resultType="int">
+    <select id="getCountInspectionRecordByProjectNoMillNoProcessCode" resultType="int">
 
         select  count(*) from inspection_process_record_header hdr
         inner join pipe_basic_info p on p.pipe_no=hdr.pipe_no
