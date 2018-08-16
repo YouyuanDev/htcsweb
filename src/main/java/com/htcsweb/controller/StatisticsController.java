@@ -8,10 +8,9 @@ import com.htcsweb.util.FileRenameUtil;
 import com.htcsweb.util.GenerateExcelToPDFUtil;
 import com.htcsweb.util.MergePDF;
 import com.htcsweb.util.ResponseUtil;
+import jxl.Workbook;
 import jxl.format.Alignment;
-import jxl.write.Label;
-import jxl.write.WritableCellFormat;
-import jxl.write.WritableFont;
+import jxl.write.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +35,7 @@ public class StatisticsController {
 
     @RequestMapping(value="getStatisticsExcel",produces="application/json;charset=UTF-8")
     @ResponseBody
-    public  String getShipmentRecordPDF(HttpServletRequest request, HttpServletResponse response){
+    public  String getStatisticsExcel(HttpServletRequest request, HttpServletResponse response)throws Exception{
         String basePath=request.getSession().getServletContext().getRealPath("/");
 
         if(basePath.lastIndexOf('/')==-1){
@@ -56,200 +55,114 @@ public class StatisticsController {
         String zipName="";
         String message="";
         String project_no=request.getParameter("project_no");
-        String begin_time=request.getParameter("beginTime");
-        String end_time=request.getParameter("endTime");
-        Date beginTime=null;
-        Date endTime=null;
-        try{
-            if(begin_time!=null&&begin_time!=""){
-                beginTime=sdf.parse(begin_time);
-                System.out.println(beginTime.toString());
-            }
-            if(end_time!=null&&end_time!=""){
-                endTime=sdf.parse(end_time);
-                System.out.println(endTime.toString());
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
 
         long startTime = System.currentTimeMillis();//获取开始时间
         if(project_no!=null&&!project_no.equals("")){
+            Workbook wb=null;
+            WritableWorkbook wwb=null;
+            WritableSheet wsheet=null;
+            List<String>finalexcelList=new ArrayList<>();
+            String xlsFullName=basePath+"/upload/pdf/"+(project_no+"_statistics_"+ UUID.randomUUID().toString()+".xls");
             try{
-
                 //先清理.zip垃圾文件
                 FileRenameUtil.cleanTrashFiles(basePath);
                 HttpSession session = request.getSession();
                 session.setAttribute("statisticExcelProgress", String.valueOf(0));
-                String xlsFullName=basePath+"/upload/pdf/"+(project_no+"_statistic_"+ UUID.randomUUID().toString()+".xls");
-                File file0=new File(xlsFullName);
-                if(!file0.exists()){
-                    file0.createNewFile();
-                }
+//                File file0=new File(xlsFullName);
+//                if(!file0.exists()){
+//                    file0.createNewFile();
+//                }
                 System.out.println("xlsFullName"+xlsFullName);
                 String templateFullName=request.getSession().getServletContext().getRealPath("/")
-                        +"template/shipment_template.xls";
+                        +"template/statistics.xls";
                 if(templateFullName.lastIndexOf('/')==-1){
                     templateFullName=templateFullName.replace('\\','/');
                 }
 
-//                //获取项目的所有shipment信息
-//                List<HashMap<String,Object>> list=shipmentInfoDao.getShipmentByProjectNo(project_no,beginTime,endTime);
-//
-//                int PAGESIZE=28;
-//
-//                int totalCount=list.size();
-//                List<String>pdfList=new ArrayList<>();
-//
-//                ArrayList<Label> datalist=new ArrayList<Label>();
-//                int index=1,row=0;
-//                WritableCellFormat wcf=null;
-//                WritableFont wf=null;
-//                // String path=this.getClass().getClassLoader().getResource("../../").getPath();
-//
-//                String logoImageFullName=webPath + "/template/img/image002.jpg";
-//                String fontPath=webPath+"/font/simhei.ttf";
-//                String copyrightPath=webPath+"/font/simsun.ttc,0";
-//                try{
-//                    wf = new WritableFont(WritableFont.createFont("Arial"), 9);
-//                    wcf= new WritableCellFormat(wf);
-//                    wcf.setAlignment(Alignment.CENTRE);
-//                    wcf.setBackground(jxl.format.Colour.RED);
-//                }catch (Exception e){
-//                    e.printStackTrace();
-//                }
-//                String last_shipment_no="";
-//                float total_length=0;
-//                float total_weight=0;
-//                int   total_count=0;
-//                session.setAttribute("statisticExcelProgress", String.valueOf("0"));
-//                for(int i=0;i<list.size();i++){
-//                    System.out.println("pipe_no"+list.get(i).get("pipe_no"));
-//                    String shipment_no=String.valueOf(list.get(i).get("shipment_no"));
-//                    if(!shipment_no.equals(last_shipment_no)&&last_shipment_no!=("")){
-//                        total_count=0;
-//                        total_length=0;
-//                        total_weight=0;
-//                    }
-//                    //判断是否需要换页
-//                    if(index%PAGESIZE==0||!shipment_no.equals(last_shipment_no)&&last_shipment_no!=("")){
-//                        index=1;
-//                        System.out.println("另起一页 last_shipment_no="+last_shipment_no+"shipment_no=+"+shipment_no+"pipe_No="+String.valueOf(list.get(i).get("pipe_no")) );
-//                        row=0;//另起一页，初始化参数
-//                        String newPdfName= GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightPath);
-//                        datalist.clear();
-//                        if(newPdfName!=null){
-//                            pdfList.add(newPdfName);
-//                            delSetPath.add(newPdfName);
-//                        }
-//                    }
-//                    last_shipment_no=shipment_no;
-//
-//                    if(index==1){
-//                        datalist.add(new Label(3, 4, String.valueOf(list.get(i).get("project_name")), wcf));
-//                        StringBuilder odwtstr = new StringBuilder();
-//                        odwtstr.append("Φ");
-//                        odwtstr.append(String.valueOf(list.get(i).get("od")));
-//                        odwtstr.append("*");
-//                        odwtstr.append(String.valueOf(list.get(i).get("wt")));
-//                        odwtstr.append("mm");
-//                        datalist.add(new Label(8, 4, odwtstr.toString(), wcf));
-//                        datalist.add(new Label(12, 4, String.valueOf(list.get(i).get("shipment_date")), wcf));
-//                        StringBuilder coating = new StringBuilder();
-//                        coating.append(String.valueOf(list.get(i).get("external_coating")));
-//                        coating.append(" ");
-//                        coating.append(String.valueOf(list.get(i).get("internal_coating")));
-//                        datalist.add(new Label(8, 5, coating.toString(), wcf));
-//                        datalist.add(new Label(3, 5, shipment_no, wcf));
-//                        datalist.add(new Label(12, 5, String.valueOf(list.get(i).get("vehicle_plate_no")), wcf));
-//                        datalist.add(new Label(12, 22,"©2018 TopInspector", wcf));
-//                    }
-//
-//                    int side=0;
-//                    if(index>PAGESIZE/2){
-//                        side=1;
-//                    }
-//                    datalist.add(new Label(0+7*side, row+7, String.valueOf(index), wcf));
-//                    datalist.add(new Label(1+7*side, row+7, String.valueOf(list.get(i).get("pipe_no")), wcf));
-//                    datalist.add(new Label(2+7*side, row+7, String.valueOf(list.get(i).get("p_length")), wcf));
-//                    datalist.add(new Label(3+7*side, row+7, String.valueOf(list.get(i).get("weight")), wcf));
-//                    datalist.add(new Label(4+7*side, row+7, String.valueOf(list.get(i).get("heat_no")), wcf));
-//                    datalist.add(new Label(5+7*side, row+7, String.valueOf(list.get(i).get("pipe_making_lot_no")), wcf));
-//                    datalist.add(new Label(6+7*side, row+7,String.valueOf(list.get(i).get("remark")), wcf));
-//                    total_count+=1;
-//                    total_length+=(float)list.get(i).get("p_length");
-//                    total_weight+=(float)list.get(i).get("weight");
-//
-//                    datalist.add(new Label(4, 21,String.valueOf(total_count), wcf));
-//                    datalist.add(new Label(8, 21,String.valueOf(total_length), wcf));
-//                    datalist.add(new Label(12, 21,String.valueOf(total_weight), wcf));
-//
-//
-//                    index+=1;
-//                    row+=1;
-//
-//
-//
-//                    //把用户数据保存在session域对象中
-//                    float percent=0;
-//                    if(totalCount!=0)
-//                        percent=(i+1)*100/totalCount;
-//                    session.setAttribute("shipmentpdfProgress", String.valueOf(percent));
-//                    System.out.println("shipmentpdfProgress：" + percent);
-//                    System.out.println("i：" + i);
-//                    System.out.println("totalCount：" + totalCount);
-//                }
-//                if(datalist.size()>0){
-//
-//                    String newPdfName= GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightPath);
-//                    datalist.clear();
-//                    if(newPdfName!=null){
-//                        pdfList.add(newPdfName);
-//                        delSetPath.add(newPdfName);
-//                    }
-//                }
-//
-//
-//                session.setAttribute("shipmentpdfProgress", String.valueOf("100"));
-//
-//
-//                List<String>finalpdfList=new ArrayList<>();
-//                if(pdfList.size()>0){
-//                    MergePDF.MergePDFs(pdfList,pdfFullName);
-//                    pdfList.clear();
-//                    finalpdfList.add(pdfFullName);
-//                    delSetPath.add(pdfFullName);
-//                }
-//                if(finalpdfList.size()==0){
-//                    success=false;
-//                    message="没有发运记录";
-//                }else{
-//                    success=true;
-//                    message="存在成品发运记录"+String.valueOf(list.size())+"条";
-//                }
-//
-//                zipName="/upload/pdf/"+ ResponseUtil.downLoadPdf(finalpdfList,request,response);
-//                //定时删除临时文件
-//                for (int j=0;j<delSetPath.size();j++){
-//                    if(delSetPath.get(j)!=null){
-//                        File file=new File(delSetPath.get(j));
-//                        if(file.exists()){
-//                            file.delete();
-//                        }
-//                    }
-//                }
+                String newexcelName= GenerateExcelToPDFUtil.FillExcelTemplate(templateFullName,null);
+                File newxlsfile = new File(newexcelName);
+                wb = Workbook.getWorkbook(newxlsfile);
+                wwb = Workbook.createWorkbook(newxlsfile, wb);
+                wsheet = wwb.getSheet(0);
+                //获取外防涂层不合格信息
+                List<HashMap<String,Object>> odCoatingRejectData=getODCoatingRejectData(project_no);
+                //获取内防涂层不合格信息
+                List<HashMap<String,Object>> idCoatingRejectData=getIDCoatingRejectData(project_no);
+
+                //获取项目的所有shipment信息
+                //List<HashMap<String,Object>> list=shipmentInfoDao.getShipmentByProjectNo(project_no,beginTime,endTime);
+                ArrayList<Label> datalist=new ArrayList<Label>();
+                WritableCellFormat wcf=null;
+                WritableFont wf=null;
+                try{
+                    wf = new WritableFont(WritableFont.createFont("Arial"), 9);
+                    wcf= new WritableCellFormat(wf);
+                    wcf.setAlignment(Alignment.CENTRE);
+                    wcf.setBackground(jxl.format.Colour.RED);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                int   total_count=0;
+                int totalCount=odCoatingRejectData.size()+idCoatingRejectData.size();
+                session.setAttribute("statisticExcelProgress", String.valueOf("0"));
+                float percent=0;
+                for (int i=0;i<odCoatingRejectData.size();i++){
+                    wsheet.addCell(new Label(0, i+2, String.valueOf(odCoatingRejectData.get(i).get("reject_reason")), wcf));
+                    wsheet.addCell(new Label(1, i+2, String.valueOf(odCoatingRejectData.get(i).get("total_count")), wcf));
+                    if(totalCount!=0)
+                        percent=(i+1)*100/totalCount;
+                    session.setAttribute("shipmentpdfProgress", String.valueOf(percent));
+                    System.out.println("shipmentpdfProgress：" + percent);
+                    System.out.println("i：" + i);
+                    System.out.println("totalCount：" + totalCount);
+                }
+                for (int i=0;i<idCoatingRejectData.size();i++){
+                    wsheet.addCell(new Label(2, i+2, String.valueOf(odCoatingRejectData.get(i).get("reject_reason")), wcf));
+                    wsheet.addCell(new Label(3, i+2, String.valueOf(odCoatingRejectData.get(i).get("total_count")), wcf));
+                    if(totalCount!=0)
+                        percent=(i+1)*100/totalCount;
+                    session.setAttribute("shipmentpdfProgress", String.valueOf(percent));
+                    System.out.println("shipmentpdfProgress：" + percent);
+                    System.out.println("i：" + i);
+                    System.out.println("totalCount：" + totalCount);
+                }
+                session.setAttribute("shipmentpdfProgress", String.valueOf("100"));
+
+                if(totalCount==0){
+                    success=false;
+                    message="没有不合格记录";
+                }else{
+                    success=true;
+                    message="存在不合格记录"+String.valueOf(totalCount)+"条";
+                }
+
             }catch (Exception e){
                 e.printStackTrace();
+            }finally {
+                wwb.write();
+                wwb.close();//关闭
+                wb.close();
+                finalexcelList.add(xlsFullName);
+                delSetPath.add(xlsFullName);
+                zipName="/upload/pdf/"+ ResponseUtil.downLoadPdf(finalexcelList,request,response);
+                System.out.println(zipName);
+                //定时删除临时文件
+                for (int j=0;j<delSetPath.size();j++){
+                    if(delSetPath.get(j)!=null){
+                        File file=new File(delSetPath.get(j));
+                        if(file.exists()){
+                           // file.delete();
+                        }
+                    }
+                }
             }
+
         }
-
-
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("success",success);
         maps.put("zipName",zipName);
         maps.put("message",message);
         String mmp= JSONArray.toJSONString(maps);
-
         return mmp;
     }
     //获取PDF生成进度
