@@ -42,4 +42,25 @@
         where item_code=#{item_code} and inspection_process_record_header_code=#{inspection_process_record_header_code}
     </update>
 
+
+
+    <select id="getLastAcceptedRecordBeforePipeNo"  resultType="com.htcsweb.entity.InspectionProcessRecordItem">
+        select it.* from inspection_process_record_item it inner join inspection_process_record_header hdr
+        on hdr.inspection_process_record_header_code= it.inspection_process_record_header_code
+        <![CDATA[ where hdr.id < (
+
+        select id from  inspection_process_record_header
+
+        where pipe_no = #{pipe_no} and process_code=#{process_code} order by id desc limit 1) ]]>
+        and   result ='1' and mill_no=#{mill_no} and process_code=#{process_code}
+
+        order by it.item_code asc
+
+
+    </select>
+
+
+
+
+
 </mapper>

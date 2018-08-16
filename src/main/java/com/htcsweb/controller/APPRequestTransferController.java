@@ -368,9 +368,7 @@ public class APPRequestTransferController {
 
                 }
 
-
-
-
+                
                 //数据导出
                 InspectionProcessRecordHeader header= inspectionProcessRecordHeaderDao.getRecentRecordByPipeNo(process_code,pipe_no);
                 if(header!=null){
@@ -379,6 +377,11 @@ public class APPRequestTransferController {
                         //是待定状态
                         resultMaps.put("record_header",header);
                         List<InspectionProcessRecordItem> itemList=inspectionProcessRecordItemDao.getInspectionProcessRecordItemByInspectionProcessRecordHeaderCode(header.getInspection_process_record_header_code());
+                        resultMaps.put("record_items",itemList);
+                    }
+                    if(header.getResult().equals("10")&&header.getProcess_code().equals("od_coating")&&header.getRemark().equals("INIT")){
+                        //这里是外涂岗位记录，获取前一根合格管的数据
+                        List<InspectionProcessRecordItem> itemList=inspectionProcessRecordItemDao.getLastAcceptedRecordBeforePipeNo(pipe_no,mill_no,"od_coating");
                         resultMaps.put("record_items",itemList);
                     }
                 }
