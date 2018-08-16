@@ -62,7 +62,7 @@ public class StatisticsController {
             WritableWorkbook wwb=null;
             WritableSheet wsheet=null;
             List<String>finalexcelList=new ArrayList<>();
-            String xlsFullName=basePath+"/upload/pdf/"+(project_no+"_statistics_"+ UUID.randomUUID().toString()+".xls");
+            String newexcelName="";
             try{
                 //先清理.zip垃圾文件
                 FileRenameUtil.cleanTrashFiles(basePath);
@@ -72,14 +72,15 @@ public class StatisticsController {
 //                if(!file0.exists()){
 //                    file0.createNewFile();
 //                }
-                System.out.println("xlsFullName"+xlsFullName);
+
                 String templateFullName=request.getSession().getServletContext().getRealPath("/")
                         +"template/statistics.xls";
                 if(templateFullName.lastIndexOf('/')==-1){
                     templateFullName=templateFullName.replace('\\','/');
                 }
 
-                String newexcelName= GenerateExcelToPDFUtil.FillExcelTemplate(templateFullName,null);
+                newexcelName= GenerateExcelToPDFUtil.FillExcelTemplate(templateFullName,null);
+                System.out.println("newexcelName"+newexcelName);
                 File newxlsfile = new File(newexcelName);
                 wb = Workbook.getWorkbook(newxlsfile);
                 wwb = Workbook.createWorkbook(newxlsfile, wb);
@@ -89,8 +90,6 @@ public class StatisticsController {
                 //获取内防涂层不合格信息
                 List<HashMap<String,Object>> idCoatingRejectData=getIDCoatingRejectData(project_no);
 
-                //获取项目的所有shipment信息
-                //ArrayList<Label> datalist=new ArrayList<Label>();
                 WritableCellFormat wcf=null;
                 WritableFont wf=null;
                 try{
@@ -140,7 +139,7 @@ public class StatisticsController {
                 wwb.write();
                 wwb.close();//关闭
                 wb.close();
-                finalexcelList.add(xlsFullName);
+                finalexcelList.add(newexcelName);
                 zipName="/upload/pdf/"+ ResponseUtil.downLoadPdf(finalexcelList,request,response);
                 System.out.println(zipName);
 
