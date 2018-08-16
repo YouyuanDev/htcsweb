@@ -496,7 +496,7 @@ public  String getStatisticsExcel(HttpServletRequest request, HttpServletRespons
                 System.out.println("--------------------nameStr="+nameStr);
                 chart.setCategoryFormula(nameStr);
                 // 图表名称
-                chart.setTitle("钢管不合格原因分布图");
+                chart.setTitle("涂层不合格原因分布图");
 
 
                 //------------------内防
