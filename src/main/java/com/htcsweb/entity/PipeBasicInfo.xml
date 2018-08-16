@@ -818,5 +818,54 @@
         limit 1
     </select>
 
+    <!--获取外防涂层不合格原因记录-->
+    <select id="getODCoatingRejectData" resultType="map">
+        select it.item_value as reject_reason,count(it.inspection_process_record_header_code) as total_count from inspection_process_record_item it
+
+        inner join inspection_process_record_header hdr on hdr.inspection_process_record_header_code=it.inspection_process_record_header_code
+
+        inner join pipe_basic_info p on p.pipe_no=hdr.pipe_no
+
+        inner join contract_info c on c.contract_no=p.contract_no
+
+        inner join dynamic_measurement_item di on it.item_code=di.item_code
+
+
+        where c.project_no=#{project_no} AND  it.item_code='coating_reject_reason' AND item_value is not null
+
+        <![CDATA[ AND item_value <> ''  ]]>
+        AND
+        (di.process_code='od_coating_inspection'
+        or di.process_code='od_final_inspection'
+        )
+
+        group by item_value
+
+    </select>
+
+    <!--获取内防涂层不合格原因记录-->
+    <select id="getIDCoatingRejectData" resultType="map">
+        select it.item_value as reject_reason,count(it.inspection_process_record_header_code) as total_count from inspection_process_record_item it
+
+        inner join inspection_process_record_header hdr on hdr.inspection_process_record_header_code=it.inspection_process_record_header_code
+
+        inner join pipe_basic_info p on p.pipe_no=hdr.pipe_no
+
+        inner join contract_info c on c.contract_no=p.contract_no
+
+        inner join dynamic_measurement_item di on it.item_code=di.item_code
+
+
+        where c.project_no=#{project_no} AND  it.item_code='coating_reject_reason' AND item_value is not null
+
+        <![CDATA[ AND item_value <> ''  ]]>
+        AND
+        (di.process_code='id_coating_inspection'
+        or di.process_code='id_final_inspection'
+        )
+
+        group by item_value
+
+    </select>
 
 </mapper>

@@ -100,4 +100,11 @@ public interface PipeBasicInfoDao {
     public PipeBasicInfo getFirstPipeNoByProjectNo(@Param("project_no")String project_no,@Param("external_coating")String external_coating,@Param("internal_coating")String internal_coating);
 
 
+    //获取外防涂层不合格原因记录
+    public List<HashMap<String,Object>> getODCoatingRejectData(@Param("project_no")String project_no);
+
+    //获取内防涂层不合格原因记录
+    public List<HashMap<String,Object>> getIDCoatingRejectData(@Param("project_no")String project_no);
+
+
 }

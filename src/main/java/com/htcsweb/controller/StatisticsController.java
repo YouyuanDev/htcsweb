@@ -3,6 +3,7 @@ package com.htcsweb.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.htcsweb.dao.PipeBasicInfoDao;
 import com.htcsweb.util.FileRenameUtil;
 import com.htcsweb.util.GenerateExcelToPDFUtil;
 import com.htcsweb.util.MergePDF;
@@ -11,6 +12,7 @@ import jxl.format.Alignment;
 import jxl.write.Label;
 import jxl.write.WritableCellFormat;
 import jxl.write.WritableFont;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,6 +28,12 @@ import java.util.*;
 @Controller
 @RequestMapping("/StatisticsOperation")
 public class StatisticsController {
+
+
+    @Autowired
+    private PipeBasicInfoDao pipeBasicInfoDao;
+
+
     @RequestMapping(value="getStatisticsExcel",produces="application/json;charset=UTF-8")
     @ResponseBody
     public  String getShipmentRecordPDF(HttpServletRequest request, HttpServletResponse response){
@@ -437,5 +445,18 @@ public class StatisticsController {
 //            m_view.releaseLock();
 //        }
 //    }
+
+    //获取外防涂层不合格原因记录
+    private List<HashMap<String,Object>> getODCoatingRejectData(String project_no){
+            List<HashMap<String,Object>> list=pipeBasicInfoDao.getODCoatingRejectData(project_no);
+            return list;
+    }
+
+    //获取内防涂层不合格原因记录
+    private List<HashMap<String,Object>> getIDCoatingRejectData(String project_no){
+        List<HashMap<String,Object>> list=pipeBasicInfoDao.getIDCoatingRejectData(project_no);
+        return list;
+    }
+
 
 }
