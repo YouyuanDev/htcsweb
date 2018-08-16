@@ -836,7 +836,7 @@
         )
         group by hdr.inspection_process_record_header_code
         ) reject_data
-        group by header_code
+        group by reject_reason
     </select>
 
     <!--获取内防涂层不合格原因记录-->
@@ -857,7 +857,7 @@
         )
         group by hdr.inspection_process_record_header_code
         ) reject_data
-        group by header_code
+        group by reject_reason
 
     </select>
 
