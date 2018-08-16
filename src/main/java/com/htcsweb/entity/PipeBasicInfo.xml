@@ -831,8 +831,8 @@
         where c.project_no=#{project_no} AND  it.item_code='coating_reject_reason' AND it.item_value is not null
         <![CDATA[ AND it.item_value <> ''  ]]>
         AND
-        (di.process_code='od_coating_inspection'
-        or di.process_code='od_final_inspection'
+        (hdr.process_code='od_coating_inspection'
+        or hdr.process_code='od_final_inspection'
         )
         group by hdr.inspection_process_record_header_code
         ) reject_data
@@ -852,8 +852,8 @@
         where c.project_no=#{project_no} AND  it.item_code='coating_reject_reason' AND it.item_value is not null
         <![CDATA[ AND it.item_value <> ''  ]]>
         AND
-        (di.process_code='id_coating_inspection'
-        or di.process_code='id_final_inspection'
+        (hdr.process_code='id_coating_inspection'
+        or hdr.process_code='id_final_inspection'
         )
         group by hdr.inspection_process_record_header_code
         ) reject_data
