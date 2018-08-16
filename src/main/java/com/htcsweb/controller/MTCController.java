@@ -242,12 +242,14 @@ public class MTCController {
                             for (int b=list.size()-1;b>=0;b--){
                                 String material_name=list.get(b).get("material_name")==null?" ":String.valueOf(list.get(b).get("material_name"));
                                 String coating_powder_name=list.get(b).get("coating_powder_name")==null?" ":String.valueOf(list.get(b).get("coating_powder_name"));
-                                String powder_type=list.get(b).get("powder_type")==null?" ":String.valueOf(list.get(b).get("powder_type"));
+                               String lot_no=list.get(b).get("lot_no")==null?" ":String.valueOf(list.get(b).get("lot_no"));
+
+                                //                                String powder_type=list.get(b).get("powder_type")==null?" ":String.valueOf(list.get(b).get("powder_type"));
                                 String manufacturer_name=list.get(b).get("manufacturer_name")==null?" ":String.valueOf(list.get(b).get("manufacturer_name"));
                                 String manufacturer_name_en=list.get(b).get("manufacturer_name_en")==null?" ":String.valueOf(list.get(b).get("manufacturer_name_en"));
                                 String [] content={material_name,
                                         coating_powder_name,
-                                        powder_type,
+                                        lot_no,
                                         manufacturer_name+" "+manufacturer_name_en};
                                 for(int ii=0;ii<4;ii++){
                                     Label label_A=null;

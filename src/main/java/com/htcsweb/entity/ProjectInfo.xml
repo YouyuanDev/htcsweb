@@ -235,17 +235,97 @@
 
     <!--获取产品质量保证书的原材料信息-->
     <select id="getRawMaterialInfo" resultType="map">
-        SELECT  coating.* from coating_powder_info coating
-        inner join inspection_process_record_item item on item.item_value=coating.coating_powder_name
+        <!--SELECT  coating.* from coating_powder_info coating-->
+        <!--inner join inspection_process_record_item item on item.item_value=coating.coating_powder_name-->
+        <!--inner join inspection_process_record_header header on header.inspection_process_record_header_code=item.inspection_process_record_header_code-->
+        <!--inner join pipe_basic_info p on p.pipe_no=header.pipe_no-->
+        <!--inner join contract_info c on c.contract_no=p.contract_no-->
+        <!--where c.project_no=#{project_no}-->
+        <!--and header.result='1'-->
+        <!--and (header.process_code = 'od_coating' or header.process_code = 'id_coating' )-->
+        <!--and item.item_value is not null-->
+        <!--<![CDATA[  and item.item_value<>'' ]]>-->
+        select * from (
+        (SELECT
+        Max(CASE item.item_code WHEN 'top_coat_used' THEN item.item_value ELSE '' END) AS 'model',
+        Max(CASE item.item_code WHEN 'top_coat_lot_no' THEN item.item_value ELSE '' END) AS 'lot_no'
+        from
+        inspection_process_record_item item
         inner join inspection_process_record_header header on header.inspection_process_record_header_code=item.inspection_process_record_header_code
         inner join pipe_basic_info p on p.pipe_no=header.pipe_no
         inner join contract_info c on c.contract_no=p.contract_no
-        where c.project_no=#{project_no}
-        and header.result='1'
-        and (header.process_code = 'od_coating' or header.process_code = 'id_coating' )
-        and item.item_value is not null
-        <![CDATA[  and item.item_value<>'' ]]>
+        where
+        (item.item_code='top_coat_used' or item.item_code='top_coat_lot_no')
+        and header.process_code='od_coating'
+        and c.project_no=#{project_no}
+        group by header.inspection_process_record_header_code
+        )
+        UNION
+        (
+        SELECT
 
+        Max(CASE item.item_code WHEN 'base_coat_used' THEN item.item_value ELSE '' END) AS 'model',
+        Max(CASE item.item_code WHEN 'base_coat_lot_no' THEN item.item_value ELSE '' END) AS 'lot_no'
+        from
+        inspection_process_record_item item
+        inner join inspection_process_record_header header on header.inspection_process_record_header_code=item.inspection_process_record_header_code
+        inner join pipe_basic_info p on p.pipe_no=header.pipe_no
+        inner join contract_info c on c.contract_no=p.contract_no
+        where
+        (item.item_code='base_coat_used'  or item.item_code='base_coat_lot_no')
+        and header.process_code='od_coating'
+        and c.project_no=#{project_no}
+        group by header.inspection_process_record_header_code
+        )
+        UNION
+        (
+        SELECT
+        Max(CASE item.item_code WHEN 'middle_coat_used' THEN item.item_value ELSE '' END) AS 'model',
+        Max(CASE item.item_code WHEN 'middle_coat_lot_no' THEN item.item_value ELSE '' END) AS 'lot_no'
+        from
+        inspection_process_record_item item
+        inner join inspection_process_record_header header on header.inspection_process_record_header_code=item.inspection_process_record_header_code
+        inner join pipe_basic_info p on p.pipe_no=header.pipe_no
+        inner join contract_info c on c.contract_no=p.contract_no
+        where
+        (item.item_code='middle_coat_used'  or item.item_code='middle_coat_lot_no')
+        and header.process_code='od_coating'
+        and c.project_no=#{project_no}
+        group by header.inspection_process_record_header_code
+        )
+        UNION
+        (
+        SELECT
+        Max(CASE item.item_code WHEN 'id_base_used' THEN item.item_value ELSE '' END) AS 'model',
+        Max(CASE item.item_code WHEN 'id_base_batch' THEN item.item_value ELSE '' END) AS 'lot_no'
+        from
+        inspection_process_record_item item
+        inner join inspection_process_record_header header on header.inspection_process_record_header_code=item.inspection_process_record_header_code
+        inner join pipe_basic_info p on p.pipe_no=header.pipe_no
+        inner join contract_info c on c.contract_no=p.contract_no
+        where
+        (item.item_code='id_base_used' or item.item_code='id_base_batch')
+        and header.process_code='id_coating'
+        and c.project_no=#{project_no}
+        group by header.inspection_process_record_header_code
+        )
+        UNION
+        (
+        SELECT
+        Max(CASE item.item_code WHEN 'id_curing_agent_used' THEN item.item_value ELSE '' END) AS 'model',
+        Max(CASE item.item_code WHEN 'id_curing_agent_batch' THEN item.item_value ELSE '' END) AS 'lot_no'
+        from
+        inspection_process_record_item item
+        inner join inspection_process_record_header header on header.inspection_process_record_header_code=item.inspection_process_record_header_code
+        inner join pipe_basic_info p on p.pipe_no=header.pipe_no
+        inner join contract_info c on c.contract_no=p.contract_no
+        where
+        (item.item_code='id_curing_agent_used' or item.item_code='id_curing_agent_batch')
+        and header.process_code='id_coating'
+        and c.project_no=#{project_no}
+        group by header.inspection_process_record_header_code
+        )
+        ) material inner join coating_powder_info powder on powder.coating_powder_name=material.model
     </select>
 
 </mapper>

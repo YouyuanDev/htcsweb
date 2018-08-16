@@ -78,7 +78,7 @@
                 "acceptancecriteria","odstandard","idstandard","labtestingstandard2fbe","labtestingstandard3lpe","rawmaterialtestingstandard2fbe","rawmaterialtestingstandard3lpe","pipebodystandard","inspectionFrequencyStandard",
                 "labtesting2fbe","labtesting3lpe","labtestingepoxy","rawmaterialtesting2fbe","rawmaterialtesting3lpe","rawmaterialtestingliquidepoxy",
                 "person","role","function",
-                "productionProcessRecord","dailyProductionReport","shipmentRecord","MTCRecord"
+                "productionProcessRecord","dailyProductionReport","shipmentRecord","MTCRecord","statistics"
 
         ];
             var processArr=uriArr.slice(0,1);
@@ -91,7 +91,7 @@
             var standArr=uriArr.slice(31,40);
             var labArr=uriArr.slice(40,46);
             var accountArr=uriArr.slice(46,49);
-            var reportArr=uriArr.slice(49,53);
+            var reportArr=uriArr.slice(49,54);
 
 
             var hsMapList="<%=session.getAttribute("userfunctionMap")%>";
@@ -795,6 +795,14 @@
                             $('#hlTab').tabs('add', {
                                 title: node.text,
                                 content: "<iframe scrolling='auto' frameborder='0'  src='productionRecordAndReport/MTCRecord.jsp' style='width:100%;height:100%;'></iframe>",
+                                closable: true
+                            });
+                            hlLanguage();
+                        }else if ("统计分析" == nodeTxt || "Statistics" == nodeTxt) {
+
+                            $('#hlTab').tabs('add', {
+                                title: node.text,
+                                content: "<iframe scrolling='auto' frameborder='0'  src='productionRecordAndReport/statistics.jsp' style='width:100%;height:100%;'></iframe>",
                                 closable: true
                             });
                             hlLanguage();
