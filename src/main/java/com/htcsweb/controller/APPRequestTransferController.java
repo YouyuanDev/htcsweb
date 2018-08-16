@@ -368,7 +368,7 @@ public class APPRequestTransferController {
 
                 }
 
-                
+
                 //数据导出
                 InspectionProcessRecordHeader header= inspectionProcessRecordHeaderDao.getRecentRecordByPipeNo(process_code,pipe_no);
                 if(header!=null){
