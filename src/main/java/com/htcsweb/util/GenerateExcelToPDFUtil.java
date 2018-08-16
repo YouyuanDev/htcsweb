@@ -257,7 +257,7 @@ public class GenerateExcelToPDFUtil {
         } catch (Exception e) {
             System.out.println("Exception:"+e.getMessage());
         } finally {
-            System.out.println("表格生成！");
+            System.out.println(newExcelFileName+"表格生成！");
             return  newExcelFileName;
         }
 
