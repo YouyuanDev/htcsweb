@@ -861,4 +861,39 @@
 
     </select>
 
+    <!--获取外防涂层总厚度记录-->
+    <select id="getODTotalCoatingThicknessData" resultType="map">
+        select item_value  as total_coating_thickness
+        from inspection_process_record_item it
+        inner join inspection_process_record_header hdr on hdr.inspection_process_record_header_code=it.inspection_process_record_header_code
+        inner join pipe_basic_info p on p.pipe_no=hdr.pipe_no
+        inner join contract_info c on c.contract_no=p.contract_no
+        inner join dynamic_measurement_item di on it.item_code=di.item_code
+        where c.project_no=#{project_no} AND  it.item_code='total_coating_thickness' AND it.item_value is not null
+         <![CDATA[ AND it.item_value <> ''  ]]>
+        AND
+        hdr.process_code='od_coating_inspection'
+
+        group by hdr.inspection_process_record_header_code
+
+
+    </select>
+
+    <!--获取内防涂层干膜厚度记录-->
+    <select id="getIDDryFilmThicknessData" resultType="map">
+        select item_value  as dry_film_thickness
+        from inspection_process_record_item it
+        inner join inspection_process_record_header hdr on hdr.inspection_process_record_header_code=it.inspection_process_record_header_code
+        inner join pipe_basic_info p on p.pipe_no=hdr.pipe_no
+        inner join contract_info c on c.contract_no=p.contract_no
+        inner join dynamic_measurement_item di on it.item_code=di.item_code
+        where c.project_no=#{project_no} AND  it.item_code='dry_film_thickness' AND it.item_value is not null
+         <![CDATA[ AND it.item_value <> ''  ]]>
+        AND
+        hdr.process_code='id_final_inspection'
+        group by hdr.inspection_process_record_header_code
+
+    </select>
+
+
 </mapper>

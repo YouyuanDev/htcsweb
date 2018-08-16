@@ -106,5 +106,11 @@ public interface PipeBasicInfoDao {
     //获取内防涂层不合格原因记录
     public List<HashMap<String,Object>> getIDCoatingRejectData(@Param("project_no")String project_no);
 
+    //获取外防涂层总厚度记录
+    public List<HashMap<String,Object>> getODTotalCoatingThicknessData(@Param("project_no")String project_no);
+
+    //获取内防涂层干膜厚度记录
+    public List<HashMap<String,Object>> getIDDryFilmThicknessData(@Param("project_no")String project_no);
+
 
 }
