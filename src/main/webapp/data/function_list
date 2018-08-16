@@ -231,3 +231,5 @@
 232	APP原材料实验(3LPE)	rawm3LPE	编辑	w	lab_testing_raw_material_3LPE	1
 233	APP原材料实验(2FBE)	rawm2FBE	编辑	w	lab_testing_raw_material_2FBE	1
 234	APP原材料实验(Epoxy)	rawmEP	编辑	w	lab_testing_raw_material_EPOXY	1
+235	APP成品入库	prstockin	编辑	w	productstockin	1
+236	分析统计管理	statis	查看	r	statistics;getStatisticsExcel	1
