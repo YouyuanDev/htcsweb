@@ -90,8 +90,7 @@ public class StatisticsController {
                 List<HashMap<String,Object>> idCoatingRejectData=getIDCoatingRejectData(project_no);
 
                 //获取项目的所有shipment信息
-                //List<HashMap<String,Object>> list=shipmentInfoDao.getShipmentByProjectNo(project_no,beginTime,endTime);
-                ArrayList<Label> datalist=new ArrayList<Label>();
+                //ArrayList<Label> datalist=new ArrayList<Label>();
                 WritableCellFormat wcf=null;
                 WritableFont wf=null;
                 try{
@@ -102,7 +101,6 @@ public class StatisticsController {
                 }catch (Exception e){
                     e.printStackTrace();
                 }
-                int   total_count=0;
                 int totalCount=odCoatingRejectData.size()+idCoatingRejectData.size();
                 session.setAttribute("statisticExcelProgress", String.valueOf("0"));
                 float percent=0;
@@ -111,8 +109,8 @@ public class StatisticsController {
                     wsheet.addCell(new Label(1, i+2, String.valueOf(odCoatingRejectData.get(i).get("total_count")), wcf));
                     if(totalCount!=0)
                         percent=(i+1)*100/totalCount;
-                    session.setAttribute("shipmentpdfProgress", String.valueOf(percent));
-                    System.out.println("shipmentpdfProgress：" + percent);
+                    session.setAttribute("statisticExcelProgress", String.valueOf(percent));
+                    System.out.println("statisticExcelProgress：" + percent);
                     System.out.println("i：" + i);
                     System.out.println("totalCount：" + totalCount);
                 }
@@ -121,12 +119,12 @@ public class StatisticsController {
                     wsheet.addCell(new Label(3, i+2, String.valueOf(odCoatingRejectData.get(i).get("total_count")), wcf));
                     if(totalCount!=0)
                         percent=(i+1)*100/totalCount;
-                    session.setAttribute("shipmentpdfProgress", String.valueOf(percent));
-                    System.out.println("shipmentpdfProgress：" + percent);
+                    session.setAttribute("statisticExcelProgress", String.valueOf(percent));
+                    System.out.println("statisticExcelProgress：" + percent);
                     System.out.println("i：" + i);
                     System.out.println("totalCount：" + totalCount);
                 }
-                session.setAttribute("shipmentpdfProgress", String.valueOf("100"));
+                session.setAttribute("statisticExcelProgress", String.valueOf("100"));
 
                 if(totalCount==0){
                     success=false;
@@ -143,18 +141,9 @@ public class StatisticsController {
                 wwb.close();//关闭
                 wb.close();
                 finalexcelList.add(xlsFullName);
-                delSetPath.add(xlsFullName);
                 zipName="/upload/pdf/"+ ResponseUtil.downLoadPdf(finalexcelList,request,response);
                 System.out.println(zipName);
-                //定时删除临时文件
-                for (int j=0;j<delSetPath.size();j++){
-                    if(delSetPath.get(j)!=null){
-                        File file=new File(delSetPath.get(j));
-                        if(file.exists()){
-                           // file.delete();
-                        }
-                    }
-                }
+
             }
 
         }
@@ -173,13 +162,12 @@ public class StatisticsController {
         try{
 
             HttpSession session = request.getSession();
-            String shipmentpdfProgress=(String)session.getAttribute("statisticExcelProgress");
-            if(shipmentpdfProgress==null||shipmentpdfProgress.equals(""))
-                shipmentpdfProgress="0";
+            String statisticExcelProgress=(String)session.getAttribute("statisticExcelProgress");
+            if(statisticExcelProgress==null||statisticExcelProgress.equals(""))
+                statisticExcelProgress="0";
             //跳转到用户主页
             json.put("success",true);
-            //System.out.println("ggggggete getAttribute pdfProgress：" + pdfProgress);    //输出程序运行时间
-            json.put("statisticExcelProgress",shipmentpdfProgress);
+            json.put("statisticExcelProgress",statisticExcelProgress);
             ResponseUtil.write(response,json);
         }catch (Exception e){
             e.printStackTrace();

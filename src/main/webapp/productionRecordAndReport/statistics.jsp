@@ -78,35 +78,35 @@
             $('.btnReport').click(function () {
                 var selectValue = $('#cc').val();
                 var selectText = $('#cc').find('option:selected').text();
-                var begin_time = $('#begintime').val();
-                var end_time = $('#endtime').val();
-                if (begin_time == null || begin_time.length == "") {
-                    $.messager.alert('Warning', '请输入开始时间!');
-                    return false;
-                }
-                if (end_time == null || end_time.length == "") {
-                    $.messager.alert('Warning', '请输入结束时间!');
-                    return false;
-                }
-                var begin_date = new Date(begin_time);
-                var end_date = new Date(end_time);
-                if (!(end_date - begin_date >= 0)) {
-                    $.messager.alert('Warning', '开始时间必须小于结束时间!');
-                    return false;
-                }
+                // var begin_time = $('#begintime').val();
+                // var end_time = $('#endtime').val();
+                // if (begin_time == null || begin_time.length == "") {
+                //     $.messager.alert('Warning', '请输入开始时间!');
+                //     return false;
+                // }
+                // if (end_time == null || end_time.length == "") {
+                //     $.messager.alert('Warning', '请输入结束时间!');
+                //     return false;
+                // }
+                // var begin_date = new Date(begin_time);
+                // var end_date = new Date(end_time);
+                // if (!(end_date - begin_date >= 0)) {
+                //     $.messager.alert('Warning', '开始时间必须小于结束时间!');
+                //     return false;
+                // }
                 //ajaxLoading();
                 var form = $("<form>");//定义一个form表单
                 form.attr("style", "display:none");
                 form.attr("target", "");
                 form.attr("method", "post");//请求类型
-                form.attr("action","/ShipmentOperation/getShipmentRecordPDF.action");//请求地址
+                form.attr("action","/StatisticsOperation/getStatisticsExcel.action");//请求地址
                 $("body").append(form);//将表单放置在web中
                 var input1 = $("<input type='hidden' name='project_no' value='" + selectValue + "'/>");
                 form.append(input1);
-                var input2 = $("<input type='hidden' name='beginTime' value='" + begin_time + "'/>");
-                form.append(input2);
-                var input3 = $("<input type='hidden' name='endTime' value='" + end_time + "'/>");
-                form.append(input3);
+                // var input2 = $("<input type='hidden' name='beginTime' value='" + begin_time + "'/>");
+                // form.append(input2);
+                // var input3 = $("<input type='hidden' name='endTime' value='" + end_time + "'/>");
+                // form.append(input3);
                 var input4 = $("<input type='hidden' name='project_name' value='" + selectText + "'/>");
                 form.append(input4);
                 // form.submit();
@@ -220,10 +220,10 @@
     <select id="cc" class="easyui-combobox" data-options="editable:false" name="result" style="width:200px;">
 
     </select>
-    <span class="i18n1" name="begintime">开始时间</span>:
-    <input id="begintime" name="begintime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
-    <span class="i18n1" name="endtime">结束时间</span>:
-    <input id="endtime" name="endtime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">
+    <%--<span class="i18n1" name="begintime">开始时间</span>:--%>
+    <%--<input id="begintime" name="begintime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">--%>
+    <%--<span class="i18n1" name="endtime">结束时间</span>:--%>
+    <%--<input id="endtime" name="endtime" type="text" class="easyui-datebox" data-options="formatter:myformatter,parser:myparser">--%>
     <button class="btnReport">开始生成</button>
     <br><br>
     <div id="p" class="easyui-progressbar" data-options="value:0" style="width:600px;display:none"></div>
