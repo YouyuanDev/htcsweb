@@ -55,7 +55,7 @@ public class StatisticsController {
         String zipName="";
         String message="";
         String project_no=request.getParameter("project_no");
-
+        String project_name=request.getParameter("project_name");
         long startTime = System.currentTimeMillis();//获取开始时间
         if(project_no!=null&&!project_no.equals("")){
             Workbook wb=null;
@@ -80,7 +80,6 @@ public class StatisticsController {
                 }
 
                 newexcelName= GenerateExcelToPDFUtil.FillExcelTemplate(templateFullName,null);
-                System.out.println("newexcelName"+newexcelName);
                 File newxlsfile = new File(newexcelName);
                 wb = Workbook.getWorkbook(newxlsfile);
                 wwb = Workbook.createWorkbook(newxlsfile, wb);
@@ -103,6 +102,7 @@ public class StatisticsController {
                 int totalCount=odCoatingRejectData.size()+idCoatingRejectData.size();
                 session.setAttribute("statisticExcelProgress", String.valueOf("0"));
                 float percent=0;
+                wsheet.addCell(new Label(5, 0,project_name, wcf));
                 for (int i=0;i<odCoatingRejectData.size();i++){
                     wsheet.addCell(new Label(0, i+2, String.valueOf(odCoatingRejectData.get(i).get("reject_reason")), wcf));
                     wsheet.addCell(new Label(1, i+2, String.valueOf(odCoatingRejectData.get(i).get("total_count")), wcf));
@@ -140,9 +140,16 @@ public class StatisticsController {
                 wwb.close();//关闭
                 wb.close();
                 finalexcelList.add(newexcelName);
+                delSetPath.add(newexcelName);
                 zipName="/upload/pdf/"+ ResponseUtil.downLoadPdf(finalexcelList,request,response);
-                System.out.println(zipName);
-
+                for (int j=0;j<delSetPath.size();j++){
+                    if(delSetPath.get(j)!=null){
+                        File file=new File(delSetPath.get(j));
+                        if(file.exists()){
+                            file.delete();
+                        }
+                    }
+                }
             }
 
         }
@@ -156,7 +163,7 @@ public class StatisticsController {
     //获取PDF生成进度
     @RequestMapping(value="getStatisticExcelProgress",produces="application/json;charset=UTF-8")
     @ResponseBody
-    public  String getShipmentpdfProgress(HttpServletRequest request, HttpServletResponse response) {
+    public  String getStatisticExcelProgress(HttpServletRequest request, HttpServletResponse response) {
         JSONObject json=new JSONObject();
         try{
 
