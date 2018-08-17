@@ -554,4 +554,34 @@ public class InspectionProcess {
         return mmp;
     }
 
+
+
+    //得到钢管后10根工位记录管号，并且记录为待定状态10
+    @RequestMapping(value = "/getNextTenPipesBeforePipeNo")
+    @ResponseBody
+    public String getNextTenPipesBeforePipeNo(@RequestParam(value = "pipe_no",required = false)String pipe_no, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        //OdCoatOperation/getLastAcceptedRecordBeforePipeNo.action?pipe_no=121212
+        //把用户数据保存在session域对象中
+        String mill_no = (String) session.getAttribute("millno");
+        String process_code=(String) session.getAttribute("process_code");
+        Map<String,Object> maps=new HashMap<String,Object>();
+        if(mill_no!=null&&pipe_no!=null&&process_code!=null){
+            List<HashMap<String,Object>> list=inspectionProcessRecordHeaderDao.getNextTenPipesBeforePipeNo(pipe_no,mill_no,process_code);
+            if(list.size()>0){
+                //是合格状态
+                maps.put("success",true);
+                maps.put("data",list);
+            }else{
+                maps.put("success",false);
+            }
+
+        }else{
+            maps.put("success",false);
+        }
+        String mmp= JSONArray.toJSONString(maps);
+        return mmp;
+
+    }
+
 }

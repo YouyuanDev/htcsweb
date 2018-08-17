@@ -1167,4 +1167,15 @@
     </select>
 
 
+
+    <!--根据钢管编号查询得到钢管后10根涂层记录管号，并且记录为待定状态 10-->
+    <select id="getNextTenPipesBeforePipeNo" resultType="map">
+        select * from inspection_process_record_header
+        <![CDATA[ where id >= (select id from inspection_process_record_header where pipe_no = #{pipe_no} and process_code=#{process_code} order by id desc limit 1) ]]>
+        and   result ='10' and mill_no=#{mill_no} and process_code=#{process_code}
+        order by id asc
+        limit 10
+    </select>
+
+
 </mapper>

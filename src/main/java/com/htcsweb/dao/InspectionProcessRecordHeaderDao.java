@@ -122,5 +122,7 @@ public interface InspectionProcessRecordHeaderDao {
     //根据project_no mill_no process_code获取检验记录总数
     public int getCountInspectionRecordByProjectNoMillNoProcessCode(@Param("project_no")String project_no,@Param("mill_no")String mill_no,@Param("process_code")String process_code,@Param("pipe_no")String pipe_no);
 
+    //获取某工位后的10根管子 且为待定状态
+    public List<HashMap<String,Object>> getNextTenPipesBeforePipeNo(@Param("pipe_no")String pipe_no,@Param("mill_no")String mill_no,@Param("process_code")String process_code);
 
 }
