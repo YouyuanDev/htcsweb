@@ -829,7 +829,7 @@
         inner join contract_info c on c.contract_no=p.contract_no
         inner join dynamic_measurement_item di on it.item_code=di.item_code
         where c.project_no=#{project_no} AND  it.item_code='coating_reject_reason' AND it.item_value is not null
-        <![CDATA[ AND it.item_value <> ''  ]]>
+        <![CDATA[ AND it.item_value <> '' AND it.item_value <> '合格' ]]>
         AND
         (hdr.process_code='od_coating_inspection'
         or hdr.process_code='od_final_inspection'
@@ -850,7 +850,7 @@
         inner join contract_info c on c.contract_no=p.contract_no
         inner join dynamic_measurement_item di on it.item_code=di.item_code
         where c.project_no=#{project_no} AND  it.item_code='coating_reject_reason' AND it.item_value is not null
-        <![CDATA[ AND it.item_value <> ''  ]]>
+        <![CDATA[ AND it.item_value <> '' AND it.item_value <> '合格' ]]>
         AND
         (hdr.process_code='id_coating_inspection'
         or hdr.process_code='id_final_inspection'
