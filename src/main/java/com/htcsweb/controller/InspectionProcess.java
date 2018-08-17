@@ -574,10 +574,12 @@ public class InspectionProcess {
                 maps.put("data",list);
             }else{
                 maps.put("success",false);
+                maps.put("message","无数据");
             }
 
         }else{
             maps.put("success",false);
+            maps.put("message","请先登录");
         }
         String mmp= JSONArray.toJSONString(maps);
         return mmp;
