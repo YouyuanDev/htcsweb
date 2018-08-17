@@ -564,7 +564,7 @@ public class InspectionProcess {
         //OdCoatOperation/getLastAcceptedRecordBeforePipeNo.action?pipe_no=121212
         //把用户数据保存在session域对象中
         String mill_no = (String) session.getAttribute("millno");
-        String process_code=(String) session.getAttribute("process_code");
+        String process_code=request.getParameter("process_code");
         Map<String,Object> maps=new HashMap<String,Object>();
         if(mill_no!=null&&pipe_no!=null&&process_code!=null){
             List<HashMap<String,Object>> list=inspectionProcessRecordHeaderDao.getNextTenPipesBeforePipeNo(pipe_no,mill_no,process_code);

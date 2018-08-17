@@ -208,7 +208,7 @@
 
 210	APP外防喷砂工位	odbst	编辑	w	od_blast	1
 211	APP外防喷砂检验工序	odbstin	编辑	w	od_blast_inspection	1
-212	APP外防喷涂工序	odc	编辑	w	od_coating	1
+212	APP外防喷涂工序	odc	编辑	w	od_coating;getNextTenPipesBeforePipeNo	1
 213	APP外涂检验工序	odcin	编辑	w	od_coating_inspection	1
 214	APP外喷标工序	odst	编辑	w	od_stencil	1
 215	APP外防终检工序	odfin	编辑	w	od_final_inspection	1
