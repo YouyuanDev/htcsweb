@@ -18,7 +18,13 @@ basepath=$(dirname $basepath)
 echo $basepath
 
 #公司服务器
-scp -r $basepath/target/htcsweb.war root@192.168.0.200:/usr/share/tomcat/apache-tomcat-8.5.28/webapps/
+#scp -r $basepath/target/htcsweb.war root@192.168.0.200:/usr/share/tomcat/apache-tomcat-8.5.28/webapps/
 
 #阿里云服务器
-#scp -r $basepath/target/htcsweb.war root@116.62.17.42:/usr/share/tomcat/webapps/
+scp -r $basepath/target/htcsweb.war root@116.62.17.42:/usr/share/tomcat/webapps/
+
+
+
+
+
+#ios  https://itunes.apple.com/app/id1419485514
