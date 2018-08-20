@@ -498,7 +498,7 @@
     </div>
 </div>
 <!--添加、修改框  max-height:600px;overflow-y:auto;-->
-<div id="addEditDialog" class="easyui-dialog" data-options="closable:false,title:'添加',modal:true" closed="true" buttons="#dlg-buttons" style="display: none;padding:5px 0px;width:1200px; height:560px;">
+<div id="addEditDialog" class="easyui-dialog" data-options="closable:false,title:'添加',modal:true" closed="true" buttons="#dlg-buttons" style="display: none;padding:5px 0px;width:1200px; height:660px;">
     <form id="addEditForm" method="post" style="width:95%;margin:0 auto;">
         <fieldset style="width:99%;border:solid 1px #aaa;position:relative;">
             <legend><span class="i18n1" name="ACinfo">标准信息</span></legend>
@@ -557,15 +557,19 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset id="dynamicItem" style="width:99%;height:300px;border:solid 1px #aaa;position:relative;">
+        <fieldset id="dynamicItem" style="width:99%;height:380px;border:solid 1px #aaa;position:relative;">
             <legend><span class="i18n1" name="inspectioniteminfo">测量项信息</span></legend>
-            <table id="dg" class="easyui-datagrid" title="" style="width:100%;height:280px;" data-options="
+            <table id="dg" class="easyui-datagrid" title="" style="width:100%;height:360px;" data-options="
 				iconCls: '',
 				singleSelect: true,
 				striped:true,
-				toolbar: '#tb',
+				toolbar:'#tb',
+				pagination:true,
+				pageList:[10,20,30,50,100],
+				pageSize:10,
 				rownumbers:true,
-				onClickRow: onClickRow
+                fitColumns:true,
+				onClickRow:onClickRow
 			">
                 <thead>
                 <tr>

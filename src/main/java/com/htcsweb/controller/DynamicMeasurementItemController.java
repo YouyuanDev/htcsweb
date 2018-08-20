@@ -60,11 +60,26 @@ public class DynamicMeasurementItemController {
     @ResponseBody
     public String getDynamicItemWithProcessInfoByACNo(HttpServletRequest request){
         JSONObject json=new JSONObject();
-
+        String page= request.getParameter("page");
+        String rows= request.getParameter("rows");
+        System.out.println("page================="+page);
+        System.out.println("rows================="+rows);
+        if(page==null){
+            page="1";
+        }
+        if(rows==null){
+            rows="20";
+        }
+        int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
         String acceptance_criteria_no=request.getParameter("acceptance_criteria_no");
-        List<HashMap<String,Object>> list=dynamicMeasurementItemDao.getDynamicMeasurementItemWithProcessInfoByAcceptanceCriteriaNo(acceptance_criteria_no);
-
-        String mmp= JSONArray.toJSONString(list);
+        List<HashMap<String,Object>> list=dynamicMeasurementItemDao.getDynamicMeasurementItemWithProcessInfoByAcceptanceCriteriaNo(acceptance_criteria_no,start,Integer.parseInt(rows));
+        int count=dynamicMeasurementItemDao.getCountDynamicMeasurementItemWithProcessInfoByAcceptanceCriteriaNo(acceptance_criteria_no);
+        System.out.println("list================="+JSONArray.toJSONString(list));
+        System.out.println("count================="+count);
+        Map<String,Object> maps=new HashMap<String,Object>();
+        maps.put("total",count);
+        maps.put("rows",list);
+        String mmp= JSONArray.toJSONString(maps);
         return mmp;
     }
 
