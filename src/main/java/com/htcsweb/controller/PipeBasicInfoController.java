@@ -30,43 +30,7 @@ public class PipeBasicInfoController {
 
     @Autowired
     private PipeStatusDao pipeStatusDao;
-    @Autowired
-    private OdBlastProcessDao odBlastProcessDao;
-    @Autowired
-    private OdBlastInspectionProcessDao odBlastInspectionProcessDao;
-    @Autowired
-    private OdCoatingProcessDao odCoatingProcessDao;
-    @Autowired
-    private OdCoatingInspectionProcessDao odCoatingInspectionProcessDao;
-    @Autowired
-    private OdCoating3LpeProcessDao odCoating3LpeProcessDao;
-    @Autowired
-    private OdCoating3LpeInspectionProcessDao odCoating3LpeInspectionProcessDao;
-    @Autowired
-    private OdStencilProcessDao odStencilProcessDao;
-    @Autowired
-    private OdFinalInspectionProcessDao odFinalInspectionProcessDao;
-    @Autowired
-    private IdBlastProcessDao idBlastProcessDao;
-    @Autowired
-     private  IdBlastInspectionProcessDao idBlastInspectionProcessDao;
-    @Autowired
-    private IdCoatingProcessDao idCoatingProcessDao;
-    @Autowired
-    private IdCoatingInspectionProcessDao idCoatingInspectionProcessDao;
-    @Autowired
-    private IdStencilProcessDao idStencilProcessDao;
-    @Autowired
-    private IdFinalInspectionProcessDao idFinalInspectionProcessDao;
 
-    @Autowired
-    private CoatingStripDao coatingStripDao;
-    @Autowired
-    private CoatingRepairDao coatingRepairDao;
-    @Autowired
-    private BarePipeGrindingCutoffRecordDao barePipeGrindingCutoffRecordDao;
-    @Autowired
-    private PipeRebevelRecordDao pipeRebevelRecordDao;
     @Autowired
     DynamicMeasurementItemDao dynamicMeasurementItemDao;
     @Autowired

@@ -4,10 +4,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.htcsweb.dao.InspectionFrequencyDao;
 import com.htcsweb.dao.InspectionTimeRecordDao;
-import com.htcsweb.entity.IdStencilProcess;
 import com.htcsweb.entity.InspectionFrequency;
 import com.htcsweb.entity.InspectionTimeRecord;
-import com.htcsweb.entity.PipeBasicInfo;
 import com.htcsweb.util.ComboxItem;
 import com.htcsweb.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 

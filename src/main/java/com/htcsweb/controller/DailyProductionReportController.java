@@ -37,32 +37,7 @@ public class DailyProductionReportController {
     private DailyProductionReportDao dailyProductionReportDao;
     @Autowired
     private ContractInfoDao contractInfoDao;
-    @Autowired
-    private OdCoatingProcessDao odCoatingProcessDao;
-    @Autowired
-    private OdCoating3LpeProcessDao odCoating3LpeProcessDao;
-    @Autowired
-    private OdFinalInspectionProcessDao odFinalInspectionProcessDao;
-    @Autowired
-    private CoatingRepairDao coatingRepairDao;
-    @Autowired
-    private BarePipeGrindingCutoffRecordDao barePipeGrindingCutoffRecordDao;
-    @Autowired
-    private IdCoatingProcessDao idCoatingProcessDao;
-    @Autowired
-    private CoatingStripDao coatingStripDao;
-    @Autowired
-    private OdCoatingInspectionProcessDao odCoatingInspectionProcessDao;
-    @Autowired
-    private OdCoating3LpeInspectionProcessDao odCoating3LpeInspectionProcessDao;
-    @Autowired
-    private IdFinalInspectionProcessDao idFinalInspectionProcessDao;
-    @Autowired
-    private IdCoatingInspectionProcessDao idCoatingInspectionProcessDao;
-    @Autowired
-    private PipeSamplingRecordDao pipeSamplingRecordDao;
-    @Autowired
-    private PipeRebevelRecordDao pipeRebevelRecordDao;
+
     @Autowired
     private ProjectInfoDao projectInfoDao;
     @Autowired
