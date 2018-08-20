@@ -307,8 +307,8 @@ public class StatisticsController {
                 // 设置图饼分块颜色
                 odChart.setVaryColors(true);
                 odCf = odChart.getDataLabelFormat(0, 0);
-                odCf.setForeColor((new Color(0, 0, 255)).getRGB());
-                odCf.setFontColor((new Color(255, 0, 0)).getRGB());
+//                odCf.setForeColor((new Color(0, 0, 255)).getRGB());
+                odCf.setFontColor((new Color(0, 0, 0)).getRGB());
                 odChart.setDataLabelFormat(0, 0, odCf);
                 // 设置标题字体格式
                 odCf = odChart.getTitleFormat();
@@ -356,8 +356,8 @@ public class StatisticsController {
                 // 设置图饼分块颜色
                 idChart.setVaryColors(true);
                 idCf = idChart.getDataLabelFormat(0, 0);
-                idCf.setForeColor((new Color(0, 0, 255)).getRGB());
-                idCf.setFontColor((new Color(255, 0, 0)).getRGB());
+//                idCf.setForeColor((new Color(0, 0, 255)).getRGB());
+                idCf.setFontColor((new Color(0, 0, 0)).getRGB());
                 idChart.setDataLabelFormat(0, 0, idCf);
                 // 设置标题字体格式
                 idCf = idChart.getTitleFormat();
@@ -438,18 +438,18 @@ public class StatisticsController {
             System.out.println("odMin="+odMinMax[0]);
             System.out.println("odMax="+odMinMax[1]);
             HashMap<String,String>odIntervalList=new LinkedHashMap<>();
-            float odMultiple=(odMinMax[1]-odMinMax[0])/10;
+            int odMultiple=(int)Math.ceil((odMinMax[1]-odMinMax[0])/100)*10;
             System.out.println(odMultiple);
             if(odMultiple!=0) {
                 for (int i = 0; i < 10; i++) {
-                    if (i < 9) {
-                        odIntervalList.put(getTransferFloat(odMultiple * i) + "-" + getTransferFloat(odMultiple * (i + 1)), String.valueOf(getCount(odThinknessList, odMultiple * i, odMultiple * (i + 1))));
-                    } else {
-                        odIntervalList.put(getTransferFloat(odMultiple * i) + "-" + getTransferFloat(odMinMax[1]), String.valueOf(getCount(odThinknessList, odMultiple * i, odMinMax[1])));
-                    }
+//                    if (i < 9) {
+                        odIntervalList.put(getTransferCeil(odMultiple * i) + "-" + getTransferCeil(odMultiple * (i + 1)), String.valueOf(getCount(odThinknessList, getTransferCeil(odMultiple * i), getTransferCeil(odMultiple * (i + 1)))));
+//                    } else {
+//                        odIntervalList.put(getTransferCeil(odMultiple * i) + "-" + getTransferCeil(odMinMax[1]), String.valueOf(getCount(odThinknessList, getTransferCeil(odMultiple * i), getTransferCeil(odMinMax[1]))));
+//                    }
                 }
             }else{
-                odIntervalList.put(getTransferFloat(odMinMax[0]) + "-" + getTransferFloat(odMinMax[1]), String.valueOf(getCount(odThinknessList, odMinMax[0], odMinMax[1])));
+                odIntervalList.put(getTransferCeil(odMinMax[0]) + "-" + getTransferCeil(odMinMax[1]), String.valueOf(getCount(odThinknessList, getTransferCeil(odMinMax[0]), getTransferCeil(odMinMax[1]))));
             }
             Iterator odIter = odIntervalList.entrySet().iterator();
             int odIndex=0;
@@ -483,14 +483,14 @@ public class StatisticsController {
             System.out.println("idMultiple="+idMultiple);
             if(idMultiple!=0) {
                 for (int i = 0; i < 10; i++) {
-                    if (i < 9) {
-                        idIntervalList.put(getTransferFloat(idMultiple * i) + "-" + getTransferFloat(idMultiple * (i + 1)), String.valueOf(getCount(idThinknessList, idMultiple * i, idMultiple * (i + 1))));
-                    } else {
-                        idIntervalList.put(getTransferFloat(idMultiple * i) + "-" + getTransferFloat(idMinMax[1]), String.valueOf(getCount(idThinknessList, idMultiple * i, idMinMax[1])));
-                    }
+//                    if (i < 9) {
+                        idIntervalList.put(getTransferCeil(idMultiple * i) + "-" + getTransferCeil(idMultiple * (i + 1)), String.valueOf(getCount(idThinknessList, getTransferCeil(idMultiple * i), getTransferCeil(idMultiple * (i + 1)))));
+//                    } else {
+//                        idIntervalList.put(getTransferCeil(idMultiple * i) + "-" + getTransferCeil(idMinMax[1]), String.valueOf(getCount(idThinknessList, getTransferCeil(idMultiple * i),getTransferCeil( idMinMax[1]))));
+//                    }
                 }
             }else{
-                idIntervalList.put(getTransferFloat(idMinMax[0]) + "-" + getTransferFloat(idMinMax[1]), String.valueOf(getCount(idThinknessList, idMinMax[0], idMinMax[1])));
+                idIntervalList.put(getTransferCeil(idMinMax[0]) + "-" + getTransferCeil(idMinMax[1]), String.valueOf(getCount(idThinknessList, getTransferCeil(idMinMax[0]), getTransferCeil(idMinMax[1]))));
             }
             Iterator idIter = idIntervalList.entrySet().iterator();
             int idIndex=0;
@@ -512,10 +512,10 @@ public class StatisticsController {
             m_view.setTextAsValue(1, 1, "支数");
             m_view.setTextAsValue(1, 2, "内防厚度区间列表");
             m_view.setTextAsValue(1, 3, "支数");
-            m_view.setTextAsValue(endLine+1, 0, "外防厚度平均数");
-            m_view.setTextAsValue(endLine+1, 1, String.valueOf(odAvg));
-            m_view.setTextAsValue(endLine+1, 2, "内防厚度平均数");
-            m_view.setTextAsValue(endLine+1, 3, String.valueOf(idAvg));
+            m_view.setTextAsValue(endLine+2, 0, "外防厚度平均数");
+            m_view.setTextAsValue(endLine+2, 1, String.valueOf(odAvg));
+            m_view.setTextAsValue(endLine+2, 2, "内防厚度平均数");
+            m_view.setTextAsValue(endLine+2, 3, String.valueOf(idAvg));
 
 
             //设置公式
@@ -546,9 +546,9 @@ public class StatisticsController {
             //系列名字
             odChart.setSeriesName(0, "coating_thickness!$B$2");
             //系列值
-            odChart.setSeriesYValueFormula(0, "coating_thickness!$B$3:$B$"+(thinckness_startLine+odIntervalList.size()-1));
+            odChart.setSeriesYValueFormula(0, "coating_thickness!$B$3:$B$"+(thinckness_startLine+odIntervalList.size()));
             //系列分类
-            odChart.setCategoryFormula("coating_thickness!$A$3:$A$"+(thinckness_startLine+odIntervalList.size()-1));
+            odChart.setCategoryFormula("coating_thickness!$A$3:$A$"+(thinckness_startLine+odIntervalList.size()));
             System.out.println("coating_thickness!$B$3:$B$"+(thinckness_startLine+odIntervalList.size()));
             System.out.println("coating_thickness!$A$3:$A$"+(thinckness_startLine+odIntervalList.size()));
             //设置横坐标标题
@@ -614,9 +614,9 @@ public class StatisticsController {
             //系列名字
             idChart.setSeriesName(0, "coating_thickness!$B$2");
             //系列值
-            idChart.setSeriesYValueFormula(0, "coating_thickness!$D$3:$D$"+(thinckness_startLine+odIntervalList.size()-1));
+            idChart.setSeriesYValueFormula(0, "coating_thickness!$D$3:$D$"+(thinckness_startLine+odIntervalList.size()));
             //系列分类
-            idChart.setCategoryFormula("coating_thickness!$C$3:$C$"+(thinckness_startLine+odIntervalList.size()-1));
+            idChart.setCategoryFormula("coating_thickness!$C$3:$C$"+(thinckness_startLine+odIntervalList.size()));
             System.out.println("coating_thickness!$D$3:$D$"+(thinckness_startLine+odIntervalList.size()));
             System.out.println("coating_thickness!$C$3:$C$"+(thinckness_startLine+odIntervalList.size()));
             //设置横坐标标题
@@ -740,10 +740,10 @@ public class StatisticsController {
         return arrFloat;
     }
     //求满足区间之间数值的个数
-    public static int getCount(ArrayList list,float start,float end){
+    public static int getCount(ArrayList list,int start,int end){
         int count=0;
-        start=getTransferFloat(start);
-        end=getTransferFloat(end);
+        start=getTransferCeil(start);
+        end=getTransferCeil(end);
         for (int i=0;i<list.size();i++){
             float val=Float.parseFloat(String.valueOf(list.get(i)));
             if(i!=list.size()-1){
@@ -758,11 +758,19 @@ public class StatisticsController {
         }
         return count;
     }
+    //向下取整
+    public static int getTransferFloor(float val){
+        return   (int) Math.floor(val);
+    }
+    //向上取整
+    public static int getTransferCeil(float val){
+        return   (int) Math.ceil(val);
+    }
     //保留4位小数
     public static float getTransferFloat(float val){
         BigDecimal b   =   new   BigDecimal(val);
         float   f1   =   b.setScale(4,   BigDecimal.ROUND_HALF_UP).floatValue();
-        return f1;
+        return   f1;
     }
     //计算平均值
     public static float getAvg(ArrayList list){
@@ -783,7 +791,9 @@ public class StatisticsController {
         System.out.println("percent="+percent);
         session.setAttribute("statisticExcelProgress", String.valueOf(percent));
     }
-
+//    public static void main(String args[]){
+//        System.out.println(Math.ceil(3.4));
+//    }
 //    public static void main(String args[]){
 //        View m_view = new View();
 //        List<String>finalexcelList=new ArrayList<>();
