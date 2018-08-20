@@ -215,8 +215,8 @@ public class StatisticsController {
                 FileRenameUtil.cleanTrashFiles(basePath);
                 //创建两个Sheet
                 m_view.setNumSheets(2);
-                m_view.setSheetName(0,"sheet1");
-                m_view.setSheetName(1,"sheet2");
+                m_view.setSheetName(0,"coating_reject");
+                m_view.setSheetName(1,"coating_thickness");
                 // select the first sheet
                 m_view.setSheet(0);
                 //获取外防涂层不合格信息
@@ -236,23 +236,23 @@ public class StatisticsController {
                 m_view.setTextAsValue(0, 2, "内防");
                 m_view.setTextAsValue(0, 4, "项目名称");
                 m_view.setTextAsValue(0, 5, project_name);
-                m_view.setTextAsValue(1, 0, "涂层不合格原因");
+                m_view.setTextAsValue(1, 0, "外涂层不合格原因");
                 m_view.setTextAsValue(1, 1, "不合格支数");
-                m_view.setTextAsValue(1, 2, "涂层不合格原因");
+                m_view.setTextAsValue(1, 2, "内涂层不合格原因");
                 m_view.setTextAsValue(1, 3, "不合格支数");
                 //startLine=startLine+2;
                 session.setAttribute("statisticExcelProgress", String.valueOf(0));
 
-                m_view.getLock();
-                //setTextAsValue参数为 行 列 数值
-                m_view.setTextAsValue(0, 0, "外防");
-                m_view.setTextAsValue(0, 2, "内防");
-                m_view.setTextAsValue(0, 4, "项目名称");
-                m_view.setTextAsValue(0, 5, "MDP");
-                m_view.setTextAsValue(1, 0, "涂层不合格原因");
-                m_view.setTextAsValue(1, 1, "不合格支数");
-                m_view.setTextAsValue(1, 2, "涂层不合格原因");
-                m_view.setTextAsValue(1, 3, "不合格支数");
+                //m_view.getLock();
+//                //setTextAsValue参数为 行 列 数值
+//                m_view.setTextAsValue(0, 0, "外防");
+//                m_view.setTextAsValue(0, 2, "内防");
+//                m_view.setTextAsValue(0, 4, "项目名称");
+//                m_view.setTextAsValue(0, 5, "MDP");
+//                m_view.setTextAsValue(1, 0, "涂层不合格原因");
+//                m_view.setTextAsValue(1, 1, "不合格支数");
+//                m_view.setTextAsValue(1, 2, "涂层不合格原因");
+//                m_view.setTextAsValue(1, 3, "不合格支数");
                 int endLine=odCoatingRejectData.size()>idCoatingRejectData.size()?odCoatingRejectData.size():idCoatingRejectData.size();
                 endLine=endLine+2;
                 for (int i=0;i<odCoatingRejectData.size();i++){
@@ -279,11 +279,11 @@ public class StatisticsController {
                 // 添加一个系列
                 odChart.addSeries();
                 // 饼图数据源,饼图需要的具体数字，参数为开始单元格结束单元格
-                String dataStr="Sheet1!$B$3:$B$"+(2+odCoatingRejectData.size());
+                String dataStr="coating_reject!$B$3:$B$"+(2+odCoatingRejectData.size());
                 System.out.println("--------------------dataStr="+dataStr);
                 odChart.setSeriesYValueFormula(0, dataStr);
                 // 数据对应的说明.
-                String odNameStr="Sheet1!$A$3:$A$"+(2+odCoatingRejectData.size());
+                String odNameStr="coating_reject!$A$3:$A$"+(2+odCoatingRejectData.size());
                 System.out.println("--------------------odNameStr="+odNameStr);
                 odChart.setCategoryFormula(odNameStr);
                 //设置总数
@@ -329,11 +329,11 @@ public class StatisticsController {
                 // 添加一个系列
                 idChart.addSeries();
                 // 饼图数据源,饼图需要的具体数字，参数为开始单元格结束单元格
-                String idDataStr="Sheet1!$D$3:$D$"+(2+idCoatingRejectData.size());
+                String idDataStr="coating_reject!$D$3:$D$"+(2+idCoatingRejectData.size());
                 System.out.println("--------------------idDataStr="+idDataStr);
                 idChart.setSeriesYValueFormula(0, idDataStr);
                 // 数据对应的说明.
-                String idNameStr="Sheet1!$C$3:$C$"+(2+idCoatingRejectData.size());
+                String idNameStr="coating_reject!$C$3:$C$"+(2+idCoatingRejectData.size());
                 System.out.println("--------------------idNameStr="+idNameStr);
                 idChart.setCategoryFormula(idNameStr);
                 //设置总数
@@ -382,7 +382,7 @@ public class StatisticsController {
                 //m_view.write("/Users/pengtian/Desktop/out1.xls");
                 m_view.write(excelFullName);
                 session.setAttribute("statisticExcelProgress", String.valueOf(100));
-                Designer.newDesigner(m_view);
+                //Designer.newDesigner(m_view);
             }catch (Exception e){
                 e.printStackTrace();
                 session.setAttribute("statisticExcelProgress", String.valueOf(100));
@@ -544,13 +544,13 @@ public class StatisticsController {
             //添加一个系列
             odChart.addSeries();
             //系列名字
-            odChart.setSeriesName(0, "Sheet2!$B$2");
+            odChart.setSeriesName(0, "coating_thickness!$B$2");
             //系列值
-            odChart.setSeriesYValueFormula(0, "Sheet2!$B$3:$B$"+(thinckness_startLine+odIntervalList.size()-1));
+            odChart.setSeriesYValueFormula(0, "coating_thickness!$B$3:$B$"+(thinckness_startLine+odIntervalList.size()-1));
             //系列分类
-            odChart.setCategoryFormula("Sheet2!$A$3:$A$"+(thinckness_startLine+odIntervalList.size()-1));
-            System.out.println("Sheet2!$B$3:$B$"+(thinckness_startLine+odIntervalList.size()));
-            System.out.println("Sheet2!$A$3:$A$"+(thinckness_startLine+odIntervalList.size()));
+            odChart.setCategoryFormula("coating_thickness!$A$3:$A$"+(thinckness_startLine+odIntervalList.size()-1));
+            System.out.println("coating_thickness!$B$3:$B$"+(thinckness_startLine+odIntervalList.size()));
+            System.out.println("coating_thickness!$A$3:$A$"+(thinckness_startLine+odIntervalList.size()));
             //设置横坐标标题
             odChart.setAxisTitle(ChartShape.XAxis, 0, "外涂层总厚度区间(单位:μm)");
             //设置纵坐标标题
@@ -612,13 +612,13 @@ public class StatisticsController {
             //添加一个系列
             idChart.addSeries();
             //系列名字
-            idChart.setSeriesName(0, "Sheet2!$B$2");
+            idChart.setSeriesName(0, "coating_thickness!$B$2");
             //系列值
-            idChart.setSeriesYValueFormula(0, "Sheet2!$D$3:$D$"+(thinckness_startLine+odIntervalList.size()-1));
+            idChart.setSeriesYValueFormula(0, "coating_thickness!$D$3:$D$"+(thinckness_startLine+odIntervalList.size()-1));
             //系列分类
-            idChart.setCategoryFormula("Sheet2!$C$3:$C$"+(thinckness_startLine+odIntervalList.size()-1));
-            System.out.println("Sheet2!$D$3:$D$"+(thinckness_startLine+odIntervalList.size()));
-            System.out.println("Sheet2!$C$3:$C$"+(thinckness_startLine+odIntervalList.size()));
+            idChart.setCategoryFormula("coating_thickness!$C$3:$C$"+(thinckness_startLine+odIntervalList.size()-1));
+            System.out.println("coating_thickness!$D$3:$D$"+(thinckness_startLine+odIntervalList.size()));
+            System.out.println("coating_thickness!$C$3:$C$"+(thinckness_startLine+odIntervalList.size()));
             //设置横坐标标题
             idChart.setAxisTitle(ChartShape.XAxis, 0, "内涂层总厚度区间(单位:μm)");
             //设置纵坐标标题
