@@ -442,11 +442,7 @@ public class StatisticsController {
             System.out.println(odMultiple);
             if(odMultiple!=0) {
                 for (int i = 0; i < 10; i++) {
-//                    if (i < 9) {
                         odIntervalList.put(getTransferCeil(odMultiple * i) + "-" + getTransferCeil(odMultiple * (i + 1)), String.valueOf(getCount(odThinknessList, getTransferCeil(odMultiple * i), getTransferCeil(odMultiple * (i + 1)))));
-//                    } else {
-//                        odIntervalList.put(getTransferCeil(odMultiple * i) + "-" + getTransferCeil(odMinMax[1]), String.valueOf(getCount(odThinknessList, getTransferCeil(odMultiple * i), getTransferCeil(odMinMax[1]))));
-//                    }
                 }
             }else{
                 odIntervalList.put(getTransferCeil(odMinMax[0]) + "-" + getTransferCeil(odMinMax[1]), String.valueOf(getCount(odThinknessList, getTransferCeil(odMinMax[0]), getTransferCeil(odMinMax[1]))));
@@ -483,11 +479,7 @@ public class StatisticsController {
             System.out.println("idMultiple="+idMultiple);
             if(idMultiple!=0) {
                 for (int i = 0; i < 10; i++) {
-//                    if (i < 9) {
                         idIntervalList.put(getTransferCeil(idMultiple * i) + "-" + getTransferCeil(idMultiple * (i + 1)), String.valueOf(getCount(idThinknessList, getTransferCeil(idMultiple * i), getTransferCeil(idMultiple * (i + 1)))));
-//                    } else {
-//                        idIntervalList.put(getTransferCeil(idMultiple * i) + "-" + getTransferCeil(idMinMax[1]), String.valueOf(getCount(idThinknessList, getTransferCeil(idMultiple * i),getTransferCeil( idMinMax[1]))));
-//                    }
                 }
             }else{
                 idIntervalList.put(getTransferCeil(idMinMax[0]) + "-" + getTransferCeil(idMinMax[1]), String.valueOf(getCount(idThinknessList, getTransferCeil(idMinMax[0]), getTransferCeil(idMinMax[1]))));
