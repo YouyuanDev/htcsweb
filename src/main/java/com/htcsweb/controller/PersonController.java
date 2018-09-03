@@ -33,9 +33,11 @@ public class PersonController {
 
     @Autowired
     private MillInfoDao millInfoDao;
-
-
-    //根据姓名模糊查询用户编号,小页面查询
+    /**
+     * 根据姓名和工号查询用户信息(小页面使用)
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/getPersonNoByName",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String getPersonNoByName(HttpServletRequest request){
@@ -46,15 +48,23 @@ public class PersonController {
         return mmp;
     }
 
+    /**
+     * 根据id查询操作工信息
+     * @param id
+     * @param request
+     * @return
+     */
     @RequestMapping("getPersonById")
     public String getPersonById(int id,HttpServletRequest request){
         Person person=personDao.getPersonById(id);
         request.getSession().setAttribute("sa",person);
         return "personedit";
     }
-
-
-    //供app程序使用，无需权限，需验证登录情况
+    /**
+     * 无需权限，需验证登录情况(app使用)
+     * @param request
+     * @return
+     */
     @RequestMapping(value ="/getPersonByEmployeeNo",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String getPersonByEmployeeNo(HttpServletRequest request){
@@ -76,7 +86,6 @@ public class PersonController {
         }
         Map<String,Object> maps=new HashMap<String,Object>();
         if(employee_no==null){
-
             maps.put("success",false);
             maps.put("msg","请先登录");
             String mmp= JSONArray.toJSONString(maps);
@@ -105,7 +114,13 @@ public class PersonController {
         }
         return mmp;
     }
-    //搜索
+    /**
+     * 分页查询操作工信息
+     * @param employee_no(工号)
+     * @param pname(名字)
+     * @param request
+     * @return
+     */
     @RequestMapping("getPersonByLike")
     @ResponseBody
     public String getPersonByLike( @RequestParam(value = "employee_no",required = false)String employee_no,@RequestParam(value = "pname",required = false)String pname,  HttpServletRequest request){
@@ -124,13 +139,15 @@ public class PersonController {
         maps.put("total",count);
         maps.put("rows",list);
         String mmp= JSONArray.toJSONString(maps);
-        //System.out.print("mmp:"+mmp);
         return mmp;
 
     }
-
-    //保存Person
-    //增加或修改Pipe信息
+    /**
+     * 增加或修改操作工信息
+     * @param person
+     * @param response
+     * @return
+     */
     @RequestMapping(value = "/savePerson")
     @ResponseBody
     public String savePerson(Person person, HttpServletRequest request,HttpServletResponse response){
@@ -141,10 +158,8 @@ public class PersonController {
             if(person.getId()==0){
                 //添加
                 resTotal=personDao.addPerson(person);
-
             }else{
                 //修改！
-
                 resTotal=personDao.updatePerson(person);
             }
             if(resTotal>0){
@@ -154,12 +169,10 @@ public class PersonController {
                 json.put("success",false);
                 json.put("message","修改失败!");
             }
-
         }catch (Exception e){
             e.printStackTrace();
             json.put("success",false);
             json.put("message",e.getMessage());
-
         }finally {
             try {
                 ResponseUtil.write(response, json);
@@ -169,9 +182,13 @@ public class PersonController {
         }
         return null;
     }
-
-
-    //删除person信息
+    /**
+     * 删除操作工信息
+     * @param hlparam(操作工id集合,","分割)
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/delPerson")
     public String delPerson(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
         String[]idArr=hlparam.split(",");

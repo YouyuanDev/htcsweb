@@ -148,6 +148,14 @@ public class SessionFilter extends OncePerRequestFilter{
             "getStatisticExcelProgress"
     }; // 不过滤的uri
 
+    /**
+     * 权限过滤
+     * @param request
+     * @param response
+     * @param filterChain
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request,HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
@@ -155,9 +163,6 @@ public class SessionFilter extends OncePerRequestFilter{
             filterChain.doFilter(request, response);//不执行过滤,继续执行操作
             return;
         }
-
-
-        //System.out.println("====测试Filter功能====拦截用户登陆====");
         String strUri = request.getRequestURI();
         String suffix=strUri.substring(strUri.lastIndexOf('.')+1);
         //从uri中取出functioncode 如/index.jsp 为 index
@@ -197,8 +202,6 @@ public class SessionFilter extends OncePerRequestFilter{
                 filterChain.doFilter(request, response);//不执行过滤,继续执行操作
                 return;
             }
-
-
             //System.out.println("存在用户session 可以进入 session="+request.getSession().getAttribute("userSession"));
             //System.out.println("检测用户是否存在页面"+reqfunctionCode+"的权限");
             boolean authrized=false;
@@ -236,13 +239,14 @@ public class SessionFilter extends OncePerRequestFilter{
             return ;
         }
     }
-
-    //检查URI是否在免过滤列表中
+    /**
+     * 检查URI是否在免过滤列表中
+     * @param URI
+     * @return
+     */
     private boolean isURIInAuthorizedList(String URI){
         if(URI==null)
             return false;
-
-
         for(int i=0;i<notFilterList.length;i++){
             if( URI.equals(notFilterList[i])) {
                 //System.out.println("notFilterList[i]="+notFilterList[i]);
@@ -250,12 +254,6 @@ public class SessionFilter extends OncePerRequestFilter{
                 return true;
             }
         }
-
-
         return false;
     }
-
-
-
-
 }

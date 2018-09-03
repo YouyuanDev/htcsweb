@@ -10,18 +10,25 @@ import java.util.List;
 
 public interface InspectionProcessRecordHeaderDao {
 
+    //添加检验表单头部信息
     public int addInspectionProcessRecordHeader(InspectionProcessRecordHeader inspectionProcessRecordHeader);
+
+    //更新检验表单头部信息
     public int updateInspectionProcessRecordHeader(InspectionProcessRecordHeader inspectionProcessRecordHeader);
+
+    //删除检验表单头部信息
     public int delInspectionProcessRecordHeader(String[]arrId);
 
+    //分页查询检验表单头部信息
     public List<HashMap<String,Object>> getAllByLike(@Param("process_code") String process_code,@Param("pipe_no") String pipe_no, @Param("operator_no") String operator_no, @Param("begin_time") Date begin_time, @Param("end_time") Date end_time, @Param("mill_no") String mill_no, @Param("skip") int skip, @Param("take") int take);
 
+    //查询检验表单头部信息总数
     public int getCountAllByLike(@Param("process_code") String process_code,@Param("pipe_no") String pipe_no, @Param("operator_no") String operator_no, @Param("begin_time") Date begin_time, @Param("end_time") Date end_time, @Param("mill_no") String mill_no);
 
-    public List<HashMap<String,Object>>  getProcessRecord(@Param("process_code") String process_code,@Param("project_no") String project_no,@Param("mill_no") String mill_no,@Param("od") String od,@Param("wt") String wt, @Param("begin_time") Date begin_time, @Param("end_time") Date end_time);
+    //public List<HashMap<String,Object>>  getProcessRecord(@Param("process_code") String process_code,@Param("project_no") String project_no,@Param("mill_no") String mill_no,@Param("od") String od,@Param("wt") String wt, @Param("begin_time") Date begin_time, @Param("end_time") Date end_time);
 
     //根据钢管编号查询上一根合格记录
-    public InspectionProcessRecordHeader getLastAcceptedRecordBeforePipeNo(@Param("process_code") String process_code,@Param("pipe_no")String pipe_no,@Param("mill_no")String mill_no);
+    //public InspectionProcessRecordHeader getLastAcceptedRecordBeforePipeNo(@Param("process_code") String process_code,@Param("pipe_no")String pipe_no,@Param("mill_no")String mill_no);
 
     //根据钢管编号查询最新一条记录
     public InspectionProcessRecordHeader getRecentRecordByPipeNo(@Param("process_code") String process_code,@Param("pipe_no")String pipe_no);

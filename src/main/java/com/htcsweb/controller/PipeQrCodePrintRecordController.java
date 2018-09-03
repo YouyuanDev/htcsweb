@@ -36,7 +36,13 @@ public class PipeQrCodePrintRecordController {
     private PipeQrCodePrintRecordDao pipeQrCodePrintRecordDao;
     @Autowired
     private PipeBasicInfoDao pipeBasicInfoDao;
-
+    /**
+     * 删除二维码打印记录
+     * @param hlparam(打印记录id集合,","分割)
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/delQrCodePrintRecord")
     public String delQrCodePrintRecord(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
         String[]idArr=hlparam.split(",");
@@ -56,8 +62,15 @@ public class PipeQrCodePrintRecordController {
         ResponseUtil.write(response,json);
         return null;
     }
-
-
+    /**
+     * 分页查询二维码打印记录
+     * @param pipe_no(钢管编号)
+     * @param operator_no(操作工号)
+     * @param begin_time(开始日期)
+     * @param end_time(结束日期)
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/getQrCodePrintRecord")
     @ResponseBody
     public String getQrCodePrintRecord(@RequestParam(value = "pipe_no",required = false)String pipe_no, @RequestParam(value = "operator_no",required = false)String operator_no, @RequestParam(value = "begin_time",required = false)String begin_time, @RequestParam(value = "end_time",required = false)String end_time,HttpServletRequest request){
@@ -94,6 +107,14 @@ public class PipeQrCodePrintRecordController {
         String mmp= JSONArray.toJSONString(maps);
         return mmp;
     }
+    /**
+     * 根据合同编号添加二维码记录信息并下载
+     * @param hlparam(钢管编号集合,","分割)
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/genQRCodeByContractNo")
     public String genQRCodeByContractNo(@RequestParam(value = "hlparam")String hlparam,HttpServletRequest request,HttpServletResponse response)throws Exception{
         String[]contractNoArr=hlparam.split(",");
@@ -123,6 +144,14 @@ public class PipeQrCodePrintRecordController {
         return "";
     }
 
+    /**
+     * 添加二维码记录信息并下载
+     * @param hlparam(钢管编号集合,","分割)
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/genQRCode")
     public String genQRCode(@RequestParam(value = "hlparam")String hlparam,HttpServletRequest request,HttpServletResponse response)throws Exception{
         ResponseUtil.writeQRCodeZipFile(hlparam,request,response);
@@ -131,7 +160,6 @@ public class PipeQrCodePrintRecordController {
         String remark=request.getParameter("remark");
         if(remark==null)
             remark="钢管信息管理页面下载";
-
         for (int i=0;i<arr.length;i++){
             PipeQrCodePrintRecord record=new PipeQrCodePrintRecord();
             record.setPipe_no(arr[i]);
@@ -152,12 +180,19 @@ public class PipeQrCodePrintRecordController {
             pipeQrCodePrintRecordDao.addQrCode(list1);
         return  null;
     }
-    //根据合同编号查询所有的钢管编号
+    /**
+     * 根据合同编号查询所有的钢管编号
+     * @param contractno(合同编号)
+     * @return
+     */
     public List<String>getPipenoByContractNo(String[]contractno){
         return pipeBasicInfoDao.getPipeNoByContractNo(contractno);
     }
-
-    //APP生成QRCode并打印
+    /**
+     * 生成QRCode并打印(APP使用)
+     * @param request
+     * @return
+     */
     @RequestMapping("/APPPrintQRCode")
     @ResponseBody
     public String genQRCode(HttpServletRequest request){
@@ -170,9 +205,7 @@ public class PipeQrCodePrintRecordController {
             PipeQrCodePrintRecord record=new PipeQrCodePrintRecord();
             record.setPipe_no(pipe_no);
             //session 读取用户id
-
             //把用户数据保存在session域对象中
-
             if(employee_no!=null) {
                 record.setOperator_no(employee_no);
             }else{
@@ -194,12 +227,14 @@ public class PipeQrCodePrintRecordController {
             json.put("success",false);
             json.put("message","管号或session不存在打印记录保存失败");
         }
-
         String mmp= JSONArray.toJSONString(json);
         return mmp;
     }
-
-    //APP查询打印次数
+    /**
+     * 获取打印次数(APP使用)
+     * @param request
+     * @return
+     */
     @RequestMapping("/APPGetQRCodePrintTimes")
     @ResponseBody
     public String APPGetQRCodePrintTimes(HttpServletRequest request){

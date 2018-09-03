@@ -20,8 +20,11 @@ public class DefectInfoController {
 
     @Autowired
     DefectInfoDao defectInfoDao;
-
-    //得到所有钢管表面的缺陷种类   /DefectOperation/getAllSteelDefectInfo.action
+    /**
+     * 得到所有钢管表面的缺陷种类
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "getAllSteelDefectInfo",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String getAllSteelDefectInfo(HttpServletRequest request){
@@ -30,9 +33,11 @@ public class DefectInfoController {
         System.out.println(mmp);
         return mmp;
     }
-
-
-    //得到所有涂层的缺陷种类     /DefectOperation/getAllCoatingDefectInfo.action
+    /**
+     * 得到所有涂层的缺陷种类
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "getAllCoatingDefectInfo",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String getAllCoatingDefectInfo(HttpServletRequest request){

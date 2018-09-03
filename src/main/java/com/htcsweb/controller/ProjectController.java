@@ -29,8 +29,12 @@ public class ProjectController {
 
     @Autowired
     private ProjectInfoDao projectInfoDao;
-
-    //获取项目编号和名称
+    /**
+     * 获取项目编号和名称
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping(value = "/getProjectNoAndName",produces="text/plain;charset=UTF-8")
     @ResponseBody
     public String getProjectNoAndName(HttpServletRequest request,HttpServletResponse response)
@@ -40,8 +44,16 @@ public class ProjectController {
         jsonArray.add(list);
         return jsonArray.toString();
     }
-
-    //模糊查询project信息列表
+    /**
+     * 分页模糊查询项目信息
+     * @param project_no(项目编号)
+     * @param project_name(项目名称)
+     * @param client_name(客户名称)
+     * @param begin_time(开始日期)
+     * @param end_time(结束日期)
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/getProjectInfoByLike")
     @ResponseBody
     public String getProjectInfoByLike(@RequestParam(value = "project_no",required = false)String project_no, @RequestParam(value = "project_name",required = false)String project_name,@RequestParam(value = "client_name",required = false)String client_name, @RequestParam(value = "begin_time",required = false)String begin_time, @RequestParam(value = "end_time",required = false)String end_time, HttpServletRequest request){
@@ -59,35 +71,28 @@ public class ProjectController {
         try{
             if(begin_time!=null&&begin_time!=""){
                 beginTime=sdf.parse(begin_time);
-                System.out.println(beginTime.toString());
             }
             if(end_time!=null&&end_time!=""){
                 endTime=sdf.parse(end_time);
-                System.out.println(endTime.toString());
             }
         }catch (Exception e){
             e.printStackTrace();
         }
-
-//        System.out.print("project_no:"+project_no);
-//        System.out.print("project_name:"+project_name);
-//        System.out.print("client_name:"+client_name);
-//        System.out.print("beginTime:"+beginTime);
-//        System.out.print("endTime:"+endTime);
-
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
         List<HashMap<String,Object>>list=projectInfoDao.getAllByLike(project_no,project_name,client_name,beginTime,endTime,start,Integer.parseInt(rows));
-        //System.out.print("list:"+list.size());
         int count=projectInfoDao.getCountAllByLike(project_no,project_name,client_name,beginTime,endTime);
-        //System.out.print("count:"+count);
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
         maps.put("rows",list);
         String mmp= JSONArray.toJSONString(maps);
-        //System.out.print("mmp:"+mmp);
         return mmp;
     }
-
+    /**
+     * 添加或修改项目信息
+     * @param projectInfo(项目信息)
+     * @param response
+     * @return
+     */
     @RequestMapping(value = "/saveProject")
     @ResponseBody
     public String saveProject(ProjectInfo projectInfo,HttpServletResponse response){
@@ -97,10 +102,8 @@ public class ProjectController {
             if(projectInfo.getId()==0){
                 //添加
                 resTotal=projectInfoDao.addProjectInfo(projectInfo);
-                //System.out.print("添加:"+projectInfo.getProject_name());
             }else{
                 //修改！
-                //System.out.print("修改:"+projectInfo.getProject_name());
                 resTotal=projectInfoDao.updateProjectInfo(projectInfo);
             }
             if(resTotal>0){
@@ -110,12 +113,10 @@ public class ProjectController {
                 json.put("success",false);
                 json.put("message","保存失败");
             }
-
         }catch (Exception e){
             e.printStackTrace();
             json.put("success",false);
             json.put("message",e.getMessage());
-
         }finally {
             try {
                 ResponseUtil.write(response, json);
@@ -125,8 +126,13 @@ public class ProjectController {
         }
         return null;
     }
-
-    //删除project信息
+    /**
+     * 删除项目信息
+     * @param hlparam(项目信息id集合,","分割)
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/delProject")
     public String delProject(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
         String[]idArr=hlparam.split(",");
@@ -138,28 +144,27 @@ public class ProjectController {
         sbmessage.append(Integer.toString(resTotal));
         sbmessage.append("项项目信息删除成功\n");
         if(resTotal>0){
-            //System.out.print("删除成功");
             json.put("success",true);
         }else{
-            //System.out.print("删除失败");
             json.put("success",false);
         }
         json.put("message",sbmessage.toString());
         ResponseUtil.write(response,json);
         return null;
     }
-
-
-    //检查project_no 是否已存在
+    /**
+     * 检查项目编号是否已经存在
+     * @param project_no
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/checkProjectNoAvailable")
     @ResponseBody
     public String checkProjectNoAvailable(@RequestParam(value = "project_no",required = false)String project_no, HttpServletResponse response)throws Exception{
-
-
         int resTotal=0;
         resTotal=projectInfoDao.hasProjectNo(project_no);
         JSONObject json=new JSONObject();
-
         if(resTotal>0){
             json.put("success",false);
         }else{
@@ -169,7 +174,12 @@ public class ProjectController {
         ResponseUtil.write(response,json);
         return null;
     }
-    //根据钢管编号异步查询钢管信息-名字
+    /**
+     * 根据钢管编号异步查询钢管信息-名字
+     * @param response
+     * @param request
+     * @return
+     */
     @RequestMapping(value ="/getProjectNameByNo")
     public String getProjectNameByNo(HttpServletResponse response,HttpServletRequest request){
         String project_no=request.getParameter("project_no");
@@ -182,7 +192,12 @@ public class ProjectController {
         }
         return null;
     }
-    //根据合同编号异步查询项目名称和编号
+    /**
+     * 根据合同编号异步查询项目名称和编号
+     * @param response
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/getProjectInfoByContract",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String getProjectInfoByContract(HttpServletResponse response,HttpServletRequest request){
@@ -196,7 +211,11 @@ public class ProjectController {
         }
         return null;
     }
-
+    /**
+     * 根据项目编号获取项目信息
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/getProjectInfo",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String getProjectInfo(HttpServletRequest request){
@@ -205,7 +224,12 @@ public class ProjectController {
         String map= JSONObject.toJSONString(list);
         return map;
     }
-    //根据项目编号和项目名字异步查询钢管信息
+    /**
+     * 根据项目编号和项目名字异步查询钢管信息
+     * @param response
+     * @param request
+     * @return
+     */
     @RequestMapping(value ="/getProjectInfoByNoOrName")
     public String getProjectInfoByNoOrName(HttpServletResponse response,HttpServletRequest request){
         String project_no=request.getParameter("project_no");

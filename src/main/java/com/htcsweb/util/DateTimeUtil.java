@@ -8,7 +8,12 @@ import java.util.List;
 
 public class DateTimeUtil {
     private  static  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    //获取两个日期之间的所有字符串日期
+    /**
+     * 获取两个日期之间的所有日期(字符串格式)
+     * @param start
+     * @param end
+     * @return
+     */
     public static   List<String> getBetweenDates(Date start, Date end) {
         List<String> result = new ArrayList<String>();
         result.add(sdf.format(start));
@@ -25,7 +30,11 @@ public class DateTimeUtil {
           result.add(sdf.format(end));
         return result;
     }
-    //获取传过来日期的下一天的日期字符串
+    /**
+     * 获取传过来日期的下一天的日期(字符串格式)
+     * @param day(传过来日期)
+     * @return
+     */
     public static  String getNextDay(String day){
         String returnday=null;
         try{
@@ -39,7 +48,11 @@ public class DateTimeUtil {
         }
         return returnday;
     }
-    //获取传过来日期的下一天的日期字符串
+    /**
+     * 获取传过来日期的前一天的日期(字符串格式)
+     * @param day
+     * @return
+     */
     public  static String getLastDay(String day){
         String returnday=null;
         try{

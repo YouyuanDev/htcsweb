@@ -7,8 +7,9 @@ import java.util.List;
 
 public interface DefectInfoDao {
 
-    //得到Steel类型的DefectInfo
+    //获取钢体缺陷类型的列表
     public List<DefectInfo> getAllSteelDefectInfo();
-    //得到Coating类型的DefectInfo
+
+    //获取涂层缺陷类型的列表
     public List<DefectInfo> getAllCoatingDefectInfo();
 }

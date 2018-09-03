@@ -11,5 +11,6 @@ import java.util.List;
 @Repository
 public interface MillInfoDao {
 
+    //获取所有分厂号
     public List<MillInfo> getAllMillInfo();
 }

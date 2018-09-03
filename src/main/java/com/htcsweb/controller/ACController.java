@@ -24,15 +24,21 @@ import java.util.Map;
 @Controller
 @RequestMapping("/ACOperation")
 public class ACController {
-
-
     @Autowired
     private AcceptanceCriteriaDao acceptanceCriteriaDao;
 
     @Autowired
     DynamicMeasurementItemDao dynamicMeasurementItemDao;
 
-
+    /**
+     * 分页查询检验标准
+     * @param acceptance_criteria_no(标准编号)
+     * @param acceptance_criteria_name(标准名称)
+     * @param external_coating_type(外防类型)
+     * @param internal_coating_type(内防类型)
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/getACByLike")
     @ResponseBody
     public String getACByLike(@RequestParam(value = "acceptance_criteria_no",required = false)String acceptance_criteria_no,@RequestParam(value = "acceptance_criteria_name",required = false)String acceptance_criteria_name, @RequestParam(value = "external_coating_type",required = false)String external_coating_type, @RequestParam(value = "internal_coating_type",required = false)String internal_coating_type, HttpServletRequest request){
@@ -60,8 +66,11 @@ public class ACController {
         //System.out.print("mmp:"+mmp);
         return mmp;
     }
-
-
+    /**
+     * 根据编号和名称查询检验标准
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/getACs",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String getACs(HttpServletRequest request){
@@ -76,9 +85,13 @@ public class ACController {
         }
         return map;
     }
-
-
-    //添加、修改
+    /**
+     * 添加或修改检验标准
+     * @param acceptanceCriteria(检验标准)
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping("/saveAC")
     @ResponseBody
     public String saveAC(AcceptanceCriteria acceptanceCriteria, HttpServletRequest request, HttpServletResponse response){
@@ -102,7 +115,6 @@ public class ACController {
             }else{
                 //修改！
                 resTotal=acceptanceCriteriaDao.updateAcceptanceCriteria(acceptanceCriteria);
-
             }
             if(resTotal>0){
                 json.put("success",true);
@@ -126,9 +138,13 @@ public class ACController {
         }
         return null;
     }
-
-
-    //删除
+    /**
+     * 删除检验标准
+     * @param hlparam(标准id集合,","分割)
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/delAC")
     public String delAC(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
         String[]idArr=hlparam.split(",");

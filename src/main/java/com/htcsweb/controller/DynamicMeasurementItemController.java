@@ -38,32 +38,31 @@ public class DynamicMeasurementItemController {
 
     @Autowired
     ContractInfoDao contractInfoDao;
-
-
-    //获得动态检测项列表，根据ACNo
+    /**
+     * 根据接收标准编号获得动态检测项列表
+     * @param request
+     * @return
+     */
     @RequestMapping("/getDynamicItemByACNo")
     @ResponseBody
     public String getDynamicItemByACNo(HttpServletRequest request){
         JSONObject json=new JSONObject();
-
         String acceptance_criteria_no=request.getParameter("acceptance_criteria_no");
         List<DynamicMeasurementItem> list=dynamicMeasurementItemDao.getDynamicMeasurementItemByAcceptanceCriteriaNo(acceptance_criteria_no);
-
         String mmp= JSONArray.toJSONString(list);
         return mmp;
     }
-
-
-
-    //获得动态检测项列表，根据ACNo
+    /**
+     * 分页查询动态检测项
+     * @param request
+     * @return
+     */
     @RequestMapping("/getDynamicItemWithProcessInfoByACNo")
     @ResponseBody
     public String getDynamicItemWithProcessInfoByACNo(HttpServletRequest request){
         JSONObject json=new JSONObject();
         String page= request.getParameter("page");
         String rows= request.getParameter("rows");
-        System.out.println("page================="+page);
-        System.out.println("rows================="+rows);
         if(page==null){
             page="1";
         }
@@ -74,41 +73,36 @@ public class DynamicMeasurementItemController {
         String acceptance_criteria_no=request.getParameter("acceptance_criteria_no");
         List<HashMap<String,Object>> list=dynamicMeasurementItemDao.getDynamicMeasurementItemWithProcessInfoByAcceptanceCriteriaNo(acceptance_criteria_no,start,Integer.parseInt(rows));
         int count=dynamicMeasurementItemDao.getCountDynamicMeasurementItemWithProcessInfoByAcceptanceCriteriaNo(acceptance_criteria_no);
-        System.out.println("list================="+JSONArray.toJSONString(list));
-        System.out.println("count================="+count);
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
         maps.put("rows",list);
         String mmp= JSONArray.toJSONString(maps);
         return mmp;
     }
-
-
-
-
-    //获得动态检测项列表，根据管号，工序号
+    /**
+     * 根据管号、工序号获得动态检测项
+     * @param request
+     * @return
+     */
     @RequestMapping("/getDynamicItemByPipeNoProcessCode")
     @ResponseBody
     public String getDynamicItemByPipeNoProcessCode(HttpServletRequest request){
         JSONObject json=new JSONObject();
-
         String pipe_no=request.getParameter("pipe_no");
         String process_code=request.getParameter("process_code");
-
-        System.out.println("pipe_no="+pipe_no);
-        System.out.println("process_code="+process_code);
-
         List<DynamicMeasurementItem> list=dynamicMeasurementItemDao.getDynamicItemByPipeNoProcessCode(pipe_no,process_code);
-
         String mmp= JSONArray.toJSONString(list);
         System.out.println(mmp);
         return mmp;
     }
-
-
+    /**
+     * 设置外防或内防喷标内容
+     * @param processCode(工序编码)
+     * @param pipeNo(钢管编号)
+     * @param stencilContent
+     * @return
+     */
     private String InitStencil_content(String processCode,String pipeNo,String stencilContent){
-
-        //设置外防或内防喷标
         if(processCode!=null&&(processCode.equals("od_stencil")||processCode.equals("id_stencil"))){
             List<HashMap<String,Object>> pipelist= pipeBasicInfoDao.getPipeInfoByNo(pipeNo);
             if(pipelist.size()>0){
@@ -136,7 +130,6 @@ public class DynamicMeasurementItemController {
                     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                     id_coating_dateString = formatter.format(id_coating_date);
                 }
-
             //替换
             stencilContent = stencilContent.replace("[OD]", String.valueOf(od));
             stencilContent = stencilContent.replace("[WT]", String.valueOf(wt));
@@ -155,15 +148,18 @@ public class DynamicMeasurementItemController {
                 stencilContent = stencilContent.replace("[COATINGDATE]",od_coating_dateString);
             if(processCode.equals("id_stencil"))
                 stencilContent = stencilContent.replace("[COATINGDATE]",id_coating_dateString);
-
-
             }
-
         }
         return stencilContent;
     }
-
-    //获得动态检测项列表及检测值，根据管号，工序号，表单编号
+    /**
+     * 根据管号，工序号，表单编号获得动态检测项列表及检测值
+     * @param request
+     * @return
+     * @throws InvocationTargetException
+     * @throws IllegalAccessException
+     * @throws NoSuchMethodException
+     */
     @RequestMapping("/getDynamicItemByPipeNoProcessCodeHeaderCode")
     @ResponseBody
     public String getDynamicItemByPipeNoProcessCodeHeaderCode(HttpServletRequest request) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
@@ -173,18 +169,10 @@ public class DynamicMeasurementItemController {
         String process_code=request.getParameter("process_code");
         String mill_no=request.getParameter("mill_no");
         String inspection_process_record_header_code=request.getParameter("inspection_process_record_header_code");
-
-        System.out.println("pipe_no="+pipe_no);
-        System.out.println("process_code="+process_code);
-        System.out.println("inspection_process_record_header_code="+inspection_process_record_header_code);
-
         List<HashMap<String, Object>> itemlist=new ArrayList<>();
-
         if(pipe_no!=null&&!pipe_no.equals("")&&process_code!=null&&!process_code.equals("")) {
             if (inspection_process_record_header_code == null || inspection_process_record_header_code.equals("")) {
-
                 itemlist=dynamicMeasurementItemDao.getDynamicItemByPipeNoProcessCodeReturnMap(pipe_no, process_code);
-
                 if(process_code.equals("od_stencil")) {//色环颜色初始化一下
                     String newStencilvalue = "";
                     for(int i=0;i<itemlist.size();i++) {
@@ -195,7 +183,6 @@ public class DynamicMeasurementItemController {
                                 mp.put("default_value",contract.getCenter_line_color());
                                 itemlist.set(i,mp);
                             }
-
                         }else if(mp != null && mp.get("item_code") != null && mp.get("item_code").equals("pipe_end_color")){
                             ContractInfo contract=contractInfoDao.getContractInfoByPipeNo(pipe_no);
                             if(contract!=null){
@@ -206,64 +193,9 @@ public class DynamicMeasurementItemController {
                     }
 
                 }
-
-
-
-//                List<DynamicMeasurementItem> tmplist = dynamicMeasurementItemDao.getDynamicItemByPipeNoProcessCode(pipe_no, process_code);
-//                //mmp= JSONArray.toJSONString(list);
-//
-//                    for(int i=0;i<tmplist.size();i++){
-//                        DynamicMeasurementItem item=tmplist.get(i);
-//                            Field[] field = item.getClass().getDeclaredFields();
-//                            HashMap <String,Object> map=new HashMap <String,Object>();
-//                            for (int j = 0; j < field.length; j++) {     //遍历所有属性
-//                                String name = field[j].getName();
-//                                name = name.substring(0, 1).toUpperCase() + name.substring(1); //将属性的首字符大写，方便构造get，set方法
-//                                Method m = null;
-//                                m = item.getClass().getMethod("get" + name);
-//
-//                                String type = field[j].getGenericType().toString();    //获取属性的类型
-//
-//                                if (type.equals("class java.lang.String")) {
-//                                    String value = (String) m.invoke(item);    //调用getter方法获取属性值
-//                                    if (value != null) {
-//                                        System.out.println("attribute value:" + value);
-//                                    }
-//
-//                                    //替换喷标内容
-//                                    String newStencilvalue="";
-//                                    if(name!=null&&value!=null&&name.equals("item_code")&&(value.equals("od_stencil_content")||value.equals("id_stencil_content"))) {
-//                                        newStencilvalue = InitStencil_content(process_code, pipe_no, item.getDefault_value());
-//                                        System.out.println("stencil_content="+newStencilvalue);
-//                                    }
-//
-//                                    if(!newStencilvalue.equals("")) {
-//                                        map.put("item_value",newStencilvalue);
-//                                    }
-//                                    map.put(name,value);
-//                                }
-//                                else if(type.equals("class java.lang.Integer")) {
-//                                    Integer value = (Integer) m.invoke(item);
-//                                    if (value != null)
-//                                    {
-//                                        System.out.println("attribute value:" + value);
-//                                    }
-//                                    map.put(name,value);
-//                                }
-//                            }
-//                        list.add(map);
-//
-//                        }
-
-
-
             } else {
                 itemlist = dynamicMeasurementItemDao.getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no, process_code, inspection_process_record_header_code);
-                //mmp= JSONArray.toJSONString(list);
-
             }
-
-
             //初始化喷标模版
             //替换喷标内容
             if(process_code.equals("od_stencil")||process_code.equals("id_stencil")) {
@@ -280,11 +212,9 @@ public class DynamicMeasurementItemController {
 
             }
             resultmaps.put("record", itemlist);
-
             //获取检测频率记录
             if(mill_no!=null&&!mill_no.equals("")) {
                 List<InspectionTimeRecord> recordlist = inspectionTimeRecordDao.getRecordByPipeNoMillNo(pipe_no, mill_no, null);
-
                 List<DynamicMeasurementItem> dynamiclist = dynamicMeasurementItemDao.getDynamicItemByPipeNoProcessCode(pipe_no, process_code);
                 List<HashMap<String,Object>> list=new ArrayList<HashMap<String,Object>>();
                 Date now = new Date();
@@ -318,20 +248,15 @@ public class DynamicMeasurementItemController {
                 resultmaps.put("needInspectionInfo",list);
             }
         }
-
-
-
         String mmp= JSONArray.toJSONString(resultmaps);
-
         System.out.println(mmp);
         return mmp;
     }
-
-
-
-
-
-
+    /**
+     * 导入动态测量项
+     * @param request
+     * @return
+     */
     @RequestMapping("/importDynamicItem")
     @ResponseBody
     public String importDynamicItem(HttpServletRequest request) {
@@ -348,7 +273,6 @@ public class DynamicMeasurementItemController {
             System.out.println("getIs_special_item="+item.getIs_special_item());
             if(item.getIs_special_item()!=null&&item.getIs_special_item().equals("1"))
                 continue;
-
             //初始化自己的参数
             item.setId(0);
             item.setAcceptance_criteria_no(des_acceptance_criteria_no);
@@ -371,12 +295,13 @@ public class DynamicMeasurementItemController {
         return mmp;
 
     }
-
-
-
-
-
-            //添加、修改
+    /**
+     * 添加或修改动态测量项
+     * @param dynamicMeasurementItem(动态测量项)
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping("/saveDynamicItem")
     @ResponseBody
     public String saveDynamicItem(DynamicMeasurementItem dynamicMeasurementItem, HttpServletRequest request, HttpServletResponse response){
@@ -391,7 +316,6 @@ public class DynamicMeasurementItemController {
             }else{
                 //修改！
                 resTotal=dynamicMeasurementItemDao.updateDynamicMeasurementItem(dynamicMeasurementItem);
-
             }
             if(resTotal>0){
                 json.put("success",true);
@@ -417,9 +341,13 @@ public class DynamicMeasurementItemController {
         }
         return null;
     }
-
-
-    //删除
+    /**
+     * 删除动态测量项
+     * @param hlparam(动态测量项id集合,","分割)
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/delDynamicItem")
     public String delDynamicItem(@RequestParam(value = "hlparam")String hlparam, HttpServletResponse response)throws Exception{
         String[]idArr=hlparam.split(",");
@@ -431,43 +359,30 @@ public class DynamicMeasurementItemController {
         sbmessage.append(Integer.toString(resTotal));
         sbmessage.append("项检验项删除成功\n");
         if(resTotal>0){
-            //System.out.print("删除成功");
             json.put("success",true);
         }else{
-            //System.out.print("删除失败");
             json.put("success",false);
         }
         json.put("message",sbmessage.toString());
         ResponseUtil.write(response,json);
         return null;
     }
-
-
-
-    //检测某检测项此刻是否需要检测
+    /**
+     * 根据钢管编号、分厂号、工序号判断某检测项此刻是否需要检测
+     * @param request
+     * @return
+     */
     @RequestMapping("/getAllInspectionTimeMapByPipeNoMillNo")
     @ResponseBody
     public String getAllInspectionTimeMapByPipeNoMillNo( HttpServletRequest request){
-
-        //DynamicItemOperation/getAllInspectionTimeMapByPipeNoMillNo.action?pipe_no=1524540&mill_no=mill_1
         String pipe_no=request.getParameter("pipe_no");
         String mill_no=request.getParameter("mill_no");
         String process_code=request.getParameter("process_code");
-
         List<HashMap<String,Object>> list=new ArrayList<HashMap<String,Object>>();
-
         if(pipe_no!=null&&!pipe_no.equals("")&&mill_no!=null&&!mill_no.equals("")) {
             List<InspectionTimeRecord> recordlist = inspectionTimeRecordDao.getRecordByPipeNoMillNo(pipe_no, mill_no, null);
-            //List<HashMap<String,Object>> ltif= inspectionFrequencyDao.getFrequencyInfoByPipeNo(pipe_no);
-
             List<DynamicMeasurementItem> dynamiclist = dynamicMeasurementItemDao.getDynamicItemByPipeNoProcessCode(pipe_no, process_code);
-
-
             Date now = new Date();
-
-            //System.out.println("11111111111ltif.size()"+ltif.size());
-            //System.out.println("222222lt.size()"+lt.size());//这里出错了 可能没记录
-
             for (int i = 0; i < dynamiclist.size(); i++) {
                 DynamicMeasurementItem item = dynamiclist.get(i);
                 boolean needInspectNow = true;
@@ -497,10 +412,13 @@ public class DynamicMeasurementItemController {
             }
         }
         String mmp= JSONArray.toJSONString(list);
-        //System.out.println(mmp);
         return mmp;
     }
-    //获取内外喷标内容模板
+    /**
+     * 获取内、外喷标内容模板
+     * @param request
+     * @return
+     */
     @RequestMapping("/getOdIdStencilContentModel")
     @ResponseBody
     public String getOdIdStencilContentModel(HttpServletRequest request){

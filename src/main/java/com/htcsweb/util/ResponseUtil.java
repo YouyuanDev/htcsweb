@@ -32,7 +32,13 @@ public class ResponseUtil {
 
     }
 
-
+    /**
+     * 生成并下载二维码
+     * @param pipeNoArr(钢管编号集合)
+     * @param request
+     * @param response
+     * @throws Exception
+     */
     public static void writeQRCodeZipFile(String[] pipeNoArr, HttpServletRequest request, HttpServletResponse response)throws Exception{
 
         String tmpfolderPath=request.getSession().getServletContext().getRealPath("/tmp");
@@ -157,7 +163,13 @@ public class ResponseUtil {
     //
 
 
-
+    /**
+     * 下载pdf
+     * @param pdfListPath(pdf集合)
+     * @param request
+     * @param response
+     * @return
+     */
     public  static  String downLoadPdf(List<String>pdfListPath,HttpServletRequest request, HttpServletResponse response){
         List<FileBean> fileList=new ArrayList<>();
 

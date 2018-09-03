@@ -46,29 +46,25 @@ public class InspectionProcess {
 
     @Autowired
     private RoleDao roleDao;
-
-
-
-
+    /**
+     * 添加或修改检验记录
+     * @param inspectionProcessRecordHeader(检验记录表头信息)
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping("/saveProcess")
     @ResponseBody
     public String saveProcess(InspectionProcessRecordHeader inspectionProcessRecordHeader, HttpServletRequest request, HttpServletResponse response){
         JSONObject json=new JSONObject();
-        System.out.println("process_code="+inspectionProcessRecordHeader.getProcess_code());
         String dynamicJson=request.getParameter("dynamicJson");
         String outputJson=request.getParameter("outputJson");
         String inputStatusList=request.getParameter("inputStatusList");
-
-//        System.out.println("dynamicJson="+dynamicJson);
-//        System.out.println("outputJson="+outputJson);
-//        System.out.println("inputStatusList="+inputStatusList);
-
         JSONObject dynamicMap=null;
         JSONObject outputMap =null;
         JSONArray resultArray=null;
         //用于特殊的检验项 ，比如 是否是is_sample is_dsc_sample is_pe_sample is_glass_sample
         JSONArray additionParamArray=null;
-
         if(dynamicJson!=null) {
             dynamicMap = JSONObject.parseObject(dynamicJson);
         }
@@ -79,8 +75,6 @@ public class InspectionProcess {
             resultArray = (JSONArray) outputMap.get("output");
             additionParamArray = (JSONArray) outputMap.get("additionParams");
         }
-
-
         String msg="";
         String result_name="";
         String result_name_en="";
@@ -89,19 +83,14 @@ public class InspectionProcess {
             String uuid = UUID.randomUUID().toString();
             inspectionProcessRecordHeader.setInspection_process_record_header_code("IPRH"+uuid);
         }
-
-        //System.out.println("id="+inspectionProcessRecordHeader.getId());
-
         try{
             int resTotal=0;
             if(inspectionProcessRecordHeader.getOperation_time()==null){
                 inspectionProcessRecordHeader.setOperation_time(new Date());
             }
-
             String pipeno=inspectionProcessRecordHeader.getPipe_no();
             String mill_no=inspectionProcessRecordHeader.getMill_no();
             String project_no="";
-
             boolean inputStatusVerified=false;
             List<HashMap<String,Object>> list=pipeBasicInfoDao.getPipeInfoByNo(pipeno);
             String p_status="";
@@ -214,8 +203,6 @@ public class InspectionProcess {
 
 
                         }
-
-
                         if(inspectionProcessRecordHeader.getResult().equals("1")){
                             //特殊检验项的处理
                             for(int i=0;additionParamArray!=null&&i<additionParamArray.size();i++) {
@@ -239,11 +226,7 @@ public class InspectionProcess {
                                             obj=p;
                                             Field newname = c.getDeclaredField(des_pipe_property_name);
                                             String type = newname.getGenericType().toString();    //获取属性的类型
-                                            System.out.println("字段="+des_pipe_property_name+"=");
-                                            System.out.println("字段类型="+type+"=");
-                                            System.out.println("value="+set_value+"=");
                                             newname.setAccessible(true);
-
                                             if (type.contains("String")) {
                                                 newname.set(obj, set_value);
                                             }
@@ -251,7 +234,6 @@ public class InspectionProcess {
                                                 if(set_value!=null){
                                                     newname.set(obj, Integer.parseInt(set_value));
                                                 }
-
                                             }
                                             else if(type.contains("float")) {
                                                 if(set_value!=null){
@@ -268,11 +250,8 @@ public class InspectionProcess {
                         }
 
                 }
-
-
                 //各类工序合格后的处理逻辑
                 if(inspectionProcessRecordHeader.getResult().equals("1")){
-
                     if(inspectionProcessRecordHeader.getProcess_code().equals("od_blast_inspection")){
                         //APP使用，外喷砂检验合格后的管子，自动添加odcoating记录
                         HttpSession session = request.getSession();
@@ -299,7 +278,6 @@ public class InspectionProcess {
                         }
                     }
                     else  if((inspectionProcessRecordHeader.getProcess_code().equals("od_coating")||inspectionProcessRecordHeader.getProcess_code().equals("id_coating"))){
-
                             //更新涂敷前等待时间(当process_code为od_coating，id_coating时执行)
                             //更新钢管涂层时间
                             //String header_code=inspectionProcessRecordHeader.getInspection_process_record_header_code();
@@ -315,8 +293,6 @@ public class InspectionProcess {
                                 p.setId_coating_date(new Date());
                             }
                             int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
-
-
                             int headerId=inspectionProcessRecordHeader.getId();
                             List<HashMap<String,Object>>blastlist=inspectionProcessRecordHeaderDao.getBlastInfoByCoatingInfo(pipeno,headerId,blast_type);
                             if(blastlist!=null&&blastlist.size()>0){
@@ -364,11 +340,9 @@ public class InspectionProcess {
                         pipeBasicInfoDao.updatePipeBasicInfo(p);
                     }
                 }
-
                 //for循环结束
                 //更新管子的状态
                 if(p!=null){
-
                         for(int i=0;i<resultArray.size();i++){
                             JSONObject  rmap=(JSONObject)resultArray.get(i);
                             if(rmap!=null){
@@ -392,31 +366,20 @@ public class InspectionProcess {
                                             p.setLast_accepted_status(p.getStatus());
                                         int statusRes = pipeBasicInfoDao.updatePipeBasicInfo(p);
                                     }
-
                                     break;
                                 }
-
                             }
-
                         }
-
-
-
                 }
-
-
                 //发送事件推送,仅非合格且非待定时发送
                 if(!inspectionProcessRecordHeader.getResult().equals("1")&&!inspectionProcessRecordHeader.getResult().equals("10")){
                     Date nowtime=new Date();
-                    //String str_title=sdf.format(nowtime.getTime())+" "+inspectionProcessRecordHeader.getProcess_code()+" "+p.getPipe_no()+" "+result_name;//+"("+result_name_en+")";
                     String str_title=inspectionProcessRecordHeader.getProcess_code()+" "+p.getPipe_no()+" "+result_name;//+"("+result_name_en+")";
-
                     String str_content="工序："+inspectionProcessRecordHeader.getProcess_code()+",管号："+p.getPipe_no()+", "+result_name+"("+result_name_en+")";
                     String basePath = request.getSession().getServletContext().getRealPath("/");
                     if(basePath.lastIndexOf('/')==-1){
                         basePath=basePath.replace('\\','/');
                     }
-
                     PushServiceThread threadDemo01 = new PushServiceThread(basePath,inspectionProcessRecordHeader.getProcess_code(),str_title,str_content);
                     threadDemo01.setName("PushServiceThread1");
                     threadDemo01.start();
@@ -424,16 +387,12 @@ public class InspectionProcess {
                     System.out.println("推送title="+str_title);
                     System.out.println("推送str_content="+str_content);
                 }
-
-
-
                 json.put("success",true);
                 json.put("message","保存成功");
             }else{
                 json.put("success",false);
                 json.put("message","保存失败，"+msg);
             }
-
         }catch (Exception e){
             e.printStackTrace();
             json.put("success",false);
@@ -448,14 +407,14 @@ public class InspectionProcess {
         }
         return null;
     }
-
-
+    /**
+     * 推送
+     */
     public class PushServiceThread extends Thread{
         private String basePath="";
         private String event="";
         private String title="";
         private String content="";
-
         public PushServiceThread(String _basePath,String _event, String _title,String _content){
             //编写子类的构造方法，可缺省
             basePath=_basePath;
@@ -477,22 +436,21 @@ public class InspectionProcess {
         }
 
     }
-
-
-
-
-
-
+    /**
+     * 删除检验记录
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/delProcess")
     public String delProcess(HttpServletRequest request, HttpServletResponse response)throws Exception{
-
         String hlparam=request.getParameter("hlparam");
         System.out.println("hlparam"+hlparam);
         String[] idArr={};
         if(hlparam!=null) {
             idArr = hlparam.split(",");
         }
-
         //删除表单
         int resTotal=0;
         resTotal=inspectionProcessRecordHeaderDao.delInspectionProcessRecordHeader(idArr);
@@ -502,21 +460,25 @@ public class InspectionProcess {
         sbmessage.append(Integer.toString(resTotal));
         sbmessage.append("项工序检验信息删除成功\n");
         if(resTotal>0){
-            //System.out.print("删除成功");
             json.put("success",true);
         }else{
-            //System.out.print("删除失败");
             json.put("success",false);
         }
         json.put("message",sbmessage.toString());
         ResponseUtil.write(response,json);
         return null;
     }
-
-
-
-    ///搜索岗位工序检验信息
-
+    /**
+     * 搜索岗位工序检验记录
+     * @param process_code(工序编码)
+     * @param pipe_no(钢管编号)
+     * @param operator_no(操作工号)
+     * @param begin_time(开始时间)
+     * @param end_time(结束时间)
+     * @param mill_no(分厂号)
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/getProcessByLike")
     @ResponseBody
     public String getProcessByLike(@RequestParam(value = "process_code",required = false)String process_code,@RequestParam(value = "pipe_no",required = false)String pipe_no, @RequestParam(value = "operator_no",required = false)String operator_no, @RequestParam(value = "begin_time",required = false)String begin_time, @RequestParam(value = "end_time",required = false)String end_time, @RequestParam(value = "mill_no",required = false)String mill_no, HttpServletRequest request){
@@ -534,11 +496,9 @@ public class InspectionProcess {
         try{
             if(begin_time!=null&&begin_time!=""){
                 beginTime=sdf.parse(begin_time);
-                System.out.println(beginTime.toString());
             }
             if(end_time!=null&&end_time!=""){
                 endTime=sdf.parse(end_time);
-                System.out.println(endTime.toString());
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -550,18 +510,18 @@ public class InspectionProcess {
         maps.put("total",count);
         maps.put("rows",list);
         String mmp= JSONArray.toJSONString(maps);
-        //System.out.print("mmp:"+mmp);
         return mmp;
     }
-
-
-
-    //得到钢管后10根工位记录管号，并且记录为待定状态10
+    /**
+     * 得到钢管后10根工位记录管号，并且记录为待定状态10
+     * @param pipe_no(钢管编号)
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/getNextTenPipesBeforePipeNo")
     @ResponseBody
     public String getNextTenPipesBeforePipeNo(@RequestParam(value = "pipe_no",required = false)String pipe_no, HttpServletRequest request) {
         HttpSession session = request.getSession();
-        //OdCoatOperation/getLastAcceptedRecordBeforePipeNo.action?pipe_no=121212
         //把用户数据保存在session域对象中
         String mill_no = (String) session.getAttribute("millno");
         String process_code=request.getParameter("process_code");
@@ -576,14 +536,12 @@ public class InspectionProcess {
                 maps.put("success",false);
                 maps.put("message","无数据");
             }
-
         }else{
             maps.put("success",false);
             maps.put("message","请先登录");
         }
         String mmp= JSONArray.toJSONString(maps);
         return mmp;
-
     }
 
 }

@@ -19,7 +19,8 @@
     <script  src="../js/lrscroll.js" type="text/javascript"></script>
     <script src="../js/jquery.i18n.properties-1.0.9.js" type="text/javascript"></script>
     <script src="../js/language.js" type="text/javascript"></script>
-
+    <script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
+    <script src="../js/datagrid-scrollview.js" type="text/javascript"></script>
     <script type="text/javascript">
         var url;
         var staticItem=[];
@@ -260,14 +261,9 @@
         function removeit(){
             var row = $('#dg').datagrid('getSelected');
             if(row){
-                if(row.is_special_item=='1'){
-                    hlAlertFour("特殊项不能删除!");
-                    return;
-                }
+                if (editIndex == undefined){return;}
+                delItem();
             }
-            if (editIndex == undefined){return;}
-            delItem();
-
         }
         //接收事件
         function accept(){
@@ -333,7 +329,6 @@
         function delItem() {
             var row = $('#dg').datagrid('getSelected');
             if(row){
-
                 var idArrs=row.id+",";
                 $.messager.confirm('系统提示',"您确定要删除这条数据吗？",function (r) {
                     if(r){
@@ -700,7 +695,7 @@
 </div>
 
 <script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
-<script src="../js/datagrid-scrollview.js" type="text/javascript"></script>
+
 </body>
 </html>
 <script type="text/javascript">

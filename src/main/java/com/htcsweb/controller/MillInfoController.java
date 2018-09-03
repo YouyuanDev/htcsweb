@@ -26,9 +26,11 @@ public class MillInfoController {
 
     @Autowired
     private MillInfoDao millInfoDao;
-
-
-    //用于搜索的分厂信息下拉框，带All 选项
+    /**
+     * 获取所有分厂信息下拉框,带All 选项
+     * @param request
+     * @return
+     */
     @RequestMapping("/getAllMillsWithComboboxSelectAll")
     @ResponseBody
     public String getAllMillsWithComboboxSelectAll(HttpServletRequest request){
@@ -38,7 +40,6 @@ public class MillInfoController {
         itemall.id="";
         itemall.text="All（所有分厂）";
         colist.add(itemall);
-
         for(int i=0;i<list.size();i++){
             ComboxItem citem= new ComboxItem();
             MillInfo mill=((MillInfo)list.get(i));
@@ -46,20 +47,19 @@ public class MillInfoController {
             citem.text= mill.getMill_no()+"("+mill.getMill_name()+")";
             colist.add(citem);
         }
-
         String map= JSONObject.toJSONString(colist);
-        System.out.println("="+map);
         return map;
     }
-
-
-    //用于搜索的分厂信息下拉框
+    /**
+     * 获取所有分厂信息下拉框,不带All 选项
+     * @param request
+     * @return
+     */
     @RequestMapping("/getAllMills")
     @ResponseBody
     public String getAllMills(HttpServletRequest request){
         List<MillInfo>list=millInfoDao.getAllMillInfo();
         List<ComboxItem> colist=new ArrayList<ComboxItem>();
-
         for(int i=0;i<list.size();i++){
             ComboxItem citem= new ComboxItem();
             MillInfo mill=((MillInfo)list.get(i));
@@ -67,13 +67,14 @@ public class MillInfoController {
             citem.text= mill.getMill_no()+"("+mill.getMill_name()+")";
             colist.add(citem);
         }
-
         String map= JSONObject.toJSONString(colist);
-        System.out.println("="+map);
         return map;
     }
-
-    //返回mill的所有信息, APP使用
+    /**
+     * 获取分厂所有信息(APP使用)
+     * @param request
+     * @return
+     */
     @RequestMapping("/getAllMillsInfo")
     @ResponseBody
     public String getAllMillsInfo(HttpServletRequest request){
@@ -83,10 +84,6 @@ public class MillInfoController {
         maps.put("millinfo",list);
         maps.put("message","返回成功");
         String map= JSONObject.toJSONString(maps);
-        System.out.println("="+map);
         return map;
     }
-
-
-
 }

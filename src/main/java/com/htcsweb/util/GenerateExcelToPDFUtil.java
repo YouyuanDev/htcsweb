@@ -41,8 +41,16 @@ public class GenerateExcelToPDFUtil {
             newExcelfilename=GenerateExcelToPDFUtil.FillExcelTemplate(excelTemplateFullName, newExcelfilename, null, String.valueOf(i),null);
         }
     }
-
-    //PDF生成方法入口
+    /**
+     * PDF生成方法入口
+     * @param excelTemplateFullName(模板路径)
+     * @param dataList(Excel所需填充的数据)
+     * @param pdfFullName(生成的pdf路径)
+     * @param imagePath(Excel插入所需图片的路径)
+     * @param fontPath(自定义字体路径)
+     * @param copyrightFontPath(著作权标识字体路径)
+     * @return
+     */
     public static String PDFAutoMation(String excelTemplateFullName,ArrayList<Label> dataList,String pdfFullName,String imagePath,String fontPath,String copyrightFontPath) {
         long startTime = System.currentTimeMillis();    //获取开始时间
 
@@ -63,12 +71,14 @@ public class GenerateExcelToPDFUtil {
 
 
     }
-
-
-
-    //合并行的静态函数
+    /**
+     * 合并行的静态函数
+     * @param str(合并行内容)
+     * @param font(合并行字体样式)
+     * @param i(合并行索引)
+     * @return
+     */
     private static PdfPCell mergeRow(String str,Font font,int i) {
-
         //创建单元格对象，将内容及字体传入
         PdfPCell cell=new PdfPCell(new Paragraph(str,font));
         //设置单元格内容居中
@@ -76,11 +86,15 @@ public class GenerateExcelToPDFUtil {
         cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
         //将该单元格所在列包括该单元格在内的i行单元格合并为一个单元格
         cell.setRowspan(i);
-
         return cell;
     }
-
-    //合并列的静态函数
+    /**
+     * 合并列的静态函数
+     * @param str(合并列内容)
+     * @param font(合并列字体样式)
+     * @param i(合并列索引)
+     * @return
+     */
     private static PdfPCell mergeCol(String str,Font font,int i) {
 
         PdfPCell cell=new PdfPCell(new Paragraph(str,font));
@@ -98,8 +112,13 @@ public class GenerateExcelToPDFUtil {
 
         return cell;
     }
-
-    //获取指定内容与字体的单元格
+    /**
+     * 获取指定内容与字体的单元格
+     * @param string(指定内容)
+     * @param font(字体)
+     * @param textHorizontalAlign(字体方向)
+     * @return
+     */
     private static PdfPCell getPDFCell(String string, Font font,int textHorizontalAlign)
     {
         //创建单元格对象，将内容与字体放入段落中作为单元格内容
@@ -113,10 +132,10 @@ public class GenerateExcelToPDFUtil {
         cell.setMinimumHeight(22);
         return cell;
     }
-
-
-
-    /* 使用文件通道的方式复制文件
+    /**
+     * 使用文件通道的方式复制文件
+     * @param srcDirName(源路径)
+     * @param destDirName(目标路径)
      */
     public static void fileChannelCopy(String srcDirName,String destDirName){
         FileInputStream fi = null;
@@ -158,8 +177,15 @@ public class GenerateExcelToPDFUtil {
         }
 
     }
-
-    //根据模版名字，将数据填入相应excel模版中
+    /**
+     * 根据模版名字，将数据填入相应excel模版中
+     * @param excelTemplateFullName(模板路径)
+     * @param newExcelFileName(新Excel路径)
+     * @param dataList(填充数据)
+     * @param tabName(Sheet的名称)
+     * @param imgPath(填充图片路径)
+     * @return
+     */
     public static String FillExcelTemplate(String excelTemplateFullName,String newExcelFileName,ArrayList<Label> dataList,String tabName,String imgPath) {
 
         if(newExcelFileName==null) {//循环写入
@@ -206,10 +232,12 @@ public class GenerateExcelToPDFUtil {
         }
 
     }
-
-
-
-    //根据模版名字，将数据填入相应excel模版中
+    /**
+     * 根据模版名字，将数据填入相应excel模版中
+     * @param excelTemplateFullName(模板路径)
+     * @param dataList(填充数据)
+     * @return
+     */
     public static String FillExcelTemplate(String excelTemplateFullName,ArrayList<Label> dataList) {
         //tempXlsFileName=String.valueOf(System.currentTimeMillis());
         //excelTemplateFullName = "/Users/kurt/Documents/pipe_coating_surface_inspection_record_template.xls";
@@ -263,7 +291,10 @@ public class GenerateExcelToPDFUtil {
 
     }
 
-
+    /**
+     * 设置单元格边框样式
+     * @param cell
+     */
     private static void setNoBorder(PdfPCell cell){
         cell.disableBorderSide(1); // 隐藏单元格周边的上边框
         cell.disableBorderSide(2);// 隐藏单元格周边的下边框
@@ -271,7 +302,12 @@ public class GenerateExcelToPDFUtil {
         cell.disableBorderSide(8);// 隐藏单元格周边的右框
     }
 
-
+    /**
+     * 设置单元格边框宽度
+     * @param cell(单元格)
+     * @param i(行)
+     * @param j(列)
+     */
     private static void setOutsideBorderWidth(PdfPCell cell,int i,int j){
         if(i==tableTopIndex){//设置Table Top的边框宽度
             //System.out.println("set TOP border i="+i+"  j="+j);
@@ -296,8 +332,15 @@ public class GenerateExcelToPDFUtil {
             }
         }
     }
-
-    //根据excel名称，转成PDF
+    /**
+     * 将Excel转成PDF
+     * @param excelFullName(Excel路径)
+     * @param pdfFullName(pdf路径)
+     * @param imagePath(插入图片路径)
+     * @param fontPath(字体路径)
+     * @param copyrightFontPath(著作权字体路径)
+     * @return
+     */
     private static String ExcelToPDFRecord(String excelFullName,String pdfFullName,String imagePath,String fontPath,String copyrightFontPath){
 //        File pdf=new File(pdfFullName);
 //        try{

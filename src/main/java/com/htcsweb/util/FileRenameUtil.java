@@ -14,7 +14,11 @@ import java.util.Date;
 import java.util.UUID;
 
 public class FileRenameUtil implements FileRenamePolicy{
-
+    /**
+     * 文件重命名
+     * @param file(重命名文件)
+     * @return
+     */
     public File rename(File file) {
          String fileName=file.getName();
          String extName=fileName.substring(fileName.lastIndexOf('.'));
@@ -22,6 +26,11 @@ public class FileRenameUtil implements FileRenamePolicy{
          file=new File(file.getParent(),fileName);
          return file;
     }
+    /**
+     * 获取文件创建日期
+     * @param fullFileName(文件路径)
+     * @return
+     */
     public static Date getFileCreateTime(String fullFileName){
         Path path= Paths.get(fullFileName);
         BasicFileAttributeView basicview= Files.getFileAttributeView(path, BasicFileAttributeView.class, LinkOption.NOFOLLOW_LINKS );
@@ -37,7 +46,10 @@ public class FileRenameUtil implements FileRenamePolicy{
         cal.set(1970, 0, 1, 0, 0, 0);
         return cal.getTime();
     }
-    //删除非今天的历史垃圾文件
+    /**
+     * 删除非今天的历史垃圾文件
+     * @param basePath(根路径)
+     */
     public static void cleanTrashFiles(String basePath){
         try{
             File fileFolder=new File(basePath+"/upload/pdf/");

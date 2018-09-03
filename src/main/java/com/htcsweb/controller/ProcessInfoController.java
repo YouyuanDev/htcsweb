@@ -15,43 +15,37 @@ import java.util.List;
 @Controller
 @RequestMapping("/ProcessOperation")
 public class ProcessInfoController {
-
-
     @Autowired
     private ProcessInfoDao processInfoDao;
-
-
-    //用于搜索的分厂信息下拉框
+    /**
+     * 获取分厂信息(下拉框使用),不带ALL选项
+     * @param request
+     * @return
+     */
     @RequestMapping("/getAllProcess")
     @ResponseBody
     public String getAllProcess(HttpServletRequest request){
         List<ProcessInfo> list=processInfoDao.getAllProcessInfo();
-
         String map= JSONObject.toJSONString(list);
-        System.out.println("="+map);
         return map;
     }
-
-
-    //用于搜索的分厂信息下拉框 有All选项
+    /**
+     * 获取分厂信息(下拉框使用),带ALL选项
+     * @param request
+     * @return
+     */
     @RequestMapping("/getAllProcessWithAllOption")
     @ResponseBody
     public String getAllProcessWithAllOption(HttpServletRequest request){
         List<ProcessInfo> list=processInfoDao.getAllProcessInfo();
-
         ProcessInfo p=new ProcessInfo();
         p.setId(0);
         p.setProcess_code("");
         p.setProcess_name("All");
         p.setProcess_name_en("All");
         list.add(0,p);
-
         String map= JSONObject.toJSONString(list);
-        System.out.println("="+map);
         return map;
     }
-
-
-
 
 }

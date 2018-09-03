@@ -23,8 +23,12 @@ import java.util.*;
 @Controller
 @RequestMapping("/CommonOperation")
 public class CommonController {
-    //private static final String DEST = "target/HelloWorld_CN_HTML_FREEMARKER_FS.pdf";
 
+    /**
+     * html转Pdf
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/htmlToPDF",method = RequestMethod.POST,produces = "pplication/json;charset=UTF-8")
     @ResponseBody
     public String htmlToPDF(HttpServletRequest request){

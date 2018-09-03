@@ -24,9 +24,13 @@ import java.util.Map;
 public class FunctionController {
     @Autowired
     private FunctionDao functionDao;
-
-
-    //搜索
+    /**
+     * 分页查询权限信息
+     * @param function_no(权限编号)
+     * @param function_name(权限名称)
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "getFunctionByLike",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String getFunctionByLike(@RequestParam(value = "function_no",required = false)String function_no, @RequestParam(value = "function_name",required = false)String function_name, HttpServletRequest request){
@@ -44,12 +48,16 @@ public class FunctionController {
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
         maps.put("rows",list);
-        //System.out.println("rrrrrrrrrrrow="+count);
         String mmp= JSONArray.toJSONString(maps);
-        //System.out.print("mmp:"+mmp);
         return mmp;
-
     }
+    /**
+     * 根据权限编号和名称查询权限信息
+     * @param function_no(权限编号)
+     * @param function_name(权限名称)
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "getFunctionByNoName",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String getFunctionByNoName(@RequestParam(value = "function_no",required = false)String function_no, @RequestParam(value = "function_name",required = false)String function_name, HttpServletRequest request){
@@ -58,25 +66,23 @@ public class FunctionController {
         System.out.println(mmp);
         return mmp;
     }
-
-    //保存function
+    /**
+     * 添加和修改权限
+     * @param function(权限)
+     * @param response
+     * @return
+     */
     @RequestMapping(value = "/saveFunction")
     @ResponseBody
     public String saveFunction(Function function, HttpServletResponse response){
-        System.out.print("saveFunction");
-
         JSONObject json=new JSONObject();
         try{
             int resTotal=0;
-
-
             if(function.getId()==0){
                 //添加
                 resTotal=functionDao.addFunction(function);
-
             }else{
                 //修改！
-
                 resTotal=functionDao.updateFunction(function);
             }
             if(resTotal>0){
@@ -86,12 +92,10 @@ public class FunctionController {
                 json.put("success",false);
                 json.put("message","保存失败");
             }
-
         }catch (Exception e){
             e.printStackTrace();
             json.put("success",false);
             json.put("message",e.getMessage());
-
         }finally {
             try {
                 ResponseUtil.write(response, json);
@@ -101,9 +105,13 @@ public class FunctionController {
         }
         return null;
     }
-
-
-    //删除Function信息
+    /**
+     * 删除权限
+     * @param hlparam(权限id集合,","分割)
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/delFunction")
     public String delFunction(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
         String[]idArr=hlparam.split(",");
@@ -115,10 +123,8 @@ public class FunctionController {
         sbmessage.append(Integer.toString(resTotal));
         sbmessage.append("项权限信息删除成功\n");
         if(resTotal>0){
-            //System.out.print("删除成功");
             json.put("success",true);
         }else{
-            //System.out.print("删除失败");
             json.put("success",false);
         }
         json.put("message",sbmessage.toString());

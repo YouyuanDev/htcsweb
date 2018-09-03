@@ -44,11 +44,11 @@ public class MergePDF {
             e.printStackTrace();
         }
     }
-
-
-//  封装了PDF文件的合并
-//  pdfFullNames  要合并的PDF文件列表
-//  outputPDFFullName 输出的PDF总文件名
+    /**
+     * 封装了PDF文件的合并
+     * @param pdfFullNames(要合并的PDF文件列表)
+     * @param outputPDFFullName(输出的PDF总文件名)
+     */
     public static void MergePDFs(String[] pdfFullNames,String outputPDFFullName){
         try {
             List<InputStream> pdfs = new ArrayList<InputStream>();
@@ -62,6 +62,11 @@ public class MergePDF {
         }
 
     }
+    /**
+     * 封装了PDF文件的合并
+     * @param pdfFullNames(要合并的PDF文件列表)
+     * @param outputPDFFullName(输出的PDF总文件名)
+     */
     public static void MergePDFs(List<String> pdfFullNames,String outputPDFFullName){
         try {
             List<InputStream> pdfs = new ArrayList<InputStream>();
@@ -77,7 +82,12 @@ public class MergePDF {
 
     }
 
-
+    /**
+     * 封装了PDF文件的合并
+     * @param streamOfPDFFiles(pdf文件流)
+     * @param outputStream(文件输出流)
+     * @param paginate(分页标识)
+     */
     private static void concatPDFs(List<InputStream> streamOfPDFFiles,
                                   OutputStream outputStream, boolean paginate) {
 

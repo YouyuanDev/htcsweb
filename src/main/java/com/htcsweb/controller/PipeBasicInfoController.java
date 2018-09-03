@@ -37,25 +37,15 @@ public class PipeBasicInfoController {
     private InspectionProcessRecordHeaderDao headerDao;
     @Autowired
     InspectionTimeRecordDao inspectionTimeRecordDao;
-    //给app搜索使用，无需登录
-//    @RequestMapping("/getPipeNumber")
-//    @ResponseBody
-//    public String getPipeNumber(HttpServletRequest request){
-//        String pipe_no=request.getParameter("pipe_no");
-//        List<PipeBasicInfo>list=pipeBasicInfoDao.getPipeNumber(pipe_no);
-//        String map= JSONObject.toJSONString(list);
-//        return map;
-//    }
-
-
-    //给app搜索使用，无需登录
+    /**
+     * 根据钢管编号分页模糊查询钢管信息,无需登录(app使用)
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/searchPipe", produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String searchPipe(HttpServletRequest request){
         String pipe_no=request.getParameter("pipe_no");
-//        String project_no=request.getParameter("project_no");
-//        String mill_no=request.getParameter("mill_no");
-//        String process_code=request.getParameter("process_code");
         String page= request.getParameter("page");
         String rows= request.getParameter("rows");
         if(page==null){
@@ -64,11 +54,9 @@ public class PipeBasicInfoController {
         if(rows==null){
             rows="20";
         }
-
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
         List<HashMap<String,Object>>list=pipeBasicInfoDao.searchPipe(pipe_no,start,Integer.parseInt(rows));
         int count=pipeBasicInfoDao.searchPipeCount(pipe_no);
-
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
         maps.put("rows",list);
@@ -76,10 +64,6 @@ public class PipeBasicInfoController {
         return mmp;
 
     }
-
-
-
-
     @RequestMapping("/getPipeNumbers")
     @ResponseBody
     public String getPipeNumbers(HttpServletRequest request){
@@ -123,9 +107,11 @@ public class PipeBasicInfoController {
         }
         return map;
     }
-
-
-    //查询2FBE未做实验的样管信息 包括DSC实验
+    /**
+     * 查询2FBE未做实验的样管信息 包括DSC实验
+     * @param request
+     * @return
+     */
     @RequestMapping("/getAll2FBESamplePipe")
     @ResponseBody
     public String getAll2FBESamplePipe(HttpServletRequest request){
@@ -138,8 +124,11 @@ public class PipeBasicInfoController {
         }
         return map;
     }
-
-    //查询3LPE实验的样管信息 包括DSC实验、PE实验
+    /**
+     * 查询3LPE实验的样管信息 包括DSC实验、PE实验
+     * @param request
+     * @return
+     */
     @RequestMapping("/getAll3LPESamplePipe")
     @ResponseBody
     public String getAll3LPESamplePipe(HttpServletRequest request){
@@ -152,8 +141,11 @@ public class PipeBasicInfoController {
         }
         return map;
     }
-
-    //查询3LPE未做实验的样管信息 包括玻璃片实验、常规实验
+    /**
+     * 查询3LPE未做实验的样管信息 包括玻璃片实验、常规实验
+     * @param request
+     * @return
+     */
     @RequestMapping("/getAllEpoxySamplePipe")
     @ResponseBody
     public String getAllEpoxySamplePipe(HttpServletRequest request){
@@ -166,13 +158,11 @@ public class PipeBasicInfoController {
         }
         return map;
     }
-
-
-
-
-
-
-    //查询2FBE实验样管信息 不包括DSC实验
+    /**
+     * 查询2FBE实验样管信息 不包括DSC实验
+     * @param request
+     * @return
+     */
     @RequestMapping("/get2FBESamplePipeNo")
     @ResponseBody
     public String get2FBESamplePipeNo(HttpServletRequest request){
@@ -181,12 +171,10 @@ public class PipeBasicInfoController {
             String pipe_no=request.getParameter("pipe_no");
             String coating_date=request.getParameter("coating_date");
             String testing_id=request.getParameter("testing_id");
-
             int id=-1;
             if(testing_id!=null&&testing_id!="") {
                 id=Integer.parseInt(testing_id);
             }
-
             Date beginTime=null;
             Date endTime=null;
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -204,9 +192,11 @@ public class PipeBasicInfoController {
         }
         return map;
     }
-
-
-    //查询2FBE dsc实验管号，未做实验的
+    /**
+     * 查询2FBE dsc实验管号，未做实验的
+     * @param request
+     * @return
+     */
     @RequestMapping("/get2FBEDSCSamplePipeNo")
     @ResponseBody
     public String getDSCSamplePipeNo(HttpServletRequest request){
@@ -236,12 +226,11 @@ public class PipeBasicInfoController {
         }
         return map;
     }
-
-
-
-
-
-    //查询3LPE常规实验样管信息
+    /**
+     * 查询3LPE常规实验样管信息
+     * @param request
+     * @return
+     */
     @RequestMapping("/get3LPESamplePipeNo")
     @ResponseBody
     public String get3LPESamplePipeNo(HttpServletRequest request){
@@ -271,8 +260,11 @@ public class PipeBasicInfoController {
         }
         return map;
     }
-
-    //查询3LPE DSC实验样管信息
+    /**
+     * 查询3LPE DSC实验样管信息
+     * @param request
+     * @return
+     */
     @RequestMapping("/get3LPEDSCSamplePipeNo")
     @ResponseBody
     public String get3LPEDSCSamplePipeNo(HttpServletRequest request){
@@ -285,8 +277,6 @@ public class PipeBasicInfoController {
             if(testing_id!=null&&testing_id!="") {
                 id=Integer.parseInt(testing_id);
             }
-
-            System.out.println("testing_id id="+testing_id);
             Date beginTime=null;
             Date endTime=null;
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -304,8 +294,11 @@ public class PipeBasicInfoController {
         }
         return map;
     }
-
-    //查询3LPE PE实验样管信息
+    /**
+     * 查询3LPE PE实验样管信息
+     * @param request
+     * @return
+     */
     @RequestMapping("/get3LPEPESamplePipeNo")
     @ResponseBody
     public String get3LPEPESamplePipeNo(HttpServletRequest request){
@@ -335,12 +328,11 @@ public class PipeBasicInfoController {
         }
         return map;
     }
-
-
-
-
-
-    //查询Liquid Epoxy内防实验样管信息  常规实验
+    /**
+     * 查询Liquid Epoxy内防实验样管信息  常规实验
+     * @param request
+     * @return
+     */
     @RequestMapping("/getLiquidEpoxySamplePipeNo")
     @ResponseBody
     public String getLiquidEpoxySamplePipeNo(HttpServletRequest request){
@@ -370,8 +362,11 @@ public class PipeBasicInfoController {
         }
         return map;
     }
-
-    //查询Liquid Epoxy内防实验样管信息  玻璃片实验
+    /**
+     * 查询Liquid Epoxy内防实验样管信息  玻璃片实验
+     * @param request
+     * @return
+     */
     @RequestMapping("/getLiquidEpoxyGlassSamplePipeNo")
     @ResponseBody
     public String getLiquidEpoxyGlassSamplePipeNo(HttpServletRequest request){
@@ -401,11 +396,11 @@ public class PipeBasicInfoController {
         }
         return map;
     }
-
-
-
-
-    //查询样管信息
+    /**
+     * 查询样管信息
+     * @param request
+     * @return
+     */
     @RequestMapping("/getODSamplePipeNumbers")
     @ResponseBody
     public String getODSamplePipeNumbers(HttpServletRequest request){
@@ -418,8 +413,11 @@ public class PipeBasicInfoController {
         }
         return map;
     }
-
-    //查询需要倒棱的管号信息
+    /**
+     * 查询需要倒棱的管号信息
+     * @param request
+     * @return
+     */
     @RequestMapping("/getNeedRebevelPipeNumbers")
     @ResponseBody
     public String getNeedRebevelPipeNumbers(HttpServletRequest request){
@@ -432,8 +430,11 @@ public class PipeBasicInfoController {
         }
         return map;
     }
-
-    //用于搜索的pipe状态下拉框，带All 选项
+    /**
+     * 获取钢管所有状态(下拉框),带All 选项
+     * @param request
+     * @return
+     */
     @RequestMapping("/getAllPipeStatusWithComboboxSelectAll")
     @ResponseBody
     public String getAllPipeStatusWithComboboxSelectAll(HttpServletRequest request){
@@ -443,7 +444,6 @@ public class PipeBasicInfoController {
         itemall.id="";
         itemall.text="All（所有状态）";
         colist.add(itemall);
-
         for(int i=0;i<list.size();i++){
             ComboxItem citem= new ComboxItem();
             PipeStatus ps=((PipeStatus)list.get(i));
@@ -451,14 +451,14 @@ public class PipeBasicInfoController {
             citem.text= ps.getStatus_code()+"("+ps.getStatus_name()+")";
             colist.add(citem);
         }
-
         String map= JSONObject.toJSONString(colist);
-        //System.out.println("========="+map);
         return map;
     }
-
-
-
+    /**
+     * 获取钢管所有状态(下拉框),不带All 选项
+     * @param request
+     * @return
+     */
     @RequestMapping("/getAllPipeStatus")
     @ResponseBody
     public String getAllPipeStatus(HttpServletRequest request){
@@ -471,14 +471,18 @@ public class PipeBasicInfoController {
             citem.text= ps.getStatus_code()+"("+ps.getStatus_name()+")";
             colist.add(citem);
         }
-
         String map= JSONObject.toJSONString(colist);
-        //System.out.println("========="+map);
         return map;
     }
-
-
-    //模糊查询Pipe信息列表
+    /**
+     * 分页模糊查询钢管信息
+     * @param project_no(项目编号)
+     * @param contract_no(合同编号)
+     * @param pipe_no(钢管编号)
+     * @param status(钢管状态)
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/getPipeInfoByLike")
     @ResponseBody
     public String getPipeInfoByLike(@RequestParam(value = "project_no",required = false)String project_no, @RequestParam(value = "contract_no",required = false)String contract_no,@RequestParam(value = "pipe_no",required = false)String pipe_no, @RequestParam(value = "status",required = false)String status,HttpServletRequest request){
@@ -490,18 +494,21 @@ public class PipeBasicInfoController {
         if(rows==null){
             rows="20";
         }
-
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
         List<HashMap<String,Object>>list=pipeBasicInfoDao.getAllByLike(project_no,contract_no,pipe_no,status,start,Integer.parseInt(rows));
         int count=pipeBasicInfoDao.getCountAllByLike(project_no,contract_no,pipe_no,status);
-
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
         maps.put("rows",list);
         String mmp= JSONArray.toJSONString(maps);
         return mmp;
     }
-    //根据钢管编号异步查询钢管信息
+    /**
+     * 根据钢管编号异步查询钢管信息
+     * @param response
+     * @param request
+     * @return
+     */
     @RequestMapping(value ="/getPipeInfoByNo")
     public String getPipeInfoByNo(HttpServletResponse response,HttpServletRequest request){
         String pipeno=request.getParameter("pipe_no");
@@ -514,7 +521,12 @@ public class PipeBasicInfoController {
         }
         return null;
     }
-    //判断钢管是否能入成品库
+    /**
+     * 判断钢管是否能入成品库
+     * @param response
+     * @param request
+     * @return
+     */
     @RequestMapping(value ="/checkForProductStockIn")
     @ResponseBody
     public String checkForProductStockIn(HttpServletResponse response,HttpServletRequest request){
@@ -524,11 +536,9 @@ public class PipeBasicInfoController {
         if(list!=null&&list.size()>0){
             HashMap<String,Object>hs=list.get(0);
             String status=String.valueOf(hs.get("status"));
-            //String id=String.valueOf(hs.get("id"));
             if(status.equals("od6")||status.equals("id6")){
                 jsonObject.put("success",true);
                 jsonObject.put("record",hs);
-                //jsonObject.put("id",id);
                 jsonObject.put("message","可以入库!");
             }else{
                 jsonObject.put("success",false);
@@ -541,9 +551,15 @@ public class PipeBasicInfoController {
         String mmp= JSON.toJSONString(jsonObject);
         return mmp;
     }
-//
-
-    //模糊查询OD ID 光管的Pipe信息列表
+    /**
+     * 分页模糊查询外防、内防光管的钢管信息
+     * @param project_no(项目编号)
+     * @param contract_no(合同编号)
+     * @param pipe_no(钢管编号)
+     * @param status(钢管状态)
+     * @param request
+     * @return
+     */
     @RequestMapping(value ="/getODIDBarePipeInfoByLike")
     @ResponseBody
     public String getODIDBarePipeInfoByLike(@RequestParam(value = "project_no",required = false)String project_no, @RequestParam(value = "contract_no",required = false)String contract_no,@RequestParam(value = "pipe_no",required = false)String pipe_no, @RequestParam(value = "status",required = false)String status,HttpServletRequest request){
@@ -558,24 +574,23 @@ public class PipeBasicInfoController {
         if(status==null||status.equals("")){
             status="bare1";
         }
-        //System.out.println("钢管状态："+status);
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
         List<HashMap<String,Object>>list=pipeBasicInfoDao.getODIDBarePipeInfoByLike(project_no,contract_no,pipe_no,status,start,Integer.parseInt(rows));
         int count=pipeBasicInfoDao.getCountODIDBarePipeInfoByLike(project_no,contract_no,pipe_no,status);
-
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
         maps.put("rows",list);
-        //System.out.println("结果集："+list.toString());
-        //System.out.println("结果个数："+list.toString());
         String mmp= JSONArray.toJSONString(maps);
         return mmp;
     }
-
-
-
-
-    //模糊查询外防成品、可出库的Pipe信息列表
+    /**
+     * 分页模糊查询外防成品、可出库的钢管信息
+     * @param project_no(项目编号)
+     * @param contract_no(合同编号)
+     * @param pipe_no(钢管编号)
+     * @param request
+     * @return
+     */
     @RequestMapping(value ="/getODInspectedPipeInfoByLike")
     @ResponseBody
     public String getODInspectedPipeInfoByLike(@RequestParam(value = "project_no",required = false)String project_no, @RequestParam(value = "contract_no",required = false)String contract_no,@RequestParam(value = "pipe_no",required = false)String pipe_no, HttpServletRequest request){
@@ -587,20 +602,23 @@ public class PipeBasicInfoController {
         if(rows==null){
             rows="20";
         }
-
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
         List<HashMap<String,Object>>list=pipeBasicInfoDao.getODInspectedPipeInfoByLike(project_no,contract_no,pipe_no,start,Integer.parseInt(rows));
         int count=pipeBasicInfoDao.getCountODInspectedPipeInfoByLike(project_no,contract_no,pipe_no);
-
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
         maps.put("rows",list);
         String mmp= JSONArray.toJSONString(maps);
         return mmp;
     }
-
-
-    //模糊查询内防成品、可入成品库的Pipe信息列表
+    /**
+     * 分页模糊查询内防成品、可入成品库的钢管信息
+     * @param project_no(项目编号)
+     * @param contract_no(合同编号)
+     * @param pipe_no(钢管编号)
+     * @param request
+     * @return
+     */
     @RequestMapping(value ="/getIDInspectedPipeInfoByLike")
     @ResponseBody
     public String getIDInspectedPipeInfoByLike(@RequestParam(value = "project_no",required = false)String project_no, @RequestParam(value = "contract_no",required = false)String contract_no,@RequestParam(value = "pipe_no",required = false)String pipe_no, HttpServletRequest request){
@@ -612,21 +630,22 @@ public class PipeBasicInfoController {
         if(rows==null){
             rows="20";
         }
-
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
         List<HashMap<String,Object>>list=pipeBasicInfoDao.getIDInspectedPipeInfoByLike(project_no,contract_no,pipe_no,start,Integer.parseInt(rows));
         int count=pipeBasicInfoDao.getCountIDInspectedPipeInfoByLike(project_no,contract_no,pipe_no);
-
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
         maps.put("rows",list);
         String mmp= JSONArray.toJSONString(maps);
         return mmp;
     }
-
-
-
-    //增加或修改Pipe信息
+    /**
+     * 添加或修改钢管基础信息
+     * @param pipeBasicInfo(钢管基础信息)
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping(value = "/savePipe")
     @ResponseBody
     public String savePipe(PipeBasicInfo pipeBasicInfo,HttpServletRequest request, HttpServletResponse response){
@@ -654,8 +673,6 @@ public class PipeBasicInfoController {
             if(!status.equals("odrepair1")&&!status.equals("odrepair2")&&!status.equals("idrepair1")&&!status.equals("idrepair2")&&!status.equals("onhold")){
                 pipeBasicInfo.setLast_accepted_status(status);
             }
-
-
             if(pipeBasicInfo.getId()==0){
                 //添加
                 resTotal=pipeBasicInfoDao.addPipeBasicInfo(pipeBasicInfo);
@@ -670,12 +687,10 @@ public class PipeBasicInfoController {
                 json.put("success",false);
                 json.put("message","保存失败");
             }
-
         }catch (Exception e){
             e.printStackTrace();
             json.put("success",false);
             json.put("message",e.getMessage());
-
         }finally {
             try {
                 ResponseUtil.write(response, json);
@@ -685,8 +700,13 @@ public class PipeBasicInfoController {
         }
         return null;
     }
-
-    //删除pipebasicinfo信息
+    /**
+     * 删除钢管基础信息
+     * @param hlparam(钢管id集合,","分割)
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/delPipe")
     public String delPipe(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
         String[]idArr=hlparam.split(",");
@@ -698,17 +718,25 @@ public class PipeBasicInfoController {
         sbmessage.append(Integer.toString(resTotal));
         sbmessage.append("根钢删除成功\n");
         if(resTotal>0){
-            //System.out.print("删除成功");
             json.put("success",true);
         }else{
-            //System.out.print("删除失败");
             json.put("success",false);
         }
         json.put("message",sbmessage.toString());
         ResponseUtil.write(response,json);
         return null;
     }
-    //成品管入库
+    /**
+     * 成品管入库
+     * @param hlparam(成品管id集合,","分割)
+     * @param storage_stack(垛位号)
+     * @param stack_level(垛位层号)
+     * @param level_direction(层方向)
+     * @param level_sequence(层序号)
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/productstockin")
     public String productstockin(@RequestParam(value = "hlparam")String hlparam,@RequestParam(value = "storage_stack")String storage_stack,@RequestParam(value = "stack_level")String stack_level,@RequestParam(value = "level_direction")String level_direction,@RequestParam(value = "level_sequence")String level_sequence,HttpServletResponse response)throws Exception{
         String[]idArr=hlparam.split(",");
@@ -740,7 +768,6 @@ public class PipeBasicInfoController {
                             }
                         }
                     }
-
                 }
             }
             StringBuilder sbmessage = new StringBuilder();
@@ -760,8 +787,17 @@ public class PipeBasicInfoController {
         ResponseUtil.write(response,json);
         return null;
     }
-
-    //外访成品管入库
+    /**
+     * 外防成品管入库
+     * @param hlparam(外防成品管id集合,","分割)
+     * @param storage_stack(垛位号)
+     * @param stack_level(垛位层号)
+     * @param level_direction(层方向)
+     * @param level_sequence(层序号)
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/odproductstockin")
     public String odproductstockin(@RequestParam(value = "hlparam")String hlparam,@RequestParam(value = "storage_stack")String storage_stack,@RequestParam(value = "stack_level")String stack_level,@RequestParam(value = "level_direction")String level_direction,@RequestParam(value = "level_sequence")String level_sequence,HttpServletResponse response)throws Exception{
         String[]idArr=hlparam.split(",");
@@ -797,7 +833,17 @@ public class PipeBasicInfoController {
         ResponseUtil.write(response,json);
         return null;
     }
-    //内访成品管入库
+    /**
+     * 内防成品管入库
+     * @param hlparam(内防成品管id集合,","分割)
+     * @param storage_stack(垛位号)
+     * @param stack_level(垛位层号)
+     * @param level_direction(层方向)
+     * @param level_sequence(层序号)
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/idproductstockin")
     public String idproductstockin(@RequestParam(value = "hlparam")String hlparam,@RequestParam(value = "storage_stack")String storage_stack,@RequestParam(value = "stack_level")String stack_level,@RequestParam(value = "level_direction")String level_direction,@RequestParam(value = "level_sequence")String level_sequence,HttpServletResponse response)throws Exception{
         String[]idArr=hlparam.split(",");
@@ -833,13 +879,16 @@ public class PipeBasicInfoController {
         ResponseUtil.write(response,json);
         return null;
     }
-
-
-    //内防光管（必须无外防处理记录）、外防扒皮管转外防光管库
+    /**
+     * 内防光管（必须无外防处理记录）、外防扒皮管转外防光管库
+     * @param hlparam(内防光管、外防扒皮管id集合,","分割)
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/SetPipeTOODBare")
     public String SetPipeTOODBare(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
         String[]idArr=hlparam.split(",");
-
         ArrayList<String> list = new ArrayList<String>();
         StringBuilder sbmessage = new StringBuilder();
         for(int i=0;i<idArr.length;i++){
@@ -858,8 +907,6 @@ public class PipeBasicInfoController {
         if(list.size()>0) {
             String[] array = new String[list.size()];
             String[] newidArr = list.toArray(array);
-            //System.out.println("newidArr=" + newidArr[0]);
-
             resTotal = pipeBasicInfoDao.SetToODBare(newidArr);
         }
         JSONObject json=new JSONObject();
@@ -867,28 +914,29 @@ public class PipeBasicInfoController {
         sbmessage.insert(0, Integer.toString(resTotal));
         sbmessage.insert(0,"总共");
         if(resTotal>0){
-            //System.out.print("转外防光管库成功");
             json.put("success",true);
         }else{
-            //System.out.print("转外防光管库成功");
             json.put("success",false);
         }
         json.put("message",sbmessage.toString());
         ResponseUtil.write(response,json);
         return null;
     }
-
-    //外防光管（必须无内防处理记录）、内防扒皮管转内防光管库
+    /**
+     * 外防光管（必须无内防处理记录）、内防扒皮管转内防光管库
+     * @param hlparam(外防光管、内防扒皮管id集合,","分割)
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/SetPipeTOIDBare")
     public String SetPipeTOIDBare(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
         String[]idArr=hlparam.split(",");
         ArrayList<String> list = new ArrayList<String>();
         StringBuilder sbmessage = new StringBuilder();
         for(int i=0;i<idArr.length;i++){
-            //System.out.println("id="+idArr[i]);
             int res=pipeBasicInfoDao.isPipeIDProcessed(idArr[i]);
             if(res==0){
-                //System.out.println("res==0");
                 list.add(idArr[i]);
             }else{
                 //需要剔除的钢管id
@@ -901,8 +949,6 @@ public class PipeBasicInfoController {
         if(list.size()>0) {
             String[] array = new String[list.size()];
             String[] newidArr = list.toArray(array);
-            //System.out.println("newidArr=" + newidArr[0]);
-
             resTotal = pipeBasicInfoDao.SetToIDBare(newidArr);
         }
         JSONObject json=new JSONObject();
@@ -920,14 +966,15 @@ public class PipeBasicInfoController {
         ResponseUtil.write(response,json);
         return null;
     }
-
-
-
-
-
-
-
-    //模糊查询内防外防成品可出厂的Pipe信息列表，需倒棱的管子不可出厂，光管也可以出库
+    /**
+     * 分页模糊查询内防外防成品可出厂的钢管信息(需倒棱的管子不可出厂，光管也可以出库)
+     * @param project_no(项目编号)
+     * @param contract_no(合同编号)
+     * @param pipe_no(钢管编号)
+     * @param status(钢管状态)
+     * @param request
+     * @return
+     */
     @RequestMapping(value ="/getCoatedStockinPipeInfoByLike")
     @ResponseBody
     public String getCoatedStockinPipeInfoByLike(@RequestParam(value = "project_no",required = false)String project_no, @RequestParam(value = "contract_no",required = false)String contract_no,@RequestParam(value = "pipe_no",required = false)String pipe_no,@RequestParam(value = "status",required = false)String status, HttpServletRequest request){
@@ -942,18 +989,22 @@ public class PipeBasicInfoController {
         if(status==null||status.equals("")){
             status="odstockin";
         }
-
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
         List<HashMap<String,Object>>list=pipeBasicInfoDao.getCoatedStockinPipeInfoByLike(project_no,contract_no,pipe_no,status,start,Integer.parseInt(rows));
         int count=pipeBasicInfoDao.getCountCoatedStockinPipeInfoByLike(project_no,contract_no,pipe_no,status);
-
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
         maps.put("rows",list);
         String mmp= JSONArray.toJSONString(maps);
         return mmp;
     }
-    //成品管出厂
+    /**
+     * 成品管出厂
+     * @param hlparam(成品管id集合,","分割)
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/coatingProductStockout")
     public String coatingProductStockout(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
         String[]idArr=hlparam.split(",");
@@ -965,35 +1016,31 @@ public class PipeBasicInfoController {
         sbmessage.insert(0, Integer.toString(resTotal));
         sbmessage.insert(0,"总共");
         if(resTotal>0){
-            //System.out.print("涂层成品管出厂成功");
             json.put("success",true);
         }else{
-            //System.out.print("涂层成品管出厂失败");
             json.put("success",false);
         }
         json.put("message",sbmessage.toString());
         ResponseUtil.write(response,json);
         return null;
     }
-    //根据钢管编号查询钢管的防腐记录
+    /**
+     * 根据钢管编号查询钢管的防腐记录
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/searchPipeRecord",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String searchPipeRecord(HttpServletRequest request){
         String mmp="";
         try{
-
-
             String pipe_no=request.getParameter("pipe_no");
             List<Map<String,Object>> result=new ArrayList<>();
             if(pipe_no!=null&&!pipe_no.equals("")){
-
                 String [] processList={"od_blast","od_blast_inspection","od_coating","od_coating_inspection","od_stencil",
                         "od_final_inspection","id_blast","id_blast_inspection","id_coating","id_coating_inspection",
                 "id_stencil","id_final_inspection","coating_strip","coating_repair","grinding_cutoff","coating_rebevel"};
-                
                 //根据钢管编号查询钢管的所有记录
-                //1.查询外打砂记录
-
                 for(int i=0;i<processList.length;i++){
                     InspectionProcessRecordHeader header=headerDao.getRecentRecordByPipeNo(processList[i],pipe_no);
                     Map<String,Object> maps=new HashMap<String,Object>();
@@ -1005,179 +1052,21 @@ public class PipeBasicInfoController {
                             result.add(maps);
                         }
                     }
-
                 }
-
-
-
-
                 mmp= JSONArray.toJSONString(result);
-
             }
         }catch (Exception ex){
             ex.printStackTrace();
         }
         return mmp;
     }
-//    public List<HashMap<String, Object>> getDynamicItemByPipeNoProcessCodeHeaderCode(String pipe_no,String process_code,String inspection_process_record_header_code) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
-//        List<HashMap<String, Object>> itemlist=new ArrayList<>();
-//        if(pipe_no!=null&&!pipe_no.equals("")&&process_code!=null&&!process_code.equals("")) {
-//            itemlist = dynamicMeasurementItemDao.getDynamicItemByPipeNoProcessCodeHeaderCode(pipe_no, process_code, inspection_process_record_header_code);
-//        }
-////        HashMap<String,Object>hs=new HashMap<>();
-////        hs.put("remark",remark);
-////        //hs.put("result",result);
-////        itemlist.add(hs);
-//        System.out.println("------------------------");
-//        System.out.println(JSONObject.toJSONString(itemlist));
-//        System.out.println("------------------------");
-//        return  itemlist;
-//    }
-//    private String InitStencil_content(String processCode,String pipeNo,String stencilContent){
-//
-//        //设置外防或内防喷标
-//        if(processCode!=null&&(processCode.equals("od_stencil")||processCode.equals("id_stencil"))){
-//            List<HashMap<String,Object>> pipelist= pipeBasicInfoDao.getPipeInfoByNo(pipeNo);
-//            if(pipelist.size()>0){
-//                float od=(float)pipelist.get(0).get("od");
-//                float wt=(float)pipelist.get(0).get("wt");
-//                String grade=(String)pipelist.get(0).get("grade");
-//                String contract_no=(String)pipelist.get(0).get("contract_no");
-//                String coating_standard=(String)pipelist.get(0).get("coating_standard");
-//                String client_spec=(String)pipelist.get(0).get("client_spec");
-//                String project_name=(String)pipelist.get(0).get("project_name");
-//                float p_length=(float)pipelist.get(0).get("p_length");
-//                float halflength=p_length*0.5f;
-//                String heat_no=(String)pipelist.get(0).get("heat_no");
-//                String pipe_making_lot_no=(String)pipelist.get(0).get("pipe_making_lot_no");
-//                float kg=(float)pipelist.get(0).get("weight")*1000;
-//                Date od_coating_date=(Date)pipelist.get(0).get("od_coating_date");
-//                String od_coating_dateString="";
-//                if(od_coating_date!=null) {
-//                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-//                    od_coating_dateString = formatter.format(od_coating_date);
-//                }
-//                Date id_coating_date=(Date)pipelist.get(0).get("id_coating_date");
-//                String id_coating_dateString="";
-//                if(id_coating_date!=null) {
-//                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-//                    id_coating_dateString = formatter.format(id_coating_date);
-//                }
-//
-//                //替换
-//                stencilContent = stencilContent.replace("[OD]", String.valueOf(od));
-//                stencilContent = stencilContent.replace("[WT]", String.valueOf(wt));
-//                stencilContent = stencilContent.replace("[GRADE]", grade);
-//                stencilContent = stencilContent.replace("[CONTRACTNO]", contract_no);
-//                stencilContent = stencilContent.replace("[COATINGSPEC]", coating_standard);
-//                stencilContent = stencilContent.replace("[CLIENTSPEC]", client_spec);
-//                stencilContent = stencilContent.replace("[PROJECTNAME]", project_name);
-//                stencilContent = stencilContent.replace("[PIPENO]", pipeNo);
-//                stencilContent = stencilContent.replace("[PIPELENGTH]", String.valueOf(p_length));
-//                stencilContent = stencilContent.replace("[HALFLENGTH]", String.valueOf(halflength));
-//                stencilContent = stencilContent.replace("[HEATNO]",heat_no);
-//                stencilContent = stencilContent.replace("[BATCHNO]",pipe_making_lot_no);
-//                stencilContent = stencilContent.replace("[WEIGHT]",String.valueOf(kg));
-//                if(processCode.equals("od_stencil"))
-//                    stencilContent = stencilContent.replace("[COATINGDATE]",od_coating_dateString);
-//                if(processCode.equals("id_stencil"))
-//                    stencilContent = stencilContent.replace("[COATINGDATE]",id_coating_dateString);
-//            }
-//
-//        }
-//        return stencilContent;
-//    }
-
-
-//    @RequestMapping("/searchPipeRecord")
-//    @ResponseBody
-//    public String searchPipeRecord(HttpServletRequest request){
-//        String mmp="";
-//        try{
-//            Map<String,Object> maps=new HashMap<String,Object>();
-//            String pipe_no=request.getParameter("pipe_no");
-//            if(pipe_no!=null&&!pipe_no.equals("")){
-//                //根据钢管编号查询钢管的所有记录
-//                //1.查询外打砂记录
-//                OdBlastProcess odBlastProcessRecord=odBlastProcessDao.getRecentRecordByPipeNo(pipe_no);
-//                //2.查询外打砂检验记录
-//                OdBlastInspectionProcess odBlastInspectionProcessRecord=odBlastInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
-//                //3.查询外涂记录
-//                OdCoatingProcess odCoatingProcessRecord=odCoatingProcessDao.getRecentRecordByPipeNo(pipe_no);
-//                OdCoating3LpeProcess odCoating3LpeProcessRecord=odCoating3LpeProcessDao.getRecentRecordByPipeNo(pipe_no);
-//                //4.查询外涂检验记录
-//                OdCoatingInspectionProcess odCoatingInspectionProcessRecord=odCoatingInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
-//                OdCoating3LpeInspectionProcess odCoating3LpeInspectionProcessRecord=odCoating3LpeInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
-//                //5.查询外喷标记录
-//                OdStencilProcess odStencilProcessRecord=odStencilProcessDao.getRecentRecordByPipeNo(pipe_no);
-//                //6.查询外涂终检记录
-//                OdFinalInspectionProcess odFinalInspectionProcessRecord=odFinalInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
-//                //7.查询内打砂记录
-//                IdBlastProcess idBlastProcessRecord=idBlastProcessDao.getRecentRecordByPipeNo(pipe_no);
-//                //8.查询内打砂检验记录
-//                IdBlastInspectionProcess idBlastInspectionProcessRecord=idBlastInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
-//                //9.查询内涂记录
-//                IdCoatingProcess idCoatingProcessRecord=idCoatingProcessDao.getRecentRecordByPipeNo(pipe_no);
-//                //10.查询内涂检验记录
-//                IdCoatingInspectionProcess idCoatingInspectionProcessRecord=idCoatingInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
-//                //11.查询内喷标记录
-//                IdStencilProcess idStencilProcessRecord=idStencilProcessDao.getRecentRecordByPipeNo(pipe_no);
-//                //12.查询内涂终检记录
-//                IdFinalInspectionProcess idFinalInspectionProcess=idFinalInspectionProcessDao.getRecentRecordByPipeNo(pipe_no);
-//                //13.扒皮记录
-//                List<CoatingStrip>coatingStrips=coatingStripDao.getRecentRecordByPipeNo(pipe_no);
-//                //14.修补
-//                List<CoatingRepair>coatingRepairs=coatingRepairDao.getRecentRecordByPipeNo(pipe_no);
-//                //15.修磨切割
-//                List<BarePipeGrindingCutoffRecord>barePipeGrindingCutoffRecords=barePipeGrindingCutoffRecordDao.getRecentRecordByPipeNo(pipe_no);
-//                //16.倒棱
-//                List<PipeRebevelRecord>pipeRebevelRecords=pipeRebevelRecordDao.getRecentRecordByPipeNo(pipe_no);
-//                if(odBlastProcessRecord!=null)
-//                   maps.put("odBlastProcessRecord",odBlastProcessRecord);
-//                if(odBlastInspectionProcessRecord!=null)
-//                    maps.put("odBlastInspectionProcessRecord",odBlastInspectionProcessRecord);
-//                if(odCoatingProcessRecord!=null)
-//                    maps.put("odCoatingProcessRecord",odCoatingProcessRecord);
-//                if(odCoatingInspectionProcessRecord!=null)
-//                    maps.put("odCoatingInspectionProcessRecord",odCoatingInspectionProcessRecord);
-//                if(odCoating3LpeProcessRecord!=null)
-//                    maps.put("odCoating3LpeProcessRecord",odCoating3LpeProcessRecord);
-//                if(odCoating3LpeInspectionProcessRecord!=null)
-//                    maps.put("odCoating3LpeInspectionProcessRecord",odCoating3LpeInspectionProcessRecord);
-//                if(odStencilProcessRecord!=null)
-//                    maps.put("odStencilProcessRecord",odStencilProcessRecord);
-//                if(odFinalInspectionProcessRecord!=null)
-//                    maps.put("odFinalInspectionProcessRecord",odFinalInspectionProcessRecord);
-//                if(idBlastProcessRecord!=null)
-//                    maps.put("idBlastProcessRecord",idBlastProcessRecord);
-//                if(idBlastInspectionProcessRecord!=null)
-//                    maps.put("idBlastInspectionProcessRecord",idBlastInspectionProcessRecord);
-//                if(idCoatingProcessRecord!=null)
-//                    maps.put("idCoatingProcessRecord",idCoatingProcessRecord);
-//                if(idCoatingInspectionProcessRecord!=null)
-//                    maps.put("idCoatingInspectionProcessRecord",idCoatingInspectionProcessRecord);
-//                if(idStencilProcessRecord!=null)
-//                    maps.put("idStencilProcessRecord",idStencilProcessRecord);
-//                if(idFinalInspectionProcess!=null)
-//                    maps.put("idFinalInspectionProcess",idFinalInspectionProcess);
-//                if(coatingStrips!=null&&coatingStrips.size()>0)
-//                    maps.put("coatingStrips",coatingStrips);
-//                if(coatingRepairs!=null&&coatingRepairs.size()>0)
-//                    maps.put("coatingRepairs",coatingRepairs);
-//                if(barePipeGrindingCutoffRecords!=null&&barePipeGrindingCutoffRecords.size()>0)
-//                    maps.put("barePipeGrindingCutoffRecords",barePipeGrindingCutoffRecords);
-//                if(pipeRebevelRecords!=null&&pipeRebevelRecords.size()>0)
-//                    maps.put("pipeRebevelRecords",pipeRebevelRecords);
-//                maps.put("success",true);
-//                mmp= JSONArray.toJSONString(maps);
-//            }
-//        }catch (Exception ex){
-//            ex.printStackTrace();
-//        }
-//
-//        return mmp;
-//    }
-
+    /**
+     * 钢管转运
+     * @param request
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/doInStoageTransfer")
     public String doInStoageTransfer(HttpServletRequest request,HttpServletResponse response)throws Exception{
 
@@ -1205,14 +1094,15 @@ public class PipeBasicInfoController {
         ResponseUtil.write(response,json);
         return null;
     }
-
-    //根据管号判断该钢管是否可以出库
+    /**
+     * 根据管号判断该钢管是否可以出库
+     * @param request
+     * @return
+     */
     @RequestMapping(value="checkPipeForShipment",produces="application/json;charset=UTF-8")
     @ResponseBody
     public String checkPipeForShipment(HttpServletRequest request) {
         String pipe_no=request.getParameter("pipe_no");
-        System.out.println("pipe_no"+pipe_no);
-
         List<HashMap<String,Object>>list=pipeBasicInfoDao.checkPipeForShipment(pipe_no);
         Map<String, Object> maps = new HashMap<String, Object>();
         if (list!=null&&list.size()>0) {

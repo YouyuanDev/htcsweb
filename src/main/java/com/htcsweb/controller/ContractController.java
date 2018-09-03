@@ -26,9 +26,14 @@ public class ContractController {
 
     @Autowired
     private ContractInfoDao contractInfoDao;
-
-
-    //模糊查询contract信息列表
+    /**
+     * 分页查询合同信息
+     * @param project_no(项目编号)
+     * @param project_name(项目名称)
+     * @param contract_no(合同编号)
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/getContractInfoByLike")
     @ResponseBody
     public String getContractInfoByLike(@RequestParam(value = "project_no",required = false)String project_no, @RequestParam(value = "project_name",required = false)String project_name,@RequestParam(value = "contract_no",required = false)String contract_no, HttpServletRequest request){
@@ -40,42 +45,32 @@ public class ContractController {
         if(rows==null){
             rows="20";
         }
-
-//        System.out.println("contractNo="+contract_no);
-//        System.out.println("project_no="+project_no);
-//        System.out.println("project_name="+project_name);
-
         int start=(Integer.parseInt(page)-1)*Integer.parseInt(rows);
         List<HashMap<String,Object>>list=contractInfoDao.getAllByLike(project_no,project_name,contract_no,start,Integer.parseInt(rows));
         int count=contractInfoDao.getCountAllByLike(project_no,project_name,contract_no);
-
         Map<String,Object> maps=new HashMap<String,Object>();
         maps.put("total",count);
         maps.put("rows",list);
         String mmp= JSONArray.toJSONString(maps);
-//        System.out.print("mmp:"+mmp);
         return mmp;
     }
-
-
-    //增加或修改contract信息
+    /**
+     * 增加或修改合同信息
+     * @param contractInfo(合同信息)
+     * @param response
+     * @return
+     */
     @RequestMapping(value = "/saveContract")
     @ResponseBody
     public String saveContract(ContractInfo contractInfo, HttpServletResponse response){
-//        System.out.print("saveContract");
-
         JSONObject json=new JSONObject();
         try{
             int resTotal=0;
-
-
             if(contractInfo.getId()==0){
                 //添加
                 resTotal=contractInfoDao.addContractInfo(contractInfo);
-
             }else{
                 //修改！
-
                 resTotal=contractInfoDao.updateContractInfo(contractInfo);
             }
             if(resTotal>0){
@@ -99,8 +94,13 @@ public class ContractController {
         }
         return null;
     }
-
-    //删除contract信息
+    /**
+     * 删除合同信息
+     * @param hlparam(合同信息id集合,","分割)
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/delContract")
     public String delContract(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
         String[]idArr=hlparam.split(",");
@@ -122,8 +122,11 @@ public class ContractController {
         ResponseUtil.write(response,json);
         return null;
     }
-
-    //得到Contract信息
+    /**
+     * 根据合同编号查询合同信息
+     * @param request
+     * @return
+     */
     @RequestMapping(value ="/getContractInfoByContractNo",produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String getContractInfoByContractNo(HttpServletRequest request){

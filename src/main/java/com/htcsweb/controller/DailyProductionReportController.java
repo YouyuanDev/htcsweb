@@ -47,14 +47,17 @@ public class DailyProductionReportController {
         public int count=0;
         public float sum=0;
     }
-
-    //生产日报的excel并下载
+    /**
+     * 生产日报的excel并下载
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping(value="getDailyRecordReportExcel",produces="application/json;charset=UTF-8")
     @ResponseBody
     public  String getDailyRecordReportExcel(HttpServletRequest request, HttpServletResponse response) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat timeformat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
         String basePath = request.getSession().getServletContext().getRealPath("/");
         if(basePath.lastIndexOf('/')==-1){
             basePath=basePath.replace('\\','/');
@@ -63,7 +66,6 @@ public class DailyProductionReportController {
             basePath = basePath.substring(0, basePath.lastIndexOf('/'));
             basePath = basePath.substring(0, basePath.lastIndexOf('/'));
         }
-
         Date start_time = null;
         Date finish_time = null;
         //是否成功标识
@@ -72,7 +74,6 @@ public class DailyProductionReportController {
         String project_no = request.getParameter("project_no");
         String beginTimeStr = request.getParameter("beginTime");
         String endTimeStr = request.getParameter("endTime");
-       // String project_name=request.getParameter("project_name");
         try{
             //先清理.zip垃圾文件
             FileRenameUtil.cleanTrashFiles(basePath);
@@ -97,24 +98,15 @@ public class DailyProductionReportController {
                  start_time=timeformat.parse(beginTimeStr+" 08:00:00");
                  finish_time=timeformat.parse(endTimeStr+" 08:00:00");
                  List<DailyProductionReport>dailyProductionReportList=null;
-//                 File file0=new File(newExcelFileName);
-//                 if(!file0.exists()){
-//                     file0.createNewFile();
-//                 }
                  String tabName="",od_wt="",external_coating="",internal_coating="";
-
-                // Date begin_time=sdf.parse(beginTimeStr);
-                 //Date end_time=sdf.parse(endTimeStr);
                  System.out.println(beginTimeStr+":"+endTimeStr+":"+project_no);
                  List<GroupEntity>grouplist=getTabGroup(project_no);
                  List<String> dateList= DateTimeUtil.getBetweenDates(start_time,finish_time);
                  float od=0,wt=0;
-
                  for (GroupEntity entity:grouplist){
                      //模版第8行开始
                      int row=8;
                      ArrayList<Label> datalist=new ArrayList<Label>();
-
                      od=entity.getOd(); wt=entity.getWt();
                      od_wt=String.valueOf(od)+"x"+String.valueOf(wt);
 
@@ -311,17 +303,23 @@ public class DailyProductionReportController {
                  }else{
                      zipName="nodata";
                  }
-                 //删除多余文件
-//                 if(file0.exists()){
-//                    file0.delete();
-//                 }
              }
         }catch (Exception e){
             e.printStackTrace();
         }
         return JSONObject.toJSONString(zipName);
     }
-
+    /**
+     * Excel填充数据
+     * @param datalist(数据集合)
+     * @param dailyProductionReportList(日报数据集合)
+     * @param row(行)
+     * @param tabName(Excel tab名称)
+     * @param project_name(项目名称)
+     * @param client_name(客户名称)
+     * @param wcf(Excel表格样式)
+     * @param sdf(日期格式)
+     */
     private  void  FillExcelData(ArrayList<Label> datalist,List<DailyProductionReport>dailyProductionReportList,int row,String tabName,String project_name,String client_name,WritableCellFormat wcf,SimpleDateFormat sdf){
         int i =0;
         try{
@@ -378,16 +376,19 @@ public class DailyProductionReportController {
                 datalist.add(new Label(34,row,String.valueOf(report.getPipe_delivered_count()), wcf));
                 datalist.add(new Label(35,row,String.valueOf(report.getPipe_delivered_length()), wcf));
                 //工程累计
-
             }
         }catch (Exception e){
 
         }
-
-
     }
-
-    //模糊查询DailyProductionReport信息列表
+    /**
+     * 分页模糊查询日报信息列表
+     * @param project_no(项目编号)
+     * @param begin_time(开始日期)
+     * @param end_time(结束日期)
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/getDailProductionReportByLike")
     @ResponseBody
     public String getDailProductionReportByLike(@RequestParam(value = "project_no",required = false)String project_no, @RequestParam(value = "begin_time",required = false)String begin_time, @RequestParam(value = "end_time",required = false)String end_time,HttpServletRequest request){
@@ -405,11 +406,9 @@ public class DailyProductionReportController {
         try{
             if(begin_time!=null&&begin_time!=""){
                 beginTime=sdf.parse(begin_time);
-                //System.out.println(beginTime.toString());
             }
             if(end_time!=null&&end_time!=""){
                 endTime=sdf.parse(end_time);
-                //System.out.println(endTime.toString());
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -423,6 +422,13 @@ public class DailyProductionReportController {
         String mmp= JSONArray.toJSONString(maps);
         return mmp;
     }
+    /**
+     * 添加或修改日报信息
+     * @param dailyProductionReport(日报信息)
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping(value = "/saveDailyProductionReport")
     @ResponseBody
     public String saveDailyProductionReport(DailyProductionReport dailyProductionReport, HttpServletRequest request, HttpServletResponse response){
@@ -468,7 +474,13 @@ public class DailyProductionReportController {
         }
         return null;
     }
-
+    /**
+     * 删除日报信息
+     * @param hlparam(日报信息id集合,","分割)
+     * @param response
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/delDailyProductionReport")
     public String delDailyProductionReport(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
         String[]idArr=hlparam.split(",");
@@ -490,16 +502,19 @@ public class DailyProductionReportController {
         ResponseUtil.write(response,json);
         return null;
     }
+    /**
+     * 添加日报数据
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/addDialyReportAndCreateExcel")
     @ResponseBody
     public String addDialyReportAndCreateExcel(HttpServletRequest request){
-
         String flag="fail";
         int result=-1;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat timeformat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try{
-
           String project_no=request.getParameter("project_no");
           String beginTime=request.getParameter("begin_time");
           String endTime=request.getParameter("end_time");
@@ -512,26 +527,18 @@ public class DailyProductionReportController {
                     begin_time=sdf.parse(beginTime);
                     end_time=sdf.parse(endTime);
                     dateList= DateTimeUtil.getBetweenDates(begin_time,end_time);
-
                     //遍历日期
                     List<GroupEntity>grouplist=getTabGroup(project_no);
                     //遍历排列组合，生成组合对应的tab
                     float od=0f,wt=0f;
                     String external_coating="",internal_coating="";
                     String od_wt="";
-                    // System.out.println("排列组合数量："+grouplist.size());
-//                    for (GroupEntity entity:grouplist){
-//                        for (String item:dateList){
-//                            System.out.println(item+":"+entity.getOd()+":"+entity.getWt()+":"+entity.getExternal_coating()+":"+entity.getInternal_coating());
-//                        }
-//                    }
                     for (GroupEntity entity:grouplist){
                         od=entity.getOd();
                         wt=entity.getWt();
                         od_wt=String.valueOf(od)+"x"+String.valueOf(wt);
                         external_coating=entity.getExternal_coating();
                         internal_coating=entity.getInternal_coating();
-
                         for (String item:dateList){
                             //根据日期填充对应的tab
                             //获取外防腐总数
@@ -650,9 +657,7 @@ public class DailyProductionReportController {
 
                             //需重新倒棱管数量(切长处理管+样管切样)
                             int onholdCutOffCount=getBarePipeCutoffCount(item,project_no,external_coating,internal_coating,od,wt,timeformat);
-
                             int sampleCutoffCount=getSampleCutoffCount(item,project_no,external_coating,internal_coating,od,wt,timeformat);
-                            //System.out.println(sampleCutoffTotal+":"+grindCutOffTotal+"----------------");
                             int cutOffTotalCount=sampleCutoffCount+onholdCutOffCount;
                             //重新倒棱合格管数量
                             int acceptedRebevelCount=getAcceptedRebevelCount(item,project_no,external_coating,internal_coating,od,wt,timeformat);
@@ -672,10 +677,6 @@ public class DailyProductionReportController {
                                     shippedPipeLength=tl.floatValue();
                                 }
                             }
-
-
-
-
                             //向日报中填充数据
                             //首先判断日报表中是否有此数据，如果没有则添加，否则进行更新,参数(time,project_no,od_wt,外防类型)
                             List<DailyProductionReport>list1=dailyProductionReportDao.getDailyReportByParams(project_no,external_coating,internal_coating,od_wt,sdf.parse(item));
@@ -683,7 +684,6 @@ public class DailyProductionReportController {
                             DailyProductionReport report=new DailyProductionReport();
                             if(list1!=null&&list1.size()>0){
                                 report=list1.get(0);
-                                System.out.println("-----------更新"+samplePipeCount);
                             }
                             //设置数据字段
                             report.setBare_pipe_count(bareCount);
@@ -734,9 +734,7 @@ public class DailyProductionReportController {
                                  result=dailyProductionReportDao.updateDailyProductionReport(report);
                             }else{
                                 //添加
-                                //System.out.println("getOd_total_coated_count："+report.getOd_total_coated_count());
                                   result=dailyProductionReportDao.addDailyProductionReport(report);
-                                //System.out.println("执行结果："+result);
                             }
                         }
                     }
@@ -750,14 +748,13 @@ public class DailyProductionReportController {
             e.printStackTrace();
             flag="error";
         }
-
-
         return JSONArray.toJSONString(flag);
     }
-    //
-
-
-    //生成tab的排列组合,根据od-wt,external_coating,internal_coating进行组合
+    /**
+     * 生成tab的排列组合,根据(外径-壁厚)、外防类型、内防类型进行组合
+     * @param project_no(项目编号)
+     * @return
+     */
     private List<GroupEntity>getTabGroup(String project_no){
         List<GroupEntity>tabGroupList=new ArrayList<>();
         List<ContractInfo>list=contractInfoDao.getAllContractInfoByProjectNo(project_no);
@@ -1008,6 +1005,11 @@ public class DailyProductionReportController {
 //        return count;
 //    }
 
+    /**
+     * 格式化字符串(如果字符串为空或空白,则设置字符串未空格,防止Excel写空数据的时候报错)
+     * @param param
+     * @return
+     */
     public  String getFormatString(String param){
         if(param!=null&&!param.equals("")){
             return  param;
@@ -1015,6 +1017,10 @@ public class DailyProductionReportController {
             return  " ";
         }
     }
+    /**
+     * Excel项目名称单元格样式设置
+     * @return
+     */
     private WritableCellFormat cellFormat_ProjectName(){
         WritableCellFormat cellFormat=null;
         try{
@@ -1028,6 +1034,10 @@ public class DailyProductionReportController {
         }
         return cellFormat;
     }
+    /**
+     * Excel涂层类型单元格样式设置
+     * @return
+     */
     private WritableCellFormat cellFormat_CoatingType(){
         WritableCellFormat cellFormat=null;
         try{
@@ -1040,6 +1050,10 @@ public class DailyProductionReportController {
         }
         return cellFormat;
     }
+    /**
+     * Excel设置单元格边框线
+     * @return
+     */
     private WritableCellFormat cellFormat3(){
         WritableCellFormat wcf=null;
         try{
@@ -1050,10 +1064,16 @@ public class DailyProductionReportController {
         }
         return wcf;
     }
-
-
-    //------------获取各个数据-------
-    //1.获取当天外防腐总数(获取外防终检表中数)
+    /**
+     * 1.获取当天外防腐总数(获取外防终检表中数)
+     * @param now(当前日期)
+     * @param project_no(项目编号)
+     * @param external_coating(外防类型)
+     * @param internal_coating(内防类型)
+     * @param od(外径)
+     * @param wt(壁厚)
+     * @return
+     */
     private int getOdCoatingCount(String now,String project_no,String external_coating,String internal_coating,float od,float wt){
         SimpleDateFormat timeformat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String nextday=DateTimeUtil.getNextDay(now);
@@ -1067,7 +1087,17 @@ public class DailyProductionReportController {
         }
         return count;
     }
-    //2.获取当天外防腐合格支数与合格长度
+    /**
+     * 2.获取当天外防腐合格支数与合格长度
+     * @param now(当前日期)
+     * @param project_no(项目编号)
+     * @param external_coating(外防类型)
+     * @param internal_coating(内防类型)
+     * @param od(外径)
+     * @param wt(壁厚)
+     * @param timeformat(日期格式化类型)
+     * @return
+     */
     private CountSum getOdCoatingAcceptedCount(String now,String project_no,String external_coating,String internal_coating,float od,float wt,SimpleDateFormat timeformat){
         String nextday=DateTimeUtil.getNextDay(now);
         CountSum countSum=new CountSum();
@@ -1089,7 +1119,18 @@ public class DailyProductionReportController {
         }
         return countSum;
     }
-    //3.获取当天的修补支数(根据od或者id划分)
+    /**
+     * 3.获取当天的修补支数(根据od或者id划分)
+     * @param now(当前日期)
+     * @param project_no(项目编号)
+     * @param external_coating(外防类型)
+     * @param internal_coating(内防类型)
+     * @param odid(外防还是内防)
+     * @param od(外径)
+     * @param wt(壁厚)
+     * @param timeformat(日期格式化类型)
+     * @return
+     */
     private int getDailyCoatingRepairCount(String now,String project_no,String external_coating,String internal_coating,String odid,float od,float wt,SimpleDateFormat timeformat){
         String nextday=DateTimeUtil.getNextDay(now);
         int count=0;
@@ -1102,7 +1143,18 @@ public class DailyProductionReportController {
         }
         return count;
     }
-    //4.获取当天的防腐光管隔离数（外防4工序和内防4工序数量和）
+    /**
+     * 4.获取当天的防腐光管隔离数（外防4工序和内防4工序数量和）
+     * @param now(当前日期)
+     * @param project_no(项目编号)
+     * @param external_coating(外防类型)
+     * @param internal_coating(内防类型)
+     * @param odid(外防还是内防)
+     * @param od(外径)
+     * @param wt(壁厚)
+     * @param timeformat(日期格式化类型)
+     * @return
+     */
     private int getBarePipeOnholdCount(String now,String project_no,String external_coating,String internal_coating,String odid,float od,float wt,SimpleDateFormat timeformat){
         String nextday=DateTimeUtil.getNextDay(now);
         int count=0;
@@ -1111,20 +1163,27 @@ public class DailyProductionReportController {
             Date endTime=timeformat.parse(nextday+" 08:00:00");
             if(odid!=null&&odid.equals("OD")){
                 count=inspectionProcessRecordHeaderDao.getODBarePipeOnholdCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
-
-                //count=barePipeGrindingCutoffRecordDao.getODBarePipeOnholdCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
             }
             else if(odid!=null&&odid.equals("ID")){
                 count=inspectionProcessRecordHeaderDao.getIDBarePipeOnholdCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
-
-                //count=barePipeGrindingCutoffRecordDao.getIDBarePipeOnholdCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
             }
         }catch (Exception e){
             e.printStackTrace();
         }
         return count;
     }
-    //5.光管隔离修磨数量
+    /**
+     * 5.光管隔离修磨数量
+     * @param now(当前日期)
+     * @param project_no(项目编号)
+     * @param external_coating(外防类型)
+     * @param internal_coating(内防类型)
+     * @param odid(外防还是内防)
+     * @param od(外径)
+     * @param wt(壁厚)
+     * @param timeformat(日期格式化类型)
+     * @return
+     */
     private int getBarePipeGrindingCount(String now,String project_no,String external_coating,String internal_coating,String odid,float od,float wt,SimpleDateFormat timeformat){
         String nextday=DateTimeUtil.getNextDay(now);
         int count=0;
@@ -1132,14 +1191,23 @@ public class DailyProductionReportController {
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
             count=inspectionProcessRecordHeaderDao.getBarePipeGrindingCount(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
-
-            //count=barePipeGrindingCutoffRecordDao.getBarePipeGrindingCount(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
         }
         return count;
     }
-    //6.光管隔离切管数量
+    /**
+     * 6.光管隔离切管数量
+     * @param now(当前日期)
+     * @param project_no(项目编号)
+     * @param external_coating(外防类型)
+     * @param internal_coating(内防类型)
+     * @param odid(外防还是内防)
+     * @param od(外径)
+     * @param wt(壁厚)
+     * @param timeformat(日期格式化类型)
+     * @return
+     */
     private int getBarePipeCutoffCount(String now,String project_no,String external_coating,String internal_coating,String odid,float od,float wt,SimpleDateFormat timeformat){
         String nextday=DateTimeUtil.getNextDay(now);
         int count=0;
@@ -1147,14 +1215,23 @@ public class DailyProductionReportController {
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
             count=inspectionProcessRecordHeaderDao.getBarePipeCutoffCount(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
-
-            //count=barePipeGrindingCutoffRecordDao.getBarePipeCutoffCount(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
         }
         return count;
     }
-    //7.获取涂层废管数量
+    /**
+     * 7.获取涂层废管数量
+     * @param now(当前日期)
+     * @param project_no(项目编号)
+     * @param external_coating(外防类型)
+     * @param internal_coating(内防类型)
+     * @param odid(外防还是内防)
+     * @param od(外径)
+     * @param wt(壁厚)
+     * @param timeformat(日期格式化类型)
+     * @return
+     */
     private int getCoatingRejectedPipe(String now,String project_no,String external_coating,String internal_coating,String odid,float od,float wt,SimpleDateFormat timeformat){
         String nextday=DateTimeUtil.getNextDay(now);
         int count=0;
@@ -1163,11 +1240,9 @@ public class DailyProductionReportController {
             Date endTime=timeformat.parse(nextday+" 08:00:00");
             if(odid!=null&&odid.equals("OD")){
                 count=inspectionProcessRecordHeaderDao.getODCoatingRejectedPipeCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
-                //count=coatingStripDao.getODCoatingRejectedPipeCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
             }
             else if(odid!=null&&odid.equals("ID")){
                 count=inspectionProcessRecordHeaderDao.getIDCoatingRejectedPipeCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
-                //count=coatingStripDao.getIDCoatingRejectedPipeCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -1175,18 +1250,25 @@ public class DailyProductionReportController {
         System.out.println(project_no+"-"+external_coating+"-"+internal_coating+"-"+odid+"-"+od+"-"+wt+"-"+"+++++++"+count);
         return count;
     }
-    //8.涂层废管扒皮处理合格数量
+    /**
+     * 8.涂层废管扒皮处理合格数量
+     * @param now(当前日期)
+     * @param project_no(项目编号)
+     * @param external_coating(外防类型)
+     * @param internal_coating(内防类型)
+     * @param odid(外防还是内防)
+     * @param od(外径)
+     * @param wt(壁厚)
+     * @param timeformat(日期格式化类型)
+     * @return
+     */
     private int getStripPipeAcceptedCount(String now,String project_no,String external_coating,String internal_coating,String odid,float od,float wt,SimpleDateFormat timeformat){
         String nextday=DateTimeUtil.getNextDay(now);
-        //System.out.println(now+":"+nextday+":"+project_no+":"+external_coating+":"+internal_coating+":"+od+":"+wt+":"+odid);
         int count=0;
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-
             count=inspectionProcessRecordHeaderDao.getStripPipeAcceptedCount(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
-
-            //count=coatingStripDao.getStripPipeAcceptedCount(project_no,null,external_coating,internal_coating,odid,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
         }finally {
@@ -1194,9 +1276,18 @@ public class DailyProductionReportController {
         }
         return count;
     }
-
     //---------------内防腐------------
-    //9.获取当天内防腐总数
+    /**
+     * 9.获取当天内防腐总数
+     * @param now(当前日期)
+     * @param project_no(项目编号)
+     * @param external_coating(外防类型)
+     * @param internal_coating(内防类型)
+     * @param od(外径)
+     * @param wt(壁厚)
+     * @param timeformat(日期格式化类型)
+     * @return
+     */
     private int getIdCoatingCount(String now,String project_no,String external_coating,String internal_coating,float od,float wt,SimpleDateFormat timeformat){
         String nextday=DateTimeUtil.getNextDay(now);
         int count=0;
@@ -1204,13 +1295,22 @@ public class DailyProductionReportController {
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
             count=inspectionProcessRecordHeaderDao.getIDCoatingCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
-            //count=idFinalInspectionProcessDao.getIDCoatingCount(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
         }
         return count;
     }
-    //10.获取当天的内防腐合格数和长度
+    /**
+     * 10.获取当天的内防腐合格数和长度
+     * @param now(当前日期)
+     * @param project_no(项目编号)
+     * @param external_coating(外防类型)
+     * @param internal_coating(内防类型)
+     * @param od(外径)
+     * @param wt(壁厚)
+     * @param timeformat(日期格式化类型)
+     * @return
+     */
     private CountSum getIdCoatingAcceptedCount(String now,String project_no,String external_coating,String internal_coating,float od,float wt,SimpleDateFormat timeformat){
         String nextday=DateTimeUtil.getNextDay(now);
         CountSum countSum=new CountSum();
@@ -1218,8 +1318,6 @@ public class DailyProductionReportController {
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
             List<HashMap<String,Object>>list1=inspectionProcessRecordHeaderDao.getIDCoatingAcceptedInfo(project_no,external_coating,internal_coating,od,wt,beginTime,endTime,"1");
-
-            //List<HashMap<String,Object>>list1=idFinalInspectionProcessDao.getIDCoatingAcceptedInfo(project_no,external_coating,internal_coating,od,wt,beginTime,endTime,"1");
             if(list1!=null&&list1.size()>0){
                 HashMap<String,Object>hs=list1.get(0);
                 if(hs!=null){
@@ -1234,7 +1332,18 @@ public class DailyProductionReportController {
         }
         return countSum;
     }
-    //12.白班、夜班样管信息
+    /**
+     * 12.查询白班、夜班样管信息
+     * @param now(当前日期)
+     * @param type(白班、夜班)
+     * @param project_no
+     * @param external_coating(外防类型)
+     * @param internal_coating(内防类型)
+     * @param od(外径)
+     * @param wt(壁厚)
+     * @param timeformat(日期格式化类型)
+     * @return
+     */
     private List<HashMap<String,Object>>getPipeSamplingInfo(String now,int type,String project_no,String external_coating,String internal_coating,float od,float wt,SimpleDateFormat timeformat){
         List<HashMap<String,Object>>list=new ArrayList<>();
         Date begin_time=null,end_time=null;
@@ -1253,48 +1362,68 @@ public class DailyProductionReportController {
                 end_time=timeformat.parse(endTime);
             }
             list=inspectionProcessRecordHeaderDao.getPipeSamplingInfo(project_no,external_coating,internal_coating,od,wt,begin_time,end_time);
-
-            //list=pipeSamplingRecordDao.getPipeSamplingInfo(project_no,external_coating,internal_coating,od,wt,begin_time,end_time);
         }catch (Exception e){
             e.printStackTrace();
         }
         return list;
     }
-    //13.管段切斜信息(切割分为两种，一种是样管切割，一种是瑕疵切割)
-    //13.1获取样管切割个数
+    /**
+     * 13.1获取样管切割个数,管段切斜信息(切割分为两种，一种是样管切割，一种是瑕疵切割)
+     * @param now(当前日期)
+     * @param project_no(项目编号)
+     * @param external_coating(外防类型)
+     * @param internal_coating(内防类型)
+     * @param od(外径)
+     * @param wt(壁厚)
+     * @param timeformat(日期格式化类型)
+     * @return
+     */
     private int getSampleCutoffCount(String now,String project_no,String external_coating,String internal_coating,float od,float wt,SimpleDateFormat timeformat){
         String nextday=DateTimeUtil.getNextDay(now);
         int count=0;
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-
             count=inspectionProcessRecordHeaderDao.getSampleCutoffCount(project_no,null,external_coating,internal_coating,null,od,wt,beginTime,endTime);
-
-
-            //count=pipeSamplingRecordDao.getSampleCutoffCount(project_no,null,external_coating,internal_coating,null,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
         }
         return count;
     }
-    //13.2获取隔离管切割管数量
+    /**
+     * 13.2获取隔离管切割管数量
+     * @param now(当前日期)
+     * @param project_no(项目编号)
+     * @param external_coating(外防类型)
+     * @param internal_coating(内防类型)
+     * @param od(外径)
+     * @param wt(壁厚)
+     * @param timeformat(日期格式化类型)
+     * @return
+     */
     private int getBarePipeCutoffCount(String now,String project_no,String external_coating,String internal_coating,float od,float wt,SimpleDateFormat timeformat){
         String nextday=DateTimeUtil.getNextDay(now);
         int count=0;
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-
             count=inspectionProcessRecordHeaderDao.getBarePipeCutoffCount(project_no,null,external_coating,internal_coating,null,od,wt,beginTime,endTime);
-
-            //count=barePipeGrindingCutoffRecordDao.getBarePipeCutoffCount(project_no,null,external_coating,internal_coating,null,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
         }
         return count;
     }
-    //13.3获取重倒棱合格管数量
+    /**
+     * 13.3获取重倒棱合格管数量
+     * @param now(当前日期)
+     * @param project_no(项目编号)
+     * @param external_coating(外防类型)
+     * @param internal_coating(内防类型)
+     * @param od(外径)
+     * @param wt(壁厚)
+     * @param timeformat(日期格式化类型)
+     * @return
+     */
     private int getAcceptedRebevelCount(String now,String project_no,String external_coating,String internal_coating,float od,float wt,SimpleDateFormat timeformat){
         String nextday=DateTimeUtil.getNextDay(now);
         int count=0;
@@ -1302,16 +1431,22 @@ public class DailyProductionReportController {
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
             count=inspectionProcessRecordHeaderDao.getAcceptedRebevelCount(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);
-
-            //count=pipeRebevelRecordDao.getAcceptedRebevelCount(project_no,external_coating,internal_coating,od,wt,beginTime,endTime);
         }catch (Exception e){
             e.printStackTrace();
         }
         return count;
     }
-
-    //14.获取发运数量和长度
-
+    /**
+     * 14.获取发运数量和长度
+     * @param now(当前日期)
+     * @param project_no(项目编号)
+     * @param external_coating(外防类型)
+     * @param internal_coating(内防类型)
+     * @param od(外径)
+     * @param wt(壁厚)
+     * @param timeformat(日期格式化类型)
+     * @return
+     */
     private List<HashMap<String,Object>> getShipingCountAndLength(String now,String project_no,String external_coating,String internal_coating,float od,float wt,SimpleDateFormat timeformat){
         String nextday=DateTimeUtil.getNextDay(now);
         List<HashMap<String,Object>> list=new ArrayList<>();
