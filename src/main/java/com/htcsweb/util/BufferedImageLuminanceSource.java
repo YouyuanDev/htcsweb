@@ -45,8 +45,12 @@ public final class BufferedImageLuminanceSource extends LuminanceSource {
         this.left = left;
         this.top = top;
     }
-
-    // 这里要得到指定行的像素数据
+    /**
+     * 这里要得到指定行的像素数据
+     * @param y
+     * @param row
+     * @return
+     */
     @Override
     public byte[] getRow(int y, byte[] row) {
         if (y < 0 || y >= getHeight()) {
@@ -59,8 +63,10 @@ public final class BufferedImageLuminanceSource extends LuminanceSource {
         image.getRaster().getDataElements(left, top + y, width, 1, row);
         return row;
     }
-
-    // 返回我们生成好的像素数据
+    /**
+     * 返回我们生成好的像素数据
+     * @return
+     */
     @Override
     public byte[] getMatrix() {
         int width = getWidth();
