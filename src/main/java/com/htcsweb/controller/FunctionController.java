@@ -63,7 +63,6 @@ public class FunctionController {
     public String getFunctionByNoName(@RequestParam(value = "function_no",required = false)String function_no, @RequestParam(value = "function_name",required = false)String function_name, HttpServletRequest request){
         List<HashMap<String,Object>> list=functionDao.getAllByNoName(function_no,function_name);
         String mmp= JSONArray.toJSONString(list);
-        System.out.println(mmp);
         return mmp;
     }
     /**
