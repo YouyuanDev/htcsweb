@@ -31,19 +31,9 @@
     <script src="../js/language.js" type="text/javascript"></script>
     <script type="text/javascript">
         var url;
-
-
         function formatterdate(value,row,index){
-            // var date = new Date(value);
-            // //return date.toLocaleString();
-            // var y = date.getFullYear();
-            // var m = date.getMonth()+1;
-            // var d = date.getDate();
-            // return y+'-'+(m<10?('0'+m):m)+'-'+(d<10?('0'+d):d);
             return getDate1(value);
         }
-
-
         // 日期格式为 2/20/2017 12:00:00 PM
         function myformatter2(date){
             return getDate1(date);
@@ -53,8 +43,6 @@
             if (!s) return new Date();
             return new Date(Date.parse(s));
         }
-
-
         function string2date(str){
             return new Date(Date.parse(str.replace(/-/g,  "/")));
         }
@@ -79,8 +67,6 @@
                 return new Date();
             }
         }
-
-
         function searchProject() {
             $('#projectDatagrids').datagrid('load',{
                 'project_no': $('#projectno').val(),
@@ -111,7 +97,6 @@
                 }
             });
             $('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
-            // hlLanguage("../i18n/");
         });
 
 
@@ -131,45 +116,15 @@
             $('#hlcancelBtn').attr('operationtype','edit');
             var row = $('#projectDatagrids').datagrid('getSelected');
             if(row){
-                 $('#hlProjectDialog').dialog('open').dialog('setTitle','修改');
-
-                //date = getDate1(row.project_time)
-                //str=myformatter2(date)
-                //alert(str)
+                $('#hlProjectDialog').dialog('open').dialog('setTitle','修改');
                 row.project_time=getDate1(row.project_time),
                 $('#projectForm').form('load',row);
-                // $('#projectForm').form('load',{
-                //     'projectid':row.id,
-                //     'project_no':row.project_no,
-                //     'project_name':row.project_name,
-                //     'client_name':row.client_name,
-                //     'client_spec':row.client_spec,
-                //     'coating_standard':row.coating_standard,
-                //     'mps':row.mps,
-                //     'itp':row.itp,
-                //     //'project_time':str,
-                //     'upload_files':row.upload_files,
-                //     // 'pipe_body_acceptance_criteria_no':row.pipe_body_acceptance_criteria_no,
-                //     // 'inspection_frequency_no':row.inspection_frequency_no,
-                //     // 'od_coating_acceptance_criteria_no':row.od_coating_acceptance_criteria_no,
-                //     // 'id_coating_acceptance_criteria_no':row.id_coating_acceptance_criteria_no,
-                //     // 'lab_testing_acceptance_criteria_2fbe_no':row.lab_testing_acceptance_criteria_2fbe_no,
-                //     // 'lab_testing_acceptance_criteria_3lpe_no':row.lab_testing_acceptance_criteria_3lpe_no,
-                //     // 'raw_material_acceptance_criteria_2fbe_no':row.raw_material_acceptance_criteria_2fbe_no,
-                //     // 'raw_material_acceptance_criteria_3lpe_no':row.raw_material_acceptance_criteria_3lpe_no,
-                //     'acceptance_criteria_no':row.acceptance_criteria_no
-                // });
-
-                //$("#project_time").datetimebox('setValue',getDate1(row.project_time));
-
                 var files=row.upload_files;
                 if(files!=null&&files!=""){
-                    //alert(files);
                     var fiList=files.split(';');
                     createFilesModel(fiList);
                 }
                 url="/ProjectOperation/saveProject.action?id="+row.id;
-
             }else{
                 hlAlertTwo();
             }
@@ -182,9 +137,6 @@
                     idArr.push(row[i].id);
                 }
                 var idArrs=idArr.join(',');
-
-
-
                 $.messager.confirm('系统提示',"您确定要删除这<font color=red>"+idArr.length+ "</font>条数据吗？",function (r) {
                     if(r){
                         $.post(
@@ -197,9 +149,6 @@
                         },"json");
                     }
                 });
-
-                //hlAlertFive("/ProjectOperation/delProject.action",idArrs,idArr.length,'#projectDatagrids');
-                // $.messager.confirm('提示','您确定要删除<font>')
             }else{
                 hlAlertOne();
             }
@@ -208,10 +157,7 @@
 
         //删除选择的文件
         function delUploadFile($obj) {
-
             var fileName=$obj.siblings('mt').find('a').attr('name');
-            alert("delete filename="+fileName)
-
             $.ajax({
                 url:'../UploadFile/delUploadFile.action',
                 dataType:'json',
@@ -219,11 +165,9 @@
                 success:function (data) {
                     if(data.success){
                         var fileList=editFilesList(2,fileName);
-                        //$(this).parent('content-dd').remove();
                         var filesList=$('#fileslist').val();
                         var fiList=filesList.split(';');
                         createFilesModel(fiList);
-
                     }else{
                         hlAlertFour("移除失败!");
                     }
@@ -245,24 +189,24 @@
 
         //创建图片展示模型(参数是图片集合)
         function  createFilesModel(filList) {
-            var basePath ="<%=basePath%>"+"/upload/files/";
-            //alert("basePath="+basePath)
-            //var basePath ="../upload/files/";
-            if($('#hl-files').length>0){
-                $('#file_list').empty();
-                for(var i=0;i<filList.length;i++){
-                    if(filList[i]=="")continue;
-                    $('#file_list').append(getGalleyChildrenLink(basePath+filList[i],filList[i]));
+            try{
+                var basePath ="<%=basePath%>"+"/upload/files/";
+                if($('#hl-files').length>0){
+                    $('#file_list').empty();
+                    for(var i=0;i<filList.length;i++){
+                        if(filList[i]=="")continue;
+                        $('#file_list').append(getGalleyChildrenLink(basePath+filList[i],filList[i]));
+                    }
+                }else{
+                    $('#hl-file-con').append(getFilesCon());
+                    for(var i=0;i<filList.length;i++){
+                        if(filList[i]=="")continue;
+                        $('#file_list').append(getGalleyChildrenLink(basePath+filList[i],filList[i]));
+                    }
                 }
-            }else{
-                $('#hl-file-con').append(getFilesCon());
-                for(var i=0;i<filList.length;i++){
-                    if(filList[i]=="")continue;
-                    $('#file_list').append(getGalleyChildrenLink(basePath+filList[i],filList[i]));
-                }
+            }catch(e){
             }
         }
-
         function getFilesCon() {
             var str='<div id="hl-files">'+
                 '<div id="file">' +
@@ -272,19 +216,23 @@
                 '</div>';
             return str;
         }
-
-
         //文件上传失败操作
         function onUploadError() {
             alert("上传失败!");
         }
         //文件上传成功操作
         function onUploadSuccess(e) {
-            var data=eval("("+e.serverData+")");
-            var fileListstr=editFilesList(0,data.fileUrl);
-            var fList=fileListstr.split(';');
-            //alert("success");
-            createFilesModel(fList);
+            try{
+                var data=eval("("+e.serverData+")");
+                if(data.fileUrl!=undefined){
+                    var fileListstr=editFilesList(0,data.fileUrl);
+                    var fList=fileListstr.split(';');
+                    createFilesModel(fList);
+                    hlAlertFour("上传成功!");
+                }
+            }catch(e){
+                hlAlertFour("上传失败!");
+            }
         }
         function editFilesList(type,fileUrl) {
             var $obj=$('#fileslist');
@@ -300,31 +248,21 @@
         //取消保存
         function ProjectFormCancelSubmit() {
             $('#hlProjectDialog').dialog('close');
-
-
         }
-
-
         //增加或保存项目信息
         function ProjectFormSubmit() {
-
             $('#projectForm').form('submit',{
                 url:url,
                 onSubmit:function () {
-
                     var pname=$("input[name='project_name']").val();
                     pname=removeAllSpace(pname);
                     $("input[name='project_name']").val(pname);
-
-
                     //表单验证
                     if($("input[name='project_no']").val()==""){
-
                         hlAlertFour("请输入项目编号");
                         return false;
                     }
                     if($("input[name='project_name']").val()==""){
-
                         hlAlertFour("请输入项目名称");
                         return false;
                     }
@@ -333,29 +271,16 @@
                         hlAlertFour("请输入客户名称");
                         return false;
                     }
-                    // if($("input[name='pipe_body_acceptance_criteria_no']").val()==""){
-                    //
-                    //     hlAlertFour("请输入钢管管体标准名称");
-                    //     return false;
-                    // }
-
-
                     if($("input[name='project_time']").val()==""){
 
                         hlAlertFour("请输入项目开始日期");
                         return false;
                     }
-
                     setParams($("input[name='project_name']"));
                     setParams($("input[name='client_name']"));
                     setParams($("input[name='client_spec']"));
                     setParams($("input[name='coating_standard']"));
                     setParams($("input[name='mps']"));
-
-
-
-
-                    //return $('#projectForm').form('enableValidation').form('validate');
                 },
                 success: function(result){
                     var result = eval('('+result+')');
@@ -363,8 +288,6 @@
                         $('#hlProjectDialog').dialog('close');
                         $('#projectDatagrids').datagrid('reload');
                         clearFormLabel();
-                        //$('#hl-gallery-con').empty();
-                       // $('#projectDatagrids').datagrid('clearSelections');
                     }
                     hlAlertFour(result.message);
                 },
@@ -383,41 +306,7 @@
             $('#projectForm').form('clear');
 
         }
-
-
-        // $.extend($.fn.validatebox.defaults.rules, {
-        //     myvalidate : {
-        //         validator : function(value, param) {
-        //             var projectno = $("#project_no").val().trim();
-        //             console.log(projectno);
-        //             alert(projectno)
-        //             var haha = " ";
-        //             $.ajax({
-        //                 type : 'post',
-        //                 async : false,
-        //                 url : '/ProjectOperation/checkProjectNoAvailable.action',
-        //                 data : {
-        //                     "project_no" : projectno
-        //                 },
-        //                 success : function(data) {
-        //                     haha = data;
-        //                 }
-        //             });
-        //             console.log(haha);
-        //             return haha.indexOf("true");
-        //         },
-        //         message : '项目名已经被占用'
-        //     }
-        // });
-
-
-
-
-
     </script>
-
-
-
 </head>
 <body>
 <fieldset class="b3" style="padding:10px;margin:10px;">

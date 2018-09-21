@@ -145,7 +145,8 @@ public class SessionFilter extends OncePerRequestFilter{
             "APPGetQRCodePrintTimes",
             "checkForProductStockIn",
             "getInspectionRecordByProjectNoMillNoProcessCode",
-            "getStatisticExcelProgress"
+            "getStatisticExcelProgress",
+            "uploadFile"
     }; // 不过滤的uri
 
     /**
