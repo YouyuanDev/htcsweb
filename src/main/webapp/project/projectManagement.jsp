@@ -158,24 +158,28 @@
         //删除选择的文件
         function delUploadFile($obj) {
             var fileName=$obj.siblings('mt').find('a').attr('name');
-            $.ajax({
-                url:'../UploadFile/delUploadFile.action',
-                dataType:'json',
-                data:{"fileList":fileName+";"},
-                success:function (data) {
-                    if(data.success){
-                        var fileList=editFilesList(2,fileName);
-                        var filesList=$('#fileslist').val();
-                        var fiList=filesList.split(';');
-                        createFilesModel(fiList);
-                    }else{
-                        hlAlertFour("移除失败!");
+            if(fileName!=undefined){
+                $.ajax({
+                    url:'../UploadFile/delUploadFile.action',
+                    dataType:'json',
+                    data:{"fileList":fileName+";"},
+                    success:function (data) {
+                        if(data.success){
+                            var fileList=editFilesList(2,fileName);
+                            var filesList=$('#fileslist').val();
+                            var fiList=filesList.split(';');
+                            createFilesModel(fiList);
+                        }else{
+                            hlAlertFour("移除失败!");
+                        }
+                    },
+                    error:function () {
+                        hlAlertThree();
                     }
-                },
-                error:function () {
-                    hlAlertThree();
-                }
-            });
+                });
+            }else{
+                hlAlertFour("移除失败,未找到该文件!");
+            }
         }
 
 
