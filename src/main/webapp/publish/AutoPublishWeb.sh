@@ -28,3 +28,5 @@ scp -r $basepath/target/htcsweb.war root@116.62.17.42:/usr/share/tomcat/webapps/
 
 
 #ios  https://itunes.apple.com/app/id1419485514
+
+#Android http://www.topinspector.cn:8080/upload/hlcoatingapp_legu_signed_zipalign.apk
