@@ -270,13 +270,15 @@
                                popup="#gridPanel" grid="#datagrid1" multiSelect="true"
                         />
 
-                        <div id="gridPanel" class="mini-panel" title="header" iconCls="icon-add" style="width:450px;height:250px;"
+                        <div id="gridPanel" class="mini-panel" title="header" iconCls="icon-add" style="width:650px;height:250px;"
                              showToolbar="true" showCloseButton="true" showHeader="false" bodyStyle="padding:0" borderStyle="border:0"
                         >
                             <div property="toolbar" style="padding:5px;padding-left:8px;text-align:center;">
                                 <div style="float:left;padding-bottom:2px;">
-                                    <span>功能编号或名称：</span>
+                                    <span>功能编号：</span>
                                     <input id="keyText" class="mini-textbox" style="width:160px;" onenter="onSearchClick"/>
+                                    <span>功能名称：</span>
+                                    <input id="keyText1" class="mini-textbox" style="width:160px;" onenter="onSearchClick"/>
                                     <a class="mini-button" onclick="onSearchClick">查询</a>
                                     <a class="mini-button" onclick="onClearClick">清除</a>
                                 </div>
@@ -329,13 +331,14 @@
     mini.parse();
     var grid = mini.get("datagrid1");
     var keyText = mini.get("keyText");
+    var keyText1 = mini.get("keyText1");
     var look2= mini.get("lookup2");
     var combox1=mini.get("combobox1");
 
     function onSearchClick(e) {
         grid.load({
             function_no: keyText.value,
-            function_name:keyText.value
+            function_name:keyText1.value
         });
     }
     function onCloseClick(e) {
@@ -353,7 +356,7 @@
         $('#searchBar2').css('display','block');
         grid.load({
             function_no: keyText.value,
-            function_name:keyText.value
+            function_name:keyText1.value
         });
         //$('.mini-buttonedit .mini-buttonedit-input').css('width','150px');
     });
