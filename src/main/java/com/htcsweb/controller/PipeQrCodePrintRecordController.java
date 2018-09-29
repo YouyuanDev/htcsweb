@@ -249,7 +249,7 @@ public class PipeQrCodePrintRecordController {
             json.put("message",pipe_no+" QRCode总共打印次数："+count);
         }else{
             json.put("success",false);
-            json.put("message","管号或session不存在打印记录保存失败");
+            json.put("message","管号或session不存在,打印记录获取失败");
         }
         String mmp= JSONArray.toJSONString(json);
         return mmp;
