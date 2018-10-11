@@ -190,8 +190,9 @@
                         disableEditor('unit_name_en',editIndex,"textbox");
                         disableEditor('options',editIndex,"textbox");
                         disableEditor('item_frequency',editIndex,"combobox");
-                        disableEditor('max_value',editIndex,"numberbox");
-                        disableEditor('min_value',editIndex,"numberbox");
+                        //涂层总厚度 需要设置max_value min_value
+                        //disableEditor('max_value',editIndex,"numberbox");
+                        //disableEditor('min_value',editIndex,"numberbox");
                         disableEditor('decimal_num',editIndex,"numberbox");
                         disableEditor('need_verify',editIndex,"checkbox");
                     }
