@@ -515,7 +515,7 @@ public class InspectionRecordPDFController {
             int odCoatingCount=0,odAcceptedPipeCount=0,odRepairPipeCount=0,odRejectedPipeCount=0,odOnholdPipeCount=0;
             //coatingCount代表防腐数，acceptedPipeCount代表防腐合格数，repairPipeCount代表修补数，rejectedPipeCount代表废管数，onholdPipeCount代表隔离数
             odCoatingCount=inspectionProcessRecordHeaderDao.getODCoatingCount(project_no,mill_no,external_coating,null,od,wt,begin_time,end_time);
-            List<HashMap<String,Object>>list1=inspectionProcessRecordHeaderDao.getODCoatingAcceptedInfo(project_no,external_coating,null,od,wt,begin_time,end_time,"1");
+            List<HashMap<String,Object>>list1=inspectionProcessRecordHeaderDao.getODCoatingAcceptedInfo(project_no,mill_no,external_coating,null,od,wt,begin_time,end_time,"1");
             if(list1!=null&&list1.size()>0){
                 HashMap<String,Object>hs=list1.get(0);
                 if(hs!=null){
@@ -673,7 +673,7 @@ public class InspectionRecordPDFController {
             int idCoatingCount=0,idAcceptedPipeCount=0,idRepairPipeCount=0,idRejectedPipeCount=0,idOnholdPipeCount=0;
             //coatingCount代表防腐数，acceptedPipeCount代表防腐合格数，repairPipeCount代表修补数，rejectedPipeCount代表废管数，onholdPipeCount代表隔离数
             idCoatingCount=inspectionProcessRecordHeaderDao.getIDCoatingCount(project_no,mill_no,null,internal_coating,od,wt,begin_time,end_time);
-            List<HashMap<String,Object>>list1=inspectionProcessRecordHeaderDao.getIDCoatingAcceptedInfo(project_no,null,internal_coating,od,wt,begin_time,end_time,"1");
+            List<HashMap<String,Object>>list1=inspectionProcessRecordHeaderDao.getIDCoatingAcceptedInfo(project_no,mill_no,null,internal_coating,od,wt,begin_time,end_time,"1");
             if(list1!=null&&list1.size()>0){
                 HashMap<String,Object>hs=list1.get(0);
                 if(hs!=null){
@@ -1266,8 +1266,8 @@ public class InspectionRecordPDFController {
                     od=contractInfo.getOd();wt=contractInfo.getWt();
                     //-----------获取白班外防信息(dayshiftodinfo)
                     odCoatingCountOfDay+=inspectionProcessRecordHeaderDao.getODCoatingCount(project_no,mill_no,null,null,od,wt,day_begin_time,day_end_time);
-
-                    List<HashMap<String,Object>>list1=inspectionProcessRecordHeaderDao.getODCoatingAcceptedInfo(project_no,null,null,od,wt,day_begin_time,day_end_time,"1");
+                    //获取外防当班合格数
+                    List<HashMap<String,Object>>list1=inspectionProcessRecordHeaderDao.getODCoatingAcceptedInfo(project_no,mill_no,null,null,od,wt,day_begin_time,day_end_time,"1");
 
                     if(list1!=null&&list1.size()>0){
                         HashMap<String,Object>hs=list1.get(0);
@@ -1318,7 +1318,7 @@ public class InspectionRecordPDFController {
 
                     //-----------获取白班内防信息(dayshiftidinfo)
                     idCoatingCountOfDay+=inspectionProcessRecordHeaderDao.getIDCoatingCount(project_no,mill_no,null,null,od,wt,day_begin_time, day_end_time);
-                    List<HashMap<String,Object>>list2=inspectionProcessRecordHeaderDao.getIDCoatingAcceptedInfo(project_no,null,null,od,wt,day_begin_time, day_end_time,"1");
+                    List<HashMap<String,Object>>list2=inspectionProcessRecordHeaderDao.getIDCoatingAcceptedInfo(project_no,mill_no,null,null,od,wt,day_begin_time, day_end_time,"1");
 
                     if(list2!=null&&list2.size()>0){
                         HashMap<String,Object>hs=list2.get(0);
@@ -1360,7 +1360,7 @@ public class InspectionRecordPDFController {
 
                     //-----------获取夜班外防信息(nightshiftodinfo)
                     odCoatingCountOfNight+=inspectionProcessRecordHeaderDao.getODCoatingCount(project_no,mill_no,null,null,od,wt,night_begin_time,night_end_time);
-                    List<HashMap<String,Object>>list3=inspectionProcessRecordHeaderDao.getODCoatingAcceptedInfo(project_no,null,null,od,wt,night_begin_time,night_end_time,"1");
+                    List<HashMap<String,Object>>list3=inspectionProcessRecordHeaderDao.getODCoatingAcceptedInfo(project_no,mill_no,null,null,od,wt,night_begin_time,night_end_time,"1");
 
                     if(list3!=null&&list3.size()>0){
                         HashMap<String,Object>hs=list3.get(0);
@@ -1404,7 +1404,7 @@ public class InspectionRecordPDFController {
 
                     //-----------获取夜班内防信息(nightshiftidinfo)
                     idCoatingCountOfNight+=inspectionProcessRecordHeaderDao.getIDCoatingCount(project_no,mill_no,null,null,od,wt,night_begin_time, night_end_time);
-                    List<HashMap<String,Object>>list4=inspectionProcessRecordHeaderDao.getIDCoatingAcceptedInfo(project_no,null,null,od,wt,night_begin_time, night_end_time,"1");
+                    List<HashMap<String,Object>>list4=inspectionProcessRecordHeaderDao.getIDCoatingAcceptedInfo(project_no,mill_no,null,null,od,wt,night_begin_time, night_end_time,"1");
 
 
                     if(list4!=null&&list4.size()>0){

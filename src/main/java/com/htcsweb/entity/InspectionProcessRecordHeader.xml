@@ -194,6 +194,9 @@
             <if test="project_no!=null and project_no!=''">
                 AND  pro.project_no=#{project_no}
             </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND o.mill_no=#{mill_no}
+            </if>
             AND format(c.od,3)=format(#{od},3)
             AND format(c.wt,3)=format(#{wt},3)
             AND o.result=#{result}
@@ -570,6 +573,9 @@
             </if>
             <if test="project_no!=null and project_no!=''">
                 AND  pro.project_no=#{project_no}
+            </if>
+            <if test="mill_no!=null and mill_no!=''">
+                AND  o.mill_no=#{mill_no}
             </if>
             AND format(c.od,3)=format(#{od},3)
             AND format(c.wt,3)=format(#{wt},3)
