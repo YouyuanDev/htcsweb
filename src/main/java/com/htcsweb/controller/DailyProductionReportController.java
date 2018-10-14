@@ -1104,7 +1104,7 @@ public class DailyProductionReportController {
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            List<HashMap<String,Object>>list1=inspectionProcessRecordHeaderDao.getODCoatingAcceptedInfo(project_no,external_coating,internal_coating,od,wt,beginTime,endTime,"1");
+            List<HashMap<String,Object>>list1=inspectionProcessRecordHeaderDao.getODCoatingAcceptedInfo(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime,"1");
             if(list1!=null&&list1.size()>0){
                 HashMap<String,Object>hs=list1.get(0);
                 if(hs!=null){
@@ -1317,7 +1317,7 @@ public class DailyProductionReportController {
         try{
             Date beginTime=timeformat.parse(now+" 08:00:00");
             Date endTime=timeformat.parse(nextday+" 08:00:00");
-            List<HashMap<String,Object>>list1=inspectionProcessRecordHeaderDao.getIDCoatingAcceptedInfo(project_no,external_coating,internal_coating,od,wt,beginTime,endTime,"1");
+            List<HashMap<String,Object>>list1=inspectionProcessRecordHeaderDao.getIDCoatingAcceptedInfo(project_no,null,external_coating,internal_coating,od,wt,beginTime,endTime,"1");
             if(list1!=null&&list1.size()>0){
                 HashMap<String,Object>hs=list1.get(0);
                 if(hs!=null){
