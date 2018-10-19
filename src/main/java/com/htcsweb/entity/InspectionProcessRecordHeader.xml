@@ -893,6 +893,7 @@
         left join project_info pro on c.project_no=pro.project_no
         <where>
             AND o.result='30'
+            AND ( o.process_code LIKE 'od%' or o.process_code='coating_repair')
             <if test="project_no!=null and project_no!=''">
                 AND pro.project_no=#{project_no}
             </if>
@@ -1020,6 +1021,7 @@
         left join project_info pro on c.project_no=pro.project_no
         <where>
             AND o.result='30'
+            AND o.process_code LIKE 'id%'
             <if test="project_no!=null and project_no!=''">
                 AND pro.project_no=#{project_no}
             </if>
