@@ -1012,7 +1012,7 @@ public class InspectionRecordPDFController {
         for (int i=0;i<12;i++){
             datalist.add(new Label(1, i+8," ", wcf));
             datalist.add(new Label(2, i+8, " ", wcf));
-            datalist.add(new Label(13, i+8, " ", wcf));
+            datalist.add(new Label(12, i+8, " ", wcf));
         }
         datalist.add(new Label(1,8,"今天暂无记录!",wcf));
         datalist.add(new Label(2, 20," ", wcf));
