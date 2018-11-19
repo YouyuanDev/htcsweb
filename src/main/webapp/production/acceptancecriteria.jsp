@@ -189,12 +189,13 @@
                         disableEditor('unit_name',editIndex,"textbox");
                         disableEditor('unit_name_en',editIndex,"textbox");
                         disableEditor('options',editIndex,"textbox");
-                        disableEditor('item_frequency',editIndex,"combobox");
+                        //涂层总厚度 需要设置item_frequency
+                        //disableEditor('item_frequency',editIndex,"combobox");
                         //涂层总厚度 需要设置max_value min_value
                         //disableEditor('max_value',editIndex,"numberbox");
                         //disableEditor('min_value',editIndex,"numberbox");
-                        disableEditor('decimal_num',editIndex,"numberbox");
-                        disableEditor('need_verify',editIndex,"checkbox");
+                        //disableEditor('decimal_num',editIndex,"numberbox");
+                        //disableEditor('need_verify',editIndex,"checkbox");
                     }
                     var $obj=$('#dynamicItem').find('.datagrid-view').find('.datagrid-body');
                     var dgTop=editIndex*25-(editIndex%8)*25;

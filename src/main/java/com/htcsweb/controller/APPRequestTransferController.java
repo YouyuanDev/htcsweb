@@ -349,6 +349,7 @@ public class APPRequestTransferController {
                                     stencil_content = stencil_content.replace("[PROJECTNAME]", project_name);
                                     stencil_content = stencil_content.replace("[PIPENO]", pipe_no);
                                     stencil_content = stencil_content.replace("[PIPELENGTH]", String.valueOf(p_length));
+                                    stencil_content = stencil_content.replace("[PIPELENGTH_MM]", String.valueOf((int)(p_length*1000)));
                                     stencil_content = stencil_content.replace("[HALFLENGTH]", String.valueOf(halflength));
                                     stencil_content = stencil_content.replace("[HEATNO]", heat_no);
                                     stencil_content = stencil_content.replace("[BATCHNO]", pipe_making_lot_no);

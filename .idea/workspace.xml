@@ -7,9 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa3f659b-6ccf-4ae8-84a0-55d0a3756f6f" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/labtesting/labtesting2fbe.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/labtesting/labtesting2fbe.jsp" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/labtesting/labtesting3lpe.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/labtesting/labtesting3lpe.jsp" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/labtesting/labtestingepoxy.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/labtesting/labtestingepoxy.jsp" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/APPRequestTransferController.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/APPRequestTransferController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/DynamicMeasurementItemController.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/DynamicMeasurementItemController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/production/acceptancecriteria.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/production/acceptancecriteria.jsp" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -37,42 +38,134 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="rawmaterialtesting2fbe.jsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/labtesting/rawmaterialtesting2fbe.jsp">
+      <file leaf-file-name="InspectionRecordPDFController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/InspectionRecordPDFController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="574" column="56" lean-forward="false" selection-start-line="574" selection-start-column="32" selection-end-line="574" selection-end-column="56" />
+            <state relative-caret-position="207">
+              <caret line="390" column="91" lean-forward="false" selection-start-line="390" selection-start-column="78" selection-end-line="390" selection-end-column="91" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProjectController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/ProjectController.java">
+      <file leaf-file-name="InspectionProcessRecordHeaderDao.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/InspectionProcessRecordHeaderDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="86">
-              <caret line="201" column="53" lean-forward="false" selection-start-line="201" selection-start-column="29" selection-end-line="201" selection-end-column="53" />
+            <state relative-caret-position="184">
+              <caret line="120" column="53" lean-forward="false" selection-start-line="120" selection-start-column="40" selection-end-line="120" selection-end-column="53" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProjectInfo.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ProjectInfo.xml">
+      <file leaf-file-name="InspectionProcessRecordHeader.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/InspectionProcessRecordHeader.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="136" column="40" lean-forward="false" selection-start-line="136" selection-start-column="16" selection-end-line="136" selection-end-column="40" />
+            <state relative-caret-position="198">
+              <caret line="1093" column="49" lean-forward="false" selection-start-line="1093" selection-start-column="49" selection-end-line="1093" selection-end-column="49" />
               <folding>
-                <marker date="1527073573000" expanded="true" signature="1954:1987" ph="select count... project_info" />
-                <marker date="1527073573000" expanded="true" signature="3039:3103" ph="select count... project_info" />
-                <marker date="1527073573000" expanded="true" signature="3176:4128" ph="Select * fro... project_info" />
-                <marker date="1527073573000" expanded="true" signature="4235:5206" ph="UPDATE project_info... " />
-                <marker date="1527073573000" expanded="true" signature="5310:6176" ph="INSERT INTO project_info... " />
-                <marker date="1527073573000" expanded="true" signature="6784:6852" ph="SELECT proje... project_info" />
-                <marker date="1527073573000" expanded="true" signature="6967:7089" ph="SELECT p.* f... project_info" />
-                <marker date="1527073573000" expanded="true" signature="7198:7239" ph="SELECT * fro... project_info" />
-                <marker date="1527073573000" expanded="true" signature="7792:7847" ph="SELECT p.pro... project_info" />
-                <marker date="1527073573000" expanded="true" signature="7982:8039" ph="SELECT * FRO... project_info" />
+                <marker date="1539956079795" expanded="true" signature="402:725" ph="INSERT INTO inspection_process_record_header... " />
+                <marker date="1539956079795" expanded="true" signature="868:1222" ph="UPDATE inspection_process_record_header... " />
+                <marker date="1539956079795" expanded="true" signature="2961:4485" ph="Select pc.pr... inspection_process_record_header" />
+                <marker date="1539956079795" expanded="true" signature="4630:4691" ph="select * fro... inspection_process_record_header" />
+                <marker date="1539956079795" expanded="true" signature="4788:5667" ph="Select o.* f... inspection_process_record_header" />
+                <marker date="1539956079795" expanded="true" signature="5821:5963" ph="SELECT * fro... inspection_process_record_header" />
+                <marker date="1539956079795" expanded="true" signature="6133:6552" ph="select * fro... inspection_process_record_header" />
+                <marker date="1539956079795" expanded="true" signature="6666:7093" ph="select ib.id... inspection_process_record_header" />
+                <marker date="1539956079795" expanded="true" signature="15617:15765" ph="select inspe... inspection_process_record_item" />
+                <marker date="1539956079795" expanded="true" signature="15896:16055" ph="select inspe... inspection_process_record_item" />
+                <marker date="1539956079795" expanded="true" signature="17728:17874" ph="select inspe... inspection_process_record_item" />
+                <marker date="1539956079795" expanded="true" signature="18005:18164" ph="select inspe... inspection_process_record_item" />
+                <marker date="1539956079795" expanded="true" signature="32952:34899" ph="(select p.od... " />
+                <marker date="1539956079795" expanded="true" signature="49620:51117" ph="select o.ins... inspection_process_record_header" />
+                <marker date="1539956079795" expanded="true" signature="51267:51391" ph="select * fro... inspection_process_record_header" />
+                <marker date="1539956079795" expanded="true" signature="51550:52592" ph="select pro.p... inspection_process_record_header" />
+                <marker date="1539956079795" expanded="true" signature="52758:53657" ph="select count... inspection_process_record_header" />
+                <marker date="1539956079795" expanded="true" signature="53794:54133" ph="select * fro... inspection_process_record_header" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="process_input_output.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/data/process_input_output.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3330">
+              <caret line="222" column="35" lean-forward="false" selection-start-line="222" selection-start-column="21" selection-end-line="222" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="acceptancecriteria.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/production/acceptancecriteria.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="207">
+              <caret line="191" column="50" lean-forward="false" selection-start-line="191" selection-start-column="50" selection-end-line="191" selection-end-column="50" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="APPRequestTransferController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/APPRequestTransferController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="292">
+              <caret line="348" column="53" lean-forward="true" selection-start-line="348" selection-start-column="53" selection-end-line="348" selection-end-column="53" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InspectionProcess.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/InspectionProcess.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2211">
+              <caret line="183" column="71" lean-forward="false" selection-start-line="183" selection-start-column="41" selection-end-line="183" selection-end-column="71" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="generalprocess.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/process/generalprocess.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-216">
+              <caret line="302" column="86" lean-forward="false" selection-start-line="302" selection-start-column="43" selection-end-line="302" selection-end-column="86" />
+              <folding>
+                <marker date="1532068658785" expanded="true" signature="16149:16159" ph="..." />
+                <marker date="1532068658785" expanded="true" signature="16224:16234" ph="..." />
+                <marker date="1532068658785" expanded="true" signature="17648:17660" ph="..." />
+                <marker date="1532068658785" expanded="true" signature="18923:18935" ph="..." />
+                <marker date="1532068658785" expanded="true" signature="19332:19344" ph="..." />
+                <marker date="1532068658785" expanded="true" signature="19756:19768" ph="..." />
+                <marker date="1532068658785" expanded="true" signature="20178:20190" ph="..." />
+                <marker date="1532068658785" expanded="true" signature="20548:20560" ph="..." />
+                <marker date="1532068658785" expanded="true" signature="22284:22307" ph="..." />
+                <marker date="1532068658785" expanded="true" signature="22737:22749" ph="..." />
+                <marker date="1532068658785" expanded="true" signature="23065:23077" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DynamicMeasurementItemController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/DynamicMeasurementItemController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="228">
+              <caret line="142" column="13" lean-forward="false" selection-start-line="142" selection-start-column="13" selection-end-line="142" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="productionProcessRecord.jsp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/productionRecordAndReport/productionProcessRecord.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="43">
+              <caret line="228" column="75" lean-forward="false" selection-start-line="228" selection-start-column="61" selection-end-line="228" selection-end-column="75" />
+              <folding>
+                <marker date="1529646421215" expanded="true" signature="7339:7353" ph="..." />
               </folding>
             </state>
           </provider>
@@ -87,58 +180,61 @@
         <option value="CSS File" />
         <option value="FxmlFile" />
         <option value="HTML File" />
-        <option value="Jsp File" />
-        <option value="Class" />
         <option value="spring-beans.schema" />
+        <option value="Class" />
+        <option value="Jsp File" />
         <option value="Interface" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>appkey</find>
-      <find>barepaipemovement</find>
-      <find>getPersonByEmployeeNo</find>
-      <find>combox1</find>
-      <find>combobox1</find>
-      <find>getAttribute</find>
-      <find>defect.txt</find>
-      <find>surfacequality.txt</find>
-      <find>onComboxCloseClick</find>
-      <find>searchPipeRecord</find>
-      <find>getPendingRecordByPipeNo</find>
-      <find>getPersonNoByName</find>
-      <find>searchPipeRebevelPro</find>
-      <find>getNeedRebevelPipeNumbers</find>
-      <find>lookup3</find>
-      <find>getAllCoatingPowderInfo</find>
+      <find>addQrCode</find>
+      <find>APPPrintQRCode</find>
+      <find>APPGetQRCodePrintTimes</find>
+      <find>p.</find>
+      <find>SendEvent</find>
+      <find>getRecentRecordByPipeNo</find>
+      <find>importExcelInfo</find>
       <find>searchPipe</find>
-      <find>onSearchClick</find>
-      <find>getCoatingInfoByPipeNo</find>
-      <find>doInStoageTransfer</find>
-      <find>getPipeInfoByNo</find>
-      <find>odproductstockin</find>
-      <find>basicinfo</find>
-      <find>dscsampleno</find>
-      <find>lookup1</find>
-      <find>clearLabelPipeInfo</find>
-      <find>ds</find>
-      <find>pipe_no</find>
-      <find>coating_date</find>
-      <find>ceshi</find>
+      <find>getCountInspectionRecordByProjectNoMillNoProcessCode</find>
+      <find>pipe</find>
+      <find>templateFullName</find>
+      <find>shipment</find>
+      <find>xlsFullName</find>
+      <find>newxlsfile</find>
+      <find>Shipment</find>
+      <find>前</find>
+      <find>getODCoatingRejectData</find>
+      <find>getLastAcceptedRecordBeforePipeNo</find>
+      <find>getNextTenPipesBeforePipeNo</find>
+      <find>out1</find>
+      <find>final_product_stockin_inspection_process</find>
+      <find>getODCoatingAcceptedInfo</find>
+      <find>idRejectedPipeCountOfDay</find>
+      <find>getIDCoatingRejectedPipeInfo</find>
+      <find>getIDCoating</find>
+      <find>getODCoatingRejectedPipeInfo</find>
+      <find>30</find>
+      <find>getPDFProgress</find>
+      <find>getPostRecord</find>
+      <find>getDynamicItemByPipeNoProcessCodeHeaderCode</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src/main/webapp/WEB-INF/lib</dir>
       <dir>$PROJECT_DIR$/src/main/webapp/od</dir>
       <dir>$PROJECT_DIR$/src/main/webapp/WEB-INF</dir>
-      <dir>$PROJECT_DIR$/src/main/java/com/htcsweb</dir>
-      <dir>$PROJECT_DIR$/src/main/java</dir>
       <dir>$PROJECT_DIR$/src/main/webapp/template</dir>
-      <dir>$PROJECT_DIR$/src/main/java/com/htcsweb/entity</dir>
-      <dir>$PROJECT_DIR$/src/main</dir>
-      <dir>$PROJECT_DIR$/src/main/java/com/htcsweb/controller</dir>
       <dir>$PROJECT_DIR$/src</dir>
       <dir>$PROJECT_DIR$/src/main/webapp</dir>
+      <dir>$PROJECT_DIR$/src/main/java/com/htcsweb/util</dir>
+      <dir>$PROJECT_DIR$/src/main</dir>
+      <dir>$PROJECT_DIR$/src/main/java/com/htcsweb/entity</dir>
+      <dir>$PROJECT_DIR$/src/main/java</dir>
+      <dir>$PROJECT_DIR$</dir>
+      <dir>$PROJECT_DIR$/src/main/java/com/htcsweb/controller</dir>
+      <dir>$PROJECT_DIR$/src/main/java/com/htcsweb/dao</dir>
+      <dir>$PROJECT_DIR$/src/main/java/com/htcsweb</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -152,57 +248,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/webapp/productionRecordAndReport/dailyProductionReport.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeBasicInfo.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/storage/idstockin.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/storage/odstockin.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PipeBasicInfoDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PipeBasicInfoController.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/springmvc.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/Person.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/Person.xml" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PersonController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/UploadFileController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/RoleController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PushEventRule.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PushEventRuleDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PushEventRule.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/Role.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/Role.xml" />
-        <option value="$PROJECT_DIR$/src/main/webapp/account/role.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/MillInfo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/util/APICloudPushService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/APPRequestTransferController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/MillInfoController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/DefectInfo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/DefectInfo.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/DefectInfo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/DefectInfoDao.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/od/odblastprocess.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/id/idblastinspectionprocess.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/od/odblastinspectionprocess.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/DefectInfoController.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/id/idblastprocess.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/LoginController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/util/SessionFilter.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/db.properties" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/CoatingRepairController.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/pipe/pipeManagement.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeBasicInfo.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTesting2Fbe.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTesting2Fbe.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTesting3Lpe.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTesting3Lpe.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTestingEpoxy.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTestingEpoxy.xml" />
-        <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings.properties" />
-        <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings_en.properties" />
-        <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh.properties" />
+        <option value="$PROJECT_DIR$/src/main/webapp/pipe/pipeManagement.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/data/process_input_output.json" />
+        <option value="$PROJECT_DIR$/src/main/webapp/index.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/productionRecordAndReport/MTCRecord.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ShipmentInfo.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/ContractController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/ProjectController.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/project/projectManagement.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/ContractInfoDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ContractInfo.xml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/process/generalprocess.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/project/contractManagement.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/ProjectInfoDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/CoatingPowderInfo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/CoatingPowderInfo.xml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/coatingpowder/coatingpowderManagement.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties" />
-        <option value="$PROJECT_DIR$/src/main/webapp/labtesting/labtesting2fbe.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/labtesting/labtesting3lpe.jsp" />
-        <option value="$PROJECT_DIR$/src/main/webapp/labtesting/labtestingepoxy.jsp" />
+        <option value="$PROJECT_DIR$/src/main/webapp/i18n/strings_en.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/AcceptanceCriteria.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/DynamicMeasurementItem.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/ProjectInfo.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/MTCController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/RoleController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PipeQrCodePrintRecordDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeQrCodePrintRecord.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/ShipmentController.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/UploadFileController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/util/SessionFilter.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/productionRecordAndReport/statistics.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/StatisticsDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/util/GenerateExcelToPDFUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/InspectionProcessRecordItem.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/InspectionProcessRecordItemDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PipeBasicInfoDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/InspectionProcessRecordHeaderDao.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/data/function_list" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/InspectionProcess.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeBasicInfo.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/StatisticsController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/DailyProductionReportController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PipeBasicInfoController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/InspectionRecordPDFController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PipeQrCodePrintRecordController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/db.properties" />
+        <option value="$PROJECT_DIR$/src/main/webapp/publish/AutoPublishWeb.sh" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/InspectionProcessRecordHeader.xml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/production/acceptancecriteria.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/DynamicMeasurementItemController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/APPRequestTransferController.java" />
       </list>
     </option>
   </component>
@@ -225,11 +321,10 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-13" />
-    <option name="y" value="86" />
-    <option name="width" value="1920" />
-    <option name="height" value="988" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="y" value="23" />
+    <option name="width" value="1440" />
+    <option name="height" value="835" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -247,9 +342,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="AndroidView" />
       <pane id="Scratches" />
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -283,11 +379,82 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
+              <item name="entity" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="process" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="production" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="productionRecordAndReport" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="publish" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -296,22 +463,22 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.27287582" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/kurt/Documents/workspace/htcsweb/src/main/java/com/htcsweb/controller/InspectionRecordPDFController.java" />
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file:///Users/kurt/Documents/workspace/htcsweb/src/main/java/com/htcsweb/controller/InspectionProcess.java" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF/lib" />
+      <recent name="$PROJECT_DIR$/src/main/webapp/process" />
+      <recent name="$PROJECT_DIR$/src/main/webapp/data" />
       <recent name="$PROJECT_DIR$/src/main/webapp/font" />
       <recent name="$PROJECT_DIR$/src/main/webapp/i18n" />
-      <recent name="$PROJECT_DIR$/src/main/webapp/od" />
-      <recent name="$PROJECT_DIR$/src/main/java/com/htcsweb/entity" />
-      <recent name="$PROJECT_DIR$/src/main/webapp/production" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.htcsweb.controller" />
@@ -319,11 +486,11 @@
       <recent name="com.htcsweb.entity" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/webapp/template" />
       <recent name="$PROJECT_DIR$/src/main/webapp/js" />
       <recent name="$PROJECT_DIR$/src/main/webapp" />
       <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF" />
       <recent name="$PROJECT_DIR$/src/main/webapp/miniui" />
-      <recent name="$PROJECT_DIR$/src/main/webapp/miniui/js" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -338,7 +505,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Tomcat Server.index.jsp (4)">
+  <component name="RunManager" selected="Tomcat Server.index.jsp (1)">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="HTML_USED" value="false" />
       <option name="WIDTH" value="400" />
@@ -424,46 +591,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="index_jsp_(1)_htcsweb_238" />
-      </server-settings>
-      <predefined_log_file id="Tomcat" enabled="true" />
-      <predefined_log_file id="Tomcat Catalina" enabled="true" />
-      <predefined_log_file id="Tomcat Manager" enabled="false" />
-      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
-      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
-        <option name="USE_ENV_VARIABLES" value="true" />
-        <STARTUP>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </STARTUP>
-        <SHUTDOWN>
-          <option name="USE_DEFAULT" value="true" />
-          <option name="SCRIPT" value="" />
-          <option name="VM_PARAMETERS" value="" />
-          <option name="PROGRAM_PARAMETERS" value="" />
-        </SHUTDOWN>
-      </ConfigurationWrapper>
-      <method>
-        <option name="BuildArtifacts" enabled="true">
-          <artifact name="htcsweb:war" />
-        </option>
-      </method>
-    </configuration>
-    <configuration name="index.jsp (2)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/index.jsp" />
-      <deployment>
-        <artifact name="htcsweb:war">
-          <settings>
-            <option name="CONTEXT_PATH" value="/" />
-          </settings>
-        </artifact>
-      </deployment>
-      <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="index_jsp_(2)_htcsweb_245" />
+        <option name="BASE_DIRECTORY_NAME" value="index_jsp_(1)_htcsweb_240" />
       </server-settings>
       <predefined_log_file id="Tomcat" enabled="true" />
       <predefined_log_file id="Tomcat Catalina" enabled="true" />
@@ -588,14 +716,14 @@
     <configuration name="index.jsp (5)" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
       <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/index.jsp" />
       <deployment>
-        <artifact name="htcsweb:war">
+        <artifact name="htcsweb:war exploded">
           <settings>
             <option name="CONTEXT_PATH" value="/" />
           </settings>
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="index_jsp_(5)_htcsweb_183" />
+        <option name="BASE_DIRECTORY_NAME" value="index_jsp_(5)_htcsweb_185" />
       </server-settings>
       <predefined_log_file id="Tomcat" enabled="true" />
       <predefined_log_file id="Tomcat Catalina" enabled="true" />
@@ -603,6 +731,39 @@
       <predefined_log_file id="Tomcat Host Manager" enabled="false" />
       <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="50420" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
         <option name="USE_ENV_VARIABLES" value="true" />
         <STARTUP>
@@ -620,7 +781,79 @@
       </ConfigurationWrapper>
       <method>
         <option name="BuildArtifacts" enabled="true">
-          <artifact name="htcsweb:war" />
+          <artifact name="htcsweb:war exploded" />
+        </option>
+      </method>
+    </configuration>
+    <configuration name="index.jsp" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" temporary="true" APPLICATION_SERVER_NAME="Tomcat 8.5.24" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/index.jsp" />
+      <deployment>
+        <artifact name="htcsweb:war exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="index_jsp_htcsweb_261" />
+      </server-settings>
+      <predefined_log_file id="Tomcat" enabled="true" />
+      <predefined_log_file id="Tomcat Catalina" enabled="true" />
+      <predefined_log_file id="Tomcat Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="50842" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method>
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="htcsweb:war exploded" />
         </option>
       </method>
     </configuration>
@@ -631,19 +864,19 @@
       <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (5)" />
-      <item index="1" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (1)" />
-      <item index="2" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (2)" />
-      <item index="3" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (3)" />
-      <item index="4" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (4)" />
+      <item index="0" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (3)" />
+      <item index="1" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (4)" />
+      <item index="2" class="java.lang.String" itemvalue="Tomcat Server.index.jsp" />
+      <item index="3" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (5)" />
+      <item index="4" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (1)" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (4)" />
-        <item index="1" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (3)" />
-        <item index="2" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (2)" />
-        <item index="3" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (1)" />
-        <item index="4" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (5)" />
+        <item index="0" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (1)" />
+        <item index="1" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (5)" />
+        <item index="2" class="java.lang.String" itemvalue="Tomcat Server.index.jsp" />
+        <item index="3" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (4)" />
+        <item index="4" class="java.lang.String" itemvalue="Tomcat Server.index.jsp (3)" />
       </list>
     </recent_temporary>
   </component>
@@ -801,6 +1034,93 @@
       <workItem from="1529026150257" duration="11919000" />
       <workItem from="1529372348560" duration="21788000" />
       <workItem from="1529458095668" duration="14028000" />
+      <workItem from="1529638951115" duration="12380000" />
+      <workItem from="1529719379824" duration="406000" />
+      <workItem from="1529911818359" duration="7091000" />
+      <workItem from="1529979071962" duration="14123000" />
+      <workItem from="1530020486172" duration="2350000" />
+      <workItem from="1530036050161" duration="180000" />
+      <workItem from="1530069951816" duration="3612000" />
+      <workItem from="1530091012653" duration="1608000" />
+      <workItem from="1530111707838" duration="5773000" />
+      <workItem from="1530151872996" duration="9006000" />
+      <workItem from="1530164381774" duration="19567000" />
+      <workItem from="1530188078962" duration="2367000" />
+      <workItem from="1530237576199" duration="10000" />
+      <workItem from="1530240474625" duration="24068000" />
+      <workItem from="1530281777380" duration="10773000" />
+      <workItem from="1530320986883" duration="2137000" />
+      <workItem from="1530330630609" duration="4602000" />
+      <workItem from="1530344222511" duration="6521000" />
+      <workItem from="1530367957966" duration="4230000" />
+      <workItem from="1530424216722" duration="1866000" />
+      <workItem from="1530426511924" duration="17412000" />
+      <workItem from="1530452370679" duration="2681000" />
+      <workItem from="1530513188254" duration="18614000" />
+      <workItem from="1530539133924" duration="1589000" />
+      <workItem from="1530540754644" duration="220000" />
+      <workItem from="1530707989084" duration="5419000" />
+      <workItem from="1530763778873" duration="21517000" />
+      <workItem from="1530802717490" duration="8755000" />
+      <workItem from="1530845556863" duration="23711000" />
+      <workItem from="1530882770626" duration="1768000" />
+      <workItem from="1530932700800" duration="7146000" />
+      <workItem from="1530964830976" duration="5542000" />
+      <workItem from="1530974892172" duration="1025000" />
+      <workItem from="1531057346430" duration="5225000" />
+      <workItem from="1531109438329" duration="10546000" />
+      <workItem from="1531133361235" duration="4377000" />
+      <workItem from="1531145585548" duration="1854000" />
+      <workItem from="1531149194284" duration="1153000" />
+      <workItem from="1531187806448" duration="433000" />
+      <workItem from="1531196124387" duration="8500000" />
+      <workItem from="1531209539144" duration="735000" />
+      <workItem from="1531210933326" duration="1313000" />
+      <workItem from="1531212541948" duration="209000" />
+      <workItem from="1531295760449" duration="2736000" />
+      <workItem from="1531310330513" duration="4978000" />
+      <workItem from="1531365448206" duration="21240000" />
+      <workItem from="1531400891118" duration="8530000" />
+      <workItem from="1531445081748" duration="29321000" />
+      <workItem from="1531734613165" duration="38000" />
+      <workItem from="1531734803137" duration="29000" />
+      <workItem from="1531735582914" duration="45000" />
+      <workItem from="1531735724405" duration="11000" />
+      <workItem from="1531737727627" duration="13000" />
+      <workItem from="1531737764741" duration="40000" />
+      <workItem from="1531737896249" duration="23000" />
+      <workItem from="1531986865024" duration="568000" />
+      <workItem from="1532057350967" duration="187000" />
+      <workItem from="1532070525873" duration="4315000" />
+      <workItem from="1532400177738" duration="5025000" />
+      <workItem from="1532599457856" duration="1707000" />
+      <workItem from="1533883674504" duration="1200000" />
+      <workItem from="1533888832253" duration="56000" />
+      <workItem from="1534219459830" duration="5612000" />
+      <workItem from="1534241930979" duration="3780000" />
+      <workItem from="1534247807997" duration="1923000" />
+      <workItem from="1534249798520" duration="87000" />
+      <workItem from="1534257321029" duration="428000" />
+      <workItem from="1534298797763" duration="9011000" />
+      <workItem from="1534331831899" duration="363000" />
+      <workItem from="1534344352830" duration="370000" />
+      <workItem from="1534384852484" duration="15423000" />
+      <workItem from="1534427944109" duration="863000" />
+      <workItem from="1534462295991" duration="595000" />
+      <workItem from="1534471069125" duration="3079000" />
+      <workItem from="1534475639352" duration="338000" />
+      <workItem from="1534514479004" duration="924000" />
+      <workItem from="1534734121812" duration="5556000" />
+      <workItem from="1535602067716" duration="511000" />
+      <workItem from="1538199313414" duration="1614000" />
+      <workItem from="1538216212961" duration="57000" />
+      <workItem from="1538216931754" duration="27000" />
+      <workItem from="1539231221493" duration="1161000" />
+      <workItem from="1539438059552" duration="547000" />
+      <workItem from="1539509359495" duration="1682000" />
+      <workItem from="1539954744004" duration="1992000" />
+      <workItem from="1542593454176" duration="703000" />
+      <workItem from="1542595531418" duration="3653000" />
     </task>
     <servers />
   </component>
@@ -813,7 +1133,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1233742000" />
+    <option name="totallyTimeSpent" value="1667067000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -825,12 +1145,12 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1920" height="988" extended-state="6" />
+    <frame x="0" y="23" width="1440" height="835" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34371397" sideWeight="0.50692225" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972974" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32912034" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -839,87 +1159,28 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39659685" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32984293" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38089004" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972974" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37972972" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972974" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896462" sideWeight="0.49444443" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3661814" sideWeight="0.49307775" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891247" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947975" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28645834" sideWeight="0.56437767" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3310811" sideWeight="0.49307775" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32837838" sideWeight="0.49444443" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32837838" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32297298" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2532189" sideWeight="0.56437767" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24444444" sideWeight="0.43683085" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34371397" sideWeight="0.50692225" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32912034" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.019169329" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24930556" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39659685" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32984293" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38089004" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298611" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3661814" sideWeight="0.49307775" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896462" sideWeight="0.49444443" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891247" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947975" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28645834" sideWeight="0.56437767" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24444444" sideWeight="0.43683085" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896462" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32837838" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
-    <layout-to-restore>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34371397" sideWeight="0.50692225" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32912034" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.019169329" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24930556" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39659685" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32984293" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38089004" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896462" sideWeight="0.49444443" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3661814" sideWeight="0.49307775" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298611" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32891247" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32947975" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28645834" sideWeight="0.56437767" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24444444" sideWeight="0.43683085" order="5" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32896462" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -960,384 +1221,369 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/IdBlastInspectionProcessController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/util/GenerateExcelToPDFUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-946">
-          <caret line="28" column="13" lean-forward="false" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
+        <state relative-caret-position="85">
+          <caret line="212" column="71" lean-forward="false" selection-start-line="212" selection-start-column="50" selection-end-line="212" selection-end-column="71" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/IdBlastProcessController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/MTCController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-163">
-          <caret line="27" column="13" lean-forward="false" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+        <state relative-caret-position="226">
+          <caret line="233" column="59" lean-forward="true" selection-start-line="233" selection-start-column="59" selection-end-line="233" selection-end-column="59" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/CoatingPowderInfo.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/RawMaterialTestingAcceptanceCriteria3LpeDao.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/LabTestingEpoxyDao.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/OdCoatingProcessDao.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/InspectionProcessRecordItemDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-16">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        <state relative-caret-position="270">
+          <caret line="22" column="165" lean-forward="false" selection-start-line="22" selection-start-column="153" selection-end-line="22" selection-end-column="165" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/CoatingPowderInfoDao.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/InspectionProcessRecordItem.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="9" column="49" lean-forward="false" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/CoatingPowderInfo.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-168">
-          <caret line="30" column="21" lean-forward="true" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdFinalInspectionProcessController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="76" column="33" lean-forward="true" selection-start-line="76" selection-start-column="33" selection-end-line="76" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoating3LpeInspectionProcessController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="111" column="0" lean-forward="false" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoatingInspectionProcessController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="29" column="35" lean-forward="false" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PersonController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="40" column="59" lean-forward="false" selection-start-line="40" selection-start-column="59" selection-end-line="40" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/BarePipeGrindingController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="61" column="31" lean-forward="false" selection-start-line="61" selection-start-column="31" selection-end-line="61" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/coatingstrip/coatingstrip.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="123" column="55" lean-forward="false" selection-start-line="123" selection-start-column="45" selection-end-line="123" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/grinding/barepipegrindingProcess.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="153" column="55" lean-forward="false" selection-start-line="153" selection-start-column="55" selection-end-line="153" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeRebevelRecord.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-530">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1527920031000" expanded="true" signature="1366:2526" ph="Select pro.p... pipe_rebevel_record" />
-            <marker date="1527920031000" expanded="true" signature="2643:2921" ph="INSERT INTO pipe_rebevel_record... " />
-            <marker date="1527920031000" expanded="true" signature="3034:3067" ph="SELECT * fro... pipe_rebevel_record" />
-            <marker date="1527920031000" expanded="true" signature="3186:3492" ph="UPDATE pipe_rebevel_record... " />
-            <marker date="1527920031000" expanded="true" signature="3561:3601" ph="select count... pipe_rebevel_record" />
-            <marker date="1527920031000" expanded="true" signature="5227:5315" ph="SELECT * fro... pipe_rebevel_record" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/coatingrepair/coatingrepair.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="243" column="21" lean-forward="false" selection-start-line="243" selection-start-column="21" selection-end-line="243" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/CoatingRepair.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="26" column="3" lean-forward="false" selection-start-line="26" selection-start-column="3" selection-end-line="26" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/CoatingPowderController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="221" column="31" lean-forward="true" selection-start-line="221" selection-start-column="31" selection-end-line="221" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/CoatingRepairController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-121">
-          <caret line="38" column="12" lean-forward="false" selection-start-line="38" selection-start-column="12" selection-end-line="38" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/PipeStatusTransferRules">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="774">
-          <caret line="47" column="52" lean-forward="false" selection-start-line="47" selection-start-column="52" selection-end-line="47" selection-end-column="52" />
+        <state relative-caret-position="138">
+          <caret line="46" column="49" lean-forward="false" selection-start-line="46" selection-start-column="16" selection-end-line="46" selection-end-column="49" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PipeBasicInfoDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="11" column="51" lean-forward="false" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="51" />
+        <state relative-caret-position="1590">
+          <caret line="112" column="65" lean-forward="false" selection-start-line="112" selection-start-column="40" selection-end-line="112" selection-end-column="65" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/grinding/pipeRebevelProcess.jsp">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdCoatingProcessController.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/OdCoatingProcess.xml" />
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/data/function_list">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="485" column="10" lean-forward="false" selection-start-line="485" selection-start-column="10" selection-end-line="485" selection-end-column="10" />
+        <state relative-caret-position="3150">
+          <caret line="210" column="66" lean-forward="false" selection-start-line="210" selection-start-column="66" selection-end-line="210" selection-end-column="66" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PipeRebevelProcessController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/StatisticsController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2059">
-          <caret line="73" column="109" lean-forward="false" selection-start-line="73" selection-start-column="109" selection-end-line="73" selection-end-column="109" />
+        <state relative-caret-position="428">
+          <caret line="401" column="13" lean-forward="true" selection-start-line="401" selection-start-column="13" selection-end-line="401" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/CoatingStripController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/coatingrepair/coatingrepair.jsp" />
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/production/inspectionFrequencyStandard.jsp" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/util/SessionFilter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2841">
-          <caret line="28" column="14" lean-forward="false" selection-start-line="28" selection-start-column="3" selection-end-line="28" selection-end-column="14" />
+        <state relative-caret-position="405">
+          <caret line="146" column="60" lean-forward="false" selection-start-line="146" selection-start-column="60" selection-end-line="146" selection-end-column="60" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/storage/barepipemovement.jsp">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/ACController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="94" column="42" lean-forward="true" selection-start-line="94" selection-start-column="42" selection-end-line="94" selection-end-column="42" />
+        <state relative-caret-position="105">
+          <caret line="25" column="13" lean-forward="false" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/APPRequestTransferController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/AcceptanceCriteriaController.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/BarePipeGrindingController.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/CoatingRepairController.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/upload/readme.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="68" column="8" lean-forward="false" selection-start-line="68" selection-start-column="8" selection-end-line="68" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PipeSamplingProcessController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="134" column="0" lean-forward="false" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/OdStencilProcessController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
-          <caret line="170" column="38" lean-forward="false" selection-start-line="170" selection-start-column="38" selection-end-line="170" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/sampling/pipeSamplingProcess.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="155" column="21" lean-forward="false" selection-start-line="155" selection-start-column="21" selection-end-line="155" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/pipe/pipeManagement.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="1182" column="20" lean-forward="false" selection-start-line="1182" selection-start-column="20" selection-end-line="1182" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/db.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3" column="21" lean-forward="false" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeBasicInfo.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="401" column="83" lean-forward="true" selection-start-line="401" selection-start-column="83" selection-end-line="401" selection-end-column="83" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/storage/odstockin.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="67" column="14" lean-forward="false" selection-start-line="67" selection-start-column="14" selection-end-line="67" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/storage/productStockout.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="64" column="39" lean-forward="false" selection-start-line="64" selection-start-column="39" selection-end-line="64" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/storage/instoragetransfer.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="177" column="54" lean-forward="false" selection-start-line="177" selection-start-column="54" selection-end-line="177" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/storage/idstockin.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-904">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/LabTesting2FbeController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/CommonController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="69" column="39" lean-forward="true" selection-start-line="69" selection-start-column="39" selection-end-line="69" selection-end-column="39" />
+        <state relative-caret-position="105">
+          <caret line="24" column="13" lean-forward="false" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTesting2Fbe.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/ContractController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="716">
-          <caret line="223" column="0" lean-forward="true" selection-start-line="223" selection-start-column="0" selection-end-line="223" selection-end-column="0" />
+        <state relative-caret-position="135">
+          <caret line="30" column="13" lean-forward="false" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTesting2Fbe.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/DefectInfoController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="15" column="13" lean-forward="true" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-          <folding />
+        <state relative-caret-position="105">
+          <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/id/idcoatinginspectionprocess.jsp">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/IdBlastInspectionProcessController.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/FunctionController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="497" column="72" lean-forward="true" selection-start-line="497" selection-start-column="72" selection-end-line="497" selection-end-column="72" />
+        <state relative-caret-position="90">
+          <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTestingEpoxy.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/InspectionFrequencyController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="17" column="28" lean-forward="true" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
+        <state relative-caret-position="105">
+          <caret line="23" column="13" lean-forward="false" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTestingEpoxy.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/LabTesting2FbeController.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/ProjectController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="92" column="0" lean-forward="true" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="120">
+          <caret line="26" column="13" lean-forward="false" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTesting3Lpe.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/RawMaterialTesting2FbeController.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/BarePipeGrindingCutoffRecordDao.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/AcceptanceCriteriaDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="235" column="30" lean-forward="false" selection-start-line="235" selection-start-column="30" selection-end-line="235" selection-end-column="30" />
+        <state relative-caret-position="495">
+          <caret line="38" column="1" lean-forward="false" selection-start-line="38" selection-start-column="1" selection-end-line="38" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/LabTesting3Lpe.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/BarePipeGrindingCutoffRecord.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/AcceptanceCriteria.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="79" column="8" lean-forward="false" selection-start-line="79" selection-start-column="8" selection-end-line="79" selection-end-column="8" />
-          <folding />
+        <state relative-caret-position="375">
+          <caret line="25" column="28" lean-forward="false" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="28" />
+          <folding>
+            <marker date="1534313917887" expanded="true" signature="328:645" ph="INSERT INTO acceptance_criteria... " />
+            <marker date="1534313917887" expanded="true" signature="767:1088" ph="UPDATE acceptance_criteria... " />
+            <marker date="1534313917887" expanded="true" signature="1561:1620" ph="select * fro... acceptance_criteria" />
+            <marker date="1534313917887" expanded="true" signature="1758:1880" ph="select * fro... acceptance_criteria" />
+            <marker date="1534313917887" expanded="true" signature="2835:3684" ph="select * fro... acceptance_criteria" />
+            <marker date="1534313917887" expanded="true" signature="3751:4254" ph="select * fro... acceptance_criteria" />
+            <marker date="1534313917887" expanded="true" signature="4355:5057" ph="select cri.*... acceptance_criteria" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/strings_zh-CN.properties">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/ProcessInfoController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="676" column="18" lean-forward="false" selection-start-line="676" selection-start-column="18" selection-end-line="676" selection-end-column="18" />
+        <state relative-caret-position="105">
+          <caret line="16" column="13" lean-forward="false" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/strings_zh.properties">
-      <provider editor-type-id="ResourceBundle">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/DailyProductionReportController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="673" column="0" lean-forward="false" selection-start-line="673" selection-start-column="0" selection-end-line="675" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/strings_en.properties">
-      <provider editor-type-id="ResourceBundle">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="679" column="26" lean-forward="false" selection-start-line="679" selection-start-column="26" selection-end-line="679" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/i18n/strings.properties">
-      <provider editor-type-id="ResourceBundle">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="674" column="22" lean-forward="true" selection-start-line="674" selection-start-column="22" selection-end-line="674" selection-end-column="22" />
+        <state relative-caret-position="16410">
+          <caret line="1121" column="7" lean-forward="false" selection-start-line="1121" selection-start-column="7" selection-end-line="1121" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PipeBasicInfoController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1892">
-          <caret line="221" column="0" lean-forward="false" selection-start-line="221" selection-start-column="0" selection-end-line="221" selection-end-column="0" />
+        <state relative-caret-position="225">
+          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding>
+            <marker date="1535980916633" expanded="true" signature="1193:1194" ph="//..." />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/js/common.js">
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/publish/AutoPublishWeb.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="235" column="27" lean-forward="true" selection-start-line="235" selection-start-column="27" selection-end-line="235" selection-end-column="27" />
+        <state relative-caret-position="390">
+          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/labtesting/labtestingepoxy.jsp">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PipeQrCodePrintRecordController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="29" column="5" lean-forward="false" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="5" />
+        <state relative-caret-position="3375">
+          <caret line="251" column="57" lean-forward="false" selection-start-line="251" selection-start-column="57" selection-end-line="251" selection-end-column="57" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/labtesting/labtesting2fbe.jsp">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/UploadFileController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="418" column="0" lean-forward="true" selection-start-line="418" selection-start-column="0" selection-end-line="418" selection-end-column="0" />
+        <state relative-caret-position="180">
+          <caret line="44" column="0" lean-forward="false" selection-start-line="44" selection-start-column="0" selection-end-line="44" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/labtesting/labtesting3lpe.jsp">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/db.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="44" column="17" lean-forward="false" selection-start-line="44" selection-start-column="17" selection-end-line="44" selection-end-column="17" />
+        <state relative-caret-position="90">
+          <caret line="6" column="14" lean-forward="false" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/PipeBasicInfo.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11175">
+          <caret line="745" column="59" lean-forward="false" selection-start-line="745" selection-start-column="16" selection-end-line="745" selection-end-column="59" />
+          <folding>
+            <marker date="1534473599686" expanded="true" signature="2157:3766" ph="SELECT p.* f... pipe_basic_info" />
+            <marker date="1534473599686" expanded="true" signature="3927:5152" ph="SELECT pro.p... pipe_basic_info" />
+            <marker date="1534473599686" expanded="true" signature="4262:4724" ph="select pipe_... inspection_process_record_header" />
+            <marker date="1534473599686" expanded="true" signature="5228:6347" ph="SELECT count... pipe_basic_info" />
+            <marker date="1534473599686" expanded="true" signature="5487:5949" ph="select pipe_... inspection_process_record_header" />
+            <marker date="1534473599686" expanded="true" signature="6455:6681" ph="SELECT * fro... pipe_basic_info" />
+            <marker date="1534473599686" expanded="true" signature="7368:7706" ph="select * fro... pipe_basic_info" />
+            <marker date="1534473599686" expanded="true" signature="7856:8220" ph="select * fro... pipe_basic_info" />
+            <marker date="1534473599686" expanded="true" signature="8371:8711" ph="select * fro... pipe_basic_info" />
+            <marker date="1534473599686" expanded="true" signature="8851:9632" ph="select * fro... pipe_basic_info" />
+            <marker date="1534473599686" expanded="true" signature="9781:10568" ph="select * fro... pipe_basic_info" />
+            <marker date="1534473599686" expanded="true" signature="10712:11499" ph="select * fro... pipe_basic_info" />
+            <marker date="1534473599686" expanded="true" signature="11639:12419" ph="select * fro... pipe_basic_info" />
+            <marker date="1534473599686" expanded="true" signature="12561:13347" ph="select * fro... pipe_basic_info" />
+            <marker date="1534473599686" expanded="true" signature="13513:14302" ph="select * fro... pipe_basic_info" />
+            <marker date="1534473599686" expanded="true" signature="14465:15267" ph="select * fro... pipe_basic_info" />
+            <marker date="1534473599686" expanded="true" signature="15731:15975" ph="select * fro... pipe_basic_info" />
+            <marker date="1534473599686" expanded="true" signature="16087:16331" ph="select * fro... pipe_basic_info" />
+            <marker date="1534473599686" expanded="true" signature="16447:16689" ph="select * fro... pipe_basic_info" />
+            <marker date="1534473599686" expanded="true" signature="17937:18864" ph="select co.pr... pipe_basic_info" />
+            <marker date="1534473599686" expanded="true" signature="18932:18968" ph="select count... pipe_basic_info" />
+            <marker date="1534473599686" expanded="true" signature="21385:22249" ph="select co.pr... pipe_basic_info" />
+            <marker date="1534473599686" expanded="true" signature="22339:23128" ph="select co.pr... pipe_basic_info" />
+            <marker date="1534473599686" expanded="true" signature="23217:24003" ph="select co.pr... pipe_basic_info" />
+            <marker date="1534473599686" expanded="true" signature="24747:25161" ph="Select p.*, pipe_basic_info" />
+            <marker date="1534473599686" expanded="true" signature="25937:26341" ph="Select p.*, pipe_basic_info" />
+            <marker date="1534473599686" expanded="true" signature="26451:27193" ph="UPDATE pipe_basic_info... " />
+            <marker date="1534473599686" expanded="true" signature="27301:28036" ph="INSERT INTO pipe_basic_info... " />
+            <marker date="1534473599686" expanded="true" signature="28363:28609" ph="UPDATE pipe_basic_info... " />
+            <marker date="1534473599686" expanded="true" signature="28717:28965" ph="UPDATE pipe_basic_info... " />
+            <marker date="1534473599686" expanded="true" signature="30723:31753" ph="select co.pr... pipe_basic_info" />
+            <marker date="1534473599686" expanded="true" signature="34329:34400" ph="UPDATE pipe_basic_info... " />
+            <marker date="1534473599686" expanded="true" signature="34517:35181" ph="select p.* f... pipe_basic_info" />
+            <marker date="1534473599686" expanded="true" signature="35288:36274" ph="select rejec... item_value" />
+            <marker date="1534473599686" expanded="true" signature="35367:36221" ph="select it.it... inspection_process_record_item" />
+            <marker date="1534473599686" expanded="true" signature="36381:37367" ph="select rejec... item_value" />
+            <marker date="1534473599686" expanded="true" signature="36460:37314" ph="select it.it... inspection_process_record_item" />
+            <marker date="1534473599686" expanded="true" signature="37481:38203" ph="select item_... inspection_process_record_item" />
+            <marker date="1534473599686" expanded="true" signature="38314:39023" ph="select item_... inspection_process_record_item" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/data/process_input_output.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3330">
+          <caret line="222" column="35" lean-forward="false" selection-start-line="222" selection-start-column="21" selection-end-line="222" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/productionRecordAndReport/productionProcessRecord.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="43">
+          <caret line="228" column="75" lean-forward="false" selection-start-line="228" selection-start-column="61" selection-end-line="228" selection-end-column="75" />
+          <folding>
+            <marker date="1529646421215" expanded="true" signature="7339:7353" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/InspectionRecordPDFController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="390" column="91" lean-forward="false" selection-start-line="390" selection-start-column="78" selection-end-line="390" selection-end-column="91" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/InspectionProcessRecordHeaderDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="120" column="53" lean-forward="false" selection-start-line="120" selection-start-column="40" selection-end-line="120" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/InspectionProcessRecordHeader.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="1093" column="49" lean-forward="false" selection-start-line="1093" selection-start-column="49" selection-end-line="1093" selection-end-column="49" />
+          <folding>
+            <marker date="1539956079795" expanded="true" signature="402:725" ph="INSERT INTO inspection_process_record_header... " />
+            <marker date="1539956079795" expanded="true" signature="868:1222" ph="UPDATE inspection_process_record_header... " />
+            <marker date="1539956079795" expanded="true" signature="2961:4485" ph="Select pc.pr... inspection_process_record_header" />
+            <marker date="1539956079795" expanded="true" signature="4630:4691" ph="select * fro... inspection_process_record_header" />
+            <marker date="1539956079795" expanded="true" signature="4788:5667" ph="Select o.* f... inspection_process_record_header" />
+            <marker date="1539956079795" expanded="true" signature="5821:5963" ph="SELECT * fro... inspection_process_record_header" />
+            <marker date="1539956079795" expanded="true" signature="6133:6552" ph="select * fro... inspection_process_record_header" />
+            <marker date="1539956079795" expanded="true" signature="6666:7093" ph="select ib.id... inspection_process_record_header" />
+            <marker date="1539956079795" expanded="true" signature="15617:15765" ph="select inspe... inspection_process_record_item" />
+            <marker date="1539956079795" expanded="true" signature="15896:16055" ph="select inspe... inspection_process_record_item" />
+            <marker date="1539956079795" expanded="true" signature="17728:17874" ph="select inspe... inspection_process_record_item" />
+            <marker date="1539956079795" expanded="true" signature="18005:18164" ph="select inspe... inspection_process_record_item" />
+            <marker date="1539956079795" expanded="true" signature="32952:34899" ph="(select p.od... " />
+            <marker date="1539956079795" expanded="true" signature="49620:51117" ph="select o.ins... inspection_process_record_header" />
+            <marker date="1539956079795" expanded="true" signature="51267:51391" ph="select * fro... inspection_process_record_header" />
+            <marker date="1539956079795" expanded="true" signature="51550:52592" ph="select pro.p... inspection_process_record_header" />
+            <marker date="1539956079795" expanded="true" signature="52758:53657" ph="select count... inspection_process_record_header" />
+            <marker date="1539956079795" expanded="true" signature="53794:54133" ph="select * fro... inspection_process_record_header" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/production/acceptancecriteria.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="191" column="50" lean-forward="false" selection-start-line="191" selection-start-column="50" selection-end-line="191" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/InspectionProcess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2211">
+          <caret line="183" column="71" lean-forward="false" selection-start-line="183" selection-start-column="41" selection-end-line="183" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/process/generalprocess.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-216">
+          <caret line="302" column="86" lean-forward="false" selection-start-line="302" selection-start-column="43" selection-end-line="302" selection-end-column="86" />
+          <folding>
+            <marker date="1532068658785" expanded="true" signature="16149:16159" ph="..." />
+            <marker date="1532068658785" expanded="true" signature="16224:16234" ph="..." />
+            <marker date="1532068658785" expanded="true" signature="17648:17660" ph="..." />
+            <marker date="1532068658785" expanded="true" signature="18923:18935" ph="..." />
+            <marker date="1532068658785" expanded="true" signature="19332:19344" ph="..." />
+            <marker date="1532068658785" expanded="true" signature="19756:19768" ph="..." />
+            <marker date="1532068658785" expanded="true" signature="20178:20190" ph="..." />
+            <marker date="1532068658785" expanded="true" signature="20548:20560" ph="..." />
+            <marker date="1532068658785" expanded="true" signature="22284:22307" ph="..." />
+            <marker date="1532068658785" expanded="true" signature="22737:22749" ph="..." />
+            <marker date="1532068658785" expanded="true" signature="23065:23077" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/DynamicMeasurementItemController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="142" column="13" lean-forward="false" selection-start-line="142" selection-start-column="13" selection-end-line="142" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/APPRequestTransferController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="348" column="53" lean-forward="true" selection-start-line="348" selection-start-column="53" selection-end-line="348" selection-end-column="53" />
           <folding />
         </state>
       </provider>
@@ -1348,7 +1594,7 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
-          <last-edited>htcsweb:war</last-edited>
+          <last-edited>htcsweb:war exploded</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1388,7 +1634,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.27287582" />
               </list>
             </option>
           </splitter-proportions>

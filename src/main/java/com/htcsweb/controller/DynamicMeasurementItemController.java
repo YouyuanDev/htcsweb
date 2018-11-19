@@ -140,6 +140,7 @@ public class DynamicMeasurementItemController {
             stencilContent = stencilContent.replace("[PROJECTNAME]", project_name);
             stencilContent = stencilContent.replace("[PIPENO]", pipeNo);
             stencilContent = stencilContent.replace("[PIPELENGTH]", String.valueOf(p_length));
+            stencilContent = stencilContent.replace("[PIPELENGTH_MM]", String.valueOf((int)(p_length*1000)));
             stencilContent = stencilContent.replace("[HALFLENGTH]", String.valueOf(halflength));
             stencilContent = stencilContent.replace("[HEATNO]",heat_no);
             stencilContent = stencilContent.replace("[BATCHNO]",pipe_making_lot_no);
