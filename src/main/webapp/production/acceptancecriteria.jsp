@@ -332,6 +332,15 @@
         function delItem() {
             var row = $('#dg').datagrid('getSelected');
             if(row){
+                var is_special_item=row.is_special_item;
+                if(is_special_item==undefined){
+                    hlAlertFour("删除失败!");
+                    return;
+                }
+                if(is_special_item!=undefined&&parseInt(is_special_item)==1){
+                    hlAlertFour("特殊项不能删除!");
+                    return;
+                }
                 var idArrs=row.id+",";
                 $.messager.confirm('系统提示',"您确定要删除这条数据吗？",function (r) {
                     if(r){
