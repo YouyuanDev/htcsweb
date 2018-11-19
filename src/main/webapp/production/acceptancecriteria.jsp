@@ -186,8 +186,9 @@
                         disableEditor('control_type',editIndex,"combobox");
                         disableEditor('item_name',editIndex,"textbox");
                         disableEditor('item_name_en',editIndex,"textbox");
-                        disableEditor('unit_name',editIndex,"textbox");
-                        disableEditor('unit_name_en',editIndex,"textbox");
+                        //涂层总厚度 需要设置unit_name unit_name_en
+                        //disableEditor('unit_name',editIndex,"textbox");
+                        //disableEditor('unit_name_en',editIndex,"textbox");
                         disableEditor('options',editIndex,"textbox");
                         //涂层总厚度 需要设置item_frequency
                         //disableEditor('item_frequency',editIndex,"combobox");
