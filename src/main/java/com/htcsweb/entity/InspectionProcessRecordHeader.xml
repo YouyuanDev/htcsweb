@@ -1109,7 +1109,7 @@
             <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
         </if>
         AND o.process_code=#{process_code}
-        ORDER BY o.id DESC
+        ORDER BY o.id, pipe_no, ipri.item_code DESC
     </select>
 
     <!--获取钢管的上一工位记录头部-->

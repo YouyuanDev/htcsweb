@@ -7,7 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa3f659b-6ccf-4ae8-84a0-55d0a3756f6f" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/production/acceptancecriteria.jsp" afterPath="$PROJECT_DIR$/src/main/webapp/production/acceptancecriteria.jsp" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/InspectionRecordPDFController.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/InspectionRecordPDFController.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/InspectionProcessRecordHeader.xml" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/InspectionProcessRecordHeader.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/htcsweb/util/GenerateExcelToPDFUtil.java" afterPath="$PROJECT_DIR$/src/main/java/com/htcsweb/util/GenerateExcelToPDFUtil.java" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/template/general_process_record_template.xls" afterPath="$PROJECT_DIR$/src/main/webapp/template/general_process_record_template.xls" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -33,23 +36,26 @@
     <expand />
     <select />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="htcsweb" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="InspectionRecordPDFController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="InspectionRecordPDFController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/InspectionRecordPDFController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="390" column="91" lean-forward="false" selection-start-line="390" selection-start-column="78" selection-end-line="390" selection-end-column="91" />
+            <state relative-caret-position="139">
+              <caret line="417" column="47" lean-forward="false" selection-start-line="417" selection-start-column="47" selection-end-line="417" selection-end-column="47" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="InspectionProcessRecordHeaderDao.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/InspectionProcessRecordHeaderDao.java">
+      <file leaf-file-name="GenerateExcelToPDFUtil.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/util/GenerateExcelToPDFUtil.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="120" column="53" lean-forward="false" selection-start-line="120" selection-start-column="40" selection-end-line="120" selection-end-column="53" />
+            <state relative-caret-position="526">
+              <caret line="471" column="59" lean-forward="false" selection-start-line="471" selection-start-column="59" selection-end-line="471" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -58,27 +64,27 @@
       <file leaf-file-name="InspectionProcessRecordHeader.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/InspectionProcessRecordHeader.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="1093" column="49" lean-forward="false" selection-start-line="1093" selection-start-column="49" selection-end-line="1093" selection-end-column="49" />
+            <state relative-caret-position="421">
+              <caret line="1111" column="51" lean-forward="false" selection-start-line="1111" selection-start-column="51" selection-end-line="1111" selection-end-column="51" />
               <folding>
-                <marker date="1539956079795" expanded="true" signature="402:725" ph="INSERT INTO inspection_process_record_header... " />
-                <marker date="1539956079795" expanded="true" signature="868:1222" ph="UPDATE inspection_process_record_header... " />
-                <marker date="1539956079795" expanded="true" signature="2961:4485" ph="Select pc.pr... inspection_process_record_header" />
-                <marker date="1539956079795" expanded="true" signature="4630:4691" ph="select * fro... inspection_process_record_header" />
-                <marker date="1539956079795" expanded="true" signature="4788:5667" ph="Select o.* f... inspection_process_record_header" />
-                <marker date="1539956079795" expanded="true" signature="5821:5963" ph="SELECT * fro... inspection_process_record_header" />
-                <marker date="1539956079795" expanded="true" signature="6133:6552" ph="select * fro... inspection_process_record_header" />
-                <marker date="1539956079795" expanded="true" signature="6666:7093" ph="select ib.id... inspection_process_record_header" />
-                <marker date="1539956079795" expanded="true" signature="15617:15765" ph="select inspe... inspection_process_record_item" />
-                <marker date="1539956079795" expanded="true" signature="15896:16055" ph="select inspe... inspection_process_record_item" />
-                <marker date="1539956079795" expanded="true" signature="17728:17874" ph="select inspe... inspection_process_record_item" />
-                <marker date="1539956079795" expanded="true" signature="18005:18164" ph="select inspe... inspection_process_record_item" />
-                <marker date="1539956079795" expanded="true" signature="32952:34899" ph="(select p.od... " />
-                <marker date="1539956079795" expanded="true" signature="49620:51117" ph="select o.ins... inspection_process_record_header" />
-                <marker date="1539956079795" expanded="true" signature="51267:51391" ph="select * fro... inspection_process_record_header" />
-                <marker date="1539956079795" expanded="true" signature="51550:52592" ph="select pro.p... inspection_process_record_header" />
-                <marker date="1539956079795" expanded="true" signature="52758:53657" ph="select count... inspection_process_record_header" />
-                <marker date="1539956079795" expanded="true" signature="53794:54133" ph="select * fro... inspection_process_record_header" />
+                <marker date="1542612974652" expanded="true" signature="402:725" ph="INSERT INTO inspection_process_record_header... " />
+                <marker date="1542612974652" expanded="true" signature="868:1222" ph="UPDATE inspection_process_record_header... " />
+                <marker date="1542612974652" expanded="true" signature="2961:4485" ph="Select pc.pr... inspection_process_record_header" />
+                <marker date="1542612974652" expanded="true" signature="4630:4691" ph="select * fro... inspection_process_record_header" />
+                <marker date="1542612974652" expanded="true" signature="4788:5667" ph="Select o.* f... inspection_process_record_header" />
+                <marker date="1542612974652" expanded="true" signature="5821:5963" ph="SELECT * fro... inspection_process_record_header" />
+                <marker date="1542612974652" expanded="true" signature="6133:6552" ph="select * fro... inspection_process_record_header" />
+                <marker date="1542612974652" expanded="true" signature="6666:7093" ph="select ib.id... inspection_process_record_header" />
+                <marker date="1542612974652" expanded="true" signature="15617:15765" ph="select inspe... inspection_process_record_item" />
+                <marker date="1542612974652" expanded="true" signature="15896:16055" ph="select inspe... inspection_process_record_item" />
+                <marker date="1542612974652" expanded="true" signature="17728:17874" ph="select inspe... inspection_process_record_item" />
+                <marker date="1542612974652" expanded="true" signature="18005:18164" ph="select inspe... inspection_process_record_item" />
+                <marker date="1542612974652" expanded="true" signature="32952:34899" ph="(select p.od... " />
+                <marker date="1542612974652" expanded="true" signature="49620:51142" ph="select o.ins... inspection_process_record_header" />
+                <marker date="1542612974652" expanded="true" signature="51292:51416" ph="select * fro... inspection_process_record_header" />
+                <marker date="1542612974652" expanded="true" signature="51575:52617" ph="select pro.p... inspection_process_record_header" />
+                <marker date="1542612974652" expanded="true" signature="52783:53682" ph="select count... inspection_process_record_header" />
+                <marker date="1542612974652" expanded="true" signature="53819:54158" ph="select * fro... inspection_process_record_header" />
               </folding>
             </state>
           </provider>
@@ -104,11 +110,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AutoPublishWeb.sh" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AutoPublishWeb.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/publish/AutoPublishWeb.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="251">
-              <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+            <state relative-caret-position="195">
+              <caret line="13" column="29" lean-forward="false" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -159,8 +165,8 @@
       <file leaf-file-name="productionProcessRecord.jsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/webapp/productionRecordAndReport/productionProcessRecord.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="43">
-              <caret line="228" column="75" lean-forward="false" selection-start-line="228" selection-start-column="61" selection-end-line="228" selection-end-column="75" />
+            <state relative-caret-position="273">
+              <caret line="113" column="73" lean-forward="false" selection-start-line="113" selection-start-column="55" selection-end-line="113" selection-end-column="73" />
               <folding>
                 <marker date="1529646421215" expanded="true" signature="7339:7353" ph="..." />
               </folding>
@@ -186,8 +192,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>addQrCode</find>
-      <find>APPPrintQRCode</find>
       <find>APPGetQRCodePrintTimes</find>
       <find>p.</find>
       <find>SendEvent</find>
@@ -214,8 +218,10 @@
       <find>getODCoatingRejectedPipeInfo</find>
       <find>30</find>
       <find>getPDFProgress</find>
-      <find>getPostRecord</find>
       <find>getDynamicItemByPipeNoProcessCodeHeaderCode</find>
+      <find>getRecordReportPDF</find>
+      <find>getPostRecord</find>
+      <find>PostRecordPdf</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src/main/webapp/WEB-INF/lib</dir>
@@ -277,7 +283,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/util/SessionFilter.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/productionRecordAndReport/statistics.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/StatisticsDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/util/GenerateExcelToPDFUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/InspectionProcessRecordItem.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/InspectionProcessRecordItemDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/dao/PipeBasicInfoDao.java" />
@@ -288,14 +293,15 @@
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/StatisticsController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/DailyProductionReportController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PipeBasicInfoController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/InspectionRecordPDFController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/PipeQrCodePrintRecordController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/db.properties" />
         <option value="$PROJECT_DIR$/src/main/webapp/publish/AutoPublishWeb.sh" />
-        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/InspectionProcessRecordHeader.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/DynamicMeasurementItemController.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/APPRequestTransferController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/production/acceptancecriteria.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/util/GenerateExcelToPDFUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/entity/InspectionProcessRecordHeader.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/htcsweb/controller/InspectionRecordPDFController.java" />
       </list>
     </option>
   </component>
@@ -381,6 +387,24 @@
               <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -429,6 +453,14 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
               <item name="publish" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="htcsweb" type="b2602c69:ProjectViewProjectNode" />
+              <item name="htcsweb" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
+              <item name="template" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -1099,7 +1131,7 @@
       <workItem from="1539509359495" duration="1682000" />
       <workItem from="1539954744004" duration="1992000" />
       <workItem from="1542593454176" duration="703000" />
-      <workItem from="1542595531418" duration="4588000" />
+      <workItem from="1542595531418" duration="13899000" />
     </task>
     <servers />
   </component>
@@ -1112,7 +1144,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1668002000" />
+    <option name="totallyTimeSpent" value="1677313000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -1144,21 +1176,21 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972974" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3310811" sideWeight="0.49307775" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3527027" sideWeight="0.49307775" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32837838" sideWeight="0.49444443" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32837838" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32297298" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2532189" sideWeight="0.56437767" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24444444" sideWeight="0.43683085" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32297298" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34191704" sideWeight="0.5553236" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34191704" sideWeight="0.4446764" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32837838" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34191704" sideWeight="0.44189188" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298611" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32837838" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1200,13 +1232,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/util/GenerateExcelToPDFUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="212" column="71" lean-forward="false" selection-start-line="212" selection-start-column="50" selection-end-line="212" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/MTCController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="226">
@@ -1454,56 +1479,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/productionRecordAndReport/productionProcessRecord.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="43">
-          <caret line="228" column="75" lean-forward="false" selection-start-line="228" selection-start-column="61" selection-end-line="228" selection-end-column="75" />
-          <folding>
-            <marker date="1529646421215" expanded="true" signature="7339:7353" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/InspectionRecordPDFController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="390" column="91" lean-forward="false" selection-start-line="390" selection-start-column="78" selection-end-line="390" selection-end-column="91" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/dao/InspectionProcessRecordHeaderDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="184">
           <caret line="120" column="53" lean-forward="false" selection-start-line="120" selection-start-column="40" selection-end-line="120" selection-end-column="53" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/InspectionProcessRecordHeader.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="1093" column="49" lean-forward="false" selection-start-line="1093" selection-start-column="49" selection-end-line="1093" selection-end-column="49" />
-          <folding>
-            <marker date="1539956079795" expanded="true" signature="402:725" ph="INSERT INTO inspection_process_record_header... " />
-            <marker date="1539956079795" expanded="true" signature="868:1222" ph="UPDATE inspection_process_record_header... " />
-            <marker date="1539956079795" expanded="true" signature="2961:4485" ph="Select pc.pr... inspection_process_record_header" />
-            <marker date="1539956079795" expanded="true" signature="4630:4691" ph="select * fro... inspection_process_record_header" />
-            <marker date="1539956079795" expanded="true" signature="4788:5667" ph="Select o.* f... inspection_process_record_header" />
-            <marker date="1539956079795" expanded="true" signature="5821:5963" ph="SELECT * fro... inspection_process_record_header" />
-            <marker date="1539956079795" expanded="true" signature="6133:6552" ph="select * fro... inspection_process_record_header" />
-            <marker date="1539956079795" expanded="true" signature="6666:7093" ph="select ib.id... inspection_process_record_header" />
-            <marker date="1539956079795" expanded="true" signature="15617:15765" ph="select inspe... inspection_process_record_item" />
-            <marker date="1539956079795" expanded="true" signature="15896:16055" ph="select inspe... inspection_process_record_item" />
-            <marker date="1539956079795" expanded="true" signature="17728:17874" ph="select inspe... inspection_process_record_item" />
-            <marker date="1539956079795" expanded="true" signature="18005:18164" ph="select inspe... inspection_process_record_item" />
-            <marker date="1539956079795" expanded="true" signature="32952:34899" ph="(select p.od... " />
-            <marker date="1539956079795" expanded="true" signature="49620:51117" ph="select o.ins... inspection_process_record_header" />
-            <marker date="1539956079795" expanded="true" signature="51267:51391" ph="select * fro... inspection_process_record_header" />
-            <marker date="1539956079795" expanded="true" signature="51550:52592" ph="select pro.p... inspection_process_record_header" />
-            <marker date="1539956079795" expanded="true" signature="52758:53657" ph="select count... inspection_process_record_header" />
-            <marker date="1539956079795" expanded="true" signature="53794:54133" ph="select * fro... inspection_process_record_header" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1561,8 +1541,61 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/publish/AutoPublishWeb.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+        <state relative-caret-position="195">
+          <caret line="13" column="29" lean-forward="false" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/productionRecordAndReport/productionProcessRecord.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="113" column="73" lean-forward="false" selection-start-line="113" selection-start-column="55" selection-end-line="113" selection-end-column="73" />
+          <folding>
+            <marker date="1529646421215" expanded="true" signature="7339:7353" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/util/GenerateExcelToPDFUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="526">
+          <caret line="471" column="59" lean-forward="false" selection-start-line="471" selection-start-column="59" selection-end-line="471" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/entity/InspectionProcessRecordHeader.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="1111" column="51" lean-forward="false" selection-start-line="1111" selection-start-column="51" selection-end-line="1111" selection-end-column="51" />
+          <folding>
+            <marker date="1542612974652" expanded="true" signature="402:725" ph="INSERT INTO inspection_process_record_header... " />
+            <marker date="1542612974652" expanded="true" signature="868:1222" ph="UPDATE inspection_process_record_header... " />
+            <marker date="1542612974652" expanded="true" signature="2961:4485" ph="Select pc.pr... inspection_process_record_header" />
+            <marker date="1542612974652" expanded="true" signature="4630:4691" ph="select * fro... inspection_process_record_header" />
+            <marker date="1542612974652" expanded="true" signature="4788:5667" ph="Select o.* f... inspection_process_record_header" />
+            <marker date="1542612974652" expanded="true" signature="5821:5963" ph="SELECT * fro... inspection_process_record_header" />
+            <marker date="1542612974652" expanded="true" signature="6133:6552" ph="select * fro... inspection_process_record_header" />
+            <marker date="1542612974652" expanded="true" signature="6666:7093" ph="select ib.id... inspection_process_record_header" />
+            <marker date="1542612974652" expanded="true" signature="15617:15765" ph="select inspe... inspection_process_record_item" />
+            <marker date="1542612974652" expanded="true" signature="15896:16055" ph="select inspe... inspection_process_record_item" />
+            <marker date="1542612974652" expanded="true" signature="17728:17874" ph="select inspe... inspection_process_record_item" />
+            <marker date="1542612974652" expanded="true" signature="18005:18164" ph="select inspe... inspection_process_record_item" />
+            <marker date="1542612974652" expanded="true" signature="32952:34899" ph="(select p.od... " />
+            <marker date="1542612974652" expanded="true" signature="49620:51142" ph="select o.ins... inspection_process_record_header" />
+            <marker date="1542612974652" expanded="true" signature="51292:51416" ph="select * fro... inspection_process_record_header" />
+            <marker date="1542612974652" expanded="true" signature="51575:52617" ph="select pro.p... inspection_process_record_header" />
+            <marker date="1542612974652" expanded="true" signature="52783:53682" ph="select count... inspection_process_record_header" />
+            <marker date="1542612974652" expanded="true" signature="53819:54158" ph="select * fro... inspection_process_record_header" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/htcsweb/controller/InspectionRecordPDFController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="417" column="47" lean-forward="false" selection-start-line="417" selection-start-column="47" selection-end-line="417" selection-end-column="47" />
           <folding />
         </state>
       </provider>

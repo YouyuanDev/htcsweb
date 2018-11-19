@@ -68,7 +68,7 @@ public class InspectionRecordPDFController {
         try{
             wf = new WritableFont(WritableFont.createFont("Arial"), 8);
             wcf= new WritableCellFormat(wf);
-            wcf.setAlignment(Alignment.RIGHT);
+            wcf.setAlignment(Alignment.LEFT);
             wcf.setVerticalAlignment(VerticalAlignment.JUSTIFY);
             wcf.setWrap(true);
             wcf.setBackground(Colour.RED);
@@ -415,6 +415,7 @@ public class InspectionRecordPDFController {
                         hs.put("remark",last_item_remark);
                         list1.add(hs);
                         last_measure_item="";
+                        //last_name用于存放测量项的名称列表
                         last_name="";
                         count=0;
                     }
@@ -445,9 +446,10 @@ public class InspectionRecordPDFController {
                 String remark="",measure_name=" ";
                 int qualifiedTotal=0;
                 for (int i=0;i<list1.size();i++){
+                    //System.err.println("pipeno="+String.valueOf(list1.get(i).get("pipe_no"))+" 测试："+String.valueOf(list1.get(i).get("measure_item")).trim());
                        datalist.add(new Label(1, row+8,String.valueOf(list1.get(i).get("pipe_no")), wcf));
                        datalist.add(new Label(2, row+8, String.valueOf(list1.get(i).get("measure_item")).trim(), wcf));
-                       datalist.add(new Label(13, row+8,getResult(process_code,String.valueOf(list1.get(i).get("result"))), wcf));
+                       datalist.add(new Label(12, row+8,getResult(process_code,String.valueOf(list1.get(i).get("result"))), wcf));
                        measure_name=String.valueOf(list1.get(i).get("last_name"));
                        remark=String.valueOf(list1.get(i).get("remark"));
                        if(!remark.equals("")){
@@ -461,18 +463,21 @@ public class InspectionRecordPDFController {
                         //最后一行数据为空问题
                         if(index%13==0){
                             newCreateRecordPdfTitle(datalist,process_name,measure_name,project_name,pipe_size,standard,coatingType,shift,title_time);
-                            newCreateRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,index,row,sb.toString(),stringList,delSetPath);
+                            newCreateRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,sb.toString(),stringList,delSetPath);
                             sb.setLength(0);
+                            qualifiedTotal=0;
+                            index=1;
+                            row=0;
                         }
                 }
                 if(datalist.size()>0){
                     for (int k=index-1;k<12;k++){
                         datalist.add(new Label(1, k+8," ", wcf));
                         datalist.add(new Label(2, k+8, " ", wcf));
-                        datalist.add(new Label(13, k+8, " ", wcf));
+                        datalist.add(new Label(12, k+8, " ", wcf));
                     }
                     newCreateRecordPdfTitle(datalist,process_name,measure_name,project_name,pipe_size,standard,coatingType,shift,title_time);
-                    newCreateRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,index,row,sb.toString(),stringList,delSetPath);
+                    newCreateRecordPdf(datalist,newPdfName,templateFullName,qualifiedTotal,sb.toString(),stringList,delSetPath);
                     sb.setLength(0);
                 }
             }else{
@@ -1108,13 +1113,11 @@ public class InspectionRecordPDFController {
      * @param newPdfName(pdf名称)
      * @param templateFullName(模板路径)
      * @param qualifiedTotal(要重置的合格数)
-     * @param index(要重置的遍历标记)
-     * @param row(要重置的行位置)
      * @param remark(备注)
      * @param stringList(存放临时pdf路径集合)
      * @param delSetPath(待删除文件集合)
      */
-    private void newCreateRecordPdf(ArrayList<Label> datalist,String newPdfName,String templateFullName,int qualifiedTotal,int index,int row,String remark,List<String>stringList,List<String>delSetPath){
+    private void newCreateRecordPdf(ArrayList<Label> datalist,String newPdfName,String templateFullName,int qualifiedTotal,String remark,List<String>stringList,List<String>delSetPath){
         if(remark.equals(""))
             remark=" ";
         datalist.add(new Label(2,20,remark,wcf));
@@ -1122,9 +1125,9 @@ public class InspectionRecordPDFController {
         datalist.add(new Label(13,20,String.valueOf(qualifiedTotal),wcf));
         newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightFontPath);
         datalist.clear();
-        qualifiedTotal=0;
-        index=1;
-        row=0;
+//        qualifiedTotal=0;
+//        index=1;
+//        row=0;
         if(newPdfName!=null){
             stringList.add(newPdfName);
             delSetPath.add(newPdfName);

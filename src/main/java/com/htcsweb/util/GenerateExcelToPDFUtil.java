@@ -100,7 +100,7 @@ public class GenerateExcelToPDFUtil {
         PdfPCell cell=new PdfPCell(new Paragraph(str,font));
         cell.setMinimumHeight(25);
         cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-        if(i>10){
+        if(i==10){
             //用于general_process_template的动态项左对齐
             cell.setHorizontalAlignment(Element.ALIGN_LEFT);
             //自动换行
