@@ -147,7 +147,8 @@ public class SessionFilter extends OncePerRequestFilter{
             "getInspectionRecordByProjectNoMillNoProcessCode",
             "getStatisticExcelProgress",
             "uploadFile",
-            "delUploadFile"
+            "delUploadFile",
+            "getAcceptanceCriteriaByAcceptanceCriteriaNo"
     }; // 不过滤的uri
 
     /**
