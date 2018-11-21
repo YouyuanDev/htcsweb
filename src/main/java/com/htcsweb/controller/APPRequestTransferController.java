@@ -508,6 +508,33 @@ public class APPRequestTransferController {
         String mmp = JSONArray.toJSONString(maps);
         return mmp;
     }
+
+
+    /**
+     * 根据接收标准编号获取检测项标准，即工艺卡(APP使用)
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/getAcceptanceCriteriaByAcceptanceCriteriaNo")
+    @ResponseBody
+    public String getAcceptanceCriteriaByAcceptanceCriteriaNo(HttpServletRequest request) {
+        String acceptance_criteria_no = request.getParameter("acceptance_criteria_no");
+
+
+
+//        List<HashMap<String, Object>> list = inspectionProcessRecordHeaderDao.getInspectionRecordByProjectNoMillNoProcessCode(project_no, mill_no, process_code, pipe_no, start, Integer.parseInt(rows));
+//        int count = inspectionProcessRecordHeaderDao.getCountInspectionRecordByProjectNoMillNoProcessCode(project_no, mill_no, process_code, pipe_no);
+//        Map<String, Object> maps = new HashMap<String, Object>();
+//        maps.put("total", count);
+//        maps.put("rows", list);
+//        String mmp = JSONArray.toJSONString(maps);
+//        return mmp;
+        return  "";
+    }
+
+
+
 //    private Map<String,HashMap<String,Object>> getInspectionFrequency(String pipe_no,String mill_no,String process_code){
 //        ///////得到本次检验频率
 //

@@ -17,14 +17,6 @@
         <result property="itp" column="itp"></result>
         <result property="project_time" column="project_time"></result>
         <result property="upload_files" column="upload_files"></result>
-        <result property="od_coating_acceptance_criteria_no" column="od_coating_acceptance_criteria_no"></result>
-        <result property="id_coating_acceptance_criteria_no" column="id_coating_acceptance_criteria_no"></result>
-        <result property="lab_testing_acceptance_criteria_2fbe_no" column="lab_testing_acceptance_criteria_2fbe_no"></result>
-        <result property="lab_testing_acceptance_criteria_3lpe_no" column="lab_testing_acceptance_criteria_3lpe_no"></result>
-        <result property="raw_material_acceptance_criteria_2fbe_no" column="raw_material_acceptance_criteria_2fbe_no"></result>
-        <result property="raw_material_acceptance_criteria_3lpe_no" column="raw_material_acceptance_criteria_3lpe_no"></result>
-        <result property="pipe_body_acceptance_criteria_no" column="pipe_body_acceptance_criteria_no"></result>
-        <result property="inspection_frequency_no" column="inspection_frequency_no"></result>
         <result property="acceptance_criteria_no" column="acceptance_criteria_no"></result>
 
     </resultMap>
@@ -123,21 +115,15 @@
         client_name=#{client_name},client_spec=#{client_spec},
         coating_standard=#{coating_standard},mps=#{mps},itp=#{itp} ,
         project_time=#{project_time},upload_files=#{upload_files},
-        od_coating_acceptance_criteria_no=#{od_coating_acceptance_criteria_no},
-        id_coating_acceptance_criteria_no=#{id_coating_acceptance_criteria_no} ,
-        lab_testing_acceptance_criteria_2fbe_no=#{lab_testing_acceptance_criteria_2fbe_no},
-        lab_testing_acceptance_criteria_3lpe_no=#{lab_testing_acceptance_criteria_3lpe_no},
-        raw_material_acceptance_criteria_2fbe_no=#{raw_material_acceptance_criteria_2fbe_no},
-        raw_material_acceptance_criteria_3lpe_no=#{raw_material_acceptance_criteria_3lpe_no},
-        pipe_body_acceptance_criteria_no=#{pipe_body_acceptance_criteria_no},
-        inspection_frequency_no=#{inspection_frequency_no},
         acceptance_criteria_no=#{acceptance_criteria_no}
          WHERE id=#{id}
     </update>
 
     <insert id="addProjectInfo" parameterType="com.htcsweb.entity.ProjectInfo">
-        INSERT INTO project_info(project_no,project_name,client_name,client_spec,coating_standard,mps,itp,project_time,upload_files,od_coating_acceptance_criteria_no,id_coating_acceptance_criteria_no,lab_testing_acceptance_criteria_2fbe_no,lab_testing_acceptance_criteria_3lpe_no,raw_material_acceptance_criteria_2fbe_no,raw_material_acceptance_criteria_3lpe_no,pipe_body_acceptance_criteria_no,inspection_frequency_no,acceptance_criteria_no)
-         VALUES (#{project_no},#{project_name},#{client_name},#{client_spec},#{coating_standard},#{mps},#{itp},#{project_time},#{upload_files},#{od_coating_acceptance_criteria_no},#{id_coating_acceptance_criteria_no},#{lab_testing_acceptance_criteria_2fbe_no},#{lab_testing_acceptance_criteria_3lpe_no},#{raw_material_acceptance_criteria_2fbe_no},#{raw_material_acceptance_criteria_3lpe_no},#{pipe_body_acceptance_criteria_no},#{inspection_frequency_no},#{acceptance_criteria_no})
+        INSERT INTO project_info(project_no,project_name,client_name,client_spec,coating_standard,mps,itp,project_time,upload_files,
+        acceptance_criteria_no)
+         VALUES (#{project_no},#{project_name},#{client_name},#{client_spec},#{coating_standard},#{mps},#{itp},#{project_time},#{upload_files},
+        #{acceptance_criteria_no})
     </insert>
 
     <delete id="delProjectInfo">

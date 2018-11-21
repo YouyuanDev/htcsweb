@@ -17,40 +17,17 @@ public class ProjectInfo {
     @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date project_time;
     private String upload_files;
-    private String od_coating_acceptance_criteria_no;
-    private String id_coating_acceptance_criteria_no;
-    private String lab_testing_acceptance_criteria_2fbe_no;
-    private String lab_testing_acceptance_criteria_3lpe_no;
-    private String raw_material_acceptance_criteria_2fbe_no;
-    private String raw_material_acceptance_criteria_3lpe_no;
-    private String pipe_body_acceptance_criteria_no;
-    private String inspection_frequency_no;
+//    private String od_coating_acceptance_criteria_no;
+//    private String id_coating_acceptance_criteria_no;
+//    private String lab_testing_acceptance_criteria_2fbe_no;
+//    private String lab_testing_acceptance_criteria_3lpe_no;
+//    private String raw_material_acceptance_criteria_2fbe_no;
+//    private String raw_material_acceptance_criteria_3lpe_no;
+//    private String pipe_body_acceptance_criteria_no;
+//    private String inspection_frequency_no;
     private String acceptance_criteria_no;
 
     public ProjectInfo() {
-    }
-
-
-    public ProjectInfo(int id, String project_no, String project_name, String client_name, String client_spec, String coating_standard, String mps, String itp, Date project_time, String upload_files, String od_coating_acceptance_criteria_no, String id_coating_acceptance_criteria_no, String lab_testing_acceptance_criteria_2fbe_no, String lab_testing_acceptance_criteria_3lpe_no, String raw_material_acceptance_criteria_2fbe_no, String raw_material_acceptance_criteria_3lpe_no, String pipe_body_acceptance_criteria_no, String inspection_frequency_no, String acceptance_criteria_no) {
-        this.id = id;
-        this.project_no = project_no;
-        this.project_name = project_name;
-        this.client_name = client_name;
-        this.client_spec = client_spec;
-        this.coating_standard = coating_standard;
-        this.mps = mps;
-        this.itp = itp;
-        this.project_time = project_time;
-        this.upload_files = upload_files;
-        this.od_coating_acceptance_criteria_no = od_coating_acceptance_criteria_no;
-        this.id_coating_acceptance_criteria_no = id_coating_acceptance_criteria_no;
-        this.lab_testing_acceptance_criteria_2fbe_no = lab_testing_acceptance_criteria_2fbe_no;
-        this.lab_testing_acceptance_criteria_3lpe_no = lab_testing_acceptance_criteria_3lpe_no;
-        this.raw_material_acceptance_criteria_2fbe_no = raw_material_acceptance_criteria_2fbe_no;
-        this.raw_material_acceptance_criteria_3lpe_no = raw_material_acceptance_criteria_3lpe_no;
-        this.pipe_body_acceptance_criteria_no = pipe_body_acceptance_criteria_no;
-        this.inspection_frequency_no = inspection_frequency_no;
-        this.acceptance_criteria_no = acceptance_criteria_no;
     }
 
     public int getId() {
@@ -131,70 +108,6 @@ public class ProjectInfo {
 
     public void setUpload_files(String upload_files) {
         this.upload_files = upload_files;
-    }
-
-    public String getOd_coating_acceptance_criteria_no() {
-        return od_coating_acceptance_criteria_no;
-    }
-
-    public void setOd_coating_acceptance_criteria_no(String od_coating_acceptance_criteria_no) {
-        this.od_coating_acceptance_criteria_no = od_coating_acceptance_criteria_no;
-    }
-
-    public String getId_coating_acceptance_criteria_no() {
-        return id_coating_acceptance_criteria_no;
-    }
-
-    public void setId_coating_acceptance_criteria_no(String id_coating_acceptance_criteria_no) {
-        this.id_coating_acceptance_criteria_no = id_coating_acceptance_criteria_no;
-    }
-
-    public String getLab_testing_acceptance_criteria_2fbe_no() {
-        return lab_testing_acceptance_criteria_2fbe_no;
-    }
-
-    public void setLab_testing_acceptance_criteria_2fbe_no(String lab_testing_acceptance_criteria_2fbe_no) {
-        this.lab_testing_acceptance_criteria_2fbe_no = lab_testing_acceptance_criteria_2fbe_no;
-    }
-
-    public String getLab_testing_acceptance_criteria_3lpe_no() {
-        return lab_testing_acceptance_criteria_3lpe_no;
-    }
-
-    public void setLab_testing_acceptance_criteria_3lpe_no(String lab_testing_acceptance_criteria_3lpe_no) {
-        this.lab_testing_acceptance_criteria_3lpe_no = lab_testing_acceptance_criteria_3lpe_no;
-    }
-
-    public String getRaw_material_acceptance_criteria_2fbe_no() {
-        return raw_material_acceptance_criteria_2fbe_no;
-    }
-
-    public void setRaw_material_acceptance_criteria_2fbe_no(String raw_material_acceptance_criteria_2fbe_no) {
-        this.raw_material_acceptance_criteria_2fbe_no = raw_material_acceptance_criteria_2fbe_no;
-    }
-
-    public String getRaw_material_acceptance_criteria_3lpe_no() {
-        return raw_material_acceptance_criteria_3lpe_no;
-    }
-
-    public void setRaw_material_acceptance_criteria_3lpe_no(String raw_material_acceptance_criteria_3lpe_no) {
-        this.raw_material_acceptance_criteria_3lpe_no = raw_material_acceptance_criteria_3lpe_no;
-    }
-
-    public String getPipe_body_acceptance_criteria_no() {
-        return pipe_body_acceptance_criteria_no;
-    }
-
-    public void setPipe_body_acceptance_criteria_no(String pipe_body_acceptance_criteria_no) {
-        this.pipe_body_acceptance_criteria_no = pipe_body_acceptance_criteria_no;
-    }
-
-    public String getInspection_frequency_no() {
-        return inspection_frequency_no;
-    }
-
-    public void setInspection_frequency_no(String inspection_frequency_no) {
-        this.inspection_frequency_no = inspection_frequency_no;
     }
 
     public String getAcceptance_criteria_no() {

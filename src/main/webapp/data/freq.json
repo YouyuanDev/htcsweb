@@ -1,5 +1,6 @@
 [
     { "item_frequency": "0", "item_frequency_name": "每0小时检验1次 (每根)"},
+    { "item_frequency": "0.5", "item_frequency_name": "每0.5小时检验一次"},
     { "item_frequency": "1", "item_frequency_name": "每1小时检验一次"},
     { "item_frequency": "2", "item_frequency_name": "每2小时检验一次"},
     { "item_frequency": "3", "item_frequency_name": "每3小时检验一次"},

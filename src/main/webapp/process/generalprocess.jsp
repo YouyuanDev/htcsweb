@@ -465,7 +465,7 @@
                 controldiv="<input controltype=\""+controltype+"\"  dynamic=\"dynamic\" class=\"easyui-textbox\" "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\" type=\"text\" name=\"" + itemcode +"\" myname=\"" + itemcode +"\" value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
             }
             else if(controltype=="multinumber"){//多值数字
-                controldiv="<input controltype=\""+controltype+"\" dynamic=\"dynamic\" class=\"easyui-textbox\"  "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\" type=\"text\" name=\"" + itemcode +"\" myname=\"" + itemcode +"\"  value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
+                controldiv="<input controltype=\""+controltype+"\" dynamic=\"dynamic\" class=\"easyui-textbox\"  "+"defaultvalue=\""+defaultvalue+"\"  maxvalue=\""+maxvalue+"\"  minvalue=\""+minvalue+"\" needverify=\""+needverify+"\" data-options=\"min:-99,precision:"+decimalnum+"\" type=\"text\" name=\"" + itemcode +"\" myname=\"" + itemcode +"\"  value=\""+defaultvalue+"\" style=\"width:200px;\"/>";
             }
             else if(controltype=="multitext"){//多值文本
 
