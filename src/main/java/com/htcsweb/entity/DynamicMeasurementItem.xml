@@ -56,9 +56,9 @@
     </select>
 
     <select id="getDynamicMeasurementItemByAcceptanceCriteriaNo" resultType="com.htcsweb.entity.DynamicMeasurementItem">
-        select * from  dynamic_measurement_item
+        select it.* from  dynamic_measurement_item it inner join process_info process on process.process_code=it.process_code
         where acceptance_criteria_no=#{acceptance_criteria_no}
-        order by id desc
+        order by process.id asc,it.id desc
     </select>
 
     <select id="getSpecialDynamicItem" resultType="com.htcsweb.entity.DynamicMeasurementItem">
