@@ -38,6 +38,10 @@ public class APPRequestTransferController {
 
 
     @Autowired
+    DynamicMeasurementItemDao dynamicMeasurementItemDao;
+
+
+    @Autowired
     ContractInfoDao contractInfoDao;
 
     @Autowired
@@ -516,21 +520,25 @@ public class APPRequestTransferController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "/getAcceptanceCriteriaByAcceptanceCriteriaNo")
+    @RequestMapping(value = "/getAcceptanceCriteriaByAcceptanceCriteriaNo", produces = "text/plain;charset=utf-8")
     @ResponseBody
     public String getAcceptanceCriteriaByAcceptanceCriteriaNo(HttpServletRequest request) {
         String acceptance_criteria_no = request.getParameter("acceptance_criteria_no");
 
+        List<DynamicMeasurementItem> list=dynamicMeasurementItemDao.getDynamicMeasurementItemByAcceptanceCriteriaNo(acceptance_criteria_no);
 
+        Map<String, Object> maps = new HashMap<String, Object>();
+        if (list != null&&list.size()>0) {
+            maps.put("success", true);
+            maps.put("items", list);
+        } else {
+            maps.put("success", false);
+            maps.put("message", "无工艺卡标准");
+        }
 
-//        List<HashMap<String, Object>> list = inspectionProcessRecordHeaderDao.getInspectionRecordByProjectNoMillNoProcessCode(project_no, mill_no, process_code, pipe_no, start, Integer.parseInt(rows));
-//        int count = inspectionProcessRecordHeaderDao.getCountInspectionRecordByProjectNoMillNoProcessCode(project_no, mill_no, process_code, pipe_no);
-//        Map<String, Object> maps = new HashMap<String, Object>();
-//        maps.put("total", count);
-//        maps.put("rows", list);
-//        String mmp = JSONArray.toJSONString(maps);
-//        return mmp;
-        return  "";
+        String mmp= JSONArray.toJSONString(maps);
+        return mmp;
+
     }
 
 
