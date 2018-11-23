@@ -36,4 +36,7 @@ public interface AcceptanceCriteriaDao {
     //根据管号、工序编号获得检验标准和检验频率状态
     public List<HashMap<String, Object>> getAcceptanceCriteriaByPipeNoProcessCode(@Param("pipe_no") String pipe_no, @Param("process_code") String process_code);
 
+    //获取已关联的检测项条数
+    public int getUsedDynamicItemsCount(String[] arrId);
+
 }

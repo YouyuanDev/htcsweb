@@ -44,6 +44,15 @@
 
 
 
+    <select id="getUsedDynamicItemsCount" resultType="int">
+        select count(*) from acceptance_criteria ac inner join dynamic_measurement_item it
+        on it.acceptance_criteria_no=ac.acceptance_criteria_no
+        WHERE
+        <foreach collection="array" item="item" open="ac.id in (" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
     <select id="getCountAllByLike" resultType="int">
         select count(*) from acceptance_criteria
 

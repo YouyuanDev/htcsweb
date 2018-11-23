@@ -1,11 +1,11 @@
 [
-    { "id": "pit", "text": "麻坑"},
-    { "id": "crater", "text": "凹坑" },
-    { "id": "inclusion", "text": "杂质" },
-    { "id": "thicknesslow", "text": "厚度低" },
-    { "id": "thicknesshigh", "text": "厚度高" },
-    { "id": "scratch", "text": "划伤" },
-    { "id": "notsmooth", "text": "不平整" },
-    { "id": "other", "text": "其他缺陷,见备注" }
+    { "id": "pit", "text": "麻坑 pit"},
+    { "id": "crater", "text": "凹坑 crater" },
+    { "id": "inclusion", "text": "杂质 inclusion" },
+    { "id": "thicknesslow", "text": "厚度低 thickness low" },
+    { "id": "thicknesshigh", "text": "厚度高 thickness high" },
+    { "id": "scratch", "text": "划伤scratch" },
+    { "id": "notsmooth", "text": "不平整 not smooth" },
+    { "id": "other", "text": "其他缺陷,见备注 other" }
 
 ]

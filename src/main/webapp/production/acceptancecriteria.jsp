@@ -52,13 +52,31 @@
                     idArr.push(row[i].id);
                 }
                 var idArrs=idArr.join(',');
-                $.messager.confirm('系统提示',"您确定要删除这<font color=red>"+idArr.length+ "</font>条数据吗？",function (r) {
+                $.messager.confirm('系统提示',"您确定要删除这<font color=red>"+idArr.length+ "</font>条标准吗？",function (r) {
                     if(r){
-                        $.post("/ACOperation/delAC.action",{hlparam:idArrs},function (data) {
+                        $.post("/ACOperation/delAC.action",{hlparam:idArrs,forcedel:"0"},function (data) {
                             if(data.success){
                                 $("#contentDatagrids").datagrid("reload");
+                                hlAlertFour(data.message);
                             }
-                            hlAlertFour(data.message);
+                            else if(data.flag){//存在关联数据
+                                //再次确认
+                                $.messager.confirm('系统提示',data.message+"，确定强制删除这<font color=red>"+idArr.length+ "</font>条标准吗？",function (r) {
+                                    if(r){
+                                        $.post("/ACOperation/delAC.action",{hlparam:idArrs,forcedel:"1"},function (ret) {
+                                            if(ret.success){
+                                                $("#contentDatagrids").datagrid("reload");
+                                            }
+                                            hlAlertFour(ret.message);
+                                        },"json");
+                                    }
+                                });
+                                //结束
+                            }
+                            else{
+                                hlAlertFour(data.message);
+                            }
+
                         },"json");
                     }
                 });

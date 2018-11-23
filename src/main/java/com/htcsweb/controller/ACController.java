@@ -146,22 +146,39 @@ public class ACController {
      * @throws Exception
      */
     @RequestMapping("/delAC")
-    public String delAC(@RequestParam(value = "hlparam")String hlparam,HttpServletResponse response)throws Exception{
+    public String delAC(@RequestParam(value = "hlparam")String hlparam,HttpServletRequest request,HttpServletResponse response)throws Exception{
         String[]idArr=hlparam.split(",");
         int resTotal=0;
-        resTotal=acceptanceCriteriaDao.delAcceptanceCriteria(idArr);
+
+        String forcedel=request.getParameter("forcedel");
+        System.out.print("forcedel="+forcedel);
+        //判断是否关联检测
+        int usedCount=acceptanceCriteriaDao.getUsedDynamicItemsCount(idArr);
         JSONObject json=new JSONObject();
         StringBuilder sbmessage = new StringBuilder();
-        sbmessage.append("总共");
-        sbmessage.append(Integer.toString(resTotal));
-        sbmessage.append("项检验标准删除成功\n");
-        if(resTotal>0){
-            //System.out.print("删除成功");
-            json.put("success",true);
-        }else{
-            //System.out.print("删除失败");
+        if(usedCount>0&&(forcedel==null||!forcedel.equals("1"))){
+            sbmessage.append("无法删除：此检验标准有");
+            sbmessage.append(usedCount);
+            sbmessage.append("条检测记录关联");
             json.put("success",false);
+            json.put("flag",true);
         }
+        else{
+            resTotal=acceptanceCriteriaDao.delAcceptanceCriteria(idArr);
+            sbmessage.append("总共");
+            sbmessage.append(Integer.toString(resTotal));
+            sbmessage.append("项检验标准删除成功\n");
+            if(resTotal>0){
+                //System.out.print("删除成功");
+                json.put("success",true);
+                json.put("flag",false);
+            }else{
+                //System.out.print("删除失败");
+                json.put("success",false);
+                json.put("flag",false);
+            }
+        }
+        System.out.print(sbmessage.toString());
         json.put("message",sbmessage.toString());
         ResponseUtil.write(response,json);
         return null;
