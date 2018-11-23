@@ -400,11 +400,11 @@ public class InspectionRecordPDFController {
                     header_code=list.get(i).get("inspection_process_record_header_code").toString();
                     pipe_no=list.get(i).get("pipe_no").toString();
                     //中文检测项名称
-                    temp_item_name=list.get(i).get("item_name").toString();
+                    temp_item_name=(list.get(i).get("item_name")==null)?" ":list.get(i).get("item_name").toString();
                     //追加英文检测项名称
-                    temp_item_name=temp_item_name+" "+list.get(i).get("item_name_en").toString();
-                    temp_item_value=list.get(i).get("item_value").toString();
-                    if(temp_item_value==null||temp_item_value.equals(""))
+                    temp_item_name=(list.get(i).get("item_name_en")==null)?temp_item_name:temp_item_name+" "+list.get(i).get("item_name_en").toString();
+                    temp_item_value=(list.get(i).get("item_value")==null)?" ":list.get(i).get("item_value").toString();
+                    if(temp_item_value.equals(""))
                         temp_item_value=" ";
                     item_result=(list.get(i).get("result")==null)?" ":list.get(i).get("result").toString();
                     item_remark=(list.get(i).get("remark")==null)?" ":list.get(i).get("remark").toString();
@@ -427,7 +427,7 @@ public class InspectionRecordPDFController {
                     last_header_code=header_code;
                     count++;
                     last_measure_item+=("["+count+"]"+temp_item_value+"    ");
-                    if(unit_name!=null&&!unit_name.equals("")){
+                    if(unit_name!=null&&!unit_name.equals("")&&!unit_name.equals(" ")){
                         last_name+=("["+count+"]"+temp_item_name+"("+unit_name+")"+"    ");
                     }else{
                         last_name+=("["+count+"]"+temp_item_name+"    ");
