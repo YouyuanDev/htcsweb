@@ -1083,7 +1083,7 @@
     </select>
     <!--获取岗位记录信息-->
     <select id="getPostRecord" resultType="map">
-        select o.inspection_process_record_header_code,o.pipe_no,o.result,o.remark,d.item_name,d.unit_name_en,ipri.item_value from inspection_process_record_header o
+        select o.inspection_process_record_header_code,o.pipe_no,o.result,o.remark,d.item_name,d.item_name_en,d.unit_name_en,ipri.item_value from inspection_process_record_header o
         left join inspection_process_record_item ipri on o.inspection_process_record_header_code=ipri.inspection_process_record_header_code
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no

@@ -383,7 +383,7 @@ public class GenerateExcelToPDFUtil {
         //BaseFont bf=BaseFont.createFont("/Users/kurt/Documents/simhei.ttf", BaseFont.IDENTITY_H, false);
 
         //创建Font对象，将基础字体对象，字体大小，字体风格
-        Font font=new Font(bf,9,Font.NORMAL);
+        Font font=new Font(bf,7,Font.NORMAL);
         Font copyrightFont=new Font(copyrightBf,8,Font.NORMAL);
         Font headfont1=new Font(bf,14,Font.BOLD);
         Font headfont2=new Font(bf,10,Font.BOLD);

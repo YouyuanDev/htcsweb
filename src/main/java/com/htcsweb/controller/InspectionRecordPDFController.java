@@ -66,7 +66,7 @@ public class InspectionRecordPDFController {
             pdfDirFile.mkdir();
         }
         try{
-            wf = new WritableFont(WritableFont.createFont("Arial"), 8);
+            wf = new WritableFont(WritableFont.createFont("Arial"), 7);
             wcf= new WritableCellFormat(wf);
             wcf.setAlignment(Alignment.LEFT);
             wcf.setVerticalAlignment(VerticalAlignment.JUSTIFY);
@@ -180,8 +180,8 @@ public class InspectionRecordPDFController {
 
                 //4.－－－－－－－－班次集合
                 List<String>shiftList=new ArrayList<>();
-                shiftList.add("白班");
-                shiftList.add("夜班");
+                shiftList.add("白班 Day Shift");
+                shiftList.add("夜班 Night Shift");
                 //5.－－－－－－－－获取所有规格集合、涂层类型
                 int totalPDFCount=listDate.size()*millList.size()*contractInfoList.size()*shiftList.size();
                 int n=0;
@@ -194,7 +194,7 @@ public class InspectionRecordPDFController {
                         for (ContractInfo contractInfo:contractInfoList){//规格和涂层类型
                             for (String shift0:shiftList){
                                 pipe_size="Φ"+decimalFormat.format(contractInfo.getOd())+"*"+decimalFormat.format(contractInfo.getWt())+"mm";
-                                if(shift0.equals("白班")){
+                                if(shift0.equals("白班 Day Shift")){
                                     start_time=timeformat.parse(recordTime+" 08:00:00");
                                     finish_time=timeformat.parse(recordTime+" 20:00:00");
                                 } else{
@@ -202,7 +202,7 @@ public class InspectionRecordPDFController {
                                     finish_time=timeformat.parse(DateTimeUtil.getNextDay(recordTime)+" 08:00:00");
                                 }
                                 //外防
-                                pdfOdPath=basePath+"/upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+"_"+recordTime+"_外防_"+shift0+"(Day)_"+pipe_size+"_"+contractInfo.getExternal_coating()+"_"+UUID.randomUUID().toString()+".pdf");
+                                pdfOdPath=basePath+"/upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+millInfo.getMill_no()+"_"+recordTime+"_外防OD_"+shift0+pipe_size+"_"+contractInfo.getExternal_coating()+"_"+UUID.randomUUID().toString()+".pdf");
                                 System.out.println(pdfOdPath+"------------------------");
                                 File file0=new File(pdfOdPath);
                                 if(!file0.exists()){
@@ -228,7 +228,7 @@ public class InspectionRecordPDFController {
                                     dayNightPdf.add(pdfOdPath);
                                 }
                                 //内防
-                                pdfIdPath=basePath+"/upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+"_"+recordTime+"_内防_"+shift0+"(Day)_"+pipe_size+"_"+contractInfo.getInternal_coating()+"_"+UUID.randomUUID().toString()+".pdf");
+                                pdfIdPath=basePath+"/upload/pdf/"+(project_name+"_"+millInfo.getMill_name()+millInfo.getMill_no()+"_"+recordTime+"_内防ID_"+shift0+pipe_size+"_"+contractInfo.getInternal_coating()+"_"+UUID.randomUUID().toString()+".pdf");
                                 File file1=new File(pdfIdPath);
                                 //开始填充pdf
                                 //6.2.1---------内防生成封面PDF
@@ -350,6 +350,7 @@ public class InspectionRecordPDFController {
                     String result_now=outputObject.getString("result");
                     if(result_now!=null&&result_now.equals(result)){
                         resultName=outputObject.getString("result_name");
+                        resultName=resultName+outputObject.getString("result_name_en");
                     }
                 }
             }
@@ -398,7 +399,10 @@ public class InspectionRecordPDFController {
                 for (int i=0;i<list.size();i++){
                     header_code=list.get(i).get("inspection_process_record_header_code").toString();
                     pipe_no=list.get(i).get("pipe_no").toString();
+                    //中文检测项名称
                     temp_item_name=list.get(i).get("item_name").toString();
+                    //追加英文检测项名称
+                    temp_item_name=temp_item_name+" "+list.get(i).get("item_name_en").toString();
                     temp_item_value=list.get(i).get("item_value").toString();
                     if(temp_item_value==null||temp_item_value.equals(""))
                         temp_item_value=" ";
@@ -600,7 +604,7 @@ public class InspectionRecordPDFController {
                     index++;
                     if(index%9==0){
                         createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,external_coating,shift,title_time);
-                        datalist.add(new Label(11,20,mill_name,wcf));
+                        datalist.add(new Label(11,20,mill_name+" "+mill_no,wcf));
                         datalist.add(new Label(2,6,String.valueOf(odCoatingCount),wcf));
                         datalist.add(new Label(5,6,String.valueOf(odAcceptedPipeCount),wcf));
                         datalist.add(new Label(7,6,String.valueOf(odRepairPipeCount),wcf));
@@ -615,7 +619,7 @@ public class InspectionRecordPDFController {
                 }
                 if(datalist.size()>0){
                     createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,external_coating,shift,title_time);
-                    datalist.add(new Label(11,20,mill_name,wcf));
+                    datalist.add(new Label(11,20,mill_name+" "+mill_no,wcf));
                     datalist.add(new Label(2,6,String.valueOf(odCoatingCount),wcf));
                     datalist.add(new Label(5,6,String.valueOf(odAcceptedPipeCount),wcf));
                     datalist.add(new Label(7,6,String.valueOf(odRepairPipeCount),wcf));
@@ -629,13 +633,13 @@ public class InspectionRecordPDFController {
                 }
             }else{
                 createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,external_coating,shift,title_time);
-                datalist.add(new Label(11,20,mill_name,wcf));
+                datalist.add(new Label(11,20,mill_name+" "+mill_no,wcf));
                 datalist.add(new Label(2,6,String.valueOf(odCoatingCount),wcf));
                 datalist.add(new Label(5,6,String.valueOf(odAcceptedPipeCount),wcf));
                 datalist.add(new Label(7,6,String.valueOf(odRepairPipeCount),wcf));
                 datalist.add(new Label(9,6,String.valueOf(odRejectedPipeCount),wcf));
                 datalist.add(new Label(12,6,String.valueOf(odOnholdPipeCount),wcf));
-                datalist.add(new Label(1,10,"今天暂无记录!",wcf));
+                datalist.add(new Label(1,10,"本班暂无记录!(No Record this shift)",wcf));
                 newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightFontPath);
                 if(newPdfName!=null){
                     stringList.add(newPdfName);
@@ -733,7 +737,7 @@ public class InspectionRecordPDFController {
                     index++;
                     if(index%19==0){
                         createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,internal_coating,shift,title_time);
-                        datalist.add(new Label(11,20,mill_name,wcf));
+                        datalist.add(new Label(11,20,mill_name+" "+mill_no,wcf));
                         datalist.add(new Label(2,6,String.valueOf(idCoatingCount),wcf));
                         datalist.add(new Label(5,6,String.valueOf(idAcceptedPipeCount),wcf));
                         datalist.add(new Label(7,6,String.valueOf(idRepairPipeCount),wcf));
@@ -748,7 +752,7 @@ public class InspectionRecordPDFController {
                 }
                 if(datalist.size()>0){
                     createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,internal_coating,shift,title_time);
-                    datalist.add(new Label(11,20,mill_name,wcf));
+                    datalist.add(new Label(11,20,mill_name+" "+mill_no,wcf));
                     datalist.add(new Label(2,6,String.valueOf(idCoatingCount),wcf));
                     datalist.add(new Label(5,6,String.valueOf(idAcceptedPipeCount),wcf));
                     datalist.add(new Label(7,6,String.valueOf(idRepairPipeCount),wcf));
@@ -762,13 +766,13 @@ public class InspectionRecordPDFController {
                 }
             }else{
                 createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,internal_coating,shift,title_time);
-                datalist.add(new Label(11,20,mill_name,wcf));
+                datalist.add(new Label(11,20,mill_name+" "+mill_no,wcf));
                 datalist.add(new Label(2,6,String.valueOf(idCoatingCount),wcf));
                 datalist.add(new Label(5,6,String.valueOf(idAcceptedPipeCount),wcf));
                 datalist.add(new Label(7,6,String.valueOf(idRepairPipeCount),wcf));
                 datalist.add(new Label(9,6,String.valueOf(idRejectedPipeCount),wcf));
                 datalist.add(new Label(12,6,String.valueOf(idOnholdPipeCount),wcf));
-                datalist.add(new Label(1,10,"今天暂无记录!",wcf));
+                datalist.add(new Label(1,10,"本班暂无记录!(No Record this shift)",wcf));
                 newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightFontPath);
                 if(newPdfName!=null){
                     stringList.add(newPdfName);
@@ -905,7 +909,7 @@ public class InspectionRecordPDFController {
                     index++;
                     if(index%23==0){
                         createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
-                        datalist.add(new Label(12,20,mill_name,wcf));
+                        datalist.add(new Label(12,20,mill_name+" "+mill_no,wcf));
                         newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightFontPath);
                         index=1;row=0;
                         datalist.clear();
@@ -915,7 +919,7 @@ public class InspectionRecordPDFController {
                 }
                 if(datalist.size()>0){
                     createRecordPdfTitle(datalist,3,8,12,4,5,project_name,pipe_size,standard,coatingType,shift,title_time);
-                    datalist.add(new Label(12,20,mill_name,wcf));
+                    datalist.add(new Label(12,20,mill_name+" "+mill_no,wcf));
                     newPdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightFontPath);
                     index=1;row=0;
                     datalist.clear();
@@ -923,7 +927,7 @@ public class InspectionRecordPDFController {
                     delSetPath.add(newPdfName);
                 }
             }else{
-                datalist.add(new Label(12,20,mill_name,wcf));
+                datalist.add(new Label(12,20,mill_name+" "+mill_no,wcf));
                 createRecordNullPdf(datalist,1,3,8,12,4,5,8,project_name,pipe_size,standard,coatingType,shift,title_time,newPdfName,templateFullName,stringList,delSetPath);
             }
         }catch (Exception e){
@@ -1014,7 +1018,7 @@ public class InspectionRecordPDFController {
             datalist.add(new Label(2, i+8, " ", wcf));
             datalist.add(new Label(12, i+8, " ", wcf));
         }
-        datalist.add(new Label(1,8,"今天暂无记录!",wcf));
+        datalist.add(new Label(1,8,"本班暂无记录(No Record this shift)!",wcf));
         datalist.add(new Label(2, 20," ", wcf));
         datalist.add(new Label(13,20," ",wcf));
         datalist.add(new Label(12, 21,"©2018 TopInspector", wcf));
@@ -1052,7 +1056,7 @@ public class InspectionRecordPDFController {
         datalist.add(new Label(column2, row2,title_standard, wcf));
         datalist.add(new Label(column3, row2,title_coating_type, wcf));
         datalist.add(new Label(column4, row2,title_shift, wcf));
-        datalist.add(new Label(column1,row3,"今天暂无记录!",wcf));
+        datalist.add(new Label(column1,row3,"本班暂无记录(No Record this shift)!",wcf));
         datalist.add(new Label(11, 21,"©2018 TopInspector", wcf));
         PdfName=GenerateExcelToPDFUtil.PDFAutoMation(templateFullName,datalist,pdfFullName,logoImageFullName,fontPath,copyrightFontPath);
         if(PdfName!=null){
