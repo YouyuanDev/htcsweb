@@ -1088,10 +1088,9 @@
         left join pipe_basic_info p on p.pipe_no=o.pipe_no
         left join contract_info c on p.contract_no=c.contract_no
         left join project_info pro on c.project_no=pro.project_no
-        left join dynamic_measurement_item d on pro.acceptance_criteria_no=d.acceptance_criteria_no
-        where
+        left join dynamic_measurement_item d on pro.acceptance_criteria_no=d.acceptance_criteria_no AND ipri.item_code=d.item_code and o.process_code=d.process_code
 
-          (ipri.item_code=d.item_code OR ipri.item_code is null)
+        <where>
 
         <if test="mill_no!=null and mill_no!=''">
             AND o.mill_no=#{mill_no}
@@ -1111,6 +1110,7 @@
             <![CDATA[ AND DATE_FORMAT(o.operation_time,'%Y-%m-%d %H:%i:%s')<DATE_FORMAT(#{end_time},'%Y-%m-%d %H:%i:%s')]]>
         </if>
         AND o.process_code=#{process_code}
+        </where>
         ORDER BY o.id, pipe_no, ipri.item_code DESC
     </select>
 
