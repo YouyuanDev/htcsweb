@@ -739,14 +739,21 @@ public class PipeBasicInfoController {
      */
     @RequestMapping("/productstockin")
     public String productstockin(@RequestParam(value = "hlparam")String hlparam,@RequestParam(value = "storage_stack")String storage_stack,@RequestParam(value = "stack_level")String stack_level,@RequestParam(value = "level_direction")String level_direction,@RequestParam(value = "level_sequence")String level_sequence,HttpServletResponse response)throws Exception{
-        String[]idArr=hlparam.split(",");
         JSONObject json=new JSONObject();
+//        System.out.println("hlparam="+hlparam);
+//        System.out.println("storage_stack="+storage_stack);
+//        System.out.println("stack_level="+stack_level);
+//        System.out.println("level_direction="+level_direction);
+//        System.out.println("level_sequence="+level_sequence);
         int resTotal=0;
-        if(level_sequence!=null&&!"".equals(level_sequence)){
+        if(hlparam!=null&&!hlparam.equals("")&&level_sequence!=null&&!level_sequence.equals("")){
+            String[]idArr=hlparam.split(",");
             int start_level_sequence=Integer.parseInt(level_sequence);
+            //System.out.println("start_level_sequence="+start_level_sequence);
             int count=0;
             for(int i=0;i<idArr.length;i++){
-                if(idArr[i]!=null&&!"".equals(idArr[i])){
+                if(idArr[i]!=null&&!idArr[i].equals("")){
+                    //System.out.println("11111111="+i);
                     int id=Integer.parseInt(idArr[i]);
                     List<HashMap<String,Object>>list=pipeBasicInfoDao.getPipeInfoById(id);
                     if(list!=null&&list.size()>0){
