@@ -378,7 +378,7 @@
       {
         "result":"1",
         "result_name":"合格,进入内喷砂检验工序",
-        "result_name_en":"Accept, go OD Blast Insp. Process",
+        "result_name_en":"Accept, go ID Blast Insp. Process",
         "next_status":"id1",
         "last_status":"id1"
       },
@@ -410,8 +410,8 @@
       },
       {
         "result":"1",
-        "result_name":"合格,进入外涂敷工序",
-        "result_name_en":"Accept, go Coating Process",
+        "result_name":"合格,进入内涂敷工序",
+        "result_name_en":"Accept, go ID Coating Process",
         "next_status":"id2",
         "last_status":"id2"
       },
