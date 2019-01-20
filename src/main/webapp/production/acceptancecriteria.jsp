@@ -222,7 +222,7 @@
                         }else if (item_frequency==3000) {
                             item_frequency="每班开机时检验一次";
                         }else if(item_frequency>0){
-                            item_frequency = "每" + items[i].item_frequency + "小时一次";
+                            item_frequency = "每" + item_frequency + "小时一次";
                         }else {
                             item_frequency = "每根";
                         }
