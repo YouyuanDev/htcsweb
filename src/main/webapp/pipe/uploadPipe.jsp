@@ -27,7 +27,44 @@
     <script src="../js/jquery.i18n.properties-1.0.9.js" type="text/javascript"></script>
     <script src="../js/language.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="../easyui/themes/default/easyui.css">
+    <style type="text/css">
+        table {
+            border-collapse: collapse;
+            margin: 0 auto;
+            text-align: center;
+            margin-bottom:15px;
+        }
 
+        table td,
+        table th {
+            border: 1px solid #cad9ea;
+            color: #666;
+            height: 30px;
+        }
+
+        table thead th {
+            width: 100px;
+        }
+
+        table tr:nth-child(odd) {
+            background: #fff;
+        }
+
+        table tr:nth-child(even) {
+            background: #F5FAFA;
+        }
+        .descinfo{
+            float: left;
+            width:50%;
+        }
+        .loginfo{
+            width:50%;
+            float: left;
+            max-height:800px;
+            text-align: left;
+            overflow-y: scroll;
+        }
+    </style>
     <script type="text/javascript">//导入excel
 
     </script>
@@ -35,7 +72,7 @@
         </head>
 <body>
 <br />
-<div align="left">
+<div class="descinfo" align="left">
 <h3><span class="i18n1" name="plsselectupladexcelfiles">请选择要上传的excel文件（.xls）</span></h3>
 <br />
 <input id="fileupload1" class="mini-fileupload" name="Fdata" limitType="*.xls;"
@@ -53,19 +90,21 @@
     <br /><br />
     <a class="mini-button mini-button-success" width="100px" value="上传" onclick="startUpload()"><span class="i18n1" name="upload">上传</span></a>
 <%--<input type="button" class="mini-button mini-button-success" width="80px" value="上传" onclick="startUpload()"/>--%>
-</div>
-<div class="description">
-    <h3><span class="i18n1" name="description">描述</span></h3>
-    <p><span class="i18n1" name="uploadpipetext">上传钢管入库清单</span></p>
-    <p><a href="../template/upload_pipe_template.xls" >点击下载：钢管清单模版.xls</a></p>
+    <div class="description">
+        <h3><span class="i18n1" name="description">描述</span></h3>
+        <p><span class="i18n1" name="uploadpipetext">上传钢管入库清单</span></p>
+        <p><a href="../template/upload_pipe_template.xls" >点击下载：钢管清单模版.xls</a></p>
 
-    <p>序号&#9;管捆号&#9;合同号&#9;原合同号&#9;外径&#9;壁厚&#9;炉号&#9;试批号&#9;实际重量&#9;理论重量&#9;总长度&#9;库位</p><br>
-    <p>1&#9;1523580&#9;RL36800012&#9;RL36800012&#9;219.1&#9;5.6&#9;17131593&#9;72456&#9;0.546&#9;0.536&#9;18.17&#9;1A02</p><br>
-    <p>2&#9;1524530&#9;RL36800012&#9;RL36800012&#9;219.1&#9;5.6&#9;17131593&#9;72457&#9;0.546&#9;0.538&#9;18.24&#9;1A02</p><br>
-    <p>3&#9;1524540&#9;RL36800012&#9;RL36800012&#9;219.1&#9;5.6&#9;17131593&#9;72457&#9;0.55&#9;0.538&#9;18.24&#9;1A02</p><br>
-    <p>4&#9;1524550&#9;RL36800012&#9;RL36800012&#9;219.1&#9;5.6&#9;17131593&#9;72457&#9;0.551&#9;0.538&#9;18.25&#9;1A02</p><br>
+        <p>序号&#9;管捆号&#9;合同号&#9;原合同号&#9;外径&#9;壁厚&#9;炉号&#9;试批号&#9;实际重量&#9;理论重量&#9;总长度&#9;库位</p><br>
+        <p>1&#9;1523580&#9;RL36800012&#9;RL36800012&#9;219.1&#9;5.6&#9;17131593&#9;72456&#9;0.546&#9;0.536&#9;18.17&#9;1A02</p><br>
+        <p>2&#9;1524530&#9;RL36800012&#9;RL36800012&#9;219.1&#9;5.6&#9;17131593&#9;72457&#9;0.546&#9;0.538&#9;18.24&#9;1A02</p><br>
+        <p>3&#9;1524540&#9;RL36800012&#9;RL36800012&#9;219.1&#9;5.6&#9;17131593&#9;72457&#9;0.55&#9;0.538&#9;18.24&#9;1A02</p><br>
+        <p>4&#9;1524550&#9;RL36800012&#9;RL36800012&#9;219.1&#9;5.6&#9;17131593&#9;72457&#9;0.551&#9;0.538&#9;18.25&#9;1A02</p><br>
+    </div>
 </div>
+<div class="loginfo">
 
+</div>
 
 </body>
 </html>
@@ -84,9 +123,12 @@
         //alert("上传成功：" + e.serverData);
         var result = eval('('+e.serverData+')');
         if(result.success){
-            alert("成功上传钢管数量："+result.totaluploaded+" 根，"+"因不存在合同号无法上传的钢管数量："+result.totalskipped+" 根");
+            $('.loginfo').append(makeLogInfo("钢管编号(成功)",result.successList));
+            $('.loginfo').append(makeLogInfo("钢管编号(更新)",result.updateList));
+            $('.loginfo').append(makeLogInfo("钢管编号(失败)",result.failList));
+            $('.loginfo').append(makeLogInfo("钢管编号(跳过)",result.skipList));
+            //alert("成功上传钢管数量："+result.totaluploaded+" 根，"+"因不存在合同号无法上传的钢管数量："+result.totalskipped+" 根");
         }
-
         this.setText("");
     }
     function onUploadError(e) {
@@ -120,12 +162,26 @@
             //alert("0000");
             fileupload.setUploadUrl("/UploadFile/uploadPipeList.action?ck_overwrite=" + overwrite+"&&entrance=0");
         }
-
-
-
-
         fileupload.startUpload();
     }
-
+    function makeLogInfo(title,data){
+        var tempalate="";
+        // if(data.length>0){
+             tempalate='<table style="float:left;margin-left:5px;">\n' +
+                '          <caption><h2>'+title+'</h2></caption>\n' +
+                '          <thead>\n' +
+                '            <tr>\n' +
+                '                <th>序号</th>\n' +
+                '                <th>钢管编号</th>\n' +
+                '            </tr>\n' +
+                '          </thead>\n'+
+                '          <tbody>\n';
+            for (var i=0;i<data.length;i++){
+                tempalate+='<tr><td>'+(i+1)+'</td><td>'+data[i]+'</td></tr>';
+            }
+            tempalate+='</tbody></table>';
+        //}
+        return tempalate;
+    }
     hlLanguage("../i18n/");
 </script>

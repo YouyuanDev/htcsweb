@@ -13,6 +13,9 @@
     { "item_frequency": "10", "item_frequency_name": "每10小时检验一次"},
     { "item_frequency": "11", "item_frequency_name": "每11小时检验一次"},
     { "item_frequency": "12", "item_frequency_name": "每12小时检验一次 (每班)"},
-    { "item_frequency": "24", "item_frequency_name": "每24小时检验一次 (每天)"}
+    { "item_frequency": "24", "item_frequency_name": "每24小时检验一次 (每天)"},
+    { "item_frequency": "1000", "item_frequency_name": "每班开始时检验一次"},
+    { "item_frequency": "2000", "item_frequency_name": "每班开工时检验一次"},
+    { "item_frequency": "3000", "item_frequency_name": "每班开机时检验一次"}
 
 ]

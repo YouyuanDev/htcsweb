@@ -46,7 +46,7 @@ public class UploadFileController {
     @Autowired
     private ContractInfoDao contractInfoDao;
 
-    public static boolean isServerTomcat = true;//是否服务器为tomcat 还是 本地debug服务器
+    public static boolean isServerTomcat = false;//是否服务器为tomcat 还是 本地debug服务器
 
     /**
      * 获取目录下所有文件
@@ -304,6 +304,7 @@ public class UploadFileController {
     }
 
     /**
+     * 钢管录入
      * @param request
      * @param response
      * @return
@@ -347,6 +348,7 @@ public class UploadFileController {
             File file = null;
             int TotalUploadedPipes = 0;
             int TotalSkippedPipes = 0;
+            JSONObject json = new JSONObject();
             if (files.hasMoreElements()) {
                 String name = (String) files.nextElement();
                 file = multi.getFile(name);
@@ -354,15 +356,18 @@ public class UploadFileController {
                     newName = file.getName();
                     //处理excel文件
                     HashMap retMap = importExcelInfo(saveDirectory + "/" + newName, overwrite, inODBareStorage);
+
                     TotalUploadedPipes = Integer.parseInt(retMap.get("uploaded").toString());
                     TotalSkippedPipes = Integer.parseInt(retMap.get("skipped").toString());
+                    json.put("fileUrl", newName);
+                    json.put("totaluploaded", TotalUploadedPipes);
+                    json.put("totalskipped", TotalSkippedPipes);
+                    json.put("successList",retMap.get("failList"));
+                    json.put("failList",retMap.get("failList"));
+                    json.put("updateList",retMap.get("updateList"));
+                    json.put("skipList",retMap.get("skipList"));
                 }
             }
-
-            JSONObject json = new JSONObject();
-            json.put("fileUrl", newName);
-            json.put("totaluploaded", TotalUploadedPipes);
-            json.put("totalskipped", TotalSkippedPipes);
             json.put("success", true);
             ResponseUtil.write(response, json);
             System.out.print("uploadPipeList成功");
@@ -387,12 +392,17 @@ public class UploadFileController {
      */
     public HashMap importExcelInfo(String fullfilename, boolean overwrite, boolean inODBareStorage) {
         HashMap retMap = new HashMap();//返回值
+        List<String>successList=new ArrayList<String>();//执行插入成功保存钢管编号的集合
+        List<String>failList=new ArrayList<String>();//执行更新或插入失败保存钢管编号的集合
+        List<String>updateList=new ArrayList<String>();//执行更新成功保存钢管编号的集合
+        List<String>skipList=new ArrayList<String>();//执行跳过保存钢管编号的集合
         int TotalUploaded = 0;//成功插入数据库的钢管数量
         int TotalSkipped = 0; //无合同号存在跳过的钢管数量
         try {
             List<List<Object>> listob = ExcelUtil.readFromFiletoList(fullfilename);
             //遍历listob数据，把数据放到List中
-            for (int i = 0; i < listob.size(); i++) {
+            int listObSize=listob.size();
+            for (int i = 0; i < listObSize; i++) {
                 List<Object> ob = listob.get(i);
                 PipeBasicInfo pipe = new PipeBasicInfo();
                 //设置编号
@@ -434,6 +444,7 @@ public class UploadFileController {
                 List<ContractInfo> conlist = contractInfoDao.getContractInfoByContractNo(pipe.getContract_no());
                 if (conlist.size() == 0) {
                     TotalSkipped = TotalSkipped + 1;
+                    skipList.add(String.valueOf(ob.get(ExcelUtil.PIPE_NO_INDEX)));
                     continue;//不存在则此钢管不予以录入系统
                 }
                 //检查pipe的钢种信息是否为空,如果是从contract里得到钢种信息并赋值
@@ -453,6 +464,10 @@ public class UploadFileController {
                     pipe.setLast_accepted_status(pipe.getStatus());
                     pipe.setRebevel_mark("0");
                     res = pipeBasicInfoDao.addPipeBasicInfo(pipe);
+                    if(res>0)
+                        successList.add(pipe.getPipe_no());
+                    else
+                        failList.add(pipe.getPipe_no());
                     System.out.println("Insert res: " + res);
                 } else {
                     if (overwrite) {
@@ -462,6 +477,10 @@ public class UploadFileController {
                         pipe.setStatus(oldpipeinfo.getStatus());
                         pipe.setLast_accepted_status(oldpipeinfo.getLast_accepted_status());
                         res = pipeBasicInfoDao.updatePipeBasicInfo(pipe);
+                        if(res>0)
+                            updateList.add(pipe.getPipe_no());
+                        else
+                            failList.add(pipe.getPipe_no());
                         System.out.println("Update res: " + res);
                     }
                 }
@@ -473,6 +492,10 @@ public class UploadFileController {
         } finally {
             retMap.put("uploaded", TotalUploaded);
             retMap.put("skipped", TotalSkipped);
+            retMap.put("successList",successList);
+            retMap.put("failList",failList);
+            retMap.put("updateList",updateList);
+            retMap.put("skipList",skipList);
             return retMap;
         }
     }

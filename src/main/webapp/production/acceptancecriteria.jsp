@@ -21,6 +21,44 @@
     <script src="../js/language.js" type="text/javascript"></script>
     <script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
     <script src="../js/datagrid-scrollview.js" type="text/javascript"></script>
+    <style type="text/css">
+        .prev-table {
+            border-collapse: collapse;
+            margin: 0 auto;
+            text-align: center;
+            margin-bottom:15px;
+        }
+
+        .prev-table td,
+        .prev-table th {
+            border: 1px solid #cad9ea;
+            color: #666;
+            height: 30px;
+        }
+
+        .prev-table thead th {
+            width: 100px;
+        }
+
+        .prev-table tr:nth-child(odd) {
+            background: #fff;
+        }
+
+        .prev-table tr:nth-child(even) {
+            background: #F5FAFA;
+        }
+        .descinfo{
+            float: left;
+            width:50%;
+        }
+        .loginfo{
+            width:50%;
+            float: left;
+            max-height:800px;
+            text-align: left;
+            overflow-y: scroll;
+        }
+    </style>
     <script type="text/javascript">
         var url;
         var staticItem=[];
@@ -98,6 +136,104 @@
             }else{
                 hlAlertTwo();
             }
+        }
+        function previewFunction(){
+            var row = $('#contentDatagrids').datagrid('getSelected');
+            if(row){
+                executePreview(row.acceptance_criteria_no);
+            }else{
+                hlAlertFour('请选择要预览的行!');
+            }
+        }
+        function executePreview(acceptance_criteria_no) {
+            $.ajax({
+                url:"/DynamicItemOperation/getDynamicItemWithProcessInfoByACNo.action?acceptance_criteria_no="+acceptance_criteria_no,
+                dataType:'json',
+                data:{
+                    acceptance_criteria_no:acceptance_criteria_no,
+                    page:1,
+                    rows:500
+                },
+                success:function (data) {
+                    if(data&&data.rows.length>0){
+                        var arr=data.rows;
+                        var map={},dest=[];
+                        for(var i = 0; i < arr.length; i++){
+                            var ai = arr[i];
+                            if(!map[ai.process_name]){
+                                dest.push({
+                                    process_name: ai.process_name,
+                                    data: [ai]
+                                });
+                                map[ai.process_name] = ai;
+                            }else{
+                                for(var j = 0; j < dest.length; j++){
+                                    var dj = dest[j];
+                                    if(dj.process_name == ai.process_name){
+                                        dj.data.push(ai);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        $('#previewContainer').empty();
+                        for (var i=0;i<dest.length;i++){
+                            $('#previewContainer').append(makePreviewInfo(dest[i].process_name,dest[i].data));
+                        }
+                    }
+                    $('#previewContainer').dialog('open');
+
+                },error:function () {
+                    hlAlertFour("预览失败!");
+                }
+            });
+        }
+        function makePreviewInfo(title,data){
+            var tempalate="";
+            if(data.length>0){
+                tempalate='<table class="prev-table">\n' +
+                    '          <caption><h2>'+title+'</h2></caption>\n' +
+                    '          <thead>\n' +
+                    '            <tr>\n' +
+                    '                <th>测量项名称</th>\n' +
+                    '                <th>测量项名称英文</th>\n' +
+                    '                <th>测量单位</th>\n' +
+                    '                <th>测量单位英文</th>\n' +
+                    '                <th>测量频率</th>\n' +
+                    '                <th>最大值</th>\n' +
+                    '                <th>最小值</th>\n' +
+                    '                <th>默认值</th>\n' +
+                    '                <th>选项</th>\n' +
+                    '                <th>是否是特殊项目</th>\n' +
+                    '            </tr>\n' +
+                    '          </thead>\n'+
+                    '          <tbody>\n';
+                for (var i=0;i<data.length;i++){
+                    var unit_name=data[i].unit_name==undefined?"":data[i].unit_name;
+                    var unit_name_en=data[i].unit_name_en==undefined?"":data[i].unit_name_en;
+                    var options=data[i].options==undefined?"":data[i].options;
+                    var is_special_item=data[i].is_special_item==0?"否":"是";
+                    var item_frequency=data[i].item_frequency;
+                    if(item_frequency!=undefined){
+                        if(item_frequency==1000){
+                            item_frequency="每班开机时检验一次";
+                        }else if(item_frequency==2000){
+                            item_frequency="每班开工时检验一次";
+                        }else if (item_frequency==3000) {
+                            item_frequency="每班开机时检验一次";
+                        }else if(item_frequency>0){
+                            item_frequency = "每" + items[i].item_frequency + "小时一次";
+                        }else {
+                            item_frequency = "每根";
+                        }
+                    }
+                    tempalate+='<tr><td>'+data[i].item_name+'</td><td>'+data[i].item_name_en+'</td><td>'+unit_name+'</td><td>'+unit_name_en+'</td>';
+                    tempalate+='<td>'+item_frequency+'</td><td>'+data[i].max_value+'</td><td>'+data[i].min_value+'</td><td>'+data[i].default_value+'</td>';
+                    tempalate+='<td>'+options+'</td><td>'+is_special_item+'</td></tr>';
+                }
+                tempalate+='</tbody></table>';
+            }
+            return tempalate;
         }
         function Search() {
             $('#contentDatagrids').datagrid('load',{
@@ -517,6 +653,7 @@
     </select>
     <a href="#" class="easyui-linkbutton" plain="true" data-options="iconCls:'icon-search'" onclick="Search()">Search</a>
     <div style="float:right">
+        <a href="#" id="previewObpLinkBtn" class="easyui-linkbutton i18n1" name="preview" data-options="iconCls:'icon-preview',plain:true" onclick="previewFunction()">预览</a>
         <a href="#" id="addObpLinkBtn" class="easyui-linkbutton i18n1" name="add" data-options="iconCls:'icon-add',plain:true" onclick="addFunction()">添加</a>
         <a href="#" id="editObpLinkBtn" class="easyui-linkbutton i18n1" name="edit" data-options="iconCls:'icon-edit',plain:true" onclick="editFunction()">修改</a>
         <a href="#" id="deltObpLinkBtn" class="easyui-linkbutton i18n1" name="delete" data-options="iconCls:'icon-remove',plain:true" onclick="delFunction()">删除</a>
@@ -616,7 +753,7 @@
 								required:true
 							}
 						}"></th>
-                        <th class="i18n1" name="itemcode" data-options="field:'item_code'"></th>
+
                     <th class="i18n1" name="itemname" data-options="field:'item_name',editor:{type:'textbox',options:{required:true}}"></th>
                     <th class="i18n1" name="itemnameen" data-options="field:'item_name_en',editor:{type:'textbox',options:{required:true}}"></th>
                     <th class="i18n1" name="unitname" data-options="field:'unit_name',editor:'textbox'"></th>
@@ -656,6 +793,7 @@
 
                     <th class="i18n1" name="options" data-options="field:'options',editor:'textbox'"></th>
                         <th class="i18n1" name="isspecialitem" data-options="field:'is_special_item'"></th>
+                        <th class="i18n1" name="itemcode" data-options="field:'item_code'"></th>
                     <%--<th class="i18n1" name="status" data-options="field:'status',align:'center',editor:{type:'checkbox',options:{on:'P',off:''}}">Status</th>--%>
 
                 </tr>
@@ -723,7 +861,9 @@
         </div>
     </div>
 </div>
-
+<div id="previewContainer"  class="easyui-dialog" closed="true" style="width:1200px;height:600px"
+     data-options="title:'接收标准',toolbar:'',modal:true">
+</div>
 <script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
 
 </body>
