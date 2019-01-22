@@ -46,7 +46,7 @@ public class UploadFileController {
     @Autowired
     private ContractInfoDao contractInfoDao;
 
-    public static boolean isServerTomcat = false;//是否服务器为tomcat 还是 本地debug服务器
+    public static boolean isServerTomcat = true;//是否服务器为tomcat 还是 本地debug服务器
 
     /**
      * 获取目录下所有文件
@@ -392,7 +392,7 @@ public class UploadFileController {
      */
     public HashMap importExcelInfo(String fullfilename, boolean overwrite, boolean inODBareStorage) {
         HashMap retMap = new HashMap();//返回值
-        List<String>successList=new ArrayList<String>();//执行插入成功保存钢管编号的集合
+        List<String>insertList=new ArrayList<String>();//执行插入成功保存钢管编号的集合
         List<String>failList=new ArrayList<String>();//执行更新或插入失败保存钢管编号的集合
         List<String>updateList=new ArrayList<String>();//执行更新成功保存钢管编号的集合
         List<String>skipList=new ArrayList<String>();//执行跳过保存钢管编号的集合
@@ -465,7 +465,7 @@ public class UploadFileController {
                     pipe.setRebevel_mark("0");
                     res = pipeBasicInfoDao.addPipeBasicInfo(pipe);
                     if(res>0)
-                        successList.add(pipe.getPipe_no());
+                        insertList.add(pipe.getPipe_no());
                     else
                         failList.add(pipe.getPipe_no());
                     System.out.println("Insert res: " + res);
@@ -482,17 +482,22 @@ public class UploadFileController {
                         else
                             failList.add(pipe.getPipe_no());
                         System.out.println("Update res: " + res);
+                    }else{
+                        //跳过该条记录，不更新
+                        skipList.add(pipe.getPipe_no());
                     }
                 }
                 TotalUploaded = TotalUploaded + res;
             }
             System.out.println("Total pipes: " + TotalUploaded);
+            retMap.put("success",true);
         } catch (Exception e) {
             e.printStackTrace();
+            retMap.put("success",false);
         } finally {
             retMap.put("uploaded", TotalUploaded);
             retMap.put("skipped", TotalSkipped);
-            retMap.put("successList",successList);
+            retMap.put("insertList",insertList);
             retMap.put("failList",failList);
             retMap.put("updateList",updateList);
             retMap.put("skipList",skipList);

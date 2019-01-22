@@ -123,10 +123,11 @@
         //alert("上传成功：" + e.serverData);
         var result = eval('('+e.serverData+')');
         if(result.success){
-            $('.loginfo').append(makeLogInfo("钢管编号(成功)",result.successList));
-            $('.loginfo').append(makeLogInfo("钢管编号(更新)",result.updateList));
-            $('.loginfo').append(makeLogInfo("钢管编号(失败)",result.failList));
-            $('.loginfo').append(makeLogInfo("钢管编号(跳过)",result.skipList));
+            $('.loginfo').empty();
+            $('.loginfo').append(makeLogInfo("新增钢管列表",result.insertList));
+            $('.loginfo').append(makeLogInfo("更新钢管列表",result.updateList));
+            $('.loginfo').append(makeLogInfo("跳过钢管列表",result.skipList));
+            $('.loginfo').append(makeLogInfo("上传失败列表",result.failList));
             //alert("成功上传钢管数量："+result.totaluploaded+" 根，"+"因不存在合同号无法上传的钢管数量："+result.totalskipped+" 根");
         }
         this.setText("");
@@ -166,9 +167,13 @@
     }
     function makeLogInfo(title,data){
         var tempalate="";
+        var totalcount=0;
+        if(data!=undefined){
+            totalcount=data.length;
+        }
         // if(data.length>0){
              tempalate='<table style="float:left;margin-left:5px;">\n' +
-                '          <caption><h2>'+title+'</h2></caption>\n' +
+                '          <caption><h2>'+title+'（'+totalcount+'条）'+'</h2></caption>\n' +
                 '          <thead>\n' +
                 '            <tr>\n' +
                 '                <th>序号</th>\n' +
@@ -176,7 +181,7 @@
                 '            </tr>\n' +
                 '          </thead>\n'+
                 '          <tbody>\n';
-            for (var i=0;i<data.length;i++){
+            for (var i=0;data!=undefined&&i<data.length;i++){
                 tempalate+='<tr><td>'+(i+1)+'</td><td>'+data[i]+'</td></tr>';
             }
             tempalate+='</tbody></table>';
