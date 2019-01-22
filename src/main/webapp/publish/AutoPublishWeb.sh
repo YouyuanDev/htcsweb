@@ -24,7 +24,7 @@ echo $basepath
 scp -r $basepath/target/htcsweb.war root@116.62.17.42:/usr/share/tomcat/webapps/
 
 
-#scp /Users/kurt/Downloads/coatinginspection_v91_legu_signed_zipalign.apk root@116.62.17.42:/usr/share/tomcat/webapps/upload/
+#scp /Users/kurt/Downloads/coatinginspection_v92_legu_signed_zipalign.apk root@116.62.17.42:/usr/share/tomcat/webapps/upload/
 
 
 #ios  https://itunes.apple.com/app/id1419485514
